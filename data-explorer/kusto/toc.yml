@@ -1,0 +1,1321 @@
+- name: Home
+  href: ./index.md
+- name: 查詢語言
+  href: ./query/index.md
+  items:
+    - name: 概觀
+      items:
+        - name: Kusto 查詢
+          href: ./query/index.md
+        - name: 教學課程
+          href: ./query/tutorial.md
+        - name: 範例
+          href: ./query/samples.md
+        - name: 最佳作法
+          href: ./query/best-practices.md
+        - name: 跨資料庫與跨叢集查詢
+          href: ./query/cross-cluster-or-database-queries.md
+    - name: 實體
+      items:
+        - name: 實體類型
+          href: ./query/schema-entities/index.md
+        - name: 實體名稱
+          href: ./query/schema-entities/entity-names.md
+        - name: 資料表
+          href: ./query/schema-entities/tables.md
+        - name: 資料行
+          href: ./query/schema-entities/columns.md
+        - name: 預存函式
+          href: ./query/schema-entities/stored-functions.md
+        - name: 外部資料表
+          href: ./query/schema-entities/externaltables.md
+    - name: 資料類型
+      items:
+        - name: 純量資料類型概觀
+          href: ./query/scalar-data-types/index.md
+        - name: bool
+          href: ./query/scalar-data-types/bool.md
+        - name: Datetime
+          href: ./query/scalar-data-types/datetime.md
+        - name: decimal
+          href: ./query/scalar-data-types/decimal.md
+        - name: 動態
+          href: ./query/scalar-data-types/dynamic.md
+        - name: guid
+          href: ./query/scalar-data-types/guid.md
+        - name: int
+          href: ./query/scalar-data-types/int.md
+        - name: long
+          href: ./query/scalar-data-types/long.md
+        - name: real
+          href: ./query/scalar-data-types/real.md
+        - name: 字串
+          href: ./query/scalar-data-types/string.md
+        - name: 時間範圍
+          href: ./query/scalar-data-types/timespan.md
+        - name: Null 值
+          href: ./query/scalar-data-types/null-values.md
+    - name: 函式
+      items:
+        - name: 函式類型
+          href: ./query/functions/index.md
+        - name: 使用者自訂函數
+          href: ./query/functions/user-defined-functions.md
+    - name: 查詢陳述式
+      items:
+        - name: 查詢陳述式類型
+          href: ./query/statements.md
+        - name: Alias 陳述式
+          href: ./query/aliasstatement.md
+        - name: Let 陳述式
+          href: ./query/letstatement.md
+        - name: Pattern 陳述式
+          href: ./query/patternstatement.md
+        - name: 查詢參數陳述式
+          href: ./query/queryparametersstatement.md
+        - name: Restrict 陳述式
+          href: ./query/restrictstatement.md
+        - name: Set 陳述式
+          href: ./query/setstatement.md
+        - name: 表格式運算式陳述式
+          href: ./query/tabularexpressionstatements.md
+        - name: 批次
+          href: ./query/batches.md
+    - name: 表格式運算子
+      items:
+        - name: 表格式資料
+          href: ./query/queries.md
+        - name: as 運算子
+          href: ./query/asoperator.md
+        - name: consume 運算子
+          href: ./query/consumeoperator.md
+        - name: count 運算子
+          href: ./query/countoperator.md
+        - name: datatable 運算子
+          href: ./query/datatableoperator.md
+        - name: distinct 運算子
+          href: ./query/distinctoperator.md
+        - name: evaluate 運算子
+          items:
+            - name: evaluate 外掛程式運算子
+              href: ./query/evaluateoperator.md
+            - name: autocluster
+              href: ./query/autoclusterplugin.md
+            - name: bag_unpack
+              href: ./query/bag-unpackplugin.md
+            - name: basket
+              href: ./query/basketplugin.md
+            - name: dcount_intersect
+              href: ./query/dcount-intersect-plugin.md
+            - name: diffpatterns
+              href: ./query/diffpatternsplugin.md
+            - name: diffpatterns_text
+              href: ./query/diffpatterns-textplugin.md
+            - name: infer_storage_schema
+              href: ./query/inferstorageschemaplugin.md
+            - name: narrow
+              href: ./query/narrowplugin.md
+            - name: pivot
+              href: ./query/pivotplugin.md
+            - name: preview
+              href: ./query/previewplugin.md
+            - name: Python
+              href: ./query/pythonplugin.md
+            - name: R
+              href: ./query/rplugin.md
+            - name: rolling_percentile
+              href: ./query/rolling-percentile-plugin.md
+            - name: schema_merge
+              href: ./query/schemamergeplugin.md
+            - name: sql_request
+              href: ./query/sqlrequestplugin.md
+            - name: sequence_detect
+              href: ./query/sequence-detect-plugin.md
+        - name: extend 運算子
+          href: ./query/extendoperator.md
+        - name: externaldata 運算子
+          href: ./query/externaldata-operator.md
+        - name: facet 運算子
+          href: ./query/facetoperator.md
+        - name: 尋找運算子
+          href: ./query/findoperator.md
+        - name: fork 運算子
+          href: ./query/forkoperator.md
+        - name: getschema 運算子
+          href: ./query/getschemaoperator.md
+        - name: invoke 運算子
+          href: ./query/invokeoperator.md
+        - name: join 運算子
+          items:
+            - name: join 運算子概觀
+              href: ./query/joinoperator.md
+            - name: 隨機播放
+              href: ./query/shufflequery.md
+            - name: 跨叢集聯結
+              href: ./query/joincrosscluster.md
+            - name: 廣播聯結
+              href: ./query/broadcastjoin.md
+            - name: 時段聯結
+              href: ./query/join-timewindow.md
+        - name: limit 運算子
+          href: ./query/limitoperator.md
+        - name: lookup 運算子
+          href: ./query/lookupoperator.md
+        - name: make-series 運算子
+          href: ./query/make-seriesoperator.md
+        - name: mv-apply 運算子
+          href: ./query/mv-applyoperator.md
+        - name: mv-expand 運算子
+          href: ./query/mvexpandoperator.md
+        - name: order 運算子
+          href: ./query/orderoperator.md
+        - name: project 運算子
+          href: ./query/projectoperator.md
+        - name: project-away 運算子
+          href: ./query/projectawayoperator.md
+        - name: project-rename 運算子
+          href: ./query/projectrenameoperator.md
+        - name: project-reorder 運算子
+          href: ./query/projectreorderoperator.md
+        - name: parse 運算子
+          href: ./query/parseoperator.md
+        - name: parse-where 運算子
+          href: ./query/parsewhereoperator.md
+        - name: partition 運算子
+          href: ./query/partitionoperator.md
+        - name: print 運算子
+          href: ./query/printoperator.md
+        - name: range 運算子
+          href: ./query/rangeoperator.md
+        - name: reduce 運算子
+          href: ./query/reduceoperator.md
+        - name: render 運算子
+          href: ./query/renderoperator.md
+        - name: sample 運算子
+          href: ./query/sampleoperator.md
+        - name: sample-distinct 運算子
+          href: ./query/sampledistinctoperator.md
+        - name: search 運算子
+          href: ./query/searchoperator.md
+        - name: serialize 運算子
+          href: ./query/serializeoperator.md
+        - name: sort 運算子
+          href: ./query/sortoperator.md
+        - name: summarize 運算子
+          items:
+            - name: summarize 運算子概觀
+              href: ./query/summarizeoperator.md
+            - name: 使用 hll() 和 tdigest()
+              href: ./query/usinghlltdigest.md
+            - name: 隨機播放
+              href: ./query/shufflequery.md
+        - name: take 運算子
+          href: ./query/takeoperator.md
+        - name: top 運算子
+          href: ./query/topoperator.md
+        - name: top-nested 運算子
+          href: ./query/topnestedoperator.md
+        - name: top-hitters 運算子
+          href: ./query/tophittersoperator.md
+        - name: union 運算子
+          href: ./query/unionoperator.md
+        - name: where 運算子
+          href: ./query/whereoperator.md
+    - name: 特殊函式
+      items:
+        - name: cluster()
+          href: ./query/clusterfunction.md
+        - name: database()
+          href: ./query/databasefunction.md
+        - name: external_table()
+          href: ./query/externaltablefunction.md
+        - name: materialize()
+          href: ./query/materializefunction.md
+        - name: table()
+          href: ./query/tablefunction.md
+        - name: toscalar()
+          href: ./query/toscalarfunction.md
+    - name: 純量運算子
+      items:
+        - name: 位元 (二元) 運算子
+          href: ./query/binoperators.md
+        - name: 日期時間/時間範圍算術
+          href: ./query/datetime-timespan-arithmetic.md
+        - name: 邏輯 (二元) 運算子
+          href: ./query/logicaloperators.md
+        - name: 數值運算子
+          href: ./query/numoperators.md
+        - name: 字串運算子
+          href: ./query/datatypes-string-operators.md
+        - name: between 運算子
+          href: ./query/betweenoperator.md
+        - name: not-between 運算子 (!between)
+          href: ./query/notbetweenoperator.md
+        - name: in 和 !in 運算子
+          href: ./query/inoperator.md
+        - name: has_any 運算子
+          href: ./query/has-anyoperator.md
+    - name: 純量函式
+      items:
+        - name: 純量函式類型
+          href: ./query/scalarfunctions.md
+        - name: abs()
+          href: ./query/abs-function.md
+        - name: acos()
+          href: ./query/acosfunction.md
+        - name: ago()
+          href: ./query/agofunction.md
+        - name: array_concat()
+          href: ./query/arrayconcatfunction.md
+        - name: array_iif()
+          href: ./query/arrayifffunction.md
+        - name: array_index_of()
+          href: ./query/arrayindexoffunction.md
+        - name: array_length()
+          href: ./query/arraylengthfunction.md
+        - name: array_rotate_left()
+          href: ./query/array_rotate_leftfunction.md
+        - name: array_rotate_right()
+          href: ./query/array_rotate_rightfunction.md
+        - name: array_shift_left()
+          href: ./query/array_shift_leftfunction.md
+        - name: array_shift_right()
+          href: ./query/array_shift_rightfunction.md
+        - name: array_slice()
+          href: ./query/arrayslicefunction.md
+        - name: array_split()
+          href: ./query/arraysplitfunction.md
+        - name: asin()
+          href: ./query/asinfunction.md
+        - name: assert()
+          href: ./query/assert-function.md
+        - name: atan()
+          href: ./query/atanfunction.md
+        - name: atan2()
+          href: ./query/atan2function.md
+        - name: bag_keys()
+          href: ./query/bagkeysfunction.md
+        - name: base64_decode_toarray()
+          href: ./query/base64_decode_toarrayfunction.md
+        - name: base64_decode_tostring()
+          href: ./query/base64_decode_tostringfunction.md
+        - name: base64_encode_fromarray()
+          href: ./query/base64_encode_fromarrayfunction.md
+        - name: base64_encode_tostring()
+          href: ./query/base64_encode_tostringfunction.md
+        - name: beta_cdf()
+          href: ./query/beta-cdffunction.md
+        - name: beta_inv()
+          href: ./query/beta-invfunction.md
+        - name: beta_pdf()
+          href: ./query/beta-pdffunction.md
+        - name: bin()
+          href: ./query/binfunction.md
+        - name: bin_at()
+          href: ./query/binatfunction.md
+        - name: bin_auto()
+          href: ./query/bin-autofunction.md
+        - name: binary_and()
+          href: ./query/binary-andfunction.md
+        - name: binary_not()
+          href: ./query/binary-notfunction.md
+        - name: binary_or()
+          href: ./query/binary-orfunction.md
+        - name: binary_shift_left()
+          href: ./query/binary-shift-leftfunction.md
+        - name: binary_shift_right()
+          href: ./query/binary-shift-rightfunction.md
+        - name: binary_xor()
+          href: ./query/binary-xorfunction.md
+        - name: bitset_count_ones()
+          href: ./query/bitset-count-onesfunction.md
+        - name: case()
+          href: ./query/casefunction.md
+        - name: ceiling()
+          href: ./query/ceilingfunction.md
+        - name: coalesce()
+          href: ./query/coalescefunction.md
+        - name: column_ifexists()
+          href: ./query/columnifexists.md
+        - name: cos()
+          href: ./query/cosfunction.md
+        - name: cot()
+          href: ./query/cotfunction.md
+        - name: countof()
+          href: ./query/countoffunction.md
+        - name: current_cluster_endpoint()
+          href: ./query/current-cluster-endpoint-function.md
+        - name: current_cursor()
+          href: ./query/cursorcurrent.md
+        - name: current_database()
+          href: ./query/current-database-function.md
+        - name: current_principal()
+          href: ./query/current-principalfunction.md
+        - name: current_principal_details()
+          href: ./query/current-principal-detailsfunction.md
+        - name: current_principal_is_member_of()
+          href: ./query/current-principal-ismemberoffunction.md
+        - name: cursor_after()
+          href: ./query/cursorafterfunction.md
+        - name: cursor_before_or_at()
+          href: ./query/cursorbeforeoratfunction.md
+        - name: cursor_current()
+          href: ./query/cursorcurrent.md
+        - name: datetime_add()
+          href: ./query/datetime-addfunction.md
+        - name: datetime_diff()
+          href: ./query/datetime-difffunction.md
+        - name: datetime_part()
+          href: ./query/datetime-partfunction.md
+        - name: dayofmonth()
+          href: ./query/dayofmonthfunction.md
+        - name: dayofweek()
+          href: ./query/dayofweekfunction.md
+        - name: dayofyear()
+          href: ./query/dayofyearfunction.md
+        - name: dcount_hll()
+          href: ./query/dcount-hllfunction.md
+        - name: degrees()
+          href: ./query/degreesfunction.md
+        - name: endofday()
+          href: ./query/endofdayfunction.md
+        - name: endofmonth()
+          href: ./query/endofmonthfunction.md
+        - name: endofweek()
+          href: ./query/endofweekfunction.md
+        - name: endofyear()
+          href: ./query/endofyearfunction.md
+        - name: estimate_data_size()
+          href: ./query/estimate-data-sizefunction.md
+        - name: exp()
+          href: ./query/exp-function.md
+        - name: exp10()
+          href: ./query/exp10-function.md
+        - name: exp2()
+          href: ./query/exp2-function.md
+        - name: extent_id()
+          href: ./query/extentidfunction.md
+        - name: extent_tags()
+          href: ./query/extenttagsfunction.md
+        - name: extract()
+          href: ./query/extractfunction.md
+        - name: extract_all()
+          href: ./query/extractallfunction.md
+        - name: extractjson()
+          href: ./query/extractjsonfunction.md
+        - name: floor()
+          href: ./query/floorfunction.md
+        - name: format_bytes()
+          href: ./query/format-bytesfunction.md
+        - name: format_datetime()
+          href: ./query/format-datetimefunction.md
+        - name: format_timespan()
+          href: ./query/format-timespanfunction.md
+        - name: gamma()
+          href: ./query/gammafunction.md
+        - name: getmonth()
+          href: ./query/getmonthfunction.md
+        - name: gettype()
+          href: ./query/gettypefunction.md
+        - name: getyear()
+          href: ./query/getyearfunction.md
+        - name: hash()
+          href: ./query/hashfunction.md
+        - name: hash_combine()
+          href: ./query/hash_combinefunction.md
+        - name: hash_many()
+          href: ./query/hash_manyfunction.md
+        - name: hash_sha256()
+          href: ./query/sha256hashfunction.md
+        - name: hll_merge()
+          href: ./query/hllmergefunction.md
+        - name: hourofday()
+          href: ./query/hourofdayfunction.md
+        - name: iif()
+          href: ./query/iiffunction.md
+        - name: indexof()
+          href: ./query/indexoffunction.md
+        - name: indexof_regex()
+          href: ./query/indexofregexfunction.md
+        - name: ingestion_time()
+          href: ./query/ingestiontimefunction.md
+        - name: ipv4_compare
+          href: ./query/ipv4-comparefunction.md
+        - name: ipv4_is_match
+          href: ./query/ipv4-is-matchfunction.md
+        - name: isascii()
+          href: ./query/isascii.md
+        - name: isempty()
+          href: ./query/isemptyfunction.md
+        - name: isfinite()
+          href: ./query/isfinitefunction.md
+        - name: isinf()
+          href: ./query/isinffunction.md
+        - name: isnan()
+          href: ./query/isnanfunction.md
+        - name: isnotempty()、notempty()
+          href: ./query/isnotemptyfunction.md
+        - name: isnotnull()、notempty()
+          href: ./query/isnotnullfunction.md
+        - name: isnull()
+          href: ./query/isnullfunction.md
+        - name: isutf8()
+          href: ./query/isutf8.md
+        - name: log()
+          href: ./query/log-function.md
+        - name: log10()
+          href: ./query/log10-function.md
+        - name: log2()
+          href: ./query/log2-function.md
+        - name: loggamma()
+          href: ./query/loggammafunction.md
+        - name: make_datetime()
+          href: ./query/make-datetimefunction.md
+        - name: make_string()
+          href: ./query/makestringfunction.md
+        - name: make_timespan()
+          href: ./query/make-timespanfunction.md
+        - name: max_of()
+          href: ./query/max-offunction.md
+        - name: min_of()
+          href: ./query/min-offunction.md
+        - name: monthofyear()
+          href: ./query/monthofyearfunction.md
+        - name: new_guid()
+          href: ./query/newguidfunction.md
+        - name: not()
+          href: ./query/notfunction.md
+        - name: now()
+          href: ./query/nowfunction.md
+        - name: pack()
+          href: ./query/packfunction.md
+        - name: pack_all()
+          href: ./query/packallfunction.md
+        - name: pack_array()
+          href: ./query/packarrayfunction.md
+        - name: pack_dictionary()
+          href: ./query/packdictionaryfunction.md
+        - name: parse_csv()
+          href: ./query/parsecsvfunction.md
+        - name: parse_ipv4()
+          href: ./query/parse-ipv4function.md
+        - name: parse_ipv4_mask()
+          href: ./query/parse-ipv4-maskfunction.md
+        - name: parse_json()
+          href: ./query/parsejsonfunction.md
+        - name: parse_path()
+          href: ./query/parsepathfunction.md
+        - name: parse_url()
+          href: ./query/parseurlfunction.md
+        - name: parse_urlquery()
+          href: ./query/parseurlqueryfunction.md
+        - name: parse_user_agent()
+          href: ./query/parse-useragentfunction.md
+        - name: parse_version()
+          href: ./query/parse-versionfunction.md
+        - name: parse_xml()
+          href: ./query/parse-xmlfunction.md
+        - name: percentile_tdigest()
+          href: ./query/percentile-tdigestfunction.md
+        - name: percentrank_tdigest()
+          href: ./query/percentrank-tdigestfunction.md
+        - name: pi()
+          href: ./query/pifunction.md
+        - name: pow()
+          href: ./query/powfunction.md
+        - name: radians()
+          href: ./query/radiansfunction.md
+        - name: rand()
+          href: ./query/randfunction.md
+        - name: range()
+          href: ./query/rangefunction.md
+        - name: rank_tdigest()
+          href: ./query/rank-tdigest.md
+        - name: repeat()
+          href: ./query/repeatfunction.md
+        - name: replace()
+          href: ./query/replacefunction.md
+        - name: reverse()
+          href: ./query/reversefunction.md
+        - name: round()
+          href: ./query/roundfunction.md
+        - name: set_difference()
+          href: ./query/setdifferencefunction.md
+        - name: set_has_element()
+          href: ./query/sethaselementfunction.md
+        - name: set_intersect()
+          href: ./query/setintersectfunction.md
+        - name: set_union()
+          href: ./query/setunionfunction.md
+        - name: sign()
+          href: ./query/signfunction.md
+        - name: sin()
+          href: ./query/sinfunction.md
+        - name: split()
+          href: ./query/splitfunction.md
+        - name: sqrt()
+          href: ./query/sqrtfunction.md
+        - name: startofday()
+          href: ./query/startofdayfunction.md
+        - name: startofmonth()
+          href: ./query/startofmonthfunction.md
+        - name: startofweek()
+          href: ./query/startofweekfunction.md
+        - name: startofyear()
+          href: ./query/startofyearfunction.md
+        - name: strcat()
+          href: ./query/strcatfunction.md
+        - name: strcat_array()
+          href: ./query/strcat-arrayfunction.md
+        - name: strcat_delim()
+          href: ./query/strcat-delimfunction.md
+        - name: strcmp()
+          href: ./query/strcmpfunction.md
+        - name: string_size()
+          href: ./query/stringsizefunction.md
+        - name: strlen()
+          href: ./query/strlenfunction.md
+        - name: strrep()
+          href: ./query/strrepfunction.md
+        - name: substring()
+          href: ./query/substringfunction.md
+        - name: tan()
+          href: ./query/tanfunction.md
+        - name: tdigest_merge()
+          href: ./query/tdigest-mergefunction.md
+        - name: to_utf8()
+          href: ./query/toutf8function.md
+        - name: tobool()
+          href: ./query/toboolfunction.md
+        - name: todatetime()
+          href: ./query/todatetimefunction.md
+        - name: todecimal()
+          href: ./query/todecimalfunction.md
+        - name: todouble()
+          href: ./query/todoublefunction.md
+        - name: todynamic()
+          href: ./query/todynamicfunction.md
+        - name: toguid()
+          href: ./query/toguidfunction.md
+        - name: tohex()
+          href: ./query/tohexfunction.md
+        - name: toint()
+          href: ./query/tointfunction.md
+        - name: tolong()
+          href: ./query/tolongfunction.md
+        - name: tolower()
+          href: ./query/tolowerfunction.md
+        - name: toreal()
+          href: ./query/todoublefunction.md
+        - name: tostring()
+          href: ./query/tostringfunction.md
+        - name: totimespan()
+          href: ./query/totimespanfunction.md
+        - name: toupper()
+          href: ./query/toupperfunction.md
+        - name: translate()
+          href: ./query/translatefunction.md
+        - name: treepath()
+          href: ./query/treepathfunction.md
+        - name: trim()
+          href: ./query/trimfunction.md
+        - name: trim_end()
+          href: ./query/trimendfunction.md
+        - name: trim_start()
+          href: ./query/trimstartfunction.md
+        - name: unixtime_microseconds_todatetime()
+          href: ./query/unixtime-microseconds-todatetimefunction.md
+        - name: unixtime_milliseconds_todatetime()
+          href: ./query/unixtime-milliseconds-todatetimefunction.md
+        - name: unixtime_nanoseconds_todatetime()
+          href: ./query/unixtime-nanoseconds-todatetimefunction.md
+        - name: unixtime_seconds_todatetime()
+          href: ./query/unixtime-seconds-todatetimefunction.md
+        - name: url_decode()
+          href: ./query/urldecodefunction.md
+        - name: url_encode()
+          href: ./query/urlencodefunction.md
+        - name: url_encode_component()
+          href: ./query/urlencodecomponentfunction.md
+        - name: weekofyear()
+          href: ./query/weekofyearfunction.md
+        - name: welch_test()
+          href: ./query/welch-testfunction.md
+        - name: zip()
+          href: ./query/zipfunction.md
+    - name: 彙總函式
+      items:
+        - name: any()
+          href: ./query/any-aggfunction.md
+        - name: anyif()
+          href: ./query/anyif-aggfunction.md
+        - name: arg_max()
+          href: ./query/arg-max-aggfunction.md
+        - name: arg_min()
+          href: ./query/arg-min-aggfunction.md
+        - name: avg()
+          href: ./query/avg-aggfunction.md
+        - name: avgif()
+          href: ./query/avgif-aggfunction.md
+        - name: binary_all_and
+          href: ./query/binary-all-and-aggfunction.md
+        - name: binary_all_or
+          href: ./query/binary-all-or-aggfunction.md
+        - name: binary_all_xor
+          href: ./query/binary-all-xor-aggfunction.md
+        - name: buildschema()
+          href: ./query/buildschema-aggfunction.md
+        - name: count()
+          href: ./query/count-aggfunction.md
+        - name: countif()
+          href: ./query/countif-aggfunction.md
+        - name: dcount()
+          href: ./query/dcount-aggfunction.md
+        - name: dcountif()
+          href: ./query/dcountif-aggfunction.md
+        - name: hll()
+          href: ./query/hll-aggfunction.md
+        - name: hll_merge()
+          href: ./query/hll-merge-aggfunction.md
+        - name: make_bag()
+          href: ./query/make-bag-aggfunction.md
+        - name: make_bag_if()
+          href: ./query/make-bag-if-aggfunction.md
+        - name: make_list()
+          href: ./query/makelist-aggfunction.md
+        - name: make_list_if()
+          href: ./query/makelistif-aggfunction.md
+        - name: make_list_with_nulls()
+          href: ./query/make-list-with-nulls-aggfunction.md
+        - name: make_set()
+          href: ./query/makeset-aggfunction.md
+        - name: make_set_if()
+          href: ./query/makesetif-aggfunction.md
+        - name: max()
+          href: ./query/max-aggfunction.md
+        - name: maxif()
+          href: ./query/maxif-aggfunction.md
+        - name: min()
+          href: ./query/min-aggfunction.md
+        - name: minif()
+          href: ./query/minif-aggfunction.md
+        - name: percentiles()
+          href: ./query/percentiles-aggfunction.md
+        - name: stdev()
+          href: ./query/stdev-aggfunction.md
+        - name: stdevif()
+          href: ./query/stdevif-aggfunction.md
+        - name: stdevp()
+          href: ./query/stdevp-aggfunction.md
+        - name: sum()
+          href: ./query/sum-aggfunction.md
+        - name: sumif()
+          href: ./query/sumif-aggfunction.md
+        - name: tdigest()
+          href: ./query/tdigest-aggfunction.md
+        - name: tdigest_merge()
+          href: ./query/tdigest-merge-aggfunction.md
+        - name: variance()
+          href: ./query/variance-aggfunction.md
+        - name: varianceif()
+          href: ./query/varianceif-aggfunction.md
+        - name: variancep()
+          href: ./query/variancep-aggfunction.md
+    - name: 視窗函式
+      items:
+        - name: Window 函式概觀
+          href: ./query/windowsfunctions.md
+        - name: next()
+          href: ./query/nextfunction.md
+        - name: prev()
+          href: ./query/prevfunction.md
+        - name: row_cumsum()
+          href: ./query/rowcumsumfunction.md
+        - name: row_number()
+          href: ./query/rownumberfunction.md
+        - name: row_window_session()
+          href: ./query/row-window-session-function.md
+    - name: 滾動時段彙總
+      items:
+        - name: rolling_percentile()
+          href: ./query/rolling-percentile-plugin.md
+    - name: 時間序列分析
+      items:
+        - name: make-series 運算子
+          href: ./query/make-seriesoperator.md
+        - name: series_add()
+          href: ./query/series-addfunction.md
+        - name: series_decompose()
+          href: ./query/series-decomposefunction.md
+        - name: series_decompose_anomalies()
+          href: ./query/series-decompose-anomaliesfunction.md
+        - name: series_decompose_forecast()
+          href: ./query/series-decompose-forecastfunction.md
+        - name: series_divide()
+          href: ./query/series-dividefunction.md
+        - name: series_equals()
+          href: ./query/series-equalsfunction.md
+        - name: series_fill_backward()
+          href: ./query/series-fill-backwardfunction.md
+        - name: series_fill_const()
+          href: ./query/series-fill-constfunction.md
+        - name: series_fill_forward()
+          href: ./query/series-fill-forwardfunction.md
+        - name: series_fill_linear()
+          href: ./query/series-fill-linearfunction.md
+        - name: series_fir()
+          href: ./query/series-firfunction.md
+        - name: series_fit_2lines()
+          href: ./query/series-fit-2linesfunction.md
+        - name: series_fit_2lines_dynamic()
+          href: ./query/series-fit-2lines-dynamicfunction.md
+        - name: series_fit_line()
+          href: ./query/series-fit-linefunction.md
+        - name: series_fit_line_dynamic()
+          href: ./query/series-fit-line-dynamicfunction.md
+        - name: series_greater()
+          href: ./query/series-greaterfunction.md
+        - name: series_greater_equals()
+          href: ./query/series-greater-equalsfunction.md
+        - name: series_iir()
+          href: ./query/series-iirfunction.md
+        - name: series_less()
+          href: ./query/series-lessfunction.md
+        - name: series_less_equals()
+          href: ./query/series-less-equalsfunction.md
+        - name: series_multiply()
+          href: ./query/series-multiplyfunction.md
+        - name: series_not_equals()
+          href: ./query/series-not-equalsfunction.md
+        - name: series_outliers()
+          href: ./query/series-outliersfunction.md
+        - name: series_pearson_correlation()
+          href: ./query/series-pearson-correlationfunction.md
+        - name: series_periods_detect()
+          href: ./query/series-periods-detectfunction.md
+        - name: series_periods_validate()
+          href: ./query/series-periods-validatefunction.md
+        - name: series_seasonal()
+          href: ./query/series-seasonalfunction.md
+        - name: series_stats()
+          href: ./query/series-statsfunction.md
+        - name: series_stats_dynamic()
+          href: ./query/series-stats-dynamicfunction.md
+        - name: series_subtract()
+          href: ./query/series-subtractfunction.md
+        - name: 時間序列分析概觀
+          href: ./query/machine-learning-and-tsa.md
+    - name: Machine Learning
+      items:
+        - name: autocluster
+          href: ./query/autoclusterplugin.md
+        - name: basket
+          href: ./query/basketplugin.md
+        - name: diffpatterns
+          href: ./query/diffpatternsplugin.md
+        - name: diffpatterns_text
+          href: ./query/diffpatterns-textplugin.md
+    - name: 地理空間
+      items:
+        - name: geo_distance_2points()
+          href: ./query/geo-distance-2points-function.md
+        - name: geo_distance_point_to_line()
+          href: ./query/geo-distance-point-to-line-function.md
+        - name: geo_geohash_to_central_point()
+          href: ./query/geo-geohash-to-central-point-function.md
+        - name: geo_point_in_circle()
+          href: ./query/geo-point-in-circle-function.md
+        - name: geo_point_in_polygon()
+          href: ./query/geo-point-in-polygon-function.md
+        - name: geo_point_to_geohash()
+          href: ./query/geo-point-to-geohash-function.md
+        - name: geo_point_to_s2cell()
+          href: ./query/geo-point-to-s2cell-function.md
+        - name: geo_s2cell_to_central_point()
+          href: ./query/geo-s2cell-to-central-point-function.md
+    - name: 使用者分析
+      items:
+        - name: 使用者外掛程式
+          href: ./query/useranalytics.md
+        - name: 作用中使用者計數
+          href: ./query/active-users-count-plugin.md
+        - name: 活動計數計量 (總計值、相異值、新值)
+          href: ./query/activity-counts-metrics-plugin.md
+        - name: 活動參與 (DAU、WAU、MAU)
+          href: ./query/activity-engagement-plugin.md
+        - name: 活動計量 (保留、變換、新值)
+          href: ./query/activity-metrics-plugin.md
+        - name: 活動計量 - 新增 (保留、變換、新值)
+          href: ./query/new-activity-metrics-plugin.md
+        - name: 漏斗圖序列完成
+          href: ./query/funnel-sequence-completion-plugin.md
+        - name: 漏斗圖序列
+          href: ./query/funnel-sequence-plugin.md
+        - name: 工作階段計數
+          href: ./query/session-count-plugin.md
+        - name: 滑動時段計數
+          href: ./query/sliding-window-counts-plugin.md
+    - name: Kusto 查詢語言的參考資料
+      items:
+        - name: RE2 語法
+          href: ./query/re2.md
+        - name: SQL 對 Kusto 的功能提要
+          href: ./query/sqlcheatsheet.md
+- name: 概念
+  href: ./concepts/index.md
+  items:
+    - name: 開始使用
+      href: ./concepts/index.md
+      items:
+        - name: 沙箱
+          href: ./concepts/sandboxes.md
+    - name: 其他與錯誤
+      items:
+        - name: 查詢限制
+          href: ./concepts/querylimits.md
+        - name: 部分查詢失敗
+          href: ./concepts/partialqueryfailures.md
+          items:
+            - name: 結果截斷
+              href: ./concepts/resulttruncation.md
+            - name: 失控查詢
+              href: ./concepts/runawayqueries.md
+            - name: 溢出
+              href: ./concepts/overflow.md
+        - name: 跨叢集查詢和結構描述變更
+          href: ./concepts/crossclusterandschemachanges.md
+        - name: 查詢一致性
+          href: ./concepts/queryconsistency.md
+        - name: 機器碼中的錯誤
+          href: ./concepts/errorsinnativecode.md
+        - name: 事實和維度資料表
+          href: ./concepts/fact-and-dimension-tables.md
+- name: 管理性
+  href: ./management/index.md
+  items:
+    - name: 概觀
+      href: ./management/index.md
+      items:
+        - name: 最佳作法
+          href: ./management/best-practices.md
+    - name: 結構描述
+      href: ./management/schema.md
+      items:
+        - name: 資料庫
+          href: ./management/databases.md
+          items:
+            - name: .show 資料庫
+              href: ./management/show-databases.md
+            - name: .show 資料庫
+              href: ./management/show-database.md
+            - name: .show 叢集資料庫
+              href: ./management/show-cluster-database.md
+            - name: .alter 資料庫
+              href: ./management/alter-database.md
+            - name: .drop 資料庫
+              href: ./management/drop-database.md
+            - name: .show 資料庫結構描述
+              href: ./management/show-schema-database.md
+        - name: 資料表
+          items:
+            - name: 資料表概觀
+              href: ./management/tables.md
+            - name: .alter 合併資料表
+              href: ./management/alter-table-command.md
+            - name: .alter 資料表
+              href: ./management/alter-table-command.md
+            - name: .alter 資料表 docstring
+              href: ./management/alter-table-docstring-command.md
+            - name: .alter 資料表資料夾
+              href: ./management/alter-table-folder-command.md
+            - name: .alter 擷取對應
+              href: ./management/alter-ingestion-mapping-command.md
+            - name: .create 擷取對應
+              href: ./management/create-ingestion-mapping-command.md
+            - name: .drop 擷取對應
+              href: ./management/drop-ingestion-mapping-command.md
+            - name: .show 擷取對應
+              href: ./management/show-ingestion-mapping-command.md
+            - name: .create 資料表
+              href: ./management/create-table-command.md
+            - name: .create 資料表
+              href: ./management/create-tables-command.md
+            - name: .drop 資料表
+              href: ./management/drop-table-command.md
+            - name: .rename 資料表
+              href: ./management/rename-table-command.md
+            - name: .show 資料表
+              href: ./management/show-tables-command.md
+            - name: .undo 捨棄資料表
+              href: ./management/undo-drop-table-command.md
+            - name: .show 資料表詳細資料
+              href: ./management/show-table-details-command.md
+            - name: .show 資料表結構描述
+              href: ./management/show-table-schema-command.md
+        - name: 資料行
+          items:
+            - name: 資料行概觀
+              href: ./management/columns.md
+            - name: .alter 資料行
+              href: ./management/alter-column.md
+            - name: .alter-merge table column-docstrings
+              href: ./management/alter-merge-table-column.md
+            - name: .drop 資料行
+              href: ./management/drop-column.md
+            - name: .rename 資料行
+              href: ./management/rename-column.md
+        - name: 對應
+          href: ./management/mappings.md
+        - name: 函式
+          items:
+            - name: 函式概觀
+              href: ./management/functions.md
+            - name: .alter 函式
+              href: ./management/alter-function.md
+            - name: .alter docstring 函式
+              href: ./management/alter-docstring-function.md
+            - name: .alter 資料夾函式
+              href: ./management/alter-folder-function.md
+            - name: .create 函式
+              href: ./management/create-function.md
+            - name: .create-or-alter 函式
+              href: ./management/create-alter-function.md
+            - name: .drop 函式
+              href: ./management/drop-function.md
+            - name: .show 函式
+              href: ./management/show-function.md
+    - name: 原則
+      items:
+        - name: 原則概觀
+          href: ./management/policies.md
+        - name: 快取原則
+          items:
+            - name: 快取原則
+              href: ./management/cachepolicy.md
+            - name: 快取原則命令
+              href: ./management/cache-policy.md
+        - name: IngestionTime 原則
+          items:
+            - name: Ingestiontime 原則
+              href: ./management/ingestiontimepolicy.md
+            - name: Ingestiontime 原則命令
+              href: ./management/ingestiontime-policy.md
+        - name: 保留原則
+          items:
+            - name: 保留原則
+              href: ./management/retentionpolicy.md
+            - name: 保留原則命令
+              href: ./management/retention-policy.md
+        - name: RowLevelSecurity 原則
+          items:
+            - name: 資料列層級安全性原則
+              href: ./management/rowlevelsecuritypolicy.md
+            - name: row_level_securityy 原則命令
+              href: ./management/row-level-security-policy.md
+        - name: RowOrder 原則
+          items:
+            - name: 資料列順序原則
+              href: ./management/roworderpolicy.md
+            - name: roworder 命令
+              href: ./management/roworder-policy.md
+        - name: 更新原則
+          items:
+            - name: 更新原則
+              href: ./management/updatepolicy.md
+            - name: 更新原則命令
+              href: ./management/update-policy.md
+        - name: 批次原則
+          items:
+            - name: 內嵌批次處理原則
+              href: ./management/batchingpolicy.md
+            - name: ingestionbatching 原則命令
+              href: ./management/batching-policy.md
+        - name: 合併原則
+          items:
+            - name: 合併原則
+              href: ./management/mergepolicy.md
+            - name: 合併原則命令
+              href: ./management/merge-policy.md
+        - name: 資料分割原則
+          items:
+            - name: 資料分割原則
+              href: ./management/partitioningpolicy.md
+            - name: 資料分割原則命令
+              href: ./management/partitioning-policy.md
+        - name: 受限的檢視存取原則
+          items:
+            - name: 受限的檢視存取原則
+              href: ./management/restrictedviewaccesspolicy.md
+            - name: restricted_view_access 原則命令
+              href: ./management/restrictedviewaccess-policy.md
+        - name: 沙箱原則
+          items:
+            - name: 沙箱原則
+              href: ./management/sandboxpolicy.md
+            - name: 沙箱原則命令
+              href: ./management/sandbox-policy.md
+        - name: 分區化原則
+          items:
+            - name: 分區化原則
+              href: ./management/shardingpolicy.md
+            - name: 分區化原則命令
+              href: ./management/sharding-policy.md
+        - name: 串流擷取原則
+          items:
+            - name: 串流擷取原則
+              href: ./management/streamingingestionpolicy.md
+            - name: streamingingestion 原則命令
+              href: ./management/streamingingestion-policy.md
+        - name: 註標原則
+          href: ./management/calloutpolicy.md
+        - name: 產能原則
+          items:
+            - name: 產能原則
+              href: ./management/capacitypolicy.md
+            - name: 產能原則命令
+              href: ./management/capacity-policy.md
+    - name: 安全性角色
+      href: ./management/security-roles.md
+    - name: 資料擷取
+      href: ./management/data-ingestion/index.md
+      items:
+        - name: 從儲存體內嵌
+          href: ./management/data-ingestion/ingest-from-storage.md
+        - name: 從查詢內嵌
+          href: ./management/data-ingestion/ingest-from-query.md
+        - name: 內嵌式內嵌
+          href: ./management/data-ingestion/ingest-inline.md
+        - name: 使用事件方格訂用帳戶從儲存體內嵌
+          href: ./management/data-ingestion/eventgrid.md
+        - name: 從事件中樞內嵌
+          href: ./management/data-ingestion/eventhub.md
+        - name: 從 IoT 中樞內嵌
+          href: ./management/data-ingestion/iothub.md
+    - name: 資料匯出
+      href: ./management/data-export/index.md
+      items:
+        - name: 至雲端儲存體
+          href: ./management/data-export/export-data-to-storage.md
+        - name: 至 SQL 資料表
+          href: ./management/data-export/export-data-to-sql.md
+        - name: 至外部資料表
+          href: ./management/data-export/export-data-to-an-external-table.md
+        - name: 連續資料匯出
+          href: ./management/data-export/continuous-data-export.md
+    - name: 資料庫指標
+      href: ./management/databasecursor.md
+    - name: 系統資訊
+      href: ./management/systeminfo.md
+      items:
+        - name: 診斷
+          href: ./management/diagnostics.md
+        - name: 日誌
+          href: ./management/journal.md
+        - name: 查詢
+          href: ./management/queries.md
+        - name: 命令
+          href: ./management/commands.md
+        - name: 命令與查詢
+          href: ./management/commands-and-queries.md
+        - name: 內嵌失敗
+          href: ./management/ingestionfailures.md
+        - name: 作業
+          href: ./management/operations.md
+    - name: 存取控制
+      href: ./management/access-control/index.md
+      items:
+        - name: Identities
+          href: ./management/access-control/principals-and-identity-providers.md
+        - name: AAD
+          href: ./management/access-control/aad.md
+        - name: 主體角色
+          href: ./management/access-control/role-based-authorization.md
+        - name: 如何進行 AAD 驗證
+          href: ./management/access-control/how-to-authenticate-with-aad.md
+        - name: 如何佈建 AAD 應用程式
+          href: ./management/access-control/how-to-provision-aad-app.md
+    - name: 進階資料管理
+      items:
+        - name: 範圍 (資料分區) 概觀
+          href: ./management/extents-overview.md
+        - name: 範圍命令
+          href: ./management/extents-commands.md
+        - name: 叢集關注者
+          href: ./management/cluster-follower.md
+        - name: 資料清除
+          href: ./management/../concepts/data-purge.md
+- name: API
+  href: ./api/index.md
+  items:
+    - name: 概觀
+      href: ./api/index.md
+      items:
+        - name: 用戶端程式庫
+          href: ./api/client-libraries.md
+        - name: 連接字串
+          href: ./api/connection-strings/index.md
+          items:
+            - name: Kusto 連接字串
+              href: ./api/connection-strings/kusto.md
+            - name: 儲存體連接字串
+              href: ./api/connection-strings/storage.md
+    - name: REST API
+      href: ./api/rest/index.md
+      items:
+        - name: 驗證
+          href: ./api/rest/authentication.md
+        - name: 查詢/管理 HTTP 要求
+          href: ./api/rest/request.md
+        - name: 查詢/管理 HTTP 回憶
+          href: ./api/rest/response.md
+        - name: 查詢 v2 HTTP 回應
+          href: ./api/rest/response2.md
+        - name: UI (深層連結)
+          href: ./api/rest/deeplink.md
+        - name: 串流內嵌
+          href: ./api/rest/streaming-ingest.md
+    - name: MS-TDS (SQL、ADO.NET、JDBC、ODBC)
+      href: ./api/tds/index.md
+      items:
+        - name: T-SQL
+          href: ./api/tds/t-sql.md
+        - name: KQL over TDS
+          href: ./api/tds/tdskql.md
+        - name: 用戶端
+          href: ./api/tds/clients.md
+        - name: 連結的伺服器
+          href: ./api/tds/linkedserver.md
+        - name: AAD
+          href: ./api/tds/aad.md
+        - name: 已知問題
+          href: ./api/tds/sqlknownissues.md
+    - name: .NET SDK
+      items:
+        - name: 一般
+          items:
+            - name: 關於 SDK
+              href: ./api/netfx/about-the-sdk.md
+            - name: 控制追蹤
+              href: ./api/netfx/controlling-tracing.md
+        - name: Kusto.Data
+          href: ./api/netfx/about-kusto-data.md
+          items:
+            - name: 要求屬性、ClientRequestProperties
+              href: ./api/netfx/request-properties.md
+        - name: Kusto.Ingest
+          href: ./api/netfx/about-kusto-ingest.md
+          items:
+            - name: 權限
+              href: ./api/netfx/kusto-ingest-client-permissions.md
+            - name: 用戶端參考
+              href: ./api/netfx/kusto-ingest-client-reference.md
+            - name: 例外狀況
+              href: ./api/netfx/kusto-ingest-client-errors.md
+            - name: 作業狀態
+              href: ./api/netfx/kusto-ingest-client-status.md
+            - name: 最佳做法
+              href: ./api/netfx/kusto-ingest-best-practices.md
+            - name: 程式碼範例
+              href: ./api/netfx/kusto-ingest-client-examples.md
+            - name: 如何進行資料內嵌
+              href: ./api/netfx/kusto-ingest-queued-ingest-sample.md
+            - name: 如何透過 REST API 進行資料內嵌
+              href: ./api/netfx/kusto-ingest-client-rest.md
+    - name: Python SDK
+      items:
+        - name: azure-kusto-python
+          href: ./api/python/kusto-python-client-library.md
+    - name: R SDK
+      items:
+        - name: azure-kusto-r
+          href: ./api/r/kusto-r-client-library.md
+    - name: Java SDK
+      items:
+        - name: azure-kusto-java
+          href: ./api/java/kusto-java-client-library.md
+    - name: Node SDK
+      items:
+        - name: azure-kusto-node
+          href: ./api/node/kusto-node-client-library.md
+    - name: Go SDK
+      items:
+        - name: azure-kusto-go
+          href: ./api/golang/kusto-golang-client-library.md
+    - name: PowerShell
+      items:
+        - name: 從 PowerShell 呼叫 Kusto
+          href: ./api/powershell/powershell.md
+    - name: Monaco IDE 整合
+      items:
+        - name: monaco-kusto 總概觀
+          href: ./api/monaco/monaco-kusto.md
+        - name: 在 iFrame 中內嵌 Web UX
+          href: ./api/monaco/host-web-ux-in-iframe.md
+- name: 工具
+  href: ./tools/index.md
+  items:
+    - name: 工具概觀
+      href: ./tools/index.md
+    - name: 特定查詢
+      items:
+        - name: Kusto.Explorer
+          href: ./tools/kusto-explorer.md
+          items:
+            - name: Kusto Explorer 選項
+              href: ./tools/kusto-explorer-options.md
+            - name: 鍵盤快速鍵
+              href: ./tools/kusto-explorer-shortcuts.md
+            - name: 程式碼重構
+              href: ./tools/kusto-explorer-refactor.md
+            - name: 程式碼巡覽
+              href: ./tools/kusto-explorer-codenav.md
+            - name: 程式碼分析器
+              href: ./tools/kusto-explorer-code-analyzer.md
+        - name: Web UI
+          href: 'https://docs.microsoft.com/azure/data-explorer/web-query-data'
+        - name: Kusto.Cli
+          href: ./tools/kusto-cli.md
+    - name: 視覺效果、儀表板和報告
+      items:
+        - name: Azure Notebooks
+          href: 'https://docs.microsoft.com/azure/data-explorer/azure-notebooks'
+        - name: Excel
+          items:
+            - name: Excel 空白查詢
+              href: 'https://docs.microsoft.com/azure/data-explorer/excel-blank-query'
+            - name: Excel 連接器
+              href: 'https://docs.microsoft.com/azure/data-explorer/excel-connector'
+        - name: Grafana
+          href: 'https://docs.microsoft.com/azure/data-explorer/grafana'
+        - name: Power BI
+          items:
+            - name: Power BI 最佳做法
+              href: 'https://docs.microsoft.com/azure/data-explorer/power-bi-best-practices'
+            - name: Power BI 連接器
+              href: 'https://docs.microsoft.com/azure/data-explorer/power-bi-connector'
+            - name: Power BI 已匯入查詢
+              href: 'https://docs.microsoft.com/azure/data-explorer/power-bi-imported-query'
+            - name: Power BI SQL 查詢
+              href: 'https://docs.microsoft.com/azure/data-explorer/power-bi-sql-query'
+    - name: 協調流程
+      items:
+        - name: Microsoft Flow (預覽)
+          items:
+            - name: Microsoft Flow 連接器
+              href: 'https://docs.microsoft.com/azure/data-explorer/flow'
+            - name: Microsoft Flow 連接器使用範例
+              href: 'https://docs.microsoft.com/azure/data-explorer/flow-usage'
+        - name: Microsoft Logic Apps (預覽)
+          href: ./tools/logicapps.md
+    - name: 資料擷取
+      items:
+        - name: LightIngest
+          href: 'https://docs.microsoft.com/azure/data-explorer/lightingest'
+        - name: Apache Spark 連接器
+          href: 'https://docs.microsoft.com/azure/data-explorer/spark-connector'
+    - name: 原始檔控制整合
+      items:
+        - name: 同步 Kusto
+          href: ./tools/synckusto.md
+        - name: Azure Pipelines/DevOps
+          href: 'https://docs.microsoft.com/azure/data-explorer/devops'
