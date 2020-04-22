@@ -1,0 +1,326 @@
+- name: Azure 資料總管文件
+  href: index.yml
+- name: 概觀
+  items:
+    - name: 什麼是 Azure 資料總管？
+      href: data-explorer-overview.md
+- name: 快速入門
+  expanded: true
+  items:
+    - name: 建立叢集和資料庫 - Azure 入口網站
+      href: create-cluster-database-portal.md
+    - name: 內嵌範例資料
+      href: ingest-sample-data.md
+    - name: 使用 Web UI 查詢資料
+      href: web-query-data.md
+- name: 教學課程
+  items:
+    - name: 撰寫查詢
+      href: write-queries.md
+    - name: E2E 程式設計 Blob 擷取
+      items:
+        - name: 'C#'
+          href: end-to-end-csharp.md
+        - name: Python
+          href: end-to-end-python.md
+    - name: 內嵌和查詢監視資料
+      href: ingest-data-no-code.md
+    - name: 將 Power BI 中的資料視覺化
+      href: visualize-power-bi.md
+- name: 概念
+  items:
+    - name: 資料擷取
+      items:
+        - name: 資料擷取概觀
+          displayName: 'pipelines, connectors, plugins, Python, .NET, Java, Node, REST'
+          href: ingest-data-overview.md
+        - name: 資料內嵌屬性
+          href: ingestion-properties.md
+        - name: 資料內嵌的格式
+          href: ingestion-supported-formats.md
+    - name: Kusto 查詢語言
+      items:
+        - name: 快速參考指南
+          href: kql-quick-reference.md
+    - name: 資料視覺效果概觀
+      href: viz-overview.md
+    - name: 安全性
+      items:
+        - name: 安全性概觀
+          href: security.md
+        - name: 安全性基準
+          href: security-baseline.md
+- name: 操作指南
+  items:
+    - name: 建立叢集和資料庫
+      items:
+        - name: Azure CLI
+          href: create-cluster-database-cli.md
+        - name: PowerShell
+          href: create-cluster-database-powershell.md
+        - name: 'C#'
+          href: create-cluster-database-csharp.md
+        - name: Python
+          href: create-cluster-database-python.md
+        - name: Azure Resource Manager 範本
+          href: create-cluster-database-resource-manager.md
+    - name: 擷取資料
+      items:
+        - name: 單鍵擷取
+          items:
+            - name: 單鍵擷取概觀
+              href: ingest-data-one-click.md
+            - name: 單鍵擷取至新資料表
+              href: one-click-ingestion-new-table.md
+            - name: 單鍵擷取至現有的資料表
+              href: one-click-ingestion-existing-table.md
+        - name: 串流擷取
+          href: ingest-data-streaming.md
+        - name: 使用 LightIngest
+          href: lightingest.md
+        - name: 事件中樞
+          items:
+            - name: Azure 入口網站
+              href: ingest-data-event-hub.md
+            - name: 'C#'
+              href: data-connection-event-hub-csharp.md
+            - name: Python
+              href: data-connection-event-hub-python.md
+            - name: Azure Resource Manager 範本
+              href: data-connection-event-hub-resource-manager.md
+        - name: Event Grid
+          items:
+            - name: Azure 入口網站
+              href: ingest-data-event-grid.md
+            - name: 'C#'
+              href: data-connection-event-grid-csharp.md
+            - name: Python
+              href: data-connection-event-grid-python.md
+            - name: Azure Resource Manager 範本
+              href: data-connection-event-grid-resource-manager.md
+        - name: IoT 中樞
+          items:
+            - name: Azure 入口網站
+              href: ingest-data-iot-hub.md
+            - name: 'C#'
+              href: data-connection-iot-hub-csharp.md
+            - name: Python
+              href: data-connection-iot-hub-python.md
+            - name: Azure Resource Manager 範本
+              href: data-connection-iot-hub-resource-manager.md
+        - name: 使用 SDK
+          items:
+            - name: Python
+              href: python-ingest-data.md
+            - name: Node SDK
+              href: node-ingest-data.md
+            - name: .NET Standard SDK
+              href: net-standard-ingest-data.md
+        - name: Kafka
+          href: ingest-data-kafka.md
+        - name: Logstash
+          href: ingest-data-logstash.md
+        - name: JSON 格式化的資料
+          href: ingest-json-formats.md
+    - name: 查詢資料
+      items:
+        - name: Azure Data Lake 中的查詢資料
+          href: data-lake-query-data.md
+        - name: 查詢 Azure 監視器中的資料
+          href: query-monitor-data.md
+        - name: 偵錯 KQL 內嵌 Python
+          href: debug-inline-python.md
+        - name: 使用 SDK
+          items:
+            - name: Python
+              href: python-query-data.md
+        - name: 時間序列分析及機器學習
+          items:
+            - name: 時間序列分析
+              href: time-series-analysis.md
+            - name: 異常偵測和預測
+              href: anomaly-detection.md
+            - name: 機器學習服務
+              href: machine-learning-clustering.md
+    - name: 顯現資料
+      items:
+        - name: Power BI
+          items:
+            - name: 最佳作法
+              href: power-bi-best-practices.md
+            - name: 連接器
+              href: power-bi-connector.md
+            - name: 已匯入查詢
+              href: power-bi-imported-query.md
+            - name: SQL 查詢 (SQL query)
+              href: power-bi-sql-query.md
+        - name: Excel
+          items:
+            - name: 連接器
+              href: excel-connector.md
+            - name: 空白查詢
+              href: excel-blank-query.md
+        - name: Grafana
+          href: grafana.md
+        - name: ODBC 連接器
+          href: connect-odbc.md
+        - name: Tableau
+          href: tableau.md
+        - name: Sisense
+          href: sisense.md
+        - name: Redash
+          href: redash.md
+        - name: Kibana (K2Bridge 連接器)
+          href: k2bridge.md
+    - name: 安全
+      items:
+        - name: 網路隔離 (VNet)
+          items:
+            - name: 在您的 VNet 中建立叢集 - 入口網站
+              href: vnet-create-cluster-portal.md
+            - name: 將叢集部署至您的 VNet
+              href: vnet-deployment.md
+            - name: 對 VNet 叢集建立、連線能力和作業進行疑難排解
+              href: vnet-deploy-troubleshoot.md
+        - name: 管理叢集安全性
+          href: manage-cluster-security.md
+        - name: 設定受控識別
+          href: managed-identities.md
+        - name: 設定客戶管理的金鑰
+          items:
+            - name: 入口網站
+              href: customer-managed-keys-portal.md
+            - name: 'C#'
+              href: customer-managed-keys-csharp.md
+            - name: Azure Resource Manager 範本
+              href: customer-managed-keys-resource-manager.md
+        - name: 建立 Azure AD 應用程式
+          href: provision-azure-ad-app.md
+    - name: 管理
+      items:
+        - name: 叢集
+          items:
+            - name: 選取叢集虛擬機器 SKU
+              href: manage-cluster-choose-sku.md
+            - name: 管理叢集的水平調整
+              href: manage-cluster-horizontal-scaling.md
+            - name: 管理叢集的垂直調整
+              href: manage-cluster-vertical-scaling.md
+            - name: 檢查叢集健康情況
+              href: check-cluster-health.md
+            - name: 新增叢集主體
+              items:
+                - name: 'C#'
+                  href: cluster-principal-csharp.md
+                - name: Python
+                  href: cluster-principal-python.md
+                - name: Azure Resource Manager 範本
+                  href: cluster-principal-resource-manager.md
+            - name: 管理叢集語言延伸模組
+              href: language-extensions.md
+        - name: 資料庫
+          items:
+            - name: 追蹤者資料庫
+              href: follower.md
+            - name: 管理資料庫權限
+              href: manage-database-permissions.md
+            - name: 新增資料庫主體
+              items:
+                - name: 'C#'
+                  href: database-principal-csharp.md
+                - name: Python
+                  href: database-principal-python.md
+                - name: Azure Resource Manager 範本
+                  href: database-principal-resource-manager.md
+            - name: 原則
+              items:
+                - name: 'C#'
+                  href: database-table-policies-csharp.md
+                - name: Python
+                  href: database-table-policies-python.md
+        - name: 資料
+          items:
+            - name: 刪除資料
+              href: delete-data.md
+            - name: 處理資料重複
+              href: dealing-with-duplicates.md
+    - name: 監視
+      items:
+        - name: 使用診斷記錄來監視擷取
+          href: using-diagnostic-logs.md
+        - name: 使用計量來監視叢集健康情況
+          href: using-metrics.md
+        - name: 使用資源健康情況來監視叢集健康情況
+          href: monitor-with-resource-health.md
+    - name: 與其他工具整合
+      items:
+        - name: Azure Data Factory
+          items:
+            - name: 與 Data Factory 整合
+              href: data-factory-integration.md
+            - name: 使用 Azure Data Factory 複製資料
+              href: data-factory-load-data.md
+            - name: 使用 Azure Data Factory 範本大量複製資料
+              href: data-factory-template.md
+            - name: 使用 Azure Data Factory 執行控制項
+              href: data-factory-command-activity.md
+        - name: Microsoft Flow 連接器
+          items:
+            - name: Microsoft Flow 連接器
+              href: flow.md
+            - name: Microsoft Flow 連接器使用範例
+              href: flow-usage.md
+        - name: Apache Spark 連接器
+          href: spark-connector.md
+        - name: 使用 Python 從 Databricks 連線
+          href: connect-from-databricks.md
+        - name: 在 Jupyter Notebook 和 Kqlmagic 中分析資料
+          href: kqlmagic.md
+        - name: 分析 Azure Notebooks 中的資料
+          href: azure-notebooks.md
+        - name: Azure Pipelines
+          href: devops.md
+    - name: 疑難排解
+      items:
+        - name: 建立叢集
+          href: troubleshoot-create-cluster.md
+        - name: 連線到叢集
+          href: troubleshoot-connect-cluster.md
+        - name: 處理資料庫與資料表
+          href: troubleshoot-database-table.md
+- name: 參考
+  items:
+    - name: 查詢語言
+      href: kusto/query/index.md
+    - name: 管理命令
+      href: kusto/management/index.md
+    - name: API
+      href: kusto/api/index.md
+    - name: 工具
+      href: kusto/tools/index.md
+    - name: 概念
+      href: kusto/concepts/index.md
+- name: 資源
+  items:
+    - name: 部落格
+      href: 'https://azure.microsoft.com/blog/tag/azure-data-explorer/'
+    - name: 論壇
+      items:
+        - name: 堆疊溢位
+          href: 'https://stackoverflow.com/questions/tagged/azure-data-explorer'
+        - name: Microsoft 技術社群
+          href: 'https://techcommunity.microsoft.com/t5/Azure-Data-Explorer/bd-p/Kusto'
+        - name: MSDN 論壇
+          href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureKusto'
+    - name: 產品意見反應
+      href: 'https://aka.ms/adefeedback'
+    - name: 定價與計費
+      items:
+        - name: 定價頁面
+          href: 'https://azure.microsoft.com/pricing/details/data-explorer/'
+        - name: 成本預估器
+          href: 'https://aka.ms/adecostestimator'
+        - name: 保留容量
+          href: pricing-reserved-capacity.md
+    - name: 服務更新
+      href: 'https://azure.microsoft.com/updates/?product=data-explorer'

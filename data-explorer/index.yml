@@ -1,0 +1,154 @@
+### YamlMime:Landing
+title: Azure 資料總管文件
+summary: Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 您可以使用 Azure 資料總管來收集、儲存及分析各種不同的資料，以改善產品、增強客戶體驗、監視裝置以及提升作業成效。
+metadata:
+  title: Azure 資料總管文件
+  description: Azure 資料總管是針對特定巨量資料查詢最佳化的記錄分析雲端平台。
+  ms.service: data-explorer
+  ms.topic: landing-page
+  author: orspod
+  ms.author: orspodek
+  ms.date: 03/19/2020
+  ms.openlocfilehash: a685cc0f12d86534274e4c4aaff87587885db572
+  ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+  ms.translationtype: HT
+  ms.contentlocale: zh-TW
+  ms.lasthandoff: 04/15/2020
+  ms.locfileid: "81490577"
+landingContent:
+- title: 關於 Azure 資料總管
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: 什麼是 Azure 資料總管？
+      url: data-explorer-overview.md
+  - linkListType: video
+    links:
+    - text: 什麼是 Azure 資料總管？ (19:47)
+      url: https://youtu.be/D_AJk2lAepw
+    - text: Pluralsight：從頭了解 Kusto 查詢語言 (KQL)
+      url: https://www.pluralsight.com/courses/kusto-query-language-kql-from-scratch
+- title: 建立叢集和資料庫
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: 建立叢集和資料庫
+      url: create-cluster-database-portal.md
+  - linkListType: how-to-guide
+    links:
+    - text: Python
+      url: create-cluster-database-python.md
+    - text: Azure Resource Manager 範本
+      url: create-cluster-database-resource-manager.md
+    - text: C#
+      url: create-cluster-database-csharp.md
+    - text: PowerShell
+      url: create-cluster-database-powershell.md
+    - text: Azure CLI
+      url: create-cluster-database-cli.md
+- title: 將資料內嵌至 Azure 資料總管
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: 資料擷取概觀
+      url: ingest-data-overview.md
+  - linkListType: quickstart
+    links:
+    - text: 內嵌範例資料
+      url: ingest-sample-data.md
+  - linkListType: how-to-guide
+    links:
+    - text: 單鍵擷取
+      url: ingest-data-one-click.md
+    - text: 串流擷取
+      url: ingest-data-streaming.md
+    - text: Python
+      url: python-ingest-data.md
+    - text: 使用 Azure 入口網站的事件中樞
+      url: ingest-data-event-hub.md
+    - text: 使用 Azure 入口網站的事件方格
+      url: ingest-data-event-grid.md
+    - text: 安裝和使用 LightIngest
+      url: lightingest.md
+- title: 查詢資料
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: 使用 Web UI 查詢資料
+      url: web-query-data.md
+  - linkListType: tutorial
+    links:
+    - text: 撰寫 KQL 查詢
+      url: write-queries.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Data Lake 中的查詢資料
+      url: data-lake-query-data.md
+    - text: 使用 Python 查詢資料
+      url: python-query-data.md
+    - text: 時間序列分析
+      url: time-series-analysis.md
+  - linkListType: reference
+    links:
+    - text: KQL 快速參考
+      url: kql-quick-reference.md
+    - text: Kusto 查詢語言
+      url: kusto/query/index.md
+- title: 顯現資料
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: 資料視覺效果概觀
+      url: viz-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Power BI 連接器
+      url: power-bi-connector.md
+    - text: Grafana
+      url: grafana.md
+    - text: ODBC 連接器
+      url: connect-odbc.md
+    - text: Tableau
+      url: tableau.md
+    - text: Kibana (K2Bridge 連接器)
+      url: k2bridge.md
+    - text: Redash
+      url: redash.md
+    - text: Sisense
+      url: sisense.md
+- title: 與其他工具整合
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: 與 Data Factory 整合
+      url: data-factory-integration.md
+    - text: Apache Spark 連接器
+      url: spark-connector.md
+    - text: Microsoft Flow 連接器
+      url: flow.md
+    - text: Azure DevOps
+      url: devops.md
+- title: 管理和監視資源和資料
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: 管理叢集的水平調整
+      url: manage-cluster-horizontal-scaling.md
+    - text: 管理叢集的垂直調整
+      url: manage-cluster-vertical-scaling.md
+    - text: 追蹤者資料庫
+      url: follower.md
+    - text: 管理資料庫權限
+      url: manage-database-permissions.md
+    - text: 使用計量來監視叢集健康情況
+      url: using-metrics.md
+    - text: 使用診斷記錄來監視擷取
+      url: using-diagnostic-logs.md
+- title: 參考
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: 管理命令
+      url: kusto/management/index.md
+    - text: Azure 資料總管 API
+      url: kusto/api/index.md
