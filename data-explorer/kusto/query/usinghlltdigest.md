@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-zone_pivot_group_filename: kusto/zone-pivot-groups.json
+zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 1392105e4b5d99f2273b686ed74a161750ee6f8c
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: c906e764330efedac051587201b28e5d0fc1ef07
+ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81662954"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81766143"
 ---
 # <a name="partitioning-and-composing-intermediate-results-of-aggregations"></a>彙總的中間結果的分割區與組合
 

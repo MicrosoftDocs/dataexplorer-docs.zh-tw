@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: fe199636d23f576220772b3a33c96ec8367a1e23
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 940320b7cd77ba09b31192853da9073511b33f5d
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663939"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82030243"
 ---
 # <a name="activity_metrics-plugin"></a>activity_metrics plugin
 
@@ -136,7 +136,7 @@ range _day from _start to _end  step 1d
 |2017-05-22 00:00:00.0000000|0.199122325836533|0.800877674163467|
 |2017-05-29 00:00:00.0000000|0.063468992248062|0.936531007751938|
 
-:::image type="content" source="images/queries/activity-metrics-churn-and-retention.png" border="false" alt-text="活動指標產生及保留":::
+:::image type="content" source="images/activity-metrics-plugin/activity-metrics-churn-and-retention.png" border="false" alt-text="活動指標產生及保留":::
 
 ### <a name="distinct-values-and-distinct-new-values"></a>不同的值和不同的「新」值 
 
@@ -183,4 +183,4 @@ range _day from _start to _end  step 1d
 |2017-05-22 00:00:00.0000000|1740|1017|
 |2017-05-29 00:00:00.0000000|960|756|
 
-:::image type="content" source="images/queries/activity-metrics-dcount-and-dcount-newvalues.png" border="false" alt-text="作用指標 dcount 和計數新值":::
+:::image type="content" source="images/activity-metrics-plugin/activity-metrics-dcount-and-dcount-newvalues.png" border="false" alt-text="作用指標 dcount 和計數新值":::

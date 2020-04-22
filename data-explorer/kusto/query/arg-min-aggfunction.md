@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/12/2019
-ms.openlocfilehash: 4531bd498cf9d9053d57d8b463c7b0adfcc9bf8d
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 58c590e124b01166ad07aa2b00fe865546947f96
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663977"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82030477"
 ---
 # <a name="arg_min-aggregation-function"></a>arg_min() (聚合函數)
 
@@ -58,4 +58,4 @@ PageViewLog
     by continent
 ```
 
-:::image type="content" source="images/aggregations/arg-min.png" alt-text="阿格敏":::
+:::image type="content" source="images/arg-min-aggfunction/arg-min.png" alt-text="阿格敏":::

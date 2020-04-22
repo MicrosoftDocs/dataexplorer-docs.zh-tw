@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ace60d0f9652d75b0f55cce4b1b622af20b42dc1
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
-ms.translationtype: HT
+ms.openlocfilehash: 9743cbcb8d3c25707d97a4a6844f947352e63b0b
+ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663684"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81744632"
 ---
 # <a name="parse_xml"></a>parse_xml()
 
@@ -52,8 +52,7 @@ XML                                |JSON                                        
  
 **範例**
 
-在下列範例中，當 `context_custom_metrics` 是類似下面內容的 `string` 時：
-<!--check this code formatting-->
+在下列範例中，當 `context_custom_metrics` 是類似下面內容的 `string` 時： 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 49d024d1deecd8e0c7bf16eda9917cd237fe6319
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 460ad9cfca4f97e6735d30a4d47d6384581e7af7
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523268"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82029982"
 ---
 # <a name="data-purge"></a>資料清除
 
@@ -90,6 +90,7 @@ ms.locfileid: "81523268"
 1. 程式設計調用:應用程式要調用的單步執行。 呼叫此命令會直接觸發清除執行序列。
 
     **語法**
+
      ```kusto
      .purge table [TableName] records in database [DatabaseName] with (noregrets='true') <| [Predicate]
      ```
@@ -101,6 +102,7 @@ ms.locfileid: "81523268"
     <!-- If query times-out on DM endpoint (default timeout is 10 minutes), it is recommended to use the [engine `whatif` command](#purge-whatif-command) directly againt the engine endpoint while increasing the [server timeout limit](../concepts/querylimits.md#limit-on-request-execution-time-timeout). Only after you have verified the expected results using the engine whatif command, issue the purge command via the DM endpoint using the 'noregrets' option. -->
 
      **語法**
+
      ```kusto
      // Step #1 - retrieve a verification token (no records will be purged until step #2 is executed)
      .purge table [TableName] records in database [DatabaseName] <| [Predicate]
@@ -256,8 +258,6 @@ ms.locfileid: "81523268"
 * 用戶端請求Id - DM 清除請求的用戶端活動 ID。 
 * 主體 - 清除命令頒發者的身份。
 
-
-
 ## <a name="purging-an-entire-table"></a>清除整個表格
 清除表包括刪除表,並將其標記為清除,以便[清除過程中](#purge-process)描述的硬刪除過程在表上運行。 在不清除表的情況下刪除表不會刪除其所有儲存項目(根據最初在表上設置的硬保留策略刪除)。 該`purge table allrecords`命令快速而高效,並且比清除記錄過程更可取(如果適用於您的方案)。 
 
@@ -270,6 +270,7 @@ ms.locfileid: "81523268"
 1. 程式設計呼叫(單步驟):
 
      **語法**
+
      ```kusto
      .purge table [TableName] in database [DatabaseName] allrecords with (noregrets='true')
      ```
@@ -277,6 +278,7 @@ ms.locfileid: "81523268"
 2. 人類調用(兩個步驟):
 
      **語法**
+
      ```kusto
      // Step #1 - retrieve a verification token (the table will not be purged until step #2 is executed)
      .purge table [TableName] in database [DatabaseName] allrecords
@@ -312,6 +314,7 @@ ms.locfileid: "81523268"
     .purge table MyTable in database MyDatabase allrecords 
     with (verificationtoken='eyJTZXJ2aWNlTmFtZSI6IkVuZ2luZS1pdHNhZ3VpIiwiRGF0YWJhc2VOYW1lIjoiQXp1cmVTdG9yYWdlTG9ncyIsIlRhYmxlTmFtZSI6IkF6dXJlU3RvcmFnZUxvZ3MiLCJQcmVkaWNhdGUiOiIgd2hlcmUgU2VydmVyTGF0ZW5jeSA9PSAyNSJ9')
     ```
+    
     輸出與".show 表"命令輸出相同(傳回時不清除表)。
 
     **輸出**

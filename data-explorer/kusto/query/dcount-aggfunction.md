@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: abd474d1ef06a71e3971df18c7ba65904b34ee06
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 6f1df8c93d21b73be3753468708a119177d4d602
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663821"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82030394"
 ---
 # <a name="dcount-aggregation-function"></a>dcount() (聚合函數)
 
@@ -38,7 +38,7 @@ ms.locfileid: "81663821"
 PageViewLog | summarize countries=dcount(country) by continent
 ```
 
-![alt 文字](./images/aggregations/dcount.png "dcount")
+:::image type="content" source="images/dcount-aggfunction/dcount.png" alt-text="D 計數":::
 
 **注意事項**
 
@@ -77,4 +77,4 @@ T | summarize dcount(B) by G | count
 
 下面描述了所有支援的準確性設置的相對估計誤差(百分比)的概率分佈函數:
 
-:::image type="content" border="false" source="images/aggregations/hll-error-distribution.png" alt-text="hll 錯誤分配":::
+:::image type="content" border="false" source="images/dcount-aggfunction/hll-error-distribution.png" alt-text="hll 錯誤分配":::

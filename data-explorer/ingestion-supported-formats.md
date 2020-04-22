@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/19/2020
-ms.openlocfilehash: 530fc02c58b719f29ef43b118fad1ce8f207337b
-ms.sourcegitcommit: 653bfb3edf32553c52ef36b339c8b80713a601b0
+ms.openlocfilehash: 93451dd1237905754ac834cb335f5d8a02157ac7
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81502539"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82030049"
 ---
 # <a name="data-formats-supported-by-azure-data-explorer-for-ingestion"></a>Azure 資料資源管理員支援用於引入的資料格式
 
@@ -50,7 +50,7 @@ ms.locfileid: "81502539"
 * `MyData.csv.zip`指示 blob 或格式化為 CSV 的檔案,使用 ZIP 壓縮(存檔或單個檔案)
 * `MyData.csv.gz`指示使用 GZip 壓縮的 blob 或格式化為 CSV 的檔案
 
-還支援不包含格式副檔名但僅包含壓縮(例如)的 Blob 或檔名。 在此情況下，您必須將檔案格式指定為擷取屬性 (因為無法加以推斷)。
+還支援不包含格式副檔名但僅包含壓縮(例如`MyData.zip`) 的 Blob 或檔名。 在此情況下，您必須將檔案格式指定為擷取屬性 (因為無法加以推斷)。
 
 > [!NOTE]
 > 某些壓縮格式會追蹤原始檔案副檔名，作為壓縮資料流程的一部分。 通常會忽略此副檔名來判斷檔案格式。 如果無法從 (壓縮的) Blob 或檔案名稱判斷檔案格式，則必須透過 `format` 擷取屬性來指定。

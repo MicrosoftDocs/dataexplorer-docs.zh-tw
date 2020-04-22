@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5e19332cf464fcad1715f4feddfe7a2c5765bb0d
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 813df821bad1b7e57315dad9bcd7b1387a2cd678
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663990"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82030069"
 ---
 # <a name="anyif-aggregation-function"></a>anyif () (聚合函數)
 
@@ -46,4 +46,4 @@ ms.locfileid: "81663990"
 Continents | summarize anyif(Continent, Population between (300000000 .. 600000000))
 ```
 
-:::image type="content" source="images/aggregations/any1.png" alt-text="任何 1":::
+:::image type="content" source="images/aggfunction/any1.png" alt-text="任何 1":::

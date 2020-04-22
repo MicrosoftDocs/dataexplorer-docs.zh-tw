@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0726b185c22cd84c93e28601a823a35d9685d96d
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 2a0b2aed48c9c5aa9d5b99bdb6cab68375827d2c
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663951"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82030190"
 ---
 # <a name="any-aggregation-function"></a>任何() (聚合函數)
 
@@ -50,7 +50,7 @@ ms.locfileid: "81663951"
 Continents | summarize any(Continent)
 ```
 
-:::image type="content" source="images/aggregations/any1.png" alt-text="任何 1":::
+:::image type="content" source="images/aggfunction/any1.png" alt-text="任何 1":::
 
 顯示隨機記錄的所有詳細資訊:
 
@@ -58,7 +58,7 @@ Continents | summarize any(Continent)
 Continents | summarize any(*)
 ```
 
-:::image type="content" source="images/aggregations/any2.png" alt-text="任 2":::
+:::image type="content" source="images/aggfunction/any2.png" alt-text="任 2":::
 
 顯示每個隨機大陸的所有詳細資訊:
 
@@ -66,4 +66,4 @@ Continents | summarize any(*)
 Continents | summarize any(*) by Continent
 ```
 
-:::image type="content" source="images/aggregations/any3.png" alt-text="任何 3":::
+:::image type="content" source="images/aggfunction/any3.png" alt-text="任何 3":::
