@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 857756b5be76746c65f58d0d8269c341e6217564
-ms.sourcegitcommit: 2e63c7c668c8a6200f99f18e39c3677fcba01453
+ms.openlocfilehash: ad255c6930e76628a5187fa8d321e3445dbb5f99
+ms.sourcegitcommit: fbe298e88542c0dcea0f491bb53ac427f850f729
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82117670"
+ms.locfileid: "82138861"
 ---
 # <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
 
@@ -25,7 +25,8 @@ ms.locfileid: "82117670"
 原則的主要目的是要改善已知會縮小為分割資料行中的一小部分值之查詢的效能。
 次要的可能優點是資料的壓縮較佳。
 
-雖然未針對可定義原則的資料表數量設定硬式編碼限制，但每個額外的資料表都會增加在叢集節點上執行之背景資料分割進程的負荷，而且可能需要叢集的其他資源-請參閱[下面](#capacity)的詳細資訊。
+> [!WARNING]
+> 雖然未針對可定義原則的資料表數量設定硬式編碼限制，但每個額外的資料表都會增加在叢集節點上執行的背景資料分割進程的負擔，而且可能需要叢集的其他資源-請參閱[容量](#capacity)。
 
 ## <a name="partition-keys"></a>資料分割索引鍵
 
@@ -202,8 +203,8 @@ ms.locfileid: "82117670"
 
 #### <a name="capacity"></a>Capacity
 
-* 由於資料分割程式會導致建立更多的範圍，因此您可能需要增加叢集的[範圍合併容量](../management/capacitypolicy.md#extents-merge-capacity)，讓[範圍合併](../management/extents-overview.md)程式能夠趕上。
-* 如果需要（例如，如果有較高的內嵌輸送量，以及（或）需要分割的大量資料表），則可以增加叢集的[範圍分割區容量](../management/capacitypolicy.md#extents-partition-capacity)，以允許執行更多的並行資料分割作業。
+* 由於資料分割程式會導致建立更多的範圍，因此您可能需要（逐漸和線性）增加叢集的[範圍合併容量](../management/capacitypolicy.md#extents-merge-capacity)，讓[延伸範圍合併](../management/extents-overview.md)處理能夠趕上。
+* 如果需要（例如，如果有較高的內嵌輸送量，以及（或）需要分割的大量資料表），叢集的[範圍分割區容量](../management/capacitypolicy.md#extents-partition-capacity)可能會增加（逐漸和線性），以允許執行更多的並行資料分割作業。
   * 萬一增加資料分割會導致使用叢集資源的大幅增加，請以手動方式或藉由啟用自動調整來調整叢集。
 
 ### <a name="outliers-in-partitioned-columns"></a>分割資料行中的極端值
