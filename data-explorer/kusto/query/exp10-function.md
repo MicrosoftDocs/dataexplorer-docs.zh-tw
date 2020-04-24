@@ -1,0 +1,34 @@
+---
+title: exp10() - Azure 資料資源管理員 |微軟文件
+description: 本文介紹 Azure 資料資源管理器中的 exp10()。
+services: data-explorer
+author: orspod
+ms.author: orspodek
+ms.reviewer: rkarlin
+ms.service: data-explorer
+ms.topic: reference
+ms.date: 03/25/2019
+ms.openlocfilehash: 60e5ea9baa994ef131506d755fcf3d600b5f6dfb
+ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 04/15/2020
+ms.locfileid: "81515635"
+---
+# <a name="exp10"></a>exp10()
+
+x 的基-10指數函數,該函數為 10,提升到冪 x:10°x。  
+
+**語法**
+
+`exp10(`*X.*`)`
+
+**引數**
+
+* *x*: 實數,指數值。
+
+**傳回**
+
+* x 的指數值。
+* 有關自然(基-10)對數,請參閱[log10()](log10-function.md)。
+* 有關基 e 和基-2 對數的指數函數,請參閱[exp()](exp-function.md) [,exp2()](exp2-function.md)
