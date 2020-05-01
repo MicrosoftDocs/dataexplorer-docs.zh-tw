@@ -1,6 +1,6 @@
 ---
-title: stdevp() (聚合函數) - Azure 數據資源管理器 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中的 stdevp()(聚合函數)。
+title: stdevp （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 stdevp （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0549c15ec9e2435d242f210e6dfc2163796e5f39
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: baafca4d8d5711d55838bceae817c36ecb0edd6f
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663195"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618561"
 ---
-# <a name="stdevp-aggregation-function"></a>stdevp() (聚合函數)
+# <a name="stdevp-aggregation-function"></a>stdevp （）（彙總函式）
 
-計算整個群組*Expr*的標準偏差,將群組視為[總體](https://en.wikipedia.org/wiki/Statistical_population)。 
+計算每個群組中的*Expr*標準差，並考慮將群組視為[擴展。](https://en.wikipedia.org/wiki/Statistical_population) 
 
-* 使用的公式:
+* 使用的公式：
 
-:::image type="content" source="images/aggregations/stdev-population.png" alt-text="斯特夫夫人口":::
+:::image type="content" source="images/stdevp-aggfunction/stdev-population.png" alt-text="Stdev 人口":::
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+* 只能在[匯總](summarizeoperator.md)的內容中使用
 
 **語法**
 
@@ -31,11 +31,11 @@ ms.locfileid: "81663195"
 
 **引數**
 
-* *Expr*:將用於聚合計算的運算式。 
+* *Expr*：將用於匯總計算的運算式。 
 
 **傳回**
 
-跨組*Expr*的標準偏差值。
+整個群組的*Expr*標準差值。
  
 **範例**
 
@@ -47,4 +47,4 @@ range x from 1 to 5 step 1
 
 |list_x|stdevp_x|
 |---|---|
-|[ 1, 2, 3, 4, 5]|1.4142135623731|
+|[1，2，3，4，5]|1.4142135623731|

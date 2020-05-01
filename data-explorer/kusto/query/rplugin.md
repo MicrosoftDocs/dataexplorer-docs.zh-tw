@@ -1,6 +1,6 @@
 ---
-title: R 外掛程式 (預覽) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 R 外掛程式(預覽)。
+title: R 外掛程式（預覽）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 R 外掛程式（預覽）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,59 +10,59 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: d815a75b241f7779a5f4ee9cae626c38ed54f9f4
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 514c67133980c9ab1c38b65cc51e4592dcb15eda
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81766004"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618952"
 ---
-# <a name="r-plugin-preview"></a>R 外掛程式 (預覽版)
+# <a name="r-plugin-preview"></a>R 外掛程式（預覽）
 
 ::: zone pivot="azuredataexplorer"
 
-R 外掛程式使用 R 文稿執行使用者定義的函數 (UDF)。 R 文本獲取表格數據作為其輸入,並有望生成表格輸出。
-外掛程式的運行時託管在[沙箱](../concepts/sandboxes.md)中,沙箱是一個在群集節點上運行的隔離和安全的環境。
+R 外掛程式會使用 R 腳本來執行使用者定義函數（UDF）。 R 腳本會取得表格式資料做為其輸入，而且預期會產生表格式輸出。
+外掛程式的執行時間裝載于[沙箱](../concepts/sandboxes.md)中，這是在叢集節點上執行的隔離且安全的環境。
 
 ### <a name="syntax"></a>語法
 
-*T* `|` *script_parameters* `evaluate` `per_node` =`hint.distribution` ( | ) ] output_schema腳本 [ script_parameters ] `=` `single` `r(` *output_schema* `,` *script* `,``)`
+*T* `|` `per_node` `,` *script_parameters* *output_schema* *script* [`hint.distribution` （`single`）] `r(`output_schema`,`腳本 [script_parameters] `evaluate` `=`  | `)`
 
 
 ### <a name="arguments"></a>引數
 
-* *output_schema*`type`: 定義表格資料的輸出架構的文本,由 R 代碼傳回。
-    * 格式為:`typeof(`*欄位*`:`*型態*[, ...`)`例如: `typeof(col1:string, col2:long)`.
-    * 要延伸輸入架構,請使用以下語法: `typeof(*, col1:string, col2:long)`。
-* *文稿*`string`: 要執行的有效 R 文稿的文字。
-* *script_parameters*`dynamic`: 可選文字,它是名稱/值對的屬性包,`kargs`作為保留 字典傳遞給 R 腳本(請參閱保留 R[變數](#reserved-r-variables))。
-* *提示.分發*:外掛程式的執行的可選提示,用於分佈在多個群集節點上。
+* *output_schema*：定義`type`表格式資料之輸出架構的常值（由 R 程式碼傳回）。
+    * 格式為： `typeof(` *ColumnName* `:` *ColumnType* [，...]`)`，例如： `typeof(col1:string, col2:long)`。
+    * 若要擴充輸入架構，請使用下列語法： `typeof(*, col1:string, col2:long)`。
+* *腳本*： `string`常值，這是要執行的有效 R 腳本。
+* *script_parameters*：選擇性`dynamic`常值，這是一組名稱/值組的屬性包，會傳遞至 R 腳本做為`kargs`保留的字典（請參閱[保留的 R 變數](#reserved-r-variables)）。
+* *提示。散發*：要在多個叢集節點間散發之外掛程式執行的選擇性提示。
    預設：`single`。
-    * `single`:腳本的單個實例將運行在整個查詢數據上。
-    * `per_node`:如果分發 R 塊之前的查詢,則腳本的實例將在每個節點上運行,因為它包含的數據。
+    * `single`：腳本的單一實例將會在整個查詢資料上執行。
+    * `per_node`：如果散發 R 區塊之前的查詢，腳本的實例將會透過它所包含的資料在每個節點上執行。
 
 
-### <a name="reserved-r-variables"></a>保留 R 變數
+### <a name="reserved-r-variables"></a>保留的 R 變數
 
-以下變數保留用於 Kusto 查詢語言與 R 程式碼之間的互動:
+下列變數是保留來進行 Kusto 查詢語言與 R 程式碼之間的互動：
 
-* `df`:輸入表格資料(`T`上述值),作為 R 資料幀。
-* `kargs`:script_parameters參數的值,*script_parameters*作為 R 字典。
-* `result`:由 R 文稿建立的 R DataFrame,其值將成為發送到外掛程式後面的任何 Kusto 查詢運算符的表格資料。
+* `df`：輸入表格式資料（ `T`上述的值），做為 R 資料框架。
+* `kargs`： *Script_parameters*引數的值，做為 R 字典。
+* `result`： R 腳本所建立的 R 資料框架，其值會變成傳送到外掛程式後面任何 Kusto 查詢運算子的表格式資料。
 
-### <a name="onboarding"></a>登入
+### <a name="onboarding"></a>入門訓練
 
 
-* 默認情況下,外掛程式已禁用。
-    * *有興趣在群集上啟用外掛程式?*
+* 預設會停用此外掛程式。
+    * *有興趣在叢集上啟用外掛程式嗎？*
         
-        * 在 Azure 門戶中,在 Azure 資料資源管理器群集中,在左側功能表中選擇 **「新建支援請求**」。
-        * 禁用外掛程式還需要打開支援票證。
+        * 在 Azure 入口網站的 Azure 資料總管叢集內，從左側功能表中選取 [**新增支援要求**]。
+        * 停用外掛程式也需要開啟支援票證。
 
-### <a name="notes-and-limitations"></a>註解及限制
+### <a name="notes-and-limitations"></a>注意事項和限制
 
-* R 沙箱影像基於 Windows*的 R 3.4.4*,包括[Anaconda R 套件中的套件](https://docs.anaconda.com/anaconda/packages/r-language-pkg-docs/)。
-* R 沙箱限制訪問網路,因此 R 代碼無法動態安裝映射中未包括的其他包。如果需要特定包,請在 Azure 門戶中打開 **"新支援請求**"。
+* R 沙箱映射是*以適用于 Windows 的 r 3.4.4 為*基礎，並包含來自[Anaconda 的 r Essentials](https://docs.anaconda.com/anaconda/packages/r-language-pkg-docs/)組合的套件。
+* R 沙箱會限制存取網路，因此 R 程式碼無法動態安裝不包含在映射中的其他套件。如果您需要特定的套件，請在 Azure 入口網站中開啟**新的支援要求**。
 
 
 ### <a name="examples"></a>範例
@@ -84,16 +84,16 @@ typeof(*, fx:double),               //  Output schema: append a new fx column to
 | render linechart 
 ```
 
-:::image type="content" source="images/samples/sine-demo.png" alt-text="因演示":::
+:::image type="content" source="images/plugin/sine-demo.png" alt-text="正弦示範" border="false":::
 
 ### <a name="performance-tips"></a>效能秘訣
 
-* 將外掛程式的輸入資料集減少到所需的最小數量(列/行)。
-    * 如果可能,請使用庫斯托查詢語言對源數據集使用篩選器。
-    * 要對源列的子集執行計算,在調用外掛程式之前僅投影這些列。
-* 每當`hint.distribution = per_node`文本中的邏輯是可分發的時,請使用。
-    * 您還可以使用[分區運算子](partitionoperator.md)對輸入數據集進行分區。
-* 只要有可能,請使用 Kusto 查詢語言來實現 R 文稿的邏輯。
+* 將外掛程式的輸入資料集減少為所需的最小數量（資料行/資料列）。
+    * 在可能的情況下，使用 Kusto 查詢語言，在源資料集上使用篩選。
+    * 若要在來源資料行的子集上執行計算，請先投影那些資料行，再叫用外掛程式。
+* 每當`hint.distribution = per_node`腳本中的邏輯可散發時使用。
+    * 您也可以使用[partition 運算子](partitionoperator.md)來分割輸入資料集。
+* 如果可能，請使用 Kusto 查詢語言來執行 R 腳本的邏輯。
 
     例如：
 
@@ -111,8 +111,8 @@ typeof(*, fx:double),               //  Output schema: append a new fx column to
 
 ### <a name="usage-tips"></a>使用提示
 
-* 為了避免 Kusto 字串分隔符與 R 的分隔元之間的衝突,我們建議在`'`Kusto 查詢中使用 Kusto 字串文字的單引號`"`字元 ( ), 在 R 文稿中的 R 字串文字使用雙引號字元 ( ) 。
-* 使用[外部資料運算元](externaldata-operator.md)獲取存儲在外部位置的腳本的內容,例如 Azure Blob 儲存、公共 GitHub 儲存庫等。
+* 若要避免 Kusto 字串分隔符號與 R 之間發生衝突，建議您針對 Kusto 查詢中的`'`Kusto 字串常值使用單引號字元（），並在 r 腳本`"`中使用雙引號字元（）來括住 r 字串常值。
+* 使用[externaldata 運算子](externaldata-operator.md)來取得您儲存在外部位置的腳本內容，例如 Azure blob 儲存體、公用 GitHub 儲存機制等等。
   
   例如：
 

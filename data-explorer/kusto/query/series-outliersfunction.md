@@ -1,6 +1,6 @@
 ---
-title: series_outliers() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 azure 數據資源管理器中的 series_outliers()。
+title: series_outliers （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 series_outliers （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: 47e479ce7fe09b2456405ac3f7daed4721374f32
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 16e82ec68a463b97699f7d02e18c46df65221c7b
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663450"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618646"
 ---
 # <a name="series_outliers"></a>series_outliers()
 
-在序列中得分異常點。
+為數列中的異常點評分。
 
-以包含動態數值陣列的運算式作為輸入,並生成長度相同的動態數值陣列。 陣列的每個值都使用[圖基的測試](https://en.wikipedia.org/wiki/Outlier#Tukey.27s_test)指示可能的異常分數。 值大於 1.5 或小於-1.5，表示異常狀況分別在輸入的相同元素中上升或下降。   
+採用包含動態數值陣列做為輸入的運算式，並產生相同長度的動態數值陣列。 陣列的每個值都會使用[Tukey 的測試](https://en.wikipedia.org/wiki/Outlier#Tukey.27s_test)指出可能的異常分數。 值大於 1.5 或小於-1.5，表示異常狀況分別在輸入的相同元素中上升或下降。   
 
 **語法**
 
-`series_outliers(`*x*`, `*類別*`, `*min_percentile*ignore_valmin_percentilemax_percentile* * `, ` `, ` * *`)`
+`series_outliers(`*x*`, `*種類*`, ` * * * * * *ignore_val min_percentile max_percentile`, ` `, ``)`
 
 **引數**
 
-* *x*: 動態陣列儲存格,這是數值陣列
-* *類型*: 異常值偵測演算法。 當前支援`"tukey"`(傳統圖基)`"ctukey"`和 (自訂圖基)。 預設為 `"ctukey"`
-* *ignore_val*: 表示序列中缺少值的數值,預設值為雙精度(空)。 null 與 ignore 值的分`0`數設定為 。
-* *min_percentile:* 對於普通分位數間範圍的計算,預設值為 10,支援的自定義值`[2.0, 98.0]`在`ctukey`範圍內 ( 僅) 
-* *max_percentile*:相同,預設值為 90,支援的自訂`[2.0, 98.0]`值在 範圍內(僅限 ctukey) 
+* *x*：動態陣列資料格，也就是數值的陣列
+* *種類：極端*偵測的演算法。 目前支援`"tukey"` （傳統 Tukey）和`"ctukey"` （自訂 Tukey）。 預設為 `"ctukey"`
+* *ignore_val*：表示數列中遺漏值的數值，預設值為 double （null）。 Null 和 ignore 值的分數會設定為`0`。
+* *min_percentile*：若為一般分量範圍的計算，預設值為10，支援的自訂值在`[2.0, 98.0]`範圍`ctukey`內（僅限） 
+* *max_percentile*：相同，預設值為90，支援的自訂值`[2.0, 98.0]`在範圍內（僅限 ctukey） 
 
-下表描述了`"tukey"``"ctukey"`與之間的差異:
+下表描述與之間`"tukey"`的`"ctukey"`差異：
 
 | 演算法 | 預設分量範圍 | 支援自訂分量範圍 |
 |-----------|----------------------- |--------------------------------|
@@ -42,11 +42,11 @@ ms.locfileid: "81663450"
 
 
 > [!TIP]
-> 使用此功能最方便的方法是將其應用於[製造系列](make-seriesoperator.md)運算符的結果。
+> 使用此函式最方便的方式，是將它套用至[make 系列](make-seriesoperator.md)運算子的結果。
 
 **範例**
 
-假設您有一個具有一些雜訊的時間序列,該時間序列會產生異常值,並且您希望將這些異常值(雜訊)替換為平均值,則可以使用 series_outliers() 來檢測異常值,然後替換它們:
+假設您有一個時間序列，其中有一些雜訊會建立極端值，而您想要以平均值取代這些極端值（雜訊），您可以使用 series_outliers （）來偵測極端值，然後加以取代：
 
 ```kusto
 range x from 1 to 100 step 1 
@@ -58,4 +58,4 @@ range x from 1 to 100 step 1
 | render linechart
 ``` 
 
-:::image type="content" border="false" source="images/samples/series-outliers.png" alt-text="系列例外值":::
+:::image type="content" source="images/series-outliersfunction/series-outliers.png" alt-text="數列極端值" border="false":::

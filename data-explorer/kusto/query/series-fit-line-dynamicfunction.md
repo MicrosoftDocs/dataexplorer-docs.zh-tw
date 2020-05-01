@@ -1,6 +1,6 @@
 ---
-title: series_fit_line_dynamic() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 series_fit_line_dynamic()。
+title: series_fit_line_dynamic （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 series_fit_line_dynamic （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,37 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 03bbb143504d0540156d5f18d4ed527ab5d13d38
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 170348dd530b581f85e0323563be324d5b795511
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663548"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618712"
 ---
 # <a name="series_fit_line_dynamic"></a>series_fit_line_dynamic()
 
-在序列上應用線性回歸,返回動態物件。  
+在數列上套用線性回歸，並傳回動態物件。  
 
-以包含動態數值陣列的運算式作為輸入並執行[線性回歸](https://en.wikipedia.org/wiki/Line_fitting),以便找到最適合它的線。 此函式需用於時間序列陣列，並符合 make-series 運算子的輸出。 它產生有以下內容的動態值:
-* `rsquare`: [r-平方](https://en.wikipedia.org/wiki/Coefficient_of_determination)是適合質量的標準度量。 這是在範圍 [0-1] 中的數字，其中 1 - 是最可能的配合，而 0 表示資料完全未依照順序，且不符合任何一條線 
-* `slope`:近似線的斜率(這是 y_ax_b 的斜率)
-* `variance`:輸入資料的方差
-* `rvariance`:剩餘方差,即輸入數據值與近似值之間的方差。
-* `interception`:攔截近似線(這是 y_ax_b 中的 b)
-* `line_fit`:數位陣列包含最佳擬合線的一系列值。 序列長度等於輸入陣列的長度。 它主要用於圖表。
+採用包含動態數值陣列做為輸入的運算式，並執行[線性回歸](https://en.wikipedia.org/wiki/Line_fitting)，以便找出最適合它的行。 此函式需用於時間序列陣列，並符合 make-series 運算子的輸出。 它會產生具有下列內容的動態值：
+* `rsquare`： [r-正方形](https://en.wikipedia.org/wiki/Coefficient_of_determination)是適合品質的標準量值。 這是在範圍 [0-1] 中的數字，其中 1 - 是最可能的配合，而 0 表示資料完全未依照順序，且不符合任何一條線 
+* `slope`：近似線的斜率（這是來自 y = ax + b 的 a）
+* `variance`：輸入資料的變異數
+* `rvariance`：剩餘變異數，也就是輸入資料值與近似值之間的差異。
+* `interception`：攔截近似線（這是 b，y = ax + b）
+* `line_fit`：數位陣列，其中包含一系列最適合行的值。 序列長度等於輸入陣列的長度。 它主要用於圖表。
 
-這個運算符類似於[series_fit_line,](series-fit-linefunction.md)但`series-fit-line`不像 它返回一個動態袋。
+這個運算子與[series_fit_line](series-fit-linefunction.md)相似，但不同`series-fit-line`的是，它會傳回動態包。
 
 **語法**
 
-`series_fit_line_dynamic(`*X.*`)`
+`series_fit_line_dynamic(`*x*`)`
 
 **引數**
 
-* *x*: 數值的動態陣列。
+* *x*：數值的動態陣列。
 
 > [!TIP]
-> 使用此功能最方便的方法是將其應用於[製造系列](make-seriesoperator.md)運算符的結果。
+> 使用此函式最方便的方式，是將它套用至[make 系列](make-seriesoperator.md)運算子的結果。
 
 **範例**
 
@@ -49,8 +49,8 @@ print id=' ', x=range(bin(now(), 1h)-11h, bin(now(), 1h), 1h), y=dynamic([2,5,6,
 | render timechart
 ```
 
-:::image type="content" source="images/samples/series-fit-line.png" alt-text="系列擬合線":::
+:::image type="content" source="images/series-fit-line/series-fit-line.png" alt-text="數列擬合線":::
 
 | RSquare | Slope | Variance | RVariance | Interception | LineFit                                                                                     |
 |---------|-------|----------|-----------|--------------|---------------------------------------------------------------------------------------------|
-| 0.982   | 2.730 | 98.628   | 1.686     | -1.666       | 1.064, 3.7945, 6.526, 9.256, 11.987, 14.718, 17.449, 20.180, 22.910, 25.641, 28.371, 31.102 |
+| 0.982   | 2.730 | 98.628   | 1.686     | -1.666       | 1.064、3.7945、6.526、9.256、11.987、14.718、17.449、20.180、22.910、25.641、28.371、31.102 |

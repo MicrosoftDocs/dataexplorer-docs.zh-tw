@@ -1,6 +1,6 @@
 ---
-title: series_fit_2lines() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 series_fit_2lines()。
+title: series_fit_2lines （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 series_fit_2lines （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,50 +8,50 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 05163735c88c3229c13d76e3f8fde9bff091b239
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 6c16b535962271a7aaf4acad63f52da028b49e33
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663512"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618731"
 ---
 # <a name="series_fit_2lines"></a>series_fit_2lines()
 
-在序列上應用兩個線段線性回歸,返回多個列。  
+在數列上套用兩個區段的線性回歸，並傳回多個資料行。  
 
-以包含動態數值陣列的運算式作為輸入,並應用[兩個線段線性回歸](https://en.wikipedia.org/wiki/Segmented_regression),以識別和量化序列中的趨勢變化。 函數反覆運算序列索引,並在每次反覆運算中將序列拆分為 2 個部分,將單獨的線(使用[series_fit_line()](series-fit-linefunction.md)貼合到每個零件,並計算總 r 平方。 最佳分割是將 r 平方最大化；此函式會傳回其參數︰
-* `rsquare`: [r-平方](https://en.wikipedia.org/wiki/Coefficient_of_determination)是適合質量的標準度量。 這是在範圍 [0-1] 中的數字，其中 1 - 是最可能的配合，而 0 表示資料完全未依照順序，且不符合任何一條線
-* `split_idx`:突破點到 2 個段的索引(基於零)
-* `variance`:輸入資料的方差
-* `rvariance`:剩餘方差,即輸入數據值與近似值(按 2 個線段)之間的方差。
-* `line_fit`:數位陣列包含最佳擬合線的一系列值。 序列長度等於輸入陣列的長度。 它主要用於圖表。
-* `right_rsquare`: 分割右方列的 r 平方,請參閱[series_fit_line ()](series-fit-linefunction.md)
-* `right_slope`:右近似線的斜率(這是 y_ax_b 的斜率)
-* `right_interception`:截取近似的左行(這是 y_ax_b 中的 b)
-* `right_variance`: 分割右邊輸入資料的方差
-* `right_rvariance`: 分割右邊輸入資料的餘差
-* `left_rsquare`: 分割左邊的列的 r 平方,請參閱[series_fit_line()](series-fit-linefunction.md)
-* `left_slope`:左側近似線的斜率(這是 y_ax_b 的斜率)
-* `left_interception`:截取近似的左行(這是 y_ax_b 中的 b)
-* `left_variance`: 分割左邊輸入資料的方差
-* `left_rvariance`: 分割左邊輸入資料的餘差
+採用包含動態數值陣列做為輸入的運算式，並套用[兩個區段的線性回歸](https://en.wikipedia.org/wiki/Segmented_regression)，以識別並量化數列中的趨勢變更。 函式會逐一查看數列索引，而在每個反復專案中，將數列分割為2個部分，將單獨的線條（使用[series_fit_line （）](series-fit-linefunction.md)）放入每個部分，並計算 r 平方的總數。 最佳分割是將 r 平方最大化；此函式會傳回其參數︰
+* `rsquare`： [r-正方形](https://en.wikipedia.org/wiki/Coefficient_of_determination)是適合品質的標準量值。 這是在範圍 [0-1] 中的數字，其中 1 - 是最可能的配合，而 0 表示資料完全未依照順序，且不符合任何一條線
+* `split_idx`：中中斷點對2區段的索引（以零為基底）
+* `variance`：輸入資料的變異數
+* `rvariance`：剩餘變異數，也就是輸入資料值與近似值（依2個線段）之間的差異。
+* `line_fit`：數位陣列，其中包含一系列最適合行的值。 序列長度等於輸入陣列的長度。 它主要用於圖表。
+* `right_rsquare`：分割右側線條的 r 平方，請參閱[series_fit_line （）](series-fit-linefunction.md)
+* `right_slope`：右邊近似線的斜率（這是來自 y = ax + b 的 a）
+* `right_interception`：攔截近似的左邊線（這是 b，y = ax + b）
+* `right_variance`：分割右側輸入資料的變異數
+* `right_rvariance`：分割右側輸入資料的剩餘變異數
+* `left_rsquare`：分割左邊的線條 r 平方，請參閱[series_fit_line （）](series-fit-linefunction.md)
+* `left_slope`：左側近似線的斜率（這是來自 y = ax + b 的 a）
+* `left_interception`：攔截近似的左邊線（這是 b，y = ax + b）
+* `left_variance`：分割左側輸入資料的變異數
+* `left_rvariance`：分割左側輸入資料的剩餘變異數
 
-*請注意*,此函數返回多個列,因此不能將其用作另一個函數的參數。
+*請注意*，此函式會傳回多個資料行，因此不能當做另一個函數的引數使用。
 
 **語法**
 
 專案`series_fit_2lines(` *x*`)`
-* 將返回上述所有列,名稱如下:series_fit_2lines_x_rsquare、series_fit_2lines_x_split_idx等。
-專案(rs、si、v)x`series_fit_2lines(` * *`)`
-* 將傳回以下欄:rs(r-平方)、si(分割索引)、v(方差)和其他將看起來像series_fit_2lines_x_rvariance、series_fit_2lines_x_line_fit等擴展(rs、si、v)=`series_fit_2lines(`*x*`)`
+* 會傳回所有前述具有下列名稱的資料行： series_fit_2lines_x_rsquare、series_fit_2lines_x_split_idx 等等。
+project （rs，si，v） =`series_fit_2lines(`*x*`)`
+* 會傳回下列資料行： rs （r-正方形）、si （分割索引）、v （變異數），而其餘部分看起來會像 series_fit_2lines_x_rvariance、series_fit_2lines_x_line_fit 等等。 extend （rs，si，v`series_fit_2lines(`） =*x*`)`
 * 只會傳回︰rs (r-square)、si (split index) 和 v (variance)。
   
 **引數**
 
-* *x*: 數值的動態陣列。  
+* *x*：數值的動態陣列。  
 
 > [!TIP]
-> 使用此功能最方便的方法是將其應用於[製造系列](make-seriesoperator.md)運算符的結果。
+> 使用此函式最方便的方式，是將它套用至[make 系列](make-seriesoperator.md)運算子的結果。
 
 **範例**
 
@@ -62,4 +62,4 @@ print id=' ', x=range(bin(now(), 1h)-11h, bin(now(), 1h), 1h), y=dynamic([1,2.2,
 | render timechart
 ```
 
-:::image type="content" source="images/samples/series-fit-2lines.png" alt-text="系列適合 2 行":::
+:::image type="content" source="images/series-fit-2lines/series-fit-2lines.png" alt-text="數列符合2行":::

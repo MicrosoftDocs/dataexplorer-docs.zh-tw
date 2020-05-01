@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 5ceafde1361c87d368237d0f8c71ad8d0708aec1
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 6b33ee0ed9535d512c909dd8de124fc8b1770cee
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108502"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618984"
 ---
 # <a name="python-plugin"></a>Python 外掛程式
 
@@ -54,7 +54,7 @@ Python 外掛程式會使用 Python 腳本來執行使用者定義函數（UDF�
 * `kargs`： *Script_parameters*引數的值，做為 Python 字典。
 * `result`： Python `pandas`腳本所建立的資料框架，其值會變成會傳送到外掛程式後面的 Kusto 查詢運算子的表格式資料。
 
-## <a name="onboarding"></a>登入
+## <a name="onboarding"></a>入門訓練
 
 * 預設會停用此外掛程式。
 * [這裡](../concepts/sandboxes.md#prerequisites)列出啟用外掛程式的必要條件。
@@ -92,7 +92,8 @@ typeof(*, fx:double),               //  Output schema: append a new fx column to
 )
 | render linechart 
 ```
-:::image type="content" source="images/samples/sine-demo.png" alt-text="正弦示範":::
+
+:::image type="content" source="images/plugin/sine-demo.png" alt-text="正弦示範" border="false":::
 
 ```kusto
 print "This is an example for using 'external_artifacts'"
