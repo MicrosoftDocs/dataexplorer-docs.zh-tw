@@ -1,6 +1,6 @@
 ---
-title: 變更合併表列文件字串 - Azure 資料資源管理員 ( Azure) 的資料資源管理員 。微軟文件
-description: 本文介紹 Azure 資料資源管理器中的更改合併表列文檔字串。
+title: alter-merge 資料表資料行-docstrings-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 alter merge 資料表資料行 docstrings。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,39 +8,39 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 75d298f35a215af5da443f673278e4a252c24cc9
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7dd36181be1140d3960369b1c8a5284ed55e48f5
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522384"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82616485"
 ---
-# <a name="alter-merge-table-column-docstrings"></a>變更合併表列文件字串
+# <a name="alter-merge-table-column-docstrings"></a>alter-merge 資料表資料行-docstrings
 
-設置`docstring`指定表的一個或多個欄的屬性。 未**顯式設置的**列將保留此屬性的現有值(如果它們具有)。
+設定指定`docstring`之資料表的一個或多個資料行的屬性。 未明確設定的資料行會**保留**其現有的此屬性值（如果有的話）。
 
-有關變更表列文件字串,請參閱[下文](#alter-table-column-docstrings)。
+如需 alter table 資料行-docstring，請參閱[下面](#alter-table-column-docstrings)的。
 
 **語法**
 
-`.alter-merge``table`*TableName*表`column-docstring`名`(` *Col1* `:`*文件字串1* =`,` *Col2* `:` *文件string2*_...`)`
+`.alter-merge``table` *TableName* `:` *Docstring1* *Col1* `:` * *Col1 Docstring1 [`,` *Col2* Docstring2] ... `column-docstring` `(``)`
 
 **範例** 
 
-```
+```kusto
 .alter-merge table Table1 column-docstrings (Column1:"DocString1", Column2:"DocString2")
 ```
 
-## <a name="alter-table-column-docstrings"></a>變更表列文件字串
+## <a name="alter-table-column-docstrings"></a>alter table 資料行-docstrings
 
-設置`docstring`指定表的一個或多個欄的屬性。 未顯式設定的列將**刪除**此屬性。
+設定指定`docstring`之資料表的一個或多個資料行的屬性。 未明確設定的資料行將會**移除**此屬性。
 
 **語法**
 
-`.alter``table`*TableName*表`column-docstring`名`(` *Col1* `:`*文件字串1* =`,` *Col2* `:` *文件string2*_...`)`
+`.alter``table` *TableName* `:` *Docstring1* *Col1* `:` * *Col1 Docstring1 [`,` *Col2* Docstring2] ... `column-docstring` `(``)`
 
 **範例** 
 
-```
+```kusto
 .alter table Table1 column-docstrings (Column1:"DocString1", Column2:"DocString2")
 ```

@@ -1,6 +1,6 @@
 ---
-title: .alter 表和 .alter-合併表 - Azure 數據資源管理器 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 .alter 表和 .alter-merge 表。
+title: 。 alter table 和 alter-merge table-Azure 資料總管 |Microsoft Docs
+description: 本文描述 Azure 資料總管中的 alter table 和 alter-merge 資料表。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,62 +8,62 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/17/2020
-ms.openlocfilehash: 516c5c7b85f7c310188fd11ae24e52cb23423143
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 18b0502754e95ca56d6a7f6946b9330bd42b174a
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522367"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82616434"
 ---
-# <a name="alter-table-and-alter-merge-table"></a>.alter 表和 .alter-合併表
+# <a name="alter-table-and-alter-merge-table"></a>。 alter table 和 alter-merge 資料表
 
-該`.alter table`命令將新的列架構、文檔字串和資料夾設置到現有表,覆蓋現有的列架構、文檔字串和資料夾。 命令"保留"的現有列中的數據將保留(因此,可以使用此命令重新排序表的列)。
+`.alter table`命令會將新的資料行架構、docstring 和資料夾設定為現有的資料表，並覆寫現有的資料行架構、docstring 和資料夾。 系統會保留命令所「保留」之現有資料行中的資料（例如，可以使用此命令來重新排列資料表的資料行）。
 
-這個`.alter-merge table`指令將新欄、文件字串和資料夾添加到現有表。
-將保留現有列中的數據。
+命令`.alter-merge table`會將新的資料行 [docstring] 和 [資料夾] 加入至現有的資料表。
+保留現有資料行中的資料。
 
-這兩個命令都必須在限定表名稱的特定資料庫的上下文中運行。
+這兩個命令都必須在範圍資料表名稱的特定資料庫內容中執行。
 
-需要[表員權限](../management/access-control/role-based-authorization.md)。
+需要[資料表管理員許可權](../management/access-control/role-based-authorization.md)。
 
 **語法**
 
-`.alter``table`*表名*(*欄位*:*欄型態*... ) 【`with` `(` `,``folder``=`*FolderName* `)` *Documentation*% 文件 [ 資料夾名稱 】 `docstring` `=`
+`.alter``table` *TableName* （*columnName*：*columnType*，...） [`with` `(`[`docstring` `=` *FolderName* *Documentation* `,`檔] [ `folder`資料夾集`)`]] `=`
 
-`.alter-merge``table`*表名*(*欄位*:*欄型態*... ) 【`with` `(` `,``folder``=`*FolderName* `)` *Documentation*% 文件 [ 資料夾名稱 】 `docstring` `=`
+`.alter-merge``table` *TableName* （*columnName*：*columnType*，...） [`with` `(`[`docstring` `=` *FolderName* *Documentation* `,`檔] [ `folder`資料夾集`)`]] `=`
 
-指定表成功完成後應具有的列。 
+指定資料表成功完成後應具有的資料行。 
 
 > [!WARNING]
-> 不正確使用`.alter`該命令可能會導致數據丟失。
-> 仔細閱讀和`.alter-merge`下面的`.alter`差異 。
+> 不正確`.alter`地使用命令可能會導致資料遺失。
+> 仔細閱讀和`.alter-merge`以下之間`.alter`的差異。
 
 `.alter-merge`:
 
- * 不存在並指定哪些列將添加到現有架構的末尾。
- * 如果傳遞的架構不包含某些表列,則不會刪除它們。
- * 如果指定了具有不同類型的現有列,則該命令將失敗。
+ * 不存在且您指定的資料行會加入至現有架構的結尾。
+ * 如果傳遞的架構不包含某些資料表資料行，則不會將它們刪除。
+ * 如果您指定了具有不同類型的現有資料行，此命令將會失敗。
 
-`.alter`只限制`.alter-merge`( 不 ):
+`.alter`僅限（ `.alter-merge`不）：
 
- * 表將具有相同的列,按指定的順序相同。
- * 命令中未指定的現有列將被刪除(如中`.drop column`),其中的數據將丟失。
- * 更改表時不支援更改列類型。 而是使用[.alter 列](alter-column.md)命令。
+ * 資料表的資料行與指定的順序會完全相同。
+ * 未在命令中指定的現有資料行將會卸載（如中`.drop column`所示），而且其中的資料會遺失。
+ * 更改資料表時，不支援變更資料行類型。 請改用[. alter column](alter-column.md)命令。
 
 > [!TIP] 
-> 用於`.show table [TableName] cslschema`在更改現有列架構之前獲取它。 
+> 您`.show table [TableName] cslschema`可以使用來取得現有的資料行架構，然後再加以修改。 
 
-以下兩個命令都適用:
+以下適用于這兩個命令：
 
-1. 這些命令不會物理修改現有數據。 將忽略已刪除欄中的資料。 假定新列中的數據為空。
-1. 根據群集的配置方式,數據引入可能會修改表的列架構,即使沒有使用者交互也是如此。 因此,在更改表的列架構時,請確保引入不會添加命令隨後將刪除所需的列。
+1. 這些命令不會實際修改現有的資料。 已移除資料行中的資料會被忽略。 新資料行中的資料會假設為 null。
+1. 視叢集的設定方式而定，資料內嵌可能會修改資料表的資料行架構，即使沒有使用者互動也一樣。 因此，在對資料表的資料行架構進行變更時，請確定內嵌不會加入所需的資料行，而該命令將會移除。
 
 > [!WARNING]
-> 數據引入過程進入與`.alter table`命令並行修改表的列架構的表,可能會與表列的順序無關地執行。 還有一個風險是數據將被引入到錯誤的列中。 通過在此類命令期間停止引入,或者確保此類引入操作始終使用映射物件來防止這種情況。
+> 在修改資料表的資料行架構的資料表中，會以與`.alter table`命令平行發生的方式來執行資料內嵌程式，可能會與資料表資料行的順序無關。 此外，也會有將資料內嵌到錯誤資料行的風險。 若要避免此情況，請在這類命令中停止內嵌，或確定這類內嵌作業一律使用對應物件。
 
 **範例**
 
-```
+```kusto
 .alter table MyTable (ColumnX:string, ColumnY:int) 
 .alter table MyTable (ColumnX:string, ColumnY:int) with (docstring = "Some documentation", folder = "Folder1")
 .alter-merge table MyTable (ColumnX:string, ColumnY:int) 

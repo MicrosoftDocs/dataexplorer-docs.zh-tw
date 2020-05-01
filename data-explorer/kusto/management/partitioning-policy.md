@@ -1,6 +1,6 @@
 ---
-title: 資料分割區策略管理 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中的數據分區策略管理。
+title: 資料分割原則管理-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的資料分割原則管理。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/04/2020
-ms.openlocfilehash: 0e1ff783195f26adf7f98e511ca155f43609098c
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 1ad9b359422b51084f1be1c64d27d656313d9296
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663957"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82616315"
 ---
-# <a name="data-partitioning-policy-management"></a>資料分割區原則管理
+# <a name="data-partitioning-policy-management"></a>資料分割原則管理
 
-[此處](../management/partitioningpolicy.md)詳細介紹了數據分區策略。
+[這裡](../management/partitioningpolicy.md)詳述資料分割原則。
 
-## <a name="show-policy"></a>顯示策略
+## <a name="show-policy"></a>顯示原則
 
 ```kusto
 .show table [table_name] policy partitioning
 ```
 
-該`.show`命令顯示應用於表的分區策略。
+此`.show`命令會顯示資料表上套用的資料分割原則。
 
 ### <a name="output"></a>輸出
 
 |原則名稱 | 實體名稱 | 原則 | 子實體 | 實體類型
 |---|---|---|---|---
-|資料分割區 | 資料表名稱 | 原則物件的 JSON 序列化 | null | Table
+|DataPartitioning | 資料表名稱 | 原則物件的 JSON 序列化 | null | Table
 
-## <a name="alter-and-alter-merge-policy"></a>變更與變更合併政策
+## <a name="alter-and-alter-merge-policy"></a>alter 和 alter-merge 原則
 
 ```kusto
 .alter table [table_name] policy partitioning @'policy object, serialized as JSON'
@@ -41,15 +41,15 @@ ms.locfileid: "81663957"
 .alter-merge table [table_name] policy partitioning @'partial policy object, serialized as JSON'
 ```
 
-該`.alter`命令允許更改應用於表的分區策略。
+此`.alter`命令可讓您變更套用於資料表的資料分割原則。
 
-該命令需要[資料庫管理員](access-control/role-based-authorization.md)許可權。
+此命令需要[DatabaseAdmin](access-control/role-based-authorization.md)許可權。
 
-對策略的更改最多可能需要 1 小時才能生效。
+對原則所做的變更可能需要最多1小時才會生效。
 
 ### <a name="examples"></a>範例
 
-#### <a name="setting-all-properties-of-the-policy-explicitly-at-table-level"></a>在表層級設定策略的所有屬性
+#### <a name="setting-all-properties-of-the-policy-explicitly-at-table-level"></a>在資料表層級明確設定原則的所有屬性
 
 ```kusto
 .alter table [table_name] policy partitioning @'{'
@@ -74,18 +74,18 @@ ms.locfileid: "81663957"
 '}'
 ```
 
-#### <a name="setting-a-specific-property-of-the-policy-explicitly-at-table-level"></a>在表層級設定策略的特定屬性
+#### <a name="setting-a-specific-property-of-the-policy-explicitly-at-table-level"></a>在資料表層級明確設定原則的特定屬性
 
-要將`EffectiveDateTime`政策設定為其他值,請使用以下指令:
+若要將`EffectiveDateTime`原則的設定為不同的值，請使用下列命令：
 
 ```kusto
-.alter table [table_name] policy partitioning @'{"EffectiveDateTime":"2020-01-01"}'
+.alter-merge table [table_name] policy partitioning @'{"EffectiveDateTime":"2020-01-01"}'
 ```
 
-## <a name="delete-policy"></a>移除原則
+## <a name="delete-policy"></a>刪除原則
 
 ```kusto
 .delete table [table_name] policy partitioning
 ```
 
-該`.delete`命令刪除給定表的分區策略。
+`.delete`命令會刪除給定資料表的資料分割原則。

@@ -1,6 +1,6 @@
 ---
-title: 操作管理 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的操作管理。
+title: Operations management-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的作業管理。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,71 +8,71 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 01f30a8d391948d5466ef76b2951d55aa6084e15
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e4e373cd694de989b2bbef8058aaf1c8b3ca3025
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520684"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82616468"
 ---
 # <a name="operations-management"></a>Operations Management
 
-## <a name="show-operations"></a>.顯示操作
+## <a name="show-operations"></a>。顯示作業
 
-`.show``operations`命令返回一個表,該表具有在過去兩周內執行的所有管理操作(無論是運行操作還是已完成操作),當前是保留期配置。
+`.show``operations`命令會傳回一個資料表，其中包含在過去兩周（目前為保留週期設定）中執行和已完成的所有系統管理作業。
 
 **語法**
 
 |||
 |---|---| 
-|`.show` `operations`              |傳回群組已處理或處理的所有操作 
-|`.show``operations`*操作代碼*|傳回特定識別碼的作業狀態 
-|`.show`*OperationId1*`(`操作代碼代碼代碼2 ...) `operations` `,` * * `,`|傳回指定的指示的作業狀態
+|`.show` `operations`              |傳回叢集已處理或正在處理的所有作業 
+|`.show``operations` *OperationId*|傳回特定識別碼的作業狀態 
+|`.show``operations` `,` *OperationId2* *OperationId1* OperationId1 OperationId2`,` ...） `(`|傳回特定識別碼的作業狀態
 
 **結果**
  
 |輸出參數 |類型 |描述 
 |---|---|---
-|Id |String |操作標識碼。
+|Id |String |作業識別碼。
 |作業 |String |管理員命令別名 
-|NodeId |String |如果指令具有遠端執行 (例如資料化)- NodeId 將包含正在執行的遠端節點的 ID 
-|啟動 |Datetime |動作開始的日期/時間(以 UTC 表示) 
-|上次更新時間 |Datetime |上次更新操作的日期/時間(以 UTC 表示)(可以是操作內的一個步驟,也可以是完成步驟) 
-|Duration |Datetime |上次更新開啟與啟動時間之間的時間跨度 
-|State |String |命令狀態:可以具有「進度」、「已完成」或「失敗」的值 
-|狀態 |String |其他說明字串,其中一個儲存失敗操作的錯誤 
+|NodeId |String |如果命令有遠端執行（例如 DataIngestPull）-節點識別碼會包含執行中遠端節點的 id 
+|StartedOn |Datetime |作業啟動時的日期/時間（UTC） 
+|LastUpdatedOn |Datetime |上次更新作業時的日期/時間（UTC）（可以是作業內的步驟，或完成步驟） 
+|Duration |Datetime |LastUpdateOn 與 StartedOn 之間的 TimeSpan 
+|State |String |命令狀態：的值可以是 "InProgress"、"Completed" 或 "Failed" 
+|狀態 |String |額外的說明字串，其中包含失敗作業的錯誤 
  
 **範例**
  
-|Id |作業 |節點識別碼 |已啟動 |上次更新時間 |Duration |State |狀態 
+|Id |作業 |節點識別碼 |開始時間 |上次更新日期 |Duration |State |狀態 
 |--|--|--|--|--|--|--|--
-|3827def6-0773-4f2a-859e-c02cf395失聰 |架構顯示 | |2015-01-06 08:47:01.0000000 |2015-01-06 08:47:01.0000000 |0001-01-01 00:00:00.0000000 |Completed | 
-|841fafa4-076a-4cba-9300-4836da0d9c75 |資料擷取 |庫斯托.Azure.Svc_IN_1 |2015-01-06 08:47:02.0000000 |2015-01-06 08:48:19.0000000 |0001-01-01 00:01:17.0000000 |Completed | 
-|e198c519-5263-4629-a158-8d68f7a1022f |操作顯示 | |2015-01-06 08:47:18.0000000 |2015-01-06 08:47:18.0000000 |0001-01-01 00:00:00.0000000 |Completed | 
-|a9f287a1-f3e6-4154-ad18-b86438da0929 |範圍刪除 | |2015-01-11 08:41:01.0000000 |0001-01-01 00:00:00.0000000 |0001-01-01 00:00:00.0000000 |InProgress | 
-|9edb3ecc-f4b4-4738-87e1-648eed2bd998 |資料擷取 | |2015-01-10 14:57:41.0000000 |2015-01-10 14:57:41.0000000 |0001-01-01 00:00:00.0000000 |失敗 |集合已修改;枚舉操作可能無法執行。 
+|3827def6-0773-4f2a-859e-c02cf395deaf |SchemaShow | |2015-01-06 08：47：01.0000000 |2015-01-06 08：47：01.0000000 |0001-01-01 00：00：00.0000000 |Completed | 
+|841fafa4-076a-4cba-9300-4836da0d9c75 |DataIngestPull |Kusto。 Svc_IN_1 |2015-01-06 08：47：02.0000000 |2015-01-06 08：48：19.0000000 |0001-01-01 00：01：17.0000000 |Completed | 
+|e198c519-5263-4629-a158-8d68f7a1022f |OperationsShow | |2015-01-06 08：47：18.0000000 |2015-01-06 08：47：18.0000000 |0001-01-01 00：00：00.0000000 |Completed | 
+|a9f287a1-f3e6-4154-ad18-b86438da0929 |ExtentsDrop | |2015-01-11 08：41：01.0000000 |0001-01-01 00：00：00.0000000 |0001-01-01 00：00：00.0000000 |InProgress | 
+|9edb3ecc-f4b4-4738-87e1-648eed2bd998 |DataIngestPull | |2015-01-10 14：57：41.0000000 |2015-01-10 14：57：41.0000000 |0001-01-01 00：00：00.0000000 |Failed |集合已修改;列舉運算可能無法執行。 
 
-## <a name="show-operation-details"></a>.顯示操作詳細資訊
+## <a name="show-operation-details"></a>。顯示作業詳細資料
 
-操作可以(可選)保留其結果,並且在操作完成後,可以使用`.show``operation``details` 
+作業可以（選擇性地）保存其結果，並在操作完成時使用`.show` `operation``details` 
 
 **注意：**
 
-* 並非所有控制命令都保留其結果,並且默認情況下僅在非同步執行(使用關鍵字`async`)上執行這些命令。 請搜索特定命令的文檔,並檢查是否這樣做(例如[,請參閱資料匯出](data-export/index.md))。 
-* 命令的`.show``operations``details`輸出架構是命令同步執行返回的相同架構。 
-* 只有在操作成功完成之後才能調用`details`該命令`.show``operation`。 在呼叫此指令之前,使用[show 操作命令](#show-operations)() 檢查操作的狀態。 
+* 並非所有的控制項命令都會保存其結果，而且通常會在非同步執行時（使用`async`關鍵字）進行預設的動作。 請搜尋檔中的特定命令，並檢查其是否存在（如需[匯出資料](data-export/index.md)，請參閱）。 
+* 命令的輸出架構`.show` `operations`是從同步執行命令所傳回的相同架構。 `details` 
+* 只有`.show` `operation` `details`在作業成功完成後，才能叫用此命令。 使用 [[顯示作業] 命令](#show-operations)），在叫用此命令之前，先檢查操作的狀態。 
 
 **語法**
 
-`.show``operation`*操作代碼*`details`
+`.show``operation` *OperationId*`details`
 
 **結果**
 
-同步執行時,結果因操作類型而異,並且與操作結果的架構匹配。 
+每種作業類型的結果都不同，而且會在同步執行時符合作業結果的架構。 
 
 **範例**
 
-此示例中的*操作 Id*是從其中一個[數據匯出](../management/data-export/index.md)命令的非同步執行返回的。
+此範例中的*OperationId*是從非同步執行其中一個[資料匯出](../management/data-export/index.md)命令傳回的。
 
 ```kusto 
 .export 
@@ -84,21 +84,22 @@ ms.locfileid: "81520684"
   <| myLogs 
 
 ```
-同步匯出指令傳回以下操作 ID:
 
-|操作代碼|
+Async export 命令傳回下列作業識別碼：
+
+|OperationId|
 |---|
 |56e51622-eb49-4d1a-b896-06a03178efcd|
 
-當命令完成查詢匯出的 Blob 時,可以使用此操作 ID,如下所示: 
+當命令完成時，可以使用此作業識別碼來查詢匯出的 blob，如下所示： 
 
-```
+```kusto
 .show operation 56e51622-eb49-4d1a-b896-06a03178efcd details 
 ```
 
 **結果**
 
-|Path|數位記錄|
+|Path|NumRecords|
 |---|---|
 |http://storage1.blob.core.windows.net/containerName/1_d08afcae2f044c1092b279412dcb571b.csv|10|
 |http://storage1.blob.core.windows.net/containerName/2_454c0f1359e24795b6529da8a0101330.csv|15|
