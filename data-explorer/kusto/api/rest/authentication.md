@@ -1,6 +1,6 @@
 ---
-title: 通過 HTTPS 進行身份驗證 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中通過 HTTPS 進行身份驗證。
+title: 透過 HTTPS 進行驗證-Azure 資料總管 |Microsoft Docs
+description: 本文說明如何透過 Azure 資料總管中的 HTTPS 進行驗證。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 4b6fbf5bb34dc3ff52938c7042778a7e49fd5faf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e0910089d87d6bce6124cb7e4560c2fa7b92b847
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81503038"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617981"
 ---
-# <a name="authentication-over-https"></a>透過 HTTPS 進行認證
+# <a name="authentication-over-https"></a>透過 HTTPS 進行驗證
 
-使用 HTTPS 時,該服務`Authorization`支援用於 執行身份驗證的標準 HTTP 標頭。
+使用 HTTPS 時，服務支援用來執行驗證`Authorization`的標準 HTTP 標頭。
 
-支援的 HTTP 認證方法包括:
+支援的 HTTP 驗證方法如下：
 
-* **Azure 活動目錄**`bearer`,通過 方法。
+* **Azure Active Directory**透過`bearer`方法 Azure Active Directory。
 
-使用 Azure 的目錄進行認證時`Authorization`, 標頭格式為:
+使用 Azure AD 進行驗證時， `Authorization`標頭的格式如下：
 
 ```txt
 Authorization: bearer TOKEN
 ```
 
-呼叫`TOKEN`者透過與 Azure 的目錄服務通訊取得的存取權杖在哪裡,具有以下屬性:
+其中`TOKEN`是呼叫者藉由與 Azure AD 服務通訊來取得的存取權杖。 Token 具有下列屬性：
 
-* 資源是服務URI(例如, `https://help.kusto.windows.net`
-* Azure 的目錄服務終結點`https://login.microsoftonline.com/TENANT/`為 。
+* 資源是服務 URI （例如`https://help.kusto.windows.net`）。
+* Azure AD 服務端點為`https://login.microsoftonline.com/TENANT/`
 
-Azure`TENANT`活動目錄租戶 ID 或名稱在哪裡。 例如,在 Microsoft 租戶下建立的服務`https://login.microsoftonline.com/microsoft.com/`可以使用 。 或者,對於僅使用者身份驗證,可以`https://login.microsoftonline.com/common/`改為請求。
+其中`TENANT`是 Azure AD 的租使用者識別碼或名稱。 例如，在 Microsoft 租使用者底下建立的服務可以使用`https://login.microsoftonline.com/microsoft.com/`。 或者，僅針對使用者驗證，可以對提出要求`https://login.microsoftonline.com/common/`。
 
 > [!NOTE]
-> 在國家雲中運行時,Azure 活動目錄服務終結點會更改。
-> 要更改將使用的終結點,將環境變數`AadAuthorityUri`設置為所需的 URI。
+> 當 Azure AD 服務端點在國家雲端中執行時，就會變更。
+> 若要變更端點，請將環境變數`AadAuthorityUri`設定為所需的 URI。
 
-有關更多資訊,請參閱[身份驗證概述](../../management/access-control/index.md)和 Azure[活動目錄身份驗證指南](../../management/access-control/how-to-authenticate-with-aad.md)。
+如需詳細資訊，請參閱[驗證總覽](../../management/access-control/index.md)和[Azure AD 驗證的指南](../../management/access-control/how-to-authenticate-with-aad.md)。

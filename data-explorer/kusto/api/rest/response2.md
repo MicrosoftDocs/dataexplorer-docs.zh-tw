@@ -1,6 +1,6 @@
 ---
-title: 查詢 V2 HTTP 回應 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的查詢 V2 HTTP 回應。
+title: 查詢 V2 HTTP 回應-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的查詢 V2 HTTP 回應。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/11/2020
-ms.openlocfilehash: cca9b8381c7c59993c1e9071c46f34c1754d2429
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 86a56d77005b2c6b5c9d38bbec85eebfbcb481dc
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81524305"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617896"
 ---
 # <a name="query-v2-http-response"></a>查詢 V2 HTTP 回應
 
-如果狀態代碼為 200,則回應正文為 JSON 陣列。
-陣列中的每個 JSON 物件都稱為_幀_。
+如果狀態碼為200，則回應主體為 JSON 陣列。
+陣列中的每個 JSON 物件稱為「_框架_」。
 
-有 7 種類型的幀:
+畫面格有幾種類型：
 
-1. 資料集標題
-2. 表標題
-3. 表碎片
-4. 表進度
-5. 表完成
-6. DataTable
-7. 資料集完成
+* [DataSetHeader](#datasetheader)
+* [TableHeader](#tableheader)
+* [TableFragment](#tablefragment)
+* [TableProgress](#tableprogress)
+* [TableCompletion](#tablecompletion)
+* [資料表](#datatable)
+* [DataSetCompletion](#datasetcompletion)
 
-## <a name="datasetheader"></a>資料集標題 
+## <a name="datasetheader"></a>DataSetHeader 
 
-這始終是數據集中的第一幀,並正好顯示一次。
+`DataSetHeader`框架一律是資料集中的第一個，而且只會出現一次。
 
 ```json
 {
@@ -43,21 +43,24 @@ ms.locfileid: "81524305"
 
 其中：
 
-1. `Version`保留協定版本。 目前版本為 `v2.0`。
-2. `IsProgressive`是一個布爾標誌,指示此數據集是否包含漸進幀。 漸進式框架是下列框架之一:
-    1. `TableHeader`: 包含有關表的一般資訊
-    2. `TableFragment`: 包含表的直腸資料分片
-    3. `TableProgress`: 包含百分比的進度 (0-100)
-    4. `TableCompletion`:標記這是表的最後一幀。
+* `Version`這是通訊協定版本。 目前版本為 `v2.0`。
+* `IsProgressive`這是一個布林值旗標，指出此資料集是否包含漸進式框架。 
+   漸進式框架是下列其中一個：
+   
+     | Frame             | 描述                                    |
+     |-------------------| -----------------------------------------------|
+     | `TableHeader`     | 包含關於資料表的一般資訊   |
+     | `TableFragment`   | 包含資料表的矩形資料分區 |
+     | `TableProgress`   | 包含進度（以百分比表示）（0-100）       |
+     | `TableCompletion` | 表示此框架是最後一個畫面格      |
         
-    上面的四個幀一起使用來描述表。
-    如果未設定此標誌,則集中的每個表都將使用單個幀進行序列化:
-      1. `DataTable`:包含用戶端所需的有關數據集中單個表的所有資訊。
+    上述框架描述資料表。
+    如果`IsProgressive`旗標未設定為 true，則會使用單一框架將集合中的每個資料表序列化：
+* `DataTable`：包含用戶端在資料集中單一資料表所需的所有資訊。
 
+## <a name="tableheader"></a>TableHeader
 
-## <a name="tableheader"></a>表標題
-
-使用`results_progressive_enabled`選項設定為 true 發出的查詢可能包括此幀。 在此表之後,用戶端應期望與`TableFragment``TableProgress`幀的交錯順序,後跟幀`TableCompletion`。 之後,將不再發送與該表相關的幀。
+使用`results_progressive_enabled`選項設定為 true 的查詢可能會包含此框架。 在此資料表之後，用戶端可以預期交錯的`TableFragment`和`TableProgress`框架序列。 資料表的最後一個框架是`TableCompletion`。
 
 ```json
 {
@@ -70,19 +73,20 @@ ms.locfileid: "81524305"
 
 其中：
 
-1. `TableId`是表的唯一 ID。
-2. `TableKind`是表的種類,可以是以下項之一:
+* `TableId`這是資料表的唯一識別碼。
+* `TableKind`是下列其中一項：
 
-      * 主要結果
-      * 查詢完成資訊
-      * 查詢追蹤紀錄
-      * 查詢PerfLog
-      * TableOfContents
-      * QueryProperties
-      * 查詢計劃
-      * Unknown
-3. `TableName`是表的名稱。
-4. `Columns`是描述表架構的陣列:
+    * PrimaryResult
+    * QueryCompletionInformation
+    * QueryTraceLog
+    * QueryPerfLog
+    * TableOfContents
+    * QueryProperties
+    * QueryPlan
+    * Unknown
+      
+* `TableName`這是資料表的名稱。
+* `Columns`這是描述資料表架構的陣列。
 
 ```json
 {
@@ -90,11 +94,12 @@ ms.locfileid: "81524305"
     "ColumnType": string,
 }
 ```
-[此處](../../query/scalar-data-types/index.md)介紹了支援的列類型。
 
-## <a name="tablefragment"></a>表碎片
+[這裡](../../query/scalar-data-types/index.md)描述支援的資料行類型。
 
-此框架包含表的矩形數據片段。 除了實際數據之外,此幀還包含一個`TableFragmentType`屬性,該屬性告訴用戶端如何處理片段(它可以追加到現有片段,也可以將它們全部替換在一起)。
+## <a name="tablefragment"></a>TableFragment
+
+此`TableFragment`框架包含資料表的矩形資料片段。 除了實際的資料之外，此框架也包含`TableFragmentType`屬性，告訴用戶端該如何處理片段。 附加至現有片段的片段，或加以取代。
 
 ```json
 {
@@ -107,17 +112,20 @@ ms.locfileid: "81524305"
 
 其中：
 
-1. `TableId`是表的唯一 ID。
-2. `FieldCount`是表格欄數
-3. `TableFragmentType`描述客戶端應如何處理此片段。 可以是下列其中一項：
-      * 資料應用
-      * 資料取代
-4. `Rows`是包含片段數據的二維陣列。
+* `TableId`這是資料表的唯一識別碼。
+* `FieldCount`這是資料表中的資料行數目。
+* `TableFragmentType`說明用戶端應該如何使用此片段。 
+    `TableFragmentType`是下列其中一項：
+    
+    * DataAppend
+    * DataReplace
+      
+* `Rows`是包含片段資料的二維陣列。
 
-## <a name="tableprogress"></a>表進度
+## <a name="tableprogress"></a>TableProgress
 
-此幀可以與上述`TableFragment`幀交錯。
-它的唯一目的是通知客戶端查詢進度。
+`TableProgress`畫面格可以與上面所`TableFragment`述的框架交錯。
+其唯一目的是通知用戶端查詢的進度。
 
 ```json
 {
@@ -128,12 +136,12 @@ ms.locfileid: "81524305"
 
 其中：
 
-1. `TableId`是表的唯一 ID。
-2. `TableProgress`以百分比 (0-100) 表示進度。
+* `TableId`這是資料表的唯一識別碼。
+* `TableProgress`這是以百分比表示的進度（0--100）。
 
-## <a name="tablecompletion"></a>表完成
+## <a name="tablecompletion"></a>TableCompletion
 
-幀`TableCompletion`標記表傳輸的結束。 將不再發送與該表相關的幀。
+此`TableCompletion`框架會標示資料表傳輸的結尾。 將不會再傳送與該資料表相關的任何畫面。
 
 ```json
 {
@@ -144,41 +152,38 @@ ms.locfileid: "81524305"
 
 其中：
 
-1. `TableId`是表的唯一 ID。
-2. `RowCount`是表中的最後行數。
+* `TableId`這是資料表的唯一識別碼。
+* `RowCount`這是資料表中的資料列總數。
 
 ## <a name="datatable"></a>DataTable
 
-`EnableProgressiveQuery`將標誌設定為 false 時發出的查詢將不包括之前 4 幀`TableHeader`中的`TableFragment``TableProgress`任何`TableCompletion`幀 ( 和 。 相反,數據集中的每個表都將使用單個幀(`DataTable`幀)傳輸,該幀包含用戶端讀取表所需的所有資訊。
+`EnableProgressiveQuery`以旗標設定為 false 的查詢將不會包含任何框架（`TableHeader`、 `TableFragment`、 `TableProgress`和`TableCompletion`）。 相反地，資料集中的每個資料表都會使用包含客戶`DataTable`端所需之所有資訊的框架來傳輸，以讀取資料表。
 
 ```json
 {
     "TableId": Number,
-
     "TableKind": string,
-
     "TableName": string,
-
     "Columns": Array,
-
     "Rows": Array,
 }
 ```    
 
 其中：
 
-1. `TableId`是表的唯一 ID。
-2. `TableKind`是表的種類,可以是以下項之一:
+* `TableId`這是資料表的唯一識別碼。
+* `TableKind`是下列其中一項：
 
-      * 主要結果
-      * 查詢完成資訊
-      * 查詢追蹤紀錄
-      * 查詢PerfLog
-      * QueryProperties
-      * 查詢計劃
-      * Unknown
-3. `TableName`是表的名稱。
-4. `Columns`是描述表架構的陣列:
+    * PrimaryResult
+    * QueryCompletionInformation
+    * QueryTraceLog
+    * QueryPerfLog
+    * QueryProperties
+    * QueryPlan
+    * Unknown
+      
+* `TableName`這是資料表的名稱。
+* `Columns`是描述資料表架構的陣列，其中包括：
 
 ```json
 {
@@ -186,18 +191,20 @@ ms.locfileid: "81524305"
     "ColumnType": string,
 }
 ```
-4. `Rows`是包含表數據的二維陣列。
 
-### <a name="the-meaning-of-tables-in-the-response"></a>回應中表的含義
+* `Rows`是包含資料表資料的二維陣列。
 
-* `PrimaryResult`- 查詢的主要表格結果。 對於每個[表格表達式語句](../../query/tabularexpressionstatements.md),按順序發出一個或多個表,表示該語句生成的結果(由於[批處理](../../query/batches.md)和[分叉運算符](../../query/forkoperator.md),可以有多個此類表)。
-* `QueryCompletionInformation`- 提供有關查詢本身執行的其他資訊,例如查詢本身是否成功完成,以及查詢消耗的資源(類似於 v1 回應中的 QueryStatus 表)。 
-* `QueryProperties`- 提供其他值,如用戶端可視化指令(例如,用於反映[呈現運算符](../../query/renderoperator.md)中的資訊和[資料庫游標](../../management/databasecursor.md)資訊)。
-* `QueryTraceLog`- 性能追蹤日誌資訊(在[用戶端請求屬性](../netfx/request-properties.md)中設置 perftrace 時返回)。
+### <a name="the-meaning-of-tables-in-the-response"></a>回應中資料表的意義
 
-## <a name="datasetcompletion"></a>資料集完成
+* `PrimaryResult`-查詢的主要表格式結果。 針對每個[表格式運算式語句](../../query/tabularexpressionstatements.md)，會依序產生一或多個資料表，表示語句所產生的結果。 因為[批次](../../query/batches.md)和[分叉運算子](../../query/forkoperator.md)，所以可能會有多個這類資料表。
+* `QueryCompletionInformation`-提供查詢本身執行的其他資訊，例如它是否已順利完成，以及查詢所使用的資源（類似 v1 回應中的 QueryStatus 資料表）。 
+* `QueryProperties`-提供額外的值，例如用戶端視覺效果指示（例如，為了反映轉譯[運算子](../../query/renderoperator.md)中的資訊而發出）和[資料庫資料指標](../../management/databasecursor.md)資訊）。
+* `QueryTraceLog`-效能追蹤記錄資訊（當`perftrace` [用戶端要求屬性](../netfx/request-properties.md)中的時傳回）設定為 true。
 
-這是數據集中的最後一幀。
+## <a name="datasetcompletion"></a>DataSetCompletion
+
+`DataSetCompletion`框架是資料集中的最後一個。
+
 ```json
 {
     "HasErrors": Boolean,
@@ -208,6 +215,6 @@ ms.locfileid: "81524305"
 
 其中：
 
-1. `HasErrors`如果生成數據集時出現任何錯誤,則為 true。
-2. `Cancelled`如果導致生成數據集的請求中途被取消,則為 true。 
-3. `OneApiErrors`僅在為`HasErrors`true 時傳輸。 有關`OneApiErrors`格式的說明,請參閱[此處](https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md)的第 7.10.2 節。
+* `HasErrors`如果產生資料集時發生錯誤，則為 true。
+* `Cancelled`如果導致資料集產生的要求在完成之前已取消，則為 true。 
+* `OneApiErrors`只有在`HasErrors`為 true 時，才會傳回。 如需`OneApiErrors`格式的說明，請參閱[這裡](https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md)的7.10.2 一節。

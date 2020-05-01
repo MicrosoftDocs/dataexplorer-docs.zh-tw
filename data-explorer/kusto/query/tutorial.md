@@ -1,6 +1,6 @@
 ---
-title: 教程 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中的教程。
+title: 教學課程-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的教學課程。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 03/23/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 4720d44396fbb30350a4113fa798d7d179d7ae85
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 69e5815fbe14805b0cf3044dafe8691bbea5fb88
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765758"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618095"
 ---
 # <a name="tutorial"></a>教學課程
 
 ::: zone pivot="azuredataexplorer"
 
-瞭解 Kusto 查詢語言的最佳方法是查看一些簡單的查詢,以便使用[帶有一些範例數據的資料庫](https://help.kusto.windows.net/Samples)獲取語言的"感覺"。 本文中演示的查詢應運行在該資料庫上。 此示例`StormEvents`資料庫中的表提供有關美國發生的風暴的一些資訊。
+瞭解 Kusto 查詢語言的最佳方式是查看一些簡單的查詢，以使用[具有一些範例資料的資料庫](https://help.kusto.windows.net/Samples)來取得語言的「風格」。 本文中所示範的查詢應該在該資料庫上執行。 此`StormEvents`範例資料庫中的表格提供有關在美國發生的風暴的一些資訊
 
 <!--
   TODO: Provide link to reference data we used originally in StormEvents
@@ -34,10 +34,10 @@ ms.locfileid: "81765758"
 
 ## <a name="count-rows"></a>計算資料列數目
 
-我們的範例資料庫有一個表`StormEvents`,稱為 。
-為了找出它有多大,我們將將其內容輸送到一個運算元中,該運算符僅對行進行計數:
+我們的範例資料庫有一個稱為`StormEvents`的資料表。
+為了瞭解其大小，我們會將其內容傳送至只計算資料列的操作員：
 
-* *語法:* 查詢是數據源(通常是表名稱),可選後跟一個或多個管道字元和一些表格運算元。
+* *語法：* 查詢是一種資料來源（通常是資料表名稱），並可選擇性地後面接著一組或多組管道字元和某些表格式運算子。
 
 ```kusto
 StormEvents | count
@@ -45,19 +45,19 @@ StormEvents | count
 
 結果如下︰
 
-|Count|
+|計數|
 |-----|
 |59066|
     
-[計數運算子](./countoperator.md)。
+[count 運算子](./countoperator.md)。
 
-## <a name="project-select-a-subset-of-columns"></a>項目:選擇欄位集
+## <a name="project-select-a-subset-of-columns"></a>專案：選取資料行的子集
 
-使用[專案](./projectoperator.md)只選取所需的欄。 請參閱下面的示例,該示例同時使用[專案和](./projectoperator.md) [take](./takeoperator.md)運算符。
+使用[project](./projectoperator.md)只挑選您想要的資料行。 請參閱下列使用[專案](./projectoperator.md)和[take](./takeoperator.md)運算子的範例。
 
-## <a name="where-filtering-by-a-boolean-expression"></a>位置:由布爾表示式進行篩選
+## <a name="where-filtering-by-a-boolean-expression"></a>where：依布林運算式篩選
 
-讓我們只看到 2007`California`年`flood`2 月的 中:
+讓我們在2007年`flood`2 月`California`的期間僅查看中的：
 
 ```kusto
 StormEvents
@@ -66,11 +66,11 @@ StormEvents
 | project StartTime, EndTime , State , EventType , EpisodeNarrative
 ```
 
-|StartTime|EndTime|State|EventType|劇集敘述|
+|StartTime|EndTime|State|EventType|EpisodeNarrative|
 |---|---|---|---|---|
-|2007-02-19 00:00:00.0000000|2007-02-19 08:00:00.0000000|加州|Flood|19日淩晨,一個穿過南聖華金谷的正面系統給肯恩縣西部帶來了短暫的大雨。 據報導,塔夫脫附近的166號州公路發生了輕微洪水。|
+|2007-02-19 00：00：00.0000000|2007-02-19 08：00：00.0000000|加州|Flood|在南 San Joaquin 的正面系統之間移動的一小段時間，會在19日早上的一小時內，為西方字偶比對國家/地區帶來短暫的 rain。 在接近 Taft 的州高速公路166報告了次要洪水。|
 
-## <a name="take-show-me-n-rows"></a>使用:顯示我 n 行
+## <a name="take-show-me-n-rows"></a>take：顯示 n 個數據列
 
 讓我們看看一些資料 - 範例 5 資料列中的內容為何？
 
@@ -82,18 +82,18 @@ StormEvents
 
 |StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
-|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|大雨|佛羅里達|在24小時內,在沿海的沃盧西亞縣部分地區降雨量高達9英寸。|
-|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|龍捲風|佛羅里達|龍捲風在西湖北端的尤斯蒂斯鎮登陸。 龍捲風迅速增強為EF1強度,因為它向北移動西北通過尤斯蒂斯。 賽道只有不到兩英里長,最大寬度為300碼。  龍捲風摧毀了7所房屋。 27所房屋受到嚴重損壞,81所房屋報告受到輕微損壞。 沒有嚴重受傷,財產損失定為620萬美元。|
-|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|噴水|大西洋南部|在墨爾本海灘東南的大西洋上形成一個噴水,並短暫地向岸邊移動。|
-|2007-12-20 07:50:00.0000000|2007-12-20 07:53:00.0000000|Thunderstorm Wind|密西西比|許多大樹被吹倒,有些樹被吹倒在電線上。 東部亞當斯縣發生破壞。|
-|2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|Thunderstorm Wind|格魯吉亞|縣調度報告說,在206國道附近的昆西巴滕環路沿線,有幾棵樹被吹倒。 估計了砍伐樹木的費用。|
+|2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|繁重 Rain|州|在近水樓臺 Volusia 縣的各個部分之間，最多有9英寸的 rain 落在24小時內。|
+|2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|龍捲風|州|Eustis 在 West Crooked Lake 的北結尾觸及了龍捲風。 龍捲風會快速更到 EF1 強度，因為它是透過 Eustis 移到西北部。 此曲目只在兩英里的時間內，寬度上限為300個碼。  龍捲風終結了7家。 二十七家家庭收到重大損害，而81家所回報的小損毀。 $6200000 不會有嚴重傷害和屬性損毀。|
+|2007-09-29 08：11：00.0000000|2007-09-29 08：11：00.0000000|Waterspout|大西洋南部|在墨爾本海灘的大西洋東南部中形成的 waterspout，並短暫地向支援腳步。|
+|2007-12-20 07：50：00.0000000|2007-12-20 07：53：00.0000000|Thunderstorm Wind|MISSISSIPPI|許多大型樹狀結構的電源線已關閉。 東部 Adams 縣（市）中發生損毀。|
+|2007-12-30 16：00：00.0000000|2007-12-30 16：05：00.0000000|Thunderstorm Wind|格魯吉亞|國家/地區分派報告數個樹狀結構沿著 Quincey Batten 迴圈，接近狀態道路206。 已估計樹狀結構移除的成本。|
 
-但是[,從表中以](./takeoperator.md)沒有特定順序顯示行,因此讓我們對它們進行排序。
-* [限制](./takeoperator.md)是[取走](./takeoperator.md)的別名,將具有相同的效果。
+但是[take 會](./takeoperator.md)以不特定的順序顯示資料表中的資料列，因此讓我們將它們排序。
+* [limit](./takeoperator.md)是[take](./takeoperator.md)的別名，會有相同的效果。
 
-## <a name="sort-and-top"></a>排序和頂部
+## <a name="sort-and-top"></a>排序和頂端
 
-* *語法:* 某些運算元的關鍵字(如`by`)引入了參數。
+* *語法：* 有些運算子具有由關鍵字引入的參數， `by`例如。
 * `desc` = 遞減順序，`asc` = 遞增。
 
 顯示前 n 個資料列 (依特定資料行排序)︰
@@ -106,13 +106,13 @@ StormEvents
 
 |StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
-|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|冬季風暴|密西根|這場大雪活動一直持續到元旦淩晨。|
-|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|冬季風暴|密西根|這場大雪活動一直持續到元旦淩晨。|
-|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|冬季風暴|密西根|這場大雪活動一直持續到元旦淩晨。|
-|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|大風|加州|據報導,文圖拉縣的山區有陣風到每小時58英里左右的西北風。|
-|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|大風|加州|暖泉 RAWS 感測器報告北風陣風到每小時 58 英里。|
+|2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪事件會持續到新年早上的一天。|
+|2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪事件會持續到新年早上的一天。|
+|2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪事件會持續到新年早上的一天。|
+|2007-12-31 23：53：00.0000000|2007-12-31 23：53：00.0000000|高風|加州|Ventura 國家/地區的山脈中回報了北部到東北部股 gusting 至大約 58 mph。|
+|2007-12-31 23：53：00.0000000|2007-12-31 23：53：00.0000000|高風|加州|暖彈簧 RAWS 感應器回報 northerly 股 gusting 到 58 mph。|
 
-使用[排序](./sortoperator.md),然後[採取](./takeoperator.md)運算子,也可以實現相同的
+使用[sort](./sortoperator.md)和[take](./takeoperator.md)運算子可以達成相同的目的
 
 ```kusto
 StormEvents
@@ -121,9 +121,9 @@ StormEvents
 | project  StartTime, EndLat, EventType, EventNarrative
 ```
 
-## <a name="extend-compute-derived-columns"></a>延伸:計算派生欄
+## <a name="extend-compute-derived-columns"></a>擴充：計算衍生的資料行
 
-以計算每行中的值建立新欄:
+藉由計算每個資料列中的值，建立新的資料行：
 
 ```kusto
 StormEvents
@@ -134,13 +134,13 @@ StormEvents
 
 |StartTime|EndTime|Duration|EventType|State|
 |---|---|---|---|---|
-|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|22:00:00|大雨|佛羅里達|
-|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|00:08:00|龍捲風|佛羅里達|
-|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|00:00:00|噴水|大西洋南部|
-|2007-12-20 07:50:00.0000000|2007-12-20 07:53:00.0000000|00:03:00|Thunderstorm Wind|密西西比|
-|2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|00:05:00|Thunderstorm Wind|格魯吉亞|
+|2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|22:00:00|繁重 Rain|州|
+|2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|00:08:00|龍捲風|州|
+|2007-09-29 08：11：00.0000000|2007-09-29 08：11：00.0000000|00:00:00|Waterspout|大西洋南部|
+|2007-12-20 07：50：00.0000000|2007-12-20 07：53：00.0000000|00:03:00|Thunderstorm Wind|MISSISSIPPI|
+|2007-12-30 16：00：00.0000000|2007-12-30 16：05：00.0000000|00:05:00|Thunderstorm Wind|格魯吉亞|
 
-可以重用列名稱並將計算結果分配給同一列。
+您可以重複使用資料行名稱，並將計算結果指派給相同的資料行。
 例如：
 
 ```kusto
@@ -153,21 +153,21 @@ print x=1
 |---|---|
 |3|1|
 
-[Scalar 表示式](./scalar-data-types/index.md)`+`可以包括所有常用運算符(、、、、、、`-``*``/``%`函數)等。
+純量[運算式](./scalar-data-types/index.md)可以包含所有常見的運算子`+`（ `-`、 `*`、 `/`、 `%`、），而且有一系列有用的函式。
 
-## <a name="summarize-aggregate-groups-of-rows"></a>匯總:聚合行組
+## <a name="summarize-aggregate-groups-of-rows"></a>摘要：匯總資料列群組
 
-計算來自每個國家/地區的事件數:
+計算每個國家/地區的事件數目：
 
 ```kusto
 StormEvents
 | summarize event_count = count() by State
 ```
 
-[將](./summarizeoperator.md)`by`子句中具有相同值的行匯總在一起,然後使用聚合函數(`count`如 )將每個組合併為單個行。 因此,在這種情況下,每個狀態都有一個行,並且有一個列用於該狀態中的行計數。
+[summarize](./summarizeoperator.md)將在`by`子句中具有相同值的群組匯總在一起，然後使用彙總函式（例如`count`）將每個群組合並成單一資料列。 因此，在此情況下，每個狀態都有一個資料列，以及該狀態的資料列計數的資料行。
 
-聚合函數的範圍很廣,您可以在一個匯總運算符中使用其中幾個[函數](./summarizeoperator.md#list-of-aggregation-functions)來生成多個計算列。 例如,我們可以獲取每個州的風暴計數以及每個州唯一類型的風暴的總和,  
-然後,我們可以使用[頂部](./topoperator.md)獲得風暴影響最大的狀態:
+有一系列的[彙總函式](./summarizeoperator.md#list-of-aggregation-functions)，您可以在一個匯總運算子中使用其中幾個來產生數個計算資料行。 例如，我們可以在每個狀態中取得風暴的計數，以及每個狀態的唯一一種電流類型的總和，  
+然後，我們可以使用[top](./topoperator.md)來取得最常受到影響的狀態：
 
 ```kusto
 StormEvents 
@@ -175,24 +175,24 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-|State|風暴計數|風暴類型|
+|State|StormCount|TypeOfStorms|
 |---|---|---|
 |德克薩斯州|4701|27|
-|堪薩斯|3166|21|
+|KANSAS|3166|21|
 |愛荷華州|2337|19|
-|伊利諾伊州|2022|23|
-|密蘇里州|2016|20|
+|伊利諾州|2022|23|
+|MISSOURI|2016|20|
 
 summarize 的結果有：
 
 * `by`中具名的每個資料行；
-* 每個計算表達式的列;
+* 每個計算運算式的資料行。
 * 每一組 `by` 值的一個資料列。
 
 ## <a name="summarize-by-scalar-values"></a>依純量值彙總
 
-您可以在`by`子句中使用標量值(數位、時間或間隔)值,但需要將值放入條柱中。  
-[bin()](./binfunction.md)函數對此很有用:
+您可以在`by`子句中使用純量（數值、時間或間隔）值，但您會想要將值放入「bin」中。  
+[Bin （）](./binfunction.md)函數適用于：
 
 ```kusto
 StormEvents
@@ -200,23 +200,23 @@ StormEvents
 | summarize event_count = count() by bin(StartTime, 1d)
 ```
 
-這會將所有時間戳縮短為 1 天的間隔:
+這會將所有時間戳記縮減為1天的間隔：
 
 |StartTime|event_count|
 |---|---|
-|2007-02-14 00:00:00.0000000|180|
-|2007-02-15 00:00:00.0000000|66|
-|2007-02-16 00:00:00.0000000|164|
-|2007-02-17 00:00:00.0000000|103|
-|2007-02-18 00:00:00.0000000|22|
-|2007-02-19 00:00:00.0000000|52|
-|2007-02-20 00:00:00.0000000|60|
+|2007-02-14 00：00：00.0000000|180|
+|2007-02-15 00：00：00.0000000|66|
+|2007-02-16 00：00：00.0000000|164|
+|2007-02-17 00：00：00.0000000|103|
+|2007-02-18 00：00：00.0000000|22|
+|2007-02-19 00：00：00.0000000|52|
+|2007-02-20 00：00：00.0000000|60|
 
-[bin()](./binfunction.md)與許多語言的[地板()](./floorfunction.md)功能相同。 它只是將每個值減少到提供的模量的最近倍數,以便[匯總](./summarizeoperator.md)可以將行分配給組。
+[Bin （）](./binfunction.md)與許多語言中的[floor （）](./floorfunction.md)函數相同。 它只會將每個值減少到您提供的最接近的模數倍數，讓[總結](./summarizeoperator.md)可以將資料列指派給群組。
 
-## <a name="render-display-a-chart-or-table"></a>顯示:顯示圖表或表格
+## <a name="render-display-a-chart-or-table"></a>Render：顯示圖表或資料表
 
-投影兩列,並將其用作圖表的 x 軸和 y 軸:
+投影兩個數據行，並使用它們做為圖表的 x 和 y 軸：
 
 ```kusto
 StormEvents 
@@ -227,16 +227,16 @@ StormEvents
 | render columnchart
 ```
 
-:::image type="content" source="images/tour/060.png" alt-text="060":::
+:::image type="content" source="images/tutorial/event-counts-state.png" alt-text="依州/省的風暴事件計數直條圖":::
 
-儘管我們在專案`mid`操作中刪除了,但如果我們希望圖表按該順序顯示國家/地區,我們仍然需要它。
+雖然我們已`mid`從專案作業中移除，但如果我們想要讓圖表以該順序顯示國家/地區，仍然需要它。
 
-嚴格地說,"呈現"是用戶端的一個功能,而不是查詢語言的一部分。 儘管如此,它還是集成到語言中,對於設想結果非常有用。
+嚴格來說，「render」是用戶端的一項功能，而不是查詢語言的一部分。 不過，它會整合到語言中，而且在構想結果時非常有用。
 
 
 ## <a name="timecharts"></a>時間表
 
-回到數位條柱,讓我們顯示一個時間序列:
+回到數值箱，讓我們來顯示一個時間序列：
 
 ```kusto
 StormEvents
@@ -244,7 +244,7 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tour/080.png" alt-text="080":::
+:::image type="content" source="images/tutorial/time-series-start-bin.png" alt-text="依時間分類收納的折線圖事件":::
 
 ## <a name="multiple-series"></a>多個系列
 
@@ -257,19 +257,19 @@ StormEvents
 | summarize count() by bin(StartTime, 10h), Source
 ```
 
-:::image type="content" source="images/tour/090.png" alt-text="090":::
+:::image type="content" source="images/tutorial/table-count-source.png" alt-text="依來源的資料表計數":::
 
-只需將呈現術語加入到上述: `| render timechart`.
+只要將轉譯詞彙加入至上述： `| render timechart`。
 
-:::image type="content" source="images/tour/100.png" alt-text="100":::
+:::image type="content" source="images/tutorial/line-count-source.png" alt-text="依來源的折線圖計數":::
 
-請注意,`render timechart`使用第一列作為 x 軸,然後將其他列顯示為單獨的行。
+請注意`render timechart` ，會使用第一個資料行做為 X 軸，然後將其他欄位顯示為個別的線條。
 
 ## <a name="daily-average-cycle"></a>每日平均週期
 
-活動在平均一天如何變化?
+活動在平均一天的變化如何？
 
-按一天計算事件,按小時計算。 請注意,我們使用`floor`而不是 bin:
+依時間模數一天計數事件，分類收納為小時。 請注意，我們`floor`會使用而不是 bin：
 
 ```kusto
 StormEvents
@@ -279,15 +279,15 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tour/120.png" alt-text="120":::
+:::image type="content" source="images/tutorial/time-count-hour.png" alt-text="時間圖表計數（依小時）":::
 
-目前,`render`沒有正確標記持續時間,但我們可以改`| render columnchart`用 :
+`render`目前無法正確標示持續時間，但我們可以`| render columnchart`改用：
 
-:::image type="content" source="images/tour/110.png" alt-text="110":::
+:::image type="content" source="images/tutorial/column-count-hour.png" alt-text="直條圖計數（依小時）":::
 
 ## <a name="compare-multiple-daily-series"></a>比較多個每日系列
 
-不同州的活動在一天中的時間如何變化?
+活動在不同狀態的當天時間有何差異？
 
 ```kusto
 StormEvents
@@ -297,9 +297,9 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tour/130.png" alt-text="130":::
+:::image type="content" source="images/tutorial/time-hour-state.png" alt-text="時間圖表（依小時和州）":::
 
-除以`1h`將 x 軸轉換為小時數而不是持續時間:
+除以`1h`以將 X 軸變成小時數，而不是持續時間：
 
 ```kusto
 StormEvents
@@ -309,13 +309,13 @@ StormEvents
 | render columnchart
 ```
 
-:::image type="content" source="images/tour/140.png" alt-text="140":::
+:::image type="content" source="images/tutorial/column-hour-state.png" alt-text="依小時和州的直條圖":::
 
 ## <a name="join"></a>Join
 
-如何查找兩個給定事件類型在它們發生的狀態?
+如何找出兩個指定的 EventTypes 在兩個狀態中發生的情況？
 
-您可以使用第一個事件類型和第二個事件類型拉取風暴事件,然後加入狀態上的兩個集。
+您可以使用第一個事件1和第二個事件集來提取風暴事件，然後聯結兩個集合的狀態。
 
 ```kusto
 StormEvents
@@ -327,17 +327,17 @@ StormEvents
 | distinct State
 ```
 
-:::image type="content" source="images/tour/145.png" alt-text="145":::
+:::image type="content" source="images/tutorial/join-events-la.png" alt-text="加入事件閃電和大量":::
 
-## <a name="user-session-example-of-join"></a>聯結的使用者作業階段範例
+## <a name="user-session-example-of-join"></a>Join 的使用者會話範例
 
-本節不使用表`StormEvents`。
+這一節不會使用`StormEvents`資料表。
 
-假設您有的數據包含標記每個使用者會話開始和結束的事件,並且每個會話都有唯一的 ID。 
+假設您的資料包含標示每個使用者會話開始和結束的事件，以及每個會話的唯一識別碼。 
 
-每個使用者會話持續多長時間?
+每個使用者會話持續多久？
 
-通過使用`extend`提供兩個時間戳的別名,可以計算會話持續時間。
+藉由`extend`使用提供兩個時間戳記的別名，您就可以計算會話的持續時間。
 
 ```kusto
 Events
@@ -352,14 +352,14 @@ Events
 | take 10
 ```
 
-:::image type="content" source="images/tour/150.png" alt-text="150":::
+:::image type="content" source="images/tutorial/user-session-extend.png" alt-text="使用者會話延伸":::
 
 在執行聯結之前，使用 `project` 只選取我們需要的資料行是相當好的做法。
 在相同的子句中，我們會將時間戳記資料行重新命名。
 
 ## <a name="plot-a-distribution"></a>繪製分佈圖
 
-有多少次不同長度的風暴?
+有多少個有不同長度的最大衝擊？
 
 ```kusto
 StormEvents
@@ -372,33 +372,33 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tour/170.png" alt-text="170":::
+:::image type="content" source="images/tutorial/event-count-duration.png" alt-text="依持續時間的事件計數 timechart":::
 
-或使用`| render columnchart`:
+或使用`| render columnchart`：
 
-:::image type="content" source="images/tour/160.png" alt-text="160":::
+:::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="依持續時間 timechart 的直條圖事件計數":::
 
 ## <a name="percentiles"></a>百分位數
 
-哪些持續時間範圍涵蓋不同百分比的風暴?
+哪些持續時間範圍涵蓋了不同的風暴百分比？
 
-使用上述查詢,但取代為`render`:
+使用上述查詢，但將取代`render`為：
 
 ```kusto
 | summarize percentiles(duration, 5, 20, 50, 80, 95)
 ```
 
-在這種情況下,我們沒有提供`by`子句,因此結果是一行:
+在此情況下，我們不`by`提供子句，因此結果為單一資料列：
 
-:::image type="content" source="images/tour/180.png" alt-text="180":::
+:::image type="content" source="images/tutorial/summarize-percentiles-duration.png" alt-text="資料表摘要百分位數（依持續時間）":::
 
 我們可以從中看到︰
 
-* 5%的風暴持續時間小於500萬;
-* 50%的風暴持續不到1h25米;
-* 5%的風暴持續至少2小時50米。
+* 5% 的大電流時間小於 5m;
+* 50% 的風暴最後小於 1h 25m;
+* 5% 的風暴最後至少為下半年50m。
 
-要獲得每個狀態的單獨細分,我們只需通過兩個匯總運算符分別將狀態列:
+若要取得每個狀態的個別明細，我們只需要透過兩個摘要運算子來分別顯示 state 資料行：
 
 ```kusto
 StormEvents
@@ -411,11 +411,11 @@ StormEvents
 | summarize percentiles(duration, 5, 20, 50, 80, 95) by State
 ```
 
-:::image type="content" source="images/tour/190.png" alt-text="190":::
+:::image type="content" source="images/tutorial/summarize-percentiles-state.png" alt-text="資料表摘要百分位數的持續時間（依狀態）":::
 
 ## <a name="let-assign-a-result-to-a-variable"></a>Let︰將結果指派給變數
 
-使用[let](./letstatement.md)分隔上面「聯接」範例中的查詢運算式部分。 結果不變：
+使用 [ [let](./letstatement.md) ] 來分隔上述「聯結」範例中的查詢運算式部分。 結果不變：
 
 ```kusto
 let LightningStorms = 
@@ -429,43 +429,43 @@ LightningStorms
 | distinct State
 ```
 
-> 提示:在 Kusto 用戶端中,不要在部分之間放置空白行。 務必執行所有一切。
+> 提示：在 Kusto 用戶端中，請勿在這個的部分之間放置空白行。 務必執行所有一切。
 
-## <a name="combining-data-from-several-databases-in-a-query"></a>在查詢中合併來自多個資料庫的資料
+## <a name="combining-data-from-several-databases-in-a-query"></a>在查詢中結合數個資料庫的資料
 
-有關詳細討論[,請參閱跨資料庫查詢](./cross-cluster-or-database-queries.md)
+如需詳細討論，請參閱[跨資料庫查詢](./cross-cluster-or-database-queries.md)
 
-編寫樣式查詢時:
+當您撰寫樣式的查詢時：
 
 ```kusto
 Logs | where ...
 ```
 
-名為 Logs 的表必須位於預設資料庫中。 如果要從其他資料庫存取表,請使用以下語法:
+名為 Logs 的資料表必須位於您的預設資料庫中。 如果您想要從另一個資料庫存取資料表，請使用下列語法：
 
 ```kusto
 database("db").Table
 ```
 
-因此,如果您有名為 *「診斷*和*遙測」的*資料庫,並且想要關聯其某些資料,則可以編寫(假設*診斷*是默認資料庫)
+因此，如果您有名為*診斷*和*遙測*的資料庫，而且想要讓部分資料相互關聯，您可以撰寫（假設*診斷*是您的預設資料庫）
 
 ```kusto
 Logs | join database("Telemetry").Metrics on Request MachineId | ...
 ```
 
-或者,如果預設資料庫是*遙測*
+或者，如果您的預設資料庫是*遙測*
 
 ```kusto
 union Requests, database("Diagnostics").Logs | ...
 ```
     
-上述所有資料庫都假定兩個資料庫都駐留在當前連接到的群集中。 假設*遙測資料庫*屬於另一個名為*TelemetryCluster.kusto.windows.net*的群集,然後訪問它需要它
+上述所有資料庫都假設兩個資料庫都位於您目前連接的叢集中。 假設*遙測*資料庫屬於另一個名為*TelemetryCluster.kusto.windows.net*的叢集，然後再存取您需要的
 
 ```kusto
 Logs | join cluster("TelemetryCluster").database("Telemetry").Metrics on Request MachineId | ...
 ```
 
-> 注意:指定群組時,資料庫是強制性的
+> 注意：指定叢集時，資料庫為強制性
 
 ::: zone-end
 

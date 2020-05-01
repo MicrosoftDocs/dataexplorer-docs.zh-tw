@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 5b3fa21b8b9012fe23a82afea77b1a3e24ae3c91
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 790cd9805be6dd4440ef2eb51c504044dc069b3c
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108468"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617777"
 ---
 # <a name="alter-table-docstring"></a>.alter 資料表 docstring
 
@@ -28,6 +28,6 @@ ms.locfileid: "82108468"
 
 **範例** 
 
-```
+```kusto
 .alter table LyricsAsTable docstring "This is the theme to Garry's show"
 ```

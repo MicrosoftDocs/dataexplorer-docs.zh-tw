@@ -1,6 +1,6 @@
 ---
-title: 在 iframe 內嵌入 Web UI - Azure 資料資源管理員 ( Azure) 的資料資源管理員 。微軟文件
-description: 本文介紹在 Azure 資料資源管理器中的 iframe 中嵌入 Web UI。
+title: 在**iframe**中內嵌 Web UI-Azure 資料總管 |Microsoft Docs
+description: 本文說明如何在 Azure 資料總管的**iframe**中內嵌 Web UI。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,43 +8,43 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 9c5469a577c3e09cd433ec250f9215e5f450d5f5
-ms.sourcegitcommit: 653bfb3edf32553c52ef36b339c8b80713a601b0
+ms.openlocfilehash: 7b7bb181f640eb259b32f3a5814290a218006418
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81524458"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617947"
 ---
-# <a name="embed-web-ui-in-an-iframe"></a>將 Web UI 嵌入到 iframe 中
+# <a name="embed-web-ui-in-an-iframe"></a>在 iframe 中內嵌 Web UI
 
-Azure 資料資源管理員 Web UI 可以嵌入到 iframe 中,並託管在第三方網站中。
+Azure 資料總管 Web UI 可以內嵌在 iframe 中，並裝載于協力廠商網站。
 
-![alt 文字](../images/web-ux.jpg "Azure 資料資源管理員 Web UI")
+![替代文字](../images/web-ux.jpg "Azure 資料總管 Web UI")
 
-在網站內嵌入 Azure 資料資源管理員 Web UX 使用戶能夠執行以下操作:
+在您的網站中內嵌 Azure 資料總管 Web UX，可讓您的使用者執行下列動作：
 
-- 編輯查詢(包括所有語言功能,如著色和感知)
-- 直觀地瀏覽表架構
-- 向 AAD 進行認證
+- 編輯查詢（包括顏色標示和 intellisense 等所有語言功能）
+- 以視覺化方式探索資料表架構
+- 向 AAD 驗證
 - 執行查詢
 - 顯示查詢執行結果
-- 建立多個選項卡
-- 在本地儲存查詢
-- 透過電子郵件分享查詢
+- 建立多個索引標籤
+- 在本機儲存查詢
+- 透過電子郵件共用查詢
 
-所有功能都經過無障礙測試,並支援黑暗和淺色主題。
+所有功能都已針對協助工具進行測試，並支援深色和淺色螢幕主題。
 
-## <a name="use-monaco-kusto-or-embed-the-web-ui"></a>使用摩納哥-庫塞托還是嵌入 Web UI?
+## <a name="use-monaco-kusto-or-embed-the-web-ui"></a>使用摩納哥-Kusto 或內嵌 Web UI？
 
-Monaco-Kusto 為您提供了完成、著色、重構、重命名和去定義等編輯體驗,它要求您構建一個解決方案,以便圍繞該解決方案進行身份驗證、查詢執行、結果顯示和架構探索。 另一方面,您可以完全靈活地打造適合您需求的用戶體驗。
+摩納哥-Kusto 提供您編輯的經驗，例如完成、顏色標示、重構、重新命名和移至定義。 它會要求您建立驗證、查詢執行、結果顯示和架構探索的解決方案，但可讓您以符合需求的方式提供完整的彈性來進行使用者體驗。
 
-嵌入 Azure 資料資源管理器 Web UI 時,只需很少精力即可提供廣泛的功能,但在使用者體驗方面的靈活性有限。 有一組固定的查詢參數,允許對系統的外觀和行為進行有限的控制。
+內嵌 Azure 資料總管 Web UI 可讓您輕鬆地為您提供豐富的功能，但對於使用者體驗的彈性有限。 有一組固定的查詢參數，可讓您對系統的外觀和行為進行有限的控制。
 
-## <a name="how-to-embed-the-web-ui-in-an-iframe"></a>如何將 Web UI 嵌入到 iframe 中
+## <a name="how-to-embed-the-web-ui-in-an-iframe"></a>如何在 iframe 中內嵌 Web UI
 
-### <a name="host-the-website-in-iframe"></a>在 iframe 中託管網站
+### <a name="host-the-website-in-an-iframe"></a>在 iframe 中裝載網站
 
-加入您的網站加入以下代碼:
+將下列程式碼新增至您的網站：
 
 ```html
 <iframe
@@ -52,13 +52,13 @@ Monaco-Kusto 為您提供了完成、著色、重構、重命名和去定義等�
 ></iframe>
 ```
 
-查詢`ibizaPortal`參數告訴 Azure 資料資源管理員 Web UI_不要_重定向以獲取身份驗證權杖。 這是必要的,因為託管網站負責向嵌入式 iframe 提供身份驗證權杖。
+`ibizaPortal`查詢參數會告訴 Azure 資料總管 Web UI*不會*重新導向以取得驗證權杖。 這是必要動作，因為主控網站負責提供驗證權杖給內嵌的 iframe。
 
-替換為`<cluster>`要載入到連接窗格(for`example: help.kusto.windows.net`的)的群集的主機名。 默認情況下,iframe 嵌入模式不提供從 UI 添加群集的方法,因為假設託管網站知道所需的群集。
+將`<cluster>`取代為您想要載入至 [連線] 窗格的叢集主機名稱（例如： `help.kusto.windows.net`）。 根據預設，iframe 內嵌模式不會提供從 UI 新增叢集的方式，因為假設主控網站知道所需的叢集。
 
-### <a name="handle-authentication"></a>處理認證
+### <a name="handle-authentication"></a>處理驗證
 
-1. 當設置為"iframe模式"`ibizaPortal=true`()時,Azure 資料資源管理器 Web UI 不會嘗試重定向以進行身份驗證。 Web UI 將使用瀏覽器用來請求和接收權杖的消息發佈機制。 在頁面載入期間,以下訊息將發佈到父視窗:
+1. 當設定為「iframe 模式」（`ibizaPortal=true`）時，Azure 資料總管 Web UI 不會嘗試重新導向以進行驗證。 Web UI 會使用瀏覽器所使用的訊息張貼機制來要求和接收權杖。 在頁面載入期間，下列訊息將會張貼到父視窗：
 
    ```javascript
    window.parent.postMessage(
@@ -75,7 +75,7 @@ Monaco-Kusto 為您提供了完成、著色、重構、重命名和去定義等�
    );
    ```
 
-1. 然後,它將偵聽具有以下結構的消息:
+1. 然後，它會接聽具有下列結構的訊息：
 
    ```json
    {
@@ -84,40 +84,40 @@ Monaco-Kusto 為您提供了完成、著色、重構、重命名和去定義等�
    }
    ```
 
-1. 提供的權杖應是從[[AAD 認證終結點]](../../management/access-control/how-to-authenticate-with-aad.md#web-client-javascript-authentication-and-authorization)取得的[JWT 權杖](https://tools.ietf.org/html/rfc7519)。
+1. 提供的權杖應該是從[[AAD 驗證端點]](../../management/access-control/how-to-authenticate-with-aad.md#web-client-javascript-authentication-and-authorization)取得的[JWT 權杖](https://tools.ietf.org/html/rfc7519)。
 
 > [!IMPORTANT]
-> 託管視窗負責在過期之前刷新權杖,並使用同一機制向應用程式提供更新的權杖。 否則,一旦令牌過期,服務調用將始終失敗。
+> 裝載視窗必須在到期前重新整理權杖，並使用相同的機制來提供更新的權杖給應用程式。 否則，一旦權杖過期，服務呼叫將會失敗。
 
 ### <a name="feature-flags"></a>功能旗標
 
-託管應用程式可能希望扭曲用戶體驗的某些方面。 例如 - 隱藏連接窗格,或關閉連線到其他群集。
-對於此方案,Web 資源管理員支援功能標誌。
+裝載應用程式可能會想要控制使用者體驗的某些層面。 例如，隱藏 [連線] 窗格，或停用 [連接到其他叢集]。
+在此案例中，web explorer 支援功能旗標。
 
-要素標誌可以在 URL 中用作查詢參數。 例如,如果託管應用程式希望禁用添加其他群集,則應使用https://dataexplorer.azure.com/?ShowConnectionButtons=false
+功能旗標可在 url 中當做查詢參數使用。 例如，如果裝載應用程式想要停用新增其他應使用的叢集，https://dataexplorer.azure.com/?ShowConnectionButtons=false
 
 | 設定                 | 描述                                                                                                                                                                                                                                                                                       | 預設值 |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| 顯示共享選單           | 顯示共享選單項目                                                                                                                                                                                                                                                                          | true          |
-| 顯示連線按鈕   | 顯示新增連線按鈕以新增新叢集                                                                                                                                                                                                                                               | true          |
-| 顯示開啟新視窗按鈕 | 在 Web UI 按鈕中顯示" 這將開啟新的瀏覽器視窗,該視窗將指向https://dataexplorer.azure.com在作用網域中具有正確的叢集和資料庫                                                                                                                                   | false         |
-| 顯示檔案選單            | 顯示檔案選單(下載選項卡內容 ETC)                                                                                                                                                                                                                                                     | true          |
-| 顯示                 | 從設定對話框顯示 Azure 資料資源管理員的服務條款連結                                                                                                                                                                                                                | true          |
-| 顯示個人個人             | 在右上角與設定選單中顯示使用者名稱                                                                                                                                                                                                                                        | true          |
-| IFrameAuth              | 如果為 true,Web 資源管理員將希望 iframe 處理身份驗證並通過消息提供權杖。 對於 iframe 方案,這始終正確                                                                                                                                              | false         |
-| 每次執行後保持     | 通常,Web 資源管理器將堅持在卸載事件中。 在 iframe 中託管時,在某些情況下不會觸發。 因此,此標誌將在每次查詢運行后觸發本地狀態。 因此,發生的任何數據丟失都只會影響從未運行過的文本,從而限制影響。 | false         |
-| 顯示平滑     | 如果為 true,請顯示右鍵按這裏的一鍵式引入體驗                                                                                                                                                                                                                  | true          |
-| 刷新連線       | 如果為 true,則在載入頁面時始終刷新架構,並且從不依賴於本地存儲                                                                                                                                                                                                      | false         |
-| 顯示頁頭          | 如果為 true,則顯示頁面標題(包括 Azure 資料資源管理員標題、設定和其他)                                                                                                                                                                                                 | true          |
-| 隱藏連接窗格      | 如果為 true,則不顯示左側連接窗格                                                                                                                                                                                                                                                | false         |
-| 跳過摩納哥焦點   | 修復了在 iframe 上託管時的焦點問題                                                                                                                                                                                                                                                          | false         |
+| ShowShareMenu           | 顯示 [共用] 功能表項目                                                                                                                                                                                                                                                                          | true          |
+| ShowConnectionButtons   | 顯示 [**新增連接**] 按鈕以新增新的叢集                                                                                                                                                                                                                                               | true          |
+| ShowOpenNewWindowButton | 顯示 [**在 web** UI 中開啟] 按鈕，這會開啟新的瀏覽器視窗https://dataexplorer.azure.com ，並在範圍內指向適當的叢集和資料庫                                                                                                                                   | false         |
+| ShowFileMenu            | 顯示 [檔案] 功能表（[**下載**]、[索引標籤]、[**內容** **]** 等等）                                                                                                                                                                                                                                                     | true          |
+| ShowToS                 | 從 [設定] 對話方塊顯示**Azure 資料總管的服務條款連結**                                                                                                                                                                                                                | true          |
+| ShowPersona             | 從右上角的 [設定] 功能表顯示使用者名稱                                                                                                                                                                                                                                         | true          |
+| IFrameAuth              | 若為 true，web explorer 會預期 iframe 處理驗證，並透過訊息提供權杖。 針對 iframe 案例，此程式一律為 true                                                                                                                                              | false         |
+| PersistAfterEachRun     | Web explorer 通常會保存在 unload 事件中（請注意，在 iframe 中裝載時，它不一定會引發）。 此旗標接著會在每次執行查詢後觸發**保存的本機狀態**。 因此，任何發生的資料遺失，只會影響從未執行過的文字，因而限制其影響。 | false         |
+| ShowSmoothIngestion     | 若為 true，則在資料庫上按一下滑鼠右鍵時，顯示1按下的內嵌體驗                                                                                                                                                                                                                  | true          |
+| RefreshConnection       | 若為 true，則一律會在載入頁面時重新整理架構，且永遠不會相依于本機儲存體                                                                                                                                                                                                      | false         |
+| ShowPageHeader          | 若為 true，則顯示頁面標頭（包含 Azure 資料總管標題和設定）                                                                                                                                                                                                 | true          |
+| HideConnectionPane      | 若為 true，則不會顯示左側連接窗格                                                                                                                                                                                                                                               | false         |
+| SkipMonacoFocusOnInit   | 修正在 iframe 上裝載時的焦點問題                                                                                                                                                                                                                                                          | false         |
 
-### <a name="feature-flag-presets"></a>功能旗標預先設定
+### <a name="feature-flag-presets"></a>功能旗標預設值
 
-預設將同時設置一組功能標誌。
-今天,我們有一個預設。
+預設會一次設定一堆功能旗標。
+目前只有一個預設值。
 
-`IbizaPortal`- 變更預設值中的以下旗標:
+`IbizaPortal`-從預設值變更下列旗標。
 
 ```json
 ShowOpenNewWindowButton: true,
@@ -127,4 +127,4 @@ ShowPageHeader: false,                                 |
 ```
 
 > [!WARNING]
-> 如果使用預設,您將無法在上面添加其他功能標誌。 如果需要這種靈活性,則應使用單獨的要素標誌。
+> 如果您使用預設值，將無法在其上新增其他功能旗標。 如果您需要這樣的彈性，您應該使用個別的功能旗標。

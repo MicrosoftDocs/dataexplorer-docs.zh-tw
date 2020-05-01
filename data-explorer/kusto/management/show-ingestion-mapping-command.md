@@ -1,6 +1,6 @@
 ---
-title: .顯示引入映射 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 .show 引入映射。
+title: 。顯示內嵌對應-Azure 資料總管 |Microsoft Docs
+description: 本文說明。在 Azure 資料總管中顯示內嵌對應。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,28 +8,28 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 91990fe40664ae89d69357812b0def2c7288eb7d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 711861a07896b7bdc4cf57bebbf1cdd0e01d064a
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519817"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617165"
 ---
-# <a name="show-ingestion-mappings"></a>.顯示引入對應
+# <a name="show-ingestion-mappings"></a>。顯示內嵌對應
 
-顯示引入對應(全部或名稱指定的映射)。
+顯示內嵌對應（全部或依名稱指定的對應）。
 
-* `.show``table`*表名*`ingestion`*對應*  `mappings`
+* `.show``table` *TableName* TableName `ingestion` *MappingKind*  `mappings`
 
-* `.show``table`*表名*`ingestion`*對應金德*`mapping`*映射名稱*   
+* `.show``table` *TableName* TableName `ingestion` *MappingKind* MappingKind`mapping` *MappingName*   
 
-顯示所有映射類型的所有引入對應:
+顯示所有對應種類的所有內嵌對應：
 
-* `.show``table`*表格名稱*`ingestion`  `mapping`
+* `.show``table` *TableName*`ingestion`  `mapping`
  
 **範例** 
  
-```
+```kusto
 .show table MyTable ingestion csv mapping "Mapping1" 
 
 .show table MyTable ingestion csv mappings 
@@ -41,4 +41,4 @@ ms.locfileid: "81519817"
 
 | 名稱     | 種類 | 對應     |
 |----------|------|-------------|
-| 映射1 | CSV  | {"名稱":"行號","DataType":"int","CsvDataType":null,"Ordinal":0,"ConstValue":null,{"名稱":"行吉德","數據類型":"字串","CsvDataType":null,"Ordinal":1,"ConstValue":null] |
+| mapping1 | CSV  | [{"Name"： "rownumber"，"DataType"： "int"，"CsvDataType"： null，"序數"：0，"ConstValue"： null}，{"Name"： "rowguid"，"DataType"： "string"，"CsvDataType"： null，"序數"：1，"ConstValue"： null}] |

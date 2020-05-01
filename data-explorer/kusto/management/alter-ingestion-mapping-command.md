@@ -1,6 +1,6 @@
 ---
-title: .alter 引入映射 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 .alter 引入映射。
+title: 。 alter 內嵌對應-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 alter 內嵌對應。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,28 +8,28 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 5343d55fadafce552c5d837e5eb50763ccf45a4c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2f43039ff3935edbb6e92627d2f96b1c411e1ffa
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522401"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617811"
 ---
 # <a name="alter-ingestion-mapping"></a>.alter 擷取對應
 
-更改與特定表和特定格式關聯的現有引入映射(替換完全映射)。
+改變與特定資料表和特定格式（完整對應取代）相關聯的現有內嵌對應。
 
 **語法**
 
-`.alter``table`*表名*`ingestion`*映射名稱*`mapping`*MappingName**映射映射格式 AsJson*
+`.alter``table` *TableName* TableName `ingestion` *MappingKind* MappingKind `mapping` *MappingName* *MappingFormattedAsJson*
 
 > [!NOTE]
-> * 可以通過引入命令(而不是將完整映射指定為命令的一部分)來引用此映射的名稱。
-> * _對應金德_`CSV`的有效值為: 、 `JSON` `avro` `parquet`、`orc`、 與 。
+> * 這個對應可以藉由內嵌命令來參考其名稱，而不是在命令中指定完整的對應。
+> * _MappingKind_的有效值為： `CSV`、 `JSON`、 `avro`、 `parquet`和。 `orc`
 
 **範例** 
  
-```
+```kusto
 .alter table MyTable ingestion csv mapping "Mapping1"
 '['
 '   { "column" : "rownumber", "DataType":"int", "Properties":{"Ordinal":"0"}},'
@@ -42,8 +42,9 @@ ms.locfileid: "81522401"
 '   { "column" : "rowguid", "Properties":{"Path":"$.rowguid"}}'
 ']'
 ```
+
 **範例輸出**
 
 | 名稱     | 種類 | 對應                                                                                                                                                                          |
 |----------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 映射1 | CSV  | {"名稱":"行號","DataType":"int","CsvDataType":null,"Ordinal":0,"ConstValue":null,{"名稱":"行吉德","數據類型":"字串","CsvDataType":null,"Ordinal":1,"ConstValue":null] |
+| mapping1 | CSV  | [{"Name"： "rownumber"，"DataType"： "int"，"CsvDataType"： null，"序數"：0，"ConstValue"： null}，{"Name"： "rowguid"，"DataType"： "string"，"CsvDataType"： null，"序數"：1，"ConstValue"： null}] |

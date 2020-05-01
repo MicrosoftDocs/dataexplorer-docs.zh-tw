@@ -1,6 +1,6 @@
 ---
-title: 方差(聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的方差(聚合函數)。
+title: variancep （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 variancep （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,20 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 386244806a6fcb3f321eb1a6b40595dc71b2b413
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 80f3f900649d2c4c36c7a50831e011f0ee018860
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81504585"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618000"
 ---
-# <a name="variancep-aggregation-function"></a>方差 () (聚合函數)
+# <a name="variancep-aggregation-function"></a>variancep （）（彙總函式）
 
-計算整個群組的*Expr*的方差,會視為[一個區 。](https://en.wikipedia.org/wiki/Statistical_population) 
+計算每個群組中*Expr*的變異數，並[考慮將群組視為擴展。](https://en.wikipedia.org/wiki/Statistical_population) 
 
-* 已用公式![:alt 文字](./images/aggregations/variance-population.png "方差-總體")
+* 使用的公式：
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+:::image type="content" source="images/variancep-aggfunction/variance-population.png" alt-text="差異擴展":::
+
+* 只能在[匯總](summarizeoperator.md)的內容中使用
 
 **語法**
 
@@ -29,11 +31,11 @@ ms.locfileid: "81504585"
 
 **引數**
 
-* *Expr*:將用於聚合計算的運算式。 
+* *Expr*：將用於匯總計算的運算式。 
 
 **傳回**
 
-跨組的*Expr*的方差值。
+整個群組中*Expr*的變異值。
  
 **範例**
 
@@ -44,4 +46,4 @@ range x from 1 to 5 step 1
 
 |list_x|variance_x|
 |---|---|
-|[ 1, 2, 3, 4, 5]|2|
+|[1，2，3，4，5]|2|

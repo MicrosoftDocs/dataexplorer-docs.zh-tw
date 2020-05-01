@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/27/2020
-ms.openlocfilehash: 69d8f4e8e0ffa388893c55e447dd3e03ed058380
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 7abcead19e0306853bc6a585a41b5b79657a6842
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108400"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617709"
 ---
 # <a name="continuous-data-export"></a>連續資料匯出
 
@@ -73,7 +73,7 @@ ms.locfileid: "82108400"
 
 **範例：**
 
-```
+```kusto
 .create-or-alter continuous-export MyExport
 over (T)
 to table ExternalBlob
@@ -185,7 +185,7 @@ with
 
 **範例：** 
 
-```
+```kusto
 .show continuous-export MyExport failures 
 ```
 
@@ -236,7 +236,7 @@ with
 
 「連續匯出」只會從其建立點開始匯出資料。 在該時間之前的記錄內嵌，應該使用（非連續）[匯出命令](export-data-to-an-external-table.md)個別匯出。 若要避免連續匯出匯出的資料發生重複，請使用 [[顯示連續匯出] 命令](#show-continuous-export)所傳回的 StartCursor，並在 cursor_before_or_at 資料指標值的情況下，只匯出記錄。 請參閱下方的範例。 歷程記錄資料可能太大，而無法在單一匯出命令中匯出。 因此，將查詢分割成幾個較小的批次。 
 
-```
+```kusto
 .show continuous-export MyExport | project StartCursor
 ```
 
@@ -246,7 +246,7 @@ with
 
 後面接著： 
 
-```
+```kusto
 .export async to table ExternalBlob
 <| T | where cursor_before_or_at("636751928823156645")
 ```

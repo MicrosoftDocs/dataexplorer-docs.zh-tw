@@ -1,6 +1,6 @@
 ---
-title: 更新策略 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的更新策略。
+title: Kusto 新增至來源之資料的更新原則-Azure 資料總管
+description: 本文說明 Azure 資料總管中的更新原則。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,115 +8,115 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 812a5af932f69d898bb419631fa6ea3c6bc0795e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7d2b89e0723bbecb29ffd582ae20c2ee41199e45
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519392"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618491"
 ---
 # <a name="update-policy"></a>更新原則
 
-更新策略設置在**目標表**上,指示 Kusto 在源**表中**插入新數據時自動將數據追加到它。 更新策略的**查詢**在插入到源表中的數據上運行。 例如,這允許創建一個表作為另一個表的篩選檢視,可能使用不同的架構、保留策略等。
+更新原則是在**目標資料表**上設定的，會指示 Kusto 在每次將新資料插入**來源資料表**時，自動附加資料給它。 更新原則的**查詢**會在插入來源資料表的資料上執行。 例如，這可讓您建立一個資料表做為另一個資料表的篩選視圖，可能會有不同的架構、保留原則等等。
 
-默認情況下,運行更新策略失敗不會影響將數據引入源表。 如果更新策略定義為**事務性**,則運行更新策略失敗會強制將數據引入源表也失敗。 (執行此操作時必須使用 Care,因為某些使用者錯誤(如在更新策略中定義不正確的查詢)可能會阻止**將任何**資料引入來源表中。在事務更新策略的"邊界"中引入的數據可用於單個事務中的查詢。
+根據預設，無法執行更新原則並不會影響將資料內嵌至來源資料表。 如果更新原則定義為**交易**式，則執行更新原則的失敗也會強制將資料內嵌到來源資料表中。 （當完成這項作業時必須小心，因為有些使用者錯誤（例如在更新原則中定義不正確的查詢）可能會防止**任何**資料內嵌到來源資料表中。）交易式更新原則的「界限」中的資料內嵌，可供單一交易中的查詢使用。
 
-更新策略的查詢以特殊模式運行,在這種模式中,它只"看到"源表中新引入的數據。 無法作為此查詢的一部分查詢源表已引入的數據。 這樣做會迅速導致二次攝入。
+更新原則的查詢是在特殊模式中執行，它會將新內嵌的資料只「查看」到來源資料表。 在此查詢中，無法查詢來源資料表的已內嵌資料。 這麼做很快就會產生二次擷取。
 
-由於更新策略是在目標表上定義的,因此將數據引入一個源表可能會導致在該數據上運行多個查詢。 更新策略的執行順序未定義。
+因為更新原則是在目的地資料表上定義，所以將資料內嵌到一個來源資料表可能會導致在該資料上執行多個查詢。 更新原則的執行順序未定義。
 
-例如,假設源表是一個高速率跟蹤表,其有趣的數據格式為自由文本列。 還假設目標表(在其中定義更新策略)只接受特定的跟蹤行,並且使用結構良好的架構,即通過使用 Kusto 的[解析運算符](../query/parseoperator.md)轉換原始自由文本數據。
+例如，假設來源資料表是高比率的追蹤資料表，並將感興趣的資料格式化為任意文字資料行。 此外，假設目標資料表（定義更新原則）只接受特定的追蹤行，並使用結構良好的架構，這是使用 Kusto 的[parse 運算子](../query/parseoperator.md)轉換原始的自由文字資料。
 
-更新策略的行為與常規引入類似,並受到相同的限制和最佳做法的約束。 例如,它隨群集的大小進行擴展,並且如果以大批量方式完成引入,則更高效地工作。
+更新原則的行為類似于一般內嵌，並且受限於相同的限制和最佳作法。 例如，它會以叢集的大小向外延展，而且如果在大型 bulks 中執行擷取，就能更有效率地運作。
 
-## <a name="commands-that-trigger-the-update-policy"></a>觸發更新原則的指令
+## <a name="commands-that-trigger-the-update-policy"></a>觸發更新原則的命令
 
-當資料被引入或移動到(在)表中建立時,使用以下任何命令,更新策略將生效:
+當您使用下列任何一個命令，將資料內嵌或移至資料表時，更新原則會生效（以建立範圍）：
 
-* [.ing0(拉)](../management/data-ingestion/ingest-from-storage.md)
-* [.ing0(內聯)](../management/data-ingestion/ingest-inline.md)
-* [.set = .附加 = .設定或追加 = .設定或取代](../management/data-ingestion/ingest-from-query.md)
-* [.移動範圍](../management/extents-commands.md#move-extents)
-* [.取代延伸盤區](../management/extents-commands.md#replace-extents)
+* [. 內嵌（提取）](../management/data-ingestion/ingest-from-storage.md)
+* [內嵌式（內嵌）](../management/data-ingestion/ingest-inline.md)
+* [。 set |. append |. set-或-append |. set-或-replace](../management/data-ingestion/ingest-from-query.md)
+* [。移動範圍](../management/extents-commands.md#move-extents)
+* [。取代範圍](../management/extents-commands.md#replace-extents)
 
 ## <a name="the-update-policy-object"></a>更新原則物件
 
-表可能具有與其關聯的零、一個或多個更新策略物件。
-每個此類物件都表示為 JSON 屬性包,並定義了以下屬性:
+資料表可以有零個、一個或多個與其相關聯的更新原則物件。
+每個這類物件都會以 JSON 屬性包表示，其中定義了下列屬性：
 
 |屬性 |類型 |描述  |
 |---------|---------|----------------|
-|IsEnabled                     |`bool`  |開啟更新政策 (true) 或關閉狀態(false)                                                                                                                               |
-|來源                        |`string`|觸發要呼叫的更新策略的表的名稱                                                                                                                                 |
-|查詢                         |`string`|產生更新資料的 Kusto CSL 查詢                                                                                                                           |
-|是事務性的               |`bool`  |如果更新策略是事務性的,則表示(預設為 false)。 無法執行事務更新策略會導致源表也不會使用新數據進行更新。   |
-|傳播屬性  |`bool`  |如果引入源表中期間指定的引入屬性(範圍標記和創建時間)也應應用於派生表中的屬性,則說明。                 |
+|IsEnabled                     |`bool`  |是否啟用更新原則（true）或停用（false）的狀態                                                                                                                               |
+|來源                        |`string`|觸發要叫用之更新原則的資料表名稱                                                                                                                                 |
+|查詢                         |`string`|用來產生更新資料的 Kusto CSL 查詢                                                                                                                           |
+|IsTransactional               |`bool`  |指出更新原則是否為交易式（預設為 false）。 如果無法執行交易式更新原則，則會導致來源資料表未使用新的資料更新。   |
+|PropagateIngestionProperties  |`bool`  |狀態：在內嵌至來源資料表期間指定的內嵌屬性（範圍標記和建立時間）也應該套用至衍生資料表中的查詢。                 |
 
 > [!NOTE]
 >
-> * 為其定義更新策略的源表和表**必須位於同一資料庫中**。
-> * 查詢**可能不包括**跨資料庫查詢或跨群集查詢。
-> * 查詢可以調用存儲的函數。
-> * 查詢會自動限定範圍,僅涵蓋新引入的記錄。
-> * 允許級聯更新(表A`[update]`-- --`[update]`>`[update]`表 B -- > 表C -- > ...)
-> * 如果以迴圈方式在多個表上定義更新策略,則在運行時檢測到此策略,並剪切更新鏈(這意味著,資料將僅引入一次到受影響表鏈中的每個表)。
-> * 在策略部分`Query``Source`( 或後者引用的函數中)引用表時,請確保**不使用**表的限定名稱(`TableName`含義、使用**和不使用**`database("DatabaseName").TableName``cluster("ClusterName").database("DatabaseName").TableName`)。
-> * 更新策略的查詢無法引用已啟用的[行級別安全原則](./rowlevelsecuritypolicy.md)的任何表。
-> * 作為更新策略的一部分運行的查詢對啟用[了受限檢視存取策略](restrictedviewaccesspolicy.md)的表**沒有**讀取存取許可權。
-> * `PropagateIngestionProperties`僅在攝入操作中生效。 當更新策略作為`.move extents``.replace extents`或 指令的一部份觸發時,這個選項**不起作用**。
-> * 當作為命令的一`.set-or-replace`部分調用更新策略時,默認行為是,派生表中的數據也會被替換,就像在源表中一樣。
+> * 定義更新原則的來源資料表和資料表**必須位於相同的資料庫中**。
+> * 查詢可能**不**會包含跨資料庫或跨叢集的查詢。
+> * 查詢可以叫用預存函數。
+> * 查詢會自動限定範圍，僅涵蓋新內嵌的記錄。
+> * 允許串聯更新（TableA--`[update]`--> TableB--`[update]`--> TableC--`[update]`--> ...）
+> * 如果以迴圈方式定義多個資料表的更新原則，則會在執行時間偵測到這種情況，並剪下更新鏈（也就是說，資料只會內嵌一次到受影響的資料表鏈中的每個資料表）。
+> * 參考`Source`原則`Query`部分（或後者所參考的函式）中的資料表時，請確定您**未**使用資料表的限定名稱（也就是，使用`TableName` ，而**不** `database("DatabaseName").TableName`是或`cluster("ClusterName").database("DatabaseName").TableName`）。
+> * 更新原則的查詢無法參考任何已啟用[資料列層級安全性原則](./rowlevelsecuritypolicy.md)的資料表。
+> * 當做更新原則之一部分執行的**查詢沒有已**啟用[RestrictedViewAccess 原則](restrictedviewaccesspolicy.md)之資料表的讀取存取權。
+> * `PropagateIngestionProperties`只有在內嵌作業中才會生效。 當更新原則當做`.move extents`或`.replace extents`命令的一部分觸發時，這個選項**沒有任何**作用。
+> * 當將更新原則當做`.set-or-replace`命令的一部分叫用時，預設行為是衍生資料表中的資料也會被取代，因為它是在來源資料表中。
 
-## <a name="retention-policy-on-the-source-table"></a>來源表上的保留原則
+## <a name="retention-policy-on-the-source-table"></a>來源資料表上的保留原則
 
-為了不保留源表中的原始資料,可以在源表的[保留策略](retentionpolicy.md)中設置軟刪除週期 0,同時將更新策略設置為事務性。
+因此，若不保留來源資料表中的原始資料，您可以在來源資料表的[保留原則](retentionpolicy.md)中設定0的虛刪除期間，同時將更新原則設定為交易式。
 
-這將導致:
-* 源數據無法從源表查詢。
-* 源數據不會作為引入操作的一部分持久存儲而持久存儲。
-* 改進操作性能。
-* 減少使用後使用的資源,用於在源表中[的擴展盤區](../management/extents-overview.md)進行後台整理操作。
+這會導致：
+* 來源資料無法從來源資料表中進行查詢。
+* 在內嵌作業中，來源資料不會保存到永久性儲存體。
+* 改善作業的效能。
+* 針對在來源資料表中的[範圍](../management/extents-overview.md)進行的背景清理作業，減少使用後置內嵌的資源。
 
 ## <a name="failures"></a>失敗
 
-在某些情況下,將數據引入源表成功,但更新策略在引入目標表期間失敗。
+在某些情況下，將資料內嵌到來源資料表的作業會成功，但是更新原則會在內嵌至目標資料表期間失敗。
 
-可以使用[.show 引入失敗命令](../management/ingestionfailures.md)檢索更新策略時遇到的故障,如下所示:
+更新原則時遇到的失敗，可以使用來抓取[。顯示內嵌失敗命令](../management/ingestionfailures.md)，如下所示：
  
 ```kusto
 .show ingestion failures 
 | where FailedOn > ago(1hr) and OriginatesFromUpdatePolicy == true
 ```
 
-容錯處理如下:
+失敗的處理方式如下：
 
-* **非事務原則**:庫托忽略失敗。 任何重試都是數據所有者的責任。  
-* **事務策略**:觸發更新的原始引入操作也將失敗。 源表和資料庫將不會使用新數據進行修改。
-  * 如果引入方法是`pull`(Kusto 的數據管理服務涉及引入過程),則根據以下邏輯對整個引入操作進行自動重試,該操作由 Kusto 的數據管理服務協調:
-    * 重試完成,直到達到最早介於`DataImporterMaximumRetryPeriod`( 預設`DataImporterMaximumRetryAttempts`= 2 天 ) 和 (預設值 = 10) 之間。
-    * 上述兩種設置都可以在數據管理服務的配置中由 KustoOps 更改。
-    * 回退期從2分鐘開始,呈指數級增長(2-> 4-> 8-> 16 ...分鐘)
-  * 在任何其他情況下,任何重試都是數據所有者的責任。
+* **非交易式原則**： Kusto 會忽略失敗。 任何重試都是資料擁有者的責任。  
+* **交易式原則**：觸發更新的原始內嵌作業也會失敗。 將不會使用新的資料來修改來源資料表和資料庫。
+  * 如果內嵌方法是（Kusto `pull`的資料管理服務與內嵌程式相關），則整個內嵌作業會自動重試，並根據 Kusto 的資料管理服務，依據下列邏輯進行協調：
+    * 重試會完成，直到達到`DataImporterMaximumRetryPeriod` （預設值 = 2 天）和`DataImporterMaximumRetryAttempts` （預設值 = 10）的最早時間為止。
+    * 在資料管理服務的設定中，您可以藉由 KustoOps 來變更這兩個設定。
+    * 輪詢期間會從2分鐘開始，並以指數方式成長（2-> 4-> 8-> 16 .。。細節
+  * 在任何其他情況下，任何重試都是資料擁有者的責任。
 
 
 
 ## <a name="control-commands"></a>控制命令
 
-* 使用[.show 表 TABLE 策略更新](../management/update-policy.md#show-update-policy)顯示表的當前更新策略。
-* 使用[.alter 表表策略更新](../management/update-policy.md#alter-update-policy)設置表的當前更新策略。
-* 使用[.alter-合併表表策略更新](../management/update-policy.md#alter-merge-table-table-policy-update)追加到表的當前更新策略。
-* 使用[.delete 表 TABLE 策略更新](../management/update-policy.md#delete-table-table-policy-update)追加到表的當前更新策略。
+* 使用[. 顯示資料表資料表原則更新](../management/update-policy.md#show-update-policy)，以顯示資料表的目前更新原則。
+* 使用[. alter TABLE table policy update](../management/update-policy.md#alter-update-policy)來設定資料表的目前更新原則。
+* 使用[. alter-merge 資料表資料表原則更新](../management/update-policy.md#alter-merge-table-table-policy-update)，附加至資料表的目前更新原則。
+* 使用[. 刪除資料表資料表原則更新](../management/update-policy.md#delete-table-table-policy-update)，以附加至資料表的目前更新原則。
 
-## <a name="testing-an-update-policys-performance-impact"></a>測試更新政策的效能影響
+## <a name="testing-an-update-policys-performance-impact"></a>測試更新原則對效能的影響
 
-定義更新策略可能會影響 Kusto 群集的性能,因為它會影響源表的任何引入。 強烈建議`Query`優化更新策略的部分以執行良好操作。
-在創建或更改策略和/或它在其部分使用的函數之前,可以通過在特定和已經存在的擴展盤區上調用更新策略對引入操作的其他性能影響來測試`Query`更新策略的其他性能影響。
+定義更新原則可能會影響 Kusto 叢集的效能，因為它會影響到來源資料表的任何內嵌。 強烈建議將更新原則的`Query`部分優化，以順利執行。
+您可以在建立或改變原則和（或）它在其`Query`元件中使用的函式之前，對內嵌作業測試更新原則的額外效能影響。
 
 下列範例假設：
 
-* 來源表名稱(更新策略`Source`的屬性)為`MySourceTable`。
-* 更新`Query`策略的屬性調用名為`MyFunction()`的 函數。
+* 來源資料表名稱（更新原則`Source`的屬性）為`MySourceTable`。
+* 更新`Query`原則的屬性會呼叫名為`MyFunction()`的函式。
 
-使用[.show 查詢](../management/queries.md),可以評估以下查詢的資源使用方式(CPU、記憶體等)和/或多次執行。
+使用[. 顯示查詢](../management/queries.md)，您可以評估下列查詢的資源使用量（CPU、記憶體等），以及（或）多次執行。
 
 ```kusto
 .show table MySourceTable extents;
