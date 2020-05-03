@@ -57,11 +57,13 @@
     "overwrite": [],
     "externalReference": [],
     "globalMetadata": {
+      "searchScope": ["Azure", "Data Explorer", "Azure Data Explorer", "Kusto", "kusto"],
       "breadcrumb_path": "/azure/data-explorer/breadcrumb/toc.json",
       "extendBreadcrumb": true,
       "brand": "azure",
+      "disable_contribution_on_translation_quality": ["MTE95","MTE75","MT","Blank"],
       "feedback_system": "GitHub",
-      "feedback_github_repo": "MicrosoftDocs/dataexplorer-docs",
+      "feedback_github_repo": "MicrosoftDocs/dataexplorer-docs.zh-tw",
       "feedback_product_url": "https://feedback.azure.com/forums/915733-azure-data-explorer",
       "recommendations": true,
       "_op_documentIdPathDepotMapping": {
