@@ -1,6 +1,6 @@
 ---
-title: 限制語句 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的"限制"語句。
+title: Restrict 語句-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的限制語句。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,40 +10,40 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: cbd21c01956f817c5db19a93104028dba2b2b2b4
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 094cec5b467c35eb9dbeeb756362bd13c77873ce
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765982"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737771"
 ---
 # <a name="restrict-statement"></a>Restrict 陳述式
 
 ::: zone pivot="azuredataexplorer"
 
-限制語句限制表/檢視實體的集,這些實體對它遵循的查詢語句可見。 例如,在包含兩個表`A`(`B`的 )的資料庫中,應用程式可以防止查詢的其餘`B`部分訪問,並且只能透過使用檢視"查看"有限形式的表`A`。
+Restrict 語句會限制資料表/視圖實體的集合，這些實體會顯示在其後面的查詢語句。 例如，在包含兩個數據表`A`（， `B`）的資料庫中，應用程式可以防止查詢的其他部分存取`B` ，而且只會使用 view 來「查看」有限的`A`資料表形式。
 
-限制語句的主要方案適用於接受來自用戶的查詢並希望在這些查詢上應用行級安全機制的中間層應用程式。 中介層應用程式可以使用**邏輯模型**(一組定義限制使用者存取資料的檢視的允許語句)來為使用者的查詢提供首碼(例如`T | where UserId == "..."`。 作為添加的最後一個語句,它僅限制使用者對邏輯模型的訪問。
+Restrict 語句的主要案例是針對接受使用者查詢的仲介層應用程式，而且想要在這些查詢上套用資料列層級的安全性機制。 中介層應用程式可以在使用者的查詢前面加上**邏輯模型**，這組 let 語句定義了限制使用者存取資料的視圖（例如`T | where UserId == "..."`）。 作為最後新增的語句，它會限制使用者只能存取邏輯模型。
 
 **語法**
 
-`restrict``access` `to` `(` 【*實體規格 】* `,``)`
+`restrict``access` `,` [EntitySpecifier [...]]* * `to` `(``)`
 
-*其中實體規格器*是:
-* 由 let 語句定義為表格檢視的標識碼。
-* 表引用(類似於聯合語句使用的表引用)。
-* 由模式聲明定義的模式。
+其中*EntitySpecifier*是下列其中一項：
+* 由 let 語句定義為表格式視圖的識別碼。
+* 資料表參考（與 union 語句所使用的相同）。
+* 模式聲明所定義的模式。
 
-限制語句未指定的所有表、表格檢視或模式對查詢的其餘部分都變為"不可見"。 
+所有資料表、表格式視圖或不是由 restrict 語句指定的模式都會變成「不可見」，以供查詢的其餘部分使用。 
 
 **注意事項**
 
-限制語句可用於限制對另一個資料庫或群集中的實體的訪問(群集名稱中不支援通配符)。
+Restrict 語句可用來限制存取另一個資料庫或叢集中的實體（叢集名稱中不支援萬用字元）。
 
 **引數**
 
-限制語句可以獲取一個或多個參數,這些參數定義實體名稱解析期間的允許限制。 實體可以是:
-- [讓語句](./letstatement.md)出現在語`restrict`句 之前。 
+Restrict 語句可以在實體的名稱解析期間，取得定義寬鬆限制的一個或多個參數。 實體可以是：
+- [let 語句](./letstatement.md)出現在`restrict`語句之前。 
 
 ```kusto
 // Limit access to 'Test' let statement only
@@ -51,7 +51,7 @@ let Test = () { print x=1 };
 restrict access to (Test);
 ```
 
-- 在資料庫中定義的[表](../management/tables.md)或[函數](../management/functions.md)。
+- 資料庫中繼資料中定義的[資料表](../management/tables.md)或[函數](../management/functions.md)。
 
 ```kusto
 // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata, 
@@ -60,7 +60,7 @@ restrict access to (Test);
 restrict access to (database().Table1, database().Func1, database('DB2').Table2);
 ```
 
-- 通配符模式,可以符合[允許文句](./letstatement.md)或表/函數的倍數  
+- 可以比對[let 語句](./letstatement.md)或資料表/函式之倍數的萬用字元模式  
 
 ```kusto
 let Test1 = () { print x=1 };
@@ -82,7 +82,7 @@ restricts access to (database('DB2').*);
 
 **範例**
 
-下面的範例展示如何中間層應用程式使用邏輯模型來準備使用者的查詢,該邏輯模型阻止使用者查詢任何其他用戶的數據。
+下列範例示範中介層應用程式如何在邏輯模型前面加上使用者的查詢，以防止使用者查詢任何其他使用者的資料。
 
 ```kusto
 // Assume the database has a single table, UserData,
@@ -139,6 +139,6 @@ Table1 |  count
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end

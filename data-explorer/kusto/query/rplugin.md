@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 514c67133980c9ab1c38b65cc51e4592dcb15eda
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 1014b9090fef60816c4bbc0a7fd9b2fdc4c22801
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618952"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737788"
 ---
 # <a name="r-plugin-preview"></a>R 外掛程式（預覽）
 
@@ -135,7 +135,7 @@ typeof(*, fx:double),               //  Output schema: append a new fx column to
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end
 

@@ -1,6 +1,6 @@
 ---
-title: current_principal_is_member_of() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 azure 數據資源管理器中的current_principal_is_member_of()。
+title: current_principal_is_member_of （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 current_principal_is_member_of （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 03/09/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 03d565c9eb61703b326a01b31bb6b1a79742f006
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 4b6f7d0b9ab4074f16ca00b4a3febb1a17351736
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81766061"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737754"
 ---
 # <a name="current_principal_is_member_of"></a>current_principal_is_member_of()
 
 ::: zone pivot="azuredataexplorer"
 
-檢查運行查詢的當前主體的組成員身份或主體標識。
+檢查目前執行查詢之主體的群組成員資格或主體身分識別。
 
 ```kusto
 print current_principal_is_member_of(
@@ -37,24 +37,24 @@ print current_principal_is_member_of(
 
 **引數**
 
-* *表示式清單*- 字串文字的逗號分隔清單,其中每個文字都是主體完全限定名稱 (FQN) 字串,形成於:  
-*普林西貝拉類型*`=`*主體租戶*`;`*Id*
+* *運算式清單*-字串常值的逗號分隔清單，其中每個常值都是主體的完整名稱（FQN）字串，格式如下：  
+*PrinciplaType*`=`*PrincipalId*PrincipalId`;`*TenantId*
 
-| PrincipalType   | FQN 首碼  |
+| PrincipalType   | FQN 前置詞  |
 |-----------------|-------------|
 | AAD 使用者        | `aaduser=`  |
-| AAD集團       | `aadgroup=` |
+| AAD 群組       | `aadgroup=` |
 | AAD 應用程式 | `aadapp=`   |
 
 **傳回**
 
 此函式會傳回：
-* `true`:如果運行查詢的當前主體已成功匹配至少一個輸入參數。
-* `false`:如果運行查詢的當前主體不是任何`aadgroup=`FQN 參數的成員,並且不等`aaduser=`於`aadapp=`任何 或 FQN 參數。
-* `(null)`:如果運行查詢的當前主體不是任何`aadgroup=`FQN 參數的成員,並且不等`aaduser=`於`aadapp=`任何 或 FQN 參數,並且至少有一個 FQN 參數未成功解析(未在 AAD 中預置)。 
+* `true`：如果目前執行查詢的主體成功符合至少一個輸入引數。
+* `false`：如果執行查詢的目前主體不是任何`aadgroup=` FQN 引數的成員，而且不等於任何`aaduser=`或`aadapp=` FQN 引數。
+* `(null)`：如果執行查詢的目前主體不是任何`aadgroup=` FQN 引數的成員，而且不等於任何`aaduser=`或`aadapp=` FQN 引數，而且至少有一個 FQN 引數未成功解析（在 AAD 中未 presed）。 
 
 > [!NOTE]
-> 由於函數返回三狀態值`true``false`(、`null`和 ),因此僅依賴正返回值以確認成功成員資格非常重要。 換句話說,以下表達式不同:
+> 因為此函式會傳回三個狀態的`true`值`false`（、 `null`和），所以請務必只依賴正傳回值來確認成功的成員資格。 換句話說，下列運算式並不相同：
 > 
 > * `where current_principal_is_member_of('non-existing-group')`
 > * `where current_principal_is_member_of('non-existing-group') != false` 
@@ -74,7 +74,7 @@ print result=current_principal_is_member_of(
 |--------|
 | (Null) |
 
-使用動態陣列而不是多反參數:
+使用動態陣列而不是 multple 引數：
 
 ```kusto
 print result=current_principal_is_member_of(
@@ -93,6 +93,6 @@ print result=current_principal_is_member_of(
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end

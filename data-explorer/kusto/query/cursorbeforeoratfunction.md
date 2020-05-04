@@ -1,6 +1,6 @@
 ---
-title: cursor_before_or_at() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的cursor_before_or_at()。
+title: cursor_before_or_at （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 cursor_before_or_at （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 4d1752c69a6f3515b94c4050cef8f518ff58a235
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: c053cd307f8cff8ad00eff0a4224ebbea2808c6c
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765962"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737669"
 ---
 # <a name="cursor_before_or_at"></a>cursor_before_or_at()
 
 ::: zone pivot="azuredataexplorer"
 
-用於比較表的記錄與資料庫游標的引入時間。
+資料表記錄上的述詞，用來比較其對資料庫資料指標的內嵌時間。
 
 **語法**
 
@@ -29,22 +29,22 @@ ms.locfileid: "81765962"
 
 **引數**
 
-* *RHS*:空字串文字或有效的資料庫游標值。
+* *RHS*：空字串常值，或有效的資料庫資料指標值。
 
 **傳回**
 
-類型`bool`標量值,指示紀錄是在資料庫游標*RHS* (`true`) 之前還是`false`之前引入的 。
+類型`bool`的純量值，指出記錄是在資料庫資料指標*RHS* （`true`）之前或之後內嵌（`false`）。
 
 **注意事項**
 
-有關[資料庫游標的其他詳細資訊,請參考資料庫游標](../management/databasecursor.md)。
+如需資料庫資料指標的其他詳細資料，請參閱[資料庫資料指標](../management/databasecursor.md)。
 
-此函數只能在啟用[引入時間策略](../management/ingestiontimepolicy.md)的表的記錄上調用。
+這個函數只能在已啟用[IngestionTime 原則](../management/ingestiontimepolicy.md)的資料表記錄上叫用。
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end

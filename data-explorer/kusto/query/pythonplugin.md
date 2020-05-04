@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 6b33ee0ed9535d512c909dd8de124fc8b1770cee
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 3d88b04220851b8218d0d23fed93ba3627720afd
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618984"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737822"
 ---
 # <a name="python-plugin"></a>Python 外掛程式
 
@@ -239,6 +239,6 @@ range Id from 1 to 3 step 1
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end

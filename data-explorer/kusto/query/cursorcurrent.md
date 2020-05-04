@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: d9a9526fd846523510e8555c04ff3345d9008348
-ms.sourcegitcommit: fbe298e88542c0dcea0f491bb53ac427f850f729
+ms.openlocfilehash: 5291fa664dc4736179d7f20984eacfd44efd5888
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82030458"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737652"
 ---
 # <a name="cursor_current-current_cursor"></a>cursor_current()、current_cursor()
 
@@ -39,6 +39,6 @@ ms.locfileid: "82030458"
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end

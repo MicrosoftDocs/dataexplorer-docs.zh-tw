@@ -1,6 +1,6 @@
 ---
-title: 設定語句 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理員中的 Set 語句。
+title: Set 語句-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 Set 語句。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,27 +10,27 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8cb9c1d72f1b2e8e4bfbbd28d67c04295c9ccf5b
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 028bfb5a2d0ddf25f65cd16bca2c498d9dcb7059
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765582"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737856"
 ---
 # <a name="set-statement"></a>Set 陳述式
 
 ::: zone pivot="azuredataexplorer"
 
-該`set`語句用於在查詢期間設置查詢選項。
-查詢選項可控制查詢如何執行和傳回結果。 它們可以是布爾標誌(預設情況下關閉),也可以有一個整數值。 查詢可能包含零個、一個或多個 set 陳述式。 設定語句僅影響按程式順序跟蹤它們的表格表達式語句。
+`set`語句可用來設定查詢持續時間的查詢選項。
+查詢選項可控制查詢如何執行和傳回結果。 它們可以是布林旗標（預設為關閉），或具有整數值。 查詢可能包含零個、一個或多個 set 陳述式。 Set 語句只會影響以程式順序追蹤的表格式運算式語句。
 
-* 通過在`ClientRequestProperties`物件中設置查詢選項,也可以以程式設計方式啟用它們。 [見此處](../api/netfx/request-properties.md)。
+* 查詢選項也可以藉由在`ClientRequestProperties`物件中設定來以程式設計方式啟用。 請參閱[這裡](../api/netfx/request-properties.md)。
   
-* 查詢選項正式不是 Kusto 語言的一部分,可以修改而不被視為斷語更改。
+* 查詢選項不是 Kusto 語言的正式部分，而且可以在不被視為中斷的語言變更的情況下修改。
 
 **語法**
 
-`set`*選項名稱*`=`=*選項值*:
+`set`*選項名稱*[`=` *OptionValue*]
 
 **範例**
 
@@ -43,6 +43,6 @@ Events | take 100
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end

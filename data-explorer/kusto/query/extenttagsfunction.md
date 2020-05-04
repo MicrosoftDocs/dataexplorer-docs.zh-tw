@@ -1,6 +1,6 @@
 ---
-title: extent_tags() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的extent_tags()。
+title: extent_tags （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 extent_tags （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,20 +10,20 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: d8af7e51c5e2efb16763541db05e9ccc7e2cb95f
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 146ab59c1c0cbcb86bfae94fa26c09f5afa0f216
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765420"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737584"
 ---
 # <a name="extent_tags"></a>extent_tags()
 
 ::: zone pivot="azuredataexplorer"
 
-返回包含當前記錄駐留在的數據分片("範圍")[標記](../management/extents-overview.md#extent-tagging)的動態數位。 
+傳回動態陣列，其中包含目前記錄所在之資料分區（「範圍」）的[標記](../management/extents-overview.md#extent-tagging)。 
 
-將此函數應用於未附加到數據分片的計算數據將返回一個空值。
+將此函數套用至未附加至資料分區的計算資料會傳回空值。
 
 **語法**
 
@@ -31,11 +31,11 @@ ms.locfileid: "81765420"
 
 **傳回**
 
-類型`dynamic`的值,是包含當前記錄的擴展區標記的陣列或空值。
+類型`dynamic`的值，這是保留目前記錄範圍標籤的陣列，或空白值。
 
 **範例**
 
-下面的範例展示如何獲取包含一小時前記錄的所有資料分片的標記以及列`ActivityId`的特定值。 它演示了某些查詢運算符(此處為`where`運算符,但對於`extend`和`project`) 也是如此,請保留有關承載記錄的數據分片的資訊。
+下列範例顯示如何取得清單，其中包含一小時前具有資料行`ActivityId`之特定值的所有資料分區標記。 它會示範某些查詢運算子（在這裡是`where`運算子，但也適用于`extend`和`project`）會保留裝載記錄之資料分區的相關資訊。
 
 ```kusto
 T
@@ -45,7 +45,7 @@ T
 | summarize by tostring(tags)
 ```
 
-下面的示例演示如何從最後一小時獲取所有記錄的計數,這些記錄存儲在使用標記`MyTag`(和可能的其他標記)標記的區位區中,但未使用標`drop-by:MyOtherTag`記 進行標記。
+下列範例示範如何取得過去一小時內所有記錄的計數（儲存在標有標記`MyTag`的範圍中（也可能是其他標記），但不會以標記`drop-by:MyOtherTag`標記）。
 
 ```kusto
 T
@@ -59,6 +59,6 @@ T
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end

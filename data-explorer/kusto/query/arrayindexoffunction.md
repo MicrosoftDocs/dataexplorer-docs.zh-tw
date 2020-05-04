@@ -1,6 +1,6 @@
 ---
-title: array_index_of() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的array_index_of()。
+title: array_index_of （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 array_index_of （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: f68c9385c55cedb4491033d137af087dafd26aa0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 27b956ee54ef22f55b3a0ceae97fceb41aadf5c3
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518610"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737346"
 ---
 # <a name="array_index_of"></a>array_index_of()
 
-搜索陣列以搜尋指定的項,並返回其位置。
+在陣列中搜尋指定的專案，並傳回其位置。
 
 **語法**
 
-`array_index_of(`*陣列*,*數值*`)`
+`array_index_of(`*陣列*，*值*`)`
 
 **引數**
 
-* *陣列*:要搜索的輸入陣列。
-* *值*:要搜索的值。 該值應為長、整數、雙精度、日期時間、時間跨度、小數點、字串或 guid 的類型。
+* *array*：要搜尋的輸入陣列。
+* *value*：要搜尋的值。 此值的類型必須是 long、integer、double、datetime、timespan、decimal、string 或 guid。
 
 **傳回**
 
-查找的零基索引位置。
-如果在陣列中找不到值,則返回 -1。
+Lookup 以零為起始的索引位置。
+如果在陣列中找不到值，則傳回-1。
 
 **範例**
 
@@ -46,4 +46,4 @@ print arr=dynamic(["this", "is", "an", "example"])
 
 **另請參閱**
 
-如果只想檢查陣列中是否存在值,但對其位置不感興趣,則可以使用[set_has_element(arr,值)](sethaselementfunction.md) - 這將提高查詢的可讀性,但從性能上講,這兩個函數都是相同的。
+如果您只想要檢查某個值是否存在於陣列中，但您對其位置不感興趣，您可以使用[set_has_element （`arr`， `value`）](sethaselementfunction.md)。 此函式可改善查詢的可讀性。 這兩個函數都具有相同的效能。

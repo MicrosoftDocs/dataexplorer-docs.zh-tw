@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/23/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 69e5815fbe14805b0cf3044dafe8691bbea5fb88
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 90d06064069a17d6b1394701bb4ea72483061b9c
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618095"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737601"
 ---
 # <a name="tutorial"></a>教學課程
 
@@ -471,6 +471,6 @@ Logs | join cluster("TelemetryCluster").database("Telemetry").Metrics on Request
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end

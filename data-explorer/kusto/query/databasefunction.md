@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 03753cf7dcabb7637335d3dc71f0b9bca773e710
-ms.sourcegitcommit: fbe298e88542c0dcea0f491bb53ac427f850f729
+ms.openlocfilehash: e3f874ecfc0bb1872f08efa3269c73b02971e4f3
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82030441"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737635"
 ---
 # <a name="database-scope-function"></a>database （）（scope 函數）
 
@@ -49,7 +49,7 @@ cluster('help').database('Sample').StormEvents
 database('Samples').StormEvents | count
 ```
 
-|Count|
+|計數|
 |---|
 |59066|
 
@@ -65,7 +65,7 @@ let foo = (dbName:string)
 foo('help')
 ```
 
-|Count|
+|計數|
 |---|
 |59066|
 
@@ -86,6 +86,6 @@ foo('help')
 
 ::: zone pivot="azuremonitor"
 
-Azure 監視器不支援此功能
+Azure 監視器不支援這項功能
 
 ::: zone-end
