@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: 155c4fadfc2892ddd91cc0c355f4f47fe4ce513c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5f424716a9227f22b4ec5b148d29798b0a55fa27
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491643"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618372"
 ---
 # <a name="what-is-one-click-ingestion"></a>什麼是單鍵擷取？ 
 
@@ -53,10 +53,13 @@ ms.locfileid: "81491643"
     ![在 Web UI 中選取單鍵擷取](media/ingest-data-one-click/one-click-ingestion-in-webui.png)   
 
 1. 此精靈會引導您從下列選項中選取：
-       * 內嵌到[現有的資料表](one-click-ingestion-existing-table.md)
-       * 內嵌到[新的資料表](one-click-ingestion-new-table.md)
-       * 從 * Blob 儲存體 * 本機檔案 * 容器內嵌資料
-       * 輸入從 1 到 10,000 個列的樣本大小 (僅限來自容器)
+    * 內嵌到[現有的資料表](one-click-ingestion-existing-table.md)
+    * 內嵌到[新的資料表](one-click-ingestion-new-table.md)
+    * 內嵌資料來源：
+      * Blob 儲存體
+      * 本機檔案
+      * 容器
+    * 輸入從 1 到 10,000 個列的樣本大小 (僅限來自容器)
        
 1. 成功選取資料來源後，就會顯示資料的預覽。 
     如果要從容器中內嵌資料，您可以篩選資料，以便只內嵌具有特定前置詞或副檔名的檔案。 例如，您可能只想要內嵌開頭為單字*歐洲*的檔案名，或僅內嵌副檔名為 .json  的檔案。 
