@@ -1,6 +1,6 @@
 ---
-title: rank_tdigest() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的rank_tdigest()。
+title: rank_tdigest （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 rank_tdigest （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,37 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: ea24213b0ca673c39f399c3a12cc54cd7d7f47d5
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a849cd496d41ad473768b3f267639eaf8c467880
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510535"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82741772"
 ---
 # <a name="rank_tdigest"></a>rank_tdigest()
 
-計算集中的值的近似排名。 集中`v``S`的值排名定義為小於或等於的成員`S`的計數`v``S`, 由其 tdigest 表示。
+計算集合中值的近似順位。 `v`集合`S`中的值次序定義為較小或等於的成員`S`計數`v`， `S`由其`tdigest`代表。
 
 **語法**
 
-`rank_tdigest(`*TDigest* `,` *Expr*`)`
+`rank_tdigest(`*`TDigest`*`,` *`Expr`*`)`
 
 **引數**
 
-* *TDigest*: 由[tdigest()](tdigest-aggfunction.md)或[tdigest_merge()](tdigest-merge-aggfunction.md)產生的運算式
-* *Expr*: 表示用於排名計算的值的運算式。
+* *TDigest*：由[TDigest （）](tdigest-aggfunction.md)或[tdigest_merge （）](tdigest-merge-aggfunction.md)所產生的運算式
+* *Expr*：代表要用於排序計算之值的運算式。
 
 **傳回**
 
-數據集中每個值的排名。
+資料集中的 rank foreach 值。
 
-**技巧**
+**提示**
 
-1) 要獲取其排名的值必須與 tdigest 的類型相同。
+1) 您想要取得其順位的值，其類型必須與相同`tdigest`。
 
 **範例**
 
-在排序列表 (1-1000) 中,685 的排名是索引:
+在排序清單（1-1000）中，685的順位是其索引：
 
 ```kusto
 range x from 1 to 1000 step 1
@@ -50,7 +50,7 @@ range x from 1 to 1000 step 1
 |-------------|
 |`685`        |
 
-此查詢計算值 4490$ 的所有損壞屬性成本的排名:
+此查詢會計算所有損害屬性成本的值 $4490 排名：
 
 ```kusto
 StormEvents
@@ -63,7 +63,7 @@ StormEvents
 |--------------|
 |`50207`       |
 
-取得排名的估計百分比(除以設定大小):
+取得順位的預估百分比（除以集合大小）：
 
 ```kusto
 StormEvents
@@ -77,7 +77,7 @@ StormEvents
 |`85.0015237192293`|
 
 
-損壞財產損失的百分位85是4490美元:
+損毀屬性成本的百分位數85為 $4490：
 
 ```kusto
 StormEvents

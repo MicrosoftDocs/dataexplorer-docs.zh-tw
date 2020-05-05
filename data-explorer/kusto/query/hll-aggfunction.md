@@ -1,6 +1,6 @@
 ---
-title: hll() (聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 hll()(聚合函數)。
+title: hll （）（彙總函式）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 hll （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,44 +8,45 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/15/2020
-ms.openlocfilehash: 52eac2984ed29bf8de21fb378a84b789015aa1c5
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f5c47e2ebd2acc0b2ec250d183d65b6536aff756
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514122"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82741815"
 ---
-# <a name="hll-aggregation-function"></a>hll() (聚合函數)
+# <a name="hll-aggregation-function"></a>hll （）（彙總函式）
 
-計算整個組[中計數](dcount-aggfunction.md)的中間結果。 
+會計算[`dcount`](dcount-aggfunction.md)整個群組的中繼結果，而只會在[摘要內匯總](summarizeoperator.md)的內容中。
 
-* 只能在[匯總](summarizeoperator.md)中的聚合上下文中使用。
-
-閱讀有關[基礎演演算法 *(H*yper*L*og*L*og) 和估計精度](dcount-aggfunction.md#estimation-accuracy)。
+閱讀[基礎演算法（*H*Yper*l*og*l*og）和估計精確度](dcount-aggfunction.md#estimation-accuracy)的相關資訊。
 
 **語法**
 
-`summarize``hll(` *Expr* `,` [*精度*]`)`
+`summarize hll(`*`Expr`* `[,` *`Accuracy`*`])`
 
 **引數**
 
-* *Expr*:將用於聚合計算的運算式。 
-* ** (若已指定) 會控制速度和精確度之間的平衡。
-    * `0` = 最不精確但最快速的計算。 1.6% 錯誤
-    * `1`• 預設值,它平衡了準確性和計算時間;約 0.8% 錯誤。
-    * `2`• 準確和緩慢的計算;約 0.4% 錯誤。
-    * `3`• 超精確和緩慢的計算;約 0.28% 錯誤。
-    * `4`• 超精確和最慢的計算;約 0.2% 錯誤。
+* *`Expr`*：將用於匯總計算的運算式。 
+* *`Accuracy`*（如果指定的話）會控制速度和精確度之間的平衡。
+
+  |精確度值 |精確度  |速度  |錯誤  |
+  |---------|---------|---------|---------|
+  |`0` | lowest | 廣泛 | 1.6% |
+  |`1` | default  | 對稱 | 0.8% |
+  |`2` | high | slow | 0.4%  |
+  |`3` | high | slow | 0.28% |
+  |`4` | 極高 | 最 | 0.2% |
     
 **傳回**
 
-跨組*Expr*的不同計數的中間結果。
+*`Expr`* 跨群組之相異計數的中繼結果。
  
-**技巧**
+**提示**
 
-1) 您可以使用聚合函數[hll_merge](hll-merge-aggfunction.md)合併多個 hll 中間結果(它僅適用於 hll 輸出)。
+1. 您可以使用彙總函式[`hll_merge`](hll-merge-aggfunction.md)來合併一個`hll`以上的中繼結果（僅適用于`hll`輸出）。
 
-2) 您可以使用函數[dcount_hll,](dcount-hllfunction.md)此函數會將從 hll / hll_merge聚合函數中計算 dcount。
+1. [`dcount_hll`](dcount-hllfunction.md)您可以使用函數來計算`dcount` from `hll`  /  `hll_merge`彙總函式。
 
 **範例**
 
@@ -55,9 +56,9 @@ StormEvents
 
 ```
 
-|StartTime|hll_DamageProperty|
+|StartTime|`hll_DamageProperty`|
 |---|---|
-|2007-09-18 20:00:00.0000000|[[1024,14],[-5473486921211236216,-6230876016761372746,3953448761157777955,4246796580750024372],[]]|
-|2007-09-20 21:50:00.0000000|[[1024,14],[4835649640695509390],[]]|
-|2007-09-29 08:10:00.0000000|[[1024,14],[4246796580750024372],[]]|
-|2007-12-30 16:00:00.0000000|[[1024,14],[4246796580750024372,-8936707700542868125],[]]|
+|2007-09-18 20：00：00.0000000|[[1024，14]，[-5473486921211236216，-6230876016761372746，3953448761157777955，4246796580750024372]，[]]|
+|2007-09-20 21：50：00.0000000|[[1024，14]，[4835649640695509390]，[]]|
+|2007-09-29 08：10：00.0000000|[[1024，14]，[4246796580750024372]，[]]|
+|2007-12-30 16：00：00.0000000|[[1024，14]，[4246796580750024372，-8936707700542868125]，[]]|

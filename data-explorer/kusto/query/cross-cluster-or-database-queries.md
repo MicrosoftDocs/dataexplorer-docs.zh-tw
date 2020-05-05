@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: eaf42247840bfc5446c61bcefbb205c9e49706c3
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 834fd81e1832b8ab624da8d99cb5cc32407db84f
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737737"
+ms.locfileid: "82741762"
 ---
 # <a name="cross-database-and-cross-cluster-queries"></a>跨資料庫與跨叢集查詢
 
@@ -73,7 +73,7 @@ union withsource=TableName *, database("OtherDb*").*Table, cluster("OtherCluster
 restrict access to (my*, database("MyOther*").*, cluster("OtherCluster").database("my2*").*);
 ```
 
-上述的會將查詢存取限制為下列實體：
+上述專案會限制下列實體的查詢存取：
 
 * 預設資料庫中以*my ...* 開頭的任何機構名稱。 
 * 目前叢集的所有資料庫中的任何資料表，名為*MyOther ...* 。

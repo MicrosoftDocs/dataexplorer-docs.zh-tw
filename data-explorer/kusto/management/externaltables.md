@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 624c0a7f1105ff13642649174f769781f1749598
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: c52f0649531678e31310f5a1f4bfb97f99f15857
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108066"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82741949"
 ---
 # <a name="external-table-management"></a>外部資料表管理
 
@@ -140,7 +140,7 @@ ms.locfileid: "82108066"
 `.create`  | （`.alter`） `external` *TableName （* *架構*） `table`  
 `kind` `=` (`blob` | `adl`)  
 [`partition` `by` *Partition* [`,` ....]]  
-`dataformat``=` *格式*  
+`dataformat` `=` *[格式]*  
 `(`  
 *StorageConnectionString* [`,` ...]  
 `)`  
@@ -183,6 +183,8 @@ ms.locfileid: "82108066"
 | `fileExtension`  | `string` | 如果設定，則表示 blob 的副檔名。 在寫入時，blob 名稱的結尾會是這個尾碼。 讀取時，只會讀取具有此副檔名的 blob。           |
 | `encoding`       | `string` | 表示文字的編碼方式： `UTF8NoBOM` （預設）或。 `UTF8BOM`             |
 
+如需有關查詢中外部資料表參數的詳細資訊，請參閱成品[篩選邏輯](#artifact-filtering-logic)。
+
 > [!NOTE]
 > * 如果資料表存在， `.create`命令將會失敗並產生錯誤。 使用`.alter`修改現有的資料表。 
 > * 不支援改變外部 blob 資料表的架構、格式或資料分割定義。 
@@ -203,8 +205,7 @@ dataformat=csv
 with 
 (
    docstring = "Docs",
-   folder = "ExternalTables",
-   namePrefix="Prefix"
+   folder = "ExternalTables"
 )  
 ```
 
@@ -221,8 +222,7 @@ dataformat=csv
 with 
 (
    docstring = "Docs",
-   folder = "ExternalTables",
-   namePrefix="Prefix"
+   folder = "ExternalTables"
 )  
 ```
 
@@ -239,8 +239,7 @@ dataformat=csv
 with 
 (
    docstring = "Docs",
-   folder = "ExternalTables",
-   namePrefix="Prefix"
+   folder = "ExternalTables"
 )
 ```
 
@@ -257,8 +256,7 @@ dataformat=csv
 with 
 (
    docstring = "Docs",
-   folder = "ExternalTables",
-   namePrefix="Prefix"
+   folder = "ExternalTables"
 )
 ```
 
@@ -286,6 +284,22 @@ with
 |TableName|TableType|資料夾|DocString|屬性|ConnectionStrings|資料分割|
 |---|---|---|---|---|---|---|
 |ExternalMultiplePartitions|Blob|ExternalTables|Docs|{"Format"： "Csv"，"壓縮"： false，"CompressionType"： null，"FileExtension"： "Csv"，"IncludeHeaders"： "None"，"Encoding"： null，"NamePrefix"： null}|["https://storageaccount.blob.core.windows.net/container1;*******"]}|[{"StringFormat"： "CustomerName ={0}"，"ColumnName"： "CustomerName"，"序數"： 0}，PartitionBy "：" 1.00：00： 00 "，" ColumnName "：" Timestamp "，" 序數 "： 1}]|
+
+#### <a name="artifact-filtering-logic"></a>成品篩選邏輯
+
+在查詢外部資料表時，查詢引擎會篩選掉不相關的外部儲存體成品（blob），以改善查詢效能。 下列程式會逐一查看 blob，並決定是否應該處理 blob。
+
+1. 建立 URI 模式，代表找到 blob 的位置。 一開始，URI 模式等於外部資料表定義中提供的連接字串。 如果有定義任何資料分割，則會將它們附加至 URI 模式。
+例如，如果連接字串為： `https://storageaccount.blob.core.windows.net/container1` ，且已定義 datetime partition： `partition by format_datetime="yyyy-MM-dd" bin(Timestamp, 1d)`，則對應的 URI 模式會是： `https://storageaccount.blob.core.windows.net/container1/yyyy-MM-dd`，而我們會在符合此模式的位置下尋找 blob。
+如果已定義額外的字串分割`"CustomerId" customerId` ，則對應的 URI 模式為： `https://storageaccount.blob.core.windows.net/container1/yyyy-MM-dd/CustomerId=*`等等。
+
+2. 針對在您已建立的 URI 模式下找到的所有*直接*blob，請檢查：
+
+ * 資料分割值符合查詢中使用的述詞。
+ * 如果定義了這`NamePrefix`類屬性，Blob 名稱就會以為開頭。
+ * 如果定義了這`FileExtension`類屬性，Blob 名稱會以結尾。
+
+一旦符合所有條件，查詢引擎就會提取並處理 blob。
 
 #### <a name="spark-virtual-columns-support"></a>Spark 虛擬資料行支援
 

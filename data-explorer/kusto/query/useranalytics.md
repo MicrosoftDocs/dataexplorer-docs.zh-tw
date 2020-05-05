@@ -1,6 +1,6 @@
 ---
-title: 使用者分析 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的使用者分析。
+title: 使用者分析-Azure 資料總管
+description: 本文說明 Azure 資料總管中的使用者分析。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/17/2019
-ms.openlocfilehash: 37b5962b9441c3eb7362a239404189e489b1c3ff
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a63f68564bc0e2fec8b6e2d5faa12e50b7adcc7c
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81504976"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82741646"
 ---
 # <a name="user-analytics"></a>使用者分析
 
-本節介紹使用者分析方案的 Kusto 擴展區(外掛程式)。
+本節說明使用者分析案例的 Kusto 延伸模組（外掛程式）。
 
-|狀況|外掛程式|詳細資料|使用者經驗|
+|狀況|外掛程式|詳細資料|使用者體驗|
 |--------|------|--------|-------|
-| 隨時間計算新使用者 | [activity_counts_metrics](activity-counts-metrics-plugin.md)|返回每個時間視窗的計數/dcounts/新計數。 每次視窗*與所有以前的時間*視窗進行比較|庫斯托.資源管理員:報表庫|
-| 期間過期:保留/流失率和新使用者 | [activity_metrics](activity-metrics-plugin.md)|返回每個視窗的計數、保留/curn 速率。 將每個時間視窗與*上一*個時間視窗進行比較|庫斯托.資源管理員:報表庫|
-| 使用者在滑動視窗中計數和計數 | [sliding_window_counts](sliding-window-counts-plugin.md)|對於每個時間視窗,以滑動視窗的方式在回顧期間返回計數和計數|
-| 新使用者佇列:保留/流失率和新使用者 | [new_activity_metrics](new-activity-metrics-plugin.md)|比較新使用者組(在時間視窗中第一次看到的所有使用者)。 每個佇列與所有以前的佇列進行比較。 比較會考慮*所有*以前的時間視窗|庫斯托.資源管理員:報表庫|
-|活動使用者:不同的計數 |[active_users_count](active-users-count-plugin.md)|為每個時間視窗返回不同的使用者,其中僅考慮使用者,如果它出現在至少 X 個不同的週期中,在 spc 化的回顧期間。|
-|使用者參與度:DAU/WAU/MAU|[activity_engagement](activity-engagement-plugin.md)|比較計算參與度的內部時間視窗(例如每日)和外部(例如每周)(例如 DAU/WAU)|庫斯托.資源管理員:報表庫|
-|工作階段:計算活動工作階段|[session_count](session-count-plugin.md)|計數工作階段,其中會話由時間段定義 - 使用者記錄被視為新工作階段,如果在當前記錄的回顧期間未看到它|
+| 一段時間內的新使用者計數 | [activity_counts_metrics](activity-counts-metrics-plugin.md)|傳回每個時間範圍的計數/dcounts/新計數。 每個時間範圍都會與先前*所有*的時間視窗比較|Kusto. Explorer：報表圖庫|
+| 週期-一段期間：保留/變換率和新使用者 | [activity_metrics](activity-metrics-plugin.md)|傳回`dcount`，每個時間範圍的保留/變換率。 每個時間範圍與*上一個*時間範圍的比較|Kusto. Explorer：報表圖庫|
+| 使用者計數和`dcount`滑過時間範圍 | [sliding_window_counts](sliding-window-counts-plugin.md)|針對每個時間範圍，以滑動`dcount`視窗的方式傳回計數和回顧期間|
+| 新使用者世代：保留/變換率和新使用者 | [new_activity_metrics](new-activity-metrics-plugin.md)|比較新使用者的世代（在時間範圍內第一次看到的所有使用者）。 每個世代都會與所有先前的世代比較。 比較會將*所有*先前的時間視窗納入考慮|Kusto. Explorer：報表圖庫|
+|作用中使用者：相異計數 |[active_users_count](active-users-count-plugin.md)|針對每個時間範圍傳回不同的使用者。 只有在指定的回顧期間內，使用者才會被視為至少 X 個相異的期間。|
+|使用者參與： DAU/WAU/MAU|[activity_engagement](activity-engagement-plugin.md)|比較內部時間範圍（例如，每日）和外部（例如，每週）進行運算的參與（例如，DAU/WAU）|Kusto. Explorer：報表圖庫|
+|會話：計算作用中會話計數|[session_count](session-count-plugin.md)|計數會話，其中會話是由時間週期所定義-使用者記錄會被視為新的會話（如果它在目前記錄的回顧期間內尚未看到）|
 ||||
-|漏鬥:上一個和下一個狀態序列分析 | [funnel_sequence](funnel-sequence-plugin.md)|計算已執行一系列事件的不同使用者,以及引導 /後跟序列的前 v/下一個事件。 可建構[神聖圖表](https://en.wikipedia.org/wiki/Sankey_diagram)||
-|漏鬥:序列完成分析|[funnel_sequence_completion](funnel-sequence-completion-plugin.md)|計算每個時間視窗*中完成*指定序列的使用者的不同計數|
+|漏斗圖：上一個和下一個狀態順序分析 | [funnel_sequence](funnel-sequence-plugin.md)|計算已採取一系列事件的不同使用者，以及引發或後面接順序的上一個或下一個事件。 適用于建立[sankey 圖表](https://en.wikipedia.org/wiki/Sankey_diagram)||
+|漏斗圖：序列完成分析|[funnel_sequence_completion](funnel-sequence-completion-plugin.md)|計算每個時間範圍內已*完成*指定順序的使用者相異計數|
 ||||
