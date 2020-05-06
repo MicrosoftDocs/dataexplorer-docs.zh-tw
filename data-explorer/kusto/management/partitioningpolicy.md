@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: e03ff6fe7ffb65d11b59cc98f150df617d42932d
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 7440b42599d8559db547762daa5f8edcc24ea46f
+ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82616366"
+ms.lasthandoff: 05/05/2020
+ms.locfileid: "82799436"
 ---
 # <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
 
@@ -22,8 +22,7 @@ ms.locfileid: "82616366"
 > [!NOTE]
 > 資料分割功能目前為*預覽*狀態。
 
-原則的主要目的是要改善已知會縮小為分割資料行中的一小部分值之查詢的效能。
-次要的可能優點是資料的壓縮較佳。
+原則的主要目的是要改善已知會縮小至分割區資料行中的一小部分值的查詢效能，以及（或）高基數位符串資料行上的匯總/聯結。 次要的可能優點是資料的壓縮較佳。
 
 > [!WARNING]
 > 雖然未針對可定義原則的資料表數量設定硬式編碼限制，但每個額外的資料表都會增加在叢集節點上執行的背景資料分割進程的負擔，而且可能需要叢集的其他資源-請參閱[容量](#capacity)。
@@ -176,7 +175,7 @@ ms.locfileid: "82616366"
   * 單一資料分割作業之來源範圍的資料列計數總和的最大目標。
   * 這個屬性是*選擇性*的，其預設值為`0` （在此情況下，5000000記錄的預設目標會生效）。
 
-## <a name="notes"></a>注意
+## <a name="notes"></a>備忘錄
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 

@@ -1,6 +1,6 @@
 ---
-title: 如何使用 Kusto.Ingest 函式庫進行資料引入 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了如何在 Azure 數據資源管理器中使用 Kusto.ingest 庫進行數據引入。
+title: 使用 Kusto 內嵌資料連結庫-Azure 資料總管
+description: 本文說明如何使用 Azure 資料總管的 Kusto 程式庫來內嵌資料。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/05/2020
-ms.openlocfilehash: 80b2b61c70269c5bd166a064fe9d0e2c59dd8197
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: fe268d19e5f42308737b7c392c58c6c1dca071b3
+ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523625"
+ms.lasthandoff: 05/05/2020
+ms.locfileid: "82799606"
 ---
-# <a name="howto-data-ingestion-with-kustoingest-library"></a>如何使用 Kusto.Ingest 函式庫進行資料引入
-本文介紹了使用 Kusto.Ingest 用戶端庫的範例代碼。
+# <a name="data-ingestion-with-the-kustoingest-library"></a>使用 Kusto 程式庫內嵌資料
 
-## <a name="overview"></a>概觀
-以下代碼示例演示了使用 Kusto.Ingest 庫將數據引入 Kusto 的數據佇列(透過 Kusto 資料管理服務)。
+本文提供的範例程式碼會使用 Kusto 的內嵌用戶端程式庫來內嵌資料。 此程式碼會詳細說明適用于生產等級管線（稱為佇列內嵌）的建議內嵌模式。 針對 Kusto 程式庫，對應的實體是[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)介面。 用戶端程式代碼會藉由將內嵌通知張貼到 Azure 佇列，與 Azure 資料總管服務互動。 佇列的參考是從負責內嵌的資料管理實體取得。 
 
-> 本文討論建議的生產級管道引入模式,也稱為**排隊引入**(在 Kusto.Ingest 庫中,相應的實體是[IKustoQueuedingestClient 介面](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient))。 在此模式下,客戶端代碼通過將引入通知消息發佈到 Azure 佇列與 Kusto 服務進行互動,該引用是從 Kusto 資料管理 (a.k.a.a) 獲得的引用。 攝入)服務。 與數據管理服務的交互必須與**AAD**進行身份驗證。
+> [!NOTE]
+> 與資料管理服務的互動必須使用 Azure Active Directory （Azure AD）進行驗證。
 
-#### <a name="authentication"></a>驗證
-此代碼示例使用 AAD 使用者身份驗證,並在互動式使用者的身份下運行。
+此範例會使用 Azure AD 的使用者驗證，並在互動式使用者的身分識別下執行。
 
 ## <a name="dependencies"></a>相依性
-此範例碼需要以下 NuGet 套件:
-* 微軟.庫斯特托.英格斯特
+
+此範例程式碼需要下列 NuGet 套件：
+* Kusto。
 * Microsoft.IdentityModel.Clients.ActiveDirectory
 * WindowsAzure.Storage
 * Newtonsoft.Json
 
 ## <a name="namespaces-used"></a>使用的命名空間
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -46,14 +46,15 @@ using Kusto.Ingest;
 ```
 
 ## <a name="code"></a>程式碼
-下面介紹的代碼執行以下操作:
-1. 在資料庫下的`KustoIngestClientDemo``KustoLab`分享 Kusto 叢集上建立表
-2. 在該表上設定[JSON 列映射物件](../../management/create-ingestion-mapping-command.md)
-3. 為`Ingest-KustoLab`資料管理服務建立[IKustoQueueddd 客戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)實體
-4. 使用適當的引入選項設定[KustoQueueinge 屬性](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties)
-5. 建立記憶體,填滿一些要引入的產生資料
-6. 使用`KustoQueuedIngestClient.IngestFromStream`方法引入資料
-7. 輪詢任何[引入錯誤](kusto-ingest-client-status.md#tracking-ingestion-status-kustoqueuedingestclient)
+
+此程式碼會執行下列動作。
+1. 在`KustoLab` `KustoIngestClientDemo`資料庫下的共用 Azure 資料總管叢集上建立資料表
+2. 在該資料表上布建[JSON 資料行對應物件](../../management/create-ingestion-mapping-command.md)
+3. 建立`Ingest-KustoLab`資料管理服務的[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)實例
+4. 使用適當的內嵌選項來設定[KustoQueuedIngestionProperties](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties)
+5. 建立 MemoryStream，並填入某些產生的資料以供內嵌
+6. 使用`KustoQueuedIngestClient.IngestFromStream`方法來內嵌資料
+7. 輪詢任何內嵌[錯誤](kusto-ingest-client-status.md#tracking-ingestion-status-kustoqueuedingestclient)
 
 ```csharp
 static void Main(string[] args)

@@ -1,6 +1,6 @@
 ---
-title: Kusto.Ingest 參考 - 引入代碼範例 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 資料資源管理器中的 Kusto.Ingest 參考 - 引入代碼示例。
+title: Kusto 內嵌參考-內嵌程式碼範例-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 Kusto 內嵌參考-內嵌程式碼範例。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/15/2019
-ms.openlocfilehash: d9314d3b9db5638a56def637e85027d4cc074d09
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ba3232ca1c8a3f587f53ee1c3c6aad3fc12283ad
+ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81502613"
+ms.lasthandoff: 05/05/2020
+ms.locfileid: "82799674"
 ---
-# <a name="kustoingest-reference---ingestion-code-examples"></a>Kusto.Ingest 參考 - 攝取代碼範例
-這是一組簡短的程式碼段,展示將資料引入 Kusto 表的各種技術
+# <a name="kustoingest-reference---ingestion-code-examples"></a>Kusto 內嵌參考-內嵌程式碼範例
+這是簡短程式碼片段的集合，示範將資料內嵌到 Kusto 資料表的各種技術
 
->提醒:這些示例看起來好像在引入后立即銷毀了引入用戶端。 請不要從字面上理解這一點。<BR>引入用戶端是重入的,線程安全,不應大量創建。 引入用戶端實例的建議基數是每個目標 Kusto 群集每個託管進程一個。
+>提醒：這些範例看起來像是在內嵌之後立即終結內嵌用戶端。 請不要真的這麼做。<BR>內嵌用戶端是可重新進入的安全線程，不應以較大的數位建立。 內嵌用戶端實例的建議基數是每個目標 Kusto 叢集的每個裝載進程一個。
 
 ### <a name="useful-references"></a>有用的參考
-* [庫斯特.Ingest 客戶端引用](kusto-ingest-client-reference.md)
-* [庫斯特.inging 操作狀態](kusto-ingest-client-errors.md)
-* [庫斯特.Ingest 例外](kusto-ingest-client-errors.md)
+* [Kusto。內嵌用戶端參考](kusto-ingest-client-reference.md)
+* [Kusto。內嵌操作狀態](kusto-ingest-client-errors.md)
+* [Kusto 內嵌例外狀況](kusto-ingest-client-errors.md)
 * [Kusto 連接字串](../connection-strings/kusto.md)
-* [庫斯托授權模型](../../management/security-roles.md)
+* [Kusto 授權模型](../../management/security-roles.md)
 
-### <a name="async-ingestion-from-a-single-azure-blob-using-kustoqueuedingestclient-with-optional-retrypolicy"></a>使用 KustoQueuedestclient 使用(可選)重試策略從單個 Azure Blob 進行同步引入:
+### <a name="async-ingestion-from-a-single-azure-blob-using-kustoqueuedingestclient-with-optional-retrypolicy"></a>使用 KustoQueuedIngestClient 搭配（選擇性） RetryPolicy 以非同步方式從單一 Azure Blob 內嵌：
 ```csharp
 //Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderDM =
@@ -56,7 +56,10 @@ await client.IngestFromStorageAsync(uri: @"BLOB-URI-WITH-SAS-KEY", ingestionProp
 client.Dispose();
 ```
 
-### <a name="ingest-from-local-file-using-kustodirectingestclient-only-for-test-purposes"></a>使用 KustoDirectingestClient 從本地端檔案進行引入(僅用於測試目的):
+### <a name="ingest-from-local-file-using-kustodirectingestclient"></a>使用 KustoDirectIngestClient 從本機檔案內嵌 
+
+此方法建議用於有限的磁片區和低頻率的內嵌。
+
 ```csharp
 // Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderEngine =
@@ -75,7 +78,7 @@ using (IKustoIngestClient client = KustoIngestFactory.CreateDirectIngestClient(k
 }
 ```
 
-### <a name="ingest-from-local-files-using-kustoqueuedingestclient-and-ingestion-validation"></a>使用 KustoQueueDd 用戶端及引入驗證從本地端檔案 
+### <a name="ingest-from-local-files-using-kustoqueuedingestclient-and-ingestion-validation"></a>使用 KustoQueuedIngestClient 和內嵌驗證從本機檔案內嵌 
 ```csharp
 // Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderDM =
@@ -107,7 +110,7 @@ Ensure.IsTrue((ingestionFailures.Count() > 0), "Failures expected");
 client.Dispose();
 ```
 
-### <a name="ingest-from-a-local-files-using-kustoqueuedingestclient-and-report-status-to-a-queue"></a>使用 KustoQueueDestClient 從本地端檔案引入,並將狀態報告到佇列
+### <a name="ingest-from-a-local-files-using-kustoqueuedingestclient-and-report-status-to-a-queue"></a>使用 KustoQueuedIngestClient 從本機檔案內嵌，並將狀態報表到佇列
 
 ```csharp
 // Create Kusto connection string with App Authentication
@@ -154,7 +157,7 @@ Ensure.ConditionIsMet((ingestionSuccesses.Count() > 0),
 client.Dispose();
 ```
 
-### <a name="ingest-from-a-local-file-using-kustoqueuedingestclient-and-report-status-to-a-table"></a>使用 KustoQueueDestClient 從本地端檔案引入,並將狀態報告到表
+### <a name="ingest-from-a-local-file-using-kustoqueuedingestclient-and-report-status-to-a-table"></a>使用 KustoQueuedIngestClient 從本機檔案內嵌，並將狀態報表到資料表
 
 ```csharp
 // Create Kusto connection string with App Authentication
