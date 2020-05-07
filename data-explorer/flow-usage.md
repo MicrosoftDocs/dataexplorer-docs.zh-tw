@@ -1,130 +1,126 @@
 ---
-title: 微軟 Azure 資料資源管理員串流連接器(預覽)使用範例
-description: 瞭解一些常見的 Microsoft 流連接器使用範例。
+title: Azure 資料總管連接器對電源自動化的使用範例（預覽）
+description: 瞭解 Azure 資料總管連接器的一些常見使用範例，以自動進行電源自動化。
 author: orspod
 ms.author: orspodek
 ms.reviewer: dorcohen
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/15/2020
-ms.openlocfilehash: 05ff0e41347d56cc1e204defa8d5f250a881c84f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0ecf0124051b6c003e056263afb6a3c5aa9ddb81
+ms.sourcegitcommit: 98eabf249b3f2cc7423dade0f386417fb8e36ce7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81498951"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82868720"
 ---
-# <a name="microsoft-flow-connector-preview-usage-examples"></a>微軟流連接器(預覽)使用範例
+# <a name="usage-examples-for-azure-data-explorer-connector-to-power-automate-preview"></a>Azure 資料總管連接器對電源自動化的使用範例（預覽）
 
-Azure 資料資源管理器流連接器允許 Azure 資料資源管理器使用[Microsoft Power 自動的流功能](https://flow.microsoft.com/)作為計畫或觸發任務的一部分自動執行 Kusto 查詢和命令。 本文檔包含幾個常見的 Microsoft Flow 連接器使用範例。
+Azure 資料總管 flow 連接器可讓 Azure 資料總管使用[Microsoft 電源自動化](https://flow.microsoft.com/)的流程功能。 您可以在已排程或觸發的工作中，自動執行 Kusto 查詢和命令。 本文包含數個常見的 flow 連接器使用範例。
 
-有關詳細資訊,請參閱[Microsoft 流連接器(預覽)。](flow.md)
+如需詳細資訊，請參閱[Azure 資料總管 flow 連接器（預覽）](flow.md)。
 
-* [微軟流連接器和 SQL](#microsoft-flow-connector-and-sql)
-* [將資料推送到 Power BI 資料集](#push-data-to-power-bi-dataset)
-* [條件查詢](#conditional-queries)
-* [透過電子郵件傳送多個 Azure 資料資源管理員流程圖表](#email-multiple-azure-data-explorer-flow-charts)
+## <a name="flow-connector-and-your-sql-database"></a>Flow 連接器和您的 SQL 資料庫
 
-## <a name="microsoft-flow-connector-and-sql"></a>微軟流連接器和 SQL
-
-使用 Microsoft Flow 連接器查詢數據並將其聚合到 SQL 資料庫中。
+使用 flow 連接器來查詢您的資料，並將它匯總在 SQL 資料庫中。
 
 > [!Note]
-> SQL 插入針對每行單獨完成。 僅對少量輸出數據使用 Microsoft 流連接器。 
+> 僅針對少量的輸出資料使用 flow 連接器。 SQL 插入作業會針對每個資料列分別執行。 
 
-![](./media/flow-usage/flow-sqlexample.png)
-
-> [!IMPORTANT]
-> 在 *「群集名稱」* 欄位中,輸入群集 URL。
-
-## <a name="push-data-to-power-bi-dataset"></a>將資料推送到 Power BI 資料集
-
-Microsoft Flow 連接器可與 Power BI 連接器一起使用,將數據從 Kusto 查詢推送到 Power BI 串流資料集。
-
-1. 創建新的"運行"查詢並列出結果操作。
-1. 選擇 **「新步驟**」。
-1. 選擇 **「新增操作**」並搜尋 Power BI。
-1. 選取 [Power BI] ****。
-1. 選擇**將行新增到資料集**。 
-
-    ![流量功率 BI 連接器](./media/flow-usage/flow-powerbiconnector.png)
-1. 輸入要推送資料的工作**區**,**資料集**與**表**格 。
-1. 在動態內容對話框中,添加包含數據集架構和相關 Kusto 查詢結果的有效負載。
-
-    ![流功率 BI 欄位](./media/flow-usage/flow-powerbifields.png)
-
-流會自動為 Kusto 查詢結果表的每一行應用 Power BI 操作。 
-
-![每行的流功率 BI 操作](./media/flow-usage/flow-powerbiforeach.png)
-
-## <a name="conditional-queries"></a>條件查詢
-
-Kusto 查詢的結果可用作下一個流操作的輸入或條件。
-
-在下面的示例中,我們查詢 Kusto 中最後一天發生的事件。 對於每個已解決的事件,將發佈一條鬆弛消息,並創建推送通知。
-對於仍處於活動狀態的每個事件,將查詢 Kusto 以瞭解有關類似事件的詳細資訊。 它將該資訊作為電子郵件發送,並打開相關的 TFS 任務。
-
-以以下說明建立類似的流:
-
-1. 創建新的"運行"查詢並列出結果操作。
-1. 選擇 **「新步驟**」。
-1. 選擇**條件控制器**。
-1. 從動態內容視窗中選擇要用作下一個操作的條件的參數。
-1. 選擇*關係*和*值*的類型以在給定參數上設置特定條件。
-
-    [![](./media/flow-usage/flow-condition.png "Flow conditions")](./media/flow-usage/flow-condition.png#lightbox)
-
-    Flow 在查詢結果表的每一行上應用此條件。
-1. 添加條件為真假時的操作。
-
-    [![](./media/flow-usage/flow-conditionactions.png "Flow condition actions")](./media/flow-usage/flow-conditionactions.png#lightbox)
-
-您可以使用 Kusto 查詢中的結果值作為下一個操作的輸入。 從動態內容視窗中選擇結果值。
-在下面的範例中,添加了"鬆弛 - 消息後"操作和可視化工作室 - 創建新的工作項操作,其中包含來自 Kusto 查詢的數據。
-
-![鬆弛 - 訊息後操作](./media/flow-usage/flow-slack.png)
-
-![視覺工作室操作](./media/flow-usage/flow-visualstudio.png)
-
-在此示例中,如果事件仍然處於活動狀態,請再次查詢 Kusto 以獲取有關過去如何解決來自同一源的事件的資訊。
-
-![串流條件查詢](./media/flow-usage/flow-conditionquery.png)
+![使用 flow 連接器查詢資料的螢幕擷取畫面](./media/flow-usage/flow-sqlexample.png)
 
 > [!IMPORTANT]
-> 在 *「群集名稱」* 欄位中,輸入群集 URL。
+> 在 [叢集**名稱**] 欄位中，輸入叢集 URL。
 
-將此資訊可視化為圓示圖,並將其透過電子郵件發送給團隊。
+## <a name="push-data-to-a-microsoft-power-bi-dataset"></a>將資料推送至 Microsoft Power BI 資料集
 
-![串流條件電子郵件](./media/flow-usage/flow-conditionemail.png)
+您可以使用 flow 連接器搭配 Power BI 連接器，將資料從 Kusto 查詢推送至 Power BI 串流資料集。
 
-## <a name="email-multiple-azure-data-explorer-flow-charts"></a>透過電子郵件傳送多個 Azure 資料資源管理員流程圖表
+1. 建立新的「**執行查詢」和「列出結果**」動作。
+1. 選取 [**新增步驟**]。
+1. 選取 [**新增動作**]，然後搜尋 Power BI。
+1. 選取 [ **Power BI** > **將資料列加入資料集**。 
 
-1. 使用定期觸發器創建新的 Flow,並定義流的間隔和頻率。 
-1. 添加新步驟,包含一個或多個 Kusto - 運行查詢並可視化結果操作。 
+    ![Power BI 連接器的螢幕擷取畫面](./media/flow-usage/flow-powerbiconnector.png)
 
-    ![在串流中執行多個查詢](./media/flow-usage/flow-severalqueries.png)
-1. 對於每個 Kusto - 執行查詢並可視化結果,請定義以下欄位:
-    * 叢集 URL
-    * 資料庫名稱
-    * 查詢和圖表類型(HTML 表格、圓形圖、時程圖表、條形圖或輸入自訂值)。
+1. 輸入將推送資料的**工作區**、**資料集**和**資料表**。
+1. 從 [動態內容] 對話方塊中，加入包含資料集架構和相關 Kusto 查詢**結果的承載**。
 
-    ![使用多個附件視覺化結果](./media/flow-usage/flow-visualizeresultsmultipleattachments.png)
+    ![Power BI 欄位的螢幕擷取畫面](./media/flow-usage/flow-powerbifields.png)
 
-1. 新增傳送電子郵件 (v2) 操作: 
-    1. 在正文部分中,選擇代碼檢視圖示。
-    1. 在 **「正文」** 欄位中,插入所需的 BodyHtml,以便查詢的可視化結果包含在電子郵件正文中。
-    1. 要向電子郵件添加附件,請添加附件名稱和附件內容。
+此流程會針對 Kusto 查詢結果資料表的每個資料列自動套用 Power BI 動作。 
+
+![每個資料列之 Power BI 動作的螢幕擷取畫面](./media/flow-usage/flow-powerbiforeach.png)
+
+## <a name="conditional-queries"></a>條件式查詢
+
+您可以使用 Kusto 查詢的結果做為下一個流程動作的輸入或條件。
+
+在下列範例中，我們會查詢 Kusto 中是否有過去一天發生的事件。 針對每個已解決的事件，會張貼一則寬限訊息，並建立推播通知。
+針對仍在作用中的每個事件，我們會查詢 Kusto 以取得類似事件的詳細資訊。 它會以電子郵件的形式傳送該資訊，並在 Azure DevOps Server 中開啟相關的工作。
+
+請遵循這些指示來建立類似的流程：
+
+1. 建立新的「**執行查詢」和「列出結果**」動作。
+1. 選取 [**新增步驟** > **條件] 控制項**。
+1. 從 [動態內容] 視窗中，選取您想要做為下一個動作之條件的參數。
+1. 選取*關聯*性和*值*的類型，以設定特定參數的特定條件。
+
+    [![](./media/flow-usage/flow-condition.png "Screenshot of flow conditions")](./media/flow-usage/flow-condition.png#lightbox)
+
+    此流程會在查詢結果資料表的每個資料列上套用此條件。
+1. 新增條件為 true 和 false 時的動作。
+
+    [![](./media/flow-usage/flow-conditionactions.png "Screenshot of flow condition actions")](./media/flow-usage/flow-conditionactions.png#lightbox)
+
+您可以使用 Kusto 查詢的結果值做為下一個動作的輸入。 從 [動態內容] 視窗中選取結果值。
+在下列範例中，我們新增了 [**時差]-[張貼訊息**] 動作和 [ **Visual Studio-建立新的工作專案**] 動作，其中包含 Kusto 查詢的資料。
+
+![時差的螢幕擷取畫面-張貼訊息動作](./media/flow-usage/flow-slack.png)
+
+![Visual Studio 動作的螢幕擷取畫面](./media/flow-usage/flow-visualstudio.png)
+
+在此範例中，如果事件仍在作用中，重新查詢 Kusto 以取得來自相同來源的事件在過去的解決方式的相關資訊。
+
+![流程條件查詢的螢幕擷取畫面](./media/flow-usage/flow-conditionquery.png)
+
+> [!IMPORTANT]
+> 在 [叢集**名稱**] 欄位中，輸入叢集 URL。
+
+以圓形圖的形式將此資訊視覺化，並以電子郵件傳送給小組。
+
+![流程條件電子郵件的螢幕擷取畫面](./media/flow-usage/flow-conditionemail.png)
+
+## <a name="email-multiple-azure-data-explorer-flow-charts"></a>透過電子郵件傳送多個 Azure 資料總管流程圖
+
+1. 使用「週期」觸發程式建立新流程，並定義流程的間隔和頻率。 
+1. 新增一個步驟，其中包含一或多個**Kusto 執行查詢，並將結果動作視覺化**。 
+
+    ![在流程中執行數個查詢的螢幕擷取畫面](./media/flow-usage/flow-severalqueries.png)
+
+1. 針對每個**Kusto 執行查詢和視覺化結果**動作，定義下欄欄位：
+    * 叢集 URL。
+    * 資料庫名稱。
+    * 查詢和圖表類型（例如，HTML 資料表、圓形圖、時間圖表、橫條圖或自訂值）。
+
+    ![以多個附件視覺化結果的螢幕擷取畫面](./media/flow-usage/flow-visualizeresultsmultipleattachments.png)
+
+1. 新增 **[傳送電子郵件（v2）** ] 動作： 
+    1. 在 [內文] 區段中，選取 [程式碼視圖] 圖示。
+    1. **在 [內**文] 欄位中，插入必要的**BodyHtml** ，讓查詢的視覺化結果包含在電子郵件的本文中。
+    1. 若要將附件新增至電子郵件，請新增**附件名稱**和**附件內容**。
     
-    ![透過電子郵件傳送多個附件](./media/flow-usage/flow-email-multiple-attachments.png)
+    ![以電子郵件傳送多個附件的螢幕擷取畫面](./media/flow-usage/flow-email-multiple-attachments.png)
 
-    有關建立電子郵件操作的完整說明,請參閱[電子郵件 Kusto 查詢結果](flow.md#email-kusto-query-results)。 
+    如需建立電子郵件動作的詳細資訊，請參閱[電子郵件 Kusto 查詢結果](flow.md#email-kusto-query-results)。 
 
 結果：
 
-[![](./media/flow-usage/flow-resultsmultipleattachments.png "Results of multiple attachments")](./media/flow-usage/flow-resultsmultipleattachments.png#lightbox)
+[![](./media/flow-usage/flow-resultsmultipleattachments.png "Screenshot of results of multiple attachments, visualized as a pie chart and bar chart")](./media/flow-usage/flow-resultsmultipleattachments.png#lightbox)
 
-[![](./media/flow-usage/flow-resultsmultipleattachments2.png "Results of multiple attachments")](./media/flow-usage/flow-resultsmultipleattachments2.png#lightbox)
+[![](./media/flow-usage/flow-resultsmultipleattachments2.png "Screenshot of results of multiple attachments, visualized as a time chart")](./media/flow-usage/flow-resultsmultipleattachments2.png#lightbox)
 
 ## <a name="next-steps"></a>後續步驟
 
-瞭解[Microsoft Azure 資源管理員邏輯應用連接器](kusto/tools/logicapps.md),這是作為計畫或觸發任務的一部分自動運行 Kusto 查詢和命令的另一種方法。
+瞭解[Azure Kusto 邏輯應用程式連接器](kusto/tools/logicapps.md)，這是在排定或觸發的工作中，可自動執行 Kusto 查詢和命令的另一種方式。
+

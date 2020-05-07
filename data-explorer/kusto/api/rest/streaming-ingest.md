@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 672f924865cab14dff6c7d5319c3c34cca1a67ee
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: 1614a04c5e5bff51f45df914174c967ff9c7d8a2
+ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82862000"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82907084"
 ---
 # <a name="streaming-ingestion-http-request"></a>串流內嵌 HTTP 要求
 
@@ -36,8 +36,8 @@ ms.locfileid: "82862000"
 
 | 參數    | 描述                                                                          | 必要/選用   |
 |--------------|--------------------------------------------------------------------------------------|---------------------|
-|`streamFormat`| 指定要求主體中的資料格式。 這個值應該是下列其中一個`CSV`：`TSV`、`SCsv`、`SOHsv`、`PSV`、`JSON``SingleJSON``MultiJSON`、、、`Avro`、。 如需詳細資訊，請參閱[支援的資料格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)。| 必要 |
-|`mappingName` | 在資料表上定義之預先建立的內嵌對應名稱。 如需詳細資訊，請參閱[資料](../../management/mappings.md)對應。 [這裡](../../management/create-ingestion-mapping-command.md)說明了在資料表上管理預先建立之對應的方式。| 選擇性，但`streamFormat`如果是`JSON`、`SingleJSON`、`MultiJSON`或其中一個，則為必要項。`Avro`|  |
+|`streamFormat`| 指定要求主體中的資料格式。 這個值應該是下列其中一個`CSV`： `TSV`、 `SCsv`、 `SOHsv`、 `PSV`、 `JSON`、 `MultiJSON`、 `Avro`、。 如需詳細資訊，請參閱[支援的資料格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)。| 必要 |
+|`mappingName` | 在資料表上定義之預先建立的內嵌對應名稱。 如需詳細資訊，請參閱[資料](../../management/mappings.md)對應。 [這裡](../../management/create-ingestion-mapping-command.md)說明了在資料表上管理預先建立之對應的方式。| 選擇性，但如果`streamFormat`是`JSON`、 `MultiJSON`或其中一個，則為必要項`Avro`|  |
               
 例如，若要將 CSV 格式的資料內嵌到`Logs`資料庫`Test`中的資料表，請使用：
 

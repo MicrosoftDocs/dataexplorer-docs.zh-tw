@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 7440b42599d8559db547762daa5f8edcc24ea46f
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: 6ce7cf38c88879b52c4e2e259e3e9a5cade959de
+ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799436"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82907146"
 ---
 # <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
 
@@ -38,7 +38,7 @@ ms.locfileid: "82799436"
 
 ### <a name="hash-partition-key"></a>雜湊分割區索引鍵
 
-當*大部分*的查詢在*大型維度*（1千萬個或更高） `application_ID`的特定`tenant_ID` `user_ID` `string`類型資料行上使用等號比較篩選`==`（ `in()`，）時，將雜湊分割區索引鍵套用在資料表的`string`類型資料行上是適當的，例如或。
+當*大部分*的查詢在*大型維度*（1千萬個或更高的基數） `application_ID`的特定`tenant_ID` `user_ID` `string`類型資料行上使用相等篩選`==`（ `in()`，）和（或）匯總/聯結（例如、或）時，將雜湊分割區索引鍵套用在資料表的類型資料行上`string`是適當的。
 
 * 雜湊模數函數可用來分割資料。
 * 屬於相同資料分割的所有*同質*（資料分割）範圍都會指派給相同的資料節點。
