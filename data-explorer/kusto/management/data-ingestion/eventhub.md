@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: fac9fd9f218948928e4f91d0d1aa056affcebd11
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 6b2f3b2d75bd964401ae37093405e692cfd64feb
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617658"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82861777"
 ---
 # <a name="ingest-from-event-hub"></a>從事件中樞內嵌
 
@@ -40,6 +40,7 @@ ms.locfileid: "82617658"
 | IngestionMappingReference | 要使用之現有內嵌[對應](../create-ingestion-mapping-command.md)的名稱。 覆寫`Column mapping`分頁上`Data Connection`的集合。|
 | 壓縮 | 資料壓縮、 `None` （預設）或`GZip`壓縮。|
 | 編碼 |  資料編碼，預設值為 UTF8。 可以是任何[.net 支援的編碼](https://docs.microsoft.com/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)。 |
+| 標記（預覽） | 要與內嵌資料產生關聯的[標記](../extents-overview.md#extent-tagging)清單，格式為 JSON 陣列字串。 請注意使用標記的[效能影響](../extents-overview.md#performance-notes-1)。 |
 
 <!--| Database | Name of the existing target database.|-->
 <!--| Tags | String representing [tags](https://docs.microsoft.com/azure/kusto/management/extents-overview#extent-tagging) that will be attached to resulting extent. |-->
@@ -65,6 +66,7 @@ var eventData = new EventData(Encoding.UTF8.GetBytes(data));
 eventData.Properties.Add("Table", "WeatherMetrics");
 eventData.Properties.Add("Format", "json");
 eventData.Properties.Add("IngestionMappingReference", "mapping1");
+eventData.Properties.Add("Tags", "['mydatatag']");
 
 // Send events
 var eventHubClient = EventHubClient.CreateFromConnectionString(eventHubNamespaceConnectionString, eventHubName);

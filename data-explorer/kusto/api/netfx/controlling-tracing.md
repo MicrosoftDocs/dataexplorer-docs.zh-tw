@@ -1,31 +1,32 @@
 ---
-title: 控制或禁止庫索托 SDK 客戶端追蹤 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了在 Azure 數據資源管理器中控制或禁止庫sto SDK 客戶端跟蹤。
+title: 控制或隱藏 Kusto SDK 用戶端追蹤-Azure 資料總管 |Microsoft Docs
+description: 本文說明如何在 Azure 資料總管中控制或隱藏 Kusto SDK 用戶端追蹤。
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 10/23/2018
-ms.openlocfilehash: 65964d7e990cdb639bd5bfe319d11874ea3de15d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cbda69063e3b1a20549dbadb4641fc9fd3f51f57
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81502732"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862049"
 ---
-# <a name="controlling-or-suppressing-kusto-sdk-client-side-tracing"></a>控制或抑制 Kusto SDK 客戶端追蹤
+# <a name="controlling-or-suppressing-kusto-sdk-client-side-tracing"></a>控制或隱藏 Kusto SDK 用戶端追蹤
 
-Kusto 用戶端庫使用通用平台進行跟蹤。 此平台在建譯過程中使用大量追蹤`System.Diagnostics.TraceSource`來源 (),每個源都連接到預設的追蹤`System.Diagnostics.Trace.Listeners`偵聽 器集 () 。
+Kusto 用戶端程式庫會使用常見的追蹤平臺。 平臺會使用大量的追蹤來源（`System.Diagnostics.TraceSource`），每一個都連接到其結構中的預設追蹤接聽`System.Diagnostics.Trace.Listeners`項（）集。
 
-其中一個含義是,如果應用程式具有與預設`System.Diagnostics.Trace`實例關聯的跟蹤偵聽器(例如,通過`app.config`其檔),則 Kusto 用戶端庫將釋放對這些偵聽器的跟蹤。
+其中一個含意是，如果應用程式有與預設`System.Diagnostics.Trace`實例相關聯的追蹤接聽項（例如，透過其`app.config`檔案），則 Kusto 用戶端程式庫將會發出追蹤給這些接聽項。
 
-可以通過程式設計或通過配置檔抑制或控制此行為。
+此行為可透過程式設計方式或設定檔來隱藏或控制。
 
-## <a name="suppress-tracing-programmatically"></a>以程式設計方式禁止追蹤
+## <a name="suppress-tracing-programmatically"></a>以程式設計方式隱藏追蹤
 
-要以程式設計方式禁止從 Kusto 用戶端庫進行追蹤,請儘早在載入相關庫時呼叫以下代碼段:
+若要以程式設計方式隱藏 Kusto 用戶端程式庫中的追蹤，請在載入相關的程式庫時，及早叫用下列程式碼片段：
 
 ```csharp
 Kusto.Cloud.Platform.Utils.TraceSourceManager.SetTraceVerbosityForAll(
@@ -33,18 +34,18 @@ Kusto.Cloud.Platform.Utils.TraceSourceManager.SetTraceVerbosityForAll(
     );
 ```
 
-## <a name="suppressing-tracing-by-using-a-config-file"></a>使用設定檔禁止追蹤
+## <a name="suppressing-tracing-by-using-a-config-file"></a>使用設定檔隱藏追蹤
 
-要透過設定檔禁止從 Kusto 用戶端函式庫進行追蹤`Kusto.Cloud.Platform.dll.tweaks`,請修改`Kusto.Data`檔案 (包含在庫中),以便適當的「調整」現在讀取:
+若要透過設定檔隱藏來自 Kusto 用戶端程式庫的追蹤，請`Kusto.Cloud.Platform.dll.tweaks`修改檔案（隨附于連結`Kusto.Data`庫），讓適當的「調整」立即讀取：
 
 ```xml
     <!-- Overrides the default trace verbosity level -->
     <add key="Kusto.Cloud.Platform.Utils.Tracing.OverrideTraceVerbosityLevel" value="0" />
 ```
 
-(請注意,要生效的調整,值中不需要減號`key`。
+（請注意，若要讓調整生效，則的值中不需要有負號） `key`。
 
-另一種方法是執行以下操作:
+另一個替代方式是執行下列動作：
 
 ```csharp
 Kusto.Cloud.Platform.Utils.Anchor.Tweaks.SetProgrammaticAppSwitch(
@@ -53,9 +54,9 @@ Kusto.Cloud.Platform.Utils.Anchor.Tweaks.SetProgrammaticAppSwitch(
     );
 ```
 
-## <a name="how-to-enable-the-kusto-client-libraries-tracing"></a>如何開啟 Kusto 用戶端庫追蹤
+## <a name="how-to-enable-the-kusto-client-libraries-tracing"></a>如何啟用 Kusto 用戶端程式庫追蹤
 
-要啟用從 Kusto 用戶端庫中追蹤,請在應用程式的 app.config 檔中啟用 .NET 跟蹤。 例如,假設應用程式`MyApp.exe`正在使用 Kusto.Data 用戶端庫。 然後,將檔案`MyApp.exe.config`更改為以下內容將啟用 Kusto.資料追蹤應用程式下一次啟動時:
+若要啟用 Kusto 用戶端程式庫的追蹤，請在應用程式的 app.config 檔案中啟用 .NET 追蹤。 例如，假設應用程式`MyApp.exe`使用 Kusto 用戶端程式庫。 然後，將檔案`MyApp.exe.config`變更為包含下列內容，將會啟用 Kusto。下次應用程式啟動時，資料會進行追蹤：
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -69,11 +70,10 @@ Kusto.Cloud.Platform.Utils.Anchor.Tweaks.SetProgrammaticAppSwitch(
     </trace>
   </system.diagnostics>
 </configuration>
-``` 
+```
 
-這將配置一個追蹤偵聽器,該偵聽器在位於進程目錄中稱為`RollingLogs`子目錄中的子目錄中寫入 CSV 檔。 (當然,任何。也可以使用 NET 相容的跟蹤偵聽器類。 
+這會設定追蹤接聽程式，以寫入至位於進程目錄中名`RollingLogs`為的子目錄中的 CSV 檔案。 （當然，任何。也可以使用 NET 相容的追蹤接聽程式類別）。
 
-## <a name="how-to-enable-the-aad-client-libraries-adal-tracing"></a>如何開啟 AAD 用戶端函式庫 (ADAL) 追蹤
+## <a name="how-to-enable-the-aad-client-libraries-adal-tracing"></a>如何啟用 AAD 用戶端程式庫（ADAL）追蹤
 
-開啟 Kusto 用戶端函式庫的追蹤後,AAD 用戶端庫發出的追蹤也是如此(Kusto 用戶端庫會自動設定 ADAL 追蹤)
-
+啟用 Kusto 用戶端程式庫的追蹤之後，AAD 用戶端程式庫所發出的追蹤（Kusto 用戶端程式庫會自動設定 ADAL 追蹤）

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 7d2b89e0723bbecb29ffd582ae20c2ee41199e45
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 072c908109fecb695a8961c546deb756caf830ab
+ms.sourcegitcommit: 98eabf249b3f2cc7423dade0f386417fb8e36ce7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618491"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82868694"
 ---
 # <a name="update-policy"></a>更新原則
 
@@ -52,19 +52,22 @@ ms.locfileid: "82618491"
 |IsTransactional               |`bool`  |指出更新原則是否為交易式（預設為 false）。 如果無法執行交易式更新原則，則會導致來源資料表未使用新的資料更新。   |
 |PropagateIngestionProperties  |`bool`  |狀態：在內嵌至來源資料表期間指定的內嵌屬性（範圍標記和建立時間）也應該套用至衍生資料表中的查詢。                 |
 
-> [!NOTE]
->
-> * 定義更新原則的來源資料表和資料表**必須位於相同的資料庫中**。
-> * 查詢可能**不**會包含跨資料庫或跨叢集的查詢。
-> * 查詢可以叫用預存函數。
-> * 查詢會自動限定範圍，僅涵蓋新內嵌的記錄。
-> * 允許串聯更新（TableA--`[update]`--> TableB--`[update]`--> TableC--`[update]`--> ...）
-> * 如果以迴圈方式定義多個資料表的更新原則，則會在執行時間偵測到這種情況，並剪下更新鏈（也就是說，資料只會內嵌一次到受影響的資料表鏈中的每個資料表）。
-> * 參考`Source`原則`Query`部分（或後者所參考的函式）中的資料表時，請確定您**未**使用資料表的限定名稱（也就是，使用`TableName` ，而**不** `database("DatabaseName").TableName`是或`cluster("ClusterName").database("DatabaseName").TableName`）。
-> * 更新原則的查詢無法參考任何已啟用[資料列層級安全性原則](./rowlevelsecuritypolicy.md)的資料表。
-> * 當做更新原則之一部分執行的**查詢沒有已**啟用[RestrictedViewAccess 原則](restrictedviewaccesspolicy.md)之資料表的讀取存取權。
-> * `PropagateIngestionProperties`只有在內嵌作業中才會生效。 當更新原則當做`.move extents`或`.replace extents`命令的一部分觸發時，這個選項**沒有任何**作用。
-> * 當將更新原則當做`.set-or-replace`命令的一部分叫用時，預設行為是衍生資料表中的資料也會被取代，因為它是在來源資料表中。
+## <a name="notes"></a>備忘錄
+
+* 查詢會自動限定範圍，僅涵蓋新內嵌的記錄。
+* 查詢可以叫用預存函數。
+* 允許串聯式更新（`TableA` → `TableB` → `TableC` → ...）
+* 當將更新原則當做`.set-or-replace`命令的一部分叫用時，預設行為是衍生資料表中的資料也會被取代，因為它是在來源資料表中。
+
+## <a name="limitations"></a>限制
+
+* 定義更新原則的來源資料表和資料表**必須位於相同的資料庫中**。
+* 查詢可能**不**會包含跨資料庫或跨叢集的查詢。
+* 如果以迴圈方式定義多個資料表的更新原則，則會在執行時間偵測到這種情況，並剪下更新鏈（也就是說，資料只會內嵌一次到受影響的資料表鏈中的每個資料表）。
+* 參考`Source`原則`Query`部分（或後者所參考的函式）中的資料表時，請確定您**未**使用資料表的限定名稱（也就是，使用`TableName` ，而**不** `database("DatabaseName").TableName`是或`cluster("ClusterName").database("DatabaseName").TableName`）。
+* 當做更新原則之一部分執行的**查詢沒有已**啟用[RestrictedViewAccess 原則](restrictedviewaccesspolicy.md)之資料表的讀取存取權。
+* 更新原則的查詢無法參考任何已啟用[資料列層級安全性原則](./rowlevelsecuritypolicy.md)的資料表。
+* `PropagateIngestionProperties`只有在內嵌作業中才會生效。 當更新原則當做`.move extents`或`.replace extents`命令的一部分觸發時，這個選項**沒有任何**作用。
 
 ## <a name="retention-policy-on-the-source-table"></a>來源資料表上的保留原則
 

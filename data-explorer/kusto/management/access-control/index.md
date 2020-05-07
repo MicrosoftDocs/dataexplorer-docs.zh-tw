@@ -7,13 +7,14 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 11/25/2019
-ms.openlocfilehash: 9d72373e8fc5c55740fa3e53a8f850a887517e7b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ecdcdf22fe25c855045d90e294597c1abc769c03
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490441"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862099"
 ---
 # <a name="kusto-access-control-overview"></a>Kusto 存取控制概觀
 
@@ -30,7 +31,7 @@ Kusto 中的存取控制是以兩個維度為基礎：
 
 AAD 是在 Microsoft 中向 Kusto 驗證的慣用方法。 其支援數種驗證案例：
 * **使用者驗證** (互動式登入)：用來驗證人為主體。
-* **應用程式驗證 (非互動式登入)** ：用來驗證必須執行/驗證而不存在任何人為使用者的服務和應用程式。 
+* **應用程式驗證 (非互動式登入)** ：用來驗證必須執行/驗證而不存在任何人為使用者的服務和應用程式。
 
 ### <a name="user-authentication"></a>使用者驗證
 使用者驗證會在使用者向 AAD 出示認證 (或向某些與 AAD 搭配使用的識別提供者，例如 ADFS) 時進行，並收到可向 Kusto 服務出示的安全性權杖。 Kusto 服務並不在意安全性權杖的取得方式，它會在意權杖是否有效，以及 AAD (或同盟 IdP) 所放入的資訊。
@@ -94,4 +95,3 @@ Kusto 會使用[以角色為基礎的授權模型](role-based-authorization.md)�
 例如，**資料庫使用者角色**會授與安全性主體 (使用者或服務) 讀取特定資料庫資料、在資料庫中建立資料表，以及在其中建立函式的許可權。
 
 您可個別地定義安全性主體與安全性角色的關聯，或使用安全性群組 (定義於 AAD) 進行定義。 執行此作業的個別命令定義於[設定以角色為基礎的授權規則](../security-roles.md)。
-

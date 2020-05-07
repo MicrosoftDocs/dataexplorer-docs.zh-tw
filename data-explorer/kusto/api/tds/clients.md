@@ -7,13 +7,14 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 10/30/2019
-ms.openlocfilehash: 5e2de0c29c58959ce683518b03bef9164fa9543c
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: b41f77fe97ce6adeeade63c00824818f4a3af721
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799623"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862032"
 ---
 # <a name="ms-tds-clients-and-azure-data-explorer"></a>MS-TDS 用戶端和 Azure 資料總管
 
@@ -83,7 +84,7 @@ jdbc:sqlserver://<cluster_name.region>.kusto.windows.net:1433;database=<database
 "Driver={ODBC Driver 17 for SQL Server};Server=mykustocluster.kusto.windows.net;Database=mykustodatabase;Authentication=ActiveDirectoryIntegrated"
 ```
 
-某些 ODBC 應用程式無法與`NVARCHAR(MAX)`類型搭配運作。 如需詳細資訊，請參閱https://docs.microsoft.com/sql/relational-databases/native-client/features/using-large-value-types?view=sql-server-2017#sql-server-native-client-odbc-driver。 
+某些 ODBC 應用程式無法與`NVARCHAR(MAX)`類型搭配運作。 如需詳細資訊，請參閱https://docs.microsoft.com/sql/relational-databases/native-client/features/using-large-value-types?view=sql-server-2017#sql-server-native-client-odbc-driver。
 
 常見的因應措施是將傳回的資料轉換成*NVARCHAR （n）*，其中有一個值為 n。 例如， *NVARCHAR （4000）*。 不過，這種因應措施不適用於 Azure 資料總管，因為 Azure 資料總管只有一個字串類型，而 SQL 用戶端的編碼為*NVARCHAR （MAX）*。
 
@@ -104,7 +105,7 @@ $conn = [System.Data.Common.DbProviderFactories]::GetFactory("System.Data.Odbc")
 $conn.ConnectionString = "Driver={ODBC Driver 17 for SQL Server};Server=mykustocluster.kusto.windows.net;Database=mykustodatabase;Authentication=ActiveDirectoryIntegrated"
 $conn.Open()
 $conn.GetSchema("Tables")
-$conn.Close()  
+$conn.Close()
 ```
 
 ## <a name="linqpad"></a>LINQPad

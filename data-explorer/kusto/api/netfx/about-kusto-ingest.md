@@ -7,13 +7,14 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 03/24/2020
-ms.openlocfilehash: 8357bc387ae26fc0dfcc50c5e712a5b39df32942
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: c43c6c09ad6da90685c56dc47ebe257a55eaede6
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799708"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862134"
 ---
 # <a name="kusto-ingest-client-library"></a>Kusto 內嵌用戶端程式庫
 
@@ -95,4 +96,3 @@ Kusto 內嵌用戶端執行是安全線程，並可供重複使用。 您不需�
 
 ### <a name="data-ingestion-rest-apis"></a>資料內嵌 REST Api
 [沒有 Kusto 的資料](kusto-ingest-client-rest.md)內嵌說明如何使用 Kusto REST api 來執行排入佇列的 Kusto 內嵌，而不需依賴 Kusto 的內嵌程式庫。
-

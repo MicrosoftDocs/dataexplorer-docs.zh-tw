@@ -1,40 +1,41 @@
 ---
-title: Azure 活動目錄 (AAD) 身份驗證 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 Azure 活動目錄 (AAD) 身份驗證。
+title: Azure Active Directory （AAD）驗證-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 Azure Active Directory （AAD）驗證。
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 09/13/2019
-ms.openlocfilehash: 637252b91af53198b3ee494309857b2d4b6e6828
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 17da89206af12e2e4f7d9867372c8babf0c4aea1
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522928"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862083"
 ---
-# <a name="azure-active-directory-aad-authentication"></a>Azure 動作目錄 (AAD) 認證
+# <a name="azure-active-directory-aad-authentication"></a>Azure Active Directory （AAD）驗證
 
 Azure Active Directory (AAD) 是 Azure 慣用的多租用戶雲端目錄服務，能夠驗證安全性主體或與其他識別提供者 (例如 Microsoft 的 Active Directory) 同盟。
 
-AAD 允許各種應用程式(Web 應用程式、Windows 桌面應用程式、通用應用程式、行動應用程式等)統一驗證和使用 Kusto 服務。
+AAD 允許各種類型（web 應用程式、Windows 桌面應用程式、通用應用程式、行動應用程式等）的應用程式一致地驗證和使用 Kusto 服務。
 
-AAD 支援多種身份驗證方案。
-如果在身份驗證期間存在使用者,則應通過 AAD 使用者身份驗證向 AAD 使用者身份驗證對使用者進行身份驗證。
-在某些情況下,即使沒有使用者以交互方式存在,也希望服務使用 Kusto。 在這種情況下,應使用應用程式密鑰對應用程式進行身份驗證,如 AAD 應用程式身份驗證中所述。
+AAD 支援多種驗證案例。
+如果在驗證期間有使用者存在，您應該使用 AAD 使用者驗證向 AAD 驗證使用者。
+在某些情況下，即使沒有任何使用者以互動方式呈現，也會想要讓服務使用 Kusto。 在這種情況下，您應該使用應用程式密碼來驗證應用程式，如 AAD 應用程式驗證中所述。
 
-Kusto 通常支援以下身份驗證方法,包括透過其 .NET 函式庫:
+Kusto 通常會支援下列驗證方法，包括透過其 .NET 程式庫：
 
-* 互動式使用者身份驗證 ─ 此模式需要互動性,如果需要,登入 UI 將彈出
-* 以前為 Kusto 發行的現有 AAD 權杖的使用者身份驗證
-* 應用程式認證與 AppID 和分享金鑰
-* 使用本地安裝的 X.509v2 憑證或內聯憑證進行應用程式身份驗證
-* 這個使用者為 Kusto 發行的現有 AAD 權杖的應用程式身份驗證
-* 使用為另一資源頒發的 AAD 權杖的使用者或應用程式身份驗證,前提是該資源與 Kusto 之間存在信任
+* 互動式使用者驗證-此模式需要互動性，如有需要，登入 UI 會快顯
+* 使用先前為 Kusto 所發行的現有 AAD 權杖來進行使用者驗證
+* 使用 AppID 和共用密碼進行應用程式驗證
+* 在本機安裝的509v2 憑證或以內嵌方式提供的憑證的應用程式驗證
+* 使用先前為 Kusto 所發行的現有 AAD 權杖進行應用程式驗證
+* 已針對另一個資源發出 AAD 權杖的使用者或應用程式驗證，提供該資源與 Kusto 之間的信任
 
-有關指南和示例,請參閱[Kusto 連接字串](../../api/connection-strings/kusto.md)參考。
+如需指引和範例，請參閱[Kusto 連接字串](../../api/connection-strings/kusto.md)參考。
 
 ## <a name="user-authentication"></a>使用者驗證
 
@@ -54,30 +55,29 @@ Kusto 通常支援以下身份驗證方法,包括透過其 .NET 函式庫:
 * 使用先前取得的有效 AAD 權杖 (發行至 Kusto) 進行應用程式驗證。
 * 使用先前取得並發行給其他資源的有效 AAD 權杖進行應用程式驗證，前提是該資源與 Kusto 之間有信任關係。
 
-## <a name="aad-server-application-permissions"></a>AAD 伺服器應用程式權限
+## <a name="aad-server-application-permissions"></a>AAD 伺服器應用程式許可權
 
-在一般情況下,AAD 伺服器應用程式可以定義多個許可權(例如,唯讀權限和讀取寫入器許可權),AAD 用戶端應用程式可以決定請求授權權杖時需要哪些許可權。 作為權杖獲取的一部分,將要求使用者授權 AAD 用戶端應用程式代表使用者執行具有具有這些許可權的授權。 如果使用者批准,這些許可權將列在頒發給 AAD 用戶端應用程式的權杖的範圍聲明中。
+在一般情況下，AAD 伺服器應用程式可以定義多個許可權（例如，唯讀許可權和讀取寫入器許可權），而 AAD 用戶端應用程式可能會在要求授權權杖時決定所需的許可權。 取得權杖時，系統會要求使用者授權 AAD 用戶端應用程式，以授與使用者執行這些許可權的授權。 如果使用者核准，這些許可權將會列在向 AAD 用戶端應用程式發出之權杖的範圍宣告中。
 
 
 
-AAD 用戶端應用程式配置為向使用者請求"訪問庫斯托"許可權(AAD 稱之為"資源擁有者")。
+AAD 用戶端應用程式已設定為向使用者要求「存取權 Kusto」許可權（AAD 會呼叫「資源擁有者」）。
 
 ## <a name="kusto-client-sdk-as-an-aad-client-application"></a>Kusto 用戶端 SDK 作為 AAD 用戶端應用程式
 
 當 Kusto 用戶端程式庫叫用 ADAL (AAD 用戶端程式庫) 以取得與 Kusto 通訊的權杖時，它會提供下列資訊：
 
-1. 從呼叫者接收的 AAD 租戶
+1. 從呼叫端收到的 AAD 租使用者
 2. AAD 用戶端應用程式識別碼
-3. AAD 客戶端資源識別碼
-4. AAD 回覆Url(身份驗證成功完成後 AAD 服務將重定向到的 URL;然後,ADAL 捕獲此重定向並從中提取授權代碼)。
-5. 群集 URI ('')。https://Cluster-and-region.kusto.windows.net
+3. AAD 用戶端資源識別碼
+4. AAD ReplyUrl （AAD 服務將在驗證成功完成後重新導向的 URL）;然後 ADAL 會捕捉此重新導向，並從它抽取授權碼）。
+5. 叢集 URI （'https://Cluster-and-region.kusto.windows.net'）。
 
-ADAL 傳回到 Kusto 用戶端庫的權杖具有庫斯托 AAD 伺服器應用程式作為存取群體,以及作為作用網域的「訪問庫斯托」許可權。
+ADAL 傳回給 Kusto 用戶端程式庫的權杖具有 Kusto AAD 伺服器應用程式作為物件，以及「存取 Kusto」許可權作為範圍。
 
-## <a name="authenticating-with-aad-programmatically"></a>以程式設計使用 AAD 進行認證
+## <a name="authenticating-with-aad-programmatically"></a>以程式設計方式向 AAD 進行驗證
 
-以下文章說明如何使用 AAD 以程式設計方式向 Kusto 進行身份驗證:
+下列文章說明如何使用 AAD 以程式設計方式向 Kusto 進行驗證：
 
-* [如何預先定義 AAD 應用程式](./how-to-provision-aad-app.md)
-* [如何執行 AAD 認證](./how-to-authenticate-with-aad.md)
-
+* [如何布建 AAD 應用程式](./how-to-provision-aad-app.md)
+* [如何執行 AAD 驗證](./how-to-authenticate-with-aad.md)
