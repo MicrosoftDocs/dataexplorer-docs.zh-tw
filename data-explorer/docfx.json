@@ -62,6 +62,7 @@
       "extendBreadcrumb": true,
       "brand": "azure",
       "disable_contribution_on_translation_quality": ["MTE95","MTE75","MT","Blank"],
+      "uhfHeaderId": "azure",
       "feedback_system": "GitHub",
       "feedback_github_repo": "MicrosoftDocs/dataexplorer-docs.zh-tw",
       "feedback_product_url": "https://feedback.azure.com/forums/915733-azure-data-explorer",
