@@ -912,8 +912,6 @@
               href: ./management/show-cluster-database.md
             - name: .alter 資料庫
               href: ./management/alter-database.md
-            - name: .drop 資料庫
-              href: ./management/drop-database.md
             - name: .show 資料庫結構描述
               href: ./management/show-schema-database.md
         - name: 資料表
