@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 6ce7cf38c88879b52c4e2e259e3e9a5cade959de
-ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
+ms.openlocfilehash: b3293916841eb56da3985f4b388754e7c8057682
+ms.sourcegitcommit: 3393ad86dac455fd182296ffb410b2bd570dbfce
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82907146"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "82991872"
 ---
 # <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
 
@@ -175,7 +175,7 @@ ms.locfileid: "82907146"
   * 單一資料分割作業之來源範圍的資料列計數總和的最大目標。
   * 這個屬性是*選擇性*的，其預設值為`0` （在此情況下，5000000記錄的預設目標會生效）。
 
-## <a name="notes"></a>備忘錄
+## <a name="notes"></a>注意
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
@@ -202,9 +202,10 @@ ms.locfileid: "82907146"
 
 #### <a name="capacity"></a>Capacity
 
-* 由於資料分割程式會導致建立更多的範圍，因此您可能需要（逐漸和線性）增加叢集的[範圍合併容量](../management/capacitypolicy.md#extents-merge-capacity)，讓[延伸範圍合併](../management/extents-overview.md)處理能夠趕上。
-* 如果需要（例如，如果有較高的內嵌輸送量，以及（或）需要分割的大量資料表），叢集的[範圍分割區容量](../management/capacitypolicy.md#extents-partition-capacity)可能會增加（逐漸和線性），以允許執行更多的並行資料分割作業。
-  * 萬一增加資料分割會導致使用叢集資源的大幅增加，請以手動方式或藉由啟用自動調整來調整叢集。
+* 資料分割程式會導致建立更多的範圍。 叢集可能會逐漸增加其[範圍合併容量](../management/capacitypolicy.md#extents-merge-capacity)，因此[合併範圍](../management/extents-overview.md)的程式可以保持運作。
+* 如果有大量的內建輸送量，以及（或）具有已定義資料分割原則的大量資料表，叢集可能會逐漸增加其[範圍分割區容量](../management/capacitypolicy.md#extents-partition-capacity)，讓資料[分割範圍的進程](#the-data-partitioning-process)能夠趕上。
+* 為了避免耗用太多資源，這些動態增加的上限為。 如果超量而時，您可能需要（逐漸和線性）將它們增加超過上限。
+  * 如果增加容量會導致使用叢集資源的大幅/[增加，您](../../manage-cluster-horizontal-scaling.md)可以手動或藉由啟用自動調整來[相應放大](../../manage-cluster-vertical-scaling.md)叢集。
 
 ### <a name="outliers-in-partitioned-columns"></a>分割資料行中的極端值
 

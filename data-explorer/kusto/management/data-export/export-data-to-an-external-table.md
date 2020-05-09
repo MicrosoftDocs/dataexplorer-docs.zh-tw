@@ -8,21 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 56150c480d0d5ecfd4d428e51f7bdb4b68e36b0c
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 5a7a1b37c8c50bdff3760ad9222065191a9eb884
+ms.sourcegitcommit: 3393ad86dac455fd182296ffb410b2bd570dbfce
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617692"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "82991904"
 ---
 # <a name="export-data-to-an-external-table"></a>將資料匯出至外部資料表
 
 您可以藉由定義[外部資料表](../externaltables.md)並將資料匯出至其中，來匯出資料。
 資料表屬性是在[建立外部資料表](../externaltables.md#create-or-alter-external-table)時指定的，因此，您不需要在 export 命令中內嵌資料表的屬性。 Export 命令會依名稱參考外部資料表。
 匯出資料需要[資料庫系統管理員許可權](../access-control/role-based-authorization.md)。
-
-> [!NOTE] 
-> * 目前不支援匯出至具有`impersonate`連接字串的外部資料表。
 
 **語法：**
 
@@ -34,7 +31,7 @@ ms.locfileid: "82617692"
 |輸出參數 |類型 |描述
 |---|---|---
 |ExternalTableName  |String |外部資料表的名稱。
-|Path|String|輸出路徑。
+|路徑|String|輸出路徑。
 |NumRecords|String| 匯出到 path 的記錄數。
 
 **注意：**
@@ -63,7 +60,7 @@ ExternalBlob 是非資料分割的外部資料表。
 .export to table ExternalBlob <| T
 ```
 
-|ExternalTableName|Path|NumRecords|
+|ExternalTableName|路徑|NumRecords|
 |---|---|---|
 |ExternalBlob|http://storage1.blob.core.windows.net/externaltable1cont1/1_58017c550b384c0db0fea61a8661333e.csv|10|
 
@@ -87,7 +84,7 @@ dataformat=csv
 .export to table PartitionedExternalBlob <| T
 ```
 
-|ExternalTableName|Path|NumRecords|
+|ExternalTableName|路徑|NumRecords|
 |---|---|---|
 |ExternalBlob|http://storageaccount.blob.core.windows.net/container1/CustomerName=customer1/2019/01/01/fa36f35c-c064-414d-b8e2-e75cf157ec35_1_58017c550b384c0db0fea61a8661333e.csv|10|
 |ExternalBlob|http://storageaccount.blob.core.windows.net/container1/CustomerName=customer2/2019/01/01/fa36f35c-c064-414d-b8e2-e75cf157ec35_2_b785beec2c004d93b7cd531208424dc9.csv|10|
