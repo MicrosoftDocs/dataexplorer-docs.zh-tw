@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b06b1c137552ba19f9b1ef5367a25bb72eea5c93
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: 167ba8818709f52ccc344452e275405c42b1796e
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82742051"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227667"
 ---
 # <a name="activity_counts_metrics-plugin"></a>activity_counts_metrics plugin
 
@@ -25,7 +25,7 @@ T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), 
 
 **語法**
 
-*T* `| evaluate` `,` *Start* `,` *dim1* *TimelineColumn* `,` *dim2* *IdColumn* `,` *End* `,` *Window* * *IdColumn TimelineColumn 開始結束`,`視窗 [`,`世代] [dim1 dim2 ...] `activity_counts_metrics(` `,`[`,` *回顧*]`)`
+*T* `| evaluate` `activity_counts_metrics(` *IdColumn* `,` *TimelineColumn* `,` *開始* `,` *結束* `,` *視窗*[世代 `,` * *] [ `,` *dim1* `,` *dim2* `,` ...] [ `,` *回顧*]`)`
 
 **引數**
 
@@ -34,7 +34,7 @@ T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), 
 * *TimelineColumn*：代表時間軸的資料行名稱。
 * *Start*：流量分析開始期間的值進行純量。
 * *End*：以分析結束期間的值為純量。
-* *Window*：以 [分析] 視窗期間的值為純量。 可以是數值/日期時間/時間戳記值，或為其中一個的`week` / `month` / `year`字串，在此情況下，所有週期都會[startofweek](startofweekfunction.md)/[startofmonth](startofmonthfunction.md)或[startofyear](startofyearfunction.md)。 
+* *Window*：以 [分析] 視窗期間的值為純量。 可以是數值/日期時間/時間戳記值，或為其中一個的字串 `week` / `month` / `year` ，在此情況下，所有週期都會[startofweek](startofweekfunction.md) / [startofmonth](startofmonthfunction.md)或[startofyear](startofyearfunction.md)。 
 * *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 
 **傳回**
@@ -60,6 +60,7 @@ T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), 
 
 下一個查詢會計算所提供輸入資料表的每日活動計數
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let start=datetime(2017-08-01);
 let end=datetime(2017-08-04);

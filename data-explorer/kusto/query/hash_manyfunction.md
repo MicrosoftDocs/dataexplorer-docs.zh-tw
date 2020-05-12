@@ -1,6 +1,6 @@
 ---
-title: hash_many() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的hash_many()。
+title: hash_many （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 hash_many （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,37 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/06/2020
-ms.openlocfilehash: e98f9d1d956d15cd7a61e7873f9b1dd34c6ae288
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 66ca1e5ff330a4b39ab769b0e3e8d6359eed9c00
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514173"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226664"
 ---
 # <a name="hash_many"></a>hash_many()
 
-返回多個值的組合哈希值。
+傳回多個值的結合雜湊值。
 
 **語法**
 
-`hash_many(`*s1* `,` *s2* =`,` *s3* ...]`)`
+`hash_many(`*s1* `,`*s2* [ `,` *s3* ...]`)`
 
 **引數**
 
-* *s1,* *s2*, *..., sN*: 將一起哈希的輸入值。
+* *s1*、 *s2*、...、 *sN*：將會雜湊在一起的輸入值。
 
 **傳回**
 
-給定標量的組合哈希值。
+給定純量的結合雜湊值。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print value1 = "Hello", value2 = "World"
 | extend combined = hash_many(value1, value2)
 ```
 
-|value1|value2|聯合|
+|value1|value2|混|
 |---|---|---|
 |您好|World|-1440138333540407281|

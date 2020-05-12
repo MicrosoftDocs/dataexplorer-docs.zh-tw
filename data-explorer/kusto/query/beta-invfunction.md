@@ -1,6 +1,6 @@
 ---
-title: beta_inv() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 azure 數據資源管理器中的beta_inv()。
+title: Beta_inv （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 Beta_inv （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,51 +8,52 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 20bdf8bfc01ef3ac6c6a12f6a43d87fd7b5c07e6
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 60b054bbd234a77f81c47e375b98be0a5df103a5
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517879"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227650"
 ---
 # <a name="beta_inv"></a>beta_inv()
 
-返回測試版累積概率測試密度函數的逆。
+傳回搶鮮版（Beta）累計機率測試密度函數的反向。
 
 ```kusto
 beta_inv(0.1, 10.0, 50.0)
 ```
 
-如果*概率* = `beta_cdf(`*x*,...`)`,然後`beta_inv(`*概率*,...x . *x* `)`  =  . 
+如果*probability*  =  `beta_cdf(` *x*,... `)` ，則機率 `beta_inv(` * *,... `)`  = *x*。 
 
 Beta 分配可用於專案規劃中，以指定預期的完成時間和變化來建立可能完成時間模型。
 
 **語法**
 
-`beta_inv(`*概率*`, `*Alpha*`, `*貝塔*`)`
+`beta_inv(`*probability*機率 `, `*Alpha* `, `搶鮮*版*`)`
 
 **引數**
 
-* *概率*:與 Beta 分佈關聯的概率。
-* *Alpha*: 分配的參數。
-* *Beta*:分配的參數。
+* 機率：與搶鮮*版（Beta*）分佈相關聯的機率。
+* *Alpha*：分佈的參數。
+* 搶鮮*版（Beta*）：散發的參數。
 
 **傳回**
 
-* 測試版累積概率密度函數[的逆beta_cdf()](./beta-cdffunction.md)
+* 搶鮮版（Beta）累計機率密度函數[Beta_cdf （）](./beta-cdffunction.md)的反向
 
 **注意事項**
 
-如果任何參數是非數字參數,beta_inv() 傳回 null 值。
+如果有任何引數是非數值，Beta_inv （）會傳回 null 值。
 
-如果 Alpha = 0 或 beta = 0,beta_inv() 傳回空值。
+如果 Alpha ≤0或 Beta ≤0，Beta_inv （）會傳回 null 值。
 
-如果概率 = 0 或概率> 1,beta_inv() 傳回 NaN 值。
+如果 probability ≤0或 probability > 1，Beta_inv （）會傳回 NaN 值。
 
-給定概率值,beta_inv() 尋求該值 x,以便beta_cdf(x、Alpha、Beta) = 概率。
+假設有 [機率] 的值，Beta_inv （）會搜尋值 x，使 Beta_cdf （x，Alpha，Beta） = 機率。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(p:double, alpha:double, beta:double, comment:string)
 [
@@ -65,11 +66,11 @@ datatable(p:double, alpha:double, beta:double, comment:string)
 
 |p|alpha|beta|comment|b|
 |---|---|---|---|---|
-|0.1|10|20|有效輸入|0.226415022388749|
-|1.5|10|20|p > 1,產生 null||
-|0.1|-1|20|α 是 < 0,生成 NaN|NaN|
+|0.1|10|20|有效的輸入|0.226415022388749|
+|1.5|10|20|p > 1，產生 null||
+|0.1|-1|20|Alpha < 0，產生 NaN|NaN|
 
 **另請參閱**
 
-* 有關計算累積 Beta 分發函數,請參閱[beta-cdf()](./beta-cdffunction.md)。
-* 有關計算概率測試密度函數,請參閱[beta-pdf()](./beta-pdffunction.md)。
+* 如需計算累計 Beta 散發函式，請參閱搶鮮[版（Beta）-cdf （）](./beta-cdffunction.md)。
+* 如需電腦率測試密度功能，請參閱[Beta-pdf （）](./beta-pdffunction.md)。

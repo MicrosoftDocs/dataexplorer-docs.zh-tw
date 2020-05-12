@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: 80936da3e56fe0a73dcf146ba61630ceeb4bcb2a
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: db6b060aee3288fb159e8b1cf7feb8554190fe36
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618508"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226494"
 ---
 # <a name="create-an-azure-data-explorer-cluster-in-your-virtual-network"></a>在您的虛擬網路中建立 Azure 資料總管叢集
 

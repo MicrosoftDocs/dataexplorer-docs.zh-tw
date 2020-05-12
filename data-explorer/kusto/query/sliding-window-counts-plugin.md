@@ -1,6 +1,6 @@
 ---
-title: sliding_window_counts外掛程式 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的sliding_window_counts外掛程式。
+title: sliding_window_counts 外掛程式-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 sliding_window_counts 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: feab3d0e8f548817be12f202eb2d494bd65aa133
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2fbc870eafc45c8c63bea98a64f492d161af4c9b
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507492"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226341"
 ---
-# <a name="sliding_window_counts-plugin"></a>sliding_window_counts外掛程式
+# <a name="sliding_window_counts-plugin"></a>sliding_window_counts 外掛程式
 
-使用[此處](samples.md#performing-aggregations-over-a-sliding-window)描述的技術計算回望期滑動視窗中的值計數和不同計數。
+使用[此處](samples.md#performing-aggregations-over-a-sliding-window)所述的技術，在回顧期間，計算滑動視窗中值的計數和相異計數。
 
-例如,對於*每一天*,*計算上周的用戶*計數和不同的計數。 
+例如，針對每一*天*，計算過去*一周*的計數和相異使用者計數。 
 
 ```kusto
 T | evaluate sliding_window_counts(id, datetime_column, startofday(ago(30d)), startofday(now()), 7d, 1d, dim1, dim2, dim3)
@@ -27,33 +27,33 @@ T | evaluate sliding_window_counts(id, datetime_column, startofday(ago(30d)), st
 
 **語法**
 
-*T* `| evaluate` T `,` *Start* `,` *End* `,` `sliding_window_counts(` IdColumn*LookbackWindow*時間線列開始結束回視窗箱 = dim1 dim2 ...] *Bin* `,` *dim2* `,` *IdColumn* `,` *TimelineColumn* `,` `,` *dim1*`)`
+*T* `| evaluate` `sliding_window_counts(` *IdColumn* `,` *TimelineColumn* `,` *Start* `,` *End* `,` *LookbackWindow* `,` *Bin* `,` [*dim1* `,` *dim2* `,` ...]`)`
 
 **引數**
 
-* *T*: 輸入表格表示式。
-* *IdColumn*: 具有表示使用者活動的 ID 值的欄的名稱。 
-* *時間線列*:表示時間線的列的名稱。
-* *開始*:具有分析開始期值的 Scalar。
-* *結束*:具有分析結束週期值的 Scalar。
-* *回視視窗*: 回望週期的 Scalar 常數值 (例如,對於過去 7D 中的 dcount 使用者:回視視窗 = 7d)
-* *:分析*步驟週期的扇號串值。 可以是數字/日期時間/時間`week`/`month`/`year`戳值,也可以是 中的字串,在這種情況下,所有期間都將相應地作為[開始的](startofmonthfunction.md)/[周](startofweekfunction.md)/開始[。](startofyearfunction.md) 
-* *dim1* *,dim2*,...:(可選)列出對活動指標計算進行切片的維度列。
+* *T*：輸入表格式運算式。
+* *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
+* *TimelineColumn*：代表時間軸的資料行名稱。
+* *Start*：流量分析開始期間的值進行純量。
+* *End*：以分析結束期間的值為純量。
+* *LookbackWindow*：回顧期間的純量常數值（例如，針對 `dcount` 過去7d： LookbackWindow = 7d 中的使用者）
+* *Bin*：分析步驟期間的純量常數值。 這個值可以是數值/日期時間/時間戳記值。 如果值是具有格式的字串，則 `week` / `month` / `year` 所有期間都會是[startofweek](startofweekfunction.md) / [startofmonth](startofmonthfunction.md) / [startofyear](startofyearfunction.md)。 
+* *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 
 **傳回**
 
-返回一個表,該表在回望期間、每個時間線期間(按 bin)和每個現有維度組合中具有 Id 的計數和不同的計數值。
+針對每個時間軸（依 bin）和每個現有的維度組合，傳回在回顧期間內具有計數和相異計數值的資料表。
 
-輸出表架構為:
+輸出資料表架構為：
 
-|*時間軸列*|昏暗1|..|dim_n|Count|計數|
+|*TimelineColumn*|`dim1`|..|`dim_n`|`count`|`dcount`|
 |---|---|---|---|---|---|
-|類型:截至*時間軸列*|..|..|..|long|long|
+|類型：從*TimelineColumn*|..|..|..|long|long|
 
 
 **範例**
 
-計算過去一周用戶計數和計數,分析期間的每一天。 
+計算 `dcounts` 過去一周內的使用者計數和時間（針對分析期間內的每一天）。 
 
 ```kusto
 let start = datetime(2017 - 08 - 01);
@@ -83,12 +83,12 @@ T | evaluate sliding_window_counts(UserId, Timestamp, start, end, lookbackWindow
 
 ```
 
-|時間戳記|Count|計數|
+|時間戳記|計數|`dcount`|
 |---|---|---|
-|2017-08-01 00:00:00.0000000|5|3|
-|2017-08-02 00:00:00.0000000|8|5|
-|2017-08-03 00:00:00.0000000|13|5|
-|2017-08-04 00:00:00.0000000|9|5|
-|2017-08-05 00:00:00.0000000|7|5|
-|2017-08-06 00:00:00.0000000|2|2|
-|2017-08-07 00:00:00.0000000|1|1|
+|2017-08-01 00：00：00.0000000|5|3|
+|2017-08-02 00：00：00.0000000|8|5|
+|2017-08-03 00：00：00.0000000|13|5|
+|2017-08-04 00：00：00.0000000|9|5|
+|2017-08-05 00：00：00.0000000|7|5|
+|2017-08-06 00：00：00.0000000|2|2|
+|2017-08-07 00：00：00.0000000|1|1|

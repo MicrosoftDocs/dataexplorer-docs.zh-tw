@@ -1,6 +1,6 @@
 ---
-title: has_any運算符 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中has_any運算符。
+title: has_any 運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 has_any 操作員。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 42a181f7c75ef36119f7f2915fd5327d4a656eb8
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 19329b8822a1e1d484c5f751f5fbc2f8eb6343ac
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514309"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226732"
 ---
 # <a name="has_any-operator"></a>has_any 運算子
 
-`has_any`基於提供的一組值的運算符篩選器。
+`has_any`運算子會根據提供的一組值來篩選。
 
 ```kusto
 Table1 | where col has_any ('value1', 'value2')
@@ -25,29 +25,30 @@ Table1 | where col has_any ('value1', 'value2')
 
 **語法**
 
-*標量表示式的**T* `|` `where` *col*`has_any``(`清單`)`   
-*T* `where` `(`T *col* col*表格表示式*`|``has_any``)`   
+*T*純 `|` `where` *col* `has_any` `(` *量運算式的*T 欄清單`)`   
+*T* `|` `where` *欄* `has_any` `(` *表格式運算式*`)`   
  
 **引數**
 
-* *T* - 要篩選其記錄的表格輸入。
-* *col* - 要篩選的欄。
-* *表示式清單*─表格、標量或文字表示式 Comma 分隔清單  
-* *表格表示式*─ 具有一組值的表格表示式(如果表示式有多個欄,則使用第一欄)
+* 要篩選其記錄的*T*表格式輸入。
+* 要*篩選的欄-資料*行。
+* *運算式清單*-表格式、純量或常值運算式的逗號分隔清單  
+* *表格式運算式*-具有一組值的表格式運算式（如果 expression 有多個資料行，則會使用第一個資料行）
 
 **傳回**
 
-謂詞為*T*中的行`true`
+述詞為之*T*中的資料列`true`
 
 **注意事項**
 
-* 運算式清單可以生成最多`10,000`的值。    
-* 對於表格表達式,將選擇結果集的第一列。   
+* 運算式清單可產生最多個 `10,000` 值。    
+* 若為表格式運算式，則會選取結果集的第一個資料行。   
 
 **範例：**  
 
-**運算子的簡單`has_any`用法:**  
+**運算子的簡單用法 `has_any` ：**  
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents 
 | where State has_any ("CAROLINA", "DAKOTA", "NEW") 
@@ -57,17 +58,18 @@ StormEvents
 |State|count_|
 |---|---|
 |紐約|1750|
-|北卡羅來納州|1721|
-|南達科他州|1567|
-|新澤西|1044|
-|南卡羅來納州|915|
-|北達科他州|905|
-|新墨西哥州|527|
-|新罕布希爾州|394|
+|北卡羅萊納州|1721|
+|南北達科他|1567|
+|新增 JERSEY|1044|
+|南卡羅萊納州|915|
+|北北達科他|905|
+|新增墨西哥|527|
+|新增新罕布什爾州|394|
 
 
-**使用動態陣列:**
+**使用動態陣列：**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let states = dynamic(['south', 'north']);
 StormEvents 
@@ -77,9 +79,9 @@ StormEvents
 
 |State|count_|
 |---|---|
-|北卡羅來納州|1721|
-|南達科他州|1567|
-|南卡羅來納州|915|
-|北達科他州|905|
+|北卡羅萊納州|1721|
+|南北達科他|1567|
+|南卡羅萊納州|915|
+|北北達科他|905|
 |大西洋南部|193|
 |大西洋北部|188|

@@ -1,6 +1,6 @@
 ---
-title: 案例() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 case()。
+title: 案例（）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的案例（）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 479c4a99d410a2df7a608531914d7dccfc555e7e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b493f74472454649a557b7e3677b26af169413de
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517267"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227548"
 ---
 # <a name="case"></a>case()
 
-計算謂詞清單並返回滿足謂詞的第一個結果表達式。
+評估述詞清單，並傳回滿足述詞的第一個結果運算式。
 
-如果兩個謂詞均未返回`true`,則返回最後一個表達式`else`( 的 ) 的結果。
-所有奇數參數(計數從 1 開始)必須是計算到`boolean`值的 運算式。
-所有偶數參數 (s)`then`和最後一`else`個參數 () 必須具有相同的類型。
+如果沒有傳回任何述詞 `true` ，則會傳回最後一個運算式的結果（ `else` ）。
+所有奇數引數（從1開始的計數）必須是評估為值的運算式 `boolean` 。
+所有偶數引數（ `then` s）和最後一個引數（ `else` ）都必須是相同的類型。
 
 **語法**
 
-`case(`*predicate_1* * * *else* *predicate_3* `,` *predicate_2* `,` * *predicate_1then_1, predicate_2then_2 , predicate_3then_3 , *then_1* `,``)`
+`case(`*predicate_1* `,`*then_1*、 *predicate_2* `,` *then_2*、 *predicate_3* `,` *then_3*、*其他*`)`
 
 **引數**
 
-* *predicate_i*: 計算到`boolean`值的 運算式。
-* *then_i*: 如果*predicate_i*是第`true`一個計算到 的謂詞,則獲取計算的運算式並將其值從 函數返回。
-* *其他*:如果兩個*predicate_i*都`true`計算到 ,則從函數返回計算及其值的運算式。
+* *predicate_i*：評估為值的運算式 `boolean` 。
+* *then_i*：如果*predicate_i*是評估為的第一個述詞，則會評估一個運算式，並從函式傳回它的值 `true` 。
+* *否則*：如果*predicate_i*不會評估為，則會評估一個運算式，並從函式傳回它的值 `true` 。
 
 **傳回**
 
-第一*個then_i*的值,*predicate_i*其 predicate_i`true`計算為 ,或者如果兩個謂詞都未滿足,則*其他*值的值。
+第一個*then_i*的值，其*predicate_i*評估為 `true` ，如果未滿足任何述詞，則為*else*的值。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range Size from 1 to 15 step 2
 | extend bucket = case(Size <= 3, "Small", 

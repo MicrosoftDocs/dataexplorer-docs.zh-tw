@@ -1,6 +1,6 @@
 ---
-title: 哈希() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的哈希()。
+title: hash （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的雜湊（）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f8142c42dcb0874dfbd84515e56dc8765bcba3d7
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a44f817ea57a114400f45e9ca2a841150b4590a6
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514139"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226800"
 ---
 # <a name="hash"></a>hash()
 
-返回輸入值的哈希值。
+傳回輸入值的雜湊值。
 
 **語法**
 
-`hash(`*來源*`,`[ *mod*]`)`
+`hash(`*來源*[ `,` *mod*]`)`
 
 **引數**
 
-* *源*:要哈希的值。
-* *mod*: 要套用於哈希結果的選擇模組值,以便輸出值介於`0`*mod* - 1 之間
+* *來源*：要雜湊的值。
+* *mod*：要套用至雜湊結果的選擇性模組值，讓輸出值介於 `0` 和*mod* -1 之間
 
 **傳回**
 
-給定標量的哈希值,蒙杜洛給定的 mod 值(如果指定)。
+給定純量的雜湊值，模數給定的 mod 值（如果有指定）。
 
 > [!WARNING]
-> 用於計算哈希的演演演算法是xxhash。
-> 此演算法將來可能會更改,並且唯一的保證是在單個查詢中此方法的所有調用使用相同的演演演算法。
-> 因此,建議使用者不要將的結果`hash()`存儲在表中。 如果需要持久化哈希值,請考慮改用[hash_sha256(](./sha256hashfunction.md)但請注意,計算`hash()`它比 要複雜得多)。
+> 用來計算雜湊的演算法是 xxhash。
+> 這個演算法未來可能會變更，而且唯一的保證是在單一查詢中，此方法的所有調用都會使用相同的演算法。
+> 因此，建議使用者不要將的結果儲存 `hash()` 在資料表中。 如果需要保存雜湊值，請考慮改為使用[hash_sha256 （）](./sha256hashfunction.md) ，但請注意，計算的複雜度遠高於 `hash()` 。
 
 **範例**
 
@@ -45,8 +45,9 @@ hash("World", 100)              // 51 (1846988464401551951 % 100)
 hash(datetime("2015-01-01"))    // 1380966698541616202
 ```
 
-下面的範例使用哈希函數對 10% 的資料執行查詢,當假定值均勻分佈時,使用哈希函數對資料進行取樣非常有用(在此範例中為 StartTime 值)
+下列範例使用雜湊函式來執行10% 資料的查詢，在假設值已一致散發時，使用雜湊函式來取樣資料會很有説明（在此範例中，StartTime 值）
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where hash(StartTime, 10) == 0
