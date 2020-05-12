@@ -1,35 +1,35 @@
 ---
-title: geo_point_to_s2cell （）-Azure 資料總管 |Microsoft Docs
+title: geo_point_to_s2cell （）-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 geo_point_to_s2cell （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: d1cd2106865419f9407b3ff464d9852eb5ffb630
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: fe3af4218fcc8b714cd4d62e45e78d6f8c9c0270
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618459"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226902"
 ---
 # <a name="geo_point_to_s2cell"></a>geo_point_to_s2cell()
 
 計算地理位置的 S2 資料格權杖字串值。
 
-如需 S2 資料格的詳細資訊，請按一下[這裡](http://s2geometry.io/devguide/s2cell_hierarchy)。
+閱讀更多有關[S2 資料格](https://s2geometry.io/devguide/s2cell_hierarchy)階層的資訊。
 
 **語法**
 
-`geo_point_to_s2cell(`*經度*`, `*latitude*緯度`, `*層級*`)`
+`geo_point_to_s2cell(`*經度* `, `*緯度* `, `*層級*`)`
 
 **引數**
 
-* *經度*：地理位置的經度值。 如果 x 是實數，而且 x 在範圍 [-180，+ 180]，則經度 x 會視為有效。 
+* *經度*：地理位置的經度值。 如果*x*是實數，而*x*是在 [-180，+ 180] 範圍內，則經度*x*會視為有效。 
 * *緯度*：地理位置的緯度值。 如果 y 是實數，而 y 在範圍 [-90，+ 90] 中，則緯度 y 會視為有效。 
-* *level*：定義要求`int`的資料格層級的選擇性。 支援的值位於 [0，30] 範圍內。 如果未指定，則會`11`使用預設值。
+* *level*： `int` 定義要求的資料格層級的選擇性。 支援的值位於 [0，30] 範圍內。 如果未指定，則 `11` 會使用預設值。
 
 **傳回**
 
@@ -37,16 +37,16 @@ ms.locfileid: "82618459"
 
 > [!NOTE]
 >
-> * S2Cell 可以是有用的地理空間叢集工具。
-> * S2Cell 有31層級的階層，範圍涵蓋範圍從85011、012.19 公里²（最高層級0）到 00.44 cm ²（最低層級為30）。
-> * S2Cell 會在層級從0到30的增加期間，保留資料格中心。
-> * S2Cell 是球體表面上的資料格，而其邊緣則是 geodesics。
-> * 在以緯度 x 和緯度 y 計算的 s2cell token 字串上叫用[geo_s2cell_to_central_point （）](geo-s2cell-to-central-point-function.md)函數時，不一定會傳回 x 和 y。
+> * S2 資料格可以是有用的地理空間叢集工具。
+> * S2 資料格的階層層級為31個，範圍涵蓋範圍從85011，012.19 公里²在最高層級0，00.44 cm ²最低層級30。
+> * S2 資料格會在層級從0到30的增加期間，保留資料格中心。
+> * S2 資料格是球形表面上的資料格，而其邊緣則是 geodesics。
+> * 在以緯度 x 和緯度 y 計算的 S2 資料格標記字串上叫用[geo_s2cell_to_central_point （）](geo-s2cell-to-central-point-function.md)函數，不一定會傳回 x 和 y。
 > * 兩個地理位置可能非常接近彼此，但有不同的 S2 資料格權杖。
 
 **S2 資料格每層級值的大約區域涵蓋範圍**
 
-針對每個層級，s2cell 的大小類似，但不完全相同。 鄰近的資料格大小通常比較大。
+針對每個層級，S2 資料格的大小類似，但不完全相同。 附近的資料格大小通常比較大。
 
 |層級|最小隨機儲存格邊緣長度（英國）|最大隨機儲存格邊緣長度（US）|
 |--|--|--|
@@ -82,7 +82,7 @@ ms.locfileid: "82618459"
 |29|12 mm|18 mm|
 |30|6 mm|9 mm|
 
-您可以在[這裡](http://s2geometry.io/resources/s2cell_statistics)找到資料表來源。
+您可以[在此 S2 資料格統計資源中](https://s2geometry.io/resources/s2cell_statistics)找到資料表來源。
 
 另請參閱[geo_point_to_geohash （）](geo-point-to-geohash-function.md)。
 
@@ -92,6 +92,7 @@ S2cell 所匯總的美國風暴事件。
 
 :::image type="content" source="images/geo-point-to-s2cell-function/s2cell.png" alt-text="US s2cell":::
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | project BeginLon, BeginLat
@@ -100,6 +101,7 @@ StormEvents
 | render scatterchart with (kind=map) // map rendering available in Kusto Explorer desktop
 ```
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print s2cell = geo_point_to_s2cell(-80.195829, 25.802215, 8)
 ```
@@ -108,7 +110,9 @@ print s2cell = geo_point_to_s2cell(-80.195829, 25.802215, 8)
 |--------|
 | 88d9b  |
 
-下列範例會尋找座標的群組。 群組中的每一對座標都位於 s2cell，最大區域為 1632.45 km²。
+下列範例會尋找座標的群組。 群組中的每一對座標都位於 S2 資料格中，且最大區域為 1632.45 km²。
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(location_id:string, longitude:real, latitude:real)
 [
@@ -127,6 +131,8 @@ datatable(location_id:string, longitude:real, latitude:real)
 | 47ae3  | 1     | ["C"]     |
 
 下列範例會產生空白的結果，因為座標輸入無效。
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print s2cell = geo_point_to_s2cell(300,1,8)
 ```
@@ -136,6 +142,8 @@ print s2cell = geo_point_to_s2cell(300,1,8)
 |        |
 
 下列範例會產生空的結果，因為層級輸入無效。
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print s2cell = geo_point_to_s2cell(1,1,35)
 ```
@@ -145,6 +153,8 @@ print s2cell = geo_point_to_s2cell(1,1,35)
 |        |
 
 下列範例會產生空的結果，因為層級輸入無效。
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print s2cell = geo_point_to_s2cell(1,1,int(null))
 ```

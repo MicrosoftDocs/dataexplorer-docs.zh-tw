@@ -1,6 +1,6 @@
 ---
-title: diffpatterns_text外掛程式 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的diffpatterns_text外掛程式。
+title: diffpatterns_text 外掛程式-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 diffpatterns_text 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,80 +8,82 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 58f059e2346dfb3f15bff295126a14a97f10f317
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7ef4bf5607979cc02976d00250e8754f3a0c4e69
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516009"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225168"
 ---
-# <a name="diffpatterns_text-plugin"></a>diffpatterns_text外掛程式
+# <a name="diffpatterns_text-plugin"></a>diffpatterns_text 外掛程式
 
-比較兩個字串值數據集,並查找描述兩個數據集之間的差異的文本模式。
+比較字串值的兩個資料集，並尋找描述兩個資料集之間差異的文字模式。
 
 ```kusto
 T | evaluate diffpatterns_text(TextColumn, BooleanCondition)
 ```
 
-返回`diffpatterns_text`一組文本模式,這些模式在兩集中捕獲數據的不同部分(即,在條件`true`為 時捕獲大量行的模式,在條件為 時捕獲大量行的模式,`false`在條件為 時捕獲大量行的百分比。 模式由連續標記(由空格分隔)構建,帶有文本列中的標記或`*`表示通配符。 每個模式會以結果中的一個資料列表示。
+`diffpatterns_text`會傳回一組文字模式，以在兩個集合中捕捉資料的不同部分（也就是當條件為時，會捕捉大量百分比的資料列 `true` ，而當條件為時，則會使用較低百分比的資料列 `false` ）。 這些模式是以連續標記（以空白字元分隔）來建立，其中包含來自文字資料行的 token，或 `*` 代表萬用字元。 每個模式會以結果中的一個資料列表示。
 
 **語法**
 
-`T | evaluate diffpatterns_text(`文字列, 布林條件 [, 最小權限, 閾值, 最大權杖 ]`)` 
+`T | evaluate diffpatterns_text(`TextColumn，BooleanCondition [，MinTokens，閾值，MaxTokens]`)` 
 
-**必要參數**
+**必要的引數**
 
-* 文字列 ─ *column_name*
+* TextColumn- *column_name*
 
-    要分析的文字列,必須是類型字串。
+    要分析的文字資料行必須是字串類型。
     
-* 布林條件 -*布林表示式*
+* BooleanCondition-*布林運算式*
 
-    定義如何生成兩個記錄子集以與輸入表進行比較。 該演算法根據條件將查詢拆分為兩個數據集「True」和「False」,然後分析它們之間的(文本)差異。 
+    定義如何產生要與輸入資料表比較的兩個記錄子集。 演算法會根據條件將查詢分割成兩個資料集 "True" 和 "False"，然後分析兩者之間的（文字）差異。 
 
-**替代參數**
+**選擇性引數**
 
 所有其他引數皆為選用，但必須為下列順序。 
 
-* MinTokens - 0 < *int* < 200 [預設值: 1]
+* MinTokens-0 < *int* < 200 [預設值： 1]
 
-    設置每個結果模式的最低非通配符權杖數。
+    為每個結果模式設定非萬用字元標記的最小數目。
 
-* 下限 - 0.015 <*雙*< 1 [默認值: 0.05]
+* 閾值-0.015 < *double* < 1 [預設值： 0.05]
 
-    設置兩個集之間的最小模式(比率)差值(請參閱[差異模式](diffpatternsplugin.md))。
+    設定兩個集合之間的最小模式（比率）差異（請參閱[diffpatterns](diffpatternsplugin.md)）。
 
-* 最大權杖 - 0 < *int* [預設值: 20]
+* MaxTokens-0 < *int* [預設值： 20]
 
-    設置每個結果模式的最大權杖數(從開始),指定較低的限制會減少查詢運行時。
+    設定每個結果模式的最大標記數目（從一開始），指定較低的限制會減少查詢執行時間。
 
 **傳回**
 
-diffpatterns_text的結果返回以下列:
+Diffpatterns_text 的結果會傳回下列資料行：
 
-* Count_of_True:條件為`true`時與模式匹配的行數。
-* Count_of_False:條件為`false`時與模式匹配的行數。
-* Percent_of_True:條件為 時,從行中匹配模式的行`true`的 百分比。
-* Percent_of_False:條件為 時,從行中匹配模式的行`false`的 百分比。
-* 模式:包含文字字串中的標記和通配元的''`*`的文本模式。 
+* Count_of_True：當條件為時符合模式的資料列數目 `true` 。
+* Count_of_False：當條件為時符合模式的資料列數目 `false` 。
+* Percent_of_True：當條件為時，與資料列中符合模式的資料列百分比 `true` 。
+* Percent_of_False：當條件為時，與資料列中符合模式的資料列百分比 `false` 。
+* Pattern：包含文字字串之標記和萬用字元之 ' ' 的文字模式 `*` 。 
 
 > [!NOTE]
-> 模式不一定不同,可能無法提供數據集的完整覆蓋範圍。 模式可能重疊,某些行可能與任何模式不匹配。
+> 模式不一定是相異的，而且可能不會提供完整的資料集涵蓋範圍。 模式可能會重迭，而且某些資料列可能不會符合任何模式。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents     
 | where EventNarrative != "" and monthofyear(StartTime) > 1 and monthofyear(StartTime) < 9
 | where EventType == "Drought" or EventType == "Extreme Cold/Wind Chill"
 | evaluate diffpatterns_text(EpisodeNarrative, EventType == "Extreme Cold/Wind Chill", 2)
 ```
+
 |Count_of_True|Count_of_False|Percent_of_True|Percent_of_False|模式|
 |---|---|---|---|---|
-|11|0|6.29|0|風向西北移動 ~ 後起 • 表面槽帶來強湖效應降雪下風 • 湖優越從|
-|9|0|5.14|0|加拿大高壓穩定 – 地區 – 產生了自 2006 年 2 月 - 2006 年以來最冷的溫度。 持續時間 = 凍結溫度|
-|0|34|0|6.24|[ ] * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *|
-|0|42|0|7.71|[ ] [ ] [ ] [ ] 在科羅拉多州西部引起 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *|
-|0|45|0|8.26|【 低於正常 】|
-|0|110|0|20.18|低於正常 *|
+|11|0|6.29|0|股在 * 喚醒 * a surface 透過數目中的西北轉變 snowfall downwind * Lake 卓越|
+|9|0|5.14|0|加拿大高壓力已結算 * * 區域 * 自2006年2月起產生最冷溫度。 持續時間 * 凍結溫度|
+|0|34|0|6.24|* * * * * * * * * * * * * * * * * * West 田納西州，|
+|0|42|0|7.71|* * * * * * * * * * * * * * * * * * * * * * * 在西歐。 *|
+|0|45|0|8.26|* * 低於正常 *|
+|0|110|0|20.18|低於一般 *|
 

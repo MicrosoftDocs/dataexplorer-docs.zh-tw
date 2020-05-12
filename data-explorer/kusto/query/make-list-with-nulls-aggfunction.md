@@ -1,6 +1,6 @@
 ---
-title: make_list_with_nulls() (聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的make_list_with_nulls()(聚合函數)。
+title: make_list_with_nulls （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 make_list_with_nulls （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/09/2020
-ms.openlocfilehash: 4b039008c5969cf02187d69a3486b09e04ec41ae
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 41f07f16641fd303c9b8e76b4924238378b6ccc9
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512864"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83224811"
 ---
-# <a name="make_list_with_nulls-aggregation-function"></a>make_list_with_nulls() (聚合函數)
+# <a name="make_list_with_nulls-aggregation-function"></a>make_list_with_nulls （）（彙總函式）
 
-`dynamic`返回組中*Expr*的所有值 (JSON) 陣列,包括空值。
+傳回 `dynamic` 群組中*Expr*所有值的（JSON）陣列，包括 null 值。
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+* 只能在[匯總](summarizeoperator.md)的內容中使用
 
 **語法**
 
@@ -27,13 +27,13 @@ ms.locfileid: "81512864"
 
 **引數**
 
-* *Expr*:將用於聚合計算的運算式。
+* *Expr*：將用於匯總計算的運算式。
 
 **傳回**
 
-`dynamic`返回組中*Expr*的所有值 (JSON) 陣列,包括空值。
-如果未對`summarize`運算符的輸入進行排序,則生成的陣列中的元素順序將未定義。
-如果對`summarize`運算符的輸入進行排序,則生成的陣列中的元素順序將追蹤輸入的順序。
+傳回 `dynamic` 群組中*Expr*所有值的（JSON）陣列，包括 null 值。
+如果 `summarize` 未排序運算子的輸入，則產生之陣列中的專案順序會是未定義的。
+如果對運算子的輸入 `summarize` 進行排序，則產生之陣列中的專案順序會追蹤輸入的內容。
 
 > [!TIP]
-> 使用[`mv-apply`](./mv-applyoperator.md)運算子按某些鍵建立有序清單。 請參閱[此處的](./mv-applyoperator.md#using-mv-apply-operator-to-sort-the-output-of-makelist-aggregate-by-some-key)範例。
+> 使用 [`mv-apply`](./mv-applyoperator.md) 運算子，依某個索引鍵建立已排序的清單。 請參閱[此處的](./mv-applyoperator.md#using-the-mv-apply-operator-to-sort-the-output-of-makelist-aggregate-by-some-key)範例。

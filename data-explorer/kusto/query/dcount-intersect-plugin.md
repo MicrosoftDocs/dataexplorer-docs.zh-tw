@@ -1,6 +1,6 @@
 ---
-title: dcount_intersect外掛程式 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的dcount_intersect外掛程式。
+title: dcount_intersect 外掛程式-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 dcount_intersect 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,41 +8,42 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 7771456ffa75085c79933c2e789e3d98f352b76f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: c431f17184570b294b9c8077028ac792719b4abd
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516128"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225202"
 ---
-# <a name="dcount_intersect-plugin"></a>dcount_intersect外掛程式
+# <a name="dcount_intersect-plugin"></a>dcount_intersect 外掛程式
 
-基於 hll 值(N 在 [2..16] 的範圍內)計算 N 個集之間的交集,並返回 N 個 dcount 值。
+根據值計算 N 個集合之間 `hll` 的交集（[2.. 16] 範圍內的 n 個），並傳回 n 個 `dcount` 值。
 
-給定集 S<sub>1</sub>, S<sub>2</sub>. . S<sub>n</sub> - 傳回數值將表示不同的計數:  
-S<sub>1</sub>, S<sub>1</sub> • S<sub>2</sub>,  
-S<sub>1</sub> • S<sub>2</sub> • S<sub>3</sub>,  
+提供的設定為 S<sub>1</sub>、s<sub>2</sub>、.。 S<sub>n</sub> -傳回值將代表的相異計數：  
+S<sub>1</sub>，s<sub>1</sub> ∩ s<sub>2</sub>，  
+S<sub>1</sub> ∩ s<sub>2</sub> ∩ s<sub>3</sub>，  
 ... ,  
-S<sub>1</sub> 、 S<sub>2</sub> 2 "S<sub>n</sub>
+S<sub>1</sub> ∩ s<sub>2</sub> ∩ .。。∩ S<sub>n</sub>
 
     T | evaluate dcount_intersect(hll_1, hll_2, hll_3)
 
 **語法**
 
-*T* `dcount_intersect(` *hll_1*`,` *hll_2* *hll_3* `,` T hll_1 , hll_2 , [ hll_3 ... `| evaluate``)`
+*T* `| evaluate` `dcount_intersect(` *hll_1*、 *hll_2*、[ `,` *hll_3* `,` ...]`)`
 
 **引數**
 
-* *T*: 輸入表格表示式。
-* *hll_i*: 使用[hll()](./hll-aggfunction.md)函數計算的 Set<sub>Si</sub>的值。
+* *T*：輸入表格式運算式。
+* *hll_i*：<sub>我</sub>以 Function 計算的 set S 值 [`hll()`](./hll-aggfunction.md) 。
 
 **傳回**
 
-返回具有 N dcount 值的表(每列,表示集交點)。
-列名稱為 s0、s1、...(直到 n-1)。
+傳回具有 N `dcount` 個值的資料表（每個資料行代表集合交集）。
+資料行名稱為 s0、s1 .。。（直到 n-1）。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 // Generate numbers from 1 to 100
 range x from 1 to 100 step 1
@@ -58,6 +59,6 @@ range x from 1 to 100 step 1
           even_and_mod3_and_mod5 = s2 - 1   // gcd(2,3,5) is 30, therefore: 100 / 30 = 3 
 ```
 
-|偶數|even_and_mod3|even_and_mod3_and_mod5|
+|evenNumbers|even_and_mod3|even_and_mod3_and_mod5|
 |---|---|---|
 |50|16|3|

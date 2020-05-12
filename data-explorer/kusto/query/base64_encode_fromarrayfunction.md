@@ -1,6 +1,6 @@
 ---
-title: base64_encode_fromarray() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的base64_encode_fromarray()。
+title: base64_encode_fromarray （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 base64_encode_fromarray （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,35 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2020
-ms.openlocfilehash: f601463fd6751be7064892e70e5b2235f96a20ff
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: bee6471ef2cf2a2cd484af8ce84d70cce749d5e0
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518066"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225321"
 ---
 # <a name="base64_encode_fromarray"></a>base64_encode_fromarray()
 
-從位元組對 base64 字串進行編碼。
+從位元組陣列將 base64 字串編碼。
 
 **語法**
 
-`base64_encode_fromarray(`*位元陣列*`)`
+`base64_encode_fromarray(`*BytesArray*`)`
 
 **引數**
 
-* *位元組*:要編碼到基64字串的輸入位元組。
+* *BytesArray*：要編碼為 base64 字串的輸入位元組陣列。
 
 **傳回**
 
-返回從位元組編碼的 base64 字串。
+傳回以位元組陣列編碼的 base64 字串。
 
-* 有關將基64字串解碼為 UTF-8 字串,請參閱[base64_decode_tostring()](base64_decode_tostringfunction.md)
-* 有關將字串編碼到 base64 字串,請參閱[base64_encode_tostring()](base64_encode_tostringfunction.md)
-* 此函數與[base64_decode_toarray()](base64_decode_toarrayfunction.md)相反
+* 如需將 base64 字串解碼為 UTF-8 字串，請參閱[base64_decode_tostring （）](base64_decode_tostringfunction.md)
+* 如需將字串編碼為 base64 字串，請參閱[base64_encode_tostring （）](base64_encode_tostringfunction.md)
+* 此函式是 base64_decode_toarray 的反向[（）](base64_decode_toarrayfunction.md)
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let bytes_array = toscalar(print base64_decode_toarray("S3VzdG8="));
 print decoded_base64_string = base64_encode_fromarray(bytes_array)
@@ -44,11 +45,12 @@ print decoded_base64_string = base64_encode_fromarray(bytes_array)
 
 |decoded_base64_string|
 |---|
-|S3VzdG8*|
+|S3VzdG8 =|
 
 
-試著從不合法的 UTF-8 編碼字串產生的無效位元組對 base64 字串進行編碼,將傳回 null:
+嘗試從不正確 UTF-8 編碼字串產生的無效位元組陣列編碼 base64 字串時，將會傳回 null：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let empty_bytes_array = toscalar(print base64_decode_toarray("U3RyaW5n0KHR0tGA0L7Rh9C60LA"));
 print empty_string = base64_encode_fromarray(empty_bytes_array)

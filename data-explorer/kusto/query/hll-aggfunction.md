@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/15/2020
-ms.openlocfilehash: f5c47e2ebd2acc0b2ec250d183d65b6536aff756
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: cbe1b0639a0379fe84bc9c100a629bbadd9c3a63
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741815"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226562"
 ---
 # <a name="hll-aggregation-function"></a>hll （）（彙總函式）
 
-會計算[`dcount`](dcount-aggfunction.md)整個群組的中繼結果，而只會在[摘要內匯總](summarizeoperator.md)的內容中。
+會計算整個群組的中繼結果 [`dcount`](dcount-aggfunction.md) ，而只會在[摘要內匯總](summarizeoperator.md)的內容中。
 
 閱讀[基礎演算法（*H*Yper*l*og*l*og）和估計精確度](dcount-aggfunction.md#estimation-accuracy)的相關資訊。
 
@@ -40,16 +40,17 @@ ms.locfileid: "82741815"
     
 **傳回**
 
-*`Expr`* 跨群組之相異計數的中繼結果。
+跨群組之相異計數的中繼結果 *`Expr`* 。
  
 **提示**
 
-1. 您可以使用彙總函式[`hll_merge`](hll-merge-aggfunction.md)來合併一個`hll`以上的中繼結果（僅適用于`hll`輸出）。
+1. 您可以使用彙總函式 [`hll_merge`](hll-merge-aggfunction.md) 來合併一個以上 `hll` 的中繼結果（僅適用于 `hll` 輸出）。
 
-1. [`dcount_hll`](dcount-hllfunction.md)您可以使用函數來計算`dcount` from `hll`  /  `hll_merge`彙總函式。
+1. 您可以使用函數來 [`dcount_hll`](dcount-hllfunction.md) 計算 `dcount` from `hll`  /  `hll_merge` 彙總函式。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize hll(DamageProperty) by bin(StartTime,10m)
