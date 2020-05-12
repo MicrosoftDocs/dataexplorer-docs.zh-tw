@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: cd503948d2f48a0ca431b7e1ce9fbe5c178fc542
-ms.sourcegitcommit: 72eaa9e5169d79507ceb6ead4a2eb703121c2190
+ms.openlocfilehash: b7e8611ba6427880f15d57137e31010047c39e01
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774964"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83224607"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-azure-cli"></a>使用 Azure CLI 建立 Azure 資料總管叢集與資料庫
 
@@ -26,9 +26,9 @@ ms.locfileid: "82774964"
 
 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 若要使用 Azure 資料總管，請先建立叢集，然後在該叢集中建立一或多個資料庫。 然後將資料內嵌 (載入) 至資料庫，讓您可以對資料執行查詢。 在本文中，您會使用 Azure CLI 來建立叢集和資料庫。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
-若要完成本文，您需要 Azure 訂用帳戶。 如果您沒有，請在開始前[建立免費帳戶](https://azure.microsoft.com/free/)。
+若要完成本文，您需要 Azure 訂用帳戶。 如果您沒有 Azure 訂用帳戶，請在開始前[建立免費帳戶](https://azure.microsoft.com/free/)。
 
 [!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
 
@@ -49,18 +49,24 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
     ```azurecli-interactive
     az account set --subscription MyAzureSub
     ```
+   
+1. 安裝擴充功能以使用最新的 Kusto CLI 版本：
+
+    ```azurecli-interactive
+    az extension add -n kusto
+    ```
 
 ## <a name="create-the-azure-data-explorer-cluster"></a>建立 Azure 資料總管叢集
 
 1. 使用下列命令建立您的叢集：
 
     ```azurecli-interactive
-    az kusto cluster create --name azureclitest --sku name="Standard_D13_v2" tier="Standard" --resource-group testrg --location westus
+    az kusto cluster create --cluster-name azureclitest --sku name="Standard_D13_v2" tier="Standard" --resource-group testrg --location westus
     ```
 
    |**設定** | **建議的值** | **欄位描述**|
    |---|---|---|
-   | NAME | *azureclitest* | 所需的叢集名稱。|
+   | name | *azureclitest* | 所需的叢集名稱。|
    | sku | *Standard_D13_v2* | 將用於叢集的 SKU。 參數：*名稱*-SKU 名稱。 *層*-SKU 層。 |
    | resource-group | *testrg* | 將在其中建立叢集的資源群組名稱。 |
    | location | *westus* | 將建立叢集的位置。 |
@@ -70,7 +76,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 1. 執行下列命令來檢查是否已成功建立叢集：
 
     ```azurecli-interactive
-    az kusto cluster show --name azureclitest --resource-group testrg
+    az kusto cluster show --cluster-name azureclitest --resource-group testrg
     ```
 
 如果結果中包含有 `Succeeded` 值的 `provisioningState`，表示已成功建立叢集。
@@ -93,7 +99,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 1. 執行下列命令以查看您所建立的資料庫：
 
     ```azurecli-interactive
-    az kusto database show --name clidatabase --resource-group testrg --cluster-name azureclitest
+    az kusto database show --database-name clidatabase --resource-group testrg --cluster-name azureclitest
     ```
 
 您此時有一個叢集和一個資料庫。
@@ -104,7 +110,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 * 若要清除資源，請刪除叢集。 您刪除叢集時，也會刪除其中的所有資料庫。 使用下列命令刪除您的叢集：
 
     ```azurecli-interactive
-    az kusto cluster delete --name azureclitest --resource-group testrg
+    az kusto cluster delete --cluster-name azureclitest --resource-group testrg
     ```
 
 ## <a name="next-steps"></a>後續步驟

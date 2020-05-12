@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/28/2018
-ms.openlocfilehash: 360a958a08b93d22dabd15b187f8227606486709
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 102077c9c1116bd9476c6dae59d993a6379b69bd
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737380"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225543"
 ---
 # <a name="array_split"></a>array_split()
 
@@ -30,10 +30,11 @@ ms.locfileid: "82737380"
 
 **傳回**
 
-動態陣列`[0..i1), [i1..i2), ... [iN..array_length)` `arr`，包含 n + 1 個數組，其中的值在範圍內，其中 N 是輸入索引的數目`i1...iN` ，而是索引。
+動態陣列，包含 N + 1 個數組，其中的值在範圍內 `[0..i1), [i1..i2), ... [iN..array_length)` `arr` ，其中 N 是輸入索引的數目，而 `i1...iN` 是索引。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print arr=dynamic([1,2,3,4,5]) 
 | extend arr_split=array_split(arr, 2)
@@ -43,7 +44,7 @@ print arr=dynamic([1,2,3,4,5])
 |---|---|
 |[1，2，3，4，5]|[[1，2]，[3，4，5]]|
 
-
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print arr=dynamic([1,2,3,4,5]) 
 | extend arr_split=array_split(arr, dynamic([1,3]))

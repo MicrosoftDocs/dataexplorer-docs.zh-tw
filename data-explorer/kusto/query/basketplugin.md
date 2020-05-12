@@ -1,6 +1,6 @@
 ---
-title: 購物籃外掛程式 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中的購物籃外掛程式。
+title: 購物籃外掛程式-Azure 資料總管
+description: 本文說明 Azure 資料總管中的購物籃外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,67 +8,68 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2019
-ms.openlocfilehash: 06fd1e33624bca6aee18a1ca969af18656c6b3e0
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: f3e53e02dbcbf8cb7521214e97dd146acd82f1ee
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663872"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225287"
 ---
-# <a name="basket-plugin"></a>籃子外掛程式
+# <a name="basket-plugin"></a>購物籃外掛程式
 
 ```kusto
 T | evaluate basket()
 ```
 
-Basket 可尋找資料中離散屬性 (維度) 的所有常見模式，將會傳回在原始查詢中傳遞頻率臨界值的所有常見模式。 購物籃保證在數據中找到所有頻繁的模式,但不能保證具有多項式運行時,查詢的運行時在行數中是線性的,但在某些情況下,列數(維度)可能呈指數級。 Basket 是以最初針對購物籃分析資料採礦而開發的 Apriori 演算法為基礎。
+Basket 可尋找資料中離散屬性 (維度) 的所有常見模式，將會傳回在原始查詢中傳遞頻率臨界值的所有常見模式。 購物籃一定要尋找資料中的所有常用模式，但不保證會有多項式執行時間，而查詢的執行時間會以資料列數為線性，但在某些情況下，資料行（維度）的數目可能是指數。 Basket 是以最初針對購物籃分析資料採礦而開發的 Apriori 演算法為基礎。
 
 **語法**
 
-`T | evaluate basket(`*參數*`)`
+`T | evaluate basket(`*引數*`)`
 
 **傳回**
 
 置物籃會傳回高於比例閾值 (預設值：0.05) 的所有經常出現模式。每個模式是以結果中的一個資料列表示。
 
-第一列是段 ID。接下來的兩列是模式捕獲的原始查詢中行的計數和百分比。 其餘的資料行來自原始查詢，其值是資料行中的特定值或表示變數值的萬用字元值 (預設為 null)。
+第一個資料行是區段識別碼。接下來的兩個數據行是由模式所捕捉之原始查詢中的資料列計數和百分比。 其餘的資料行來自原始查詢，其值是資料行中的特定值或表示變數值的萬用字元值 (預設為 null)。
 
 **引數 (全部選用)**
 
-`T | evaluate basket(`[*閾值*,*重量柱*,*最大尺寸*,*自訂通配符*,*自訂通配符*, ...]`)`
+`T | evaluate basket(`[*閾值*， *WeightColumn*， *MaxDimensions*， *CustomWildcard*， *CustomWildcard*，...]`)`
 
 所有引數皆為選用，但必須為上述順序。 若要指示需使用預設值，請放置字串波狀符號值 - '~' (請參閱以下範例)。
 
-可用參數:
+可用的引數：
 
-* 下限 - 0.015 <*雙*< 1 [默認值: 0.05]
+* 閾值-0.015 < *double* < 1 [預設值： 0.05]
 
     將資料列的最小比率設為認定的頻繁 (不會傳回較小比例的模式)。
     
-    範例： `T | evaluate basket(0.02)`
+    範例：`T | evaluate basket(0.02)`
 
 * WeightColumn - *column_name*
 
     根據指定的權數 (依預設每個資料都列具有權數 '1') 考慮輸入中的每個資料列。 引數必須是數值資料行名稱 (例如 int、long、real)。 權數資料行的常見用法是考慮已內嵌至各資料列的資料取樣或分組/彙總。
     
-    範例： `T | evaluate basket('~', sample_Count)`
+    範例：`T | evaluate basket('~', sample_Count)`
 
-* 最大尺寸 - 1 < *int* [預設值: 5]
+* MaxDimensions-1 < *int* [預設值： 5]
 
     設定每個 Basket 的不相關維度數目上限 (依預設會受到限制以縮減查詢執行階段)。
 
-    範例： `T | evaluate basket('~', '~', 3)`
+    範例：`T | evaluate basket('~', '~', 3)`
 
-* 自定義通配符 - *"any_value_per_type"*
+* CustomWildcard- *"any_value_per_type"*
 
     在結果資料表中設定特定類型的萬用字元值，會指出目前的模式沒有這個資料行的限制。
-    預設值是 null，而字串預設值為空字串。 如果預設值是數據中的可行值,則應使用不同的通配符值(例如`*`)。
+    預設值是 null，而字串預設值為空字串。 如果預設值是資料中的可行值，則應該使用不同的萬用字元值（例如 `*` ）。
     請參閱下列範例。
 
-    範例： `T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
+    範例：`T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where monthofyear(StartTime) == 5
@@ -77,7 +78,7 @@ StormEvents
 | evaluate basket(0.2)
 ```
 
-|SegmentId|Count|百分比|State|EventType|Damage|DamageCrops|
+|SegmentId|計數|百分比|State|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4574|77.7|||否|0
 |1|2278|38.7||Hail|否|0
@@ -90,6 +91,7 @@ StormEvents
 
 **包含自訂萬用字元的範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where monthofyear(StartTime) == 5
@@ -98,7 +100,7 @@ StormEvents
 | evaluate basket(0.2, '~', '~', '*', int(-1))
 ```
 
-|SegmentId|Count|百分比|State|EventType|Damage|DamageCrops|
+|SegmentId|計數|百分比|State|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4574|77.7|\*|\*|否|0
 |1|2278|38.7|\*|Hail|否|0

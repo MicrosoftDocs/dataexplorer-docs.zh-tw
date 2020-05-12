@@ -1,6 +1,6 @@
 ---
-title: 容量策略 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的容量策略。
+title: 容量原則-Azure 資料總管
+description: 本文說明 Azure 資料總管中的容量原則。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,86 +8,96 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: af648bd0a4b328477b14e20a2457e3e914df2827
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 15a1c21a38999b0a3929fcf0451a91ec607ca2a8
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521993"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225916"
 ---
-# <a name="capacity-policy"></a>容量原則
+# <a name="capacity-policy"></a>產能原則
 
-容量策略用於控制用於執行資料引入和其他資料整理操作(如合併擴展區)的計算資源。
+容量原則可用來控制用於叢集上資料管理作業的計算資源。
 
-## <a name="the-capacity-policy-object"></a>容量策略物件
+## <a name="the-capacity-policy-object"></a>容量原則物件
 
-`IngestionCapacity`容量策略由和`ExtentsMergeCapacity``ExtentsPurgeRebuildCapacity`組成。 `ExportCapacity`
+容量原則是由下列各項所組成：
 
-### <a name="ingestion-capacity"></a>攝取能力
+* [IngestionCapacity](#ingestion-capacity)
+* [ExtentsMergeCapacity](#extents-merge-capacity)
+* [ExtentsPurgeRebuildCapacity](#extents-purge-rebuild-capacity)
+* [ExportCapacity](#export-capacity)
+* [ExtentsPartitionCapacity](#extents-partition-capacity)
 
-|屬性                           |類型    |描述                                                                                                                                                                               |
+## <a name="ingestion-capacity"></a>內嵌容量
+
+|屬性                           |類型    |說明                                                                                                                                                                               |
 |-----------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|叢集最大併發操作 |long    |叢集並發引入操作數的最大值                                                                                                            |
-|核心利用率係數         |double  |在計算攝入容量時要利用的內核百分比的係數(計算結果將始終按`ClusterMaximumConcurrentOperations`) 規範化。 |                                                                                                                             |
+|ClusterMaximumConcurrentOperations |long    |叢集中並行內嵌作業數目的最大值                                                                                                            |
+|CoreUtilizationCoefficient         |double  |計算內嵌容量時所用核心百分比的係數（計算的結果一律會正規化 `ClusterMaximumConcurrentOperations` ） |                                                                                                                             |
 
-叢集的總引入容量(如[.show 容量](../management/diagnostics.md#show-capacity)所示)的計算方式如下:
+叢集的內嵌容量總計（如 [[顯示容量](../management/diagnostics.md#show-capacity)] 所示）是由下列計算：
 
-最小值`ClusterMaximumConcurrentOperations`(=`Number of nodes in cluster`最大值(1,)) `Core count per node`  *  `CoreUtilizationCoefficient`
+最小值（ `ClusterMaximumConcurrentOperations` ， `Number of nodes in cluster` * 最大值（1， `Core count per node`  *  `CoreUtilizationCoefficient` ））
 
-> [!Note] 
-> 在具有三個或三個節點以上的群集中,管理節點不參與執行引入操作,因此`Number of nodes in cluster`減少了 1。
+> [!Note]
+> 在具有三個或更多節點的叢集中，admin 節點不會參與進行內嵌作業。 `Number of nodes in cluster`會減少一。
 
-### <a name="extents-merge-capacity"></a>擴充區合併容量
+## <a name="extents-merge-capacity"></a>範圍合併容量
 
-|屬性                           |類型    |描述                                                                                    |
+|屬性                           |類型    |說明                                                                                    |
 |-----------------------------------|--------|-----------------------------------------------------------------------------------------------|
-|最大併發操作 PerNode |long    |單個節點上的併發擴展盤區合併/重建操作數的最大值 |
+|MaximumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最大值 |
 
-叢集的總延伸盤區合併容量(如[.show 容量](../management/diagnostics.md#show-capacity)所示)的計算方式如下:
+叢集的總範圍合併容量（如[顯示容量](../management/diagnostics.md#show-capacity)）的計算方式如下：
 
-`Number of nodes in cluster`X.`MaximumConcurrentOperationsPerNode`
+`Number of nodes in cluster`x`MaximumConcurrentOperationsPerNode`
 
-> [!Note] 
-> 在具有三個或三個節點以上的群集中,管理節點不參與執行合併操作,因此`Number of nodes in cluster`減少了 1。
+> [!Note]
+> * `MaximumConcurrentOperationsPerNode`會由系統自動調整，範圍 [1，5]
+> * 在具有三個或更多節點的叢集中，admin 節點不會參與執行合併作業。 `Number of nodes in cluster`會減少一。
 
-### <a name="extents-purge-rebuild-capacity"></a>延伸區清除重建容量
+## <a name="extents-purge-rebuild-capacity"></a>範圍清除重建容量
 
-|屬性                           |類型    |描述                                                                                                                           |
+|屬性                           |類型    |說明                                                                                                                           |
 |-----------------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------|
-|最大併發操作 PerNode |long    |單一節點上並發擴展重建操作(清除操作的重建延伸範圍)的最大值 |
+|MaximumConcurrentOperationsPerNode |long    |單一節點上的清除作業並行重建範圍數目的最大值 |
 
-叢集的總延伸範圍清除重建容量(如[.show 容量](../management/diagnostics.md#show-capacity)所示)的計算方式如下:
+叢集的總範圍會清除重建容量（如顯示[容量](../management/diagnostics.md#show-capacity)），計算方式如下：
 
-`Number of nodes in cluster`X.`MaximumConcurrentOperationsPerNode`
+`Number of nodes in cluster`x`MaximumConcurrentOperationsPerNode`
 
-> [!Note] 
-> 在具有三個或三個節點以上的群集中,管理節點不參與執行合併操作,因此`Number of nodes in cluster`減少了 1。
+> [!Note]
+> 在具有三個或更多節點的叢集中，admin 節點不會參與執行合併作業。 `Number of nodes in cluster`會減少一。
 
-### <a name="export-capacity"></a>出口能力
+## <a name="export-capacity"></a>匯出容量
 
-|屬性                           |類型    |描述                                                                                                                                                                            |
+|屬性                           |類型    |說明                                                                                                                                                                            |
 |-----------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|叢集最大併發操作 |long    |群集中併發匯出操作數的最大值。                                                                                                           |
-|核心利用率係數         |double  |計算匯出容量時要利用的型芯百分比的係數(計算結果將始終按`ClusterMaximumConcurrentOperations`) 規範化。 |
+|ClusterMaximumConcurrentOperations |long    |叢集中並行匯出作業數目的最大值。                                                                                                           |
+|CoreUtilizationCoefficient         |double  |計算匯出容量時所用核心百分比的係數。 計算的結果一律會以正規化 `ClusterMaximumConcurrentOperations` 。 |
 
-叢集的總匯出容量(如[.show 容量](../management/diagnostics.md#show-capacity)所示)的計算方式如下:
+叢集的總匯出容量（如 [[顯示容量](../management/diagnostics.md#show-capacity)] 所示）是由下列計算：
 
-最小值`ClusterMaximumConcurrentOperations`(=`Number of nodes in cluster`最大值(1,)) `Core count per node`  *  `CoreUtilizationCoefficient`
+最小值（ `ClusterMaximumConcurrentOperations` ， `Number of nodes in cluster` * 最大值（1， `Core count per node`  *  `CoreUtilizationCoefficient` ））
 
-> [!Note] 
-> 在具有三個或三個節點以上的群集中,管理節點不參與執行匯出操作,因此`Number of nodes in cluster`減少了 1。
+> [!Note]
+> 在具有三個或更多節點的叢集中，admin 節點不會參與執行匯出作業。 `Number of nodes in cluster`會減少一。
 
-### <a name="extents-partition-capacity"></a>延伸區分割區容量
+## <a name="extents-partition-capacity"></a>範圍分割區容量
 
-|屬性                           |類型    |描述                                                                             |
+|屬性                           |類型    |說明                                                                             |
 |-----------------------------------|--------|----------------------------------------------------------------------------------------|
-|叢集最大併發操作 |long    |群集中併發區分區操作數的最大值。 |
+|ClusterMaximumConcurrentOperations |long    |叢集中並行範圍分割作業數目的最大值。 |
 
-叢集的總延伸區分割區容量(如[.show 容量](../management/diagnostics.md#show-capacity)的名稱) 由單`ClusterMaximumConcurrentOperations`個屬性定義: 。
+叢集的總範圍分割區容量（如 [[顯示容量](../management/diagnostics.md#show-capacity)] 所示）是由單一屬性所定義： `ClusterMaximumConcurrentOperations` 。
 
-### <a name="defaults"></a>Defaults
+> [!Note]
+> `ClusterMaximumConcurrentOperations`會由系統自動調整，範圍 [1，10]
 
-預設容量策略具有以下 JSON 表示形式:
+## <a name="defaults"></a>Defaults
+
+預設容量原則具有下列 JSON 標記法：
 
 ```kusto 
 {
@@ -108,28 +118,26 @@ ms.locfileid: "81521993"
 }
 ```
 
-> [!WARNING]
-> **很少建議**在不事先諮詢 Kusto 團隊的情況下更改容量策略。
-
 ## <a name="control-commands"></a>控制命令
 
-* 使用[.show 叢集策略容量](capacity-policy.md#show-cluster-policy-capacity)來顯示叢集的目前容量策略。
-* 使用[.alter 群集策略容量](capacity-policy.md#alter-cluster-policy-capacity)更改群集的容量策略。
+> [!WARNING]
+> 由於可能會對叢集的可用資源造成影響，因此很少會建議您改變容量原則。
+
+* 使用[。顯示叢集原則容量](capacity-policy.md#show-cluster-policy-capacity)，以顯示叢集目前的容量原則。
+
+* 使用[. alter cluster policy 容量](capacity-policy.md#alter-cluster-policy-capacity)來改變叢集的容量原則。
 
 ## <a name="throttling"></a>節流
 
-Kusto 限制以下指令的併發請求數:
+Kusto 會限制下列使用者起始命令的並行要求數目：
 
-1. 引入(包括[此處](../management/data-ingestion/index.md)列出的所有命令)
-      * 限制在[容量策略](#capacity-policy)中定義。
-1. 合併
-      * 限制在[容量策略](#capacity-policy)中定義。
-1. 清除
-      * 全域當前固定在每個群集的一個。
-      * 清除重建容量在內部用於確定清除命令期間的併發重建操作數(清除命令不會因此被阻止/限制,但會根據清除重建容量更快地/變慢)。
-1. 出口
-      * 限制在[容量策略](#capacity-policy)中定義。
+* 擷取（包括[此處](../management/data-ingestion/index.md)所列的所有命令）
+   * [[容量原則](#capacity-policy)] 中定義的 [限制]。
+* 清除
+   * 全域目前已固定于每個叢集一個。
+   * 清除的重建容量會在內部用來判斷清除命令期間並行重建作業的數目。 由於此程式的緣故，清除命令不會遭到封鎖/節流處理，但會根據清除重建容量而更快或更慢。
+* 多餘
+   * [[容量原則](#capacity-policy)] 中定義的 [限制]。
 
-
-當 Kusto 檢測到某些操作已超過允許的併發操作時,Kusto 將使用 429 HTTP 代碼進行回應。
-用戶端應在一些回退後重試該操作。
+當叢集偵測到某個作業已超過允許的平行作業時，它會以429（「節流」） HTTP 程式碼回應。
+請在部分輪詢之後重試作業。

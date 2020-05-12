@@ -1,6 +1,6 @@
 ---
-title: infer_storage_schema外掛程式 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的infer_storage_schema外掛程式。
+title: infer_storage_schema 外掛程式-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 infer_storage_schema 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 6c4543a3b029017067867bb70d913509941c332e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1b4a917101ad3a35f8fdbc1cccb257b6f3724b69
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513901"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83224862"
 ---
-# <a name="infer_storage_schema-plugin"></a>infer_storage_schema外掛程式
+# <a name="infer_storage_schema-plugin"></a>infer_storage_schema 外掛程式
 
-此外掛程式推斷外部資料的架構,並將其返回為 CSL 架構字串,可在[創建外部表](../management/externaltables.md#create-or-alter-external-table)時使用。
+此外掛程式會推斷外部資料的架構，並將其傳回為 CSL 架構字串。 [建立外部資料表](../management/external-tables-azurestorage-azuredatalake.md#create-or-alter-external-table)時，可以使用此字串。
 
 ```kusto
 let options = dynamic({
@@ -36,23 +36,23 @@ evaluate infer_storage_schema(options)
 
 **引數**
 
-單個*Options*參數是一個`dynamic`類型的 常數值,它儲存一個屬性套件,指定請求的屬性:
+單一*選項*引數是類型的常數值 `dynamic` ，其中包含指定要求屬性的屬性包：
 
-|名稱                    |必要|描述|
+|名稱                    |必要|說明|
 |------------------------|--------|-----------|
-|`StorageContainers`|是|數位表示儲存資料的前置伺服器的前置伺服器[storage connection strings](../api/connection-strings/storage.md)|
-|`DataFormat`|是|支援[的資料格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)之一。|
-|`FileExtension`|否|僅掃描以此文件副檔名結尾的檔。 它不是必需的,但指定它可能會加快進程(或消除資料讀取問題)|
-|`FileNamePrefix`|否|僅掃描以此前綴開頭的檔。 它不是必需的,但指定它可能會加快進程|
-|`Mode`|否|架構推理原則,其中一個`any` `last` `all`: 。 從任何(首次找到)檔、上次寫入檔或所有檔分別推斷數據架構。 預設值是 `last`。|
+|`StorageContainers`|是|[儲存體連接字串](../api/connection-strings/storage.md)的清單，代表已儲存資料成品的前置詞 URI|
+|`DataFormat`|是|其中一種支援的[資料格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)。|
+|`FileExtension`|否|僅掃描以這個副檔名結尾的檔案。 這不是必要的，但指定它可能會加速處理常式（或排除資料讀取問題）|
+|`FileNamePrefix`|否|僅掃描開頭為此前置詞的檔案。 這不是必要的，但指定它可能會加速進程|
+|`Mode`|否|架構推斷策略，下列其中一個： `any` 、 `last` 、 `all` 。 從任何（第一個找到的）檔案、最後寫入的檔案，或從所有檔案推斷資料架構。 預設值為 `last`。|
 
 **傳回**
 
-外掛`infer_storage_schema`程式傳回一個結果表,其中包含一個包含 CSL 架構字串的行/列。
+外掛程式會傳回 `infer_storage_schema` 單一結果資料表，其中包含保留了 CSL 架構字串的單一資料列/資料行。
 
 > [!NOTE]
-> * 架構推理策略"all"是非常"昂貴的"操作,因為它意味著從找到*的所有*工件中讀取並合併其架構。
-> * 由於類型猜測錯誤(或者由於架構合併過程的結果),某些返回的類型可能不是實際類型。 因此,建議在創建外部表之前仔細檢查結果。
+> * 架構推斷策略「全部」是一種非常「昂貴」的作業，因為它意味著從找到的*所有*成品讀取併合並其架構。
+> * 某些傳回的類型可能不是由錯誤的類型猜測所造成的實際值（或做為架構合併程式的結果）。 這就是為什麼您應該先仔細檢查結果，再建立外部資料表。
 
 **範例**
 
@@ -68,8 +68,8 @@ let options = dynamic({
 evaluate infer_storage_schema(options)
 ```
 
-*結果*
+*Result*
 
 |CslSchema|
 |---|
-|app_id:字串,user_id:長,event_time:日期時間,國家:字串,城市:字串,device_type:字串,device_vendor:字串,ad_network:字串,市場:字串,site_id:字串,site_id:字串,event_type:字串,event_name:字串,有機:字串,days_from_install:int,收入:真實|
+|app_id： string、user_id： long、event_time： datetime、country： string、city： string、device_type： string、device_vendor： string、ad_network： string、行銷： string、site_id： string、event_type： string、event_name： string、有機： string、days_from_install： int、收益： real|

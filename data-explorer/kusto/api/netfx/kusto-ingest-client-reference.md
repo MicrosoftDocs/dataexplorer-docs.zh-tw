@@ -1,6 +1,6 @@
 ---
-title: Kusto.ingest 客戶端引用 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 Kusto.Ingest 用戶端引用。
+title: Kusto：內嵌用戶端介面和 factory 類別-Azure 資料總管
+description: 本文說明 Kusto 在 Azure 資料總管中內嵌用戶端介面和 factory 類別。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: e5a9c1fa561fa07df527f17552a3a8f594a4e5d8
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1d3c3939a5c8b3a5f1e6f1fa0b40f9b927ee5325
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81503106"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226052"
 ---
-# <a name="kustoingest-client-reference"></a>庫斯特.Ingest 客戶端引用
+# <a name="kustoingest-client-interfaces-and-factory-classes"></a>Kusto。內嵌用戶端介面和 factory 類別
 
-Kusto.Ingest 庫中的主要介面和工廠類包括:
+Kusto 程式庫中的主要介面和 factory 類別為：
 
-* [介面 IKustoingest 用戶端](#interface-ikustoingestclient):主引入介面。
-* [類擴展 Kustoingest 用戶端](#class-extendedkustoingestclient):擴展到主引入介面。
-* [類 Kustoingest 工廠](#class-kustoingestfactory):用於吸收客戶的主要工廠。
-* [類 Kustoinges 屬性](#class-kustoingestionproperties):用於提供公共引入屬性的類。
-* [類 JsonColumn 映射](#class-jsoncolumnmapping):類用於描述從 JSON 數據源引入時要應用的架構映射。
-* [CsvColumn 對應類別](#class-csvcolumnmapping)類 :類別用於描述從 CSV 資料來源引入時要應用的架構對應。
-* [列舉資料來源 :](#enum-datasourceformat)支援的資料來源格式 (例如, CSV、 JSON)
-* [介面 IKustoqueued 用戶端](#interface-ikustoqueuedingestclient):描述僅應用於排隊引入的操作的介面。
-* [類 KustoQueueinge 屬性](#class-kustoqueuedingestionproperties):僅適用於排隊引入的屬性。
+* [介面 IKustoIngestClient](#interface-ikustoingestclient)：主要內嵌介面。
+* [類別 ExtendedKustoIngestClient](#class-extendedkustoingestclient)：主要內嵌介面的延伸模組。
+* [類別 KustoIngestFactory](#class-kustoingestfactory)：內嵌用戶端的主 factory。
+* [類別 KustoIngestionProperties](#class-kustoingestionproperties)：用來提供一般內嵌屬性的類別。
+* [Class JsonColumnMapping](#class-jsoncolumnmapping)：用來描述從 JSON 資料來源內嵌時要套用之架構對應的類別。
+* [Class CsvColumnMapping](#class-csvcolumnmapping)：用來描述從 CSV 資料來源內嵌時要套用之架構對應的類別。
+* [Enum DataSourceFormat](#enum-datasourceformat)：支援的資料來源格式（例如，CSV、JSON）
+* [介面 IKustoQueuedIngestClient](#interface-ikustoqueuedingestclient)：描述僅適用于佇列內嵌之作業的介面。
+* [類別 KustoQueuedIngestionProperties](#class-kustoqueuedingestionproperties)：僅適用于佇列內嵌的屬性。
 
-## <a name="interface-ikustoingestclient"></a>介面 IKustoing 最
+## <a name="interface-ikustoingestclient"></a>介面 IKustoIngestClient
 
-* 從資料閱讀器同步引入
-* 從儲存同步引入
-* 從串流同步引入
+* IngestFromDataReaderAsync
+* IngestFromStorageAsync
+* IngestFromStreamAsync
 
 ```csharp
 public interface IKustoIngestClient : IDisposable
@@ -68,16 +68,16 @@ public interface IKustoIngestClient : IDisposable
 }
 ```
 
-## <a name="class-extendedkustoingestclient"></a>類別延伸庫斯特用戶端
+## <a name="class-extendedkustoingestclient"></a>類別 ExtendedKustoIngestClient
 
-* 從單一Blob中引入 - 已棄用。 請改用 `IKustoIngestClient.IngestFromStorageAsync`。
-* 從單一Blobasync的引入 - 已棄用。 請改用 `IKustoIngestClient.IngestFromStorageAsync`。
-* 從資料閱讀器中引入 - 已棄用。 請改用 `IKustoIngestClient.IngestFromDataReaderAsync`。
-* 從資料閱讀器同步引入
-* 從單一檔引入 - 已棄用。 請改用 `IKustoIngestClient.IngestFromStorageAsync`。
-* 從單一檔同步引入 - 已棄用。 請改用 `IKustoIngestClient.IngestFromStorageAsync`。
-* 從流中引入 - 已棄用。 請改用 `IKustoIngestClient.IngestFromStreamAsync`。
-* 從串流同步引入
+* IngestFromSingleBlob-已被取代。 請改用 `IKustoIngestClient.IngestFromStorageAsync`。
+* IngestFromSingleBlobAsync-已被取代。 請改用 `IKustoIngestClient.IngestFromStorageAsync`。
+* IngestFromDataReader-已被取代。 請改用 `IKustoIngestClient.IngestFromDataReaderAsync`。
+* IngestFromDataReaderAsync
+* IngestFromSingleFile-已被取代。 請改用 `IKustoIngestClient.IngestFromStorageAsync`。
+* IngestFromSingleFileAsync-已被取代。 請改用 `IKustoIngestClient.IngestFromStorageAsync`。
+* IngestFromStream-已被取代。 請改用 `IKustoIngestClient.IngestFromStreamAsync`。
+* IngestFromStreamAsync
 
 ```csharp
 public static class ExtendedKustoIngestClient
@@ -244,12 +244,12 @@ public static class ExtendedKustoIngestClient
 }
 ```
 
-## <a name="class-kustoingestfactory"></a>庫斯特寧特工廠班
+## <a name="class-kustoingestfactory"></a>類別 KustoIngestFactory
 
-* 建立定向用戶端
-* 建立佇列客戶端
-* 建立託管串流用戶端
-* 建立流式處理客戶端
+* CreateDirectIngestClient
+* CreateQueuedIngestClient
+* CreateManagedStreamingIngestClient
+* CreateStreamingIngestClient
 
 ```csharp
 /// <summary>
@@ -342,24 +342,24 @@ public static class KustoIngestFactory
 }
 ```
 
-## <a name="class-kustoingestionproperties"></a>類別的庫辛屬性
+## <a name="class-kustoingestionproperties"></a>類別 KustoIngestionProperties
 
-KustoIngestionProperties 類封裝了基本引入屬性,允許 Kusto 引擎對引入過程及其處理進行精細控制:
+KustoIngestionProperties 類別包含基本的內嵌屬性，可讓您精確控制內嵌進程，以及 Kusto 引擎處理它的方式。
 
 |屬性   |意義    |
 |-----------|-----------|
-|DatabaseName |要引入的資料庫名稱 |
-|TableName |要引入的表格名稱 |
-|丟棄ByTags |每個範圍都將具有的標記。 DropByTags 是永久性的,可以使用如下`.show table T extents where tags has 'some tag'`:`.drop extents <| .show table T extents where tags has 'some tag'` |
-|引入ByTags |按範圍編寫的標記。 以後可以使用`IngestIfNotExists`屬性,以避免兩次引入相同的資料 |
-|附加標籤 |根據需要新增其他標籤 |
-|攝錄 |不想再次攝用的標記清單(每個表) |
-|CSV 對應 |對於每列,定義數據類型和批號。 僅與 CSV 攝入相關(可選) |
-|日森對應 |對於每列,定義 JSON 路徑和轉換選項。 **JSON 攝取必須** |
-|阿夫羅映射 |對於每列,在 Avro 記錄中定義欄位的名稱。 **AVRO 攝取必須** |
-|驗證原則 |數據驗證定義。 有關詳細資訊,請參閱 [TODO] |
-|[格式] |將攝製資料格式 |
-|其他屬性 | 將作為[引入屬性](https://docs.microsoft.com/azure/data-explorer/ingestion-properties)傳遞給引入命令的其他屬性,因為並非所有引入屬性都表示在此類的單獨成員中|
+|DatabaseName |要內嵌到其中的資料庫名稱 |
+|TableName |要內嵌到其中的資料表名稱 |
+|DropByTags |每個範圍都有的標記。 DropByTags 是永久性的，而且可以用如下： `.show table T extents where tags has 'some tag'` 或`.drop extents <| .show table T extents where tags has 'some tag'` |
+|IngestByTags |每個範圍所寫入的標記。 稍後可以與屬性搭配使用 `IngestIfNotExists` ，以避免內嵌相同的資料兩次 |
+|AdditionalTags |視需要額外標記 |
+|IngestIfNotExists |不想再內嵌的標記清單（每個資料表） |
+|CSVMapping |會針對每個資料行定義資料類型和序數資料行編號。 僅適用于 CSV 內嵌（選擇性） |
+|JsonMapping |針對每個資料行定義 JSON 路徑和轉換選項。 **JSON 內嵌的必要** |
+|AvroMapping |針對每個資料行，定義 Avro 記錄中的功能變數名稱。 **AVRO 內嵌的必要** |
+|ValidationPolicy |資料驗證定義。 如需詳細資訊，請參閱 [TODO] |
+|[格式] |要內嵌之資料的格式 |
+|AdditionalProperties | 其他會當做內嵌[屬性](https://docs.microsoft.com/azure/data-explorer/ingestion-properties)傳遞至內嵌命令的屬性。 將會傳遞屬性，因為並非所有的內嵌屬性都會在此類別的個別成員中表示|
 
 ```csharp
 public class KustoIngestionProperties
@@ -382,7 +382,7 @@ public class KustoIngestionProperties
 }
 ```
 
-## <a name="class-jsoncolumnmapping"></a>類別 JsonColumn 對應
+## <a name="class-jsoncolumnmapping"></a>類別 JsonColumnMapping
 
 ```csharp
 public class JsonColumnMapping
@@ -395,7 +395,7 @@ public class JsonColumnMapping
 }
 ```
 
-## <a name="class-csvcolumnmapping"></a>類別 CsvColumn 對應
+## <a name="class-csvcolumnmapping"></a>類別 CsvColumnMapping
 
 ```csharp
 public class CsvColumnMapping
@@ -418,7 +418,7 @@ public class CsvColumnMapping
 }
 ```
 
-## <a name="enum-datasourceformat"></a>列舉資料來源格式
+## <a name="enum-datasourceformat"></a>列舉 DataSourceFormat
 
 ```csharp
 public enum DataSourceFormat
@@ -438,7 +438,7 @@ public enum DataSourceFormat
 ```
 
 
-## <a name="example-of-kustoingestionproperties-definition"></a>庫斯托屬性定義範例
+## <a name="example-of-kustoingestionproperties-definition"></a>KustoIngestionProperties 定義的範例
 
 ```csharp
 var guid = new Guid().ToString();
@@ -456,13 +456,13 @@ var kustoIngestionProperties = new KustoIngestionProperties("TargetDatabase", "T
 };
 ```
 
-## <a name="interface-ikustoqueuedingestclient"></a>介面 IKusto 排隊客戶端
+## <a name="interface-ikustoqueuedingestclient"></a>介面 IKustoQueuedIngestClient
 
-IKustoQueueddClient 介面添加了跟蹤方法以遵循引入操作結果,並公開了引入用戶端的重試策略。
+IKustoQueuedIngestClient 介面會加入遵循內嵌作業結果的追蹤方法，並公開內嵌用戶端的 RetryPolicy。
 
-* 窺視上點失敗
-* 取得與放棄上置失敗
-* 獲得和放棄的上流成功
+* PeekTopIngestionFailures
+* GetAndDiscardTopIngestionFailures
+* GetAndDiscardTopIngestionSuccesses
 
 ```csharp
 public interface IKustoQueuedIngestClient : IKustoIngestClient
@@ -496,15 +496,15 @@ public interface IKustoQueuedIngestClient : IKustoIngestClient
 }
 ```
 
-## <a name="class-kustoqueuedingestionproperties"></a>類別的庫斯托佇列屬性
+## <a name="class-kustoqueuedingestionproperties"></a>類別 KustoQueuedIngestionProperties
 
-KustoQueueDIngingininginininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininin inininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininin
+KustoQueuedIngestionProperties 類別會以數個控制旋鈕擴充 KustoIngestionProperties，可用來微調內嵌行為。
 
 |屬性   |意義    |
 |-----------|-----------|
-|立即刷新 |預設為 `false`。 如果設定為`true`,將繞過資料管理服務的聚合機制 |
-|引入報告層級 |控制引入狀態報告等級 (預設`FailuresOnly`為 。 在性能和儲存使用方式方面,不建議將引入報告級別設置為`FailuresAndSuccesses` |
-|攝入報告方法 |控制攝入狀態報告的目標。 可用選項包括:Azure 佇列、Azure 表或兩者。 預設為 `Queue`。
+|FlushImmediately |預設為 `false`。 如果設定為 `true` ，將會略過資料管理服務的匯總機制 |
+|IngestionReportLevel |控制內嵌狀態報表的層級（預設為 `FailuresOnly` ）。 為獲得良好的效能和儲存使用量，建議您不要將 IngestionReportLevel 設定為`FailuresAndSuccesses` |
+|IngestionReportMethod |控制內嵌狀態報表的目標。 可用的選項包括： Azure 佇列、Azure 資料表或兩者。 預設為 `Queue`。
 
 ```csharp
 public class KustoQueuedIngestionProperties : KustoIngestionProperties

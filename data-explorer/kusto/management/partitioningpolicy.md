@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: b3293916841eb56da3985f4b388754e7c8057682
-ms.sourcegitcommit: 3393ad86dac455fd182296ffb410b2bd570dbfce
+ms.openlocfilehash: 564ce0677f3d280fed27c0b6ce1328cb35188c4f
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "82991872"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225882"
 ---
 # <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
 
@@ -38,35 +38,35 @@ ms.locfileid: "82991872"
 
 ### <a name="hash-partition-key"></a>雜湊分割區索引鍵
 
-當*大部分*的查詢在*大型維度*（1千萬個或更高的基數） `application_ID`的特定`tenant_ID` `user_ID` `string`類型資料行上使用相等篩選`==`（ `in()`，）和（或）匯總/聯結（例如、或）時，將雜湊分割區索引鍵套用在資料表的類型資料行上`string`是適當的。
+`string`當*大部分*的查詢 `==` `in()` 在 `string` *大型維度*（1千萬個或更高的基數）的特定類型資料行上使用相等篩選（，）和（或）匯總/聯結（例如 `application_ID` 、 `tenant_ID` 或） `user_ID` 時，將雜湊分割區索引鍵套用在資料表的類型資料行上是適當的。
 
 * 雜湊模數函數可用來分割資料。
 * 屬於相同資料分割的所有*同質*（資料分割）範圍都會指派給相同的資料節點。
 * *同質*（已分割）範圍中的資料是依雜湊資料分割索引鍵來排序。
   * 不需要在資料[列順序原則](roworderpolicy.md)中包含分割區索引鍵（如果資料表上有定義）。
-* 使用[隨機播放策略](../query/shufflequery.md)的查詢，以及資料表的哈`shuffle key`希分割`join`區`summarize`索引`make-series`鍵所使用的，其預期會執行得更好，因為在叢集節點之間移動所需的資料量會大幅降低。
+* 使用[隨機播放策略](../query/shufflequery.md)的查詢，以及 `shuffle key` 資料表的雜湊分割區索引鍵所使用的，其 `join` `summarize` 預期會 `make-series` 執行得更好，因為在叢集節點之間移動所需的資料量會大幅降低。
 
 #### <a name="partition-properties"></a>磁碟分割內容
 
 * `Function`這是要使用的雜湊模數函數名稱。
-  * 支援的值`XxHash64`：。
+  * 支援的值： `XxHash64` 。
 * `MaxPartitionCount`這是每個時間週期內所要建立的分割區數目上限（雜湊模數函數的模數引數）。
-  * 支援的為範圍`(1,1024]`中的值。
+  * 支援的為範圍中的值 `(1,1024]` 。
     * 此值應為：
       * 大於叢集中的節點數目
       * 小於資料行的基數。
     * 值愈高，叢集節點上資料分割程式的額外負荷就會愈大，而每個時間週期的範圍數目也會越高。
-    * 建議以開頭的值為`256`。
+    * 建議以開頭的值為 `256` 。
       * 如有需要，您可以根據前述考慮來調整（通常為向上），並根據測量查詢效能的優點與分割資料的額外負荷（在內嵌之後）。
 * `Seed`這是用來隨機化雜湊值的值。
   * 此值應為正整數。
-  * 建議的（如果未指定，則為預設值`1`）為。
+  * 建議的（如果未指定，則為預設值）為 `1` 。
 
 #### <a name="example"></a>範例
 
-下列是在名為`string` `tenant_id`的類型資料行上的雜湊資料分割索引鍵。
+下列是在名為的類型資料行上的雜湊資料分割索引鍵 `string` `tenant_id` 。
 
-它會使用`XxHash64`雜湊函式， `MaxPartitionCount`並`256`搭配的和預設`Seed`值`1`。
+它會使用 `XxHash64` 雜湊函式，並搭配 `MaxPartitionCount` 的 `256` 和預設 `Seed` 值 `1` 。
 
 ```json
 {
@@ -82,21 +82,24 @@ ms.locfileid: "82991872"
 
 ### <a name="uniform-range-datetime-partition-key"></a>統一範圍 datetime 資料分割索引鍵
 
-當不*太可能*根據這個資料行來`datetime`排序資料表中的資料內嵌時，將統一範圍的 datetime 資料分割索引鍵套用到資料表中的類型資料行上是適當的。 在這種情況下，在範圍之間重新隨機播放資料可能會很有説明，因為每個範圍最後都會包含有限時間範圍內的記錄，因此在`datetime`查詢時資料行上的篩選會更有效率。
+`datetime`當不*太可能*根據這個資料行來排序資料表中的資料內嵌時，將統一範圍的 datetime 資料分割索引鍵套用到資料表中的類型資料行上是適當的。 在這種情況下，在範圍之間重新隨機播放資料可能會很有説明，因為每個範圍最後都會包含有限時間範圍內的記錄，因此在查詢時資料行上的篩選會 `datetime` 更有效率。
 
 * 使用的資料分割函數是[bin_at （）](../query/binatfunction.md) ，無法自訂。
 
 #### <a name="partition-properties"></a>磁碟分割內容
 
-* `RangeSize`這是`timespan`一個純量常數，表示每個 datetime 資料分割的大小。
-* `Reference``datetime`這是類型的純量常數，表示根據哪一個日期時間資料分割對齊的固定時間點。
-  * 如果日期時間分割區索引鍵有`null`值的記錄，其資料分割值會設為的值。 `Reference`
+* `RangeSize`這是一個純 `timespan` 量常數，表示每個 datetime 資料分割的大小。
+  * 建議以開頭的值為 `1.00:00:00` （一天）。
+  * 設定的值明顯比*不*建議更短，因為它可能會導致具有大量小型範圍的資料表無法合併在一起。
+* `Reference`這是類型的純量 `datetime` 常數，表示根據哪一個日期時間資料分割對齊的固定時間點。
+  * 建議以開頭的值為 `1970-01-01 00:00:00` 。
+  * 如果日期時間分割區索引鍵有值的記錄 `null` ，其資料分割值會設為的值 `Reference` 。
 
 #### <a name="example"></a>範例
 
-以下是在名為的`datetime`具類型資料行上的統一 datetime 範圍資料分割索引鍵`timestamp`
+以下是在名為的具類型資料行上的統一 datetime 範圍資料分割索引鍵 `datetime``timestamp`
 
-它會`datetime(1970-01-01)`使用作為其參考點，每個分割`1d`區的大小為。
+它會使用 `datetime(1970-01-01)` 作為其參考點， `1d` 每個分割區的大小為。
 
 ```json
 {
@@ -111,19 +114,19 @@ ms.locfileid: "82991872"
 
 ## <a name="the-policy-object"></a>原則物件
 
-根據預設，資料表的資料分割原則是`null`，在這種情況下，資料表中的資料將不會進行分割。
+根據預設，資料表的資料分割原則是 `null` ，在這種情況下，資料表中的資料將不會進行分割。
 
 資料分割原則具有下列主要屬性：
 
 * **PartitionKeys**：
   * 分割區索引[鍵](#partition-keys)的集合，定義如何分割資料表中的資料。
-  * 資料表可以有多個`2`分割區索引鍵，並具有下列3個選項的其中一個：
+  * 資料表可以有多個分割區索引 `2` 鍵，並具有下列3個選項的其中一個：
     * 1個[雜湊資料分割索引鍵](#hash-partition-key)。
     * 1[統一範圍 datetime 資料分割索引鍵](#uniform-range-datetime-partition-key)。
     * 1個[雜湊資料分割索引鍵](#hash-partition-key)和1個[統一範圍的 datetime 資料分割索引鍵](#uniform-range-datetime-partition-key)。
   * 每個分割區索引鍵都有下列屬性：
     * `ColumnName`： `string ` -資料行的名稱，將會根據該資料分割資料。
-    * `Kind`： `string` -要套用的資料分割類型（`Hash`或`UniformRange`）。
+    * `Kind`： `string` -要套用的資料分割類型（ `Hash` 或 `UniformRange` ）。
     * `Properties`： `property bag` -根據完成的資料分割定義參數。
 
 * **EffectiveDateTime**：
@@ -134,10 +137,10 @@ ms.locfileid: "82991872"
 ### <a name="example"></a>範例
 
 以下是具有兩個分割區索引鍵的資料分割原則物件：
-1. 具有類型之資料行的`string`雜湊資料分割`tenant_id`索引鍵。
-    - 它會使用`XxHash64`雜湊函式， `MaxPartitionCount`其為256，而預設`Seed`值`1`為。
-2. 具有`datetime`類型之資料行的統一 datetime 範圍資料分割索引鍵`timestamp`
-    - 它會`datetime(1970-01-01)`使用作為其參考點，每個分割`1d`區的大小為。
+1. 具有類型之資料行的雜湊資料分割索引鍵 `string` `tenant_id` 。
+    - 它會使用 `XxHash64` 雜湊函式，其為 `MaxPartitionCount` 256，而預設值為 `Seed` `1` 。
+2. 具有類型之資料行的統一 datetime 範圍資料分割索引鍵 `datetime``timestamp`
+    - 它會使用 `datetime(1970-01-01)` 作為其參考點， `1d` 每個分割區的大小為。
 
 ```json
 {
@@ -169,19 +172,19 @@ ms.locfileid: "82991872"
 
 * **MinRowCountPerOperation**：
   * 單一資料分割作業之來源範圍的資料列計數總和的最小目標。
-  * 這個屬性是*選擇性*的，其預設值為`0`。
+  * 這個屬性是*選擇性*的，其預設值為 `0` 。
 
 * **MaxRowCountPerOperation**：
   * 單一資料分割作業之來源範圍的資料列計數總和的最大目標。
-  * 這個屬性是*選擇性*的，其預設值為`0` （在此情況下，5000000記錄的預設目標會生效）。
+  * 這個屬性是*選擇性*的，其預設值為 `0` （在此情況下，5000000記錄的預設目標會生效）。
 
-## <a name="notes"></a>注意
+## <a name="notes"></a>附註
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
 * 資料分割會在叢集中做為內嵌後背景進程執行。
   * 連續內嵌到的資料表預期一律會有資料的「結尾」，但尚未分割（*非同質*範圍）。
-* 不論原則中的`EffectiveDateTime`屬性值為何，資料分割都只會在經常性存取範圍上執行。
+* 不論原則中的屬性值為何，資料分割都只會在經常性存取範圍上執行 `EffectiveDateTime` 。
   * 如果需要分割冷範圍，您必須暫時相應地調整快取[原則](cachepolicy.md)。
 
 #### <a name="monitoring"></a>監視
@@ -205,7 +208,7 @@ ms.locfileid: "82991872"
 * 資料分割程式會導致建立更多的範圍。 叢集可能會逐漸增加其[範圍合併容量](../management/capacitypolicy.md#extents-merge-capacity)，因此[合併範圍](../management/extents-overview.md)的程式可以保持運作。
 * 如果有大量的內建輸送量，以及（或）具有已定義資料分割原則的大量資料表，叢集可能會逐漸增加其[範圍分割區容量](../management/capacitypolicy.md#extents-partition-capacity)，讓資料[分割範圍的進程](#the-data-partitioning-process)能夠趕上。
 * 為了避免耗用太多資源，這些動態增加的上限為。 如果超量而時，您可能需要（逐漸和線性）將它們增加超過上限。
-  * 如果增加容量會導致使用叢集資源的大幅/[增加，您](../../manage-cluster-horizontal-scaling.md)可以手動或藉由啟用自動調整來[相應放大](../../manage-cluster-vertical-scaling.md)叢集。
+  * 如果增加容量會導致使用叢集資源的大幅增加，您可以[up](../../manage-cluster-vertical-scaling.md) / [out](../../manage-cluster-horizontal-scaling.md)手動或藉由啟用自動調整來相應放大叢集。
 
 ### <a name="outliers-in-partitioned-columns"></a>分割資料行中的極端值
 

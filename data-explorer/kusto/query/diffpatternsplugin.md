@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9931b297f5a86c46a8502902a6c396fbb2fd4191
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: b3dece66f3bafae989643afd418557aeaaa7d746
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741743"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225032"
 ---
 # <a name="diff-patterns-plugin"></a>diff 模式外掛程式
 
@@ -51,7 +51,7 @@ T | evaluate diffpatterns(splitColumn)
 
 * WeightColumn - *column_name*
 
-    根據指定的權數 (依預設每個資料都列具有權數 '1') 考慮輸入中的每個資料列。 引數必須是數值資料行的名稱（ `int` `long`例如、、 `real`）。
+    根據指定的權數 (依預設每個資料都列具有權數 '1') 考慮輸入中的每個資料列。 引數必須是數值資料行的名稱（例如、、 `int` `long` `real` ）。
     權數資料行的常見用法是考慮已內嵌至各資料列的資料取樣或分組/彙總。
     
     範例：`T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", sample_Count) `
@@ -71,7 +71,7 @@ T | evaluate diffpatterns(splitColumn)
 * CustomWildcard-「*每一類型的任何值*」
 
     在結果資料表中設定特定類型的萬用字元值，會指出目前的模式沒有這個資料行的限制。
-    預設值是 null，而字串預設值為空字串。 如果預設值是資料中的可行值，則應該使用不同的萬用字元值（例如`*`）。
+    預設值是 null，而字串預設值為空字串。 如果預設值是資料中的可行值，則應該使用不同的萬用字元值（例如 `*` ）。
     請參閱下列範例。
 
     範例：`T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
@@ -80,13 +80,13 @@ T | evaluate diffpatterns(splitColumn)
 
 `Diffpatterns`傳回一小組模式，用來在兩個集合中捕捉資料的不同部分（也就是，在第一個資料集中捕捉大量百分比的資料列，而在第二個集合中，資料列的百分比偏低的模式）。 每個模式會以結果中的一個資料列表示。
 
-的結果`diffpatterns`會傳回下列資料行：
+的結果會傳回 `diffpatterns` 下列資料行：
 
 * SegmentId：指派給目前查詢中模式的身分識別（注意：識別碼在重複查詢中不保證會是相同的）。
 
-* CountA： Set A 中模式所捕獲的資料列數目（Set A 相當於`where tostring(splitColumn) == SplitValueA`）。
+* CountA： Set A 中模式所捕獲的資料列數目（Set A 相當於 `where tostring(splitColumn) == SplitValueA` ）。
 
-* CountB： Set B 中模式所捕獲的資料列數目（Set B 相當於`where tostring(splitColumn) == SplitValueB`）。
+* CountB： Set B 中模式所捕獲的資料列數目（Set B 相當於 `where tostring(splitColumn) == SplitValueB` ）。
 
 * PercentA：由模式（100.0 * CountA/count （SetA））所捕捉之集合中的資料列百分比。
 
@@ -94,7 +94,7 @@ T | evaluate diffpatterns(splitColumn)
 
 * PercentDiffAB： A 和 B 之間的絕對百分比點差異（|PercentA-PercentB |）這是描述兩個集合之間差異的模式主要量值。
 
-* 其餘的資料行：是輸入的原始架構，而且會描述模式，每個資料列（模式） reresents 資料行的非萬用字元值的交集（相當於`where col1==val1 and col2==val2 and ... colN=valN`針對資料列中的每個非萬用字元值）。
+* 其餘的資料行：是輸入的原始架構，而且會描述模式，每個資料列（模式） reresents 資料行的非萬用字元值的交集（相當於針對資料列 `where col1==val1 and col2==val2 and ... colN=valN` 中的每個非萬用字元值）。
 
 針對每個模式，模式中未設定的資料行（也就是沒有特定值的限制）將包含萬用字元值，預設為 null。 請參閱下面的引數一節：如何以手動方式變更萬用字元。
 
@@ -107,10 +107,11 @@ T | evaluate diffpatterns(splitColumn)
 
 當您找到有趣的資料列時，您可藉由將其特定值加入至您的 `where` 篩選器，進一步深入探索。
 
-* 注意： `diffpatterns`目標是要尋找重要的模式（這會捕捉集合之間資料差異的部分），而不是用來進行逐列的差異。
+* 注意： `diffpatterns` 目標是要尋找重要的模式（這會捕捉集合之間資料差異的部分），而不是用來進行逐列的差異。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where monthofyear(StartTime) == 5

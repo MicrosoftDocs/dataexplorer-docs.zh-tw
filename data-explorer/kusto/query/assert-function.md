@@ -1,6 +1,6 @@
 ---
-title: 斷言() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 assert()。
+title: assert （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 assert （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,40 +8,41 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 97f01df7bc85171eefabeb2ed835109f0faef81e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b1f83f0b78e4bbb16de706a8d14ca04ee522c2ee
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518406"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225546"
 ---
 # <a name="assert"></a>assert()
 
-檢查條件。 如果條件為 false,則輸出錯誤消息並失敗查詢。
+檢查條件。 如果條件為 false，則會輸出錯誤訊息，而且查詢會失敗。
 
 **語法**
 
-`assert(`*條件*`, `*訊息*`)`
+`assert(`*條件* `, `*訊息*`)`
 
 **引數**
 
-* *條件*:要計算的條件表達式。 如果條件為`false`,則指定的消息用於報告錯誤。 如果條件為`true`,它將`true`作為評估結果返回。 在查詢分析階段,必須將條件計算為常量。
-* *消息*: 如果斷言`false`計算到 ,則使用的消息。 *消息*必須是字串文字。
+* *條件*：要評估的條件運算式。 如果條件為 `false` ，則會使用指定的訊息來報告錯誤。 如果條件為 `true` ，則會傳回 `true` 做為評估結果。 在查詢分析階段期間，必須將條件評估為常數。
+* *message*：判斷提示評估為時所使用的訊息 `false` 。 *訊息*必須是字串常值。
 
 
 **傳回**
 
-* `true`- 如果條件為`true`
-* 如果條件計算到`false`,則引發語義錯誤。
+* `true`-如果條件為`true`
+* 如果條件評估為，則引發語意錯誤 `false` 。
 
 **注意事項**
 
-* `condition`必須在查詢分析階段計算為常量。 換句話說,它可以從引用常量的其他表達式構造,並且不能綁定到行上下文。
+* `condition`在查詢分析階段，必須評估為常數。 換句話說，它可以從參考常數的其他運算式來加以構造，而且無法系結至資料列內容。
 
 **範例**
 
-以下查詢定義一個函數`checkLength()`,用於檢查輸入字串長度,並用於`assert`驗證輸入長度參數(檢查其大於零)。
+下列查詢會定義一個函式，該函式會 `checkLength()` 檢查輸入字串長度，並使用 `assert` 來驗證輸入長度參數（檢查其是否大於零）。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let checkLength = (len:long, s:string)
 {
@@ -56,12 +57,13 @@ datatable(input:string)
 | where checkLength(len=long(-1), input)
 ```
 
-執行此查詢會產生錯誤:  
+執行此查詢會產生錯誤：  
 `assert() has failed with message: 'Length must be greater than zero'`
 
 
-使用有效輸入執行的範例`len`:
+以有效 `len` 輸入執行的範例：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let checkLength = (len:long, s:string)
 {

@@ -1,6 +1,6 @@
 ---
-title: array_concat() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 array_concat()。
+title: array_concat （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 array_concat （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: c66c17ab147eb3d6c5f749e7f28fad347a50ce22
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 681178cc12d145b1c574357e87ae4f7b33d736c4
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518746"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225644"
 ---
 # <a name="array_concat"></a>array_concat()
 
-將多個動態陣列與單個數位串聯。
+將數個動態陣列串連成單一陣列。
 
 **語法**
 
-`array_concat(`*arr1*`[`` *arr2*, ...]`, )
+`array_concat(`*arr1* `[` ， ` *arr2*, ...]` ） '
 
 **引數**
 
-* *阿爾1...arrN*: 要串聯到動態陣列的輸入陣列。 所有參數都必須是動態陣列(請參閱[pack_array](packarrayfunction.md))。 
+* *arr1 .。。arrN*：要串連成動態陣列的輸入陣列。 所有引數都必須是動態陣列（請參閱[pack_array](packarrayfunction.md)）。 
 
 **傳回**
 
-具有 arr1、arr2、...、 arrN 的陣列的動態陣列陣列。
+具有 arr1、arr2、...、arrN 之陣列的動態陣列。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 3 step 1
 | extend y = x * 2
@@ -43,6 +44,6 @@ range x from 1 to 3 step 1
 
 |Column1|
 |---|
-|[1,2,4,1,2]|
-|[2,4,8,2,4]|
-|[3,6,12,3,6]|
+|[1，2，4，1，2]|
+|[2，4，8，2，4]|
+|[3，6，12，3，6]|

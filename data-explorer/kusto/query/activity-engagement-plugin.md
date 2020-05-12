@@ -1,6 +1,6 @@
 ---
-title: activity_engagement外掛程式 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中activity_engagement外掛程式。
+title: activity_engagement 外掛程式-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 activity_engagement 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a7ed7ad7ebef425160b64b792ff75c95d4c4fcee
-ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
+ms.openlocfilehash: 9aa85bcb12cd5f8d836f58ea9d16a318d8a40506
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82030294"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225950"
 ---
 # <a name="activity_engagement-plugin"></a>activity_engagement plugin
 
 依據 ID 資料列來計算活動參與率隨滑動時間軸時段的變化。
 
-activity_engagement外掛程式可用於計算 DAU/WAU/MAU(每日/每周/每月活動)。
+activity_engagement 外掛程式可用於計算 DAU/WAU/MAU （每日/每週/每月活動）。
 
 ```kusto
 T | evaluate activity_engagement(id, datetime_column, 1d, 30d)
@@ -27,36 +27,37 @@ T | evaluate activity_engagement(id, datetime_column, 1d, 30d)
 
 **語法**
 
-*T* `| evaluate` T `,` *End* `,` `,` *dim1* `activity_engagement(` IdColumn*InnerActivityWindow*時間線列 。 開始結束 • 內部活動視窗外部活動視窗 • 暗 1 dim2 ...] `,` `,` *IdColumn* `,` `,` *Start* `,` *dim2* *TimelineColumn* *OuterActivityWindow*`)`
+*T* `| evaluate` `activity_engagement(` *IdColumn* `,` *TimelineColumn* `,` [*Start* `,` *End* `,` ] *InnerActivityWindow* `,` *OuterActivityWindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
 **引數**
 
-* *T*: 輸入表格表示式。
-* *IdColumn*: 具有表示使用者活動的 ID 值的欄的名稱。 
-* *時間線列*:表示時間線的列的名稱。
-* *開始*:(可選)具有分析開始週期的值的 Scalar。
-* *結束*:(可選)具有分析結束週期的值的 Scalar。
-* *內部活動視窗*:具有內範圍分析視窗期間值的 Scalar。
-* *外部活動視窗*:具有外部範圍分析視窗期間值的 Scalar。
-* *dim1* *,dim2*,...:(可選)列出對活動指標計算進行切片的維度列。
+* *T*：輸入表格式運算式。
+* *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
+* *TimelineColumn*：代表時間軸的資料行名稱。
+* *Start*：（選擇性）流量分析開始期間的值來進行純量。
+* *End*：（選擇性）以 [分析結束期間] 的值為純量。
+* *InnerActivityWindow*：純量，具有內部範圍分析視窗期間的值。
+* *OuterActivityWindow*：以 [外部範圍分析] 視窗期間的值為純量。
+* *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 
 **傳回**
 
-返回一個表,該表具有每個內部範圍視窗期間和每個現有維度組合的(內部範圍視窗中的 ID 值的不同計數、外部範圍視窗中的 ID 值不同計數以及活動比率)。
+針對每個內部範圍視窗期間和每個現有的維度組合，傳回具有（內部範圍視窗內的識別碼值相異計數、外部範圍視窗內的識別碼值的相異計數，以及活動比率）的資料表。
 
-輸出表架構為:
+輸出資料表架構為：
 
-|時間軸列|dcount_activities_inner|dcount_activities_outer|activity_ratio|昏暗1|..|dim_n|
+|TimelineColumn|dcount_activities_inner|dcount_activities_outer|activity_ratio|dim1|..|dim_n|
 |---|---|---|---|--|--|--|--|--|--|
-|類型:截至*時間軸列*|long|long|double|..|..|..|
+|類型：從*TimelineColumn*|long|long|double|..|..|..|
 
 
 **範例**
 
 ### <a name="dauwau-calculation"></a>DAU/WAU 計算
 
-以下範例計算 DAU/WAU(每日活躍使用者/每周活動使用者比率)對隨機生成的數據。
+下列範例會計算隨機產生之資料的 DAU/WAU （每日作用中使用者/每週作用中使用者比率）。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 // Generate random data of user activities
 let _start = datetime(2017-01-01);
@@ -72,12 +73,13 @@ range _day from _start to _end  step 1d
 | render timechart 
 ```
 
-:::image type="content" source="images/activity-engagement-plugin/activity-engagement-dau-wau.png" border="false" alt-text="作用活動參與 dau wau":::
+:::image type="content" source="images/activity-engagement-plugin/activity-engagement-dau-wau.png" border="false" alt-text="活動參與 dau wau":::
 
 ### <a name="daumau-calculation"></a>DAU/MAU 計算
 
-以下範例計算 DAU/WAU(每日活躍使用者/每周活動使用者比率)對隨機生成的數據。
+下列範例會計算隨機產生之資料的 DAU/WAU （每日作用中使用者/每週作用中使用者比率）。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 // Generate random data of user activities
 let _start = datetime(2017-01-01);
@@ -93,12 +95,13 @@ range _day from _start to _end  step 1d
 | render timechart 
 ```
 
-:::image type="content" source="images/activity-engagement-plugin/activity-engagement-dau-mau.png" border="false" alt-text="活動參與度 達烏毛":::
+:::image type="content" source="images/activity-engagement-plugin/activity-engagement-dau-mau.png" border="false" alt-text="活動參與 dau mau":::
 
-### <a name="daumau-calculation-with-additional-dimensions"></a>具有額外的 DAU/ MAU 計算
+### <a name="daumau-calculation-with-additional-dimensions"></a>具有其他維度的 DAU/MAU 計算
 
-下面的範例計算 DAU/WAU(每日活躍使用者/每周活動使用者比率)與具有附加維度`mod3`() 的隨機生成數據。
+下列範例會使用額外的維度（），計算隨機產生之資料的 DAU/WAU （每日作用中使用者/每週作用中使用者比率） `mod3` 。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 // Generate random data of user activities
 let _start = datetime(2017-01-01);
@@ -115,4 +118,4 @@ range _day from _start to _end  step 1d
 | render timechart 
 ```
 
-:::image type="content" source="images/activity-engagement-plugin/activity-engagement-dau-mau-mod3.png" border="false" alt-text="作用活動":::
+:::image type="content" source="images/activity-engagement-plugin/activity-engagement-dau-mau-mod3.png" border="false" alt-text="活動參與 dau mau mod 3":::
