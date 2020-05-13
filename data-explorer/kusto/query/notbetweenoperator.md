@@ -1,6 +1,6 @@
 ---
-title: 不在運算元之間 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的運算符之間的不。
+title: notbetween 運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 notbetween 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,47 +8,48 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: eacde679f05ff79f5ee0d223ba005217dbf5192c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e951e56589824acd6dd74160c9ab61778fbce45e
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512082"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271548"
 ---
-# <a name="between-operator"></a>!在操作員之間
+# <a name="between-operator"></a>！ between 運算子
 
-匹配超出包含範圍的輸入。
+符合內含範圍以外的輸入。
 
 ```kusto
 Table1 | where Num1 !between (1 .. 10)
 Table1 | where Time !between (datetime(2017-01-01) .. datetime(2017-01-01))
 ```
 
-`!between`可以對任何數位、日期時間或時間跨度運算式進行操作。
+`!between`可以在任何數值、日期時間或 timespan 運算式上操作。
  
 **語法**
 
-*T* `where` *rightRange*`(` *expr*`!between`T*leftRange*expr` .. `左範圍 右範圍`|``)`   
+*T* `|` `where` *expr* `!between` `(` *leftRange* ` .. ` *rightRange*`)`   
  
-如果*expr*表示日期時間 - 提供另一種語法糖語法:
+如果*expr*運算式為 datetime，則會提供另一個語法為的語法：
 
-*T* `where` *rightRangeTimespan*`(` *expr*`!between`T*leftRangeDateTime*expr` .. `左範圍 時間 右範圍時間跨度`|``)`   
+*T* `|` `where` *expr* `!between` `(` *leftRangeDateTime* ` .. ` *rightRangeTimespan*`)`   
 
 **引數**
 
-* *T* - 要匹配其記錄的表格輸入。
-* *expr* - 要篩選的運算式。
-* *左範圍*- 左側範圍的運算式(包括)。
-* *右範圍*- rihgt 範圍(包括)的運算式。
+* *T* -要比對其記錄的表格式輸入。
+* *expr* -要篩選的運算式。
+* *leftRange* -左邊範圍（含）的運算式。
+* *rightRange* -rihgt 範圍（含）的運算式。
 
 **傳回**
 
-*T*中的行,謂詞(*左* < *範圍*或*expr* > *右範圍*) 計算`true`為的行。
+*T*中的資料列（*expr*  <  *leftRange*或*expr*  >  *rightRange*）會評估為 `true` 。
 
 **範例**  
 
-**使用「!"運算符篩選數值**  
+**使用 '！ between ' 運算子篩選數值**  
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 10 step 1
 | where x !between (5 .. 9)
@@ -62,26 +63,26 @@ range x from 1 to 10 step 1
 |4|
 |10|
 
-**使用「介於「運算符篩選日期時間**  
+**使用 ' between ' 運算子篩選 datetime**  
 
-
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | where StartTime !between (datetime(2007-07-27) .. datetime(2007-07-30))
 | count 
 ```
 
-|Count|
+|計數|
 |---|
 |58590|
 
-
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | where StartTime !between (datetime(2007-07-27) .. 3d)
 | count 
 ```
 
-|Count|
+|計數|
 |---|
 |58590|

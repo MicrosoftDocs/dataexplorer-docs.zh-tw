@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: db99d1d46c321bff0f5d7b370766900ea7d1d5a0
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 1c7670dfb06e95f227a4b828a86b980005eeeac9
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227718"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373364"
 ---
 # <a name="external-tables-in-azure-storage-or-azure-data-lake"></a>Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -40,7 +40,7 @@ ms.locfileid: "83227718"
 * *TableName* -外部資料表名稱。 必須遵循[機構名稱](../query/schema-entities/entity-names.md)的規則。 外部資料表不能與相同資料庫中的一般資料表具有相同的名稱。
 * *架構*-格式為的外部資料架構： `ColumnName:ColumnType[, ColumnName:ColumnType ...]` 。 如果外部資料結構描述不明，請使用[infer_storage_schema](../query/inferstorageschemaplugin.md)外掛程式，它可以根據外部檔案內容推斷架構。
 * *Partition* -一或多個資料分割定義（選擇性）。 請參閱下面的分割語法。
-* *Format* -資料格式。 任何內嵌[格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)都支援查詢。 使用[匯出案例](data-export/export-data-to-an-external-table.md)的外部資料表僅限於下列格式： `CSV` 、 `TSV` 、 `JSON` 、 `Parquet` 。
+* *Format* -資料格式。 任何內嵌[格式](../../ingestion-supported-formats.md)都支援查詢。 使用[匯出案例](data-export/export-data-to-an-external-table.md)的外部資料表僅限於下列格式： `CSV` 、 `TSV` 、 `JSON` 、 `Parquet` 。
 * *StorageConnectionString* -一或多個 Azure Blob 儲存體 Blob 容器或 Azure Data Lake 存放區檔案系統（虛擬目錄或資料夾）（包括認證）的路徑。 如需詳細資訊，請參閱[儲存體連接字串](../api/connection-strings/storage.md)。 提供多個單一儲存體帳戶，以避免在將大量資料[匯出](data-export/export-data-to-an-external-table.md)至外部資料表時進行儲存體節流。 匯出會在提供的所有帳戶之間散發寫入。 
 
 **資料分割語法**
@@ -60,7 +60,7 @@ ms.locfileid: "83227718"
 
 **選擇性屬性**：
 
-| 屬性         | 類型     | 說明       |
+| 屬性         | 類型     | 描述       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | 資料表的資料夾                                                                     |
 | `docString`      | `string` | 記錄資料表的字串                                                       |
@@ -168,7 +168,7 @@ with
 
 **輸出**
 
-|TableName|TableType|資料夾|DocString|[內容]|ConnectionStrings|資料分割|
+|TableName|TableType|資料夾|DocString|屬性|ConnectionStrings|資料分割|
 |---|---|---|---|---|---|---|
 |ExternalMultiplePartitions|Blob|ExternalTables|Docs|{"Format"： "Csv"，"壓縮"： false，"CompressionType"： null，"FileExtension"： "Csv"，"IncludeHeaders"： "None"，"Encoding"： null，"NamePrefix"： null}|["https://storageaccount.blob.core.windows.net/container1;*******"]}|[{"StringFormat"： "CustomerName = {0} "，"ColumnName"： "CustomerName"，"序數"： 0}，PartitionBy "：" 1.00：00： 00 "，" ColumnName "：" Timestamp "，" 序數 "： 1}]|
 
@@ -221,7 +221,7 @@ dataformat=parquet
 
 **輸出**
 
-| 輸出參數 | 類型   | 說明                       |
+| 輸出參數 | 類型   | 描述                       |
 |------------------|--------|-----------------------------------|
 | Uri              | 字串 | 外部儲存體成品的 URI |
 

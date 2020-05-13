@@ -1,6 +1,6 @@
 ---
-title: 外部資料運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的外部數據運算符。
+title: externaldata 運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 externaldata 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,43 +8,43 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 0a4a151d1fd052e27e4daf76539ef6dbd9d94c83
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d46a8669c523955f74d3f489c7b10e5b0f7ccef6
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515465"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373293"
 ---
 # <a name="externaldata-operator"></a>externaldata 運算子
 
-操作員`externaldata`返回其架構在查詢本身中定義的表,其數據從外部存儲專案(如 Azure Blob 存儲中的 Blob)讀取。
+運算子會傳回 `externaldata` 一個資料表，其架構是在查詢本身中定義，而且其資料是從外部儲存成品（例如 Azure Blob 儲存體中的 blob）讀取。
 
 > [!NOTE]
-> 此運算符沒有管道輸入。
+> 此運算子沒有管線輸入。
 
 **語法**
 
-`externaldata``(`*欄位*`:`*型態*`,`= ...]`)``[`儲存連線字串 = Prop1 值 1 = ...] `]` `with` `(` `=` * * `,` * * * *`)`]
+`externaldata``(` *ColumnName* `:` *ColumnType* [ `,` ...] `)` `[` *StorageConnectionString* `]` [ `with` `(` *Prop1* `=` *Value1* [ `,` ...] `)` ]
 
 **引數**
 
-* *欄位*名稱,*欄型態*: 定義表的架構.
-  語法與 在[.create 表](../management/create-table-command.md)中定義表時使用的語法相同。
+* *ColumnName*、 *ColumnType*：定義資料表的架構。
+  語法與在[. create table](../management/create-table-command.md)中定義資料表時所使用的語法相同。
 
-* *儲存連線字串*:[儲存連線字串](../api/connection-strings/storage.md)描述儲存要傳回資料的儲存專案。
+* *StorageConnectionString*：[儲存體連接字串](../api/connection-strings/storage.md)會描述保存要傳回之資料的儲存體成品。
 
-* *Prop1,Value1*,...:描述如何解釋從存儲檢索的數據的其他屬性,如[在引入屬性](../management/data-ingestion/index.md)下列*Value1*出。
-    * 目前支援的屬性:`format``ignoreFirstRecord`與 。
-    * 支援的資料格式:支援任何[引入資料格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats),`json``parquet``avro`包括`csv``tsv`、、、、、、
+* *Prop1*， *Value1*，...：描述如何解讀從儲存體取得之資料的其他屬性，如 [內嵌[屬性](../management/data-ingestion/index.md)] 底下所列。
+    * 目前支援的屬性： `format` 和 `ignoreFirstRecord` 。
+    * 支援的資料格式：支援任何內嵌[資料格式](../../ingestion-supported-formats.md)，包括 `csv` 、 `tsv` 、 `json` 、 `parquet` 、 `avro` 。
 
 **傳回**
 
-運算符`externaldata`返回給定架構的數據表,其數據從儲存連接字串(Int)指示的指定儲存工件進行分析。
+`externaldata`運算子會傳回給定架構的資料表，其資料是從儲存體連接字串所指示的指定儲存體成品進行剖析。
 
 **範例**
 
-下面的範例展示如何查找表中的所有記錄,其`UserID`列落入外部Blob中保留(每行一個)的已知一組指示。
-由於該集由查詢間接引用,因此可能非常大。
+下列範例顯示如何在資料表中尋找資料 `UserID` 行屬於一組已知識別碼的所有記錄（每行一個），並保留在外部 blob 中。
+因為此集合是由查詢間接參考，所以可能非常大。
 
 ```
 Users

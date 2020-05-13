@@ -1,5 +1,5 @@
 ---
-title: series_outliers （）-Azure 資料總管 |Microsoft Docs
+title: series_outliers （）-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 series_outliers （）。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: 16e82ec68a463b97699f7d02e18c46df65221c7b
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 864638f8e03487a35eefa83fa3951d2ecefc27c7
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618646"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372546"
 ---
 # <a name="series_outliers"></a>series_outliers()
 
@@ -23,17 +23,17 @@ ms.locfileid: "82618646"
 
 **語法**
 
-`series_outliers(`*x*`, `*種類*`, ` * * * * * *ignore_val min_percentile max_percentile`, ` `, ``)`
+`series_outliers(`*x* `, `*種類* `, `*ignore_val* `, `*min_percentile* `, `*max_percentile*`)`
 
 **引數**
 
 * *x*：動態陣列資料格，也就是數值的陣列
-* *種類：極端*偵測的演算法。 目前支援`"tukey"` （傳統 Tukey）和`"ctukey"` （自訂 Tukey）。 預設為 `"ctukey"`
-* *ignore_val*：表示數列中遺漏值的數值，預設值為 double （null）。 Null 和 ignore 值的分數會設定為`0`。
-* *min_percentile*：若為一般分量範圍的計算，預設值為10，支援的自訂值在`[2.0, 98.0]`範圍`ctukey`內（僅限） 
-* *max_percentile*：相同，預設值為90，支援的自訂值`[2.0, 98.0]`在範圍內（僅限 ctukey） 
+* *種類：極端*偵測的演算法。 目前支援 `"tukey"` （傳統 Tukey）和 `"ctukey"` （自訂 Tukey）。 預設為 `"ctukey"`
+* *ignore_val*：表示數列中遺漏值的數值，預設值為 double （null）。 Null 和 ignore 值的分數會設定為 `0` 。
+* *min_percentile*：若為一般分量範圍的計算，預設值為10，支援的自訂值在範圍內 `[2.0, 98.0]` （ `ctukey` 僅限） 
+* *max_percentile*：相同，預設值為90，支援的自訂值在範圍內 `[2.0, 98.0]` （僅限 ctukey） 
 
-下表描述與之間`"tukey"`的`"ctukey"`差異：
+下表描述 `"tukey"` 與之間的差異 `"ctukey"` ：
 
 | 演算法 | 預設分量範圍 | 支援自訂分量範圍 |
 |-----------|----------------------- |--------------------------------|
@@ -48,6 +48,7 @@ ms.locfileid: "82618646"
 
 假設您有一個時間序列，其中有一些雜訊會建立極端值，而您想要以平均值取代這些極端值（雜訊），您可以使用 series_outliers （）來偵測極端值，然後加以取代：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 100 step 1 
 | extend y=iff(x==20 or x==80, 10*rand()+10+(50-x)/2, 10*rand()+10) // generate a sample series with outliers at x=20 and x=80

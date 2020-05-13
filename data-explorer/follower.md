@@ -1,47 +1,47 @@
 ---
-title: 使用跟隨器資料庫功能在 Azure 資料資源管理員中附加資料庫
-description: 瞭解如何使用關注者資料庫功能在 Azure 資料資源管理器中附加資料庫。
+title: 使用資料的資料庫功能，在 Azure 中附加資料庫資料總管
+description: 瞭解如何使用「資料後資料庫」功能，在 Azure 資料總管中附加資料庫。
 author: orspod
 ms.author: orspodek
 ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/07/2019
-ms.openlocfilehash: 4c385551f8983219dddf840f7a2d590809b030a3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 35fd37db22b2f07dcee9d7f67c700414a4cfc5d3
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81496715"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373858"
 ---
-# <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>使用跟隨者資料庫在 Azure 資料資源管理員中附加資料庫
+# <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>使用在 Azure 資料總管中的資料，來連接資料庫
 
-**關注者資料庫**功能允許您將位於不同群集中的資料庫附加到 Azure 資料資源管理器群集。 **跟隨者資料庫**以*唯讀*模式附加,因此可以查看資料並運行對引入**到引線資料庫中**的數據的查詢。 關注者資料庫同步引線資料庫中的更改。 由於同步,數據可用性會延遲幾秒鐘到幾分鐘。 時滯的長度取決於引線資料庫元數據的總體大小。 領導者和關注者資料庫使用相同的存儲帳戶來獲取數據。 存儲歸引線資料庫所有。 跟隨者資料庫無需攝用數據即可查看數據。 由於附加的資料庫是唯讀資料庫,因此資料庫中的數據、表和策略不能修改,但[快取策略](#configure-caching-policy)、[主體](#manage-principals)和[許可權](#manage-permissions)除外。 無法刪除附加的資料庫。 必須由領導者或跟隨者分離它們,只有這樣才能將其刪除。 
+「後置**資料庫**」功能可讓您將位於不同叢集中的資料庫附加至您的 Azure 資料總管叢集。 「執行程式」**資料庫**是以*唯讀*模式附加，因此您可以在內嵌至**領導者資料庫**的資料上，查看資料並執行查詢。 「資料後」資料庫會同步處理領導者資料庫中的變更。 由於同步處理，資料可用性會有幾秒鐘到幾分鐘的資料延遲。 時間延遲的長度取決於領導者資料庫中繼資料的整體大小。 領導者和執行者資料庫會使用相同的儲存體帳戶來提取資料。 儲存區是由領導者資料庫所擁有。 「取用的資料庫」會在不需要內嵌資料的情況下，就能流覽資料。 因為附加的資料庫是唯讀資料庫，所以無法修改資料庫中的資料、資料表和原則，但快取[原則](#configure-caching-policy)、[主體](#manage-principals)和[許可權](#manage-permissions)除外。 無法刪除附加的資料庫。 它們必須由領導者或其他人卸離，然後才可以刪除。 
 
-使用跟隨器功能將資料庫附加到其他群集用作基礎結構,用於在組織和團隊之間共享數據。 此功能可用於隔離計算資源,以保護生產環境免受非生產用例的影響。 跟隨器還可用於將 Azure 資料資源管理器群集的成本與運行數據查詢的一方相關聯。
+使用「進行中」功能將資料庫附加至不同的叢集，是用來做為基礎結構，以便在組織與小組之間共用資料。 此功能適用于隔離計算資源，以保護生產環境不受非生產使用案例的限制。 您也可以將 Azure 資料總管叢集的成本與對資料執行查詢的合作物件建立關聯。
 
-## <a name="which-databases-are-followed"></a>遵循哪些資料庫?
+## <a name="which-databases-are-followed"></a>會遵循哪些資料庫？
 
-* 群集可以遵循一個資料庫、多個資料庫或引線群集的所有資料庫。 
-* 單個群集可以跟蹤來自多個引線群集的資料庫。 
-* 叢集可以同時包含跟隨者資料庫和引線資料庫
+* 叢集可以遵循一個資料庫、數個資料庫或領導者叢集的所有資料庫。 
+* 單一叢集可以遵循來自多個領導者叢集的資料庫。 
+* 叢集可以同時包含進行中的資料庫和領導者資料庫
 
 ## <a name="prerequisites"></a>Prerequisites
 
 1. 如果您沒有 Azure 訂用帳戶，請在開始之前先[建立免費帳戶](https://azure.microsoft.com/free/)。
-1. 為領導者和跟隨者[創建群集和 DB。](/azure/data-explorer/create-cluster-database-portal)
-1. 使用[引入概述](/azure/data-explorer/ingest-data-overview)中討論的各種方法之一[將數據](/azure/data-explorer/ingest-sample-data)引入引線資料庫。
+1. 為領導者和進行中[建立叢集和資料庫](create-cluster-database-portal.md)。
+1. 使用內嵌[總覽](/azure/data-explorer/ingest-data-overview)中所討論的各種方法之一，將[資料](ingest-sample-data.md)內嵌至領導者資料庫。
 
 ## <a name="attach-a-database"></a>附加資料庫
 
-可以使用多種方法來附加資料庫。 在本文中,我們將討論使用 C# 或 Azure 資源管理器範本附加資料庫。 要附加資料庫,您必須對引線群集和跟隨器群集具有許可權。 有關權限的詳細資訊,請參閱[管理權限](#manage-permissions)。
+您可以使用各種方法來附加資料庫。 在本文中，我們會討論如何使用 c # 或 Azure Resource Manager 範本附加資料庫。 若要附加資料庫，您必須擁有領導者叢集和消費者叢集的許可權。 如需許可權的詳細資訊，請參閱[管理許可權](#manage-permissions)。
 
-### <a name="attach-a-database-using-c"></a>使用 C 連線資料庫#
+### <a name="attach-a-database-using-c"></a>使用 C 附加資料庫#
 
-#### <a name="needed-nugets"></a>所需的 NuGets
+#### <a name="needed-nugets"></a>必要的 Nuget
 
-* 安裝[Microsoft.Azure.管理.kusto](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
-* 安裝[Microsoft.Rest.ClientRuntime.Azure.身份驗證](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime.Azure.Authentication)。
+* 請安裝[kusto](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
+* 安裝[ClientRuntime 以進行驗證](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime.Azure.Authentication)。
 
 #### <a name="code-example"></a>程式碼範例
 
@@ -77,9 +77,9 @@ AttachedDatabaseConfiguration attachedDatabaseConfigurationProperties = new Atta
 var attachedDatabaseConfigurations = resourceManagementClient.AttachedDatabaseConfigurations.CreateOrUpdate(followerResourceGroupName, followerClusterName, attachedDatabaseConfigurationName, attachedDatabaseConfigurationProperties);
 ```
 
-### <a name="attach-a-database-using-python"></a>使用 Python 連線資料庫
+### <a name="attach-a-database-using-python"></a>使用 Python 附加資料庫
 
-#### <a name="needed-modules"></a>所需的模組
+#### <a name="needed-modules"></a>需要的模組
 
 ```
 pip install azure-common
@@ -125,9 +125,9 @@ attached_database_configuration_properties = AttachedDatabaseConfiguration(clust
 poller = kusto_management_client.attached_database_configurations.create_or_update(follower_resource_group_name, follower_cluster_name, attached_database_Configuration_name, attached_database_configuration_properties)
 ```
 
-### <a name="attach-a-database-using-an-azure-resource-manager-template"></a>使用 Azure 資源管理員樣本附加資料庫
+### <a name="attach-a-database-using-an-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本附加資料庫
 
-在本節中,您將學習使用[Azure 資源管理器範本](/azure/azure-resource-manager/management/overview)將資料庫附加到現有 cluser。 
+在本節中，您會瞭解如何使用[Azure Resource Manager 範本](/azure/azure-resource-manager/management/overview)，將資料庫附加至現有的叢集。 
 
 ```json
 {
@@ -196,41 +196,41 @@ poller = kusto_management_client.attached_database_configurations.create_or_upda
 
 ### <a name="deploy-the-template"></a>部署範本 
 
-可以使用[Azure 門戶](https://portal.azure.com)或使用電源外殼部署 Azure 資源管理器範本。
+您可以[使用 Azure 入口網站](https://portal.azure.com)或使用 powershell 來部署 Azure Resource Manager 範本。
 
-   ![樣本部署](media/follower/template-deployment.png)
+   ![範本部署](media/follower/template-deployment.png)
 
 
-|**設定**  |**說明**  |
+|**設定**  |**描述**  |
 |---------|---------|
-|關注者群組名稱     |  跟隨者群集的名稱;範本的部署位置。  |
-|附加資料庫設定名稱    |    附加的資料庫配置物件的名稱。 該名稱可以是群集級別上唯一的任何字串。     |
-|資料庫名稱     |      要遵循的資料庫的名稱。 如果要跟蹤領導者的所有資料庫,請使用"*"。   |
-|領導者群集資源識別碼    |   引線群集的資源 ID。      |
-|預設主體修改類型    |   默認主體修改類型。 可以是`Union`或`Replace``None`。 有關預設主體修改類型的詳細資訊,請參閱[主體修改類控制命令](kusto/management/cluster-follower.md#alter-follower-database-principals-modification-kind)。      |
-|Location   |   所有資源的位置。 領導者和跟隨者必須位於同一位置。       |
+|進行中的叢集名稱     |  進行中的叢集名稱;將部署範本的位置。  |
+|附加的資料庫設定名稱    |    附加的資料庫設定物件的名稱。 此名稱可以是在叢集層級上唯一的任何字串。     |
+|資料庫名稱     |      要遵循的資料庫名稱。 如果您想要追蹤所有領導者的資料庫，請使用 ' * '。   |
+|領導者叢集資源識別碼    |   領導者叢集的資源識別碼。      |
+|預設主體修改種類    |   預設的主體修改種類。 可以是 `Union` 、 `Replace` 或 `None` 。 如需預設主體修改種類的詳細資訊，請參閱[principal 修改種類控制命令](kusto/management/cluster-follower.md#alter-follower-database-principals-modification-kind)。      |
+|Location   |   所有資源的位置。 領導人和進行者必須位於相同的位置。       |
  
-### <a name="verify-that-the-database-was-successfully-attached"></a>驗證資料庫是否已成功連線
+### <a name="verify-that-the-database-was-successfully-attached"></a>確認資料庫已成功附加
 
-要驗證資料庫是否已成功連接,請在[Azure 門戶](https://portal.azure.com)中找到附加的資料庫。 
+若要確認資料庫是否已成功附加，請在[Azure 入口網站](https://portal.azure.com)中尋找您附加的資料庫。 
 
-1. 瀏覽到跟隨者群集並選擇**資料庫**
-1. 在資料庫清單中搜索新的唯讀資料庫。
+1. 流覽至 [進行中] 叢集並選取 [**資料庫**]
+1. 在 [資料庫] 清單中搜尋新的唯讀資料庫。
 
-    ![唯讀跟隨器資料庫](media/follower/read-only-follower-database.png)
+    ![唯讀的進行中資料庫](media/follower/read-only-follower-database.png)
 
 或者：
 
-1. 導覽引線叢集並選擇**資料庫**
-2. 檢查相關資料庫已標記為 **"共用與其他人** > **共用是"**
+1. 流覽至領導者叢集並選取 [**資料庫**]
+2. 檢查相關資料庫是否標示為**與其他人共用**  >  **[是]**
 
-    ![讀取及寫入附加資料庫](media/follower/read-write-databases-shared.png)
+    ![讀取和寫入附加的資料庫](media/follower/read-write-databases-shared.png)
 
-## <a name="detach-the-follower-database-using-c"></a>使用 C 分離跟隨者資料庫# 
+## <a name="detach-the-follower-database-using-c"></a>使用 C 卸離資料的後向資料庫# 
 
-### <a name="detach-the-attached-follower-database-from-the-follower-cluster"></a>將附加的跟隨者資料庫從跟隨器群集中分離出來
+### <a name="detach-the-attached-follower-database-from-the-follower-cluster"></a>卸離已連接的資料來源資料庫與進行中的叢集
 
-跟隨者群集可以按如下方式分離任何附加的資料庫:
+進行中的叢集可以卸離任何附加的資料庫，如下所示：
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -252,9 +252,9 @@ var attachedDatabaseConfigurationsName = "uniqueName";
 resourceManagementClient.AttachedDatabaseConfigurations.Delete(followerResourceGroupName, followerClusterName, attachedDatabaseConfigurationsName);
 ```
 
-### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>從引線群集分離附加的跟隨者資料庫
+### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>從領導者叢集卸離附加的資料來源資料庫
 
-引線群集可以按如下方式分離任何附加的資料庫:
+領導者叢集可以卸離任何附加的資料庫，如下所示：
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -282,11 +282,11 @@ var followerDatabaseDefinition = new FollowerDatabaseDefinition()
 resourceManagementClient.Clusters.DetachFollowerDatabases(leaderResourceGroupName, leaderClusterName, followerDatabaseDefinition);
 ```
 
-## <a name="detach-the-follower-database-using-python"></a>使用 Python 分離跟隨者資料庫
+## <a name="detach-the-follower-database-using-python"></a>使用 Python 卸離資料的後向資料庫
 
-### <a name="detach-the-attached-follower-database-from-the-follower-cluster"></a>將附加的跟隨者資料庫從跟隨器群集中分離出來
+### <a name="detach-the-attached-follower-database-from-the-follower-cluster"></a>卸離已連接的資料來源資料庫與進行中的叢集
 
-跟隨者群集可以按如下方式分離任何附加的資料庫:
+進行中的叢集可以卸離任何附加的資料庫，如下所示：
 
 ```python
 from azure.mgmt.kusto import KustoManagementClient
@@ -315,9 +315,9 @@ attached_database_configurationName = "uniqueName"
 poller = kusto_management_client.attached_database_configurations.delete(follower_resource_group_name, follower_cluster_name, attached_database_configurationName)
 ```
 
-### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>從引線群集分離附加的跟隨者資料庫
+### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>從領導者叢集卸離附加的資料來源資料庫
 
-引線群集可以按如下方式分離任何附加的資料庫:
+領導者叢集可以卸離任何附加的資料庫，如下所示：
 
 ```python
 
@@ -354,37 +354,37 @@ cluster_resource_id = "/subscriptions/" + follower_subscription_id + "/resourceG
 poller = kusto_management_client.clusters.detach_follower_databases(resource_group_name = leader_resource_group_name, cluster_name = leader_cluster_name, cluster_resource_id = cluster_resource_id, attached_database_configuration_name = attached_database_configuration_name)
 ```
 
-## <a name="manage-principals-permissions-and-caching-policy"></a>管理主體、權限和快取原則
+## <a name="manage-principals-permissions-and-caching-policy"></a>管理主體、許可權和快取原則
 
 ### <a name="manage-principals"></a>管理主體
 
-附加資料庫時,指定 **「默認主體修改類型」。** 預設值是保留[授權主體](kusto/management/access-control/index.md#authorization)的引線資料庫集合
+附加資料庫時，請指定「**預設主體修改種類**」。 預設會保留已[授權主體](kusto/management/access-control/index.md#authorization)的領導者資料庫集合
 
-|**種類** |**說明**  |
+|**種類** |**描述**  |
 |---------|---------|
-|**Union**     |   附加的資料庫主體將始終包括原始資料庫主體以及添加到關注者資料庫的其他新主體。      |
-|**取代**   |    沒有從原始資料庫繼承主體。 必須為附加的資料庫創建新主體。     |
-|**None**   |   附加的資料庫主體僅包括原始資料庫的主體,沒有其他主體。      |
+|**Union**     |   附加的資料庫主體一律會包含原始資料庫主體，加上加入至資料後資料庫的額外新主體。      |
+|**取代**   |    不會繼承原始資料庫的主體。 必須為附加的資料庫建立新的主體。     |
+|**None**   |   附加的資料庫主體只包含原始資料庫的主體，且沒有其他主體。      |
 
-有關使用控制命令設定授權主體的詳細資訊,請參閱[用於管理跟隨者叢集的控制命令](kusto/management/cluster-follower.md)。
+如需使用控制命令來設定授權主體的詳細資訊，請參閱[控制管理使用](kusto/management/cluster-follower.md)中叢集的命令。
 
 ### <a name="manage-permissions"></a>管理權限
 
-管理唯讀資料庫許可權與所有資料庫類型相同。 請參考[Azure 門戶中的管理權限](/azure/data-explorer/manage-database-permissions#manage-permissions-in-the-azure-portal)。
+管理唯讀資料庫許可權與所有資料庫類型相同。 請參閱[管理 Azure 入口網站中的許可權](manage-database-permissions.md#manage-permissions-in-the-azure-portal)。
 
 ### <a name="configure-caching-policy"></a>設定快取原則
 
-跟隨者資料庫管理員可以修改附加資料庫或其託管群集上任何表的[快取原則](kusto/management/cache-policy.md)。 默認值是保留資料庫和表級緩存策略的引線資料庫集合。 例如,您可以對引線資料庫具有 30 天的緩存策略,用於運行月度報告,在跟隨者資料庫上使用三天緩存策略,以便僅查詢用於故障排除的最近數據。 有關使用控制命令在跟隨程式資料庫或表上設定快取策略的詳細資訊,請參閱[用於管理跟隨器叢集的控制項命令](kusto/management/cluster-follower.md)。
+「後向資料庫管理員」可以在主控叢集上修改附加資料庫或其任何資料表的快取[原則](kusto/management/cache-policy.md)。 預設值是保留資料庫和資料表層級快取原則的領導者資料庫集合。 例如，您可以在領導者資料庫上有30天的快取原則來執行每月報表，並在執行者資料庫上使用三天的快取原則，只查詢最近的資料進行疑難排解。 如需使用控制命令在資料後資料庫或資料表上設定快取原則的詳細資訊，請參閱[控制用於管理](kusto/management/cluster-follower.md)資料型叢集的命令。
 
 ## <a name="limitations"></a>限制
 
-* 跟隨者和引線群集必須位於同一區域。
-* [流引入](/azure/data-explorer/ingest-data-streaming)不能用於正在跟蹤的資料庫。
-* 領導者和跟隨者群集不支援使用[客戶託管金鑰](/azure/data-explorer/security#customer-managed-keys-with-azure-key-vault)進行數據加密。 
-* 在分離資料庫之前,無法刪除附加到其他群集的資料庫。
-* 在分離資料庫之前,不能刪除將資料庫附加到其他群集的群集。
-* 不能阻止具有附加跟隨者或引線資料庫的群集。 
+* 「進行中」和「領導者」叢集必須位於相同的區域。
+* [資料流程](ingest-data-streaming.md)內嵌無法用於所遵循的資料庫。
+* 在領導者和後向叢集上不支援使用[客戶管理的金鑰](security.md#customer-managed-keys-with-azure-key-vault)進行資料加密。 
+* 卸離另一個叢集之前，您無法刪除該資料庫。
+* 卸離資料庫之前，您無法刪除已附加至不同叢集的叢集。
+* 您無法停止已連接到或領導者資料庫的叢集。 
 
 ## <a name="next-steps"></a>後續步驟
 
-* 有關跟隨器叢集設定的資訊,請參閱[用於管理跟隨器群集的控制項指令](kusto/management/cluster-follower.md)。
+* 如需有關「進行中」叢集設定的詳細資訊，請參閱[控制管理使用](kusto/management/cluster-follower.md)中叢集的命令。

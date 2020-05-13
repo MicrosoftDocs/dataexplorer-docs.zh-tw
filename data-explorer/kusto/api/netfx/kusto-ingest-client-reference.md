@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1d3c3939a5c8b3a5f1e6f1fa0b40f9b927ee5325
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: d2e42ce3de656a3e137245786596e454c36ccbef
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226052"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373616"
 ---
 # <a name="kustoingest-client-interfaces-and-factory-classes"></a>Kusto。內嵌用戶端介面和 factory 類別
 
@@ -359,7 +359,7 @@ KustoIngestionProperties 類別包含基本的內嵌屬性，可讓您精確控�
 |AvroMapping |針對每個資料行，定義 Avro 記錄中的功能變數名稱。 **AVRO 內嵌的必要** |
 |ValidationPolicy |資料驗證定義。 如需詳細資訊，請參閱 [TODO] |
 |[格式] |要內嵌之資料的格式 |
-|AdditionalProperties | 其他會當做內嵌[屬性](https://docs.microsoft.com/azure/data-explorer/ingestion-properties)傳遞至內嵌命令的屬性。 將會傳遞屬性，因為並非所有的內嵌屬性都會在此類別的個別成員中表示|
+|AdditionalProperties | 其他會當做內嵌[屬性](../../../ingestion-properties.md)傳遞至內嵌命令的屬性。 將會傳遞屬性，因為並非所有的內嵌屬性都會在此類別的個別成員中表示|
 
 ```csharp
 public class KustoIngestionProperties

@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 03/24/2020
-ms.openlocfilehash: c43c6c09ad6da90685c56dc47ebe257a55eaede6
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: 5770c59ff7298567cad01bb3ed4cc6a684b2378a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82862134"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373701"
 ---
 # <a name="kusto-ingest-client-library"></a>Kusto 內嵌用戶端程式庫
 
@@ -47,7 +47,7 @@ Kusto 內嵌方法是由[IKustoIngestClient](kusto-ingest-client-reference.md#in
 ![替代文字](../images/queued-ingest.jpg "已排入佇列-內嵌")
 
 ### <a name="direct-ingestion"></a>直接內嵌
-此模式由 IKustoDirectIngestClient 定義，會強制與 Kusto 引擎服務直接互動。 在此模式中，Kusto 內嵌服務不會仲裁或管理資料。 Direct 模式中的每個內嵌要求最後都會轉譯`.ingest`成直接在 Kusto Engine 服務上執行的命令。
+此模式由 IKustoDirectIngestClient 定義，會強制與 Kusto 引擎服務直接互動。 在此模式中，Kusto 內嵌服務不會仲裁或管理資料。 Direct 模式中的每個內嵌要求最後都會轉譯成 `.ingest` 直接在 Kusto Engine 服務上執行的命令。
 下圖概述直接內嵌用戶端與 Kusto 的互動：
 
 ![替代文字](../images/direct-ingest.jpg "直接內嵌")
@@ -72,10 +72,10 @@ Kusto 內嵌方法是由[IKustoIngestClient](kusto-ingest-client-reference.md#in
 內嵌[最佳做法](kusto-ingest-best-practices.md)會在內嵌時提供 COGs 和輸送量 POV。
 
 ### <a name="thread-safety"></a>執行緒安全
-Kusto 內嵌用戶端執行是安全線程，並可供重複使用。 您不需要針對每個或甚至數`KustoQueuedIngestClient`個內嵌作業，建立類別的實例。 每個使用者進程`KustoQueuedIngestClient`每個目標 Kusto 叢集都需要一個的單一實例。 執行多個實例會提高效率，而且可能會 DoS 資料管理叢集。
+Kusto 內嵌用戶端執行是安全線程，並可供重複使用。 您不需要 `KustoQueuedIngestClient` 針對每個或甚至數個內嵌作業，建立類別的實例。 每 `KustoQueuedIngestClient` 個使用者進程每個目標 Kusto 叢集都需要一個的單一實例。 執行多個實例會提高效率，而且可能會 DoS 資料管理叢集。
 
 ### <a name="supported-data-formats"></a>支援的資料格式
-使用原生內嵌時（如果尚未存在），請將資料上傳至一或多個 Azure 儲存體 blob。 目前支援的 blob 格式記載于[支援的資料格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)主題中。
+使用原生內嵌時（如果尚未存在），請將資料上傳至一或多個 Azure 儲存體 blob。 目前支援的 blob 格式記載于[支援的資料格式](../../../ingestion-supported-formats.md)主題中。
 
 ### <a name="schema-mapping"></a>結構描述對應
 [架構](../../management/mappings.md)對應有助於以決定性的方式將源資料欄位系結至目的地資料表資料行。

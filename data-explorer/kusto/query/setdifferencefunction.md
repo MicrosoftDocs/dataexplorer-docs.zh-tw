@@ -1,6 +1,6 @@
 ---
-title: set_difference() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 set_difference()。
+title: set_difference （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 set_difference （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: d4edb8ec46fca99b7dd58b11bbd54442a9340c7a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7e13a9b652e1bdadb325cd866bddd78761b25b85
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507798"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372385"
 ---
 # <a name="set_difference"></a>set_difference()
 
-返回第`dynamic`一個陣列中但不在其他陣列中的所有不同值集的 (JSON) 陣列 - ((((arr1 = arr2) = arr3 = ...)。
+傳回 `dynamic` 第一個陣列中但不在其他陣列中之所有相異值集合的（JSON）陣列-（（（arr1 \ arr2） \ arr3） \ ...）。
 
 **語法**
 
-`set_difference(`*arr1*`, `*arr2*`[`,` *arr3*, ...])`
+`set_difference(`*arr1* `, `*arr2* `[` ，` *arr3*, ...])`
 
 **引數**
 
-* *阿爾1...arrN*: 輸入陣列以建立一個差異集(至少兩個陣列)。 所有參數都必須是動態陣列(請參閱[pack_array](packarrayfunction.md))。 
+* *arr1 .。。arrN*：輸入陣列以建立差異集合（至少兩個數組）。 所有引數都必須是動態陣列（請參閱[pack_array](packarrayfunction.md)）。 
 
 **傳回**
 
-返回 arr1 中但不在其他陣列中的所有不同值集的動態陣列。 請參考[`set_union()`](setunionfunction.md)[`set_intersect()`](setintersectfunction.md)與 。
+傳回 arr1 中但不在其他陣列中的所有相異值集合的動態陣列。 請參閱 [`set_union()`](setunionfunction.md) 和 [`set_intersect()`](setintersectfunction.md) 。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 3 step 1
 | extend y = x * 2
@@ -45,13 +46,14 @@ range x from 1 to 3 step 1
 |Column1|
 |---|
 |[4]|
-|[8]|
-|[12]|
+|8|
+|12|
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print arr = set_difference(dynamic([1,2,3]), dynamic([1,2,3]))
 ```
 
-|阿爾爾|
+|arr|
 |---|
 |[]|

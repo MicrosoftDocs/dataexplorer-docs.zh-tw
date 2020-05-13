@@ -1,6 +1,6 @@
 ---
-title: 項目離開運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的項目離開運算符。
+title: 專案外操作員-Azure 資料總管
+description: 本文說明 Azure 資料總管中的專案離開運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,48 +8,49 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 38ec57e9659458ef34117e4a380c756310db218b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 444710775af405cc63193e0205e573b2ea77de3a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510943"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373194"
 ---
 # <a name="project-away-operator"></a>project-away 運算子
 
-選擇要從輸出中排除的輸入欄位
+在輸入中選取要從輸出排除的資料行
 
 ```kusto
 T | project-away price, quantity, zz*
 ```
 
-結果中的列的順序由它們在表中的原始順序決定。 只刪除指定為參數的欄。 結果中包括其他列。  (另請參閱 `project`)。
+結果中的資料行順序取決於其在資料表中的原始順序。 只會卸載指定為引數的資料行。 其他資料行則包含在結果中。  (另請參閱 `project`)。
 
 **語法**
 
-*T* `| project-away` *欄位名稱或模式*[`,` ...
+*T* `| project-away` *ColumnNameOrPattern* [ `,` ...]
 
 **引數**
 
-* *T*: 輸入表
-* *欄名稱或圖案:* 要從輸出中刪除的列或列通配符模式的名稱。
+* *T*：輸入資料表
+* *ColumnNameOrPattern：* 要從輸出中移除之資料行或資料行萬用字元模式的名稱。
 
 **傳回**
 
-包含未命名為參數的列的表。 包含與輸入表相同的行數。
+包含未命名為引數之資料行的資料表。 包含與輸入資料表相同的資料列數目。
 
-**技巧**
+**提示**
 
-* 如果[`project-rename`](projectrenameoperator.md)打算重新命名列,請使用。
-* 如果[`project-reorder`](projectreorderoperator.md)意圖是重新排序列,請使用。
+* [`project-rename`](projectrenameoperator.md)如果您想要重新命名資料行，請使用。
+* [`project-reorder`](projectreorderoperator.md)如果您想要重新排列資料行，請使用。
 
-* 可以`project-away`顯示原始表中存在或作為查詢的一部分計算的任何列。
+* 您可以在 `project-away` 原始資料表中出現的任何資料行，或做為查詢一部分計算的資料行。
 
 
 **範例**
 
 輸入資料表 `T` 有三個類型為 `long` 的資料行：`A`、`B` 和 `C`。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(A:long, B:long, C:long) [1, 2, 3]
 | project-away C    // Removes column C from the output
@@ -59,8 +60,9 @@ datatable(A:long, B:long, C:long) [1, 2, 3]
 |---|---|
 |1|2|
 
-刪除以"a"開頭的欄。
+移除以 ' a ' 開頭的資料行。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print  a2='a2', b = 'b', a3='a3', a1='a1'
 |  project-away a* 

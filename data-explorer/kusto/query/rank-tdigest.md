@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: a849cd496d41ad473768b3f267639eaf8c467880
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: 29b35e5bd7265d89e65fe0129317a9f1672c7cad
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741772"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373088"
 ---
 # <a name="rank_tdigest"></a>rank_tdigest()
 
-計算集合中值的近似順位。 `v`集合`S`中的值次序定義為較小或等於的成員`S`計數`v`， `S`由其`tdigest`代表。
+計算集合中值的近似順位。 集合中的值次序 `v` `S` 定義為 `S` 較小或等於的成員計數，由 `v` `S` 其代表 `tdigest` 。
 
 **語法**
 
@@ -34,12 +34,13 @@ ms.locfileid: "82741772"
 
 **提示**
 
-1) 您想要取得其順位的值，其類型必須與相同`tdigest`。
+1) 您想要取得其順位的值，其類型必須與相同 `tdigest` 。
 
 **範例**
 
 在排序清單（1-1000）中，685的順位是其索引：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 1000 step 1
 | summarize t_x=tdigest(x)
@@ -52,6 +53,7 @@ range x from 1 to 1000 step 1
 
 此查詢會計算所有損害屬性成本的值 $4490 排名：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigestRes = tdigest(DamageProperty)
@@ -65,6 +67,7 @@ StormEvents
 
 取得順位的預估百分比（除以集合大小）：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigestRes = tdigest(DamageProperty), count()
@@ -79,6 +82,7 @@ StormEvents
 
 損毀屬性成本的百分位數85為 $4490：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigestRes = tdigest(DamageProperty)

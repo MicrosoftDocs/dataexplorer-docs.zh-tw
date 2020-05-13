@@ -1,6 +1,6 @@
 ---
-title: 減少運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的縮減運算符。
+title: 減少操作員-Azure 資料總管
+description: 本文說明 Azure 資料總管中的縮減運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,66 +8,67 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 33d4ac202b61fdaa1b92291407cdd2783d947c6e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7d157244a167e1264b454cd8cd3c103e297c3263
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510501"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373059"
 ---
 # <a name="reduce-operator"></a>reduce 運算子
 
-根據值相似性將一組字串組合在一起。
+根據值的相似性，將一組字串分組在一起。
 
 ```kusto
 T | reduce by LogMessage with threshold=0.1
 ```
 
-此一個所有此類群組,輸出一個**模式**,以最好地描述群組(可能使用 asterix`*`( ) 字元來表示通配符、群組中的值數**計數**以及群組(群組中的原始值之一)**的表示形式**。
+針對每個這類群組，它會輸出最能描述該群組的**模式**（可能使用星號（ `*` ）字元來代表萬用字元） **count** 、群組中的值數目，以及群組的**代表**（群組中的其中一個原始值）。
 
 **語法**
 
-*T* `|` T `threshold` `kind`=`=`減少金德 • Expr [ 閾值 ] = 字元 * `reduce` `characters` `=` `,` `=` *Characters* *ReduceKind* `by` *Expr* `with` * *
+*T* `|` `reduce` [ `kind` `=` *ReduceKind*] `by` *Expr* [ `with` [ `threshold` `=` *閾值*] [ `,` `characters` `=` *字元*]]
 
 **引數**
 
-* *Expr*:一個計算到值`string`的 運算式。
-* *閾值*`real`:範圍中的文本 (0..1)。 默認值為 0.1。 若為大型輸入，臨界值應該小一點。 
-* *字元*:`string`包含 要加入不中斷術語的字元清單中的字元列表的文字。 (`aaa=bbbb`例如,如果希望`aaa:bbb`並且 每個術語都是整個術語,而不是`=`中`:`斷 和`":="`,用作 字串文本。
-* *減少金德*: 指定減少的味道。 目前唯一有效的值是`source`。
+* *Expr*：評估為值的運算式 `string` 。
+* *閾值*： `real` 範圍（0 ..1）中的常值。 預設值為0.1。 若為大型輸入，臨界值應該小一點。 
+* *字元*：常值， `string` 其中包含要加入不會中斷字詞之字元清單中的字元清單。 （例如，如果您希望 `aaa=bbbb` 和 `aaa:bbb` 都是整個詞彙，而不是在和上中斷 `=` ， `:` 請使用 `":="` 做為字串常值）。
+* *ReduceKind*：指定 [縮減] 類別。 唯一有效的時間值為 `source` 。
 
 **傳回**
 
-此運算符返回具有三列 (、`Pattern``Count``Representative`和 ) 的表,以及與組一樣多的行。 `Pattern`是群組的模式值,`*`用作通配符(表示任意插入字串),`Count`計算該模式表示運算符號輸入的行數,`Representative`並且是屬於此組的輸入中的一個值。
+這個運算子會傳回具有三個數據行（、和）的資料表，以及與群組相同的資料列 `Pattern` `Count` `Representative` 數目。 `Pattern`這是群組的模式值，用 `*` 來做為萬用字元（代表任意插入字串）、 `Count` 計算運算子的輸入中有多少資料列是由這個模式表示，而且 `Representative` 是來自屬於此群組之輸入的一個值。
 
-如果`[kind=source]`指定,運算子將該`Pattern`列追加到現有表結構。
-請注意,此風格的架構的語法可能會受到將來的更改。
+如果 `[kind=source]` 指定了，運算子就會將資料 `Pattern` 行附加至現有的資料表結構。
+請注意，此類別架構的語法可能會受到未來變更的攻擊。
 
 例如， `reduce by city` 的結果可能包括： 
 
-|模式     |Count |Representative|
+|模式     |計數 |Representative|
 |------------|------|--------------|
-| San *      | 5182 |聖伯納德   |
-| Saint *    | 2846 |聖露西    |
+| San *      | 5182 |San Bernard   |
+| Saint *    | 2846 |聖 Lucy    |
 | Moscow     | 3726 |Moscow        |
 | \* -on- \* | 2730 |一對一  |
 | Paris      | 2716 |Paris         |
 
-具有自訂權杖化的另一個範例:
+另一個具有自訂 token 化的範例：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 1000 step 1
 | project MyText = strcat("MachineLearningX", tostring(toint(rand(10))))
 | reduce by MyText  with threshold=0.001 , characters = "X" 
 ```
 
-|模式         |Count|Representative   |
+|模式         |計數|Representative   |
 |----------------|-----|-----------------|
-|機器學習*|1000 |機器學習X4|
+|MachineLearning|1000 |MachineLearningX4|
 
 **範例**
 
-下面的範例展示如何將`reduce`運算子應用於「已消毒」輸入,在減少列的 GUID 之前取代
+下列範例示範如何將運算子套用至「已清理」的 `reduce` 輸入，其中要減少的資料行中的 guid 會在減少之前被取代
 
 ```kusto
 // Start with a few records from the Trace table.
@@ -87,4 +88,4 @@ Trace | take 10000
 
 **注意事項**
 
-運算元的`reduce`實現主要基於 Risto Vaarandi 的論文《[事件日誌中挖掘模式的數據聚類演演演算法](https://ristov.github.io/publications/slct-ipom03-web.pdf)》。
+運算子的執行 `reduce` 主要是根據[來自事件記錄檔的資料群集演算法](https://ristov.github.io/publications/slct-ipom03-web.pdf)（Risto Vaarandi）。

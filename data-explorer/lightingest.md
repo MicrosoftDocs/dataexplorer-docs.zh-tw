@@ -1,120 +1,120 @@
 ---
-title: Lightingest 是一個命令行實用程式,用於引入 Azure 數據資源管理器。
-description: 瞭解 LightIngest,這是一個用於將臨時數據引入 Azure 資料資源管理器的命令行實用程式。
+title: LightIngest 是命令列公用程式，可用於內嵌至 Azure 資料總管。
+description: 深入瞭解 LightIngest，這是一種命令列公用程式，可用於將臨機運算元據內嵌至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/01/2020
-ms.openlocfilehash: e9918452aaeefc2c4f144c60e2e7bdb70ac87f2b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8d4eeb47abb8eac2b042b64e65b55dac7e91d6c9
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81502409"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374047"
 ---
 # <a name="install-and-use-lightingest"></a>安裝和使用 LightIngest
 
-Lightingest 是一個命令行實用程式,用於將臨時數據引入 Azure 數據資源管理器。
-該實用程式可以從本地資料夾或 Azure Blob 儲存容器中提取源資料。
+LightIngest 是命令列公用程式，可用於將臨機運算元據內嵌至 Azure 資料總管。
+公用程式可以從本機資料夾或從 Azure blob 儲存體容器提取來源資料。
 
 ## <a name="prerequisites"></a>Prerequisites
 
-* 最輕 - 作為[Microsoft.Azure.Kusto.Tools NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)的一部分下載它
+* LightIngest-將其下載為 Kusto 的一部分[NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)
 
-    ![最亮下載](media/lightingest/lightingest-download-area.png)
+    ![Lightingest 下載](media/lightingest/lightingest-download-area.png)
 
-* WinRAR - 從[www.win-rar.com/download.html](http://www.win-rar.com/download.html)下載
+* WinRAR-從[www.win-rar.com/download.html](http://www.win-rar.com/download.html)下載
 
-## <a name="install-lightingest"></a>安裝最亮燈
+## <a name="install-lightingest"></a>安裝 LightIngest
 
-1. 導航到您下載的"燈光"計算機上的位置。 
-1. 使用 WinRAR,將*工具*目錄提取到您的電腦。
+1. 流覽至您電腦上下載 LightIngest 的位置。 
+1. 使用 WinRAR，將*工具*目錄解壓縮至您的電腦。
 
-## <a name="run-lightingest"></a>運行照明
+## <a name="run-lightingest"></a>執行 LightIngest
 
-1. 導航到電腦上的提取*工具*目錄。
-1. 從位置列中刪除現有位置資訊。
+1. 流覽至您電腦上的已解壓縮*工具*目錄。
+1. 從 [位置] 列刪除現有的位置資訊。
     
       ![刪除位置資訊](media/lightingest/lightingest-location-bar.png)
 
-1. 請`cmd`輸入 並按**Enter**。
-1. 在指令提示符下,`LightIngest.exe`輸入後跟相關的命令列參數。
+1. 輸入 `cmd` ，然後按**enter**鍵。
+1. 在命令提示字元中，輸入， `LightIngest.exe` 後面接著相關的命令列引數。
 
     > [!Tip]
-    > 有關受支援的指令列參數的清單,請輸入`LightIngest.exe /help`。
+    > 如需支援的命令列引數清單，請輸入 `LightIngest.exe /help` 。
     >
     >![命令列說明](media/lightingest/lightingest-cmd-line-help.png)
 
-1. 輸入`ingest-`後跟將管理引入的 Azure 資料資源管理器群集的連接字串。
-    將連接字串括在雙引號中,並遵循[Kusto 連接字串規格](kusto/api/connection-strings/kusto.md)。
+1. 輸入， `ingest-` 後面接著將會管理內嵌的 Azure 資料總管叢集的連接字串。
+    以雙引號括住連接字串，並遵循[Kusto 連接字串規格](kusto/api/connection-strings/kusto.md)。
 
     例如：
     ```
     ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
     ```
 
-* 建議的方法是 Lightingest`https://ingest-{yourClusterNameAndRegion}.kusto.windows.net`使用 中的 引入終結點。 這樣,Azure 數據資源管理器服務可以管理引入負載,並且可以輕鬆地從瞬態錯誤中恢復。 但是,您還可以將「光點」配置為直接與引擎終結點 ()`https://{yourClusterNameAndRegion}.kusto.windows.net`配合使用。
+* 建議的方法是讓 LightIngest 在中使用內嵌端點 `https://ingest-{yourClusterNameAndRegion}.kusto.windows.net` 。 如此一來，Azure 資料總管服務就可以管理內嵌負載，而且您可以輕鬆地從暫時性錯誤中復原。 不過，您也可以將 LightIngest 設定為直接與引擎端點（）搭配使用 `https://{yourClusterNameAndRegion}.kusto.windows.net` 。
 
 > [!Note]
-> 如果直接使用引擎終結點進行攝取,則不需要包括`ingest-`,但不會有 DM 功能來保護發動機並提高引入成功率。
+> 如果您直接內嵌引擎端點，則不需要包含 `ingest-` ，但也不會有 DM 功能來保護引擎並改善內嵌成功率。
 
-* 為了獲得最佳的攝取性能,LightIngest 瞭解原始數據大小非常重要,因此 Lightingest 將估計本地檔的未壓縮大小。 但是,LightIngest 可能無法在不首先下載壓縮 blob 的情況下正確估計壓縮 blob 的原始大小。 因此,在引入壓縮的 Blob 時`rawSizeBytes`,將 blob 中繼資料上的屬性設置為以位元組為單位的未壓縮數據大小。
+* 為了達到最佳的內嵌效能，LightIngest 必須知道原始資料大小，因此 LightIngest 會估計本機檔案的未壓縮大小。 不過，LightIngest 可能無法正確估計壓縮 blob 的原始大小，而不需要先下載它們。 因此，內嵌壓縮的 blob 時，請將 `rawSizeBytes` blob 中繼資料上的屬性設定為未壓縮的資料大小（以位元組為單位）。
 
-## <a name="general-command-line-arguments"></a>一般命令列參數
+## <a name="general-command-line-arguments"></a>一般命令列引數
 
 |引數名稱         |簡短名稱   |類型    |強制性 |描述                                |
 |----------------------|-------------|--------|----------|-------------------------------------------|
-|                      |             |字串  |強制性 |[Azure 資料資源管理器連接字串](kusto/api/connection-strings/kusto.md),指定將處理引入的 Kusto 終結點。 應以雙引弧括起來 |
-|-資料庫             |-db          |字串  |選用  |目標 Azure 資料資源管理員資料庫名稱 |
-|-表                |             |字串  |強制性 |目標 Azure 資料資源管理員表名稱 |
-|-sourcePath           |-source      |字串  |強制性 |blob 容器的源檔或根URI的路徑。 如果數據在 Blob 中,則必須包含儲存帳戶金鑰或 SAS。 建議以雙引括起來 |
-|-前置               |             |字串  |選用  |當要引入的源資料駐留在 Blob 儲存上時,此 URL 前綴由所有 Blob 共用,不包括容器名稱。 <br>例如,如果資料在中`MyContainer/Dir1/Dir2`,則前置字串`Dir1/Dir2`應為 。 建議用雙引括起來 |
-|-模式              |             |字串  |選用  |選取來源/blob 的模式。 支援通配符。 例如： `"*.csv"` 。 建議以雙引括起來 |
-|-zipPattern           |             |字串  |選用  |在選擇要引入的 ZIP 存檔中的檔時使用的正則運算式。<br>存檔中的所有其他檔將被忽略。例如, `"*.csv"`. 建議用雙引括起來 |
-|-格式               |-f           |字串  |選用  |源數據格式。 必須是[支援的格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)之一 |
-|-引入對應路徑 |-對應路徑 |字串  |選用  |引入列映射檔的路徑(Json 和 Avro 格式的必需)。 檢視[資料對應](kusto/management/mappings.md) |
-|-引入對應  |-映射參考  |字串  |選用  |預先建立的引入列映射的名稱(Json 和 Avro 格式的必需)。 檢視[資料對應](kusto/management/mappings.md) |
-|-建立時間模式  |             |字串  |選用  |設置後,用於從檔或 Blob 路徑中提取創建時間屬性。 請參考[使用建立時間模式參數](#using-creationtimepattern-argument) |
-|-忽略第一行       |-忽略第一 |bool    |選用  |如果設定,將忽略每個檔案/blob 的第一個紀錄(例如,如果源資料具有標頭) |
-|-標籤                  |             |字串  |選用  |要與引入的資料關聯的[標籤](kusto/management/extents-overview.md#extent-tagging)。 允許多次發生 |
-|-不要等待             |             |bool    |選用  |如果設置為"true",則不等待攝入完成。 攝入大量檔案/blob 時非常有用 |
+|                      |             |字串  |強制性 |[Azure 資料總管連接字串](kusto/api/connection-strings/kusto.md)，指定將處理內嵌的 Kusto 端點。 應以雙引號括住 |
+|-資料庫             |-db          |字串  |選用  |目標 Azure 資料總管資料庫名稱 |
+|-table                |             |字串  |強制性 |目標 Azure 資料總管資料表名稱 |
+|-sourcePath           |-source      |字串  |強制性 |Blob 容器的來源檔案或根 URI 路徑。 如果資料位於 blob 中，必須包含儲存體帳戶金鑰或 SAS。 建議以雙引號括住 |
+|-前置詞               |             |字串  |選用  |當要內嵌的來源資料位於 blob 儲存體時，此 URL 首碼會由所有 blob 共用，但不包括容器名稱。 <br>例如，如果資料在中，則 `MyContainer/Dir1/Dir2` 前置詞應該是 `Dir1/Dir2` 。 建議以雙引號括住 |
+|-pattern              |             |字串  |選用  |從中挑選原始程式檔/blob 的模式。 支援萬用字元。 例如 `"*.csv"`。 建議以雙引號括住 |
+|-zipPattern           |             |字串  |選用  |選取要內嵌之 ZIP 封存中的檔案時，所要使用的正則運算式。<br>封存中的所有其他檔案都會被忽略。例如， `"*.csv"` 。 建議以雙引號括住 |
+|-格式               |-f           |字串  |選用  |源資料格式。 必須是其中一種[支援的格式](ingestion-supported-formats.md) |
+|-ingestionMappingPath |-mappingPath |字串  |選用  |內嵌資料行對應檔的路徑（Json 和 Avro 格式的必要）。 請參閱[資料](kusto/management/mappings.md)對應 |
+|-ingestionMappingRef  |-mappingRef  |字串  |選用  |預先建立的內嵌資料行對應名稱（Json 和 Avro 格式的必要項）。 請參閱[資料](kusto/management/mappings.md)對應 |
+|-creationTimePattern  |             |字串  |選用  |設定時，會用來從檔案或 blob 路徑解壓縮 CreationTime 屬性。 請參閱[使用 CreationTimePattern 引數](#using-creationtimepattern-argument) |
+|-ignoreFirstRow       |-ignoreFirst |bool    |選用  |如果設定，則會忽略每個檔案/blob 的第一筆記錄（例如，如果來源資料有標頭） |
+|-tag                  |             |字串  |選用  |要與內嵌資料產生關聯的[標記](kusto/management/extents-overview.md#extent-tagging)。 允許多次發生 |
+|-dontWait             |             |bool    |選用  |如果設定為 ' true '，則不會等候內嵌完成。 內嵌大量檔案/blob 時很有用 |
 
-### <a name="using-creationtimepattern-argument"></a>使用建立時間模式參數
+### <a name="using-creationtimepattern-argument"></a>使用 CreationTimePattern 引數
 
-參數`-creationTimePattern`從檔案或 blob 路徑中提取創建時間屬性。 該模式不需要反映整個專案路徑,只需反映要使用的時間戳的部分。
+`-creationTimePattern`引數會從檔案或 blob 路徑中解壓縮 CreationTime 屬性。 此模式不需要反映整個專案路徑，只會包含您要使用的時間戳記區段。
 
-參數值必須包括:
-* 時間戳前面的常量測試,以單引弧括起來
-* 時間戳格式,標準為[.NET 日期時間表示法](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)
-* 時間戳緊隨其後的常量文本。 例如,如果 blob`historicalvalues19840101.parquet`名稱以 (時間戳為年份的四位數位、該月的兩位數位和每月的兩位數位)結尾,`-creationTimePattern`則參數的相應值為:
+引數值必須包含：
+* 緊接在時間戳記前面的常數測試，以單引號括住
+* 標準[.Net 日期時程表示法](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)中的時間戳記格式
+* 緊接在時間戳記之後的常文字。 例如，如果 blob 名稱的結尾 `historicalvalues19840101.parquet` 是（時間戳記是年份的四位數，月份有兩個數字，月份日期有兩個數字），則引數的對應值 `-creationTimePattern` 會是：
 
 ```
 ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -creationTimePattern:"'historicalvalues'yyyyMMdd'.parquet'"
  -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
 ```
 
-### <a name="command-line-arguments-for-advanced-scenarios"></a>進階機制的指令列參數
+### <a name="command-line-arguments-for-advanced-scenarios"></a>Advanced 案例的命令列引數
 
 |引數名稱         |簡短名稱   |類型    |強制性 |描述                                |
 |----------------------|-------------|--------|----------|-------------------------------------------|
-|-壓縮          |-cr          |double  |選用  |壓縮比提示。 引入壓縮檔/blob 以説明 Azure 資料資源管理器評估原始數據大小時非常有用。 依壓縮大小以原始大小 |
-|-限制                |-l           |integer |選用  |若設定,則將引入限制為前 N 個檔案 |
-|-僅清單             |-list        |bool    |選用  |如果設置,則僅顯示已選擇要攝入的專案| 
-|-引入超時        |             |integer |選用  |所有引入操作完成以分鐘表示超時。 預設為 `60`|
-|-力同步            |             |bool    |選用  |如果設置,則強制同步攝入。 預設為 `false` |
-|-資料批次大小        |             |integer |選用  |設定每個引入操作的總大小限制(MB、未壓縮) |
-|-檔案在巴奇         |             |integer |選用  |設定每個引入操作的檔案/Blob 計數限制 |
-|-dev追蹤           |-追蹤       |字串  |選用  |如果設定,診斷紀錄將寫入本地目錄(預設情況下,`RollingLogs`在目前的目錄中,或者可以透過設定開關值進行修改) |
+|-壓縮          |-cr          |double  |選用  |壓縮比例提示。 內嵌壓縮檔案/blob 以協助 Azure 資料總管評估原始資料大小時很有用。 以原始大小除以壓縮大小來計算 |
+|-限制                |-l           |integer |選用  |若設定，會將內嵌限制為前 N 個檔案 |
+|-listOnly             |-list        |bool    |選用  |如果設定，則只會顯示已選取要進行內嵌的專案| 
+|-ingestTimeout        |             |integer |選用  |所有內嵌作業完成的超時（以分鐘為單位）。 預設為 `60`|
+|-forceSync            |             |bool    |選用  |如果設定，則會強制執行同步內嵌。 預設為 `false` |
+|-dataBatchSize        |             |integer |選用  |設定每個內嵌作業的總大小限制（MB、未壓縮） |
+|-filesInBatch         |             |integer |選用  |設定每個內嵌作業的檔案/blob 計數限制 |
+|-devTracing           |-trace       |字串  |選用  |如果設定，診斷記錄會寫入本機目錄（根據預設， `RollingLogs` 在目前的目錄中，或者可以藉由設定參數值來修改） |
 
 ## <a name="blob-metadata-properties"></a>Blob 中繼資料屬性
-當與 Azure Blob 一起使用時,Lightingest 將使用某些 blob 元數據屬性來增強引入過程。
+與 Azure blob 搭配使用時，LightIngest 會使用某些 blob 中繼資料屬性來增加內嵌進程。
 
-|中繼資料屬性                            | 使用量                                                                           |
+|Metadata 屬性                            | 使用方式                                                                           |
 |---------------------------------------------|---------------------------------------------------------------------------------|
-|`rawSizeBytes`, `kustoUncompressedSizeBytes` | 如果設定,將解釋為未壓縮的資料大小                       |
-|`kustoCreationTime`, `kustoCreationTimeUtc`  | 解釋為 UTC 時間戳。 如果設置,將用於覆蓋 Kusto 中的創建時間。 適用於回填方案 |
+|`rawSizeBytes`, `kustoUncompressedSizeBytes` | 如果設定，將會被視為未壓縮的資料大小                       |
+|`kustoCreationTime`, `kustoCreationTimeUtc`  | 以 UTC 時間戳記的形式轉譯。 如果設定，將會用來覆寫 Kusto 中的建立時間。 適用于回填案例 |
 
 ## <a name="usage-examples"></a>使用範例
 
@@ -152,12 +152,12 @@ To use the LightIngest command below:
     ![Injestion result in Azure Data Explorer](media/lightingest/lightingest-show-failure-count.png)
 -->
 
-### <a name="ingesting-blobs-using-a-storage-account-key-or-a-sas-token"></a>使用儲存帳戶金鑰或 SAS 權杖引入 Blob
+### <a name="ingesting-blobs-using-a-storage-account-key-or-a-sas-token"></a>使用儲存體帳戶金鑰或 SAS 權杖來內嵌 blob
 
-* 在指定的儲存帳戶`ACCOUNT`下、在資料夾中`DIR`、容器`CONT`下引入 10 個 blob,並符合模式`*.csv.gz`
-* 目標是資料庫`DB`、表`TABLE`,在目標上預先建立引入`MAPPING`對應
-* 該工具將等待,直到引入操作完成
-* 請注意指定目標資料庫和儲存帳戶金鑰與 SAS 權杖的不同選項
+* 在 [容器] 底下的 [指定的儲存體帳戶 `ACCOUNT` 、資料夾] `DIR` `CONT` 和 [符合] 模式中內嵌10個 blob`*.csv.gz`
+* 目的地是資料庫 `DB` 、資料表 `TABLE` ，以及 `MAPPING` 預先建立在目的地上的內嵌對應
+* 此工具會等到內嵌作業完成
+* 請注意指定目標資料庫和儲存體帳戶金鑰與 SAS 權杖的不同選項
 
 ```
 LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True"
@@ -180,12 +180,12 @@ LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True;In
   -limit:10
 ```
 
-### <a name="ingesting-all-blobs-in-a-container-not-including-header-rows"></a>引入容器中的所有 Blob,不包括標頭行
+### <a name="ingesting-all-blobs-in-a-container-not-including-header-rows"></a>內嵌容器中的所有 blob，不包含標頭資料列
 
-* 在指定的儲存帳戶`ACCOUNT`下、資料夾中`DIR1/DIR2`、容器`CONT`下和符合模式下引入所有 Blob`*.csv.gz`
-* 目標是資料庫`DB`、表`TABLE`,在目標上預先建立引入`MAPPING`對應
-* 來源檢視器,因此指示工具移除每個 Blob 的第一條記錄
-* 該工具將發佈用於攝取的數據,並且不會等待引入操作完成
+* 將所有 blob 內嵌在指定的儲存體帳戶 `ACCOUNT` 、資料夾 `DIR1/DIR2` 、容器底下， `CONT` 並符合模式`*.csv.gz`
+* 目的地是資料庫 `DB` 、資料表 `TABLE` ，以及 `MAPPING` 預先建立在目的地上的內嵌對應
+* 來源 blob 包含標頭行，因此會指示工具卸載每個 blob 的第一筆記錄
+* 此工具會公佈資料進行內嵌，而不會等待內嵌作業完成
 
 ```
 LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True"
@@ -199,11 +199,11 @@ LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True"
   -ignoreFirstRow:true
 ```
 
-### <a name="ingesting-all-json-files-from-a-path"></a>從路徑中引入所有 JSON 檔
+### <a name="ingesting-all-json-files-from-a-path"></a>從路徑內嵌所有 JSON 檔案
 
-* 引入路徑`PATH`下的所有檔案,與模式比對`*.json`
-* 目標是資料庫`DB`、`TABLE`表格,引入映射在本地端檔案中定義`MAPPING_FILE_PATH`
-* 該工具將發佈用於攝取的數據,並且不會等待引入操作完成
+* 內嵌 path 底下的所有檔案 `PATH` ，符合模式`*.json`
+* 目的地是資料庫 `DB` 、資料表 `TABLE` 和內嵌對應定義于本機檔案中`MAPPING_FILE_PATH`
+* 此工具會公佈資料進行內嵌，而不會等待內嵌作業完成
 
 ```
 LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True"
@@ -215,12 +215,12 @@ LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True"
   -mappingPath:"MAPPING_FILE_PATH"
 ```
 
-### <a name="ingesting-files-and-writing-diagnostic-trace-files"></a>引入檔案及寫入診斷追蹤檔案
+### <a name="ingesting-files-and-writing-diagnostic-trace-files"></a>內嵌檔案和寫入診斷追蹤檔案
 
-* 引入路徑`PATH`下的所有檔案,與模式比對`*.json`
-* 目標是資料庫`DB`、`TABLE`表格,引入映射在本地端檔案中定義`MAPPING_FILE_PATH`
-* 該工具將發佈用於攝取的數據,並且不會等待引入操作完成
-* 診斷追蹤檔案將在資料夾下本地寫入`LOGS_PATH`
+* 內嵌 path 底下的所有檔案 `PATH` ，符合模式`*.json`
+* 目的地是資料庫 `DB` 、資料表 `TABLE` 和內嵌對應定義于本機檔案中`MAPPING_FILE_PATH`
+* 此工具會公佈資料進行內嵌，而不會等待內嵌作業完成
+* 診斷追蹤檔案會以本機方式寫入資料夾`LOGS_PATH`
 
 ```
 LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True"
@@ -235,4 +235,4 @@ LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True"
 ## <a name="changelog"></a>變更記錄
 |版本        |變更                                                                             |
 |---------------|------------------------------------------------------------------------------------|
-|4.0.9.0        |<ul><li>已新增 `-zipPattern` 引數 </li><li>已新增 `-listOnly` 引數 </li><li>在開始執行之前顯示參數摘要</li><li>根據`-creationTimePattern`參數,從 Blob 中繼資料屬性或 blob 或檔案名讀取建立時間</li></ul>|
+|4.0.9.0        |<ul><li>已新增 `-zipPattern` 引數 </li><li>已新增 `-listOnly` 引數 </li><li>引數摘要會在執行生效之前顯示</li><li>根據引數，從 blob 中繼資料屬性或從 blob 或檔案名讀取 CreationTime `-creationTimePattern`</li></ul>|

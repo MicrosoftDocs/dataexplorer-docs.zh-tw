@@ -1,6 +1,6 @@
 ---
-title: ipv4_is_match() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 ipv4_is_match()。
+title: ipv4_is_match （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 ipv4_is_match （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: aa0646321af2d467c1e4af07fba81ccdc58eff37
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b63a73efe73223ba7c6bd2b42c6e05a6c60e94b6
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513731"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271446"
 ---
-# <a name="ipv4_is_match"></a>ipv4_is_match()
+# <a name="ipv4_is_match"></a>ipv4_is_match （）
 
-匹配兩個 IPv4 字串。
+符合兩個 IPv4 字串。
 
 ```kusto
 ipv4_is_match("127.0.0.1", "127.0.0.1") == true
@@ -28,35 +28,36 @@ ipv4_is_match('192.168.1.1', '192.168.1.255', 24) == true
 
 **語法**
 
-`ipv4_is_match(`*Expr1*`, `*Expr2*`[ ,`*首碼遮罩*`])`
+`ipv4_is_match(`*運算式 1* `, `*運算式 2* `[ ,`*PrefixMask*`])`
 
 **引數**
 
-* *Expr1*, *Expr2*: 表示 IPv4 位址的字串運算式。 可以使用[IP 首碼表示法](#ip-prefix-notation)遮罩 IPv4 字串。
-* *首碼遮罩*:從 0 到 32 的整數,表示考慮的最顯著位數。
+* *運算式 1*、運算式*2*：代表 IPv4 位址的字串運算式。 IPv4 字串可以使用[IP 首碼標記法](#ip-prefix-notation)來進行遮罩。
+* *PrefixMask*：介於0到32之間的整數，代表所考慮的最高有效位數。
 
-### <a name="ip-prefix-notation"></a>IP 前置表示法
+### <a name="ip-prefix-notation"></a>IP 首碼標記法
 
-使用`IP-prefix notation`斜杠`/`( ) 字元定義 IP 位址是常見做法。 斜杠`/`( ) LEFT 的 IP 位址是基本`/`IP 位址,斜杠 () 右側的數位(1 到 32)是網掩碼中連續 1 位的數量。 
+使用 `IP-prefix notation` 斜線（）字元來定義 IP 位址是常見的作法 `/` 。 斜線（）左邊的 IP 位址 `/` 是基底 IP 位址，而斜線（）右邊的數位（1到32） `/` 是網路遮罩中連續1位的數目。 
 
-示例:192.168.2.0/24 將具有一個關聯的網路/子網掩碼,其中包含 24 個連續位或 255.255.255.0,以點狀小數格式顯示。
+範例： 192.168.2.0/24 會有相關聯的 net/subnetmask，其中包含小數點十進位格式的24個連續位或255.255.255.0。
 
 **傳回**
 
-在計算從參數前置的 IP 前置碼和可選`PrefixMask`參數時,將分析和比較兩個 IPv4 字串。
+這兩個 IPv4 字串會經過剖析和比較，同時會計入引數前置詞所計算的結合 IP 首碼遮罩和選擇性 `PrefixMask` 引數。
 
 傳回：
-* `true`:如果第一個 IPv4 字串參數的長表示形式等於第二個 IPv4 字串參數。
-*  `false`:否則。
+* `true`：如果第一個 IPv4 字串引數的長標記法等於第二個 IPv4 字串引數。
+*  `false`別的.
 
-如果兩個 IPv4 字串之一的轉換不成功,則結果將`null`為 。
+如果兩個 IPv4 字串其中之一的轉換不成功，則結果會是 `null` 。
 
 **範例**
 
-## <a name="ipv4-comparison-equality-cases"></a>IPv4 比較相等情況
+## <a name="ipv4-comparison-equality-cases"></a>IPv4 比較相等案例
 
-下面的範例使用 IPv4 字串中指定的 IP 首碼表示法比較各種 IP。
+下列範例會比較使用 IPv4 字串內指定之 IP 首碼標記法的各種 Ip。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(ip1_string:string, ip2_string:string)
 [
@@ -71,12 +72,13 @@ datatable(ip1_string:string, ip2_string:string)
 |ip1_string|ip2_string|result|
 |---|---|---|
 |192.168.1.0|192.168.1.0|1|
-|192.168.1.1/24|192.168.1.255|1|
-|192.168.1.1|192.168.1.255/24|1|
-|192.168.1.1/30|192.168.1.255/24|1|
+|192.168.1.1/24|192.168.1.255 裝置|1|
+|192.168.1.1|192.168.1.255 裝置/24|1|
+|192.168.1.1/30|192.168.1.255 裝置/24|1|
 
-下面的範例使用在IPv4字串中指定的IP首碼表示法作為`ipv4_is_match()`函數的其他參數比較各種IP。
+下列範例會使用 IPv4 字串內指定的 IP 首碼標記法，以及做為函式的其他引數，來比較各種 ip `ipv4_is_match()` 。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(ip1_string:string, ip2_string:string, prefix:long)
 [
@@ -90,5 +92,5 @@ datatable(ip1_string:string, ip2_string:string, prefix:long)
 |ip1_string|ip2_string|prefix|result|
 |---|---|---|---|
 |192.168.1.1|192.168.1.0|31|1|
-|192.168.1.1/24|192.168.1.255|31|1|
-|192.168.1.1|192.168.1.255|24|1|
+|192.168.1.1/24|192.168.1.255 裝置|31|1|
+|192.168.1.1|192.168.1.255 裝置|24|1|

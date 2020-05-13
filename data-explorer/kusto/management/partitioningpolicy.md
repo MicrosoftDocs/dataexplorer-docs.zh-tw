@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 564ce0677f3d280fed27c0b6ce1328cb35188c4f
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: fc3fa6b081e48e09ed246144cd72785446395883
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225882"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373332"
 ---
 # <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
 
@@ -212,8 +212,8 @@ ms.locfileid: "83225882"
 
 ### <a name="outliers-in-partitioned-columns"></a>分割資料行中的極端值
 
-* 如果雜湊分割區索引鍵的值夠大，而無法正確填入（例如，它們是空的或具有一般值），這可能會導致在叢集節點之間擁有非平衡的資料散發。
-* 如果統一範圍的 datetime 資料分割索引鍵有夠多百分比的值，這些值是從資料行中大部分的值「遠」（例如，過去或未來的日期時間值）。
+* 如果雜湊分割區索引鍵所包含的值比其他 significnatly 更普遍，例如，空字串、泛型值（例如 `null` 或 `N/A` ），或代表在 `tenant_id` 資料集內較普遍的實體（例如），可能會導致跨叢集節點的不平衡散發資料，以及降低查詢效能。
+* 如果統一範圍的 datetime 資料分割索引鍵有夠多百分比的值，這些值都是來自資料行中大多數值的「遠」（例如，過去或未來的日期時間值），這可能會增加資料分割程式的 overhad，並導致叢集需要追蹤的許多小型範圍。
 
 在這兩種情況下，您都應該「修正」資料，或在內嵌時（例如，使用[更新原則](updatepolicy.md)）篩選掉資料中任何不相關的記錄，以降低叢集上資料分割的額外負荷。
 

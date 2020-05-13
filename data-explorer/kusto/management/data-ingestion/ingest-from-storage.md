@@ -1,6 +1,6 @@
 ---
-title: .ingest 到命令(從存儲中提取數據) - Azure 數據資源管理器 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 .ingest 到命令(從存儲中提取數據)。
+title: 將內嵌至命令（從儲存體提取資料）-Azure 資料總管 |Microsoft Docs
+description: 本文說明如何在 Azure 資料總管中內嵌至命令（從儲存體提取資料）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,59 +8,59 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1f304f9dc064094c6d55cb32f3fb453f32114979
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 05d62aaa7b123f7f6d02b784402fd06335e155b2
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521432"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373418"
 ---
-# <a name="the-ingest-into-command-pull-data-from-storage"></a>.ingest 到指令(從儲存中提取資料)
+# <a name="the-ingest-into-command-pull-data-from-storage"></a>將內嵌至命令（從儲存體提取資料）
 
-該`.ingest into`命令通過從一個或多個雲端儲存專案「提取」數據來將數據引入表中。
-例如,該命令可以從 Azure Blob 儲存中檢索 1000 個 CSV 格式的 Blob,對其進行分析,並將它們一起引入單個目標表。
-數據將追加到表中,而不會影響現有記錄,並且不修改表的架構。
+命令會藉 `.ingest into` 由「提取」一或多個雲端儲存體成品中的資料，將資料內嵌到資料表中。
+例如，命令可以從 Azure Blob 儲存體取出 1000 CSV 格式的 blob、剖析它們，並將它們一起內嵌到單一目標資料表中。
+資料會附加至資料表，而不會影響現有的記錄，而且不會修改資料表的架構。
 
 **語法**
 
-`.ingest`[`async` `into` `with` `(` `,` `=`*IngestionPropertyValue**TableName**SourceDataLocator* *IngestionPropertyName*] 表名 來源資料定位器 ( 引入屬性名稱 引入屬性值 ] ...] `table``)`]
+`.ingest`[ `async` ] `into` `table` *TableName* *SourceDataLocator* [ `with` `(` *IngestionPropertyName* `=` *IngestionPropertyValue* [ `,` ...] `)` ]
 
 **引數**
 
-* `async`:如果指定,該命令將立即返回,並繼續在後台引入。 該命令的結果將包括一個`OperationId`值,該值隨後可用於該`.show operation`命令以檢索引入完成狀態和結果。
+* `async`：如果指定，此命令會立即傳回，並繼續在背景中進行內嵌。 此命令的結果將會包含一個 `OperationId` 值，之後可以使用此 `.show operation` 命令來抓取內嵌完成狀態和結果。
   
-* *表名稱*:要將資料引入到的表的名稱。
-  表名稱始終與上下文中的資料庫相關,並且其架構是如果未提供架構映射物件,則將為數據假定的架構。
+* *TableName*：要內嵌資料的資料表名稱。
+  資料表名稱一律會相對於內容中的資料庫，而且如果未提供任何架構對應物件，其架構就是將會假設用於資料的架構。
 
-* *SourceDataLocator:*`string`類型 的文字`(`,`)`或由 和字元包圍的此類文本的逗號分隔清單,指示包含要提取數據的儲存工件。 請參考[儲存連線字串](../../api/connection-strings/storage.md)。
+* *SourceDataLocator*：類型的常值 `string` ，或是以和字元括住的這類常值清單（以逗號分隔） `(` `)` ，表示包含要提取之資料的儲存體成品。 請參閱[儲存體連接字串](../../api/connection-strings/storage.md)。
 
 > [!NOTE]
-> 強烈建議對包含實際認證的*SourceDataPointer*使用[模糊字串文字](../../query/scalar-data-types/string.md#obfuscated-string-literals)。
-> 該服務將一定要在其內部跟蹤、錯誤消息等中擦除憑據。
+> 強烈建議您針對包含實際認證的*SourceDataPointer* ，使用[模糊的字串常](../../query/scalar-data-types/string.md#obfuscated-string-literals)值。
+> 服務會確定在其內部追蹤、錯誤訊息等中清除認證。
 
-* *引入屬性名稱*,*引入屬性值*:影響引入過程的任何數量的[引入屬性](https://docs.microsoft.com/azure/data-explorer/ingestion-properties)。
+* *IngestionPropertyName*， *IngestionPropertyValue*：會影響內嵌進程的任意數目的內嵌[屬性](../../../ingestion-properties.md)。
 
 **結果**
 
-該命令的結果是具有與命令生成的數據分片("範圍")一樣多的記錄的表。
-如果未生成數據分片,則返回單個記錄,並返回空(零值)範圍ID。
+命令的結果是一個資料表，其中包含多筆記錄，如命令所產生的資料分區（「範圍」）。
+如果未產生任何資料分區，則會傳回具有空白（零值）範圍識別碼的單一記錄。
 
 |名稱       |類型      |描述                                                                |
 |-----------|----------|---------------------------------------------------------------------------|
-|放大縮小字型功能 放大縮小字型功能   |`guid`    |命令產生的數據分片的唯一標識符。|
-|專案已載入 |`string`  |與此記錄相關的一個或多個存儲專案。             |
-|Duration   |`timespan`|執行攝入需要多長時間。                                     |
-|有錯誤  |`bool`    |此記錄是否表示引入失敗。                |
-|操作代碼|`guid`    |表示操作的唯一 ID。 可與命令一`.show operation`起使用。|
+|ExtentId   |`guid`    |命令所產生之資料分區的唯一識別碼。|
+|ItemLoaded |`string`  |與此記錄相關的一或多個儲存體成品。             |
+|Duration   |`timespan`|執行內嵌所花費的時間。                                     |
+|HasErrors  |`bool`    |此記錄是否代表內嵌失敗。                |
+|OperationId|`guid`    |代表作業的唯一識別碼。 可以搭配 `.show operation` 命令使用。|
 
 **備註**
 
-此命令不修改要引入的表的架構。
-如有必要,數據在引入過程中被「強制」到此架構中,而不是相反(忽略額外的列,缺少的列被視為空值)。
+此命令不會修改要內嵌至之資料表的架構。
+如有必要，資料會在內嵌期間「強制轉型」到此架構中，而非另一種方法（忽略額外的資料行，而遺漏的資料行則視為 null 值）。
 
 **範例**
 
-下一個範例指示引擎將 Azure Blob 儲存中的兩個 Blob 讀取為`T`CSV 檔,並將其內容引入到表中。 表示`...`Azure 儲存共享存取簽名 (SAS),它允許讀取存取每個 Blob。 另請注意,使用模糊字串(`h`字串值前面)以確保永遠不會記錄 SAS。
+下一個範例會指示引擎從 Azure Blob 儲存體讀取兩個 blob 做為 CSV 檔案，並將其內容內嵌到資料表中 `T` 。 `...`代表 Azure 儲存體的共用存取簽章（SAS），可提供每個 blob 的讀取權限。 另請注意，使用模糊的字串（ `h` 在字串值前面），以確保永遠不會記錄 SAS。
 
 ```kusto
 .ingest into table T (
@@ -69,7 +69,7 @@ ms.locfileid: "81521432"
 )
 ```
 
-下一個範例是從 Azure 資料儲存第 2 代 (ADLSv2) 中引入數據。 此處使用的認證 (`...`) 是儲存帳戶認證 (共用金鑰),我們僅對連接字串的機密部分使用字串混淆。
+下一個範例是從 Azure Data Lake Storage Gen 2 （ADLSv2）內嵌資料。 此處使用的認證（ `...` ）是儲存體帳號憑證（共用金鑰），而且我們只會針對連接字串的秘密部分使用字串混淆。
 
 ```kusto
 .ingest into table T (
@@ -78,8 +78,8 @@ ms.locfileid: "81521432"
 )
 ```
 
-下一個範例從 Azure 資料儲存 (ADLS) 中引入單個檔。
-它使用使用者的認證存取 ADLS(因此無需將儲存 URI 視為包含機密)。 它還演示如何指定引入屬性。
+下一個範例會從 Azure Data Lake Storage （ADLS）內嵌單一檔案。
+它會使用使用者的認證來存取 ADLS （因此，不需要將儲存體 URI 視為包含秘密）。 它也會說明如何指定內嵌屬性。
 
 ```kusto
 .ingest into table T ('adl://contoso.azuredatalakestore.net/Path/To/File/file1.ext;impersonate')

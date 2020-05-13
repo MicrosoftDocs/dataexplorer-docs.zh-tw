@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 5394eefad37195833c0c5ebb94325bb540d1f520
-ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
+ms.openlocfilehash: 4500ec5b58c93901e011ea6dd270563d3405ee01
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82907223"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372858"
 ---
 # <a name="series_decompose"></a>series_decompose()
 
@@ -23,7 +23,7 @@ ms.locfileid: "82907223"
  
 **語法**
 
-`series_decompose(`*數列* `[,` *季節性*`,` *Seasonality_threshold* *Test_points* *Trend*趨勢 Test_points Seasonality_threshold`,` `,``])`
+`series_decompose(`*數列* `[,`*季節性* `,`*趨勢* `,`*Test_points* `,`*Seasonality_threshold*`])`
 
 **引數**
 
@@ -37,7 +37,7 @@ ms.locfileid: "82907223"
     * "linefit"：使用線性回歸來將趨勢元件解壓縮。
     * "none"：沒有趨勢，略過解壓縮此元件。    
 * *Test_points*：0（預設值）或正整數，指定要從學習（回歸）進程中排除之數列結尾的點數目。 此參數應針對預測用途進行設定。
-* *Seasonality_threshold*：當*季節性*設定為自動偵測時，季節性分數的閾值，預設的分數臨界`0.6`值為。 如需詳細資訊，請參閱[series_periods_detect](series-periods-detectfunction.md)。
+* *Seasonality_threshold*：當*季節性*設定為自動偵測時，季節性分數的閾值，預設的分數臨界值為 `0.6` 。 如需詳細資訊，請參閱[series_periods_detect](series-periods-detectfunction.md)。
 
 **退貨**
 
@@ -72,6 +72,7 @@ ms.locfileid: "82907223"
 
 在下列範例中，我們會產生一個包含每週季節性的數列，而沒有趨勢，然後在其中新增一些極端值。 `series_decompose`尋找並自動偵測季節性，並產生與季節性元件幾乎完全相同的基準。 我們所新增的極端值可以在殘差元件中清楚看出。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 
@@ -88,8 +89,9 @@ ts
 
 **具有趨勢的每週季節性**
 
-在此範例中，我們會將趨勢新增到上一個範例中的數列。 首先，我們會`series_decompose`使用預設參數來執行。 [趨勢`avg` ] 預設值只會採用平均值，而不會計算趨勢。 產生的基準不包含趨勢。 觀察殘差的趨勢時，此範例會明顯比前一個範例更不精確。
+在此範例中，我們會將趨勢新增到上一個範例中的數列。 首先，我們會 `series_decompose` 使用預設參數來執行。 [趨勢] `avg` 預設值只會採用平均值，而不會計算趨勢。 產生的基準不包含趨勢。 觀察殘差的趨勢時，此範例會明顯比前一個範例更不精確。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 
@@ -104,8 +106,9 @@ ts
 
 :::image type="content" source="images/samples/series-decompose2.png" alt-text="數列分解2":::
 
-接下來，我們會重新執行相同的範例。 因為我們預期數列中的趨勢，所以我們在 trend `linefit`參數中指定。 我們可以看到偵測到正向趨勢，而且基準比輸入數列更接近。 殘差會接近零，只有極端值才會醒目。我們可以在圖表中看到數列上的所有元件。
+接下來，我們會重新執行相同的範例。 因為我們預期數列中的趨勢，所以我們在 `linefit` trend 參數中指定。 我們可以看到偵測到正向趨勢，而且基準比輸入數列更接近。 殘差會接近零，只有極端值才會醒目。我們可以在圖表中看到數列上的所有元件。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 

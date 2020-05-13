@@ -1,6 +1,6 @@
 ---
-title: hash_sha256() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的hash_sha256()。
+title: hash_sha256 （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 hash_sha256 （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2147f4e9f2bd3d7df8f75ac704a4e4808e69bb3c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 32fa2f3ffefdbf1f14ed87e8e89444de322408c3
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507594"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372325"
 ---
 # <a name="hash_sha256"></a>hash_sha256()
 
-返回輸入值的 sha256 哈希值。
+傳回輸入值的 sha256 雜湊值。
 
 **語法**
 
-`hash_sha256(`*源*`)`
+`hash_sha256(`*來源*`)`
 
 **引數**
 
-* *源*:要哈希的值。
+* *來源*：要雜湊的值。
 
 **傳回**
 
-給定標量的 sha256 哈希值,編碼為十六進位元字串(字串,每個字元表示介於 0 和 255 之間的單個十六進位數位)。
+指定純量的 sha256 雜湊值，編碼為十六進位字串（字元字串，每兩個都代表0到255之間的一個十六進位數位）。
 
 > [!WARNING]
-> 此函數 (SHA256) 使用的演算法保證將來不會修改,但計算非常複雜。 建議在單個查詢期間需要「輕量級」 哈希函數的使用者改用函數[哈希()。](./hashfunction.md)
+> 此函式（SHA256）所使用的演算法保證不會在未來進行修改，但對計算而言非常複雜。 在單一查詢期間，需要「輕量」雜湊函式的使用者，建議改用函數[雜湊（）](./hashfunction.md) 。
 
 **範例**
 
@@ -41,8 +41,9 @@ hash_sha256("World")                   // 78ae647dc5544d227130a0682a51e30bc7777f
 hash_sha256(datetime("2015-01-01"))    // e7ef5635e188f5a36fafd3557d382bbd00f699bd22c671c3dea6d071eb59fbf8
 ```
 
-下面的範例使用hash_sha256函數在資料的 StartTime 列上執行查詢
+下列範例會使用 hash_sha256 函數，對資料的 StartTime 資料行執行查詢。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where hash_sha256(StartTime) == 0

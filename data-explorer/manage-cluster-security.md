@@ -1,38 +1,38 @@
 ---
-title: 在 Azure 資料資源管理員保護叢集
-description: 本文介紹如何在 Azure 門戶中的 Azure 數據資源管理器中保護群集。
+title: 在 Azure 中保護您的叢集資料總管
+description: 本文說明如何在 Azure 入口網站中保護 Azure 資料總管中的叢集。
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/20/2019
-ms.openlocfilehash: 0f935999b68a7283c032d43c42d688b273d5c450
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3daf9f5af46338a450a1f1a4e9c80a6c83841343
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81496195"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374028"
 ---
-# <a name="secure-your-cluster-in-azure-data-explorer---azure-portal"></a>在 Azure 資料資源管理員保護叢集 - Azure 門戶
+# <a name="secure-your-cluster-in-azure-data-explorer---azure-portal"></a>在 Azure 中保護您的叢集資料總管-Azure 入口網站
 
-[Azure 磁碟加密](/azure/security/azure-security-disk-encryption-overview)有助於保護數據,以滿足組織安全性和合規性承諾。 它為群集虛擬機器的作業系統和數據磁碟提供卷加密。 它還與 Azure[密鑰保管庫](/azure/key-vault/)整合,這使我們能夠控制和管理磁碟加密密鑰和機密,並確保 VM 磁碟上的所有數據都加密。 
+[Azure 磁碟加密](/azure/security/azure-security-disk-encryption-overview)有助於保護和保護您的資料，以符合組織的安全性和合規性承諾。 它提供叢集虛擬機器的 OS 和資料磁片的磁片區加密。 它也會與[Azure Key Vault](/azure/key-vault/)整合，可讓我們控制及管理磁片加密金鑰和密碼，並確保 VM 磁片上的所有資料都已加密。 
   
-## <a name="enable-encryption-at-rest-in-the-azure-portal"></a>在 Azure 門戶開啟靜態加密
+## <a name="enable-encryption-at-rest-in-the-azure-portal"></a>在 Azure 入口網站中啟用待用加密
   
-叢集安全設置允許您在群集上啟用磁碟加密。 在群集上啟用[靜態加密](/azure/security/fundamentals/encryption-atrest)為存儲的數據(靜態)提供數據保護。 
+您的叢集安全性設定可讓您在叢集上啟用磁片加密。 在您的叢集上啟用待用[加密](/azure/security/fundamentals/encryption-atrest)可為儲存的資料（待用）提供資料保護。 
 
-1. 在 Azure 門戶中,轉到 Azure 資料資源管理器群集資源。 在 **「設定」** 標題下,選擇 **「安全**」。 
+1. 在 Azure 入口網站中，移至您的 Azure 資料總管叢集資源。 在 [**設定**] 標題下，選取 [**安全性**]。 
 
-    ![在靜止時開啟加密](media/manage-cluster-security/security-encryption-at-rest.png)
+    ![開啟待用加密](media/manage-cluster-security/security-encryption-at-rest.png)
 
-1. 在 **「安全」** 視窗中,為 **「磁碟加密**安全設定**打開**」。。 
+1. 在 [**安全性**] 視窗中，針對 [**磁片加密**] 安全性設定選取 [**開啟**]。 
 
 1. 選取 [儲存]  。
  
 > [!NOTE]
-> 選擇 **「關閉**」以在加密啟用後關閉加密。
+> 選取 [**關閉**] 以在啟用加密後予以停用。
 
 ## <a name="next-steps"></a>後續步驟
 
-[檢查叢集健康情況](/azure/data-explorer/check-cluster-health)
+[檢查叢集健康情況](check-cluster-health.md)

@@ -1,6 +1,6 @@
 ---
-title: series_divide() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的series_divide()。
+title: series_divide （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 series_divide （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 8e8b806c325da9bfce5f79ce5a5c4e5cfadaa838
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7d5bdba030687c17c355eb72ce2fc9c358c10ebd
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81508835"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372855"
 ---
 # <a name="series_divide"></a>series_divide()
 
-計算兩個數位系列輸入的元素劃分。
+計算兩個數值數列輸入的元素成對除法。
 
 **語法**
 
-`series_divide(`*列1*`,`*系列2*`)`
+`series_divide(`*series1* `,`*series2*`)`
 
 **引數**
 
-* *系列1,系列2:* 輸入數值陣列,第一個按元素將第二個劃分為動態陣組結果。 所有參數必須是動態陣組。 
+* *series1，series2*：輸入數值陣列，第一個是以元素的方式除以第二個，成為動態陣列結果。 所有引數都必須是動態陣列。 
 
 **傳回**
 
-兩個輸入之間計算元素的按點操作的動態陣列。 任何非數位元素或不存在的元素(不同大小的陣列)都生成`null`元素值。
+這兩個輸入之間的計算元素取向運算動態陣列。 任何非數值元素或不存在的專案（不同大小的陣列）都會產生 `null` 元素值。
 
-注意:即使輸入是整數,結果序列也是雙類型。 除以零後,雙除以零(例如 2/0 生成雙(\inf)。"
+注意：結果數列是 double 型別，即使輸入是整數也一樣。 零除會沿著零除（例如2/0 產生雙精度（+ inf））。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 3 step 1
 | extend y = x * 2
@@ -45,6 +46,6 @@ range x from 1 to 3 step 1
 
 |s1         |s2|        s1_divide_s2|
 |---|---|---|
-|[1,2,4]    |[4,2,1]|   [0.25,1.0,4.0]|
-|[2,4,8]    |[8,4,2]|   [0.25,1.0,4.0]|
-|[3,6,12]   |[12,6,3]|  [0.25,1.0,4.0]|
+|[1，2，4]    |[4，2，1]|   [0.25，1.0，4.0]|
+|[2，4，8]    |[8，4，2]|   [0.25，1.0，4.0]|
+|[3，6，12]   |[12，6，3]|  [0.25，1.0，4.0]|

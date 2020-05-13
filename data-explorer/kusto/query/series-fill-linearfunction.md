@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 4ef02ab79b0701b4af74744a94e0ff795eb8c26a
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 4cec053990457a6b33c7446c5b32c63713320de9
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737244"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372770"
 ---
 # <a name="series_fill_linear"></a>series_fill_linear()
 
@@ -23,31 +23,33 @@ ms.locfileid: "82737244"
 
 **語法**
 
-`series_fill_linear(`*x* `[,` * *missing_value_placeholder` [,`*fill_edges*fill_edges` [,`*constant_value*`]]]))`
+`series_fill_linear(`*x* `[,` *missing_value_placeholder* ` [,` *fill_edges* ` [,` *constant_value*`]]]))`
 * 會使用指定的參數傳回*x*的數列線性插補。
  
 
 **引數**
 
 * *x*：動態陣列純量運算式，這是數值的陣列。
-* *missing_value_placeholder*：選擇性參數，指定要取代的「遺漏值」的預留位置。 預設值為`double`（*null*）。
+* *missing_value_placeholder*：選擇性參數，指定要取代的「遺漏值」的預留位置。 預設值為 `double` （*null*）。
 * *fill_edges*：布林值，指出是否應該以最接近的值取代陣列開頭和結尾的*missing_value_placeholder* 。 預設值*為 True* 。 如果設定為*false*，則會保留陣列開頭和結尾*missing_value_placeholder* 。
-* *constant_value*：僅與陣列相關的選擇性參數，完全由*null*值組成。 這個參數會指定要用來填滿數列的常數值。 預設值為*0*。 將這個參數設定為`double`（*null*），會有效地將*null*值保留在其中。
+* *constant_value*：僅與陣列相關的選擇性參數，完全由*null*值組成。 這個參數會指定要用來填滿數列的常數值。 預設值為*0*。 將這個參數設定為 `double` （*null*），會有效地將*null*值保留在其中。
 
 **注意事項**
 
 * 若要在[make 系列](make-seriesoperator.md)之後套用任何插補函式，請將*null*指定為預設值： 
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 make-series num=count() default=long(null) on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
 ```
 
-* *Missing_value_placeholder*可以是任何將轉換成實際元素類型的類型。 因此， `double`（*null*）、 `long`（*null*）或`int`（*null*）具有相同的意義。
-* 如果*missing_value_placeholder*為`double`（*null*）（或省略，其意義相同），則結果可能會包含*null*值。 使用其他插補函式來填滿這些*null*值。 目前只有[series_outliers （）](series-outliersfunction.md)支援輸入陣列中的*null*值。
+* *Missing_value_placeholder*可以是任何將轉換成實際元素類型的類型。 因此， `double` （*null*）、 `long` （*null*）或 `int` （*null*）具有相同的意義。
+* 如果*missing_value_placeholder*為 `double` （*null*）（或省略，其意義相同），則結果可能會包含*null*值。 使用其他插補函式來填滿這些*null*值。 目前只有[series_outliers （）](series-outliersfunction.md)支援輸入陣列中的*null*值。
 * 函式會保留陣列元素的原始類型。 如果 x 只包含 int 或 long 元素，則線性插補會傳回四捨五入的插補值，而不是精確的。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let data = datatable(arr: dynamic)
 [

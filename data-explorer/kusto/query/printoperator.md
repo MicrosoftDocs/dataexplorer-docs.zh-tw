@@ -1,6 +1,6 @@
 ---
-title: 列印運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的列印運算符。
+title: 列印運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的列印操作員。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,43 +8,45 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2019
-ms.openlocfilehash: b751b07446a74ef17002abac26e4c881a2da757b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d5788ee937fe110b63a8f137fdab0790eb7cb37e
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510960"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373212"
 ---
 # <a name="print-operator"></a>print 運算子
 
-使用一個或多個標量表達式輸出單行。
+輸出含有一或多個純量運算式的單一資料列。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print x=1, s=strcat("Hello", ", ", "World!")
 ```
 
 **語法**
 
-`print`【*欄位*`=`名稱 】*Scalar表示式*[', ' ...
+`print`[*ColumnName* `=` ]*ScalarExpression* ['，' ...]
 
 **引數**
 
-* *列名*:要分配給輸出的單數列的選項名稱。
-* *標量運算式*:要計算的標量運算式。
+* *ColumnName*：要指派給輸出單數資料行的選項名稱。
+* *ScalarExpression*：要評估的純量運算式。
 
 **傳回**
 
-儲存格表,單格的數字的值具有計算的*ScalarExpression*。
+單一資料行的單一資料列資料表，其單一資料格具有已評估之*ScalarExpression*的值。
 
 **範例**
 
-運算元`print`可用作計算一個或多個標量運算式並從結果值中生成單行表的快速方法。
+`print`運算子可用來快速評估一個或多個純量運算式，並將單一資料列資料表從產生的值中取出。
 例如：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print 0 + 1 + 2 + 3 + 4 + 5, x = "Wow!"
 ```
-
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print banner=strcat("Hello", ", ", "World!")
 ```

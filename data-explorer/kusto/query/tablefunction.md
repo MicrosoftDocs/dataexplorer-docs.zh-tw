@@ -1,6 +1,6 @@
 ---
-title: 表() (range) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的表(範圍函數)。
+title: table （）（範圍函數）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的資料表（）（範圍函數）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,16 +10,16 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 233baebaf51cdc8b07cdd32cec9bd10a54695c1c
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 0d5f44d621612e90d83a93f2f5831630520d4ba0
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81766148"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83371741"
 ---
-# <a name="table-scope-function"></a>表() (range)
+# <a name="table-scope-function"></a>table （）（scope 函數）
 
-表() 函數通過提供表的名稱作為類型`string`的 運算式來引用表。
+Table （）函數會藉由提供名稱做為類型的運算式，來參考資料表 `string` 。
 
 ```kusto
 table('StormEvent')
@@ -27,50 +27,52 @@ table('StormEvent')
 
 **語法**
 
-`table``(`*表名*`,`(*資料範圍*)`)`
+`table``(` *TableName* [ `,` *DataScope*]`)`
 
 **引數**
 
 ::: zone pivot="azuredataexplorer"
 
-* *表名稱*:提供被`string`引用 表名稱的類型運算式。 此表達式的值在調用函數時必須為常量(即它不能因數據上下文而異)。
+* *TableName*：類型 `string` 的運算式，提供所參考之資料表的名稱。 這個運算式的值在函式的呼叫點必須是常數（也就是它不能因數據內容而異）。
 
-* *DataScope:* 一種可選類型`string`的 參數,可用於根據數據在表的有效[快取策略](../management/cachepolicy.md)下如何限制表引用資料。 如果使用,實際參數必須是具有以下可能值之`string`一的常量運算式:
+* *DataScope*：類型的選擇性參數 `string` ，可用來根據此資料在資料表的有效快取[原則](../management/cachepolicy.md)下，限制資料的資料表參考。 如果使用，則實際引數必須是 `string` 具有下列其中一個可能值的常數運算式：
 
-    - `"hotcache"`:將僅引用分類為熱緩存的數據。
-    - `"all"`: 將引用表中的所有資料。
-    - `"default"`:這與`"all"`相同 ,除非群集管理員將群集設置為預設`"hotcache"`使用。
+    - `"hotcache"`：只會參考分類為熱快取的資料。
+    - `"all"`：將會參考資料表中的所有資料。
+    - `"default"`：這與相同 `"all"` ，除非叢集已設定為使用叢集 `"hotcache"` 管理員的預設值。
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-* *表名稱*:提供被`string`引用 表名稱的類型運算式。 此表達式的值在調用函數時必須為常量(即它不能因數據上下文而異)。
+* *TableName*：類型 `string` 的運算式，提供所參考之資料表的名稱。 這個運算式的值在函式的呼叫點必須是常數（也就是它不能因數據內容而異）。
 
-* *DataScope*:一種可選類型`string`的 參數,可用於根據數據在表的有效緩存策略下如何限制表引用數據。 如果使用,實際參數必須是具有以下可能值之`string`一的常量運算式:
+* *DataScope*：類型的選擇性參數 `string` ，可用來根據此資料在資料表的有效快取原則下，限制資料的資料表參考。 如果使用，則實際引數必須是 `string` 具有下列其中一個可能值的常數運算式：
 
-    - `"hotcache"`:將僅引用分類為熱緩存的數據。
-    - `"all"`: 將引用表中的所有資料。
-    - `"default"`: 這`"all"`與 相同。
+    - `"hotcache"`：只會參考分類為熱快取的資料。
+    - `"all"`：將會參考資料表中的所有資料。
+    - `"default"`：這與相同 `"all"` 。
 
 ::: zone-end
 
 ## <a name="examples"></a>範例
 
-### <a name="use-table-to-access-table-of-the-current-database"></a>使用表格() 存取目前資料庫的表
+### <a name="use-table-to-access-table-of-the-current-database"></a>使用 table （）存取目前資料庫的資料表
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 table('StormEvent') | count
 ```
 
-|Count|
+|計數|
 |---|
 |59066|
 
-### <a name="use-table-inside-let-statements"></a>在 let 語片內使用表()
+### <a name="use-table-inside-let-statements"></a>使用 let 語句中的 table （）
 
-可以重寫與上述相同的查詢,以使用接收參數的內聯函數(let 語句),該函`tableName`數將傳遞到表()函數中。
+與上述相同的查詢可以重寫成使用內嵌函式（let 語句）來接收參數（ `tableName` 傳遞至 table （）函數）。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let foo = (tableName:string)
 {
@@ -79,13 +81,13 @@ let foo = (tableName:string)
 foo('help')
 ```
 
-|Count|
+|計數|
 |---|
 |59066|
 
-### <a name="use-table-inside-functions"></a>在函數內使用表()
+### <a name="use-table-inside-functions"></a>在函數中使用 table （）
 
-可以重寫與上述相同的查詢,以用於接收參數的函數 -`tableName`該參數 傳遞到 table() 函數中。
+您可以重新撰寫與上述相同的查詢，以在接收參數的函式中使用，該函數 `tableName` 會傳遞至 table （）函數。
 
 ```kusto
 .create function foo(tableName:string)
@@ -96,15 +98,15 @@ foo('help')
 
 ::: zone pivot="azuredataexplorer"
 
-**注意:** 此類函數只能在本地使用,不能在跨群集查詢中使用。
+**注意：** 這類函式只能在本機使用，而不能用於跨叢集查詢。
 
 ::: zone-end
 
-### <a name="use-table-with-non-constant-parameter"></a>將表()與非常量參數一起使用
+### <a name="use-table-with-non-constant-parameter"></a>搭配使用 table （）與非常數參數
 
-參數,它不是標量常量字串不能作為參數傳遞`table()`來運行。
+不能將不是純量常數位串的參數當做參數傳遞給函式 `table()` 。
 
-下面,給出了此類案例的解決方法示例。
+以下提供此案例的因應措施範例。
 
 ```kusto
 let T1 = print x=1;

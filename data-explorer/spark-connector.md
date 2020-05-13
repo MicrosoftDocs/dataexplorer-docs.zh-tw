@@ -7,12 +7,12 @@ ms.reviewer: michazag
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 1/14/2020
-ms.openlocfilehash: 6e7879948fb7683210859c84970f31bc5adb4a90
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 28dee67b6ac412a9c0497d5713a69c9617d3ae55
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108315"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83370474"
 ---
 # <a name="azure-data-explorer-connector-for-apache-spark"></a>適用于 Apache Spark 的 Azure 資料總管連接器
 
@@ -27,9 +27,9 @@ ms.locfileid: "82108315"
 > [!NOTE]
 > 雖然以下的部分範例參考[Azure Databricks](https://docs.azuredatabricks.net/) Spark 叢集，但 Azure 資料總管 Spark 連接器並不會直接相依于 Databricks 或任何其他 spark 散發。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
-* [建立 Azure 資料總管叢集和資料庫](/azure/data-explorer/create-cluster-database-portal) 
+* [建立 Azure 資料總管叢集和資料庫](create-cluster-database-portal.md) 
 * 建立 Spark 叢集
 * 安裝 Azure 資料總管連接器程式庫：
     * [Spark 2.4、Scala 2.11](https://github.com/Azure/azure-kusto-spark/releases)的預先建立程式庫 
@@ -89,7 +89,7 @@ mvn clean install
     
 1. 從 Maven 安裝最新的 spark kusto 連接器程式庫：
     
-    ![匯入](media/spark-connector/db-libraries-view.png) ![程式庫選取 Spark-Kusto-連接器](media/spark-connector/db-dependencies.png)
+    ![匯入程式庫 ](media/spark-connector/db-libraries-view.png) ![ 選取 Spark-Kusto-連接器](media/spark-connector/db-dependencies.png)
 
 1. 確認已安裝所有必要的程式庫：
 
@@ -111,7 +111,7 @@ Azure 資料總管 Spark 連接器可讓您使用下列其中一種方法，透�
 
 Azure AD 應用程式驗證是最簡單且最常見的驗證方法，建議用於 Azure 資料總管 Spark 連接器。
 
-|屬性  |說明  |
+|屬性  |描述  |
 |---------|---------|
 |**KUSTO_AAD_CLIENT_ID**     |   Azure AD 應用程式（用戶端）識別碼。      |
 |**KUSTO_AAD_AUTHORITY_ID**     |  Azure AD 的驗證授權單位。 Azure AD Directory （租使用者）識別碼。        |
@@ -268,7 +268,7 @@ Azure AD 應用程式驗證是最簡單且最常見的驗證方法，建議用�
         display(dfFiltered)
         ```
 
-## <a name="next-steps"></a>接下來的步驟
+## <a name="next-steps"></a>後續步驟
 
 * 深入瞭解[Azure 資料總管 Spark 連接器](https://github.com/Azure/azure-kusto-spark/tree/master/docs)
 * [JAVA 和 Python 的範例程式碼](https://github.com/Azure/azure-kusto-spark/tree/master/samples/src/main)

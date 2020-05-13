@@ -1,6 +1,6 @@
 ---
-title: 從 IoT 中心引入 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 IoT 中心中的引入。
+title: 從 IoT 中樞內嵌-Azure 資料總管 |Microsoft Docs
+description: 本文說明如何從 Azure 資料總管中的 IoT 中樞內嵌。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,46 +8,46 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 33b6f4f737657ee0a6c2712f3b7cadce0c9c0a8f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: c3ed0fa8608f2be5739c1143a648230f792e5d40
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521347"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373394"
 ---
-# <a name="ingest-from-iot-hub"></a>從 IoT 中心引入
+# <a name="ingest-from-iot-hub"></a>從 IoT 中樞內嵌
 
-[Azure IoT 中心](https://docs.microsoft.com/azure/iot-hub/about-iot-hub)是託管服務,託管在雲中,充當 IoT 應用程式與它管理的設備之間的雙向通信的中央消息中心。 Azure 資料資源管理器使用其[相容內置的終結點](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-d2c#routing-endpoints)提供來自客戶託管 IoT 中心的連續引入。
+[Azure IoT 中樞](https://docs.microsoft.com/azure/iot-hub/about-iot-hub)是裝載于雲端的受控服務，可做為您的 IoT 應用程式與其管理裝置之間雙向通訊的中央訊息中樞。 Azure 資料總管使用其[事件中樞相容的內建端點](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-d2c#routing-endpoints)，從客戶管理的 IoT 中樞提供連續的內嵌功能。
 
 ## <a name="data-format"></a>資料格式
 
-* 數據以[事件數據](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata?view=azure-dotnet)物件的形式從事件中心終結點讀取。
-* 事件有效負載可以採用 Azure[資料資源管理員支援的格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)之一。
+* 資料是以[EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata?view=azure-dotnet)物件的形式從事件中樞端點讀取。
+* 事件裝載可以是[Azure 資料總管支援](../../../ingestion-supported-formats.md)的其中一種格式。
 
 ## <a name="ingestion-properties"></a>內嵌屬性
 
-攝入屬性指示攝取過程。 在何處路由數據以及如何處理數據。 您可以使用[EventData.屬性](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)指定事件引入[屬性](https://docs.microsoft.com/azure/data-explorer/ingestion-properties)。 您可以設定下列屬性：
+內嵌屬性會指示內嵌進程。 資料的路由和處理方式。 您可以使用[EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)指定內嵌事件的內嵌[屬性](../../../ingestion-properties.md)。 您可以設定下列屬性：
 
 |屬性 |描述|
 |---|---|
-| Table | 現有目標表的名稱(區分大小寫)。 覆蓋邊欄`Table`選項卡`Data Connection`上的 集。 |
-| [格式] | 資料格式。 覆蓋邊欄`Data format`選項卡`Data Connection`上的 集。 |
-| 引入對應 | 要使用的現有[引入映射](../create-ingestion-mapping-command.md)的名稱。 覆蓋邊欄`Column mapping`選項卡`Data Connection`上的 集。|
-| 編碼 |  數據編碼,預設值為 UTF8。 可以是[.NET 支援的任何編碼](https://docs.microsoft.com/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)。 |
+| Table | 現有目標資料表的名稱（區分大小寫）。 覆寫分頁 `Table` 上的集合 `Data Connection` 。 |
+| [格式] | 資料格式。 覆寫分頁 `Data format` 上的集合 `Data Connection` 。 |
+| IngestionMappingReference | 要使用之現有內嵌[對應](../create-ingestion-mapping-command.md)的名稱。 覆寫分頁 `Column mapping` 上的集合 `Data Connection` 。|
+| 編碼 |  資料編碼，預設值為 UTF8。 可以是任何[.net 支援的編碼](https://docs.microsoft.com/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)。 |
 
 ## <a name="events-routing"></a>事件路由
 
-設置到 Azure 資料資源管理器群集的 IoT 中心連接時,可以指定目標表屬性(表名稱、資料格式和映射)。 這是資料的預設路由,也稱為`static routing`。
-您還可以使用事件屬性為每個事件指定目標表屬性。 連接將動態路由[事件數據.屬性](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)中指定的數據,覆蓋此事件的靜態屬性。
+設定 Azure 資料總管叢集的 IoT 中樞連線時，您可以指定目標資料表屬性（資料表名稱、資料格式和對應）。 這是您的資料的預設路由，也稱為 `static routing` 。
+您也可以使用事件屬性來指定每個事件的目標資料表屬性。 連接會以動態方式路由傳送[EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)中指定的資料，並覆寫此事件的靜態屬性。
 
 ## <a name="event-system-properties-mapping"></a>事件系統屬性對應
 
-系統屬性是用於存儲IoT中心服務在接收事件時設置的屬性的集合。 Azure 資料資源管理員 IoT 中心連接將所選屬性嵌入到表中的數據著陸中。
+系統屬性是一種集合，用來儲存在收到事件時由 IoT 中樞服務所設定的屬性。 Azure 資料總管 IoT 中樞連線會將選取的屬性內嵌到資料表中的 [資料] 登陸。
 
 > [!Note]
-> * 對於`csv`映射,屬性按下表中列出的順序在記錄的開頭添加。 對於`json`映射,根據下表中的屬性名稱添加屬性。
+> * 針對 `csv` 對應，會依照下表所列的順序，在記錄的開頭加入屬性。 針對 `json` 對應，會根據下表中的屬性名稱來加入屬性。
 
-### <a name="iot-hub-exposes-the-following-system-properties"></a>IoT 中心公開以下系統屬性:
+### <a name="iot-hub-exposes-the-following-system-properties"></a>IoT 中樞會公開下列系統屬性：
 
 |屬性 |描述|
 |---|---|
@@ -55,19 +55,19 @@ ms.locfileid: "81521347"
 | sequence-number | IoT 中樞指派給每則雲端到裝置訊息的數字 (對每個裝置佇列而言都是唯一的)。 |
 | to | 雲端到裝置 訊息中指定的目的地。 |
 | absolute-expiry-time | 訊息到期的日期和時間。 |
-| iothub-enqueuedtime | IoT 中心接收設備到雲消息的日期和時間。 |
+| iothub-enqueuedtime | IoT 中樞收到裝置到雲端訊息的日期和時間。 |
 | correlation-id| 回應訊息中的字串屬性，通常包含採用「要求-回覆」模式之要求的 MessageId。 |
 | user-id| 用來指定訊息來源的識別碼。 |
 | iothub-ack| 意見反應訊息產生器。 |
 | iothub-connection-device-id| 由 IoT 中樞在裝置到雲端訊息上設定的識別碼。 它包含傳送訊息之裝置的 deviceId 。 |
-| iothub-connection-auth-generation-id| 由 IoT 中樞在裝置到雲端訊息上設定的識別碼。 它包含發送消息的設備的連接DeviceGenerationId(根據設備識別屬性)。 |
+| iothub-connection-auth-generation-id| 由 IoT 中樞在裝置到雲端訊息上設定的識別碼。 它包含傳送訊息之裝置的 connectionDeviceGenerationId （依據裝置身分識別屬性）。 |
 | iothub-connection-auth-method| 由 IoT 中樞在裝置到雲端訊息上設定的驗證方法。 這個屬性包含用來驗證傳送訊息之裝置的驗證方法的相關資訊。 |
 
-如果在表的 **「資料源」** 部分中選擇了**事件系統屬性**,則必須在表架構和映射中包括這些屬性。
+如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，則必須在資料表架構和對應中包含屬性。
 
-**表架構範例**
+**資料表架構範例**
 
-如果資料包含三`Timespan`欄`Metric`(、`Value`與 ) 以及`x-opt-enqueued-time``x-opt-offset`包含的屬性是與, 請使用此指令建立或變更表架構:
+如果您的資料包含三個數據行（ `Timespan` 、 `Metric` 和 `Value` ），而您包含的屬性為 `x-opt-enqueued-time` 和 `x-opt-offset` ，請使用下列命令來建立或修改資料表架構：
 
 ```kusto
     .create-merge table TestTable (TimeStamp: datetime, Metric: string, Value: int, EventHubEnqueuedTime:datetime, EventHubOffset:long)
@@ -75,7 +75,7 @@ ms.locfileid: "81521347"
 
 **CSV 對應範例**
 
-運行以下命令將數據添加到記錄的開頭。 注意序號值:屬性按上表中列出的順序在記錄的開頭添加。 這對 CSV 映射非常重要,其中列序列將根據映射的系統屬性進行更改。
+執行下列命令，將資料新增至記錄的開頭。 注意序數值：屬性會依照上表所列的順序加入記錄的開頭。 這對於 CSV 對應很重要，其中資料行序數會根據所對應的系統屬性而變更。
 
 ```kusto
     .create table TestTable ingestion csv mapping "CsvMapping1"
@@ -90,7 +90,7 @@ ms.locfileid: "81521347"
  
 **JSON 對應範例**
 
-數據是透過使用系統屬性名稱添加的,因為它們顯示在 **「資料連接**邊欄選項卡**事件」系統屬性**清單中。 執行以下命令：
+使用 [**資料連線**] 分頁**事件系統屬性**清單中所顯示的系統屬性名稱來加入資料。 執行下列命令：
 
 ```kusto
     .create table TestTable ingestion json mapping "JsonMapping1"
@@ -103,32 +103,32 @@ ms.locfileid: "81521347"
     ']'
 ```
 
-## <a name="create-iot-hub-connection"></a>建立 IoT 中心連線
+## <a name="create-iot-hub-connection"></a>建立 IoT 中樞連接
 
 > [!Note]
-> 為獲得最佳性能,請創建與 Azure 資料資源管理器群集相同的區域中的所有資源。
+> 為了達到最佳效能，請在 Azure 資料總管叢集所在的相同區域中建立所有資源。
 
 ### <a name="create-an-iot-hub"></a>建立 IoT 中樞
 
-如果還沒有,[請建立 Iot 中 。](https://docs.microsoft.com/azure/data-explorer/ingest-data-iot-hub#create-an-iot-hub)
+如果您還沒有帳戶，請[建立一個 Iot 中樞](../../../ingest-data-iot-hub.md#create-an-iot-hub)。
 
 > [!Note]
-> * 計數`device-to-cloud partitions`不可更改,因此在設置分區計數時應考慮長期比例。
-> * 消費者群體*必須是*每個消費者的單一。 創建專用於 Kusto 連接的消費者組。 在 Azure 門戶中查找資源`Built-in endpoints`,然後 轉到添加新消費者組。
+> * 此 `device-to-cloud partitions` 計數無法變更，因此在設定分割區計數時，您應該考慮長期調整。
+> * 取用者群組*必須*uniqe 每個取用者。 建立 Kusto 連接專用的取用者群組。 在 Azure 入口網站中尋找您的資源，然後移至 `Built-in endpoints` 以新增新的取用者群組。
 
-### <a name="data-ingestion-connection-to-azure-data-explorer"></a>到 Azure 資料資源管理員的資料連線
+### <a name="data-ingestion-connection-to-azure-data-explorer"></a>Azure 資料總管的資料內嵌連接
 
-* 透過 Azure 閘戶:[將 Azure 資料資源管理員表連接到 IoT 中心](https://docs.microsoft.com/azure/data-explorer/ingest-data-iot-hub#connect-azure-data-explorer-table-to-iot-hub)。
-* 使用 Azure 資料資源管理者管理 .NET SDK:[新增 IoT 中心資料連線](https://docs.microsoft.com/azure/data-explorer/data-connection-iot-hub-csharp#add-an-iot-hub-data-connection)
-* 使用 Azure 資料資源管理 Python SDK:[新增 IoT 中心資料連線](https://docs.microsoft.com/azure/data-explorer/data-connection-iot-hub-python#add-an-iot-hub-data-connection)
-* 使用 ARM 樣本:[用於新增 Iot 中心資料連線的 Azure 資源管理員樣本](https://docs.microsoft.com/azure/data-explorer/data-connection-iot-hub-resource-manager#azure-resource-manager-template-for-adding-an-iot-hub-data-connection)
-
-> [!Note]
-> 如果 **"我的數據"包含所選的路由資訊**,*則必須*作為事件屬性的一部分提供必要的[路由](#events-routing)資訊。
+* 透過 Azure 入口網站：[將 Azure 資料總管資料表連線到 IoT 中樞](../../../ingest-data-iot-hub.md#connect-azure-data-explorer-table-to-iot-hub)。
+* 使用 Azure 資料總管 management .NET SDK：[新增 IoT 中樞資料連線](../../../data-connection-iot-hub-csharp.md#add-an-iot-hub-data-connection)
+* 使用 Azure 資料總管管理 Python SDK：[新增 IoT 中樞資料](../../../data-connection-iot-hub-python.md#add-an-iot-hub-data-connection)連線
+* 使用 ARM 範本：[用於新增 Iot 中樞資料連線的 Azure Resource Manager 範本](../../../data-connection-iot-hub-resource-manager.md#azure-resource-manager-template-for-adding-an-iot-hub-data-connection)
 
 > [!Note]
-> 設置連接后,它會從創建時間後排隊的事件開始引入數據。
+> 如果 [我的資料] 包含選取的 [**路由資訊**]，您*必須*提供必要的[路由](#events-routing)資訊做為事件屬性的一部分。
 
-### <a name="generating-data"></a>組建資料
+> [!Note]
+> 設定連線之後，它會從在建立時間排入佇列的事件開始內嵌資料。
 
-* 檢視模擬裝置與產生資料[的範例項目](https://github.com/Azure-Samples/azure-iot-samples-csharp/tree/master/iot-hub/Quickstarts/simulated-device)。
+### <a name="generating-data"></a>產生資料
+
+* 請參閱模擬裝置並產生資料的[範例專案](https://github.com/Azure-Samples/azure-iot-samples-csharp/tree/master/iot-hub/Quickstarts/simulated-device)。

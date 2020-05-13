@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/21/2019
-ms.openlocfilehash: e721e5809d3b0445fecc0609668332b66ef39db8
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 0cf510a8a7a6042d99587b51ee62eb30d4b7b7a7
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737329"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271293"
 ---
 # <a name="materialize"></a>materialize()
 
@@ -39,7 +39,7 @@ ms.locfileid: "82737329"
 
 * 具體化的快取大小限制為**5 GB**。 
   這是每個叢集節點的限制，而且會與同時執行的所有查詢相互同步。
-  如果查詢使用`materialize()` ，而且快取無法保存任何其他資料，則查詢將會中止並產生錯誤。
+  如果查詢使用 `materialize()` ，而且快取無法保存任何其他資料，則查詢將會中止並產生錯誤。
 
 **範例**
 
@@ -50,6 +50,7 @@ ms.locfileid: "82737329"
 
 這種作業可以使用[批次](batches.md)和具體化來完成：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
  ```kusto
 let randomSet = materialize(range x from 1 to 30000000 step 1
 | project value = rand(10000000));

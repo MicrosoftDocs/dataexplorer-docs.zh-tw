@@ -1,5 +1,5 @@
 ---
-title: series_decompose_forecast （）-Azure 資料總管 |Microsoft Docs
+title: series_decompose_forecast （）-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 series_decompose_forecast （）。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 97f87a7390ab099886e84642b2eb46a8087b6da9
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 9676da9d12e2654cd4d92538f183a2630971d078
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618833"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372873"
 ---
 # <a name="series_decompose_forecast"></a>series_decompose_forecast()
 
@@ -23,7 +23,7 @@ ms.locfileid: "82618833"
  
 **語法**
 
-`series_decompose_forecast(`*數列* `,` *點*`,` *Seasonality_threshold* *Trend* *Seasonality*季節性趨勢 Seasonality_threshold`,` `[,``])`
+`series_decompose_forecast(`*數列* `,`*點* `[,`*季節性* `,`*趨勢* `,`*Seasonality_threshold*`])`
 
 **引數**
 
@@ -37,7 +37,7 @@ ms.locfileid: "82618833"
     * "linefit"：使用線性回歸（預設值）將趨勢元件解壓縮。    
     * "avg"：將趨勢元件定義為平均（x）。
     * "none"：沒有趨勢，略過解壓縮此元件。   
-* *Seasonality_threshold*：當*季節性*設定為自動偵測時，季節性分數的閾值，預設的分數臨界值為`0.6`。 如需詳細資訊，請參閱[series_periods_detect](series-periods-detectfunction.md)。
+* *Seasonality_threshold*：當*季節性*設定為自動偵測時，季節性分數的閾值，預設的分數臨界值為 `0.6` 。 如需詳細資訊，請參閱[series_periods_detect](series-periods-detectfunction.md)。
 
 **退貨**
 
@@ -52,8 +52,9 @@ ms.locfileid: "82618833"
 
 **範例**
 
-在下列範例中，我們會在每小時的資料細微性中產生一系列的4周，每週季節性和小型向上`make-series`趨勢，然後使用，並將另一個空的周新增至數列。 `series_decompose_forecast`呼叫的是一周（24 * 7 點），它會自動偵測季節性和趨勢，並產生整個5週期間的預測。 
+在下列範例中，我們會在每小時的資料細微性中產生一系列的4周，每週季節性和小型向上趨勢，然後使用 `make-series` ，並將另一個空的周新增至數列。 `series_decompose_forecast`呼叫的是一周（24 * 7 點），它會自動偵測季節性和趨勢，並產生整個5週期間的預測。 
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*4 step 1 // generate 4 weeks of hourly data
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 

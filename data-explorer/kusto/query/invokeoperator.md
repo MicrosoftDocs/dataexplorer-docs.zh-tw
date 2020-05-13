@@ -1,6 +1,6 @@
 ---
-title: 呼叫運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的調用運算符。
+title: 叫用運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 invoke 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 41f19440795f4f302352a8dda5192c5c4790ea99
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1aca8cda34e1ee8506d5be6633cfd46fd912c6c3
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513697"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271514"
 ---
 # <a name="invoke-operator"></a>invoke 運算子
 
-呼叫接收作為表格參數參數參數的來源的`invoke`lambda。
+`invoke`叫用接收做為表格式參數引數之來源的 lambda。
 
 ```kusto
 T | invoke foo(param1, param2)
@@ -25,26 +25,27 @@ T | invoke foo(param1, param2)
 
 **語法**
 
-`T | invoke`*功能*`(`=*參數1* `,` *參數2*|`)`
+`T | invoke`函式*function* `(`[*param1* `,`*param2*]`)`
 
 **引數**
 
-* *T*: 表格來源。
-* *函數*:要計算的 lambda 運算式或函數名稱的名稱。
-* *參數1,**第2段*...:額外的lambda參數。
+* *T*：表格式來源。
+* *function*：要評估之 lambda 運算式或函式名稱的名稱。
+* *param1*， *param2* ...：其他 lambda 引數。
 
 **傳回**
 
-返回計算表達式的結果。
+傳回已評估運算式的結果。
 
 **注意事項**
 
-有關詳細資訊,請參閱[let 語句](./letstatement.md),瞭解如何聲明可以接受表格參數的 lambda 運算式。
+如需詳細資訊，請參閱[let 語句](./letstatement.md)，以瞭解如何宣告可以接受表格式引數的 lambda 運算式。
 
 **範例**
 
-下面的範例展示如何使用`invoke`運算子呼叫 lambda 表示式:
+下列範例顯示如何使用 `invoke` 運算子來呼叫 lambda 運算式：
 
+<!-- csl: https://help.kusto.windows.net:443/KustoMonitoringPersistentDatabase -->
 ```kusto
 // clipped_average(): calculates percentiles limits, and then makes another 
 //                    pass over the data to calculate average with values inside the percentiles

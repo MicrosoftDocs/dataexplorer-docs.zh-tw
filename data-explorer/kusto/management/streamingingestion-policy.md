@@ -1,6 +1,6 @@
 ---
-title: 流式處理原則管理 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的流式處理策略管理。
+title: 串流處理內嵌原則管理-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的串流內嵌原則管理。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,37 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: b0b1a76e52688dcc88ca87023309f9c970b4c702
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 76844b764a8e21629c7d936f4c269d7d3ab1ec8c
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519613"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373321"
 ---
-# <a name="streaming-ingestion-policy-management"></a>串流式引入原則管理
+# <a name="streaming-ingestion-policy-management"></a>串流處理內嵌原則管理
 
-流引入策略可以附加到資料庫或表,以允許流式傳輸引入這些位置。 該策略還定義用於流式引入的行存儲。
+串流內嵌原則可以附加到資料庫或資料表，以允許將串流內嵌到那些位置。 此原則也會定義用於串流內嵌的資料列存放區。
 
-有關流式引入的詳細資訊,請參閱[流式引入(預覽)。](https://docs.microsoft.com/azure/data-explorer/ingest-data-streaming) 要瞭解有關串流引入策略的更多,請參閱[串流引入策略](streamingingestionpolicy.md)。
+如需串流內嵌的詳細資訊，請參閱[串流內嵌（預覽）](../../ingest-data-streaming.md)。 若要深入瞭解串流內嵌原則，請參閱[串流內嵌原則](streamingingestionpolicy.md)。
 
-## <a name="show-policy-streamingingestion"></a>.顯示策略流式處理
+## <a name="show-policy-streamingingestion"></a>。顯示原則 streamingingestion
 
-該`.show policy streamingingestion`命令顯示資料庫或表的流式引入策略。
+此 `.show policy streamingingestion` 命令會顯示資料庫或資料表的串流內嵌原則。
 
 **語法**
 
-`.show``database``policy`我的`streamingingestion`資料庫
-我的表`.show``policy``table``streamingingestion`
+`.show``database` `policy` `streamingingestion` 
+ MyDatabase `.show``table`MyTable `policy``streamingingestion`
 
 **傳回**
 
-此指令傳回有以下欄的表:
+此命令會傳回具有下列資料行的資料表：
 
 |資料行    |類型    |描述
 |---|---|---
-|PolicyName|`string`|原則名稱 - 串流化原則
-|EntityName|`string`|資料庫或表格名稱
-|原則    |`string`|定義串流引入策略的 JSON 物件格式化為[串流式引入策略物件](#streaming-ingestion-policy-object)
+|PolicyName|`string`|原則名稱-StreamingIngestionPolicy
+|EntityName|`string`|資料庫或資料表名稱
+|原則    |`string`|JSON 物件，定義串流內嵌原則，格式為串流內嵌[原則物件](#streaming-ingestion-policy-object)
 
 **範例**
 
@@ -47,43 +47,43 @@ ms.locfileid: "81519613"
 .show table T1 policy streamingingestion 
 ```
 
-|PolicyName|EntityName|原則|子實體|EntityType|
+|PolicyName|EntityName|原則|ChildEntities|EntityType|
 |---|---|---|---|---|
-|串流化原則|DB1|[ "羅羅商店數量": 4 |
+|StreamingIngestionPolicy|DB1|{"NumberOfRowStores"： 4}
 
-### <a name="streaming-ingestion-policy-object"></a>串流式引入策略物件
+### <a name="streaming-ingestion-policy-object"></a>串流內嵌原則物件
 
 |屬性  |類型    |描述                                                       |
 |----------|--------|------------------------------------------------------------------|
-|羅文商店數量 |`int`  |配置給實體的儲存數量|
-|密封間隔限制|`TimeSpan?`|表上的密封操作之間的間隔的可選限制。 有效範圍介於 1 到 24 小時之間。 預設值：24 小時。|
-|密封閾值位元組|`int?`|對於表上的單個密封操作,需要對數據量進行可選限制。 該值的有效範圍介於 10 到 200 MB 之間。 默認值:200 MB。|
+|NumberOfRowStores |`int`  |指派給實體的資料列存放區數目|
+|SealIntervalLimit|`TimeSpan?`|選擇性限制資料表上密封作業之間的間隔。 有效範圍介於1到24小時之間。 預設值：24 小時。|
+|SealThresholdBytes|`int?`|資料表上單一密封作業所需的資料量選擇性限制。 值的有效範圍介於10到 200 Mb 之間。 預設值： 200 Mb。|
 
-## <a name="alter-policy-streamingingestion"></a>.alter 策略流式處理
+## <a name="alter-policy-streamingingestion"></a>。 alter policy streamingingestion
 
-該`.alter policy streamingingestion`命令設置資料庫或表的流式處理策略。
+`.alter policy streamingingestion`命令會設定資料庫或資料表的 streamingingestion 原則。
 
 **語法**
 
-* `.alter``database`我的資料庫`policy``streamingingestion`*流程式處理原則物件*
+* `.alter``database` `policy` MyDatabase `streamingingestion`*StreamingIngestionPolicyObject*
 
-* `.alter``database`我的資料庫`policy``streamingingestion``enable`
+* `.alter``database` `policy` MyDatabase `streamingingestion``enable`
 
-* `.alter``database`我的資料庫`policy``streamingingestion``disable`
+* `.alter``database` `policy` MyDatabase `streamingingestion``disable`
 
-* `.alter``table` MyTable `policy` `streamingingestion` *傳輸原則物件*
+* `.alter``table` `policy` MyTable `streamingingestion`*StreamingIngestionPolicyObject*
 
-* `.alter``table`我的表`policy``streamingingestion``enable`
+* `.alter``table` `policy` MyTable `streamingingestion``enable`
 
-* `.alter``table`我的表`policy``streamingingestion``disable`
+* `.alter``table` `policy` MyTable `streamingingestion``disable`
 
 **注意事項**
 
-1. *流式處理策略對像是*定義流引入策略物件的 JSON 物件。
+1. *StreamingIngestionPolicyObject*是已定義串流內嵌原則物件的 JSON 物件。
 
-2. `enable`- 如果策略未定義或使用 0 行存儲定義,則將流式引入策略設置為具有 4 個行存儲,否則該命令將不執行任何操作。
+2. `enable`-如果原則未定義或已使用 0 rowstores 定義，則將串流內嵌原則設定為使用 4 rowstores，否則命令不會執行任何動作。
 
-3. `disable`- 如果策略已使用正行存儲定義,則將流式引入策略設置為 0 行存儲,否則該命令將不執行任何操作。
+3. `disable`-如果已使用正 rowstores 定義原則，則將串流內嵌原則設定為，否則為 rowstores，否則命令不會執行任何動作。
 
 **範例**
 
@@ -93,19 +93,19 @@ ms.locfileid: "81519613"
 .alter table MyTable policy streamingingestion '{  "NumberOfRowStores": 4}'
 ```
 
-## <a name="delete-policy-streamingingestion"></a>.刪除策略流式處理
+## <a name="delete-policy-streamingingestion"></a>。刪除原則 streamingingestion
 
-該`.delete policy streamingingestion`命令從資料庫或表中刪除流式處理策略。
+此 `.delete policy streamingingestion` 命令會從資料庫或資料表中刪除 streamingingestion 原則。
 
 **語法** 
 
-`.delete``database`我的資料庫`policy``streamingingestion`
+`.delete``database`MyDatabase `policy``streamingingestion`
 
-`.delete``table`我的表`policy``streamingingestion`
+`.delete``table`MyTable `policy``streamingingestion`
 
 **傳回**
 
-該命令刪除表或資料庫流式處理策略物件,然後返回相應的[.show 策略流式處理](#show-policy-streamingingestion)命令的輸出。
+此命令會刪除資料表或資料庫 streamingingestion 原則物件，然後傳回對應之的輸出[。顯示原則 streamingingestion](#show-policy-streamingingestion)命令。
 
 **範例**
 

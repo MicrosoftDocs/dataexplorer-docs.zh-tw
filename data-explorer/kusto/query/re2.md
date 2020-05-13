@@ -1,6 +1,6 @@
 ---
-title: 正規表示式 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的正則運算式。
+title: 正則運算式-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的正則運算式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/09/2019
-ms.openlocfilehash: 0bc5dc6705d6cada446716f2f9d84618322ecd76
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3bbd14031adbfee3b5fac07194f5ff879ff33693
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510518"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373064"
 ---
 # <a name="regular-expressions"></a>規則運算式
 
-RE2 正則表示式語法描述 Kusto (re2) 使用的正則運算式庫的語法。
-Kusto 中有幾個函式使用正規表示式執行字串符合、選擇和擷取
+RE2 正則運算式語法描述 Kusto （RE2）所使用之正則運算式程式庫的語法。
+Kusto 中有幾個函式會使用正則運算式執行字串比對、選取和解壓縮
 
 - [countof()](countoffunction.md)
-- [擷取物()](extractfunction.md)
+- [extract()](extractfunction.md)
 - [extract_all()](extractallfunction.md)
 - [符合 RegEx](datatypes-string-operators.md)
 - [parse 運算子](parseoperator.md)
-- [取代()](replacefunction.md)
-- [修剪()](trimfunction.md)
-- [飾件()](trimendfunction.md)
-- [修剪啟動()](trimstartfunction.md)
+- [replace （）](replacefunction.md)
+- [trim （）](trimfunction.md)
+- [trimend （）](trimendfunction.md)
+- [trimstart （）](trimstartfunction.md)
 
-Kusto 支援的正則表達式語法是[re2 庫](https://github.com/google/re2/wiki/Syntax)的正則表達式語法,下面詳細介紹了該語法。 請注意,這些運算式必須在 Kusto 中編`string`碼為文本,並且所有 Kusto 的字串報價規則都適用。 例如,正則表達式`\A`與行的開頭匹配(見下表),並在 Kusto 中指定為字`"\\A"`串文本 (注意"額外"反`\`斜杠 ( ) 字元。
-
+Kusto 支援的正則運算式語法就是 re2 連結[庫](https://github.com/google/re2/wiki/Syntax)的。 這些運算式必須在 Kusto 中編碼為 `string` 常值，而且所有 Kusto 的字串引號規則都適用。 例如，正則運算式 `\A` 會比對行首，並在 Kusto 中指定為字串常值 `"\\A"` （請注意 "額外的反斜線（ `\` ）字元）。

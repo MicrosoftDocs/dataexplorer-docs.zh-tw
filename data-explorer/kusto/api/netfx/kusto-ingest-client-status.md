@@ -1,6 +1,6 @@
 ---
-title: Kusto.Ingest 參考 - 攝取狀態報告 - Azure 數據資源管理器 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 Kusto.ingest 參考 - 引入狀態報告。
+title: Kusto。內嵌內嵌狀態報表-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 Kusto 內嵌狀態報表。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,23 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 1a3eed1db0ec7d3dd4bc83c0a65f342020b2a387
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 76ae07e2e7bdbb15900385b1e2feab0c9ff97d01
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523710"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373621"
 ---
-# <a name="kustoingest-reference---ingestion-status-reporting"></a>Kusto.Ingest 參考 - 攝取狀態報告
-本文介紹如何使用[IKustoQueueingestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)功能來追蹤引入請求的狀態。
+# <a name="kustoingest-ingestion-status-reporting"></a>Kusto。內嵌內嵌狀態報表
 
-## <a name="sourcedescription-datareaderdescription-streamdescription-filedescription-and-blobdescription"></a>來源描述、資料閱讀器描述、串流描述、檔案描述和 Blob 描述
-這些不同的描述類封裝了有關要引入的源數據的重要詳細資訊,並且可能甚至應該提供給引入操作。
-所有這些類都派生自抽象類`SourceDescription`,用於實例化每個數據源的唯一標識符。
-提供的標識碼用於後續操作狀態追蹤,並將顯示在與相應操作相關的所有報表、追蹤和異常中。
+本文說明如何使用[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)功能來追蹤內嵌要求的狀態。
 
-### <a name="class-sourcedescription"></a>類別描述
->引入大型資料集(例如,資料閱讀器超過 1GB) 時, 資料將拆分為 1GB 塊並單獨引入。<BR>在這種情況下,相同的 SourceId 將應用於源自同一數據集的所有引入操作。   
+## <a name="description-classes"></a>描述類別
+
+這些描述類別包含要內嵌之來源資料的重要詳細資訊，而且應該用於內嵌作業。 
+
+* SourceDescription
+* DataReaderDescription
+* StreamDescription
+* FileDescription
+* BlobDescription
+
+類別全都衍生自抽象類別別 `SourceDescription` ，而且是用來具現化每個資料來源的唯一識別碼。 接著，每個識別碼會用於狀態追蹤，並會顯示在與相關作業相關的所有報表、追蹤和例外狀況中。
+
+### <a name="class-sourcedescription"></a>類別 SourceDescription
+
+大型資料集會分割成1GB 區塊，而每個元件會分別內嵌。 然後，相同的 SourceId 會套用至源自相同資料集的所有內嵌作業。   
 
 ```csharp
 public abstract class SourceDescription
@@ -33,7 +42,8 @@ public abstract class SourceDescription
 }
 ```
 
-### <a name="class-datareaderdescription"></a>類別資料閱讀器描述
+### <a name="class-datareaderdescription"></a>類別 DataReaderDescription
+
 ```csharp
 public class DataReaderDescription : SourceDescription
 {
@@ -41,7 +51,8 @@ public class DataReaderDescription : SourceDescription
 }
 ```
 
-### <a name="class-streamdescription"></a>類別描述
+### <a name="class-streamdescription"></a>類別 StreamDescription
+
 ```csharp
 public class StreamDescription : SourceDescription
 {
@@ -49,7 +60,8 @@ public class StreamDescription : SourceDescription
 }
 ```
 
-### <a name="class-filedescription"></a>類別描述
+### <a name="class-filedescription"></a>類別 FileDescription
+
 ```csharp
 public class FileDescription : SourceDescription
 {
@@ -57,7 +69,8 @@ public class FileDescription : SourceDescription
 }
 ```
 
-### <a name="class-blobdescription"></a>類別 Blob 描述
+### <a name="class-blobdescription"></a>類別 BlobDescription
+
 ```csharp
 public class BlobDescription : SourceDescription
 {
@@ -67,10 +80,12 @@ public class BlobDescription : SourceDescription
 }
 ```
 
-## <a name="ingestion-result-representation"></a>引入結果表示
+## <a name="ingestion-result-representation"></a>內嵌結果標記法
 
-### <a name="interface-ikustoingestionresult"></a>介面 IKustoings 結果
-此介面捕獲單個排隊引入操作的結果,並允許通過`SourceId`檢索它。
+### <a name="interface-ikustoingestionresult"></a>介面 IKustoIngestionResult
+
+這個介面會捕獲單一佇列內嵌作業的結果，而且可以由抓取 `SourceId` 。
+
 ```csharp
 public interface IKustoIngestionResult
 {
@@ -82,8 +97,10 @@ public interface IKustoIngestionResult
 }
 ```
 
-### <a name="class-ingestionstatus"></a>類別引入狀態
-引入狀態封裝單個引入操作的完整狀態。
+### <a name="class-ingestionstatus"></a>類別 IngestionStatus
+
+IngestionStatus 包含單一內嵌作業的完整狀態。
+
 ```csharp
 public class IngestionStatus
 {
@@ -120,26 +137,28 @@ public class IngestionStatus
 }
 ```
 
-### <a name="status-enumeration"></a>狀態枚舉
-|值 |意義 |
-|------------|------------|
-|Pending |臨時。 根據攝入操作的結果,在攝入過程中可能會發生變化 |
-|成功 |永久。 他的數據已成功攝用 |
-|失敗 |永久。 攝入失敗 |
-|已排入佇列 |永久。 資料已排隊等待攝取 |
-|已略過 |永久。 未提供任何資料,並且跳過了引入操作 |
-|部分成功 |永久。 部分數據已成功攝用,而某些數據失敗 |
+### <a name="status-enumeration"></a>狀態列舉
 
-## <a name="tracking-ingestion-status-kustoqueuedingestclient"></a>追蹤引入狀態 (庫斯特排機客戶)
-[IKustoQueueingestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)是一個"即用即用"用戶端 - 用戶端上的引入操作通過在將消息發佈到 Azure 佇列結束,之後將完成用戶端作業。 為方便用戶端使用者,KustoQueuedingestClient 提供了一種用於追蹤單個引入狀態的機制。 這不適用於高通量引入管道的大規模使用,而是在速率相對較低且跟蹤要求非常嚴格時用於"精確"引入。
+|值              |意義                                                                                     |暫存/永久
+|-------------------|-----------------------------------------------------------------------------------------------------|---------|
+|Pending            |根據內嵌作業的結果，在內嵌過程中，此值可能會變更 |暫存|
+|成功          |已成功內嵌資料                                                              |持續性| 
+|失敗             |內嵌失敗                                                                                     |持續性|
+|已排入佇列             |已將資料排入佇列以進行內嵌                                                               |持續性|
+|已略過            |未提供任何資料，且已略過內嵌操作                                            |持續性|
+|PartiallySucceeded |已成功內嵌部分資料，但有些失敗                                        |持續性|
+
+## <a name="tracking-ingestion-status-kustoqueuedingestclient"></a>追蹤內嵌狀態（KustoQueuedIngestClient）
+
+[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)是「火災又忘」的用戶端。 用戶端上的內嵌作業會將訊息張貼到 Azure 佇列來結束。 張貼之後，用戶端作業就完成了。 針對用戶端使用者的便利性，KustoQueuedIngestClient 提供一個機制來追蹤個別的內嵌狀態。 此機制不適用於高輸送量內嵌管線上的大量使用量。 當速率相對較低且追蹤需求為嚴格時，此機制適用于精確內嵌。
 
 > [!WARNING]
-> 應避免為大容量數據流的每個引入請求打開正通知,因為這會對底層的 xStore 資源造成極大的負載,>这可能导致引入延迟增加,甚至完全群集無回應性。
+> 您應該避免針對大型磁片區資料流程的每個內嵌要求開啟正面通知，因為這會對基礎 xStore 資源造成極大的負載，而這可能會導致內嵌延遲增加，甚至完成叢集非回應能力。
 
+下列屬性（在[KustoQueuedIngestionProperties](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties)上設定）會控制內嵌成功或失敗通知的層級和傳輸。
 
-以下屬性(在[KustoQueuedInginge 屬性](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties)上設定)控制接收成功或失敗通知的層級和傳輸:
+### <a name="ingestionreportlevel-enumeration"></a>IngestionReportLevel 列舉
 
-### <a name="ingestionreportlevel-enumeration"></a>引入報告等級枚舉
 ```csharp
 public enum IngestionReportLevel
 {
@@ -149,7 +168,8 @@ public enum IngestionReportLevel
 }
 ```
 
-### <a name="ingestionreportmethod-enumeration"></a>引入報告方法列舉
+### <a name="ingestionreportmethod-enumeration"></a>IngestionReportMethod 列舉
+
 ```csharp
 public enum IngestionReportMethod
 {
@@ -159,41 +179,45 @@ public enum IngestionReportMethod
 }
 ```
 
-為了能夠跟蹤您的攝入狀態,請確保向執行攝取操作的[IKustoQueueingestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)提供以下內容:
-1.  將`IngestionReportLevel`屬性設定為所需的報告級別 - 僅限故障(預設值)或失敗和成功。
-當設置為"無"時,在攝入結束時不會報告任何內容。
-2.  指定所需的`IngestionReportMethod`- 佇列、表或兩者。
+若要追蹤您的內嵌狀態，請將下列內容提供給您執行內嵌作業所使用的[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) ：
+1.  將 `IngestionReportLevel` 屬性設定為所需的報表層級。 `FailuresOnly`（也就是預設值）或 `FailuresAndSuccesses` 。
+設定為時 `None` ，將不會在內嵌的結尾回報任何內容。
+1.  指定 `IngestionReportMethod`  -  `Queue` 、 `Table` 或 `both` 。
 
-可以使用範例在[Kusto.Ingest 範例](kusto-ingest-client-examples.md)頁面上找到。
+使用範例可以在 Kusto 的 [[範例](kusto-ingest-client-examples.md)] 頁面上找到。
 
-### <a name="ingestion-status-in-azure-table"></a>Azure 表格引入狀態
-從`IKustoIngestionResult`每個引入操作返回的介面包含可用於查詢引入狀態的函數。
-特別注意傳`Status``IngestionStatus`回 的物件的屬性:
-* `Pending`指示源已排隊等待引入,並且尚未更新;再次使用 函式查詢來源的狀態
-* `Succeeded`指示來源已成功引入
-* `Failed`指示來源未被引入
+### <a name="ingestion-status-in-the-azure-table"></a>Azure 資料表中的內嵌狀態
 
->請注意,獲取狀態`Queued``IngestionReportMethod`表示 保留的預設值為"佇列"。 這是一個永久狀態,重新調用"獲取狀態由來源Id"或"獲取狀態收集"函數將始終導致相同的"排隊"狀態。<BR>為了能夠檢查 Azure 表中的引入狀態,`IngestionReportMethod`請在引入[KustoQueueinge](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties)屬性`Table`的屬性設置為`QueueAndTable`之前進行驗證(或者 如果您還希望將引入狀態報告到佇列)。
+`IKustoIngestionResult`從每個內嵌作業傳回的介面包含可用來查詢內嵌狀態的函數。
+特別注意 `Status` 傳回物件的屬性 `IngestionStatus` ：
+* `Pending`表示來源已排入佇列以供內嵌，尚未更新。 再次使用函數來查詢來源的狀態
+* `Succeeded`表示已成功內嵌來源
+* `Failed`指出無法內嵌來源
 
-### <a name="ingestion-status-in-azure-queue"></a>Azure 佇列中引入狀態
-這些方法`IKustoIngestionResult`僅與檢查 Azure 表中的狀態相關。 要查詢已報告到 Azure 佇列的狀態,請使用以下[IKustoQueueingest 用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)的方法:
+> [!NOTE]
+> 取得 `Queued` 狀態表示 `IngestionReportMethod` 已保留其預設值「佇列」。 這是永久的狀態，重新叫用或函式時 `GetIngestionStatusBySourceId` `GetIngestionStatusCollection` ，一律會產生相同的「已排入佇列」狀態。
+> 若要檢查 Azure 資料表中的內嵌狀態，在內嵌之前，請確認 `IngestionReportMethod` [KustoQueuedIngestionProperties](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties)的屬性已設定為 `Table` 。 如果您也想要將內嵌狀態回報給佇列，請將狀態設定為 `QueueAndTable` 。
 
-|方法 |目的 |
-|------------|------------|
-|窺視上點失敗 |根據請求的消息限制返回有關未丟棄的最早引入失敗的資訊的非同步方法 |
-|取得與放棄上置失敗 |根據請求的消息限制返回並丟棄未丟棄的最早引入故障的非同步方法 |
-|獲得和放棄的上流成功 |根據請求的消息限制,返回並丟棄未丟棄的最早引入成功(僅設置為`IngestionReportLevel``FailuresAndSuccesses` |
+### <a name="ingestion-status-in-azure-queue"></a>Azure 佇列中的內嵌狀態
 
+這些 `IKustoIngestionResult` 方法僅適用于檢查 Azure 資料表中的狀態。 若要查詢向 Azure 佇列回報的狀態，請使用下列[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)方法。
 
-### <a name="ingestion-failures-retrieved-from-azure-queue"></a>從 Azure 佇列中取出的失敗
-引入失敗由`IngestionFailure`包含有關故障的有用資訊的物件表示:
+|方法                                  |目的     |
+|----------------------------------------|------------|
+|PeekTopIngestionFailures                |非同步方法，傳回因要求的訊息限制而尚未捨棄的最早內嵌失敗相關資訊 |
+|GetAndDiscardTopIngestionFailures       |非同步方法，會傳回並捨棄因為要求的訊息限制而尚未捨棄的最早內嵌失敗 |
+|GetAndDiscardTopIngestionSuccesses      |非同步方法會傳回並捨棄因要求的訊息限制而尚未捨棄的最早內嵌成功。 只有當設定為時，這個方法才會相關 `IngestionReportLevel``FailuresAndSuccesses` |
 
-|屬性 |意義 |
-|------------|------------|
-|資料庫&表 |預期的資料庫與表格名稱 |
-|引入來源路徑 |引入的 blob 的路徑。 將在檔被引入的情況下包含原始檔名。 在資料閱讀器被引入的情況下,將是隨機的 |
-|失敗狀態 |`Permanent`( 不執行重試)、(`Transient`將執行重試`Exhausted`)或 (幾次重試也失敗) |
-|操作代碼 &根活动代碼 |引入的操作 ID 和 RootActivity ID(可用於進一步故障排除) |
-|失敗開啟 |故障的 UTC 時間。 將大於調用引入方法的時間,因為在執行引入之前正在聚合數據 |
-|詳細資料 |有關故障的其他詳細資訊(如果存在) |
-|ErrorCode |`IngestionErrorCode`Entl 表示引入錯誤代碼,以防失敗發生|
+### <a name="ingestion-failures-retrieved-from-the-azure-queue"></a>從 Azure 佇列取出的內嵌失敗
+
+內嵌失敗會以 `IngestionFailure` 物件表示，其中包含有關失敗的實用資訊。
+
+|屬性                      |意義     |
+|------------------------------|------------|
+|資料庫 & 資料表              |預期的資料庫和資料表名稱 |
+|IngestionSourcePath           |內嵌 blob 的路徑。 如果檔案是內嵌，則會包含原始檔案名稱。 如果 DataReader 為內嵌，則為隨機 |
+|FailureStatus                 |`Permanent`（將不會執行重試）、 `Transient` （將執行重試），或 `Exhausted` （多次重試也失敗） |
+|OperationId & RootActivityId  |內嵌的作業識別碼和 RootActivity 識別碼（適用于進一步疑難排解） |
+|FailedOn                      |失敗的 UTC 時間。 會大於呼叫內嵌方法的時間，因為資料會在執行內嵌之前匯總 |
+|詳細資料                       |關於失敗的其他詳細資料（如果有的話） |
+|ErrorCode                     |`IngestionErrorCode`列舉，代表發生失敗時的內嵌錯誤碼 |

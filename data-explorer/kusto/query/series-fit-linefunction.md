@@ -1,5 +1,5 @@
 ---
-title: series_fit_line （）-Azure 資料總管 |Microsoft Docs
+title: series_fit_line （）-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 series_fit_line （）。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 1694b92293b19cb84e40d38d667c8d67c1cc250f
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 876eeaa4550a5433354d50dd44fae3920177d335
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618680"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372670"
 ---
 # <a name="series_fit_line"></a>series_fit_line()
 
@@ -40,6 +40,7 @@ ms.locfileid: "82618680"
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print id=' ', x=range(bin(now(), 1h)-11h, bin(now(), 1h), 1h), y=dynamic([2,5,6,8,11,15,17,18,25,26,30,30])
 | extend (RSquare,Slope,Variance,RVariance,Interception,LineFit)=series_fit_line(y)

@@ -1,6 +1,6 @@
 ---
-title: series_multiply)- Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的series_multiply()。
+title: series_multiply （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 series_multiply （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: fa000d1058730e0232790e7f0e3976fa203519c0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1f88cdfc1490f8b00d8104286441e366aaf46f3f
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81508206"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372583"
 ---
 # <a name="series_multiply"></a>series_multiply()
 
-計算兩個數位系列輸入的元乘法。
+計算兩個數值數列輸入的元素取向乘法。
 
 **語法**
 
-`series_multiply(`*列1*`,`*系列2*`)`
+`series_multiply(`*series1* `,`*series2*`)`
 
 **引數**
 
-* *系列1,系列2:* 輸入數值陣列,按元素乘以動態數位結果。 所有參數必須是動態陣組。 
+* *series1，series2*：輸入數值陣列，要以元素的乘積乘以動態陣列結果。 所有引數都必須是動態陣列。 
 
 **傳回**
 
-兩個輸入之間計算元素乘法操作的動態陣列。 任何非數位元素或不存在的元素(不同大小的陣列)都生成`null`元素值。
+這兩個輸入之間的計算元素取向乘法運算動態陣列。 任何非數值元素或不存在的專案（不同大小的陣列）都會產生 `null` 元素值。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 3 step 1
 | extend y = x * 2
@@ -43,6 +44,6 @@ range x from 1 to 3 step 1
 
 |s1         |s2|        s1_multiply_s2|
 |---|---|---|
-|[1,2,4]    |[4,2,1]|   [4,4,4]|
-|[2,4,8]    |[8,4,2]|   [16,16,16]|
-|[3,6,12]   |[12,6,3]|  [36,36,36]|
+|[1，2，4]    |[4，2，1]|   [4，4，4]|
+|[2，4，8]    |[8，4，2]|   [16，16，16]|
+|[3，6，12]   |[12，6，3]|  [36，36，36]|

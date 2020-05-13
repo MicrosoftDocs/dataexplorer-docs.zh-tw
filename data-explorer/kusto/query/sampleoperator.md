@@ -1,6 +1,6 @@
 ---
-title: 範例運算子 ─ Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的範例運算符。
+title: 範例運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的範例運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/18/2020
-ms.openlocfilehash: 757830bde0c56ac727d5240c01ca4768eab28877
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4915371127acd229845cc9eac1ea1400484c313f
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510025"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372977"
 ---
 # <a name="sample-operator"></a>sample 運算子
 
-從輸入表中返回指定數量的隨機行。
+從輸入資料表傳回指定數目的亂數據列。
 
 ```kusto
 T | sample 5
@@ -25,17 +25,17 @@ T | sample 5
 
 **語法**
 
-_T_ `| sample` _行數_
+_T_ `| sample` _NumberOfRows_
 
 **引數**
 
-- _行數_:要返回的_T_行數。 您可以指定任何數字運算式。
+- _NumberOfRows_：要傳回的_T_資料列數目。 您可以指定任何數值運算式。
 
 **注意事項**
 
-- `sample`是面向速度的,而不是均勻的值分佈。 具體來說,這意味著如果使用運算元將 2 個不同大小的數據集(如`union``join`或運算符)結合在一起,則不會生成"公平"結果。 建議在表引用和篩選器`sample`之後直接使用。
+- `sample`適用于速度，而不是平均分佈值。 具體來說，這表示如果在兩個不同大小的資料集（例如 `union` or 運算子）後面使用運算子之後，它就不會產生 ' 公平 ' 結果 `join` 。 建議在 `sample` 資料表參考和篩選準則後面使用 right。
 
-- `sample`是非確定性運算符,每次在查詢期間計算結果時都會返回不同的結果集。 例如,以下查詢生成兩個不同的行(即使預期返回同一行兩次)。
+- `sample`是不具決定性的運算子，而且每次在查詢期間評估時，都會傳回不同的結果集。 例如，下列查詢會產生兩個不同的資料列（即使有一個會預期傳回相同的資料列兩次）。
 
 ```kusto
 let _data = range x from 1 to 100 step 1;
@@ -48,7 +48,7 @@ union (_sample), (_sample)
 | 83  |
 | 3   |
 
-為了確保在上面`_sample`的範例中計算一次,可以使用[具體函數](./materializefunction.md):
+為了確保上述範例 `_sample` 只會計算一次，您可以使用[具體化（）](./materializefunction.md)函數：
 
 ```kusto
 let _data = range x from 1 to 100 step 1;
@@ -61,18 +61,20 @@ union (_sample), (_sample)
 | 34  |
 | 34  |
 
-**技巧**
+**提示**
 
-- 如果要對某一百分比的數據進行採樣(而不是指定數量的行),可以使用
+- 如果您想要對特定百分比的資料進行取樣（而不是指定的資料列數目），您可以使用
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents | where rand() < 0.1
 ```
 
-- 如果要對鍵而不是行進行採樣(例如 - 範例 10 個 Id 並取得[`sample-distinct`](./sampledistinctoperator.md)這些 Id`in`的所有行), 則可以使用 運算符組合使用。
+- 如果您想要對索引鍵（而非資料列）進行取樣（例如，範例10識別碼並取得這些識別碼的所有資料列），您可以 [`sample-distinct`](./sampledistinctoperator.md) 搭配 `in` 運算子使用。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let sampleEpisodes = StormEvents | sample-distinct 10 of EpisodeId;
 StormEvents

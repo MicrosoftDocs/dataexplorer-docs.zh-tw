@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1614a04c5e5bff51f45df914174c967ff9c7d8a2
-ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
+ms.openlocfilehash: 87b68e4a9de42a9a7085238db5919066d577ed1f
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82907084"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373547"
 ---
 # <a name="streaming-ingestion-http-request"></a>串流內嵌 HTTP 要求
 
@@ -32,20 +32,20 @@ ms.locfileid: "82907084"
 
 ## <a name="additional-parameters"></a>其他參數
 
-其他參數會格式化為 URL 查詢`{name}={value}`配對，並以 & 字元分隔。
+其他參數會格式化為 URL 查詢 `{name}={value}` 配對，並以 & 字元分隔。
 
 | 參數    | 描述                                                                          | 必要/選用   |
 |--------------|--------------------------------------------------------------------------------------|---------------------|
-|`streamFormat`| 指定要求主體中的資料格式。 這個值應該是下列其中一個`CSV`： `TSV`、 `SCsv`、 `SOHsv`、 `PSV`、 `JSON`、 `MultiJSON`、 `Avro`、。 如需詳細資訊，請參閱[支援的資料格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)。| 必要 |
-|`mappingName` | 在資料表上定義之預先建立的內嵌對應名稱。 如需詳細資訊，請參閱[資料](../../management/mappings.md)對應。 [這裡](../../management/create-ingestion-mapping-command.md)說明了在資料表上管理預先建立之對應的方式。| 選擇性，但如果`streamFormat`是`JSON`、 `MultiJSON`或其中一個，則為必要項`Avro`|  |
+|`streamFormat`| 指定要求主體中的資料格式。 這個值應該是下列其中一個： `CSV` 、 `TSV` 、、、、、 `SCsv` `SOHsv` `PSV` `JSON` `MultiJSON` 、 `Avro` 。 如需詳細資訊，請參閱[支援的資料格式](../../../ingestion-supported-formats.md)。| 必要 |
+|`mappingName` | 在資料表上定義之預先建立的內嵌對應名稱。 如需詳細資訊，請參閱[資料](../../management/mappings.md)對應。 [這裡](../../management/create-ingestion-mapping-command.md)說明了在資料表上管理預先建立之對應的方式。| 選擇性，但如果 `streamFormat` 是 `JSON` 、或其中一個，則為必要項 `MultiJSON``Avro`|  |
               
-例如，若要將 CSV 格式的資料內嵌到`Logs`資料庫`Test`中的資料表，請使用：
+例如，若要將 CSV 格式的資料內嵌到 `Logs` 資料庫中的資料表 `Test` ，請使用：
 
 ```
 POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Csv HTTP/1.1
 ```
 
-若要使用預先建立的對應`mylogmapping`來內嵌 JSON 格式的資料，請使用：
+若要使用預先建立的對應來內嵌 JSON 格式的資料 `mylogmapping` ，請使用：
 
 ```
 POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Json&mappingName=mylogmapping HTTP/1.1
@@ -57,14 +57,14 @@ POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Json&m
 
 |標準標頭   | 描述                                                                               | 必要/選用 | 
 |------------------|-------------------------------------------------------------------------------------------|-------------------|
-|`Accept`          | 將此值設定`application/json`為。                                                     | 選用          |
-|`Accept-Encoding` | 支援的編碼`gzip`方式`deflate`為和。                                             | 選用          | 
+|`Accept`          | 將此值設定為 `application/json` 。                                                     | 選用          |
+|`Accept-Encoding` | 支援的編碼方式為 `gzip` 和 `deflate` 。                                             | 選用          | 
 |`Authorization`   | 請參閱[驗證](./authentication.md)。                                                | 必要          |
 |`Connection`      | 啟用 `Keep-Alive`。                                                                      | 選用          |
 |`Content-Length`  | 指定要求主體長度（如果已知）。                                              | 選用          |
-|`Content-Encoding`| 設定為`gzip` ，但主體必須是 gzip 壓縮                                        | 選用          |
+|`Content-Encoding`| 設定為， `gzip` 但主體必須是 gzip 壓縮                                        | 選用          |
 |`Expect`          | 設定為 `100-Continue`。                                                                    | 選用          |
-|`Host`            | 將設定為您用來傳送要求的功能變數名稱（例如`help.kusto.windows.net`）。 | 必要          |
+|`Host`            | 將設定為您用來傳送要求的功能變數名稱（例如 `help.kusto.windows.net` ）。 | 必要          |
 
 下表包含查詢和管理作業的一般自訂標頭。 除非另有指示，否則標頭僅適用于遙測用途，而且不會影響任何功能。
 

@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/27/2018
-ms.openlocfilehash: 7e1c7dd313f42884132fe014367c0402418be708
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1853b85215da63a753a7867cb9d4354c5b99731a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81497196"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373972"
 ---
 # <a name="connect-to-azure-data-explorer-from-azure-databricks-by-using-python"></a>使用 Python 從 Azure Databricks 連線至 Azure 資料總管
 
@@ -20,8 +20,8 @@ ms.locfileid: "81497196"
 
 ## <a name="prerequisites"></a>Prerequisites
 
-- [建立 Azure 資料資源管理器叢集與資料庫](/azure/data-explorer/create-cluster-database-portal)。
-- [建立 Azure 資料區塊工作區](/azure/azure-databricks/quickstart-create-databricks-workspace-portal#create-an-azure-databricks-workspace)。 在 [Azure Databricks 服務]**** 下方的 [定價層]**** 下拉式清單中，選取 [Premium]****。 此選取項目可讓您使用 Azure Databricks 祕密儲存您的認證，並在 Notebook 和作業中加以參考。
+- [建立 Azure 資料總管叢集和資料庫](create-cluster-database-portal.md)。
+- [建立 Azure Databricks 工作區](/azure/azure-databricks/quickstart-create-databricks-workspace-portal#create-an-azure-databricks-workspace)。 在 [Azure Databricks 服務]**** 下方的 [定價層]**** 下拉式清單中，選取 [Premium]****。 此選取項目可讓您使用 Azure Databricks 祕密儲存您的認證，並在 Notebook 和作業中加以參考。
 
 - 在 Azure Databricks 中使用下列規格 (執行範例 Notebook 所需的最低設定) [建立叢集](https://docs.azuredatabricks.net/user-guide/clusters/create.html)：
 
@@ -75,7 +75,7 @@ https://login.windows.net/<YourDomain>/.well-known/openid-configuration/
 使用 Azure Databricks [祕密](https://docs.azuredatabricks.net/user-guide/secrets/index.html#secrets)儲存並保護 Azure AD 索引鍵和金鑰，如下所示：
 1. [設定 CLI](https://docs.azuredatabricks.net/user-guide/dev-tools/databricks-cli.html#set-up-the-cli)。
 1. [安裝 CLI](https://docs.azuredatabricks.net/user-guide/dev-tools/databricks-cli.html#install-the-cli)。 
-1. [設定認證](https://docs.azuredatabricks.net/user-guide/dev-tools/databricks-cli.html#set-up-authentication)。
+1. [設定驗證](https://docs.azuredatabricks.net/user-guide/dev-tools/databricks-cli.html#set-up-authentication)。
 1. 使用下列範例命令設定[祕密](https://docs.azuredatabricks.net/user-guide/secrets/index.html#secrets)：
 
     ```databricks secrets create-scope --scope adx```

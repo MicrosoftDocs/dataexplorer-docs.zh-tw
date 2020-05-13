@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 22e40c810242ee82701cf2d0e382a9f1910ed22d
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: 7f7c6384bb49640890ae4d3cbd5a4f409688bcbe
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741717"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372795"
 ---
 # <a name="series_fill_const"></a>series_fill_const()
 
@@ -23,17 +23,17 @@ ms.locfileid: "82741717"
 
 **語法**
 
-`series_fill_const(`*x* `[, ` * * constant_value`[,` *missing_value_placeholder*`]])`
+`series_fill_const(`*x* `[, `*constant_value* `[,`*missing_value_placeholder*`]])`
 * 會傳回數列*x* ，其中的所有實例*missing_value_placeholder*都會取代為*constant_value*。
 
 **引數**
 
 * *x*：動態陣列純量運算式，這是數值的陣列。
 * *constant_value*：參數，指定要取代之遺漏值的預留位置。 預設值為*0*。 
-* *missing_value_placeholder*：選擇性參數，指定要取代之遺漏值的預留位置。 預設值為`double`（*null*）。
+* *missing_value_placeholder*：選擇性參數，指定要取代之遺漏值的預留位置。 預設值為 `double` （*null*）。
 
 **注意事項**
-* 您可以使用`default = ` *DefaultValue*語法來建立填滿常數值的數列（或只省略會假設為0的）。 如需詳細資訊，請參閱[make 系列](make-seriesoperator.md)。
+* 您可以使用 DefaultValue 語法來建立填滿常數值的數列 `default = ` *DefaultValue* （或只省略會假設為0的）。 如需詳細資訊，請參閱[make 系列](make-seriesoperator.md)。
 
 ```kusto
 make-series num=count() default=-1 on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
@@ -45,11 +45,12 @@ make-series num=count() default=-1 on TimeStamp in range(ago(1d), ago(1h), 1h) b
 make-series num=count() default=long(null) on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
 ```
   
-* *Missing_value_placeholder*可以是任何類型，這會轉換成實際的元素類型。 因此， `double`（*null*）、 `long`（*null*）或`int`（*null*）具有相同的意義。
+* *Missing_value_placeholder*可以是任何類型，這會轉換成實際的元素類型。 因此， `double` （*null*）、 `long` （*null*）或 `int` （*null*）具有相同的意義。
 * 函式會保留陣列元素的原始類型。 
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let data = datatable(`arr`: dynamic)
 [

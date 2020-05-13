@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: db6b060aee3288fb159e8b1cf7feb8554190fe36
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 097e175ff28d334532e85715f1f6401a96fa8f8c
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226494"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374320"
 ---
 # <a name="create-an-azure-data-explorer-cluster-in-your-virtual-network"></a>在您的虛擬網路中建立 Azure 資料總管叢集
 
@@ -68,7 +68,7 @@ Azure 資料總管支援將叢集部署到虛擬網路（VNet）中的子網。 
     | 名稱 | AllowAzureDataExplorerManagement
     | | |
     
-1. 根據[VNet 部署](/azure/data-explorer/vnet-deployment#dependencies-for-vnet-deployment)的相依性，針對所有輸入和輸出相依性重複前兩個步驟。 或者，您可以使用單一規則來取代輸出規則，以允許埠443和80的*網際網路*。
+1. 根據[VNet 部署](vnet-deployment.md#dependencies-for-vnet-deployment)的相依性，針對所有輸入和輸出相依性重複前兩個步驟。 或者，您可以使用單一規則來取代輸出規則，以允許埠443和80的*網際網路*。
     
     輸入和輸出相依性的 NSG 規則看起來應該像這樣：
 
@@ -121,7 +121,7 @@ Azure 資料總管支援將叢集部署到虛擬網路（VNet）中的子網。 
     | | | |
 
     > [!NOTE]
-    > 針對生產工作負載，請根據[您 VNet 中的規劃子網大小](/azure/data-explorer/vnet-deployment#plan-subnet-size-in-your-vnet)來規劃子網大小
+    > 針對生產工作負載，請根據[您 VNet 中的規劃子網大小](vnet-deployment.md#plan-subnet-size-in-your-vnet)來規劃子網大小
 
 1. 選取 [檢閱 + 建立]**** 以檢閱您的叢集詳細資料，然後選取 [建立]**** 以佈建叢集。
 

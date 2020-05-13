@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: f2e5e4aca145e0d78baddd7b1e34ab3ce6d047d1
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 1d93535ff2caff096a18e2324fd3015ca91fc5b4
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83224997"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373259"
 ---
 # <a name="percentile_tdigest"></a>percentile_tdigest()
 
@@ -48,6 +48,7 @@ ms.locfileid: "83224997"
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigestRes = tdigest(DamageProperty) by State
@@ -62,7 +63,7 @@ StormEvents
 |1200000|
 |250000|
 
-
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigestRes = tdigest(DamageProperty) by State
@@ -77,7 +78,7 @@ StormEvents
 |[0，0，1200000]|
 |[0，0，250000]|
 
-
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigestRes = tdigest(DamageProperty) by State

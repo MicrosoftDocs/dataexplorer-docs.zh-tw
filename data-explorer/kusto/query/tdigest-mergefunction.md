@@ -8,35 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/09/2019
-ms.openlocfilehash: 92dce1a98cc0e24dcfbfcd7cb875fa370e3ae1d0
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 1281e2afdf9770975c6f6f74399f9815adaec045
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737720"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83371054"
 ---
 # <a name="tdigest_merge"></a>tdigest_merge()
 
-合併`tdigest`結果（匯總版本[`tdigest_merge()`](tdigest-merge-aggfunction.md)的純量版本）。
+合併 `tdigest` 結果（匯總版本的純量版本 [`tdigest_merge()`](tdigest-merge-aggfunction.md) ）。
 
 深入瞭解基礎演算法（T-摘要式）和[此處](percentiles-aggfunction.md#estimation-error-in-percentiles)的估計錯誤。
 
 **語法**
 
-`merge_tdigests(`*運算式*`,` *運算式 2*`, ...)`
+`merge_tdigests(`*運算式 1* `,`*運算式 2*`, ...)`
 
-`tdigest_merge(`*運算式*`,` *運算式 2* `, ...)` -別名。
+`tdigest_merge(`*運算式 1* `,`*運算式 2* `, ...)`-別名。
 
 **引數**
 
-* 具有要合併之`tdigest`值的資料行。
+* 具有 `tdigest` 要合併之值的資料行。
 
 **傳回**
 
-合併資料行`*Expr1*`的結果， `*Expr2*`.。。`*ExprN*`一個`tdigest`。
+將資料行 `*Expr1*` （ `*Expr2*` ...）合併 `*ExprN*` 到其中的 `tdigest` 結果。
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 10 step 1 
 | extend y = x + 10

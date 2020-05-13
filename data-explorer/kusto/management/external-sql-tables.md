@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: f8cc5771890247291f6c9e1183a57fc7e1341874
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 9de01863ddb832421c5b6dbfe65b8ae451382fb7
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227735"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373378"
 ---
 # <a name="external-sql-table"></a>外部 SQL 資料表
 
@@ -40,7 +40,7 @@ ms.locfileid: "83227735"
 
 ## <a name="optional-properties"></a>選擇性屬性
 
-| 屬性            | 類型            | 說明                          |
+| 屬性            | 類型            | 描述                          |
 |---------------------|-----------------|---------------------------------------------------------------------------------------------------|
 | `folder`            | `string`        | 資料表的資料夾。                  |
 | `docString`         | `string`        | 記錄資料表的字串。      |
@@ -75,13 +75,13 @@ with
 
 **輸出**
 
-| TableName   | TableType | 資料夾         | DocString | [內容]                            |
+| TableName   | TableType | 資料夾         | DocString | 屬性                            |
 |-------------|-----------|----------------|-----------|---------------------------------------|
 | ExternalSql | Sql       | ExternalTables | Docs      | {<br>  "TargetEntityKind": "sqltable'",<br>  "TargetEntityName": "MySqlTable",<br>  "TargetEntityConnectionString"： "Server = tcp:myserver. net，1433;Authentication = Active Directory 整合; 初始目錄 = mydatabase; "，<br>  "FireTriggers"： true，<br>  "CreateIfNotExists"： true，<br>  "PrimaryKey"： "x"<br>} |
 
 ## <a name="querying-an-external-table-of-type-sql"></a>查詢 SQL 類型的外部資料表 
 
-支援查詢外部 SQL 資料表。 請參閱[查詢外部資料表](https://docs.microsoft.com/azure/data-explorer/data-lake-query-data)。 
+支援查詢外部 SQL 資料表。 請參閱[查詢外部資料表](../../data-lake-query-data.md)。 
 
 > [!Note]
 > SQL 外部資料表查詢實行會從 SQL 資料表執行完整的「選取 *」（或選取相關的資料行）。 查詢的其餘部分將會在 Kusto 端執行。 

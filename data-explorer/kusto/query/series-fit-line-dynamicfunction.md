@@ -1,5 +1,5 @@
 ---
-title: series_fit_line_dynamic （）-Azure 資料總管 |Microsoft Docs
+title: series_fit_line_dynamic （）-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 series_fit_line_dynamic （）。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 170348dd530b581f85e0323563be324d5b795511
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 756650db23d531ec37636c0e7bd781a74ef9fdc3
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618712"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372686"
 ---
 # <a name="series_fit_line_dynamic"></a>series_fit_line_dynamic()
 
@@ -27,7 +27,7 @@ ms.locfileid: "82618712"
 * `interception`：攔截近似線（這是 b，y = ax + b）
 * `line_fit`：數位陣列，其中包含一系列最適合行的值。 序列長度等於輸入陣列的長度。 它主要用於圖表。
 
-這個運算子與[series_fit_line](series-fit-linefunction.md)相似，但不同`series-fit-line`的是，它會傳回動態包。
+這個運算子與[series_fit_line](series-fit-linefunction.md)相似，但不同的是， `series-fit-line` 它會傳回動態包。
 
 **語法**
 
@@ -42,6 +42,7 @@ ms.locfileid: "82618712"
 
 **範例**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print id=' ', x=range(bin(now(), 1h)-11h, bin(now(), 1h), 1h), y=dynamic([2,5,6,8,11,15,17,18,25,26,30,30])
 | extend fit=series_fit_line_dynamic(y)

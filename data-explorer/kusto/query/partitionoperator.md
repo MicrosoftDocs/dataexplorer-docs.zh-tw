@@ -1,6 +1,6 @@
 ---
-title: 分割區運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的分區運算符。
+title: 資料分割運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的資料分割運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0a9ef31f68a989fffe42d9b54800e9305e51f4ed
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 417d4afb74e9170301baebde6be73d97df097f0f
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81511368"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271531"
 ---
 # <a name="partition-operator"></a>partition 運算子
 
-分區運算符根據指定列的值將其輸入表分區到多個子表中,在每個子表上執行子查詢,並生成單個輸出表,該輸出表是所有子查詢結果的合併。 
+分割運算子會根據指定的資料行值，將其輸入資料表分割成多個子資料工作表、在每個子資料工作表上執行子查詢，並產生單一輸出資料表，這是所有子查詢結果的聯集。 
 
 ```kusto
 T | partition by Col1 ( top 10 by MaxValue )
@@ -27,44 +27,45 @@ T | partition by Col1 { U | where Col2=toscalar(Col1) }
 
 **語法**
 
-*T* `partition` `by` *Column*`(`*ContextualSubquery* T =*分割區參數*= 欄 中查詢`|``)`
+*T* `|` `partition` [*PartitionParameters*] 資料 `by` *行* `(` *CoNtextualSubquery*`)`
 
-*T* `partition` `by` *Column*`{`*Subquery* T =*分割區參數*= 欄子查詢`|``}`
+*T* `|` `partition` [*PartitionParameters*] 資料 `by` *行* `{` *子查詢*`}`
 
 **引數**
 
-* *T*: 其資料將由運算子處理的表格來源。
+* *T*：要由運算子處理其資料的表格式來源。
 
-* *列* *:T*中一列的名稱,其值確定如何劃分輸入表。 請參考下一個下註**解**。
+* *Column*： *T*中的資料行名稱，其值會決定輸入資料表的分割方式。 請參閱下面的**附注**。
 
-* *上下文子查詢*:一個表格表達式,該表單表達式,該`partition`表 單表達式是運算符的源,為單個*鍵*值範圍。
+* *CoNtextualSubquery*：表格式運算式，其來源是運算子的來源 `partition` ，範圍限定為單一*索引鍵值*。
 
-* *子查詢*:沒有源的表格運算式。 *可以通過*`toscalar()`呼叫獲得密鑰值。
+* *子查詢*：不含來源的表格式運算式。 *金鑰*值可透過 `toscalar()` 呼叫取得。
 
-* *分割區參數*:零個或多個(空間分隔)參數,其形式為:控制運算子行為*的名稱*`=`*值*。 支援下列參數：
+* *PartitionParameters*：零或多個（以空格分隔）參數，格式為： *Name* `=` *值*，可控制運算子的行為。 支援下列參數：
 
   |名稱               |值         |描述|
   |-------------------|---------------|-----------|
-  |`hint.materialized`|`true`,`false` |設定為`true`將運算子的`partition`來源(預設值: `false`)|
-  |`hint.concurrency`|*數量*|提示系統應並行執行`partition`運算符的併發子查詢數。 *默認值*:群集單個節點上的 CPU 內核量(2 到 16)。|
-  |`hint.spread`|*數量*|提示系統併發`partition`子查詢執行應使用多少個節點。 *默認值*:1。|
+  |`hint.materialized`|`true`,`false` |如果設定為， `true` 將會具體化運算子的來源 `partition` （預設值： `false` ）|
+  |`hint.concurrency`|*數字*|提示系統 `partition` 應該以平行方式執行運算子的多個並行子查詢。 *預設值*：叢集的單一節點上的 CPU 核心數量（2到16個）。|
+  |`hint.spread`|*數字*|提示系統並行子查詢執行應使用的節點數目 `partition` 。 *預設值*：1。|
 
 **傳回**
 
-運算符返回將子查詢應用於輸入數據的每個分區的結果的聯合。
+運算子會傳回將子查詢套用到輸入資料的每個分割區之結果的聯集。
 
 **注意事項**
 
-* 分區運算符當前受分區數的限制。
-  最多可以創建 64 個不同的分區。
-  如果分割區列 (*列*) 具有超過 64 個不同的值,則運算元將生成錯誤。
+* 資料分割運算子目前受限於磁碟分割數目。
+  可能會建立最多64個相異的分割區。
+  如果分割區資料行（資料*行*）有超過64個相異值，則運算子會產生錯誤。
 
-* 子查詢隱式引用輸入分區(子查詢中沒有分區的"名稱")。 您要在子查詢中多次引用輸入分區,請使用[為運算子](asoperator.md),如**下面的範例:分區參考**。
+* 子查詢會隱含地參考輸入資料分割（子查詢中沒有資料分割的 "name"）。 若要在子查詢中多次參考輸入資料分割，請使用[as 運算子](asoperator.md)，如以下範例所示 **：資料分割參考**。
 
-**範例:頂端嵌so大小寫**
+**範例： top-nested 案例**
 
-在某些情況下`partition`- 使用運算符而不是使用[`top-nested`運算符](topnestedoperator.md)編寫查詢更性能、更容易 下一個範例運行`summarize`子查詢`top`計算 ,並且`W`針對每個國家從 :(威明、華盛頓、西弗吉尼亞、威斯康星)開始
+在某些情況下，使用 `partition` 運算子（而不是使用[ `top-nested` 運算子](topnestedoperator.md)）來撰寫查詢變得更有效率，而下一個範例會執行子查詢 `summarize` ，並 `top` 從開始 `W` ：（懷俄明州，華盛頓，WEST 佛吉尼亞，威斯康辛）
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | where State startswith 'W'
@@ -75,25 +76,26 @@ StormEvents
 ) 
 
 ```
-|EventType|State|事件|損傷|
+|EventType|State|事件|傷害|
 |---|---|---|---|
 |Hail|懷俄明州|108|0|
-|大風|懷俄明州|81|5|
+|高風|懷俄明州|81|5|
 |冬季風暴|懷俄明州|72|0|
-|大雪|華盛頓|82|0|
-|大風|華盛頓|58|13|
-|野火|華盛頓|29|0|
+|繁重的雪|位於|82|0|
+|高風|位於|58|13|
+|野火|位於|29|0|
 |Thunderstorm Wind|西維吉尼亞|180|1|
 |Hail|西維吉尼亞|103|0|
-|冬季天氣|西維吉尼亞|88|0|
-|Thunderstorm Wind|威斯康辛州|416|1|
-|冬季風暴|威斯康辛州|310|0|
-|Hail|威斯康辛州|303|1|
+|冬季氣象|西維吉尼亞|88|0|
+|Thunderstorm Wind|威斯康辛|416|1|
+|冬季風暴|威斯康辛|310|0|
+|Hail|威斯康辛|303|1|
 
-**範例:查詢非重疊資料分割區**
+**範例：查詢非重迭資料分割**
 
-有時,在地圖/減少樣式中對非重疊數據分區運行複雜的子查詢很有用(按明智方式)。 下面的示例演示如何創建超過 10 個分區的聚合的手動分佈。
+有時候，在地圖/縮減樣式中，對非重迭的資料分割執行複雜的子查詢是很有用的（效能取向）。 下列範例顯示如何建立10個數據分割的手動散發匯總。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | extend p = hash(EventId, 10)
@@ -105,18 +107,19 @@ StormEvents
 | top 5 by Count
 ```
 
-|來源|Count|
+|來源|計數|
 |---|---|
 |Trained Spotter|12770|
 |執法機關|8570|
-|公開|6157|
+|公用|6157|
 |Emergency Manager|4900|
-|COOP 觀察員|3039|
+|合作基金觀察者|3039|
 
-**範例:查詢時間分區**
+**範例：查詢時間分割**
 
-下面的示例演示如何將查詢分區劃分為 N=10 分區,其中每個分區計算其自己的 Count,然後將所有分區匯總到 TotalCount 中。
+下列範例示範如何將查詢分割成 N = 10 個數據分割，其中每個資料分割會計算自己的計數，並在稍後將所有匯總到 TotalCount。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let N = 10;                 // Number of query-partitions
 range p from 0 to N-1 step 1  // 
@@ -134,9 +137,9 @@ range p from 0 to N-1 step 1  //
 |59066|
 
 
-**範例:分割區參照**
+**範例：資料分割-參考**
 
-下面的範例展示如何使用[as 運算子](asoperator.md)為每個資料分區指定一個「name」,然後在子查詢中重用該名稱:
+下列範例顯示如何使用[as 運算子](asoperator.md)，為每個資料分割提供「名稱」，然後在子查詢中重複使用該名稱：
 
 ```kusto
 T
@@ -147,10 +150,11 @@ T
 )
 ```
 
-**範例:由函數呼叫隱藏的複雜子查詢**
+**範例：由函式呼叫隱藏的複雜子查詢**
 
-同樣的技術可以應用於更複雜的子查詢。 為了簡化語法,可以在函數調用中包裝子查詢:
+同樣的技巧也可以運用更複雜的子查詢來套用。 為了簡化語法，其中一個可以將子查詢包裝在函式呼叫中：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let partition_function = (T:(Source:string)) 
 {
@@ -167,10 +171,10 @@ StormEvents
 | top 5 by Count
 ```
 
-|來源|Count|
+|來源|計數|
 |---|---|
 |Trained Spotter|12770|
 |執法機關|8570|
-|公開|6157|
+|公用|6157|
 |Emergency Manager|4900|
-|COOP 觀察員|3039|
+|合作基金觀察者|3039|

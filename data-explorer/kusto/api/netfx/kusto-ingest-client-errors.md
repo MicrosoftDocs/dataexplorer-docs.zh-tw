@@ -1,6 +1,6 @@
 ---
-title: Kusto.ingest 參考 - 錯誤和異常 - Azure 資料資源管理器 |微軟文件
-description: 本文介紹 Kusto.Ingest 引用 - Azure 資料資源管理器中的錯誤和異常。
+title: Kusto-錯誤和例外狀況-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 Kusto 錯誤和例外狀況。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,222 +8,220 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: f8f50322a79dea8890b4a4ad5eaa78f0b8fe3bc0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4af09c0b29b77edd7a4e62c7a6abbbae7e918610
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81524339"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373671"
 ---
-# <a name="kustoingest-reference---errors-and-exceptions"></a>庫斯特.Ingest 參考 - 錯誤和例外
-用戶端的引入處理過程中的任何錯誤都通過 C# 異常向使用者代碼公開。
+# <a name="kustoingest-errors-and-exceptions"></a>Kusto。內嵌錯誤和例外狀況
+在用戶端上進行內嵌處理期間的任何錯誤，都是以 c # 例外狀況來表示。
 
-## <a name="failures-overview"></a>容錯概述
+## <a name="failures"></a>失敗
 
-### <a name="kustodirectingestclient-exceptions"></a>庫斯特定向客戶端異常
-在嘗試從多個源引入時,在引入其中一些源時可能會出現錯誤,而其他源可能已成功引入。 如果特定源的引入失敗,則記錄該引入,並且客戶端繼續引入用於引入的剩餘源。 在遍過所有來源進行攝入后,將引發`IngestClientAggregateException`一個包含成員`IList<IngestClientException> IngestionErrors`。
-`IngestClientException`及其派生類包含一個字段`IngestionSource`和`Error`一 個字段,這些欄位共同形成從源的映射,該映射無法引入到嘗試引入時發生的錯誤。 可以使用「引入錯誤」清單中的資訊來調查哪些源未被引入以及原因。 `IngestClientAggregateException`例外還包含一個布爾屬性,`GlobalError`該屬性指示是否對所有源發生錯誤。
+### <a name="kustodirectingestclient-exceptions"></a>KustoDirectIngestClient 例外狀況
 
-### <a name="failures-ingesting-from-files-or-blobs"></a>從檔案或 Blob 引入失敗 
-如果嘗試從 blob_file 引入時發生引入失敗,`deleteSourceOnSuccess`則即使標誌`true`設置為 也不會刪除引入源。
-保留源以進行進一步分析。 一旦瞭解了錯誤的來源,並且由於錯誤並非來自引入源本身,用戶端的使用者可能會嘗試重新引入它。
+嘗試從多個來源內嵌時，在內嵌過程中可能會發生錯誤。 如果其中一個來源的內嵌失敗，則會記錄它，而且用戶端會繼續內嵌剩餘的來源。 在進行內嵌的所有來源之後，會擲回 `IngestClientAggregateException` ，其中包含 `IList<IngestClientException> IngestionErrors` 成員。
 
-### <a name="failures-ingesting-from-idatareader"></a>從 IDataReader 引入失敗
-從 DataReader 引入時,要引入的數據將保存到預設`<Temp Path>\Ingestions_<current date and time>`位置為的臨時資料夾。 此文件始終在成功引入後刪除。<BR>
-在`IngestFromDataReader`和`IngestFromDataReaderAsync`方法中`retainCsvOnFailure`,預設值`false`為的標記確定是否應在引入失敗後保留檔。 如果此標誌設置為`false`,則無法引入的數據將不會持久化,因此很難理解問題所在。
+`IngestClientException`及其衍生類別包含欄位 `IngestionSource` 和 `Error` 欄位。 這兩個欄位會一起建立一個對應，從無法內嵌的來源，到嘗試內嵌時發生的錯誤。 此資訊可在清單中用 `IngestionErrors` 來調查哪些來源的內嵌失敗和原因。 `IngestClientAggregateException`例外狀況也包含布林值屬性 `GlobalError` ，指出所有來源是否發生錯誤。
 
-## <a name="kustoqueuedingestclient-exceptions"></a>庫斯特托排隊處理客戶端異常
-KustoQueuedestClient 通過將消息上傳到 Azure 佇列來引入數據。 如果在排隊過程之前和期間發生任何錯誤,則在執行結束時`IngestClientAggregateException`將引發一個`IngestClientException`錯誤 ,其中包含未發佈到佇列的源(對於每個失敗)以及嘗試發佈消息時發生的錯誤。
+### <a name="failures-ingesting-from-files-or-blobs"></a>從檔案或 blob 內嵌的失敗
 
-### <a name="posting-to-queue-failures-with-file-or-blob-as-a-source"></a>將檔案或 Blob 為源過帳到佇列失敗
-如果使用 KustoQueuedingestClient 的引入源檔/Ingest FromBlob 方法時發生錯誤,則源不會`deleteSourceOnSuccess`被刪除,`true`即使 標誌設置為 ,而是保留以進行進一步分析。 一旦瞭解了錯誤的來源,並且由於錯誤並非來自源本身,用戶端的使用者可能會嘗試使用與失敗源相關的 Ingest FromFile/Ingest FromBlob 方法重新排隊數據。 
+如果嘗試從 blob 或檔案內嵌時發生的內嵌失敗，即使旗標設定為，也不會刪除內嵌來源 `deleteSourceOnSuccess` `true` 。 系統會保留來源以供進一步分析。 瞭解錯誤的來源之後，如果錯誤不是來自內嵌來源本身，則用戶端的使用者可能會嘗試 reingest 它。
 
-### <a name="posting-to-queue-failures-with-idatareader-as-a-source"></a>使用 IDataReader 為源過帳到佇列失敗
-使用 DataReader 源時,要發布到佇列的數據將保存到預設`<Temp Path>\Ingestions_<current date and time>`位置為的臨時資料夾。
-在將數據成功發佈到佇列后,始終會刪除此資料夾。
-在`IngestFromDataReader`和`IngestFromDataReaderAsync`方法中`retainCsvOnFailure`,預設值`false`為的標記確定是否應在引入失敗後保留檔。 如果此標誌設置為`false`,則無法引入的數據將不會持久化,因此很難理解問題所在。
+### <a name="failures-ingesting-from-idatareader"></a>從 IDataReader 內嵌的失敗
 
-### <a name="common-failures"></a>常見故障
-|錯誤|原因|降低|
-|------------------------------|----|------------|
-|資料庫<database name>名稱不存在| 資料庫不存在|在 kustoInges 屬性/建立資料庫時檢查資料庫名稱 |
-|找不到實體「不存在的表名稱」 類型的「表」。|該表不存在,並且沒有 CSV 映射。| 新增 CSV 映射/建立所需的表 |
-|出於<blob path>原因排除 Blob:json 模式必須使用 jsonMapping 參數引入| 當沒有提供 json 映射時,Json 攝取。|提供 JSON 對應 |
-|下載 Blob 失敗:「遠端伺服器返回錯誤:(404) 找不到。| Blob 不存在。|驗證 Blob 是否存在(如果存在重試)並聯絡 Kusto 團隊 |
-|Json 列映射無效:兩個或多個映射元素指向同一列。| JSON 對應式 2 欄位路徑|修復 JSON 對應 |
-|引擎錯誤 ─ 【Utilsexception] 引入下載.下載:一個或多個檔案下載失敗(搜尋 KustoLogs<GUID1>的活動ID:<GUID2>, 根活動Id: )| 一個或多個檔案下載失敗。 |重試 |
-|剖析失敗:使用 id'<stream name>的串流有格式錯誤的 Csv 格式,每個驗證選項策略失敗 |格式錯誤的 csv 檔(例如,每行的欄數不同)。 僅當驗證策略設置為驗證選項時,才會失敗。 驗證Csv輸入常數列 |檢查您的 csv 檔。 此訊息僅適用於 csv/tsv 檔案 |
-|引入用戶端聚合Exception,錯誤消息"缺少有效共用訪問簽名的必需參數" |正在使用的 SAS 是服務,而不是儲存帳戶 |使用儲存帳戶的 SAS |
+從 DataReader 內嵌時，要內嵌的資料會儲存到預設位置為的暫存資料夾中 `<Temp Path>\Ingestions_<current date and time>` 。 成功內嵌之後，一律會刪除此預設資料夾。
 
-### <a name="ingestion-error-codes"></a>攝入錯誤代碼
+在 `IngestFromDataReader` 和 `IngestFromDataReaderAsync` 方法中，旗標 `retainCsvOnFailure` （其預設值為 `false` ）會判斷檔案是否應在失敗的內嵌之後保留。 如果此旗標設定為 `false` ，則不會保存失敗的內嵌資料，因此很難瞭解發生錯誤的原因。
 
-為了説明以程式設計方式處理引入失敗,故障資訊會用數位錯誤代碼(引入錯誤代碼枚舉)來豐富。
+## <a name="kustoqueuedingestclient-exceptions"></a>KustoQueuedIngestClient 例外狀況
 
-|ErrorCode|原因|
-|-----------|-------|
-|Unknown| 發生未知錯誤|
-|Stream_LowMemoryCondition| 操作記憶體不足|
-|Stream_WrongNumberOfFields| CSV 文件的欄位數不一致|
-|Stream_InputStreamTooLarge| 提交供攝取的文件已超過允許的大小|
-|Stream_NoDataToIngest| 找不到要引入的資料串流|
-|Stream_DynamicPropertyBagTooLarge| 引入資料中的動態欄包含太多唯一屬性|
-|Download_SourceNotFound| 無法從 Azure 儲存下載來源 ─ 找不到來源|
-|Download_AccessConditionNotSatisfied| 無法從 Azure 儲存下載來源 - 存取被拒|
-|Download_Forbidden| 無法從 Azure 儲存下載來源 - 禁止存取|
-|Download_AccountNotFound| 無法從 Azure 儲存下載來源 ─ 找不到帳號|
-|Download_BadRequest| 無法從 Azure 儲存下載來源 ─ 錯誤要求|
-|Download_NotTransient| 無法從 Azure 儲存下載來源 ─ 不是暫時性錯誤|
-|Download_UnknownError| 無法從 Azure 儲存下載來源 ─ 未知錯誤|
-|UpdatePolicy_QuerySchemaDoesNotMatchTableSchema| 無法調用更新策略。 查詢架構與表架構不匹配|
-|UpdatePolicy_FailedDescendantTransaction| 無法調用更新策略。 失敗的子項目事務更新原則|
-|UpdatePolicy_IngestionError| 無法調用更新策略。 發生攝入錯誤|
-|UpdatePolicy_UnknownError| 無法調用更新策略。 發生未知錯誤|
-|BadRequest_MissingJsonMappingtFailure| Json 模式未引入 jsonMapping 參數|
-|BadRequest_InvalidOrEmptyBlob| Blob 不合法或空白 zip 存檔|
-|BadRequest_DatabaseNotExist| 資料庫不存在|
-|BadRequest_TableNotExist| 表不存在|
-|BadRequest_InvalidKustoIdentityToken| 不合法的 kusto 識別碼|
-|BadRequest_UriMissingSas| 沒有未知的 Blob 儲存的 SAS 的 Blob 路徑|
-|BadRequest_FileTooLarge| 嘗試引入太大的檔案|
-|BadRequest_NoValidResponseFromEngine| 從引入命令沒有合法|
-|BadRequest_TableAccessDenied| 拒絕存取表|
-|BadRequest_MessageExhausted| 訊息已用盡|
-|General_BadRequest| 一般錯誤要求 (可能暗示引入非現有資料庫/表)|
-|General_InternalServerError| 發生內部伺服器錯誤|
+`KustoQueuedIngestClient`藉由將訊息上傳至 Azure 佇列來內嵌資料。 如果在佇列進程之前或期間發生錯誤， `IngestClientAggregateException` 則會在進程結束時擲回。 擲回的例外狀況包含的集合 `IngestClientException` ，其中包含每個失敗的來源，而且尚未張貼至佇列。 嘗試張貼訊息時發生的錯誤也會擲回。
 
-## <a name="detailed-kustoingest-exceptions-reference"></a>詳細的庫斯特.Ingest 異常引用
+### <a name="posting-to-queue-failures-with-a-file-or-blob-as-a-source"></a>以檔案或 blob 做為來源張貼到佇列失敗
 
-### <a name="cloudqueuesnotfoundexception"></a>雲佇列找不到異常
-當資料管理叢集未返回佇列時引發
+如果使用 `KustoQueuedIngestClient` 的方法發生錯誤 `IngestFromFile/IngestFromBlob` ，則不會刪除來源，即使 `deleteSourceOnSuccess` 旗標設定為也一樣 `true` 。 相反地，會保留來源以供進一步分析。 
 
-基類:[例外](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+瞭解錯誤的來源之後，如果錯誤不是來自內嵌來源本身，則用戶端的使用者可能會嘗試使用與失敗來源相關的方法來 requeue 資料 `IngestFromFile/IngestFromBlob` 。 
 
-欄位：
+### <a name="posting-to-queue-failures-with-idatareader-as-a-source"></a>張貼到佇列失敗，並以 IDataReader 作為來源
 
-|名稱|類型|意義
-|-----------|----|------------------------------|
-|錯誤| `String`| 試著從 DM 檢索佇列時發生的錯誤
+使用 DataReader 來源時，張貼至佇列的資料會儲存到預設位置為的暫存資料夾中 `<Temp Path>\Ingestions_<current date and time>` 。 成功將資料張貼到佇列之後，一律會刪除此資料夾。
+在 `IngestFromDataReader` 和 `IngestFromDataReaderAsync` 方法中，旗標 `retainCsvOnFailure` （其預設值為 `false` ）會判斷檔案是否應在失敗的內嵌之後保留。 如果此旗標設定為 `false` ，則不會保存失敗的內嵌資料，因此很難瞭解發生錯誤的原因。
+
+### <a name="common-failures"></a>常見失敗
+|錯誤                         |原因           |降低                                   |
+|------------------------------|-----------------|---------------------------------------------|
+|資料庫 <database name> 名稱不存在| 資料庫不存在|檢查資料庫的資料庫名稱 `kustoIngestionProperties` |
+|找不到類型為「資料表」的實體「資料表名稱不存在」。|資料表不存在，而且沒有 CSV 對應。| 新增 CSV 對應/建立必要的資料表 |
+|<blob path>排除的 Blob 原因： JSON 模式必須使用 jsonMapping 參數來內嵌| 未提供 JSON 對應時，會內嵌 JSON。|提供 JSON 對應 |
+|無法下載 blob：「遠端伺服器傳回錯誤：（404）找不到。」| Blob 不存在。|請確認 blob 是否存在。 如果存在，請重試並聯絡 Kusto 小組 |
+|JSON 資料行對應無效：兩個或多個對應元素指向相同的資料行。| JSON 對應有2個數據行具有不同的路徑|修正 JSON 對應 |
+|EngineError-[UtilsException] `IngestionDownloader.Download` ：一個或多個檔案無法下載（請搜尋 KustoLogs 中的 ActivityID： <GUID1> ，RootActivityId： <GUID2> ）| 無法下載一或多個檔案。 |重試 |
+|無法剖析：識別碼為 ' ' 的資料流程 <stream name> 具有格式不正確的 CSV 格式，每個 ValidationOptions 原則失敗 |CSV 檔案格式不正確（例如，每一行沒有相同數目的資料行）。 只有在驗證原則設定為時，才會失敗 `ValidationOptions` 。 ValidateCsvInputConstantColumns |檢查您的 CSV 檔案。 此訊息僅適用于 CSV/TSV 檔案 |
+|`IngestClientAggregateException`出現錯誤訊息「遺漏有效的共用存取簽章的強制參數」 |所使用的 SAS 屬於服務，而不是儲存體帳戶 |使用儲存體帳戶的 SAS |
+
+### <a name="ingestion-error-codes"></a>內嵌錯誤代碼
+
+為了協助以程式設計方式處理內嵌失敗，會以數值錯誤碼（）擴充失敗資訊 `IngestionErrorCode enumeration` 。
+
+|ErrorCode                                      |原因                                                        |
+|-----------------------------------------------|--------------------------------------------------------------|
+|Unknown                                        | 發生未知錯誤|
+|Stream_LowMemoryCondition                      | 作業已用盡記憶體|
+|Stream_WrongNumberOfFields                     | CSV 檔的欄位數目不一致|
+|Stream_InputStreamTooLarge                     | 針對內嵌提交的檔已超過允許的大小|
+|Stream_NoDataToIngest                          | 找不到可內嵌的資料流程|
+|Stream_DynamicPropertyBagTooLarge              | 內嵌資料中的其中一個動態資料行包含太多唯一的屬性|
+|Download_SourceNotFound                        | 無法從 Azure 儲存體下載來源-找不到來源|
+|Download_AccessConditionNotSatisfied           | 無法從 Azure 儲存體下載來源-拒絕存取|
+|Download_Forbidden                             | 無法從 Azure 儲存體下載來源-不允許存取|
+|Download_AccountNotFound                       | 無法從 Azure 儲存體下載來源-找不到帳戶|
+|Download_BadRequest                            | 無法從 Azure 儲存體下載來源-不正確的要求|
+|Download_NotTransient                          | 無法從 Azure 儲存體下載來源-不是暫時性錯誤|
+|Download_UnknownError                          | 無法從 Azure 儲存體下載來源-不明錯誤|
+|UpdatePolicy_QuerySchemaDoesNotMatchTableSchema| 無法叫用更新原則。 查詢架構不符合資料表架構|
+|UpdatePolicy_FailedDescendantTransaction       | 無法叫用更新原則。 失敗的下階交易式更新原則|
+|UpdatePolicy_IngestionError                    | 無法叫用更新原則。 發生內嵌錯誤|
+|UpdatePolicy_UnknownError                      | 無法叫用更新原則。 發生未知錯誤|
+|BadRequest_MissingJsonMappingtFailure          | 未使用 jsonMapping 參數內嵌 JSON 模式|
+|BadRequest_InvalidOrEmptyBlob                  | Blob 無效或為空的 zip 封存|
+|BadRequest_DatabaseNotExist                    | 資料庫不存在|
+|BadRequest_TableNotExist                       | 資料表不存在|
+|BadRequest_InvalidKustoIdentityToken           | 不正確 Kusto 身分識別權杖|
+|BadRequest_UriMissingSas                       | 不明 blob 儲存體中沒有 SAS 的 blob 路徑|
+|BadRequest_FileTooLarge                        | 嘗試內嵌太大的檔案|
+|BadRequest_NoValidResponseFromEngine           | 內嵌命令沒有有效的回復|
+|BadRequest_TableAccessDenied                   | 拒絕存取資料表|
+|BadRequest_MessageExhausted                    | 訊息已耗盡|
+|General_BadRequest                             | 一般錯誤的要求。 可能會提示內嵌至不存在的資料庫/資料表|
+|General_InternalServerError                    | 發生內部伺服器錯誤|
+
+## <a name="detailed-exceptions-reference"></a>詳細的例外狀況參考
+
+### <a name="cloudqueuesnotfoundexception"></a>CloudQueuesNotFoundException
+
+當資料管理叢集未傳回任何佇列時引發
+
+基類：[例外](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)狀況
+
+|欄位名稱 |類型     |意義
+|-----------|---------|------------------------------|
+|錯誤      | String  | 嘗試從 DM 取得佇列時發生的錯誤
                             
-其他資訊：
-
-僅當使用[Kusto 排隊引入用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。
-在引入過程中,多次嘗試檢索連結到 DM 的 Azure 佇列。 當這些嘗試失敗時,將引發異常,其中包含"錯誤"欄位中的失敗原因,以及"內部異常"欄位中可能存在內部異常。
+只有在使用[Kusto 佇列內嵌用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。
+在內嵌程式期間，會嘗試幾次來抓取連結至 DM 的 Azure 佇列。 當這些嘗試失敗時，包含失敗原因的例外狀況會在 [錯誤] 欄位中引發。 可能也會引發 ' InnerException ' 欄位中的內部例外狀況。
 
 
-### <a name="cloudblobcontainersnotfoundexception"></a>雲Blob容器未發現異常
-從資料管理叢集未傳回 Blob 容器時引發
+### <a name="cloudblobcontainersnotfoundexception"></a>CloudBlobContainersNotFoundException
 
-基類:[例外](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+未從資料管理叢集傳回任何 blob 容器時引發
 
-欄位：
+基類：[例外](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)狀況
 
-|名稱|類型|意義       
-|-----------|----|------------------------------|
-|庫斯托端點| `String`| 相關 DM 的終結點
+|欄位名稱   |類型     |意義       
+|-------------|---------|------------------------------|
+|KustoEndpoint| String  | 相關 DM 的端點
                             
-其他資訊：
+只有在使用[Kusto 佇列內嵌用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。  
+內嵌不在 Azure 容器中的來源（例如檔案、DataReader 或資料流程）時，會將資料上傳至暫存 blob 以進行內嵌。 當找不到可將資料上傳至的容器時，就會引發例外狀況。
 
-僅當使用[Kusto 排隊引入用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。  
-引入 Azure 容器中尚未的來源(即檔、DataReader 或 Stream)時,資料將上傳到臨時 Blob 以進行引入。 當找不到要將數據上載到的容器時,將引發異常。
+### <a name="duplicateingestionpropertyexception"></a>DuplicateIngestionPropertyException
 
-### <a name="duplicateingestionpropertyexception"></a>重複屬性異常
-多次設定引入屬性時引發
+當內嵌屬性設定超過一次時引發
 
-基類:[例外](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+基類：[例外](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)狀況
 
-欄位：
-
-|名稱|類型|意義       
-|-----------|----|------------------------------|
-|PropertyName| `String`| 重複屬性的名稱
+|欄位名稱   |類型     |意義       
+|-------------|---------|------------------------------------|
+|PropertyName | String  | 重複屬性的名稱。
                             
-### <a name="postmessagetoqueuefailedexception"></a>訊息後到佇列失敗異常
-將訊息發佈到佇列失敗時引發
+### <a name="postmessagetoqueuefailedexception"></a>PostMessageToQueueFailedException
 
-基類:[例外](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+將訊息張貼到佇列失敗時引發
 
-欄位：
+基類：[例外](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)狀況
 
-|名稱|類型|意義       
-|-----------|----|------------------------------|
-|佇列裡| `String`| 佇列的 URI
-|錯誤| `String`| 試著發佈到佇列時產生的錯誤訊息
+|欄位名稱   |類型     |意義       
+|-------------|---------|---------------------------------|
+|QueueUri     | String  | 佇列的 URI
+|錯誤        | String  | 嘗試張貼至佇列時所產生的錯誤訊息
                             
-其他資訊：
+只有在使用[Kusto 佇列內嵌用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。  
+佇列的內嵌用戶端會藉由將訊息上傳至相關的 Azure 佇列來內嵌資料。 如果發生 post 失敗，則會引發例外狀況。 它會包含佇列 URI、[錯誤] 欄位中失敗的原因，以及 [InnerException] 欄位中可能發生的內部例外狀況。
 
-僅當使用[Kusto 排隊引入用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。  
-排隊的客戶端通過將消息上傳到相關的 Azure 佇列來引入數據。 如果帖子失敗,將引發包含佇列URI的異常,即"錯誤"欄位中失敗的原因,以及"內部異常"欄位中可能存在的內部異常。
+### <a name="dataformatnotspecifiedexception"></a>DataFormatNotSpecifiedException
 
-### <a name="dataformatnotspecifiedexception"></a>資料格式未指定例外
-當需要資料格式在引入屬性中沒有指定時引發
+當需要資料格式，但未在中指定時引發`IngestionProperties`
 
-基類:引入客戶端異常
+基類： IngestClientException
 
-其他資訊：
+從資料流程內嵌時，必須在[IngestionProperties](kusto-ingest-client-reference.md#class-kustoingestionproperties)中指定資料格式，才能適當地內嵌資料。 當未指定時，就會引發這個例外狀況 `IngestionProperties.Format` 。
 
-從流引入時,必須在[引入屬性](kusto-ingest-client-reference.md#class-kustoingestionproperties)中指定數據格式,以便正確引入數據。 未指定引入屬性.Format 時引發此異常。
+### <a name="invaliduriingestclientexception"></a>InvalidUriIngestClientException
 
-### <a name="invaliduriingestclientexception"></a>不合法客戶端例外
-當不合法的 blob URI 作為引入來源提交時引發
+提交不正確 blob URI 做為內嵌來源時引發
 
-基類:引入客戶端異常
+基類： IngestClientException
 
-### <a name="compressfileingestclientexception"></a>壓縮封存客戶端例外
-以引入客戶端無法壓縮為引入的檔案時引發
+### <a name="compressfileingestclientexception"></a>CompressFileIngestClientException
 
-基類:引入客戶端異常
+當內嵌用戶端無法壓縮提供用於內嵌的檔案時引發
 
-其他資訊：
+基類： IngestClientException
 
-檔在引入之前被壓縮。 嘗試壓縮檔失敗時引發此異常。
+檔案會先壓縮，再進行內嵌。 當嘗試壓縮檔案失敗時，就會引發例外狀況。
 
-### <a name="uploadfiletotempblobingestclientexception"></a>上傳檔案到暫存客戶端異常
-從引入客戶端無法提供給引入的來源上傳到暫時 Blob 時引發
+### <a name="uploadfiletotempblobingestclientexception"></a>UploadFileToTempBlobIngestClientException
 
-基類:引入客戶端異常
+當內嵌用戶端無法上傳提供來內嵌至暫存 blob 的來源時引發
 
-### <a name="sizelimitexceededingestclientexception"></a>大小限制超出最大用戶端例外
-當攝入源過大時引發
+基類： IngestClientException
 
-基類:引入客戶端異常
+### <a name="sizelimitexceededingestclientexception"></a>SizeLimitExceededIngestClientException
 
-欄位：
+當內嵌來源太大時引發
 
-|名稱|類型|意義       
-|-----------|----|------------------------------|
-|大小| `long`| 攝入來源大小
-|MaxSize| `long`| 允許攝入的最大大小
+基類： IngestClientException
 
-其他資訊：
+|欄位名稱   |類型     |意義       
+|-------------|---------|-----------------------|
+|大小         | long    | 內嵌來源的大小
+|MaxSize      | long    | 允許內嵌的最大大小
 
-如果引入源超過 4GB 的最大大小,則引發異常。 大小驗證可以由[引入屬性類別](kusto-ingest-client-reference.md#class-kustoingestionproperties)的 IgnoreSizeLimit 標誌覆蓋,但不建議[引入大於 1 GB 的單一源](about-kusto-ingest.md#ingestion-best-practices)。
+如果內嵌來源超過4GB 的最大大小，則會擲回例外狀況。 `IgnoreSizeLimit` [IngestionProperties 類別](kusto-ingest-client-reference.md#class-kustoingestionproperties)中的旗標可以覆寫大小驗證。 不過，不建議您內嵌[大於 1 GB 的單一來源](about-kusto-ingest.md#ingestion-best-practices)。
 
-### <a name="uploadfiletotempblobingestclientexception"></a>上傳檔案到暫存客戶端異常
-使用引入客戶端無法將引入為引入為暫時的執行的檔案上載到暫時的執行中執行
+### <a name="uploadfiletotempblobingestclientexception"></a>UploadFileToTempBlobIngestClientException
 
-基類:引入客戶端異常
+當內嵌用戶端無法上傳提供來內嵌至暫存 blob 的檔案時引發
 
-### <a name="directingestclientexception"></a>定向用戶端例外
-執行直接攝入時發生常規錯誤時引發
+基類： IngestClientException
 
-基類:引入客戶端異常
+### <a name="directingestclientexception"></a>DirectIngestClientException
 
-### <a name="queuedingestclientexception"></a>排用的客戶端例外
-執行排隊攝入時出錯時引發
+當執行直接內嵌時發生一般錯誤時引發
 
-基類:引入客戶端異常
+基類： IngestClientException
 
-### <a name="ingestclientaggregateexception"></a>引入用戶端集合異常
-在攝入過程中發生一個或多個錯誤時引發
+### <a name="queuedingestclientexception"></a>QueuedIngestClientException
 
-基類:[聚合異常](https://msdn.microsoft.com/library/system.aggregateexception(v=vs.110).aspx)
+在執行佇列內嵌時發生錯誤時引發
 
-欄位：
+基類： IngestClientException
 
-|名稱|類型|意義       
-|-----------|----|------------------------------|
-|攝入錯誤| `IList<IngestClientException>`| 嘗試相機時發生的錯誤以及與這些錯誤相關的來源
-|是全域錯誤| `bool`| 指示是否對所有源都發生了異常
+### <a name="ingestclientaggregateexception"></a>IngestClientAggregateException
 
-## <a name="errors-in-native-code"></a>機器碼中的錯誤
-Kusto 引擎是用本機代碼編寫的。 有關本機代碼中的錯誤的詳細資訊,請參閱[本機代碼中的錯誤](../../concepts/errorsinnativecode.md)
+在內嵌期間發生一或多個錯誤時引發
+
+基類： [AggregateException](https://msdn.microsoft.com/library/system.aggregateexception(v=vs.110).aspx)
+
+|欄位名稱      |類型                             |意義       
+|----------------|---------------------------------|-----------------------|
+|IngestionErrors | IList<IngestClientException>    | 嘗試內嵌時所發生的錯誤，以及與它們相關的來源
+|IsGlobalError   | bool                            | 指出是否針對所有來源發生例外狀況
+
+## <a name="next-steps"></a>後續步驟
+
+如需機器碼中錯誤的詳細資訊，請參閱[機器碼中的錯誤](../../concepts/errorsinnativecode.md)。

@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/12/2020
-ms.openlocfilehash: 7389bfdf437d5fc6e4872f9f35ed40d5cb7b2f16
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 8a4a4e68333255c322708993b1c9429a89ae7a00
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108366"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373757"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-kibana-with-the-k2bridge-open-source-connector"></a>使用 K2Bridge 開放原始碼連接器將 Kibana 中 Azure 資料總管的資料視覺化
 
@@ -34,7 +34,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
 
    [![系結至 Azure 資料總管的 Kibana 頁面](media/k2bridge/k2bridge-kibana-page.png)](media/k2bridge/k2bridge-kibana-page.png#lightbox)
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 在您可以將 Kibana 中的 Azure 資料總管的資料視覺化之前，請備妥下列內容：
 
@@ -46,7 +46,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
 
 * 已獲授權可在 Azure 資料總管中查看資料的 Azure Active Directory （Azure AD）服務主體，包括用戶端識別碼和用戶端密碼。
 
-    我們建議您使用具有檢視器許可權的服務主體，並不鼓勵您使用較高層級的許可權。 [設定 Azure AD 服務主體的叢集 [view] 許可權](https://docs.microsoft.com/azure/data-explorer/manage-database-permissions#manage-permissions-in-the-azure-portal)。
+    我們建議您使用具有檢視器許可權的服務主體，並不鼓勵您使用較高層級的許可權。 [設定 Azure AD 服務主體的叢集 [view] 許可權](manage-database-permissions.md#manage-permissions-in-the-azure-portal)。
 
     如需 Azure AD 服務主體的詳細資訊，請參閱[建立 Azure AD 服務主體](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#create-an-azure-active-directory-application)。
 
@@ -114,7 +114,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
         kubectl port-forward service/kibana-kibana 5601 --namespace k2bridge
         ```
 
-    1. 前往來連接到 Kibana http://127.0.0.1:5601。
+    1. 前往來連接到 Kibana http://127.0.0.1:5601 。
 
     1. 向使用者公開 Kibana。 有多種方法可以這麼做。 您所使用的方法主要取決於您的使用案例。
 
@@ -133,7 +133,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
         kibana-kibana   LoadBalancer   xx.xx.xx.xx    <pending>     5601:30128/TCP   4m24s
         ```
 
-        接著，您可以使用顯示的 [產生的外部 IP] 值。 使用它來存取 Kibana，方法是開啟瀏覽器並\<前往 [外部\>IP： 5601]。
+        接著，您可以使用顯示的 [產生的外部 IP] 值。 使用它來存取 Kibana，方法是開啟瀏覽器並前往 [ \< 外部 IP \> ： 5601]。
 
 1. 設定索引模式來存取您的資料。
 
@@ -142,7 +142,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
     1. 開啟 Kibana。
     1. 流覽至 [**管理**]。
     1. 選取 [**索引模式**]。
-    1. 建立索引模式。 索引的名稱必須完全符合資料表名稱或函數名稱，但不含星號（\*）。 您可以從清單中複製相關的行。
+    1. 建立索引模式。 索引的名稱必須完全符合資料表名稱或函數名稱，但不含星號（ \* ）。 您可以從清單中複製相關的行。
 
 > [!Note]
 > 若要在其他 Kubernetes 提供者上執行 K2Bridge，請變更 values. yaml 中的 Elasticsearch **storageClassName**值，使其符合提供者建議的值。
@@ -176,7 +176,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
         * 搜尋「錯誤」以尋找包含此值的所有記錄。
         * 搜尋 "status： 200" 以取得狀態值為200的所有記錄。
     * 使用邏輯運算子**AND**、 **OR**和**NOT**。
-    * 使用星號（\*）和問號（？）萬用字元。 例如，查詢 "destination_city： L *" 符合記錄，其中目的地-城市值開頭為 "L" 或 "l"。 （K2Bridge 不區分大小寫）。
+    * 使用星號（ \* ）和問號（？）萬用字元。 例如，查詢 "destination_city： L *" 符合記錄，其中目的地-城市值開頭為 "L" 或 "l"。 （K2Bridge 不區分大小寫）。
 
     ![執行查詢](media/k2bridge/k2bridge-run-query.png)
 

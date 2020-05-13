@@ -1,6 +1,6 @@
 ---
-title: sumif() (聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 sumif()聚合函數。
+title: sumif （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 sumif （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a7d2c96f73b404e8d9acbe9da9defecd6bf1bbf3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7d97d31b2fb97d5541400bc0605ee40e83807b62
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506659"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83371887"
 ---
-# <a name="sumif-aggregation-function"></a>sumif() (聚合函數)
+# <a name="sumif-aggregation-function"></a>sumif （）（彙總函式）
 
-返回*謂詞*`true`計算到 的*Expr*的總和。
+傳回述*詞評估為的* *Expr*總和 `true` 。
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+* 只能在[匯總](summarizeoperator.md)的內容中使用
 
-您還可以使用[sum()](sum-aggfunction.md)函數,該函數在沒有謂詞表達式的情況下對行求和。
+您也可以使用[sum （）](sum-aggfunction.md)函數來計算不含述詞運算式的資料列。
 
 **語法**
 
-總結`sumif(` *Expr*`,`*謂詞*`)`
+總結 `sumif(` *Expr* `,` *Predicate*述詞`)`
 
 **引數**
 
-* *Expr*:用於聚合計算的運算式。 
-* *謂詞*: 謂詞, 如果為*true,Expr*的計算值將添加到總和中。 
+* *Expr*：匯總計算的運算式。 
+* 述*詞：述*詞，如果為 true，則會將*Expr*的計算值新增至總和。 
 
 **傳回**
 
-*謂詞*計算`true`到 的*Expr*的總和值。
-
-> [!TIP]
-> 使用 `summarize sumif(expr, filter)` 來取代 `where filter | summarize sum(expr)`
+述*詞評估為之* *Expr*的總和值 `true` 。
 
 **範例**
 

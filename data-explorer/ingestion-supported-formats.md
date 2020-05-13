@@ -7,18 +7,18 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/19/2020
-ms.openlocfilehash: fbc67bbc0523b208f717936a184cfa3b4be9db2d
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: c591c4f774f3af99004d398898b288256861bb75
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226239"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373709"
 ---
 # <a name="data-formats-supported-by-azure-data-explorer-for-ingestion"></a>適用于內嵌的 Azure 資料總管所支援的資料格式
 
 資料內嵌是將資料新增至資料表，並可在 Azure 資料總管中進行查詢的程式。 針對所有內嵌方法，除了內嵌查詢以外，資料必須是其中一種支援的格式。 下表列出並描述 Azure 資料總管支援資料內嵌的格式。
 
-|[格式]   |延伸   |說明|
+|[格式]   |延伸   |描述|
 |---------|------------|-----------|
 |Avro     |`.avro`     |[Avro容器檔案](https://avro.apache.org/docs/current/)。 支援以下程式碼：`null`、`deflate` (`snappy` 目前不支援)。|
 |ApacheAvro|`.avro`    |[Avro](https://avro.apache.org/docs/current/)格式的實驗性原生執行，支援[邏輯類型](https://avro.apache.org/docs/current/spec.html#Logical+Types)和 `snappy` 壓縮編解碼器。|
@@ -58,5 +58,5 @@ Blob 和檔案可以透過下列任何壓縮演算法來壓縮：
 
 ## <a name="next-steps"></a>後續步驟
 
-* 深入瞭解[資料](/azure/data-explorer/ingest-data-overview)內嵌
+* 深入瞭解[資料](ingest-data-overview.md)內嵌
 * 深入瞭解[Azure 資料總管資料內嵌屬性](ingestion-properties.md)

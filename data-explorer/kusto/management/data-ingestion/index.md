@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: f41304ae4ac51081cd61c41856ed5e7e08ed6f7a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f0fb68395ec5ed647e1f28cc1c93d46083d405c6
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490373"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373435"
 ---
 # <a name="data-ingestion"></a>資料擷取
 
@@ -41,8 +41,8 @@ ms.locfileid: "81490373"
 > 在 Kusto 中內嵌至資料表的資料會受限於資料表的有效**保留原則**。
 > 除非明確設定於資料表上，否則有效保留原則會衍生自資料庫的保留原則。 因此，當您將資料擷取至 Kusto 時，請確定資料庫的保留原則適合您的需要。 如果不是，請在資料表層級明確覆寫。 若沒有這麼做，可能會因為資料庫的保留原則而導致系統「無訊息」地刪除您的資料。 如需詳細資料，請參閱[保留原則](https://kusto.azurewebsites.net/docs/concepts/retentionpolicy.html)。
 
-如需資料內嵌屬性，請參閱[資料內嵌屬性](https://docs.microsoft.com/azure/data-explorer/ingestion-properties)。
-如需資料內嵌支援的格式清單，請參閱[資料格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)。
+如需資料內嵌屬性，請參閱[資料內嵌屬性](../../../ingestion-properties.md)。
+如需資料內嵌支援的格式清單，請參閱[資料格式](../../../ingestion-supported-formats.md)。
 
 
 

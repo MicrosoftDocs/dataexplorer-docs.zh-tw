@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1b4a917101ad3a35f8fdbc1cccb257b6f3724b69
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 5c430fd0ca18265c5800165b33bfe14126aee02a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83224862"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373278"
 ---
 # <a name="infer_storage_schema-plugin"></a>infer_storage_schema 外掛程式
 
@@ -38,13 +38,13 @@ evaluate infer_storage_schema(options)
 
 單一*選項*引數是類型的常數值 `dynamic` ，其中包含指定要求屬性的屬性包：
 
-|名稱                    |必要|說明|
+|名稱                    |必要|描述|
 |------------------------|--------|-----------|
 |`StorageContainers`|是|[儲存體連接字串](../api/connection-strings/storage.md)的清單，代表已儲存資料成品的前置詞 URI|
-|`DataFormat`|是|其中一種支援的[資料格式](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)。|
+|`DataFormat`|是|其中一種支援的[資料格式](../../ingestion-supported-formats.md)。|
 |`FileExtension`|否|僅掃描以這個副檔名結尾的檔案。 這不是必要的，但指定它可能會加速處理常式（或排除資料讀取問題）|
 |`FileNamePrefix`|否|僅掃描開頭為此前置詞的檔案。 這不是必要的，但指定它可能會加速進程|
-|`Mode`|否|架構推斷策略，下列其中一個： `any` 、 `last` 、 `all` 。 從任何（第一個找到的）檔案、最後寫入的檔案，或從所有檔案推斷資料架構。 預設值為 `last`。|
+|`Mode`|否|架構推斷策略，下列其中一個： `any` 、 `last` 、 `all` 。 從任何（第一個找到的）檔案、最後寫入的檔案，或從所有檔案推斷資料架構。 預設值是 `last`。|
 
 **傳回**
 

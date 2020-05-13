@@ -1,5 +1,5 @@
 ---
-title: Kusto. Explorer 工具-Azure 資料總管 |Microsoft Docs
+title: Kusto. Explorer 工具-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 Kusto 工具。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/23/2020
-ms.openlocfilehash: 1a643a282deec5a98230a17e7335fff7638812b8
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 60a414ff871d88de041e8b76671b73d98854fba0
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108434"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374078"
 ---
 # <a name="kustoexplorer-tool"></a>Kusto. Explorer 工具
 
@@ -23,7 +23,7 @@ Kusto 是一種豐富的桌面應用程式，可讓您使用 Kusto 查詢語言�
 
 * 安裝[Kusto. Explorer 工具](https://aka.ms/Kusto.Explorer)
 
-* 或者，使用瀏覽器存取您的 Kusto 叢集， `https://<your_cluster>.kusto.windows.net`網址為：。 以您的 Azure 資料總管叢集名稱取代 <your_cluster>。
+* 或者，使用瀏覽器存取您的 Kusto 叢集，網址為： `https://<your_cluster>.kusto.windows.net` 。 以您的 Azure 資料總管叢集名稱取代 <your_cluster>。
 
 
 
@@ -175,7 +175,7 @@ Kusto Explorer 視窗有幾個 UI 元件：
 |新增連接| 新增 Kusto 伺服器連接| 
 |編輯連線| 開啟 Kusto 伺服器連接屬性編輯的對話方塊|
 |移除連接| 移除 Kusto 伺服器的現有連線|
-|Refresh| 重新整理 Kusto 伺服器連接的屬性|
+|重新整理| 重新整理 Kusto 伺服器連接的屬性|
 ||---------*識別提供者*---------|
 |檢查連接主體| 顯示電流作用中使用者詳細資料|
 |從 AAD 登出| 登出目前使用者與 AAD 的連線|
@@ -227,7 +227,7 @@ Kusto Explorer 視窗有幾個 UI 元件：
 |查詢以 Power BI| 將查詢轉譯成適合在 Power BI 中使用的格式|
 ||---------*選項*---------|
 |重設選項| 將應用程式設定設為預設值|
-|選項。| 開啟用來進行應用程式設定的工具。 [詳細資料](kusto-explorer-options.md)|
+|選項| 開啟用來進行應用程式設定的工具。 [詳細資料](kusto-explorer-options.md)|
 
 
 
@@ -251,7 +251,7 @@ Kusto Explorer 視窗有幾個 UI 元件：
 |-----------------|---------|
 ||---------*附帶*---------|
 |説明             | 開啟 Kusto 線上檔的連結  | 
-|新增功能       | 開啟一份檔，列出所有 Kusto 的變更|
+|新功能       | 開啟一份檔，列出所有 Kusto 的變更|
 |報告問題      |開啟包含兩個選項的對話方塊： <ul><li>報告與服務相關的問題</li><li>報告用戶端應用程式中的問題</li></ul> | 
 |建議功能  | 開啟 Kusto 意見反應論壇的連結 | 
 |檢查更新     | 檢查您的 Kusto 版本是否有更新。 | 
@@ -265,7 +265,7 @@ Kusto 的左窗格會顯示用戶端所設定的所有叢集連接。 它會針�
 如果實際的架構很大（例如具有數百個數據表的資料庫），您可以按下 CTRL + F 並輸入您要尋找之機構名稱的子字串（不區分大小寫），藉此搜尋架構。
 
 Kusto 支援從查詢視窗控制連接面板。
-這對腳本非常有用。 例如，使用下列語法，以指示 Kusto 連接到正在查詢其資料之叢集/資料庫的命令來啟動腳本檔案。 如同往常，您必須使用`F5`或類似的來執行每一行：
+這對腳本非常有用。 例如，使用下列語法，以指示 Kusto 連接到正在查詢其資料之叢集/資料庫的命令來啟動腳本檔案。 如同往常，您必須使用或類似的來執行每一行 `F5` ：
 
 ```kusto
 #connect cluster('help').database('Samples')
@@ -285,7 +285,7 @@ StormEvents | count
 Data Source=https://CLUSTER_NAME.kusto.windows.net;Initial Catalog=DATABASE_NAME;AAD Federated Security=True;Authority Id=AAD_TENANT_OF_CLUSTER;User=USER_DOMAIN
 ```
 
-唯一的獨特之處`AAD_TENANT_OF_CLUSTER`是，這是託管叢集之 AAD 租使用者的功能變數名稱或 aad 租使用者識別碼（GUID）（通常是擁有叢集的組織功能變數名稱，例如`contoso.com`），而 USER_DOMAIN 是受邀加入該租使用者之使用者的身分識別（例如`joe@fabrikam.com`）。 
+唯一的獨特之處是，這 `AAD_TENANT_OF_CLUSTER` 是託管叢集之 AAD 租使用者的功能變數名稱或 aad 租使用者識別碼（GUID）（通常是擁有叢集的組織功能變數名稱，例如 `contoso.com` ），而 USER_DOMAIN 是受邀加入該租使用者之使用者的身分識別（例如 `joe@fabrikam.com` ）。 
 
 >[!Note]
 > 使用者的功能變數名稱不一定與主控叢集的租使用者名稱相同。
@@ -294,7 +294,7 @@ Data Source=https://CLUSTER_NAME.kusto.windows.net;Initial Catalog=DATABASE_NAME
 
 Kusto 會嘗試「猜測」結果窗格中每個資料列的嚴重性或詳細等級，並據此進行色彩。 其方式是將每個資料行的相異值與一組已知模式（「警告」、「錯誤」等等）進行比對。
 
-若要修改輸出色彩配置，或關閉此行為，請從 [**工具**] 功能表選取 [**選項** > **] [結果檢視器** > **詳細資訊色彩配置**]。
+若要修改輸出色彩配置，或關閉此行為，請從 [**工具**] 功能表選取 [**選項**  >  **] [結果檢視器**  >  **詳細資訊色彩配置**]。
 
 ![替代文字](./Images/KustoTools-KustoExplorer/ke-color-scheme.png)
 
@@ -316,6 +316,7 @@ Kusto 有一個功能強大的腳本模式，可讓您撰寫、編輯和執行�
 
 如果您有資料表記錄，可以藉由輸入下列內容來開始探索：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents | count 
 ```
@@ -324,11 +325,13 @@ StormEvents | count
 
 以下是一些更多範例查詢：
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 // Take 10 lines from the table. Useful to get familiar with the data
 StormEvents | limit 10 
 ```
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 // Filter by EventType == 'Flood' and State == 'California' (=~ means case insensitive) 
 // and take sample of 10 lines
@@ -401,7 +404,7 @@ Kusto 提供一個便利的方式，讓您透過電子郵件共用查詢和查�
 運作方式如下：
 
 1. 在 Kusto 中執行查詢
-1. 選取 [**匯出至剪貼**簿] `Ctrl+Shift+C`（或按）
+1. 選取 [**匯出至剪貼**簿] （或按 `Ctrl+Shift+C` ）
 
     ![替代文字](./Images/KustoTools-KustoExplorer/menu-export.png "功能表-匯出")
 
@@ -421,7 +424,7 @@ Kusto 提供一個便利的方式，讓您透過電子郵件共用查詢和查�
 >
 > * 用戶端查詢 parametrization （如下所述）只是 Kusto 應用程式的一項功能。 這相當於在傳送這些查詢以由服務執行之前，先在查詢上使用字串取代作業。 下面所述的語法不是查詢語言本身的一部分，而且不能用來傳送查詢給服務，方法是使用 Kusto。
 
-如果您打算在多個查詢或多個索引標籤中使用相同的值，就很難以變更它。 不過，Kusto 支援查詢參數。 參數是以{}括弧表示。 例如：`{parameter1}`
+如果您打算在多個查詢或多個索引標籤中使用相同的值，就很難以變更它。 不過，Kusto 支援查詢參數。 參數是以 {} 括弧表示。 例如： `{parameter1}`
 
 腳本編輯器會反白顯示查詢參數：
 
@@ -452,11 +455,11 @@ Kusto 提供一個便利的方式，讓您透過電子郵件共用查詢和查�
 ### <a name="limitations"></a>限制
 查詢限制為 ~ 2000 個字元，因為 Internet Explorer 的限制（限制是因為它依存于叢集和資料庫名稱長度而定） https://support.microsoft.com/kb/208427 ，以減少您將達到字元數限制的機率，請參閱下方的[取得較短的連結](#getting-shorter-links)。
 
-URI 的格式為： HTTPs://<ClusterCname>. kusto.windows.net/<DatabaseName>？ query =<QueryToExecute>
+URI 的格式為： HTTPs:// <ClusterCname> . kusto.windows.net/ <DatabaseName> ？ query =<QueryToExecute>
 
 例如：  https://help.kusto.windows.net/Samples?query=StormEvents+%7c+limit+10
  
-此 URI 會開啟 Kusto，連接到`help` Kusto 叢集，並在`Samples`資料庫上執行指定的查詢。 如果有 Kusto 的實例已在執行中，則執行中的實例將會開啟新的索引標籤，並在其中執行查詢）。
+此 URI 會開啟 Kusto，連接到 `help` Kusto 叢集，並在資料庫上執行指定的查詢 `Samples` 。 如果有 Kusto 的實例已在執行中，則執行中的實例將會開啟新的索引標籤，並在其中執行查詢）。
 
 **安全性注意事項**：基於安全性考慮，已停用控制命令的深層連結。
 
@@ -478,14 +481,14 @@ https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSs
 
 您可以使用參數化查詢搭配深層連結。
 
-1. 建立查詢以形成參數化查詢（例如， `KustoLogs | where Timestamp > ago({Period}) | count`） 
+1. 建立查詢以形成參數化查詢（例如， `KustoLogs | where Timestamp > ago({Period}) | count` ） 
 2. 在此情況下，請為 URI 中的每個查詢參數提供參數：
 
 `https://mycluster.kusto.windows.net/MyDatabase?web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h`
 
 ### <a name="getting-shorter-links"></a>取得較短的連結
 
-查詢可能會變長。 若要減少查詢超過最大長度的機率，請`String Kusto.Data.Common.CslCommandGenerator.EncodeQueryAsBase64Url(string query)`使用 Kusto 用戶端程式庫中提供的方法。 這個方法會產生更精簡的查詢版本。 Kusto 也能辨識較短的格式。
+查詢可能會變長。 若要減少查詢超過最大長度的機率，請使用 `String Kusto.Data.Common.CslCommandGenerator.EncodeQueryAsBase64Url(string query)` Kusto 用戶端程式庫中提供的方法。 這個方法會產生更精簡的查詢版本。 Kusto 也能辨識較短的格式。
 
 https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVuDlqlEoLs3NTSzKrEpVSM4vzSvR0FRIqlRIyszTCC5JLCoJycxN1VEwT9EEKS1KzUtJLVIoAYolZwAlFQCB3oo%2bTAAAAA%3d%3d
 
@@ -502,10 +505,10 @@ Kusto 支援下列語法中的數個命令列引數（順序很重要）：
 [*LocalScriptFile*][*QueryString*]
 
 其中：
-* *LocalScriptFile*是本機電腦上必須有副檔名`.kql`的指令檔名。 如果這類檔案存在，Kusto 會在啟動時自動載入此檔案。
+* *LocalScriptFile*是本機電腦上必須有副檔名的指令檔名 `.kql` 。 如果這類檔案存在，Kusto 會在啟動時自動載入此檔案。
 * *QueryString*是使用 HTTP 查詢字串格式格式化的字串。 這個方法會提供其他屬性，如下表所述。
 
-例如，若要以名`c:\temp\script.kql`為的腳本檔案啟動 Kusto，並設定為與叢集`help`、資料庫`Samples`通訊，請使用下列命令：
+例如，若要以名為的腳本檔案啟動 Kusto， `c:\temp\script.kql` 並設定為與叢集 `help` 、資料庫通訊 `Samples` ，請使用下列命令：
 
 ```
 Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples;Fed=true&name=Samples
@@ -514,8 +517,8 @@ Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples
 |引數  |描述                                                               |
 |----------|--------------------------------------------------------------------------|
 |**要執行的查詢**                                                                 |
-|`query`   |要執行的查詢（base64 編碼）。 如果空白，請`querysrc`使用。          |
-|`querysrc`|保存要執行之查詢的檔案或 blob 的 URL （如果`query`是空的）。|
+|`query`   |要執行的查詢（base64 編碼）。 如果空白，請使用 `querysrc` 。          |
+|`querysrc`|保存要執行之查詢的檔案或 blob 的 URL （如果 `query` 是空的）。|
 |**連接到 Kusto 叢集**                                                  |
 |`uri`     |要連接之 Kusto 叢集的連接字串。                 |
 |`name`    |連接至 Kusto 叢集的顯示名稱。                  |
@@ -526,14 +529,14 @@ Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples
 
 ## <a name="kustoexplorer-connection-files"></a>Kusto. Explorer 連接檔案
 
-Kusto 會將`%LOCALAPPDATA%\Kusto.Explorer`其連接設定保留在資料夾中。
-連接群組的清單會保留在內部`%LOCALAPPDATA%\Kusto.Explorer\UserConnectionGroups.xml`，而且每個連接群組都會保留在下`%LOCALAPPDATA%\Kusto.Explorer\Connections\`的專用檔案中。
+Kusto 會將其連接設定保留在 `%LOCALAPPDATA%\Kusto.Explorer` 資料夾中。
+連接群組的清單會保留在內部 `%LOCALAPPDATA%\Kusto.Explorer\UserConnectionGroups.xml` ，而且每個連接群組都會保留在下的專用檔案中 `%LOCALAPPDATA%\Kusto.Explorer\Connections\` 。
 
 ### <a name="format-of-connection-group-files"></a>連接群組檔案的格式
 
-檔案位置是`%LOCALAPPDATA%\Kusto.Explorer\UserConnectionGroups.xml`。  
+檔案位置是 `%LOCALAPPDATA%\Kusto.Explorer\UserConnectionGroups.xml` 。  
 
-這是具有下列屬性之`ServerGroupDescription`物件陣列的 XML 序列化：
+這是具有下列屬性之物件陣列的 XML 序列化 `ServerGroupDescription` ：
 
 ```
   <ServerGroupDescription>
@@ -556,9 +559,9 @@ Kusto 會將`%LOCALAPPDATA%\Kusto.Explorer`其連接設定保留在資料夾中�
 
 ### <a name="format-of-connection-list-files"></a>連接清單檔案的格式
 
-檔案位置為： `%LOCALAPPDATA%\Kusto.Explorer\Connections\`。
+檔案位置為： `%LOCALAPPDATA%\Kusto.Explorer\Connections\` 。
 
-這是具有下列屬性之`ServerDescriptionBase`物件陣列的 XML 序列化：
+這是具有下列屬性之物件陣列的 XML 序列化 `ServerDescriptionBase` ：
 
 ```
    <ServerDescriptionBase xsi:type="ServerDescription">
@@ -586,14 +589,14 @@ Kusto 會將`%LOCALAPPDATA%\Kusto.Explorer`其連接設定保留在資料夾中�
 如有需要，您可以完全重設 Kusto。 使用下列程式，以漸進方式重設在電腦上部署的 Kusto，直到完全移除該檔案，而且必須從頭開始安裝。
 
 1. 在 Windows 中，開啟 [**變更] 或 [移除程式**] （也稱為 [**程式和功能**]）。
-1. 選取名稱開頭為的`Kusto.Explorer`每個專案。
+1. 選取名稱開頭為的每個專案 `Kusto.Explorer` 。
 1. 選取 [解除安裝]****。
 
    如果無法卸載應用程式（有時是 ClickOnce 應用程式的已知問題），請參閱[此堆疊溢位文章](https://stackoverflow.com/questions/10896223/how-do-i-completely-uninstall-a-clickonce-application-from-my-computer)，其中說明如何執行此作業。
 
-1. 刪除資料夾`%LOCALAPPDATA%\Kusto.Explorer`。 這會移除所有連接、歷程記錄等等。
+1. 刪除資料夾 `%LOCALAPPDATA%\Kusto.Explorer` 。 這會移除所有連接、歷程記錄等等。
 
-1. 刪除資料夾`%APPDATA%\Kusto`。 這會移除 Kusto token 快取。 您將需要重新驗證所有叢集。
+1. 刪除資料夾 `%APPDATA%\Kusto` 。 這會移除 Kusto token 快取。 您將需要重新驗證所有叢集。
 
 也可以還原為特定版本的 Kusto。
 
@@ -609,7 +612,7 @@ Kusto 會將`%LOCALAPPDATA%\Kusto.Explorer`其連接設定保留在資料夾中�
 
 **徵兆:**
 
-在啟動時，Kusto 會顯示`InvalidOperationException`錯誤。
+在啟動時，Kusto 會顯示 `InvalidOperationException` 錯誤。
 
 **可能的解決方案：**
 
@@ -627,7 +630,7 @@ Kusto 會將`%LOCALAPPDATA%\Kusto.Explorer`其連接設定保留在資料夾中�
 
 這可能是您本機 ClickOnce 存放區損毀的結果。 您可以在提升許可權的命令提示字元中執行下列命令，以清除本機 ClickOnce 存放區。
 > [!Important]
-> 1. 如果有任何其他 ClickOnce 應用程式或的`dfsvc.exe`實例，請先將其終止，然後再執行此命令。
+> 1. 如果有任何其他 ClickOnce 應用程式或的實例 `dfsvc.exe` ，請先將其終止，然後再執行此命令。
 > 2. 任何 ClickOnce 應用程式會在您下次執行時自動重新安裝，只要您可以存取儲存在應用程式快捷方式中的原始安裝位置即可。 應用程式快捷方式不會被刪除。
 
 ```
@@ -645,7 +648,7 @@ rd /q /s %userprofile%\appdata\local\apps\2.0
 * 程式無法啟動，並顯示錯誤，其中包含：`The application binding data format is invalid.` 
 * 程式無法啟動，並顯示錯誤，其中包含：`Exception from HRESULT: 0x800736B2`
 
-您可以按一下`Details`下列錯誤對話方塊來流覽錯誤詳細資料：
+您可以按一下下列錯誤對話方塊來流覽錯誤詳細資料 `Details` ：
 
 ![替代文字](./Images/KustoTools-KustoExplorer/clickonce-err-1.jpg "clickonce-err-1")
 
@@ -666,9 +669,9 @@ Following errors were detected during this operation.
 
 **建議的解決方案步驟：**
 
-1. 使用`Programs and Features` （`appwiz.cpl`）卸載 Kusto. Explorer 應用程式。
+1. 使用（）卸載 Kusto. Explorer 應用程式 `Programs and Features` `appwiz.cpl` 。
 
-1. 請試`CleanOnlineAppCache`著執行，然後再次嘗試安裝 Kusto。 從提高許可權的命令提示字元： 
+1. 請試著執行 `CleanOnlineAppCache` ，然後再次嘗試安裝 Kusto。 從提高許可權的命令提示字元： 
     
     ```
     rundll32 %windir%\system32\dfshim.dll CleanOnlineAppCache
@@ -705,7 +708,7 @@ Following errors were detected during this operation.
 
 1. 如果仍然失敗，請在下方建立 LogVerbosityLevel 字串值1，以啟用詳細的 ClickOnce 記錄：
 
-`HKEY_CURRENT_USER\Software\Classes\Software\Microsoft\Windows\CurrentVersion\Deployment`，再次重現，並將詳細資訊輸出傳送至KEBugReport@microsoft.com。 
+`HKEY_CURRENT_USER\Software\Classes\Software\Microsoft\Windows\CurrentVersion\Deployment`，再次重現，並將詳細資訊輸出傳送至 KEBugReport@microsoft.com 。 
 
 #### <a name="clickonce-error-your-administrator-has-blocked-this-application-because-it-potentially-poses-a-security-risk-to-your-computer"></a>ClickOnce 錯誤：您的系統管理員已封鎖此應用程式，因為它可能會對您的電腦造成安全性風險
 
@@ -722,7 +725,7 @@ Following errors were detected during this operation.
 
 有時候，當先前的疑難排解步驟無法協助 Kusto 啟動時，清除儲存在本機的資料可能會有説明。
 
-Kusto 所儲存的資料可在這裡找到： `C:\Users\\[your alias]\AppData\Local\Kusto.Explorer`。
+Kusto 所儲存的資料可在這裡找到： `C:\Users\\[your alias]\AppData\Local\Kusto.Explorer` 。
 
 > [!NOTE]
 > 清除資料會導致開啟的索引標籤（復原資料夾）、儲存的連接（連接資料夾）和應用程式設定（UserSettings 資料夾）遺失。

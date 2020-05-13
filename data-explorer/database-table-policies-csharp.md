@@ -1,46 +1,46 @@
 ---
-title: 使用 Azure 資料資源管理員 C# SDK 建立原則
-description: 在本文中,您將學習如何使用 C# 創建策略。
+title: '使用 Azure 資料總管 c # SDK 建立原則'
+description: '在本文中，您將瞭解如何使用 c # 來建立原則。'
 author: lucygoldbergmicrosoft
 ms.author: lugoldbe
 ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 09/24/2019
-ms.openlocfilehash: ee9d740a3bd9748611b4e822f5204eee2633b1bf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0d02b5916cabc3645a3d61a9154ed31061c762aa
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81496884"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373905"
 ---
-# <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-c"></a>使用 Czure 資料資源管理員建立資料庫和表原則#
+# <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-c"></a>使用 C 建立適用于 Azure 資料總管的資料庫和資料表原則#
 
 > [!div class="op_single_selector"]
 > * [C#](database-table-policies-csharp.md)
 > * [Python](database-table-policies-python.md)
 >
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 在本文中,您將使用 C# 為 Azure 資料資源管理器創建資料庫和表策略。
+Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 在本文中，您將使用 c # 來建立 Azure 資料總管的資料庫和資料表原則。
 
 ## <a name="prerequisites"></a>Prerequisites
 
-* Visual Studio 2019。 如果你沒有視覺工作室2019,你可以下載和使用*免費*[的視覺工作室社區2019。](https://www.visualstudio.com/downloads/) 請務必在可視化工作室設定期間選擇**Azure 開發**。
-* Azure 訂用帳戶。 如果需要,可以在開始之前建立[一個免費的 Azure 帳戶](https://azure.microsoft.com/free/)。
-* [測試叢集與資料庫](create-cluster-database-csharp.md)。
-* [測試表](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)。
+* Visual Studio 2019。 如果您沒有 Visual Studio 2019，可以下載並使用*免費*的[Visual Studio Community 2019](https://www.visualstudio.com/downloads/)。 請務必在 Visual Studio 設定期間選取 [ **Azure 開發**]。
+* Azure 訂用帳戶。 如有需要，您可以在開始前建立[免費的 Azure 帳戶](https://azure.microsoft.com/free/)。
+* [測試叢集和資料庫](create-cluster-database-csharp.md)。
+* [測試資料表](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)。
 
-## <a name="install-c-nuget"></a>安裝 C# NuGet
+## <a name="install-c-nuget"></a>安裝 c # NuGet
 
-* 安裝[Azure 資料資源管理員 (Kusto) NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
-* 安裝[Microsoft. Azure.Kusto.Data.NET 標準NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data.NETStandard/)。 (可選,用於更改表策略。
-* 安裝[Microsoft.身份模型.用戶端.ActiveDirectory NuGet 包](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/),用於身份驗證。
+* 安裝[Azure 資料總管（Kusto） NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
+* 安裝[Kusto NETStandard NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data.NETStandard/)（）。 （選擇性，用於變更資料表原則）。
+* 安裝[Microsoft.identitymodel NuGet 套件](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/)，以進行驗證。
 
 ## <a name="authentication"></a>驗證
-要運行本文中的範例,需要一個可以存取資源的 Azure 活動目錄 (Azure AD) 應用程式和服務主體。 您可以使用同一 Azure AD 應用程式從[測試群集和資料庫](create-cluster-database-csharp.md#authentication)進行身份驗證。 如果要使用其他 Azure AD 應用程式,請參閱[創建 Azure AD 應用程式](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal)以建立免費的 Azure AD 應用程式,並在訂閱範圍內添加角色分配。 本文還展示如何取得`Directory (tenant) ID`、`Application ID``Client secret`與 。 您可能需要將新的 Azure AD 應用程式添加為資料庫中的主體。 有關詳細資訊,請參閱管理[Azure 資料資源管理員資料庫權限](https://docs.microsoft.com/azure/data-explorer/manage-database-permissions)。
+若要執行本文中的範例，您需要可存取資源的 Azure Active Directory （Azure AD）應用程式和服務主體。 您可以使用相同的 Azure AD 應用程式，從[測試叢集和資料庫](create-cluster-database-csharp.md#authentication)進行驗證。 如果您想要使用不同的 Azure AD 應用程式，請參閱[建立 Azure AD 應用](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal)程式來建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 本文也會說明如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client secret` 。 您可能需要將新的 Azure AD 應用程式新增為資料庫中的主體。 如需詳細資訊，請參閱[管理 Azure 資料總管資料庫許可權](manage-database-permissions.md)。
 
-## <a name="alter-database-retention-policy"></a>變更資料庫保留原則
-設置具有 10 天軟刪除期的保留策略。
+## <a name="alter-database-retention-policy"></a>改變資料庫保留原則
+使用10天的虛刪除週期來設定保留原則。
     
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -65,8 +65,8 @@ var databaseName = "mykustodatabase";
 await kustoManagementClient.Databases.UpdateAsync(resourceGroupName, clusterName, databaseName, new DatabaseUpdate(softDeletePeriod: TimeSpan.FromDays(10)));
 ```
 
-## <a name="alter-database-cache-policy"></a>變更資料庫快取原則
-為資料庫設置緩存策略。 前五天的數據將位於群集 SSD 上。
+## <a name="alter-database-cache-policy"></a>Alter database 快取原則
+設定資料庫的快取原則。 過去五天的資料會在叢集 SSD 上。
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -91,8 +91,8 @@ var databaseName = "mykustodatabase";
 await kustoManagementClient.Databases.UpdateAsync(resourceGroupName, clusterName, databaseName, new DatabaseUpdate(hotCachePeriod: TimeSpan.FromDays(5)));
 ```
 
-## <a name="alter-table-cache-policy"></a>變更表快取原則
-為表設置緩存策略。 前五天的數據將位於群集 SSD 上。
+## <a name="alter-table-cache-policy"></a>Alter table cache 原則
+設定資料表的快取原則。 過去五天的資料會在叢集 SSD 上。
 
 ```csharp
 var kustoUri = "https://<ClusterName>.<Region>.kusto.windows.net:443/";
@@ -123,8 +123,8 @@ using (var kustoClient = KustoClientFactory.CreateCslAdminProvider(kustoConnecti
 }
 ```
 
-## <a name="add-a-new-principal-for-the-database"></a>為資料庫新增新主體
-添加新的 Azure AD 應用程式作為資料庫的管理員主體。
+## <a name="add-a-new-principal-for-the-database"></a>為資料庫加入新的主體
+加入新的 Azure AD 應用程式做為資料庫的系統管理主體。
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -158,4 +158,4 @@ await kustoManagementClient.Databases.AddPrincipalsAsync(resourceGroupName, clus
 ```
 ## <a name="next-steps"></a>後續步驟
 
-* [閱讀有關資料庫和表原則的詳細資訊](kusto/management/policies.md)
+* [深入瞭解資料庫和資料表原則](kusto/management/policies.md)

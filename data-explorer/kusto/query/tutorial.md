@@ -1,5 +1,5 @@
 ---
-title: 教學課程-Azure 資料總管 |Microsoft Docs
+title: 教學課程-Azure 資料總管
 description: 本文說明 Azure 資料總管中的教學課程。
 services: data-explorer
 author: orspod
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 03/23/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 90d06064069a17d6b1394701bb4ea72483061b9c
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 8898f772af37e86ec33bff66e43779dfbaf4c053
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737601"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83370696"
 ---
 # <a name="tutorial"></a>教學課程
 
 ::: zone pivot="azuredataexplorer"
 
-瞭解 Kusto 查詢語言的最佳方式是查看一些簡單的查詢，以使用[具有一些範例資料的資料庫](https://help.kusto.windows.net/Samples)來取得語言的「風格」。 本文中所示範的查詢應該在該資料庫上執行。 此`StormEvents`範例資料庫中的表格提供有關在美國發生的風暴的一些資訊
+瞭解 Kusto 查詢語言的最佳方式是查看一些簡單的查詢，以使用[具有一些範例資料的資料庫](https://help.kusto.windows.net/Samples)來取得語言的「風格」。 本文中所示範的查詢應該在該資料庫上執行。 `StormEvents`此範例資料庫中的表格提供有關在美國發生的風暴的一些資訊
 
 <!--
   TODO: Provide link to reference data we used originally in StormEvents
@@ -34,11 +34,12 @@ ms.locfileid: "82737601"
 
 ## <a name="count-rows"></a>計算資料列數目
 
-我們的範例資料庫有一個稱為`StormEvents`的資料表。
+我們的範例資料庫有一個稱為的資料表 `StormEvents` 。
 為了瞭解其大小，我們會將其內容傳送至只計算資料列的操作員：
 
 * *語法：* 查詢是一種資料來源（通常是資料表名稱），並可選擇性地後面接著一組或多組管道字元和某些表格式運算子。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents | count
 ```
@@ -57,8 +58,9 @@ StormEvents | count
 
 ## <a name="where-filtering-by-a-boolean-expression"></a>where：依布林運算式篩選
 
-讓我們在2007年`flood`2 月`California`的期間僅查看中的：
+讓我們 `flood` 在 `California` 2007 年2月的期間僅查看中的：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | where StartTime > datetime(2007-02-01) and StartTime < datetime(2007-03-01)
@@ -74,6 +76,7 @@ StormEvents
 
 讓我們看看一些資料 - 範例 5 資料列中的內容為何？
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | take 5
@@ -93,11 +96,12 @@ StormEvents
 
 ## <a name="sort-and-top"></a>排序和頂端
 
-* *語法：* 有些運算子具有由關鍵字引入的參數， `by`例如。
+* *語法：* 有些運算子具有由關鍵字引入的參數，例如 `by` 。
 * `desc` = 遞減順序，`asc` = 遞增。
 
 顯示前 n 個資料列 (依特定資料行排序)︰
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | top 5 by StartTime desc
@@ -114,6 +118,7 @@ StormEvents
 
 使用[sort](./sortoperator.md)和[take](./takeoperator.md)運算子可以達成相同的目的
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | sort by StartTime desc
@@ -125,6 +130,7 @@ StormEvents
 
 藉由計算每個資料列中的值，建立新的資料行：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | limit 5
@@ -143,6 +149,7 @@ StormEvents
 您可以重複使用資料行名稱，並將計算結果指派給相同的資料行。
 例如：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print x=1
 | extend x = x + 1, y = x
@@ -153,22 +160,24 @@ print x=1
 |---|---|
 |3|1|
 
-純量[運算式](./scalar-data-types/index.md)可以包含所有常見的運算子`+`（ `-`、 `*`、 `/`、 `%`、），而且有一系列有用的函式。
+純量[運算式](./scalar-data-types/index.md)可以包含所有常見的運算子（ `+` 、 `-` 、 `*` 、 `/` 、 `%` ），而且有一系列有用的函式。
 
 ## <a name="summarize-aggregate-groups-of-rows"></a>摘要：匯總資料列群組
 
 計算每個國家/地區的事件數目：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | summarize event_count = count() by State
 ```
 
-[summarize](./summarizeoperator.md)將在`by`子句中具有相同值的群組匯總在一起，然後使用彙總函式（例如`count`）將每個群組合並成單一資料列。 因此，在此情況下，每個狀態都有一個資料列，以及該狀態的資料列計數的資料行。
+將在子句中具有相同值的群組[匯總](./summarizeoperator.md)在一起 `by` ，然後使用彙總函式（例如 `count` ）將每個群組合並成單一資料列。 因此，在此情況下，每個狀態都有一個資料列，以及該狀態的資料列計數的資料行。
 
 有一系列的[彙總函式](./summarizeoperator.md#list-of-aggregation-functions)，您可以在一個匯總運算子中使用其中幾個來產生數個計算資料行。 例如，我們可以在每個狀態中取得風暴的計數，以及每個狀態的唯一一種電流類型的總和，  
 然後，我們可以使用[top](./topoperator.md)來取得最常受到影響的狀態：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents 
 | summarize StormCount = count(), TypeOfStorms = dcount(EventType) by State
@@ -191,9 +200,10 @@ summarize 的結果有：
 
 ## <a name="summarize-by-scalar-values"></a>依純量值彙總
 
-您可以在`by`子句中使用純量（數值、時間或間隔）值，但您會想要將值放入「bin」中。  
+您可以在子句中使用純量（數值、時間或間隔）值 `by` ，但您會想要將值放入「bin」中。  
 [Bin （）](./binfunction.md)函數適用于：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | where StartTime > datetime(2007-02-14) and StartTime < datetime(2007-02-21)
@@ -218,6 +228,7 @@ StormEvents
 
 投影兩個數據行，並使用它們做為圖表的 x 和 y 軸：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents 
 | summarize event_count=count(), mid = avg(BeginLat) by State 
@@ -229,7 +240,7 @@ StormEvents
 
 :::image type="content" source="images/tutorial/event-counts-state.png" alt-text="依州/省的風暴事件計數直條圖":::
 
-雖然我們已`mid`從專案作業中移除，但如果我們想要讓圖表以該順序顯示國家/地區，仍然需要它。
+雖然我們已從 `mid` 專案作業中移除，但如果我們想要讓圖表以該順序顯示國家/地區，仍然需要它。
 
 嚴格來說，「render」是用戶端的一項功能，而不是查詢語言的一部分。 不過，它會整合到語言中，而且在構想結果時非常有用。
 
@@ -238,6 +249,7 @@ StormEvents
 
 回到數值箱，讓我們來顯示一個時間序列：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | summarize event_count=count() by bin(StartTime, 1d)
@@ -250,6 +262,7 @@ StormEvents
 
 在 `summarize by` 子句中使用多個值，為每組值建立個別的資料列：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents 
 | where StartTime > datetime(2007-06-04) and StartTime < datetime(2007-06-10) 
@@ -259,18 +272,19 @@ StormEvents
 
 :::image type="content" source="images/tutorial/table-count-source.png" alt-text="依來源的資料表計數":::
 
-只要將轉譯詞彙加入至上述： `| render timechart`。
+只要將轉譯詞彙加入至上述： `| render timechart` 。
 
 :::image type="content" source="images/tutorial/line-count-source.png" alt-text="依來源的折線圖計數":::
 
-請注意`render timechart` ，會使用第一個資料行做為 X 軸，然後將其他欄位顯示為個別的線條。
+請注意，會 `render timechart` 使用第一個資料行做為 X 軸，然後將其他欄位顯示為個別的線條。
 
 ## <a name="daily-average-cycle"></a>每日平均週期
 
 活動在平均一天的變化如何？
 
-依時間模數一天計數事件，分類收納為小時。 請注意，我們`floor`會使用而不是 bin：
+依時間模數一天計數事件，分類收納為小時。 請注意，我們會使用 `floor` 而不是 bin：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend hour = floor(StartTime % 1d , 1h)
@@ -281,7 +295,7 @@ StormEvents
 
 :::image type="content" source="images/tutorial/time-count-hour.png" alt-text="時間圖表計數（依小時）":::
 
-`render`目前無法正確標示持續時間，但我們可以`| render columnchart`改用：
+目前無法 `render` 正確標示持續時間，但我們可以改用 `| render columnchart` ：
 
 :::image type="content" source="images/tutorial/column-count-hour.png" alt-text="直條圖計數（依小時）":::
 
@@ -289,6 +303,7 @@ StormEvents
 
 活動在不同狀態的當天時間有何差異？
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend hour= floor( StartTime % 1d , 1h)
@@ -299,8 +314,9 @@ StormEvents
 
 :::image type="content" source="images/tutorial/time-hour-state.png" alt-text="時間圖表（依小時和州）":::
 
-除以`1h`以將 X 軸變成小時數，而不是持續時間：
+除以 `1h` 以將 X 軸變成小時數，而不是持續時間：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend hour= floor( StartTime % 1d , 1h)/ 1h
@@ -317,6 +333,7 @@ StormEvents
 
 您可以使用第一個事件1和第二個事件集來提取風暴事件，然後聯結兩個集合的狀態。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | where EventType == "Lightning"
@@ -331,14 +348,15 @@ StormEvents
 
 ## <a name="user-session-example-of-join"></a>Join 的使用者會話範例
 
-這一節不會使用`StormEvents`資料表。
+這一節不會使用 `StormEvents` 資料表。
 
 假設您的資料包含標示每個使用者會話開始和結束的事件，以及每個會話的唯一識別碼。 
 
 每個使用者會話持續多久？
 
-藉由`extend`使用提供兩個時間戳記的別名，您就可以計算會話的持續時間。
+藉由使用 `extend` 提供兩個時間戳記的別名，您就可以計算會話的持續時間。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 Events
 | where eventName == "session_started"
@@ -361,6 +379,7 @@ Events
 
 有多少個有不同長度的最大衝擊？
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend  duration = EndTime - StartTime
@@ -374,7 +393,7 @@ StormEvents
 
 :::image type="content" source="images/tutorial/event-count-duration.png" alt-text="依持續時間的事件計數 timechart":::
 
-或使用`| render columnchart`：
+或使用 `| render columnchart` ：
 
 :::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="依持續時間 timechart 的直條圖事件計數":::
 
@@ -382,13 +401,13 @@ StormEvents
 
 哪些持續時間範圍涵蓋了不同的風暴百分比？
 
-使用上述查詢，但將取代`render`為：
+使用上述查詢，但將取代 `render` 為：
 
 ```kusto
 | summarize percentiles(duration, 5, 20, 50, 80, 95)
 ```
 
-在此情況下，我們不`by`提供子句，因此結果為單一資料列：
+在此情況下，我們不提供 `by` 子句，因此結果為單一資料列：
 
 :::image type="content" source="images/tutorial/summarize-percentiles-duration.png" alt-text="資料表摘要百分位數（依持續時間）":::
 
@@ -400,6 +419,7 @@ StormEvents
 
 若要取得每個狀態的個別明細，我們只需要透過兩個摘要運算子來分別顯示 state 資料行：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend  duration = EndTime - StartTime
@@ -417,6 +437,7 @@ StormEvents
 
 使用 [ [let](./letstatement.md) ] 來分隔上述「聯結」範例中的查詢運算式部分。 結果不變：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let LightningStorms = 
     StormEvents

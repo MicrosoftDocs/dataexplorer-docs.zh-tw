@@ -1,5 +1,5 @@
 ---
-title: session_count 外掛程式-Azure 資料總管 |Microsoft Docs
+title: session_count 外掛程式-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 session_count 外掛程式。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7ebbbc401f8fdee79aaa328d45c7758d9acb931e
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 6a9596b71afabe1e80e866fef7f2a22f6b288631
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82619037"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372397"
 ---
 # <a name="session_count-plugin"></a>session_count plugin
 
@@ -25,7 +25,7 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 
 **語法**
 
-*T* `| evaluate` `,` *Start* `,` *dim2* *TimelineColumn* `,` *dim1* *Bin* *IdColumn* `,` *End* `,` IdColumn TimelineColumn 開始`,`結束 Bin`,` *LookBackWindow* [dim1 dim2 ...]`,` `session_count(``)`
+*T* `| evaluate` `session_count(` *IdColumn* `,` *TimelineColumn* `,` *開始* `,` *結束* `,` *Bin* `,` *LookBackWindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
 **引數**
 
@@ -35,7 +35,7 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 * *Start*：流量分析開始期間的值進行純量。
 * *End*：以分析結束期間的值為純量。
 * *Bin*：會話分析步驟期間的純量常數值。
-* *LookBackWindow*：代表會話回顧期間的純量常數值。 如果的識別碼`IdColumn`出現在的時間範圍內`LookBackWindow` -會話會被視為現有的（如果沒有的話），則會話會被視為新的。
+* *LookBackWindow*：代表會話回顧期間的純量常數值。 如果的識別碼 `IdColumn` 出現在的時間範圍內 `LookBackWindow` -會話會被視為現有的（如果沒有的話），則會話會被視為新的。
 * *dim1*， *dim2*，...：（選擇性）分割會話計數計算的維度資料行清單。
 
 **傳回**
@@ -56,12 +56,13 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 - 時間軸：從1到10000的執行數位
 - 識別碼：從1到50的使用者識別碼
 
-`Id`如果是的分割`Timeline`線`Timeline` （時間軸% Id = = 0），則會出現在特定位置。
+`Id``Timeline`如果是的分割 `Timeline` 線（時間軸% Id = = 0），則會出現在特定位置。
 
-這表示使用`Id==1`的事件會出現在任何`Timeline`位置、每個`Id==2`第二個`Timeline`插槽的事件，依此類推。
+這表示使用的事件 `Id==1` 會出現在任何位置 `Timeline` 、 `Id==2` 每個第二個 `Timeline` 插槽的事件，依此類推。
 
 以下是一些20行的資料：
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let _data = range Timeline from 1 to 10000 step 1
 | extend __key = 1
@@ -74,7 +75,7 @@ _data
 | limit 20
 ```
 
-|時間軸|Id|
+|時間表|Id|
 |---|---|
 |1|1|
 |2|1|
@@ -97,10 +98,11 @@ _data
 |8|4|
 |8|8|
 
-讓我們在下一個詞彙定義會話：只要使用者（`Id`）在100時段的時間範圍內至少出現一次，會話就會被視為作用中，而會話的查閱視窗則是41的時間位置。
+讓我們在下一個詞彙定義會話：只要使用者（ `Id` ）在100時段的時間範圍內至少出現一次，會話就會被視為作用中，而會話的查閱視窗則是41的時間位置。
 
 下一個查詢會根據上述定義來顯示作用中會話的計數。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let _data = range Timeline from 1 to 9999 step 1
 | extend __key = 1

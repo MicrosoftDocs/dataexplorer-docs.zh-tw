@@ -1,6 +1,6 @@
 ---
-title: Kusto 內嵌參考-內嵌程式碼範例-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 Kusto 內嵌參考-內嵌程式碼範例。
+title: Kusto 內嵌程式碼範例-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 Kusto 內嵌程式碼範例。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,25 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/15/2019
-ms.openlocfilehash: ba3232ca1c8a3f587f53ee1c3c6aad3fc12283ad
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: caeebf0a94d4e8144f1d00f84ea78f8727947416
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799674"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373653"
 ---
-# <a name="kustoingest-reference---ingestion-code-examples"></a>Kusto 內嵌參考-內嵌程式碼範例
-這是簡短程式碼片段的集合，示範將資料內嵌到 Kusto 資料表的各種技術
+# <a name="kustoingest-ingestion-code-examples"></a>Kusto 內嵌內嵌程式碼範例
 
->提醒：這些範例看起來像是在內嵌之後立即終結內嵌用戶端。 請不要真的這麼做。<BR>內嵌用戶端是可重新進入的安全線程，不應以較大的數位建立。 內嵌用戶端實例的建議基數是每個目標 Kusto 叢集的每個裝載進程一個。
+這一組簡短的程式碼片段會示範將資料內嵌到 Kusto 資料表中的各種技術。
 
-### <a name="useful-references"></a>有用的參考
-* [Kusto。內嵌用戶端參考](kusto-ingest-client-reference.md)
-* [Kusto。內嵌操作狀態](kusto-ingest-client-errors.md)
-* [Kusto 內嵌例外狀況](kusto-ingest-client-errors.md)
-* [Kusto 連接字串](../connection-strings/kusto.md)
-* [Kusto 授權模型](../../management/security-roles.md)
+> [!NOTE]
+> 這些範例看起來像是在內嵌之後立即終結內嵌用戶端。 請不要逐字採用。
+> 內嵌用戶端是可重新進入且具備執行緒安全的，而且不應該以較大的數位建立。 針對每個目標 Kusto 叢集，內嵌用戶端實例的建議基數是每個裝載進程一個。
 
-### <a name="async-ingestion-from-a-single-azure-blob-using-kustoqueuedingestclient-with-optional-retrypolicy"></a>使用 KustoQueuedIngestClient 搭配（選擇性） RetryPolicy 以非同步方式從單一 Azure Blob 內嵌：
+## <a name="async-ingestion-from-a-single-azure-blob"></a>從單一 Azure blob 非同步內嵌
+
+使用具有選擇性 RetryPolicy 的 KustoQueuedIngestClient，以從單一 Azure blob 進行非同步內嵌。
+
 ```csharp
 //Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderDM =
@@ -56,9 +55,13 @@ await client.IngestFromStorageAsync(uri: @"BLOB-URI-WITH-SAS-KEY", ingestionProp
 client.Dispose();
 ```
 
-### <a name="ingest-from-local-file-using-kustodirectingestclient"></a>使用 KustoDirectIngestClient 從本機檔案內嵌 
+## <a name="ingest-from-local-file"></a>從本機檔案內嵌 
 
-此方法建議用於有限的磁片區和低頻率的內嵌。
+使用 KustoDirectIngestClient 從本機檔案內嵌。
+
+
+> [!NOTE]
+> 我們建議將此方法用於有限的磁片區和低頻率的內嵌。
 
 ```csharp
 // Create Kusto connection string with App Authentication
@@ -78,7 +81,10 @@ using (IKustoIngestClient client = KustoIngestFactory.CreateDirectIngestClient(k
 }
 ```
 
-### <a name="ingest-from-local-files-using-kustoqueuedingestclient-and-ingestion-validation"></a>使用 KustoQueuedIngestClient 和內嵌驗證從本機檔案內嵌 
+## <a name="ingest-from-local-files-and-validate-ingestion"></a>從本機檔案內嵌並驗證內嵌
+
+使用 KustoQueuedIngestClient 從本機檔案內嵌，然後驗證內嵌。
+
 ```csharp
 // Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderDM =
@@ -110,7 +116,9 @@ Ensure.IsTrue((ingestionFailures.Count() > 0), "Failures expected");
 client.Dispose();
 ```
 
-### <a name="ingest-from-a-local-files-using-kustoqueuedingestclient-and-report-status-to-a-queue"></a>使用 KustoQueuedIngestClient 從本機檔案內嵌，並將狀態報表到佇列
+### <a name="ingest-from-local-files-and-report-status-to-a-queue"></a>從本機檔案內嵌，並將狀態報表到佇列
+
+使用 KustoQueuedIngestClient 從本機檔案內嵌，然後將狀態報表到佇列。
 
 ```csharp
 // Create Kusto connection string with App Authentication
@@ -157,7 +165,9 @@ Ensure.ConditionIsMet((ingestionSuccesses.Count() > 0),
 client.Dispose();
 ```
 
-### <a name="ingest-from-a-local-file-using-kustoqueuedingestclient-and-report-status-to-a-table"></a>使用 KustoQueuedIngestClient 從本機檔案內嵌，並將狀態報表到資料表
+### <a name="ingest-from-local-files-and-report-status-to-a-table"></a>從本機檔案內嵌，並將狀態報表到資料表
+
+使用 KustoQueuedIngestClient 從本機檔案內嵌，並將狀態報表到資料表。
 
 ```csharp
 // Create Kusto connection string with App Authentication
@@ -206,3 +216,11 @@ Ensure.ConditionIsMet(ingestionStatus.Status == Status.Succeeded,
 // Dispose of the client
 client.Dispose();
 ```
+
+## <a name="next-steps"></a>後續步驟
+
+* [Kusto。內嵌用戶端參考](kusto-ingest-client-reference.md)
+* [Kusto。內嵌操作狀態](kusto-ingest-client-errors.md)
+* [Kusto 內嵌例外狀況](kusto-ingest-client-errors.md)
+* [Kusto 連接字串](../connection-strings/kusto.md)
+* [Kusto 授權模型](../../management/security-roles.md)
