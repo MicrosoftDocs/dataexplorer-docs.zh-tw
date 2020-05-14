@@ -1,5 +1,5 @@
 ---
-title: Azure Active Directory （AAD）驗證-Azure 資料總管 |Microsoft Docs
+title: Kusto Azure Active Directory （AAD）驗證-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 Azure Active Directory （AAD）驗證。
 services: data-explorer
 author: orspod
@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 09/13/2019
-ms.openlocfilehash: 17da89206af12e2e4f7d9867372c8babf0c4aea1
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: 85d01c9192c71b3274907e5f93e4155b4c98accf
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82862083"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83382211"
 ---
 # <a name="azure-active-directory-aad-authentication"></a>Azure Active Directory （AAD）驗證
 
@@ -71,7 +71,7 @@ AAD 用戶端應用程式已設定為向使用者要求「存取權 Kusto」許�
 2. AAD 用戶端應用程式識別碼
 3. AAD 用戶端資源識別碼
 4. AAD ReplyUrl （AAD 服務將在驗證成功完成後重新導向的 URL）;然後 ADAL 會捕捉此重新導向，並從它抽取授權碼）。
-5. 叢集 URI （'https://Cluster-and-region.kusto.windows.net'）。
+5. 叢集 URI （' https://Cluster-and-region.kusto.windows.net '）。
 
 ADAL 傳回給 Kusto 用戶端程式庫的權杖具有 Kusto AAD 伺服器應用程式作為物件，以及「存取 Kusto」許可權作為範圍。
 

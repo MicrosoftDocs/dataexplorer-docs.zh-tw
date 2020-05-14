@@ -1,5 +1,5 @@
 ---
-title: Kusto 內嵌用戶端程式庫-最佳做法-Azure 資料總管
+title: Kusto 內嵌用戶端程式庫最佳做法-Azure 資料總管
 description: 本文說明 Kusto 內嵌用戶端程式庫的最佳做法。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/16/2019
-ms.openlocfilehash: 615bb1ef9400f3671b88e2108d4e6cad0469978b
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: d02d030a6deb468a4804c68965466e1917858be9
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373682"
+ms.locfileid: "83382330"
 ---
 # <a name="kusto-ingest-client-library---best-practices"></a>Kusto 內嵌用戶端程式庫-最佳作法
 
@@ -47,7 +47,7 @@ ms.locfileid: "83373682"
 
 有多個因素會影響內嵌的輸送量。 在規劃您的內嵌管線時，請務必評估下列幾點，這可能會對您的 COGs 產生顯著影響。
 
-| 考慮因素 |  描述                                                                                              |
+| 考慮因素 |  說明                                                                                              |
 |--------------------------|-----------------------------------------------------------------------------------------------------------|
 | 資料格式              | CSV 是最快速內嵌的格式。 對於相同的資料量，JSON 通常會花費2倍或3倍的時間。|
 | 資料表寬度              | 請確定您只內嵌您真正需要的資料。 資料表的範圍愈多，需要編碼和編制索引的資料行越多，輸送量就越低。 您可以藉由提供內嵌對應來控制哪些欄位會取得內嵌。       |

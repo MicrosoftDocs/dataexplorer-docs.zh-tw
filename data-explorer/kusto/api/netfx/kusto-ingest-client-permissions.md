@@ -1,5 +1,5 @@
 ---
-title: Kusto 內嵌的許可權-Azure 資料總管
+title: Kusto 內嵌許可權-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 Kusto 內嵌許可權。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3fd516b7201c5e857417ca13bade668f32f25161
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 6b649a06262153f80c4c35374e55a206be02c781
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226154"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83382279"
 ---
 # <a name="kustoingest---ingestion-permissions"></a>Kusto。內嵌-內嵌許可權
 

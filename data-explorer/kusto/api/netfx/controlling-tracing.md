@@ -1,5 +1,5 @@
 ---
-title: 控制和隱藏 Kusto SDK 用戶端追蹤-Azure 資料總管
+title: Kusto 控制或隱藏 SDK 用戶端追蹤-Azure 資料總管
 description: 本文說明如何在 Azure 資料總管中控制和隱藏 Kusto SDK 用戶端追蹤。
 services: data-explorer
 author: orspod
@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 10/23/2018
-ms.openlocfilehash: 159036bbbe6e0415f56b36827b1913cba90fb705
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 8ef966cb2be70ddca6fb5ab10813abe12cb5bce1
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226171"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83382347"
 ---
 # <a name="controlling-and-suppressing-kusto-sdk-client-side-tracing"></a>控制和隱藏 Kusto SDK 用戶端追蹤
 

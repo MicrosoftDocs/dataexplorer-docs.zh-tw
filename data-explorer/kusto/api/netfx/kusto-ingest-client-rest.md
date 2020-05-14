@@ -1,5 +1,5 @@
 ---
-title: 做法資料內嵌但不 Kusto。內嵌程式庫-Azure 資料總管 |Microsoft Docs
+title: 不含內嵌程式庫的 Kusto 資料內嵌-Azure 資料總管
 description: 本文說明在 Azure 資料總管中，不含 Kusto 的做法資料內嵌程式庫。
 services: data-explorer
 author: orspod
@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 80fe504311ee847afa7244e179974d80485efe46
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 96409849823850ef9fd939f9e359d75d3e6d5bf1
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373564"
+ms.locfileid: "83382143"
 ---
 # <a name="ingestion-without-kustoingest-library"></a>不 Kusto 內嵌程式庫的內嵌
 
@@ -336,7 +336,7 @@ Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列�
 }
 ```
 
-|屬性 | 描述 |
+|屬性 | 說明 |
 |---------|-------------|
 |Id |訊息識別碼（GUID） |
 |BlobPath |Blob 的路徑（URI），包括授與 Azure 資料總管許可權以讀取/寫入/刪除它的 SAS 金鑰。 需要許可權，才能讓 Azure 資料總管在內嵌資料完成後刪除 blob|
@@ -354,7 +354,7 @@ Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列�
 
 資料管理預期要從輸入 Azure 佇列讀取的訊息是下列格式的 JSON 檔。
 
-|屬性 | 描述 |
+|屬性 | 說明 |
 |---------|-------------
 |OperationId |可以用來追蹤服務端作業的作業識別碼（GUID） |
 |資料庫 |目標資料庫名稱 |

@@ -1,5 +1,5 @@
 ---
-title: 串流處理內嵌原則管理-Azure 資料總管 |Microsoft Docs
+title: Kusto 串流內嵌原則管理-Azure 資料總管
 description: 本文說明 Azure 資料總管中的串流內嵌原則管理。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 76844b764a8e21629c7d936f4c269d7d3ab1ec8c
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 1c3ce0c0d383d07375333b08de336503d1578b1a
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373321"
+ms.locfileid: "83381990"
 ---
 # <a name="streaming-ingestion-policy-management"></a>串流處理內嵌原則管理
 
@@ -34,7 +34,7 @@ ms.locfileid: "83373321"
 
 此命令會傳回具有下列資料行的資料表：
 
-|資料行    |類型    |描述
+|資料行    |類型    |說明
 |---|---|---
 |PolicyName|`string`|原則名稱-StreamingIngestionPolicy
 |EntityName|`string`|資料庫或資料表名稱
@@ -53,7 +53,7 @@ ms.locfileid: "83373321"
 
 ### <a name="streaming-ingestion-policy-object"></a>串流內嵌原則物件
 
-|屬性  |類型    |描述                                                       |
+|屬性  |類型    |說明                                                       |
 |----------|--------|------------------------------------------------------------------|
 |NumberOfRowStores |`int`  |指派給實體的資料列存放區數目|
 |SealIntervalLimit|`TimeSpan?`|選擇性限制資料表上密封作業之間的間隔。 有效範圍介於1到24小時之間。 預設值：24 小時。|

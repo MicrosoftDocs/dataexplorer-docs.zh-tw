@@ -1,5 +1,5 @@
 ---
-title: 將內嵌至命令（從儲存體提取資料）-Azure 資料總管 |Microsoft Docs
+title: Kusto 內嵌至命令（從儲存體提取資料）-Azure 資料總管
 description: 本文說明如何在 Azure 資料總管中內嵌至命令（從儲存體提取資料）。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 05d62aaa7b123f7f6d02b784402fd06335e155b2
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: fcab02ee032d1009cf31e36963c44cc6b12358e3
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373418"
+ms.locfileid: "83382007"
 ---
 # <a name="the-ingest-into-command-pull-data-from-storage"></a>將內嵌至命令（從儲存體提取資料）
 
@@ -45,7 +45,7 @@ ms.locfileid: "83373418"
 命令的結果是一個資料表，其中包含多筆記錄，如命令所產生的資料分區（「範圍」）。
 如果未產生任何資料分區，則會傳回具有空白（零值）範圍識別碼的單一記錄。
 
-|名稱       |類型      |描述                                                                |
+|名稱       |類型      |說明                                                                |
 |-----------|----------|---------------------------------------------------------------------------|
 |ExtentId   |`guid`    |命令所產生之資料分區的唯一識別碼。|
 |ItemLoaded |`string`  |與此記錄相關的一或多個儲存體成品。             |

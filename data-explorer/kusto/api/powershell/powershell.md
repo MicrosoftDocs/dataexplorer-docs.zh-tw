@@ -1,5 +1,5 @@
 ---
-title: 從 PowerShell 使用 .NET 用戶端程式庫-Azure 資料總管
+title: 從 PowerShell Kusto .NET 用戶端程式庫-Azure 資料總管
 description: 本文說明如何在 Azure 資料總管的 PowerShell 中使用 .NET 用戶端程式庫。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/29/2019
-ms.openlocfilehash: 5c521d7e63d58dd32425e759b0cf09a22a050b40
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: b454b9453c7afd0835041ac78d13318de73432e2
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226035"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83382059"
 ---
 # <a name="using-the-net-client-libraries-from-powershell"></a>從 PowerShell 使用 .NET 用戶端程式庫
 

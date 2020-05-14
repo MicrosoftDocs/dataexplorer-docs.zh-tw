@@ -1,5 +1,5 @@
 ---
-title: Kusto。內嵌內嵌狀態報表-Azure 資料總管
+title: Kusto。內嵌狀態報表-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 Kusto 內嵌狀態報表。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 76ae07e2e7bdbb15900385b1e2feab0c9ff97d01
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 41c6f7868d5300dc6a7234ee774ad8c78b08c36e
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373621"
+ms.locfileid: "83382177"
 ---
 # <a name="kustoingest-ingestion-status-reporting"></a>Kusto。內嵌內嵌狀態報表
 

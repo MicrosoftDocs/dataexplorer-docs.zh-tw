@@ -1,5 +1,5 @@
 ---
-title: Kusto-錯誤和例外狀況-Azure 資料總管
+title: '& 例外狀況 Kusto 內嵌錯誤-Azure 資料總管'
 description: 本文說明 Azure 資料總管中的 Kusto 錯誤和例外狀況。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 4af09c0b29b77edd7a4e62c7a6abbbae7e918610
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 97798fa62d588769636966c7155dc5f398bd001a
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373671"
+ms.locfileid: "83382313"
 ---
 # <a name="kustoingest-errors-and-exceptions"></a>Kusto。內嵌錯誤和例外狀況
 在用戶端上進行內嵌處理期間的任何錯誤，都是以 c # 例外狀況來表示。
@@ -109,7 +109,7 @@ ms.locfileid: "83373671"
 
 |欄位名稱 |類型     |意義
 |-----------|---------|------------------------------|
-|錯誤      | String  | 嘗試從 DM 取得佇列時發生的錯誤
+|錯誤      | 字串  | 嘗試從 DM 取得佇列時發生的錯誤
                             
 只有在使用[Kusto 佇列內嵌用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。
 在內嵌程式期間，會嘗試幾次來抓取連結至 DM 的 Azure 佇列。 當這些嘗試失敗時，包含失敗原因的例外狀況會在 [錯誤] 欄位中引發。 可能也會引發 ' InnerException ' 欄位中的內部例外狀況。
@@ -123,7 +123,7 @@ ms.locfileid: "83373671"
 
 |欄位名稱   |類型     |意義       
 |-------------|---------|------------------------------|
-|KustoEndpoint| String  | 相關 DM 的端點
+|KustoEndpoint| 字串  | 相關 DM 的端點
                             
 只有在使用[Kusto 佇列內嵌用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。  
 內嵌不在 Azure 容器中的來源（例如檔案、DataReader 或資料流程）時，會將資料上傳至暫存 blob 以進行內嵌。 當找不到可將資料上傳至的容器時，就會引發例外狀況。
@@ -136,7 +136,7 @@ ms.locfileid: "83373671"
 
 |欄位名稱   |類型     |意義       
 |-------------|---------|------------------------------------|
-|PropertyName | String  | 重複屬性的名稱。
+|PropertyName | 字串  | 重複屬性的名稱。
                             
 ### <a name="postmessagetoqueuefailedexception"></a>PostMessageToQueueFailedException
 
@@ -146,8 +146,8 @@ ms.locfileid: "83373671"
 
 |欄位名稱   |類型     |意義       
 |-------------|---------|---------------------------------|
-|QueueUri     | String  | 佇列的 URI
-|錯誤        | String  | 嘗試張貼至佇列時所產生的錯誤訊息
+|QueueUri     | 字串  | 佇列的 URI
+|錯誤        | 字串  | 嘗試張貼至佇列時所產生的錯誤訊息
                             
 只有在使用[Kusto 佇列內嵌用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。  
 佇列的內嵌用戶端會藉由將訊息上傳至相關的 Azure 佇列來內嵌資料。 如果發生 post 失敗，則會引發例外狀況。 它會包含佇列 URI、[錯誤] 欄位中失敗的原因，以及 [InnerException] 欄位中可能發生的內部例外狀況。
