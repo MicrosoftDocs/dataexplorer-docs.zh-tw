@@ -1,5 +1,5 @@
 ---
-title: 概觀 - Azure 資料總管 | Microsoft Docs
+title: 總覽 - Azure 資料總管
 description: 本文說明 Azure 資料總管的概觀。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/07/2019
-ms.openlocfilehash: 1c6c3cafef35c1292292e86da69a4d6ec03bb87c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7f36e5239ba183b87ab04349b873a0182363def7
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490271"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226477"
 ---
 # <a name="overview"></a>概觀
 
@@ -26,6 +26,7 @@ Kusto 查詢是一種負責處理資料並傳回結果的唯讀要求。
 
 例如，下列 Kusto 查詢會有一個陳述式，亦即表格式運算陳述式。 此陳述式一開始會先參照名為 `StormEvents` 的資料表 (裝載此資料表的資料庫在此是隱含的，且為連接資訊的一部分)。 接著會篩選資料表的資料 (資料列)，先依 `StartTime` 資料行的值篩選，再以 `State` 資料行的值篩選。 然後查詢會傳回「仍正常運作」的資料列計數。
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where StartTime >= datetime(2007-11-01) and StartTime < datetime(2007-12-01)
