@@ -1,6 +1,6 @@
 ---
-title: where 運算子-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 where 運算子（has、contains、startswith、endswith、符合 RegEx）。
+title: Kusto 查詢語言中的 where 運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 where 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: fadf8aa8c21dac364793c73a38e68d55fc2a6f6d
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 7dc9d7166a1f286e14c81f269f32f894cbe9ff9d
+ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370360"
+ms.lasthandoff: 05/14/2020
+ms.locfileid: "83404184"
 ---
 # <a name="where-operator"></a>where 運算子
 
@@ -50,7 +50,7 @@ Predicate** 是 `true` 之 T** 中的資料列。
 
 * **最簡單的詞彙優先︰** 如果您使用 `and` 連結多個子句，請先放置只包含一個資料行的子句。 因此 `Timestamp > ago(1d) and OpId == EventId` 比反過來要好。
 
-如需詳細資訊，請參閱可用的[字串運算子](./datatypes-string-operators.md)摘要和[可用數值運算子](./numoperators.md)的摘要。
+如需詳細資訊，請參閱[可用的字串運算子](./datatypes-string-operators.md)摘要和[可用數值運算子](./numoperators.md)的摘要。
 
 **範例**
 
@@ -61,9 +61,9 @@ Traces
     and ActivityId == SubActivityId 
 ```
 
-不超過1小時的記錄，來自名為 "MyCluster" 的來源，而且有兩個相同值的資料行。 
+這個範例會抓取不超過1小時的記錄、來自稱為的來源 `MyCluster` ，而且有兩個相同值的資料行。 
 
-請注意，我們將兩個資料行之間的比較放在最後，因為它不能利用索引和強制執行掃描。
+請注意，我們會在最後兩個數據行之間進行比較，因為它無法使用索引並強制執行掃描。
 
 **範例**
 

@@ -1,5 +1,5 @@
 ---
-title: 分割和組成匯總的中繼結果-Azure 資料總管
+title: Kusto 資料分割 & 撰寫中繼匯總結果-Azure 資料總管
 description: 本文說明如何在 Azure 資料總管中分割和撰寫匯總的中繼結果。
 services: data-explorer
 author: orspod
@@ -10,16 +10,16 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8085f2347501c313c857a262bc9de6ec7280c90c
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: ce86e24fbd13221fe333f281dac3ba3b6ac73a1f
+ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83224539"
+ms.lasthandoff: 05/14/2020
+ms.locfileid: "83404252"
 ---
 # <a name="partitioning-and-composing-intermediate-results-of-aggregations"></a>分割和組成匯總的中繼結果
 
-如果您想要計算過去七天每天的相異使用者計數。 您可以 `summarize dcount(user)` 一天執行一次，並將範圍篩選為過去七天。 這個方法沒有效率，因為每次執行計算時，先前的計算會有六天的重迭。 您也可以計算每一天的匯總，然後結合這些匯總。 這個方法會要求您「記住」最後六個結果，但效率更高。
+假設您想要計算過去七天每天的相異使用者計數。 您可以 `summarize dcount(user)` 一天執行一次，並將範圍篩選為過去七天。 這個方法沒有效率，因為每次執行計算時，先前的計算會有六天的重迭。 您也可以計算每一天的匯總，然後結合這些匯總。 這個方法會要求您「記住」最後六個結果，但效率更高。
 
 如所述，分割查詢很容易用於簡單的匯總，例如 `count()` 和 `sum()` 。 它也適用于複雜的匯總，例如 `dcount()` 和 `percentiles()` 。 本主題說明 Kusto 如何支援這類計算。
 
@@ -39,7 +39,7 @@ range x from 1 to 1000000 step 1
 |---|
 |1.0000524520874|
 
-在套用這種原則之前，請先將此內嵌到資料表中，以內嵌 null：
+套用這種原則之前，請先將此物件內嵌到資料表中，以內嵌 null：
 
 ```kusto
 .set-or-append MyTable <| range x from 1 to 1000000 step 1
@@ -143,7 +143,7 @@ PageViewsHllTDigest
 
 ::: zone-end
 
-當您需要取得這些值的最終結果時，查詢可能會使用 hll/tdigest 合併： [`hll-merge()`](hll-merge-aggfunction.md) / [`tdigest_merge()`](tdigest-merge-aggfunction.md) ，然後在取得合併的值之後， [`percentile_tdigest()`](percentile-tdigestfunction.md)  /  [`dcount_hll()`](dcount-hllfunction.md) 就可以在這些合併的值上叫用來取得或百分位數的最終結果 `dcount` 。
+當您需要取得這些值的最終結果時，查詢可能會使用 `hll` / `tdigest` 合併： [`hll-merge()`](hll-merge-aggfunction.md) / [`tdigest_merge()`](tdigest-merge-aggfunction.md) 。 然後，在取得合併的值之後， [`percentile_tdigest()`](percentile-tdigestfunction.md)  /  [`dcount_hll()`](dcount-hllfunction.md) 就可以在這些合併值上叫用，以取得 `dcount` 或百分位數的最終結果。
 
 假設有一個資料表 PageViews，每日內嵌資料，每日您想要計算每分鐘在日期 = datetime （2016-05-01 18：00：00.0000000）之後所看到的相異頁面計數。
 
@@ -176,12 +176,12 @@ PageViewsHllTDigest
 |2016-05-02 00：00：00.0000000|83486|64135183|
 |2016-05-03 00：00：00.0000000|72247|13685621|
 
-這應該更具效能，而且查詢會在較小的資料表上執行（在此範例中，第一個查詢會執行超過 ~ 215M 筆記錄，而第二個則只會執行超過32筆記錄）。
+此查詢在較小的資料表上執行時，應該更具效能。 在此範例中，第一個查詢會執行 ~ 215M 筆記錄，而第二個則只會執行32筆記錄：
 
 **範例**
 
 保留查詢。
-假設您有一個資料表，摘要說明每個維琪百科頁面的觀看時間（取樣大小是1千萬個），而且您想要尋找每個 date1 2 日的百分比，分別是在 date1 和 date2 中，相對於在 date1 上所看到的頁面（date1 < date2）。
+假設您有一個資料表，其摘要說明每個維琪百科頁面的觀看時間（取樣大小為1千萬個），而且您想要尋找每個 date1 2 日的百分比，分別是在 date1 和 date2 中，相對於在 date1 上所看到的頁面（date1 < date2）。
   
 簡單的方式是使用聯結和摘要運算子：
 
@@ -220,7 +220,7 @@ on $left.Day1 == $right.Day
  
 上述查詢花費 ~ 18 秒。
 
-當使用、和的函式時 [`hll()`](hll-aggfunction.md) [`hll_merge()`](hll-merge-aggfunction.md) [`dcount_hll()`](dcount-hllfunction.md) ，相等的查詢將會在 ~ 1.3 秒後結束，並顯示函式可將 `hll` 上述查詢加速到 ~ 14 次：
+當您使用、和函式時 [`hll()`](hll-aggfunction.md) [`hll_merge()`](hll-merge-aggfunction.md) [`dcount_hll()`](dcount-hllfunction.md) ，相等的查詢將會在 ~ 1.3 秒後結束，並顯示函式可將 `hll` 上述查詢加速到 ~ 14 次：
 
 ```kusto
 let Stats=PageViewsSample | summarize pagehll=hll(Page, 2) by day=startofday(Timestamp); // saving the hll values (intermediate results of the dcount values)
@@ -248,4 +248,4 @@ Stats
 |2016-05-02 00：00：00.0000000|2016-05-03 00：00：00.0000000|14.5160020350006|
 
 > [!NOTE] 
-> 查詢的結果不是100% 精確，因為函數發生錯誤 `hll` 。（如需錯誤的詳細資訊，請參閱 [`dcount()`](dcount-aggfunction.md) ）。
+> 查詢的結果不是100% 精確，因為函式發生錯誤 `hll` 。 如需有關錯誤的詳細資訊，請參閱 [`dcount()`](dcount-aggfunction.md) 。
