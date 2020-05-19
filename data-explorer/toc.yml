@@ -1572,53 +1572,53 @@
                 - name: 程式碼分析器
                   href: ./kusto/tools/kusto-explorer-code-analyzer.md
             - name: Web UI
-              href: 'https://docs.microsoft.com/azure/data-explorer/web-query-data'
+              href: ./web-query-data.md
             - name: Kusto.Cli
               href: ./kusto/tools/kusto-cli.md
         - name: 視覺效果、儀表板和報告
           items:
             - name: Azure Notebooks
-              href: 'https://docs.microsoft.com/azure/data-explorer/azure-notebooks'
+              href: ./azure-notebooks.md
             - name: Excel
               items:
                 - name: Excel 空白查詢
-                  href: 'https://docs.microsoft.com/azure/data-explorer/excel-blank-query'
+                  href: ./excel-blank-query.md
                 - name: Excel 連接器
-                  href: 'https://docs.microsoft.com/azure/data-explorer/excel-connector'
+                  href: ./excel-connector.md
             - name: Grafana
-              href: 'https://docs.microsoft.com/azure/data-explorer/grafana'
+              href: ./grafana.md
             - name: Power BI
               items:
                 - name: Power BI 最佳做法
-                  href: 'https://docs.microsoft.com/azure/data-explorer/power-bi-best-practices'
+                  href: ./power-bi-best-practices.md
                 - name: Power BI 連接器
-                  href: 'https://docs.microsoft.com/azure/data-explorer/power-bi-connector'
+                  href: ./power-bi-connector.md
                 - name: Power BI 已匯入查詢
-                  href: 'https://docs.microsoft.com/azure/data-explorer/power-bi-imported-query'
+                  href: ./power-bi-imported-query.md
                 - name: Power BI SQL 查詢
-                  href: 'https://docs.microsoft.com/azure/data-explorer/power-bi-sql-query'
+                  href: ./power-bi-sql-query.md
         - name: 協調流程
           items:
             - name: Microsoft Flow (預覽)
               items:
                 - name: Microsoft Flow 連接器
-                  href: 'https://docs.microsoft.com/azure/data-explorer/flow'
+                  href: ./flow.md
                 - name: Microsoft Flow 連接器使用範例
-                  href: 'https://docs.microsoft.com/azure/data-explorer/flow-usage'
+                  href: ./flow-usage.md
             - name: Microsoft Logic Apps (預覽)
               href: ./kusto/tools/logicapps.md
         - name: 資料擷取
           items:
             - name: LightIngest
-              href: 'https://docs.microsoft.com/azure/data-explorer/lightingest'
+              href: ./lightingest.md
             - name: Apache Spark 連接器
-              href: 'https://docs.microsoft.com/azure/data-explorer/spark-connector'
+              href: ./spark-connector.md
         - name: 原始檔控制整合
           items:
             - name: 同步 Kusto
               href: ./kusto/tools/synckusto.md
             - name: Azure Pipelines/DevOps
-              href: 'https://docs.microsoft.com/azure/data-explorer/devops'
+              href: ./devops.md
 - name: 資源
   items:
     - name: 部落格

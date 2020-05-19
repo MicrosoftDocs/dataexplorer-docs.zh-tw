@@ -1,6 +1,6 @@
 ---
-title: MS-TDS (T-SQL 支援) - Azure 資料總管 | Microsoft Docs
-description: 本文說明 Azure 資料總管中的 MS-TDS (T-SQL 支援)。
+title: MS-TDS T-SQL 支援 - Azure 資料總管
+description: 本文介紹 Azure 資料總管中的 MS-TDS T-SQL 支援。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/06/2019
-ms.openlocfilehash: 8aaea26b6c4e8a7f76c4129faeb681791f25ae7e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a128db995c78c0583bc7c7712c06292a2f6598d1
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490543"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550532"
 ---
-# <a name="ms-tds-t-sql-support"></a>MS-TDS (T-SQL 支援)
+# <a name="ms-tds-t-sql-support"></a>MS-TDS T-SQL 支援
 
-Kusto 支援一小組 Microsoft SQL Server 通訊協定 (MS-TDS)，，其中包含 T-SQL 查詢語言的子集，讓知道如何查詢 SQL Server 的現有工具可搭配 Kusto 使用。 支援的用戶端包括 Microsoft Excel、Microsoft Power BI 及其他許多用戶端。
+Azure 資料總管 (Kusto) 支援一小組 Microsoft SQL Server 通訊協定 (MS-TDS)，其中包含 T-SQL 查詢語言的子集。 Microsoft Excel 和 Microsoft Power BI 只是可與 Azure 資料總管 (Kusto) 搭配使用的許多工具之一。 這些 Microsoft 應用程式也知道如何查詢 SQL Server。
 
-請注意，若要讓用戶端工具透過 MS-TDS 查詢 Kusto，用戶端必須使用 Azure Active Directory 整合式驗證。
+> [!NOTE]
+> 由於用戶端工具透過 MS-TDS 查詢 Kusto，用戶端必須使用 Azure Active Directory (Azure AD) 整合式驗證。
 
-如需 Kusto 所執行 T-SQL 查詢語言的詳細資訊，請參閱 [T-SQL](./t-sql.md)。 
+## <a name="next-steps"></a>後續步驟
 
-請參閱 [MS-TDS 用戶端和 Kusto](./clients.md)，以取得如何從使用 MS-TDS/T-SQL 的某些知名用戶端使用 Kusto 的範例。
+* [T-SQL](./t-sql.md) - 深入了解由 Kusto 所執行的 T-SQL 查詢語言。 
 
-請參閱 [Kusto 作為 SQL 伺服器的連結伺服器](./linkedserver.md)，將 Kusto cluster 設定為 SQL 伺服器內部部署的連結伺服器。
+* [KQL over TDS](./tdskql.md) - 深入了解透過 TDS 端點執行原生 KQL 查詢。
 
-如需透過 TDS 使用 AAD 連線到 Kusto 的詳細資訊，請參閱[使用 Azure Active Directory 的 MS-TDS](./aad.md)。
+* [MS-TDS 用戶端和 Kusto](./clients.md) - 從使用 MS-TDS/T-SQL 的知名用戶端使用 Azure 資料總管。
 
-如需透過 TDS 端點執行原生 KQL 查詢的相關資訊，請參閱 [KQL over TDS](./tdskql.md)。 
+* [Azure 資料總管 (Kusto) 作為 SQL 伺服器的連結伺服器](./linkedserver.md) - 將叢集設定為 SQL 伺服器內部部署的連結伺服器。 
 
-最後，請參閱[此內容](./sqlknownissues.md)，以了解 T-SQL 與 Kusto 的 SQL Server 實作之間的一些主要差異。
+* [具有 Azure Active Directory 的 MS-TDS](./aad.md) - 透過 TDS 使用 Azure AD，以連接到 Azure 資料總管。
+
+* [SQL 已知問題](./sqlknownissues.md) 深入了解 T-SQL 與 Azure 資料總管的 SQL Server 實作之間的一些主要差異。
