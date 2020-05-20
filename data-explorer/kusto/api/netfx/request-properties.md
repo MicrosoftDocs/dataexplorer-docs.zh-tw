@@ -1,6 +1,6 @@
 ---
-title: Kusto 要求屬性 & ClientRequestProperties-Azure 資料總管
-description: 本文說明 Azure 資料總管中的要求屬性（ClientRequestProperties）。
+title: 要求屬性和 ClientRequestProperties-Azure 資料總管
+description: 本文說明 Azure 資料總管中的要求屬性和 ClientRequestProperties。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,56 +8,60 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/23/2019
-ms.openlocfilehash: 52b1f73e539e57f82d3ec911a3ea69dcd6848e4a
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 137a34ab211b72c2282d242840a46699d5feb3b3
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382160"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550481"
 ---
-# <a name="request-properties-clientrequestproperties"></a>要求屬性，ClientRequestProperties
+# <a name="request-properties-and-clientrequestproperties"></a>要求屬性和 ClientRequestProperties
 
-透過 .NET SDK 向 Kusto 提出要求時，通常會提供下列值：
+透過 .NET SDK 從 Kusto 提出要求時，請提供：
 
-1. 連接字串，表示要連接的服務端點、驗證參數，以及類似的連接相關資訊。 以程式設計方式，連接字串會透過 `KustoConnectionStringBuilder` 類別來表示。
+* 連接字串，表示要連接的服務端點、驗證參數，以及類似的連接相關資訊。 以程式設計方式，連接字串會透過 `KustoConnectionStringBuilder` 類別來表示。
 
-2. 用來描述要求「範圍」的資料庫名稱。
+* 用來描述要求「範圍」的資料庫名稱。
 
-3. 要求的文字（查詢或命令）本身。
+* 要求的文字（查詢或命令）本身。
 
-4. 用戶端提供服務並套用至要求的其他屬性。 以程式設計方式，這些屬性會由名為的類別所持有 `ClientRequestProperties` 。
+* 用戶端提供給服務並套用至要求的其他屬性。 以程式設計方式，這些屬性會由名為的類別所持有 `ClientRequestProperties` 。
 
-用戶端要求屬性有許多用途。 其中一些是用來讓偵錯工具更容易進行（例如，藉由提供可用來追蹤用戶端/服務互動的相互關聯字串），其他則用來影響套用至要求的限制和原則，而這類屬性的第三個類別則是[查詢參數](../../query/queryparametersstatement.md)。 此頁面會顯示支援屬性的完整清單。
+##   <a name="clientrequestproperties"></a>ClientRequestProperties
 
-`Kusto.Data.Common.ClientRequestProperties`類別包含三種資料：
+用戶端要求屬性有許多用途。 
+* 讓調試更容易。 例如，屬性可能會提供用來追蹤用戶端/服務互動的相互關聯字串。 
+* 會影響套用至要求的限制和原則。 
+* [查詢參數](../../query/queryparametersstatement.md)可讓用戶端應用程式根據使用者輸入將 Kusto 查詢參數化。
+[支援的屬性清單](#list-of-clientrequestproperties)。
+
+`Kusto.Data.Common.ClientRequestProperties`類別包含三種資料。
 
 * 命名的屬性。
-
-* 選項（選項名稱與選項值的對應）。
-
-* 參數（查詢參數名稱與查詢參數值的對應）。
+* 選項-選項名稱與選項值的對應。
+* Parameters-查詢參數名稱與查詢參數值的對應。
 
 > [!NOTE]
-> 某些已命名的屬性會標示為「請勿使用」。 這些屬性不應由用戶端指定，也不會影響服務。
+> 某些已命名的屬性會標示為「請勿使用」。 這類屬性不應由用戶端指定，也不會影響服務。
 
 ## <a name="the-clientrequestid-x-ms-client-request-id-named-property"></a>名為屬性的 ClientRequestId （x-ms-用戶端要求識別碼）
 
-這個命名屬性會保存要求的用戶端指定身分識別。 強烈建議用戶端以每個要求所傳送的要求來指定唯一的每個要求值，因為這會使偵錯工具失敗變得更容易（在某些情況下，例如查詢取消）。
+這個命名屬性具有用戶端指定的要求身分識別。 用戶端應該根據每個要求所傳送的要求來指定唯一的每個要求值。 這個值可讓偵錯工具失敗更容易執行，而且在某些情況下（例如，用於查詢取消）是必要的。
 
-這個屬性的程式設計名稱是 `ClientRequestId` ，它會轉譯成 HTTP 標頭 `x-ms-client-request-id` 。
+屬性的程式設計名稱是 `ClientRequestId` ，它會轉譯成 HTTP 標頭 `x-ms-client-request-id` 。
 
-如果用戶端未指定自己的值，則 SDK 會將此屬性設定為（隨機）值。
+如果用戶端未指定值，SDK 就會將這個屬性設定為（隨機）值。
 
 這個屬性的內容可以是任何可列印的唯一字串，例如 GUID。
-不過，建議用戶端使用下列範本：
+不過，我們建議用戶端使用： *ApplicationName* `.` *ActivityName* `;` *UniqueId*
 
-*ApplicationName* `.`*ActivityName* `;`*UniqueId*
-
-其中， *ApplicationName*會識別提出要求的用戶端應用程式， *ActivityName*會識別用戶端應用程式發出用戶端要求的活動類型，而*UniqueId*會識別特定的要求。
+* *ApplicationName*會識別提出要求的用戶端應用程式。
+* *ActivityName*會識別用戶端應用程式發出用戶端要求的活動類型。
+* *UniqueId*可識別特定的要求。
 
 ## <a name="the-application-x-ms-app-named-property"></a>名為屬性的應用程式（x-ms-app）
 
-這個命名屬性會保存提出要求的用戶端應用程式名稱，以供追蹤之用。
+名為屬性的應用程式（x-ms-app）具有提出要求之用戶端應用程式的名稱，並用於追蹤。
 
 這個屬性的程式設計名稱是 `Application` ，它會轉譯成 HTTP 標頭 `x-ms-app` 。 您可以在 Kusto 連接字串中將它指定為 `Application Name for Tracing` 。
 
@@ -65,26 +69,27 @@ ms.locfileid: "83382160"
 
 ## <a name="the-user-x-ms-user-named-property"></a>名為屬性的使用者（x-ms-使用者）
 
-這個命名屬性會保留提出要求之使用者的身分識別，以供追蹤之用。
+名為屬性的使用者（x-ms-使用者）具有提出要求之使用者的身分識別，並用於追蹤。
 
 這個屬性的程式設計名稱是 `User` ，它會轉譯成 HTTP 標頭 `x-ms-user` 。 您可以在 Kusto 連接字串中將它指定為 `User Name for Tracing` 。
 
 ## <a name="controlling-request-properties-using-the-rest-api"></a>使用 REST API 控制要求屬性
 
-向 Kusto 服務發出 HTTP 要求時，請使用 `properties` JSON 檔中的位置作為 POST 要求主體，以提供要求屬性。 請注意，您可以在 HTTP 標頭中提供某些屬性（例如「用戶端要求識別碼」，也就是用戶端提供給服務以識別要求的相互關聯識別碼），因此也可以在使用 HTTP GET 時設定。
-如需其他資訊，請參閱[Kusto REST API request 物件](../rest/request.md)。
+向 Kusto 服務發出 HTTP 要求時，請使用 `properties` JSON 檔中的位置作為 POST 要求主體，以提供要求屬性。 
+
+> [!NOTE]
+> 某些屬性（例如「用戶端要求識別碼」，也就是用戶端提供給識別要求的服務的相互關聯識別碼）可以在 HTTP 標頭中提供，而且也可以在使用 HTTP GET 時設定。
+如需詳細資訊，請參閱[Kusto REST API request 物件](../rest/request.md)。
 
 ## <a name="providing-values-for-query-parameterization-as-request-properties"></a>提供查詢參數化的值做為要求屬性
 
-Kusto 查詢可以使用查詢文字中的特殊[declare 查詢參數](../../query/queryparametersstatement.md)語句來參考查詢參數。 這可讓用戶端應用程式以安全的方式，根據使用者輸入參數化 Kusto 查詢（而不需要擔心插入式攻擊）。
+Kusto 查詢可以使用查詢文字中的特殊[declare 查詢參數](../../query/queryparametersstatement.md)語句來參考查詢參數。 這個語句可讓用戶端應用程式以安全的方式，根據使用者輸入來參數化 Kusto 查詢，而不需要擔心插入式攻擊。
 
-以程式設計方式，可以使用 `ClearParameter` 、和方法來設定屬性值 `SetParameter` `HasParameter` 。
+以程式設計方式，使用 `ClearParameter` 、和方法來設定屬性值 `SetParameter` `HasParameter` 。
 
 在 REST API 中，查詢參數會出現在與其他要求屬性相同的 JSON 編碼字串中。
 
-## <a name="sample-code-for-using-request-properties"></a>使用要求屬性的範例程式碼
-
-以下是用戶端程式代碼的範例：
+## <a name="sample-client-code-for-using-request-properties"></a>使用要求屬性的範例用戶端程式代碼
 
 ```csharp
 public static System.Data.IDataReader QueryKusto(
@@ -141,19 +146,15 @@ public static System.Data.IDataReader QueryKusto(
 
 ## <a name="list-of-clientrequestproperties"></a>ClientRequestProperties 清單
 
-<!-- The following is auto-generated by running the following command: -->
-<!-- Kusto.Cli.exe -execute:"#crp -doc"                                -->
-
-<!-- The following text can be re-produced by running the Kusto.Cli.exe directive '#crp -doc' -->
-
+<!-- The following is auto-generated by running  Kusto.Cli.exe -execute:"#crp -doc"           -->
 <!-- The following text can be re-produced by running the Kusto.Cli.exe directive '#crp -doc' -->
 
 * `debug_query_externaldata_projection_fusion_disabled`（*OptionDebugQueryDisableExternalDataProjectionFusion*）：如果設定，則不會將投影到 ExternalData 運算子。 True
-* `debug_query_fanout_threads_percent_external_data`（*OptionDebugQueryFanoutThreadsPercentExternalData*）：針對外部資料節點，要扇出執行的執行緒百分比。 Int
-* `deferpartialqueryfailures`（*OptionDeferPartialQueryFailures*）：如果為 true，則會停用報告部分查詢失敗，做為結果集的一部分。 True
+* `debug_query_fanout_threads_percent_external_data`（*OptionDebugQueryFanoutThreadsPercentExternalData*）：針對外部資料節點，要從何種執行緒傳出執行的百分比。 Int
+* `deferpartialqueryfailures`（*OptionDeferPartialQueryFailures*）：如果為 true，則會停用部分查詢失敗的報告做為結果集的一部分。 True
 * `max_memory_consumption_per_query_per_node`（*OptionMaxMemoryConsumptionPerQueryPerNode*）：覆寫整個查詢可能為每個節點配置的預設記憶體數量上限。 UInt64
 * `maxmemoryconsumptionperiterator`（*OptionMaxMemoryConsumptionPerIterator*）：覆寫查詢運算子可能配置的預設記憶體數量上限。 UInt64
-* `maxoutputcolumns`（*OptionMaxOutputColumns*）：覆寫允許查詢產生的預設最大資料行數目。 前提
+* `maxoutputcolumns`（*OptionMaxOutputColumns*）：覆寫查詢可能會產生的預設最大資料行數目。 前提
 * `norequesttimeout`（*OptionNoRequestTimeout*）：可將要求超時設定為最大值。 True
 * `notruncation`（*OptionNoTruncation*）：啟用隱藏傳回給呼叫端之查詢結果的截斷。 True
 * `push_selection_through_aggregation`（*OptionPushSelectionThroughAggregation*）：如果為 true，則透過匯總推送簡單選取 [布林值]
@@ -164,33 +165,32 @@ public static System.Data.IDataReader QueryKusto(
 * `query_cursor_before_or_at_default`（*OptionQueryCursorBeforeOrAtDefault*）：未搭配參數呼叫時，cursor_before_or_at （）函數的預設參數值。 [string]
 * `query_cursor_current`（*OptionQueryCursorCurrent*）：覆寫 cursor_current （）或 current_cursor （）函數所傳回的資料指標值。 [string]
 * `query_cursor_scoped_tables`（*OptionQueryCursorScopedTables*）：資料表名稱的清單，應限定為 cursor_after_default 的範圍。 cursor_before_or_at_default （上限是選擇性的）。 效果
-* `query_datascope`（*OptionQueryDataScope*）：控制查詢的 datascope--查詢是否會套用至所有資料或只是其中一部分。 [' 預設值]、[全部] 或 [hotcache]]
+* `query_datascope`（*OptionQueryDataScope*）：控制查詢的 datascope，關於查詢是套用到所有資料或只是其中一部分。 [' 預設值]、[全部] 或 [hotcache]]
 * `query_datetimescope_column`（*OptionQueryDateTimeScopeColumn*）：控制查詢的日期時間範圍（query_datetimescope_to/query_datetimescope_from）的資料行名稱。 字串
-* `query_datetimescope_from`（*OptionQueryDateTimeScopeFrom*）：控制查詢的日期時間範圍（最早）--僅用於 query_datetimescope_column 上的自動套用篩選（如果已定義）。 [DateTime]
-* `query_datetimescope_to`（*OptionQueryDateTimeScopeTo*）：控制查詢的日期時間範圍（最新）--僅用於 query_datetimescope_column 上的自動套用篩選（如果已定義）。 [DateTime]
-* `query_distribution_nodes_span`（*OptionQueryDistributionNodesSpanSize*）：如果設定，會控制子查詢合併的行為：執行中的節點將會在每個子節點群組的查詢階層中引進額外的層級。子群組的大小是由這個選項所設定。 Int
-* `query_fanout_nodes_percent`（*OptionQueryFanoutNodesPercent*）：要扇出執行的節點百分比。 Int
-* `query_fanout_threads_percent`（*OptionQueryFanoutThreadsPercent*）：要扇出執行的執行緒百分比。 Int
+* `query_datetimescope_from`（*OptionQueryDateTimeScopeFrom*）：控制查詢的日期時間範圍（最早）。 此值只會用來做為 query_datetimescope_column 上的自動套用篩選（如果已定義）。 [DateTime]
+* `query_datetime\scope_to`（*OptionQueryDateTimeScopeTo*）：控制查詢的日期時間範圍（最新）。 此值只會用來做為 query_datetimescope_column 上的自動套用篩選（如果已定義）。 [DateTime]
+* `query_distribution_nodes_span`（*OptionQueryDistributionNodesSpanSize*）：如果設定，會控制子查詢合併的行為：執行中的節點將會在每個節點子群組的查詢階層中引進額外的層級。 此選項會設定子群組的大小。 Int
+* `query_fanout_nodes_percent`（*OptionQueryFanoutNodesPercent*）：要作為外部執行的節點百分比。 Int
+* `query_fanout_threads_percent`（*OptionQueryFanoutThreadsPercent*）：執行緒輸出執行的百分比。 Int
 * `query_language`（*OptionQueryLanguage*）：控制要如何解讀查詢文字。 [' csl '、' kql ' 或 ' sql ']
 * `query_max_entities_in_union`（*OptionMaxEntitiesToUnion*）：覆寫允許查詢產生的預設最大資料行數目。 前提
 * `query_now`（*OptionQueryNow*）：覆寫 now （0）函數所傳回的 datetime 值。 [DateTime]
-* `query_python_debug`（*OptionDebugPython*）：如果設定，則為列舉的 python 節點產生 python debug 查詢（預設為第一個）。 [布林值或 Int]
+* `query_python_debug`（*OptionDebugPython*）：如果設定，會為列舉的 python 節點產生 python debug 查詢（預設為第一個）。 [布林值或 Int]
 * `query_results_apply_getschema`（*OptionQueryResultsApplyGetSchema*）：如果設定，則會抓取查詢結果中每個表格式資料的架構，而不是資料本身。 True
-* `query_results_cache_max_age`（*OptionQueryResultsCacheMaxAge*）：如果是正值，則控制允許 Kusto 傳回的快取查詢結果的最長存留期 [TimeSpan]
-* `query_results_progressive_row_count`（*OptionProgressiveQueryMinRowCountPerUpdate*）： Kusto 的提示，表示每個更新中要傳送的記錄數目（只有在已設定 OptionResultsProgressiveEnabled 時才會生效）
-* `query_results_progressive_update_period`（*OptionProgressiveProgressReportPeriod*）： Kusto 的提示，做為傳送進度畫面的頻率（只有在已設定 OptionResultsProgressiveEnabled 時才會生效）
+* `query_results_cache_max_age`（*OptionQueryResultsCacheMaxAge*）：如果是正數，則會控制快取查詢結果的最長存留期，而 Kusto 可能會傳回 [TimeSpan]
+* `query_results_progressive_row_count`（*OptionProgressiveQueryMinRowCountPerUpdate*）：告訴 Kusto 每個更新中要傳送多少筆記錄。 只有在已設定 OptionResultsProgressiveEnabled 時，此值才會生效
+* `query_results_progressive_update_period`（*OptionProgressiveProgressReportPeriod*）：告訴 Kusto 傳送進度畫面的頻率。 只有在已設定 OptionResultsProgressiveEnabled 時，此值才會生效
 * `query_shuffle_broadcast_join`（*ShuffleBroadcastJoin*）：啟用透過廣播聯結的隨機。
 * `query_take_max_records`（*OptionTakeMaxRecords*）：可將查詢結果限制為此筆記錄數目。 前提
 * `queryconsistency`（*OptionQueryConsistency*）：控制查詢一致性。 [' strongconsistency ' 或 ' normalconsistency ' 或 ' weakconsistency ']
 * `request_callout_disabled`（*OptionRequestCalloutDisabled*）：如果已指定，表示要求無法呼叫使用者提供的服務。 True
 * `request_description`（*OptionRequestDescription*）：要求的作者想要包含為要求描述的任意文字。 字串
 * `request_external_table_disabled`（*OptionRequestExternalTableDisabled*）：如果指定，表示要求無法叫用 ExternalTable 中的程式碼。 True
-* `request_readonly`（*OptionRequestReadOnly*）：如果指定，表示要求不能寫入任何內容。 True
+* `request_readonly`（*OptionRequestReadOnly*）：如果指定，表示要求無法寫入任何內容。 True
 * `request_remote_entities_disabled`（*OptionRequestRemoteEntitiesDisabled*）：如果指定，表示要求無法存取遠端資料庫和叢集。 True
 * `request_sandboxed_execution_disabled`（*OptionRequestSandboxedExecutionDisabled*）：如果指定，表示要求無法叫用沙箱中的程式碼。 True
 * `results_progressive_enabled`（*OptionResultsProgressiveEnabled*）：如果設定，會啟用漸進式查詢資料流程
 * `servertimeout`（*OptionServerTimeout*）：覆寫預設的要求超時。 TimeSpan
-* `truncationmaxrecords`（*OptionTruncationMaxRecords*）：覆寫允許查詢傳回給呼叫端（截斷）的預設最大記錄數目。 前提
+* `truncationmaxrecords`（*OptionTruncationMaxRecords*）：覆寫查詢可能傳回給呼叫端（截斷）的預設最大記錄數目。 前提
 * `truncationmaxsize`（*OptionTruncationMaxSize*）：覆寫允許查詢傳回給呼叫端（截斷）的預設最大資料大小。 前提
-* `validate_permissions`（*OptionValidatePermissions*）：驗證使用者執行查詢的許可權，而且不會自行執行查詢。 True
-
+* `validate_permissions`（*OptionValidatePermissions*）：驗證使用者進行查詢的許可權，而不執行查詢本身。 True

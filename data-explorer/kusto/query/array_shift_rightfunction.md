@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 714c6c15443420abbc973593acb2f311a5507dc4
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 28a44365d6d79bf30ec188146d989f2af2ad12c1
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225661"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550651"
 ---
 # <a name="array_shift_right"></a>array_shift_right()
 
@@ -21,17 +21,17 @@ ms.locfileid: "83225661"
 
 **語法**
 
-`array_shift_right(`*arr*， *shift_count* [， *fill_value* ]`)`
+`array_shift_right(`*`arr`*, *`shift_count`* [, *`fill_value`* ]`)`
 
 **引數**
 
-* *arr*：要分割的輸入陣列，必須是動態陣列。
-* *shift_count*：指定陣列元素要向右移動的位置數目的整數。 如果值為負數，則會將元素向左移動。
-* *fill_value*：用來插入元素的純量值，而不是已移動和移除的專案。 Default： null 值或空字串（視*arr*類型而定）。
+* *`arr`*：要分割的輸入陣列，必須是動態陣列。
+* *`shift_count`*：整數，指定陣列元素要向右移動的位置數目。 如果值為負數，則會將元素向左移動。
+* *`fill_value`*：用來插入元素的純量值，而不是已移位和已移除的專案。 Default： null 值或空字串（視*arr*類型而定）。
 
 **傳回**
 
-動態陣列，包含與原始陣列中相同數量的元素，其中每個專案都是根據*shift_count*來移位。 新增的新專案（而不是移除的元素）將具有*fill_value*的值。
+動態陣列，包含與原始陣列中相同數量的元素。 每個專案都已根據而移位 *`shift_count`* 。 新增的新專案（而不是移除的專案）會有值 *`fill_value`* 。
 
 **另請參閱**
 
@@ -64,7 +64,6 @@ ms.locfileid: "83225661"
     |arr|arr_shift|
     |---|---|
     |[1，2，3，4，5]|[-1，-1，1，2，3]|
-
 
 * 使用負數 shift_count 值，向左移位兩個位置：
 

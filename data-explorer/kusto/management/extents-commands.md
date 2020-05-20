@@ -1,6 +1,6 @@
 ---
-title: 擴展區(資料分片)管理 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的擴展區(數據分片)管理。
+title: 範圍（資料分區）管理-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的範圍（資料分區）管理。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,93 +8,93 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: e94b830809bf079e612b477292d00d2dbe85e60e
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: ca66beaad41796dff38a5bd5ce1fad2e0f41fc72
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744735"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550498"
 ---
-# <a name="extents-data-shards-management"></a>範圍(資料分片)管理
+# <a name="extents-data-shards-management"></a>範圍（資料分區）管理
 
-數據分片在 Kusto 中稱為**延伸盤區**,所有命令都使用「範圍」或「範圍」作為同義詞。
+資料分區在 Kusto 中稱為**範圍**，而所有命令都會使用「範圍」或「範圍」做為同義字。
 
-## <a name="show-extents"></a>.顯示範圍
+## <a name="show-extents"></a>。顯示範圍
 
-**叢集等級**
+**叢集層級**
 
 `.show` `cluster` `extents` [`hot`]
 
-顯示群集中存在的範圍(資料碎片)的資訊。
-如果`hot`指定 - 僅顯示預期位於熱緩存中的擴展盤區。
+顯示存在於叢集中的範圍（資料分區）的相關資訊。
+如果 `hot` 指定，則只會顯示預期在熱快取中的範圍。
 
-**資料庫等級**
+**資料庫層級**
 
-`.show``database`*資料庫*`extents`名稱`(`=*範圍代碼1*`,`...`,`*範圍IdN*`)``hot`[`where` `tags` `has` |`!has` ]`and` | `contains` | ( `!has` `!contains` )|標籤1 [|) 標籤2 .* `tags` `has` `!contains` `contains` | *Tag1* * *
+`.show``database` *DatabaseName* `extents` [ `(` *ExtentId1* `,` ... `,`*ExtentIdN* `)` ][ `hot` ] [ `where` `tags` （ `has` | `contains` | `!has` | `!contains` ） *Tag1* [ `and` `tags` （ `has` | `contains` | `!has` | `!contains` ） *Tag2*...]]
 
-顯示指定資料庫中存在的區位區(資料分片)的資訊。
-如果`hot`指定 - 僅顯示預期位於熱緩存中的擴展盤區。
+顯示存在於指定資料庫中的範圍（資料分區）的相關資訊。
+如果 `hot` 指定，則只會顯示預期在熱快取中的範圍。
 
 **資料表層級**
 
-`.show``table`*表*`extents`名`(`=*範圍代碼1*`,`...`,`*範圍IdN*`)``hot`[`where` `tags` `has` |`!has` ]`and` | `contains` | ( `!has` `!contains` )|標籤1 [|) 標籤2 .* `tags` `has` `!contains` `contains` | *Tag1* * *
+`.show``table` *TableName* `extents` [ `(` *ExtentId1* `,` ... `,`*ExtentIdN* `)` ][ `hot` ] [ `where` `tags` （ `has` | `contains` | `!has` | `!contains` ） *Tag1* [ `and` `tags` （ `has` | `contains` | `!has` | `!contains` ） *Tag2*...]]
 
-`.show`表格*名稱 1...* `(` `tables` `,``,`*表格名稱N* `)` `extents` `(`=*範圍代碼1*`,`...`,`*範圍IdN*`)``hot`[`where` `tags` `has` |`!has` ]`and` | `contains` | ( `!has` `!contains` )|標籤1 [|) 標籤2 .* `tags` `has` `!contains` `contains` | *Tag1* * *
+`.show``tables` `(` *TableName1* `,` ... `,`*TableNameN* `)``extents`[ `(` *ExtentId1* `,` ... `,`*ExtentIdN* `)` ][ `hot` ] [ `where` `tags` （ `has` | `contains` | `!has` | `!contains` ） *Tag1* [ `and` `tags` （ `has` | `contains` | `!has` | `!contains` ） *Tag2*...]]
 
-顯示指定表中存在的區位(資料分片)資訊(資料庫取自命令的上下文)。
-如果`hot`指定 - 僅顯示預期位於熱緩存中的擴展盤區。
+顯示指定資料表中所存在之範圍（資料分區）的相關資訊（從命令的內容取得資料庫）。
+如果 `hot` 指定，則只會顯示預期在熱快取中的範圍。
 
 **注意：**
 
-* 使用資料庫和/或表級命令比篩選(添加`| where DatabaseName == '...' and TableName == '...'`) 群集級命令的結果要快得多。
-* 如果提供了萬有範圍的I,則返回的數據集僅限於這些範圍。
-    * 同樣,這比篩選(添加到`| where ExtentId in(...)`)"裸"命令的結果要快得多。
-* 指定`tags`過濾器時:
-  * 返回的清單僅限於標記集合服從*所有*提供的標記篩選器的擴展盤區。
-    * 同樣,這比篩選(添加`| where Tags has '...' and Tags contains '...'`)"裸"命令的結果要快得多。
-  * `has`篩選器是相等篩選器:未使用任一指定標記標記的擴展盤區將被篩選出來。
-  * `!has`篩選器是相等負篩選器:使用任一指定標記標記的擴展盤區將被過濾掉。
-  * `contains`篩選器是不區分大小寫的子字串篩選器:沒有指定字串作為其任何標記的子字串的擴展盤區將被過濾掉。 
-  * `!contains`篩選器是不區分大小寫的子字串負篩選器:將篩選出具有指定字串作為其任何標記子字串的擴展盤區。 
+* 使用資料庫和/或資料表層級命令比篩選（新增）叢集 `| where DatabaseName == '...' and TableName == '...'` 層級命令的結果快很多。
+* 如果提供了選擇性的範圍識別碼清單，則傳回的資料集會限制為僅限這些範圍。
+    * 同樣地，這比篩選（新增 `| where ExtentId in(...)` 至）「裸機」命令的結果快很多。
+* 在 `tags` 指定篩選準則時：
+  * 傳回的清單僅限於標記集合遵守*所有*提供的標記篩選準則的範圍。
+    * 同樣地，這比篩選（新增）「 `| where Tags has '...' and Tags contains '...'` 裸機」命令的結果快很多。
+  * `has`篩選是相等的篩選準則：未標記任何指定標記的範圍會被篩選掉。
+  * `!has`篩選是相等的負面篩選準則：將會篩選出使用其中一個指定標記標記的範圍。
+  * `contains`篩選器是不區分大小寫的子字串篩選準則：不含指定字串做為其任何標記之子字串的範圍會被篩選掉。 
+  * `!contains`篩選是不區分大小寫的子字串負篩選：具有指定字串做為其任何標記之子字串的範圍會被篩選掉。 
   
   * **範例**
-    * 表中`E``T`的擴展區使用標`aaa``BBB`記`ccc`和 標記標記。
-    * 此查詢將傳`E`回 : 
+    * `E`資料表中的範圍 `T` 會加 `aaa` 上標記、 `BBB` 和 `ccc` 。
+    * 此查詢將會傳回 `E` ： 
     
     ```kusto 
     .show table T extents where tags has 'aaa' and tags contains 'bb' 
     ``` 
     
-    * 此查詢*不會*返回`E`(因為它未使用等於的標記標`aa`記 標記。
+    * 此查詢*不*會傳回 `E` （因為它不是以等於的標記標記 `aa` ）：
     
     ```kusto 
     .show table T extents where tags has 'aa' and tags contains 'bb' 
     ``` 
     
-    * 此查詢將傳`E`回 : 
+    * 此查詢將會傳回 `E` ： 
     
     ```kusto 
     .show table T extents where tags contains 'aaa' and tags contains 'bb' 
     ``` 
 
-|輸出參數 |類型 |描述 
+|輸出參數 |類型 |說明 
 |---|---|---
-|放大縮小字型功能 放大縮小字型功能 |Guid |範圍的識別碼 
-|DatabaseName |String |該範圍所屬的資料庫 
-|TableName |String |範圍所屬的表 
-|馬克斯·斯朗森 |Datetime |建立範圍時的日期與時間(對合併範圍 - 原始範圍之間建立時間的最大) 
-|原始大小 |Double |範圍資料的原始大小(以位元組為單位) 
-|範圍大小 |Double |記憶體中範圍的大小(壓縮 + 索引) 
-|壓縮大小 |Double |記憶體中範圍資料的壓縮大小 
+|ExtentId |Guid |範圍的識別碼 
+|DatabaseName |String |範圍所屬的資料庫 
+|TableName |String |範圍所屬的資料表 
+|MaxCreatedOn |Datetime |建立範圍的日期-時間（針對合併的範圍-來源範圍內的建立時間上限） 
+|OriginalSize |Double |範圍資料的原始大小（以位元組為單位） 
+|ExtentSize |Double |記憶體中的範圍大小（已壓縮 + 索引） 
+|CompressedSize |Double |記憶體中的範圍資料的壓縮大小 
 |IndexSize |Double |範圍資料的索引大小 
-|區塊 |long |範圍中的資料塊量 
-|使用者分佈 |long |範圍中的資料段數量 
-|配置的資料節點 |String | 已棄用(空字串)
-|增益資料節點 |String |已棄用(空字串)
-|範圍容器 Id |String | 範圍中的範圍容器的識別碼
-|RowCount |long |範圍中的行數
-|最小建立on |Datetime |建立範圍時的日期與時間(對合併範圍 - 原始範圍之間建立時間的最小) 
-|Tags|String|為範圍定義的標記(如果有) 
+|區塊 |long |範圍中的資料區塊數量 
+|使用者分佈 |long |範圍中的資料區段數量 
+|AssignedDataNodes |String | 已淘汰（空字串）
+|LoadedDataNodes |String |已淘汰（空字串）
+|ExtentContainerId |String | 範圍所在的範圍容器識別碼
+|RowCount |long |範圍中的資料列數量
+|MinCreatedOn |Datetime |建立範圍的日期-時間（針對合併的範圍-來源範圍中的最小建立時間） 
+|標籤|String|針對範圍定義的標記（如果有的話） 
  
 **範例**
 
@@ -120,73 +120,73 @@ ms.locfileid: "81744735"
 .show tables (TaggingGames1,TaggingGames2) extents where tags has 'tag1' and tags has 'tag2'
 ``` 
  
-## <a name="merge-extents"></a>.合併範圍
+## <a name="merge-extents"></a>。合併範圍
 
 **語法**
 
-`.merge``[async | dryrun]`*表名*`(` *GUID1* =`,` *GUID2* ...]`)``[with(rebuild=true)]`
+`.merge``[async | dryrun]` *TableName* `(` *GUID1* [ `,` *GUID2* ...] `)``[with(rebuild=true)]`
 
-此命令合併由其 ID 在指定表中指示的範圍(請參閱:[範圍(資料碎片)概述](extents-overview.md))。
+此命令會合並指定之資料表中其識別碼所指出的範圍（請參閱：[範圍（資料分區）總覽](extents-overview.md)）。
 
-合併操作有兩種類型:*合併*(重建索引 *)和重建(* 完全重新生成資料)。
+合併作業有2個類別： [*合併*] （重建索引）和 [*重建*] （完全 reingests 資料）。
 
-* `async`: 操作將以非同步方式執行 - 結果將是操作 ID (GUID),可以使用該 ID`.show operations <operation ID>`執行以查看命令的狀態&狀態。
-* `dryrun`:該操作將僅列出應合併的擴展盤區,但不會實際合併它們。 
-* `with(rebuild=true)`:將重建範圍(將重新生成資料),而不是合併(將重建索引)。
+* `async`：作業將會以非同步方式執行，結果將會是作業識別碼（GUID），它可以 `.show operations <operation ID>` 用來執行，以查看命令的狀態 & 狀態。
+* `dryrun`：作業只會列出應該合併的範圍，但不會實際合併它們。 
+* `with(rebuild=true)`：將會重建範圍（將會 reingested 資料），而不是合併（將會重建索引）。
 
 **傳回輸出**
 
-輸出參數 |類型 |描述 
+輸出參數 |類型 |說明 
 ---|---|---
-原始範圍Id |字串 |源表中原始範圍的唯一標識符 (GUID),該識別碼已合併到目標範圍。 
-結果範圍Id |字串 |從源範圍創建的結果範圍的唯一標識符 (GUID)。 失敗後 - "失敗"或"放棄"。
-Duration |時間範圍 |完成合併操作所花的時間段。
+OriginalExtentId |字串 |來源資料表中原始範圍的唯一識別碼（GUID），已合併至目標範圍。 
+ResultExtentId |字串 |已從來源範圍建立之結果範圍的唯一識別碼（GUID）。 失敗時-「失敗」或「已放棄」。
+Duration |時間範圍 |完成合併作業所花費的時間週期。
 
 **範例**
 
-在`MyTable`中 重建兩個特定擴展盤區,非同步執行
+重建中的兩個特定範圍 `MyTable` ，以非同步方式執行
 ```kusto
 .merge async MyTable (e133f050-a1e2-4dad-8552-1f5cf47cab69, 0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687) with(rebuild=true)
 ```
 
-合併`MyTable`的兩個特定擴充盤區,同步執行
+合併中的兩個特定範圍 `MyTable` ，以同步方式執行
 ```kusto
 .merge MyTable (12345050-a1e2-4dad-8552-1f5cf47cab69, 98765b2d-9dd2-4d2c-a45e-b24c65aa6687)
 ```
 
 **注意事項**
-- 通常,`.merge`命令很少應手動運行,並且它們在 Kusto 叢集的後台自動執行(根據為其中的表和資料庫定義的[合併策略](mergepolicy.md))。  
-  - 合併[策略](mergepolicy.md)下記錄了有關將多個擴展盤區合併為單個範圍的標準的一般注意事項。
-- `.merge`操作具有可能的最終狀態`Abandoned`(在使用操作 ID`.show operations`執行時 可以看到 ) - 此狀態表示源擴展盤區未合併在一起,因為源表中不再存在某些源擴展盤區。
-  - 這種狀態預計將在發生,例如:
-     - 源範圍已作為表保留的一部分被刪除。
-     - 源範圍已移動到其他表。
-     - 源表已完全刪除或重新命名。
+- 一般來說， `.merge` 命令應該不會以手動方式執行，而且會在 Kusto 叢集的背景中自動進行持續（根據針對資料表和資料庫所定義的[合併原則](mergepolicy.md)）。  
+  - 將多個範圍合併成單一範圍之準則的一般考慮記載于 [[合併原則](mergepolicy.md)] 底下。
+- `.merge`作業有可能的最終狀態（以作業 `Abandoned` 識別碼執行時可能會看到 `.show operations` ）-此狀態表示來源範圍並未合併在一起，因為部分來源範圍已不存在於來源資料表中。
+  - 這類狀態預期會發生在下列情況：
+     - 已卸載來源範圍做為資料表保留期的一部分。
+     - 來源範圍已移至不同的資料表。
+     - 來源資料表已完全卸載或重新命名。
 
-## <a name="move-extents"></a>.移動範圍
+## <a name="move-extents"></a>。移動範圍
 
 **語法**
 
-`.move`[`async``extents``all``from`]`table`*原始表名稱*`to``table`*目標表名稱*
+`.move`[ `async` ] `extents` `all` `from` `table` *SourceTableName* `to` `table` *DestinationTableName*
 
-`.move``async` `extents` [ `(` ] *GUID1* [`,` *GUID2* ...`)``to``table`來源表名稱 目標表名稱`from``table`*DestinationTableName**SourceTableName* 
+`.move`[ `async` ] `extents` `(` *GUID1* [ `,` *GUID2* ... `)` `from` ] `table`*SourceTableName* `to``table` *DestinationTableName* 
 
-`.move``async` `extents` [ `to`  <| *query* ]*目標表名稱*查詢`table`
+`.move`[ `async` ] `extents` `to` `table` *DestinationTableName*  <|  *查詢*
 
-此命令在特定資料庫的上下文中運行,並將指定的擴展盤區從源表以事務方式移動到目標表。
-需要來源與目標表的[表管理員權限](../management/access-control/role-based-authorization.md)。
+此命令會在特定資料庫的內容中執行，並以交易方式將指定的範圍從來源資料表移到目的地資料表。
+需要來源和目的地資料表的[資料表管理員許可權](../management/access-control/role-based-authorization.md)。
 
-* `async`(可選)指定命令是否非同步執行(在這種情況下,將返回操作 ID (Guid),並且可以使用[.show 操作](operations.md#show-operations)命令監視操作的狀態)。
-    * 如果使用此選項,可以檢索成功執行的結果[.show 操作詳細資訊](operations.md#show-operation-details)命令)。
+* `async`（選擇性）指定是否要以非同步方式執行命令（在這種情況下，會傳回作業識別碼（Guid），而且可以使用[. show operations](operations.md#show-operations)命令來監視操作的狀態）。
+    * 如果使用此選項，則可以抓取成功執行的結果[。顯示作業詳細資料](operations.md#show-operation-details)命令）。
 
-有三種方法可以指定要移動的擴展盤區:
-1. 要移動特定表的所有範圍。
-2. 通過在源表中顯式指定範圍指示。
-3. 通過提供其結果指定源表中的擴展區指示的查詢。
+有三種方式可指定要移動的範圍：
+1. 要移動特定資料表的所有範圍。
+2. 藉由在來源資料表中明確指定範圍識別碼。
+3. 藉由提供查詢，其結果會指定來源資料表中的範圍識別碼。
 
 **限制**
-- 源表和目標表都必須位於上下文資料庫中。 
-- 源表中的所有列都應存在於具有相同名稱和數據類型的目標表中。
+- 來源和目的地資料表都必須在內容資料庫中。 
+- 來源資料表中的所有資料行都應該存在於具有相同名稱和資料類型的目的地資料表中。
 
 **使用查詢指定範圍**
 
@@ -194,113 +194,113 @@ Duration |時間範圍 |完成合併操作所花的時間段。
 .move extents to table TableName <| ...query... 
 ```
 
-擴展區使用 Kusto 查詢指定,該查詢返回具有名為「天度Id」的列的記錄集。 
+範圍的指定方式是使用 Kusto 查詢，其會傳回具有名為 "ExtentId" 之資料行的記錄集。 
 
-**傳回輸出**(用於同步執行)
+傳回**輸出**（用於同步執行）
 
-輸出參數 |類型 |描述 
+輸出參數 |類型 |說明 
 ---|---|---
-原始範圍Id |字串 |源表中原始範圍的唯一標識符 (GUID),該識別碼已移動到目標表。 
-結果範圍Id |字串 |結果範圍的唯一標識碼 (GUID),該識別碼已由源表移動到目標表。 失敗後 - "失敗"
-詳細資料 |字串 |包括故障詳細資訊,以防操作失敗。
+OriginalExtentId |字串 |來源資料表中原始範圍的唯一識別碼（GUID），已移至目的地資料表。 
+ResultExtentId |字串 |結果範圍的唯一識別碼（GUID），已從來源資料表移到目的地資料表。 失敗時-「失敗」。
+詳細資料 |字串 |包含失敗詳細資料，以防作業失敗。
 
 **範例**
 
-將表格`MyTable`的所有延伸區移到表`MyOtherTable`格 。
+將資料表中的所有範圍移 `MyTable` 到資料表 `MyOtherTable` 。
 ```kusto
 .move extents all from table MyTable to table MyOtherTable
 ```
 
-將 2 個特定範圍(按其範圍指示)`MyTable`從表`MyOtherTable`移動到表格 。
+將2個特定範圍（依據其範圍識別碼）從資料表移動 `MyTable` 到資料表 `MyOtherTable` 。
 ```kusto
 .move extents (AE6CD250-BE62-4978-90F2-5CB7A10D16D7,399F9254-4751-49E3-8192-C1CA78020706) from table MyTable to table MyOtherTable
 ```
 
-將所有擴充區從 2`MyTable1``MyTable2`個特定`MyOtherTable`表格 (、 ) 移至表格 。
+將2個特定資料表（，）的所有範圍移 `MyTable1` `MyTable2` 至資料表 `MyOtherTable` 。
 ```kusto
 .move extents to table MyOtherTable <| .show tables (MyTable1,MyTable2) extents
 ```
 
 **範例輸出** 
 
-|原始範圍Id |結果範圍Id| 詳細資料
+|OriginalExtentId |ResultExtentId| 詳細資料
 |---|---|---
 |e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687| 
 |cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be| 
 |4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f| 
 |2dfdef64-62a3-4950-a130-96b5b1083b5a |0fb7f3da-5e28-4f09-a000-e62eb41592df| 
 
-## <a name="drop-extents"></a>.下降範圍
+## <a name="drop-extents"></a>。放置範圍
 
-從指定的資料庫/表刪除範圍。 此命令具有多個變體:在一個變體中,要刪除的擴展區由 Kusto 查詢指定,而在其他變體中,擴展區使用下面描述的微型語言指定。 
+從指定的資料庫/資料表中卸載範圍。 此命令有數個變體：在一個變異中，要卸載的範圍是由 Kusto 查詢所指定，而在其他 variant 範圍中則是使用以下所述的迷你語言來指定。 
  
 ### <a name="specifying-extents-with-a-query"></a>使用查詢指定範圍
 
-需要提供查詢傳回的擴充盤區的每個表格表[管理員權限](../management/access-control/role-based-authorization.md)。
+需要具有提供的查詢所傳回之範圍之資料表的[資料表管理員許可權](../management/access-control/role-based-authorization.md)foreach。
 
-丟棄範圍(或只是報告它們,如果使用,`whatif`則不實際丟棄):
+捨棄範圍（或只在使用時才會進行報告 `whatif` ）：
 
 **語法**
 
-`.drop``extents` [`whatif`] <**查詢*
+`.drop``extents`[ `whatif` ] <|*查詢*
 
-擴展區使用 Kusto 查詢指定,該查詢返回具有名為「天度Id」的列的記錄集。 
+範圍的指定方式是使用 Kusto 查詢，其會傳回具有名為 "ExtentId" 之資料行的記錄集。 
  
-### <a name="dropping-a-specific-extent"></a>刪除特定範圍
+### <a name="dropping-a-specific-extent"></a>卸載特定範圍
 
-在指定表格名稱的情況下,需要[表管理員權限](../management/access-control/role-based-authorization.md)。
+如果指定資料表名稱，則需要[資料表管理員許可權](../management/access-control/role-based-authorization.md)。
 
-在未指定表格名稱的情況下,需要[資料庫管理員權限](../management/access-control/role-based-authorization.md)。
-
-**語法**
-
-`.drop``extent`*延伸區*`from`Id =*表名*|
-
-### <a name="dropping-specific-multiple-extents"></a>刪除特定的多個延伸盤區
-
-在指定表格名稱的情況下,需要[表管理員權限](../management/access-control/role-based-authorization.md)。
-
-在未指定表格名稱的情況下,需要[資料庫管理員權限](../management/access-control/role-based-authorization.md)。
+如果未指定資料表名稱，則需要[資料庫管理員許可權](../management/access-control/role-based-authorization.md)。
 
 **語法**
 
-`.drop`範圍代碼1 *ExtentId1* ... `(` `extents` `,`*範圍 IdN* `)` =`from` *表名*|
+`.drop``extent` *ExtentId* [ `from` *TableName*]
+
+### <a name="dropping-specific-multiple-extents"></a>卸載特定的多個範圍
+
+如果指定資料表名稱，則需要[資料表管理員許可權](../management/access-control/role-based-authorization.md)。
+
+如果未指定資料表名稱，則需要[資料庫管理員許可權](../management/access-control/role-based-authorization.md)。
+
+**語法**
+
+`.drop``extents` `(` *ExtentId1* `,` .。。*ExtentIdN* `)`[ `from` *TableName*]
 
 ### <a name="specifying-extents-by-properties"></a>依屬性指定範圍
 
-在指定表格名稱的情況下,需要[表管理員權限](../management/access-control/role-based-authorization.md)。
+如果指定資料表名稱，則需要[資料表管理員許可權](../management/access-control/role-based-authorization.md)。
 
-在未指定表格名稱的情況下,需要[資料庫管理員權限](../management/access-control/role-based-authorization.md)。
+如果未指定資料表名稱，則需要[資料庫管理員許可權](../management/access-control/role-based-authorization.md)。
 
-`.drop``extents` [`older` `limit` *N* *TableName* | `all``tables``trim` *LimitCount*N `from` `extentsize` | `datasize``MB` `by` ( )* | ( 表名`bytes`) [ ( ) N ( ) * [ 限制計數 ]`GB` |  *N* `days` | `hours`
+`.drop``extents`[ `older` *N* （ `days`  |  `hours` ）] `from` （*TableName*  |  `all` `tables` ） [ `trim` `by` （ `extentsize`  |  `datasize` ） *N* （ `MB`  |  `GB`  |  `bytes` ）] [ `limit` *LimitCount*]
 
-* `older`:將僅刪除早於*N*天/小時的範圍。 
-* `trim`: 這個操作會修剪資料庫中的資料,直到範圍與所需大小(MaxSize) 符合 
-* `limit`:該操作將應用於第一個*限制計數*範圍 
+* `older`：只會捨棄超過*N*天/小時的範圍。 
+* `trim`：作業將會修剪資料庫中的資料，直到範圍總和符合所需的大小（MaxSize） 
+* `limit`：作業將會套用至第一個*LimitCount*範圍 
 
-該命令支援模擬 (`.drop-pretend``.drop`而不是 ) 模式,該模式生成輸出,就像命令會運行一樣,但實際沒有執行它。
+命令支援模擬（ `.drop-pretend` 而不是 `.drop` ）模式，它會產生輸出，如同命令會執行，但未實際執行。
 
 **範例**
 
-從資料庫中的所有表中移除 10 天以前建立的所有擴充盤區`MyDatabase`
+從資料庫的所有資料表中移除超過10天前建立的所有範圍`MyDatabase`
 
 ```kusto
 .drop extents <| .show database MyDatabase extents | where CreatedOn < now() - time(10d)
 ```
 
-刪除表`Table1``Table2`與中的所有延伸盤區,其建立時間超過 10 天前:
+移除資料表和中的所有範圍 `Table1` `Table2` ，其建立時間超過10天前：
 
 ```kusto
 .drop extents older 10 days from tables (Table1, Table2)
 ```
 
-模擬模式:顯示命令會刪除哪些範圍(範圍 ID 參數不適用於此命令):
+模擬模式：顯示命令所要移除的範圍（範圍識別碼參數不適用於此命令）：
 
 ```kusto
 .drop-pretend extents older 10 days from all tables
 ```
 
-從「測試表」中移除所有延伸盤區:
+從 ' TestTable ' 移除所有範圍：
 
 ```kusto
 .drop extents from TestTable
@@ -308,151 +308,190 @@ Duration |時間範圍 |完成合併操作所花的時間段。
  
 **傳回輸出**
 
-|輸出參數 |類型 |描述 
+|輸出參數 |類型 |說明 
 |---|---|---
-|放大縮小字型功能 放大縮小字型功能 |String |由於命令而移除的延伸區 Id 
-|TableName |String |表名稱,其中範圍屬於  
-|已建立 |Datetime |時間戳,包含有關最初建立延伸區的時間戳 
+|ExtentId |String |因命令而卸載的 ExtentId 
+|TableName |String |資料表名稱，其中的範圍所屬  
+|CreatedOn |Datetime |保存首次建立範圍的相關資訊的時間戳記 
  
 **範例輸出** 
 
 |範圍識別碼 |資料表名稱 |建立於 
 |---|---|---
-|43c6e03f-1713-4ca7-a52a-5db8a4e8b87d |TestTable |2015-01-12 12:48:49.4298178 
+|43c6e03f-1713-4ca7-a52a-5db8a4e8b87d |TestTable |2015-01-12 12：48：49.4298178 
 
-## <a name="replace-extents"></a>.取代延伸盤區
+## <a name="replace-extents"></a>。取代範圍
 
 **語法**
 
-`.replace``async` `extents` [ `in` `},{`*DestinationTableName*`<| 
-{`*query for extents to be dropped from table*] 目標表名稱 查詢,用於從表*查詢中移除要移動到表的延伸區*`table``}`
+`.replace`[ `async` ] `extents` `in` `table` *DestinationTableName*要 `<| 
+{` *從資料表查詢中卸載的範圍查詢*，以 `},{` *將範圍移至資料表*`}`
 
-此命令在特定資料庫的上下文中運行,將指定的擴展盤區從其源表移動到目標錶,並從目標表中刪除指定的擴展盤區。
-所有放置和移動操作都在單個事務中完成。
+此命令會在特定資料庫的內容中執行、將指定的範圍從其來源資料表移至目的地資料表，並從目的地資料表中卸載指定的範圍。
+所有的 drop 和 move 作業都是在單一交易中完成。
 
-需要來源與目標表的[表管理員權限](../management/access-control/role-based-authorization.md)。
+需要來源和目的地資料表的[資料表管理員許可權](../management/access-control/role-based-authorization.md)。
 
-* `async`(可選)指定命令是否非同步執行(在這種情況下,將返回操作 ID (Guid),並且可以使用[.show 操作](operations.md#show-operations)命令監視操作的狀態)。
-    * 如果使用此選項,可以檢索成功執行的結果[.show 操作詳細資訊](operations.md#show-operation-details)命令)。
+* `async`（選擇性）指定是否要以非同步方式執行命令（在這種情況下，會傳回作業識別碼（Guid），而且可以使用[. show operations](operations.md#show-operations)命令來監視操作的狀態）。
+    * 如果使用此選項，則可以抓取成功執行的結果[。顯示作業詳細資料](operations.md#show-operation-details)命令）。
 
-透過提供 2 個查詢,指定應刪除或移動哪些延伸盤區
-- *查詢要從表格中移除的延伸碟區*- 此查詢的結果指定範圍指示  
-應從目標表中刪除。
-- *要移動到表的擴展盤區查詢*- 此查詢的結果指定源表中應移動到目標表的擴展區指示。
+藉由提供2個查詢來指定應卸載或移動的範圍
+- *查詢要從資料表*卸載的範圍-此查詢的結果會指定範圍識別碼  
+應該從目的地資料表中卸載。
+- *查詢要移到資料表的範圍*-此查詢的結果會指定來源資料表中應該移至目的地資料表的範圍識別碼。
 
-兩個查詢都應返回一個記錄集,其中列名為"天地 Id"。
+這兩個查詢都應該傳回具有名為 "ExtentId" 之資料行的記錄集。
 
 **限制**
-- 源表和目標表都必須位於上下文資料庫中。 
-- 查詢指定的所有擴展區 *(即要從表中刪除的擴展盤區*)都應屬於目標表。
-- 源表中的所有列都應存在於具有相同名稱和數據類型的目標表中。
+- 來源和目的地資料表都必須在內容資料庫中。 
+- 查詢所指定*要從資料表中卸載之範圍*的所有範圍，都應該屬於目的地資料表。
+- 來源資料表中的所有資料行都應該存在於具有相同名稱和資料類型的目的地資料表中。
 
-**傳回輸出**(用於同步執行)
+傳回**輸出**（用於同步執行）
 
-輸出參數 |類型 |描述 
+輸出參數 |類型 |說明 
 ---|---|---
-原始範圍Id |字串 |源表中原始範圍的唯一識別碼 (GUID),該識別子已移動到目標表,或 - 目標表中已刪除的擴展盤區。
-結果範圍Id |字串 |結果範圍的唯一標識碼 (GUID),該識別碼從源表移動到目標表,或 - 空,以防範圍從目標表中刪除。 失敗後 - "失敗"
-詳細資料 |字串 |包括故障詳細資訊,以防操作失敗。
+OriginalExtentId |字串 |來源資料表中原始範圍的唯一識別碼（GUID），已移至目的地資料表，或已卸載之目的地資料表中的範圍。
+ResultExtentId |字串 |已從來源資料表移到目的地資料表的結果範圍唯一識別碼（GUID），如果已從目的地資料表卸載範圍，則為-empty。 失敗時-「失敗」。
+詳細資料 |字串 |包含失敗詳細資料，以防作業失敗。
+
+> [!NOTE]
+> 如果*要從資料表*查詢中卸載的範圍所傳回的範圍不存在於目的地資料表中，此命令將會失敗。 如果在執行 replace 命令之前合併範圍，就可能會發生這種情況。 若要確保命令在遺失的範圍中失敗，請檢查查詢是否傳回預期的 ExtentIds。 如果要卸載的範圍不存在於資料表 MyOtherTable 中，以下的範例 #1 將會失敗。 不過，#2 的範例會成功，即使要卸載的範圍不存在，因為卸載的查詢不會傳回任何範圍識別碼。 
 
 **範例**
 
-將所有延伸碟區從 2`MyTable1``MyTable2`個特定表格 (、`MyOtherTable` `MyOtherTable` `drop-by:MyTag`) 移至表 , 並丟棄標記的所有延伸盤區:
+下列命令會將2個特定資料表（，）中的所有範圍移 `MyTable1` `MyTable2` 至資料表 `MyOtherTable` ，並卸載 `MyOtherTable` 標記為的所有範圍 `drop-by:MyTag` ：
 
 ```kusto
 .replace extents in table MyOtherTable <|
-    {.show table MyOtherTable extents where tags has 'drop-by:MyTag'},
-    {.show tables (MyTable1,MyTable2) extents}
+    {
+        .show table MyOtherTable extents where tags has 'drop-by:MyTag'
+    },
+    {
+        .show tables (MyTable1,MyTable2) extents
+    }
 ```
 
 **範例輸出** 
 
-|原始範圍Id |結果範圍Id |詳細資料
+|OriginalExtentId |ResultExtentId |詳細資料
 |---|---|---
 |e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687| 
 |cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be| 
 |4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f| 
 |2dfdef64-62a3-4950-a130-96b5b1083b5a |0fb7f3da-5e28-4f09-a000-e62eb41592df| 
 
-*注意*： 
-> [!NOTE]
-> 如果目標*表中不存在從表查詢中刪除的擴展區返回的擴展區*,則該命令將失敗。 如果在執行替換命令之前合併了擴展盤區,則可能發生此情況。 為了確保命令在缺少的擴展區上失敗,請檢查查詢是否返回預期的擴展盤Id。 如果表 MyOtherTable 中不存在下降範圍,則下面的示例#1將失敗。 但是,即使不存在下降範圍,示例#2也會成功,因為要刪除的查詢不會返回任何擴展盤 ID。 
 
-範例#1: 
+下列命令會將1個特定資料表（）的所有範圍移 `MyTable1` 至資料表 `MyOtherTable` ，並依其識別碼在中卸載特定範圍 `MyOtherTable` ：
+
 
 ```kusto
 .replace extents in table MyOtherTable <|
-     { datatable(ExtentId:guid)[ "2cca5844-8f0d-454e-bdad-299e978be5df"] }, { .show table MyTable1 extents }
+    {
+        print ExtentId = "2cca5844-8f0d-454e-bdad-299e978be5df"
+    },
+    {
+        .show table MyTable1 extents 
+    }
 ```
-
-範例#2:
 
 ```kusto
 .replace extents in table MyOtherTable  <|
-     { .show table MyOtherTable extents | where ExtentId == guid(2cca5844-8f0d-454e-bdad-299e978be5df) }, { .show table MyTable1 extents }
+    {
+        .show table MyOtherTable extents
+        | where ExtentId == guid(2cca5844-8f0d-454e-bdad-299e978be5df) 
+    },
+    {
+        .show table MyTable1 extents 
+    }
 ```
 
+下列命令會執行等冪邏輯，因此它只會從資料表中卸載範圍， `t_dest` 以防有範圍要從資料表移 `t_source` 到資料表 `t_dest` ：
 
+```kusto
+.replace async extents in table t_dest <|
+{
+    let any_extents_to_move = toscalar( 
+        t_source
+        | where extent_tags() has 'drop-by:blue'
+        | summarize count() > 0
+    );
+    let extents_to_drop =
+        t_dest
+        | where any_extents_to_move and extent_tags() has 'drop-by:blue'
+        | summarize by ExtentId = extent_id()
+    ;
+    extents_to_drop
+},
+{
+    let extents_to_move = 
+        t_source
+        | where extent_tags() has 'drop-by:blue'
+        | summarize by ExtentId = extent_id()
+    ;
+    extents_to_move
+}
+```
 
-## <a name="drop-extent-tags"></a>.下降範圍標記
+## <a name="drop-extent-tags"></a>。放置範圍標記
 
 **語法**
 
-`.drop`[`async` `extent` `table``(``,`*Tag1*`,` *TableName**Tag2*] 表名 ' 標籤1 ' ' ' 標籤2 ' ... `tags` `from``,`'*標籤*'*`)`
+`.drop`[ `async` ] `extent` `tags` `from` `table` *TableName* `(` '*Tag1*' [ `,` '*Tag2*' `,` ... `,` '*TagN*']`)`
 
-`.drop``async` `extent` [ `tags` ]*查詢* <| 
+`.drop`[ `async` ] `extent` `tags`  <|  *查詢*
 
-* `async`(可選)指定命令是否非同步執行(在這種情況下,將返回操作 ID (Guid),並且可以使用[.show 操作](operations.md#show-operations)命令監視操作的狀態)。
-    * 如果使用此選項,可以檢索成功執行的結果[.show 操作詳細資訊](operations.md#show-operation-details)命令)。
+* `async`（選擇性）指定是否要以非同步方式執行命令（在這種情況下，會傳回作業識別碼（Guid），而且可以使用[. show operations](operations.md#show-operations)命令來監視操作的狀態）。
+    * 如果使用此選項，則可以抓取成功執行的結果[。顯示作業詳細資料](operations.md#show-operation-details)命令）。
 
-這個指令在特定資料庫的上下文中執行,並從提供的資料庫和表中的任何範圍(包括任何標籤)中刪除提供的[延伸區標記](extents-overview.md#extent-tagging)。  
+命令會在特定資料庫的內容中執行，並從提供的資料庫和資料表中的任何範圍卸載提供的[範圍標記](extents-overview.md#extent-tagging)，其中包括任何標記。  
 
-有兩種方法可以指定應從哪些擴展區中刪除哪些標記:
+有兩種方式可指定應該從哪些範圍移除哪些標記：
 
-1. 通過顯式指定應從指定表中的所有擴展區中刪除的標記。
-2. 通過提供其結果指定表和每個範圍中的範圍 ID 的查詢 - 應刪除的標記。
+1. 藉由明確指定應該從指定資料表中的所有範圍移除的標記。
+2. 藉由提供查詢，其結果會指定資料表中的範圍識別碼和 foreach 範圍（應移除的標記）。
 
 **限制**
-- 所有擴展區都必須位於上下文資料庫中,並且必須屬於同一表。 
+- 所有範圍都必須在內容資料庫中，而且必須屬於相同的資料表。 
 
 **使用查詢指定範圍**
 
-需要所有相關來源與目標表的[表員權限](../management/access-control/role-based-authorization.md)。
+需要所有相關來源和目的地資料表的[資料表管理員許可權](../management/access-control/role-based-authorization.md)。
 
 ```kusto 
 .drop extent tags <| ...query... 
 ```
 
-使用 Kusto 查詢指定要刪除的範圍和標記,該查詢傳回具有名為「天度Id」的欄和名為「標記」的欄的記錄集。 
+您可以使用 Kusto 查詢來指定要卸載的範圍和標籤，以傳回具有名為 "ExtentId" 之資料行的記錄集，以及名為 "Tags" 的資料行。 
 
-*註*: 使用[Kusto .NET 用戶端函式庫](../api/netfx/about-kusto-data.md)時,可以使用以下方法產生所需的指令:
+*注意*：使用[Kusto .net 用戶端程式庫](../api/netfx/about-kusto-data.md)時，您可以使用下列方法來產生所需的命令：
 - `CslCommandGenerator.GenerateExtentTagsDropByRegexCommand(string tableName, string regex)`
 - `CslCommandGenerator.GenerateExtentTagsDropBySubstringCommand(string tableName, string substring)`
 
 **傳回輸出**
 
-輸出參數 |類型 |描述 
+輸出參數 |類型 |說明 
 ---|---|---
-原始範圍Id |字串 |標記已修改的原始範圍的唯一識別碼 (GUID),並作為操作的一部分刪除) 
-結果範圍Id |字串 |具有修改標記(並作為操作的一部分創建和添加)的結果範圍的唯一標識符 (GUID)。 失敗後 - "失敗"
-結果範圍標記 |字串 |結果範圍標記為標記的標記的集合(如果保留任何標記)或「null」,以防操作失敗。
-詳細資料 |字串 |包括故障詳細資訊,以防操作失敗。
+OriginalExtentId |字串 |原始範圍的唯一識別碼（GUID），其標記已修改（並在作業中卸載） 
+ResultExtentId |字串 |具有已修改標記之結果範圍的唯一識別碼（GUID）（並會在作業中建立和新增）。 失敗時-「失敗」。
+ResultExtentTags |字串 |標記的集合，其中的結果範圍會加上標籤（如果有的話）或 "null" （如果作業失敗的話）。
+詳細資料 |字串 |包含失敗詳細資料，以防作業失敗。
 
 **範例**
 
-從`drop-by:Partition000``MyOtherTable`表 中帶有標記的任何範圍中丟棄標記。
+`drop-by:Partition000`從資料表中標記為它的任何範圍卸載標記 `MyOtherTable` 。
 
 ```kusto
 .drop extent tags from table MyOtherTable ('drop-by:Partition000')
 ```
 
-從表中`drop-by:20160810104500``My Table`標有`a random tag`其中 任何一個`drop-by:20160810`的標籤 範圍刪除標記 、和/或。
+`drop-by:20160810104500` `a random tag` `drop-by:20160810` 從資料表中任何已標記的範圍中，卸載標記、和/或 `My Table` 。
 
 ```kusto
 .drop extent tags from table [My Table] ('drop-by:20160810104500','a random tag','drop-by:20160810')
 ```
 
-從表中`drop-by``MyTable`的擴展區刪除所有標記。
+`drop-by`從資料表的範圍中卸載所有標記 `MyTable` 。
 
 ```kusto
 .drop extent tags <| 
@@ -463,7 +502,7 @@ Duration |時間範圍 |完成合併操作所花的時間段。
   | where Tags startswith 'drop-by'
 ```
 
-`drop-by:StreamCreationTime_20160915(\d{6})`從表中`MyTable`的擴展區刪除匹配正則運算式的所有標記。
+從資料表的範圍中卸載符合 RegEx 的所有標記 `drop-by:StreamCreationTime_20160915(\d{6})` `MyTable` 。
 
 ```kusto
 .drop extent tags <| 
@@ -476,49 +515,49 @@ Duration |時間範圍 |完成合併操作所花的時間段。
 
 **範例輸出** 
 
-|原始範圍Id |結果範圍Id | 結果範圍標記 | 詳細資料
+|OriginalExtentId |ResultExtentId | ResultExtentTags | 詳細資料
 |---|---|---|---
-|e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687 | 分割區001 |
+|e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687 | Partition001 |
 |cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be | |
-|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f | 分割區001 分區002 |
+|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f | Partition001 Partition002 |
 |2dfdef64-62a3-4950-a130-96b5b1083b5a |0fb7f3da-5e28-4f09-a000-e62eb41592df | |
 
-## <a name="alter-extent-tags"></a>.alter 範圍標記
+## <a name="alter-extent-tags"></a>。 alter 範圍標記
 
 **語法**
 
-`.alter``async` `extent` [ `tags` `,``,`*Tag2*]*標籤1*' ' Tag2 ' ... `(``,` *'TagN']*`)` <| *查詢*
+`.alter`[ `async` ] `extent` `tags` `(` '*Tag1*' [ `,` '*Tag2*' `,` ... `,` '*TagN*'] `)`  <|  *查詢*
 
-該命令在特定資料庫的上下文中運行,並將指定查詢返回的所有範圍的[擴展區標記](extents-overview.md#extent-tagging)更改為提供的標記集。
+此命令會在特定資料庫的內容中執行，並將指定查詢所傳回之所有範圍的[範圍標記](extents-overview.md#extent-tagging)變更為提供的標記集。
 
-使用 Kusto 查詢指定要更改的範圍和標記,該查詢返回具有名為「特定程度的 Id」的列的記錄集。
+您可以使用 Kusto 查詢來指定要改變的範圍和標籤，以傳回具有名為 "ExtentId" 之資料行的記錄集。
 
-* `async`(可選)指定命令是否非同步執行(在這種情況下,將返回操作 ID (Guid),並且可以使用[.show 操作](operations.md#show-operations)命令監視操作的狀態)。
-    * 如果使用此選項,可以檢索成功執行的結果[.show 操作詳細資訊](operations.md#show-operation-details)命令)。
+* `async`（選擇性）指定是否要以非同步方式執行命令（在這種情況下，會傳回作業識別碼（Guid），而且可以使用[. show operations](operations.md#show-operations)命令來監視操作的狀態）。
+    * 如果使用此選項，則可以抓取成功執行的結果[。顯示作業詳細資料](operations.md#show-operation-details)命令）。
 
-需要所有相片表的[表管理權限](../management/access-control/role-based-authorization.md)。
+需要所有相關資料表的[資料表管理員許可權](../management/access-control/role-based-authorization.md)。
 
 **限制**
-- 所有擴展區都必須位於上下文資料庫中,並且必須屬於同一表。 
+- 所有範圍都必須在內容資料庫中，而且必須屬於相同的資料表。 
 
 **傳回輸出**
 
-輸出參數 |類型 |描述 
+輸出參數 |類型 |說明 
 ---|---|---
-原始範圍Id |字串 |標記已修改的原始範圍的唯一識別碼 (GUID),並作為操作的一部分刪除) 
-結果範圍Id |字串 |具有修改標記(並作為操作的一部分創建和添加)的結果範圍的唯一標識符 (GUID)。 失敗後 - "失敗"
-結果範圍標記 |字串 |結果範圍標記的標記的集合,或操作失敗時"null"的標記的集合。
-詳細資料 |字串 |包括故障詳細資訊,以防操作失敗。
+OriginalExtentId |字串 |原始範圍的唯一識別碼（GUID），其標記已修改（並在作業中卸載） 
+ResultExtentId |字串 |具有已修改標記之結果範圍的唯一識別碼（GUID）（並會在作業中建立和新增）。 失敗時-「失敗」。
+ResultExtentTags |字串 |已標記結果範圍的標記集合，如果作業失敗則為 "null"。
+詳細資料 |字串 |包含失敗詳細資料，以防作業失敗。
 
 **範例**
 
-將表格`MyTable`中 所有延伸的分割分頁`MyTag`變更為 。
+將資料表中所有範圍的標記變更 `MyTable` 為 `MyTag` 。
 
 ```kusto
 .alter extent tags ('MyTag') <| .show table MyTable extents
 ```
 
-變更表中`MyTable`所有延伸盤區的分頁,標`drop-by:MyTag`記`drop-by:MyNewTag``MyOtherNewTag`為與 。
+改變數據表中所有範圍的標記 `MyTable` ， `drop-by:MyTag` 並將其標記為 `drop-by:MyNewTag` 和 `MyOtherNewTag` 。
 
 ```kusto
 .alter extent tags ('drop-by:MyNewTag','MyOtherNewTag') <| .show table MyTable extents where tags has 'drop-by:MyTag'
@@ -526,10 +565,10 @@ Duration |時間範圍 |完成合併操作所花的時間段。
 
 **範例輸出** 
 
-|原始範圍Id |結果範圍Id | 結果範圍標記 | 詳細資料
+|OriginalExtentId |ResultExtentId | ResultExtentTags | 詳細資料
 |---|---|---|---
-|e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687 | 下一個: 我的新分頁我的其他新分頁| 
-|cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be | 下一個: 我的新分頁我的其他新分頁| 
-|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f | 下一個: 我的新分頁我的其他新分頁| 
-|2dfdef64-62a3-4950-a130-96b5b1083b5a |0fb7f3da-5e28-4f09-a000-e62eb41592df | 下一個: 我的新分頁我的其他新分頁| 
+|e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687 | drop by： MyNewTag MyOtherNewTag| 
+|cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be | drop by： MyNewTag MyOtherNewTag| 
+|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f | drop by： MyNewTag MyOtherNewTag| 
+|2dfdef64-62a3-4950-a130-96b5b1083b5a |0fb7f3da-5e28-4f09-a000-e62eb41592df | drop by： MyNewTag MyOtherNewTag| 
 

@@ -1,42 +1,60 @@
 ---
-title: 微軟邏輯應用和庫塞托 - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 Microsoft 邏輯應用和庫托。
-services: data-explorer
+title: 使用 Logic Apps 自動執行 Kusto 查詢
+description: 瞭解如何使用 Logic Apps 自動執行 Kusto 查詢和命令並加以排程
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: docohe
 ms.service: data-explorer
-ms.topic: reference
-ms.date: 10/30/2019
-ms.openlocfilehash: f7d719ece5df6eb3f6d4060a2fb07e7092902601
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.topic: conceptual
+ms.date: 04/14/2020
+ms.openlocfilehash: 8765635e0eea8c1d41640bc0393d39a0afa5f971
+ms.sourcegitcommit: e66c5f4b833b4f6269bb7bfa5695519fcb11d9fa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523812"
+ms.lasthandoff: 05/19/2020
+ms.locfileid: "83630149"
 ---
-# <a name="microsoft-logic-app-and-kusto"></a>微軟邏輯應用程式和庫托
+# <a name="microsoft-logic-app-and-azure-data-explorer"></a>Microsoft 邏輯應用程式和 Azure 資料總管
 
-Azure Kusto 邏輯應用連接器允許使用者使用[Microsoft 邏輯應用](https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps)作為計畫或觸發任務的一部分自動執行 Kusto 查詢和命令。
+Azure Kusto 邏輯應用程式連接器可讓您使用[Microsoft 邏輯應用程式](https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps)連接器，自動執行 Kusto 查詢和命令，做為已排程或觸發工作的一部分。
 
-邏輯應用程式和流連接器構建在同一連接器之上,因此,如[Flow 文件頁](flow.md)中所述,相同的[限制](flow.md#limitations)、[操作](flow.md#azure-kusto-flow-actions),[身份驗證](flow.md#authentication)[和使用範例](flow.md#usage-examples)適用於這兩個。
+邏輯應用程式和流程是建立在相同的連接器上。 因此，適用于 Flow 的[限制](flow.md#limitations)、[動作](flow.md#azure-kusto-flow-actions)、[驗證](flow.md#authentication)和[使用範例](flow.md#azure-kusto-flow-actions)也適用于 Logic Apps，如[Flow 檔頁面](flow.md)所述。
 
+## <a name="how-to-create-a-logic-app-with-azure-data-explorer"></a>如何使用 Azure 資料總管建立邏輯應用程式
 
-## <a name="how-to-create-a-logic-app-with-azure-kusto"></a>如何使用 Azure 函式庫建立邏輯應用
+1. 開啟 [ [Microsoft Azure 入口網站](https://ms.portal.azure.com/)]。 
+1. 搜尋 `logic app` 並加以選取。
 
-打開 Azure 門戶,然後單擊創建新的邏輯應用資源。
-添加所需的名稱、訂閱、重新創建組和位置,然後單擊"創建"。
+    [![](./Images/logicapps/logicapp-search.png "Search for logic app")](./Images/logicapps/logicapp-search.png#lightbox)
 
-![建立邏輯應用程式](./Images/KustoTools-LogicApp/logicapp-createlogicapp.png "邏輯應用-建立邏輯應用")
+1. 選取 [+新增]  。
 
-建立邏輯應用後,按下編輯按鈕
+    ![新增邏輯應用程式](./Images/logicapps/logicapp-add.png)
 
-![編輯邏輯應用設計器](./Images/KustoTools-LogicApp/logicapp-editdesigner.png "邏輯應用編輯設計器")
+1. 輸入表單的必要詳細資料：
+    * 訂用帳戶
+    * 資源群組
+    * 邏輯應用程式名稱
+    * 區域或整合服務環境
+    * Location
+    * 開啟或關閉記錄分析
+1. 選取 [檢閱 + 建立]  。
 
-建立空白邏輯應用
+    ![建立邏輯應用程式](./Images/logicapps/logicapp-create-new.png)
 
-![邏輯應用空白範本](./Images/KustoTools-LogicApp/logicapp-blanktemplate.png "邏輯應用空白範本")
+1. 建立邏輯應用程式時，請選取 [**編輯**]。
 
-新增重複操作,然後選擇"Azure 庫塞托"
+    ![編輯邏輯應用程式設計工具](./Images/logicapps/logicapp-editdesigner.png "logicapp-editdesigner")
 
-![邏輯應用 Kusto 串流連接器](./Images/KustoTools-LogicApp/logicapp-kustoconnector.png "邏輯應用-庫斯托連接器")
+1. 建立空白邏輯應用程式。
+
+    ![邏輯應用程式空白範本](./Images/logicapps/logicapp-blanktemplate.png "logicapp-blanktemplate")
+
+1. 新增迴圈動作並選取 [ **Azure Kusto**]。
+
+    ![邏輯應用程式 Kusto 流程連接器](./Images/logicapps/logicapp-kustoconnector.png "logicapp-kustoconnector")
+
+## <a name="next-steps"></a>後續步驟
+
+* 若要深入瞭解如何設定迴圈動作，請參閱[Flow 檔頁面](flow.md)
+* 請參閱一些[使用範例](flow.md#azure-kusto-flow-actions)，以瞭解設定邏輯應用程式動作的想法

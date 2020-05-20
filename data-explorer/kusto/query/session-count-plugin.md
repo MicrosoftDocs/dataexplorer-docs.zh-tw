@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6a9596b71afabe1e80e866fef7f2a22f6b288631
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 1e173dcba48e8748562bad61e0f16786e957ca83
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372397"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550549"
 ---
 # <a name="session_count-plugin"></a>session_count plugin
 
@@ -35,7 +35,7 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 * *Start*：流量分析開始期間的值進行純量。
 * *End*：以分析結束期間的值為純量。
 * *Bin*：會話分析步驟期間的純量常數值。
-* *LookBackWindow*：代表會話回顧期間的純量常數值。 如果的識別碼 `IdColumn` 出現在的時間範圍內 `LookBackWindow` -會話會被視為現有的（如果沒有的話），則會話會被視為新的。
+* *LookBackWindow*：代表會話回顧期間的純量常數值。 如果的識別碼 `IdColumn` 出現在的時間範圍內 `LookBackWindow` ，則會話會被視為現有的會話。 如果識別碼未出現，則會話會被視為新的。
 * *dim1*， *dim2*，...：（選擇性）分割會話計數計算的維度資料行清單。
 
 **傳回**
@@ -51,14 +51,13 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 
 **範例**
 
-
-基於此範例的目的，我們會將資料視為具決定性的資料表，其中包含兩個數據行：
+在此範例中，資料具有決定性，而且我們使用具有兩個數據行的資料表：
 - 時間軸：從1到10000的執行數位
 - 識別碼：從1到50的使用者識別碼
 
-`Id``Timeline`如果是的分割 `Timeline` 線（時間軸% Id = = 0），則會出現在特定位置。
+`Id`如果是的 `Timeline` 分割線 `Timeline` （時間軸% Id = = 0），則會出現在特定位置。
 
-這表示使用的事件 `Id==1` 會出現在任何位置 `Timeline` 、 `Id==2` 每個第二個 `Timeline` 插槽的事件，依此類推。
+具有的事件 `Id==1` 會出現在任何位置 `Timeline` 、 `Id==2` 每個第二個插槽的事件 `Timeline` ，依此類推。
 
 以下是一些20行的資料：
 

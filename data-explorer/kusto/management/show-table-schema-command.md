@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: e2a550f0ea755181d39524876833cff4281608b4
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 899e54b46dd231db0bf1272c0eb1933dad474a47
+ms.sourcegitcommit: 2ebd83369f247cf6dd91709f26e4ecd873489eaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618338"
+ms.lasthandoff: 05/19/2020
+ms.locfileid: "83555010"
 ---
 # <a name="show-table-schema"></a>.show 資料表結構描述
 
@@ -25,7 +25,7 @@ ms.locfileid: "82618338"
 .show table TableName cslschema 
 ```
 
-| 輸出參數 | 類型   | 描述                                               |
+| 輸出參數 | 類型   | 說明                                               |
 |------------------|--------|-----------------------------------------------------------|
 | TableName        | String | 資料表的名稱。                                    |
 | 結構描述           | String | 資料表架構 as 應該用於資料表建立/改變 |
@@ -41,10 +41,10 @@ ms.locfileid: "82618338"
 需要[資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 ```kusto
-.show table TableName schema as JSON
+.show table TableName schema as json
 ```
 
-| 輸出參數 | 類型   | 描述                             |
+| 輸出參數 | 類型   | 說明                             |
 |------------------|--------|-----------------------------------------|
 | TableName        | String | 資料表的名稱                   |
 | 結構描述           | String | JSON 格式的資料表架構         |

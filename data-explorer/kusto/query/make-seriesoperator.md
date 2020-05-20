@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: b4df3d7ea6df9eaec2e71fd3dddd60a1b23a02bd
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 5c1d25c0eaa0a3f52c18cf2f1e5e4200775b7d9d
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271429"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550566"
 ---
 # <a name="make-series-operator"></a>make-series 運算子
 
-沿著指定的軸，建立一系列指定的匯總值。 
+沿著指定的軸建立一連串指定的匯總值。
 
 ```kusto
 T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from datetime(2016-01-01) to datetime(2016-01-10) step 1d by fruit, supplier
@@ -30,13 +30,13 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 **引數**
 
 * ** 結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
-* *DefaultValue：* 將使用的預設值，而不是不存在的值。 如果沒有具有*AxisColumn*和*GroupExpression*之特定值的資料列，則會在結果中使用*DefaultValue*來指派陣列的對應元素。 如果 `default =` 省略*DefaultValue* ，則假設為0。 
-* *匯總：* 以資料[aggregation function](make-seriesoperator.md#list-of-aggregation-functions) `count()` `avg()` 行名稱做為引數呼叫彙總函式（例如或）。 請參閱 [彙總函式清單](make-seriesoperator.md#list-of-aggregation-functions)。 請注意，只有傳回數值結果的彙總函式可以搭配 `make-series` 運算子使用。
+* *DefaultValue：* 將使用的預設值，而不是不存在的值。 如果沒有具有*AxisColumn*和*GroupExpression*之特定值的資料列，則會在結果中將*DefaultValue*的對應元素指派給陣列。 如果省略*DefaultValue* ，則假設為0。 
+* *匯總：* 以資料[aggregation function](make-seriesoperator.md#list-of-aggregation-functions) `count()` `avg()` 行名稱做為引數呼叫彙總函式（例如或）。 請參閱 [彙總函式清單](make-seriesoperator.md#list-of-aggregation-functions)。 只有傳回數值結果的彙總函式可以與運算子搭配使用 `make-series` 。
 * *AxisColumn：* 將排序數列的資料行。 它可以視為時程表，但除了 `datetime` 接受任何數數值型別之外。
-* *start*：（選擇性）將會建立數列之每個*AxisColumn*的下限值。 *start*、 *end*和*step*是用來在給定範圍內建立*AxisColumn*值的陣列，並使用指定的*步驟*。 所有*匯總*值會分別針對此陣列進行排序。 這個*AxisColumn*陣列也是輸出中的最後一個輸出資料行，其名稱與*AxisColumn*相同。 如果未指定*start*值，start 就是在每個數列中具有資料的第一個 bin （step）。
-* *end*：（選擇性） *AxisColumn*的上限（非內含）值，時間序列的最後一個索引會小於此值（而且會*開始*加上小於*end*的*步驟*整數倍數）。 如果未提供*結束*值，它會是最後一個 bin （步驟）的上限，其中包含每個數列的資料。
-* *步驟*： *AxisColumn*陣列的兩個連續專案之間的差異（亦即，bin 大小）。
-* ** 可提供一組相異值的資料行運算式。 通常是已提供有限的一組值的資料行名稱。 
+* *start*：（選擇性）要建立的每個數列之*AxisColumn*的下限值。 *start*、 *end*和*step*是用來建立給定範圍內的*AxisColumn*值陣列，並使用指定的*步驟*。 所有*匯總*值會分別針對此陣列進行排序。 這個*AxisColumn*陣列也是輸出中的最後一個輸出資料行，其名稱與*AxisColumn*相同。 如果未指定*start*值，start 就是在每個數列中具有資料的第一個 bin （step）。
+* *end*：（選擇性） *AxisColumn*的上限（非內含）值。 時間序列的最後一個索引小於此值（且將會*開始*加上小於*end*的*步驟*整數倍數）。 如果未提供*結束*值，它會是最後一個 bin （步驟）的上限，其中包含每個數列的資料。
+* *步驟*： *AxisColumn*陣列的兩個連續專案之間的差異（也就是，bin 大小）。
+* *GroupExpression：* 在資料行上提供一組相異值的運算式。 通常是已提供有限的一組值的資料行名稱。 
 * *MakeSeriesParameters*：*名稱*值格式為零或多個（以空格分隔）的參數 `=` *Value* ，可控制行為。 支援下列參數： 
   
   |名稱           |值                                        |描述                                                                                        |
@@ -45,13 +45,13 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 
 **傳回**
 
-輸入資料列會安排在具有相同 `by` 運算式和 `bin_at(` *AxisColumn* `, ` *步驟* `, ` *開始* `)` 運算式值的群組中。 然後指定的彙總函式會針對每個群組進行計算，以便為每個群組產生資料列。 結果會包含資料 `by` 行、 *AxisColumn*資料行，以及每個計算匯總的至少一個資料行。 （不支援多個資料行或非數值結果的匯總）。
+輸入資料列會排列成具有相同 `by` 運算式值和 `bin_at(` *AxisColumn* `, ` *步驟* `, ` *開始* `)` 運算式的群組。 然後指定的彙總函式會針對每個群組進行計算，以便為每個群組產生資料列。 結果會包含資料 `by` 行、 *AxisColumn*資料行，以及每個計算匯總的至少一個資料行。 （不支援多個資料行或非數值結果的匯總）。
 
 此中繼結果具有與 `by` `bin_at(` *AxisColumn* `, ` *步驟* `, ` *開始* `)` 值的不同組合的資料列數目。
 
 最後，將中繼結果中的資料列排列成具有相同運算式值的群組 `by` ，並將所有匯總值排列成陣列（類型的值 `dynamic` ）。 針對每個匯總，有一個資料行包含具有相同名稱的陣列。 範圍函數輸出中具有所有*AxisColumn*值的最後一個資料行。 它的值會針對所有資料列重複。 
 
-請注意，由於 [填滿遺漏的 bin] 預設值，產生的樞紐分析表與所有數列都有相同數目的 bin （也就是匯總的值）  
+由於預設會填滿遺漏的 bin 值，因此產生的樞紐分析表與所有數列都有相同數目的 bin （也就是匯總值）  
 
 **注意**
 
@@ -61,9 +61,9 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 
 *T* `| make-series` [*Column* `=` ]*匯總*[ `default` `=` *DefaultValue*] [ `,` ...] `on` *AxisColumn* `in` `range(` *start* `,` *stop* `,` *step* `)` [ `by` [*Column* `=` ] *GroupExpression* [ `,` ...]]
 
-從替代語法產生的數列與2個層面的主要語法不同：
+從替代語法產生的數列與主要語法有兩個不同之處：
 * [*停止*] 值為 [內含]。
-* 分類收納索引軸是以 bin （）產生，而不是 bin_at （），這表示*啟動*不一定會包含在產生的數列中。
+* 分類收納索引軸是以 bin （）產生，而不是 bin_at （），這表示*啟動*可能不會包含在產生的數列中。
 
 建議使用 make 系列的主要語法，而不是替代語法。
 
@@ -75,15 +75,15 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 
 |函式|說明|
 |--------|-----------|
-|[any （）](any-aggfunction.md)|傳回群組的隨機非空白值|
-|[avg （）](avg-aggfunction.md)|Retuns 整個群組的平均值|
+|[any()](any-aggfunction.md)|傳回群組的隨機非空白值|
+|[avg （）](avg-aggfunction.md)|傳回整個群組的平均值|
 |[count （）](count-aggfunction.md)|傳回群組的計數|
-|[countif()](countif-aggfunction.md)|傳回包含群組之述詞的計數|
+|[countif()](countif-aggfunction.md)|傳回具有群組之述詞的計數|
 |[dcount()](dcount-aggfunction.md)|傳回群組元素的近似相異計數|
 |[最大值（）](max-aggfunction.md)|傳回整個群組的最大值|
 |[min （）](min-aggfunction.md)|傳回整個群組的最小值|
 |[stdev （）](stdev-aggfunction.md)|傳回整個群組的標準差|
-|[sum （）](sum-aggfunction.md)|傳回遷移群組的元素總和|
+|[sum （）](sum-aggfunction.md)|傳回群組內元素的總和。|
 |[variance()](variance-aggfunction.md)|傳回整個群組的變異數|
 
 ## <a name="list-of-series-analysis-functions"></a>數列分析函數清單
@@ -104,18 +104,18 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
   
 ## <a name="list-of-series-interpolation-functions"></a>數列插補函式的清單
 
-|函式|描述|
+|函式|說明|
 |--------|-----------|
 |[series_fill_backward()](series-fill-backwardfunction.md)|執行數列中遺漏值的後置填滿插補|
 |[series_fill_const()](series-fill-constfunction.md)|以指定的常數值取代數列中的遺漏值|
 |[series_fill_forward()](series-fill-forwardfunction.md)|對數列中的遺漏值執行向前填滿插補|
 |[series_fill_linear()](series-fill-linearfunction.md)|執行數列中遺漏值的線性插補|
 
-* 注意：插補函式預設會假設 `null` 為遺漏值。 因此， `default=` *double* `null` `make-series` 如果您想要使用數列的插補函式，建議您在中指定 double （）。 
+* 注意：插補函式預設會假設 `null` 為遺漏值。 因此 `default=` *double* `null` `make-series` ，如果您想要使用數列的插補函式，請在中指定 double （）。 
 
 ## <a name="example"></a>範例
   
- 一份資料表，顯示每個供應商依時間戳記與指定範圍排序之每個水果的數位和平均價格陣列。 針對水果和供應商的每個相異組合，輸出中會有一個資料列。 [輸出] 資料行會顯示水果、供應商和下列各項的陣列：計數、平均和整段時間（2016-01-01 到2016-01-10）。 所有陣列都會依各自的時間戳記排序，而所有的間隙都會填入預設值（在此範例中為0）。 其他所有輸入資料行則會遭到忽略。
+ 一份資料表，顯示每個供應商依時間戳記與指定範圍排序之每個水果的數位和平均價格陣列。 針對水果和供應商的每個相異組合，輸出中會有一個資料列。 [輸出] 資料行會顯示 [計數]、[平均] 和 [整個時間軸] 的 [水果]、[供應商] 和 [陣列（從2016-01-01 到2016-01-10）]。 所有陣列都會依各自的時間戳記排序，而所有的間隙都會填入預設值（在此範例中為0）。 其他所有輸入資料行則會遭到忽略。
   
 ```kusto
 T | make-series PriceAvg=avg(Price) default=0
@@ -124,7 +124,7 @@ on Purchase from datetime(2016-09-10) to datetime(2016-09-13) step 1d by Supplie
 
 :::image type="content" source="images/make-seriesoperator/makeseries.png" alt-text="Makeseries":::  
 
- <!-- csl: https://help.kusto.windows.net:443/Samples --> 
+<!-- csl: https://help.kusto.windows.net:443/Samples --> 
 ```kusto
 let data=datatable(timestamp:datetime, metric: real)
 [
@@ -185,7 +185,7 @@ data
 | count 
 ```
 
-|計數|
+|Count|
 |---|
 |0|
 

@@ -1,5 +1,5 @@
 ---
-title: dcount_hll （）-Azure 資料總管 |Microsoft Docs
+title: dcount_hll （）-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 dcount_hll （）。
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: d4a76a30526f5fecbafafd735cf72de92aae7644
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 1b1b0c2313f32044a7988e0992c00786885ce2aa
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225185"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550294"
 ---
 # <a name="dcount_hll"></a>dcount_hll()
 

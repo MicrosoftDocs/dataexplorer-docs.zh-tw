@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6b649a06262153f80c4c35374e55a206be02c781
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 2e88ba9af0b9563274e15eff8d1c1f6e997fb45c
+ms.sourcegitcommit: e66c5f4b833b4f6269bb7bfa5695519fcb11d9fa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382279"
+ms.lasthandoff: 05/19/2020
+ms.locfileid: "83629995"
 ---
-# <a name="kustoingest---ingestion-permissions"></a>Kusto。內嵌-內嵌許可權
+# <a name="kustoingest---ingestion-permissions"></a>Kusto。內嵌-內嵌許可權 
 
 本文說明在您的服務上設定哪些許可權，以便進行內嵌 `Native` 作業。
 
-## <a name="prerequisites"></a>先決條件
-
+## <a name="prerequisites"></a>必要條件
+ 
 * 若要在 Kusto 服務和資料庫上查看及修改授權設定，請參閱[Kusto 控制命令](../../management/security-roles.md)。
 
 * 在下列範例中，用來做為範例主體的 Azure Active Directory （Azure AD）應用程式：
     * 測試 Azure AD App （2a904276-1234-5678-9012-66fc53add60b; microsoft.com）
     * Kusto 內部內嵌 Azure AD App （76263cdb-1234-5678-9012-545644e9c404; microsoft.com）
-
+ 
 ## <a name="ingestion-permission-mode-for-queued-ingestion"></a>已排入佇列的內嵌許可權模式
 
 內嵌許可權模式定義于[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)中。 此模式會限制 Azure 資料總管服務上的用戶端程式代碼相依性。 藉由將 Kusto 的內嵌訊息張貼至 Azure 佇列來完成內嵌作業。 佇列（也稱為「內嵌服務」）是從 Azure 資料總管服務取得。 內嵌用戶端會使用 Azure 資料總管服務所配置的資源來建立中繼儲存體成品。
 
 此圖概述已排入佇列的內嵌用戶端與 Kusto 的互動。
 
-:::image type="content" source="../images/queued-ingest.jpg" alt-text="已排入佇列-內嵌":::
+:::image type="content" source="../images/kusto-ingest-client-permissions/queued-ingest.png" alt-text="已排入佇列的內嵌":::
 
 ### <a name="permissions-on-the-engine-service"></a>引擎服務的許可權
 
@@ -55,3 +55,4 @@ ms.locfileid: "83382279"
 .add database DB1 ingestors ('aadapp=2a904276-1234-5678-9012-66fc53add60b;microsoft.com') 'Test Azure AD App'
 .add table T1 ingestors ('aadapp=2a904276-1234-5678-9012-66fc53add60b;microsoft.com') 'Test Azure AD App'
 ```
+ 

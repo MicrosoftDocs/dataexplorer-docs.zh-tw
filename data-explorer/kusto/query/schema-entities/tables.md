@@ -1,6 +1,6 @@
 ---
-title: 表 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的表。
+title: 資料表-Azure 資料總管
+description: 本文說明 Azure 資料總管中的資料表。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,52 +8,53 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: fd47a8f59c716148dfc5f89ac1d4c7aca45a8e9c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f51e05abac44b85ab328e7df5645eeab51d2a274
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509277"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550617"
 ---
 # <a name="tables"></a>資料表
 
-資料表是可保存資料的具名實體。 表具有一組有序的[列](./columns.md),以及零行或更多行的數據,每行都包含表的每個列的一個數據值。 表中行的順序未知,通常不會影響查詢,但某些表格運算符(如[頂部運算符](../topoperator.md))本質上是不確定的。
+資料表是可保存資料的具名實體。 資料表具有一組已排序的資料行，以及零或多個資料[列](./columns.md)。 每個資料列都會針對資料表的每個資料行保存一個資料值。 資料表中的資料列順序是未知的，而且一般不會影響查詢，除了原本無法確定的某些表格式運算子（例如[top 運算子](../topoperator.md)）。
 
-表佔用與[儲存函數](./stored-functions.md)相同的命名空間,因此,如果存儲的函數和表具有相同的名稱,則將選擇存儲的函數。
+資料表佔用與[預存函數](./stored-functions.md)相同的命名空間。
+如果預存函數和資料表都有相同的名稱，則會選擇儲存的函式。
 
 **注意事項**  
 
-* 表名稱區分大小寫。
-* 表名稱遵循[實體名稱](./entity-names.md)的規則。
-* 每個資料庫表的最大限制為 10,000。
+* 資料表名稱會區分大小寫。
+* 資料表名稱會遵循[機構名稱](./entity-names.md)的規則。
+* 每個資料庫的資料表上限為10000。
 
 
-有關如何創建和管理表的詳細資訊,請參閱[管理表](../../management/tables.md)
+如需如何建立和管理資料表的詳細資訊，請參閱[管理資料表](../../management/tables.md)
 
-## <a name="table-references"></a>表參考
+## <a name="table-references"></a>資料表參考
 
-引用表的最簡單方法是使用表的名稱。 這可以針對上下文中資料庫中的所有表執行此操作。 因此,例如,以下查詢對目前資料庫表的記錄`StormEvents`進行計數:
+參考資料表最簡單的方式是使用其名稱。 此參考可針對資料庫中所有位於內容中的資料表進行。 例如，下列查詢會計算目前資料庫資料表的記錄 `StormEvents` ：
 
 ```kusto
 StormEvents
 | count
 ```
 
-請注意,編寫上述查詢的等效方法是通過轉義表名稱:
+撰寫上述查詢的對等方式是藉由將資料表名稱進行轉義：
 
 ```kusto
 ["StormEvents"]
 | count
 ```
 
-表還可以通過顯式記錄它們位於的資料庫(或資料庫和群集)來引用,從而允許一個表編寫組合來自多個資料庫和群集的數據的查詢。 例如,只要調用方有權訪問目標資料庫,以下查詢將適用於上下文中的任何資料庫:
+資料表也可以藉由明確記出它們所在的資料庫（或資料庫和叢集）來參考。 接著，您可以撰寫結合多個資料庫和叢集之資料的查詢。 例如，只要呼叫者具有目標資料庫的存取權，下列查詢就會使用內容中的任何資料庫：
 
 ```kusto
 cluster("https://help.kusto.windows.net").database("Samples").StormEvents
 | count
 ```
 
-也可以使用[表() 特殊函數](../tablefunction.md)引用表,只要該函數的參數計算為常量。 例如：
+您也可以使用[table （）特殊函數](../tablefunction.md)來參考資料表，只要該函數的引數評估為常數即可。 例如：
 
 ```kusto
 let counter=(TableName:string) { table(TableName) | count };
