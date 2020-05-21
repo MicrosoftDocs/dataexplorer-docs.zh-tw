@@ -1,6 +1,6 @@
 ---
-title: 周日() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的周()日。
+title: dayofweek （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 dayofweek （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 31d3f525653f6e0979229e4355cdec6cb76833f8
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4e445a86b976f251de2beef4726c4840bcec8e44
+ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516298"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83722026"
 ---
 # <a name="dayofweek"></a>dayofweek()
 
-將自上一個星期日以來的整數天數傳回`timespan`為 。
+傳回從上個星期日算起的整數天數 `timespan` 。
 
 ```kusto
 dayofweek(datetime(2015-12-14)) == 1d  // Monday
@@ -38,6 +38,6 @@ dayofweek(datetime(2015-12-14)) == 1d  // Monday
 **範例**
 
 ```kusto
-dayofweek(1947-11-29 10:00:05)  // time(6.00:00:00), indicating Saturday
-dayofweek(1970-05-11)           // time(1.00:00:00), indicating Monday
+dayofweek(datetime(1947-11-30 10:00:05))  // time(0.00:00:00), indicating Sunday
+dayofweek(datetime(1970-05-11))           // time(1.00:00:00), indicating Monday
 ```

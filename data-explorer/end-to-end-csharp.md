@@ -1,41 +1,41 @@
 ---
-title: 以 C 將端到端 Blob 引入 Azure 資料資源管理員#
-description: 在本文中,您將瞭解如何使用使用 C# 的端到端範例將 Blob 引入 Azure 資料資源管理員。
+title: 透過 C 在 Azure 資料總管中內嵌的端對端 blob#
+description: '在本文中，您將瞭解如何使用使用 c # 的端對端範例，將 blob 內嵌至 Azure 資料總管。'
 author: lucygoldbergmicrosoft
 ms.author: lugoldbe
 ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 02/03/2020
-ms.openlocfilehash: 8df2202d3a127c58cee90353a628bf933ea30a10
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.date: 05/19/2020
+ms.openlocfilehash: 53504f51f1a5bd80967c510bd4bff1ba47cd8e58
+ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81499250"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83722162"
 ---
-# <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-c"></a>以 C 將端到端 Blob 引入 Azure 資料資源管理員#
+# <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-c"></a>透過 C 在 Azure 資料總管中內嵌的端對端 blob#
 
 > [!div class="op_single_selector"]
 > * [C#](end-to-end-csharp.md)
 > * [Python](end-to-end-python.md)
 >
 
-Azure 資料總管是一項快速又可調整的資料探索服務，可用於處理記錄和遙測資料。 本文提供了如何將數據從 Azure Blob 儲存引入到 Azure 資料資源管理員的端到端範例。 
+Azure 資料總管是一項快速又可調整的資料探索服務，可用於處理記錄和遙測資料。 本文提供如何將資料從 Azure Blob 儲存體內嵌至 Azure 資料總管的端對端範例。 
 
-您將學習如何以程式設計方式創建資源組、儲存帳戶和容器、事件中心以及 Azure 資料資源管理器群集和資料庫。 您還將瞭解如何以程式設計方式將 Azure 資料資源管理員配置為從新儲存帳戶中引入數據。
+您將瞭解如何以程式設計方式建立資源群組、儲存體帳戶和容器、事件中樞，以及 Azure 資料總管叢集和資料庫。 您也將瞭解如何以程式設計方式設定 Azure 資料總管，以從新的儲存體帳戶內嵌資料。
 
 ## <a name="prerequisites"></a>Prerequisites
 
 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
-## <a name="install-c-nuget"></a>安裝 C# NuGet
+## <a name="install-c-nuget"></a>安裝 c # NuGet
 
-* 安裝[Microsoft.Azure.管理.kusto](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
-* 安裝[Microsoft.Azure.管理.資源管理員](https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager)。
-* 安裝[微軟.Azure.管理.事件網格](https://www.nuget.org/packages/Microsoft.Azure.Management.EventGrid/)。
-* 安裝[微軟.Azure.儲存.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/)。
-* 安裝[Microsoft.Rest.用戶端執行時.Azure.](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime.Azure.Authentication)身份驗證。
+* 請安裝[kusto](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
+* 安裝[Microsoft. Azure 管理元件](https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager)。
+* 請安裝[EventGrid](https://www.nuget.org/packages/Microsoft.Azure.Management.EventGrid/)。
+* 安裝[Microsoft Azure 儲存體 Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/)。
+* 安裝[ClientRuntime](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime.Azure.Authentication)以進行驗證。
 
 [!INCLUDE [data-explorer-authentication](includes/data-explorer-authentication.md)]
 
@@ -43,9 +43,9 @@ Azure 資料總管是一項快速又可調整的資料探索服務，可用於�
 
 ## <a name="code-example"></a>程式碼範例 
 
-以下代碼示例為您提供了一個分步過程,該過程會導致數據引入 Azure 數據資源管理器。 
+下列程式碼範例會逐步解說如何使資料內嵌至 Azure 資料總管。 
 
-首先創建資源組。 您還可以創建 Azure 資源(如儲存帳戶和容器、事件中心、Azure 資料資源管理器群集和資料庫)以及添加主體。 然後,在 Azure 資料資源管理器資料庫中創建 Azure 事件網格訂閱以及表和列映射。 最後,創建數據連接以將 Azure 資料資源管理員配置為從新儲存帳戶中引入數據。 
+您必須先建立資源群組。 您也會建立 Azure 資源，例如儲存體帳戶和容器、事件中樞，以及 Azure 資料總管叢集和資料庫，以及新增主體。 接著，您會在 Azure 資料總管資料庫中建立 Azure 事件方格訂用帳戶，以及資料表和資料行對應。 最後，您會建立資料連線來設定 Azure 資料總管，以從新的儲存體帳戶內嵌資料。 
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -153,14 +153,14 @@ using (var kustoClient = KustoClientFactory.CreateCslAdminProvider(kustoConnecti
 
     kustoClient.ExecuteControlCommand(command);
 
-    command = CslCommandGenerator.GenerateTableCsvMappingCreateCommand(
+    command = CslCommandGenerator.GenerateTableMappingCreateCommand(
+        Data.Ingestion.IngestionMappingKind.Csv,
         kustoTableName,
         kustoColumnMappingName,
-        new[]
-        {
-            new CsvColumnMapping { ColumnName = "EventTime", CslDataType="dateTime", Ordinal = 0 },
-            new CsvColumnMapping { ColumnName = "EventId", CslDataType="int", Ordinal = 1 },
-            new CsvColumnMapping { ColumnName = "EventSummary", CslDataType="string", Ordinal = 2 },
+        new ColumnMapping[] {
+            new ColumnMapping() { ColumnName = "EventTime", ColumnType = "dateTime", Properties = new Dictionary<string, string>() { { MappingConsts.Ordinal, "0" } } },
+            new ColumnMapping() { ColumnName = "EventId", ColumnType = "int", Properties = new Dictionary<string, string>() { { MappingConsts.Ordinal, "1" } } },
+            new ColumnMapping() { ColumnName = "EventSummary", ColumnType = "string", Properties = new Dictionary<string, string>() { { MappingConsts.Ordinal, "2" } } },
         });
     kustoClient.ExecuteControlCommand(command);
 }
@@ -176,14 +176,14 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 ```
 | **設定** | **欄位描述** |
 |---|---|---|
-| tenantId | 您的租用戶識別碼。 它也稱為目錄 ID。|
-| subscriptionId | 用於資源創建的訂閱 ID。|
-| clientId | 可以訪問租戶中資源的應用程式的客戶端 ID。|
-| clientSecret | 可以訪問租戶中資源的應用程式的用戶端機密。 |
+| tenantId | 您的租用戶識別碼。 它也稱為目錄識別碼。|
+| subscriptionId | 您用來建立資源的訂用帳戶識別碼。|
+| clientId | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
+| clientSecret | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
 
-## <a name="test-the-code-example"></a>測試代碼範例
+## <a name="test-the-code-example"></a>測試程式碼範例
 
-1. 將檔上載到存儲帳戶。
+1. 將檔案上傳到儲存體帳戶。
 
     ```csharp
     string storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=xxxxxxxxxxxxxx;AccountKey=xxxxxxxxxxxxxx;EndpointSuffix=core.windows.net";
@@ -197,9 +197,9 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
     ```
     |**設定** | **欄位描述**|
     |---|---|---|
-    | 儲存連線字串 | 以程式設計方式建立的儲存帳戶的連接字串。|
+    | storageConnectionString | 以程式設計方式建立之儲存體帳戶的連接字串。|
 
-2. 在 Azure 數據資源管理器中運行測試查詢。
+2. 在 Azure 資料總管中執行測試查詢。
 
     ```csharp
     var kustoUri = $"https://{kustoClusterName}.{locationSmallCase}.kusto.windows.net";
@@ -226,7 +226,7 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 
 ## <a name="clean-up-resources"></a>清除資源
 
-要刪除資源群組並清除資源,請使用以下指令:
+若要刪除資源群組和清除資源，請使用下列命令：
 
 ```csharp
 await resourceManagementClient.ResourceGroups.DeleteAsync(resourceGroupName);
@@ -234,7 +234,7 @@ await resourceManagementClient.ResourceGroups.DeleteAsync(resourceGroupName);
 
 ## <a name="next-steps"></a>後續步驟
 
-*  要瞭解建立叢集與資料庫的其他方法,請參考[Azure 資料資源管理器叢集與資料庫](create-cluster-database-csharp.md)。
-* 要瞭解有關引入方法的更多,請參閱 Azure[資料資源管理員資料引入](ingest-data-overview.md)。
-* 要瞭解 Web 應用程式,請參閱[快速入門:Azure 資料資源管理員 Web UI 中的查詢資料](web-query-data.md)。
+*  若要深入瞭解建立叢集和資料庫的其他方式，請參閱[建立 Azure 資料總管叢集和資料庫](create-cluster-database-csharp.md)。
+* 若要深入瞭解內嵌方法，請參閱[Azure 資料總管資料](ingest-data-overview.md)內嵌。
+* 若要深入瞭解 web 應用程式，請參閱[快速入門：在 Azure 資料總管 WEB UI 中查詢資料](web-query-data.md)。
 * 使用 Kusto 查詢語言[撰寫查詢](write-queries.md)。

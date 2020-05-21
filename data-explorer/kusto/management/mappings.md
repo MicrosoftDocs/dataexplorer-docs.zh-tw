@@ -4,22 +4,22 @@ description: 本文說明 Azure 資料總管中的資料對應。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: ohbitton
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/30/2020
-ms.openlocfilehash: 2a3b402c04d5d1af85b2c2a042a23fbade7e2524
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.date: 05/19/2020
+ms.openlocfilehash: c4a64db6d1103aa2a004b816969ab73c7ba19943
+ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617641"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83722060"
 ---
 # <a name="data-mappings"></a>資料對應
 
 資料對應會在內嵌期間用來將傳入的資料對應到 Kusto 資料表內的資料行。
 
-Kusto 支援不同類型的對應，包括`row-oriented` （CSV、JSON 和 AVRO）和`column-oriented` （Parquet）。
+Kusto 支援不同類型的對應，包括 `row-oriented` （CSV、JSON 和 AVRO）和 `column-oriented` （Parquet）。
 
 對應清單中的每個元素都是由三個屬性所構成：
 
@@ -30,7 +30,7 @@ Kusto 支援不同類型的對應，包括`row-oriented` （CSV、JSON 和 AVRO�
 |`Properties`|選擇性屬性包，包含每個對應的特定屬性，如下一節中所述。
 
 
-所有對應都可以[預先建立](create-ingestion-mapping-command.md)，並可使用`ingestionMappingReference`參數從內嵌命令加以參考。
+所有對應都可以[預先建立](create-ingestion-mapping-command.md)，並可使用參數從內嵌命令加以參考 `ingestionMappingReference` 。
 
 ## <a name="csv-mapping"></a>CSV 對應
 
@@ -46,7 +46,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 |`constantValue`|選擇性要用於資料行的常數值，而不是 CSV 內的某個值|
 
 > [!NOTE]
-> `Ordinal`和`ConstantValue`是互斥的。
+> `Ordinal`和 `ConstantValue` 是互斥的。
 
 ### <a name="example-of-the-csv-mapping"></a>CSV 對應的範例
 
@@ -65,9 +65,9 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 ```
 
 > [!NOTE]
-> 當上述對應當做`.ingest`控制項命令的一部分提供時，它會序列化為 JSON 字串。
+> 當上述對應當做控制項命令的一部分提供時， `.ingest` 它會序列化為 JSON 字串。
 
-* [預先建立](create-ingestion-mapping-command.md)上述對應時，可以在`.ingest` control 命令中加以參考：
+* [預先建立](create-ingestion-mapping-command.md)上述對應時，可以在 control 命令中加以參考 `.ingest` ：
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -78,7 +78,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
     )
 ```
 
-* 當上述對應當做`.ingest`控制項命令的一部分提供時，它會序列化為 JSON 字串：
+* 當上述對應當做控制項命令的一部分提供時， `.ingest` 它會序列化為 JSON 字串：
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -93,7 +93,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
     )
 ```
 
-**注意：** 目前支援下列不含`Properties`屬性包的對應格式，但未來可能會被取代。
+**注意：** 下列不含屬性包的對應格式 `Properties` 已被取代。
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -116,7 +116,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 
 |屬性|描述|
 |----|--|
-|`path`|如果開頭為`$`：將成為 json 檔中之資料行內容的欄位的 json 路徑（表示整份檔的 json 路徑為`$`）。 如果值的開頭不是`$`：會使用常數值。|
+|`path`|如果開頭為 `$` ：將成為 json 檔中之資料行內容的欄位的 json 路徑（表示整份檔的 json 路徑為 `$` ）。 如果值的開頭不 `$` 是：會使用常數值。|
 |`transform`|選擇性應該套用在具有[對應轉換](#mapping-transformations)之內容上的轉換。|
 
 ### <a name="example-of-json-mapping"></a>JSON 對應的範例
@@ -138,7 +138,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 ```
 
 > [!NOTE]
-> 當上述對應當做`.ingest` control 命令的一部分提供時，它會序列化為 JSON 字串。
+> 當上述對應當做 control 命令的一部分提供時， `.ingest` 它會序列化為 JSON 字串。
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -149,7 +149,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
     )
 ```
 
-**注意：** 目前支援下列不含`Properties`屬性包的對應格式，但未來可能會被取代。
+**注意：** 下列不含屬性包的對應格式 `Properties` 已被取代。
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -173,13 +173,13 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 |屬性|描述|
 |----|--|
 |`Field`|Avro 記錄中的功能變數名稱。|
-|`Path`|使用`field`的替代方法，可讓您視需要取得 Avro 記錄欄位的內部部分。 值表示來自記錄根目錄的 JSON 路徑。 如需詳細資訊，請參閱下面的附注。 |
+|`Path`|使用的替代方法，可讓您視 `field` 需要取得 Avro 記錄欄位的內部部分。 值表示來自記錄根目錄的 JSON 路徑。 如需詳細資訊，請參閱下面的附注。 |
 |`transform`|選擇性應該使用[支援的轉換](#mapping-transformations)在內容上套用的轉換。|
 
 **注意事項**
 >[!NOTE]
-> * `field`和`path`無法一起使用，只允許一個。 
-> * `path`無法指向根`$` ，它必須至少有一個路徑層級。
+> * `field`和 `path` 無法一起使用，只允許一個。 
+> * `path`無法指向根 `$` ，它必須至少有一個路徑層級。
 
 以下兩個替代方案相同：
 
@@ -211,7 +211,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 ``` 
 
 > [!NOTE]
-> 當上述對應當做`.ingest` control 命令的一部分提供時，它會序列化為 JSON 字串。
+> 當上述對應當做 control 命令的一部分提供時， `.ingest` 它會序列化為 JSON 字串。
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -222,7 +222,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
     )
 ```
 
-**注意：** 目前支援下列不含`Properties`屬性包的對應格式，但未來可能會被取代。
+**注意：** 下列不含屬性包的對應格式 `Properties` 已被取代。
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -245,7 +245,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 
 |屬性|描述|
 |----|--|
-|`path`|如果開頭為`$`：將成為 Parquet 檔中之資料行內容的欄位的 json 路徑（表示整份檔的 json 路徑為`$`）。 如果值的開頭不是`$`：會使用常數值。|
+|`path`|如果開頭為 `$` ：將成為 Parquet 檔中之資料行內容的欄位的 json 路徑（表示整份檔的 json 路徑為 `$` ）。 如果值的開頭不 `$` 是：會使用常數值。|
 |`transform`|選擇性應套用至內容的[對應轉換](#mapping-transformations)。
 
 
@@ -266,9 +266,9 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 ```      
 
 > [!NOTE]
-> 當上述對應當做`.ingest`控制項命令的一部分提供時，它會序列化為 JSON 字串。
+> 當上述對應當做控制項命令的一部分提供時， `.ingest` 它會序列化為 JSON 字串。
 
-* [預先建立](create-ingestion-mapping-command.md)上述對應時，可以在`.ingest` control 命令中加以參考：
+* [預先建立](create-ingestion-mapping-command.md)上述對應時，可以在 control 命令中加以參考 `.ingest` ：
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -279,7 +279,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
     )
 ```
 
-* 當上述對應當做`.ingest`控制項命令的一部分提供時，它會序列化為 JSON 字串：
+* 當上述對應當做控制項命令的一部分提供時， `.ingest` 它會序列化為 JSON 字串：
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -302,7 +302,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 
 |屬性|描述|
 |----|--|
-|`path`|如果開頭為`$`：將成為 Orc 檔中之資料行內容的欄位的 json 路徑（表示整份檔的 json 路徑為`$`）。 如果值的開頭不是`$`：會使用常數值。|
+|`path`|如果開頭為 `$` ：將成為 Orc 檔中之資料行內容的欄位的 json 路徑（表示整份檔的 json 路徑為 `$` ）。 如果值的開頭不 `$` 是：會使用常數值。|
 |`transform`|選擇性應套用至內容的[對應轉換](#mapping-transformations)。
 
 ### <a name="example-of-orc-mapping"></a>Orc 對應的範例
@@ -322,7 +322,7 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 ```      
 
 > [!NOTE]
-> 當上述對應當做`.ingest`控制項命令的一部分提供時，它會序列化為 JSON 字串。
+> 當上述對應當做控制項命令的一部分提供時， `.ingest` 它會序列化為 JSON 字串。
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -341,10 +341,10 @@ CSV 對應可以套用至所有以分隔符號分隔的格式： CSV、TSV、PSV
 
 部分資料格式對應（Parquet、JSON 和 Avro）支援簡單且有用的內嵌時間轉換。 案例在內嵌時需要更複雜的處理，請使用[更新原則](update-policy.md)，這可讓您使用 KQL 運算式來定義輕量處理。
 
-|路徑相依的轉換|描述|條件|
+|路徑相依的轉換|Description|條件|
 |--|--|--|
-|`PropertyBagArrayToDictionary`|將屬性的 JSON 陣列（例如 {events： [{"n1"： "v1"}，{"n2"： "v2"}]}）轉換成字典，並將其序列化為有效的 JSON 檔（例如 {"n1"： "v1"，"n2"： "v2"}）。|只有在使用時`path`才可以套用|
-|`GetPathElement(index)`|根據指定的索引，從指定的路徑中解壓縮專案（例如，Path： $. b. .c，GetPathElement （0） = = "c"，GetPathElement （-1） = = "b"，類型 string|只有在使用時`path`才可以套用|
+|`PropertyBagArrayToDictionary`|將屬性的 JSON 陣列（例如 {events： [{"n1"： "v1"}，{"n2"： "v2"}]}）轉換成字典，並將其序列化為有效的 JSON 檔（例如 {"n1"： "v1"，"n2"： "v2"}）。|只有在使用時才可以套用 `path`|
+|`GetPathElement(index)`|根據指定的索引，從指定的路徑中解壓縮專案（例如，Path： $. b. .c，GetPathElement （0） = = "c"，GetPathElement （-1） = = "b"，類型 string|只有在使用時才可以套用 `path`|
 |`SourceLocation`|提供資料的儲存體成品名稱，類型字串（例如，blob 的 "BaseUri" 欄位）。|
 |`SourceLineNumber`|相對於該儲存體成品的位移，輸入 long （從 ' 1 ' 開始，並根據新的記錄遞增）。|
 |`DateTimeFromUnixSeconds`|將代表 unix 時間（從1970-01-01 起的秒數）的數位轉換為 UTC 日期時間字串|

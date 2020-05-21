@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的 Kusto 內嵌程式碼範例�
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: ohbitton
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 08/15/2019
-ms.openlocfilehash: 7d0dd4ae1482d41e213a3f25cd05121b1c45d9c9
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.date: 05/19/2019
+ms.openlocfilehash: 73c2a01d3b71a541e8d3152f190732c394f5c435
+ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382296"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83722111"
 ---
 # <a name="kustoingest-ingestion-code-examples"></a>Kusto 內嵌內嵌程式碼範例
 
@@ -106,10 +106,10 @@ client.IngestFromStorageAsync(@"InvalidTestFile.csv", kustoIngestionProperties);
 Thread.Sleep(TimeSpan.FromMinutes(8));
 
 // Retrieve and validate failures
-var ingestionFailures = client.PeekTopIngestionFailures().GetAwaiter().GetResult();
+var ingestionFailures = client.PeekTopIngestionFailuresAsync().GetAwaiter().GetResult();
 Ensure.IsTrue((ingestionFailures.Count() > 0), "Failures expected");
 // Retrieve, delete and validate failures
-ingestionFailures = client.GetAndDiscardTopIngestionFailures().GetAwaiter().GetResult();
+ingestionFailures = client.GetAndDiscardTopIngestionFailuresAsync().GetAwaiter().GetResult();
 Ensure.IsTrue((ingestionFailures.Count() > 0), "Failures expected");
 
 // Dispose of the client

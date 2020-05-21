@@ -4,27 +4,26 @@ description: 本文說明 Kusto 在 Azure 資料總管中內嵌用戶端介面�
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: ohbitton
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/24/2020
-ms.openlocfilehash: d2e42ce3de656a3e137245786596e454c36ccbef
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.date: 05/19/2020
+ms.openlocfilehash: 3a89af281b2376e7fc06d07643af8e95a6c97cd2
+ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373616"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83722094"
 ---
-# <a name="kustoingest-client-interfaces-and-factory-classes"></a>Kusto。內嵌用戶端介面和 factory 類別
+# <a name="kustoingest-client-interfaces-and-classes"></a>Kusto。內嵌用戶端介面和類別
 
-Kusto 程式庫中的主要介面和 factory 類別為：
+Kusto 程式庫中的主要介面和類別為：
 
 * [介面 IKustoIngestClient](#interface-ikustoingestclient)：主要內嵌介面。
 * [類別 ExtendedKustoIngestClient](#class-extendedkustoingestclient)：主要內嵌介面的延伸模組。
 * [類別 KustoIngestFactory](#class-kustoingestfactory)：內嵌用戶端的主 factory。
 * [類別 KustoIngestionProperties](#class-kustoingestionproperties)：用來提供一般內嵌屬性的類別。
-* [Class JsonColumnMapping](#class-jsoncolumnmapping)：用來描述從 JSON 資料來源內嵌時要套用之架構對應的類別。
-* [Class CsvColumnMapping](#class-csvcolumnmapping)：用來描述從 CSV 資料來源內嵌時要套用之架構對應的類別。
+* 類別 IngestionMapping：用來描述內嵌之資料對應的類別。
 * [Enum DataSourceFormat](#enum-datasourceformat)：支援的資料來源格式（例如，CSV、JSON）
 * [介面 IKustoQueuedIngestClient](#interface-ikustoqueuedingestclient)：描述僅適用于佇列內嵌之作業的介面。
 * [類別 KustoQueuedIngestionProperties](#class-kustoqueuedingestionproperties)：僅適用于佇列內嵌的屬性。
@@ -352,13 +351,11 @@ KustoIngestionProperties 類別包含基本的內嵌屬性，可讓您精確控�
 |TableName |要內嵌到其中的資料表名稱 |
 |DropByTags |每個範圍都有的標記。 DropByTags 是永久性的，而且可以用如下： `.show table T extents where tags has 'some tag'` 或`.drop extents <| .show table T extents where tags has 'some tag'` |
 |IngestByTags |每個範圍所寫入的標記。 稍後可以與屬性搭配使用 `IngestIfNotExists` ，以避免內嵌相同的資料兩次 |
+|IngestionMapping|保存現有對應或資料行對應清單的參考|
 |AdditionalTags |視需要額外標記 |
 |IngestIfNotExists |不想再內嵌的標記清單（每個資料表） |
-|CSVMapping |會針對每個資料行定義資料類型和序數資料行編號。 僅適用于 CSV 內嵌（選擇性） |
-|JsonMapping |針對每個資料行定義 JSON 路徑和轉換選項。 **JSON 內嵌的必要** |
-|AvroMapping |針對每個資料行，定義 Avro 記錄中的功能變數名稱。 **AVRO 內嵌的必要** |
 |ValidationPolicy |資料驗證定義。 如需詳細資訊，請參閱 [TODO] |
-|[格式] |要內嵌之資料的格式 |
+|格式 |要內嵌之資料的格式 |
 |AdditionalProperties | 其他會當做內嵌[屬性](../../../ingestion-properties.md)傳遞至內嵌命令的屬性。 將會傳遞屬性，因為並非所有的內嵌屬性都會在此類別的個別成員中表示|
 
 ```csharp
@@ -370,51 +367,13 @@ public class KustoIngestionProperties
     public IEnumerable<string> IngestByTags { get; set; }
     public IEnumerable<string> AdditionalTags { get; set; }
     public IEnumerable<string> IngestIfNotExists { get; set; }
-    public IEnumerable<CsvColumnMapping> CSVMapping { get; set; }
-    public IEnumerable<JsonColumnMapping> JsonMapping { get; set; } // Must be set for DataSourceFormat.json format
-    public IEnumerable<AvroColumnMapping> AvroMapping { get; set; } // Must be set for DataSourceFormat.avro format
+    public IngestionMapping IngestionMapping { get; set; }
     public ValidationPolicy ValidationPolicy { get; set; }
     public DataSourceFormat? Format { get; set; }
     public bool IgnoreSizeLimit { get; set; } // Determines whether the limit of 4GB per single ingestion source should be ignored. Defaults to false.
     public IDictionary<string, string> AdditionalProperties { get; set; }
 
     public KustoIngestionProperties(string databaseName, string tableName);
-}
-```
-
-## <a name="class-jsoncolumnmapping"></a>類別 JsonColumnMapping
-
-```csharp
-public class JsonColumnMapping
-{
-    /// The column name (in the Kusto table)
-    public string ColumnName { get; set; }
-
-    /// The JsonPath to the desired property in the JSON document
-    public string JsonPath { get; set; }
-}
-```
-
-## <a name="class-csvcolumnmapping"></a>類別 CsvColumnMapping
-
-```csharp
-public class CsvColumnMapping
-{
-    /// The column name (in the Kusto table)
-    public string ColumnName { get; set; }
-
-    /// The column's data type in the table (CSL term), if empty, the current column data type will be used.
-    /// If column doesn't exist, a new one will be created (alter table) with this data type, if empty, StorageDataType.StringBuffer will be used.
-    public string CslDataType { get; set; }
-
-    /// The CSV column dataType (not in use for now)
-    public string CsvColumnDataType { get; set; }
-
-    /// CSV ordinal number
-    public int Ordinal { get; set; }
-
-    /// This column has a const value (the Ordinal field is ignored, if this value is not null or empty)
-    public string ConstValue { get; set; }
 }
 ```
 
@@ -428,11 +387,13 @@ public enum DataSourceFormat
     scsv,       // Data is in a SCSV(-semicolon-separated values) format
     sohsv,      // Data is in a SOHSV(-SOH (ASCII 1) separated values) format
     psv,        // Data is in a PSV (pipe-separated values) format
+    tsve,       // Tab-separated value with '\' escaping character.
     txt,        // Each record is a line and has just one field
     raw,        // The entire stream/file/blob is a single record having a single field
     json,       // Data is in a JSON-line format (each line is record with a single JSON value)
     multijson,  // The data stream is a concatenation of JSON documents (property bags all)
     avro,       // Data is in a AVRO format
+    orc,        // Data is in a ORC format
     parquet,    // Data is in a Parquet format
 }
 ```
@@ -448,9 +409,15 @@ var kustoIngestionProperties = new KustoIngestionProperties("TargetDatabase", "T
     IngestByTags = new List<string> { guid },
     AdditionalTags = new List<string> { "some tags" },
     IngestIfNotExists = new List<string> { guid },
-    CSVMapping = new List<CsvColumnMapping> { new CsvColumnMapping { ColumnName = "columnA", CslDataType = "Dynamic", Ordinal = 1 } },
-    JsonMapping = new List<JsonColumnMapping> { new JsonColumnMapping { ColumnName = "columnA" , JsonPath = "$.path" } }, // You can only one of CSV/JSON/AVRO mappings
-    AvroMapping = new List<AvroColumnMapping> { new AvroColumnMapping { ColumnName = "columnA" , FieldName = "AvroFieldName" } }, // You can only one of CSV/JSON/AVRO mappings
+    IngestionMapping = new IngestionMapping() {
+        IngestionMappingKind = Data.Ingestion.IngestionMappingKind.Csv,
+        IngestionMappings = new ColumnMapping[] { new ColumnMapping() {
+            ColumnName = "stringColumn",
+            Properties = new Dictionary<string, string>() {
+            { MappingConsts.Ordinal, "1"} }
+        } },
+        // IngestionMappingReference = mappingName, the pre-created mapping name
+    },
     ValidationPolicy = new ValidationPolicy { ValidationImplications = ValidationImplications.Fail, ValidationOptions = ValidationOptions.ValidateCsvInputConstantColumns },
     Format = DataSourceFormat.csv
 };
@@ -521,6 +488,12 @@ public class KustoQueuedIngestionProperties : KustoIngestionProperties
     /// </summary>
     public IngestionReportLevel ReportLevel { get; set; }
 
+    /// <summary>
+    /// Controls the target of the ingestion status reporting. Available options are Azure Queue, Azure Table, or both.
+    /// Defaults to 'Queue'.
+    /// </summary>
+    public IngestionReportMethod ReportMethod { get; set; }
+    
     /// <summary>
     /// Controls the target of the ingestion status reporting. Available options are Azure Queue, Azure Table, or both.
     /// Defaults to 'Queue'.

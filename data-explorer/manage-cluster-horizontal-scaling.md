@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 12/09/2019
-ms.openlocfilehash: 18bd73797070ba569d1a43a8c66ab92526682f36
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 874c667e210996a838573df7ad982cadc1bb3360
+ms.sourcegitcommit: 4cc56775f0ff1c71c062dd69746db9962c122b78
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82619154"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83757147"
 ---
 # <a name="manage-cluster-horizontal-scaling-scale-out-in-azure-data-explorer-to-accommodate-changing-demand"></a>在 Azure 資料總管中管理叢集水準調整（向外延展）以配合變更需求
 
@@ -37,7 +37,7 @@ ms.locfileid: "82619154"
 
    ![手動調整方法](media/manage-cluster-horizontal-scaling/manual-scale-method.png)
 
-### <a name="optimized-autoscale-preview"></a>優化自動調整（預覽）
+### <a name="optimized-autoscale"></a>優化自動調整
 
 最佳自動調整是建議的自動調整方法。 這個方法可優化叢集效能和成本。 如果叢集接近使用率的狀態，則會進行相應縮小。 此動作會降低成本，但會保留效能層級。 如果叢集接近使用率的狀態，就會相應放大以維持最佳效能。 若要設定優化自動調整：
 
@@ -45,7 +45,7 @@ ms.locfileid: "82619154"
 
 1. 選取 [最小實例計數] 和 [最大實例計數]。 叢集會根據負載，自動調整這兩個數字之間的範圍。
 
-1. 選取 [儲存]  。
+1. 選取 [儲存]。
 
    ![優化自動調整方法](media/manage-cluster-horizontal-scaling/optimized-autoscale-method.png)
 
@@ -92,7 +92,7 @@ ms.locfileid: "82619154"
 
 4. 在右側的 [**調整規則**] 區段中，輸入每個設定的值。
 
-    **指標**
+    **準則**
 
     | 設定 | 描述和值 |
     | --- | --- |
@@ -113,18 +113,18 @@ ms.locfileid: "82619154"
     | **冷卻時間（分鐘）** | 選擇調整大小作業間適當的時間間隔。 請從預設的五分鐘開始。 |
     |  |  |
 
-5. 選取 [新增]  。
+5. 選取 [新增]。
 
 6. 在左側的 [**實例限制**] 區段中，輸入每個設定的值。
 
     | 設定 | 描述和值 |
     | --- | --- |
-    | **最小值** | 執行個體數；無論使用率為何，您的叢集都不會調整到低於此數值。 |
-    | **高** | 執行個體數；無論使用率為何，您的叢集都不會調整到高於此數值。 |
+    | **最低需求** | 執行個體數；無論使用率為何，您的叢集都不會調整到低於此數值。 |
+    | **最大值** | 執行個體數；無論使用率為何，您的叢集都不會調整到高於此數值。 |
     | **預設** | 實例的預設數目。 如果在讀取資源計量時發生問題，則會使用此設定。 |
     |  |  |
 
-7. 選取 [儲存]  。
+7. 選取 [儲存]。
 
 您現在已設定 Azure 資料總管叢集的水準調整。 新增另一個用於垂直調整的規則。 如果您需要叢集調整問題的協助，請在 Azure 入口網站中[開啟支援要求](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)。
 
