@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: 5f424716a9227f22b4ec5b148d29798b0a55fa27
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 16db3eb2d925d12ba8eefa605b27566e9b4c1b04
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618372"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373809"
 ---
 # <a name="what-is-one-click-ingestion"></a>什麼是單鍵擷取？ 
 
@@ -26,7 +26,7 @@ ms.locfileid: "82618372"
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 建立 [Azure 資料總管叢集與資料庫](create-cluster-database-portal.md)。
-* 登入 [Azure 資料總管 Web UI](https://dataexplorer.azure.com/) 並[將連線新增至您的叢集](/azure/data-explorer/web-query-data#add-clusters)。
+* 登入 [Azure 資料總管 Web UI](https://dataexplorer.azure.com/) 並[將連線新增至您的叢集](web-query-data.md#add-clusters)。
 
 ## <a name="file-formats"></a>檔案格式
 
@@ -74,5 +74,5 @@ ms.locfileid: "82618372"
 ## <a name="next-steps"></a>後續步驟
 
 * 決定您是否要使用單鍵擷取，將資料內嵌至[現有資料表](one-click-ingestion-existing-table.md)或[新的資料表](one-click-ingestion-new-table.md)
-* [在 Azure 資料總管 Web UI 中查詢資料](/azure/data-explorer/web-query-data)
-* [使用 Kusto 查詢語言撰寫 Azure 資料總管的查詢](/azure/data-explorer/write-queries)
+* [在 Azure 資料總管 Web UI 中查詢資料](web-query-data.md)
+* [使用 Kusto 查詢語言撰寫 Azure 資料總管的查詢](write-queries.md)

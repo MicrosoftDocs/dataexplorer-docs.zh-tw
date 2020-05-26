@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: kerend
 ms.service: data-explorer
 ms.topic: tutorial
-ms.date: 01/29/2020
-ms.openlocfilehash: 59a42c2a3e4efa8c8642bccf96b0040767753e65
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.date: 05/19/2020
+ms.openlocfilehash: 0808d0dadd410ae6d220b03ef54191192b925a21
+ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108332"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83722179"
 ---
 # <a name="tutorial-ingest-and-query-monitoring-data-in-azure-data-explorer"></a>教學課程：在 Azure 資料總管中擷取和查詢監視資料 
 
@@ -196,7 +196,7 @@ Azure 活動記錄為訂用帳戶層級的記錄，可針對在訂用帳戶中�
 
 ## <a name="set-up-an-ingestion-pipeline-in-azure-data-explorer"></a>在 Azure 資料總管中設定擷取管線
 
-設定 Azure 資料總管管線時須執行數個步驟，例如[資料表建立和資料擷取](/azure/data-explorer/ingest-sample-data#ingest-data)。 您也可以操作、對應和更新資料。
+設定 Azure 資料總管管線時須執行數個步驟，例如[資料表建立和資料擷取](ingest-sample-data.md#ingest-data)。 您也可以操作、對應和更新資料。
 
 ### <a name="connect-to-the-azure-data-explorer-web-ui"></a>連線至 Azure 資料總管 Web UI
 
@@ -290,7 +290,7 @@ Azure 監視器記錄的結構不是表格式的。 您將操作資料，並將�
 若要將診斷計量和記錄資料對應至資料表，請使用下列查詢：
 
 ```kusto
-.create table DiagnosticRawRecords ingestion json mapping 'DiagnosticRawRecordsMapping' '[{"column":"Records","path":"$.records"}]'
+.create table DiagnosticRawRecords ingestion json mapping 'DiagnosticRawRecordsMapping' '[{"column":"Records","Properties":{"path":"$.records"}}]'
 ```
 
 # <a name="activity-logs"></a>[活動記錄](#tab/activity-logs)
@@ -299,7 +299,7 @@ Azure 監視器記錄的結構不是表格式的。 您將操作資料，並將�
 若要將活動記錄資料對應至資料表，請使用下列查詢：
 
 ```kusto
-.create table ActivityLogsRawRecords ingestion json mapping 'ActivityLogsRawRecordsMapping' '[{"column":"Records","path":"$.records"}]'
+.create table ActivityLogsRawRecords ingestion json mapping 'ActivityLogsRawRecordsMapping' '[{"column":"Records","Properties":{"path":"$.records"}}]'
 ```
 ---
 
@@ -336,7 +336,7 @@ Azure 監視器記錄的結構不是表格式的。 您將操作資料，並將�
 # <a name="diagnostic-logs"></a>[診斷記錄](#tab/diagnostic-logs)
 #### <a name="create-data-update-policy-for-diagnostics-logs"></a>建立診斷記錄的資料更新原則
 
-1. 建立可展開診斷記錄之記錄集合的[函式](kusto/management/functions.md)，讓集合中的每個值能夠取得不同的資料列。 您將在 Azure 資料總管叢集上啟用擷取記錄，並使用[擷取記錄結構描述](/azure/data-explorer/using-diagnostic-logs#diagnostic-logs-schema)。 您將建立一個用於成功和失敗擷取的資料表，而某些欄位將是空的，以供成功的擷取使用 (例如 ErrorCode)。 使用 [`mv-expand`](kusto/query/mvexpandoperator.md) 運算子：
+1. 建立可展開診斷記錄之記錄集合的[函式](kusto/management/functions.md)，讓集合中的每個值能夠取得不同的資料列。 您將在 Azure 資料總管叢集上啟用擷取記錄，並使用[擷取記錄結構描述](using-diagnostic-logs.md#diagnostic-logs-schema)。 您將建立一個用於成功和失敗擷取的資料表，而某些欄位將是空的，以供成功的擷取使用 (例如 ErrorCode)。 使用 [`mv-expand`](kusto/query/mvexpandoperator.md) 運算子：
 
     ```kusto
     .create function DiagnosticLogsExpand() {

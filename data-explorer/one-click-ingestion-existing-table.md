@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: bd919c43c847ed6e0078752e0b6a0b88edbf68f3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a26e48520f5cc577a52f877da16996df0d03d2b8
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492293"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374368"
 ---
 # <a name="use-one-click-ingestion-to-ingest-data-to-an-existing-table-in-azure-data-explorer"></a>使用單鍵擷取將資料內嵌到 Azure 資料總管中的現有資料表
 
@@ -97,5 +97,5 @@ ms.locfileid: "81492293"
 
 ## <a name="next-steps"></a>後續步驟
 
-* [在 Azure 資料總管 Web UI 中查詢資料](/azure/data-explorer/web-query-data)
-* [使用 Kusto 查詢語言撰寫 Azure 資料總管的查詢](/azure/data-explorer/write-queries)
+* [在 Azure 資料總管 Web UI 中查詢資料](web-query-data.md)
+* [使用 Kusto 查詢語言撰寫 Azure 資料總管的查詢](write-queries.md)

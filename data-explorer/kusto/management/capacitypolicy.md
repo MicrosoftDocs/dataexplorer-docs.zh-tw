@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 0ecdee4171cb6deaa4cc6c233b8951c4eb54953c
-ms.sourcegitcommit: 9810acae3f1c83b8efe7b952d3bada2ff496b024
+ms.openlocfilehash: 4a2b18f28840291fc02002239297b45f38be00be
+ms.sourcegitcommit: 4e46b497d518884693a142f4ae21ea497db81861
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83444693"
+ms.lasthandoff: 05/25/2020
+ms.locfileid: "83824912"
 ---
 # <a name="capacity-policy"></a>產能原則
 
@@ -31,7 +31,7 @@ ms.locfileid: "83444693"
 
 ## <a name="ingestion-capacity"></a>內嵌容量
 
-|屬性                           |類型    |說明                                                                                                                                                                               |
+|屬性                           |類型    |描述                                                                                                                                                                               |
 |-----------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |ClusterMaximumConcurrentOperations |long    |叢集中並行內嵌作業數目的最大值                                                                                                            |
 |CoreUtilizationCoefficient         |double  |計算內嵌容量時所用核心百分比的係數（計算的結果一律會正規化 `ClusterMaximumConcurrentOperations` ） |                                                                                                                             |
@@ -45,7 +45,7 @@ ms.locfileid: "83444693"
 
 ## <a name="extents-merge-capacity"></a>範圍合併容量
 
-|屬性                           |類型    |說明                                                                                    |
+|屬性                           |類型    |描述                                                                                    |
 |-----------------------------------|--------|-----------------------------------------------------------------------------------------------|
 |MaximumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最大值 |
 
@@ -59,7 +59,7 @@ ms.locfileid: "83444693"
 
 ## <a name="extents-purge-rebuild-capacity"></a>範圍清除重建容量
 
-|屬性                           |類型    |說明                                                                                                                           |
+|屬性                           |類型    |描述                                                                                                                           |
 |-----------------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------|
 |MaximumConcurrentOperationsPerNode |long    |單一節點上的清除作業並行重建範圍數目的最大值 |
 
@@ -72,7 +72,7 @@ ms.locfileid: "83444693"
 
 ## <a name="export-capacity"></a>匯出容量
 
-|屬性                           |類型    |說明                                                                                                                                                                            |
+|屬性                           |類型    |描述                                                                                                                                                                            |
 |-----------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |ClusterMaximumConcurrentOperations |long    |叢集中並行匯出作業數目的最大值。                                                                                                           |
 |CoreUtilizationCoefficient         |double  |計算匯出容量時所用核心百分比的係數。 計算的結果一律會以正規化 `ClusterMaximumConcurrentOperations` 。 |
@@ -86,7 +86,7 @@ ms.locfileid: "83444693"
 
 ## <a name="extents-partition-capacity"></a>範圍分割區容量
 
-|屬性                           |類型    |說明                                                                             |
+|屬性                           |類型    |描述                                                                             |
 |-----------------------------------|--------|----------------------------------------------------------------------------------------|
 |ClusterMaximumConcurrentOperations |long    |叢集中並行範圍分割作業數目的最大值。 |
 
@@ -121,7 +121,7 @@ ms.locfileid: "83444693"
 ## <a name="control-commands"></a>控制命令
 
 > [!WARNING]
-> 由於可能會對叢集的可用資源造成影響，因此很少會建議您改變容量原則。
+> 在改變容量原則之前，請洽詢 Azure 資料總管小組。
 
 * 使用[。顯示叢集原則容量](capacity-policy.md#show-cluster-policy-capacity)，以顯示叢集目前的容量原則。
 
