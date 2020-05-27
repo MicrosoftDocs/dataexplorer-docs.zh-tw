@@ -220,8 +220,6 @@
               href: language-extensions.md
         - name: 資料庫
           items:
-            - name: 追蹤者資料庫
-              href: follower.md
             - name: 管理資料庫權限
               href: manage-database-permissions.md
             - name: 新增資料庫主體
@@ -254,6 +252,12 @@
           href: using-metrics.md
         - name: 使用資源健康情況來監視叢集健康情況
           href: monitor-with-resource-health.md
+    - name: 共用資料
+      items:
+        - name: 使用 Azure Data Share
+          href: data-share.md
+        - name: 追蹤者資料庫
+          href: follower.md
     - name: 與其他工具整合
       items:
         - name: Azure Data Factory
@@ -1248,11 +1252,11 @@
                   href: ./kusto/management/show-table-schema-command.md
             - name: 外部資料表
               items:
-                - name: 外部資料表控制項命令
+                - name: 外部資料表一般控制項命令
                   href: ./kusto/management/externaltables.md
-                - name: 外部 SQL 資料表
+                - name: 建立和改變外部 SQL 資料表
                   href: ./kusto/management/external-sql-tables.md
-                - name: Azure 儲存體或 Azure Data Lake 中的外部資料表
+                - name: 建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
                   href: ./kusto/management/external-tables-azurestorage-azuredatalake.md
             - name: 資料行
               items:
@@ -1561,9 +1565,12 @@
         - name: 特定查詢
           items:
             - name: Kusto.Explorer
-              href: ./kusto/tools/kusto-explorer.md
               items:
-                - name: Kusto Explorer 選項
+                - name: Kusto. Explorer 安裝和使用者介面
+                  href: ./kusto/tools/kusto-explorer.md
+                - name: 使用 Kusto.Explorer
+                  href: ./kusto/tools/kusto-explorer-using.md
+                - name: Kusto.Explorer 選項
                   href: ./kusto/tools/kusto-explorer-options.md
                 - name: 鍵盤快速鍵
                   href: ./kusto/tools/kusto-explorer-shortcuts.md
@@ -1573,6 +1580,8 @@
                   href: ./kusto/tools/kusto-explorer-codenav.md
                 - name: 程式碼分析器
                   href: ./kusto/tools/kusto-explorer-code-analyzer.md
+                - name: 針對 Kusto 進行疑難排解
+                  href: ./kusto/tools/kusto-explorer-troubleshooting.md
             - name: Web UI
               href: ./web-query-data.md
             - name: Kusto.Cli
