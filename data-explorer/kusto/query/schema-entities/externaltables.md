@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: 7f74732ed38d0b41a857fc549f549ce54ad4dce6
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: a3d95d3cb90b6a834b1f1538aa28da1f1ac2a97f
+ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863705"
+ms.locfileid: "83867047"
 ---
 # <a name="external-tables"></a>外部資料表
 
@@ -21,7 +21,7 @@ ms.locfileid: "83863705"
 
 與[資料表](tables.md)類似，外部資料表具有妥善定義的架構（資料行名稱和資料類型配對的排序清單）。 不同于資料表，資料會儲存在 Kusto 叢集外部並加以管理。 最常見的資料是以某種標準格式（例如 CSV、Parquet、Avro）儲存，而不是由 Kusto 內嵌。
 
-**外部資料表**只會建立一次（請參閱[外部資料表一般控制命令](../../management/externaltables.md)、[建立和變更外部 SQL 資料表](../../management/external-sql-tables.md)，以及[建立和變更儲存體中的資料表](../../management/external-tables-azurestorage-azuredatalake.md)），並可使用[external_table （）](../../query/externaltablefunction.md)函數來參考其名稱。 
+**外部資料表**只會建立一次（請參閱[外部資料表一般控制命令](../../management/externaltables.md)、[建立和變更外部 SQL 資料表](../../management/external-sql-tables.md)、建立[和改變 Azure 儲存體或 Azure Data Lake 中的資料表](../../management/external-tables-azurestorage-azuredatalake.md)），並可使用[external_table （）](../../query/externaltablefunction.md)函數來參考其名稱。 
 
 **注意事項**
 
