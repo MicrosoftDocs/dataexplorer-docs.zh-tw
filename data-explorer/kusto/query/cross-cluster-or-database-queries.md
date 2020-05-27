@@ -10,20 +10,20 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: bb25fd556ab59dc5bdf5c533435f99deb6b32fdb
-ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
+ms.openlocfilehash: 26c6d660cb254ec2df6600e90437d7db7ca748f4
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83404231"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863144"
 ---
 # <a name="cross-database-and-cross-cluster-queries"></a>跨資料庫與跨叢集查詢
 
 ::: zone pivot="azuredataexplorer"
 
 每個 Kusto 查詢都會在目前叢集和預設資料庫的內容中運作。
-* 在[Kusto Explorer](../tools/kusto-explorer.md)中，預設資料庫是 [連線][面板](../tools/kusto-explorer.md#connections-panel)中所選取的資料庫，而目前的叢集是包含該資料庫的連接
-* 使用[Kusto 用戶端程式庫](../api/netfx/about-kusto-data.md)時，目前的叢集和預設資料庫會分別由 `Data Source` `Initial Catalog` [Kusto 連接字串](../api/connection-strings/kusto.md)的和屬性指定。
+* 在[Kusto Explorer](../tools/kusto-explorer.md)中，預設資料庫是在 [連線][面板](../tools/kusto-explorer.md#connections-panel)中選取的資料庫，而目前的叢集是包含該資料庫的連接
+* 使用[Kusto 用戶端程式庫](../api/netfx/about-kusto-data.md)時，目前的叢集和預設資料庫會 `Data Source` 分別由 `Initial Catalog` [Kusto 連接字串](../api/connection-strings/kusto.md)的和屬性指定。
 
 ## <a name="queries"></a>查詢
 若要從預設值以外的任何資料庫存取資料表，必須使用*限定名稱*語法：若要存取目前叢集中的資料庫：

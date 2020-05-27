@@ -1,6 +1,6 @@
 ---
-title: Azure 儲存體或 Azure Data Lake 中的外部資料表-Azure 資料總管
-description: 本文說明 Azure 中的外部資料表管理資料總管。
+title: 在 Azure 儲存體或 Azure Data Lake 中建立和改變外部資料表-Azure 資料總管
+description: 本文說明如何在 Azure 儲存體或 Azure Data Lake 中建立和改變外部資料表。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1c7670dfb06e95f227a4b828a86b980005eeeac9
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 2ef238d863f2f3fe181814ac14e3605de21a5aff
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373364"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863365"
 ---
-# <a name="external-tables-in-azure-storage-or-azure-data-lake"></a>Azure 儲存體或 Azure Data Lake 中的外部資料表
+# <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>在 Azure 儲存體或 Azure Data Lake 中建立和改變外部資料表
 
 下列命令描述如何建立外部資料表。 資料表可以位於 Azure Blob 儲存體、Azure Data Lake 存放區 Gen1 或 Azure Data Lake 存放區 Gen2 中。 
 [儲存體連接字串](../api/connection-strings/storage.md)說明如何為每個選項建立連接字串。 
@@ -27,7 +27,7 @@ ms.locfileid: "83373364"
 （ `.create`  |  `.alter` ） `external` `table` *TableName* （*架構*）  
 `kind` `=` (`blob` | `adl`)  
 [ `partition` `by` *Partition* [ `,` ....]]  
-`dataformat` `=` *[格式]*  
+`dataformat` `=` *格式*  
 `(`  
 *StorageConnectionString* [ `,` ...]  
 `)`  
@@ -170,7 +170,7 @@ with
 
 |TableName|TableType|資料夾|DocString|屬性|ConnectionStrings|資料分割|
 |---|---|---|---|---|---|---|
-|ExternalMultiplePartitions|Blob|ExternalTables|Docs|{"Format"： "Csv"，"壓縮"： false，"CompressionType"： null，"FileExtension"： "Csv"，"IncludeHeaders"： "None"，"Encoding"： null，"NamePrefix"： null}|["https://storageaccount.blob.core.windows.net/container1;*******"]}|[{"StringFormat"： "CustomerName = {0} "，"ColumnName"： "CustomerName"，"序數"： 0}，PartitionBy "：" 1.00：00： 00 "，" ColumnName "：" Timestamp "，" 序數 "： 1}]|
+|ExternalMultiplePartitions|Blob|ExternalTables|文件|{"Format"： "Csv"，"壓縮"： false，"CompressionType"： null，"FileExtension"： "Csv"，"IncludeHeaders"： "None"，"Encoding"： null，"NamePrefix"： null}|["https://storageaccount.blob.core.windows.net/container1;*******"]}|[{"StringFormat"： "CustomerName = {0} "，"ColumnName"： "CustomerName"，"序數"： 0}，PartitionBy "：" 1.00：00： 00 "，" ColumnName "：" Timestamp "，" 序數 "： 1}]|
 
 ### <a name="artifact-filtering-logic"></a>成品篩選邏輯
 
@@ -217,7 +217,7 @@ dataformat=parquet
 
 **語法：** 
 
-`.show``external` `table` *TableName*`artifacts`
+`.show` `external` `table` *TableName* `artifacts`
 
 **輸出**
 
@@ -306,3 +306,7 @@ dataformat=parquet
 ```kusto
 .drop external table MyExternalTable JSON mapping "Mapping1" 
 ```
+## <a name="next-steps"></a>後續步驟
+
+* [外部資料表一般控制命令](externaltables.md)
+* [建立和改變外部 SQL 資料表](external-sql-tables.md)

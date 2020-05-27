@@ -8,12 +8,12 @@ ms.reviewer: ohbitton
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/19/2020
-ms.openlocfilehash: 3a89af281b2376e7fc06d07643af8e95a6c97cd2
-ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
+ms.openlocfilehash: 49a689b88e508285f2876f2e86208afceda0872b
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83722094"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863246"
 ---
 # <a name="kustoingest-client-interfaces-and-classes"></a>Kusto。內嵌用戶端介面和類別
 
@@ -23,7 +23,7 @@ Kusto 程式庫中的主要介面和類別為：
 * [類別 ExtendedKustoIngestClient](#class-extendedkustoingestclient)：主要內嵌介面的延伸模組。
 * [類別 KustoIngestFactory](#class-kustoingestfactory)：內嵌用戶端的主 factory。
 * [類別 KustoIngestionProperties](#class-kustoingestionproperties)：用來提供一般內嵌屬性的類別。
-* 類別 IngestionMapping：用來描述內嵌之資料對應的類別。
+* [類別 IngestionMapping](#class-ingestionmapping)：用來描述內嵌之資料對應的類別。
 * [Enum DataSourceFormat](#enum-datasourceformat)：支援的資料來源格式（例如，CSV、JSON）
 * [介面 IKustoQueuedIngestClient](#interface-ikustoqueuedingestclient)：描述僅適用于佇列內嵌之作業的介面。
 * [類別 KustoQueuedIngestionProperties](#class-kustoqueuedingestionproperties)：僅適用于佇列內嵌的屬性。
@@ -377,6 +377,28 @@ public class KustoIngestionProperties
 }
 ```
 
+## <a name="class-ingestionmapping"></a>類別 IngestionMapping
+
+保存現有對應或資料行對應清單的參考。
+
+|屬性   |意義    |
+|-----------|-----------|
+|IngestionMappings | 資料行對應，每個都會描述目標資料行的資料及其來源 |
+|IngestionMappingKind | IngestionMappings 屬性中所描述的對應類型-Csv、Json、Avro、Parquet、SStream、Orc、ApacheAvro 或 W3CLogFile 中的其中一個。 |
+|IngestionMappingReference | 預先建立的對應名稱 |
+
+```csharp
+public class IngestionMapping
+{
+    public IEnumerable<ColumnMapping> IngestionMappings { get; set; }
+    public IngestionMappingKind IngestionMappingKind { get; set; }
+    public string IngestionMappingReference { get; set; }
+
+    public IngestionMapping()
+    public IngestionMapping(IngestionMapping ingestionMapping)
+}
+```
+
 ## <a name="enum-datasourceformat"></a>列舉 DataSourceFormat
 
 ```csharp
@@ -416,7 +438,6 @@ var kustoIngestionProperties = new KustoIngestionProperties("TargetDatabase", "T
             Properties = new Dictionary<string, string>() {
             { MappingConsts.Ordinal, "1"} }
         } },
-        // IngestionMappingReference = mappingName, the pre-created mapping name
     },
     ValidationPolicy = new ValidationPolicy { ValidationImplications = ValidationImplications.Fail, ValidationOptions = ValidationOptions.ValidateCsvInputConstantColumns },
     Format = DataSourceFormat.csv

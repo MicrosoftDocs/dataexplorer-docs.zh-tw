@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: bf31d8573266de1217ce93944a357c716d3ba508
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 8c5ade644f383a5a0d9e846b1a3143027d1eb467
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108162"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863178"
 ---
 # <a name="kusto-connection-strings"></a>Kusto 連接字串
 
@@ -27,42 +27,42 @@ https://help.kusto.windows.net/Samples; Fed=true; Accept=true
 
 URI 會提供要與通訊的服務端點：
 
-* （`https://help.kusto.windows.net`）- `Data Source`屬性的值。
-* `Samples`（預設資料庫）-`Initial Catalog`屬性的值。
+* （ `https://help.kusto.windows.net` ）-屬性的值 `Data Source` 。
+* `Samples`（預設資料庫）-屬性的值 `Initial Catalog` 。
 
 使用名稱/值語法提供兩個額外的屬性： 
 
-* `Fed`屬性（也稱為`AAD Federated Security`）會設定`true`為。
-* `Accept`屬性設定為`true`。
+* `Fed`屬性（也稱為 `AAD Federated Security` ）會設定為 `true` 。
+* `Accept`屬性設定為 `true` 。
 
 > [!NOTE]
 >
 > * 屬性名稱不區分大小寫，且名稱/值組之間的空格會被忽略。
-> * 屬性值**會**區分大小寫。 包含分號（`;`）、單引號（`'`）或雙引號（`"`）的屬性值，必須以雙引號括住。
+> * 屬性值**會**區分大小寫。 包含分號（ `;` ）、單引號（ `'` ）或雙引號（）的屬性值， `"` 必須以雙引號括住。
 
-有數個 Kusto 用戶端工具支援連接字串之 URI 前置詞的延伸模組，因為它們允許使用速記`@`格式_ClusterName_ `/` _InitialCatalog_ 。
-例如，這些工具會將`@help/Samples`連接字串`https://help.kusto.windows.net/Samples; Fed=true`轉譯為，這表示三個屬性`Data Source`（、 `Initial Catalog`和`AAD Federated Security`）。
+有數個 Kusto 用戶端工具支援連接字串之 URI 前置詞的延伸模組，因為它們允許使用速記格式 `@` _ClusterName_ `/` _InitialCatalog_ 。
+例如， `@help/Samples` 這些工具會將連接字串轉譯為 `https://help.kusto.windows.net/Samples; Fed=true` ，這表示三個屬性（ `Data Source` 、 `Initial Catalog` 和 `AAD Federated Security` ）。
 
-以程式設計方式，可由 c # `Kusto.Data.KustoConnectionStringBuilder`類別剖析和操作 Kusto 連接字串。 這個類別會驗證所有連接字串，並在驗證失敗時產生執行時間例外狀況。
+以程式設計方式，可由 c # 類別剖析和操作 Kusto 連接字串 `Kusto.Data.KustoConnectionStringBuilder` 。 這個類別會驗證所有連接字串，並在驗證失敗時產生執行時間例外狀況。
 這項功能存在於所有種類的 Kusto SDK 中。
 
 ## <a name="connection-string-properties"></a>連接字串屬性
 
 下表列出您可以在 Kusto 連接字串中指定的所有屬性。
-它會列出程式設計名稱（這是`Kusto.Data.KustoConnectionStringBuilder`物件中的屬性名稱），以及其他別名的屬性名稱。
+它會列出程式設計名稱（這是物件中的屬性名稱 `Kusto.Data.KustoConnectionStringBuilder` ），以及其他別名的屬性名稱。
 
 ### <a name="general-properties"></a>一般屬性
 
-| 屬性名稱              | 別名                      | 程式設計名稱  | 說明                                                                                                                          |
+| 屬性名稱              | 別名                      | 程式設計名稱  | 描述                                                                                                                          |
 |----------------------------|----------------------------------------|--------------------|---------------------------------------------------|
 | 用於追蹤的用戶端版本 |                                        | TraceClientVersion | 當追蹤用戶端版本時，請使用此值   |
 | 資料來源                | 位址、位址、網路位址、伺服器 | DataSource         | 指定 Kusto 服務端點的 URI。 例如，`https://mycluster.kusto.windows.net` 或 `net.tcp://localhost`。               |
 | 初始目錄            | 資料庫                               | InitialCatalog     | 預設所要使用之資料庫的名稱。 例如，MyDatabase|
-| 查詢一致性          | QueryConsistency                       | QueryConsistency   | 設定為`strongconsistency`或`weakconsistency` ，以判斷查詢是否應該在執行之前與元資料同步處理 |
+| 查詢一致性          | QueryConsistency                       | QueryConsistency   | 設定為 `strongconsistency` 或 `weakconsistency` ，以判斷查詢是否應該在執行之前與元資料同步處理 |
 
 ### <a name="user-authentication-properties"></a>使用者驗證屬性
 
-| 屬性名稱          | 別名                          | 程式設計名稱 | 說明                       |
+| 屬性名稱          | 別名                          | 程式設計名稱 | 描述                       |
 |------------------------|--------------------------------------------|-------------------|-----------------------------------|
 | AAD 同盟安全性 | 聯合安全性、同盟、饋送、AADFed | FederatedSecurity | 指示用戶端執行 Azure Active 的布林值  |
 | 強制執行 MFA            | MFA、EnforceMFA                             | EnforceMfa        | 布林值，指示用戶端取得多重要素驗證 token       |
@@ -75,7 +75,7 @@ URI 會提供要與通訊的服務端點：
 
 ### <a name="application-authentication-properties"></a>應用程式驗證屬性
 
-|屬性名稱                                     |別名                         |程式設計名稱                             |說明      |
+|屬性名稱                                     |別名                         |程式設計名稱                             |描述      |
 |--------------------------------------------------|------------------------------------------|----------------------------------------------|-----------------|
 |AAD 同盟安全性                            |聯合安全性、同盟、饋送、AADFed|FederatedSecurity                             |布林值，指示用戶端執行 Azure Active Directory （AAD）同盟驗證|
 |應用程式憑證指紋                |Appcert.exe                                   |ApplicationCertificateThumbprint              |字串值，提供使用應用程式用戶端憑證驗證流程時所要使用之用戶端憑證的指紋|
@@ -84,7 +84,7 @@ URI 會提供要與通訊的服務端點：
 |追蹤的應用程式名稱                      |TraceAppName                              |ApplicationNameForTracing                     |一個字串值，會向服務報告在內部追蹤要求時所要使用的應用程式名稱|
 |應用程式權杖                                 |AppToken                                  |ApplicationToken                              |字串值，指示用戶端使用指定的持有人權杖來執行應用程式驗證|
 |授權單位識別碼                                      |TenantId                                  |授權單位                                     |字串值，提供註冊應用程式的租使用者名稱或識別碼|
-|                                                  |                                          |EmbeddedManagedIdentity                       |字串值，指示用戶端要搭配受控識別驗證使用哪個應用程式識別;使用`system`來表示系統指派的身分識別。 這個屬性不能使用連接字串來設定，只能以程式設計方式進行。|ManagedServiceIdentity                        |TODO|
+|                                                  |                                          |EmbeddedManagedIdentity                       |字串值，指示用戶端要搭配受控識別驗證使用哪個應用程式識別;使用 `system` 來表示系統指派的身分識別。 這個屬性不能使用連接字串來設定，只能以程式設計方式進行。|ManagedServiceIdentity                        |TODO|
 |應用程式憑證主體辨別名稱|應用程式憑證主體           |ApplicationCertificateSubjectDistinguishedName||
 |應用程式憑證簽發者辨別名稱 |應用程式憑證簽發者            |ApplicationCertificateIssuerDistinguishedName ||
 |應用程式憑證傳送公開憑證   |應用程式憑證 SendX5c、SendX5c  |ApplicationCertificateSendPublicCertificate   ||
@@ -93,9 +93,9 @@ URI 會提供要與通訊的服務端點：
 
 ### <a name="client-communication-properties"></a>用戶端通訊屬性
 
-|屬性名稱                      |別名|程式設計名稱  |說明                                                   |
+|屬性名稱                      |別名|程式設計名稱  |描述                                                   |
 |-----------------------------------|-----------------|-------------------|--------------------------------------------------------------|
-|Accept      ||Accept      |布林值，要求失敗時傳回的詳細錯誤物件。|
+|接受      ||接受      |布林值，要求失敗時傳回的詳細錯誤物件。|
 |串流   ||串流   |要求用戶端的布林值不會在提供給呼叫者之前累積資料。|
 |未壓縮||未壓縮|要求用戶端不會要求傳輸層級壓縮的布林值。|
 
@@ -114,9 +114,6 @@ URI 會提供要與通訊的服務端點：
 1. 否則不會驗證。
 
 
-
-
-
 ### <a name="aad-federated-application-authentication-with-application-certificate"></a>使用應用程式憑證的 AAD 同盟應用程式驗證
 
 1. 只有 web 應用程式支援以應用程式憑證為基礎的驗證（而不是原生用戶端應用程式）。
@@ -127,45 +124,65 @@ URI 會提供要與通訊的服務端點：
 
 ## <a name="aad-based-authentication-examples"></a>以 AAD 為基礎的驗證範例
 
-**以目前登入的使用者身分識別為基礎的 AAD 同盟驗證（如有需要，系統會提示使用者）**
+**使用目前登入的使用者身分識別進行 AAD 同盟驗證（如有需要，系統會提示使用者）**
 
 ```csharp
-// Option 1
-var serviceName = "help";
+var serviceUri = "Service URI, typically of the form https://cluster.region.kusto.windows.net";
 var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder($"https://{serviceNameAndRegion}.kusto.windows.net")
+
+// Recommended syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
   .WithAadUserPromptAuthentication(authority);
 
-// Option 2
-var serviceName = "help";
-var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder($"https://{serviceNameAndRegion}.kusto.windows.net")
+// Legacy syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
 {
     FederatedSecurity = true,
     InitialCatalog = "NetDefaultDB",
     Authority = authority,
 };
 
-// Equivalent Kusto connection string: $"Data Source=https://{serviceNameAndRegion}.kusto.windows.net:443;Database=NetDefaultDB;Fed=True;authority={authority}"
+// Equivalent Kusto connection string: $"Data Source={serviceUri};Database=NetDefaultDB;Fed=True;Authority Id={authority}"
 ```
 
-**以指定的 ApplicationClientId 和 ApplicationKey 為基礎的 AAD 同盟應用程式驗證**
+**具有使用者識別碼提示的 AAD 同盟驗證（如有需要，系統會提示使用者）**
 
 ```csharp
-// Option 1
-var serviceName = "help";
+var serviceUri = "Service URI, typically of the form https://cluster.region.kusto.windows.net";
 var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
-var applicationClientId = APP_GUID;
-var applicationKey = secret;
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder($"https://{serviceNameAndRegion}.kusto.windows.net")
-    .WithAadApplicationKeyAuthentication(applicationClientId, applicationKey, authority);
+var userUPN = "johndoe@contoso.com";
 
-// Option 2
-var serviceName = "help";
+// Recommended syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+  .WithAadUserPromptAuthentication(authority);
+kustoConnectionStringBuilder.UserID = userUPN;
+
+// Legacy syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+{
+    FederatedSecurity = true,
+    InitialCatalog = "NetDefaultDB",
+    UserID = userUPN,
+    Authority = authority,
+};
+
+// Equivalent Kusto connection string: $"Data Source={serviceUri};Database=NetDefaultDB;Fed=True;User ID={userUPN};Authority Id={authority}"
+```
+
+**使用 ApplicationClientId 和 ApplicationKey 的 AAD 同盟應用程式驗證**
+
+```csharp
+var serviceUri = "Service URI, typically of the form https://cluster.region.kusto.windows.net";
 var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
 var applicationClientId = <ApplicationClientId>;
 var applicationKey = <ApplicationKey>;
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(@"https://{serviceNameAndRegion}.kusto.windows.net")
+
+// Recommended syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+    .WithAadApplicationKeyAuthentication(applicationClientId, applicationKey, authority);
+
+// Legacy syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
 {
     FederatedSecurity = true,
     InitialCatalog = "NetDefaultDB",
@@ -174,74 +191,119 @@ var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(@"https://{s
     Authority = authority,
 };
 
-// Equivalent Kusto connection string: $"Data Source=https://{serviceNameAndRegion}.kusto.windows.net:443;Database=NetDefaultDB;Fed=True;AppClientId={applicationClientId};AppKey={applicationKey};authority={authority}"
+// Equivalent Kusto connection string: $"Data Source={serviceUri};Database=NetDefaultDB;Fed=True;AppClientId={applicationClientId};AppKey={applicationKey};Authority Id={authority}"
 ```
 
-**以指定使用者/應用程式的權杖為基礎的 AAD 同盟驗證**
+**使用使用者/應用程式權杖的 AAD 同盟驗證**
 
 ```csharp
-var serviceNameAndRegion = "help";
-var databaseName = "NetDefaultDB";
-var clusterAndDatabase = string.Format(
-    "https://{0}.kusto.windows.net/{1}",
-    serviceNameAndRegion, databaseName);
-
-// AAD User - Option 1
-var userToken = "<UserToken>";
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(clusterAndDatabase)
-    .WithAadUserTokenAuthentication(userToken);
-
-// AAD User - Option 2
-var userToken = "<UserToken>";
+var serviceUri = "Service URI, typically of the form https://cluster.region.kusto.windows.net";
 var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(clusterAndDatabase)
+var access_token = "<access token obtained from AAD>"
+
+// Recommended syntax - AAD User token
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+    .WithAadUserTokenAuthentication(access_token, authority);
+
+// Legacy syntax - AAD User token
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
 {
     FederatedSecurity = true,
-    UserToken = userToken,
+    UserToken = access_token,
     Authority = authority,
 };
 
-// Equivalent Kusto connection string: "Data Source=https://{serviceNameAndRegion}.kusto.windows.net:443;Database=NetDefaultDB;Fed=True;UserToken={user_token};authority={authority}"
+// Equivalent Kusto connection string: "Data Source={serviceUri};Database=NetDefaultDB;Fed=True;UserToken={access_token};Authority Id={authority}"
 
-// AAD Application - Option 1
-var applicationToken = "<ApplicationToken>";
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(clusterAndDatabase)
-    .WithAadApplicationTokenAuthentication();
+// Recommended syntax - AAD Application token
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+    .WithAadApplicationTokenAuthentication(access_token, authority);
 
-// AAD Application - Option 2
-var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
-var applicationToken = "<UserToken>";
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(clusterAndDatabase)
+// Legacy syntax - AAD Application token
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
 {
     FederatedSecurity = true,
-    ApplicationToken = applicationToken,
+    ApplicationToken = access_token,
     Authority = authority,
 };
 
-// Equivalent Kusto connection string: $"Data Source=https://{serviceNameAndRegion}.kusto.windows.net:443;Database=NetDefaultDB;Fed=True;AppToken={applicationToken};authority={authority}"
+// Equivalent Kusto connection string: $"Data Source={serviceUri};Database=NetDefaultDB;Fed=True;AppToken={applicationToken};Authority Id={authority}"
 ```
 
-**使用憑證指紋（用戶端會嘗試從本機存放區載入憑證）**
+**使用權杖提供者回呼（每次需要權杖時都會叫用）**
 
 ```csharp
-var serviceNameAndRegion = "help";
-var databaseName = "Samples";
-var clusterAndDatabase = string.Format(
-    "https://{0}.kusto.windows.net/{1}",
-    serviceNameAndRegion, databaseName);
+var serviceUri = "Service URI, typically of the form https://cluster.region.kusto.windows.net";
+Func<string> tokenProviderCallback; // User-defined method to retrieve the access token
 
+// Recommended syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+    .WithAadTokenProviderAuthentication(tokenProviderCallback);
+
+// Legacy syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+{
+    FederatedSecurity = true,
+    TokenProviderCallback = () => Task.FromResult(tokenProviderCallback()),
+};
+```
+
+**使用受控識別**
+
+```csharp
+var serviceUri = "Service URI, typically of the form https://cluster.region.kusto.windows.net";
+var managedIdentity = "<managed identity>"; // For system-assigned identity use "system"
+
+// Recommended syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+    .WithAadManagedIdentity(managedIdentity);
+
+// Legacy syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+{
+    FederatedSecurity = true,
+    EmbeddedManagedIdentity = managedIdentity,
+};
+```
+
+**使用 x.509 憑證**
+
+```csharp
+var serviceUri = "Service URI, typically of the form https://cluster.region.kusto.windows.net";
+var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
+string applicationClientId = "<applicationClientId>";
+X509Certificate2 applicationCertificate = "<certificate blob>";
+bool sendX5c = <desired value>; // Set too 'True' to use Trusted Issuer feature of AAD
+
+// Recommended syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+    .WithAadApplicationCertificateAuthentication(applicationClientId, applicationCertificate, authority, sendX5c);
+
+// Legacy syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
+{
+    FederatedSecurity = true,
+    ApplicationClientId = applicationClientId,
+    ApplicationCertificateBlob = applicationCertificate,
+    ApplicationCertificateSendX5c = sendX5c,
+    Authority = authority,
+};
+```
+
+**依指紋使用 x.509 憑證（用戶端會嘗試從本機存放區載入憑證）**
+
+```csharp
+var serviceUri = "Service URI, typically of the form https://cluster.region.kusto.windows.net";
+var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
 string applicationClientId = "<applicationClientId>";
 string applicationCertificateThumbprint = "<ApplicationCertificateThumbprint>";
 
-// Option 1
-var serviceName = "help";
-var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(clusterAndDatabase)
+// Recommended syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
     .WithAadApplicationThumbprintAuthentication(applicationClientId, applicationCertificateThumbprint, authority);
 
-// Option 2
-var authority = "contoso.com"; // Or the AAD tenant GUID: "..."
-var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(clusterAndDatabase)
+// Legacy syntax
+var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(serviceUri)
 {
     FederatedSecurity = true,
     ApplicationClientId = applicationClientId,
@@ -249,6 +311,5 @@ var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(clusterAndDa
     Authority = authority,
 };
 
-// Equivalent Kusto connection string: $"Data Source=https://{serviceNameAndRegion}.kusto.windows.net:443;Database=NetDefaultDB;Fed=True;AppClientId={applicationClientId};AppCert={applicationCertificateThumbprint};authority={authority}"
+// Equivalent Kusto connection string: $"Data Source={serviceUri};Database=NetDefaultDB;Fed=True;AppClientId={applicationClientId};AppCert={applicationCertificateThumbprint};Authority Id={authority}"
 ```
-

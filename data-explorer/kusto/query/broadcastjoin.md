@@ -1,6 +1,6 @@
 ---
-title: 廣播聯接 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的廣播聯接。
+title: 廣播聯結-Azure 資料總管
+description: 本文說明 Azure 資料總管中的廣播聯結。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 72c89bf2160f8f5b735fd8c93f9519feae9114d9
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e64413047ceb83860f7ea47a1540ae99faa7ec55
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517301"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863212"
 ---
-# <a name="broadcast-join"></a>廣播加入
+# <a name="broadcast-join"></a>廣播聯結
 
-今天,常規聯接在單個群集節點上執行。
-廣播聯接是一種聯接的執行策略,它將在群集節點上分發它,當聯接的左側較小(最多 100K 記錄)時,它很有用,在這種情況下,聯接將比常規聯接更具性能。
+今天，一般聯結會在單一叢集節點上執行。
+「廣播聯結」是聯結的執行策略，它會將它散發在叢集節點上。 當聯結的左邊很小（最多 100 K 筆記錄）時，此策略會很有用。 在此情況下，廣播聯結的效能會比一般聯結更有效率。
 
-如果聯接的左側是一個小資料集,則可以使用以下語法(hint.策略 = 廣播)在廣播模式下運行聯接:
+如果聯結的左邊是小型資料集，則您可以使用下列語法（提示. 策略 = 廣播）在廣播模式下執行 join：
 
 ```kusto
 lookupTable 
 | join hint.strategy = broadcast (factTable) on key
 ```
 
-在聯接後其他運算子(如`summarize`) 例如,在此查詢中:
+在聯結後面接著其他運算子（例如）的情況下，效能改進會更明顯 `summarize` 。 例如，在此查詢中：
 
 ```kusto
 lookupTable 

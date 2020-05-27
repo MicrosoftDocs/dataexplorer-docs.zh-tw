@@ -1,6 +1,6 @@
 ---
-title: 外部 SQL 資料表-Azure 資料總管
-description: 本文說明 Azure 資料總管中的外部 SQL 資料表建立。
+title: 建立和改變外部 SQL 資料表-Azure 資料總管
+description: 本文說明如何建立和改變外部 SQL 資料表。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 9de01863ddb832421c5b6dbfe65b8ae451382fb7
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 235c68a8a04fd76dd3a9e25abac63db09e00919a
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373378"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863331"
 ---
-# <a name="external-sql-table"></a>外部 SQL 資料表
+# <a name="create-and-alter-external-sql-tables"></a>建立和改變外部 SQL 資料表
 
 在執行命令的資料庫中，建立或改變外部 SQL 資料表。  
 
@@ -77,7 +77,7 @@ with
 
 | TableName   | TableType | 資料夾         | DocString | 屬性                            |
 |-------------|-----------|----------------|-----------|---------------------------------------|
-| ExternalSql | Sql       | ExternalTables | Docs      | {<br>  "TargetEntityKind": "sqltable'",<br>  "TargetEntityName": "MySqlTable",<br>  "TargetEntityConnectionString"： "Server = tcp:myserver. net，1433;Authentication = Active Directory 整合; 初始目錄 = mydatabase; "，<br>  "FireTriggers"： true，<br>  "CreateIfNotExists"： true，<br>  "PrimaryKey"： "x"<br>} |
+| ExternalSql | Sql       | ExternalTables | 文件      | {<br>  "TargetEntityKind": "sqltable'",<br>  "TargetEntityName": "MySqlTable",<br>  "TargetEntityConnectionString"： "Server = tcp:myserver. net，1433;Authentication = Active Directory 整合; 初始目錄 = mydatabase; "，<br>  "FireTriggers"： true，<br>  "CreateIfNotExists"： true，<br>  "PrimaryKey"： "x"<br>} |
 
 ## <a name="querying-an-external-table-of-type-sql"></a>查詢 SQL 類型的外部資料表 
 
@@ -95,3 +95,8 @@ external_table('MySqlExternalTable') | count
 Kusto 會對 SQL 資料庫執行 ' SELECT * from TABLE ' 查詢，後面接著 Kusto 端的計數。 在這種情況下，如果直接以 T-sql （[SELECT COUNT （1） FROM TABLE]）撰寫，並使用[sql_request 外掛程式](../query/sqlrequestplugin.md)執行，而不是使用外部資料表函數，效能就會更好。 同樣地，篩選器也不會推送至 SQL 查詢。  
 
 當查詢需要讀取整個資料表（或相關的資料行），以便在 Kusto 端進一步執行時，請使用外部資料表來查詢 SQL 資料表。 當 SQL 查詢可以在 T-sql 中優化時，請使用[sql_request 外掛程式](../query/sqlrequestplugin.md)。
+
+## <a name="next-steps"></a>後續步驟
+
+* [外部資料表一般控制命令](externaltables.md)
+* [在 Azure 儲存體或 Azure Data Lake 中建立和改變外部資料表](external-tables-azurestorage-azuredatalake.md)
