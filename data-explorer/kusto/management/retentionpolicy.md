@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 5254f2daee767f51111f2ac3d1be07b7f2bb09f4
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 3d854262a2a446f983f60c49a5c0ca02f6aa2ffe
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617386"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011359"
 ---
 # <a name="retention-policy"></a>保留原則
 
@@ -31,7 +31,7 @@ ms.locfileid: "82617386"
 > [!NOTE]
 > * 刪除時間不精確。 系統保證在超過限制之前不會刪除資料，但在該時間點之後不會立即刪除。
 > * 您可以將虛刪除期間0設定為數據表層級保留原則的一部分（但不是資料庫層級保留原則的一部分）。
->   * 完成此動作時，內嵌資料將不會認可到來源資料表，而不需要保存資料。
+>   * 完成此動作時，內嵌資料將不會認可到來源資料表，而不需要保存資料。 因此，只能 `Recoverability` 設定為 `Disabled` 。 
 >   * 這種設定主要適用于將資料內嵌到資料表時。
 >   交易式[更新原則](updatepolicy.md)是用來轉換它，並將輸出重新導向至另一個資料表。
 
@@ -45,8 +45,8 @@ ms.locfileid: "82617386"
     * 改變數據表或資料庫的虛刪除期間時，新的值會同時套用至現有和新的資料。
 * 復原**能力**：
     * 資料刪除後的資料復原能力（已啟用/已停用）
-    * 預設為 `enabled`
-    * 如果設定為`enabled`，資料將在刪除後的14天內復原
+    * 預設為 `Enabled`
+    * 如果設定為 `Enabled` ，資料會在虛刪除之後的14天內復原。
 
 ## <a name="control-commands"></a>控制命令
 
@@ -57,7 +57,7 @@ ms.locfileid: "82617386"
 
 根據預設，建立資料庫或資料表時，不會定義保留原則。
 在一般情況下，會建立資料庫，然後根據已知的需求，立即由其建立者設定其保留原則。
-針對尚未設定其原則的資料庫或資料表的保留原則執行[show 命令](../management/retention-policy.md)時， `Policy`會顯示為`null`。
+針對尚未設定其原則的資料庫或資料表的保留原則執行[show 命令](../management/retention-policy.md)時， `Policy` 會顯示為 `null` 。
 
 您可以使用下列命令來套用預設的保留原則（使用上述的預設值）：
 
@@ -83,7 +83,7 @@ ms.locfileid: "82617386"
 
 ## <a name="examples"></a>範例
 
-假設您的叢集具有名為`MyDatabase`的資料庫、 `MyTable1`資料表`MyTable2`和`MySpecialTable`
+假設您的叢集具有名為的資料庫 `MyDatabase` 、 `MyTable1` 資料表 `MyTable2` 和`MySpecialTable`
 
 **1. 將資料庫中的所有資料表設定為具有7天的虛刪除期間，並停用復原能力**：
 
@@ -104,9 +104,9 @@ ms.locfileid: "82617386"
 .alter-merge table MySpecialTable policy retention softdelete = 7d recoverability = disabled
 ```
 
-**2. 設定資料表`MyTable1`， `MyTable2`使其具有7天的虛刪除週期並啟用復原功能，並將`MySpecialTable`設定為在14天內停用虛刪除期間，並使復原能力失效**：
+**2. 設定資料表 `MyTable1` ，使其 `MyTable2` 具有7天的虛刪除週期並啟用復原功能，並將設定 `MySpecialTable` 為在14天內停用虛刪除期間，並使復原能力失效**：
 
-* *選項1（建議使用）*：設定資料庫層級的保留原則，並在7天內執行虛刪除期間並啟用復原功能，並設定資料表層級的保留原則，其中包含14天的虛刪除期間和`MySpecialTable`針對停用的復原能力。
+* *選項1（建議使用）*：設定資料庫層級的保留原則，並在7天內執行虛刪除期間並啟用復原功能，並設定資料表層級的保留原則，其中包含14天的虛刪除期間和針對停用的復原能力 `MySpecialTable` 。
 
 ```kusto
 .delete table MyTable1 policy retention   // optional, only if the table previously had its policy set
@@ -123,9 +123,9 @@ ms.locfileid: "82617386"
 .alter-merge table MySpecialTable policy retention softdelete = 14d recoverability = enabled
 ```
 
-**3. 設定資料表`MyTable1`， `MyTable2`使其具有7天的虛刪除期間，並無限期`MySpecialTable`地保留其資料**：
+**3. 設定資料表 `MyTable1` ，使 `MyTable2` 其具有7天的虛刪除期間，並 `MySpecialTable` 無限期地保留其資料**：
 
-* *選項 1*：使用七天的虛刪除期間來設定資料庫層級保留原則，並以100年的虛刪除期間（預設保留原則）設定資料表層級的保留原則`MySpecialTable`。
+* *選項 1*：使用七天的虛刪除期間來設定資料庫層級保留原則，並以100年的虛刪除期間（預設保留原則）設定資料表層級的保留原則 `MySpecialTable` 。
 
 ```kusto
 .delete table MyTable1 policy retention   // optional, only if the table previously had its policy set
@@ -134,7 +134,7 @@ ms.locfileid: "82617386"
 .alter table MySpecialTable policy retention "{}" // this sets the default retention policy
 ```
 
-* *選項 2*：如果是`MyTable1`資料表`MyTable2`，請使用七天所需的虛刪除期間來設定資料表層級的保留原則，並確認`MySpecialTable`未設定的資料庫層級和資料表層級原則。
+* *選項 2*：如果是資料表 `MyTable1` ， `MyTable2` 請使用七天所需的虛刪除期間來設定資料表層級的保留原則，並確認未設定的資料庫層級和資料表層級原則 `MySpecialTable` 。
 
 ```kusto
 .delete database MyDatabase policy retention   // optional, only if the database previously had its policy set
@@ -143,7 +143,7 @@ ms.locfileid: "82617386"
 .alter-merge table MyTable2 policy retention softdelete = 7d
 ```
 
-* *選項 3*：針對資料表`MyTable1`， `MyTable2`設定資料表層級的保留原則，並將所需的虛刪除期間設為七天。 針對 [ `MySpecialTable`資料表]，以100年的虛刪除期間（預設的保留原則）設定資料表層級的保留原則。
+* *選項 3*：針對資料表 `MyTable1` ， `MyTable2` 設定資料表層級的保留原則，並將所需的虛刪除期間設為七天。 針對 [資料表] `MySpecialTable` ，以100年的虛刪除期間（預設的保留原則）設定資料表層級的保留原則。
 
 ```kusto
 .alter-merge table MyTable1 policy retention softdelete = 7d

@@ -1,6 +1,6 @@
 ---
-title: 標註策略 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的標註策略。
+title: 標注原則-Azure 資料總管
+description: 本文說明 Azure 資料總管中的標注原則。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,73 +8,70 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: df57c4901cef74d574108d2c6e75672d1faba75c
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 42254e00e629a19dfceeef2d4a6c2d1877400c05
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744507"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011545"
 ---
 # <a name="callout-policy"></a>註標原則
 
-## <a name="overview"></a>概觀
+在許多不同的案例中，Azure 資料總管叢集可以與外部服務進行通訊。
+叢集系統管理員可以藉由更新叢集的注標原則，來管理外部呼叫的授權網域。
 
-Azure 資料資源管理器群集可以在許多不同的方案中與外部服務通信。
-群集管理員可以通過更新群集的標註策略來管理外部呼叫的允許域。
+注標原則會在叢集層級進行管理，並分類為下列類型。
+* `kusto`-控制 Azure 資料總管跨叢集查詢。
+* `sql`-控制[SQL 外掛程式](../query/sqlrequestplugin.md)。
 
-標註策略在群集等級進行管理,並分為以下類型:
-* `kusto`- 控制 Azure 資料資源管理器跨群集查詢。
-* `sql`- 控制[SQL 外掛程式](../query/sqlrequestplugin.md)。
+* `webapi`-控制其他外部 Web 呼叫。
+* `sandbox_artifacts`-控制沙箱化外掛程式（[python](../query/pythonplugin.md)  |  [R](../query/rplugin.md)）。
 
+注標原則是由下列各項所組成。
 
-* `webapi`- 控制其他外部 Web 調用。
-* `sandbox_artifacts`- 控制沙箱外掛程式[(python](../query/pythonplugin.md) | [R](../query/rplugin.md))。
+* **CalloutType** -定義標注的類型，可以是 `kusto` 、 `sql` 或。`webapi`
+* **CalloutUriRegex** -指定注標網域的允許 Regex
+* **CanCall** -指出是否允許外部呼叫的標注。
 
-標註原則由以下元件組成:
-* **標註型態**定義標註的類型,可以是以下類型之一:kusto、sql 或 webapi
-* **標記網的 UriRegex**指定標記網域的允許的 Regex
-* **CanCall**指示標註是否允許外部呼叫。
+## <a name="predefined-callout-policies"></a>預先定義的標注原則
 
-## <a name="predefined-callout-policies"></a>預先定義的標註原則
+此表格顯示一組預先定義的注標原則，預先設定在所有 Azure 資料總管叢集上，以啟用標注來選取服務。
 
-在所有 Azure 資料資源管理器群集上,有一組預定義的標註策略,不可改變地預配置,以方便標註選擇服務。
-
-|服務      |雲端        |指定  |允許的網域 |
+|服務      |Cloud        |指定  |允許的網域 |
 |-------------|-------------|-------------|-------------|
-|Kusto |公用 Azure |跨群集查詢 |`^[^.]*\.kusto\.windows\.net$` <br> `^[^.]*\.kustomfa\.windows\.net$` |
-|Kusto |黑森林 |跨群集查詢 |`^[^.]*\.kusto\.cloudapi\.de$` <br> `^[^.]*\.kustomfa\.cloudapi\.de$` |
-|Kusto |Fairfax |跨群集查詢 |`^[^.]*\.kusto\.usgovcloudapi\.net$` <br> `^[^.]*\.kustomfa\.usgovcloudapi\.net$` |
-|Kusto |月餅 |跨群集查詢 |`^[^.]*\.kusto\.chinacloudapi\.cn$` <br> `^[^.]*\.kustomfa\.chinacloudapi\.cn$` |
-|Azure DB |公用 Azure |SQL 要求 |`^[^.]*\.database\.windows\.net$` <br> `^[^.]*\.databasemfa\.windows\.net$` |
-|Azure DB |黑森林 |SQL 要求 |`^[^.]*\.database\.cloudapi\.de$` <br> `^[^.]*\.databasemfa\.cloudapi\.de$` |
-|Azure DB |Fairfax |SQL 要求 |`^[^.]*\.database\.usgovcloudapi\.net$` <br> `^[^.]*\.databasemfa\.usgovcloudapi\.net$` |
-|Azure DB |月餅 |SQL 要求 |`^[^.]*\.database\.chinacloudapi\.cn$` <br> `^[^.]*\.databasemfa\.chinacloudapi\.cn$` |
-|基線服務 |公用 Azure |基線要求 |`baseliningsvc-int.azurewebsites.net` <br> `baseliningsvc-ppe.azurewebsites.net` <br> `baseliningsvc-prod.azurewebsites.net` |
-
+|Kusto |`Public Azure` |跨叢集查詢 |`^[^.]*\.kusto\.windows\.net$` <br> `^[^.]*\.kustomfa\.windows\.net$` |
+|Kusto |`Black Forest` |跨叢集查詢 |`^[^.]*\.kusto\.cloudapi\.de$` <br> `^[^.]*\.kustomfa\.cloudapi\.de$` |
+|Kusto |`Fairfax` |跨叢集查詢 |`^[^.]*\.kusto\.usgovcloudapi\.net$` <br> `^[^.]*\.kustomfa\.usgovcloudapi\.net$` |
+|Kusto |`Mooncake` |跨叢集查詢 |`^[^.]*\.kusto\.chinacloudapi\.cn$` <br> `^[^.]*\.kustomfa\.chinacloudapi\.cn$` |
+|Azure DB |`Public Azure` |SQL 要求 |`^[^.]*\.database\.windows\.net$` <br> `^[^.]*\.databasemfa\.windows\.net$` |
+|Azure DB |`Black Forest` |SQL 要求 |`^[^.]*\.database\.cloudapi\.de$` <br> `^[^.]*\.databasemfa\.cloudapi\.de$` |
+|Azure DB |`Fairfax` |SQL 要求 |`^[^.]*\.database\.usgovcloudapi\.net$` <br> `^[^.]*\.databasemfa\.usgovcloudapi\.net$` |
+|Azure DB |`Mooncake` |SQL 要求 |`^[^.]*\.database\.chinacloudapi\.cn$` <br> `^[^.]*\.databasemfa\.chinacloudapi\.cn$` |
+|基準服務 |公用 Azure |基準化要求 |`baseliningsvc-int.azurewebsites.net` <br> `baseliningsvc-ppe.azurewebsites.net` <br> `baseliningsvc-prod.azurewebsites.net` |
 
 ## <a name="control-commands"></a>控制命令
 
-這些命令需要[所有資料庫管理員](access-control/role-based-authorization.md)許可權。
+命令需要[AllDatabasesAdmin](access-control/role-based-authorization.md)許可權。
 
-**顯示所有設定的標記原則**
+**顯示所有已設定的標注原則**
 
 ```kusto
 .show cluster policy callout
 ```
 
-**變更宣告標註原則**
+**改變標注原則**
 
 ```kusto
 .alter cluster policy callout @'[{"CalloutType": "webapi","CalloutUriRegex": "en\\.wikipedia\\.org","CanCall": true}]'
 ```
 
-**新增一組允許的標註**
+**新增一組允許的標注**
 
 ```kusto
 .alter-merge cluster policy callout @'[{"CalloutType": "webapi","CalloutUriRegex": "en\\.wikipedia\\.org","CanCall": true}, {"CalloutType": "webapi","CalloutUriRegex": "bing\\.com","CanCall": true}]'
 ```
 
-**移除所有不可變更的標註原則**
+**刪除所有不可變的標注原則**
 
 ```kusto
 .delete cluster policy callout

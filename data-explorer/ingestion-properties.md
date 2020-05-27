@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/19/2020
-ms.openlocfilehash: c66d7e11b3f64633a0dda33f7a3fa2f974536caa
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 25e80458dc4f0432e0f9e4c385fb71c4b8bf3997
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373735"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011562"
 ---
 # <a name="azure-data-explorer-data-ingestion-properties"></a>Azure 資料總管資料內嵌屬性 
 
@@ -36,7 +36,7 @@ ms.locfileid: "83373735"
 |`policy_ingestiontime`|布林值，若已指定，則描述是否要在此命令所建立的資料表上啟用[內嵌時間](kusto/management/ingestiontimepolicy.md)原則。 預設值為 `true`。|`with (policy_ingestiontime=false)`|
 |`recreate_schema` |布林值，若已指定，則描述此命令是否可以重建資料表的結構描述。 此屬性只適用于 `.set-or-replace` 命令。 如果同時設定了這兩個屬性，則此屬性優先于 `extend_schema` 屬性。|`with (recreate_schema=true)`|
 |`tags`|要與內嵌資料產生關聯的[標記](kusto/management/extents-overview.md#extent-tagging)清單，格式為 JSON 字串 |`with (tags="['Tag1', 'Tag2']")`|
-|`validationPolicy`|指出要在內嵌期間執行哪些驗證的 JSON 字串。 如需不同選項的說明，請參閱[資料](kusto/management/data-ingestion/index.md)內嵌。| `with (validationPolicy='{"ValidationOptions":1, "ValidationImplications":1}')`（這實際上是預設原則）|
+|`validationPolicy`|指出要在內嵌期間執行哪些驗證的 JSON 字串。 如需不同選項的說明，請參閱[資料](ingest-data-overview.md)內嵌。| `with (validationPolicy='{"ValidationOptions":1, "ValidationImplications":1}')`（這實際上是預設原則）|
 |`zipPattern`|從具有 ZIP 封存的儲存體內嵌資料時，請使用此屬性。 這是一個字串值，表示在選取要內嵌的 ZIP 封存中的哪些檔案時，所要使用的正則運算式。  封存中的所有其他檔案都會被忽略。|`with (zipPattern="*.csv")`|
 
 ## <a name="next-steps"></a>後續步驟

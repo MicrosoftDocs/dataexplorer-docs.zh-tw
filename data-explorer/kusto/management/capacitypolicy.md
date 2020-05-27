@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 4a2b18f28840291fc02002239297b45f38be00be
-ms.sourcegitcommit: 4e46b497d518884693a142f4ae21ea497db81861
+ms.openlocfilehash: 21514de40910691e878dbc6d237d810a13676b40
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/25/2020
-ms.locfileid: "83824912"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011528"
 ---
 # <a name="capacity-policy"></a>產能原則
 
@@ -131,7 +131,7 @@ ms.locfileid: "83824912"
 
 Kusto 會限制下列使用者起始命令的並行要求數目：
 
-* 擷取（包括[此處](../management/data-ingestion/index.md)所列的所有命令）
+* 擷取（包括[此處](../../ingest-data-overview.md)所列的所有命令）
    * [[容量原則](#capacity-policy)] 中定義的 [限制]。
 * 清除
    * 全域目前已固定于每個叢集一個。

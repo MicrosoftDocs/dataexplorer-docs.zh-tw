@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: ce86e24fbd13221fe333f281dac3ba3b6ac73a1f
-ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
+ms.openlocfilehash: 3f1371fe298b2d0e066fc3a278cc3b560050416c
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83404252"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011579"
 ---
 # <a name="partitioning-and-composing-intermediate-results-of-aggregations"></a>分割和組成匯總的中繼結果
 
@@ -133,7 +133,7 @@ PageViewsHllTDigest
 
 ::: zone pivot="azuredataexplorer"
 
-若要解決這個問題，新增的資料可能會在所 `hll` `tdigest` [`hll()`](hll-aggfunction.md) 需的作業是時， `dcount` 或使用 [`tdigest()`](tdigest-aggfunction.md) 或的需要的作業為百分位數 [`set/append`](../management/data-ingestion/index.md) [`update policy`](../management/updatepolicy.md) 時，以或值的形式加入至臨時表。 在這種情況下，或的中繼結果 `dcount` `tdigest` 會儲存至另一個資料集，而該 dataset 應小於目標大型。
+若要解決這個問題，新增的資料可能會在所 `hll` `tdigest` [`hll()`](hll-aggfunction.md) 需的作業是時， `dcount` 或使用 [`tdigest()`](tdigest-aggfunction.md) 或的需要的作業為百分位數 [`set/append`](../../ingest-data-overview.md) [`update policy`](../management/updatepolicy.md) 時，以或值的形式加入至臨時表。 在這種情況下，或的中繼結果 `dcount` `tdigest` 會儲存至另一個資料集，而該 dataset 應小於目標大型。
 
 ::: zone-end
 

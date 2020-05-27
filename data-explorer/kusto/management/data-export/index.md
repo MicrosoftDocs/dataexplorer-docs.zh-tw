@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/09/2019
-ms.openlocfilehash: 88bb9e6541d9dc5c934affc8f777f836aad86ae1
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: f8c05967d684f9723dd26085eddda7261a7eb19b
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373500"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011392"
 ---
 # <a name="data-export"></a>資料匯出
 
@@ -23,7 +23,7 @@ ms.locfileid: "83373500"
 
 * **用戶端匯出**：在最簡單的形式中，可以在用戶端上進行資料匯出 (用戶端會對服務執行查詢、讀回結果，然後將其寫入某處)。 這種形式的資料匯出依賴用戶端工具來執行匯出，最常見於工具執行所在的本機檔案系統。 支援此模型的工具包括 [Kusto.Explorer](../../tools/kusto-explorer.md)、[Web UI](../../../web-query-data.md) 和其它工具。
 
-* **服務端匯出 (提取)** ：如果匯出的目標是 Kusto 資料表 (位於與查詢相同的叢集/資料庫或其他叢集/資料庫上)，請在目標資料表上使用「從查詢內嵌」流程。 此流程會執行查詢，並將其結果立即內嵌到 Kusto 資料表中。 請參閱[資料內嵌](../data-ingestion/index.md)。
+* **服務端匯出 (提取)** ：如果匯出的目標是 Kusto 資料表 (位於與查詢相同的叢集/資料庫或其他叢集/資料庫上)，請在目標資料表上使用「從查詢內嵌」流程。 此流程會執行查詢，並將其結果立即內嵌到 Kusto 資料表中。 請參閱[資料內嵌](../../../ingest-data-overview.md)。
 
 
 

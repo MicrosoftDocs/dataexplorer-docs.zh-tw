@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: d46a8669c523955f74d3f489c7b10e5b0f7ccef6
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: e35245cf767e3cf82ab61d5ce0704015d996cd7c
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373293"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011364"
 ---
 # <a name="externaldata-operator"></a>externaldata 運算子
 
@@ -33,7 +33,7 @@ ms.locfileid: "83373293"
 
 * *StorageConnectionString*：[儲存體連接字串](../api/connection-strings/storage.md)會描述保存要傳回之資料的儲存體成品。
 
-* *Prop1*， *Value1*，...：描述如何解讀從儲存體取得之資料的其他屬性，如 [內嵌[屬性](../management/data-ingestion/index.md)] 底下所列。
+* *Prop1*， *Value1*，...：描述如何解讀從儲存體取得之資料的其他屬性，如 [內嵌[屬性](../../ingestion-properties.md)] 底下所列。
     * 目前支援的屬性： `format` 和 `ignoreFirstRecord` 。
     * 支援的資料格式：支援任何內嵌[資料格式](../../ingestion-supported-formats.md)，包括 `csv` 、 `tsv` 、 `json` 、 `parquet` 、 `avro` 。
 
