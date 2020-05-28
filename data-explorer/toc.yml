@@ -88,7 +88,7 @@
               href: data-connection-event-hub-python.md
             - name: Azure Resource Manager 範本
               href: data-connection-event-hub-resource-manager.md
-        - name: Event Grid
+        - name: 事件方格
           items:
             - name: Azure 入口網站
               href: ingest-data-event-grid.md
@@ -144,6 +144,8 @@
               href: machine-learning-clustering.md
     - name: 顯現資料
       items:
+        - name: Azure Data Explorer 儀表板
+          href: azure-data-explorer-dashboards.md
         - name: Power BI
           items:
             - name: 最佳作法
@@ -152,7 +154,7 @@
               href: power-bi-connector.md
             - name: 已匯入查詢
               href: power-bi-imported-query.md
-            - name: SQL 查詢 (SQL query)
+            - name: SQL 查詢
               href: power-bi-sql-query.md
         - name: Excel
           items:
@@ -473,7 +475,7 @@
               href: ./kusto/query/projectawayoperator.md
             - name: project-rename 運算子
               href: ./kusto/query/projectrenameoperator.md
-            - name: project-reorder 運算子
+            - name: project-reorder operator
               href: ./kusto/query/projectreorderoperator.md
             - name: parse 運算子
               href: ./kusto/query/parseoperator.md
@@ -533,7 +535,7 @@
               href: ./kusto/query/tablefunction.md
             - name: toscalar()
               href: ./kusto/query/toscalarfunction.md
-        - name: 純量運算子
+        - name: Scalar 運算子
           items:
             - name: 位元 (二元) 運算子
               href: ./kusto/query/binoperators.md
@@ -1383,7 +1385,6 @@
         - name: 安全性角色
           href: ./kusto/management/security-roles.md
         - name: 資料擷取
-          href: ./kusto/management/data-ingestion/index.md
           items:
             - name: 從儲存體內嵌
               href: ./kusto/management/data-ingestion/ingest-from-storage.md
@@ -1438,8 +1439,6 @@
               href: ./kusto/management/access-control/role-based-authorization.md
             - name: 如何進行 AAD 驗證
               href: ./kusto/management/access-control/how-to-authenticate-with-aad.md
-            - name: 如何佈建 AAD 應用程式
-              href: ./kusto/management/access-control/how-to-provision-aad-app.md
         - name: 進階資料管理
           items:
             - name: 範圍 (資料分區) 概觀
