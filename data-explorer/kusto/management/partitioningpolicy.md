@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: e6f103d8957416c55a4562fb646e8ccb17ddf1e5
-ms.sourcegitcommit: 9810acae3f1c83b8efe7b952d3bada2ff496b024
+ms.openlocfilehash: b2bb03511afed386e4c7519471481b7ecf5b6291
+ms.sourcegitcommit: e82e1bcfcb456e89a1afb19fc6e874ca9d70c575
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83444710"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84110906"
 ---
 # <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
 
@@ -24,7 +24,7 @@ ms.locfileid: "83444710"
 
 原則的主要目的是要改善已知會縮小至分割區資料行中的一小部分值的查詢效能，以及（或）高基數位符串資料行上的匯總/聯結。 次要的可能優點是資料的壓縮較佳。
 
-> [!WARNING]
+> [!CAUTION]
 > 雖然未針對可定義原則的資料表數量設定硬式編碼限制，但每個額外的資料表都會增加在叢集節點上執行的背景資料分割進程的負擔，而且可能需要叢集的其他資源-請參閱[容量](#capacity)。
 
 ## <a name="partition-keys"></a>資料分割索引鍵
@@ -178,7 +178,7 @@ ms.locfileid: "83444710"
   * 單一資料分割作業之來源範圍的資料列計數總和的最大目標。
   * 這個屬性是*選擇性*的，其預設值為 `0` （在此情況下，5000000記錄的預設目標會生效）。
 
-## <a name="notes"></a>注意
+## <a name="notes"></a>備忘錄
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
