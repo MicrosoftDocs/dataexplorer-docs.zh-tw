@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 22d3744cfa83a003830acc07710fd459003dbf20
-ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
+ms.openlocfilehash: b40ca669df7671b1451166f6bfc1c7c680713166
+ms.sourcegitcommit: 1f50c6688a2b8d8a3976c0cd0ef40cde2ef76749
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82907193"
+ms.lasthandoff: 05/29/2020
+ms.locfileid: "84202954"
 ---
 # <a name="active_users_count-plugin"></a>active_users_count 外掛程式
 
 計算值的相異計數，其中每個值在回顧期間至少出現在最小週期數。
 
-僅適用于計算「風扇」的相異計數，而不包含「非風扇」的外觀。 只有當使用者在回顧期間處於作用中狀態時，才會將其視為「風扇」。 回顧期間只會用來判斷使用者是否被視為`active` （「風扇」）。 匯總本身不會包含回顧視窗中的使用者。 相較之下， [sliding_window_counts](sliding-window-counts-plugin.md)匯總會在回顧期間的滑動視窗上執行。
+僅適用于計算「風扇」的相異計數，而不包含「非風扇」的外觀。 只有當使用者在回顧期間處於作用中狀態時，才會將其視為「風扇」。 回顧期間只會用來判斷使用者是否被視為（「 `active` 風扇」）。 匯總本身不會包含回顧視窗中的使用者。 相較之下， [sliding_window_counts](sliding-window-counts-plugin.md)匯總會在回顧期間的滑動視窗上執行。
 
 ```kusto
 T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), startofday(now()), 7d, 1d, 2, 7d, dim1, dim2, dim3)
@@ -27,7 +27,7 @@ T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), start
 
 **語法**
 
-*T* `| evaluate` `,` *TimelineColumn* `,` *Bin* *dim2* *IdColumn* `,` *Period* *End* `,` *LookbackWindow* `,` *dim1* *Start* `,` IdColumn TimelineColumn`,` Start`,` End`,` LookbackWindow Period`,` *ActivePeriodsCount* Bin [dim1 dim2 ...] `active_users_count(``)`
+*T* `| evaluate` `active_users_count(` *IdColumn* `,` *TimelineColumn* `,` *Start* `,` *End* `,` *LookbackWindow* `,` *Period* `,` *ActivePeriodsCount* `,` *Bin* `,` [*dim1* `,` *dim2* `,` ...]`)`
 
 **引數**
 
@@ -39,7 +39,7 @@ T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), start
 * *LookbackWindow*：定義檢查使用者外觀之期間的滑動時間範圍。 回顧期間從（[目前的外觀]-[回顧視窗]）開始，並于（[目前的外觀]）結束。 
 * *Period*：純量常數 timespan 會計算為單一外觀（如果使用者出現在此時間範圍的至少不同 ActivePeriodsCount 中，則會被視為作用中。
 * *ActivePeriodsCount*：用來決定使用者是否作用中的相異作用期間數目最少。 [作用中使用者] 是出現在 [使用中的期間] （等於或大於） [作用中] 的使用者人數。
-* *Bin*：分析步驟期間的純量常數值。 可以是數值/日期時間/時間戳記值，或為`week` / `month` / `year`的字串。 所有期間都會是對應的[startofweek](startofweekfunction.md)/[startofmonth](startofmonthfunction.md)/[startofyear](startofyearfunction.md)函數。
+* *Bin*：分析步驟期間的純量常數值。 可以是數值/日期時間/時間戳記值，或為的字串 `week` / `month` / `year` 。 所有期間都會是對應的[startofweek](startofweekfunction.md) / [startofmonth](startofmonthfunction.md) / [startofyear](startofyearfunction.md)函數。
 * *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 
 **傳回**
@@ -88,7 +88,7 @@ T | evaluate active_users_count(User, Timestamp, Start, End, LookbackWindow, Per
 |2018-07-01 00：00：00.0000000|1|
 |2018-07-15 00：00：00.0000000|1|
 
-如果使用者符合下列其中一個準則，則會將其視為作用中： 
+如果使用者滿足下列兩個準則，則會將其視為作用中： 
 * 使用者在至少三個不同的日子（Period = 1d，ActivePeriods = 3）中出現。
 * 使用者已在8d 的回顧視窗中看到，並包含其目前的外觀。
 
