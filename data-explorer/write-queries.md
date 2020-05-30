@@ -7,18 +7,18 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/07/2019
-ms.openlocfilehash: 7b43218d3d1894341ce997f4cfddcc3abbf1e39c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4490310664a7c27a319ce758a63b1dc90be8bef0
+ms.sourcegitcommit: 3cdb365c0174e517fb5cb16784da278ceb801b23
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81499315"
+ms.lasthandoff: 05/29/2020
+ms.locfileid: "84214405"
 ---
 # <a name="write-queries-for-azure-data-explorer"></a>撰寫 Azure 資料總管查詢
 
 在本文中，您將學到如何在 Azure 資料總管中使用查詢語言，以運用最常見的運算子執行基本查詢。 您也會了解一些該語言更進階的功能。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 有兩種方式可執行本文中的查詢：
 
@@ -31,7 +31,7 @@ ms.locfileid: "81499315"
 
 ## <a name="overview-of-the-query-language"></a>查詢語言概觀
 
-Azure 資料總管中的查詢語言是一種負責處理資料並傳回結果的唯讀要求。 該要求是採用針對讓語法易於理解、撰寫及自動執行所設計的資料流程模型，並採用純文字加以陳述。 此資料所使用的結構描述實體其組織架構類似於 SQL 的階層：資料庫、資料表與資料欄。
+Azure 資料總管中的查詢是處理資料和傳回結果的唯讀要求。 該要求是採用針對讓語法易於理解、撰寫及自動執行所設計的資料流程模型，並採用純文字加以陳述。 此資料所使用的結構描述實體其組織架構類似於 SQL 的階層：資料庫、資料表與資料欄。
 
 此查詢包含一系列以分號 (`;`) 分隔的查詢陳述式，其中至少有一個陳述式為表格式運算陳述式，這種陳述式所產生的資料會以類似表格之網格的資料行與資料列方式排列。 此查詢的表格式運算陳述式會產生查詢的結果。
 
@@ -210,7 +210,7 @@ StormEvents
 
 - 每個依值組合的一個資料列
 
-### <a name="render"></a>render
+### <a name="render"></a>轉譯
 
 [**render**](kusto/query/renderoperator.md)：以圖形化輸出呈現結果。
 
@@ -264,7 +264,7 @@ StormEvents
 > [!NOTE]
 > **render** 運算子是用戶端功能，而非引擎的一部分。 它會整合到該語言中以方便使用。 Web 應用程式支援下列選項：長條圖、直條圖、圓形圖、時間圖表及折線圖。 
 
-## <a name="scalar-operators"></a>純量運算子
+## <a name="scalar-operators"></a>Scalar 運算子
 
 本節說明一些最重要的純量運算子。
 
@@ -612,11 +612,11 @@ StormEvents
 | project State, FloodReports
 ```
 
-### <a name="mv-expand"></a>mv 延伸
+### <a name="mv-expand"></a>mv-展開
 
-[**mv-展開**](kusto/query/mvexpandoperator.md):從動態類型列展開多值集合,以便集合中的每個值都獲得單獨的行。 所展開資料列中的其他所有資料行則會重複。 並且與 makelist 相反。
+[**mv-expand**](kusto/query/mvexpandoperator.md)：從動態類型的資料行展開多值集合，讓集合中的每個值都能取得個別的資料列。 所展開資料列中的其他所有資料行則會重複。 並且與 makelist 相反。
 
-以下查詢通過創建一個集,然後使用它來演示**mv-展開**功能來生成範例數據。
+下列查詢會藉由建立集合，然後使用它來示範**mv 展開**功能，來產生範例資料。
 
 **\[**[**按一下以執行查詢**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAFWOQQ6CQAxF9yTcoWGliTcws1MPIFygyk9EKTPpVBTj4Z2BjSz%2f738v7WF06r1vD2xcp%2bCoNq9yHDFYLIsvvW5Q0JybKYCco2omqnyNTxHW7oPFckbwajFZhB%2bIsE1trNZ0gi1dpuRmQ%2baC%2bjuuthS7Fbwvi%2f%2bP8lpGvAMP7Wr3A6BceSu7AAAA)**\]**
 
@@ -710,7 +710,7 @@ X
 ```
 
 > [!TIP]
-> 在聯結之前，使用 **where** 與 **project** 運算子來減少輸入資料表中的資料列與資料行數目。 如果某個資料表一定會比另一個資料表還小，請將它做為聯結的左側 (管線)。 聯結相符項目的資料行必須具有相同名稱。 如有必要,請使用**項目**運算符重命名其中一個表中的列。
+> 在聯結之前，使用 **where** 與 **project** 運算子來減少輸入資料表中的資料列與資料行數目。 如果某個資料表一定會比另一個資料表還小，請將它做為聯結的左側 (管線)。 聯結相符項目的資料行必須具有相同名稱。 必要時，請使用**專案**運算子來重新命名其中一個資料表中的資料行。
 
 ### <a name="serialize"></a>serialize
 
@@ -727,7 +727,7 @@ StormEvents
 | extend row_number = row_number()
 ```
 
-如果行集**parse**是:**排序**、**頂部**或**範圍**運算元的結果,則也被視為序列化,可以選擇後跟**專案**,**專案離開**、**擴展**、**解析****、mv-展開**或**獲取**運算符號。
+如果資料列集的結果為： **sort**、 **top**或**range**運算子，則也會將它視為序列化，選擇性地緊接著**專案**、**專案離開**、**擴充**、 **where**、 **parse**、 **mv-expand**或**take**運算子。
 
 **\[**[**按一下以執行查詢**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlVIzi%2fNK9HQVEiqVAguSSxJBcvmF5XABRQSi5NBgqkVJal5KQpF%2beXxeaW5SalFCrZIHA1NAEGimf5iAAAA)**\]**
 
