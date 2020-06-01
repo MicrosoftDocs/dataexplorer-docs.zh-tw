@@ -8,21 +8,24 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 80e38c1782a4476181fe73c5f77d6460f2ef539f
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 8fd83615de466c238a590273b228c118e2cd1b46
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271225"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257835"
 ---
 # <a name="mv-apply-operator"></a>mv-apply 運算子
 
-運算子會將 `mv-apply` 其輸入資料表中的每筆記錄展開為 subtable、將子查詢套用至每個 subtable，並傳回所有子查詢的結果聯集。
+將子查詢套用至每一筆記錄，並傳回所有子查詢結果的聯集。
 
 例如，假設資料表 `T` 具有 `Metric` 類型的資料行， `dynamic` 其值為數字的陣列 `real` 。 下列查詢會找出每個值中的兩個最大值 `Metric` ，並傳回對應至這些值的記錄。
 
 ```kusto
-T | mv-apply Metric to typeof(real) on (top 2 by Metric desc)
+T | mv-apply Metric to typeof(real) on 
+(
+   top 2 by Metric desc
+)
 ```
 
 `mv-apply`運算子具有下列處理步驟：

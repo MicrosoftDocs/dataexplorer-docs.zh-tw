@@ -1,6 +1,6 @@
 ---
-title: 行序策略 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 RowOrder 策略。
+title: RowOrder 原則-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 RowOrder 原則。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: cda4c9a6017071878832fab376a0376d250f3ed6
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 63aad71854c73a3d1f1837c3665a152db8b48d13
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520242"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84258023"
 ---
-# <a name="roworder-policy"></a>行Order 政策
+# <a name="roworder-policy"></a>RowOrder 原則
 
-本文介紹了用於創建和更改[行訂單策略](../management/roworderpolicy.md)的控制命令。
+本文描述用來建立和變更資料[列順序原則](../management/roworderpolicy.md)的控制命令。
 
-## <a name="show-roworder-policy"></a>顯示列序原則
+## <a name="show-roworder-policy"></a>顯示 RowOrder 原則
 
 ```kusto
 .show table <table_name> policy roworder
@@ -27,13 +27,13 @@ ms.locfileid: "81520242"
 .show table * policy roworder
 ```
 
-## <a name="delete-roworder-policy"></a>刪除列序原則
+## <a name="delete-roworder-policy"></a>刪除 RowOrder 原則
 
 ```kusto
 .delete table <table_name> policy roworder
 ```
 
-## <a name="alter-roworder-policy"></a>變更列序原則
+## <a name="alter-roworder-policy"></a>改變 RowOrder 原則
 
 ```kusto
 .alter table <table_name> policy roworder (<row_order_policy>)
@@ -43,9 +43,9 @@ ms.locfileid: "81520242"
 .alter-merge table <table_name> policy roworder (<row_order_policy>)
 ```
 
-**範例**
+**範例** 
 
-下面的示例將行順序策略設置為`TenantId`列(升序)為主鍵,在`Timestamp`列(升序)上作為輔助鍵;然後查詢政策:
+下列範例會將資料行（遞增）上的資料列順序原則設定 `TenantId` 為主鍵，並將資料行 `Timestamp` （遞增）設為次要索引鍵。 然後會查詢原則。
 
 ```kusto
 .alter table events policy roworder (TenantId asc, Timestamp desc)
@@ -55,6 +55,6 @@ ms.locfileid: "81520242"
 .show table events policy roworder 
 ```
 
-|TableName|列訂單原則| 
+|TableName|RowOrderPolicy| 
 |---|---|
-|活動|(租戶 Id asc,時間戳| 
+|活動|（TenantId asc，時間戳記 desc）|

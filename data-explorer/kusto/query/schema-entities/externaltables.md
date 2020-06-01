@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: a3d95d3cb90b6a834b1f1538aa28da1f1ac2a97f
-ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
+ms.openlocfilehash: 2b03f4e0ef426b07f88d7c179caecca6e7dd3034
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83867047"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257819"
 ---
 # <a name="external-tables"></a>外部資料表
 
@@ -29,4 +29,5 @@ ms.locfileid: "83867047"
 * 外部資料表名稱不能與 Kusto 資料表名稱重迭。
 * 外部資料表名稱會遵循[機構名稱](./entity-names.md)的規則。
 * 每個資料庫的外部資料表上限為1000。
-* Kusto 支援[將資料匯出至外部資料表](../../management/data-export/export-data-to-an-external-table.md)以及[查詢外部資料表](../../../data-lake-query-data.md)。
+* Kusto 支援對外部資料表進行[匯出](../../management/data-export/export-data-to-an-external-table.md)和[連續匯出](../../management/data-export/continuous-data-export.md)，以及[查詢外部資料表](../../../data-lake-query-data.md)。
+    * [資料清除](../../concepts/data-purge.md)不適用於外部資料表。 永遠不會從外部資料表中刪除記錄。

@@ -1,25 +1,26 @@
 ---
-title: 使用 Azure 資源管理員樣本在 Azure 資料資源管理員中設定客戶管理金鑰
-description: 本文介紹如何使用 Azure 資源管理員範本在 Azure 資料資源管理器中配置客戶管理的數據密鑰加密。
+title: 使用 Azure Resource Manager 範本在 Azure 資料總管中設定客戶管理的金鑰
+description: 本文說明如何使用 Azure Resource Manager 範本，在 Azure 資料總管中的資料上設定客戶管理的金鑰加密。
 author: saguiitay
 ms.author: itsagui
 ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: 1af7404a20c7246b50f80385f666da886f0cc96b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1d7611537a96cf38ab33ddba30c83f721c90d11c
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81496962"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257972"
 ---
-# <a name="configure-customer-managed-keys-using-the-azure-resource-manager-template"></a>使用 Azure 資源管理員樣本設定客戶託管金鑰
+# <a name="configure-customer-managed-keys-using-the-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本設定客戶管理的金鑰
 
 > [!div class="op_single_selector"]
 > * [入口網站](customer-managed-keys-portal.md)
 > * [C#](customer-managed-keys-csharp.md)
 > * [Azure Resource Manager 範本](customer-managed-keys-resource-manager.md)
+> * [CLI](customer-managed-keys-cli.md)
 
 [!INCLUDE [data-explorer-configure-customer-managed-keys](includes/data-explorer-configure-customer-managed-keys.md)]
 
@@ -27,9 +28,9 @@ ms.locfileid: "81496962"
 
 ## <a name="configure-encryption-with-customer-managed-keys"></a>使用客戶管理的金鑰設定加密
 
-在本節中,使用 Azure 資源管理器範本配置客戶管理的密鑰。 默認情況下,Azure 資料資源管理員加密使用Microsoft管理的密鑰。 在此步驟中,將 Azure 資料資源管理器群集配置為使用客戶管理的密鑰,並指定要與群集關聯的鍵。
+在本節中，您會使用 Azure Resource Manager 範本來設定客戶管理的金鑰。 根據預設，Azure 資料總管加密會使用 Microsoft 管理的金鑰。 在此步驟中，請將您的 Azure 資料總管叢集設定為使用客戶管理的金鑰，並指定要與叢集產生關聯的金鑰。
 
-可以使用 Azure 門戶或使用 PowerShell 部署 Azure 資源管理器範本。
+您可以使用 Azure 入口網站或使用 PowerShell 來部署 Azure Resource Manager 範本。
 
 ```json
 {
@@ -77,12 +78,12 @@ ms.locfileid: "81496962"
 
 ## <a name="update-the-key-version"></a>更新金鑰版本
 
-建立金鑰的新版本時,需要更新群集才能使用新版本。 首先,打電話`Get-AzKeyVaultKey`獲取最新版本的密鑰。 然後更新群集的密鑰保管庫屬性以使用密鑰的新版本,如[使用客戶管理的密鑰配置加密](#configure-encryption-with-customer-managed-keys)所示。
+當您建立新版本的金鑰時，您必須更新叢集以使用新的版本。 首先，呼叫 `Get-AzKeyVaultKey` 以取得金鑰的最新版本。 然後，將叢集的 key vault 屬性更新為使用新版本的金鑰，如以[客戶管理的金鑰設定加密](#configure-encryption-with-customer-managed-keys)中所示。
 
 ## <a name="next-steps"></a>後續步驟
 
-* [在 Azure 中保護 Azure 資料資源管理器群集](security.md)
-* [為 Azure 資料資源管理器叢集設定託管識別](managed-identities.md)
-* 以靜態開啟加密來保護[Azure 資料資源管理員 - Azure 門戶中的叢集](manage-cluster-security.md)。
-* [使用 C 設定客戶託管金鑰#](customer-managed-keys-csharp.md)
+* [在 Azure 中保護 Azure 資料總管叢集](security.md)
+* [設定 Azure 資料總管叢集的受控識別](managed-identities.md)
+* 藉由啟用待用加密，[在 Azure 資料總管 Azure 入口網站中保護您](manage-cluster-security.md)的叢集。
+* [使用 C 設定客戶管理的金鑰#](customer-managed-keys-csharp.md)
 

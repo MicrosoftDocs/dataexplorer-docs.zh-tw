@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 7b4bade1ca874157ec843103a8bcf5236b49abfe
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 28aca460089c6dc3b70aecaff11b26cfe1c1baf4
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227786"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84258057"
 ---
 # <a name="export-data-to-an-external-table"></a>將資料匯出至外部資料表
 
@@ -27,7 +27,7 @@ ms.locfileid: "83227786"
 
 **輸出**
 
-|輸出參數 |類型 |說明
+|輸出參數 |類型 |描述
 |---|---|---
 |ExternalTableName  |String |外部資料表的名稱。
 |路徑|String|輸出路徑。
@@ -42,7 +42,8 @@ ms.locfileid: "83227786"
 * 下列屬性在 export 命令中受到支援。 如需詳細資訊，請參閱[匯出至儲存體](export-data-to-storage.md)一節： 
    * `sizeLimit`, `parquetRowGroupSize`, `distributed`.
 
-   * 如果外部資料表已分割，則會根據[範例](#partitioned-external-table-example)中所示的資料分割定義，將匯出的成品寫入其各自的目錄。 
+* 如果外部資料表已分割，則會根據[範例](#partitioned-external-table-example)中所示的資料分割定義，將匯出的成品寫入其各自的目錄。 
+  * 如果分割區值為 null/空白或為不正確目錄值，則根據目標儲存體的定義，它會被取代為的預設值 `__DEFAULT_PARTITION__` 。 
 
 * 每個分割區寫入的檔案數目取決於設定：
    * 如果外部資料表只包含 datetime 資料分割，或沒有任何資料分割，則寫入的檔案數目（針對每個分割區，如果存在）應會在叢集中的節點數目（如果已達到，則為更多 `sizeLimit` ）。 當匯出作業散發時，叢集中的所有節點都會同時匯出。 若要停用散發，讓只有單一節點執行寫入，請將設定 `distributed` 為 false。 此程式會建立較少的檔案，但會降低匯出效能。

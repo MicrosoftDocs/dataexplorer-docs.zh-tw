@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 7673b50a8d1ff401f8c2fa086b7eec34c0517238
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: e8c5642e59999c7a1bd547bfcb17cc18bf5d9e15
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373475"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84258040"
 ---
 # <a name="ingest-from-storage-using-event-grid-subscription"></a>使用事件方格訂用帳戶從儲存體內嵌
 
@@ -46,7 +46,7 @@ Azure 資料總管使用[Azure Event Grid](https://docs.microsoft.com/azure/even
 
 ## <a name="events-routing"></a>事件路由
 
-設定 Azure 資料總管叢集的 blob 儲存體連接時，請指定目標資料表屬性（資料表名稱、資料格式和對應）。 這是您資料的預設路由，也稱為 `static routig` 。
+設定 Azure 資料總管叢集的 blob 儲存體連接時，請指定目標資料表屬性（資料表名稱、資料格式和對應）。 這是您的資料的預設路由，也稱為 `static routing` 。
 您也可以使用 blob 中繼資料，為每個 blob 指定目標資料表屬性。 資料將會依內嵌[屬性](#ingestion-properties)的指定動態路由傳送。
 
 以下範例示範如何在上傳屬性之前，先設定 blob 中繼資料。 Blob 會路由傳送至不同的資料表。
@@ -77,9 +77,9 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
 
 ### <a name="event-grid-subscription"></a>事件方格訂用帳戶
 
-* Kusto 選取 `Event Hub` 為 endpoind 類型，用於傳輸 blob 儲存體事件通知。 `Event Grid schema`這是所選取的通知架構。 請注意，每個即使是中樞都可以服務一個連接。
+* Kusto 選取 `Event Hub` 為端點類型，用於傳輸 blob 儲存體事件通知。 `Event Grid schema`這是所選取的通知架構。 請注意，每個即使是中樞都可以服務一個連接。
 * Blob 儲存體訂閱連接會處理類型的通知 `Microsoft.Storage.BlobCreated` 。 建立訂用帳戶時，請務必選取它。 請注意，如果選取其他類型的通知，則會予以忽略。
-* 一個訂用帳戶可以在一個或多個容器中通知儲存體事件。 如果您想要追蹤特定容器中的檔案，請設定通知的篩選準則，如下所示：設定連線時，請 speciel 注意下列值： 
+* 一個訂用帳戶可以在一個或多個容器中通知儲存體事件。 如果您想要追蹤特定容器中的檔案，請設定通知的篩選，如下所示：設定連接時，請特別注意下列值： 
    * **Subject 開頭為**filter 是 blob 容器的*常*值前置詞。 由於套用的模式是 *startswith*，因此它可以跨越多個容器。 不允許使用萬用字元。
      *必須*設定如下： *`/blobServices/default/containers/<prefix>`* 。 例如： */blobServices/default/containers/StormEvents-2020-*
    * [主旨結尾為]**** 欄位是 Blob 的*常值*後置詞。 不允許使用萬用字元。 適合用來篩選副檔名。
@@ -88,7 +88,7 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
 
 ### <a name="data-ingestion-connection-to-azure-data-explorer"></a>Azure 資料總管的資料內嵌連接
 
-* 透過 Azure 入口網站：[在 azure 資料總管中建立 Event Grid 資料](../../../ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer)連線。
+* 透過 Azure 入口網站：[在 Azure 資料總管中建立事件方格資料連線](../../../ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer)。
 * 使用 Kusto management .NET SDK：[新增事件方格資料連線](../../../data-connection-event-grid-csharp.md#add-an-event-grid-data-connection)
 * 使用 Kusto 管理 Python SDK：[新增事件方格資料連線](../../../data-connection-event-grid-python.md#add-an-event-grid-data-connection)
 * 使用 ARM 範本：[用於新增事件方格資料連線的 Azure Resource Manager 範本](../../../data-connection-event-grid-resource-manager.md#azure-resource-manager-template-for-adding-an-event-grid-data-connection)
@@ -125,3 +125,10 @@ blob.UploadFromFile(csvCompressedLocalFileName);
 ## <a name="blob-lifecycle"></a>Blob 生命週期
 
 Azure 資料總管不會在內嵌時刪除 blob，但會保留三到五天。 使用[Azure blob 儲存體生命週期](https://docs.microsoft.com/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal)來管理您的 Blob 刪除。
+
+## <a name="known-issues"></a>已知問題
+
+使用 Azure 資料總管[匯出](../data-export/export-data-to-storage.md)事件方格內嵌所使用的檔案時，應注意下列事項： 
+* 如果提供給匯出命令的連接字串或提供給[外部資料表](../data-export/export-data-to-an-external-table.md)的連接字串是[ADLS Gen2 格式](../../api/connection-strings/storage.md#azure-data-lake-store)的連接字串（例如），但未*not* `abfss://filesystem@accountname.dfs.core.windows.net` *針對階層式命名空間啟用儲存體帳戶*，則不會觸發事件方格通知。 
+ * 如果未啟用階層命名空間的帳戶，連接字串必須使用[Blob 儲存體](../../api/connection-strings/storage.md#azure-storage-blob)格式（例如 `https://accountname.blob.core.windows.net` ）。 
+ * 請注意，即使在此情況下使用 ADLS Gen2 連接字串，匯出仍會如預期般運作，但不會觸發通知，因此事件方格內嵌將無法運作。 

@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的連續資料匯出。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/27/2020
-ms.openlocfilehash: e1978746eaac35b96b05131e79378c391b5e138b
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 4ea4532d8547011b2b281988ff1534cd1d49da86
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227769"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84258074"
 ---
 # <a name="continuous-data-export"></a>連續資料匯出
 
@@ -22,12 +22,13 @@ ms.locfileid: "83227769"
 連續資料匯出會要求您[建立外部資料表](../external-tables-azurestorage-azuredatalake.md#create-or-alter-external-table)，然後建立指向外部資料表[的連續匯出定義](#create-or-alter-continuous-export)。 
 
 > [!NOTE] 
-> * Kusto 不支援在連續匯出建立之前，匯出內嵌的歷程記錄（做為連續匯出的一部分）。 您可以使用（非連續）[匯出命令](export-data-to-an-external-table.md)分別匯出歷程記錄。 如需詳細資訊，請參閱[匯出歷程記錄資料](#exporting-historical-data)。 
+> * Kusto 不支援在連續匯出建立之前，匯出內嵌的歷程記錄（做為連續匯出的一部分）。 您可以使用（非連續）[匯出命令](export-data-to-an-external-table.md)分別匯出歷程記錄。 如需詳細資訊，請參閱[匯出歷程記錄資料](#exporting-historical-data)。
 > * 「連續匯出」不適用於使用串流內嵌的資料內嵌。 
 > * 目前，無法在啟用[資料列層級安全性原則](../../management/rowlevelsecuritypolicy.md)的資料表上設定連續匯出。
 > * `impersonate`在其[連接字串](../../api/connection-strings/storage.md)中，外部資料表不支援連續匯出。
- 
-## <a name="notes"></a>附註
+> * 如果「連續匯出」使用的成品是用來觸發事件方格通知，請參閱[事件方格檔中的已知問題一節](../data-ingestion/eventgrid.md#known-issues)。
+
+## <a name="notes"></a>注意
 
 * 僅針對 [[顯示匯出](#show-continuous-export-artifacts)的成品] 命令所報告的檔案，保證「剛好一次」匯出。 
 「連續匯出」並不保證每一筆記錄只會寫入至外部資料表一次。 如果在匯出開始之後發生失敗，而且某些成品已經寫入外部資料表，則外部資料表_可能會_包含重複專案（或甚至是損毀的檔案，以防在完成之前中止寫入作業）。 在這種情況下，成品不會從外部資料表中刪除，但*不*會在 [[顯示匯出](#show-continuous-export-artifacts)的成品] 命令中回報。 使用匯出的檔案 `show exported artifacts command` 。 
@@ -61,7 +62,7 @@ ms.locfileid: "83227769"
 
 **屬性**：
 
-| 屬性             | 類型     | 說明   |
+| 屬性             | 類型     | 描述   |
 |----------------------|----------|---------------------------------------|
 | ContinuousExportName | String   | 連續匯出的名稱。 名稱在資料庫內必須是唯一的，而且可用來定期執行連續匯出。      |
 | ExternalTableName    | String   | 要匯出的[外部資料表](../externaltables.md)名稱。  |
@@ -99,7 +100,7 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 說明                |
+| 屬性             | 類型   | 描述                |
 |----------------------|--------|----------------------------|
 | ContinuousExportName | String | 連續匯出的名稱。 |
 
@@ -110,7 +111,7 @@ with
 
 **輸出**
 
-| 輸出參數    | 類型     | 說明                                                             |
+| 輸出參數    | 類型     | 描述                                                             |
 |---------------------|----------|-------------------------------------------------------------------------|
 | CursorScopedTables  | String   | 明確限定範圍（事實）資料表的清單（JSON 序列化）               |
 | ExportProperties    | String   | 匯出屬性（JSON 序列化）                                     |
@@ -136,13 +137,13 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 說明                |
+| 屬性             | 類型   | 描述                |
 |----------------------|--------|----------------------------|
 | ContinuousExportName | String | 連續匯出的名稱。 |
 
 **輸出**
 
-| 輸出參數  | 類型     | 說明                            |
+| 輸出參數  | 類型     | 描述                            |
 |-------------------|----------|----------------------------------------|
 | 時間戳記         | Datetime | 連續匯出執行的時間戳記 |
 | ExternalTableName | String   | 外部資料表的名稱             |
@@ -169,13 +170,13 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 說明                |
+| 屬性             | 類型   | 描述                |
 |----------------------|--------|----------------------------|
 | ContinuousExportName | String | 連續匯出的名稱  |
 
 **輸出**
 
-| 輸出參數 | 類型      | 說明                                         |
+| 輸出參數 | 類型      | 描述                                         |
 |------------------|-----------|-----------------------------------------------------|
 | 時間戳記        | Datetime  | 失敗的時間戳記。                           |
 | OperationId      | String    | 失敗的作業識別碼。                    |
@@ -202,7 +203,7 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 說明                |
+| 屬性             | 類型   | 描述                |
 |----------------------|--------|----------------------------|
 | ContinuousExportName | String | 連續匯出的名稱 |
 
@@ -222,7 +223,7 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 說明                |
+| 屬性             | 類型   | 描述                |
 |----------------------|--------|----------------------------|
 | ContinuousExportName | String | 連續匯出的名稱 |
 

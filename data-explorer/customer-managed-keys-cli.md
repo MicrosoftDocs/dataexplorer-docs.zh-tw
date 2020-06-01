@@ -1,0 +1,52 @@
+---
+title: 使用 Azure CLI 設定客戶管理的金鑰
+description: 本文說明如何使用 Azure CLI 在 Azure 資料總管中的資料上設定客戶管理的金鑰加密。
+author: orspod
+ms.author: orspodek
+ms.reviewer: astauben
+ms.service: data-explorer
+ms.topic: conceptual
+ms.date: 06/01/2020
+ms.openlocfilehash: 570ec818a330074cdf46075571d831c718273e64
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.translationtype: MT
+ms.contentlocale: zh-TW
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84262124"
+---
+# <a name="configure-customer-managed-keys-using-azure-cli"></a>使用 Azure CLI 設定客戶管理的金鑰
+
+> [!div class="op_single_selector"]
+> * [入口網站](customer-managed-keys-portal.md)
+> * [C#](customer-managed-keys-csharp.md)
+> * [Azure Resource Manager 範本](customer-managed-keys-resource-manager.md)
+> * [CLI](customer-managed-keys-cli.md)
+
+[!INCLUDE [data-explorer-configure-customer-managed-keys](includes/data-explorer-configure-customer-managed-keys.md)]
+
+## <a name="enable-encryption-with-customer-managed-keys-in-the-azure-portal"></a>在 Azure 入口網站中使用客戶管理的金鑰來啟用加密
+
+本文說明如何使用 Azure CLI 用戶端來啟用客戶管理的金鑰加密。 根據預設，Azure 資料總管加密會使用 Microsoft 管理的金鑰。 將您的 Azure 資料總管叢集設定為使用客戶管理的金鑰，並指定要與叢集產生關聯的金鑰。
+
+1. 執行下列命令以登入 Azure：
+
+    ```azurecli-interactive
+    az login
+    ```
+
+1. 設定您的叢集註冊所在的訂用帳戶。 以您想要使用的 Azure 訂用帳戶名稱取代*MyAzureSub* 。
+
+    ```azurecli-interactive
+    az account set --subscription MyAzureSub
+    ```
+
+1. 執行下列命令來設定新的金鑰。
+    ```azurecli-interactive
+    az kusto cluster update --cluster-name "mytestcluster" --resource-group "mytestrg" --key-vault-properties key-name="<key-name>" key-version="<key-version>" key-vault-uri="<key-vault-uri>"
+    ```
+1. 執行下列命令並檢查 ' keyVaultProperties ' 屬性，以確認已成功更新叢集。
+
+    ```azurecli-interactive
+    az kusto cluster show --cluster-name "mytestcluster" --resource-group "mytestrg"
+    ```
+

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/09/2019
-ms.openlocfilehash: 2c4443c0a9301dbc6bb3e65392163da0cc237f74
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 55864dd408f35c59398ea1b93f18c0834a611a90
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617879"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84258091"
 ---
 # <a name="kql-over-tds"></a>KQL over TDS
 
@@ -25,7 +25,7 @@ Kusto 允許[預存函數](../../query/schema-entities/stored-functions.md)執�
 
 例如，預存函數 MyFunction：
 
-|名稱 |參數|body|資料夾|DocString
+|名稱 |參數|主體|資料夾|DocString
 |---|---|---|---|---
 |MyFunction |（myLimit： long）| {StormEvents &#124; 限制 myLimit}|MyFolder|使用參數的示範函式||
 
@@ -49,7 +49,7 @@ Kusto 允許[預存函數](../../query/schema-entities/stored-functions.md)執�
   }
 ```
 
-> [!注意：] 使用名為`kusto`的明確架構來呼叫預存函式，以區別 Kusto 儲存的函數和模擬的 SQL 系統預存程式。
+> [!注意：] 使用名為的明確架構來呼叫預存函式 `kusto` ，以區別 Kusto 儲存的函數和模擬的 SQL 系統預存程式。
 
 您也可以從 T-sql 呼叫 Kusto 預存函數，例如 SQL 表格式函數：
 
@@ -61,9 +61,9 @@ SELECT * FROM kusto.MyFunction(10)
 
 ## <a name="executing-kql-query"></a>執行 KQL 查詢
 
-預存程式`sp_execute_kql`會執行[KQL](../../query/index.md)查詢（包括參數化查詢）。 此程式類似于 SQL server `sp_executesql`。
+預存程式會 `sp_execute_kql` 執行[KQL](../../query/index.md)查詢（包括參數化查詢）。 此程式類似于 SQL server `sp_executesql` 。
 
-的第一個參數`sp_execute_kql`是 KQL 查詢。 您可以引進其他參數，它們的作用就像[查詢參數](../../query/queryparametersstatement.md)一樣。
+的第一個參數 `sp_execute_kql` 是 KQL 查詢。 您可以引進其他參數，它們的作用就像[查詢參數](../../query/queryparametersstatement.md)一樣。
 
 例如：
 
@@ -88,4 +88,5 @@ SELECT * FROM kusto.MyFunction(10)
   }
 ```
 
-> [!注意：] 透過 TDS 呼叫時，不需要宣告參數，因為參數類型是透過通訊協定所設定。
+> [!NOTE]
+> 透過 TDS 呼叫時，不需要宣告參數，因為參數類型是透過通訊協定所設定。
