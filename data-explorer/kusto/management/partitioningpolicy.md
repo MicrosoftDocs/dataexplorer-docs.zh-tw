@@ -8,19 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: b2bb03511afed386e4c7519471481b7ecf5b6291
-ms.sourcegitcommit: e82e1bcfcb456e89a1afb19fc6e874ca9d70c575
+ms.openlocfilehash: 829e23fc087e732db4a555f3007f760249df15fe
+ms.sourcegitcommit: d660e39f24bd9a0e1c788cb86d4da9afd981cfc9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84110906"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84268077"
 ---
 # <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
 
 分割原則會針對特定資料表定義是否應該分割[範圍（資料分區）](../management/extents-overview.md) 。
-
-> [!NOTE]
-> 資料分割功能目前為*預覽*狀態。
 
 原則的主要目的是要改善已知會縮小至分割區資料行中的一小部分值的查詢效能，以及（或）高基數位符串資料行上的匯總/聯結。 次要的可能優點是資料的壓縮較佳。
 
@@ -178,7 +175,7 @@ ms.locfileid: "84110906"
   * 單一資料分割作業之來源範圍的資料列計數總和的最大目標。
   * 這個屬性是*選擇性*的，其預設值為 `0` （在此情況下，5000000記錄的預設目標會生效）。
 
-## <a name="notes"></a>備忘錄
+## <a name="notes"></a>注意
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
