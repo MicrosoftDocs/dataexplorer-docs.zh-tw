@@ -1,6 +1,6 @@
 ---
-title: 紀錄管理 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的日誌管理。
+title: 日誌管理-Azure 資料總管
+description: 本文說明 Azure 資料總管中的日誌管理。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,78 +8,68 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/19/2019
-ms.openlocfilehash: bbe5ab4bda42fdfd9382c7e71da85789c13f6987
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 64b0f8179a328ce811747b05a90516fd8b6029be
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520786"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294401"
 ---
-# <a name="journal-management"></a>日記帳管理
+# <a name="journal-management"></a>日誌管理
 
- `Journal`包含有關在 Kusto 資料庫上執行的元數據操作的資訊。
+ `Journal`包含在 Azure 資料總管資料庫上完成的中繼資料作業相關資訊。
 
-元數據操作可能是由使用者執行的控制命令或系統執行的內部控制命令(如按保留丟棄範圍)執行的控制命令的結果。
+中繼資料作業可能是由使用者執行的控制命令，或系統執行的內部控制命令所產生，例如透過保留來放置範圍。
 
-**注意：**
+> [!NOTE]
+> * 包含*加入*新範圍的中繼資料作業（例如 `.ingest` 、 `.append` `.move` 和其他）將不會有所顯示的相符事件 `Journal` 。
+> * 結果集資料行中的資料，以及其呈現的格式不是合約。 
+  不建議您對這些專案進行相依性。
 
-- 包含*新增新*延伸的碟區(`.ingest``.append`如`.move`等)的中繼資料操作將沒有顯示`Journal`在中的匹配事件。
-- 結果集列中的數據以及顯示結果集的格式*不是*合同的,因此*不*建議依賴它們。
-
-|事件        |EventTimestamp     |資料庫  |EntityName|更新實體名稱|實體版本|實體容器名稱|
+|事件        |EventTimestamp     |資料庫  |EntityName|UpdatedEntityName|EntityVersion|Entitycontainername.entitysetname|
 |-------------|-------------------|----------|----------|-----------------|-------------|-------------------|
-|建立表 |2017-01-05 14:25:07|內部資料庫|我的表1  |我的表1         |v7.0         |內部資料庫         |
-|重新命名表 |2017-01-13 10:30:01|內部資料庫|我的表1  |我的表2         |v8.0         |內部資料庫         |  
+|建立-資料表 |2017-01-05 14:25:07|InternalDb|MyTable1  |MyTable1         |7.0 版         |InternalDb         |
+|重新命名資料表 |2017-01-13 10:30:01|InternalDb|MyTable1  |MyTable2         |8.0 版         |InternalDb         |  
 
-|原始實體狀態|更新實體狀態                                              |變更命令                                                                                                          |主體            |
+|OriginalEntityState|UpdatedEntityState                                              |ChangeCommand                                                                                                          |主體            |
 |-------------------|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|---------------------|
-|.                  |名稱:MyTable1,屬性:名稱[我的表1]。[col1],類型[I32'|.建立表 MyTable1 (col1:int)                                                                                      |imike@fabrikam.com
-|.                  |db 屬性 (太長,無法在此處顯示)               |.建立資料庫測試DB保留https://imfbkm.blob.core.windows.net/md(*"https://imfbkm.blob.core.windows.net/data, *" " )|AAD 應用程式 id_76263cdb-abcd-545644e9c404
-|名稱:MyTable1,屬性:名稱[我的表1]。[col1],類型[I32'|名稱:MyTable2,屬性:名稱[我的表1]。[col1],類型[I32'|.將表 MyTable1 重新命名為 MyTable2|rdmik@fabrikam.com
+|.                  |名稱： MyTable1，屬性： Name = ' [MyTable1]。[col1] '，類型 = ' I32 '|。建立資料表 MyTable1 （col1： int）                                                                                      |imike@fabrikam.com
+|.                  |資料庫屬性（在此顯示太長）         |。 create database TestDB 會保存（@ " https://imfbkm.blob.core.windows.net/md "，@ " https://imfbkm.blob.core.windows.net/data "）|Azure AD 應用程式識別碼 = 76263cdb-abcd-545644e9c404
+|名稱： MyTable1，屬性： Name = ' [MyTable1]。[col1] '，類型 = ' I32 '|名稱： MyTable2，屬性： Name = ' [MyTable1]。[col1] '，類型 = ' I32 '|。將 table MyTable1 重新命名為 MyTable2|rdmik@fabrikam.com
 
+|Item                 |描述                                                              |                                
+|---------------------|-------------------------------------------------------------------------|
+|事件                |中繼資料事件名稱                                                  |
+|EventTimestamp       |事件時間戳記                                                      |                        
+|資料庫             |此資料庫的中繼資料已在事件之後變更                |
+|EntityName           |作業執行所在的機構名稱，在變更之前    |
+|UpdatedEntityName    |變更後的新機構名稱                                     |
+|EntityVersion        |變更後的新中繼資料版本（db/cluster）               |
+|Entitycontainername.entitysetname  |實體容器名稱（entity = column，container = table）               |
+|OriginalEntityState  |實體（實體屬性）在變更之前的狀態            |
+|UpdatedEntityState   |變更後的新狀態                                           |
+|ChangeCommand        |觸發中繼資料變更的已執行控制命令          |
+|主體            |執行控制命令的主體（使用者/應用程式）               |
+    
+## <a name="show-journal"></a>。顯示日誌
 
-事件 - 中繼資料名稱。
-
-事件時間戳 - 事件時間戳。
-
-資料庫 - 此資料庫的中繼資料在事件發生後被更改。
-
-實體名稱 - 實體名稱,操作在更改之前執行。
-
-更新的實體名稱 - 更改後的新實體名稱。
-
-實體版本 - 更改後的新元數據版本(db/群集)。
-
-實體容器名稱 - 實體容器名稱(即:實體\列、容器\表)。
-
-原始實體狀態 - 更改前實體的狀態(實體屬性)。
-
-更新實體狀態 - 更改後的新狀態。
-
-變更命令 - 觸發中資料更改的已執行控制命令。
-
-主體 - 執行控制命令的主體(用戶/應用)。
-                    
-## <a name="show-journal"></a>.顯示紀錄
-
-該`.show journal`命令返回元數據更改的清單,該列表位於使用者具有管理員訪問許可權的資料庫/群集上。
+`.show journal`命令會傳回資料庫或使用者具有系統管理員存取權的叢集上的中繼資料變更清單。
 
 **權限**
 
-每個人都可以執行命令(群集訪問)。 
+每個人（叢集存取）都可以執行命令。 
 
-傳回的結果將包括: 
-1. 執行命令的使用者的所有日記帳分錄。 
-2. 執行命令的使用者有權訪問所有資料庫的日記帳分錄。 
-3. 如果執行該命令的使用者是群集管理員,則所有群集日記帳分錄。 
+傳回的結果將包含： 
+- 執行命令之使用者的所有記錄項目。 
+- 執行命令的使用者具有系統管理員存取權的所有資料庫記錄項目。 
+- 所有叢集記錄項目（如果執行命令的使用者是叢集系統管理員）。 
 
-## <a name="show-database-databasename-journal"></a>.顯示*資料庫名稱*紀錄 
+## <a name="show-database-databasename-journal"></a>。顯示資料庫*DatabaseName*日誌 
 
-資料庫`journal`名稱 指令傳回特定資料庫元資料更改的日誌。 *DatabaseName* `.show` `database`
+`.show` `database` *DatabaseName* `journal` 命令會針對特定的資料庫中繼資料變更傳回日誌。
 
 **權限**
 
-每個人都可以執行命令(群集訪問)。 傳回的結果將包括: 
-1. 如果執行該命令的用戶是*資料庫名稱*中的資料庫管理員,則資料庫*資料庫名稱*的所有日誌條目。 
-2. 否則,*資料庫名稱*和執行命令的使用者的所有日記條目。 
-
+每個人（叢集存取）都可以執行命令。 傳回的結果包括： 
+- 如果執行命令的使用者是*DatabaseName*中的資料庫管理員，則為資料庫*DatabaseName*的所有記錄項目。 
+- 否則，就是資料庫 `DatabaseName` 和執行命令之使用者的所有記錄項目。 

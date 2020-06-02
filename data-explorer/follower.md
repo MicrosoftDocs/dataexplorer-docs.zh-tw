@@ -7,12 +7,12 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/07/2019
-ms.openlocfilehash: 35fd37db22b2f07dcee9d7f67c700414a4cfc5d3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 942c0577b8fb784af74cf09aec4c8a68a7be8dda
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373858"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294554"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>使用在 Azure 資料總管中的資料，來連接資料庫
 
@@ -34,7 +34,7 @@ ms.locfileid: "83373858"
 
 ## <a name="attach-a-database"></a>附加資料庫
 
-您可以使用各種方法來附加資料庫。 在本文中，我們會討論如何使用 c # 或 Azure Resource Manager 範本附加資料庫。 若要附加資料庫，您必須擁有領導者叢集和消費者叢集的許可權。 如需許可權的詳細資訊，請參閱[管理許可權](#manage-permissions)。
+您可以使用各種方法來附加資料庫。 在本文中，我們會討論如何使用 c #、Python 或 Azure Resource Manager 範本附加資料庫。 若要附加資料庫，您必須擁有領導者叢集和消費者叢集上至少具有參與者角色的使用者、群組、服務主體或受控識別。 您可以使用[Azure 入口網站](/azure/role-based-access-control/role-assignments-portal)、 [PowerShell](/azure/role-based-access-control/role-assignments-powershell)、 [Azure CLI](/azure/role-based-access-control/role-assignments-cli)和[ARM 範本](/azure/role-based-access-control/role-assignments-template)來新增或移除角色指派。 您可以深入瞭解[Azure 角色型存取控制（AZURE RBAC）](/azure/role-based-access-control/overview)和[不同的角色](/azure/role-based-access-control/rbac-and-directory-admin-roles)。 
 
 ### <a name="attach-a-database-using-c"></a>使用 C 附加資料庫#
 
@@ -201,7 +201,7 @@ poller = kusto_management_client.attached_database_configurations.create_or_upda
    ![範本部署](media/follower/template-deployment.png)
 
 
-|**設定**  |**描述**  |
+|**設定**  |**說明**  |
 |---------|---------|
 |進行中的叢集名稱     |  進行中的叢集名稱;將部署範本的位置。  |
 |附加的資料庫設定名稱    |    附加的資料庫設定物件的名稱。 此名稱可以是在叢集層級上唯一的任何字串。     |
@@ -252,6 +252,9 @@ var attachedDatabaseConfigurationsName = "uniqueName";
 resourceManagementClient.AttachedDatabaseConfigurations.Delete(followerResourceGroupName, followerClusterName, attachedDatabaseConfigurationsName);
 ```
 
+若要從第一方卸離資料庫，您必須具有使用者、群組、服務主體，或在使用中叢集至少具有「參與者」角色的受控識別。
+在上述範例中，我們使用服務主體。
+
 ### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>從領導者叢集卸離附加的資料來源資料庫
 
 領導者叢集可以卸離任何附加的資料庫，如下所示：
@@ -281,6 +284,8 @@ var followerDatabaseDefinition = new FollowerDatabaseDefinition()
 
 resourceManagementClient.Clusters.DetachFollowerDatabases(leaderResourceGroupName, leaderClusterName, followerDatabaseDefinition);
 ```
+
+若要從領導者端卸離資料庫，您必須在領導者叢集上擁有具有至少參與者角色的使用者、群組、服務主體或受控識別。 在上述範例中，我們使用服務主體。
 
 ## <a name="detach-the-follower-database-using-python"></a>使用 Python 卸離資料的後向資料庫
 
@@ -314,6 +319,8 @@ attached_database_configurationName = "uniqueName"
 #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
 poller = kusto_management_client.attached_database_configurations.delete(follower_resource_group_name, follower_cluster_name, attached_database_configurationName)
 ```
+若要從第一方卸離資料庫，您必須具有使用者、群組、服務主體，或在使用中叢集至少具有「參與者」角色的受控識別。
+在上述範例中，我們使用服務主體。
 
 ### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>從領導者叢集卸離附加的資料來源資料庫
 
@@ -354,15 +361,18 @@ cluster_resource_id = "/subscriptions/" + follower_subscription_id + "/resourceG
 poller = kusto_management_client.clusters.detach_follower_databases(resource_group_name = leader_resource_group_name, cluster_name = leader_cluster_name, cluster_resource_id = cluster_resource_id, attached_database_configuration_name = attached_database_configuration_name)
 ```
 
+若要從領導者端卸離資料庫，您必須在領導者叢集上擁有具有至少參與者角色的使用者、群組、服務主體或受控識別。
+在上述範例中，我們使用服務主體。
+
 ## <a name="manage-principals-permissions-and-caching-policy"></a>管理主體、許可權和快取原則
 
 ### <a name="manage-principals"></a>管理主體
 
 附加資料庫時，請指定「**預設主體修改種類**」。 預設會保留已[授權主體](kusto/management/access-control/index.md#authorization)的領導者資料庫集合
 
-|**種類** |**描述**  |
+|**種類** |**說明**  |
 |---------|---------|
-|**Union**     |   附加的資料庫主體一律會包含原始資料庫主體，加上加入至資料後資料庫的額外新主體。      |
+|**並**     |   附加的資料庫主體一律會包含原始資料庫主體，加上加入至資料後資料庫的額外新主體。      |
 |**取代**   |    不會繼承原始資料庫的主體。 必須為附加的資料庫建立新的主體。     |
 |**None**   |   附加的資料庫主體只包含原始資料庫的主體，且沒有其他主體。      |
 

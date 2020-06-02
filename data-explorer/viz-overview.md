@@ -7,19 +7,29 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 01/30/2020
-ms.openlocfilehash: b1d888471c93409826abe523ae6ae4df39e120c3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.date: 06/02/2020
+ms.openlocfilehash: b1351ceb9fe4b81a818ca41728a588dddfb4c5a2
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374251"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294673"
 ---
 # <a name="data-visualization-with-azure-data-explorer"></a>使用 Azure 資料總管的資料視覺效果 
 
 Azure 資料總管是快速且可高度調整的資料探索服務，適用于記錄和遙測資料，用來建立大量資料的複雜分析解決方案。 Azure 資料總管與各種視覺效果工具整合，因此您可以將資料視覺化，並在整個組織中共用結果。 此資料可以轉換成可操作的深入解析，以對您的企業產生影響。
 
 資料視覺效果和報告是資料分析程式中的重要步驟。 Azure 資料總管支援許多 BI 服務，因此您可以使用最適合您案例和預算的服務。
+
+## <a name="azure-data-explorer-dashboards"></a>Azure Data Explorer 儀表板
+
+Azure 資料總管儀表板是一個 web 應用程式，可讓您在獨立 web 應用程式（ [WEB UI](web-query-data.md)）中執行查詢並建立儀表板。 Azure 資料總管儀表板提供三個主要優點：
+
+* 以原生方式將查詢從 Web UI 匯出至 Azure 資料總管儀表板。 
+* 流覽 Web UI 中的資料。
+* 優化儀表板轉譯效能。
+
+如需詳細資訊，請參閱[使用 Azure 資料總管儀表板將資料視覺化](azure-data-explorer-dashboards.md)。
 
 ## <a name="kusto-query-language-visualizations"></a>Kusto 查詢語言視覺效果
 
@@ -33,7 +43,7 @@ Azure 資料總管提供使用各種方法連接到[Power BI](https://powerbi.mi
 
   * [從 Azure 資料總管到 Power BI 的查詢匯入](power-bi-imported-query.md)
  
-  * [SQL 查詢 (SQL query)](power-bi-sql-query.md)
+  * [SQL 查詢](power-bi-sql-query.md)
 
 ## <a name="microsoft-excel"></a>Microsoft Excel
 
@@ -45,7 +55,7 @@ Azure 資料總管可讓您使用[內建的原生 Excel 連接器](excel-connect
 
 ## <a name="kibana"></a>Kibana
 
-Azure 資料總管可讓您使用 K2Bridge （開放原始碼連接器）來連線到[Kibana （[探索] 頁面）](https://www.elastic.co/guide/en/kibana/6.8/discover.html) 。 您會[將 Azure 資料總管設定為 Kibana 的資料來源，然後將資料視覺化](k2bridge.md)。
+Azure 資料總管提供使用 K2Bridge （開放原始碼連接器）連接到[Kibana](https://www.elastic.co/guide/en/kibana/6.8/discover.html)的功能。 您會[將 Azure 資料總管設定為 Kibana 的資料來源，然後將資料視覺化](k2bridge.md)。
 
 ## <a name="odbc-connector"></a>ODBC 連接器
 
