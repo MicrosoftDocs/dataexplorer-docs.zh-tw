@@ -8,19 +8,21 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: ce7751d7ac60d23f9ffa0fc84992050fe1036131
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: b6bc95158c1dd161a17572342c6a99bdf9d37235
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370477"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257904"
 ---
 # <a name="azure-data-explorer-tools"></a>Azure 資料總管工具
 
 ## <a name="ad-hoc-query-tools"></a>特定查詢工具
 
-
-* [Kusto.Explorer](./kusto-explorer.md)- 用於查詢和控制 Kusto 的主要桌面工具
+* Kusto.Explorer
+   * [Kusto.Explorer 安裝和使用者介面](./kusto-explorer.md) - 用於查詢和控制 Kusto 的主要桌面工具
+   * [使用 Kusto.Explorer](./kusto-explorer-using.md)
+   * [針對 Kusto.Explorer 進行疑難排解](kusto-explorer-troubleshooting.md)
 * [Web UI](../../web-query-data.md) - 用於查詢 Kusto 的 Web UI
 
 ## <a name="visualizations-dashboards-and-reporting-tools"></a>視覺效果、儀表板和報告工具
@@ -39,6 +41,7 @@ ms.locfileid: "83370477"
    * [PowerBI SQL 查詢](../../power-bi-sql-query.md)
 
 * [Grafana](../../grafana.md)
+* [K2Bridge 開放原始碼連接器](../../k2bridge.md) - 在 Kibana 中從 Azure 資料總管將資料視覺化
 
 ## <a name="orchestration-tools"></a>協調流程工具
 
@@ -54,8 +57,8 @@ ms.locfileid: "83370477"
 
 
 * [LightIngest](../../lightingest.md) - 用於將特定資料內嵌至 Azure 資料總管的說明公用程式
- 
-
+* [單鍵擷取](../../ingest-data-one-click.md) - 工具可讓您快速內嵌資料，並自動建議資料表和對應結構
+* [Azure Data Factory](azure-data-factory.md)
 
 
 ## <a name="source-control-integration-tools"></a>原始檔控制整合工具
