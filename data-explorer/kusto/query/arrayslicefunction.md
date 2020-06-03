@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/03/2018
-ms.openlocfilehash: 98ed69475232dde474f21d1f4a7f792c82a69637
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 612829f2cbcd8b3f495d516b254faf7a9cf6919a
+ms.sourcegitcommit: 02236d1f23f48f9dd41cc7433f46991356a869fc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225610"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84306566"
 ---
 # <a name="array_slice"></a>array_slice()
 
@@ -21,7 +21,7 @@ ms.locfileid: "83225610"
 
 **語法**
 
-`array_slice`(*`arr`*, *`start`*, *`end`*])
+`array_slice`(*`arr`*, *`start`*, *`end`*)
 
 **引數**
 

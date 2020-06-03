@@ -1,6 +1,6 @@
 ---
-title: 指令與查詢管理 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的命令和查詢管理。
+title: 命令和查詢管理-Azure 資料總管
+description: 本文說明 Azure 資料總管中的命令和查詢管理。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/19/2019
-ms.openlocfilehash: f8c01709d69a0b439ce51b4782eb8f747db15d65
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: c7f692739071496ce492d168c6036a2c2adac8fd
+ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521908"
+ms.lasthandoff: 06/03/2020
+ms.locfileid: "84329039"
 ---
-# <a name="commands-and-queries-management"></a>命令與查詢管理
+# <a name="commands-and-queries-management"></a>命令和查詢管理
 
-## <a name="show-commands-and-queries"></a>.顯示指令與查詢 
+## <a name="show-commands-and-queries"></a>。顯示命令與查詢 
 
-`.show``commands-and-queries`返回具有已達到最終狀態的管理員命令和查詢的表。 這些命令和查詢可供查詢 30 天。
+`.show`傳回 `commands-and-queries` 資料表，其中包含已達到最終狀態的系統管理命令和查詢。 這些命令和查詢可供使用30天。
 
-命令輸出中提供的資訊與[.show 命令](commands.md)和[.show 查詢](queries.md)提供的資訊類似,但它基本上允許以簡單的方式將兩個結果集合並。
+命令輸出中顯示的資訊類似于[。顯示命令](commands.md)和[。顯示查詢](queries.md)，但基本上可讓您以簡單的方式聯結這兩個結果集。
 
 **語法**
 
@@ -29,28 +29,29 @@ ms.locfileid: "81521908"
  
 **輸出**
  
-輸出架構如下:
+輸出架構如下所示：
 
 | ColumnName               | ColumnType |
 |--------------------------|------------|
-| 用戶端活動Id         | 字串     |
+| ClientActivityId         | 字串     |
 | CommandType              | 字串     |
 | Text                     | 字串     |
 | 資料庫                 | 字串     |
-| 啟動                | Datetime   |
-| 上次更新時間            | Datetime   |
-| Duration                 | 時間範圍   |
-| State                    | 字串     |
+| StartedOn                | Datetime   |
+| LastUpdatedOn            | Datetime   |
+| 持續時間                 | 時間範圍   |
+| 州                    | 字串     |
 | FailureReason            | 字串     |
 | RootActivityId           | guid       |
-| User                     | 字串     |
+| 使用者                     | 字串     |
 | Application              | 字串     |
 | 主體                | 字串     |
-| 用戶端要求屬性  | 動態    |
-| 總Cpu                 | 時間範圍   |
-| 記憶體峰值               | long       |
-| 快取統計資訊          | 動態    |
-| 掃描範圍統計 | 動態    |
-| 結果集統計      | 動態    |
+| ClientRequestProperties  | 動態    |
+| TotalCpu                 | 時間範圍   |
+| MemoryPeak               | long       |
+| CacheStatistics          | 動態    |
+| ScannedExtentsStatistics | 動態    |
+| ResultSetStatistics      | 動態    |
 
-請注意,對於查詢,值`CommandType`為`Query`。
+> [!NOTE]
+> 針對查詢，的值 `CommandType` 為 `Query` 。

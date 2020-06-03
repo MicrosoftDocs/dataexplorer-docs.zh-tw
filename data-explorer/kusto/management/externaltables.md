@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2020
-ms.openlocfilehash: a08f1f154c0efa17164d15a075456e2b6fab3212
-ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
+ms.openlocfilehash: 293ee468f31fafafdf08da1632c93b04b0a8adf2
+ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83867081"
+ms.lasthandoff: 06/03/2020
+ms.locfileid: "84329005"
 ---
 # <a name="external-table-general-control-commands"></a>外部資料表一般控制命令
 
@@ -112,7 +112,7 @@ ms.locfileid: "83867081"
 
 **輸出**
 
-傳回已卸載之資料表的屬性。 請參閱[。顯示外部資料表](#show-external-tables)。
+傳回已卸載之資料表的屬性。 如需詳細資訊，請參閱[。顯示外部資料表](#show-external-tables)。
 
 **範例：**
 
@@ -126,5 +126,5 @@ ms.locfileid: "83867081"
 
 ## <a name="next-steps"></a>後續步驟
 
-* [在 Azure 儲存體或 Azure Data Lake 中建立和改變外部資料表](external-tables-azurestorage-azuredatalake.md)
+* [建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表](external-tables-azurestorage-azuredatalake.md)
 * [建立和改變外部 SQL 資料表](external-sql-tables.md)
