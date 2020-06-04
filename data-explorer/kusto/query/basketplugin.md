@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2019
-ms.openlocfilehash: f3e53e02dbcbf8cb7521214e97dd146acd82f1ee
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a43275aa6d2938631cad052cfbdd9a185db487b2
+ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225287"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84420844"
 ---
 # <a name="basket-plugin"></a>購物籃外掛程式
 
@@ -29,7 +29,7 @@ Basket 可尋找資料中離散屬性 (維度) 的所有常見模式，將會傳
 
 **傳回**
 
-置物籃會傳回高於比例閾值 (預設值：0.05) 的所有經常出現模式。每個模式是以結果中的一個資料列表示。
+購物籃會傳回顯示在資料列的比例閾值（預設值：0.05）上方的所有常見模式。 每個模式會以結果中的一個資料列表示。
 
 第一個資料行是區段識別碼。接下來的兩個數據行是由模式所捕捉之原始查詢中的資料列計數和百分比。 其餘的資料行來自原始查詢，其值是資料行中的特定值或表示變數值的萬用字元值 (預設為 null)。
 
@@ -45,19 +45,19 @@ Basket 可尋找資料中離散屬性 (維度) 的所有常見模式，將會傳
 
     將資料列的最小比率設為認定的頻繁 (不會傳回較小比例的模式)。
     
-    範例：`T | evaluate basket(0.02)`
+    範例： `T | evaluate basket(0.02)`
 
 * WeightColumn - *column_name*
 
     根據指定的權數 (依預設每個資料都列具有權數 '1') 考慮輸入中的每個資料列。 引數必須是數值資料行名稱 (例如 int、long、real)。 權數資料行的常見用法是考慮已內嵌至各資料列的資料取樣或分組/彙總。
     
-    範例：`T | evaluate basket('~', sample_Count)`
+    範例： `T | evaluate basket('~', sample_Count)`
 
 * MaxDimensions-1 < *int* [預設值： 5]
 
     設定每個 Basket 的不相關維度數目上限 (依預設會受到限制以縮減查詢執行階段)。
 
-    範例：`T | evaluate basket('~', '~', 3)`
+    範例： `T | evaluate basket('~', '~', 3)`
 
 * CustomWildcard- *"any_value_per_type"*
 
@@ -65,7 +65,7 @@ Basket 可尋找資料中離散屬性 (維度) 的所有常見模式，將會傳
     預設值是 null，而字串預設值為空字串。 如果預設值是資料中的可行值，則應該使用不同的萬用字元值（例如 `*` ）。
     請參閱下列範例。
 
-    範例：`T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
+    範例： `T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
 
 **範例**
 
@@ -78,7 +78,7 @@ StormEvents
 | evaluate basket(0.2)
 ```
 
-|SegmentId|計數|百分比|State|EventType|Damage|DamageCrops|
+|SegmentId|Count|百分比|州|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4574|77.7|||否|0
 |1|2278|38.7||Hail|否|0
@@ -100,7 +100,7 @@ StormEvents
 | evaluate basket(0.2, '~', '~', '*', int(-1))
 ```
 
-|SegmentId|計數|百分比|State|EventType|Damage|DamageCrops|
+|SegmentId|Count|百分比|州|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4574|77.7|\*|\*|否|0
 |1|2278|38.7|\*|Hail|否|0
