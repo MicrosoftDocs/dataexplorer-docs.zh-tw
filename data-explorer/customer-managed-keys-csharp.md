@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: ff2edd1e64aa3ef44c96ecf15d6a859eadd49e69
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: 1d562939430aa5040dc2ab96ae59611d2685e057
+ms.sourcegitcommit: a7e040fc844098323aa1c00e254bcbcd41fe587f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84257870"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84426554"
 ---
 # <a name="configure-customer-managed-keys-using-c"></a>使用 C 設定客戶管理的金鑰#
 
@@ -21,6 +21,7 @@ ms.locfileid: "84257870"
 > * [C#](customer-managed-keys-csharp.md)
 > * [Azure Resource Manager 範本](customer-managed-keys-resource-manager.md)
 > * [CLI](customer-managed-keys-cli.md)
+> * [PowerShell](customer-managed-keys-powershell.md)
 
 [!INCLUDE [data-explorer-configure-customer-managed-keys](includes/data-explorer-configure-customer-managed-keys.md)]
 
@@ -30,7 +31,7 @@ ms.locfileid: "84257870"
 
 本節說明如何使用 Azure 資料總管 c # 用戶端來設定客戶管理的金鑰加密。 
 
-### <a name="prerequisites"></a>Prerequisites
+### <a name="prerequisites"></a>必要條件
 
 * 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 
