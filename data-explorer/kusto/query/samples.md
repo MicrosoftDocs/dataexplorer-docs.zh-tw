@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: fe44323dabb246438f18c9ab01eec0008ad4fe97
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: ffb14b110904bcf94a69d3abeed2fc0b542b0448
+ms.sourcegitcommit: 31af2dfa75b5a2f59113611cf6faba0b45d29eb5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372974"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454128"
 ---
 # <a name="samples"></a>範例
 
@@ -38,18 +38,17 @@ StormEvents
 
 :::image type="content" source="images/samples/060.png" alt-text="060":::
 
-<a name="activities"></a>
 ## <a name="get-sessions-from-start-and-stop-events"></a>從開始和停止事件取得工作階段
 
 假設我們有一事件記錄檔，其中某些事件標記了擴充的活動或工作階段的開始或結束。 
 
 |名稱|City|SessionId|時間戳記|
 |---|---|---|---|
-|Start|London|2817330|2015-12-09T10:12:02.32|
+|開始|London|2817330|2015-12-09T10:12:02.32|
 |遊戲|London|2817330|2015-12-09T10:12:52.45|
-|Start|曼徹斯特|4267667|2015-12-09T10:14:02.23|
+|開始|曼徹斯特|4267667|2015-12-09T10:14:02.23|
 |Stop|London|2817330|2015-12-09T10:23:43.18|
-|[取消]|曼徹斯特|4267667|2015-12-09T10:27:26.29|
+|取消|曼徹斯特|4267667|2015-12-09T10:27:26.29|
 |Stop|曼徹斯特|4267667|2015-12-09T10:28:31.72|
 
 每個事件都有 SessionId，因此符合開始和停止事件的問題就會有相同的識別碼。
@@ -71,7 +70,7 @@ Events
 [`Project`](./projectoperator.md)是用來變更時間戳記的名稱，讓啟動和停止時間都可以出現在結果中。 它也會選取我們要在結果中看到的其他資料行。 [`join`](./joinoperator.md)符合相同活動的開始和停止專案，為每個活動建立一個資料列。 最後， `project` 會再次加入資料行以顯示活動的持續時間。
 
 
-|City|SessionId|StartTime|StopTime|Duration|
+|City|SessionId|StartTime|StopTime|持續時間|
 |---|---|---|---|---|
 |London|2817330|2015-12-09T10:12:02.32|2015-12-09T10:23:43.18|00:11:40.46|
 |曼徹斯特|4267667|2015-12-09T10:14:02.23|2015-12-09T10:28:31.72|00:14:29.49|
@@ -104,7 +103,7 @@ Events
 
 :::image type="content" source="images/samples/040.png" alt-text="040"::: 
 
-然後，我們可以新增一些程式碼，以方便調整的 bin 來計算持續時間。橫條圖有些許的喜好設定，所以我們會分割以將 `1s` 時間範圍轉換成數位。 
+然後，我們可以新增一些程式碼，以方便調整的大小來計算持續時間。橫條圖有些許的喜好設定，所以我們會分割以將 `1s` 時間範圍轉換成數位。 
 
 
       // Count the frequency of each duration:
@@ -185,7 +184,6 @@ on UnitOfWorkId
 | extend SaveFactor = sum_NormalizedLoad / sum_CurrentLoad 
 ```
 
-<a name="concurrent-activities"><a/>
 ## <a name="chart-concurrent-sessions-over-time"></a>一段時間的並行工作階段圖表
 
 假設我們有含有活動開始及結束時間的活動資料表。  我們要查看一段時間的圖表，該圖表顯示在任意時間中有多少活動正在同時執行。
@@ -345,7 +343,7 @@ Logs
 | project Count, Pattern
 ```
 
-|計數|模式
+|Count|模式
 |---|---
 |7125|方法 ' RunCycleFromInterimData ' 的 ExecuteAlgorithmMethod 失敗 .。。
 |  7125|InferenceHostService 呼叫失敗。。NullReferenceException：物件參考未設定為物件的實例 .。。
@@ -366,7 +364,7 @@ Logs
 | evaluate autocluster()
 ```
 
-|計數 |百分比 (%)|元件|叢集|訊息
+|Count |百分比 (%)|元件|叢集|訊息
 |---|---|---|---|---
 |7125|26.64|InferenceHostService|DB4|ExecuteAlgorithmMethod for method ...。
 |7125|26.64|未知的元件|DB4|InferenceHostService 呼叫失敗 ...。
@@ -379,7 +377,7 @@ Logs
 例如，請考慮下表。 Devicemodel 傳遞會指定裝置的型號，這不是很方便的裝置名稱參考形式。  
 
 
-|DeviceModel |計數 
+|DeviceModel |Count 
 |---|---
 |iPhone5，1 |32 
 |iPhone3，2 |432 
@@ -389,7 +387,7 @@ Logs
   
 較佳的表示方式可能是：  
 
-|FriendlyName |計數 
+|FriendlyName |Count 
 |---|---
 |iPhone 5 |32 
 |iPhone 4 |432 
@@ -424,7 +422,7 @@ Source
 | project FriendlyName = phone_mapping[DeviceModel], Count
 ```
 
-|FriendlyName|計數|
+|FriendlyName|Count|
 |---|---|
 |iPhone 5|32|
 |iPhone 4|432|
@@ -475,7 +473,7 @@ Devices
 
 結果：
 
-|FriendlyName |計數 
+|FriendlyName |Count 
 |---|---
 |iPhone 5 |32 
 |iPhone 4 |432 
@@ -545,7 +543,7 @@ datatable(id:string, timestamp:datetime, bla:string)           // (1)
 | project-away dummy0, dummy1, dummy2                          // (5)
 ```
 
-附註
+注意
 1. `datatable`只是為了示範目的而產生一些測試資料的方式。 當然，事實上，您會在這裡提供資料。
 2. 這一行基本上表示「傳回所有相異值」 `id` 。
 3. 然後，這一行會針對最大化資料行的前2筆記錄 `timestamp` ，傳回上一個層級（這裡只是 `id` ）和在此層級指定的資料行（在此為 `timestamp` ）。
@@ -559,14 +557,14 @@ datatable(id:string, timestamp:datetime, bla:string)           // (1)
 |SomeSeries|SomeInt|
 |----------|-------|
 |Foo       |    100|
-|長條圖       |    200|
+|橫條圖       |    200|
 
 而且您想要將此資料表顯示為：
 
 |SomeSeries|SomeInt|百分比 |
 |----------|-------|----|
 |Foo       |    100|33.3|
-|長條圖       |    200|66.6|
+|橫條圖       |    200|66.6|
 
 若要這樣做，您必須計算資料行的總計（總和） `SomeInt` ，然後將此資料行的每個值除以總計。 您可以使用[as 運算子](asoperator.md)，為這些結果提供名稱，藉此為任意結果執行這項操作：
 

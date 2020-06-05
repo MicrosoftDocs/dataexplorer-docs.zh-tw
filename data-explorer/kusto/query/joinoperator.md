@@ -1,6 +1,6 @@
 ---
-title: 聯接運算符 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的聯接運算符。
+title: join 運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 join 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/30/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 86d883c8d0214d278099260fa2406b91b776b4d1
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 2961f27226175fe81b7d9c82a6366b36134d805f
+ms.sourcegitcommit: 31af2dfa75b5a2f59113611cf6faba0b45d29eb5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765822"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454111"
 ---
 # <a name="join-operator"></a>join 運算子
 
@@ -27,34 +27,34 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 
 **語法**
 
-*左表*`|``join`=*聯接參數*= `(` *右表*`)``on`*屬性*
+*LeftTable* `|``join`[*JoinParameters*] `(` *RightTable* `)` `on` *屬性*
 
 **引數**
 
-* *左表*:要合併其行的**左**表或表格表達式(有時稱為**外部**表)。 表示為`$left`。
+* *LeftTable*：要合併其資料列的**左側**資料表或表格式運算式（有時稱為**外部**資料表）。 表示為 `$left` 。
 
-* *右表*:要合併其行**的右**表或表格表達式(有時稱為 =*內部*表)。 表示為`$right`。
+* *RightTable*：要合併其資料列的**右側**資料表或表格式運算式（有時稱為 **內部*資料表）。 表示為 `$right` 。
 
-* *屬性*:一個或多個(逗號分隔)規則,用於描述*左表*的行如何與*右表*的行匹配。 使用`and`邏輯運算符評估多個規則。
-  規則可以是:
+* *屬性*：一或多個（以逗號分隔）規則，描述*LeftTable*中的資料列如何與*RightTable*中的資料列比對。 使用邏輯運算子來評估多個規則 `and` 。
+  規則可以是下列其中一個：
 
-  |規則類型        |語法                                          |Predicate                                                      |
+  |規則種類        |語法                                          |Predicate                                                      |
   |-----------------|------------------------------------------------|---------------------------------------------------------------|
-  |依名稱相等 |*ColumnName*                                    |`where`*左表*。*欄位*`==`*右表*。*欄名稱*|
-  |依值相等|`$left.`*左柱*`==``$right.`*右柱*|`where``$left.`*LeftColumn*左`==`柱`$right.`*右柱*       |
+  |依名稱相等 |*ColumnName*                                    |`where`*LeftTable*。*ColumnName* `==`*RightTable*。*ColumnName*|
+  |依值相等|`$left.`*LeftColumn* `==``$right.` *RightColumn*|`where``$left.` *LeftColumn* `==` LeftColumn `$right.`*RightColumn*       |
 
 > [!NOTE]
-> 在「按值相等」 的情況下,*欄位名稱必須*限定為由`$left`和`$right`符號表示的適用擁有者表。
+> 如果是「依值相等」，則*必須*以和標記法來限定資料行名稱，並以適用的擁有者資料表加以限定 `$left` `$right` 。
 
-* *聯接參數*:以*名稱*`=`*值*的形式控制行匹配操作和執行計劃的行為的零個或多個(空間分隔)參數。 支援下列參數： 
+* *JoinParameters*：*名稱*值格式為零或多個（以空格分隔）的參數 `=` *Value* ，可控制資料列比對作業和執行計畫的行為。 支援下列參數： 
 
 ::: zone pivot="azuredataexplorer"
 
   |名稱           |值                                        |描述                                  |
   |---------------|----------------------------------------------|---------------------------------------------|
-  |`kind`         |聯結類別|請參閱[加入口味](#join-flavors)|                                             |
-  |`hint.remote`  |`auto`, `left`, `local`, `right`              |請參閱[跨群集聯接](joincrosscluster.md)|
-  |`hint.strategy`|執行提示                               |請參考[加入提示](#join-hints)                |
+  |`kind`         |聯結類別|查看[聯結](#join-flavors)類別|                                             |
+  |`hint.remote`  |`auto`, `left`, `local`, `right`              |請參閱[跨叢集聯結](joincrosscluster.md)|
+  |`hint.strategy`|執行提示                               |請參閱[聯結提示](#join-hints)                |
 
 ::: zone-end
 
@@ -62,28 +62,28 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 
   |名稱           |值                                        |描述                                  |
   |---------------|----------------------------------------------|---------------------------------------------|
-  |`kind`         |聯結類別|請參閱[加入口味](#join-flavors)|                                             |
+  |`kind`         |聯結類別|查看[聯結](#join-flavors)類別|                                             |
   |`hint.remote`  |`auto`, `left`, `local`, `right`              |                                             |
-  |`hint.strategy`|執行提示                               |請參考[加入提示](#join-hints)                |
+  |`hint.strategy`|執行提示                               |請參閱[聯結提示](#join-hints)                |
 
 ::: zone-end
 
 
 > [!WARNING]
-> 預設聯結樣式(如果`kind`未指定)`innerunique`為 。 這與其他分析產品不同,這些產品具有`inner`默認風格。 請閱讀[下文](#join-flavors),瞭解不同類型之間的差異,並確保查詢產生預期結果。
+> 如果未指定，預設的聯結類別 `kind` 為 `innerunique` 。 這不同于其他的分析產品，其具有做 `inner` 為預設的類別。 請[仔細閱讀，以](#join-flavors)瞭解不同類型之間的差異，並確保查詢會產生預期的結果。
 
 **傳回**
 
-輸出架構取決於聯接風格:
+輸出架構取決於聯結類別：
 
  * `kind=leftanti`, `kind=leftsemi`:
 
-     結果表僅包含左側的列。
+     結果資料表只包含左側的資料行。
 
      
  * `kind=rightanti`, `kind=rightsemi`:
 
-     結果表僅包含右側的列。
+     結果資料表只包含右側的資料行。
 
      
 *  `kind=innerunique`, `kind=inner`, `kind=leftouter`, `kind=rightouter`, `kind=fullouter`
@@ -91,31 +91,31 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
      兩個資料表中的每個資料行各自佔據一個資料行，包括用來比對的索引鍵。 如果名稱有衝突，右側的資料行會自動重新命名。
 
      
-輸出紀錄取決於聯結風格:
+輸出記錄視聯結類別而定：
 
  * `kind=leftanti`, `kind=leftantisemi`
 
-     從左側返回右側沒有匹配項的所有記錄。     
+     傳回左邊沒有符合右邊的所有記錄。     
      
  * `kind=rightanti`, `kind=rightantisemi`
 
-     從右側返回左側沒有匹配項的所有記錄。  
+     傳回右邊沒有相符專案的所有記錄。  
       
 *  `kind=innerunique`, `kind=inner`, `kind=leftouter`, `kind=rightouter`, `kind=fullouter`, `kind=leftsemi`, `kind=rightsemi`
 
-    輸入資料表間的每個相符項目各自佔據一個資料列。 匹配是從一個表中選擇的行,該表對於具有以下約束的其他表中的所有`on`欄位具有相同的值:
+    輸入資料表間的每個相符項目各自佔據一個資料列。 「比對」是從一個資料表中選取的資料列，其值 `on` 與具有下列條件約束之另一個資料表中的資料列相同：
 
-   - `kind`未指定,`kind=innerunique`
+   - `kind`識別`kind=innerunique`
 
     左側只會有一個資料列符合 `on` 索引鍵的每個值。 此資料列與右側資料列的每個相符項目都會在輸出中佔有一個資料列。
     
    - `kind=leftsemi`
    
-    從左側返回右側具有匹配項的所有記錄。
+    傳回左邊有符合右邊的所有記錄。
     
    - `kind=rightsemi`
    
-       從右側返回從左側具有匹配項的所有記錄。
+       從右邊傳回具有相符專案的所有記錄。
 
    - `kind=inner`
  
@@ -128,7 +128,7 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 
  
 
-**技巧**
+**提示**
 
 若要獲得最佳效能︰
 
@@ -162,28 +162,28 @@ Events
 | project City, ActivityId, StartTime, StopTime, Duration = StopTime - StartTime
 ```
 
-[有關此範例的更多](./samples.md#activities)。
+[這個範例的詳細資訊](./samples.md#get-sessions-from-start-and-stop-events)。
 
 ## <a name="join-flavors"></a>聯結類別
 
-聯結運算子的確切類別是以某種關鍵字來指定。 從今天起,Kusto 支援聯接運算符的以下口味: 
+聯結運算子的確切類別是以某種關鍵字來指定。 目前，Kusto 支援下列聯結運算子的種類： 
 
 |聯結種類|描述|
 |--|--|
-|[`innerunique`](#default-join-flavor)( 或預設值為空 )|左邊重複資料消除的內部聯結|
-|[`inner`](#inner-join)|標準內部連線|
+|[`innerunique`](#default-join-flavor)（或做為預設值）|與左側重復資料刪除的內部聯結|
+|[`inner`](#inner-join)|標準內部聯結|
 |[`leftouter`](#left-outer-join)|左方外部聯結|
-|[`rightouter`](#right-outer-join)|右外聯結|
+|[`rightouter`](#right-outer-join)|右方外部聯結|
 |[`fullouter`](#full-outer-join)|完整外部聯結|
-|[`leftanti`](#left-anti-join)、[`anti`](#left-anti-join)或[`leftantisemi`](#left-anti-join)|左反聯接|
-|[`rightanti`](#right-anti-join)或[`rightantisemi`](#right-anti-join)|右防聯接|
-|[`leftsemi`](#left-semi-join)|左半聯接|
-|[`rightsemi`](#right-semi-join)|右半聯接|
+|[`leftanti`](#left-anti-join)、 [`anti`](#left-anti-join) 或[`leftantisemi`](#left-anti-join)|左方反聯結|
+|[`rightanti`](#right-anti-join)或[`rightantisemi`](#right-anti-join)|右方反聯結|
+|[`leftsemi`](#left-semi-join)|左方半聯結|
+|[`rightsemi`](#right-semi-join)|右方半聯結|
 
-### <a name="inner-and-innerunique-join-operator-flavors"></a>內部和內部唯一聯接運算元口味
+### <a name="inner-and-innerunique-join-operator-flavors"></a>inner 和 innerunique join 運算子類別
 
--    使用**內部聯接風格**時,輸出中將有一行用於從左至右匹配行的每個組合,而沒有左鍵重複數據消除。 輸出將是左右鍵的點菜產品。
-    **內部聯結**範例 :
+-    使用**內部聯結**類別時，輸出中會有一個資料列，其中的每個相符資料列都是由左和右組成，而不會有 deduplications 的左索引鍵。 輸出將會是左和右鍵的笛卡兒乘積。
+    **內部聯結**的範例：
 
 ```kusto
 let t1 = datatable(key:long, value:string)  
@@ -204,36 +204,14 @@ on key
 
 |索引鍵|value|key1|value1|
 |---|---|---|---|
-|1|瓦爾1.2|1|val1.3|
-|1|val1.1|1|val1.3|
-|1|瓦爾1.2|1|瓦爾1.4|
-|1|val1.1|1|瓦爾1.4|
+|1|val 1。2|1|val 1。3|
+|1|val 1。1|1|val 1。3|
+|1|val 1。2|1|val 1。4|
+|1|val 1。1|1|val 1。4|
 
--    使用**內部唯一聯接風格**將從左側刪除鍵,並且輸出中將有一行來自重複數據消除的左鍵和右鍵的組合。
-    上面使用的相同數據集**的內部唯一聯接**示例,請注意,此情況的內部**唯一風味**可能產生兩個可能的輸出,並且兩者都是正確的。
-    在第一個輸出中,聯接運算符隨機選取在 t1 中顯示的第一個鍵,該鍵的值為"val1.1",並將其與 t2 鍵匹配;而在第二個輸出中,聯接運算符隨機選取第二個鍵出現在值為「val1.2」的 t1 中,並將其與 t2 鍵匹配:
-
-```kusto
-let t1 = datatable(key:long, value:string)  
-[
-1, "val1.1",  
-1, "val1.2"  
-];
-let t2 = datatable(key:long, value:string)  
-[  
-1, "val1.3", 
-1, "val1.4"  
-];
-t1
-| join kind = innerunique
-    t2
-on key
-```
-
-|索引鍵|value|key1|value1|
-|---|---|---|---|
-|1|val1.1|1|val1.3|
-|1|val1.1|1|瓦爾1.4|
+-    使用**innerunique 聯結**類別將會從左側刪除重複索引鍵，並在每次重復資料刪除的左邊鍵和右索引鍵組合的輸出中，會有一個資料列。
+    針對上述使用的相同資料集進行**innerunique 聯結**的範例，請注意，此案例的**innerunique**類別可能會產生兩個可能的輸出，而且兩者都正確。
+    在第一個輸出中，join 運算子會隨機挑選第一個出現在 t1 中且值為 "val 1.1" 的索引鍵，而在第二個索引鍵中，會以 t2 索引鍵來比對它，而第二個索引鍵則會出現在 t1 中，其值為 "val 1.2"，並與 t2 索引鍵相符：
 
 ```kusto
 let t1 = datatable(key:long, value:string)  
@@ -254,13 +232,35 @@ on key
 
 |索引鍵|value|key1|value1|
 |---|---|---|---|
-|1|瓦爾1.2|1|val1.3|
-|1|瓦爾1.2|1|瓦爾1.4|
+|1|val 1。1|1|val 1。3|
+|1|val 1。1|1|val 1。4|
+
+```kusto
+let t1 = datatable(key:long, value:string)  
+[
+1, "val1.1",  
+1, "val1.2"  
+];
+let t2 = datatable(key:long, value:string)  
+[  
+1, "val1.3", 
+1, "val1.4"  
+];
+t1
+| join kind = innerunique
+    t2
+on key
+```
+
+|索引鍵|value|key1|value1|
+|---|---|---|---|
+|1|val 1。2|1|val 1。3|
+|1|val 1。2|1|val 1。4|
 
 
--    Kusto 經過優化,可盡可能將後`join`方的濾波器推向相應的連接側左側或右側。
-    有時,當使用的味道是**內部唯一**的,並且篩選器可以傳播到聯接的左側時,它將自動傳播,並且應用於該篩選器的鍵將始終出現在輸出中。
-    例如,使用上面的範例並添加篩選器` where value == "val1.2" `將始終給出第二個結果,並且永遠不會為已使用的數據集提供第一個結果:
+-    Kusto 已優化，可在可能的情況下，將出現在 `join` 適當聯結側後方的篩選推播。
+    有時候，當使用的類別是**innerunique** ，且篩選器可以傳播到聯結的左邊時，它會自動傳播，而套用至該篩選的索引鍵一律會出現在輸出中。
+    例如，使用上述範例並加入篩選， ` where value == "val1.2" ` 一律會提供第二個結果，而且永遠不會提供所使用資料集的第一個結果：
 
 ```kusto
 let t1 = datatable(key:long, value:string)  
@@ -282,15 +282,15 @@ on key
 
 |索引鍵|value|key1|value1|
 |---|---|---|---|
-|1|瓦爾1.2|1|val1.3|
-|1|瓦爾1.2|1|瓦爾1.4|
+|1|val 1。2|1|val 1。3|
+|1|val 1。2|1|val 1。4|
  
-### <a name="default-join-flavor"></a>預設聯結風格
+### <a name="default-join-flavor"></a>預設聯結類別
     
     X | join Y on Key
     X | join kind=innerunique Y on Key
      
-讓我們使用兩個範例表來解釋聯接的操作: 
+讓我們使用兩個範例資料表來說明聯結作業： 
  
 資料表 X 
 
@@ -342,16 +342,16 @@ let Y = datatable(Key:string, Value2:long)
 X | join Y on Key
 ```
 
-|Key|Value1|金鑰1|Value2|
+|Key|Value1|Key1|Value2|
 |---|---|---|---|
 |b|2|b|10|
 |c|4|c|20|
 |c|4|c|30|
 
 
-(請注意,鍵"a"和"d"不會顯示在輸出中,因為左側和右側沒有匹配的鍵)。 
+（請注意，索引鍵 ' a ' 和 ' d ' 不會出現在輸出中，因為左邊和右邊沒有相符的索引鍵）。 
  
-(從歷史上看,這是 Kusto 初始版本支援的聯接的第一個實現;在典型的日誌/跟蹤分析方案中非常有用,我們希望將兩個事件(每個事件匹配一個篩選條件)關聯在同一關聯 ID 下,並返回我們查找現象的所有外觀,而忽略貢獻跟蹤記錄的多個外觀。
+（在過去，這是初始版本 Kusto 所支援的第一次執行聯結; 在一般的記錄/追蹤分析案例中，我們想要將兩個事件（每個符合某些篩選準則）與相同的相互關聯識別碼相互關聯，並取回我們要尋找的所有現象外觀，忽略多個參與追蹤記錄的外觀）。
  
 ### <a name="inner-join"></a>內部聯結
 
@@ -375,7 +375,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=inner Y on Key
 ```
 
-|Key|Value1|金鑰1|Value2|
+|Key|Value1|Key1|Value2|
 |---|---|---|---|
 |b|3|b|10|
 |b|2|b|10|
@@ -406,7 +406,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=leftouter Y on Key
 ```
 
-|Key|Value1|金鑰1|Value2|
+|Key|Value1|Key1|Value2|
 |---|---|---|---|
 |b|3|b|10|
 |b|2|b|10|
@@ -415,7 +415,7 @@ X | join kind=leftouter Y on Key
 |a|1|||
 
  
-### <a name="right-outer-join"></a>右外聯結 
+### <a name="right-outer-join"></a>右方外部聯結 
 
 類似於左外部聯結，但資料表的處理方式相反。 
  
@@ -437,7 +437,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=rightouter Y on Key
 ```
 
-|Key|Value1|金鑰1|Value2|
+|Key|Value1|Key1|Value2|
 |---|---|---|---|
 |b|3|b|10|
 |b|2|b|10|
@@ -448,7 +448,7 @@ X | join kind=rightouter Y on Key
  
 ### <a name="full-outer-join"></a>完整外部聯結 
 
-就概念而言，完整外部聯結結合了套用左外部聯結與右外部聯結的效果。 如果聯接表中的記錄不匹配,則結果集將具有缺少匹配行的表的每個列的 NULL 值。 針對相符的記錄，會在結果集中產生單一的資料列 (包含從兩個資料表填入的資料行)。 
+就概念而言，完整外部聯結結合了套用左外部聯結與右外部聯結的效果。 聯結資料表中的記錄不相符時，結果集對於資料表的每個資料行都不會有 Null 值。 針對相符的記錄，會在結果集中產生單一的資料列 (包含從兩個資料表填入的資料行)。 
  
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -468,7 +468,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=fullouter Y on Key
 ```
 
-|Key|Value1|金鑰1|Value2|
+|Key|Value1|Key1|Value2|
 |---|---|---|---|
 |b|3|b|10|
 |b|2|b|10|
@@ -478,9 +478,9 @@ X | join kind=fullouter Y on Key
 |a|1|||
 
  
-### <a name="left-anti-join"></a>左反聯接
+### <a name="left-anti-join"></a>左方反聯結
 
-左反聯接返回左側與右側任何記錄不匹配的所有記錄。 
+左方反聯結會傳回左側的所有記錄，而不符合右側的任何記錄。 
  
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -506,9 +506,9 @@ X | join kind=leftanti Y on Key
 
 反聯結建立「NOT IN」查詢模型。 
 
-### <a name="right-anti-join"></a>右防聯接
+### <a name="right-anti-join"></a>右方反聯結
 
-右反聯接返回右側與左側任何記錄不匹配的所有記錄。 
+右方反聯結會從右側傳回不符合左側任何記錄的所有記錄。 
  
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -534,9 +534,9 @@ X | join kind=rightanti Y on Key
 
 反聯結建立「NOT IN」查詢模型。 
 
-### <a name="left-semi-join"></a>左半聯接
+### <a name="left-semi-join"></a>左方半聯結
 
-左半聯接返回左側與右側記錄匹配的所有記錄。 僅返回左側的列。 
+左方半聯結會從右邊傳回符合記錄的所有記錄。 只會傳回左邊的資料行。 
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -562,9 +562,9 @@ X | join kind=leftsemi Y on Key
 |b|2|
 |c|4|
 
-### <a name="right-semi-join"></a>右半聯接
+### <a name="right-semi-join"></a>右方半聯結
 
-右半聯接從右側返回與左側記錄匹配的所有記錄。 僅返回右側的列。 
+右方半聯結會從左側傳回符合一筆記錄的所有記錄。 只會傳回右側的資料行。 
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -593,17 +593,17 @@ X | join kind=rightsemi Y on Key
 
 ### <a name="cross-join"></a>交叉聯結
 
-Kusto 不提供本地的交叉聯接風格(即,您無法`kind=cross`用 標記運算符)。
-但是,通過提出一個虛擬密鑰來類比這一點並不難:
+Kusto 不會以原生方式提供交叉聯結類別（亦即，您無法將運算子標示為 `kind=cross` ）。
+不過，我們不太容易模擬這種情況，而是透過虛擬機器碼：
 
     X | extend dummy=1 | join kind=inner (Y | extend dummy=1) on dummy
 
-## <a name="join-hints"></a>加入提示
+## <a name="join-hints"></a>聯結提示
 
-運算子`join`支援控制查詢執行方式的一些提示。
-這些不會更改`join`的語義,但可能會影響其性能。
+`join`運算子支援一些可控制查詢執行方式的提示。
+這些不會變更的語義 `join` ，但可能會影響其效能。
 
-加入以下文章中介紹的提示: 
-* `hint.shufflekey=<key>`與`hint.strategy=shuffle` - [隨機查詢](shufflequery.md)
+下列文章中說明的聯結提示： 
+* `hint.shufflekey=<key>`和 `hint.strategy=shuffle`  -  [隨機查詢](shufflequery.md)
 * `hint.strategy=broadcast` - [廣播聯結](broadcastjoin.md)
-* `hint.remote=<strategy>` - [跨群集聯結](joincrosscluster.md)
+* `hint.remote=<strategy>` - [跨叢集聯結](joincrosscluster.md)
