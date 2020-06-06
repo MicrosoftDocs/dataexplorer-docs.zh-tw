@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 21514de40910691e878dbc6d237d810a13676b40
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: bb3ee687e995af7d4161ca111f9efbe91c1b9ca0
+ms.sourcegitcommit: a60ad8da32f16c5d9ce35b62e7331d7439081e3d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011528"
+ms.lasthandoff: 06/06/2020
+ms.locfileid: "84466301"
 ---
 # <a name="capacity-policy"></a>產能原則
 
@@ -45,16 +45,19 @@ ms.locfileid: "84011528"
 
 ## <a name="extents-merge-capacity"></a>範圍合併容量
 
-|屬性                           |類型    |描述                                                                                    |
-|-----------------------------------|--------|-----------------------------------------------------------------------------------------------|
-|MaximumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最大值 |
+|屬性                           |類型    |描述                                                                                                |
+|-----------------------------------|--------|-----------------------------------------------------------------------------------------------------------|
+|MinimumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最小值。 預設值：1 |
+|MaximumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最大值。 預設值：5 |
 
 叢集的總範圍合併容量（如[顯示容量](../management/diagnostics.md#show-capacity)）的計算方式如下：
 
-`Number of nodes in cluster`x`MaximumConcurrentOperationsPerNode`
+`Number of nodes in cluster`x`Concurrent operations per node`
+
+的有效值 `Concurrent operations per node` 會由系統在 [，] 範圍內自動調整 `MinimumConcurrentOperationsPerNode` `MaximumConcurrentOperationsPerNode` 。
+
 
 > [!Note]
-> * `MaximumConcurrentOperationsPerNode`會由系統在範圍 [1，5] 中自動調整，除非它已設定為較高的值。
 > * 在具有三個或更多節點的叢集中，admin 節點不會參與執行合併作業。 `Number of nodes in cluster`會減少一。
 
 ## <a name="extents-purge-rebuild-capacity"></a>範圍清除重建容量
@@ -86,14 +89,14 @@ ms.locfileid: "84011528"
 
 ## <a name="extents-partition-capacity"></a>範圍分割區容量
 
-|屬性                           |類型    |描述                                                                             |
-|-----------------------------------|--------|----------------------------------------------------------------------------------------|
-|ClusterMaximumConcurrentOperations |long    |叢集中並行範圍分割作業數目的最大值。 |
+|屬性                           |類型    |描述                                                                                         |
+|-----------------------------------|--------|----------------------------------------------------------------------------------------------------|
+|ClusterMinimumConcurrentOperations |long    |叢集中並行範圍分割作業數目的最小值。 預設值：1  |
+|ClusterMaximumConcurrentOperations |long    |叢集中並行範圍分割作業數目的最大值。 預設值：16 |
 
-叢集的總範圍分割區容量（如 [[顯示容量](../management/diagnostics.md#show-capacity)] 所示）是由單一屬性所定義： `ClusterMaximumConcurrentOperations` 。
+叢集的總範圍分割區容量（如所示[。顯示容量](../management/diagnostics.md#show-capacity)）。
 
-> [!Note]
-> `ClusterMaximumConcurrentOperations`會由系統在範圍 [1，16] 中自動調整，除非它已設定為較高的值。
+的有效值 `Concurrent operations` 會由系統在 [，] 範圍內自動調整 `ClusterMinimumConcurrentOperations` `ClusterMaximumConcurrentOperations` 。
 
 ## <a name="defaults"></a>Defaults
 
