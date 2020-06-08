@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: bfa44859987d8f3c4f11221fd8370290f08f9a67
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: cd9d0f9156387f3a42d41b000aefc9eac0793f9d
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382041"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512498"
 ---
 # <a name="ingest-from-query-set-append-set-or-append-set-or-replace"></a>從查詢內嵌（. set、. append、. set-或-append、. set-或-replace）
 
@@ -38,7 +38,7 @@ ms.locfileid: "83382041"
 
 **引數**
 
-* `async`：如果指定，此命令會立即傳回，並繼續在背景中進行內嵌。 此命令的結果將會包含一個 `OperationId` 值，之後可以使用此 `.show operation` 命令來抓取內嵌完成狀態和結果。
+* `async`：如果指定，此命令會立即傳回，並繼續在背景中進行內嵌。 此命令的結果將會包含一個 `OperationId` 值，之後可以使用此 `.show operations` 命令來抓取內嵌完成狀態和結果。
 * *TableName*：要內嵌資料的資料表名稱。
   資料表名稱一律相對於內容中的資料庫。
 * *PropertyName*、 *PropertyValue*：任何數目的內嵌屬性會影響內嵌進程。

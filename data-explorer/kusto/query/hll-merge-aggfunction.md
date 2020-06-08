@@ -1,6 +1,6 @@
 ---
-title: hll_merge() (聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的hll_merge(聚合函數)。
+title: hll_merge （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 hll_merge （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: 4700d5c87bf0f29f7bba86d56114a6a61092da94
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 59c6f6a11b108cf6e74ceb59d3483ea1a95f7002
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514105"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512379"
 ---
-# <a name="hll_merge-aggregation-function"></a>hll_merge() (聚合函數)
+# <a name="hll_merge-aggregation-function"></a>hll_merge （）（彙總函式）
 
-將整個組的 HLL 結果合併為單個 HLL 值。
+`HLL`將整個群組的結果合併成單一 `HLL` 值。
 
-* 只能在[匯總](summarizeoperator.md)中的聚合上下文中使用。
+* 只能用在[摘要內匯總](summarizeoperator.md)的內容中。
 
-閱讀有關[基礎演演算法 *(H*yper*L*og*L*og) 和估計精度](dcount-aggfunction.md#estimation-accuracy)。
+如需詳細資訊，請參閱[基礎演算法（*H*Yper*l*og*l*og）和估計精確度](dcount-aggfunction.md#estimation-accuracy)。
 
 **語法**
 
@@ -29,12 +29,12 @@ ms.locfileid: "81514105"
 
 **引數**
 
-* *Expr*:將用於聚合計算的運算式。 
+* `*Expr*`：將用於匯總計算的運算式。
 
 **傳回**
 
-跨組中*Expr*的合併 hll 值。
+函數會傳回 `hll` 整個群組的合併值 `*Expr*` 。
  
-**技巧**
+**提示**
 
-1) 您可以使用函數 [dcount_hll] (dcount-hllfunction.md),該函數將從 hll / hll-merge 聚合函數中計算 dcount。
+1) 使用函數 [dcount_hll] （dcount-hllfunction.md）來計算 `dcount` from `hll`  /  `hll-merge` 彙總函式。

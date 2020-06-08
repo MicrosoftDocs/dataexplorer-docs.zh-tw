@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/09/2019
-ms.openlocfilehash: 55864dd408f35c59398ea1b93f18c0834a611a90
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: 071658bf2277dd0ddb4734aaf0b59a7a44c8fe27
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84258091"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512345"
 ---
 # <a name="kql-over-tds"></a>KQL over TDS
 
@@ -25,7 +25,7 @@ Kusto 允許[預存函數](../../query/schema-entities/stored-functions.md)執�
 
 例如，預存函數 MyFunction：
 
-|名稱 |參數|主體|資料夾|DocString
+|Name |參數|主體|資料夾|DocString
 |---|---|---|---|---
 |MyFunction |（myLimit： long）| {StormEvents &#124; 限制 myLimit}|MyFolder|使用參數的示範函式||
 
@@ -49,7 +49,8 @@ Kusto 允許[預存函數](../../query/schema-entities/stored-functions.md)執�
   }
 ```
 
-> [!注意：] 使用名為的明確架構來呼叫預存函式 `kusto` ，以區別 Kusto 儲存的函數和模擬的 SQL 系統預存程式。
+> [!NOTE]
+> 使用名為的明確架構來呼叫預存函式 `kusto` ，以區別 Kusto 儲存的函數和模擬的 SQL 系統預存程式。
 
 您也可以從 T-sql 呼叫 Kusto 預存函數，例如 SQL 表格式函數：
 

@@ -1,6 +1,6 @@
 ---
-title: 查詢一致性 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的查詢一致性。
+title: 查詢一致性-Azure 資料總管
+description: 本文說明 Azure 資料總管中的查詢一致性。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,21 +8,21 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/20/2019
-ms.openlocfilehash: b66540af2d2d4bef4571249474cd618e69eb2261
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8b4d1df4dc9a035764f9d50a4f9c4dcf452da67e
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523098"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512260"
 ---
 # <a name="query-consistency"></a>查詢一致性
 
-Kusto 支援兩個查詢一致性模型:**強**和**弱**。
+Kusto 支援兩種查詢一致性模型：**強**式和**弱**式。
 
-強一致的查詢(預設值)具有"讀我更改"保證。 發送控制命令並收到成功完成該命令的正確認的用戶端將得到保證,緊隨其後的任何查詢都將遵守該命令的結果。
+強式一致查詢（預設值）具有「讀取-我的變更」保證。 如果您傳送 control 命令並收到命令已成功完成的通知，您將會保證緊接在之後的任何查詢都會觀察到命令的結果。
 
-弱一致的查詢(必須由用戶端顯式啟用)不保證。 進行查詢的用戶端可能會觀察到一些延遲(通常為1-2分鐘)之間的更改和反映這些更改的查詢。
+用戶端必須明確啟用的弱式一致查詢，並不一定要這麼做。 進行查詢的用戶端可能會在反映這些變更的變更與查詢之間發現一些延遲（通常是1-2 分鐘）。
 
-弱一致的查詢的優點是減少了處理資料庫更改的群集節點上的負載。 通常,建議客戶首先嘗試強一致的模型,並切換到使用弱一致性(如果絕對需要)。
+弱式一致查詢的優點是，它可減少處理資料庫變更的叢集節點上的負載。 一般來說，我們建議您先嘗試強的一致性模型。 只有在必要時，才改用弱式一致查詢。
 
-切換到弱一致性的查詢是通過在進行 REST `queryconsistency` [API 調用](../api/rest/request.md)時設置屬性來完成的。 Kusto .NET 用戶端的使用者也可以將其設置在[Kusto 連接字串](../api/connection-strings/kusto.md)中,也可以將其設置為[用戶端請求屬性](../api/netfx/request-properties.md)中的標誌。
+若要切換到弱式一致查詢，請 `queryconsistency` 在進行[REST API 呼叫](../api/rest/request.md)時設定屬性。 .NET 用戶端的使用者也可以在[Kusto 連接字串](../api/connection-strings/kusto.md)中，或在[用戶端要求屬性](../api/netfx/request-properties.md)中設定為旗標。

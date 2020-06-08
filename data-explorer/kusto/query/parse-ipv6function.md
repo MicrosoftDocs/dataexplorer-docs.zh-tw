@@ -8,14 +8,14 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: d7858a67719bbde9a1ecedee5888abc7d0662e1e
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 6de336566f58f5cb0435ca22250cd7a07e8601cd
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84301209"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512583"
 ---
-# <a name="parse_ipv6"></a>parse_ipv6 （）
+# <a name="parse_ipv6"></a>parse_ipv6()
 
 將 IPv6 或 IPv4 字串轉換成標準 IPv6 字串表示。
 
@@ -61,10 +61,4 @@ datatable(ip_string:string, netmask:long)
 |192.168.255.255/24|30|3232300800|
 |255.255.255.255|24|4294967040|
 
-## <a name="next-steps"></a>後續步驟
 
-如需其他類似的功能，請參閱：
-
-* [parse_ipv4()](parse-ipv4function.md)
-* [ipv6_compare （）](ipv6-comparefunction.md)
-* [ipv6_is_match （）](ipv6-is-matchfunction.md)

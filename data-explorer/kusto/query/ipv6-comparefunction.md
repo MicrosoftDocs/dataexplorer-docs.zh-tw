@@ -8,14 +8,14 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: d666a819f777ab87ce0bfc3822278e8f60ec3985
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 7d63ce48ba54377fa79ccd13484b2b9b08794bc6
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84301294"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512362"
 ---
-# <a name="ipv6_compare"></a>ipv6_compare （）
+# <a name="ipv6_compare"></a>ipv6_compare()
 
 比較兩個 IPv6 或 IPv4 網路位址字串。 這兩個 IPv6 字串會經過剖析和比較，同時會計入引數前置詞所計算的結合 IP 首碼遮罩和選擇性 `PrefixMask` 引數。
 
@@ -130,9 +130,3 @@ datatable(ip1_string:string, ip2_string:string, prefix:long)
 |：： ffff： c0a8：0101|192.168.1.255 裝置|120|0|
 |：： 192.168.1.1/30|192.168.1.255 裝置/24|127|0|
 
-## <a name="next-steps"></a>後續步驟
-
-如需其他類似的功能，請參閱：
-
-* [ipv6_is_match （）](ipv6-is-matchfunction.md)
-* [ipv4_compare （）](ipv4-comparefunction.md)

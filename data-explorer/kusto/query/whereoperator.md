@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7dc9d7166a1f286e14c81f269f32f894cbe9ff9d
-ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
+ms.openlocfilehash: 116f585fe8a09b4befddd7d1429229ad1bac886f
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83404184"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512465"
 ---
 # <a name="where-operator"></a>where 運算子
 
@@ -38,7 +38,9 @@ T | where fruit=="apple"
 
 Predicate** 是 `true` 之 T** 中的資料列。
 
-**附注**Null 值：相較于 null 值，所有篩選函數都會傳回 false。 您可以使用特殊的 null 感知函數來撰寫查詢，將 null 值納入考慮： [isnull （）](./isnullfunction.md)、 [isnotnull （）](./isnotnullfunction.md)、 [isempty （）](./isemptyfunction.md)、 [isnotempty （）](./isnotemptyfunction.md)。 
+**附注**Null 值：相較于 null 值，所有篩選函數都會傳回 false。 您可以使用特殊的 null 感知函數來撰寫處理 null 值的查詢。
+
+[isnull （）](./isnullfunction.md)、 [isnotnull （）](./isnotnullfunction.md)、 [isempty （）](./isemptyfunction.md)、 [isnotempty （）](./isnotemptyfunction.md)。 
 
 **提示**
 
@@ -72,3 +74,4 @@ Traces | where * has "Kusto"
 ```
 
 "Kusto" 這個字會出現在任何資料行中的所有資料列。
+ 
