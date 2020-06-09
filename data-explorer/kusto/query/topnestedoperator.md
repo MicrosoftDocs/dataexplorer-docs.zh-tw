@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a2a8f4fa92a7b8722097ec3595674b855a90f216
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 3fc4cfa307a283c4eb21ba60e3b83ba89b574757
+ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294656"
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84626687"
 ---
 # <a name="top-nested-operator"></a>top-nested 運算子
 
@@ -48,7 +48,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 * *`Expr`*：輸入記錄的運算式，指出要為此階層層級傳回哪個值。
   這通常是表格式輸入（*T*）的資料行參考，或是這類資料行的某些計算（例如 `bin()` ）。
 
-* *`ConstExpr`*：如果已指定，則會將每個階層層級1筆記錄的值，加上不是「設為最上層」的所有記錄匯總。
+* *`ConstExpr`*：如果指定，針對每個階層層級，將會加入1筆記錄，其值為未「使其移至最上層」的所有記錄的匯總。
 
 * *`AggName`*：如果指定，此識別碼會在輸出中設定*匯總*值的資料行名稱。
 
@@ -72,7 +72,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 * 一個資料行包含子句計算的相異值 *`Expr`* （如果有指定，就會將資料行名稱*ExprName* ）
 
-* 一個資料行包含*匯總*計算的結果（如果有指定，則資料行名稱為*AggregationName* ）。
+* 一個資料行包含*匯總*計算的結果（如果有指定，則資料行名稱為*AggregationName* ）
 
 **註解**
 
@@ -85,7 +85,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 記錄的數目可能會與匯總子句的數目（（N1 + 1） \* （N2 + 1） \* ...）以指數方式成長。如果未指定*N*限制，記錄成長速度會更快。 請考慮此操作員可能會耗用大量資源。
 
-對於匯總分佈非常非統一的情況，請限制要傳回的相異值數目（藉由使用*N*），並使用 `with others=` *ConstExpr*選項來取得所有其他情況的「權數」指示。
+如果匯總的散發量很大，請限制要傳回的相異值數目（藉由使用*N*），並使用 `with others=` *ConstExpr*選項來取得所有其他案例的「權數」指示。
 
 **範例**
 
@@ -136,8 +136,7 @@ StormEvents
 |德克薩斯州|123400.5101|||所有其他結束位置|58523.2932000001|
 |所有其他狀態|1149279.5923|||所有其他結束位置|1149279.5923|
 
-
-下列查詢會針對上述範例中使用的第一個層級顯示相同的結果：
+下列查詢會針對上述範例中使用的第一個層級顯示相同的結果。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -151,7 +150,7 @@ StormEvents
 |1149279.5923|
 
 
-向上方的嵌套結果要求另一個資料行（事件層）： 
+向上方的嵌套結果要求另一個資料行（事件層）。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -185,7 +184,7 @@ StormEvents
 | mv-expand EndLocations, endLocationSums, indicies
 ```
 
-|州|來源|EndLocations|endLocationSums|indicies|
+|州|來源|EndLocations|endLocationSums|指數|
 |---|---|---|---|---|
 |德克薩斯州|Trained Spotter|CLAUDE|421.44|0|
 |德克薩斯州|Trained Spotter|AMARILLO|316.8892|1|

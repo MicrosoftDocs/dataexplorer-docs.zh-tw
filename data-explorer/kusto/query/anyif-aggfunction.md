@@ -1,6 +1,6 @@
 ---
-title: anyif () (聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的任意 if()(聚合函數)。
+title: anyif （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 anyif （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,42 +8,42 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 813df821bad1b7e57315dad9bcd7b1387a2cd678
-ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
+ms.openlocfilehash: 54431e2d088f60fa8ea2a56bffea9faa374faeda
+ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82030069"
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84626675"
 ---
-# <a name="anyif-aggregation-function"></a>anyif () (聚合函數)
+# <a name="anyif-aggregation-function"></a>anyif （）（彙總函式）
 
-任意在[彙總運算符](summarizeoperator.md)中為每個組選擇一條記錄,謂詞為 true,並返回表達式的值,而不是每個此類記錄。
+任意為[摘要運算子](summarizeoperator.md)中的每個群組選取一筆記錄，其述詞為 "true"。 函式會針對每個這類記錄傳回運算式的值。
 
 **語法**
 
-`summarize`Expr ,*謂詞*) ' *Expr* `anyif` `(`
+`summarize``anyif` `(` *Expr*、 *Predicate*述詞`)`
 
 **引數**
 
-* *Expr*: 從輸入中選擇要返回的每個記錄上的運算式。
-* *謂詞*:謂詞:用於指示可以考慮評估哪些記錄。
+* *Expr*：從要傳回的輸入中選取的每個記錄所傳回的運算式。
+* 述*詞：指出*哪些記錄可視為進行評估的述詞。
 
 **傳回**
 
-聚合`anyif`函數返回為從匯總運算符的每個組隨機選擇的每個記錄計算的運算式值。 只能選擇*謂詞*返回 true 的記錄(如果謂詞不返回 true,則生成 null 值)。
+`anyif`彙總函式會針對從摘要運算子的每個群組中隨機選取的每個記錄，傳回計算出之運算式的值。 只能選取述詞會傳回 "true *" 的記錄*。 如果述詞未傳回 "true"，則會產生 null 值。
 
 **備註**
 
-當您想要獲取複合組鍵每值一列的示例值時,此函數非常有用,但某些謂詞為 true。
+當您想要針對複合群組索引鍵的每個值取得一個資料行的範例值時，此函數會很有用，但受限於某個屬於 "true" 的述詞。
 
-如果存在非空/非空值,則函數將嘗試返回該值。
+如果有這類值，函數會嘗試傳回非 null/非空白的值。
 
 **範例**
 
-顯示人口從 3 億到 6 億的隨機大陸:
+顯示填入300到600000000的隨機大陸。
 
 ```kusto
 Continents | summarize anyif(Continent, Population between (300000000 .. 600000000))
 ```
 
-:::image type="content" source="images/aggfunction/any1.png" alt-text="任何 1":::
+:::image type="content" source="images/aggfunction/any1.png" alt-text="任何1":::

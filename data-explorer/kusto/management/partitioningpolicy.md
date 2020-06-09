@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: f17bd3736d2a154dd287459bd779088517eebcbc
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: e8125c6d0c327c98b80c4aeed6c587df12fdf91d
+ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294486"
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84626658"
 ---
 # <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
 
@@ -177,7 +177,7 @@ ms.locfileid: "84294486"
   * 單一資料分割作業之來源範圍的資料列計數總和的最大目標。
   * 這是選用屬性。 其預設值為 `0` ，預設目標為5000000記錄。
 
-## <a name="notes"></a>備忘稿
+## <a name="notes"></a>注意
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
@@ -201,6 +201,17 @@ ms.locfileid: "84294486"
   * `MinPartitioningPercentageInSingleTable`：在叢集中具有資料分割原則的所有資料表上，分割資料的最小百分比。
       * 如果此百分比持續維持在90% 以下，則請評估叢集的分割容量（請參閱[容量](partitioningpolicy.md#capacity)）。
   * `TableWithMinPartitioningPercentage`：資料表的完整名稱，如上所示的分割百分比。
+
+* 若要監視資料分割命令及其資源使用率，您可以使用[. show 命令](commands.md)。 例如：
+
+```kusto
+.show commands 
+| where StartedOn > ago(1d)
+| where CommandType == "ExtentsPartition"
+| parse Text with ".partition async table " TableName " extents" *
+| summarize count(), sum(TotalCpu), avg(tolong(ResourcesUtilization.MemoryPeak)) by TableName, bin(StartedOn, 15m)
+| render timechart with(ysplit = panels)
+```
 
 #### <a name="capacity"></a>Capacity
 
