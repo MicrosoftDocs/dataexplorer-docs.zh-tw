@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/26/2020
-ms.openlocfilehash: 46e3821514ca5b06852f7e8428b12cf9f80e29a4
-ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
+ms.openlocfilehash: 7f012b5b99cdf12ab1ace452838860aff312a28d
+ms.sourcegitcommit: b0cbb89e88b64a36880e6d34b4d6779283174456
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83867868"
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84633745"
 ---
 # <a name="visualize-data-with-azure-data-explorer-dashboards"></a>使用 Azure 資料總管儀表板將資料視覺化
 
@@ -50,13 +50,13 @@ Azure 資料總管儀表板提供三個主要優點：
     1. 輸入包含區域的叢集**URI**或部分名稱，然後選取 **[連線]**。 
     1. 從下拉式清單中選取**資料庫**。
     1. 如有需要，請使用預設值或修改**資料來源名稱**。 
-    1. 選取 [套用]。
+    1. 選取 [ **套用**]。
 
     :::image type="content" source="media/adx-dashboards/data-source-pane.png" alt-text="資料來源窗格":::
 
 ## <a name="use-parameters"></a>使用參數
 
-參數可讓您使用儀表板篩選。 參數會大幅提升儀表板轉譯效能，並可讓您在查詢中儘早使用篩選值。
+參數可讓您使用儀表板篩選。 參數會大幅提升儀表板轉譯效能，並可讓您在查詢中儘早使用篩選值。 如需使用參數的詳細資訊，請參閱[在 Azure 資料總管儀表板中使用參數](dashboard-parameters.md)。
 
 1. 選取頂端列上的 [**參數**]。 選取 [**參數**] 窗格中的 [ **+ 新增參數**] 按鈕。
 
@@ -102,4 +102,5 @@ Azure 資料總管儀表板提供三個主要優點：
 
 ## <a name="next-steps"></a>後續步驟
 
+* [在 Azure 資料總管儀表板中使用參數](dashboard-parameters.md)
 * [查詢 Azure 中的資料資料總管](web-query-data.md)
