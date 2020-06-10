@@ -8,24 +8,24 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 756650db23d531ec37636c0e7bd781a74ef9fdc3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: f3fb8361cfb281ad39dee7a15a690c2b94c79bea
+ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372686"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664920"
 ---
 # <a name="series_fit_line_dynamic"></a>series_fit_line_dynamic()
 
 在數列上套用線性回歸，並傳回動態物件。  
 
-採用包含動態數值陣列做為輸入的運算式，並執行[線性回歸](https://en.wikipedia.org/wiki/Line_fitting)，以便找出最適合它的行。 此函式需用於時間序列陣列，並符合 make-series 運算子的輸出。 它會產生具有下列內容的動態值：
-* `rsquare`： [r-正方形](https://en.wikipedia.org/wiki/Coefficient_of_determination)是適合品質的標準量值。 這是在範圍 [0-1] 中的數字，其中 1 - 是最可能的配合，而 0 表示資料完全未依照順序，且不符合任何一條線 
-* `slope`：近似線的斜率（這是來自 y = ax + b 的 a）
+採用包含動態數值陣列做為輸入的運算式，並執行[線性回歸](https://en.wikipedia.org/wiki/Line_fitting)來尋找最適合它的線條。 此函式需用於時間序列陣列，並符合 make-series 運算子的輸出。 它會產生具有下列內容的動態值：
+* `rsquare`： [r-正方形](https://en.wikipedia.org/wiki/Coefficient_of_determination)是適合品質的標準量值。 它是範圍 [0-1] 中的數位，其中1是最適合的大小，而0表示資料未排序且不符合任何行
+* `slope`：近似線的斜率（ *y = ax + b*的*a*值）
 * `variance`：輸入資料的變異數
-* `rvariance`：剩餘變異數，也就是輸入資料值與近似值之間的差異。
-* `interception`：攔截近似線（這是 b，y = ax + b）
-* `line_fit`：數位陣列，其中包含一系列最適合行的值。 序列長度等於輸入陣列的長度。 它主要用於圖表。
+* `rvariance`：剩餘的變異數，也就是輸入資料值與近似值之間的差異。
+* `interception`：攔截近似線（ *y = ax + b*的*b*值）
+* `line_fit`：數值陣列，其中包含一系列最適合行的值。 序列長度等於輸入陣列的長度。 主要用於製作圖表。
 
 這個運算子與[series_fit_line](series-fit-linefunction.md)相似，但不同的是， `series-fit-line` 它會傳回動態包。
 
@@ -38,7 +38,7 @@ ms.locfileid: "83372686"
 * *x*：數值的動態陣列。
 
 > [!TIP]
-> 使用此函式最方便的方式，是將它套用至[make 系列](make-seriesoperator.md)運算子的結果。
+> 使用此函式最方便的方式，就是將它套用至[make 系列](make-seriesoperator.md)運算子的結果。
 
 **範例**
 
@@ -49,9 +49,10 @@ print id=' ', x=range(bin(now(), 1h)-11h, bin(now(), 1h), 1h), y=dynamic([2,5,6,
 | extend RSquare=fit.rsquare, Slope=fit.slope, Variance=fit.variance,RVariance=fit.rvariance,Interception=fit.interception,LineFit=fit.line_fit
 | render timechart
 ```
-
+ 
 :::image type="content" source="images/series-fit-line/series-fit-line.png" alt-text="數列擬合線":::
 
 | RSquare | Slope | Variance | RVariance | Interception | LineFit                                                                                     |
 |---------|-------|----------|-----------|--------------|---------------------------------------------------------------------------------------------|
 | 0.982   | 2.730 | 98.628   | 1.686     | -1.666       | 1.064、3.7945、6.526、9.256、11.987、14.718、17.449、20.180、22.910、25.641、28.371、31.102 |
+ 

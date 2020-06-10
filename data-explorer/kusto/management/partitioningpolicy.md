@@ -7,20 +7,17 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/30/2020
-ms.openlocfilehash: e8125c6d0c327c98b80c4aeed6c587df12fdf91d
-ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
+ms.date: 06/10/2020
+ms.openlocfilehash: 768f07307a6f43c2af2db79bc1221c140b7c9a6f
+ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84626658"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664966"
 ---
-# <a name="data-partitioning-policy-preview"></a>資料分割原則（預覽）
+# <a name="data-partitioning-policy"></a>資料分割原則
 
 分割原則會針對特定資料表定義是否應該分割[範圍（資料分區）](../management/extents-overview.md) 。
-
-> [!NOTE]
-> 資料分割功能目前為*預覽*狀態。
 
 原則的主要目的是要改善已知的查詢效能，以縮小分割資料行中的值資料集，或在高基數位符串資料行上進行匯總/聯結。 原則也可能會導致資料的壓縮變得更好。
 
@@ -188,21 +185,21 @@ ms.locfileid: "84626658"
 
 #### <a name="monitoring"></a>監視
 
-* 您可以在叢集中監視資料分割的進度或狀態。 使用 [[顯示診斷](../management/diagnostics.md#show-diagnostics)] 命令。
+使用 [[顯示診斷](../management/diagnostics.md#show-diagnostics)] 命令來監視叢集中的資料分割進度或狀態。
 
-```kusto
-.show diagnostics
-| project MinPartitioningPercentageInSingleTable,
-          TableWithMinPartitioningPercentage
-```
+    ```kusto
+    .show diagnostics
+    | project MinPartitioningPercentageInSingleTable,
+              TableWithMinPartitioningPercentage
+    ```
 
-輸出包含：
+    The output includes:
 
-  * `MinPartitioningPercentageInSingleTable`：在叢集中具有資料分割原則的所有資料表上，分割資料的最小百分比。
+    * `MinPartitioningPercentageInSingleTable`：在叢集中具有資料分割原則的所有資料表上，分割資料的最小百分比。
       * 如果此百分比持續維持在90% 以下，則請評估叢集的分割容量（請參閱[容量](partitioningpolicy.md#capacity)）。
-  * `TableWithMinPartitioningPercentage`：資料表的完整名稱，如上所示的分割百分比。
+    * `TableWithMinPartitioningPercentage`：資料表的完整名稱，如上所示的分割百分比。
 
-* 若要監視資料分割命令及其資源使用率，您可以使用[. show 命令](commands.md)。 例如：
+使用[. show 命令](commands.md)來監視分割命令及其資源使用率。 例如：
 
 ```kusto
 .show commands 

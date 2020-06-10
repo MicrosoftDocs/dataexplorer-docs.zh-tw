@@ -7,12 +7,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/17/2019
-ms.openlocfilehash: b7ca4a41bb15e9fb8a4f55a9d674b1536dddd5ae
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a4a1d1f507f0b76ba1647eb3db78a4fe8a2bd944
+ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226392"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84665056"
 ---
 # <a name="query-data-in-azure-data-lake-using-azure-data-explorer"></a>使用 Azure 資料總管查詢 Azure Data Lake 中的資料
 
@@ -65,12 +65,6 @@ Azure 資料總管與 Azure Blob 儲存體和 Azure Data Lake Storage （Gen1 �
     ( 
        h@'http://storageaccount.blob.core.windows.net/container1;secretKey'
     )
-    with 
-    (
-       docstring = "Docs",
-       folder = "ExternalTables",
-       namePrefix="Prefix"
-    ) 
     ```
  
 1. Json 格式需要第二個步驟來建立資料行的對應，如下所示。 在下列查詢中，建立名為*mappingName*的特定 json 對應：
