@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: tutorial
-ms.date: 09/24/2018
-ms.openlocfilehash: d37cef094bfc1200182f7cf23dc68d396c126eb2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.date: 06/02/2020
+ms.openlocfilehash: bde567a3c41a226ca0a8304d7ab4ed42f3fa65bf
+ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491953"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84420912"
 ---
 # <a name="tutorial-visualize-data-from-azure-data-explorer-in-power-bi"></a>教學課程：在 Power BI 中從 Azure 資料總管將資料視覺化
 
@@ -29,7 +29,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 > * 使用視覺效果來建立報表
 > * 發佈和共用報表
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 除了 Azure 和 Power BI 訂用帳戶之外，您還需要下列項目，才能完成本教學課程：
 
@@ -37,7 +37,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 * [StormEvents 範例資料](ingest-sample-data.md)。 [!INCLUDE [data-explorer-storm-events](includes/data-explorer-storm-events.md)]
 
-* [Power BI Desktop](https://powerbi.microsoft.com/get-started/) (選取 [免費下載]  )
+* [Power BI Desktop](https://powerbi.microsoft.com/get-started/) (選取 [免費下載])
 
 ## <a name="render-visuals-in-azure-data-explorer"></a>在 Azure 資料總管中轉譯視覺效果
 
@@ -47,7 +47,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 1. 在左窗格中，選取包含 StormEvents 範例資料的測試資料庫。
 
-1. 將下列查詢貼到右側視窗中，然後選取 [執行]  。
+1. 將下列查詢貼到右側視窗中，然後選取 [執行]。
 
     ```Kusto
     StormEvents
@@ -62,7 +62,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
     ![事件直條圖](media/visualize-power-bi/events-column-chart.png)
 
-1. 將下列查詢貼到右側視窗中，然後選取 [執行]  。
+1. 將下列查詢貼到右側視窗中，然後選取 [執行]。
 
     ```Kusto
     StormEvents
@@ -81,51 +81,51 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 現在您需在 Power BI Desktop 中連線至 Azure 資料總管。
 
-1. 在 Power BI Desktop 的 [首頁]  索引標籤上，選取 [取得資料]  ，然後選取 [更多]  。
+1. 在 Power BI Desktop 的 [首頁] 索引標籤上，選取 [取得資料]，然後選取 [更多]。
 
     ![取得資料](media/visualize-power-bi/get-data-more.png)
 
-1. 搜尋 [Azure 資料總管]  ，選取 [Azure 資料總管 (Beta)]  ，然後選取 [連線]  。
+1. 搜尋 [Azure 資料總管]，選取 [Azure 資料總管]，然後選取 [連線]。
 
     ![搜尋並取得資料](media/visualize-power-bi/search-get-data.png)
 
-1. 在 [預覽版連接器]  畫面上，選取 [繼續]  。
+1. 在 [預覽版連接器] 畫面上，選取 [繼續]。
 
-1. 在下一個畫面上，輸入測試叢集和資料庫的名稱。 叢集的格式應該是 `https://<ClusterName>.<Region>.kusto.windows.net`。 輸入 *StormEvents* 作為資料表的名稱。 保留所有其他選項的預設值，然後選取 [確定]  。
+1. 在下一個畫面上，輸入測試叢集和資料庫的名稱。 叢集的格式應該是 `https://<ClusterName>.<Region>.kusto.windows.net`。 輸入 *StormEvents* 作為資料表的名稱。 保留所有其他選項的預設值，然後選取 [確定]。
 
     ![叢集、資料庫、資料表選項](media/visualize-power-bi/cluster-database-table.png)
 
-1. 在資料預覽畫面上，選取 [編輯]  。
+1. 在資料預覽畫面上，選取 [編輯]。
 
     資料表會在「Power Query 編輯器」中開啟，您可以先在此編輯器中編輯資料列和資料行，然後再匯入資料。
 
 ## <a name="work-with-data-in-power-bi-desktop"></a>在 Power BI Desktop 中處理資料
 
-既然您已連線至「Azure 資料總管」，現在即可在「Power Query 編輯器」中編輯資料。 您需將 [BeginLat]  資料行中具有 Null 值的資料列卸除，並將 [StormSummary]  JSON 資料行整個卸除。 這些作業相當簡單，但您也可以在匯入資料時，執行複雜的轉換。
+既然您已連線至「Azure 資料總管」，現在即可在「Power Query 編輯器」中編輯資料。 您需將 [BeginLat] 資料行中具有 Null 值的資料列卸除，並將 [StormSummary] JSON 資料行整個卸除。 這些作業相當簡單，但您也可以在匯入資料時，執行複雜的轉換。
 
-1. 選取 [BeginLat]  資料行的箭號、取消選取 [null]  核取方塊，然後選取 [確定]  。
+1. 選取 [BeginLat] 資料行的箭號、取消選取 [null] 核取方塊，然後選取 [確定]。
 
     ![篩選資料行](media/visualize-power-bi/filter-column.png)
 
-1. 以滑鼠右鍵按一下 **StormSummary** 資料行標頭，然後選取 [移除]  。
+1. 以滑鼠右鍵按一下 **StormSummary** 資料行標頭，然後選取 [移除]。
 
     ![移除資料行](media/visualize-power-bi/remove-column.png)
 
-1. 在 [查詢設定]  窗格中，將名稱從 *Query1* 變更為 *StormEvents*。
+1. 在 [查詢設定] 窗格中，將名稱從 *Query1* 變更為 *StormEvents*。
 
     ![變更查詢名稱](media/visualize-power-bi/query-name.png)
 
-1. 在功能區的 [常用]  索引標籤上，選取 [關閉並套用]  。
+1. 在功能區的 [常用] 索引標籤上，選取 [關閉並套用]。
 
     ![關閉並套用](media/visualize-power-bi/close-apply.png)
 
-    Power Query 會套用您的變更，然後將範例資料匯入到「資料模型」  中。 接下來幾個步驟將說明如何充實該資料模型。 同樣地，這只是一個讓您了解可能進行之操作的簡單範例。
+    Power Query 會套用您的變更，然後將範例資料匯入到「資料模型」中。 接下來幾個步驟將說明如何充實該資料模型。 同樣地，這只是一個讓您了解可能進行之操作的簡單範例。
 
 1. 在主視窗的左側，選取資料檢視。
 
     ![資料檢視](media/visualize-power-bi/data-view.png)
 
-1. 在功能區的 [模型]  索引標籤上，選取 [新增資料行]  。
+1. 在功能區的 [模型] 索引標籤上，選取 [新增資料行]。
 
     ![新增資料行](media/visualize-power-bi/new-column.png)
 
@@ -149,7 +149,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
     ![報表檢視](media/visualize-power-bi/report-view.png)
 
-1. 在 [視覺效果]  窗格中，選取群組直條圖。
+1. 在 [視覺效果] 窗格中，選取群組直條圖。
 
     ![新增直條圖](media/visualize-power-bi/add-column-chart.png)
 
@@ -157,7 +157,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
     ![空白圖表](media/visualize-power-bi/blank-chart.png)
 
-1. 在 [欄位]  清單中，選取 [DurationHours]  和 [State]  。
+1. 在 [欄位] 清單中，選取 [DurationHours] 和 [State]。
 
     ![選取欄位](media/visualize-power-bi/select-fields.png)
 
@@ -167,11 +167,11 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 1. 按一下畫布上直條圖外的任何位置。
 
-1. 在 [視覺效果]  窗格中，選取地圖。
+1. 在 [視覺效果] 窗格中，選取地圖。
 
     ![新增地圖](media/visualize-power-bi/add-map.png)
 
-1. 在 [欄位]  清單中，選取 [CropDamage]  和 [State]  。 調整地圖大小以便清楚查看美國各州。
+1. 在 [欄位] 清單中，選取 [CropDamage] 和 [State]。 調整地圖大小以便清楚查看美國各州。
 
     ![農損地圖](media/visualize-power-bi/crop-damage-map.png)
 
@@ -187,27 +187,27 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 到目前為止，您在 Power BI 中進行的工作都是使用 Power BI Desktop 在本機完成的。 現在您需將報表發佈至 Power BI 服務以便與他人共用。
 
-1. 在 Power BI Desktop 之功能區的 [常用]  索引標籤上，選取 [發佈]  。
+1. 在 Power BI Desktop 之功能區的 [常用] 索引標籤上，選取 [發佈]。
 
     ![發佈按鈕](media/visualize-power-bi/publish-button.png)
 
 1. 如果您尚未登入 Power BI，請進行登入程序。
 
-1. 選取 [我的工作區]  ，然後選取 [選取]  。
+1. 選取 [我的工作區]，然後選取 [選取]。
 
     ![選取工作區](media/visualize-power-bi/select-workspace.png)
 
-1. 完成發佈時，選取 [在 Power BI 中開啟 storm-events.pbix]  。
+1. 完成發佈時，選取 [在 Power BI 中開啟 storm-events.pbix]。
 
     ![發佈成功](media/visualize-power-bi/publishing-succeeded.png)
 
     報表會在服務中開啟，所含的視覺效果和版面配置會與您在 Power BI Desktop 中定義的相同。
 
-1. 在報表的右上角中，選取 [共用]  。
+1. 在報表的右上角中，選取 [共用]。
 
     ![[共用] 按鈕](media/visualize-power-bi/share-button.png)
 
-1. 在 [共用報表]  畫面中，新增您組織中的同事、新增附註，然後選取 [共用]  。
+1. 在 [共用報表] 畫面中，新增您組織中的同事、新增附註，然後選取 [共用]。
 
     ![共用報表](media/visualize-power-bi/share-report.png)
 
@@ -217,9 +217,9 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 如果您不想要保留所建立的報表，只要刪除 *storm-events.pbix* 檔案即可。 如果您想要移除所發佈的報表，請依照下列步驟進行操作。
 
-1. 在 [我的工作區]  底下，向下捲動至 [報表]  並找出 [storm-events]  。
+1. 在 [我的工作區] 底下，向下捲動至 [報表] 並找出 [storm-events]。
 
-1. 選取 [storm-events]  旁邊的省略符號 ( **. . .** )，然後選取 [移除]  。
+1. 選取 [storm-events] 旁邊的省略符號 ( **. . .** )，然後選取 [移除]。
 
     ![移除報表](media/visualize-power-bi/remove-report.png)
 
