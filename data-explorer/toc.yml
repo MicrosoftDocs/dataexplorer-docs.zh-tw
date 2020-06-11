@@ -145,7 +145,11 @@
     - name: 顯現資料
       items:
         - name: Azure Data Explorer 儀表板
-          href: azure-data-explorer-dashboards.md
+          items:
+            - name: 使用儀表板
+              href: azure-data-explorer-dashboards.md
+            - name: 使用儀表板參數
+              href: dashboard-parameters.md
         - name: Power BI
           items:
             - name: 最佳作法
