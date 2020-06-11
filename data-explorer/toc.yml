@@ -1237,7 +1237,7 @@
                 - name: 資料表概觀
                   href: ./kusto/management/tables.md
                 - name: .alter 合併資料表
-                  href: ./kusto/management/alter-table-command.md
+                  href: ./kusto/management/alter-merge-table-command.md
                 - name: .alter 資料表
                   href: ./kusto/management/alter-table-command.md
                 - name: .alter 資料表 docstring
