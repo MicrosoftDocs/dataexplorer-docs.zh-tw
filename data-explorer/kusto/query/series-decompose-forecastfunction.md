@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 9676da9d12e2654cd4d92538f183a2630971d078
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 7aafc6ce041395a914787ed2b406d88aa9910238
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372873"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717154"
 ---
 # <a name="series_decompose_forecast"></a>series_decompose_forecast()
 
 根據數列分解進行預測。
 
-接受包含數列（動態數值陣列）做為輸入的運算式，並預測最後尾端點的值（如需分解方法的詳細資訊，請參閱[series_decompose](series-decomposefunction.md) ）。
+接受包含數列（動態數值陣列）做為輸入的運算式，並預測最後一個尾端點的值。 如需詳細資訊，請參閱[series_decompose](series-decomposefunction.md)。
  
 **語法**
 
@@ -27,32 +27,29 @@ ms.locfileid: "83372873"
 
 **引數**
 
-* *數列*：動態陣列資料格，這是數值的陣列。 [Make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出通常是。
+* *數列*：數值的動態陣列資料格。 通常是[make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出。
 * *Points*：整數，指定要預測之數列結尾的點數（預測）。 這些點會從學習（回歸）流程中排除。
 * *季節性*：控制季節性分析的整數，其中包含下列其中一項：
-    * -1：使用[series_periods_detect](series-periods-detectfunction.md) （預設值）自動偵測季節性。 
+    * -1：使用[series_periods_detect](series-periods-detectfunction.md) （預設值）自動偵測季節性。
     * period：正整數，指定區間數目的預期時間長度。例如，如果數列位於1h 的 bin 中，則每週期間為168的 bin。
-    * 0：無季節性（略過解壓縮此元件）。   
+    * 0：無季節性（略過解壓縮此元件）。
 * *趨勢*：控制趨勢分析的字串，其中包含下列其中一項：
-    * "linefit"：使用線性回歸（預設值）將趨勢元件解壓縮。    
-    * "avg"：將趨勢元件定義為平均（x）。
-    * "none"：沒有趨勢，略過解壓縮此元件。   
-* *Seasonality_threshold*：當*季節性*設定為自動偵測時，季節性分數的閾值，預設的分數臨界值為 `0.6` 。 如需詳細資訊，請參閱[series_periods_detect](series-periods-detectfunction.md)。
+    * `linefit`：使用線性回歸（預設值）將趨勢元件解壓縮。
+    * `avg`：將趨勢元件定義為平均（x）。
+    * `none`：沒有趨勢，略過解壓縮此元件。
+* *Seasonality_threshold*：當*季節性*設定為 [自動偵測] 時，季節性分數的閾值。 預設分數臨界值為 `0.6` 。 如需詳細資訊，請參閱[series_periods_detect](series-periods-detectfunction.md)。
 
 **退貨**
 
- 具有預測數列的動態陣列
-  
+ 具有預測數列的動態陣列。
 
-**注意事項**
-
-* 原始輸入數列的動態陣列應包含要預測的數位*點位置*，這通常是使用[make 系列](make-seriesoperator.md)來完成，並在範圍內指定包含要預測時間範圍的結束時間。
-    
-* 應該啟用季節性和（或）趨勢，否則函式是多餘的，而且只會傳回填滿零的數列。
+> [!NOTE]
+> * 原始輸入數列的動態陣列應包含要預測的數個*點*插槽。 預測通常是使用[make 系列](make-seriesoperator.md)來完成，並在範圍內指定結束時間（包含要預測的時間範圍）。
+> * 應該啟用季節性或 trend，否則函式是多餘的，而且只會傳回填滿零的數列。
 
 **範例**
 
-在下列範例中，我們會在每小時的資料細微性中產生一系列的4周，每週季節性和小型向上趨勢，然後使用 `make-series` ，並將另一個空的周新增至數列。 `series_decompose_forecast`呼叫的是一周（24 * 7 點），它會自動偵測季節性和趨勢，並產生整個5週期間的預測。 
+在下列範例中，我們會以每小時的方式產生一連串的四周，每週季節性和一個小型向上趨勢。 然後，我們會使用 `make-series` ，並將另一個空白周新增至數列。 `series_decompose_forecast`呼叫的是一周（24 * 7 點），它會自動偵測季節性和趨勢，並產生整個五周週期的預測。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -68,3 +65,4 @@ ts
 ```
 
 :::image type="content" source="images/series-decompose-forecastfunction/series-decompose-forecast.png" alt-text="數列分解預測":::
+ 

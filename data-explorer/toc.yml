@@ -329,6 +329,10 @@
               href: ./kusto/query/schema-entities/index.md
             - name: 實體名稱
               href: ./kusto/query/schema-entities/entity-names.md
+            - name: 實體參考
+              href: ./kusto/query/schema-entities/entity-references.md
+            - name: 資料庫
+              href: ./kusto/query/schema-entities/databases.md
             - name: 資料表
               href: ./kusto/query/schema-entities/tables.md
             - name: 資料行
@@ -363,6 +367,8 @@
               href: ./kusto/query/scalar-data-types/timespan.md
             - name: Null 值
               href: ./kusto/query/scalar-data-types/null-values.md
+            - name: 不支援的純量資料類型
+              href: /kusto/query/scalar-data-types/unsupported-data-types.md
         - name: 函式
           items:
             - name: 函式類型
@@ -1256,6 +1262,8 @@
                   href: ./kusto/management/create-table-command.md
                 - name: .create 資料表
                   href: ./kusto/management/create-tables-command.md
+                - name: .create-merge tables
+                  href: ./kusto/management/create-merge-tables-command.md
                 - name: .drop 資料表
                   href: ./kusto/management/drop-table-command.md
                 - name: .rename 資料表

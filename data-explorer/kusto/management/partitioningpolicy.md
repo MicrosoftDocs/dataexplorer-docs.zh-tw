@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 768f07307a6f43c2af2db79bc1221c140b7c9a6f
-ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
+ms.openlocfilehash: 2a54d6e8bdb891500778f2043f2b1aa4094162d2
+ms.sourcegitcommit: 743e8b1def28bc8f875b22b857ec345eeb7e5acc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664966"
+ms.locfileid: "84671439"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
@@ -187,17 +187,16 @@ ms.locfileid: "84664966"
 
 使用 [[顯示診斷](../management/diagnostics.md#show-diagnostics)] 命令來監視叢集中的資料分割進度或狀態。
 
-    ```kusto
-    .show diagnostics
-    | project MinPartitioningPercentageInSingleTable,
-              TableWithMinPartitioningPercentage
-    ```
+```kusto
+.show diagnostics
+| project MinPartitioningPercentageInSingleTable, TableWithMinPartitioningPercentage
+```
 
-    The output includes:
+輸出包含：
 
-    * `MinPartitioningPercentageInSingleTable`：在叢集中具有資料分割原則的所有資料表上，分割資料的最小百分比。
-      * 如果此百分比持續維持在90% 以下，則請評估叢集的分割容量（請參閱[容量](partitioningpolicy.md#capacity)）。
-    * `TableWithMinPartitioningPercentage`：資料表的完整名稱，如上所示的分割百分比。
+  * `MinPartitioningPercentageInSingleTable`：在叢集中具有資料分割原則的所有資料表上，分割資料的最小百分比。
+    * 如果此百分比持續維持在90% 以下，則請評估叢集的分割容量（請參閱[容量](partitioningpolicy.md#capacity)）。
+  * `TableWithMinPartitioningPercentage`：資料表的完整名稱，如上所示的分割百分比。
 
 使用[. show 命令](commands.md)來監視分割命令及其資源使用率。 例如：
 

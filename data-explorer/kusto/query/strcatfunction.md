@@ -1,6 +1,6 @@
 ---
-title: strcat() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 strcat()。
+title: strcat （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 strcat （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: dd01f875b45be038371cc184987aa2a8f8b8d5eb
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: af25bb0407c9bc0c004c2f22e326ac034c6682cd
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506914"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717099"
 ---
 # <a name="strcat"></a>strcat()
 
-在 1 到 64 個參數之間串聯。
+會串連1到64個引數。
 
-* 如果參數不是字串類型,則它們將被強制轉換為字串。
+* 如果引數不是字串類型，則會強制將它們轉換成字串。
 
 **語法**
 
-`strcat(`*參數1*,*參數2* [,*參數N*]`)`
+`strcat(`*argument1*， *Argument2*[， *argumentN*]`)`
 
 **引數**
 
-* *參數1* ...*參數N* :要串聯的運算式。
+* *argument1* .。。*argumentN*：要串連的運算式。
 
 **傳回**
 
-參數,串聯到單個字串。
+引數，串連成單一字串。
 
 **範例**
   

@@ -1,6 +1,6 @@
 ---
-title: 序列化運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中的序列化運算符。
+title: 序列化運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的序列化運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5402d1e1fcceb42f02643bf24918ed07beddaed7
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 708a5ccd5f8402dedb074a6ab8c17b1d7762839c
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509107"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717116"
 ---
 # <a name="serialize-operator"></a>serialize 運算子
 
-標記輸入行集的順序對視窗函數的使用是安全的。
+標記輸入資料列集的順序可安全地用於視窗函數。
 
-運算碼具有聲明性含義,它將輸入行集標記為序列化(有序),以便[視窗函數](./windowsfunctions.md)可以應用於它。
+運算子具有宣告式意義。 它會將輸入資料列集標示為已序列化（已排序），以便將視窗函式套用至該[工作](./windowsfunctions.md)表。
 
 ```kusto
 T | serialize rn=row_number()
@@ -27,9 +27,9 @@ T | serialize rn=row_number()
 
 **語法**
 
-`serialize`[*名稱1* `=` *Expr1* ]`,` *名稱2* `=` *Expr2*[...]
+`serialize`[*Name1* `=`*運算式 1* [ `,` *Name2* `=` *運算式 2*] ...]
 
-* *名稱*/*Expr*對與[擴展運算符](./extendoperator.md)中的對類似。
+* *名稱* / *Expr*配對與[extend 運算子](./extendoperator.md)中的配對類似。
 
 **範例**
 
@@ -43,12 +43,12 @@ Traces
 | serialize rn = row_number()
 ```
 
-以下運算子輸出行集標記為序列化:
+下列運算子的輸出資料列集標示為已序列化。
 
-[範圍](./rangeoperator.md),[排序](./sortoperator.md),[順序](./topoperator.md),[頂端,](./tophittersoperator.md)[頂端, 取得模式](./getschemaoperator.md).[order](./orderoperator.md)
+[range](./rangeoperator.md)、 [sort](./sortoperator.md)、 [order](./orderoperator.md)、 [top](./topoperator.md)、 [top-hitters](./tophittersoperator.md)、 [getschema](./getschemaoperator.md)。
 
-以下運算子輸出行集標記為非序列化:
+下列運算子的輸出資料列集標示為非序列化。
 
-[樣本](./sampleoperator.md),[樣本不同](./sampledistinctoperator.md),[不同](./distinctoperator.md),[聯結](./joinoperator.md),[頂巢巢 ,](./topnestedoperator.md)[計數](./countoperator.md),[總結](./summarizeoperator.md),[面,](./facetoperator.md) [mv-展開](./mvexpandoperator.md),[評估](./evaluateoperator.md),[減少](./reduceoperator.md),[使系列](./make-seriesoperator.md)
+[範例](./sampleoperator.md)，[範例相異](./sampledistinctoperator.md)，[相異](./distinctoperator.md)，[聯結](./joinoperator.md)，[頂端嵌套](./topnestedoperator.md)，[計數](./countoperator.md)，[摘要](./summarizeoperator.md)， [facet](./facetoperator.md)， [mv-展開](./mvexpandoperator.md)，[評估](./evaluateoperator.md)，[減少依據](./reduceoperator.md)， [make 系列](./make-seriesoperator.md)
 
-所有其他運算元都保留序列化屬性(如果輸入行集已序列化,則輸出行集也是如此)。
+所有其他運算子都會保留序列化屬性。 如果輸入資料列集已序列化，則輸出資料列集也會序列化。

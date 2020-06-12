@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: e81afc50c752ac1b673bcaac38a77c2712ce9ff4
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: a06bd3719fba4f9f61cf7b1c9501f96b17a48d58
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82619003"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717218"
 ---
 # <a name="summarize-operator"></a>summarize 運算子
 
@@ -33,12 +33,12 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 **語法**
 
-*T* `| summarize` [[*Column* `=`]*匯總*[`,` ...]][`by` [*Column* `=`] *GroupExpression* [`,` ...]]
+*T* `| summarize` [[*column* `=` ]*匯總*[ `,` ...]] [ `by` [*column* `=` ] *GroupExpression* [ `,` ...]]
 
 **引數**
 
 * ** 結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
-* *匯總：* 以資料行名稱做為引數`count()`呼叫`avg()`[彙總函式](summarizeoperator.md#list-of-aggregation-functions)（例如或）。 請參閱 [彙總函式清單](summarizeoperator.md#list-of-aggregation-functions)。
+* *匯總：* 以資料[aggregation function](summarizeoperator.md#list-of-aggregation-functions) `count()` `avg()` 行名稱做為引數呼叫彙總函式（例如或）。 請參閱 [彙總函式清單](summarizeoperator.md#list-of-aggregation-functions)。
 * ** 可提供一組相異值的資料行運算式。 它通常是已提供一組受限值的資料行名稱，或是以數值或時間資料行做為引數的 `bin()` 。 
 
 > [!NOTE]
@@ -51,9 +51,9 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 輸入資料列會各自分組到具有相同 `by` 運算式值的群組。 然後指定的彙總函式會針對每個群組進行計算，以便為每個群組產生資料列。 結果會包含 `by` 資料行，而且每個經過計算的彙總至少會佔有一個資料行。 (某些彙總函式會傳回多個資料行)。
 
-結果有多個不同的`by`值組合（可能是零）的資料列。 如果未提供任何群組索引鍵，則結果會有一筆記錄。
+結果有多個不同的 `by` 值組合（可能是零）的資料列。 如果未提供任何群組索引鍵，則結果會有一筆記錄。
 
-若要總結數值範圍，請使用`bin()`來將範圍減少為離散值。
+若要總結數值範圍，請使用 `bin()` 來將範圍減少為離散值。
 
 > [!NOTE]
 > * 雖然您可以為彙總與群組運算式提供任意運算式，但更有效率的方法是使用簡單的資料行名稱，或對數值資料行套用 `bin()` 。
@@ -63,16 +63,16 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 |函式|描述|
 |--------|-----------|
-|[any （）](any-aggfunction.md)|傳回群組的隨機非空白值|
+|[any()](any-aggfunction.md)|傳回群組的隨機非空白值|
 |[anyif()](anyif-aggfunction.md)|傳回群組的隨機非空白值（含述詞）|
 |[arg_max()](arg-max-aggfunction.md)|當引數最大化時，傳回一或多個運算式|
 |[arg_min()](arg-min-aggfunction.md)|當引數最小化時，傳回一或多個運算式|
-|[avg （）](avg-aggfunction.md)|傳回整個群組的平均值|
+|[avg()](avg-aggfunction.md)|傳回整個群組的平均值|
 |[avgif()](avgif-aggfunction.md)|傳回整個群組的平均值（含述詞）|
-|[binary_all_and](binary-all-and-aggfunction.md)|使用群組的二進位`AND`檔傳回匯總值|
-|[binary_all_or](binary-all-or-aggfunction.md)|使用群組的二進位`OR`檔傳回匯總值|
-|[binary_all_xor](binary-all-xor-aggfunction.md)|使用群組的二進位`XOR`檔傳回匯總值|
-|[buildschema()](buildschema-aggfunction.md)|傳回 dynamicexpression `dynamic`輸入之所有值的最小架構|
+|[binary_all_and](binary-all-and-aggfunction.md)|使用群組的二進位檔傳回匯總值 `AND`|
+|[binary_all_or](binary-all-or-aggfunction.md)|使用群組的二進位檔傳回匯總值 `OR`|
+|[binary_all_xor](binary-all-xor-aggfunction.md)|使用群組的二進位檔傳回匯總值 `XOR`|
+|[buildschema()](buildschema-aggfunction.md)|傳回 dynamicexpression 輸入之所有值的最小架構 `dynamic`|
 |[count （）](count-aggfunction.md)|傳回群組的計數|
 |[countif()](countif-aggfunction.md)|傳回具有群組之述詞的計數|
 |[dcount()](dcount-aggfunction.md)|傳回群組元素的近似相異計數|
@@ -84,17 +84,17 @@ T | summarize count() by price_range=bin(price, 10.0)
 |[make_list_with_nulls()](make-list-with-nulls-aggfunction.md)|傳回群組中所有值的清單，包括 null 值|
 |[make_set()](makeset-aggfunction.md)|傳回群組內的一組相異值|
 |[make_set_if()](makesetif-aggfunction.md)|傳回群組內的一組相異值（使用述詞）|
-|[最大值（）](max-aggfunction.md)|傳回整個群組的最大值|
+|[max()](max-aggfunction.md)|傳回整個群組的最大值|
 |[maxif()](maxif-aggfunction.md)|傳回整個群組的最大值（含述詞）|
-|[min （）](min-aggfunction.md)|傳回整個群組的最小值|
+|[min()](min-aggfunction.md)|傳回整個群組的最小值|
 |[minif()](minif-aggfunction.md)|傳回整個群組的最小值（含述詞）|
 |[percentiles()](percentiles-aggfunction.md)|傳回群組的百分位數近似值|
 |[percentiles_array （）](percentiles-aggfunction.md)|傳回群組的百分位數近似|
 |[percentilesw()](percentiles-aggfunction.md)|傳回群組的加權百分位近似|
 |[percentilesw_array （）](percentiles-aggfunction.md)|傳回群組的加權百分位數近似|
-|[stdev （）](stdev-aggfunction.md)|傳回整個群組的標準差|
+|[stdev()](stdev-aggfunction.md)|傳回整個群組的標準差|
 |[stdevif()](stdevif-aggfunction.md)|傳回整個群組的標準差（使用述詞）|
-|[sum （）](sum-aggfunction.md)|傳回遷移群組的元素總和|
+|[sum()](sum-aggfunction.md)|傳回遷移群組的元素總和|
 |[sumif()](sumif-aggfunction.md)|傳回遷移群組之元素的總和（使用述詞）|
 |[variance()](variance-aggfunction.md)|傳回整個群組的變異數|
 |[varianceif()](varianceif-aggfunction.md)|傳回整個群組的變異數（使用述詞）|
@@ -117,7 +117,7 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 **範例**
 
-判斷和`CompletionStatus`資料表中的`ActivityType`唯一組合。 沒有任何彙總函式，只是群組依據索引鍵。 輸出只會顯示這些結果的資料行：
+判斷 `ActivityType` 和資料表中的唯一組合 `CompletionStatus` 。 沒有任何彙總函式，只是群組依據索引鍵。 輸出只會顯示這些結果的資料行：
 
 ```kusto
 Activities | summarize by ActivityType, completionStatus
@@ -157,7 +157,7 @@ Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
 
 **範例**
 
-下列範例會計算每個活動類型的長條圖。 因為`Duration`有許多值，請`bin`使用將其值分組成10分鐘的間隔：
+下列範例會計算每個活動類型的長條圖。 因為 `Duration` 有許多值，請使用 `bin` 將其值分組成10分鐘的間隔：
 
 ```kusto
 Activities | summarize count() by ActivityType, length=bin(Duration, 10m)
@@ -175,13 +175,12 @@ Activities | summarize count() by ActivityType, length=bin(Duration, 10m)
 
 **匯總預設值的範例**
 
-當`summarize`運算子的輸入至少有一個空白的 group by 索引鍵時，也會是空的結果。
+當運算子的輸入 `summarize` 至少有一個空白的 group by 索引鍵時，也會是空的結果。
 
-當`summarize`運算子的輸入沒有空白的 group by 索引鍵時，結果會是中使用之匯總的預設值`summarize`：
+當運算子的輸入沒有 `summarize` 空白的 group by 索引鍵時，結果會是中使用之匯總的預設值 `summarize` ：
 
 ```kusto
-range x from 1 to 10 step 1
-| where 1 == 2
+datatable(x:long)[]
 | summarize any(x), arg_max(x, x), arg_min(x, x), avg(x), buildschema(todynamic(tostring(x))), max(x), min(x), percentile(x, 55), hll(x) ,stdev(x), sum(x), sumif(x, x > 0), tdigest(x), variance(x)
 ```
 
@@ -190,8 +189,7 @@ range x from 1 to 10 step 1
 |||||||||||||||||
 
 ```kusto
-range x from 1 to 10 step 1
-| where 1 == 2
+datatable(x:long)[]
 | summarize  count(x), countif(x > 0) , dcount(x), dcountif(x, x > 0)
 ```
 
@@ -200,8 +198,7 @@ range x from 1 to 10 step 1
 |0|0|0|0|
 
 ```kusto
-range x from 1 to 10 step 1
-| where 1 == 2
+datatable(x:long)[]
 | summarize  make_set(x), make_list(x)
 ```
 

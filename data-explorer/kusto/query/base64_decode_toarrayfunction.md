@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: eda367dfeaab15dc5249fd860596964c597a1bcd
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: df10ea2bbdf4e48d32c087d35eb9361fc4d697b8
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225406"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717201"
 ---
 # <a name="base64_decode_toarray"></a>base64_decode_toarray()
 
@@ -25,14 +25,14 @@ ms.locfileid: "83225406"
 
 **引數**
 
-* *String*：要從 base64 解碼成 UTF8-8 字串的輸入字串。
+* *String*：要從 base64 解碼成 UTF8 字串的輸入字串。
 
 **傳回**
 
-傳回從 base64 字串 ecoded 的 long 值陣列。
+傳回從 base64 字串解碼的 long 值陣列。
 
-* 如需將 base64 字串解碼為 UTF-8 字串，請參閱[base64_decode_tostring （）](base64_decode_tostringfunction.md)
-* 如需將字串編碼為 base64 字串，請參閱[base64_encode_tostring （）](base64_encode_tostringfunction.md)
+* 若要將 base64 字串解碼為 UTF-8 字串，請參閱[base64_decode_tostring （）](base64_decode_tostringfunction.md)
+* 若要將字串編碼為 base64 字串，請參閱[base64_encode_tostring （）](base64_encode_tostringfunction.md)
 
 **範例**
 
@@ -46,7 +46,7 @@ print Quine=base64_decode_toarray("S3VzdG8=")
 |-----|
 |[75117115116111]|
 
-嘗試將從無效 UTF-8 編碼所產生的 base64 字串解碼，將會傳回 null：
+如果您嘗試將從無效 UTF-8 編碼所產生的 base64 字串解碼，則會傳回 "null"：
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

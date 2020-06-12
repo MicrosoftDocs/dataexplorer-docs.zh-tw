@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b1d45fb8b0749a4be30854dd9b0120a7eb127bf2
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 43e92edd74861acc8207a855243f9ec1e012070a
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227293"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717354"
 ---
 # <a name="current_principal"></a>current_principal()
 
@@ -30,7 +30,7 @@ ms.locfileid: "83227293"
 **傳回**
 
 目前的主體完整名稱（FQN），其為 `string` 。  
-此字串的格式如下：  
+字串格式為：  
 *PrinciplaType* `=`*PrincipalId* `;`*TenantId*
 
 **範例**
