@@ -1,6 +1,6 @@
 ---
-title: 動態資料類型 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的動態數據類型。
+title: 動態資料類型-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的動態資料類型。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,71 +8,68 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: e1cdb6e5af20b326198a7447c50c24e5f632d237
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 606d48c4bda583ad82404a1b25119ec9beb4c5a9
+ms.sourcegitcommit: 6f56b169fda0b74f9569004555a574d8973b1021
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509872"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84748946"
 ---
 # <a name="the-dynamic-data-type"></a>動態資料類型
 
-`dynamic`標量資料類型是特殊的,因為它可以從下面的清單中獲取其他標量數據類型的任何值,以及陣列和屬性包。 具體而言,`dynamic`值可以是:
+純量 `dynamic` 資料類型是特殊的，它可以接受下列清單中任何其他純量資料類型的值，以及陣列和屬性包。 具體而言， `dynamic` 值可以是：
 
-* 空。
-* 任何`bool`基元標量資料類型的值: `datetime` `guid`、 `int` `long` `real` `string`、 `timespan`、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、
-* 值陣列`dynamic`,具有零或多個值,具有零基索引。
-* 將唯一`string`值映射`dynamic`到 值的屬性包。
-  屬性包具有零個或多個此類映射(稱為"插槽"),由唯一`string`值索引。 插槽未排序。
-
-> [!NOTE]
-> 類型`dynamic`值限制為 1MB (2^20)。
+* Null.
+* 任何基本純量資料類型的值： `bool` 、 `datetime` 、 `guid` 、 `int` 、、、 `long` `real` `string` 和 `timespan` 。
+* 值的陣列 `dynamic` ，保留零個或多個具有以零為起始之索引的值。
+* 將唯一值對應至值的屬性包 `string` `dynamic` 。
+  屬性包有零或多個這類對應（稱為「位置」），以唯一值編制索引 `string` 。 位置未排序。
 
 > [!NOTE]
-> `dynamic`儘管類型顯示為類似 JSON,但它可以容納 JSON 模型不表示的值,因為它們不存在`long`JSON(`timespan``guid`例如, `real`、 `datetime`、 和 )
-> 因此,在將值`dynamic`序列化為 JSON 表示形式時,JSON 無法表示`string`的值將序列化為值。 相反,Kusto 將解析字串為強類型值(如果可以這樣解析)。
-> 這適用於`datetime`、`real``long`類型`guid`。 有關 JSON 物件模型的更多,請參閱[json.org](https://json.org/)。
+> * 類型的值 `dynamic` 限制為1mb （2 ^ 20）。
+> * 雖然 `dynamic` 類型看起來類似 json，但它可以保留 json 模型不代表的值，因為它們不存在於 json 中（例如、、、、 `long` `real` `datetime` `timespan` 和 `guid` ）。
+>   因此，在將 `dynamic` 值序列化為 json 標記法時，JSON 無法代表的值會序列化為 `string` 值。 相反地，Kusto 會將字串剖析為強型別值（如果可以將它們剖析為）。
+>   這適用于 `datetime` 、 `real` 、 `long` 和 `guid` 類型。 
+>   如需 JSON 物件模型的詳細資訊，請參閱[json.org](https://json.org/)。
+> * Kusto 不會嘗試保留屬性包中的名稱與值對應順序，因此您無法假設要保留的順序。 有兩個具有相同對應集的屬性包，可以在以值表示時產生不同的結果 `string` （例如）。
 
-> [!NOTE]
-> Kusto 不會嘗試在屬性包中保留名稱到值映射的順序,因此您無法假定要保留的順序。 例如,具有相同映射集的兩個屬性包完全有可能在它們表示為`string`值時產生不同的結果。
+## <a name="dynamic-literals"></a>動態常值
 
-## <a name="dynamic-literals"></a>動態文字
+類型的常值 `dynamic` 看起來像這樣：
 
-類型的`dynamic`文字如下所示:
+`dynamic(` *值* `)`
 
-`dynamic(`*值*`)`
+*值*可以是：
 
-*值*可以是:
-
-* `null`在這種情況下,文字表示 null 動態`dynamic(null)`值: 。
-* 另一種標量數據類型文本,在這種情況下,文本表示"內部`dynamic`"類型的文本。 例如,`dynamic(4)`是保存長標量數據類型的值 4 的動態值。
-* 動態或其他文字的陣列:`[`*清單的值*`]`。 例如,`dynamic([1, 2, "hello"])`是一個由三個元素、兩`long`個 值`string`和一個值組成的動態陣列。
-* 屬性套件:`{`*名稱*`=`*值*...`}`. 例如,`dynamic({"a":1, "b":{"a":2}})`是具有兩個插槽的屬性包`a`,`b`第 二個插槽是另一個屬性包。
+* `null`，在此情況下，常值代表 null 動態值： `dynamic(null)` 。
+* 另一個純量資料類型常值，在此情況下，常值代表「 `dynamic` 內部」類型的常值。 例如， `dynamic(4)` 是包含 long 純量資料類型之值4的動態值。
+* 動態或其他常值的陣列： `[` *ListOfValues* `]` 。 例如， `dynamic([1, 2, "hello"])` 是三個元素的動態陣列、兩個 `long` 值和一個 `string` 值。
+* 屬性包： `{` *名稱* `=` *值*... `}` 。 例如， `dynamic({"a":1, "b":{"a":2}})` 是具有兩個位置（和）的屬性包，而 `a` `b` 第二個插槽是另一個屬性包。
 
 ```kusto
 print o=dynamic({"a":123, "b":"hello", "c":[1,2,3], "d":{}})
 | extend a=o.a, b=o.b, c=o.c, d=o.d
 ```
 
-為方便起見,`dynamic`查詢文本本身中出現的文本也可能包括其他 Kusto`datetime`文本(`timespan`如文本、 文本等)。在分析字串時(例如使用`parse_json`函數或引入資料時),JSON 上的此擴展不可用,但它使您能夠執行此操作:
+為了方便起見， `dynamic` 出現在查詢文字本身的常值也可能包含其他 Kusto 常值（例如 `datetime` 常值、常值等 `timespan` ）。剖析字串時（例如使用函式或內嵌資料時）無法使用此延伸模組 `parse_json` ，但它可讓您執行此動作：
 
 ```kusto
 print d=dynamic({"a": datetime(1970-05-11)})
 ```
 
-要將遵循`string`JSON 編碼規則的值`dynamic`解析為 值,請使用`parse_json`函數。 例如：
+若要將 `string` 遵循 JSON 編碼規則的值剖析為 `dynamic` 值，請使用 `parse_json` 函數。 例如：
 
 * `parse_json('[43, 21, 65]')` - 數字陣列
-* `parse_json('{"name":"Alan", "age":21, "address":{"street":432,"postcode":"JLK32P"}}')`- 字典
+* `parse_json('{"name":"Alan", "age":21, "address":{"street":432,"postcode":"JLK32P"}}')`-字典
 * `parse_json('21')` - 包含數字的動態類型單一值
 * `parse_json('"21"')` - 包含字串的動態類型單一值
-* `parse_json('{"a":123, "b":"hello", "c":[1,2,3], "d":{}}')`- 給出與`o`上 例相同的值。
+* `parse_json('{"a":123, "b":"hello", "c":[1,2,3], "d":{}}')`-提供與 `o` 上述範例中相同的值。
 
 > [!NOTE]
-> 與 JavaScript 不同,JSON 強制使用字串`"`和屬性 包屬性名稱周圍的雙引號 ( ) 字元。
-> 因此,使用單引號()`'`字元引用 JSON 編碼的字串文本通常更容易。
+> 與 JavaScript 不同的是，JSON 會要求在 `"` 字串和屬性包屬性名稱前後使用雙引號（）字元。
+> 因此，使用單引號（）字元來括住 JSON 編碼的字串常值通常會比較容易 `'` 。
   
-下面的範例展示如何定義包含列`dynamic`(`datetime`以及列)的表,然後引入單個記錄。 它還展示如何在 CSV 檔中對 JSON 字串進行編碼:
+下列範例示範如何定義保存資料行的資料表（以及資料 `dynamic` `datetime` 行），然後將單一記錄內嵌到其中。 它也會示範如何編碼 CSV 檔案中的 JSON 字串：
 
 ```kusto
 // dynamic is just like any other type:
@@ -92,47 +89,47 @@ print d=dynamic({"a": datetime(1970-05-11)})
 
 |時間戳記                   | 追蹤                                                 |
 |----------------------------|-------------------------------------------------------|
-|2015-01-01 00:00:00.0000000 | {"事件類型":"演示","事件值":"雙引號愛!"|
+|2015-01-01 00：00：00.0000000 | {「事件2」： "Demo"，"EventValue"： "雙引號愛！"}|
 
-## <a name="dynamic-object-accessors"></a>動態物件存取器
+## <a name="dynamic-object-accessors"></a>動態物件存取子
 
-要對字典進行下標,請使用點表示法`dict.key`( ) 或括`dict["key"]`號表示法 ( 。
-當下標是字串常量時,兩個選項都是等效的。
+若要將字典加上注標，請使用點標記法（ `dict.key` ）或方括弧標記法（ `dict["key"]` ）。
+當注標是字串常數時，這兩個選項都是相等的。
 
 > [!NOTE] 
-> 要使用表達式作為下標,請使用括弧表示法。 使用算術表達式時,括弧內的表達式必須包在括弧中。
+> 若要使用運算式做為注標，請使用方括弧標記法。 使用算術運算式時，括弧內的運算式必須以括弧括住。
 
-在下面的`dict`範例中,`arr`是動態類型的欄:
+在下列範例中 `dict` ，和 `arr` 是動態類型的資料行：
 
-|運算是                        | 存取器運算式類型 | 意義                                                                              | 註解                                      |
+|運算是                        | 存取子運算式類型 | 意義                                                                              | 註解                                      |
 |----------------------------------|--------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------|
-|迪克特[科爾]                         | 實體名稱(欄)     | 使用欄`col`位值作為鍵對字典進行下標              | 欄必須為型別字串                 | 
-|arr[索引]                        | 實體索引(欄)    | 使用欄`index`位的值為索引對陣列進行細分              | 欄的類型必須整數或布林     | 
-|arr[指數]                       | 實體索引(欄)    | 從陣列的末尾檢索「索引」第一個值                             | 欄的類型必須整數或布林     |
-|arr[(-1)]                         | 實體索引             | 檢索陣列的最後一個值                                                |                                               |
-|arr[toint(索引AsString)]         | 函式呼叫             | 將欄`indexAsString`值強制轉換為 int,並使用它們來對陣列進行下標 |                                               |
-|迪克特[在哪裡]]                   | 用作實體名稱的關鍵字(欄) | 使用欄`where`位值作為鍵對字典進行下標    | 必須參考與某些查詢語言關鍵字相同的實體名稱 | 
-|"在哪裡"或"在哪裡"*   | 持續性                 | 使用`where`字串作為鍵對字典進行子文稿                              |                                               |
+|dict [col]                         | 機構名稱（資料行）     | 使用資料行的值 `col` 做為索引鍵，做為字典的注標              | 資料行必須是字串類型                 | 
+|arr [index]                        | 實體索引（資料行）    | 使用資料行的值做為索引，將陣列設 `index` 為下標              | 資料行的類型必須是整數或布林值     | 
+|arr [-index]                       | 實體索引（資料行）    | 從陣列的結尾抓取 ' index' 第一個值                             | 資料行的類型必須是整數或布林值     |
+|arr [（-1）]                         | 實體索引             | 抓取陣列中的最後一個值                                                |                                               |
+|arr [toint （indexAsString）]         | 函式呼叫            | 將資料行的值轉換 `indexAsString` 成 int，並使用它們來將陣列標上 |                                               |
+|dict [['，where ']]                   | 當做機構名稱（資料行）使用的關鍵字 | 使用資料行的值做為索引鍵，將字典設 `where` 為下標    | 與某些查詢語言關鍵字相同的機構名稱必須加上引號 | 
+|dict. [' where '] 或 dict [' where ']   | 持續性                 | 使用字串做為索引鍵，將字典設 `where` 為下標                              |                                               |
 
-**效能提示:** 盡可能使用常量子腳本
+**效能秘訣：** 偏好盡可能使用常數注標
 
-訪問值的子物件會產生另一`dynamic``dynamic`個值,即使子物件具有不同的基礎類型也是如此。 使用`gettype`函數可以發現值的實際基礎類型,以及下面列出的任何強制轉換函數將其轉換為實際類型。
+存取值的子物件會 `dynamic` 產生另一個 `dynamic` 值，即使子物件具有不同的基礎類型也一樣。 使用 `gettype` 函式來探索值的實際基礎類型，以及下面所列的任何轉換函數，將它轉換成實際類型。
 
-## <a name="casting-dynamic-objects"></a>強制轉換動態物件
+## <a name="casting-dynamic-objects"></a>轉換動態物件
 
-> 對動態物件進行下標後,必須將該值轉換為簡單類型。
+> 注標動態物件之後，您必須將值轉換成簡單類型。
 
 |運算是 | 值 | 類型|
 |---|---|---|
-| X | parse_json('100,101,102])| array|
-|X[0]|parse_json('100')|動態|
-|托因特(X[1])|101| int|
-| Y | parse_json("a1":100,"b c":"2015-01-01"*)| 字典|
-|Y.a1|parse_json('100')|動態|
-|Y="b c"*| parse_json("2015-01-01")|動態|
-|日期(Y="b c"*)|日期時間 (2015-01-01)| Datetime|
+| X | parse_json （' [100101102] '）| array|
+|X [0]|parse_json （' 100 '）|動態|
+|toint （X [1]）|101| int|
+| Y | parse_json （' {"a1"：100，"a b c"： "2015-01-01"} "）| 字典|
+|Y. a1|parse_json （' 100 '）|動態|
+|Y ["a b c"]| parse_json （"2015-01-01"）|動態|
+|todate （Y ["a b c"]）|datetime （2015-01-01）| Datetime|
 
-強制轉換功能包括:
+Cast 函數包括：
 
 * `tolong()`
 * `todouble()`
@@ -142,26 +139,26 @@ print d=dynamic({"a": datetime(1970-05-11)})
 * `toguid()`
 * `todynamic()`
 
-## <a name="building-dynamic-objects"></a>編譯動態物件
+## <a name="building-dynamic-objects"></a>建立動態物件
 
-多個函數讓您能夠建立新`dynamic`物件:
+有數個函式可讓您建立新 `dynamic` 物件：
 
-* [pack()](../packfunction.md)從名稱/值對創建屬性包。
-* [pack_array()](../packarrayfunction.md)從名稱/值對創建陣列。
-* [range()](../rangefunction.md)建立具有數位算術序列的陣列。
-* [zip()](../zipfunction.md)將兩個陣列的"並行"值配對到單個陣列中。
-* [重複()](../repeatfunction.md)建立具有重複值的陣列。
+* [pack （）](../packfunction.md)會從名稱/值配對建立屬性包。
+* [pack_array （）](../packarrayfunction.md)會從名稱/值組建立陣列。
+* [range （）](../rangefunction.md)會使用數位的算術數列來建立陣列。
+* [zip （）](../zipfunction.md)將兩個數組中的「平行」值配對成單一陣列。
+* [repeat （）](../repeatfunction.md)會以重複的值來建立陣列。
 
-此外,還有幾個聚合函數創建`dynamic`數位來儲存聚合值:
+此外，還有數個彙總函式，可建立 `dynamic` 陣列來保存匯總值：
 
-* [buildschema()](../buildschema-aggfunction.md)傳`dynamic`回多個值的聚合架構。
-* [make_bag()](../make-bag-aggfunction.md)傳回組中動態值的屬性包。
-* [make_bag_if())](../make-bag-if-aggfunction.md)傳回組中動態值的屬性包(帶有謂詞)。
-* [make_list()](../makelist-aggfunction.md)傳回按順序保存所有值的陣列。
-* [make_list_if())](../makelistif-aggfunction.md)傳回一個陣列,該陣列按順序(帶有謂詞)保存所有值。
-* [make_list_with_nulls()](../make-list-with-nulls-aggfunction.md)傳回按順序保存所有值(包括空值)的陣列。
-* [make_set()](../makeset-aggfunction.md)傳回包含所有唯一值的陣列。
-* [make_set_if()](../makesetif-aggfunction.md)傳回包含所有唯一值(帶有謂詞)的陣列。
+* [buildschema （）](../buildschema-aggfunction.md)會傳回多個值的匯總架構 `dynamic` 。
+* [make_bag （）](../make-bag-aggfunction.md)會傳回群組內動態值的屬性包。
+* [make_bag_if （）](../make-bag-if-aggfunction.md)會傳回群組內動態值的屬性包（使用述詞）。
+* [make_list （）](../makelist-aggfunction.md)會傳回保留所有值的陣列（依序）。
+* [make_list_if （）](../makelistif-aggfunction.md)會傳回包含所有值的陣列（依序）（使用述詞）。
+* [make_list_with_nulls （）](../make-list-with-nulls-aggfunction.md)會傳回包含所有值（依序）的陣列，其中包含 null 值。
+* [make_set （）](../makeset-aggfunction.md)會傳回包含所有唯一值的陣列。
+* [make_set_if （）](../makesetif-aggfunction.md)會傳回包含所有唯一值（含述詞）的陣列。
 
 ## <a name="operators-and-functions-over-dynamic-types"></a>動態類型的運算子和函式
 
@@ -169,17 +166,17 @@ print d=dynamic({"a": datetime(1970-05-11)})
 |---|---|
 | *value* `in` *array*| 如果有 array** 項目 == value**，則為 true<br/>`where City in ('London', 'Paris', 'Rome')`
 | *value* `!in` *array*| 如果沒有 array** 項目 == value**，則為 true
-|[`array_length(`陣列`)`](../arraylengthfunction.md)| 如果不是陣列則為 null
-|[`bag_keys(`袋`)`](../bagkeysfunction.md)| 枚舉動態屬性包物件中的所有根鍵。
-|[`extractjson(`路徑,物件`)`](../extractjsonfunction.md)|使用路徑來瀏覽至物件。
-|[`parse_json(`源`)`](../parsejsonfunction.md)| 將 JSON 字串變成動態物件。
-|[`range(`從,到,步驟`)`](../rangefunction.md)| 值的陣列
-|[`mv-expand`清單列](../mvexpandoperator.md) | 在指定資料格中複寫清單中每個值的資料列。
-|[`summarize buildschema(`欄`)`](../buildschema-aggfunction.md) |從資料行內容推斷類型結構描述
-|[`summarize make_bag(`欄`)`](../make-bag-aggfunction.md) | 將列中的屬性包(字典)值合併到一個屬性袋中,而不進行密鑰複製。
-|[`summarize make_bag_if(`列,謂詞`)`](../make-bag-if-aggfunction.md) | 將列中的屬性包(字典)值合併到一個屬性包中,而不進行密鑰重複(帶謂詞)。
-|[`summarize make_list(`欄`)`](../makelist-aggfunction.md)| 將資料列群組壓平合併，並將資料行的值放在陣列中。
-|[`summarize make_list_if(`列,謂`)`詞](../makelistif-aggfunction.md)| 拼合行組並將列的值放在數位中(帶謂詞)。
-|[`summarize make_list_with_nulls(`欄`)`](../make-list-with-nulls-aggfunction.md)| 拼合行組並將列的值放在數位中,包括空值。
-|[`summarize make_set(`欄`)`](../makeset-aggfunction.md) | 將資料列群組壓平合併，並將資料行的值放在陣列中，但不重複。
-|[`summarize make_bag(`欄`)`](../make-bag-aggfunction.md) | 將列中的屬性包(字典)值合併到一個屬性袋中,而不進行密鑰複製。
+|[`array_length(`數列`)`](../arraylengthfunction.md)| 如果不是陣列則為 null
+|[`bag_keys(`包`)`](../bagkeysfunction.md)| 列舉動態屬性包物件中的所有根機碼。
+|[`extractjson(`path、object`)`](../extractjsonfunction.md)|使用路徑來瀏覽至物件。
+|[`parse_json(`來源`)`](../parsejsonfunction.md)| 將 JSON 字串變成動態物件。
+|[`range(`from、to、step`)`](../rangefunction.md)| 值的陣列
+|[`mv-expand`listColumn](../mvexpandoperator.md) | 在指定資料格中複寫清單中每個值的資料列。
+|[`summarize buildschema(`排`)`](../buildschema-aggfunction.md) |從資料行內容推斷類型結構描述
+|[`summarize make_bag(`排`)`](../make-bag-aggfunction.md) | 將資料行中的屬性包（字典）值合併到一個屬性包中，而不需要金鑰重複。
+|[`summarize make_bag_if(`column、述詞`)`](../make-bag-if-aggfunction.md) | 將資料行中的屬性包（字典）值合併到一個屬性包中，而不需要金鑰複製（使用述詞）。
+|[`summarize make_list(`資料行 `)`](../makelist-aggfunction.md)| 將資料列群組壓平合併，並將資料行的值放在陣列中。
+|[`summarize make_list_if(`column、 `)` 述詞](../makelistif-aggfunction.md)| 將資料列群組壓平合併，並將資料行的值放在陣列中（使用述詞）。
+|[`summarize make_list_with_nulls(`資料行 `)`](../make-list-with-nulls-aggfunction.md)| 將資料列群組壓平合併，並將資料行的值放在陣列中，包括 null 值。
+|[`summarize make_set(`排`)`](../makeset-aggfunction.md) | 將資料列群組壓平合併，並將資料行的值放在陣列中，但不重複。
+|[`summarize make_bag(`排`)`](../make-bag-aggfunction.md) | 將資料行中的屬性包（字典）值合併到一個屬性包中，而不需要金鑰重複。
