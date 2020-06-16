@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: cd11362c15e5ecfb80eab57b57b22f190f47da05
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 3f45f579ad47dbdc9bf1fca707826948a598f63d
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271565"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780162"
 ---
 # <a name="in-and-in-operators"></a>in 和 !in 運算子
 
@@ -45,18 +45,18 @@ Table1 | where col in ('value1', 'value2')
 
 * *T* -要篩選其記錄的表格式輸入。
 * *col* -要篩選的資料行。
-* *運算式清單*-表格式、純量或常值運算式的逗號分隔清單  
-* *表格式運算式*-具有一組值的表格式運算式（在案例運算式中有多個資料行，會使用第一個資料行）
+* *運算式清單*-表格式、純量或常值運算式的逗號分隔清單。
+* *表格式運算式*-具有一組值的表格式運算式。 如果運算式有多個資料行，則會使用第一個資料行。
 
 **傳回**
 
-述詞為之*T*中的資料列`true`
+述詞為之*T*中的資料列 `true` 。
 
 **注意事項**
 
-* 運算式清單可產生最多個 `1,000,000` 值    
-* 嵌套的陣列會壓平合併成單一的值清單，例如， `x in (dynamic([1,[2,3]]))` 變成`x in (1,2,3)` 
-* 如果是表格式運算式，則會選取結果集的第一個資料行   
+* 運算式清單可產生最多個 `1,000,000` 值。
+* 嵌套的陣列會壓平合併成單一的值清單。 例如，`x in (dynamic([1,[2,3]]))` 會成為 `x in (1,2,3)`。
+* 在表格式運算式中，會選取結果集的第一個資料行。
 * 將 ' ~ ' 新增至運算子會使值的搜尋不區分大小寫： `x in~ (expression)` 或 `x !in~ (expression)` 。
 
 **範例：**  
@@ -70,7 +70,7 @@ StormEvents
 | count
 ```
 
-|計數|
+|Count|
 |---|
 |4775|  
 
@@ -84,7 +84,7 @@ StormEvents
 | count
 ```
 
-|計數|
+|Count|
 |---|
 |4775|  
 
@@ -97,7 +97,7 @@ StormEvents
 | count
 ```
 
-|計數|
+|Count|
 |---|
 |54291|  
 
@@ -112,7 +112,7 @@ StormEvents
 | count
 ```
 
-|計數|
+|Count|
 |---|
 |3218|
 
@@ -145,7 +145,7 @@ StormEvents
 | count
 ```
 
-|計數|
+|Count|
 |---|
 |14242|  
 
@@ -177,18 +177,17 @@ StormEvents | where State in (InterestingStates()) | count
 
 ```
 
-|計數|
+|Count|
 |---|
 |4775|  
 
-
-函式定義如下：  
+函式定義。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 .show function InterestingStates
 ```
 
-|名稱|參數|body|資料夾|DocString|
+|名稱|參數|主體|資料夾|DocString|
 |---|---|---|---|---|
 |InterestingStates|()|{dynamic （["華盛頓"，"佛羅里達"，"格魯吉亞"，"紐約"]）}

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: f8f6f820090bde91b9ed6479e0677a893a682983
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 3f36fa4c35ceb88c82b4dfcb7557e4839fed4aa2
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617369"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780536"
 ---
 # <a name="rowlevelsecurity-policy-preview"></a>RowLevelSecurity 原則（預覽）
 
@@ -48,15 +48,15 @@ ms.locfileid: "82617369"
 如果您想要嘗試 row_level_security 的各種查詢，但不想要對使用者實際生效，這會很有用。 一旦您確信查詢，請啟用此原則。
 
 > [!NOTE]
-> 下列限制適用于`query`：
+> 下列限制適用于 `query` ：
 >
 > * 查詢應該會產生與原則定義所在之資料表完全相同的架構。 也就是說，查詢的結果應該會以相同的名稱和類型，以相同的順序傳回與原始資料表完全相同的資料行。
-> * 查詢只能使用`extend`下列運算子：、 `where`、 `project`、 `project-away`、 `project-rename` `project-reorder`和。 `union`
-> * 查詢無法參考定義原則所在的資料表。
+> * 查詢只能使用下列運算子： `extend` 、 `where` 、 `project` 、 `project-away` 、、 `project-rename` `project-reorder` `join` 和 `union` 。
+> * 查詢無法參考已啟用 RLS 的其他資料表。
 > * 查詢可以是下列任何一項或兩者的組合：
->    * 查詢（例如， `<table_name> | extend CreditCardNumber = "****"`）
->    * 函數（例如， `AnonymizeSensitiveData`）
->    * Datatable （例如， `datatable(Col1:datetime, Col2:string) [...]`）
+>    * 查詢（例如， `<table_name> | extend CreditCardNumber = "****"` ）
+>    * 函數（例如， `AnonymizeSensitiveData` ）
+>    * Datatable （例如， `datatable(Col1:datetime, Col2:string) [...]` ）
 
 > [!TIP]
 > 這些函數通常適用于 row_level_security 查詢：
@@ -77,7 +77,7 @@ ms.locfileid: "82617369"
 .alter table Customers policy row_level_security enable "TrimCreditCardNumbers"
 ```
 
-**效能**提示： `UserCanSeeFullNumbers`將先評估，然後再評估`AllData`或`PartialData` ，但不是兩者都是預期的結果。
+**效能**提示： `UserCanSeeFullNumbers` 將先評估，然後再 `AllData` 評估或， `PartialData` 但不是兩者都是預期的結果。
 您可以在[這裡](rowlevelsecuritypolicy.md#performance-impact-on-queries)閱讀有關 RLS 的效能影響的詳細資訊。
 
 ## <a name="deleting-the-policy"></a>正在刪除原則

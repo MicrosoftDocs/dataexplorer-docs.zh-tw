@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a046cc369dd466defa50916ee78b2c29f5f88ea0
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 4662b1bd9f68778cab1f799f564499e23add5812
+ms.sourcegitcommit: 6a0bd5b84f9bd739510c6a75277dec3a9e851edd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373223"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84788897"
 ---
 # <a name="pivot-plugin"></a>pivot 外掛程式
 
@@ -30,7 +30,7 @@ T | evaluate pivot(PivotColumn)
 **引數**
 
 * *pivotColumn*：要旋轉的資料行。 此資料行中的每個唯一值都是輸出資料表中的資料行。
-* *彙總函式*：（選擇性）將輸入資料表中的多個資料列匯總到輸出資料表中的單一資料列。 目前支援的函式： `min()` 、 `max()` 、 `any()` 、 `sum()` 、、、、 `dcount()` `avg()` `stdev()` `variance()` 和 `count()` （預設為 `count()` ）。
+* *彙總函式*：（選擇性）將輸入資料表中的多個資料列匯總到輸出資料表中的單一資料列。 目前支援的函式：、、、、、、、、、、、 `min()` `max()` `any()` `sum()` `dcount()` `avg()` `stdev()` `variance()` `make_list()` `make_bag()` `make_set()` `count()` （預設值為 `count()` ）。
 * *column1*、 *column2*、...：（選擇性）資料行名稱。 輸出資料表會在每個指定的資料行中包含一個額外的資料行。 預設值： [已切換] 資料行和 [匯總] 資料行以外的所有資料行。
 
 **傳回**

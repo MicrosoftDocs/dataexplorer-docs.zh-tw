@@ -7,24 +7,36 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/29/2019
-ms.openlocfilehash: abef0650485ac1feb53d43f42559c5a7fdfb75c3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 4665064a645ad0001251a0c7246c9d799ff6e638
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374040"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780485"
 ---
 # <a name="machine-learning-capability-in-azure-data-explorer"></a>Azure 資料總管中的機器學習服務功能
 
-Azure 資料總管是一個龐大的資料分析平臺，可用來監視服務健全狀況、QoS 或故障的裝置，以使用內建的[異常偵測和預測](anomaly-detection.md)功能來進行異常行為。 一旦偵測到異常模式，就會執行根本原因分析（RCA）來減輕或解決異常。
+Azure 資料總管是海量資料分析平臺。 它可用來監視服務健全狀況、QoS 或故障的裝置。 內建的[異常偵測和預測](anomaly-detection.md)函數會檢查異常行為。 一旦偵測到這種模式，就會執行根本原因分析（RCA）來減輕或解決異常。
 
-這項診斷程式既複雜又冗長，而且是由網域專家來完成的。 此套裝程式括從相同時間範圍內的不同來源提取和聯結其他資料、尋找多個維度上值分佈的變更、繪製其他變數的圖表，以及根據領域知識和直覺的其他技術。 由於這些診斷案例在 Azure 資料總管中很常見，因此可以使用機器學習外掛程式來簡化診斷階段，並縮短 RCA 的持續時間。
+診斷程式既複雜又冗長，而且是由網域專家完成。 此程序包括：
+* 從相同的時間範圍內，提取和聯結不同來源的其他資料
+* 尋找多個維度上值分佈的變更
+* 繪製其他變數的圖表
+* 以領域知識和直覺為基礎的其他技術
 
-Azure 資料總管有三個 Machine Learning 外掛程式： [`autocluster`](kusto/query/autoclusterplugin.md) 、 [`basket`](kusto/query/basketplugin.md) 和 [`diffpatterns`](kusto/query/diffpatternsplugin.md) 。 所有外掛程式都會執行群集演算法。 `autocluster`和 `basket` 外掛程式叢集單一記錄集，而外掛程式會叢集 `diffpatterns` 兩個記錄集之間的差異。
+由於這些診斷案例在 Azure 資料總管中很常見，因此可以使用機器學習外掛程式來簡化診斷階段，並縮短 RCA 的持續時間。
+
+Azure 資料總管有三個 Machine Learning 外掛程式： [`autocluster`](kusto/query/autoclusterplugin.md) 、 [`basket`](kusto/query/basketplugin.md) 和 [`diffpatterns`](kusto/query/diffpatternsplugin.md) 。 所有外掛程式都會執行群集演算法。 `autocluster`和外掛程式會叢集 `basket` 單一記錄集，而外掛程式會叢集 `diffpatterns` 兩個記錄集之間的差異。
 
 ## <a name="clustering-a-single-record-set"></a>群集單一記錄集
 
-常見的案例包括特定準則所選取的資料集，例如展示異常行為、高溫度裝置讀數、長時間命令和最高消費使用者的時間範圍。 我們想要一個簡單快速的方法，在資料中尋找常見的模式（區段）。 模式是資料集的子集，其記錄會在多個維度（類別資料行）上共用相同的值。 下列查詢會建立並顯示一系列以十分鐘為單位的服務例外狀況，一周的時間序列：
+常見的案例包括特定準則所選取的資料集，例如：
+* 顯示異常行為的時間範圍
+* 高溫度裝置讀數
+* 長時間的命令
+* 您想要快速又輕鬆地在資料中尋找常見模式（區段）的重要消費使用者。 模式是資料集的子集，其記錄會在多個維度（類別資料行）上共用相同的值。 
+
+下列查詢會在一周的一段時間內，建立並顯示一系列的服務例外狀況（以十分鐘為單位）：
 
 **\[**[**按一下以執行查詢**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA5XPsaoCQQyF4d6nCFa7oHCtZd9B0F6G8ajByWTJZHS5+PDOgpVgYRn485EkOAnno9NAriWGFKw7QfQYUy0O43zZ0JNKFQnG/5jrbmeIXHBgwd6DjH2/JVqk2QrTL1aYvlifa4tni29YlzaiUK4yRK3Zu54006dBZ1N5/+X6PqpRI23+pFGGfIKRtz5egzk92K+dsycMyz3szhGEKWJ01lxI760O9ABuq0bMcvV2hqFoqnOz7F9BdSHlSgEAAA==)**\]**
 
@@ -38,9 +50,9 @@ demo_clustering1
 
 ![服務例外狀況 timechart](media/machine-learning-clustering/service-exceptions-timechart.png)
 
-服務例外狀況計數與整體服務流量相互關聯。 您可以清楚看到每日模式，適用于星期一到星期五的工作日，服務例外狀況計數的增加，並在夜間進行計數下降。 在週末可以看到一般的低計數。 使用 Azure 資料總管中的[時間序列異常偵測](anomaly-detection.md#time-series-anomaly-detection)，可以偵測到例外狀況尖峰。
+服務例外狀況計數與整體服務流量相互關聯。 您可以清楚地看到工作日，星期一到星期五的每日模式。 在白天，服務例外狀況計數會增加，並在夜間進行計數下降。 在週末可以看到一般的低計數。 使用 Azure 資料總管中的[時間序列異常偵測](anomaly-detection.md#time-series-anomaly-detection)，可以偵測到例外狀況尖峰。
 
-資料中的第二個尖峰會在星期二下午發生。 下列查詢可用來進一步診斷此尖峰。 使用查詢以較高的解析度（一分鐘的8小時）來重繪圖表，以確認它是否為銳利尖峰，並查看其框線。
+資料中的第二個尖峰會在星期二下午發生。 下列查詢是用來進一步診斷並確認它是否為突然增加的尖峰。 查詢會以一分鐘的時間間隔，以較高的解析度在8小時內重新繪製圖表。然後您可以研究其框線。
 
 **\[**[**按一下以執行查詢**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAyXNwQrCMBAE0Hu/YvHUooWkghSl/yDoyUsJyWpCk2xJNnjx403pbeYwbzwyBBdnnoxiZBewHYS89GLshzNIeRWiuzUGA83al8yYXPzI5gdBLdjnWjFDLGHSVCK3HVCEe0LtMj4r9mAVVngnCvsLMO3hOFqo2goyVCxhNJhgu9dWJYavY9uyY4/T4UV1XVm2CEM0kFe34AnkBhXGOs7kCzuKh+4P3/XM5M8AAAA=)**\]**
 
@@ -53,7 +65,7 @@ demo_clustering1
 
 ![專注于尖峰 timechart](media/machine-learning-clustering/focus-spike-timechart.png)
 
-我們看到從15:00 到15:02 的窄兩分鐘尖峰。 在下列查詢中，計算這兩分鐘時間範圍內的例外狀況：
+您會看到從15:00 到15:02 的窄兩分鐘尖峰。 在下列查詢中，計算這兩分鐘時間範圍內的例外狀況：
 
 **\[**[**按一下以執行查詢**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA8tJLVHIzcyLL0hNzI4vsU1JLEktycxN1TAyMDTTNbDQNTJWMDS1MjDQtObKASlNrCCk1AioNCU1Nz8+Oae0uCS1KDMv3ZCrRqE8I7UoVSGgKDU5szg1BKgvuCQxt0AhKbWkPDU1TwPhBj09hCWaQI3J+aV5JQACnQoRpwAAAA==)**\]**
 
@@ -65,7 +77,7 @@ demo_clustering1
 | count
 ```
 
-|計數 |
+|Count |
 |---------|
 |972    |
 
@@ -106,7 +118,7 @@ demo_clustering1
 
 ### <a name="use-autocluster-for-single-record-set-clustering"></a>針對單一記錄集叢集使用 autocluster （）
 
-雖然有少於一千個例外狀況，但還是很難找到常見的區段，因為每個資料行中有多個值。 您可以使用 [`autocluster()`](kusto/query/autoclusterplugin.md) 外掛程式立即解壓縮一小部分的常見區段清單，並在尖峰的兩分鐘內尋找感興趣的叢集，如下列查詢所示：
+雖然有少於一千個例外狀況，但還是很難找到常見的區段，因為每個資料行中都有多個值。 您可以使用 [`autocluster()`](kusto/query/autoclusterplugin.md) 外掛程式立即解壓縮常用區段的簡短清單，並在尖峰的兩分鐘內尋找感興趣的叢集，如下列查詢所示：
 
 **\[**[**按一下以執行查詢**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA4WOsQrCMBRF937FG5OhJYkoovQfBN1DbC8aTNqSvlgHP94IQkf3c+65AUzRD3aCe1hue8dgHyGM0rta7WuzIb09KCWPVfii7vUPNQXtEUfbhTwzkh9uunrTckcCnRI6P+NSvDO7ONEVvACDWD80zRqRRcTThVxa5DKPv00hP81KL1+4AAAA)**\]**
 
@@ -118,7 +130,7 @@ demo_clustering1
 | evaluate autocluster()
 ```
 
-| SegmentId | 計數 | 百分比 | 區域 | ScaleUnit | DeploymentId | ServiceHost |
+| SegmentId | Count | 百分比 | 區域 | ScaleUnit | DeploymentId | ServiceHost |
 |-----------|-------|------------------|--------|-----------|----------------------------------|--------------------------------------|
 | 0 | 639 | 65.7407407407407 | eau | su7 | b5d1d4df547d4a04ac15885617edba57 | e7f60c5d-4944-42b3-922a-92e98a8e7dec |
 | 1 | 94 | 9.67078189300411 | scus | su5 | 9dbd1b161d5b4779a73cf19a7836ebd6 |  |
@@ -126,9 +138,9 @@ demo_clustering1
 | 3 | 68 | 6.99588477366255 | scus | su3 | 90d3d2fc7ecc430c9621ece335651a01 |  |
 | 4 | 55 | 5.65843621399177 | weu | su4 | be1d6d7ac9574cbc9a22cb8ee20f16fc |  |
 
-您可以從上方的結果看到，最主要的區段包含總例外狀況記錄的65.74% 並共用四個維度。 下一個區段較不常見，只包含9.67% 的記錄，並共用三個維度。 其他區段則更不常見。 
+您可以從上述結果查看，最主要的區段包含65.74% 的總例外狀況記錄，並共用四個維度。 下一個區段較不常見。 它只包含9.67% 的記錄，並共用三個維度。 其他區段則更不常見。
 
-Autocluster 使用專屬的演算法來進行多個維度的提取，並將感興趣的區段解壓縮。 「有趣」表示每個區段都有大量的記錄集和功能集的涵蓋範圍。 這些區段也是分歧的，這表示每個區段的差異與其他不同。 其中一或多個區段可能與 RCA 程式相關。 為了將區段審查和評量降至最低，autocluster 只會解壓縮小型區段清單。
+Autocluster 使用專屬的演算法來進行多個維度的提取，並將感興趣的區段解壓縮。 「有趣」表示每個區段都有大量的記錄集和功能集的涵蓋範圍。 這些區段也會分歧，這表示每個區段與其他區段不同。 其中一或多個區段可能與 RCA 程式相關。 為了將區段審查和評量降至最低，autocluster 只會解壓縮小型區段清單。
 
 ### <a name="use-basket-for-single-record-set-clustering"></a>針對單一記錄集叢集使用購物籃（）
 
@@ -144,7 +156,7 @@ demo_clustering1
 | evaluate basket()
 ```
 
-| SegmentId | 計數 | 百分比 | 區域 | ScaleUnit | DeploymentId | 跟蹤 | ServiceHost |
+| SegmentId | Count | 百分比 | 區域 | ScaleUnit | DeploymentId | 跟蹤 | ServiceHost |
 |-----------|-------|------------------|--------|-----------|----------------------------------|------------|--------------------------------------|
 | 0 | 639 | 65.7407407407407 | eau | su7 | b5d1d4df547d4a04ac15885617edba57 |  | e7f60c5d-4944-42b3-922a-92e98a8e7dec |
 | 1 | 642 | 66.0493827160494 | eau | su7 | b5d1d4df547d4a04ac15885617edba57 |  |  |
@@ -160,15 +172,15 @@ demo_clustering1
 | 11 | 90 | 9.25925925925926 |  |  |  | 10007006 |  |
 | 12 | 57 | 5.8641975308642 |  |  |  |  | 00000000-0000-0000-0000-000000000000 |
 
-購物籃會針對專案集挖掘執行 Apriori 演算法，並將其涵蓋範圍記錄集的所有區段都設為高於臨界值（預設值5%）。 您可以看到使用類似的區段（例如，區段0、1或2、3）解壓縮了更多區段。
+購物籃會針對專案集挖掘執行 *"Apriori"* 演算法。 它會解壓縮記錄集涵蓋範圍高於閾值（預設值5%）的所有區段。 您可以看到，有更多區段以類似的分割區解壓縮，例如區段0、1或2、3。
 
-這兩個外掛程式都具有強大且便於使用的功能，但其重大限制是以不受監督的方式（無標籤）來叢集單一記錄集。 因此，已解壓縮的模式是否會為選取的記錄集（異常記錄）或全域記錄集建立特性。
+這兩個外掛程式都具有強大且便於使用的功能。 其限制是以不受監督的方式來叢集單一記錄集，而不使用標籤。 不清楚已解壓縮的模式是否會為選取的記錄集、異常記錄或全域記錄集建立特性。
 
 ## <a name="clustering-the-difference-between-two-records-sets"></a>群集兩個記錄集之間的差異
 
-[`diffpatterns()`](kusto/query/diffpatternsplugin.md)外掛程式克服了和的限制 `autocluster` `basket` 。 `Diffpatterns`會採用兩個記錄集，並解壓縮它們之間不同的主要區段。 其中一個集合通常包含正在調查的異常記錄集（由和分析的一個 `autocluster` `basket` ）。 另一個集合包含參考記錄集（基準）。 
+[`diffpatterns()`](kusto/query/diffpatternsplugin.md)外掛程式克服了和的限制 `autocluster` `basket` 。 `Diffpatterns`會採用兩個記錄集，並解壓縮不同的主要區段。 其中一個集合通常包含正在調查的異常記錄集。 一個是由 `autocluster` 和分析 `basket` 。 另一個集合包含參考記錄集，也就是基準。
 
-在下面的查詢中，我們會使用，在 `diffpatterns` 尖峰的兩分鐘內尋找感興趣的叢集，這與基準中的群集不同。 我們會將基準視窗定義為15:00 之前的八分鐘（當尖峰時間開始時）。 我們也需要以二進位資料行（AB）來擴充，指定特定記錄是否屬於基準或異常資料集。 `Diffpatterns`會實行受監督的學習演算法，其中兩個類別標籤是由異常與基準旗標（AB）所產生。
+在下面的查詢中， `diffpatterns` 會在尖峰的兩分鐘內尋找感興趣的叢集，這與基準中的群集不同。 當尖峰時間開始時，基準視窗會定義為15:00 之前的8分鐘。 您可以使用二進位資料行（AB）來擴充，並指定特定記錄是否屬於基準或異常資料集。 `Diffpatterns`會實行受監督的學習演算法，其中兩個類別標籤是由異常與基準旗標（AB）所產生。
 
 **\[**[**按一下以執行查詢**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA42QzU+DQBDF7/wVcwOi5UtrmhJM4OzBRO9kWqbtpssuYacfGv94t0CrxFTd02by5jfvPUkMtVBlQ7gtOauQiUVNXhLFD5NoNknuIJ7Oo8hPHXmS4vEvaXKWWuoCDUmh6Jr8fj79Tv6HfOanEIbwRLgnQFhjAwviA5EC3hCcCYCq6gamEVsC1oB7LfoRt6iMYKEVvGtFQXfeNFKc7mXe2MjNVzl+mARR6lRU63Ipd4apFWodOx9w2FBL4D23tBSGXi3mhbG+OPPGVQTB+ITvg24dGN7vlN5JTxhc+dYAHZls4LzIxGr1k/B4iXcLbq50jfLNtd9i8OB2jD3KnW0dKstokG08Zby8uLbyCfX/tG46AgAA)**\]**
 
@@ -195,7 +207,7 @@ demo_clustering1
 | 5 | 55 | 252 | 5.66 | 20.45 | 14.8 | weu | su4 | be1d6d7ac9574cbc9a22cb8ee20f16fc |  |
 | 6 | 57 | 204 | 5.86 | 16.56 | 10.69 |  |  |  |  |
 
-最主要的區段與所解壓縮的區段相同 `autocluster` ，其在兩分鐘異常時間範圍內的涵蓋範圍也是65.74%。 但在八分鐘的基準視窗中，其涵蓋範圍只有1.7%。 差異為64.04%。 這種差異似乎與異常尖峰相關。 您可以藉由將原始圖表分割成屬於此問題區段的記錄，與下列查詢中所示的其他區段進行驗證，來確認這項假設：
+最主要的區段是所解壓縮的相同區段 `autocluster` 。 其在兩分鐘異常時間範圍內的涵蓋範圍也是65.74%。 不過，它在八分鐘的基準視窗上的涵蓋範圍只有1.7%。 差異為64.04%。 這種差異似乎與異常尖峰相關。 若要確認這種假設，請將原始圖表分割成屬於此問題區段的記錄，以及其他區段中的記錄。 請參閱下列查詢。
 
 **\[**[**按一下以執行查詢**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA5WRsWrDMBCG9zzF4cmGGuJUjh2Ktw7tUkLTzuEsnRNRnRQkuSQlD185yRTo0EWIO913/J8MRWBttxE6iC5INOhzRey20owhktd2V8EZwsiMXv/Q9Dpfe5I60Idm2kTkQ1E8AczMxMLjf1h4/IN1PzY7Ax0jWQWBdomvhyF/p512FroOMsIxA0zdTdpKn1bHSzmMzbX8TAfjTkw2vqpLp69VpYQaatEogXOBsqrbtl5WDake6yabXWjkv7WkFxeuPGqG5VzWqhQrIUqx6B/L1WKB6aBViy01imT2ANnau94QT9c35xlNVqQAjF9UhpSHAtiRO+lGG/MCUoZ7CTB4x7ePie5mNbk4QDVn6E+ThUT0SQh5iGlM7tHHX4WFgLHOAQAA)**\]**
 
@@ -213,8 +225,8 @@ and ServiceHost == "e7f60c5d-4944-42b3-922a-92e98a8e7dec", "Problem", "Normal")
 
 此圖表可讓我們查看星期二下午的尖峰時間，這是因為使用外掛程式探索到的特定區段發生例外狀況 `diffpatterns` 。
 
-## <a name="summary"></a>總結
+## <a name="summary"></a>摘要
 
-Azure 資料總管 Machine Learning 外掛程式在許多情況下都很有用。 `autocluster`和 `basket` 會執行不受監督學習演算法，而且很容易使用。 `Diffpatterns`會實行受監督的學習演算法，雖然更複雜，但更強大的方式是將 RCA 的差異區段解壓縮。
+Azure 資料總管 Machine Learning 外掛程式在許多情況下都很有用。 `autocluster`和 `basket` 會執行不受監督學習演算法，而且很容易使用。 `Diffpatterns`會實行受監督的學習演算法，雖然更複雜，但更適合用來解壓縮 RCA 的差異區段。
 
-這些外掛程式會在臨機操作案例和自動近乎即時的監視服務中以互動方式使用。 在 Azure 資料總管中，時間序列異常偵測會接著經過高度優化的診斷程式，以符合所需的效能標準。
+這些外掛程式會在臨機操作案例和自動近乎即時的監視服務中以互動方式使用。 在 Azure 資料總管中，時間序列異常偵測接著是診斷程式。 此程式經過高度優化，以符合所需的效能標準。

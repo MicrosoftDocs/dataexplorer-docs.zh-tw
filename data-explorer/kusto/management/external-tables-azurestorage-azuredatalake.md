@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 296c6e245b7157c09c7af59132fd8bfa686fc9f7
-ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
+ms.openlocfilehash: 7bcba1cbcbcbd712278696d897febaee5714703f
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84665039"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780587"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -282,7 +282,7 @@ dataformat=parquet
 .show external table T artifacts
 ```
 
-**輸出**
+**輸出：**
 
 | Uri                                                                     |
 |-------------------------------------------------------------------------|
@@ -297,14 +297,14 @@ dataformat=parquet
 **範例** 
  
 ```kusto
-.create external table MyExternalTable JSON mapping "Mapping1" '[{ "column" : "rownumber", "datatype" : "int", "path" : "$.rownumber"},{ "column" : "rowguid", "path" : "$.rowguid" }]'
+.create external table MyExternalTable json mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
 ```
 
 **範例輸出**
 
 | 名稱     | 種類 | 對應                                                           |
 |----------|------|-------------------------------------------------------------------|
-| mapping1 | JSON | [{"ColumnName"： "rownumber"，"ColumnType"： "int"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"ColumnType"： ""，"Properties"： {"Path"： "$. rowguid"}}] |
+| mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
 ## <a name="alter-external-table-mapping"></a>。 alter external table 對應
 
@@ -315,14 +315,14 @@ dataformat=parquet
 **範例** 
  
 ```kusto
-.alter external table MyExternalTable JSON mapping "Mapping1" '[{ "column" : "rownumber", "path" : "$.rownumber"},{ "column" : "rowguid", "path" : "$.rowguid" }]'
+.alter external table MyExternalTable json mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
 ```
 
 **範例輸出**
 
 | 名稱     | 種類 | 對應                                                                |
 |----------|------|------------------------------------------------------------------------|
-| mapping1 | JSON | [{"ColumnName"： "rownumber"，"ColumnType"： ""，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"ColumnType"： ""，"Properties"： {"Path"： "$. rowguid"}}] |
+| mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
 ## <a name="show-external-table-mappings"></a>：顯示外部資料表對應
 
@@ -335,16 +335,16 @@ dataformat=parquet
 **範例** 
  
 ```kusto
-.show external table MyExternalTable JSON mapping "Mapping1" 
+.show external table MyExternalTable json mapping "Mapping1" 
 
-.show external table MyExternalTable JSON mappings 
+.show external table MyExternalTable json mappings 
 ```
 
 **範例輸出**
 
 | 名稱     | 種類 | 對應                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
-| mapping1 | JSON | [{"ColumnName"： "rownumber"，"ColumnType"： ""，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"ColumnType"： ""，"Properties"： {"Path"： "$. rowguid"}}] |
+| mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
 ## <a name="drop-external-table-mapping"></a>。卸載外部資料表對應
 
@@ -355,7 +355,7 @@ dataformat=parquet
 **範例** 
  
 ```kusto
-.drop external table MyExternalTable JSON mapping "Mapping1" 
+.drop external table MyExternalTable json mapping "Mapping1" 
 ```
 ## <a name="next-steps"></a>後續步驟
 

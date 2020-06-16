@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f01faae3d9339aa23e7e2bb2b1fdae7a652db360
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: b61934ec2efbfb22c17fe93a4f3969a1592cefab
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271208"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780655"
 ---
 # <a name="parse_csv"></a>parse_csv()
 
@@ -37,7 +37,7 @@ parse_csv("aaa,bbb,ccc") == ["aaa","bbb","ccc"]
 
 **注意事項**
 
-內嵌的換行文字、逗號和引號可以使用雙引號（' "'）來進行換用。 此函式不支援每個資料列有多筆記錄（只會取得第一筆記錄）。
+內嵌的換行文字、逗號和引號可以使用雙引號（' "'）來進行轉義。 此函式不支援每個資料列有多筆記錄（只會取得第一筆記錄）。
 
 **範例**
 

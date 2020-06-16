@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/30/2019
-ms.openlocfilehash: 4bbb076b4c21ac2f93b2bdaf775d513483332934
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: 66118ad7b91d1bcfdd52679d4bfa3dc5ebc4c281
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84257955"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780230"
 ---
 # <a name="streaming-ingestion-preview"></a>串流內嵌（預覽）
 
@@ -75,7 +75,7 @@ ms.locfileid: "84257955"
 * 必須[預先建立](kusto/management/create-ingestion-mapping-command.md)[資料對應](kusto/management/mappings.md)，才能用於串流內嵌。 個別的串流內嵌要求不會容納內嵌資料對應。
 * 透過增加的 VM 和叢集大小，串流處理內嵌的效能和容量規模。 並行的內嵌要求數目限制為每個核心六個。 例如，針對16核心 Sku （例如 D14 和 L16 也），支援的最大負載為96並行內嵌要求。 針對兩個核心 Sku （例如 D11），支援的最大負載為12個並行內嵌要求。
 * 串流內嵌要求的資料大小限制為 4 MB。
-* 架構更新最多可能需要五分鐘的時間，才可供串流內嵌服務使用。 這些更新的範例包括建立和修改資料表和內嵌對應。 
+* 架構更新（例如建立和修改資料表和內嵌對應）最多可能需要五分鐘的時間來處理串流內嵌服務。 如需詳細資訊[，請參閱串流內嵌和架構變更](kusto/management/data-ingestion/streaming-ingestion-schema-changes.md)。
 * 在叢集上啟用串流內嵌，即使資料不是透過串流內嵌，也會使用叢集機器的部分本機 SSD 磁片來串流內嵌資料，並減少用於熱快取的儲存體。
 * 無法在串流內嵌資料上設定[範圍標記](kusto/management/extents-overview.md#extent-tagging)。
 

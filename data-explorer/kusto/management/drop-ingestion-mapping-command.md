@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 7454bd86a6ca2a835dc0515a9c8901a444259f12
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 69ab4849d67d7cc7507bab075b0111fbd8ec95e7
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294520"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780604"
 ---
 # <a name="drop-ingestion-mapping"></a>.drop 擷取對應
 
@@ -24,7 +24,7 @@ ms.locfileid: "84294520"
 **範例** 
 
 ```kusto
-.drop table MyTable ingestion CSV mapping "Mapping1" 
+.drop table MyTable ingestion csv mapping "Mapping1" 
 
 .drop table MyTable ingestion json mapping "Mapping1" 
 ```

@@ -1,6 +1,6 @@
 ---
-title: indexof_regex() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 indexof_regex()。
+title: indexof_RegEx （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 indexof_RegEx （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,40 +8,47 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6da0523e85bab4883c50708ffe3f7d087fdd8c8f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 72797b54c3ba431b4a846f9e9661e9693359cceb
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513884"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780451"
 ---
 # <a name="indexof_regex"></a>indexof_regex()
 
-函數報告輸入字串中第一次出現的指定字串的零基索引。 純字串匹配不會重疊。 
+函式會報告輸入字串內指定之字串第一次出現時的所在索引（以零為基底）。 純字串相符專案不會重迭。
 
-請參考[`indexof()`](indexoffunction.md)。
+請參閱 [`indexof()`](indexoffunction.md)。
 
 **語法**
 
-`indexof_regex(`*源*`,`*查找*`[,`*occurrence*`[,``[,`start_index長度發生*length**start_index*`]]])`
+`indexof_regex(`*來源* `,`*查閱* `[,`*start_index* `[,`*長度* `[,`*發生次數*`]]])`
 
 **引數**
 
-* *源*:輸入字串。  
-* *尋找*:要查找的字串。
-* *start_index*:搜索起始位置(可選)。
-* *長度*:要檢查的字元位置數,-1 定義無限長度(可選)。
-* *出現*:是發生預設值 1(可選)。
+|引數     | 描述                                     |Required 或 Optional|
+|--------------|-------------------------------------------------|--------------------|
+|source        | 輸入字串                                    |必要            |
+|lookup        | 要搜尋的字串                                  |必要            |
+|start_index   | 搜尋開始位置                           |選用            |
+|長度        | 要檢查的字元位置數目。 -1 定義無限長度 |選用            |
+|occurrence    | 尋找模式的第 N 個外觀索引。 
+                 預設值為1，第一次出現的索引 |選用            |
 
 **傳回**
 
-*查找*的零基索引位置。
+*Lookup*以零為起始的索引位置。
 
-如果在輸入中找不到字串,則返回 -1。
-如果不相關(小於*0)start_index,**發生*或(小於 -1)*長度*參數 - 返回*空*。
+* 如果在輸入中找不到字串，則傳回-1。
+* 如果是，則傳回*null* ：
+     * start_index 小於0。
+     * 發生次數小於0。
+     * 長度參數小於-1。
 
 
 **範例**
+
 ```kusto
 print
  idx1 = indexof_regex("abcabc", "a.c") // lookup found in input string
@@ -51,6 +58,6 @@ print
  , idx5 = indexof_regex("abcabc", "a|ab", -1)  // invalid input
 ```
 
-|idx1|idx2|idx3|idx4|idx5
-|----|----|----|----|----
-|0   |3   |-1  |-1  |    
+|idx1|idx2|idx3|idx4|idx5|
+|----|----|----|----|----|
+|0   |3   |-1  |-1  |    |

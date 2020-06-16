@@ -1,6 +1,6 @@
 ---
-title: 失控查詢 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 Runaway 查詢。
+title: 失控查詢-Azure 資料總管
+description: 本文說明 Azure 資料總管中失控的查詢。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,23 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 076afea64cf3c4405f37e9e4014584b90d58ca07
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8300289cb98e2f23613c15a711982efe06f327cf
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522979"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780247"
 ---
 # <a name="runaway-queries"></a>失控查詢
 
-*失控查詢*是在查詢執行期間超出某些內部[查詢限制](querylimits.md)時發生的一種[部分查詢失敗](partialqueryfailures.md)。
+*失控查詢*是一種[部分查詢失敗](partialqueryfailures.md)，會在查詢執行期間超過一些內部[查詢限制](querylimits.md)時發生。 
 
-例如,可以回報以下錯誤:`HashJoin operator has exceeded the memory budget during evaluation. Results may be incorrect or incomplete.`
+例如，可能會回報下列錯誤：`HashJoin operator has exceeded the memory budget during evaluation. Results may be incorrect or incomplete.`
 
-發生這種情況時,可能採取以下幾種操作方案:
-* 更改查詢以消耗更少的資源。 例如,如果錯誤指示查詢結果集太大,則可以嘗試限制查詢返回的記錄數(使用[take 運算符](../query/takeoperator.md)或通過添加其他[位置子句](../query/whereoperator.md)),或減少查詢返回的列數(使用[專案運算符](../query/projectoperator.md)或[專案離開運算符](../query/projectawayoperator.md)),或使用[匯總運算符](../query/summarizeoperator.md)獲取聚合數據等。
-* 暫時增加該查詢的相關查詢限制(請參閱[查詢限制](querylimits.md)下**每個結果集反覆運算器的 Max 記憶體**)。  
-  請注意,通常不建議這樣做,因為存在限制,專門保護群集,以確保單個查詢不會中斷群集上運行的併發查詢。
-  
-  
-  
+有幾個可能的動作課程。
+* 變更查詢以耗用較少的資源。 例如，如果錯誤指出查詢結果集太大，您可以：
+  * 限制查詢所傳回的記錄數目
+     * 使用[take 運算子](../query/takeoperator.md)
+     * 加入額外[的 where 子句](../query/whereoperator.md)
+  * 減少由查詢傳回的資料行數目 
+     * 使用[專案運算子](../query/projectoperator.md)
+     * 使用「[專案離開」運算子](../query/projectawayoperator.md)
+  * 使用「[摘要」運算子](../query/summarizeoperator.md)來取得匯總資料。
+* 暫時增加該查詢的相關查詢限制。 如需詳細資訊，請參閱[查詢限制-每個反覆運算器的記憶體限制](querylimits.md)。 不過，不建議使用這個方法。 有限制可保護叢集，並確保單一查詢不會中斷在叢集上執行的並行查詢。

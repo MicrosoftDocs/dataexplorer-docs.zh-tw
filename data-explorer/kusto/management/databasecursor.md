@@ -1,6 +1,6 @@
 ---
-title: 資料庫游標 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的資料庫游標。
+title: 資料庫資料指標-Azure 資料總管
+description: 本文說明 Azure 資料總管中的資料庫資料指標。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,39 +8,41 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 90ec677a7eaf1f326509828b5415b022742fd9ed
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 75dc0aa0ff23bfb4f08be9fac84fa34cf9526508
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521313"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780621"
 ---
-# <a name="database-cursors"></a>資料庫游標
+# <a name="database-cursors"></a>資料庫資料指標
 
-**資料庫游標**是資料庫級物件,即使與查詢並行執行數據追加/數據保留操作,也可以多次查詢資料庫並獲得一致的結果。
+**資料庫資料指標**是一種資料庫層級物件，可讓您多次查詢資料庫。 即使有 `data-append` 或 `data-retention` 作業與查詢平行發生，您仍會得到一致的結果。
 
-資料庫游標旨在解決兩種重要方案:
+資料庫資料指標的設計目的是要解決兩個重要的案例：
 
-* 只要查詢指示「同一數據集」,即可多次重複同一查詢並獲取相同的結果。
+* 只要查詢指出「相同的資料集」，就能夠多次重複相同的查詢，並取得相同的結果。
 
-* 執行「完全一次」查詢(僅」查看「以前查詢由於當時數據不可用而未看到的數據的查詢) 的能力。
-   例如,這允許迭代表中所有新到達的數據,而不必擔心處理同一記錄兩次或錯誤地跳過記錄。
+* 能夠進行「剛好一次」查詢。 此查詢只會「看見」先前查詢並未看到的資料，因為資料無法使用。
+   查詢可讓您逐一查看資料表中所有最近抵達的資料，而不需要擔心處理相同的記錄兩次，或不小心略過記錄。
 
-資料庫游標在查詢語言中表示為類型的`string`標量值。 實際值應視為不透明,除了保存其值和/或使用下面所述的游標函數之外,沒有任何操作支援。
+資料庫資料指標會以查詢語言表示，做為類型的純量值 `string` 。 實際值應視為不透明，而且除了儲存其值或使用資料指標函數以外，不支援任何作業。
 
 ## <a name="cursor-functions"></a>資料指標函數
 
-Kusto 提供了三個函數來幫助實現上述兩個方案:
+Kusto 提供三個函式，可協助您執行上述兩個案例：
 
-* [cursor_current()](../query/cursorcurrent.md): 使用此函數檢索資料庫游標的當前值。
-   可以將此值用作其他兩個函數的參數。
-   此函數還有同義詞`current_cursor()`。
+* [cursor_current （）](../query/cursorcurrent.md)：使用此函數來抓取資料庫資料指標的目前值。
+   您可以使用此值做為其他兩個函數的引數。
+   此函式也有同義字 `current_cursor()` 。
 
-* [cursor_after(rhs:字串):](../query/cursorafterfunction.md)此特殊函數可用於啟用[引入時間策略](ingestiontime-policy.md)的表記錄。 它返回類型的`bool`標量值,指示記錄`ingestion_time()`的 資料庫游標值`rhs`是否位於資料庫游標值之後。
+* [cursor_after （rhs： string）](../query/cursorafterfunction.md)：這個特殊函數可以用於已啟用[IngestionTime 原則](ingestiontime-policy.md)的資料表記錄。 它會傳回類型的純量值 `bool` ，指出記錄的 `ingestion_time()` 資料庫資料指標值是否位於 `rhs` 資料庫資料指標值之後。
 
-* [cursor_before_or_at(rhs:字串):](../query/cursorbeforeoratfunction.md)此特殊函數可用於啟用[引入時間策略](ingestiontime-policy.md)的表記錄。 它返回類型的`bool`標量值,指示記錄`ingestion_time()`的 資料庫游標值`rhs`是否位於資料庫游標值之後。
+* [cursor_before_or_at （rhs： string）](../query/cursorbeforeoratfunction.md)：此特殊函數可以用於已啟用[IngestionTime 原則](ingestiontime-policy.md)的資料表記錄。 它會傳回類型的純量值 `bool` ，指出記錄的 `ingestion_time()` 資料庫資料指標值是否位於 `rhs` 資料庫資料指標值之後。
 
-這兩個特殊函數`cursor_after``cursor_before_or_at`( 和 ) 也有副作用:當它們被使用時,Kusto 會將**資料庫游標的當前值**發射`@ExtendedProperties`到查詢的結果集。 游標的屬性名稱稱為`Cursor`,其值為`string`單個 。 例如：
+這兩個特殊函式（ `cursor_after` 和 `cursor_before_or_at` ）也有副作用：使用時，Kusto 會將**資料庫資料指標的目前值**發出至 `@ExtendedProperties` 查詢的結果集。 資料指標的屬性名稱是 `Cursor` ，而其值為單一 `string` 。 
+
+例如：
 
 ```json
 {"Cursor" : "636040929866477946"}
@@ -48,17 +50,17 @@ Kusto 提供了三個函數來幫助實現上述兩個方案:
 
 ## <a name="restrictions"></a>限制
 
-資料庫游標只能與已為其啟用[引入時間策略](ingestiontime-policy.md)的表一起使用。 此類表中的每個記錄都與引入記錄時有效的資料庫游標的值相關聯,因此可以使用[ingestion_time()](../query/ingestiontimefunction.md)函數。
+資料庫資料指標只能與已啟用[IngestionTime 原則](ingestiontime-policy.md)的資料表搭配使用。 這類資料表中的每筆記錄都會與內嵌記錄時生效的資料庫資料指標值相關聯。
+因此，可以使用[ingestion_time （）](../query/ingestiontimefunction.md)函數。
 
-除非資料庫至少有一個表定義了[引入時間策略](ingestiontime-policy.md),否則資料庫游標物件不保存有意義的值。
-此外,僅保證此值根據需要由引入歷史記錄更新到此類表中,並且查詢運行引用此類表。 在其他情況下,它可能更新,也可能不更新。
+除非資料庫至少有一個資料表已定義[IngestionTime 原則](ingestiontime-policy.md)，否則資料庫資料指標物件不會保存任何有意義的值。
+此值保證會在參考這類資料表的資料表和查詢中，視需要更新內嵌歷程記錄。 不一定會在其他情況下更新。
 
-引入過程首先提交數據(以便可用於查詢),然後僅為每個記錄分配實際游標值。 這意味著,如果嘗試使用資料庫游標在引入完成後立即查詢數據,則結果可能尚未包含添加的最後記錄,因為它們尚未分配游標值。 同樣,重複檢索當前資料庫游標值可能會返回相同的值(即使兩者之間進行了引入),因為只有游標提交才會更新其值。
+內嵌程式會先認可資料，使其可供查詢，而且只會將實際的資料指標值指派給每一筆記錄。 如果您嘗試在使用資料庫資料指標進行內嵌完成後立即查詢資料，則結果可能尚未併入最後新增的記錄，因為它們尚未被指派資料指標值。 此外，即使在之間執行內嵌，也可能會傳回相同的值，因為只有資料指標認可哥以更新其值。
 
-## <a name="example-processing-of-records-exactly-once"></a>範例:完全處理記錄一次
+## <a name="example-processing-records-exactly-once"></a>範例：只處理一次記錄
 
-假設具有`Employees`架構`[Name, Salary]`的表。
-要在將新記錄引入表中時持續處理新記錄,請使用以下步驟:
+針對 `Employees` 具有架構的資料表 `[Name, Salary]` ，若要在內嵌至資料表時持續處理新記錄，請使用下列程式：
 
 ```kusto
 // [Once] Enable the IngestionTime policy on table Employees

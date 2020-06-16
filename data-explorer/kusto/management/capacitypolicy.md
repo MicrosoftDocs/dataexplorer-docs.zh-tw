@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: bb3ee687e995af7d4161ca111f9efbe91c1b9ca0
-ms.sourcegitcommit: a60ad8da32f16c5d9ce35b62e7331d7439081e3d
+ms.openlocfilehash: a7f34f51ee38b10c51c469c0145081f5bb702d8f
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/06/2020
-ms.locfileid: "84466301"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780213"
 ---
 # <a name="capacity-policy"></a>產能原則
 
-容量原則可用來控制用於叢集上資料管理作業的計算資源。
+容量原則可用來控制叢集上資料管理作業的計算資源。
 
 ## <a name="the-capacity-policy-object"></a>容量原則物件
 
@@ -33,29 +33,28 @@ ms.locfileid: "84466301"
 
 |屬性                           |類型    |描述                                                                                                                                                                               |
 |-----------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|ClusterMaximumConcurrentOperations |long    |叢集中並行內嵌作業數目的最大值                                                                                                            |
-|CoreUtilizationCoefficient         |double  |計算內嵌容量時所用核心百分比的係數（計算的結果一律會正規化 `ClusterMaximumConcurrentOperations` ） |                                                                                                                             |
+|ClusterMaximumConcurrentOperations |long    |叢集中並行內嵌作業數目的最大值                                          |
+|CoreUtilizationCoefficient         |double  |計算內嵌容量時所用核心百分比的係數。 計算的結果一律會以正規化`ClusterMaximumConcurrentOperations`                          |
 
-叢集的內嵌容量總計（如 [[顯示容量](../management/diagnostics.md#show-capacity)] 所示）是由下列計算：
+叢集的所有內嵌容量（如所[示）會](../management/diagnostics.md#show-capacity)以下列方式計算：
 
 最小值（ `ClusterMaximumConcurrentOperations` ， `Number of nodes in cluster` * 最大值（1， `Core count per node`  *  `CoreUtilizationCoefficient` ））
 
 > [!Note]
-> 在具有三個或更多節點的叢集中，admin 節點不會參與進行內嵌作業。 `Number of nodes in cluster`會減少一。
+> 在具有三個或更多節點的叢集中，admin 節點不會參與內嵌作業。 `Number of nodes in cluster`會減少一。
 
 ## <a name="extents-merge-capacity"></a>範圍合併容量
 
 |屬性                           |類型    |描述                                                                                                |
 |-----------------------------------|--------|-----------------------------------------------------------------------------------------------------------|
-|MinimumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最小值。 預設值：1 |
-|MaximumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最大值。 預設值：5 |
+|MinimumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最小值。 預設值為1 |
+|MaximumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最大值。 預設值為5 |
 
-叢集的總範圍合併容量（如[顯示容量](../management/diagnostics.md#show-capacity)）的計算方式如下：
+叢集的總範圍合併容量（如所[示），](../management/diagnostics.md#show-capacity)其計算方式如下：
 
 `Number of nodes in cluster`x`Concurrent operations per node`
 
 的有效值 `Concurrent operations per node` 會由系統在 [，] 範圍內自動調整 `MinimumConcurrentOperationsPerNode` `MaximumConcurrentOperationsPerNode` 。
-
 
 > [!Note]
 > * 在具有三個或更多節點的叢集中，admin 節點不會參與執行合併作業。 `Number of nodes in cluster`會減少一。
@@ -77,15 +76,15 @@ ms.locfileid: "84466301"
 
 |屬性                           |類型    |描述                                                                                                                                                                            |
 |-----------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|ClusterMaximumConcurrentOperations |long    |叢集中並行匯出作業數目的最大值。                                                                                                           |
+|ClusterMaximumConcurrentOperations |long    |叢集中並行匯出作業數目的最大值。                                           |
 |CoreUtilizationCoefficient         |double  |計算匯出容量時所用核心百分比的係數。 計算的結果一律會以正規化 `ClusterMaximumConcurrentOperations` 。 |
 
-叢集的總匯出容量（如 [[顯示容量](../management/diagnostics.md#show-capacity)] 所示）是由下列計算：
+叢集的總匯出容量（如所[示）會](../management/diagnostics.md#show-capacity)以下列方式計算：
 
 最小值（ `ClusterMaximumConcurrentOperations` ， `Number of nodes in cluster` * 最大值（1， `Core count per node`  *  `CoreUtilizationCoefficient` ））
 
 > [!Note]
-> 在具有三個或更多節點的叢集中，admin 節點不會參與執行匯出作業。 `Number of nodes in cluster`會減少一。
+> 在具有三個或更多節點的叢集中，admin 節點不會參與匯出作業。 `Number of nodes in cluster`會減少一。
 
 ## <a name="extents-partition-capacity"></a>範圍分割區容量
 
@@ -96,7 +95,7 @@ ms.locfileid: "84466301"
 
 叢集的總範圍分割區容量（如所示[。顯示容量](../management/diagnostics.md#show-capacity)）。
 
-的有效值 `Concurrent operations` 會由系統在 [，] 範圍內自動調整 `ClusterMinimumConcurrentOperations` `ClusterMaximumConcurrentOperations` 。
+的有效值會 `Concurrent operations` 由系統在 [，] 範圍內自動調整 `ClusterMinimumConcurrentOperations` `ClusterMaximumConcurrentOperations` 。
 
 ## <a name="defaults"></a>Defaults
 
@@ -138,9 +137,9 @@ Kusto 會限制下列使用者起始命令的並行要求數目：
    * [[容量原則](#capacity-policy)] 中定義的 [限制]。
 * 清除
    * 全域目前已固定于每個叢集一個。
-   * 清除的重建容量會在內部用來判斷清除命令期間並行重建作業的數目。 由於此程式的緣故，清除命令不會遭到封鎖/節流處理，但會根據清除重建容量而更快或更慢。
+   * 清除的重建容量會在內部用來判斷清除命令期間並行重建作業的數目。 由於此程式的原因，清除命令不會遭到封鎖/節流處理，但會根據清除重建容量而更快或更慢。
 * 多餘
    * [[容量原則](#capacity-policy)] 中定義的 [限制]。
 
-當叢集偵測到某個作業已超過允許的平行作業時，它會以429（「節流」） HTTP 程式碼回應。
+當叢集偵測到某個作業已超過允許的平行作業時，它會以429、「節流」、HTTP 程式碼回應。
 請在部分輪詢之後重試作業。
