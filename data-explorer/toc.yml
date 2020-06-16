@@ -75,7 +75,9 @@
             - name: 單鍵擷取至現有的資料表
               href: one-click-ingestion-existing-table.md
         - name: 串流擷取
-          href: ingest-data-streaming.md
+          items:
+            - name: 串流擷取
+              href: ingest-data-streaming.md
         - name: 使用 LightIngest
           href: lightingest.md
         - name: 事件中樞
@@ -609,6 +611,8 @@
               href: ./kusto/query/atan2function.md
             - name: bag_keys()
               href: ./kusto/query/bagkeysfunction.md
+            - name: bag_merge()
+              href: ./kusto/query/bag-merge-function.md
             - name: base64_decode_toarray()
               href: ./kusto/query/base64_decode_toarrayfunction.md
             - name: base64_decode_tostring()
@@ -773,7 +777,7 @@
               href: ./kusto/query/isnanfunction.md
             - name: isnotempty()、notempty()
               href: ./kusto/query/isnotemptyfunction.md
-            - name: isnotnull()、notempty()
+            - name: 'isnotnull(), notnull()'
               href: ./kusto/query/isnotnullfunction.md
             - name: isnull()
               href: ./kusto/query/isnullfunction.md
@@ -1238,6 +1242,8 @@
                   href: ./kusto/management/alter-database.md
                 - name: .show 資料庫結構描述
                   href: ./kusto/management/show-schema-database.md
+                - name: .execute 資料庫指令碼
+                  href: ./kusto/management/execute-database-script.md
             - name: 資料表
               items:
                 - name: 資料表概觀
@@ -1422,6 +1428,12 @@
               href: ./kusto/management/data-ingestion/eventhub.md
             - name: 從 IoT 中樞內嵌
               href: ./kusto/management/data-ingestion/iothub.md
+            - name: 串流內嵌
+              items:
+                - name: 串流內嵌和架構變更
+                  href: ./kusto/management/data-ingestion/streaming-ingestion-schema-changes.md
+                - name: 清除用於串流內嵌的架構快取
+                  href: ./kusto/management/data-ingestion/clear-schema-cache-command.md
         - name: 資料匯出
           href: ./kusto/management/data-export/index.md
           items:
