@@ -1,5 +1,5 @@
 ---
-title: 範圍合併原則-Azure 資料總管 |Microsoft Docs
+title: 範圍合併原則-Azure 資料總管
 description: 本文說明 Azure 資料總管中的範圍合併原則。
 services: data-explorer
 author: orspod
@@ -8,61 +8,64 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: f0398fbc19842b3cce7fe69c8cb61258d0aeaaa6
-ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
+ms.openlocfilehash: 1f0a95e095dfaa11afdea3b66597ff3d98f0449b
+ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83867030"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84818629"
 ---
 # <a name="extents-merge-policy"></a>範圍合併原則
+
 合併原則會定義是否應該合併 Kusto 叢集中的[範圍（資料分區）](../management/extents-overview.md) 。
 
-合併作業有兩種類別： `Merge` （重建索引）和 `Rebuild` （完全 reingests 資料）。
+有兩種類型的合併作業： `Merge` 重建索引，以及 `Rebuild` 完全 reingests 資料的。
 
-這兩種作業種類都會產生單一範圍，以取代來源範圍。
+這兩種作業類型都會產生一個取代來源範圍的範圍。
 
-根據預設，會建議重建作業，而且只有在有任何剩餘的範圍未符合要重建的準則時，才會嘗試進行合併。  
+預設會建議重建作業。 如果有超出要重建之準則的範圍，就會嘗試將它們合併。  
 
-*注意：*
-- 標記使用*不同* `drop-by` 標記的範圍會導致這類範圍不會合並在一起，即使已設定合併原則（請參閱[範圍標記](../management/extents-overview.md#extent-tagging)）。
-- 標記的聯集長度超過1百萬個字元的範圍，將不會合並在一起。
-- 資料庫的/資料表的[分區化原則](./shardingpolicy.md)也會影響範圍合併在一起的方式。
+> [!NOTE]
+> * 標記使用*不同* `drop-by` 標記的範圍會導致這類範圍不會合並，即使已設定合併原則也一樣。 如需詳細資訊，請參閱[範圍標記](../management/extents-overview.md#extent-tagging)。
+> * 標記的聯集長度超過1百萬個字元的範圍將不會合並。
+> * 資料庫或資料表的[分區化原則](./shardingpolicy.md)也會影響範圍合併的方式。
+
+## <a name="merge-policy-properties"></a>合併原則屬性
 
 合併原則包含下列屬性：
 
-- **RowCountUpperBoundForMerge**：
-    - 預設：
-      - 0（無限制），適用于2020年6月之前設定的原則。
-      - 16000000，適用于從6月2020開始設定的原則。
-    - 合併範圍允許的最大資料列計數。
-    - 適用于合併作業，而不是重建。  
-- **OriginalSizeMBUpperBoundForMerge**：
-    - 預設為0（無限制）。
-    - 合併範圍的允許原始大小上限（以 Mb 為單位）。
-    - 適用于合併作業，而不是重建。  
-- **MaxExtentsToMerge**：
-    - 預設為100。
-    - 要在單一作業中合併的允許範圍數目上限。
-    - 適用于合併作業。
-- **LoopPeriod**：
-    - 預設為01:00:00 （1小時）。
-    - 開始合併/重建作業的兩個連續反復專案（由資料管理服務執行）之間的等候時間上限。
-    - 同時適用于合併和重建作業。
-- **AllowRebuild**：
-    - 預設為 ' true '。
-    - 定義是否 `Rebuild` 啟用作業（在這種情況下，它們優先于 `Merge` 作業）。
-- **AllowMerge**：
-    - 預設為 ' true '。
-    - 定義是否 `Merge` 啟用作業（在這種情況下，它們比作業的偏好更低 `Rebuild` ）。
-- **MaxRangeInHours**：
-    - 預設值為8。
-    - 任何兩個不同範圍的建立時間所允許的最大差異（以小時為單位），使其仍然可以合併。
-    - 時間戳記是在範圍內建立的，而且不會與範圍中包含的實際資料相關。
-    - 同時適用于合併和重建作業。
-    - 最佳做法是將此值與資料庫/資料表的[保留原則](./retentionpolicy.md) *SoftDeletePeriod*或快取[原則](./cachepolicy.md)的*DataHotSpan* （兩者的較低者）相互關聯，使其介於後者的2-3% 之間。
+* **RowCountUpperBoundForMerge**：
+    * 預設：
+      * 0（無限制），適用于2020年6月之前設定的原則。
+      * 16000000，適用于從6月2020開始設定的原則。
+    * 合併範圍允許的最大資料列計數。
+    * 適用于合併作業，而不是重建。  
+* **OriginalSizeMBUpperBoundForMerge**：
+    * 預設為0（無限制）。
+    * 合併範圍的允許原始大小上限（以 Mb 為單位）。
+    * 適用于合併作業，而不是重建。  
+* **MaxExtentsToMerge**：
+    * 預設為100。
+    * 要在單一作業中合併的允許範圍數目上限。
+    * 適用于合併作業。
+* **LoopPeriod**：
+    * 預設為01:00:00 （1小時）。
+    * 資料管理服務開始合併或重建作業的兩個連續反復專案之間的等候時間上限。
+    * 同時適用于合併和重建作業。
+* **AllowRebuild**：
+    * 預設為 ' true '。
+    * 定義是否 `Rebuild` 啟用作業（在這種情況下，它們是慣用的 `Merge` 作業）。
+* **AllowMerge**：
+    * 預設為 ' true '。
+    * 定義是否 `Merge` 啟用作業，在這種情況下，它們比作業的偏好更低 `Rebuild` 。
+* **MaxRangeInHours**：
+    * 預設值為8。
+    * 允許的差異（以小時為單位），介於兩個不同範圍的建立時間之間，使其仍然可以合併。
+    * 時間戳記的範圍是建立的，而且不會與範圍中包含的實際資料相關。
+    * 同時適用于合併和重建作業。
+    * 這個值應該根據有效的[保留原則](./retentionpolicy.md) *SoftDeletePeriod*或快取[原則](./cachepolicy.md) *DataHotSpan*值來設定。 採用較低的*SoftDeletePeriod*和*DataHotSpan*值。 將*MaxRangeInHours*值設定為介於2-3% 之間。 請參閱[範例](#maxrangeinhours-examples)。
 
-**`MaxRangeInHours`典型**
+## <a name="maxrangeinhours-examples"></a>MaxRangeInHours 範例
 
 |最小值（SoftDeletePeriod （保留原則），DataHotSpan （快取原則））|最大範圍（以小時為單位）（合併原則）|
 |--------------------------------------------------------------------|---------------------------------|
@@ -77,6 +80,6 @@ ms.locfileid: "83867030"
 > [!WARNING]
 > 在改變範圍合併原則之前，請洽詢 Azure 資料總管小組。
 
-建立資料庫時，會使用預設的合併原則來設定它（此原則具有上述預設值），這預設會由資料庫中建立的所有資料表繼承（除非在資料表層級明確覆寫其原則）。
+建立資料庫時，會使用上述的預設合併原則值進行設定。 除非在資料表層級明確覆寫其原則，否則在資料庫中建立的所有資料表預設會繼承原則。
 
-您可以在[這裡](../management/merge-policy.md)找到允許管理資料庫/資料表之合併原則的控制命令。
+如需詳細資訊，請參閱[控制命令，可讓您管理資料庫或資料表的合併原則](../management/merge-policy.md)。

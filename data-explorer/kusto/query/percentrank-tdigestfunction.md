@@ -8,16 +8,17 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 8220c52b70eec8a0a297c5826fff3a6e2a0483b3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: cafb52b7254041a18a9cae956ed338f45bc67a54
+ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373231"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84818563"
 ---
 # <a name="percentrank_tdigest"></a>percentrank_tdigest()
 
-計算集合中值的近似順位，其中 rank 會以集合大小的百分比表示。 這個函數可以視為百分位數的反向。
+計算集合中值的近似順位，其中 rank 會以集合大小的百分比表示。
+這個函數可以視為百分位數的反向。
 
 **語法**
 
@@ -34,7 +35,7 @@ ms.locfileid: "83373231"
 
 **提示**
 
-1) 第二個參數的類型和 tdigest 中元素的類型應相同。
+1) 第二個參數的類型和中的元素類型 `tdigest` 應該相同。
 
 2) 第一個參數應該是由[TDigest （）](tdigest-aggfunction.md)或[tdigest_merge （）](tdigest-merge-aggfunction.md)所產生的 TDigest
 

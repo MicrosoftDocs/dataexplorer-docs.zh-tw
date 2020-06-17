@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: f51e05abac44b85ab328e7df5645eeab51d2a274
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: fa97777da8173034098037f1aceec385a4c206de
+ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550617"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84818609"
 ---
 # <a name="tables"></a>資料表
 
@@ -60,3 +60,6 @@ cluster("https://help.kusto.windows.net").database("Samples").StormEvents
 let counter=(TableName:string) { table(TableName) | count };
 counter("StormEvents")
 ```
+
+> [!NOTE]
+> 使用 `table()` 特殊函數來明確指定資料表資料範圍。 例如，您可以使用此函式來限制處理位於熱快取中的資料表資料。

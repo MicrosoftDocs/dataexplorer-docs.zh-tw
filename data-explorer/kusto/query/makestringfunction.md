@@ -1,6 +1,6 @@
 ---
-title: make_string() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的make_string()。
+title: make_string （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 make_string （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d5af7cab9106088064048c1077ec3f9b1950ec08
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 035be5910d173c75e585baa0b093dc6276bd4d63
+ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512626"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84818592"
 ---
 # <a name="make_string"></a>make_string()
 
-返回 Unicode 字元產生的字串。
+傳回 Unicode 字元所產生的字串。
     
 **語法**
 
-`make_string (`*Arg1* [, *ArgN*]...`)`
+`make_string (`*Arg1*[， *...argn*] .。。`)`
 
 **引數**
 
-* *Arg1* ...*ArgN* :整數(int 或 long)或包含積分陣列的動態值的運算式。
+* *Arg1* .。。*...Argn*：是整數（int 或 long）的運算式，或包含整數陣列的動態值。
 
-* 此函數最多接收 64 個參數。 
+* 此函式最多可接收64個引數。
 
 **傳回**
 
-返回由 Unicode 字元組成的字串,其代碼點值由此函數的參數提供。 輸入必須包含有效的 Unicode 代碼點。
-如果任何參數未映射到 Unicode 字元,則函數傳回 null。
+傳回 Unicode 字元的字串，其值是由這個函數的引數所提供。 輸入必須包含有效的 Unicode 字碼指標。
+如果有任何引數未對應至 Unicode 字元，則函式會傳回 `null` 。
 
 **範例**
 
@@ -43,7 +43,7 @@ print str = make_string(75, 117, 115, 116, 111)
 |字串|
 |---|
 |Kusto|
-    
+
 ```kusto
 print str = make_string(dynamic([75, 117, 115, 116, 111]))
 ```

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: d2e1c5dbb845e67a5306ccb16c234de383d3ca69
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: ffef2fd609075b0d5e5af5c4064e079c27cd8c94
+ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225338"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84818511"
 ---
 # <a name="base64_decode_tostring"></a>base64_decode_tostring()
 
@@ -32,7 +32,7 @@ ms.locfileid: "83225338"
 傳回從 base64 字串解碼的 UTF-8 字串。
 
 * 若要將 base64 字串解碼為 long 值陣列，請參閱[base64_decode_toarray （）](base64_decode_toarrayfunction.md)
-* 如需將字串編碼為 base64 字串，請參閱[base64_encode_tostring （）](base64_encode_tostringfunction.md)
+* 若要將字串解碼為 base64 字串，請參閱[base64_encode_tostring （）](base64_encode_tostringfunction.md)
 
 **範例**
 

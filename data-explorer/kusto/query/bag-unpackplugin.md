@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的 bag_unpack 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 08/21/2019
-ms.openlocfilehash: fd8b0968d90f1c5239cae80c3be9c2a32d0603d6
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.date: 06/15/2020
+ms.openlocfilehash: 1823a9d875c6294f360fbce77fcb5e1d2c968019
+ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225491"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84818550"
 ---
 # <a name="bag_unpack-plugin"></a>bag_unpack 外掛程式
 
@@ -23,18 +23,22 @@ ms.locfileid: "83225491"
 
 **語法**
 
-*T*資料 `|` `evaluate` `bag_unpack(` *行* `,` [ *OutputColumnPrefix* ]`)`
+*T*資料 `|` `evaluate` `bag_unpack(` *行*[ `,` *OutputColumnPrefix* ] [ `,` *columnsConlict* ] [ `,` *ignoredProperties* ]`)`
 
 **引數**
 
 * *T*：要解壓縮其*資料行的*表格式輸入。
 * *Column*：要解除封裝之*T*的資料行。 其型別必須是 `dynamic`。
-* *OutputColumnPrefix*：要加入外掛程式所產生之所有資料行的一般前置詞。
-  選擇性。
+* *OutputColumnPrefix*：要加入外掛程式所產生之所有資料行的一般前置詞。 此引數是選擇性的。
+* *columnsConlict*：資料行衝突解決的方向。 此引數是選擇性的。 當提供引數時，它應該是符合下列其中一個值的字串常值：
+    - `error`-query 會產生錯誤（預設值）
+    - `replace_source`-來來源資料行已被取代
+    - `keep_source`-來來源資料行已保留
+* *ignoredProperties*：要忽略的一組選擇性包屬性。 當提供引數時，它必須是 `dynamic` 具有一或多個字串常值的陣列常數。
 
 **傳回**
 
-外掛程式會傳回 `bag_unpack` 一個資料表，其中包含多筆記錄做為其表格式輸入（*T*）。 資料表的架構與其表格式輸入相同，並具有下列修改：
+外掛程式會傳回 `bag_unpack` 一個資料表，其中包含多筆記錄做為其表格式輸入（*T*）。 資料表的架構與其表格式輸入的架構相同，並具有下列修改：
 
 * 已移除指定的輸入資料行（資料*行*）。
 
@@ -42,23 +46,25 @@ ms.locfileid: "83225491"
 
 **注意事項**
 
-外掛程式的輸出架構取決於資料值，使其成為資料本身「無法預測」。 因此，多個具有不同資料輸入的外掛程式執行，可能會產生不同的輸出架構。
+外掛程式的輸出架構取決於資料值，使其成為資料本身「無法預測」。 因此，多個使用不同資料輸入的外掛程式執行可能會產生不同的輸出架構。
 
-外掛程式的輸入資料必須是這樣，輸出架構才符合表格式架構的所有規則。 尤其是：
+外掛程式的輸入資料必須是這樣，輸出架構才會遵循表格式架構的所有規則。 尤其是：
 
 1. 輸出資料行名稱不能與表格式輸入*T*中的現有資料行相同，除非它是要解除封裝的資料行（資料*行*）本身，因為這會產生兩個具有相同名稱的資料行。
 
-2. 所有位置名稱（在前面加上*OutputColumnPrefix*）必須是有效的機構名稱，並符合[識別碼命名規則](./schema-entities/entity-names.md#identifier-naming-rules)。
+2. 所有位置名稱（在前面加上*OutputColumnPrefix*）必須是有效的機構名稱，並遵循[識別碼命名規則](./schema-entities/entity-names.md#identifier-naming-rules)。
 
 **範例**
 
-<!-- csl: https://help.kusto.windows.net:443/Samples -->
+展開包：
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(d:dynamic)
 [
     dynamic({"Name": "John", "Age":20}),
     dynamic({"Name": "Dave", "Age":40}),
-    dynamic({"Name": "Smitha", "Age":30}),
+    dynamic({"Name": "Jasmine", "Age":30}),
 ]
 | evaluate bag_unpack(d)
 ```
@@ -67,4 +73,79 @@ datatable(d:dynamic)
 |------|---|
 |John  |20 |
 |Dave  |40 |
-|Smitha|30 |
+|Jasmine|30 |
+
+展開包，並使用 `OutputColumnPrefix` 選項來產生開頭為 ' Property_ ' 的資料行名稱：
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
+```kusto
+datatable(d:dynamic)
+[
+    dynamic({"Name": "John", "Age":20}),
+    dynamic({"Name": "Dave", "Age":40}),
+    dynamic({"Name": "Jasmine", "Age":30}),
+]
+| evaluate bag_unpack(d, 'Property_')
+```
+
+|Property_Name|Property_Age|
+|---|---|
+|John|20|
+|Dave|40|
+|Jasmine|30|
+
+展開包，並使用 `columnsConlict` 選項來解決運算子所產生之現有資料行與資料行之間的衝突 `bag_unpack()` 。
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
+```kusto
+datatable(Name:string, d:dynamic)
+[
+    'Old_name', dynamic({"Name": "John", "Age":20}),
+    'Old_name', dynamic({"Name": "Dave", "Age":40}),
+    'Old_name', dynamic({"Name": "Jasmine", "Age":30}),
+]
+| evaluate bag_unpack(d, columnsConlict='replace_source') // Use new name
+```
+
+|名稱|Age|
+|---|---|
+|John|20|
+|Dave|40|
+|Jasmine|30|
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
+```kusto
+datatable(Name:string, d:dynamic)
+[
+    'Old_name', dynamic({"Name": "John", "Age":20}),
+    'Old_name', dynamic({"Name": "Dave", "Age":40}),
+    'Old_name', dynamic({"Name": "Jasmine", "Age":30}),
+]
+| evaluate bag_unpack(d, columnsConlict='keep_source') // Keep old name
+```
+
+|名稱|Age|
+|---|---|
+|Old_name|20|
+|Old_name|40|
+|Old_name|30|
+
+展開包，並使用 `ignoredProperties` 選項來忽略屬性包中現有的某些屬性。
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
+```kusto
+datatable(d:dynamic)
+[
+    dynamic({"Name": "John", "Age":20, "Address": "Address-1" }),
+    dynamic({"Name": "Dave", "Age":40, "Address": "Address-2"}),
+    dynamic({"Name": "Jasmine", "Age":30, "Address": "Address-3"}),
+]
+// Ignore 'Age' and 'Address' properties
+| evaluate bag_unpack(d, ignoredProperties=dynamic(['Address', 'Age']))
+```
+
+|名稱|
+|---|
+|John|
+|Dave|
+|Jasmine|

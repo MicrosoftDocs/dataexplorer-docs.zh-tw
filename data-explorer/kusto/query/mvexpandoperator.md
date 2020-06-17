@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
-ms.openlocfilehash: de0b2696ba5974a7261b4f397214e3ade59fc9cb
-ms.sourcegitcommit: 31af2dfa75b5a2f59113611cf6faba0b45d29eb5
+ms.openlocfilehash: bba3c4e82c3c1ac53a6ebafcb9de4c327da77e37
+ms.sourcegitcommit: 4986354cc1ba25c584e4f3c7eac7b5ff499f0cf1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454094"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84856189"
 ---
 # <a name="mv-expand-operator"></a>mv-expand 運算子
 
@@ -96,9 +96,9 @@ datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), d
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
-range x from 1 to 4 step 1 
-| summarize x = make_list(x) 
-| mv-expand with_itemindex=Index  x 
+range x from 1 to 4 step 1
+| summarize x = make_list(x)
+| mv-expand with_itemindex=Index x
 ```
 
 |x|索引|
