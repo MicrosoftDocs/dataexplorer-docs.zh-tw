@@ -19,7 +19,7 @@
       href: write-queries.md
     - name: E2E 程式設計 Blob 擷取
       items:
-        - name: 'C#'
+        - name: C#
           href: end-to-end-csharp.md
         - name: Python
           href: end-to-end-python.md
@@ -58,7 +58,7 @@
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
-        - name: 'C#'
+        - name: C#
           href: create-cluster-database-csharp.md
         - name: Python
           href: create-cluster-database-python.md
@@ -84,7 +84,7 @@
           items:
             - name: Azure 入口網站
               href: ingest-data-event-hub.md
-            - name: 'C#'
+            - name: C#
               href: data-connection-event-hub-csharp.md
             - name: Python
               href: data-connection-event-hub-python.md
@@ -94,7 +94,7 @@
           items:
             - name: Azure 入口網站
               href: ingest-data-event-grid.md
-            - name: 'C#'
+            - name: C#
               href: data-connection-event-grid-csharp.md
             - name: Python
               href: data-connection-event-grid-python.md
@@ -104,7 +104,7 @@
           items:
             - name: Azure 入口網站
               href: ingest-data-iot-hub.md
-            - name: 'C#'
+            - name: C#
               href: data-connection-iot-hub-csharp.md
             - name: Python
               href: data-connection-iot-hub-python.md
@@ -198,7 +198,7 @@
           items:
             - name: 入口網站
               href: customer-managed-keys-portal.md
-            - name: 'C#'
+            - name: C#
               href: customer-managed-keys-csharp.md
             - name: Azure Resource Manager 範本
               href: customer-managed-keys-resource-manager.md
@@ -222,7 +222,7 @@
               href: check-cluster-health.md
             - name: 新增叢集主體
               items:
-                - name: 'C#'
+                - name: C#
                   href: cluster-principal-csharp.md
                 - name: Python
                   href: cluster-principal-python.md
@@ -236,7 +236,7 @@
               href: manage-database-permissions.md
             - name: 新增資料庫主體
               items:
-                - name: 'C#'
+                - name: C#
                   href: database-principal-csharp.md
                 - name: Python
                   href: database-principal-python.md
@@ -244,7 +244,7 @@
                   href: database-principal-resource-manager.md
             - name: 原則
               items:
-                - name: 'C#'
+                - name: C#
                   href: database-table-policies-csharp.md
                 - name: Python
                   href: database-table-policies-python.md
@@ -325,6 +325,8 @@
               href: ./kusto/query/best-practices.md
             - name: 跨資料庫與跨叢集查詢
               href: ./kusto/query/cross-cluster-or-database-queries.md
+            - name: 查詢結果快取
+              href: ./kusto/query/query-results-cache.md
         - name: 實體
           items:
             - name: 實體類型
@@ -1447,6 +1449,13 @@
               href: ./kusto/management/data-export/continuous-data-export.md
         - name: 資料庫指標
           href: ./kusto/management/databasecursor.md
+        - name: 查詢結果快取
+          href: ./kusto/management/query-results-cache-commands.md
+          items:
+            - name: 新增快取
+              href: ./kusto/management/show-query-results-cache-command.md
+            - name: 清除快取
+              href: ./kusto/management/clear-query-results-cache-command.md
         - name: 系統資訊
           href: ./kusto/management/systeminfo.md
           items:
