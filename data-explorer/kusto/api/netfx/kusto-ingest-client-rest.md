@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 96409849823850ef9fd939f9e359d75d3e6d5bf1
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 83af540389087f0e1d9fdbd04266ab7ecaca0c5a
+ms.sourcegitcommit: b12e03206c79726d5b4055853ec3fdaa8870c451
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382143"
+ms.lasthandoff: 06/18/2020
+ms.locfileid: "85069169"
 ---
 # <a name="ingestion-without-kustoingest-library"></a>不 Kusto 內嵌程式庫的內嵌
 
@@ -22,7 +22,7 @@ Kusto 是將資料內嵌至 Azure 資料總管慣用的程式庫。 不過，您
 本文將為您示範如何使用適用于生產等級管線的 Azure 資料總管的*佇列*內嵌。
 
 > [!NOTE]
-> 下列程式碼是以 c # 撰寫，並利用 Azure 儲存體 SDK、ADAL 驗證程式庫和 NewtonSoft 封裝，來簡化範例程式碼。 如有需要，您可以將對應的程式碼取代為適當的[Azure 儲存體 REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api)呼叫、 [non-.NET ADAL 封裝](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)，以及任何可用的 JSON 處理封裝。
+> 下列程式碼是以 c # 撰寫，並利用 Azure 儲存體 SDK、ADAL 驗證程式庫和封裝上的 NewtonSoft.JS來簡化範例程式碼。 如有需要，您可以將對應的程式碼取代為適當的[Azure 儲存體 REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api)呼叫、 [non-.NET ADAL 封裝](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)，以及任何可用的 JSON 處理封裝。
 
 本文會處理建議的內嵌模式。 針對 Kusto 程式庫，其對應的實體是[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)介面。 在這裡，用戶端程式代碼會藉由將內嵌通知訊息張貼至 Azure 佇列，來與 Azure 資料總管服務互動。 訊息的參考是從 Kusto 資料管理（也稱為內嵌）服務取得。 與服務的互動必須使用 Azure Active Directory （Azure AD）進行驗證。
 
@@ -240,7 +240,7 @@ internal static string UploadFileToBlobContainer(string filePath, string blobCon
 
 ### <a name="compose-the-azure-data-explorer-ingestion-message"></a>撰寫 Azure 資料總管的內嵌訊息
 
-NewtonSoft 會再次撰寫有效的內嵌要求，以識別目標資料庫和資料表，並指向 blob。
+封裝上的 NewtonSoft.JS將再次撰寫有效的內嵌要求，以識別目標資料庫和資料表，並指向 blob。
 訊息將會張貼到相關的 Kusto 資料管理服務正在接聽的 Azure 佇列。
 
 以下是一些要考慮的重點。
@@ -265,14 +265,15 @@ internal static string PrepareIngestionMessage(string db, string table, string d
     message.Add("DatabaseName", db);
     message.Add("TableName", table);
     message.Add("RetainBlobOnSuccess", true);   // Do not delete the blob on success
-    message.Add("Format", "json");              // Data is in JSON format
     message.Add("FlushImmediately", true);      // Do not aggregate
     message.Add("ReportLevel", 2);              // Report failures and successes (might incur perf overhead)
     message.Add("ReportMethod", 0);             // Failures are reported to an Azure Queue
 
     message.Add("AdditionalProperties", new JObject(
                                             new JProperty("authorizationContext", identityToken),
-                                            new JProperty("jsonMappingReference", mappingRef)));
+                                            new JProperty("jsonMappingReference", mappingRef),
+                                            // Data is in JSON format
+                                            new JProperty("format", "json")));
     return message.ToString();
 }
 ```
@@ -336,7 +337,7 @@ Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列�
 }
 ```
 
-|屬性 | 說明 |
+|屬性 | 描述 |
 |---------|-------------|
 |Id |訊息識別碼（GUID） |
 |BlobPath |Blob 的路徑（URI），包括授與 Azure 資料總管許可權以讀取/寫入/刪除它的 SAS 金鑰。 需要許可權，才能讓 Azure 資料總管在內嵌資料完成後刪除 blob|
@@ -344,7 +345,7 @@ Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列�
 |DatabaseName |目標資料庫名稱 |
 |TableName |目標資料表名稱 |
 |RetainBlobOnSuccess |如果設定為 `true` ，則一旦成功完成內嵌之後，將不會刪除 blob。 預設為 `false` |
-|[格式] |未壓縮的資料格式 |
+|格式 |未壓縮的資料格式 |
 |FlushImmediately |如果設定為 `true` ，則會略過任何匯總。 預設為 `false` |
 |ReportLevel |成功/錯誤報表層級： 0-失敗，1-無，2-全部 |
 |ReportMethod |報告機制： 0-佇列，1-資料表 |
@@ -354,7 +355,7 @@ Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列�
 
 資料管理預期要從輸入 Azure 佇列讀取的訊息是下列格式的 JSON 檔。
 
-|屬性 | 說明 |
+|屬性 | 描述 |
 |---------|-------------
 |OperationId |可以用來追蹤服務端作業的作業識別碼（GUID） |
 |資料庫 |目標資料庫名稱 |

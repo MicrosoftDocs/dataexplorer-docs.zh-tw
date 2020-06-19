@@ -4,20 +4,21 @@ description: 本文說明 Azure 資料總管中的 parse 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8255f3d0c3dc0006029f06c7a0da4b41dfbaa1b7
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 07318a64781678410374f902ff8fe5514a4bdd17
+ms.sourcegitcommit: f9d3f54114fb8fab5c487b6aea9230260b85c41d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271329"
+ms.lasthandoff: 06/18/2020
+ms.locfileid: "85071902"
 ---
 # <a name="parse-operator"></a>parse 運算子
 
-評估字串運算式，並將其值剖析至一或多個計算的資料行。 若為未成功剖析的字串，計算結果欄會有 null。
+評估字串運算式，並將其值剖析至一或多個計算的資料行。 若為未成功剖析的字串，計算結果欄會有 null。 
+
 請參閱[parse-where](parsewhereoperator.md)運算子，它會篩選掉不成功剖析的字串。
 
 ```kusto
