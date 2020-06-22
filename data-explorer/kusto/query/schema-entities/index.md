@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/19/2019
-ms.openlocfilehash: d31765d72d37b0146cf7ba8a42e02722296bf80e
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: a69362b590acee99fbe9b57d9303099f0033d458
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663475"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128490"
 ---
-# <a name="entities"></a>實體
+# <a name="entity-types"></a>實體類型
 
 Kusto 查詢會在附加至 Kusto 叢集的某些 Kusto 資料庫內容中執行。 資料庫中的資料會以資料表的形式排列，查詢可能會參考這些資料表，並在資料表內組織成資料行和資料列的矩形方格。 此外，查詢可能會參考資料庫中的預存函式，這是可重複使用的查詢片段。
 

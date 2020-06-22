@@ -310,23 +310,20 @@
           href: troubleshoot-database-table.md
 - name: 參考
   items:
-    - name: 查詢語言
-      href: ./kusto/query/index.md
+    - name: Kusto 查詢
       items:
         - name: 概觀
-          items:
-            - name: Kusto 查詢
-              href: ./kusto/query/index.md
-            - name: 教學課程
-              href: ./kusto/query/tutorial.md
-            - name: 範例
-              href: ./kusto/query/samples.md
-            - name: 最佳作法
-              href: ./kusto/query/best-practices.md
-            - name: 跨資料庫與跨叢集查詢
-              href: ./kusto/query/cross-cluster-or-database-queries.md
-            - name: 查詢結果快取
-              href: ./kusto/query/query-results-cache.md
+          href: ./kusto/query/index.md
+        - name: 教學課程
+          href: ./kusto/query/tutorial.md
+        - name: 範例
+          href: ./kusto/query/samples.md
+        - name: 最佳作法
+          href: ./kusto/query/best-practices.md
+        - name: 跨資料庫與跨叢集查詢
+          href: ./kusto/query/cross-cluster-or-database-queries.md
+        - name: 查詢結果快取
+          href: ./kusto/query/query-results-cache.md
         - name: 實體
           items:
             - name: 實體類型
@@ -347,7 +344,7 @@
               href: ./kusto/query/schema-entities/externaltables.md
         - name: 資料類型
           items:
-            - name: 純量資料類型概觀
+            - name: 純量資料類型
               href: ./kusto/query/scalar-data-types/index.md
             - name: bool
               href: ./kusto/query/scalar-data-types/bool.md
@@ -372,7 +369,7 @@
             - name: Null 值
               href: ./kusto/query/scalar-data-types/null-values.md
             - name: 不支援的純量資料類型
-              href: /kusto/query/scalar-data-types/unsupported-data-types.md
+              href: ./kusto/query/scalar-data-types/unsupported-data-types.md
         - name: 函式
           items:
             - name: 函式類型
@@ -401,7 +398,7 @@
               href: ./kusto/query/batches.md
         - name: 表格式運算子
           items:
-            - name: 表格式資料
+            - name: 查詢運算子
               href: ./kusto/query/queries.md
             - name: as 運算子
               href: ./kusto/query/asoperator.md
@@ -415,7 +412,7 @@
               href: ./kusto/query/distinctoperator.md
             - name: evaluate 運算子
               items:
-                - name: evaluate 外掛程式運算子
+                - name: evaluate 運算子外掛程式
                   href: ./kusto/query/evaluateoperator.md
                 - name: autocluster
                   href: ./kusto/query/autoclusterplugin.md
@@ -465,9 +462,9 @@
               href: ./kusto/query/invokeoperator.md
             - name: join 運算子
               items:
-                - name: join 運算子概觀
+                - name: join 運算子
                   href: ./kusto/query/joinoperator.md
-                - name: 隨機播放
+                - name: 隨機查詢
                   href: ./kusto/query/shufflequery.md
                 - name: 跨叢集聯結
                   href: ./kusto/query/joincrosscluster.md
