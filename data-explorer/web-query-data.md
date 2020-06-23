@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
-ms.date: 07/04/2019
-ms.openlocfilehash: 145e452a3a914e1026d6da11f2ce38e85fa724f0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.date: 06/15/2020
+ms.openlocfilehash: 05c9a805e1391a34fe2d751c33178fcac16d15a9
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491293"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780128"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>快速入門：在 Azure 資料總管 Web UI 中查詢資料
 
@@ -20,7 +20,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 除了 Azure 訂用帳戶之外，您還需要[一個測試叢集和資料庫](create-cluster-database-portal.md)，才能完成此快速入門。
 
@@ -36,15 +36,15 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 您必須將連線新增到至少一個叢集，才能開始執行查詢。 在此節中，您將連線新增至 Azure 資料總管中我們已設置要輔助學習的*說明叢集*，也要將連線新增到在先前快速入門中建立的測試叢集。
 
-1. 在應用程式的左上方中，選取 [新增叢集]  。
+1. 在應用程式的左上方中，選取 [新增叢集]。
 
-1. 在 [新增叢集]  對話方塊中，輸入 URI，然後選取 [新增]  。
+1. 在 [新增叢集] 對話方塊中，輸入 URI，然後選取 [新增]。
 
    您可以使用說明叢集 URI，`https://help.kusto.windows.net`。 如果您有自己的叢集，請提供您叢集的 URI。 例如，如下圖所示的 `https://mydataexplorercluster.westus.kusto.windows.net`：
 
     ![入口網站中的伺服器 URI](media/web-query-data/server-uri.png)
 
-1. 在左窗格中，您現在應該會看到 [說明]  叢集。 展開 [範例]  資料庫，以便看到您可以存取的範例資料表。
+1. 在左窗格中，您現在應該會看到 [說明] 叢集。 展開 [範例] 資料庫，以便看到您可以存取的範例資料表。
 
     ![範例資料庫](media/web-query-data/sample-databases.png)
 
@@ -52,21 +52,21 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 現在加入之前建立的測試叢集。
 
-1. 選取 [新增叢集]  。
+1. 選取 [新增叢集]。
 
-1. 在 [新增叢集]  對話方塊中，以 `https://<ClusterName>.<Region>.kusto.windows.net/` 格式輸入您的測試叢集 URL，然後選取 [新增]  。
+1. 在 [新增叢集] 對話方塊中，以 `https://<ClusterName>.<Region>.kusto.windows.net/` 格式輸入您的測試叢集 URL，然後選取 [新增]。
 
-    在下面的範例中，您會看到 [說明]  叢集和一個新的叢集 **docscluster.westus** (完整的 URL 是 `https://docscluster.westus.kusto.windows.net/`)。
+    在下面的範例中，您會看到 [說明] 叢集和一個新的叢集 **docscluster.westus** (完整的 URL 是 `https://docscluster.westus.kusto.windows.net/`)。
 
     ![測試叢集](media/web-query-data/test-cluster.png)
 
 ## <a name="run-queries"></a>執行查詢
 
-您現在可以對連線的叢集執行查詢 (假設測試叢集中已經有資料)。 我們將著重 [i說明]  叢集。
+您現在可以對連線的叢集執行查詢 (假設測試叢集中已經有資料)。 我們將著重 [i說明] 叢集。
 
-1. 在左窗格中，在 [說明]  叢集下面選取 [範例]  資料庫。
+1. 在左窗格中，在 [說明]叢集下面選取 [範例] 資料庫。
 
-1. 複製下列查詢並貼到查詢視窗中。 在視窗頂端，選取 [執行]  。
+1. 複製下列查詢並貼到查詢視窗中。 在視窗頂端，選取 [執行] 。
 
     ```Kusto
     StormEvents
@@ -97,9 +97,9 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
     ![查詢結果集](media/web-query-data/result-set-02.png)
 
-1. 在查詢視窗頂端，選取 [召回]  。
+1. 在查詢視窗頂端，選取 [召回] 。
 
-    查詢視窗現在會顯示第一個查詢的結果，無需重新執行查詢。 通常在分析期間，您可以執行多個查詢，而 [召回]  可讓您重新瀏覽上一個查詢的結果。
+    查詢視窗現在會顯示第一個查詢的結果，無需重新執行查詢。 通常在分析期間，您可以執行多個查詢，而 [召回] 可讓您重新瀏覽上一個查詢的結果。
 
 1. 讓我們再執行一個查詢來查看不同的輸出類型。
 
@@ -151,7 +151,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
     此面板的功能類似於 Excel 中的樞紐資料表的欄位清單，能讓您在格線本身執行更多分析。
 
-1. 選取 [樞紐分析表模式]  ，然後拖曳資料行，如下所示：[狀態]  到 [資料列群組]  ；[DamageProperty]  到 [值]  ；[EventType]  到 [資料行標籤]  。  
+1. 選取 [樞紐分析表模式]，然後拖曳資料行，如下所示：[狀態] 到 [資料列群組]；[DamageProperty] 到 [值]；[EventType] 到 [資料行標籤]。  
 
     ![樞紐分析表模式](media/web-query-data/pivot-mode.png)
 
@@ -163,31 +163,68 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 ## <a name="share-queries"></a>共用查詢
 
-許多時候，您會想要共用所建立的查詢。 您可以提供深層連結，讓其他能夠存取叢集的使用者也能執行查詢。
+許多時候，您會想要共用所建立的查詢。 
 
 1. 在查詢視窗中，選取您所複製的第一個查詢。
 
-1. 在查詢視窗頂端，選取 [共用]  。
+1. 在查詢視窗頂端，選取 [共用] 。 
 
-1. 選取 [Link, query to clipboard]  。
+:::image type="content" source="media/web-query-data/share-menu.png" alt-text="共用功能表":::
+
+下拉式清單中有下列選項可用：
+* 連結至剪貼簿
+* [連結至剪貼簿或對其進行查詢](#provide-a-deep-link)
+* 連結至剪貼簿或對其進行查詢，以及將結果送至剪貼簿
+* [釘選到儀表板](#pin-to-dashboard)
+* [查詢 Power BI](power-bi-imported-query.md)
+
+### <a name="provide-a-deep-link"></a>提供深層連結
+
+您可以提供深層連結，讓其他能夠存取叢集的使用者也能執行查詢。
+
+1. 在**共用**中，選取 [連結至剪貼簿或對其進行查詢]。
 
 1. 複製連結和查詢到文字檔。
 
 1. 將連結貼到新的瀏覽器視窗。 查詢執行之後，結果應該會看起來如下所示。
 
-    ![共用的查詢](media/web-query-data/shared-query.png)
+    :::image type="content" source="media/web-query-data/shared-query.png" alt-text="共用查詢深層連結":::
+
+### <a name="pin-to-dashboard"></a>釘選到儀表板
+
+當您使用 Web UI 中的查詢完成資料探索並尋找所需的資料時，您可以將其釘選到儀表板以進行持續監視。 
+
+若要釘選查詢：
+
+1. 在**共用**中，選取 [釘選到儀表板]。
+
+1. 在 [釘選到儀表板] 窗格中：
+    1. 提供**查詢名稱**。
+    1. 選取 [使用現有項目] 或 [新建]。
+    1. 提供**儀表板名稱**
+    1. 選取 [建立後檢視儀表板] 核取方塊 (如果是新的儀表板)。
+    1. 選取 [釘選]
+
+    :::image type="content" source="media/web-query-data/pin-to-dashboard.png" alt-text="釘選到儀表板窗格":::
+    
+> [!NOTE]
+> **釘選到儀表板**只會釘選選取的查詢。 若要建立儀表板資料來源，並將轉譯命令翻譯成儀表板中的視覺效果，您必須在資料庫清單中選取相關的資料庫。
+
+## <a name="export-query-results"></a>匯出查詢結果
+
+若要將查詢結果匯出至 CSV 檔案，請選取 [檔案] > [匯出至 CSV]。
+
+:::image type="content" source="media/web-query-data/export-results.png" alt-text="將結果匯出至 CSV 檔案":::
 
 ## <a name="provide-feedback"></a>提供意見反應
 
-資料總管目前為預覽狀態，我們歡迎您針對使用提出意見反應。 您可以立即執行此作業，或等到您有更多時間可以執行。
+1. 在應用程式右上角，選取意見反應圖示 ![意見反應圖示](media/web-query-data/icon-feedback.png)。
 
-1. 在應用程式右上角，選取意見反應圖示： ![意見反應圖示](media/web-query-data/icon-feedback.png)。
-
-1. 輸入您的意見反應，然後選取 [提交]  。
+1. 輸入您的意見反應，然後選取 [提交]。
 
 ## <a name="clean-up-resources"></a>清除資源
 
-您並未在此快速入門中建立任何資源，但若您要從應用程式移除一或兩個叢集，請以滑鼠右鍵按一下叢集，然後選取 [移除連線]  。
+您並未在此快速入門中建立任何資源，但若您要從應用程式移除一或兩個叢集，請以滑鼠右鍵按一下叢集，然後選取 [移除連線]。
 
 ## <a name="next-steps"></a>後續步驟
 
