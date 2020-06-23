@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2019
-ms.openlocfilehash: a43275aa6d2938631cad052cfbdd9a185db487b2
-ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
+ms.openlocfilehash: d95bed91ab07be3feebecffbb97378866cb7c6c9
+ms.sourcegitcommit: a034b6a795ed5e62865fcf9340906f91945b3971
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84420844"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85197221"
 ---
 # <a name="basket-plugin"></a>購物籃外掛程式
 
@@ -21,7 +21,7 @@ ms.locfileid: "84420844"
 T | evaluate basket()
 ```
 
-Basket 可尋找資料中離散屬性 (維度) 的所有常見模式，將會傳回在原始查詢中傳遞頻率臨界值的所有常見模式。 購物籃一定要尋找資料中的所有常用模式，但不保證會有多項式執行時間，而查詢的執行時間會以資料列數為線性，但在某些情況下，資料行（維度）的數目可能是指數。 Basket 是以最初針對購物籃分析資料採礦而開發的 Apriori 演算法為基礎。
+購物籃會尋找資料中離散屬性（維度）的所有常見模式。 然後，它會傳回在原始查詢中傳遞頻率臨界值的常見模式。 購物籃保證會在資料中尋找每個常見的模式，但不保證會有多項式執行時間。 查詢的執行時間在資料列數目中是線性的，但可能是資料行數目（維度）的指數。 Basket 是以最初針對購物籃分析資料採礦而開發的 Apriori 演算法為基礎。
 
 **語法**
 
@@ -29,43 +29,45 @@ Basket 可尋找資料中離散屬性 (維度) 的所有常見模式，將會傳
 
 **傳回**
 
-購物籃會傳回顯示在資料列的比例閾值（預設值：0.05）上方的所有常見模式。 每個模式會以結果中的一個資料列表示。
+購物籃會傳回顯示在資料列比率臨界值以上的所有常用模式。 預設閾值為0.05。 每個模式會以結果中的一個資料列表示。
 
-第一個資料行是區段識別碼。接下來的兩個數據行是由模式所捕捉之原始查詢中的資料列計數和百分比。 其餘的資料行來自原始查詢，其值是資料行中的特定值或表示變數值的萬用字元值 (預設為 null)。
+第一個資料行是區段識別碼。 接下來的兩個數據行是由模式所捕捉之原始查詢中的資料列*計數*和*百分比*。 其餘的資料行是來自原始查詢。
+其值可以是資料行中的特定值或萬用字元值（預設為 null），表示變數值。
 
 **引數 (全部選用)**
 
 `T | evaluate basket(`[*閾值*， *WeightColumn*， *MaxDimensions*， *CustomWildcard*， *CustomWildcard*，...]`)`
 
-所有引數皆為選用，但必須為上述順序。 若要指示需使用預設值，請放置字串波狀符號值 - '~' (請參閱以下範例)。
+所有引數皆為選用，但必須為上述順序。 若要表示應該使用預設值，請使用字串波狀符號值-' ~ '。 請參閱下列範例。
 
 可用的引數：
 
 * 閾值-0.015 < *double* < 1 [預設值： 0.05]
 
-    將資料列的最小比率設為認定的頻繁 (不會傳回較小比例的模式)。
+    設定要視為經常考慮之資料列的最小比例。 比率較小的模式不會傳回。
     
     範例： `T | evaluate basket(0.02)`
 
 * WeightColumn - *column_name*
 
-    根據指定的權數 (依預設每個資料都列具有權數 '1') 考慮輸入中的每個資料列。 引數必須是數值資料行名稱 (例如 int、long、real)。 權數資料行的常見用法是考慮已內嵌至各資料列的資料取樣或分組/彙總。
-    
+    根據指定的權數，考慮輸入中的每個資料列。 根據預設，每個資料列的權數為 ' 1 '。 引數必須是數值資料行的名稱，例如 int、long、real。 權數資料行的常見用法是將已經內嵌在每個資料列中的資料取樣或值區/匯總納入考慮。
+
     範例： `T | evaluate basket('~', sample_Count)`
 
 * MaxDimensions-1 < *int* [預設值： 5]
 
-    設定每個 Basket 的不相關維度數目上限 (依預設會受到限制以縮減查詢執行階段)。
+    設定每個購物籃的不相關維度數目上限，預設會受到限制，以最小化查詢執行時間。
 
     範例： `T | evaluate basket('~', '~', 3)`
 
 * CustomWildcard- *"any_value_per_type"*
 
     在結果資料表中設定特定類型的萬用字元值，會指出目前的模式沒有這個資料行的限制。
-    預設值是 null，而字串預設值為空字串。 如果預設值是資料中的可行值，則應該使用不同的萬用字元值（例如 `*` ）。
-    請參閱下列範例。
+    預設值為 null。 字串的預設值為空字串。 如果資料中的預設值是良好的，則應該使用不同的萬用字元值，例如 `*` 。
 
-    範例： `T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
+    例如：
+
+     `T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
 
 **範例**
 
@@ -78,7 +80,7 @@ StormEvents
 | evaluate basket(0.2)
 ```
 
-|SegmentId|Count|百分比|州|EventType|Damage|DamageCrops|
+|SegmentId|Count|百分比|State|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4574|77.7|||否|0
 |1|2278|38.7||Hail|否|0
@@ -100,7 +102,7 @@ StormEvents
 | evaluate basket(0.2, '~', '~', '*', int(-1))
 ```
 
-|SegmentId|Count|百分比|州|EventType|Damage|DamageCrops|
+|SegmentId|Count|百分比|State|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4574|77.7|\*|\*|否|0
 |1|2278|38.7|\*|Hail|否|0

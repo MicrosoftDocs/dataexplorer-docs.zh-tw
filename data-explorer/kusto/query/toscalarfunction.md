@@ -1,6 +1,6 @@
 ---
-title: 到斯卡拉爾() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 toscalar()。
+title: toscalar （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 toscalar （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,43 +8,43 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 60fe8123760a9921bfa7abfacbbdffba6dba8d7b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 15d9056ec21eb6f25ccbc985d659f310d670f02d
+ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81505894"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85133408"
 ---
 # <a name="toscalar"></a>toscalar()
 
-返回計算表達式的標量常量值。 
+傳回已評估運算式的純量常數值。 
 
-此函數對於需要暫存計算的查詢很有用,例如計算事件總數,然後將其用於篩選超過所有事件特定百分比的組。 
+此函數適用于需要分段計算的查詢。 例如，計算事件的總計數，然後使用結果來篩選超過所有事件的特定百分比的群組。
 
 **語法**
 
-`toscalar(`*表達*`)`
+`toscalar(`*運算式*`)`
 
 **引數**
 
-* *表示式*: 將計算用於標量轉換的運算式  
+* *Expression*：將針對純量轉換進行評估的運算式。
 
 **傳回**
 
-計算表達式的標量常量值。
-如果表達式結果是表格,則第一列和第一行將進行轉換。
+已評估運算式的純量常數值。
+如果結果是表格式，則會採用第一個資料行和第一個資料列來進行轉換。
 
 > [!TIP]
-> 使用`toscalar()`時,可以使用[let 語句](letstatement.md)來讀取查詢的可讀性。
+> 當您使用時，可以使用[let 語句](letstatement.md)來取得查詢的可讀性 `toscalar()` 。
 
 **注意事項**
 
-`toscalar()`可以在查詢執行期間計算恆定次數。
-換句話說,`toscalar()`函數不能應用於行級別(對於每行方案)。
+`toscalar()`可以在查詢執行期間計算固定次數。
+`toscalar()`無法在資料列層級（每個資料列的案例）上套用函數。
 
 **範例**
 
-`Start`以下查詢計算`End`,並`Step`作為 標量常量,並將`range`其用於計算。 
+`Start`將、 `End` 和評估為純量 `Step` 常數，並使用結果進行 `range` 評估。
 
 ```kusto
 let Start = toscalar(print x=1);

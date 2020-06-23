@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: 348d9d1e9f50beb258138febf064b97b8c18c488
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 693c639ab3240ac555916a5f6862e7d57dba65e5
+ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372159"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85133425"
 ---
 # <a name="sql-to-kusto-query-translation"></a>用來 Kusto 查詢轉譯的 SQL
 
 Kusto 支援 SQL 語言的子集。 如需不支援功能的完整清單，請參閱[SQL 已知問題](../api/tds/sqlknownissues.md)清單。
 
-與 Kusto 互動的主要語言是 KQL （Kusto 查詢語言），若要更輕鬆地轉換和學習經驗，您可以使用 Kusto 服務將 SQL 查詢轉譯為 KQL。 將 SQL 查詢傳送至 Kusto 服務，並在前面加上「說明」動詞，即可達成此目的。
+與 Kusto 互動的主要語言是 KQL （Kusto 查詢語言）。 若要讓轉換和學習體驗更容易，您可以使用 Kusto 將 SQL 查詢轉譯為 KQL。 將 SQL 查詢傳送至 Kusto，並在前面加上動詞的「說明」。
 
 例如：
 
@@ -35,7 +35,7 @@ SELECT COUNT_BIG(*) as C FROM StormEvents
 
 ## <a name="sql-to-kusto-cheat-sheet"></a>SQL to Kusto 功能提要
 
-下表顯示 SQL 中的範例查詢和其 KQL equivalients。
+下表顯示 SQL 中的範例查詢及其 KQL 的對等專案。
 
 |類別 |SQL 查詢 |Kusto 查詢
 |---|---|---
@@ -52,7 +52,7 @@ Null 評估 |<code>SELECT * FROM dependencies<br>WHERE resultCode IS NOT NULL</c
 Distinct |<code>SELECT DISTINCT name, type  FROM dependencies</code> |<code>dependencies<br>&#124; summarize by name, type</code>
 群組，彙總 |<code>SELECT name, AVG(duration) FROM dependencies<br>GROUP BY name</code> |<code>dependencies<br>&#124; summarize avg(duration) by name</code>
 資料行別名，擴充 |<code>SELECT operationName as Name, AVG(duration) as AvgD FROM dependencies<br>GROUP BY name</code> |<code>dependencies<br>&#124; summarize AvgD = avg(duration) by operationName<br>&#124; project Name = operationName, AvgD</code>
-訂購 |<code>SELECT name, timestamp FROM dependencies<br>ORDER BY timestamp ASC</code> |<code>dependencies<br>&#124; project name, timestamp<br>&#124; order by timestamp asc nulls last</code>
+排序 |<code>SELECT name, timestamp FROM dependencies<br>ORDER BY timestamp ASC</code> |<code>dependencies<br>&#124; project name, timestamp<br>&#124; order by timestamp asc nulls last</code>
 依量值的前 n 個 |<code>SELECT TOP 100 name, COUNT(*) as Count FROM dependencies<br>GROUP BY name<br>ORDER BY Count DESC</code> |<code>dependencies<br>&#124; summarize Count = count() by name<br>&#124; top 100 by Count desc</code>
 Union |<code>SELECT * FROM dependencies<br>UNION<br>SELECT * FROM exceptions</code> |<code>union dependencies, exceptions</code>
 --|<code>SELECT * FROM dependencies<br>WHERE timestamp > ...<br>UNION<br>SELECT * FROM exceptions<br>WHERE timestamp > ...</code> |<code>dependencies<br>&#124; where timestamp > ago(1d)<br>&#124; union<br>&nbsp;&nbsp;(exceptions<br>&nbsp;&nbsp;&#124; where timestamp > ago(1d))</code>

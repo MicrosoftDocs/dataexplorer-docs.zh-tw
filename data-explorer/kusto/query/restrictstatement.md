@@ -10,24 +10,24 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 094cec5b467c35eb9dbeeb756362bd13c77873ce
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 8476680ad5b8206dcd7dfe98bf116bb5b6dcefdc
+ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737771"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85133445"
 ---
 # <a name="restrict-statement"></a>Restrict 陳述式
 
 ::: zone pivot="azuredataexplorer"
 
-Restrict 語句會限制資料表/視圖實體的集合，這些實體會顯示在其後面的查詢語句。 例如，在包含兩個數據表`A`（， `B`）的資料庫中，應用程式可以防止查詢的其他部分存取`B` ，而且只會使用 view 來「查看」有限的`A`資料表形式。
+Restrict 語句會限制資料表/視圖實體的集合，這些實體會顯示在其後面的查詢語句。 例如，在包含兩個數據表（，）的資料庫中 `A` `B` ，應用程式可以防止查詢的其他部分存取， `B` 而且只會使用 view 來「查看」有限的資料表形式 `A` 。
 
-Restrict 語句的主要案例是針對接受使用者查詢的仲介層應用程式，而且想要在這些查詢上套用資料列層級的安全性機制。 中介層應用程式可以在使用者的查詢前面加上**邏輯模型**，這組 let 語句定義了限制使用者存取資料的視圖（例如`T | where UserId == "..."`）。 作為最後新增的語句，它會限制使用者只能存取邏輯模型。
+Restrict 語句的主要案例是針對接受使用者查詢的仲介層應用程式，而且想要在這些查詢上套用資料列層級的安全性機制。 中介層應用程式可以在使用者的查詢前面加上**邏輯模型**，這組 let 語句定義了限制使用者存取資料的視圖（例如 `T | where UserId == "..."` ）。 作為最後新增的語句，它會限制使用者只能存取邏輯模型。
 
 **語法**
 
-`restrict``access` `,` [EntitySpecifier [...]]* * `to` `(``)`
+`restrict``access` `to` `(`[*EntitySpecifier* [ `,` ...]]`)`
 
 其中*EntitySpecifier*是下列其中一項：
 * 由 let 語句定義為表格式視圖的識別碼。
@@ -43,7 +43,7 @@ Restrict 語句可用來限制存取另一個資料庫或叢集中的實體（�
 **引數**
 
 Restrict 語句可以在實體的名稱解析期間，取得定義寬鬆限制的一個或多個參數。 實體可以是：
-- [let 語句](./letstatement.md)出現在`restrict`語句之前。 
+- [let 語句](./letstatement.md)出現在 `restrict` 語句之前。 
 
 ```kusto
 // Limit access to 'Test' let statement only
@@ -105,7 +105,7 @@ RestrictedData | summarize IrsLovesMe=sum(Salary) by Year, Month
 restrict access to (database().Table1);
 Table1 | count
 
-// Restricting acess to Table1 in the current database and Table2 in database 'DB2'
+// Restricting access to Table1 in the current database and Table2 in database 'DB2'
 restrict access to (database().Table1, database('DB2').Table2);
 union 
     (Table1),
