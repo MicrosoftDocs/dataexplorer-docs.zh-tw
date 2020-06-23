@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a41a45fb12fafe62fffd6c13e5ea9ecff55bb355
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 0ff4ad4adbae580e34c946eb9d18ca3337d3c49c
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373019"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128881"
 ---
-# <a name="rolling_percentile-plugin"></a>rolling_percentile 外掛程式
+# <a name="rolling_percentile-plugin"></a>rolling_percentile （）外掛程式
 
 針對每個*BinSize*的輪流（滑動） *BinsPerWindow*大小視窗，傳回*ValueColumn*擴展的指定百分位數估計。
 

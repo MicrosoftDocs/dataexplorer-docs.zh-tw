@@ -1,53 +1,57 @@
 ---
-title: 評估外掛程式運算子 ─ Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中的評價外掛程式運算符。
+title: 評估外掛程式操作員-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的評估外掛程式操作員。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 1aae36df29abf705ba821abdc2d1da96e4635a60
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d01b3b5178801fe1b5e55f51987564674ce4aeae
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515737"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128626"
 ---
-# <a name="evaluate-plugin-operator"></a>evaluate 外掛程式運算子
+# <a name="evaluate-operator-plugins"></a>evaluate 運算子外掛程式
 
-調用服務端查詢擴展(外掛程式)。
+叫用服務端查詢延伸模組（外掛程式）。
 
-運算子`evaluate`是一個表格運算符,提供調用稱為**外掛程式**的查詢語言擴展的能力。 外掛程式可以啟用或禁用(與其他語言構造始終可用不同),並且不受語言關係性質"綁定"(例如,它們可能沒有預定義的靜態確定輸出架構)。
+`evaluate`運算子是一種表格式運算子，可讓您叫用稱為**外掛程式**的查詢語言擴充功能。 外掛程式可以啟用或停用（不同于一律可供使用的其他語言結構），而且不會受到語言的關聯式本質的「系結」（例如，它們可能沒有預先定義、靜態判斷的輸出架構）。
 
 **語法** 
 
-[* * `|` `evaluate` T ] [*計算參數*`,` ]*外掛程式名稱*`(`•*外掛程式Arg1* •*外掛程式Arg2*[...`)`
+[*T* `|` ] `evaluate` [ *evaluateParameters* ] *PluginName* `(` [*PluginArg1* [ `,` *PluginArg2*] .。。`)`
 
 其中：
 
-* *T*是外掛程式的可選表格輸入。 (某些外掛程式不採用任何輸入,並充當表格數據來源。
-* *外掛程式名稱*是被調用的外掛程式的必填名稱。
-* *外掛程式Arg1*, ...是外掛程式的可選參數。
-* *計算參數*:以*名稱*`=`*值*的形式控制計算操作和執行計劃的行為的零個或多個(空間分隔)參數。 支援下列參數： 
+* *T*是外掛程式的選擇性表格式輸入。 （有些外掛程式不會接受任何輸入，而是作為表格式資料來源）。
+* *PluginName*是要叫用之外掛程式的必要名稱。
+* *PluginArg1*，.。。是外掛程式的選擇性引數。
+* *evaluateParameters*：*名稱*值格式為零或多個（以空格分隔）的參數 `=` *Value* ，可控制評估作業和執行計畫的行為。 每個外掛程式可能會以不同的方式來決定如何處理每個參數。 請參閱每個外掛程式的檔，以瞭解特定的行為。  
 
-  |名稱                |值                           |描述                                |
+支援下列參數： 
+
+  |名稱                |值                           |說明                                |
   |--------------------|---------------------------------|-------------------------------------------|
-  |`hint.distribution` |`single`, `per_node`, `per_shard`| [分轉提示](#distribution-hints) |
+  |`hint.distribution` |`single`, `per_node`, `per_shard`| [散發提示](#distributionhints) |
+  |`hint.pass_filters` |`true`, `false`| 允許 `evaluate` 運算子在外掛程式之前傳遞任何相符的篩選準則。 如果參考的資料行是在運算子之前，則會將篩選視為「相符」 `evaluate` 。 預設：`false` |
+  |`hint.pass_filters_column` |*column_name*| 允許外掛程式操作員傳遞在外掛程式之前參考*column_name*的篩選準則。 參數可以多次使用，並使用不同的資料行名稱。 |
 
 **注意事項**
 
-* 從語法上講,`evaluate`其操作方式類似於[調用運算符](./invokeoperator.md),後者調用表格函數。
-* 通過計算運算符提供的外掛程式不受查詢執行或參數計算的常規規則的約束。
-特定的外掛程式可能有特定的限制。 例如,在執行跨群集查詢時,不能使用輸出架構依賴於數據的外掛程式(例如[,bag_unpack外掛程式](./bag-unpackplugin.md))。
+* 在語法上，其 `evaluate` 行為類似于叫用表格式函數的叫用[運算子](./invokeoperator.md)。
+* 透過評估運算子提供的外掛程式不會受到查詢執行或引數評估的一般規則所限制。
+* 特定外掛程式可能會有特定的限制。 例如，執行跨叢集查詢時，不能使用其輸出架構相依于資料的外掛程式（例如[bag_unpack 外掛程式](./bag-unpackplugin.md)和[資料透視外掛程式](./pivotplugin.md)）。
 
-## <a name="distribution-hints"></a>分轉提示
+<a id="distributionhints"/>**散發提示**</a>
 
-分發提示指定外掛程式執行將如何跨多個群集節點分佈。 每個外掛程式可以對分發實現不同的支援。 外掛程式的文件指定外掛程式支援的分發選項。
+發佈提示會指定外掛程式執行如何分散到多個叢集節點。 每個外掛程式都可能會對散發執行不同的支援。 外掛程式的檔會指定外掛程式支援的散發選項。
 
 可能的值：
 
-* `single`:外掛程式的單個實體執行在整個查詢資料上。
-* `per_node`:如果外掛程式調用之前的查詢分佈在節點之間,則外掛程式的實例將在每個節點上運行,因為它包含的數據。
-* `per_shard`:如果外掛程式調用之前的數據分佈在分片之間,則外掛程式的實例將運行在數據的每個分片上。
+* `single`：外掛程式的單一實例將會在整個查詢資料上執行。
+* `per_node`：如果在外掛程式呼叫之前的查詢分散到各個節點，則外掛程式的實例將會透過其包含的資料在每個節點上執行。
+* `per_shard`：如果外掛程式呼叫之前的資料分散在分區上，則外掛程式的實例將會在每個分區的資料上執行。

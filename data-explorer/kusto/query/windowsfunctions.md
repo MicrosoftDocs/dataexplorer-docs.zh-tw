@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: d876f26de796008e83b620e4511a31cdb4e23888
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: 1e93764058c6d890568e90f67472ec4306a092f8
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550685"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128694"
 ---
-# <a name="window-functions"></a>視窗函式
+# <a name="window-functions-overview"></a>Window 函式概觀
 
 視窗函式會在一次資料列集中的多個資料列（記錄）上運作。 不同于彙總函式，視窗函式需要序列化資料列集中的資料列（具有特定的順序）。 視窗函數可能相依于判斷結果的順序。
 

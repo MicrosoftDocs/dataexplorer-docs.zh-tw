@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 6e383ce9fdcf373452c0b7d710302669e7987395
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 778b8c276d6264b890c0b0be7b127f578663a64d
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737839"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85129051"
 ---
-# <a name="query-statements"></a>查詢陳述式
+# <a name="query-statement-types"></a>查詢陳述式類型
 
 ::: zone pivot="azuredataexplorer"
 
-查詢是由一個或多個**查詢語句**所組成，並以分號`;`（）分隔。
+查詢是由一個或多個**查詢語句**所組成，並以分號（ `;` ）分隔。
 這些查詢語句中至少有一個必須是[表格式運算式語句](./tabularexpressionstatements.md)。
 表格式運算式語句會產生一或多個表格式結果。
 當查詢有一個以上的表格式運算式語句時，查詢會有一[批](./batches.md)表格式運算式語句，而這些語句所產生的表格式結果全都由查詢傳回。

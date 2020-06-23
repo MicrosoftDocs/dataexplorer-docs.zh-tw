@@ -1,6 +1,6 @@
 ---
-title: 位(二進位)運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的位(二進位)運算元。
+title: 位（二進位）運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的位（二元）運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 216008d66bf80e391cef375d2218ee0c5ff1c99c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6038ee8214ef06a7feb88e95d68f4688fc8a88f4
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517403"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128914"
 ---
-# <a name="bitwise-binary-operators"></a>位(二進位)運算子
+# <a name="bitwise-binary-operators"></a>位元 (二元) 運算子
 
-Kusto 支援整數之間的許多位(二進位)運算子:
+Kusto 支援整數之間的多個位（二元）運算子：
 
 * [binary_and](binary-andfunction.md)
 * [binary_not](binary-notfunction.md)

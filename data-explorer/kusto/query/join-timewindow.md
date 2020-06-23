@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4741da4367bb1a350c7310ea21ebe5ce9b91b06b
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: d23d76fdcc592435a8ec7fa24ef5d0dfd5186c68
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271480"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128444"
 ---
-# <a name="joining-within-time-window"></a>在時間範圍內加入
+# <a name="time-window-join"></a>時段聯結
 
 在某些高基數的索引鍵上聯結兩個大型資料集（例如作業識別碼或會話識別碼），並進一步限制 `$right` 需要針對每個左側（）記錄進行比對的右手邊（）記錄，方法是在 `$left` `datetime` 左邊和右邊的資料行之間加上「時間距離」的限制。 這不同于一般 Kusto 聯結作業，除了「等聯結」部分（符合高基數索引鍵或左和右資料集）之外，系統也可以套用距離函數，並使用它來大幅加速聯結。 請注意，距離函式的行為不像是相等的（也就是說，當 `dist(x,y)` 和 `dist(y,z)` 都是 true 時，也不會跟著 `dist(x,z)` 也是如此）。*就內部而言，我們有時稱之為「對角聯結」。*
 
@@ -74,7 +74,7 @@ T
 
 ```
 
-|SessionId|Start|結束|
+|SessionId|開始|結束|
 |---|---|---|
 |0|2017-10-01 00：00：00.0000000|2017-10-01 00：01：00.0000000|
 
@@ -110,7 +110,7 @@ T
 | project SessionId, Start, End 
 ```
 
-|SessionId|Start|結束|
+|SessionId|開始|結束|
 |---|---|---|
 |0|2017-10-01 00：00：00.0000000|2017-10-01 00：01：00.0000000|
 
@@ -146,7 +146,7 @@ T
 | project SessionId, Start, End 
 ```
 
-|SessionId|Start|結束|
+|SessionId|開始|結束|
 |---|---|---|
 |0|2017-10-01 00：00：00.0000000|2017-10-01 00：01：00.0000000|
 
@@ -182,6 +182,6 @@ T
 | count 
 ```
 
-|計數|
+|Count|
 |---|
 |1276|

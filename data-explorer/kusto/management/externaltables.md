@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2020
-ms.openlocfilehash: 293ee468f31fafafdf08da1632c93b04b0a8adf2
-ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
+ms.openlocfilehash: 8e419d471419a291b3680c4b91d3e6908b2e7f2e
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/03/2020
-ms.locfileid: "84329005"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128830"
 ---
 # <a name="external-table-general-control-commands"></a>外部資料表一般控制命令
 
@@ -28,7 +28,7 @@ ms.locfileid: "84329005"
 
 `.show` `external` `tables`
 
-`.show` `external` `table` *TableName*
+`.show``external` `table` *TableName*
 
 **輸出**
 
@@ -50,7 +50,7 @@ ms.locfileid: "84329005"
 
 | TableName | TableType | 資料夾         | DocString | 屬性 |
 |-----------|-----------|----------------|-----------|------------|
-| T         | Blob      | ExternalTables | 文件      | {}         |
+| T         | Blob      | ExternalTables | Docs      | {}         |
 
 
 ## <a name="show-external-table-schema"></a>：顯示外部資料表架構
@@ -62,7 +62,7 @@ ms.locfileid: "84329005"
 
 `.show``external` `table` *TableName* `schema` `as` （ `json`  |  `csl` ）
 
-`.show` `external` `table` *TableName* `cslschema`
+`.show``external` `table` *TableName*`cslschema`
 
 **輸出**
 
@@ -85,20 +85,20 @@ ms.locfileid: "84329005"
 .show external table T cslschema
 ```
 
-**輸出**
+**輸出：**
 
 *json*
 
 | TableName | 結構描述    | DatabaseName | 資料夾         | DocString |
 |-----------|----------------------------------|--------------|----------------|-----------|
-| T         | {"Name"： "ExternalBlob"，<br>"Folder"： "ExternalTables"，<br>"DocString"： "檔"，<br>"OrderedColumns"： [{"Name"： "x"，"Type"： "System.object"，"CslType"： "long"，"DocString"： ""}，{"Name"： "s"，"Type"： "system.string"，"CslType"： ""}]} | DB           | ExternalTables | 文件      |
+| T         | {"Name"： "ExternalBlob"，<br>"Folder"： "ExternalTables"，<br>"DocString"： "檔"，<br>"OrderedColumns"： [{"Name"： "x"，"Type"： "System.object"，"CslType"： "long"，"DocString"： ""}，{"Name"： "s"，"Type"： "system.string"，"CslType"： ""}]} | DB           | ExternalTables | Docs      |
 
 
 *csl*
 
 | TableName | 結構描述          | DatabaseName | 資料夾         | DocString |
 |-----------|-----------------|--------------|----------------|-----------|
-| T         | x:long,s:string | DB           | ExternalTables | 文件      |
+| T         | x:long,s:string | DB           | ExternalTables | Docs      |
 
 ## <a name="drop-external-table"></a>. drop external table
 
@@ -108,7 +108,7 @@ ms.locfileid: "84329005"
 
 **語法：**  
 
-`.drop` `external` `table` *TableName*
+`.drop``external` `table` *TableName* [ `ifexists` ]
 
 **輸出**
 
@@ -122,7 +122,7 @@ ms.locfileid: "84329005"
 
 | TableName | TableType | 資料夾         | DocString | 結構描述       | 屬性 |
 |-----------|-----------|----------------|-----------|-----------------------------------------------------|------------|
-| T         | Blob      | ExternalTables | 文件      | [{"Name"： "x"，"CslType"： "long"}，<br> {"Name"： "s"，"CslType"： "string"}] | {}         |
+| T         | Blob      | ExternalTables | Docs      | [{"Name"： "x"，"CslType"： "long"}，<br> {"Name"： "s"，"CslType"： "string"}] | {}         |
 
 ## <a name="next-steps"></a>後續步驟
 

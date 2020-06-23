@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: fb842bcda70c2986bd754f55184413eec594d412
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: a93a8b493959b6d335f01b9d3fcda24ae7c31748
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373118"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128932"
 ---
-# <a name="queries"></a>查詢
+# <a name="query-operators"></a>查詢運算子
 
 查詢是針對 Kusto 引擎叢集的內嵌資料進行唯讀作業。 查詢一律會在叢集中特定資料庫的內容中執行（雖然它們也可以參考另一個資料庫中的資料，甚至是另一個叢集中的資料）。
 

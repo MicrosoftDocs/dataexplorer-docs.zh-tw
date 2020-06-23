@@ -1,6 +1,6 @@
 ---
-title: 前() - Azure 資料資源管理員 |微軟文件
-description: 本文在 Azure 資料資源管理器中介紹 prev()。
+title: 上一個（）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的上一個（）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,35 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 33f6045333826b21ddc0092e2cc7d5e033c12a96
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 4216f691345c7dffd3bb1974e5f82e877ffb70f2
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744588"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128983"
 ---
 # <a name="prev"></a>prev()
 
-返回行中列的值,該列在[序列化列集](./windowsfunctions.md#serialized-row-set)中的當前行之前處於某種偏移量。
+傳回指定資料列中特定資料行的值。
+指定的資料列位於[序列化資料列集中](./windowsfunctions.md#serialized-row-set)目前資料列的指定位移。
 
 **語法**
 
-`prev(column)`
+有幾種可能性。
 
-`prev(column, offset)`
+* `prev(column)`
 
-`prev(column, offset, default_value)`
+* `prev(column, offset)`
+
+* `prev(column, offset, default_value)`
 
 **引數**
 
-* `column`:要從中獲取值的列。
+* `column`：要從中取得值的資料行。
 
-* `offset`:要返回行的偏移量。 如果未指定偏移量,則使用預設偏移量 1。
+* `offset`：要回到資料列中的位移。 若未指定位移，則會使用預設位移1。
 
-* `default_value`:當沒有要從中獲取該值的行時,將使用的默認值。 如果未指定預設值,則使用 null。
-
+* `default_value`：在沒有先前的資料列要接受值時，所要使用的預設值。 若未指定預設值，則會使用 null。
 
 **範例**
 

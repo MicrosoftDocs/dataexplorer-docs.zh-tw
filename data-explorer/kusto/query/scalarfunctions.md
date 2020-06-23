@@ -8,16 +8,16 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: ccbd01faae3e71941c1bf4542f473410753155cf
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 640c331b177642735d875f615772dcdbb6ec68d8
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294571"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128864"
 ---
-# <a name="scalar-functions"></a>純量函數
+# <a name="scalar-function-types"></a>純量函式類型
 
-## <a name="binary-functions"></a>二元函式
+## <a name="binary-functions"></a>二進位函式
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
@@ -29,17 +29,17 @@ ms.locfileid: "84294571"
 |[binary_xor()](binary-xorfunction.md)|傳回兩個值之位 xor 運算的結果。|
 |[bitset_count_ones()](bitset-count-onesfunction.md)|傳回數位的二進位標記法中的集合位數目。|
 
-## <a name="conversion-functions"></a>轉換函式
+## <a name="conversion-functions"></a>轉換函數
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[tobool()](toboolfunction.md)|將輸入轉換成布林值（帶正負號的8位）標記法。|
 |[todatetime()](todatetimefunction.md)|將輸入轉換為 datetime 純量。|
 |[todouble （）/toreal （）](todoublefunction.md)|將輸入轉換成 real 類型的值。 （todouble （）和 toreal （）是同義字）。|
-|[tostring （）](tostringfunction.md)|將輸入轉換為字串表示。|
+|[tostring()](tostringfunction.md)|將輸入轉換為字串表示。|
 |[totimespan()](totimespanfunction.md)|將輸入轉換為 timespan 純量。|
 
-## <a name="datetimetimespan-functions"></a>DateTime/Timespan 函數
+## <a name="datetimetimespan-functions"></a>DateTime/timespan 函數
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
@@ -48,7 +48,7 @@ ms.locfileid: "84294571"
 |[datetime_part()](datetime-partfunction.md)|將要求的日期部分解壓縮成整數值。|
 |[datetime_diff()](datetime-difffunction.md)|傳回包含日期的年份結尾，如果有提供，則會位移位移。|
 |[dayofmonth()](dayofmonthfunction.md)|傳回代表給定月份之日數位的整數數位。|
-|[dayofweek()](dayofweekfunction.md)|傳回從上個星期日算起的整數天數，以 timespan 為單位。|
+|[dayofweek （）](dayofweekfunction.md)|傳回從上個星期日算起的整數天數，以 timespan 為單位。|
 |[dayofyear()](dayofyearfunction.md)|傳回整數，代表指定年份的日數。|
 |[endofday()](endofdayfunction.md)|傳回包含日期的日結束，如果有提供，則會位移位移。|
 |[endofmonth()](endofmonthfunction.md)|傳回包含日期的月份結尾，如果有提供，則會位移位移。|
@@ -99,7 +99,7 @@ ms.locfileid: "84294571"
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
-|[下一個（）](nextfunction.md)|對於序列化的資料列集，會根據位移，從較新的資料列傳回指定資料行的值。|
+|[next()](nextfunction.md)|對於序列化的資料列集，會根據位移，從較新的資料列傳回指定資料行的值。|
 |[prev()](prevfunction.md)|針對序列化的資料列集，根據位移，傳回先前資料列中指定資料行的值。|
 |[row_cumsum()](rowcumsumfunction.md)|計算資料行的累計總和。|
 |[row_number()](rownumberfunction.md)|傳回序列化資料列集內的資料列編號-從指定索引開始的連續數位，或預設值為1。|
@@ -110,7 +110,7 @@ ms.locfileid: "84294571"
 |-------------------------|--------------------------------------------------------|
 |[toscalar()](toscalarfunction.md)|傳回已評估運算式的純量常數值。|
 
-## <a name="mathematical-functions"></a>數學函式
+## <a name="mathematical-functions"></a>數學函數
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
@@ -135,7 +135,7 @@ ms.locfileid: "84294571"
 |[isfinite()](isfinitefunction.md)|傳回輸入是否為有限值（不是無限或 NaN）。|
 |[isinf()](isinffunction.md)|傳回輸入是否為無限（正或負）值。|
 |[isnan()](isnanfunction.md)|傳回輸入是否為非數位（NaN）值。|
-|[log()](log-function.md)|傳回自然對數函數。|
+|[log （）](log-function.md)|傳回自然對數函數。|
 |[log10()](log10-function.md)|傳回通用（底數為10）對數函數。|
 |[log2()](log2-function.md)|傳回以2為底數的對數函數。|
 |[loggamma()](loggammafunction.md)|計算 gamma 函數絕對值的記錄。|
@@ -144,14 +144,13 @@ ms.locfileid: "84294571"
 |[pow()](powfunction.md)|傳回乘冪的結果。|
 |[radians()](radiansfunction.md)|使用公式弧度 = （PI/180） * 以度為單位的角度，將角度值以弧度轉換為值。|
 |[rand()](randfunction.md)|傳回亂數字。|
-|[範圍（）](rangefunction.md)|產生動態陣列，保存一系列同等間距的值。|
+|[range()](rangefunction.md)|產生動態陣列，保存一系列同等間距的值。|
 |[round()](roundfunction.md)|傳回指定之有效位數的圓角來源。|
 |[sign()](signfunction.md)|數值運算式的正負號。|
 |[sin()](sinfunction.md)|傳回正弦函數。|
 |[sqrt()](sqrtfunction.md)|傳回平方根函數。|
 |[tan()](tanfunction.md)|傳回正切函數。|
 |[welch_test()](welch-testfunction.md)|計算[Welch-test 函數](https://en.wikipedia.org/wiki/Welch%27s_t-test)的 p 值。|
-
 
 ## <a name="metadata-functions"></a>中繼資料函數
 
@@ -169,7 +168,6 @@ ms.locfileid: "84294571"
 |[extent_tags()](extenttagsfunction.md)|傳回動態陣列，其中包含目前記錄所在之資料分區（「範圍」）的標記。|
 |[ingestion_time()](ingestiontimefunction.md)|抓取記錄的 $IngestionTime 隱藏日期時間資料行，或為 null。|
 
-
 ## <a name="rounding-functions"></a>進位函數
 
 |函數名稱     |描述                                          |
@@ -178,7 +176,6 @@ ms.locfileid: "84294571"
 |[bin_at()](binatfunction.md)|將值向下舍入固定大小的「bin」，並控制 bin 的起點。 （另請參閱 bin 函數）。|
 |[ceiling()](ceilingfunction.md)|計算大於或等於指定之數值運算式的最小整數。|
 |[floor()](floorfunction.md)|將值捨入為指定 bin 大小的整數倍數。|
-
 
 ## <a name="conditional-functions"></a>條件式函數
 
@@ -230,7 +227,7 @@ ms.locfileid: "84294571"
 |[series_stats()](series-statsfunction.md)|傳回多個資料行中數列的統計資料。|
 |[series_stats_dynamic()](series-stats-dynamicfunction.md)|傳回動態物件中數列的統計資料。|
 
-## <a name="string-functions"></a>字串函式
+## <a name="string-functions"></a>字串函數
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
@@ -244,13 +241,13 @@ ms.locfileid: "84294571"
 |[indexof()](indexoffunction.md)|函式會報告輸入字串內指定之字串第一次出現時的所在索引（以零為基底）。|
 |[isempty()](isemptyfunction.md)|如果引數為空字串或為 null，則傳回 true。|
 |[isnotempty()](isnotemptyfunction.md)|如果引數不是空字串或 null，則傳回 true。|
-|[isnotnull （）](isnotnullfunction.md)|如果引數不是 null，則傳回 true。|
+|[isnotnull()](isnotnullfunction.md)|如果引數不是 null，則傳回 true。|
 |[isnull()](isnullfunction.md)|評估其唯一引數，並傳回布林值，指出引數是否評估為 null 值。|
 |[parse_csv()](parsecsvfunction.md)|分割代表逗號分隔值的指定字串，並傳回具有這些值的字串陣列。|
 |[parse_ipv4()](parse-ipv4function.md)|將輸入轉換成 long （帶正負號的64位）數位表示。|
 |[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|將輸入字串和 IP 首碼遮罩轉換成 long （帶正負號的64位）數位表示。|
-|[parse_ipv6 （）](parse-ipv6function.md)|將 IPv6 或 IPv4 字串轉換成標準 IPv6 字串表示。|
-|[parse_ipv6_mask （）](parse-ipv6-maskfunction.md)|將 IPv6 或 IPv4 字串和網路遮罩轉換成標準 IPv6 字串表示。|
+|[parse_ipv6()](parse-ipv6function.md)|將 IPv6 或 IPv4 字串轉換成標準 IPv6 字串表示。|
+|[parse_ipv6_mask()](parse-ipv6-maskfunction.md)|將 IPv6 或 IPv4 字串和網路遮罩轉換成標準 IPv6 字串表示。|
 |[parse_json()](parsejsonfunction.md)|將字串解讀為 JSON 值），並以動態方式傳回值。|
 |[parse_url()](parseurlfunction.md)|剖析絕對 URL 字串，並傳回動態物件，其中包含 URL 的所有部分。|
 |[parse_urlquery()](parseurlqueryfunction.md)|剖析 url 查詢字串，並傳回包含查詢參數的動態物件。|
@@ -276,16 +273,16 @@ ms.locfileid: "84294571"
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
-|[ipv4_compare （）](ipv4-comparefunction.md)|比較兩個 IPv4 字串。|
-|[ipv4_is_match （）](ipv4-is-matchfunction.md)|符合兩個 IPv4 字串。|
+|[ipv4_compare()](ipv4-comparefunction.md)|比較兩個 IPv4 字串。|
+|[ipv4_is_match()](ipv4-is-matchfunction.md)|符合兩個 IPv4 字串。|
 |[parse_ipv4()](parse-ipv4function.md)|將輸入字串轉換為 long （帶正負號的64位）數位表示。|
 |[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|將輸入字串和 IP 首碼遮罩轉換成 long （帶正負號的64位）數位表示。|
-|[ipv6_compare （）](ipv6-comparefunction.md)|比較兩個 IPv4 或 IPv6 字串。|
-|[ipv6_is_match （）](ipv6-is-matchfunction.md)|符合兩個 IPv4 或 IPv6 字串。|
-|[parse_ipv6 （）](parse-ipv6function.md)|將 IPv6 或 IPv4 字串轉換成標準 IPv6 字串表示。|
-|[parse_ipv6_mask （）](parse-ipv6-maskfunction.md)|將 IPv6 或 IPv4 字串和網路遮罩轉換成標準 IPv6 字串表示。|
+|[ipv6_compare()](ipv6-comparefunction.md)|比較兩個 IPv4 或 IPv6 字串。|
+|[ipv6_is_match()](ipv6-is-matchfunction.md)|符合兩個 IPv4 或 IPv6 字串。|
+|[parse_ipv6()](parse-ipv6function.md)|將 IPv6 或 IPv4 字串轉換成標準 IPv6 字串表示。|
+|[parse_ipv6_mask()](parse-ipv6-maskfunction.md)|將 IPv6 或 IPv4 字串和網路遮罩轉換成標準 IPv6 字串表示。|
 
-## <a name="type-functions"></a>型別函式
+## <a name="type-functions"></a>類型函式
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e64413047ceb83860f7ea47a1540ae99faa7ec55
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: 7987f44437d673b90954b674e63b70ac35e2432c
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863212"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128677"
 ---
 # <a name="broadcast-join"></a>廣播聯結
 

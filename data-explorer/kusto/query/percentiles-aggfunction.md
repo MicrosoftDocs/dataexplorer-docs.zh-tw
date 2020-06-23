@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: dfb957189eb0d9be552cf12b32ef57452a375c51
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: b70ee322d4718f78a37144b650a147c5c9965a60
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512549"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85129017"
 ---
-# <a name="percentile-percentiles"></a>百分位數（）、百分位數（）
+# <a name="percentile-percentiles-aggregation-function"></a>百分位數（）、百分位數（）（彙總函式）
 
 針對所定義之擴展的指定[最近排名百分位數](#nearest-rank-percentile)，傳回估計值 `*Expr*` 。
 其精確度取決於百分位數區域中的母體密度。 此函式只能用在[摘要內匯總](summarizeoperator.md)的內容中
