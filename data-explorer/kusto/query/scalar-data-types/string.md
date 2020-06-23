@@ -1,6 +1,6 @@
 ---
-title: 字串資料類型 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的字串數據類型。
+title: String 資料類型-Azure 資料總管
+description: 本文說明 Azure 資料總管中的字串資料類型。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8c040045ba7146cf56487ca3a8729372084d3bf2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e7c043a9b4d8b141d2dc45e88022e191e6483c35
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509617"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264805"
 ---
-# <a name="the-string-data-type"></a>字串資料型態
+# <a name="the-string-data-type"></a>String 資料類型
 
-資料類型`string`表示 Unicode 字串。 (Kusto 字串在 UTF-8 中編碼,默認情況下限制為 1MB。
+`string`資料類型代表 Unicode 字串。 Kusto 字串是以 UTF-8 編碼，且預設限制為1MB。
 
 ## <a name="string-literals"></a>字串常值
 
-有幾種方法可以對`string`資料類型的字面進行編碼:
+有數種方式可以編碼資料類型的常值 `string` 。
 
-* 以將字串括在雙引號中 ():`"``"This is a string literal. Single quote characters (') do not require escaping. Double quote characters (\") are escaped by a backslash (\\)"`
-* 將字串括在單引號中 (`'`):`'Another string literal. Single quote characters (\') require escaping by a backslash (\\). Double quote characters (") do not require escaping.'`
+* 以雙引號括住字串（ `"` ）：`"This is a string literal. Single quote characters (') don't require escaping. Double quote characters (\") are escaped by a backslash (\\)"`
+* 以單引號括住字串（ `'` ）：`'Another string literal. Single quote characters (\') require escaping by a backslash (\\). Double quote characters (") do not require escaping.'`
 
-在上面的兩個表示中,反斜杠`\`( ) 字元指示轉義。
-它用於轉義包含引號字元、制表元 ()、`\t`換`\n`行元`\\`() 和自身 ()。
+在上述兩個標記法中，反斜線（ `\` ）字元表示已進行轉義。
+它是用來將括住的引號字元、定位字元（ `\t` ）、分行符號（） `\n` 和本身（）加以轉義 `\\` 。
 
-也支援逐字字串文本。 在此表單中,反斜槓字元`\`( ) 代表本身,而不是作為轉義字元:
+同時也支援逐字字串常值。 在此表單中，反斜線字元（ `\` ）代表本身，而不是逸出字元。
 
-* 以雙引號括起來`"`( ):`@"This is a verbatim string literal that ends with a backslash\"`
-* 以單引括起來`'`( ):`@'This is a verbatim string literal that ends with a backslash\'`
+* 以雙引號括住（ `"` ）：`@"This is a verbatim string literal that ends with a backslash\"`
+* 以單引號括住（ `'` ）：`@'This is a verbatim string literal that ends with a backslash\'`
 
-查詢文本中的兩個字串文本之間沒有任何內容,或者僅由空格和註釋分隔,它們會自動串聯在一起形成新的字串文本(直到無法進行此類替換)。
-例如,以下表示式所有產生`13`:
+查詢中不含任何內容的兩個字串常值，或只以空白字元和批註分隔，會自動聯結以形成新的字串常值。
+例如，下列運算式全部都會產生長度 `13` 。
 
 ```kusto
 print strlen("Hello"', '@"world!"); // Nothing between them
@@ -64,18 +64,20 @@ print myPath1 = @'C:\Folder\filename.txt'
 print s = '\\n.*(>|\'|=|\")[a-zA-Z0-9/+]{86}=='
 ```
 
-可以看出,當字串以雙引號 ()`"`括起來時, 單引`'`號 ( ) 字元不需要轉義,反之亦然。 這樣,根據上下文對字串進行報價就更容易了。
+如您所見，當字串以雙引號（）括住時 `"` ，單引號（ `'` ）字元並不需要進行轉義，還有另一種方法。 這個方法可讓您更輕鬆地根據內容來括住字串。
 
-## <a name="obfuscated-string-literals"></a>模糊字串文字
+## <a name="obfuscated-string-literals"></a>模糊字串常值
 
-系統跟蹤查詢並將其存儲以用於遙測和分析目的。
-例如,查詢文本可能提供給群集擁有者。 如果查詢文本包含機密資訊(如密碼),這可能會洩露應保密的資訊。 為了防止這種情況發生,查詢作者可能會將特定的字串文字標記為**模糊字串文字**。
-查詢文字中的此類文字會自動替換為多個星形`*`( ) 字元,因此以後無法進行分析。
+系統會追蹤查詢，並將它們儲存以供遙測和分析之用。
+例如，可能會讓叢集擁有者使用查詢文字。 如果查詢文字包含秘密資訊（例如密碼），則可能會洩漏應該保持私用的資訊。 為了避免發生這類流失問題，查詢作者可以將特定字串常值標示為**模糊字串常**值。
+查詢文字中的這類常值會自動以星號（ `*` ）字元取代，因此無法用於稍後的分析。
 
 > [!IMPORTANT]
-> **強烈建議將所有**包含機密資訊的字串文本標記為模糊字串文本。
+> 將包含秘密資訊的所有字串常值標記為模糊字串常值。
 
-模糊字串文字可以通過採用「一般」字串文本來形成,並預處理前面的字元`h`或`H`字元。 例如：
+您可以採用「一般」字串常值來形成模糊字串常值，並 `h` 在前面加上或 `H` 字元。 
+
+例如：
 
 ```kusto
 h'hello'
@@ -84,7 +86,9 @@ h"hello"
 ```
 
 > [!NOTE]
-> 在許多情況下,只有字串文本的一部分是機密。 在這些情況下,將文本拆分為非機密部分和機密部分非常有用,然後只將機密部分標記為模糊部分。 例如：
+> 在許多情況下，只有一部分的字串常值是秘密。 在這些情況下，請將常值分割成非秘密部分和秘密部分。 然後，只將秘密部分標示為模糊。
+
+例如：
 
 ```kusto
 print x="https://contoso.blob.core.windows.net/container/blob.txt?"

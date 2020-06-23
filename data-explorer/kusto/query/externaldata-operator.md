@@ -1,6 +1,6 @@
 ---
-title: externaldata 運算子-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 externaldata 運算子。
+title: externaldata 運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的外部資料操作員。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: f8878a3c4589dca3cfacf935a787e8c754ab3ede
-ms.sourcegitcommit: a8575e80c65eab2a2118842e59f62aee0ff0e416
+ms.openlocfilehash: 4534705156669447a89cb5d85c360071dfcb2b2a
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/17/2020
-ms.locfileid: "84942670"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264992"
 ---
 # <a name="externaldata-operator"></a>externaldata 運算子
 
-運算子會傳回 `externaldata` 一個資料表，其架構是在查詢本身中定義，而且其資料是從外部儲存成品（例如 Azure Blob 儲存體中的 blob）讀取。
+運算子會傳回 `externaldata` 一個資料表，其架構是在查詢本身中定義，而其資料是從外部儲存成品（例如 Azure Blob 儲存體中的 blob）讀取。
 
 **語法**
 
@@ -25,7 +25,7 @@ ms.locfileid: "84942670"
 
 **引數**
 
-* *ColumnName*、 *ColumnType*：定義資料表的架構。
+* *ColumnName*、 *ColumnType*：引數會定義資料表的架構。
   語法與在[. create table](../management/create-table-command.md)中定義資料表時所使用的語法相同。
 
 * *StorageConnectionString*：[儲存體連接字串](../api/connection-strings/storage.md)會描述保存要傳回之資料的儲存體成品。
@@ -39,7 +39,7 @@ ms.locfileid: "84942670"
 
 **傳回**
 
-`externaldata`運算子會傳回給定架構的資料表，其資料是從儲存體連接字串所指示的指定儲存體成品進行剖析。
+`externaldata`運算子會傳回給定架構的資料表，其資料是從指定的儲存體成品進行剖析，並以儲存體連接字串表示。
 
 **範例**
 
@@ -68,7 +68,7 @@ with(format="csv")
 | summarize count() by ProductId
 ```
 
-上述範例可視為快速查詢多個資料檔案，而不需定義[外部資料表](schema-entities/externaltables.md)的方式。 
+上述範例可視為快速查詢多個資料檔案，而不需定義[外部資料表](schema-entities/externaltables.md)的方式。
 
->[!NOTE]
->運算子無法辨識資料分割 `externaldata()` 。
+> [!NOTE]
+> 運算子無法辨識資料分割 `externaldata()` 。

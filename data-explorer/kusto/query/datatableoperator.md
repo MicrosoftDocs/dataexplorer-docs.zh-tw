@@ -1,6 +1,6 @@
 ---
-title: 資料表運算符 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的數據表運算符。
+title: datatable 運算子-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 datatable 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,42 +10,44 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 182f8030e3263ee5bf6bee4ca7444b0d5596e7d6
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 2a5881eacd0702720b7ea4b9a3237731a56a5180
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765391"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85265029"
 ---
 # <a name="datatable-operator"></a>datatable 運算子
 
-返回其架構和值在查詢本身中定義的表。
+傳回資料表，其架構和值在查詢本身中定義。
 
-請注意，此運算子沒有管線輸入。
+> [!NOTE]
+> 這個運算子沒有管線輸入。
 
 **語法**
 
-`datatable``(`*欄位*`:`*型態*`,`= ...]`)` *ScalarValue* ScalarValue = ScalarValue ...] `[` `,` *ScalarValue*`]`
+`datatable``(` *ColumnName* `:` *ColumnType* [ `,` ...] `)` `[` *scalarvalue 具有*[ `,` *scalarvalue 具有*...]`]`
 
 **引數**
 
 ::: zone pivot="azuredataexplorer"
 
-* *欄位*名稱,*欄型態*: 這些定義表的架構。 使用的語法與定義表時使用的語法完全相同(請參閱[.create 表](../management/create-table-command.md))。
-* *ScalarValue*:要插入到表中的常量標量值。 值數必須是表中列的整數倍數 *,n'th*值必須具有對應於列*n* % *NumColumn*的類型。
+* *ColumnName*、 *ColumnType*：這些引數會定義資料表的架構。 引數會使用與定義資料表時所使用的相同語法。
+  如需詳細資訊，請參閱[create table](../management/create-table-command.md)）。
+* *Scalarvalue 具有*：要插入資料表中的常數純量值。 值的數目必須是資料表中資料行的整數倍數。 第*n*個值必須具有對應至資料行*n*  %  *NumColumns*的類型。
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-* *欄位*名稱,*欄型態*: 這些定義表的架構。
-* *ScalarValue*:要插入到表中的常量標量值。 值數必須是表中列的整數倍數 *,n'th*值必須具有對應於列*n* % *NumColumn*的類型。
+* *ColumnName*、 *ColumnType*：這些引數會定義資料表的架構。
+* *Scalarvalue 具有*：要插入資料表中的常數純量值。 值的數目必須是資料表中資料行的整數倍數。 第*n*個值必須具有對應至資料行*n*  %  *NumColumns*的類型。
 
 ::: zone-end
 
 **傳回**
 
-此運算符返回給定架構和數據的數據表。
+這個運算子會傳回給定架構和資料的資料表。
 
 **範例**
 

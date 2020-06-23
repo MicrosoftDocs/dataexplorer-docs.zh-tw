@@ -4,22 +4,21 @@ description: 本文說明 Azure 資料總管中的 parse 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: alexans
+ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 07318a64781678410374f902ff8fe5514a4bdd17
-ms.sourcegitcommit: f9d3f54114fb8fab5c487b6aea9230260b85c41d
+ms.openlocfilehash: dd70b2135a485303cbf52d984e0b406052c4023a
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/18/2020
-ms.locfileid: "85071902"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264941"
 ---
 # <a name="parse-operator"></a>parse 運算子
 
-評估字串運算式，並將其值剖析至一或多個計算的資料行。 若為未成功剖析的字串，計算結果欄會有 null。 
-
-請參閱[parse-where](parsewhereoperator.md)運算子，它會篩選掉不成功剖析的字串。
+評估字串運算式，並將其值剖析至一或多個計算的資料行。 計算結果欄會有 null，用於未成功剖析的字串。
+如需詳細資訊，請參閱[parse-where 運算子](parsewhereoperator.md)。
 
 ```kusto
 T | parse Text with "ActivityName=" name ", ActivityType=" type
@@ -32,21 +31,21 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
 **引數**
 
 * *T*：輸入資料表。
-* 種類： 
+* 種類：
 
-    * simple （預設值）： StringConstant 是一般字串值，比對是嚴格的，這表示所有字串分隔符號都應該出現在剖析的字串中，而且所有擴充的資料行都必須符合所需的類型。
+    * simple （預設值）： StringConstant 是一般字串值，比對是嚴格的。 所有字串分隔符號都應該出現在剖析的字串中，而且所有擴充的資料行都必須符合所需的類型。
         
-    * RegEx： StringConstant 可能是正則運算式，而比對是嚴格的，這表示所有字串分隔符號（這可以是此模式的 RegEx）應出現在剖析的字串中，而且所有擴充的資料行都必須符合所需的類型。
+    * RegEx： StringConstant 可以是正則運算式，而相符項則是嚴格的。 所有字串分隔符號（可以是此模式的 RegEx）應會出現在剖析的字串中，而且所有擴充的資料行都必須符合所需的類型。
     
-    * flags：用於 RegEx 模式的旗標，例如 `U` （Ungreedy）、 `m` （多行模式）、（ `s` 符合新行 `\n` ）、 `i` （不區分大小寫）和[RE2 旗標](re2.md)中的其他。
+    * flags：在 RE2 旗標中，用於 RegEx 模式的旗標，例如 `U` （Ungreedy）、 `m` （多行模式）、（ `s` 符合新行 `\n` ）、 `i` （ [RE2 flags](re2.md)不區分大小寫）。
         
-    * 寬鬆： StringConstant 是一般字串值，而且比對是寬鬆的，這表示所有字串分隔符號都應該出現在剖析的字串中，但是擴充的資料行可能會符合必要的類型部分（不符合所需類型的擴充資料行會取得 null 值）。
+    * 寬鬆： StringConstant 是一般字串值，比對是寬鬆的。 所有字串分隔符號都應該出現在剖析的字串中，但是擴充的資料行可能部分符合必要的類型。 不符合所需類型的擴充資料行將會取得 null 值。
 
 * *Expression*：評估為字串的運算式。
 
-* *ColumnName：* 要指派值的資料行名稱（從字串運算式取出）。 
+* *ColumnName：* 要指派值的資料行名稱，從字串運算式中解壓縮。 
   
-* *ColumnType：* 應該是選擇性純量類型，表示要將值轉換成的類型（根據預設，它是字串類型）。
+* *ColumnType：* 選擇性. 純量值，表示要轉換值的類型。 預設值為 `string` 類型。
 
 **傳回**
 
@@ -56,36 +55,38 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
 
 * [`project`](projectoperator.md)如果您也想要捨棄或重新命名某些資料行，請使用。
 
-* 在模式中使用 *，以略過垃圾值（不能用在字串資料行之後）
+* 在模式中使用 * 來略過垃圾值。 
 
-* 剖析模式的開頭可能是*ColumnName* ，而不只是*StringConstant*。 
+    > [!NOTE] 
+    > `*`不能用在類型資料 `string` 行之後。
 
-* 如果剖析的*運算式*不是字串類型，它會轉換成字串類型。
+* 剖析模式的開頭可能是*ColumnName* ，而不只是*StringConstant*。
+
+* 如果剖析的*運算式*不屬於類型 `string` ，則會將它轉換成類型 `string` 。
 
 * 如果使用 RegEx 模式，有一個選項可加入 RegEx 旗標，以控制用於剖析的整個 RegEx。
 
-* 在 RegEx 模式中，parse 會將模式轉譯成 RegEx，並使用[RE2 語法](re2.md)來進行比對，以便使用在內部處理的編號捕捉群組進行比對。
-  例如，這個 parse 語句：
-  
+* 在 RegEx 模式中，parse 會將模式轉譯成 RegEx。 請使用[RE2 語法](re2.md)來執行比對，並使用在內部處理的編號已捕獲群組。
+    例如：
+
     ```kusto
     parse kind=regex Col with * <regex1> var1:string <regex2> var2:long
     ```
 
-    剖析在內部產生的 RegEx 是 `.*?<regex1>(.*?)<regex2>(\-\d+)` 。
+    在 parse 語句中，剖析會內部產生的 RegEx 是 `.*?<regex1>(.*?)<regex2>(\-\d+)` 。
         
-    - `*`已轉譯為 `.*?` 。
+    * `*`已轉譯為 `.*?` 。
         
-    - `string`已轉譯為 `.*?` 。
+    * `string`已轉譯為 `.*?` 。
         
-    - `long`已轉譯為 `\-\d+` 。
+    * `long`已轉譯為 `\-\d+` 。
 
 **範例**
 
-`parse`運算子會 `extend` 在同一個運算式上使用多個應用程式，為數據表提供簡化的方式 `extract` `string` 。
-當資料表的 `string` 資料行包含多個您想要細分為個別資料行的值（例如，由開發人員追蹤（" `printf` "/" `Console.WriteLine` " "）語句所產生的資料行）時，這會非常有用。
+`parse`運算子會 `extend` 在同一個運算式上使用多個應用程式，為數據表提供簡化的方式 `extract` `string` 。 當資料表有一個 `string` 資料行包含您想要細分為個別資料行的數個值時，這個結果就很有用。 例如，開發人員追蹤（" `printf` "/""）語句所產生的資料行 `Console.WriteLine` 。
 
 在下列範例中，假設資料表的資料行 `EventText` `Traces` 包含表單的字串 `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})` 。
-下列作業會擴充具有6個數據行的資料表： `resourceName` 、 `totalSlices` 、 `sliceNumber` 、、、 `lockTime ` `releaseTime` `previouLockTime` `Month` 和 `Day` 。 
+作業會擴充包含六個數據行的資料表： `resourceName` 、 `totalSlices` 、 `sliceNumber` 、 `lockTime ` 、、、 `releaseTime` `previousLockTime` `Month` 和 `Day` 。 
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -98,11 +99,11 @@ let Traces = datatable(EventText:string)
 "Event: NotifySliceRelease (resourceName=PipelineScheduler, totalSlices=27, sliceNumber=16, lockTime=02/17/2016 08:41:00, releaseTime=02/17/2016 08:41:00, previousLockTime=02/17/2016 08:40:00)"
 ];
 Traces  
-| parse EventText with * "resourceName=" resourceName ", totalSlices=" totalSlices:long * "sliceNumber=" sliceNumber:long * "lockTime=" lockTime ", releaseTime=" releaseTime:date "," * "previousLockTime=" previouLockTime:date ")" *  
-| project resourceName ,totalSlices , sliceNumber , lockTime , releaseTime , previouLockTime
+| parse EventText with * "resourceName=" resourceName ", totalSlices=" totalSlices:long * "sliceNumber=" sliceNumber:long * "lockTime=" lockTime ", releaseTime=" releaseTime:date "," * "previousLockTime=" previousLockTime:date ")" *  
+| project resourceName ,totalSlices , sliceNumber , lockTime , releaseTime , previousLockTime
 ```
 
-|resourceName|totalSlices|sliceNumber|lockTime|releaseTime|previouLockTime|
+|resourceName|totalSlices|sliceNumber|lockTime|releaseTime|previousLockTime|
 |---|---|---|---|---|---|
 |PipelineScheduler|27|15|02/17/2016 08:40:00|2016-02-17 08：40：00.0000000|2016-02-17 08：39：00.0000000|
 |PipelineScheduler|27|23|02/17/2016 08:40:01|2016-02-17 08：40：01.0000000|2016-02-17 08：39：01.0000000|
@@ -110,7 +111,7 @@ Traces
 |PipelineScheduler|27|16|02/17/2016 08:41:00|2016-02-17 08：41：00.0000000|2016-02-17 08：40：00.0000000|
 |PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08：41：00.0000000|2016-02-17 08：40：01.0000000|
 
-若為 RegEx 模式：
+**適用于 RegEx 模式**
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -123,11 +124,11 @@ let Traces = datatable(EventText:string)
 "Event: NotifySliceRelease (resourceName=PipelineScheduler, totalSlices=27, sliceNumber=16, lockTime=02/17/2016 08:41:00, releaseTime=02/17/2016 08:41:00, previousLockTime=02/17/2016 08:40:00)"
 ];
 Traces  
-| parse kind = regex EventText with "(.*?)[a-zA-Z]*=" resourceName @", totalSlices=\s*\d+\s*.*?sliceNumber=" sliceNumber:long  ".*?(previous)?lockTime=" lockTime ".*?releaseTime=" releaseTime ".*?previousLockTime=" previouLockTime:date "\\)"  
-| project resourceName , sliceNumber , lockTime , releaseTime , previouLockTime
+| parse kind = regex EventText with "(.*?)[a-zA-Z]*=" resourceName @", totalSlices=\s*\d+\s*.*?sliceNumber=" sliceNumber:long  ".*?(previous)?lockTime=" lockTime ".*?releaseTime=" releaseTime ".*?previousLockTime=" previousLockTime:date "\\)"  
+| project resourceName , sliceNumber , lockTime , releaseTime , previousLockTime
 ```
 
-|resourceName|sliceNumber|lockTime|releaseTime|previouLockTime|
+|resourceName|sliceNumber|lockTime|releaseTime|previousLockTime|
 |---|---|---|---|---|
 |PipelineScheduler|15|02/17/2016 08:40:00、 |02/17/2016 08:40:00、 |2016-02-17 08：39：00.0000000|
 |PipelineScheduler|23|02/17/2016 08:40:01、 |02/17/2016 08:40:01、 |2016-02-17 08：39：01.0000000|
@@ -135,10 +136,9 @@ Traces
 |PipelineScheduler|16|02/17/2016 08:41:00、 |02/17/2016 08:41:00、 |2016-02-17 08：40：00.0000000|
 |PipelineScheduler|22|02/17/2016 08:41:01、 |02/17/2016 08:41:00、 |2016-02-17 08：40：01.0000000|
 
+**使用 RegEx 旗標的 RegEx 模式**
 
-若為使用 RegEx 旗標的 RegEx 模式：
-
-如果我們只想要取得此「使用量」，而我們使用此查詢：
+如果您只想要取得此「使用量」，請使用下列查詢：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -163,9 +163,10 @@ Traces
 |PipelineScheduler，totalSlices = 27，sliceNumber = 22，lockTime = 02/17/2016 08:41:01，releaseTime = 02/17/2016 08:41:00|
 |PipelineScheduler，totalSlices = 27，sliceNumber = 16，lockTime = 02/17/2016 08:41:00，releaseTime = 02/17/2016 08:41:00|
 
-但我們不會得到預期的結果，因為預設模式是 [貪婪]。
-或者，即使我們有幾個記錄，其中的資料存放位置有時較低，有時會是大寫，因此我們可能會取得一些值的 null。
-為了取得想要的結果，我們可以使用非貪婪（）執行此動作， `U` 並停用區分大小寫（ `i` ） RegEx 旗標：
+您不會得到預期的結果，因為預設模式是 [貪婪]。
+如果您有一些記錄，其中的*使用方式有時候會*顯示為小寫，有時候是大寫，則某些值可能會是 null。
+
+若要取得想要的結果，請使用非貪婪的來執行查詢， `U` 並停用區分大小寫的 `i` RegEx 旗標。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -190,8 +191,7 @@ Traces
 |PipelineScheduler|
 |PipelineScheduler|
 
-
-如果剖析過的字串具有分行符號，您應該使用旗標 `s` 以預期的方式剖析文字：
+如果剖析的字串具有分行符號，請使用旗標 `s` 來剖析文字。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -216,12 +216,16 @@ Traces
 |PipelineScheduler<br>|27|2016-02-17 08：41：00.0000000|2016-02-17 08：41：00.0000000|2016-02-17 08：40：00.0000000|
 |PipelineScheduler<br>|27|2016-02-17 08：41：01.0000000|2016-02-17 08：41：00.0000000|2016-02-17 08：40：01.0000000|
 
+**寬鬆模式**
 
-在此寬鬆模式的範例中： totalSlices 擴充資料行必須是 long 類型，但在剖析的字串中，其值為 nonValidLongValue。
-releaseTime 擴充資料行有相同的問題，nonValidDateTime 值無法剖析為 datetime。
-在此情況下，這兩個擴充的資料行將會得到 null 值，而另一個則會取得正確的值（例如 sliceNumber）。
+在此寬鬆模式的範例中， *totalSlices*擴充資料行的類型必須是 `long` 。 不過，在剖析的字串中，其值為*nonValidLongValue*。
+在*releaseTime*擴充資料行中， *nonValidDateTime*值無法剖析為*datetime*。
+這兩個擴充的資料行會取得 null 值，而另一個則是*sliceNumber*，但仍會取得正確的值。
 
-下列相同查詢的 using kind = simple 會針對所有延伸資料行提供 null，因為它在擴充資料行上是嚴格的（這是寬鬆模式與簡單模式之間的差異，在寬鬆模式中，延伸資料行可以部分比對）。
+如果您在下面的相同查詢中使用選項*種類 = simple* ，所有擴充資料行都會得到 null。 此選項在擴充資料行上是嚴格的，而且是寬鬆模式與簡單模式之間的差異。
+
+ > [!NOTE] 
+ > 在寬鬆模式中，擴充的資料行可以部分相符。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -234,14 +238,15 @@ let Traces = datatable(EventText:string)
 "Event: NotifySliceRelease (resourceName=PipelineScheduler, totalSlices=nonValidLongValue, sliceNumber=16, lockTime=02/17/2016 08:41:00, releaseTime=02/17/2016 08:41:00, previousLockTime=02/17/2016 08:40:00)"
 ];
 Traces
-| parse kind=relaxed EventText with * "resourceName=" resourceName ", totalSlices=" totalSlices:long * "sliceNumber=" sliceNumber:long * "lockTime=" lockTime ", releaseTime=" releaseTime:date "," * "previousLockTime=" previouLockTime:date ")" *
+| parse kind=relaxed EventText with * "resourceName=" resourceName ", totalSlices=" totalSlices:long * "sliceNumber=" sliceNumber:long * "lockTime=" lockTime ", releaseTime=" releaseTime:date "," * "previousLockTime=" previousLockTime:date ")" *
 | project-away EventText
 ```
 
-|resourceName|totalSlices|sliceNumber|lockTime|releaseTime|previouLockTime|
+|resourceName|totalSlices|sliceNumber|lockTime|releaseTime|previousLockTime|
 |---|---|---|---|---|---|
 |PipelineScheduler|27|15|02/17/2016 08:40:00||2016-02-17 08：39：00.0000000|
 |PipelineScheduler|27|23|02/17/2016 08:40:01||2016-02-17 08：39：01.0000000|
 |PipelineScheduler||20|02/17/2016 08:40:01||2016-02-17 08：39：01.0000000|
 |PipelineScheduler||16|02/17/2016 08:41:00|2016-02-17 08：41：00.0000000|2016-02-17 08：40：00.0000000|
 |PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08：41：00.0000000|2016-02-17 08：40：01.0000000|
+ 

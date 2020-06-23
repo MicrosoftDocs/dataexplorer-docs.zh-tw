@@ -8,19 +8,23 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: 8b03970aacafef932f6397e64afdf871dc086bc1
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: fbdf7b1a9a9f5b65e6c6ee7a78fe64afba2893af
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372620"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264788"
 ---
 # <a name="series_iir"></a>series_iir()
 
-在數列上套用無限脈衝回應篩選。  
+在數列上套用無限脈衝回應篩選準則。  
 
-採用包含動態數值陣列做為輸入的運算式，並套用[無限脈衝回應](https://en.wikipedia.org/wiki/Infinite_impulse_response)篩選準則。 藉由指定篩選係數，就可以使用它來計算數列的累計總和、套用平滑作業，以及各種[高階](https://en.wikipedia.org/wiki/High-pass_filter)、[頻外](https://en.wikipedia.org/wiki/Band-pass_filter)和[低](https://en.wikipedia.org/wiki/Low-pass_filter)行程篩選。 函式會採用包含動態陣列的資料行，以及篩選準則*a*和*b*係數的兩個靜態動態陣列做為輸入，並在資料行上套用篩選。 它會輸出新的動態陣列資料行，其中包含已篩選的輸出。  
- 
+函式會採用包含動態數值陣列做為輸入的運算式，並套用[無限脈衝回應](https://en.wikipedia.org/wiki/Infinite_impulse_response)篩選準則。 藉由指定篩選係數，可以使用函數：
+* 計算數列的累計總和
+* 套用平滑作業
+* 套用各種[高效](https://en.wikipedia.org/wiki/High-pass_filter)能、[頻外](https://en.wikipedia.org/wiki/Band-pass_filter)和[低通過](https://en.wikipedia.org/wiki/Low-pass_filter)篩選
+
+函式會採用包含動態陣列的資料行，以及篩選準則*a*和*b*係數的兩個靜態動態陣列做為輸入，並在資料行上套用篩選。 它會輸出新的動態陣列資料行，其中包含已篩選的輸出。  
 
 **語法**
 
@@ -33,11 +37,11 @@ ms.locfileid: "83372620"
 * *答*：常數運算式，例如*b*。 包含濾波器的分母係數。
 
 > [!IMPORTANT]
-> 的第一個元素 `a` （亦即 `a[0]` ）不得為零（以避免除數為 0; 請參閱下面的公式）。
+> 的第一個元素 `a` （也就是 `a[0]` ）不得為零，以避免除數為0。 請參閱[下列公式](#the-filters-recursive-formula)。
 
-**深入瞭解篩選的遞迴公式**
+## <a name="the-filters-recursive-formula"></a>篩選的遞迴公式
 
-* 假設輸入陣列 X 和係數陣列 a、b 的長度分別 n_a 和 n_b，則產生輸出陣列 Y 的篩選準則傳送函式是由定義（另請參閱維琪百科）：
+* 請考慮輸入陣列 X，並分別 n_a 和 n_b 係數陣列 a 和 b。 將產生輸出陣列 Y 的篩選準則傳送功能是由下列定義：
 
 <div align="center">
 Y<sub>i</sub> = a<sub>0</sub><sup>-1</sup>（b<sub>0</sub>x<sub>i</sub> 
@@ -45,9 +49,9 @@ Y<sub>i</sub> = a<sub>0</sub><sup>-1</sup>（b<sub>0</sub>x<sub>i</sub>
  - a<sub>1</sub>Y i-<sub>1</sub>-a<sub>2</sub>Y<sub>i-2</sub> - ...-a<sub>n<sub>a</sub>-1</sub>Y<sub>i-n<sub>a</sub>-1</sub>）
 </div>
 
-**範例**
+## <a name="example"></a>範例
 
-計算累計總和可以透過具有係數*a*= [1，-1] 和*b*= [1] 的 iir 濾波器篩選來執行：  
+計算累計總和。 將 iir 濾波器篩選準則與係數*a*= [1，-1] 和*b*= [1] 搭配使用：  
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

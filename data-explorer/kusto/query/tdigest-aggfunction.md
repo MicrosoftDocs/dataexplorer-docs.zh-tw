@@ -8,41 +8,42 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: b98c551cb1ded8da291d4510b45a86d560f325b1
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 5a8ce5a66da871dfaa6f65a0fbc8addeb0f42926
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83371036"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264586"
 ---
 # <a name="tdigest-aggregation-function"></a>tdigest （）（彙總函式）
 
-計算整個群組的中繼結果 [`percentiles()`](percentiles-aggfunction.md) 。 
+計算整個群組的中繼結果 [`percentiles()`](percentiles-aggfunction.md) 。
 
-* 只能用在[摘要內匯總](summarizeoperator.md)的內容中。
+> [!NOTE]
+> 只能在匯總的內容中使用，在[摘要](summarizeoperator.md)中。
 
-深入瞭解[基礎演算法（T-摘要式）和估計的錯誤](percentiles-aggfunction.md#estimation-error-in-percentiles)。
+如需詳細資訊，請參閱[基礎演算法（T-Digest）和估計的錯誤](percentiles-aggfunction.md#estimation-error-in-percentiles)。
 
 **語法**
 
-`summarize``tdigest(` *Expr* [ `,` *WeightExpr*]`)`
+`summarize` `tdigest`(*`Expr`* [`,` *`WeightExpr`*])
 
 **引數**
 
-* *Expr*：將用於匯總計算的運算式。 
-* *WeightExpr*：將當做匯總計算之值的權數使用的運算式。
+* *Expr*：用於匯總計算的運算式。
+* *WeightExpr*：用來當做匯總計算之值權數的運算式。
 
     
 **傳回**
 
-在整個群組中， *Expr*的加權百分位數的中繼結果。
+整個群組的加權百分位數的中繼結果 `*Expr*` 。
  
  
 **提示**
 
-1) 您可以使用彙總函式[tdigest_merge （）](tdigest-merge-aggfunction.md) ，再次將 tdigest 的輸出合併到另一個群組。
+* 使用彙總函式[tdigest_merge （）](tdigest-merge-aggfunction.md) ，在 `tdigest` 另一個群組之間再次合併的輸出。
 
-2) 您可以使用函數[percentile_tdigest （）](percentile-tdigestfunction.md)來計算 tdigest 結果的百分位數/percentilew。
+* 使用函數[percentile_tdigest （）](percentile-tdigestfunction.md)來計算結果的百分位數/percentilew `tdigest` 。
 
 **範例**
 

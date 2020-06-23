@@ -1,6 +1,6 @@
 ---
-title: 索引() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的索引。
+title: indexof （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 indexof （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,40 +8,40 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 698cc7c13c3d665f9f5cfe25a31269dc763c51fb
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2d5accaa0e6f6c4c6e5d5261a9709ba965de6965
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513935"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264953"
 ---
 # <a name="indexof"></a>indexof()
 
-函數報告輸入字串中第一次出現的指定字串的零基索引。
+報告輸入字串內指定之字串第一次出現時的所在索引（以零為基底）。
 
-如果尋找或輸入字串不是字串型態 - 強制將值強制轉換為字串。
+如果查閱或輸入字串不是*字串*類型，函式會強制將值轉換成*字串*。
 
-請參考[`indexof_regex()`](indexofregexfunction.md)。
+如需詳細資訊，請參閱 [`indexof_regex()`](indexofregexfunction.md)。
 
 **語法**
 
-`indexof(`*源*`,`*查找*`[,`*occurrence*`[,``[,`start_index長度發生*length**start_index*`]]])`
+`indexof(`*來源* `,`*查閱* `[,`*start_index* `[,`*長度* `[,`*發生次數*`]]])`
 
 **引數**
 
-* *源*:輸入字串。  
-* *尋找*:要查找的字串。
-* *start_index*:搜索起始位置(可選)。
-* *長度*:要檢查的字元位置數,-1 定義無限長度(可選)。
-* *出現*:是發生預設值 1(可選)。
+* *來源*：輸入字串。  
+* *查閱*：要查詢的字串。
+* *start_index*：搜尋開始位置。 選擇性。
+* *長度*：要檢查的字元位置數目。 -1 的值表示無限制的長度。 選擇性。
+* *發生*次數：發生次數。 預設值：1。 選擇性。
 
 **傳回**
 
-*查找*的零基索引位置。
+*Lookup*以零為起始的索引位置。
 
-如果在輸入中找不到字串,則返回 -1。
+如果在輸入中找不到字串，則傳回-1。
 
-如果不相關(小於*0)start_index,**發生*或(小於 -1)*長度*參數 - 返回*空*。
+如果不相關（小於0） *start_index*、*發生次數*或（小於-1）*長度*參數，則會傳回*null*。
 
 **範例**
 ```kusto

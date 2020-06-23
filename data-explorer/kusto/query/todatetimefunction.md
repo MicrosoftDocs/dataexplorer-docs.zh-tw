@@ -1,6 +1,6 @@
 ---
-title: 日期時間() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的日期時間()。
+title: todatetime （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 todatetime （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: abe3852195b1a79ab5c86176698099ed6e7ff7af
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f5c108b670534728f34db8975f16d713848dd8f4
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506336"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264603"
 ---
 # <a name="todatetime"></a>todatetime()
 
-將輸入轉換為[日期時間](./scalar-data-types/datetime.md)標量。
+將輸入轉換為[datetime](./scalar-data-types/datetime.md)純量。
 
 ```kusto
 todatetime("2015-12-24") == datetime(2015-12-24)
@@ -29,11 +29,12 @@ todatetime("2015-12-24") == datetime(2015-12-24)
 
 **引數**
 
-* *Expr*: 將轉換為[日期時間的](./scalar-data-types/datetime.md)運算式 。 
+* *Expr*：將轉換成[datetime](./scalar-data-types/datetime.md)的運算式。
 
 **傳回**
 
-如果轉換成功,結果將是[一個日期時間](./scalar-data-types/datetime.md)值。
-如果轉換不成功,結果將為空。
+如果轉換成功，則結果會是[日期時間](./scalar-data-types/datetime.md)值。
+否則，結果會是 null。
  
-*注意*:盡可能使用[日期時間()。](./scalar-data-types/datetime.md)
+> [!NOTE]
+> 可能的話，偏好使用[datetime （）](./scalar-data-types/datetime.md) 。

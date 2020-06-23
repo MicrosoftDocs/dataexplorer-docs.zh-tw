@@ -1,6 +1,6 @@
 ---
-title: 反向() - Azure 資料資源管理員 |微軟文件
-description: 本文在 Azure 數據資源管理器中介紹反向()。
+title: 反向（）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的反向（）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,25 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e95246e0586dff7dd89dc2658c7fae08b1bbaddf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 22fe505eb8fd391e7a61120dbf42c214cb61c120
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510297"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264822"
 ---
 # <a name="reverse"></a>reverse()
 
-函數使輸入字串反轉。
-
-如果輸入值不是字串類型,則函數強制將該值強制轉換為字串。
+函式會反轉輸入字串的順序。
+如果輸入值的類型不是，則函式會 `string` 強制將值轉換為類型 `string` 。
 
 **語法**
 
-`reverse(`*源*`)`
+`reverse(`*來源*`)`
 
 **引數**
 
-* *源*:輸入值。  
+* *來源*：輸入值。  
 
 **傳回**
 
@@ -42,7 +41,7 @@ print str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 |字串|rstr|
 |---|---|
-|ABCDEFGHIJKLMNOPQRSTUVWXYZ|ZYXWVTRPONKJIJFEDCBA|
+|ABCDEFGHIJKLMNOPQRSTUVWXYZ|ZYXWVUTSRQPONMLKJIHGFEDCBA|
 
 
 ```kusto
@@ -52,11 +51,6 @@ print ['int'] = 12345, ['double'] = 123.45,
 rdatetime = reverse(['datetime']), rtimespan = reverse(['timespan'])
 ```
 
-|rint|rdouble|時間|rtimespan|
+|rint|rdouble|rdatetime|rtimespan|
 |---|---|---|---|
-|54321|54.321|Z0000000.00:00:21T51-01-7102|00:00:30|
-
-
-
-
- 
+|54321|54.321|Z 0000000.00：00： 21T51-01-7102|00:00:30|

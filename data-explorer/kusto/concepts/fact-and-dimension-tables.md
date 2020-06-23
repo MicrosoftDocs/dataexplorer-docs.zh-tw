@@ -1,6 +1,6 @@
 ---
-title: 事實和維度表 - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的事實和維度表。
+title: 事實和維度資料表-Azure 資料總管
+description: 本文說明 Azure 資料總管中的事實和維度資料表。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,41 +8,45 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/23/2020
-ms.openlocfilehash: 1a88f8549bf5accce197294d433ece8ccb683281
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6db37366ddd3d70aaa89c0d6eebd1ec8affbb76d
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523234"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264436"
 ---
-# <a name="fact-and-dimension-tables"></a>事實和維度表
+# <a name="fact-and-dimension-tables"></a>事實和維度資料表
 
-在 Kusto 資料庫設計架構時,將表視為大致屬於兩個類別之一非常有用:
-* [事實表](https://en.wikipedia.org/wiki/Fact_table)和
-* [維度表](https://en.wikipedia.org/wiki/Dimension_(data_warehouse)#Dimension_table)。
+在設計 Azure 資料總管資料庫的架構時，請將資料表視為屬於兩個類別的其中一個。
+* [事實資料表](https://en.wikipedia.org/wiki/Fact_table)
+* [維度資料表](https://en.wikipedia.org/wiki/Dimension_(data_warehouse)#Dimension_table)
 
-**事實表**是記錄不可變的"事實"的表,如服務日誌和度量資訊。 記錄將逐步追加到表中(以流式或大塊方式),並保留在那裡,直到由於成本原因或丟失價值而必須刪除記錄。 否則,記錄永遠不會更新。
+## <a name="fact-tables"></a>事實資料表
+事實資料表是一種資料表，其記錄為不可變的「事實」，例如服務記錄和度量資訊。 記錄會以資料流程方式或大型區塊逐漸附加到資料表中。 記錄會保留在那裡，直到其因為成本或遺失其值而被移除為止。 否則永遠不會更新記錄。
 
-**維度表**保存引用數據(如從實體識別碼到其屬性的查找表)和類似快照的數據(其整個內容在單個事務中更改的表)。 通常,此類表不會定期引入新數據。 相反,使用[諸如 .set 或替換](../management/data-ingestion/ingest-from-query.md)[、.move 擴展區](../management/extents-commands.md#move-extents)或[.重新命名表](../management/rename-table-command.md)等操作一次更新整個資料內容。
-在某些情況下,維度表可能通過事實數據表上的[更新策略](../management/updatepolicy.md)派生自事實數據表,以及對獲取每個實體的最後一條記錄的表的一些查詢。
+實體資料有時會保留在事實資料表中，實體資料的變更速度會變慢。 例如，某些實體實體的相關資料，例如不常變更位置的辦公室設備。
+由於 Kusto 中的資料是不可變的，因此常見的做法是讓每個資料表都包含兩個數據行：
+* 識別實體的識別（ `string` ）資料行
+* 上次修改 `datetime` 時間戳記資料行
 
-請務必認識到,無法將 Kusto 中的表標記為事實表或維度表。 數據如何引入到表中以及如何使用表是最重要的。
+然後只會抓取每個實體身分識別的最後一筆記錄。
 
-> [!NOTE]
-> 有時,Kusto 用於在實際上表中保存實體數據,以便實體數據更改緩慢。 例如,有關某些實體實體(例如,辦公設備)的數據很少更改位置。
-> 由於 Kusto 中的數據是不可變的,因此通常的做法是讓每個表包含兩列:標識`string`實體的 標識 ( )`datetime`列和最後修改的 ( ) 時間戳列。 然後僅檢索每個實體標識的最後一條記錄。
+## <a name="dimension-tables"></a>維度資料表
+維度資料表：
+* 保存參考資料，例如從實體識別碼到其屬性的查閱資料表
+* 在單一交易中整個內容變更的資料表中保存類似快照集的資料
 
+維度資料表不會定期內嵌新資料。 相反地，會使用諸如[. set-或-replace](../management/data-ingestion/ingest-from-query.md)、 [. move 範圍](../management/extents-commands.md#move-extents)或[. rename 資料表](../management/rename-table-command.md)的作業，一次更新整個資料內容。
 
+有時候，維度資料表可能是從事實資料表衍生而來。 此程式可透過事實資料表上的[更新原則](../management/updatepolicy.md)來完成，並在資料表上查詢以取得每個實體的最後一筆記錄。
 
-## <a name="commands-that-differentiate-fact-and-dimension-tables"></a>區分事實與維度表的指令
+## <a name="differentiate-fact-and-dimension-tables"></a>區分事實和維度資料表
 
-Kusto 中有些進程區分了事實表和維度表。
+Kusto 中的進程會區分事實資料表和維度資料表。 其中一個是[連續匯出](../management/data-export/continuous-data-export.md)。
 
-* [連續出口](../management/data-export/continuous-data-export.md)
+這些機制保證能夠精確地處理事實資料表中的資料一次。 它們會依賴[資料庫資料指標](../management/databasecursor.md)機制。
 
+例如，每次執行連續匯出作業時，都會匯出上次更新資料庫資料指標之後所內嵌的所有記錄。 連續匯出作業必須區分事實資料表和維度資料表。 事實資料表只會處理新內嵌的資料，並使用維度資料表做為查閱。 因此，整個資料表都必須列入考慮。
 
-
-
-通過依賴[資料庫游標](../management/databasecursor.md)機制,這些進程可以精確處理一次實際上表中的數據。
-
-例如,每次執行連續匯出作業都會匯出自上次更新資料庫游標以來引入的所有記錄。 因此,連續匯出作業必須區分事實表(僅處理新引入的數據)和維度表(用作查找,因此必須考慮整個表)。
+沒有任何方法可以將資料表「標示」為「事實資料表」或「維度資料表」。
+將資料內嵌到資料表中的方式，以及如何使用資料表，就是識別其類型的方法。

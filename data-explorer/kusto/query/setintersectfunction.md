@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: 23b751dce38f5b595ba081c9a29e1b1a5442c96f
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: f611f660a791117159ad5fce4c024914d9e6909b
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372361"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264737"
 ---
 # <a name="set_intersect"></a>set_intersect()
 
-傳回 `dynamic` 所有陣列中所有相異值集合的（JSON）陣列-（arr1 ∩ arr2 ∩ ...）。
+傳回 `dynamic` 所有陣列中所有相異值集合的陣列-（arr1 ∩ arr2 ∩ ...）。
 
 **語法**
 
@@ -45,7 +45,7 @@ range x from 1 to 3 step 1
 
 |Column1|
 |---|
-|[1]|
+| [1]|
 |2|
 |[3]|
 
