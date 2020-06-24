@@ -414,37 +414,37 @@
               items:
                 - name: evaluate 運算子外掛程式
                   href: ./kusto/query/evaluateoperator.md
-                - name: autocluster
+                - name: autocluster 外掛程式
                   href: ./kusto/query/autoclusterplugin.md
-                - name: bag_unpack
+                - name: bag_unpack 外掛程式
                   href: ./kusto/query/bag-unpackplugin.md
-                - name: basket
+                - name: basket 外掛程式
                   href: ./kusto/query/basketplugin.md
-                - name: dcount_intersect
+                - name: dcount_intersect 外掛程式
                   href: ./kusto/query/dcount-intersect-plugin.md
-                - name: diffpatterns
+                - name: diffpatterns 外掛程式
                   href: ./kusto/query/diffpatternsplugin.md
-                - name: diffpatterns_text
+                - name: diffpatterns_text 外掛程式
                   href: ./kusto/query/diffpatterns-textplugin.md
-                - name: infer_storage_schema
+                - name: infer_storage_schema 外掛程式
                   href: ./kusto/query/inferstorageschemaplugin.md
-                - name: narrow
+                - name: narrow 外掛程式
                   href: ./kusto/query/narrowplugin.md
-                - name: pivot
+                - name: pivot 外掛程式
                   href: ./kusto/query/pivotplugin.md
-                - name: preview
+                - name: preview 外掛程式
                   href: ./kusto/query/previewplugin.md
-                - name: Python
+                - name: Python 外掛程式
                   href: ./kusto/query/pythonplugin.md
-                - name: R
+                - name: R 外掛程式
                   href: ./kusto/query/rplugin.md
-                - name: rolling_percentile
+                - name: rolling_percentile 外掛程式
                   href: ./kusto/query/rolling-percentile-plugin.md
-                - name: schema_merge
+                - name: schema_merge 外掛程式
                   href: ./kusto/query/schemamergeplugin.md
-                - name: sql_request
+                - name: sql_request 外掛程式
                   href: ./kusto/query/sqlrequestplugin.md
-                - name: sequence_detect
+                - name: sequence_detect 外掛程式
                   href: ./kusto/query/sequence-detect-plugin.md
             - name: extend 運算子
               href: ./kusto/query/extendoperator.md
@@ -1060,10 +1060,6 @@
               href: ./kusto/query/rownumberfunction.md
             - name: row_window_session()
               href: ./kusto/query/row-window-session-function.md
-        - name: 滾動時段彙總
-          items:
-            - name: rolling_percentile()
-              href: ./kusto/query/rolling-percentile-plugin.md
         - name: 時間序列分析
           items:
             - name: 時間序列分析概觀
@@ -1132,13 +1128,13 @@
               href: ./kusto/query/series-subtractfunction.md
         - name: Machine Learning
           items:
-            - name: autocluster
+            - name: autocluster 外掛程式
               href: ./kusto/query/autoclusterplugin.md
-            - name: basket
+            - name: basket 外掛程式
               href: ./kusto/query/basketplugin.md
-            - name: diffpatterns
+            - name: diffpatterns 外掛程式
               href: ./kusto/query/diffpatternsplugin.md
-            - name: diffpatterns_text
+            - name: diffpatterns_text 外掛程式
               href: ./kusto/query/diffpatterns-textplugin.md
         - name: 地理空間
           items:
@@ -1162,25 +1158,25 @@
               href: kusto/query/geo-polygon-to-s2cells-function.md
         - name: 使用者分析
           items:
-            - name: 使用者外掛程式
+            - name: 使用者分析外掛程式
               href: ./kusto/query/useranalytics.md
-            - name: 作用中使用者計數
+            - name: 作用中使用者計數外掛程式
               href: ./kusto/query/active-users-count-plugin.md
-            - name: 活動計數計量 (總計值、相異值、新值)
+            - name: 活動計數計量外掛程式
               href: ./kusto/query/activity-counts-metrics-plugin.md
-            - name: 活動參與 (DAU、WAU、MAU)
+            - name: 活動參與外掛程式
               href: ./kusto/query/activity-engagement-plugin.md
-            - name: 活動計量 (保留、變換、新值)
+            - name: 活動計量外掛程式
               href: ./kusto/query/activity-metrics-plugin.md
-            - name: 活動計量 - 新增 (保留、變換、新值)
+            - name: 活動計量外掛程式 - 新增
               href: ./kusto/query/new-activity-metrics-plugin.md
-            - name: 漏斗圖序列完成
+            - name: 漏斗圖序列完成外掛程式
               href: ./kusto/query/funnel-sequence-completion-plugin.md
-            - name: 漏斗圖序列
+            - name: 漏斗圖序列外掛程式
               href: ./kusto/query/funnel-sequence-plugin.md
-            - name: 工作階段計數
+            - name: 工作階段計數外掛程式
               href: ./kusto/query/session-count-plugin.md
-            - name: 滑動時段計數
+            - name: 滑動時段計數外掛程式
               href: ./kusto/query/sliding-window-counts-plugin.md
         - name: Kusto 查詢語言的參考資料
           items:
