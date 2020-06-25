@@ -8,14 +8,12 @@ ms.reviewer: amitof
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
-zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 7373af48ef581e4b64f1cfc34ece0c16a416fc08
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 4bfc7b591683940e10d2737ec776421f65d1427a
+ms.sourcegitcommit: 93510ef1e5570ce4da2cbf76eb77946c93a7dec8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128898"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85372463"
 ---
 # <a name="query-results-cache"></a>查詢結果快取
 
@@ -38,7 +36,7 @@ GithubEvent
 
 ### <a name="identical-queries"></a>相同的查詢
 
-Query_results_cache 只會針對視為「完全相同」的查詢，傳回先前快取查詢的結果。 如果符合下列所有條件，則會將兩個查詢視為相同：
+查詢結果快取只會針對視為「完全相同」的查詢，傳回先前快取查詢的結果。 如果符合下列所有條件，則會將兩個查詢視為相同：
 
 * 這兩個查詢具有相同的標記法（如 UTF-8 字串）。
 * 這兩個查詢會對相同的資料庫進行。

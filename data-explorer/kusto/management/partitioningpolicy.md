@@ -1,6 +1,6 @@
 ---
-title: 資料分割原則（預覽）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的資料分割原則（預覽）。
+title: 資料分割原則-Azure 資料總管
+description: 本文說明 Azure 資料總管中的資料分割原則。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 2a54d6e8bdb891500778f2043f2b1aa4094162d2
-ms.sourcegitcommit: 743e8b1def28bc8f875b22b857ec345eeb7e5acc
+ms.openlocfilehash: 3ab402833e4aebd5499fcb383dd803e9a6a815ed
+ms.sourcegitcommit: 93510ef1e5570ce4da2cbf76eb77946c93a7dec8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84671439"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85372480"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
@@ -173,6 +173,7 @@ ms.locfileid: "84671439"
 * **MaxRowCountPerOperation**：
   * 單一資料分割作業之來源範圍的資料列計數總和的最大目標。
   * 這是選用屬性。 其預設值為 `0` ，預設目標為5000000記錄。
+    * 您可以考慮設定低於5M 的值，您會看到資料分割作業會耗用非常大量的記憶體/CPU （請參閱 #monitoring）。
 
 ## <a name="notes"></a>注意
 
@@ -223,6 +224,6 @@ ms.locfileid: "84671439"
 
 在這兩種情況下，您都應該「修正」資料，或在內嵌期間篩選掉資料中任何不相關的記錄，以降低叢集上資料分割的額外負荷。 例如，使用[更新原則](updatepolicy.md)）。
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>接下來的步驟
 
 使用[分割原則控制命令](../management/partitioning-policy.md)來管理資料表的資料分割原則。
