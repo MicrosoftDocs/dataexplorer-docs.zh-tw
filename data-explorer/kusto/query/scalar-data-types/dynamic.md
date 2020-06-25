@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 606d48c4bda583ad82404a1b25119ec9beb4c5a9
-ms.sourcegitcommit: 6f56b169fda0b74f9569004555a574d8973b1021
+ms.openlocfilehash: 8a979d91b008be7a93626aa7f58865cb5466076b
+ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84748946"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85332585"
 ---
 # <a name="the-dynamic-data-type"></a>動態資料類型
 
@@ -166,8 +166,9 @@ Cast 函數包括：
 |---|---|
 | *value* `in` *array*| 如果有 array** 項目 == value**，則為 true<br/>`where City in ('London', 'Paris', 'Rome')`
 | *value* `!in` *array*| 如果沒有 array** 項目 == value**，則為 true
-|[`array_length(`數列`)`](../arraylengthfunction.md)| 如果不是陣列則為 null
+|[`array_length(`array`)`](../arraylengthfunction.md)| 如果不是陣列則為 null
 |[`bag_keys(`包`)`](../bagkeysfunction.md)| 列舉動態屬性包物件中的所有根機碼。
+|[`bag_merge(`bag1,..., bagN`)`](../bag-merge-function.md)| 將動態屬性包合併為動態屬性包，併合並所有屬性。
 |[`extractjson(`path、object`)`](../extractjsonfunction.md)|使用路徑來瀏覽至物件。
 |[`parse_json(`來源`)`](../parsejsonfunction.md)| 將 JSON 字串變成動態物件。
 |[`range(`from、to、step`)`](../rangefunction.md)| 值的陣列
@@ -179,4 +180,3 @@ Cast 函數包括：
 |[`summarize make_list_if(`column、 `)` 述詞](../makelistif-aggfunction.md)| 將資料列群組壓平合併，並將資料行的值放在陣列中（使用述詞）。
 |[`summarize make_list_with_nulls(`資料行 `)`](../make-list-with-nulls-aggfunction.md)| 將資料列群組壓平合併，並將資料行的值放在陣列中，包括 null 值。
 |[`summarize make_set(`排`)`](../makeset-aggfunction.md) | 將資料列群組壓平合併，並將資料行的值放在陣列中，但不重複。
-|[`summarize make_bag(`排`)`](../make-bag-aggfunction.md) | 將資料行中的屬性包（字典）值合併到一個屬性包中，而不需要金鑰重複。

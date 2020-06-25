@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 5c430fd0ca18265c5800165b33bfe14126aee02a
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 5fd6221e4b877d066050f932a564f71d56d8c168
+ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373278"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85332569"
 ---
 # <a name="infer_storage_schema-plugin"></a>infer_storage_schema 外掛程式
 
@@ -32,13 +32,13 @@ evaluate infer_storage_schema(options)
 
 **語法**
 
-`evaluate` `infer_storage_schema(` *選項* `)`
+`evaluate``infer_storage_schema(`*選項*`)`
 
 **引數**
 
 單一*選項*引數是類型的常數值 `dynamic` ，其中包含指定要求屬性的屬性包：
 
-|名稱                    |必要|描述|
+|名稱                    |必要|說明|
 |------------------------|--------|-----------|
 |`StorageContainers`|是|[儲存體連接字串](../api/connection-strings/storage.md)的清單，代表已儲存資料成品的前置詞 URI|
 |`DataFormat`|是|其中一種支援的[資料格式](../../ingestion-supported-formats.md)。|
@@ -51,6 +51,7 @@ evaluate infer_storage_schema(options)
 外掛程式會傳回 `infer_storage_schema` 單一結果資料表，其中包含保留了 CSL 架構字串的單一資料列/資料行。
 
 > [!NOTE]
+> * 儲存體容器 URI 秘密金鑰除了*讀取*之外，還必須具有*清單*的許可權。
 > * 架構推斷策略「全部」是一種非常「昂貴」的作業，因為它意味著從找到的*所有*成品讀取併合並其架構。
 > * 某些傳回的類型可能不是由錯誤的類型猜測所造成的實際值（或做為架構合併程式的結果）。 這就是為什麼您應該先仔細檢查結果，再建立外部資料表。
 
@@ -68,7 +69,7 @@ let options = dynamic({
 evaluate infer_storage_schema(options)
 ```
 
-*Result*
+*結果*
 
 |CslSchema|
 |---|

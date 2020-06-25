@@ -10,27 +10,31 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 26c6d660cb254ec2df6600e90437d7db7ca748f4
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: a1516f3b3410c1a27f27a91d2eb120539441f712
+ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863144"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85332513"
 ---
 # <a name="cross-database-and-cross-cluster-queries"></a>跨資料庫與跨叢集查詢
 
 ::: zone pivot="azuredataexplorer"
 
-每個 Kusto 查詢都會在目前叢集和預設資料庫的內容中運作。
-* 在[Kusto Explorer](../tools/kusto-explorer.md)中，預設資料庫是在 [連線][面板](../tools/kusto-explorer.md#connections-panel)中選取的資料庫，而目前的叢集是包含該資料庫的連接
-* 使用[Kusto 用戶端程式庫](../api/netfx/about-kusto-data.md)時，目前的叢集和預設資料庫會 `Data Source` 分別由 `Initial Catalog` [Kusto 連接字串](../api/connection-strings/kusto.md)的和屬性指定。
+每個 Kusto 查詢都會在目前叢集的內容和預設資料庫中運作。
+* 在[Kusto Explorer](../tools/kusto-explorer.md)中，預設資料庫是 [連線][面板](../tools/kusto-explorer.md#connections-panel)中所選取的資料庫，而 [目前叢集] 則是包含該資料庫的連接。
+* 使用[用戶端程式庫](../api/netfx/about-kusto-data.md)時，目前的叢集和預設資料庫會分別由 `Data Source` `Initial Catalog` [連接字串](../api/connection-strings/kusto.md)的和屬性指定。
 
 ## <a name="queries"></a>查詢
-若要從預設值以外的任何資料庫存取資料表，必須使用*限定名稱*語法：若要存取目前叢集中的資料庫：
+若要從預設值以外的任何資料庫存取資料表，必須使用*限定名稱*語法。
+
+存取目前叢集中的資料庫。
+
 ```kusto
 database("<database name>").<table name>
 ```
-遠端叢集中的資料庫：
+
+遠端叢集中的資料庫。
 ```kusto
 cluster("<cluster name>").database("<database name>").<table name>
 ```
@@ -38,16 +42,17 @@ cluster("<cluster name>").database("<database name>").<table name>
 *資料庫名稱*區分大小寫
 
 叢集*名稱*不區分大小寫，而且可以是下列其中一種形式：
-* 格式正確的 URL，例如 `http://contoso.kusto.windows.net:1234/` 。 僅支援 HTTP 和 HTTPS 架構。
-* 完整功能變數名稱（FQDN），例如 `contoso.kusto.windows.net` 。 這個字串相當於 `https://` **`contoso.kusto.windows.net`** `:443/` 。
-* 簡短名稱（不含網域部分的主機名稱 [和區域]），例如 `contoso` 或 `contoso.westus` 。 這些字串會解讀為 `https://` **`contoso`** `.kusto.windows.net:443/` 和 `https://` **`contoso.westus`** `.kusto.windows.net:443/` 。
+   * 格式正確的 URL，例如 `http://contoso.kusto.windows.net:1234/` 。 僅支援 HTTP 和 HTTPS 架構。
+   * 完整功能變數名稱（FQDN），例如 `contoso.kusto.windows.net` 。 這個字串相當於 `https://` **`contoso.kusto.windows.net`** `:443/` 。
+   * 簡短名稱（不含網域部分的主機名稱 [和區域]），例如 `contoso` 或 `contoso.westus` 。 這些字串會解讀為 `https://` **`contoso`** `.kusto.windows.net:443/` 和 `https://` **`contoso.westus`** `.kusto.windows.net:443/` 。
 
 > [!NOTE]
 > 跨資料庫存取權受限於一般許可權檢查。
-> 若要 excute 查詢，您必須擁有預設資料庫的 [讀取] 許可權，以及查詢中所參考的每個其他資料庫（在目前和遠端叢集中）。
+> 若要執行查詢，您必須擁有預設資料庫的 [讀取] 許可權，以及查詢中所參考的每個其他資料庫（在目前和遠端叢集中）。
 
 *限定名稱*可用於任何可以使用資料表名稱的內容中。
-下列全部都是有效的：
+
+下列全部都是有效的。
 
 ```kusto
 database("OtherDb").Table | where ...
@@ -57,18 +62,20 @@ union Table1, cluster("OtherCluster").database("OtherDb").Table2 | project ...
 database("OtherDb1").Table1 | join cluster("OtherCluster").database("OtherDb2").Table2 on Key | join Table3 on Key | extend ...
 ```
 
-當*限定名稱*顯示為聯[集運算子](./unionoperator.md)的運算元時，可以使用萬用字元來指定多個資料表和多個資料庫。 叢集名稱中不允許使用萬用字元：
+當*限定名稱*顯示為聯[集運算子](./unionoperator.md)的運算元時，可以使用萬用字元來指定多個資料表和多個資料庫。 叢集名稱中不允許使用萬用字元。
 
 ```kusto
 union withsource=TableName *, database("OtherDb*").*Table, cluster("OtherCluster").database("*").*
 ```
 
 > [!NOTE]
->* 預設資料庫的名稱也是可能的相符項，因此資料庫（"&#42;"）。 * 會指定所有資料庫的所有資料表，包括預設值。
->* 架構變更如何影響跨叢集查詢，請參閱[跨叢集查詢和架構變更](../concepts/crossclusterandschemachanges.md)
+> * 預設資料庫的名稱也是可能的相符項，因此資料庫（"&#42;"）會指定所有資料庫的所有資料表，包括預設值。
+> * 如需架構變更如何影響跨叢集查詢的詳細 ionformation，請參閱[跨叢集查詢和架構變更](../concepts/crossclusterandschemachanges.md)
 
-## <a name="access-restriction"></a>存取限制 
-限定的名稱或模式也可以包含在[限制存取](./restrictstatement.md)語句中（叢集名稱中不允許使用萬用字元）
+## <a name="access-restriction"></a>存取限制
+
+限定的名稱或模式也可以包含在[限制存取](./restrictstatement.md)語句中，叢集名稱中不允許使用萬用字元。
+
 ```kusto
 restrict access to (my*, database("MyOther*").*, cluster("OtherCluster").database("my2*").*);
 ```
@@ -81,27 +88,28 @@ restrict access to (my*, database("MyOther*").*, cluster("OtherCluster").databas
 
 ## <a name="functions-and-views"></a>函數和觀點
 
-函數和觀點（持續性和建立的內嵌）可以參考跨資料庫和叢集界限的資料表。 下列程式碼是有效的：
+函數和觀點（持續性和建立的內嵌）可以參考跨資料庫和叢集界限的資料表。 下列程式碼是有效的。
 
 ```kusto
 let MyView = Table1 join database("OtherDb").Table2 on Key | join cluster("OtherCluster").database("SomeDb").Table3 on Key;
 MyView | where ...
 ```
 
-持續性函數和 views 可以從相同叢集中的另一個資料庫存取：
+持續性函數和 views 可以從相同叢集中的另一個資料庫存取。
 
-表格式函數（view）中的 `OtherDb` ：
+中的表格式函數（view） `OtherDb` 。
 
 ```kusto
 .create function MyView(v:string) { Table1 | where Column1 has v ...  }  
 ```
 
-中的純量函數 `OtherDb` ：
+中的純量函數 `OtherDb` 。
+
 ```kusto
 .create function MyCalc(a:double, b:double, c:double) { (a + b) / c }  
 ```
 
-在 [預設資料庫] 中：
+在 [預設資料庫] 中。
 
 ```kusto
 database("OtherDb").MyView("exception") | extend CalCol=database("OtherDb").MyCalc(Col1, Col2, Col3) | limit 10
@@ -111,52 +119,56 @@ database("OtherDb").MyView("exception") | extend CalCol=database("OtherDb").MyCa
 
 表格式函數或 views 可以跨叢集參考。 套用下列限制：
 
-1. 遠端函式必須傳回表格式架構。 純量函數只能在相同的叢集中存取。
-2. 遠端函數只能接受純量參數。 取得一或多個資料表引數的函式只能在相同的叢集中存取。
-3. 遠端函式的架構必須是已知且不變的參數（請參閱[跨叢集查詢和架構變更](../concepts/crossclusterandschemachanges.md)）。
+* 遠端函式必須傳回表格式架構。 純量函數只能在相同的叢集中存取。
+* 遠端函數只能接受純量參數。 取得一或多個資料表引數的函式只能在相同的叢集中存取。
+* 遠端函式的架構必須是已知且不變的參數。 如需詳細資訊，請參閱[跨叢集查詢和架構變更](../concepts/crossclusterandschemachanges.md)。
 
-下列跨叢集呼叫**有效**：
+下列跨叢集呼叫有效。
 
 ```kusto
 cluster("OtherCluster").database("SomeDb").MyView("exception") | count
 ```
 
 下列查詢會呼叫遠端純量函數 `MyCalc` 。
-此呼叫違反規則 #1，因此**無效**：
+此呼叫違反規則 #1，因此無效。
 
 ```kusto
 MyTable | extend CalCol=cluster("OtherCluster").database("OtherDb").MyCalc(Col1, Col2, Col3) | limit 10
 ```
 
 下列查詢會呼叫遠端函數 `MyCalc` ，並提供表格式參數。
-此呼叫違反規則 #2，因此**無效**：
+此呼叫違反規則 #2，因此無效。
 
 ```kusto
-cluster("OtherCluster").database("OtherDb").MyCalc(datatable(x:string, y:string)["x","y"] ) 
+cluster("OtherCluster").database("OtherDb").MyCalc(datatable(x:string, y:string)["x","y"] )
 ```
 
 下列查詢 `SomeTable` 會呼叫具有以參數為基礎之變數架構輸出的遠端函數 `tablename` 。
-此呼叫違反規則 #3，因此**無效**：
+此呼叫違反規則 #3，因此無效。
 
-中的表格式函數 `OtherDb` ：
+中的表格式函數 `OtherDb` 。
+
 ```kusto
 .create function SomeTable(tablename:string) { table(tablename)  }  
 ```
 
-在 [預設資料庫] 中：
+在 [預設資料庫] 中。
+
 ```kusto
 cluster("OtherCluster").database("OtherDb").SomeTable("MyTable")
 ```
 
 下列查詢 `GetDataPivot` 會呼叫具有以資料為基礎之變數架構輸出的遠端函數（[pivot （）外掛程式](pivotplugin.md)具有動態輸出）。
-此呼叫違反規則 #3，因此**無效**：
+此呼叫違反規則 #3，因此無效。
 
-中的表格式函數 `OtherDb` ：
+中的表格式函數 `OtherDb` 。
+
 ```kusto
 .create function GetDataPivot() { T | evaluate pivot(PivotColumn) }  
 ```
 
-預設資料庫中的表格式函數：
+預設資料庫中的表格式函數。
+
 ```kusto
 cluster("OtherCluster").database("OtherDb").GetDataPivot()
 ```

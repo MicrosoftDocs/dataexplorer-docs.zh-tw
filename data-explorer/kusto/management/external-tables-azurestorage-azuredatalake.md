@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 7bcba1cbcbcbd712278696d897febaee5714703f
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 828f2450db7f6afabf33f72d813af6f0007ada6b
+ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780587"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85332598"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -89,7 +89,7 @@ ms.locfileid: "84780587"
 
 &nbsp;&nbsp;[*StringSeparator*]*Partition* [*StringSeparator*] [*partition* [*StringSeparator*] ...]  
 
-其中*partition*指的是在子句中宣告的資料分割 `partition` `by` ，而*StringSeparator*是以引號括住的任何文字。
+其中*partition*指的是在子句中宣告的資料分割 `partition` `by` ，而*StringSeparator*是以引號括住的任何文字。 連續的分割區元素必須使用*StringSeparator*來分開設定。
 
 您可以使用轉譯為字串的分割區元素，並以對應的文字分隔符號來建立原始檔案路徑前置詞。 若要指定用來轉譯 datetime 資料分割值的格式，可以使用下列宏：
 
@@ -133,7 +133,7 @@ Azure Blob 儲存體 Blob 容器或 Azure Data Lake 存放區檔案系統（虛�
 <a name="properties"></a>
 *選擇性屬性*
 
-| 屬性         | 類型     | 描述       |
+| 屬性         | 類型     | 說明       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | 資料表的資料夾                                                                     |
 | `docString`      | `string` | 記錄資料表的字串                                                       |
@@ -236,6 +236,9 @@ dataformat=parquet
 )
 ```
 
+> [!NOTE]
+> 目前不支援下列資料格式的虛擬資料行： `CSV` 、 `TSV` 、、 `TSVE` 、 `SCsv` 、 `SOHsv` `PSV` `RAW` 和 `TXT` 。
+
 <a name="file-filtering"></a>
 **檔案篩選邏輯**
 
@@ -269,7 +272,7 @@ dataformat=parquet
 
 **輸出**
 
-| 輸出參數 | 類型   | 描述                       |
+| 輸出參數 | 類型   | 說明                       |
 |------------------|--------|-----------------------------------|
 | Uri              | 字串 | 外部儲存體資料檔案的 URI |
 
@@ -302,7 +305,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| 名稱     | 種類 | 對應                                                           |
+| Name     | 種類 | 對應                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -320,7 +323,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| 名稱     | 種類 | 對應                                                                |
+| Name     | 種類 | 對應                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -342,7 +345,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| 名稱     | 種類 | 對應                                                                         |
+| Name     | 種類 | 對應                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
