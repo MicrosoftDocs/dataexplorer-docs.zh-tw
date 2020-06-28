@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 3ab402833e4aebd5499fcb383dd803e9a6a815ed
-ms.sourcegitcommit: 93510ef1e5570ce4da2cbf76eb77946c93a7dec8
+ms.openlocfilehash: 433d8786ad3664d02387efacd7dcd3865b4deb13
+ms.sourcegitcommit: ddafa58deb79417bd6f36e8bb3ad106d375b63e1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85372480"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85448497"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
@@ -22,7 +22,7 @@ ms.locfileid: "85372480"
 原則的主要目的是要改善已知的查詢效能，以縮小分割資料行中的值資料集，或在高基數位符串資料行上進行匯總/聯結。 原則也可能會導致資料的壓縮變得更好。
 
 > [!CAUTION]
-> 在可定義原則的資料表數目上，沒有已設定的硬式編碼限制。 不過，每個額外的資料表都會增加在叢集節點上執行之背景資料分割程式的負擔。 這可能會導致使用更多的叢集資源。 如需詳細資訊，請參閱[容量](#capacity)。
+> 在可定義原則的資料表數目上，沒有已設定的硬式編碼限制。 不過，每個額外的資料表都會增加在叢集節點上執行之背景資料分割程式的負擔。 這可能會導致使用更多的叢集資源。 如需詳細資訊，請參閱[監視](#monitoring)和[容量](#capacity)。
 
 ## <a name="partition-keys"></a>資料分割索引鍵
 
@@ -224,6 +224,6 @@ ms.locfileid: "85372480"
 
 在這兩種情況下，您都應該「修正」資料，或在內嵌期間篩選掉資料中任何不相關的記錄，以降低叢集上資料分割的額外負荷。 例如，使用[更新原則](updatepolicy.md)）。
 
-## <a name="next-steps"></a>接下來的步驟
+## <a name="next-steps"></a>後續步驟
 
 使用[分割原則控制命令](../management/partitioning-policy.md)來管理資料表的資料分割原則。
