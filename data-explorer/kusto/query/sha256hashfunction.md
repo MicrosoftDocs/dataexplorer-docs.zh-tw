@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 32fa2f3ffefdbf1f14ed87e8e89444de322408c3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: b7a94d8c4e4f22deed6cd9368cdd52dd15e86dd7
+ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372325"
+ms.lasthandoff: 06/29/2020
+ms.locfileid: "85517778"
 ---
 # <a name="hash_sha256"></a>hash_sha256()
 
@@ -36,17 +36,30 @@ ms.locfileid: "83372325"
 
 **範例**
 
+<!-- csl: https://kuskusdfv3.kusto.windows.net/Kuskus -->
 ```kusto
-hash_sha256("World")                   // 78ae647dc5544d227130a0682a51e30bc7777fbb6d8a8f17007463a3ecd1d524
-hash_sha256(datetime("2015-01-01"))    // e7ef5635e188f5a36fafd3557d382bbd00f699bd22c671c3dea6d071eb59fbf8
+print 
+h1=hash_sha256("World"),
+h2=hash_sha256(datetime(2020-01-01))
 ```
 
-下列範例會使用 hash_sha256 函數，對資料的 StartTime 資料行執行查詢。
+|h1|h2|
+|---|---|
+|78ae647dc5544d227130a0682a51e30bc7777fbb6d8a8f17007463a3ecd1d524|ba666752dc1a20eb750b0eb64e780cc4c968bc9fb8813461c1d7e750f302d71d|
 
-<!-- csl: https://help.kusto.windows.net:443/Samples -->
+下列範例會 `hash_sha256()` 根據狀態的 SHA256 雜湊值，使用函數來匯總 StormEvents。 
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents 
-| where hash_sha256(StartTime) == 0
-| summarize StormCount = count(), TypeOfStorms = dcount(EventType) by State 
+| summarize StormCount = count() by State, StateHash=hash_sha256(State)
 | top 5 by StormCount desc
 ```
+
+|State|StateHash|StormCount|
+|---|---|---|
+|德克薩斯州|9087f20f23f91b5a77e8406846117049029e6798ebbd0d38aea68da73a00ca37|4701|
+|KANSAS|c80e328393541a3181b258cdb4da4d00587c5045e8cf3bb6c8fdb7016b69cc2e|3166|
+|愛荷華州|f85893dca466f779410f65cd904fdc4622de49e119ad4e7c7e4a291ceed1820b|2337|
+|伊利諾州|ae3eeabfd7eba3d9a4ccbfed6a9b8cff269dc43255906476282e0184cf81b7fd|2022|
+|MISSOURI|d15dfc28abc3ee73b7d1f664a35980167ca96f6f90e034db2a6525c0b8ba61b1|2016|

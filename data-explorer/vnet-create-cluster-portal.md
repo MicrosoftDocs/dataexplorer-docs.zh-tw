@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: 097e175ff28d334532e85715f1f6401a96fa8f8c
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 753c2a21812c850613c2c2462394b6b0bde8b740
+ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374320"
+ms.lasthandoff: 06/29/2020
+ms.locfileid: "85517948"
 ---
 # <a name="create-an-azure-data-explorer-cluster-in-your-virtual-network"></a>在您的虛擬網路中建立 Azure 資料總管叢集
 
@@ -40,7 +40,7 @@ Azure 資料總管支援將叢集部署到虛擬網路（VNet）中的子網。 
     |---|---|---|
     | 訂用帳戶 | 您的訂用帳戶 | 選取您要用於叢集的 Azure 訂用帳戶。|
     | 資源群組 | 您的資源群組 | 使用現有資源群組，或建立新的資源群組。 |
-    | 名稱 | AzureDataExplorerNsg | 選擇名稱，以識別資源群組中的網路安全性群組（NSG）。  |
+    | Name | AzureDataExplorerNsg | 選擇名稱，以識別資源群組中的網路安全性群組（NSG）。  |
     | 區域 | *美國西部* | 選取最符合您需求的區域。
     | | | |
 
@@ -65,7 +65,7 @@ Azure 資料總管支援將叢集部署到虛擬網路（VNet）中的子網。 
     | 通訊協定 | TCP
     | 動作 | Allow
     | 優先順序 | 100
-    | 名稱 | AllowAzureDataExplorerManagement
+    | Name | AllowAzureDataExplorerManagement
     | | |
     
 1. 根據[VNet 部署](vnet-deployment.md#dependencies-for-vnet-deployment)的相依性，針對所有輸入和輸出相依性重複前兩個步驟。 或者，您可以使用單一規則來取代輸出規則，以允許埠443和80的*網際網路*。
@@ -89,7 +89,7 @@ Azure 資料總管支援將叢集部署到虛擬網路（VNet）中的子網。 
     |---|---|---|
     | IP 版本 | IPv4 | 選取 IP 版本。 我們只支援 IPv4。|
     | SKU | 標準 | 我們需要**標準**for Query （引擎） URI 端點。 |
-    | 名稱 | 引擎-pip | 選擇用來識別資源群組中公用 IP 位址的名稱。
+    | Name | 引擎-pip | 選擇用來識別資源群組中公用 IP 位址的名稱。
     | 訂用帳戶 | 您的訂用帳戶 | 選取您想要用於公用 IP 的 Azure 訂用帳戶。|
     | 資源群組 | 您的資源群組 | 使用現有資源群組，或建立新的資源群組。 |
     | Location | *美國西部* | 選取最符合您需求的區域。
@@ -97,9 +97,7 @@ Azure 資料總管支援將叢集部署到虛擬網路（VNet）中的子網。 
 
 1. 選取 [**建立**] 以建立公用 IP 位址。
 
-1. 若要建立內嵌（資料管理）公用 IP 位址，請遵循相同的指示，然後選取 
-    * **Sku**：基本
-    * **IP 位址指派**：靜態
+1. 若要建立內嵌（資料管理）公用 IP 位址，請遵循相同的指示。
 
 ## <a name="create-virtual-network-and-subnet"></a>建立虛擬網路和子網
 
@@ -116,7 +114,7 @@ Azure 資料總管支援將叢集部署到虛擬網路（VNet）中的子網。 
     |---|---|---|
     | 訂用帳戶 | 您的訂用帳戶 | 選取您要用於叢集的 Azure 訂用帳戶。|
     | 資源群組 | 您的資源群組 | 使用現有資源群組，或建立新的資源群組。 |
-    | 名稱 | AzureDataExplorerVnet | 選擇用來識別資源群組中虛擬網路的名稱。
+    | Name | AzureDataExplorerVnet | 選擇用來識別資源群組中虛擬網路的名稱。
     | 區域 | *美國西部* | 選取最符合您需求的區域。
     | | | |
 

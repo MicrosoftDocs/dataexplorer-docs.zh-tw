@@ -1,6 +1,6 @@
 ---
-title: 實體引用 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的實體引用。
+title: 實體參考-Azure 資料總管
+description: 本文說明 Azure 資料總管中的實體參考。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: abbf63de632ff2ff5fb721dddc256c5ee62d4966
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 9d652ea8551a21d542ad6afef575616e7387183f
+ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509396"
+ms.lasthandoff: 06/29/2020
+ms.locfileid: "85517881"
 ---
 # <a name="entity-references"></a>實體參考
 
-命名 Kusto 架構實體(資料庫、表、列和存儲的函數,但不是群集)使用名稱在查詢中引用它們。 如果實體的容器在當前上下文中是明確的,則實體名稱可以在沒有附加限定的情況下使用。 例如,當對名為`DB`的資料庫執行查詢時,可以參考該資料庫中僅使用`T`其名稱呼叫的`T`表格 。
+參考使用其名稱在查詢中 Kusto 架構實體。 有效的機構名稱包含*資料庫*、*資料表*、資料*行*和預存函數。 叢集*無法以*其名稱參考。
+如果實體的容器在目前內容中是明確的，請使用機構名稱，而不需要額外的資格。 例如，針對名為的資料庫執行查詢時， `DB` 您可以參考該資料庫中名為的資料表 `T` ，其名稱為 `T` 。
 
-另一方面,如果實體的容器不在上下文中可用,或者希望引用上下文中與容器不同的容器中的實體,則必須使用實體的**限定名稱**,即實體名稱與容器的串聯(以及可能與其容器的容器等)的串聯。因此`DB`,針對資料庫執行的查詢可以使用 引用同`T1`一群集不同資料庫`DB1`中的表`database("DB1").T1`, 如果要參考另一個群集中的表,則可以這樣做,例如透過`cluster("https://C2.kusto.windows.net/").database("DB2").T2`使用 。
+如果無法從內容取得實體的容器，或您想要參考不同于內容中容器的容器中的實體，請使用實體的**限定名稱**。
+此名稱會將機構名稱串連至容器的，並可能會將其容器的，依此類推。 如此一來，針對資料庫執行的查詢 `DB` 可能會參考相同叢集 `T1` 之不同資料庫中的資料表 `DB1` ，方法是使用 `database("DB1").T1` 。 如果查詢想要參考另一個叢集的資料表，則可以使用來執行這項操作，例如 `cluster("https://C2.kusto.windows.net/").database("DB2").T2` 。
 
-實體引用也可以實體漂亮名稱,只要它在實體容器的上下文中是唯一的。 請參考[實體的名稱](./entity-names.md#entity-pretty-names)。
+實體參考也可以使用實體的名稱，前提是它在實體容器的內容中是唯一的。 如需詳細資訊，請參閱[機構名稱](./entity-names.md#entity-pretty-names)。
 
-## <a name="wildcard-matching-for-entity-names"></a>實體名稱的通配符比
+## <a name="wildcard-matching-for-entity-names"></a>機構名稱的萬用字元比對
 
-在某些上下文中,可以使用通配符`*`( ) 來匹配實體名稱的全部或部分。 例如,以下查詢引用當前資料庫中的所有表,以及資料庫中`DB`名稱以`T`: 開頭的所有表。
+在某些內容中，您可以使用萬用字元（ `*` ）來比對機構名稱的全部或部分。 例如，下列查詢會參考目前資料庫中的所有資料表，以及資料庫中 `DB` 名稱開頭為的所有資料表 `T` ：
 
 ```kusto
 union *, database("DB1").T*
 ```
 
-注意:通配符匹配與以美元符號 ()`$`開頭的實體名稱不匹配。
-此類名稱是系統保留的。
+> [!NOTE]
+> 萬用字元比對不符合以貨幣符號（）開頭的機構名稱 `$` 。
+這類名稱是系統保留的。
 
+## <a name="next-steps"></a>後續步驟
 
-
+* [架構實體類型](https://docs.microsoft.com/azure/data-explorer/kusto/query/schema-entities/)
+* [架構機構名稱](https://docs.microsoft.com/azure/data-explorer/kusto/query/schema-entities/entity-names)

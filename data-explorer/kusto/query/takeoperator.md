@@ -1,6 +1,6 @@
 ---
-title: 取得運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中的獲取運算符。
+title: take 運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 take 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,49 +8,49 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0c8f724e139e13bf9ece00d5af09f2a3cf25b03a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 98586f8f8380d4c1fc36a88b288b47798c10e09e
+ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506591"
+ms.lasthandoff: 06/29/2020
+ms.locfileid: "85517914"
 ---
 # <a name="take-operator"></a>take 運算子
 
-返回到指定的行數。
+傳回指定數目的資料列。
 
 ```kusto
 T | take 5
 ```
 
-除非對源數據進行排序,否則無法保證返回哪些記錄。
+除非來源資料已排序，否則不保證會傳回哪些記錄。
 
 **語法**
 
-`take`*NumberOfRows*`limit`*行數的行數*
+`take`*NumberOfRows* 
+ NumberOfRows `limit`*NumberOfRows*
 
-
-(`take``limit`是 同義詞。
+（ `take` 和 `limit` 都是同義字）。
 
 **注意事項**
 
-`take`在互動式流覽數據時查看少量記錄示例是一種簡單、快速、高效的方法,但請注意,即使數據集未更改,在執行多次時,它不能保證結果的任何一致性。
+`take`當您以互動方式流覽資料時，是一種簡單快速且有效率的方式來查看記錄的小型樣本，但請注意，在執行多次時，即使資料集尚未變更，它也不保證其結果的一致性。
 
-即使查詢返回的行數不受查詢的明確限制(不使用`take`運算符),Kusto 默認也會限制該數位。
-有關詳細資訊,請參閱[Kusto 查詢限制](../concepts/querylimits.md)。
+即使查詢所傳回的資料列數目未明確受到查詢限制（不 `take` 使用任何運算子），Kusto 預設會限制該數位。
+如需詳細資訊，請參閱[Kusto 查詢限制](../concepts/querylimits.md)。
 
-請參閱:[對運算元](sortoperator.md)
-[頂部運算元](topoperator.md)
-[頂部嵌so運算符進行排序](topnestedoperator.md)
+請參閱： [sort 運算子](sortoperator.md) 
+ [top 運算子](topoperator.md) 
+ [top-nested 運算子](topnestedoperator.md)
 
-## <a name="does-kusto-support-paging-of-query-results"></a>Kusto 是否支援查詢結果的分頁?
+## <a name="does-kusto-support-paging-of-query-results"></a>Kusto 支援查詢結果的分頁嗎？
 
-Kusto 不提供內置的分頁機制。
+Kusto 不會提供內建的分頁機制。
 
-Kusto 是一項複雜的服務,它不斷優化其存儲的數據,從而在大型數據集上提供出色的查詢性能。 雖然分頁對於資源有限的無狀態客戶端來說是一種有用的機制,但它將負擔轉移到必須跟蹤用戶端狀態資訊的後端服務上。 隨後,後端服務的性能和可擴充性受到嚴重限制。
+Kusto 是一種複雜的服務，會持續優化它所儲存的資料，以提供優於大型資料集的絕佳查詢效能。 雖然分頁是適用于具有有限資源的無狀態用戶端的實用機制，但它會將負擔轉移到必須追蹤用戶端狀態資訊的後端服務。 接下來，後端服務的效能和擴充性受到嚴格限制。
 
-對分頁支援實現以下功能之一:
+如需分頁支援，請執行下列其中一項功能：
 
-* 將查詢結果匯出到外部存儲並通過生成的數據分頁。
+* 將查詢的結果匯出至外部儲存體，並透過產生的資料進行分頁。
 
-* 編寫一個中間層應用程式,通過緩存 Kusto 查詢的結果來提供有狀態的分頁 API。
+* 藉由快取 Kusto 查詢的結果，撰寫可提供具狀態分頁 API 的中介層應用程式。

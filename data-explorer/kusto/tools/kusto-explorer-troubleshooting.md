@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 8fe86f16eef79fca0db22fd3048cc3841c57d189
-ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
+ms.openlocfilehash: 19ffbe2f5e14a2c003c24d145b713970e6bb31b8
+ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84420895"
+ms.lasthandoff: 06/29/2020
+ms.locfileid: "85517761"
 ---
 # <a name="troubleshooting"></a>疑難排解
 
@@ -141,7 +141,7 @@ Following errors were detected during this operation.
 * `Your administrator has blocked this application because it potentially poses a security risk to your computer`.
 * `Your security settings do not allow this application to be installed on your computer.`
 
-**解決方法**
+**方案**
 
 這個徵兆可能是因為另一個應用程式正在覆寫預設的 ClickOnce 信任提示行為。 
 1. 查看您的預設設定。
@@ -163,9 +163,9 @@ Kusto 所儲存的資料可在這裡找到： `C:\Users\\[your alias]\AppData\Lo
 
 1. 在 Windows 中，開啟 [**變更] 或 [移除程式**] （也稱為 [**程式和功能**]）。
 1. 選取每個以開頭的專案 `Kusto.Explorer` 。
-1. 選取 [解除安裝]****。
+1. 選取 [解除安裝]。
 
-   如果此程式無法卸載應用程式（ClickOnce 應用程式的已知問題），請參閱 [此堆疊溢位文章，其中說明如何執行此作業。
+   如果此程式無法卸載應用程式（ClickOnce 應用程式的已知問題），請參閱[這篇文章以取得相關指示](https://stackoverflow.com/questions/10896223/how-do-i-completely-uninstall-a-clickonce-application-from-my-computer)。
 
 1. 刪除資料夾 `%LOCALAPPDATA%\Kusto.Explorer` ，這會移除所有連接、記錄等等。
 
