@@ -9,12 +9,12 @@ metadata:
   author: orspod
   ms.author: orspodek
   ms.date: 03/19/2020
-  ms.openlocfilehash: a685cc0f12d86534274e4c4aaff87587885db572
-  ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+  ms.openlocfilehash: e9e434423919643e75dd7c90c60ae3c90072283f
+  ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
   ms.translationtype: HT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 04/15/2020
-  ms.locfileid: "81490577"
+  ms.lasthandoff: 07/01/2020
+  ms.locfileid: "85763922"
 landingContent:
 - title: 關於 Azure 資料總管
   linkLists:
@@ -26,6 +26,8 @@ landingContent:
     links:
     - text: 什麼是 Azure 資料總管？ (19:47)
       url: https://youtu.be/D_AJk2lAepw
+    - text: Pluralsight：如何開始使用 Microsoft Azure 資料總管
+      url: https://www.pluralsight.com/courses/microsoft-azure-data-explorer-starting
     - text: Pluralsight：從頭了解 Kusto 查詢語言 (KQL)
       url: https://www.pluralsight.com/courses/kusto-query-language-kql-from-scratch
 - title: 建立叢集和資料庫
