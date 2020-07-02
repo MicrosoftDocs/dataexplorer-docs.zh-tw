@@ -1,6 +1,6 @@
 ---
-title: Azure 資料資源管理員 Python SDK - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 Azure 資料資源管理器 Python SDK。
+title: Azure 資料總管 Python SDK-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 Python SDK。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 5bee1fce1ca76069c34602872b2d4dedeb762ec2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7718eb5983f1d7893a27df5db7ae0c52983dea85
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81502851"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763842"
 ---
-# <a name="azure-data-explorer-python-sdk"></a>Azure 資料資源管理員 Python SDK
+# <a name="azure-data-explorer-python-sdk"></a>Azure 資料總管 Python SDK
 
-Azure 資料資源管理員*Kusto Python 用戶端*庫提供了使用 Python 查詢 Azure 資料資源管理員群集的功能。 它與 Python 2.x/3.x 相容,並且支援使用熟悉的 Python DB API 介面的所有資料類型。
+Azure 資料總管*Kusto Python 用戶端*程式庫可讓您使用 Python 查詢 azure 資料總管叢集。 程式庫是 Python 2.x/3.x 相容。 它支援使用 Python DB API 介面的所有資料類型。
 
-例如,可以使用連接到Spark群集的[Jupyter筆記本](https://jupyter.org/)中的庫,包括Azure資料磚塊實例,但並非僅包含Azure[資料塊](https://azure.microsoft.com/services/databricks/)實例。
+例如，您可以使用程式庫，從附加至 Spark 叢集的[Jupyter 筆記本](https://jupyter.org/)，包括（但不是專門） [Azure Databricks](https://azure.microsoft.com/services/databricks/)實例。
 
-*Kusto Python Ingest 用戶端*是一個 python 庫,允許將資料發送到 Azure 資料資源管理員服務 - 即引入資料。 
+*Kusto python 內嵌用戶端*是 python 程式庫，可讓您將內嵌資料傳送至 Azure 資料總管服務。
+
+## <a name="next-steps"></a>後續步驟
 
 * [如何安裝套件](https://github.com/Azure/azure-kusto-python#install)
 
-* [函式庫斯托查詢範例](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py)
+* [Kusto 查詢範例](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py)
 
-* [資料攝取範例](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-ingest/tests/sample.py)
+* [資料內嵌範例](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-ingest/tests/sample.py)
 
-* [GitHub 儲存函式庫](https://github.com/Azure/azure-kusto-python)
+* [GitHub 存放庫](https://github.com/Azure/azure-kusto-python)
 
-    [![alt 文字](https://travis-ci.org/Azure/azure-kusto-python.svg?branch=master "azure-kusto-python")](https://travis-ci.org/Azure/azure-kusto-python)
+    [![替代文字](https://travis-ci.org/Azure/azure-kusto-python.svg?branch=master "azure-kusto-python")](https://travis-ci.org/Azure/azure-kusto-python)
 
-* 皮皮包:
+* Pypi 套件：
 
-    * [azure-kusto-data](https://pypi.org/project/azure-kusto-data/)
-    [![PyPI 版本](https://badge.fury.io/py/azure-kusto-data.svg)](https://badge.fury.io/py/azure-kusto-data)
-    * [azure-kustoing0PyPI](https://pypi.org/project/azure-kusto-ingest/)
-    [![版本](https://badge.fury.io/py/azure-kusto-ingest.svg)](https://badge.fury.io/py/azure-kusto-ingest)
-    * [azure-mgmt-kusto](https://pypi.org/project/azure-mgmt-kusto/)
-    [![PyPI 版本](https://badge.fury.io/py/azure-mgmt-kusto.svg)](https://badge.fury.io/py/azure-mgmt-kusto)
+    * [azure-kusto-資料](https://pypi.org/project/azure-kusto-data/) 
+    [ ![ PyPI 版本](https://badge.fury.io/py/azure-kusto-data.svg)](https://badge.fury.io/py/azure-kusto-data)
+    * [azure-kusto-](https://pypi.org/project/azure-kusto-ingest/) 
+     內嵌[ ![ PyPI 版本](https://badge.fury.io/py/azure-kusto-ingest.svg)](https://badge.fury.io/py/azure-kusto-ingest)
+    * [azure-管理-kusto](https://pypi.org/project/azure-mgmt-kusto/) 
+    [ ![ PyPI 版本](https://badge.fury.io/py/azure-mgmt-kusto.svg)](https://badge.fury.io/py/azure-mgmt-kusto)

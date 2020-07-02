@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
-ms.openlocfilehash: bba3c4e82c3c1ac53a6ebafcb9de4c327da77e37
-ms.sourcegitcommit: 4986354cc1ba25c584e4f3c7eac7b5ff499f0cf1
+ms.openlocfilehash: ee9c4b236344e21bbbc1da68b76710b15b519baa
+ms.sourcegitcommit: 56bb7b69654900ed63310ac9537ae08b72bf7209
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84856189"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85814206"
 ---
 # <a name="mv-expand-operator"></a>mv-expand 運算子
 
 展開多值陣列或屬性包。
 
-`mv-expand`會套用在[動態](./scalar-data-types/dynamic.md)類型的資料行上，讓集合中的每個值都能取得個別的資料列。 所展開資料列中的其他所有資料行則會重複。 
+`mv-expand`會套用在[動態](./scalar-data-types/dynamic.md)類型陣列或屬性包資料行上，讓集合中的每個值都能取得個別的資料列。 所展開資料列中的其他所有資料行則會重複。 
 
 **語法**
 
@@ -34,8 +34,10 @@ ms.locfileid: "84856189"
 * ** 新資料行的名稱。
 * *Typename：* 指出陣列元素的基礎類型，這會成為運算子所產生之資料行的類型。 陣列中不符合的值將不會轉換。 相反地，這些值將會接受 `null` 值。
 * ** 從每個原始資料列所產生的資料列數目上限。 預設值為2147483647。 
-  > [!Note] 
+
+  > [!Note]
   > 運算子的舊版和過時形式的 `mvexpand` 預設資料列限制為128。
+
 * *IndexColumnName：* 如果 `with_itemindex` 指定了，輸出將會包含一個額外的資料行（名為*IndexColumnName*），其中包含原始展開集合中專案的索引（從0開始）。 
 
 **傳回**
@@ -49,7 +51,9 @@ ms.locfileid: "84856189"
 * `bagexpansion=bag`︰屬性包會展開為單一項目屬性包。 此模式為預設展開。
 * `bagexpansion=array`：屬性包會展開為兩個元素的索引 `[` *鍵值* `,` *value* `]` 陣列結構，允許對索引鍵和值的統一存取（也就是在屬性名稱上執行相異計數匯總）。 
 
-**範例**
+## <a name="examples"></a>範例
+
+### <a name="single-column"></a>單一資料行
 
 單一資料行的簡單擴充：
 
@@ -64,18 +68,23 @@ datatable (a:int, b:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"})]
 |1|{"prop1"： "a"}|
 |1|{"this.prop2"： "b"}|
 
+### <a name="zipped-two-columns"></a>已壓縮兩個數據行
+
 將兩個數據行展開，會先「壓縮」適用的資料行，然後再加以展開：
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
-datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), dynamic([5])]
-| mv-expand b, c 
+datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), dynamic([5, 4, 3])]
+| mv-expand b, c
 ```
 
 |a|b|c|
 |---|---|---|
 |1|{"prop1"： "a"}|5|
-|1|{"this.prop2"： "b"}||
+|1|{"this.prop2"： "b"}|4|
+|1||3|
+
+### <a name="cartesian-product-of-two-columns"></a>兩個數據行的笛卡兒乘積
 
 如果您想要取得可展開兩個數據行的笛卡兒乘積，請在另一個後面展開一個：
 
@@ -91,6 +100,26 @@ datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), d
 |1|{"prop1"： "a"}|5|
 |1|{"this.prop2"： "b"}|5|
 
+### <a name="convert-output"></a>轉換輸出
+
+如果您想要強制將 mv-expand 的輸出設為特定類型（預設為動態），請使用 `to typeof` ：
+
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
+```kusto
+datatable (a:string, b:dynamic, c:dynamic)["Constant", dynamic([1,2,3,4]), dynamic([6,7,8,9])]
+| mv-expand b, c to typeof(int)
+| getschema 
+```
+
+ColumnName|ColumnOrdinal|DateType|ColumnType
+-|-|-|-
+a|0|System.String|字串
+b|1|System.Object|動態
+c|2|System.Int32|int
+
+[通知] 資料行即將推出，如同 `b` `dynamic` `c` `int` 。
+
+### <a name="using-with_itemindex"></a>使用 with_itemindex
 
 陣列的擴充 `with_itemindex` ：
 
@@ -107,14 +136,10 @@ range x from 1 to 4 step 1
 |2|1|
 |3|2|
 |4|3|
+ 
+## <a name="see-also"></a>另請參閱
 
-
-**更多範例**
-
-請參閱經過一段[時間的即時活動圖表計數](./samples.md#chart-concurrent-sessions-over-time)。
-
-**另請參閱**
-
-- [mv-apply](./mv-applyoperator.md)運算子。
-- [摘要 make_list （）](makelist-aggfunction.md)，它會執行相反的函式。
-- [bag_unpack （）](bag-unpackplugin.md)外掛程式，可使用屬性包索引鍵將動態 JSON 物件展開為數據行。
+* 如需更多範例，請參閱經過一段[時間的即時活動圖表計數](./samples.md#chart-concurrent-sessions-over-time)。
+* [mv-apply](./mv-applyoperator.md)運算子。
+* [摘要 make_list （）](makelist-aggfunction.md)，這是 mv-expand 的相反功能。
+* [bag_unpack （）](bag-unpackplugin.md)外掛程式，可使用屬性包索引鍵將動態 JSON 物件展開為數據行。

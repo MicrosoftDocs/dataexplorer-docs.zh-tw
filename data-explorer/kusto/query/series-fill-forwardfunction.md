@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: dc421c8321985d001bb08ba85965cf017b1d51c6
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 7ea5210f0370b495c48615d28e763bf6e396d46e
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372781"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763700"
 ---
 # <a name="series_fill_forward"></a>series_fill_forward()
 
@@ -31,13 +31,13 @@ ms.locfileid: "83372781"
 * *x*：動態陣列純量運算式，這是數值的陣列。 
 * *missing_value_placeholder*：選擇性參數，指定要取代之遺漏值的預留位置。 預設值為 `double` （*null*）。
 
-**注意事項**
+**備註**
 
 * 指定*null*做為預設值，以在[進行數列](make-seriesoperator.md)之後套用插補函式： 
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
-make-series num=count() default=long(null) on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
+make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
 ```
 
 * *Missing_value_placeholder*可以是任何將轉換成實際元素類型的類型。 `double`（*Null*） `long` （*null*）和 `int` （*null*）都具有相同的意義。

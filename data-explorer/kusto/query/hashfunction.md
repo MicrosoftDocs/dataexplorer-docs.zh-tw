@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a44f817ea57a114400f45e9ca2a841150b4590a6
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: b0a8f1b2a72ceb154b7252b3218718a9c23968cb
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226800"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763857"
 ---
 # <a name="hash"></a>hash()
 
@@ -35,7 +35,7 @@ ms.locfileid: "83226800"
 > [!WARNING]
 > 用來計算雜湊的演算法是 xxhash。
 > 這個演算法未來可能會變更，而且唯一的保證是在單一查詢中，此方法的所有調用都會使用相同的演算法。
-> 因此，建議使用者不要將的結果儲存 `hash()` 在資料表中。 如果需要保存雜湊值，請考慮改為使用[hash_sha256 （）](./sha256hashfunction.md) ，但請注意，計算的複雜度遠高於 `hash()` 。
+> 因此，建議您不要將的結果儲存 `hash()` 在資料表中。 如果需要保存雜湊值，請改用[hash_sha256 （）](./sha256hashfunction.md)或[hash_md5 （）](./md5hashfunction.md) 。 請注意，計算這些函數比更複雜 `hash()` 。
 
 **範例**
 

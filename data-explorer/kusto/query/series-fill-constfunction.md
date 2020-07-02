@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7f7c6384bb49640890ae4d3cbd5a4f409688bcbe
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: e078919af16a9d2f7dadba0a309932b3a39b6ced
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372795"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763252"
 ---
 # <a name="series_fill_const"></a>series_fill_const()
 
@@ -32,17 +32,17 @@ ms.locfileid: "83372795"
 * *constant_value*：參數，指定要取代之遺漏值的預留位置。 預設值為*0*。 
 * *missing_value_placeholder*：選擇性參數，指定要取代之遺漏值的預留位置。 預設值為 `double` （*null*）。
 
-**注意事項**
+**備註**
 * 您可以使用 DefaultValue 語法來建立填滿常數值的數列 `default = ` *DefaultValue* （或只省略會假設為0的）。 如需詳細資訊，請參閱[make 系列](make-seriesoperator.md)。
 
 ```kusto
-make-series num=count() default=-1 on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
+make-series num=count() default=-1 on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
 ```
   
 * 若要在[make 系列](make-seriesoperator.md)之後套用任何插補函式，請將*null*指定為預設值： 
 
 ```kusto
-make-series num=count() default=long(null) on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
+make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
 ```
   
 * *Missing_value_placeholder*可以是任何類型，這會轉換成實際的元素類型。 因此， `double` （*null*）、 `long` （*null*）或 `int` （*null*）具有相同的意義。

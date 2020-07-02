@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 55ed390a1c98a307d2bb38476458f29fc9c92997
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: e8d02634ad0c56b2e1e369d4c2cd86c63bdad155
+ms.sourcegitcommit: 56bb7b69654900ed63310ac9537ae08b72bf7209
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84258006"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85814189"
 ---
 # <a name="streaming-ingestion-policy-management"></a>串流處理內嵌原則管理
 
@@ -114,7 +114,8 @@ ms.locfileid: "84258006"
 ### <a name="streaming-ingestion-policy-object"></a>串流內嵌原則物件
 
 在管理命令的輸入和輸出中，串流內嵌原則物件是 JSON 格式的字串，其中包含下列屬性。
-|屬性  |類型    |描述                                                       |必要/選用 |
-|----------|--------|------------------------------------------------------------------|-------|
-|IsEnabled |`bool`  |已針對實體啟用串流內嵌| 必要|
-|HintAllocatedRate|`double`|資料會輸入的預估速率（Gb/小時）| 選用|
+
+|屬性|類型|描述|必要/選用
+|---|---|---|---
+|IsEnabled|`bool`|已針對實體啟用串流內嵌| 必要
+|HintAllocatedRate|`double`|資料會輸入的預估速率（Gb/小時）|選擇性

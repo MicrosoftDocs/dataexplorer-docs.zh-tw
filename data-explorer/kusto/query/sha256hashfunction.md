@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b7a94d8c4e4f22deed6cd9368cdd52dd15e86dd7
-ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
+ms.openlocfilehash: cf47fd98027859ebb5f0cf22208b790a5396dc61
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/29/2020
-ms.locfileid: "85517778"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763743"
 ---
 # <a name="hash_sha256"></a>hash_sha256()
 
@@ -36,7 +36,7 @@ ms.locfileid: "85517778"
 
 **範例**
 
-<!-- csl: https://kuskusdfv3.kusto.windows.net/Kuskus -->
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print 
 h1=hash_sha256("World"),

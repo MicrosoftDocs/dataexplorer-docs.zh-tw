@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 4cec053990457a6b33c7446c5b32c63713320de9
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 4bf68800cc10bf301f6a5738d47e670905c2c46d
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372770"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763647"
 ---
 # <a name="series_fill_linear"></a>series_fill_linear()
 
@@ -34,13 +34,13 @@ ms.locfileid: "83372770"
 * *fill_edges*：布林值，指出是否應該以最接近的值取代陣列開頭和結尾的*missing_value_placeholder* 。 預設值*為 True* 。 如果設定為*false*，則會保留陣列開頭和結尾*missing_value_placeholder* 。
 * *constant_value*：僅與陣列相關的選擇性參數，完全由*null*值組成。 這個參數會指定要用來填滿數列的常數值。 預設值為*0*。 將這個參數設定為 `double` （*null*），會有效地將*null*值保留在其中。
 
-**注意事項**
+**備註**
 
 * 若要在[make 系列](make-seriesoperator.md)之後套用任何插補函式，請將*null*指定為預設值： 
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
-make-series num=count() default=long(null) on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
+make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
 ```
 
 * *Missing_value_placeholder*可以是任何將轉換成實際元素類型的類型。 因此， `double` （*null*）、 `long` （*null*）或 `int` （*null*）具有相同的意義。

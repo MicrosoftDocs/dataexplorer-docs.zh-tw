@@ -8,21 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: a3f2a325b63306f7fec6b11eb3e684d3918bc7d5
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 876966391e67ad2f8f25a900dfc4c92bf0bfd11e
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372532"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763267"
 ---
 # <a name="series_periods_detect"></a>series_periods_detect()
 
 尋找存在於時間序列中最重要的期間。  
 
-測量應用程式流量的度量通常會有兩個重要的週期：每週和每天。 假設有這種時間序列，應該會偵測 `series_periods_detect()` 到這兩個主要期間。  
-函式會將包含時間序列動態陣列的資料行（通常是[make 系列](make-seriesoperator.md)運算子的結果輸出）做為輸入，並使用兩個 `real` 數位來定義最小和最大週期大小（也就是 bin 的數目，例如 for 1h bin 每日週期的大小為24）來搜尋，以及定義函式 `long` 要搜尋的總期間數的數位。 函式會輸出2個數據行：
-* *期間*：包含已找到之期間的動態陣列（以 bin 大小的單位），依分數排序
-* *分數*：包含0和1之間值的動態陣列，每個都測量週期陣列中其各自位置的*某個期間的*重要性
+測量應用程式流量的度量通常會有兩個重要的期間：每週和每天。 函式會 `series_periods_detect()` 在時間序列中偵測這兩個主要週期。  
+函式會採用做為輸入：
+* 包含時間序列動態陣列的資料行。 一般而言，資料行是[make 系列](make-seriesoperator.md)運算子的結果輸出。
+* 兩個 `real` 數位，定義最小和最大週期大小，也就是要搜尋的 bin 數目。 例如，對於1h 的 bin，每日期間的大小會是24。 
+* 數位，定義函式 `long` 要搜尋的總週期數。 
+
+函式會輸出兩個數據行：
+* *期間*：包含已找到之期間的動態陣列，以依分數排序的空間大小單位。
+* *分數*：動態陣列，包含介於0到1之間的值。 每個陣列都會測量句點陣列中其各自位置的*某個期間的*重要性。
  
 **語法**
 
@@ -33,19 +38,18 @@ ms.locfileid: "83372532"
 * *x*：動態陣列純量運算式，這是數值的陣列，通常是[make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出。
 * *min_period*： `real` 指定要搜尋之最短期間的數位。
 * *max_period*： `real` 指定要搜尋之最長期間的數位。
-* *num_periods*： `long` 指定最大必要週期數的數位。 這會是輸出動態陣列的長度。
+* *num_periods*： `long` 指定最大必要週期數的數位。 這個數位會是輸出動態陣列的長度。
 
 > [!IMPORTANT]
 > * 此演算法可以偵測到包含至少4個點和數列長度最多一半的期間。 
 >
-> * 您應該將*min_period*設定為以下部分，並在您預期於時間序列中找到的期間*max_period*一點。 例如，如果您有每小時匯總的信號，而且您同時尋找每日 > 和每週期間（分別為 24 & 168），您可以設定*min_period*= 0.8 \* 24， *max_period*= 1.2 \* 168，將20% 的邊界留在這段期間。
+> * 請在下方設定*min_period* ，然後*max_period*您預期會在時間序列中找到的週期。 例如，如果您有每小時的匯總信號，而且您同時尋找每日和每週期間（分別為24和168小時），您可以設定*min_period*= 0.8 \* 24， *max_period*= 1.2 \* 168，並在這段期間保留20% 的邊界。
 >
-> * 輸入時間序列必須是一般的，也就是在常數 bin 中匯總（如果是使用[make 系列](make-seriesoperator.md)所建立的，則一律為這種情況）。 否則，輸出就沒有意義。
-
+> * 輸入時間序列必須是一般的。 也就是，在常數的 bin 中匯總，如果它是使用[make 系列](make-seriesoperator.md)所建立的，則一律是這樣。 否則，輸出就沒有意義。
 
 **範例**
 
-下列查詢會內嵌應用程式流量的一個月快照集，每日匯總兩次（也就是，bin 大小是12小時）。
+下列查詢會內嵌應用程式流量的一個月快照集，每日匯總兩次。 Bin 大小為12小時。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -56,7 +60,7 @@ print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77
 
 :::image type="content" source="images/series-periods/series-periods.png" alt-text="數列期間":::
 
-`series_periods_detect()`在此系列上執行會導致每週期間（14點長）：
+`series_periods_detect()`在此系列上執行，結果為每週期間，14點長。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -70,4 +74,5 @@ print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77
 | [14.0, 0.0] | [0.84，0.0]  |
 
 
-請注意，在圖表中可能也會看到的每日期間都找不到，因為取樣太過粗略（12h 的 bin 大小），因此每日2個區間的鈴是演算法所需之4點的最小週期大小。
+> [!NOTE] 
+> 找不到圖表中可能也會出現的每日期間，因為取樣太過粗糙（12h 的 bin 大小），因此每日2個區間的最小週期大小低於4個點，這是演算法所需。

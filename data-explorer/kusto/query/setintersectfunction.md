@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: f611f660a791117159ad5fce4c024914d9e6909b
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 6739b01f996c04829a1fdb78eab96f6e51b011bb
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264737"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763663"
 ---
 # <a name="set_intersect"></a>set_intersect()
 
@@ -25,7 +25,7 @@ ms.locfileid: "85264737"
 
 **引數**
 
-* *arr1 .。。arrN*：輸入陣列以建立交集集合（至少兩個數組）。 所有引數都必須是動態陣列（請參閱[pack_array](packarrayfunction.md)）。 
+* *arr1 .。。arrN*：輸入陣列以建立交集集合（至少兩個數組）。 所有引數都必須是動態陣列。 如需詳細資訊，請參閱[pack_array](packarrayfunction.md)。 
 
 **傳回**
 

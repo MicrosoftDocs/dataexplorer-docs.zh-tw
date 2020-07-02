@@ -1,6 +1,6 @@
 ---
-title: welch_test() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的welch_test()。
+title: welch_test （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 welch_test （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a9f4b3d86bf3d679fd4fdd320b394956c71d3e97
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1bb995874bf6ac552350c602c6d3742a08b1273b
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81504483"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763677"
 ---
 # <a name="welch_test"></a>welch_test()
 
-計算[韋爾奇測試函數](https://en.wikipedia.org/wiki/Welch%27s_t-test)p_value
+計算[Welch-test 函數](https://en.wikipedia.org/wiki/Welch%27s_t-test)的 p_value
 
 ```kusto
 // s1, s2 values are from https://en.wikipedia.org/wiki/Welch%27s_t-test
@@ -33,19 +33,19 @@ print
 
 **語法**
 
-`welch_test(`*平均1*`, `*方差1*`, `*計數1*`, `*平均2*`, `*方差2*`, `*計數2*`)`
+`welch_test(`*mean1* `, `*variance1* `, `*count1* `, `*mean2* `, `*variance2* `, `*count2*`)`
 
 **引數**
 
-* *平均1:* 表示第 1 個系列的平均值(平均值)值的運算式
-* *方差1:* 表示第 1 個系列的方差值的運算式
-* *count1*: 表示第 1 個系列的值計數的運算式
-* *平均2*:表示第 2 個系列的平均值(平均值)的運算式
-* *方差2*:表示第二個系列的方差值的運算式
-* *count2*: 表示第 2 個系列的值計數的運算式
+* *mean1*：代表第一個數列之平均值（平均）值的運算式
+* *variance1*：表示第一個數列之變異數值的運算式
+* *count1*：代表第一個數列中值計數的運算式
+* *mean2*：代表第二個數列之平均值（平均）值的運算式
+* *variance2*：表示第二個數列之變異數值的運算式
+* *count2*：代表第二個數列中值計數的運算式
 
 **傳回**
 
-從[維琪百科](https://en.wikipedia.org/wiki/Welch%27s_t-test):
+從[維琪百科](https://en.wikipedia.org/wiki/Welch%27s_t-test)：
 
-在統計中,Welch 的 t 檢驗或不等差 t 檢驗是一個雙樣本位置檢驗,用於測試兩個總體具有相等均等均值的假設。 Welch 的 t 檢驗是學生 t 測試的適應,即它是在學生 t 測試的説明下派生的,當兩個樣本具有不等方差和樣本量不相等時,該測試更可靠。 這些測試通常稱為"未配對"或"獨立樣本"t 檢驗,因為當所比較的兩個樣本的基礎統計單位不重疊時,通常會應用這些測試。 鑒於 Welch 的 t 測試不如學生的 t-test 受歡迎,而且讀者可能不太熟悉,因此資訊更豐富的名稱是"韋爾奇的不等方差 t 檢驗"或"不均差異 t 檢驗",以便簡潔。
+在 [統計資料] 中，Welch 的 t-test 是兩個樣本的位置測試，用來測試兩個人口有相等的假設。 Welch 的 t 測試是一種調整學生的 t 測試，而且當兩個樣本的變異數不相等和不相等的樣本大小時，也更可靠。 這些測試通常稱為「未配對」或「獨立範例」 t-測試。 當比較兩個樣本基礎的統計單位不重迭時，通常會套用測試。 Welch 的 t 測試比學生的 t 測試更受歡迎，而且讀者可能比較不熟悉。 測試也稱為「Welch 的不相等差異 t-測試」或「不相等的差異 t-測試」。

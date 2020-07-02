@@ -1,6 +1,6 @@
 ---
-title: tobool() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 tobool()。
+title: tobool （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 tobool （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3e1867c99ae241b3f7e09ab8ee873d5ae5d374e0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f99406d94e1cd64da8605e5000aa99136c2b119a
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506353"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763793"
 ---
 # <a name="tobool"></a>tobool()
 
-將輸入轉換為布爾(簽名的8位)表示形式。
+將輸入轉換成布林值（帶正負號的8位）標記法。
 
 ```kusto
 tobool("true") == true
@@ -29,14 +29,13 @@ tobool(123) == true
 **語法**
 
 `tobool(`*Expr* `)` 
- * * Expr (別名) `toboolean(` `)`
+ Expr `toboolean(`*Expr* `)`鋸齒
 
 **引數**
 
-* *Expr*: 將轉換為布林的運算式。 
+* *Expr*：將轉換成布林值的運算式。 
 
 **傳回**
 
-如果轉換成功,結果將是一個布爾。
-如果轉換不成功,結果會為`null`。
- 
+如果轉換成功，則結果會是布林值。
+如果轉換不成功，則結果會是 `null` 。
