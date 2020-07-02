@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/29/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 20e512d55568f39ea21d3ddcb383adaf0fa7dab3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 90b2a08d4fdde6ab6a74b12632c9310029f8fc1b
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373040"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902092"
 ---
 # <a name="render-operator"></a>render 運算子
 
@@ -40,9 +40,9 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 ::: zone pivot="azuredataexplorer"
 
-|*視覺效果*     |描述|
+|*視覺效果*     |說明|
 |--------------------|-|
-| `anomalychart`     | 類似于 timechart，但使用[series_decompose_anomalies](./series-decompose-anomaliesfunction.md)函數來反白[顯示異常](./samples.md#get-more-out-of-your-data-in-kusto-using-machine-learning)。 |
+| `anomalychart`     | 類似于 timechart，但使用[series_decompose_anomalies](./series-decompose-anomaliesfunction.md)函數來反白[顯示異常](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning)。 |
 | `areachart`        | 區域圖。 第一個資料行是 X 軸，而且應該是數值資料行。 其他數值資料行則為 y 軸。 |
 | `barchart`         | 第一個資料行是 X 軸，而且可以是文字、日期時間或數值。 其他資料行是數值，會顯示為水準去除。|
 | `card`             | 第一個結果記錄會被視為純量值的集合，並顯示為卡片。 |
@@ -61,7 +61,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 ::: zone pivot="azuremonitor"
 
-|*視覺效果*     |描述|
+|*視覺效果*     |說明|
 |--------------------|-|
 | `areachart`        | 區域圖。 第一個資料行是 X 軸，而且應該是數值資料行。 其他數值資料行則為 y 軸。 |
 | `barchart`         | 第一個資料行是 X 軸，而且可以是文字、日期時間或數值。 其他資料行是數值，會顯示為水準去除。|
@@ -112,7 +112,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 有些視覺效果可以藉由提供屬性進行進一步的詳細討論 `kind` 。
 它們是：
 
-|*視覺效果*|`kind`             |描述                        |
+|*視覺效果*|`kind`             |說明                        |
 |---------------|-------------------|-----------------------------------|
 |`areachart`    |`default`          |每個「區域」都代表自己。     |
 |               |`unstacked`        |與 `default` 相同。                 |
@@ -133,7 +133,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 有些視覺效果支援分割成多個 y 軸值：
 
-|`ysplit`  |描述                                                       |
+|`ysplit`  |說明                                                       |
 |----------|------------------------------------------------------------------|
 |`none`    |所有數列資料都會顯示單一 y 軸。 (預設值)       |
 |`axes`    |單一圖表會顯示多個 y 軸（每個數列一個）。|
@@ -170,6 +170,6 @@ range x from -2 to 2 step 0.1
 
 [教學課程中的轉譯範例](./tutorial.md#render-display-a-chart-or-table)。
 
-[異常偵測](./samples.md#get-more-out-of-your-data-in-kusto-using-machine-learning)
+[異常偵測](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning)
 
 ::: zone-end

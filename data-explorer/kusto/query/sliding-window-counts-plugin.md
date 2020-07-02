@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2fbc870eafc45c8c63bea98a64f492d161af4c9b
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 4d90bc3b6222896d45374d771ce5f87f4bdf6786
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226341"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902018"
 ---
 # <a name="sliding_window_counts-plugin"></a>sliding_window_counts 外掛程式
 
-使用[此處](samples.md#performing-aggregations-over-a-sliding-window)所述的技術，在回顧期間，計算滑動視窗中值的計數和相異計數。
+使用[此處](samples.md#perform-aggregations-over-a-sliding-window)所述的技術，在回顧期間，計算滑動視窗中值的計數和相異計數。
 
 例如，針對每一*天*，計算過去*一周*的計數和相異使用者計數。 
 
@@ -83,7 +83,7 @@ T | evaluate sliding_window_counts(UserId, Timestamp, start, end, lookbackWindow
 
 ```
 
-|時間戳記|計數|`dcount`|
+|時間戳記|Count|`dcount`|
 |---|---|---|
 |2017-08-01 00：00：00.0000000|5|3|
 |2017-08-02 00：00：00.0000000|8|5|

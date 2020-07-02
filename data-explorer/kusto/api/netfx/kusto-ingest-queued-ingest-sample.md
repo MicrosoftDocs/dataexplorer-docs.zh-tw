@@ -8,21 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/05/2020
-ms.openlocfilehash: 0e6564e6c27c62621678ae350514bf1df39c73ae
-ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
+ms.openlocfilehash: 6963c118742593d2402d5ae81d8ff4373a2ff600
+ms.sourcegitcommit: d40fe44e7581d87f63cc0cb939f3aa9c3996fc08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83722077"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85839419"
 ---
 # <a name="data-ingestion-with-the-kustoingest-library"></a>使用 Kusto 程式庫內嵌資料
 
-本文提供的範例程式碼會使用 Kusto 的內嵌用戶端程式庫來內嵌資料。 此程式碼會詳細說明適用于生產等級管線（稱為佇列內嵌）的建議內嵌模式。 針對 Kusto 程式庫，對應的實體是[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)介面。 用戶端程式代碼會藉由將內嵌通知張貼到 Azure 佇列，與 Azure 資料總管服務互動。 佇列的參考是從負責內嵌的資料管理實體取得。 
+本文提供的範例程式碼會使用 Kusto 的內嵌用戶端程式庫來內嵌資料。 此程式碼會詳細說明適用于生產等級管線（稱為佇列內嵌）的建議內嵌模式。 針對 Kusto 程式庫，對應的實體是[IKustoQueuedIngestClient 介面](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)。
+用戶端程式代碼會藉由將內嵌通知張貼到 Azure 佇列，與 Azure 資料總管服務互動。 佇列的參考是從負責內嵌的資料管理實體取得。 
 
 > [!NOTE]
 > 與資料管理服務的互動必須使用 Azure Active Directory （Azure AD）進行驗證。
 
-此範例會使用 Azure AD 的使用者驗證，並在互動式使用者的身分識別下執行。
+範例程式碼會使用 Azure AD 的使用者驗證，並在互動式使用者的身分識別下執行。
 
 ## <a name="dependencies"></a>相依性
 

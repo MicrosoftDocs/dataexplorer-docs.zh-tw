@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: fcab02ee032d1009cf31e36963c44cc6b12358e3
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 1d8766c1fb09ceb64cf4196a92030163eed63694
+ms.sourcegitcommit: d40fe44e7581d87f63cc0cb939f3aa9c3996fc08
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382007"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85839405"
 ---
 # <a name="the-ingest-into-command-pull-data-from-storage"></a>將內嵌至命令（從儲存體提取資料）
 
@@ -73,8 +73,7 @@ ms.locfileid: "83382007"
 
 ```kusto
 .ingest into table T (
-  'abfss://myfilesystem@contoso.dfs.core.windows.net/path/to/file1.csv;'
-    h'...'
+  'abfss://myfilesystem@contoso.dfs.core.windows.net/path/to/file1.csv;...'
 )
 ```
 

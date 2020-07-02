@@ -1,21 +1,21 @@
 ---
-title: Python 外掛程式-Azure 資料總管 |Microsoft Docs
+title: Python 外掛程式-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 Python 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: d4159af7cd7b45022d29a1c98694dc4ae80451ab
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: e6439912d323b7677f6febc8b23068c880a735c2
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373140"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902136"
 ---
 # <a name="python-plugin"></a>Python 外掛程式
 
@@ -31,48 +31,53 @@ Python 外掛程式會使用 Python 腳本來執行使用者定義函數（UDF�
 ## <a name="arguments"></a>引數
 
 * *output_schema*： `type` 定義 Python 程式碼所傳回之表格式資料輸出架構的常值。
-    * 格式為： `typeof(` *ColumnName* `:` *ColumnType* [，...] `)` ，例如： `typeof(col1:string, col2:long)` 。
+    * 格式為： `typeof(` *ColumnName* `:` *ColumnType*[，...] `)` 。例如， `typeof(col1:string, col2:long)` 。
     * 若要擴充輸入架構，請使用下列語法：`typeof(*, col1:string, col2:long)`
 * *腳本*： `string` 常值，這是要執行的有效 Python 腳本。
-* *script_parameters*：選擇性 `dynamic` 常值，這是一組名稱/值組的屬性包，會傳遞至 Python 腳本做為保留的 `kargs` 字典（請參閱[保留的 Python 變數](#reserved-python-variables)）。
+* *script_parameters*：選擇性的 `dynamic` 常值。 這是一組名稱/值組的屬性包，會傳遞至 Python 腳本做為保留的 `kargs` 字典。 如需詳細資訊，請參閱[保留的 Python 變數](#reserved-python-variables)。
 * *提示。散發*：要在多個叢集節點間散發之外掛程式執行的選擇性提示。
-  * 預設值是 `single`。
+  * 預設值為 `single`。
   * `single`：腳本的單一實例將會在整個查詢資料上執行。
-  * `per_node`：如果散發 Python 區塊之前的查詢，腳本的實例將會透過它所包含的資料在每個節點上執行。
-* *external_artifacts*：選擇性 `dynamic` 常值，這是可從雲端儲存體存取之成品的名稱 & URL 組的屬性包，可讓腳本在執行時間使用。
-  * 此屬性包中參考的 Url 必須：
-  * 包含在叢集的[標注原則](../management/calloutpolicy.md)中。
-    2. 位於公開可用的位置，或提供必要的認證，如[儲存體連接字串](../api/connection-strings/storage.md)中所述。
-  * 成品可供腳本用來從本機臨時目錄取用， `.\Temp` 而屬性包中提供的名稱則會用來做為本機檔案名（請參閱下面的[範例](#examples)）。
-  * 如需詳細資訊，請參閱下列[附錄](#appendix-installing-packages-for-the-python-plugin)。
+  * `per_node`：如果散發 Python 區塊之前的查詢，腳本的實例將會在每個節點上，于其包含的資料上執行。
+* *external_artifacts*：選擇性的 `dynamic` 常值，這是一組名稱和 URL 組的屬性包，適用于可從雲端儲存體存取的成品。 它們可以讓腳本在執行時間使用。
+  * 此屬性包中所參考的 Url 必須是：
+    * 包含在叢集的[注解原則](../management/calloutpolicy.md)中。
+    * 在公開可用的位置，或提供必要的認證，如[儲存體連接字串](../api/connection-strings/storage.md)中所述。
+  * 這些成品可讓腳本從本機臨時目錄取用 `.\Temp` 。 屬性包中提供的名稱會用來做為本機檔案名。 請參閱[範例](#examples)。
+  * 如需詳細資訊，請參閱[安裝 Python 外掛程式的套件](#install-packages-for-the-python-plugin)。 
 
 ## <a name="reserved-python-variables"></a>保留的 Python 變數
 
-下列變數是保留來進行 Kusto 查詢語言與 Python 程式碼之間的互動：
+下列變數是保留來進行 Kusto 查詢語言與 Python 程式碼之間的互動。
 
 * `df`：輸入表格式資料（上述的值 `T` ）做為 `pandas` 資料框架。
 * `kargs`： *Script_parameters*引數的值，做為 Python 字典。
-* `result`： `pandas` Python 腳本所建立的資料框架，其值會變成會傳送到外掛程式後面的 Kusto 查詢運算子的表格式資料。
+* `result`： `pandas` Python 腳本所建立的資料框架，其值會變成傳送到外掛程式後面的 Kusto 查詢運算子的表格式資料。
 
-## <a name="onboarding"></a>登入
+## <a name="enable-the-plugin"></a>啟用外掛程式
 
 * 預設會停用此外掛程式。
-* [這裡](../concepts/sandboxes.md#prerequisites)列出啟用外掛程式的必要條件。
-* 在叢集[的 [設定] **Configuration** ](../../language-extensions.md)索引標籤中，啟用或停用 Azure 入口網站中的外掛程式。
+* 若要啟用外掛程式，請參閱[必要條件](../concepts/sandboxes.md#prerequisites)清單。
+* 在您叢集的 [設定[]](../../language-extensions.md)索引標籤中，啟用或停用 Azure 入口網站中的外掛程式。
 
-## <a name="notes-and-limitations"></a>注意事項和限制
+## <a name="python-sandbox-image"></a>Python 沙箱映射
 
 * Python 沙箱映射是以*python 3.6*引擎的*Anaconda 5.2.0*散發為基礎。
-  您可以在[這裡](http://docs.anaconda.com/anaconda/packages/old-pkg-lists/5.2.0/py3.6_win-64/)找到其封裝清單（套件的少數部分可能與執行外掛程式的沙箱所強制執行的限制不相容）。
-* Python 映射也包含常見的 ML 套件： `tensorflow` 、 `keras` 、 `torch` 、 `hdbscan` `xgboost` 和其他有用的套件。
+  請參閱[Anaconda 套件](http://docs.anaconda.com/anaconda/packages/old-pkg-lists/5.2.0/py3.6_win-64/)的清單。
+  
+  > [!NOTE]
+  > 少數的封裝可能與執行外掛程式的沙箱所強制執行的限制不相容。
+  
+* Python 映射也包含一般 ML 套件： `tensorflow` 、 `keras` 、、 `torch` `hdbscan` 、 `xgboost` 和其他有用的套件。
 * 外掛程式預設會將*numpy* （as）匯入 `np` & *pandas* （as `pd` ）。  您可以視需要匯入其他模組。
-* **[從查詢](../management/data-ingestion/ingest-from-query.md)和[更新原則](../management/updatepolicy.md)中提取**
-  * 您可以在下列查詢中使用此外掛程式：
-      1. 定義為更新原則的一部分，其來源資料表會內嵌為使用*非串流*內嵌。
-      2. 執行為從查詢內嵌之命令的一部分（例如 `.set-or-append` ）。
-  * 在上述兩種情況下，建議您確認內嵌的數量和頻率，以及 Python 邏輯的複雜性和資源使用率是否符合[沙箱限制](../concepts/sandboxes.md#limitations)，以及叢集的可用資源。
-    如果無法這樣做，可能會導致[節流錯誤](../concepts/sandboxes.md#errors)。
-  * 在定義為更新原則一部分的查詢中，*不*可能使用此外掛程式，其來源資料表是使用[串流](../../ingest-data-streaming.md)內嵌來內嵌的。
+
+## <a name="use-ingestion-from-query-and-update-policy"></a>使用來自查詢和更新原則的內嵌
+
+* 在下列查詢中使用外掛程式：
+  * 定義為[更新原則](../management/updatepolicy.md)的一部分，其來源資料表會內嵌為使用*非串流*內嵌。
+  * 執行為[從查詢內嵌之](../management/data-ingestion/ingest-from-query.md)命令的一部分，例如 `.set-or-append` 。
+    在這兩種情況下，請確認內嵌的數量和頻率，以及 Python 邏輯所使用的複雜性和資源，與[沙箱限制](../concepts/sandboxes.md#limitations)和叢集的可用資源一致。 如果無法這樣做，可能會導致[節流錯誤](../concepts/sandboxes.md#errors)。
+* 您無法在定義為更新原則之一部分的查詢中使用此外掛程式，其來源資料表是使用[串流](../../ingest-data-streaming.md)內嵌進行內嵌。
 
 ## <a name="examples"></a>範例
 
@@ -124,12 +129,12 @@ print "This is an example for using 'external_artifacts'"
 
 * 將外掛程式的輸入資料集減少為所需的最小數量（資料行/資料列）。
     * 在可能的情況下，使用 Kusto 的查詢語言來篩選源資料集。
-    * 若要在來源資料行的子集上執行計算，請先投影那些資料行，再叫用外掛程式。
+    * 若要在來源資料行的子集上進行計算，請先投影那些資料行，再叫用外掛程式。
 * `hint.distribution = per_node`每當腳本中的邏輯可散發時使用。
     * 您也可以使用[partition 運算子](partitionoperator.md)來分割輸入資料集。
 * 盡可能使用 Kusto 的查詢語言，以執行 Python 腳本的邏輯。
 
-    範例：
+    **範例**
 
     ```kusto    
     .show operations
@@ -145,11 +150,14 @@ print "This is an example for using 'external_artifacts'"
 
 ## <a name="usage-tips"></a>使用提示
 
-* 若要在中產生包含 Python 腳本的多行字串 `Kusto.Explorer` ，請從您最愛的 python 編輯器（*Jupyter*、 *Visual Studio Code*、 *PyCharm*等）複製 Python 腳本，然後執行下列其中一項：
-    * 按*F2*以開啟 [**在 Python 中編輯**] 視窗。 將腳本貼入此視窗。 選取 [確定]  。 腳本會以引號和新行裝飾（因此在 Kusto 中有效）並自動貼入 [查詢] 索引標籤中。
-    * 將 Python 程式碼直接貼到 [查詢] 索引標籤中，選取這些行，然後按*ctrl + k*、 *ctrl + S*熱鍵來裝飾它們（若要反向執行，請按*ctrl + k*、 *ctrl + M*快速鍵）。 [以下](../tools/kusto-explorer-shortcuts.md#query-editor)是查詢編輯器快捷方式的完整清單。
-* 為避免 Kusto 字串分隔符號與 Python 字串常值之間的衝突，我們建議 `'` 在 Kusto 查詢中使用單引號字元（）來 Kusto 字串常值，並在 python 腳本中使用雙引號字元（）來括住 `"` python 字串常值。
-* 使用[externaldata 運算子](externaldata-operator.md)來取得您儲存在外部位置（例如 Azure Blob 儲存體）的腳本內容。
+* 若要在中產生包含 Python 腳本的多行字串 `Kusto.Explorer` ，請從您最愛的 python 編輯器（*Jupyter*、 *Visual Studio Code*、 *PyCharm*等）複製 Python 腳本。 
+  現在，請執行下列其中一個動作：
+    * 按**F2**以開啟 [*在 Python 中編輯*] 視窗。 將腳本貼入此視窗。 選取 [確定]。 腳本會以引號和新行裝飾，因此它在 Kusto 中是有效的，而且會自動貼入 [查詢] 索引標籤中。
+    * 將 Python 程式碼直接貼入 [查詢] 索引標籤。選取這些線條，然後按**ctrl + K**、 **ctrl + S**快速鍵，以如上所述加以裝飾。 若要反轉，請按**ctrl + K**、 **ctrl + M**快速鍵。 請參閱[查詢編輯器快捷方式](../tools/kusto-explorer-shortcuts.md#query-editor)的完整清單。
+* 若要避免 Kusto 字串分隔符號與 Python 字串常值之間的衝突，請使用：
+     * `'`Kusto 查詢中 Kusto 字串常值的單引號字元（）
+     * `"`Python 腳本中 python 字串常值的雙引號字元（）
+* 使用[ `externaldata` 運算子](externaldata-operator.md)來取得您儲存在外部位置（例如 Azure Blob 儲存體）的腳本內容。
   
     **範例**
 
@@ -166,55 +174,59 @@ print "This is an example for using 'external_artifacts'"
     | render linechart 
     ```
 
-## <a name="appendix-installing-packages-for-the-python-plugin"></a>附錄：安裝 Python 外掛程式的套件
+## <a name="install-packages-for-the-python-plugin"></a>安裝適用于 Python 外掛程式的套件
 
-您可能因為下列任何原因而需要自行安裝套件：
+您可能需要自行安裝套件，原因如下：
 
 * 封裝是私用的，而且是您自己的套件。
 * 封裝是公用的，但未包含在外掛程式的基底映射中。
 
-您可以遵循下列步驟來安裝套件：
+安裝套件，如下所示：
 
-1. 一次性先決條件：
-  
-  a. 建立 blob 容器來裝載封裝，最好是與您的叢集位於相同的區域。
-    * 例如： `https://artifcatswestus.blob.core.windows.net/python` （假設您的叢集位於美國西部）
-  
-  b. 改變叢集的[標注原則](../management/calloutpolicy.md)，以允許存取該位置。
-    * 這需要[AllDatabasesAdmin](../management/access-control/role-based-authorization.md)許可權。
-    * 例如，若要啟用存取中的 blob `https://artifcatswestus.blob.core.windows.net/python` ，要執行的命令為：
+### <a name="prerequisites"></a>必要條件
 
-      ```kusto
-      .alter-merge cluster policy callout @'[ { "CalloutType": "sandbox_artifacts", "CalloutUriRegex": "artifcatswestus\\.blob\\.core\\.windows\\.net/python/","CanCall": true } ]'
-      ```
+  1. 建立 blob 容器來裝載封裝，最好是與您的叢集位於相同的位置。 例如， `https://artifcatswestus.blob.core.windows.net/python` 假設您的叢集位於美國西部。
+  1. 改變叢集的[標注原則](../management/calloutpolicy.md)，以允許存取該位置。
+        * 這種變更需要[AllDatabasesAdmin](../management/access-control/role-based-authorization.md)許可權。
 
-2. 公用封裝（在[PyPi](https://pypi.org/)或其他通道中） a。 下載套件及其相依性。
-  b. 如有需要，請編譯成滾輪（ `*.whl` ）檔案：
-    * 從 cmd 視窗（在本機 Python 環境中）執行：
-      ```python
-      pip wheel [-w download-dir] package-name.
-      ```
+        * 例如，若要允許存取位於的 blob `https://artifcatswestus.blob.core.windows.net/python` ，請執行下列命令：
 
-3. 建立 zip 檔案，其中包含必要的套件和其相依性：
+        ```kusto
+        .alter-merge cluster policy callout @'[ { "CalloutType": "sandbox_artifacts", "CalloutUriRegex": "artifcatswestus\\.blob\\.core\\.windows\\.net/python/","CanCall": true } ]'
+        ```
 
-    * 針對公用套件：壓縮在上一個步驟中下載的檔案。
-    * 附註：
-        * 請務必壓縮檔案 `.whl` 本身，而*不*是其上層資料夾。
-        * 您可以略過 `.whl` 已存在於基底沙箱映射中具有相同版本的封裝檔案。
-    * 針對私人封裝：壓縮封裝的資料夾及其相依性
+### <a name="install-packages"></a>安裝套件
 
-4. 將壓縮檔案上傳至成品位置中的 blob （來自步驟1）。
+1. 若為[PyPi](https://pypi.org/)或其他通道中的公用套件，請下載套件及其相依性。
 
-5. 呼叫 `python` 外掛程式：
+   * 編譯滾輪（ `*.whl` ）檔案（如有必要）。
+   * 從本機 Python 環境中的 cmd 視窗，執行：
+    
+    ```python
+    pip wheel [-w download-dir] package-name.
+    ```
+
+1. 建立 zip 檔案，其中包含所需的套件及其相依性。
+
+    * 針對私人封裝：壓縮封裝的資料夾和其相依性的資料夾。
+    * 若為公用封裝，請壓縮在上一個步驟中下載的檔案。
+    
+    > [!NOTE]
+    > * 請務必壓縮檔案 `.whl` 本身，而不是其上層資料夾。
+    > * 您可以略過 `.whl` 已存在於基底沙箱映射中具有相同版本的封裝檔案。
+
+1. 將壓縮檔案上傳至成品位置中的 blob （來自步驟1）。
+
+1. 呼叫 `python` 外掛程式。
     * 以 `external_artifacts` 名稱的屬性包和 zip 檔案（blob 的 URL）的參考，指定參數。
-    * 在您的內嵌 python 程式碼中：從匯入 `Zipackage` `sandbox_utils` ，並 `install()` 以 zip 檔案的名稱呼叫其方法。
+    * 在您的內嵌 python 程式碼中，從匯入， `Zipackage` `sandbox_utils` 並 `install()` 以 zip 檔案的名稱呼叫其方法。
 
 ### <a name="example"></a>範例
 
-安裝會產生假資料的[Faker](https://pypi.org/project/Faker/)套件：
+安裝產生假資料的[Faker](https://pypi.org/project/Faker/)套件。
 
 ```kusto
-range Id from 1 to 3 step 1 
+range ID from 1 to 3 step 1 
 | extend Name=''
 | evaluate python(typeof(*),
     'from sandbox_utils import Zipackage\n'
@@ -227,7 +239,7 @@ range Id from 1 to 3 step 1
     external_artifacts=pack('faker.zip', 'https://artifacts.blob.core.windows.net/kusto/Faker.zip?...'))
 ```
 
-| Id | 名稱         |
+| ID | 名稱         |
 |----|--------------|
 |   1| Gary Tapia   |
 |   2| Emma Evans   |

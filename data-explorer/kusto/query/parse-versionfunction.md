@@ -1,6 +1,6 @@
 ---
-title: parse_version() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的parse_version()。
+title: parse_version （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 parse_version （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5cb35c12849568f24a6bde42461e8af66058f48f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5e4b318743380b13a26e90a7e83549c998926bd8
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81511708"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902117"
 ---
 # <a name="parse_version"></a>parse_version()
 
-將版本的輸入字串表示形式轉換為可比較的小數位數。
+將版本的輸入字串表示，轉換為可比較的十進位數。
 
 ```kusto
 parse_version("0.0.0.1")
@@ -29,22 +29,21 @@ parse_version("0.0.0.1")
 
 **引數**
 
-* *Expr*: 指定要分析`string`的版本 的類型標量運算式。
+* *`Expr`*：類型的純量運算式 `string` ，指定要剖析的版本。
 
 **傳回**
 
-如果轉換成功,結果將是十進制。
-如果轉換不成功,結果會為`null`。
+如果轉換成功，則結果會是十進位。
+如果轉換不成功，則結果會是 `null` 。
 
-**注意事項**
+**備註**
 
-輸入字串必須包含從 1 到 4 個版本的零件,表示為數位,並與點 (『.』) 分隔。
+輸入字串必須包含一到四個版本元件，以數位表示，並以句點（'. '）分隔。
 
-版本的每個部分最多可能包含 8 位元數位(最大值 - 999999)。
+版本的每個部分最多可包含八位數，最大值為99999999。
 
-如果零件量小於 4,則所有缺失的零件都被視為尾隨 ()。`1.0`  ==  `1.0.0.0`
+如果部分數目小於四個，所有遺漏的部分都會被視為尾端（ `1.0`  ==  `1.0.0.0` ）。
 
- 
 **範例**
 ```kusto
 let dt = datatable(v:string)
@@ -86,7 +85,3 @@ dt | project v1=v, _key=1
 |99999999.0.0.0|1.2.3.4|99999999.0.0.0|
 |1.2.3.4|1|1.2.3.4|
 |99999999.0.0.0|1|99999999.0.0.0|
-
-
-
-

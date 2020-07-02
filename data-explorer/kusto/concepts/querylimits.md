@@ -1,6 +1,6 @@
 ---
-title: 查詢限制 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的查詢限制。
+title: 查詢限制-Azure 資料總管
+description: 本文說明 Azure 資料總管中的查詢限制。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,60 +8,65 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 437e9781b9e29db7496292ba6a416f6e0c769e8b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 20b1b87778451245e7a886255ce3e83493b0d9e1
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523064"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85901940"
 ---
 # <a name="query-limits"></a>查詢限制
 
-由於 Kusto 是一個臨時查詢引擎,它承載大型數據集並嘗試通過在記憶體中保存所有相關數據來滿足查詢,因此存在查詢將壟斷服務資源而不帶界限的內在風險。 Kusto 以默認查詢限制的形式提供了許多內置保護。
+Kusto 是一種臨機操作查詢引擎，它會裝載大型資料集，並藉由將所有相關的資料保留在記憶體中來嘗試滿足查詢。
+有一種固有的風險，就是查詢會獨佔不含界限的服務資源。 Kusto 提供數個內建的保護，格式為預設查詢限制。
 
-## <a name="limit-on-query-concurrency"></a>查詢併發限制
+## <a name="limit-on-query-concurrency"></a>查詢並行的限制
 
-**查詢併發**是群集對同時運行的多個查詢施加的限制。
-查詢並發限制的預設值取決於它執行的 SKU 群集,並計算`Cores-Per-Node x 10`為: 。 例如,對於在 D14v2 SKU 上設定的群集,每台電腦具有 16 個 vCore,`16 cores x10 = 160`預設查詢併發限制為 。
-可以通過創建支援票證來更改預設值。 將來,此控件也將通過控制命令公開。
+**查詢並行**的限制是叢集會同時對多個執行中的查詢強加。
 
-## <a name="limit-on-result-set-size-result-truncation"></a>限制結果集大小(結果截斷)
+* 查詢並行限制的預設值取決於其執行所在的 SKU 叢集，且計算方式為： `Cores-Per-Node x 10` 。
+  * 例如，針對在 D14v2 SKU 上設定的叢集，其中每台機器都有16個虛擬核心，預設的查詢並行限制是 `16 cores x10 = 160` 。
+* 您可以藉由建立支援票證來變更預設值。 未來，此控制項也會透過 control 命令公開。
 
-**默認情況下,結果截斷**是默認情況下對查詢返回的結果集設置的限制。 Kusto 將傳回客戶端的紀錄數限制為**500,000**個,這些紀錄的總記憶體限制為**64 MB**。 當超過這些限制之一時,查詢將失敗,出現"部分查詢失敗"。 超過總記憶體將產生訊息的異常:
+## <a name="limit-on-result-set-size-result-truncation"></a>限制結果集大小（結果截斷）
+
+**結果截斷**是查詢所傳回的結果集上預設設定的限制。 Kusto 會將傳回給用戶端的記錄數目限制為**500000**，而將這些記錄的整體記憶體設為**64 MB**。 當超過其中一項限制時，查詢就會失敗並出現「部分查詢失敗」。 超過整體記憶體將會產生例外狀況，其中包含下列訊息：
 
 ```
 The Kusto DataEngine has failed to execute a query: 'Query result set has exceeded the internal data size limit 67108864 (E_QUERY_RESULT_SET_TOO_LARGE).'
 ```
 
-超過記錄數將失敗,但有一個例外,即:
+超過記錄數目將會失敗，並出現例外狀況，指出：
 
 ```
 The Kusto DataEngine has failed to execute a query: 'Query result set has exceeded the internal record count limit 500000 (E_QUERY_RESULT_SET_TOO_LARGE).'
 ```
 
-處理錯誤有許多政策:
+有數個策略可處理此錯誤。
 
-* 通過修改查詢以不返回無趣數據來減小結果集大小。 當初始(失敗)查詢過於"寬"時,這通常很有用(例如,它不投影不需要的數據列)。
-* 通過將查詢后處理(如聚合)轉移到查詢本身來減小結果集大小。 這在將查詢輸出饋送到另一個處理系統(然後執行其他聚合)的情況下非常有用。 
-* 從查詢切換到使用[資料匯出](../management/data-export/index.md)。
-   當您要從服務匯出大型數據集時,這是合適的。
-* 指示服務禁止顯示此查詢限制。
+* 藉由修改查詢只傳回感興趣的資料，來減少結果集的大小。 當初始失敗的查詢太「寬」時，此策略非常有用。 例如，查詢不會將不需要的資料行投影出來。
+* 將查詢後處理（例如匯總）移至查詢本身，以減少結果集的大小。 此策略適用于將查詢輸出送至另一個處理系統，然後再執行其他匯總的案例。
+* 當您想要從服務匯出大量資料集時，請從查詢切換到使用[資料匯出](../management/data-export/index.md)。
+* 指示服務抑制此查詢限制。
 
-減少查詢產生的結果集大小的常用方法是:
+減少查詢所產生之結果集大小的方法包括：
 
-* 使用[匯總運算子](../query/summarizeoperator.md)組並在查詢輸出中對類似記錄進行聚合,可能會使用[任何聚合函數](../query/any-aggfunction.md)對某些列進行採樣。
-* 使用[take 運算符](../query/takeoperator.md)對查詢輸出進行採樣。
-* 使用[子字串函數](../query/substringfunction.md)修剪寬自由文字列。
-* 使用[專案運算符](../query/projectoperator.md)從結果集中刪除任何無趣列。
+* 使用[摘要運算子](../query/summarizeoperator.md)群組，並匯總查詢輸出中相似的記錄。 可能會使用[任何彙總函式](../query/any-aggfunction.md)來取樣一些資料行。
+* 使用[take 運算子](../query/takeoperator.md)來取樣查詢輸出。
+* 使用[substring 函數](../query/substringfunction.md)來修剪寬的自由文字資料行。
+* 使用[專案運算子](../query/projectoperator.md)，從結果集中卸載任何不必要的資料行。
 
-可以使用`notruncation`請求選項禁用結果截斷。 強烈建議在這種情況下,仍然實行某種形式的限制。 例如：
+您可以使用 [要求] 選項來停用結果截斷 `notruncation` 。
+我們建議您仍然將某種形式的限制放在原地。
+
+例如：
 
 ```kusto
 set notruncation;
 MyTable | take 1000000
 ```
 
-還可以通過設置`truncationmaxsize`值 (以位元組為單位的最大資料大小、預設值設置為 64 MB)和`truncationmaxrecords`(最大記錄數、默認值為 500,000)對結果截斷進行更精細的控制。 例如,以下查詢將結果截斷設置在 1,105 條記錄或 1MB 時發生,以超出者為準:
+您也可以設定的值 `truncationmaxsize` （最大資料大小（以位元組為單位，預設為 64 MB）和 `truncationmaxrecords` （記錄數目上限，預設為500000），以更精確地控制結果截斷。 例如，下列查詢會將結果截斷設定為在1105記錄或1MB 發生，取兩者中已超過。
 
 ```kusto
 set truncationmaxsize=1048576;
@@ -69,13 +74,19 @@ set truncationmaxrecords=1105;
 MyTable | where User=="Ploni"
 ```
 
-Kusto 用戶端庫當前假定存在此限制。 雖然您可以無限制地增加限制,但最終您將達到當前不可配置的用戶端限制。 一種可能的解決方法是直接針對 REST API 協定進行程式設計,並為 Kusto 查詢結果實現流解析器。 讓 Kusto 團隊知道您是否遇到此問題,以便我們可以適當地確定流用戶端的優先順序。
+Kusto 用戶端程式庫目前會假設此限制存在。 雖然您可以增加不含界限的限制，但最終您會到達目前無法設定的用戶端限制。
 
-默認情況下,將應用結果截斷,而不僅僅是返回到客戶端的結果流;默認情況下,它還應用於任何子查詢,即一個 Kusto 叢集在跨群集查詢中向另一個 Kusto 群集發出問題,具有類似的效果。
+不想要在單一大量提取所有資料的客戶，可以嘗試下列解決方法：
+* 將某些 Sdk 切換至串流模式（KustoConnectionStringBuilder 上的串流 = true 屬性）
+* 切換至 .NET v2 API，讓 Kusto 小組知道您是否遇到此問題，因此我們可以提高串流用戶端的優先順序。
+
+Kusto 提供許多用戶端程式庫，可處理「無限大」的結果，方法是將它們串流至呼叫者。 使用其中一個程式庫，並將它設定為串流模式。 例如，使用 .NET Framework 用戶端（Kusto），並將連接字串的串流屬性設為*true*，或使用一律會串流結果的*ExecuteQueryV2Async （）* 呼叫。
+
+預設會套用結果截斷，而不只是傳回給用戶端的結果資料流程。 根據預設，它也會套用至任何一個叢集在跨叢集查詢中發出至另一個叢集的子查詢，其效果類似。
 
 ## <a name="limit-on-memory-per-iterator"></a>每個反覆運算器的記憶體限制
 
-**每個結果集反覆運算器的最大記憶體**是 Kusto 用於防止「失控」查詢的另一個限制。 此限制(由請求選項`maxmemoryconsumptionperiterator`表示)設置單個查詢計劃結果集反覆運算器可以容納的記憶體量的上限。 (此限制適用於未按自然性質流式傳輸的特定反覆運算器,例如`join`.以下是一些錯誤消息,當發生這種情況時將返回:
+「**每個結果集的記憶體上限」反覆運算器**是 Kusto 用來防止「失控」查詢的另一個限制。 這個限制（由 request 選項表示 `maxmemoryconsumptionperiterator` ）會設定單一查詢計劃結果集反覆運算器可以保存的記憶體數量上限。 這項限制適用于不是由本質進行資料流程處理的特定反覆運算器，例如 `join` 。）以下是發生這種情況時，將傳回的幾個錯誤訊息：
 
 ```
 The ClusterBy operator has exceeded the memory budget during evaluation. Results may be incorrect or incomplete E_RUNAWAY_QUERY.
@@ -95,17 +106,18 @@ The TopNestedAggregator operator has exceeded the memory budget during evaluatio
 The TopNested operator has exceeded the memory budget during evaluation. Results may be incorrect or incomplete (E_RUNAWAY_QUERY).
 ```
 
-預設情況下,此值設置為 5 GB。 一個可以增加此值高達機器物理記憶體的一半:
+根據預設，此值設定為 5 GB。 您最多可以將這個值增加到電腦的一半實體記憶體：
 
 ```kusto
 set maxmemoryconsumptionperiterator=68719476736;
 MyTable | ...
 ```
 
-在考慮刪除這些限制時,首先確定是否通過這樣做實際上獲得了任何價值。 特別是,刪除結果截斷限制意味著您打算將批量數據移出 Kusto (用於匯出目的 (在這種情況下,請`.export`您改用 該命令), 或執行以後的聚合(在這種情況下,請考慮使用 Kusto 進行聚合)。
-讓 Kusto 團隊知道,您是否有一個無法由這些建議的解決方案滿足的業務方案。  
+考慮移除這些限制時，請先判斷您是否真的取得任何價值。 特別是，移除結果截斷限制表示您想要將大量資料移出 Kusto。
+您可以使用命令來移除結果截斷限制， `.export` 或是在稍後進行匯總，在這種情況下，請考慮使用 Kusto 進行匯總。
+讓 Kusto 小組知道您是否有任何一項建議的解決方案無法滿足的商務案例。  
 
-在許多情況下,通過將數據集採樣到 10%可以避免超過此限制。 下面的兩個查詢顯示了如何執行此採樣。 第一個是統計採樣(使用隨機數產生器)。 第二個是確定性採樣(透過從資料集(通常是一些 ID)中散列):
+在許多情況下，您可以藉由取樣資料集來避免超過此限制。 下列兩個查詢顯示如何進行取樣。 第一個是使用亂數字產生器的統計取樣。 第二種是具決定性的取樣，其方式是從資料集的某些資料行進行雜湊處理，通常是某些識別碼。
 
 ```kusto
 T | where rand() < 0.1 | ...
@@ -115,18 +127,17 @@ T | where hash(UserId, 10) == 1 | ...
 
 ## <a name="limit-on-memory-per-node"></a>每個節點的記憶體限制
 
-**每個節點的最大記憶體**是 Kusto 用於防止「失控」查詢的另一個限制。 此限制(由請求選項`max_memory_consumption_per_query_per_node`表示)設置對可在單個節點上為特定查詢分配的內存量設置上限。 
-
+**每個節點的最大記憶體每個查詢**都是用來防止「失控」查詢的另一個限制。 這項限制（以要求選項表示 `max_memory_consumption_per_query_per_node` ）會設定可在特定查詢的單一節點上使用的記憶體數量上限。
 
 ```kusto
 set max_memory_consumption_per_query_per_node=68719476736;
 MyTable | ...
 ```
 
-## <a name="limit-on-accumulated-string-sets"></a>對累積字串集的限制
+## <a name="limit-on-accumulated-string-sets"></a>累計字串集的限制
 
-在各種查詢操作中,Kusto 需要「收集」字串值並在內部緩衝它們,然後才能開始生成結果。 這些累積的字串集的大小和可以容納的項數是有限的。 此外,每個單獨的字串不能超過一定的限制。
-超過這些限制之一將導致以下錯誤之一:
+在各種查詢作業中，Kusto 需要「收集」字串值，並在開始產生結果之前于內部緩衝。 這些累積的字串集會有大小限制，以及它們可以保存的專案數。 此外，每個個別的字串都不應該超過特定限制。
+超過這些限制的其中一個會導致下列其中一個錯誤：
 
 ```
 Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the limit of ...GB (see https://aka.ms/kustoquerylimits)')
@@ -136,49 +147,49 @@ Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too
 Runaway query (E_RUNAWAY_QUERY). (message: 'Single string size shouldn't exceed the limit of 2GB (see http://aka.ms/kustoquerylimits)')
 ```
 
-當前沒有增加最大字串集大小的開關。
-作為解決方法,請重新表述查詢以減少必須緩衝的數據量。 例如,通過在「輸入」運算符(如聯接和匯總)之前投影不需要的列。 或者,例如,通過使用[隨機查詢](../query/shufflequery.md)策略。
+目前沒有任何參數可增加字串集大小上限。
+因應措施是將查詢重新加以改寫，以減少必須緩衝處理的資料量。 您可以在不需要的資料行之前，先將其投影出來，例如聯結和摘要等運算子。 或者，您可以使用[隨機查詢](../query/shufflequery.md)策略。
 
-## <a name="limit-on-request-execution-time-timeout"></a>要求執行時間限制(逾時)
+## <a name="limit-execution-timeout"></a>限制執行超時
 
-**伺服器超時**是應用於所有請求的服務端超時。
-執行要求(查詢及控制命令)的逾時在多個點強制執行:
+**伺服器超時**是套用至所有要求的服務端超時。
+在 Kusto 中的多個點強制執行要求的時間（查詢和控制命令）：
 
-* 在 Kusto 用戶端庫中(如果使用)
-* 在接受要求的 Kusto 服務終結點中
-* 處理 Kusto 服務引擎
+* 用戶端程式庫（如果使用）
+* 接受要求的服務端點
+* 處理要求的服務引擎
 
-默認情況下,查詢超時設置為 4 分鐘,控件命令設置為 10 分鐘。 如果需要,此值可以增加(在一小時時封頂):
+根據預設，查詢的 timeout 設定為4分鐘，而控制命令則設為10分鐘。 如有需要，可以增加此值（上限為一小時）。
 
-* 如果使用 Kusto.Explorer 查詢,請**使用工具**&gt;**選項*** &gt;**連線**&gt;**查詢伺服器超時**。
-* 以程式設計方式設定`servertimeout`客戶端請求屬性`System.TimeSpan`(類型的值,最多一小時)。
+* 如果您使用 Kusto 進行查詢，請使用 [**工具**] [選項] [ &gt; **Options** *  &gt; **連接** &gt; **查詢伺服器超時**]。
+* 以程式設計方式，將 `servertimeout` 用戶端要求屬性（類型的值 `System.TimeSpan` ）設定為一小時。
 
-關於超時的說明:
+**有關超時的注意事項**
 
-* 在用戶端,超時從創建的請求一直到回應開始到達客戶端的時間應用超時。 在用戶端讀取負載所需的時間不被視為超時的一部分(因為它取決於調用方從流中提取數據的速度)。
-* 同樣在用戶端,使用的實際超時值略高於使用者請求的伺服器超時值。 這是為了允許網路延遲。
-* 在服務端,並非所有查詢運算元都遵守超時值。
-   我們正在逐步增加這種支援。
-* 要讓 Kusto 自動使用允許的最大要求逾時,請將用戶端`norequesttimeout`請求屬性`true`設定為 。
+* 在用戶端上，會從所建立的要求中套用超時時間，直到回應開始到達用戶端為止。 在用戶端上讀取承載所花費的時間，並不會被視為超時的一部分。 這取決於呼叫端從資料流程提取資料的速度。
+* 此外，在用戶端上，所使用的實際超時值稍微高於使用者要求的伺服器超時值。 這種差異是允許網路延遲。
+* 若要自動使用允許的要求超時上限，請將用戶端要求屬性設定 `norequesttimeout` 為 `true` 。
 
 <!--
   Request timeout can also be set using a set statement, but we don't mention
-  it here as it should not be used in production scenarios.
+  it here since it shouldn't be used in production scenarios.
 -->
 
-## <a name="limit-on-query-cpu-resource-usage"></a>限制查詢 CPU 資源使用
+## <a name="limit-on-query-cpu-resource-usage"></a>查詢 CPU 資源使用量的限制
 
-默認情況下,Kusto 允許正在運行的查詢使用與群集一樣多的 CPU 資源,嘗試在查詢之間執行公平的迴圈(如果有多個查詢正在運行)。 在許多情況下,這會產生臨時查詢的最佳性能。
-在其他情況下,您可能希望限制為特定查詢分配的 CPU 資源。 例如,如果運行"後台作業",則可能會容忍較高的延遲,以便為併發臨時查詢提供高優先順序。
+Kusto 可讓您執行查詢，並使用與叢集一樣多的 CPU 資源。 如果有一個以上的執行，它會嘗試在查詢之間進行公平的迴圈配置資源。 此方法可為特定查詢產生最佳效能。
+有時候，您可能會想要限制用於特定查詢的 CPU 資源。 例如，如果您執行「背景作業」，系統可能會容許較高的延遲，讓並行的臨機操作查詢具有高優先順序。
 
-Kusto 支援在執行查詢時指定兩個[客戶端要求屬性](../api/netfx/request-properties.md)**,query_fanout_threads_percent**和**query_fanout_nodes_percent**。
-兩者都是預設為最大值 (100) 的整數,但對於特定查詢,可能會減少到某個值。 第一個控制線程使用的扇出因數;當群集為 100% 時,群集將為每個節點(例如,部署在 Azure D14 節點上的群集、16 個 CPU 上的群集)分配給查詢,當它為 50% 超過將使用的 CPU 的一半時,等等(數位被四捨五入到整個 CPU,因此將其設置為 0 是安全的。第二個控制群集中每個子查詢分發操作要利用的節點數,並且以類似方式運行。
+Kusto 支援在執行查詢時指定兩個[用戶端要求屬性](../api/netfx/request-properties.md)。 屬性為*query_fanout_threads_percent*和*query_fanout_nodes_percent*。
+這兩個屬性都是預設為最大值（100）的整數，但可能會針對某個其他值的特定查詢減少。 
 
-## <a name="limit-on-query-complexity"></a>查詢複雜性限制
+第一個*query_fanout_threads_percent*會控制執行緒使用的扇出因素。 當它是100% 時，叢集將會指派每個節點上的所有 Cpu。 例如，部署在 Azure D14 節點上的叢集上有16個 Cpu。 當它是50% 時，將會使用一半的 Cpu，依此類推。 數位會無條件進位到整個 CPU，因此可以安全地將它設定為0。 第二個是*query_fanout_nodes_percent*，它會控制叢集中有多少查詢節點，以供每個子查詢散發作業使用。 它的運作方式類似。
 
-在查詢執行期間,查詢文本將轉換為表示查詢的關係運算符樹。
-如果樹深度超過內部閾值(數千個級別),則查詢被認為過於複雜,無法處理,並且將失敗,並且錯誤代碼指示關係運算符樹超過限制。
-在大多數情況下,這是由包含連結在一起的一長串二進位運算符的查詢引起的,例如:
+## <a name="limit-on-query-complexity"></a>查詢複雜度的限制
+
+在查詢執行期間，查詢文字會轉換成代表查詢的關聯式運算子樹狀結構。
+如果樹狀結構深度超過數千個層級的內部臨界值，則查詢會被視為太複雜而無法處理，而且會失敗並產生錯誤碼。 此失敗表示關聯式運算子樹狀結構超過其限制。
+因為查詢中有多個連結在一起的二元運算子清單，所以超出了限制。 例如：
 
 ```kusto
 T 
@@ -188,7 +199,7 @@ T
         Column == "valueN"
 ```
 
-對於此特定情況 -[`in()`](../query/inoperator.md)建議使用 運算元重新編寫查詢。 
+在此特定案例中，請使用運算子來重寫查詢 [`in()`](../query/inoperator.md) 。
 
 ```kusto
 T 

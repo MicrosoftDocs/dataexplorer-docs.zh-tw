@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 83af540389087f0e1d9fdbd04266ab7ecaca0c5a
-ms.sourcegitcommit: b12e03206c79726d5b4055853ec3fdaa8870c451
+ms.openlocfilehash: eb13b53ba5f6785c79aaa586de50478074901c8d
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/18/2020
-ms.locfileid: "85069169"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85901919"
 ---
 # <a name="ingestion-without-kustoingest-library"></a>不 Kusto 內嵌程式庫的內嵌
 
@@ -283,7 +283,7 @@ internal static string PrepareIngestionMessage(string db, string table, string d
 最後，將您所建立的訊息張貼到您從 Azure 資料總管取得的所選內嵌佇列。
 
 > [!NOTE]
-> .Net 儲存體用戶端在使用時，預設會將訊息編碼為 base64。 如需詳細資訊，請參閱[儲存體](https://docs.microsoft.com/dotnet/api/microsoft.windowsazure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage)檔。如果您不是使用該用戶端，請務必適當地編碼訊息內容。
+> .Net 儲存體用戶端在使用時，預設會將訊息編碼為 base64。 如需詳細資訊，請參閱[儲存體](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage)檔。如果您不是使用該用戶端，請務必適當地編碼訊息內容。
 
 ```csharp
 internal static void PostMessageToQueue(string queueUriWithSas, string message)
@@ -329,7 +329,6 @@ Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列�
     "DatabaseName": "<DatabaseName>",
     "TableName" : "<TableName>",
     "RetainBlobOnSuccess" : "<RetainBlobOnSuccess>",
-    "Format" : "<csv|tsv|...>",
     "FlushImmediately": "<true|false>",
     "ReportLevel" : <0-Failures, 1-None, 2-All>,
     "ReportMethod" : <0-Queue, 1-Table>,
@@ -337,7 +336,7 @@ Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列�
 }
 ```
 
-|屬性 | 描述 |
+|屬性 | 說明 |
 |---------|-------------|
 |Id |訊息識別碼（GUID） |
 |BlobPath |Blob 的路徑（URI），包括授與 Azure 資料總管許可權以讀取/寫入/刪除它的 SAS 金鑰。 需要許可權，才能讓 Azure 資料總管在內嵌資料完成後刪除 blob|
@@ -345,17 +344,16 @@ Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列�
 |DatabaseName |目標資料庫名稱 |
 |TableName |目標資料表名稱 |
 |RetainBlobOnSuccess |如果設定為 `true` ，則一旦成功完成內嵌之後，將不會刪除 blob。 預設為 `false` |
-|格式 |未壓縮的資料格式 |
 |FlushImmediately |如果設定為 `true` ，則會略過任何匯總。 預設為 `false` |
 |ReportLevel |成功/錯誤報表層級： 0-失敗，1-無，2-全部 |
 |ReportMethod |報告機制： 0-佇列，1-資料表 |
-|AdditionalProperties |其他屬性，例如標記 |
+|AdditionalProperties |其他屬性，例如 `format` 、 `tags` 和 `creationTime` 。 如需詳細資訊，請參閱[資料內嵌屬性](../../../ingestion-properties.md)。|
 
 ### <a name="ingestion-failure-message-structure"></a>內嵌失敗訊息結構
 
 資料管理預期要從輸入 Azure 佇列讀取的訊息是下列格式的 JSON 檔。
 
-|屬性 | 描述 |
+|屬性 | 說明 |
 |---------|-------------
 |OperationId |可以用來追蹤服務端作業的作業識別碼（GUID） |
 |資料庫 |目標資料庫名稱 |

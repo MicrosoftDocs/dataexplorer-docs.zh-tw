@@ -1,6 +1,6 @@
 ---
-title: 產生架構()(聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的生成架構(聚合函數)。
+title: buildschema （）（彙總函式）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 buildschema （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,37 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: d0faceae970034ae96ced2b8958af4f16cb5dff4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cf21443beffb327e2708b8990017ac37fbbc8d21
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517284"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902045"
 ---
-# <a name="buildschema-aggregation-function"></a>產生架構 () (聚合函數)
+# <a name="buildschema-aggregation-function"></a>buildschema （）（彙總函式）
 
-返回允許*DynamicExpr*的所有值的最小架構。
+傳回 dynamicexpression 所有*DynamicExpr*值的最小架構。
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+* 只能在匯總的內容中使用，在[摘要](summarizeoperator.md)中
 
 **語法**
 
-總結`buildschema(`*動態Expr*`)`
+摘要 `buildschema(` *DynamicExpr*`)`
 
 **引數**
 
-* *動態 Expr*:將用於聚合計算的運算式。 參數欄型態應`dynamic`為 。 
+* *DynamicExpr*：用於匯總計算的運算式。 參數資料行類型必須是 `dynamic` 。 
 
 **傳回**
 
-跨組的*Expr*的最大值。
+整個群組的最大值 *`Expr`* 。
 
 > [!TIP] 
-> 如果`buildschema(json_column)`給出語法錯誤:*是`json_column`字串而不是動態物件?* 如果是這樣,您需要使用`buildschema(parsejson(json_column))`。
+> 如果出現 `buildschema(json_column)` 語法錯誤：*是您 `json_column` 的字串，而不是動態物件嗎？* 然後使用 `buildschema(parsejson(json_column))` 。
 
 **範例**
 
-假設輸入資料行有三個動態值︰
+假設輸入資料行有三個動態值。
 
 ||
 |---|
@@ -58,11 +58,11 @@ ms.locfileid: "81517284"
 
 結構描述指出：
 
-* 根物件是具有四個屬性 (名稱分別是 x、y、z 和 t) 的容器。
-* 名稱為 "x" 的屬性可以是 "int" 類型或 "string" 類型。
-* 名稱為 "y" 的屬性可以是 "double" 類型，或是另一個具有 "w" 屬性且類型為 "string" 的容器。
+* 根物件是具有四個屬性（名為 x、y、z 和 t）的容器。
+* 名為 "x" 的屬性，其類型可能是 "int" 或 "string" 類型。
+* 名為 "y" 的屬性可能是 "double" 類型，或另一個具有 "w" 類型 "string" 屬性的容器。
 * ``indexer`` 關鍵字指出 "z" 與 "t" 是陣列。
-* "z" 陣列中的每個項目皆為整數或字串。
+* 陣列 "z" 中的每個專案都屬於類型 "int" 或類型 "string"。
 * "t" 是字串陣列。
 * 每個屬性皆可隱含選用，且任何陣列都可以是空的。
 
@@ -76,7 +76,7 @@ ms.locfileid: "81517284"
     Union-type ::= '[' Type* ']';
     Primitive-type ::= "int" | "string" | ...;
 
-它們等效於 TypeScript 類型註釋的子集,編碼為 Kusto 動態值。 在 Typescript 中，範例結構描述會是︰
+這些值相當於 TypeScript 類型注釋的子集，並編碼為 Kusto 動態值。 在 Typescript 中，範例結構描述會是︰
 
     var someobject: 
     { 
@@ -85,3 +85,4 @@ ms.locfileid: "81517284"
       z?: { [n:number] : (int | string)},
       t?: { [n:number]: string } 
     }
+    

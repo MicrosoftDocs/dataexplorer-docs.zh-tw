@@ -1,23 +1,23 @@
 ---
-title: 同步庫塞托 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的同步庫托。
+title: 同步 Kusto-Azure 資料總管
+description: 本文說明 Azure 資料總管中的同步處理 Kusto。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: zivc
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/12/2019
-ms.openlocfilehash: 5f56b47d684441111aae397491336b5d819dedc8
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d132fd2bbb9f0a5a674955d586a208443a76d197
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81503276"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902076"
 ---
 # <a name="sync-kusto"></a>同步 Kusto
 
-Sync Kusto 是一種工具,使用戶能夠在本地檔案系統、Kusto 資料庫和 Azure 開發人員行動儲存庫之間同步各種 Kusto 架構實體(如表架構和存儲的函數)。
+Sync Kusto 是一種工具，可讓使用者同步處理各種不同的 Kusto 架構實體，例如資料表架構和預存函數。 這是在本機檔案系統、Kusto 資料庫和 Azure Dev Ops 存放庫之間進行的同步處理。
 
-同步函式庫斯圖在 GitHub 上可用[https://github.com/microsoft/synckusto](https://github.com/microsoft/synckusto): .
+您可以[在 GitHub 上](https://github.com/microsoft/synckusto)取得同步 Kusto。
 

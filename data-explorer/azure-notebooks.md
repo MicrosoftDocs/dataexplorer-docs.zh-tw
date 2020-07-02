@@ -37,7 +37,7 @@ ms.locfileid: "83373982"
     1. 清除 [**公用**] 核取方塊。
         >[!Important]
         > 如果您未清除 [公用] 核取方塊，您的專案將會在開啟的網際網路上公開。
-    1. 選取 [建立]  。
+    1. 選取 [建立]。
     
     ![建立新專案](media/azurenotebooks/an-create-new-project-blank.png)
 
