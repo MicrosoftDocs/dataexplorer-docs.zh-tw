@@ -283,16 +283,18 @@
               href: data-factory-template.md
             - name: 使用 Azure Data Factory 執行控制項
               href: data-factory-command-activity.md
-        - name: Microsoft Flow 連接器
+        - name: Power Automate
           items:
-            - name: Microsoft Flow 連接器
+            - name: Power Automate 流程連接器
               href: flow.md
-            - name: Microsoft Flow 連接器使用範例
+            - name: Power Automate 連接器使用範例
               href: flow-usage.md
         - name: Logic Apps
           href: kusto/tools/logicapps.md
         - name: Apache Spark 連接器
           href: spark-connector.md
+        - name: Cosmos DB
+          href: 'https://github.com/Azure/azure-kusto-labs/tree/master/cosmosdb-adx-integration'
         - name: 使用 Python 從 Databricks 連線
           href: connect-from-databricks.md
         - name: 在 Jupyter Notebook 和 Kqlmagic 中分析資料
