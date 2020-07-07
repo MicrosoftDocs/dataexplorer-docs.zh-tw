@@ -1,6 +1,6 @@
 ---
-title: 沙箱策略 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的沙箱策略。
+title: 沙箱原則-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的沙箱原則。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 7ac5a92b2084eaf2b447f296be34b2f4e79e1bb7
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7d56d602f53db29f5ea558acb0e9e4288e5ac6e3
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520123"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967480"
 ---
-# <a name="sandbox-policy"></a>沙箱原則
+# <a name="sandbox-policy-command"></a>沙箱原則命令
 
-以下命令允許管理 Kusto 引擎服務中的[沙箱](../concepts/sandboxes.md)與[沙箱原則](sandboxpolicy.md)。
+下列命令可讓您在 Kusto 引擎服務中管理[沙箱](../concepts/sandboxes.md)和[沙箱原則](sandboxpolicy.md)。
 
-這些命令需要[所有資料庫管理員](access-control/role-based-authorization.md)許可權。
+命令需要[AllDatabasesAdmin](access-control/role-based-authorization.md)許可權。
 
 ## <a name="sandbox-policy"></a>沙箱原則
 
-### <a name="show-cluster-policy-sandbox"></a>.顯示叢集策略沙箱
+### <a name="show-cluster-policy-sandbox"></a>。顯示叢集原則沙箱
 
-在群集級別顯示所有已配置的沙箱策略。
+顯示叢集層級上所有已設定的沙箱原則。
 
 ```kusto
 .show cluster policy sandbox
 ```
 
-### <a name="alter-cluster-policy-sandbox"></a>.更改叢集策略沙箱
+### <a name="alter-cluster-policy-sandbox"></a>。 alter cluster policy 沙箱
 
-修改群集級別的沙箱策略集合。
+修改叢集層級的沙箱原則集合。
 
 ```kusto
 .alter cluster policy sandbox @'['
@@ -54,9 +54,9 @@ ms.locfileid: "81520123"
 ']'
 ```
 
-### <a name="drop-cluster-policy-sandbox"></a>.刪除叢集策略沙箱
+### <a name="drop-cluster-policy-sandbox"></a>。卸載叢集原則沙箱
 
-要刪除**所有**沙箱策略,請使用以下命令:
+若要卸載**所有**沙箱原則，請使用下列命令：
 
 ```kusto
 .delete cluster policy sandbox

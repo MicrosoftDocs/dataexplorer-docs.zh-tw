@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: e8d02634ad0c56b2e1e369d4c2cd86c63bdad155
-ms.sourcegitcommit: 56bb7b69654900ed63310ac9537ae08b72bf7209
+ms.openlocfilehash: 6f7efe2916bc5c5344bf4a6c4fa4a60bfaa167b7
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85814189"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967344"
 ---
-# <a name="streaming-ingestion-policy-management"></a>串流處理內嵌原則管理
+# <a name="streaming-ingestion-policy-command"></a>串流內嵌原則命令
 
 您可以在資料表上設定串流內嵌原則，以允許在此資料表中內嵌串流。 您也可以在資料庫層級設定原則，以便將相同的設定套用到目前和未來的資料表。
 

@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: e03e529e0c802f0d424deb4048c5809bbe845ddd
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: ebbd9aa5544d97ef1e980bcb3a53f74dbde66547
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617403"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967531"
 ---
-# <a name="retention-policy"></a>保留原則
+# <a name="retention-policy-command"></a>保留原則命令
 
 本文說明用來建立和改變[保留原則](retentionpolicy.md)的控制命令。
 
@@ -28,11 +28,11 @@ ms.locfileid: "82617403"
 ```
 
 * `entity_type`：資料表或資料庫
-* `database_or_table`： `database_name`或`database_name.table_name`或`table_name` （在資料庫內容中）
+* `database_or_table`： `database_name` 或 `database_name.table_name` 或 `table_name` （在資料庫內容中）
 
 **範例**
 
-顯示名為`MyDatabase`之資料庫的保留原則：
+顯示名為之資料庫的保留原則 `MyDatabase` ：
 
 ```kusto
 .show database MyDatabase policy retention
@@ -49,11 +49,11 @@ ms.locfileid: "82617403"
 ```
 
 * `entity_type`：資料表或資料庫
-* `database_or_table`： `database_name`或`database_name.table_name`或`table_name` （在資料庫內容中）
+* `database_or_table`： `database_name` 或 `database_name.table_name` 或 `table_name` （在資料庫內容中）
 
 **範例**
 
-刪除名為`MyTable1`之資料表的保留原則：
+刪除名為之資料表的保留原則 `MyTable1` ：
 
 ```kusto
 .delete table MyTable policy retention
@@ -73,8 +73,8 @@ ms.locfileid: "82617403"
 ```
 
 * `entity_type`：資料表或資料庫
-* `database_or_table`： `database_name`或`database_name.table_name`或`table_name` （在資料庫內容中）
-* `table_name`：資料庫內容中的資料表名稱。  萬用字元（`*`可在這裡使用）。
+* `database_or_table`： `database_name` 或 `database_name.table_name` 或 `table_name` （在資料庫內容中）
+* `table_name`：資料庫內容中的資料表名稱。  萬用字元（ `*` 可在這裡使用）。
 * `retention_policy` :
 
 ```kusto
@@ -85,7 +85,7 @@ ms.locfileid: "82617403"
 
 **範例**
 
-顯示名為`MyDatabase`之資料庫的保留原則：
+顯示名為之資料庫的保留原則 `MyDatabase` ：
 
 ```kusto
 .show database MyDatabase policy retention

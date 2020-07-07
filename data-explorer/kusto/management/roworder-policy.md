@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 63aad71854c73a3d1f1837c3665a152db8b48d13
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: bf8844a72d2b4fc3d9dec4f24fdfa6ac36ee84d7
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84258023"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967497"
 ---
-# <a name="roworder-policy"></a>RowOrder 原則
+# <a name="roworder-policy-command"></a>roworder 原則命令
 
 本文描述用來建立和變更資料[列順序原則](../management/roworderpolicy.md)的控制命令。
 

@@ -1,6 +1,6 @@
 ---
-title: 放置欄 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的刪除列。
+title: 卸載資料行-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 drop 資料行。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/11/2020
-ms.openlocfilehash: 56ba5499b27b517b3080ee27ac317aa1e0917edd
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 770f787493828e897600485c282f3ccb12bb74c4
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521211"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85966868"
 ---
-# <a name="drop-column"></a>放置欄位
+# <a name="drop-column"></a>.drop 資料行
 
-從表中刪除欄位。
-要從表格中移除多個欄,請參考[下面的](#drop-table-columns)。
+從資料表中移除資料行。
+若要卸載資料表中的多個資料行，請參閱[下面](#drop-table-columns)的。
 
 > [!WARNING]
-> 此命令不可逆。 刪除欄中的資料都將被刪除。
-> 將來要將該列添加回來的命令將無法還原數據。
+> 此命令無法復原。 將會刪除資料行中移除的所有資料。
+> 未來用來新增該資料行的命令將無法還原資料。
 
 **語法**
 
-`.drop``column`*表名*`.`*欄位*
+`.drop``column` *TableName* `.` *ColumnName*
 
-## <a name="drop-table-columns"></a>放置表列
+## <a name="drop-table-columns"></a>捨棄資料表資料行
 
-從表中刪除多個欄位。
+從資料表中移除一些資料行。
 
 > [!WARNING]
-> 此命令不可逆。 刪除的欄中的所有資料都將被刪除。
-> 將來要將這些列重新添加的命令將無法還原資料。
+> 此命令無法復原。 將會刪除資料行中移除的所有資料。
+> 未來用來新增這些資料行的命令將無法還原資料。
 
 **語法**
 
-`.drop``table`*TableName*表`columns`名`(` *Col1* =`,` *Col2*_...`)`
+`.drop``table` *TableName* `columns` TableName `(`*Col1* [ `,` *Col2*] .。。`)`

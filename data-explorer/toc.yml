@@ -295,7 +295,7 @@
           href: spark-connector.md
         - name: Cosmos DB
           href: 'https://github.com/Azure/azure-kusto-labs/tree/master/cosmosdb-adx-integration'
-        - name: 使用 Python 從 Databricks 連線
+        - name: 從 Azure Databricks 連線
           href: connect-from-databricks.md
         - name: 在 Jupyter Notebook 和 Kqlmagic 中分析資料
           href: kqlmagic.md
@@ -1163,25 +1163,25 @@
               href: kusto/query/geo-polygon-to-s2cells-function.md
         - name: 使用者分析
           items:
-            - name: 使用者分析外掛程式
+            - name: 使用者分析外掛程式概觀
               href: ./kusto/query/useranalytics.md
-            - name: 作用中使用者計數外掛程式
+            - name: active_users_count 外掛程式
               href: ./kusto/query/active-users-count-plugin.md
-            - name: 活動計數計量外掛程式
+            - name: activity_counts_metrics plugin
               href: ./kusto/query/activity-counts-metrics-plugin.md
-            - name: 活動參與外掛程式
+            - name: activity_engagement plugin
               href: ./kusto/query/activity-engagement-plugin.md
-            - name: 活動計量外掛程式
+            - name: activity_metrics plugin
               href: ./kusto/query/activity-metrics-plugin.md
-            - name: 活動計量外掛程式 - 新增
+            - name: new_activity_metrics plugin
               href: ./kusto/query/new-activity-metrics-plugin.md
-            - name: 漏斗圖序列完成外掛程式
+            - name: funnel_sequence_completion plugin
               href: ./kusto/query/funnel-sequence-completion-plugin.md
-            - name: 漏斗圖序列外掛程式
+            - name: funnel_sequence plugin
               href: ./kusto/query/funnel-sequence-plugin.md
-            - name: 工作階段計數外掛程式
+            - name: session_count plugin
               href: ./kusto/query/session-count-plugin.md
-            - name: 滑動時段計數外掛程式
+            - name: sliding_window_counts 外掛程式
               href: ./kusto/query/sliding-window-counts-plugin.md
         - name: Kusto 查詢語言的參考資料
           items:
@@ -1221,34 +1221,33 @@
     - name: 管理性
       href: ./kusto/management/index.md
       items:
-        - name: 概觀
+        - name: 管理 (控制命令) 概觀
           href: ./kusto/management/index.md
           items:
-            - name: 最佳作法
+            - name: 結構描述設計的最佳做法
               href: ./kusto/management/best-practices.md
         - name: 結構描述
-          href: ./kusto/management/schema.md
           items:
-            - name: 資料庫
+            - name: 管理資料庫
               href: ./kusto/management/databases.md
               items:
                 - name: .show 資料庫
                   href: ./kusto/management/show-databases.md
                 - name: .show 資料庫
                   href: ./kusto/management/show-database.md
-                - name: .show 叢集資料庫
+                - name: .show cluster databases
                   href: ./kusto/management/show-cluster-database.md
-                - name: .alter 資料庫
+                - name: .alter database prettyname
                   href: ./kusto/management/alter-database.md
-                - name: .show 資料庫結構描述
+                - name: .show database(s) schema
                   href: ./kusto/management/show-schema-database.md
                 - name: .execute 資料庫指令碼
                   href: ./kusto/management/execute-database-script.md
             - name: 資料表
               items:
-                - name: 資料表概觀
+                - name: 資料表管理
                   href: ./kusto/management/tables.md
-                - name: .alter 合併資料表
+                - name: .alter-merge table
                   href: ./kusto/management/alter-merge-table-command.md
                 - name: .alter 資料表
                   href: ./kusto/management/alter-table-command.md
@@ -1268,13 +1267,15 @@
                   href: ./kusto/management/create-table-command.md
                 - name: .create 資料表
                   href: ./kusto/management/create-tables-command.md
+                - name: .create-merge table
+                  href: ./kusto/management/create-merge-table-command.md
                 - name: .create-merge tables
                   href: ./kusto/management/create-merge-tables-command.md
                 - name: .drop 資料表
                   href: ./kusto/management/drop-table-command.md
-                - name: .rename 資料表
+                - name: .rename table(s)
                   href: ./kusto/management/rename-table-command.md
-                - name: .show 資料表
+                - name: .show tables
                   href: ./kusto/management/show-tables-command.md
                 - name: .undo 捨棄資料表
                   href: ./kusto/management/undo-drop-table-command.md
@@ -1292,7 +1293,7 @@
                   href: ./kusto/management/external-tables-azurestorage-azuredatalake.md
             - name: 資料行
               items:
-                - name: 資料行概觀
+                - name: 資料行管理
                   href: ./kusto/management/columns.md
                 - name: .alter 資料行
                   href: ./kusto/management/alter-column.md
@@ -1302,17 +1303,17 @@
                   href: ./kusto/management/drop-column.md
                 - name: .rename 資料行
                   href: ./kusto/management/rename-column.md
-            - name: 對應
+            - name: 資料對應
               href: ./kusto/management/mappings.md
             - name: 函式
               items:
-                - name: 函式概觀
+                - name: 預存函數管理概觀
                   href: ./kusto/management/functions.md
                 - name: .alter 函式
                   href: ./kusto/management/alter-function.md
-                - name: .alter docstring 函式
+                - name: .alter function docstring
                   href: ./kusto/management/alter-docstring-function.md
-                - name: .alter 資料夾函式
+                - name: .alter function folder
                   href: ./kusto/management/alter-folder-function.md
                 - name: .create 函式
                   href: ./kusto/management/create-function.md
@@ -1320,98 +1321,96 @@
                   href: ./kusto/management/create-alter-function.md
                 - name: .drop 函式
                   href: ./kusto/management/drop-function.md
-                - name: .show 函式
+                - name: .show functions
                   href: ./kusto/management/show-function.md
         - name: 原則
           items:
-            - name: 原則概觀
-              href: ./kusto/management/policies.md
-            - name: 快取原則
+            - name: 內嵌批次處理
               items:
-                - name: 快取原則
-                  href: ./kusto/management/cachepolicy.md
-                - name: 快取原則命令
-                  href: ./kusto/management/cache-policy.md
-            - name: IngestionTime 原則
-              items:
-                - name: Ingestiontime 原則
-                  href: ./kusto/management/ingestiontimepolicy.md
-                - name: Ingestiontime 原則命令
-                  href: ./kusto/management/ingestiontime-policy.md
-            - name: 保留原則
-              items:
-                - name: 保留原則
-                  href: ./kusto/management/retentionpolicy.md
-                - name: 保留原則命令
-                  href: ./kusto/management/retention-policy.md
-            - name: RowLevelSecurity 原則
-              items:
-                - name: 資料列層級安全性原則
-                  href: ./kusto/management/rowlevelsecuritypolicy.md
-                - name: row_level_securityy 原則命令
-                  href: ./kusto/management/row-level-security-policy.md
-            - name: RowOrder 原則
-              items:
-                - name: 資料列順序原則
-                  href: ./kusto/management/roworderpolicy.md
-                - name: roworder 命令
-                  href: ./kusto/management/roworder-policy.md
-            - name: 更新原則
-              items:
-                - name: 更新原則
-                  href: ./kusto/management/updatepolicy.md
-                - name: 更新原則命令
-                  href: ./kusto/management/update-policy.md
-            - name: 批次原則
-              items:
-                - name: 內嵌批次處理原則
+                - name: Ingestionbatching 原則
                   href: ./kusto/management/batchingpolicy.md
                 - name: ingestionbatching 原則命令
                   href: ./kusto/management/batching-policy.md
-            - name: 合併原則
+            - name: 快取
               items:
-                - name: 合併原則
-                  href: ./kusto/management/mergepolicy.md
-                - name: 合併原則命令
-                  href: ./kusto/management/merge-policy.md
-            - name: 資料分割原則
-              items:
-                - name: 資料分割原則
-                  href: ./kusto/management/partitioningpolicy.md
-                - name: 資料分割原則命令
-                  href: ./kusto/management/partitioning-policy.md
-            - name: 受限的檢視存取原則
-              items:
-                - name: 受限的檢視存取原則
-                  href: ./kusto/management/restrictedviewaccesspolicy.md
-                - name: restricted_view_access 原則命令
-                  href: ./kusto/management/restrictedviewaccess-policy.md
-            - name: 沙箱原則
-              items:
-                - name: 沙箱原則
-                  href: ./kusto/management/sandboxpolicy.md
-                - name: 沙箱原則命令
-                  href: ./kusto/management/sandbox-policy.md
-            - name: 分區化原則
-              items:
-                - name: 分區化原則
-                  href: ./kusto/management/shardingpolicy.md
-                - name: 分區化原則命令
-                  href: ./kusto/management/sharding-policy.md
-            - name: 串流擷取原則
-              items:
-                - name: 串流擷取原則
-                  href: ./kusto/management/streamingingestionpolicy.md
-                - name: streamingingestion 原則命令
-                  href: ./kusto/management/streamingingestion-policy.md
-            - name: 註標原則
+                - name: 快取原則 (經常性存取和非經常性存取快取)
+                  href: ./kusto/management/cachepolicy.md
+                - name: 快取原則命令
+                  href: ./kusto/management/cache-policy.md
+            - name: 圖說文字
               href: ./kusto/management/calloutpolicy.md
-            - name: 產能原則
+            - name: Capacity
               items:
                 - name: 產能原則
                   href: ./kusto/management/capacitypolicy.md
                 - name: 產能原則命令
                   href: ./kusto/management/capacity-policy.md
+            - name: Ingestiontime
+              items:
+                - name: Ingestiontime 原則
+                  href: ./kusto/management/ingestiontimepolicy.md
+                - name: Ingestiontime 原則命令
+                  href: ./kusto/management/ingestiontime-policy.md
+            - name: 合併
+              items:
+                - name: 合併原則
+                  href: ./kusto/management/mergepolicy.md
+                - name: 合併原則命令
+                  href: ./kusto/management/merge-policy.md
+            - name: 資料分割
+              items:
+                - name: 資料分割原則
+                  href: ./kusto/management/partitioningpolicy.md
+                - name: 資料分割原則命令
+                  href: ./kusto/management/partitioning-policy.md
+            - name: 保留
+              items:
+                - name: 保留原則
+                  href: ./kusto/management/retentionpolicy.md
+                - name: 保留原則命令
+                  href: ./kusto/management/retention-policy.md
+            - name: 受限的檢視存取
+              items:
+                - name: 受限的檢視存取原則
+                  href: ./kusto/management/restrictedviewaccesspolicy.md
+                - name: restricted_view_access 原則命令
+                  href: ./kusto/management/restrictedviewaccess-policy.md
+            - name: 資料列層級安全性
+              items:
+                - name: 資料列層級安全性原則
+                  href: ./kusto/management/rowlevelsecuritypolicy.md
+                - name: row_level_security 原則命令
+                  href: ./kusto/management/row-level-security-policy.md
+            - name: Roworder
+              items:
+                - name: Roworder 原則
+                  href: ./kusto/management/roworderpolicy.md
+                - name: roworder 原則命令
+                  href: ./kusto/management/roworder-policy.md
+            - name: 沙箱
+              items:
+                - name: 沙箱原則
+                  href: ./kusto/management/sandboxpolicy.md
+                - name: 沙箱原則命令
+                  href: ./kusto/management/sandbox-policy.md
+            - name: 分區化
+              items:
+                - name: 分區化原則
+                  href: ./kusto/management/shardingpolicy.md
+                - name: 分區化原則命令
+                  href: ./kusto/management/sharding-policy.md
+            - name: 串流擷取
+              items:
+                - name: 串流內嵌原則
+                  href: ./kusto/management/streamingingestionpolicy.md
+                - name: streamingingestion 原則命令
+                  href: ./kusto/management/streamingingestion-policy.md
+            - name: 更新
+              items:
+                - name: 更新原則
+                  href: ./kusto/management/updatepolicy.md
+                - name: 更新原則命令
+                  href: ./kusto/management/update-policy.md
         - name: 安全性角色
           href: ./kusto/management/security-roles.md
         - name: 資料擷取
@@ -1428,7 +1427,7 @@
               href: ./kusto/management/data-ingestion/eventhub.md
             - name: 從 IoT 中樞內嵌
               href: ./kusto/management/data-ingestion/iothub.md
-            - name: 串流內嵌
+            - name: 串流擷取
               items:
                 - name: 串流內嵌和架構變更
                   href: ./kusto/management/data-ingestion/streaming-ingestion-schema-changes.md
@@ -1561,7 +1560,7 @@
                   href: ./kusto/api/netfx/kusto-ingest-client-errors.md
                 - name: 作業狀態
                   href: ./kusto/api/netfx/kusto-ingest-client-status.md
-                - name: 最佳做法
+                - name: 最佳作法
                   href: ./kusto/api/netfx/kusto-ingest-best-practices.md
                 - name: 程式碼範例
                   href: ./kusto/api/netfx/kusto-ingest-client-examples.md

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 26ccf94f8d88c6c86a6c11c20ec9cc04f8af1a42
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: 74871c2c1a10c199c5eb5415fcdf21590e4cf648
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011494"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967446"
 ---
 # <a name="data-sharding-policy"></a>資料分區化原則
 

@@ -1,5 +1,5 @@
 ---
-title: 使用 Kusto
+title: 使用 Kusto.Explorer
 description: 瞭解如何使用 Kusto
 author: orspod
 ms.author: orspodek
@@ -7,14 +7,14 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: 98a42fd72a28089e6add53aed5346ce2d0e5d993
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: fc8e34be3d61c690bc94795e6bd37f2559d247e0
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83866130"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013914"
 ---
-# <a name="using-kustoexplorer"></a>使用 Kusto
+# <a name="using-kustoexplorer"></a>使用 Kusto.Explorer
 
 Kusto 是一種桌面應用程式，可讓您在便於使用的使用者介面中使用 Kusto 查詢語言來流覽資料。 本文說明如何使用搜尋和查詢模式、共用查詢，以及管理叢集、資料庫和資料表。
 
@@ -135,7 +135,7 @@ Kusto 提供一個便利的方式，讓您透過電子郵件共用查詢和查�
 
 ### <a name="limitations"></a>限制
 
-查詢限制為 ~ 2000 個字元，因為瀏覽器限制、HTTP proxy，以及用來驗證連結的工具（例如 Microsoft Outlook）。 其限制是因為它相依于叢集和資料庫名稱長度。 如需詳細資訊，請參閱 [https://support.microsoft.com/kb/208427](https://support.microsoft.com/kb/208427) \(英文\)。 若要減少達到字元數限制的機率，請參閱下方的[取得較短的連結](#getting-shorter-links)。
+查詢限制為 ~ 2000 個字元，因為瀏覽器限制、HTTP proxy，以及用來驗證連結的工具（例如 Microsoft Outlook）。 其限制是因為它相依于叢集和資料庫名稱長度。 如需詳細資訊，請參閱 [https://support.microsoft.com/kb/208427](https://support.microsoft.com/kb/208427)。 若要減少達到字元數限制的機率，請參閱下方的[取得較短的連結](#getting-shorter-links)。
 
 URI 的格式為：`https://<ClusterCname>.kusto.windows.net/<DatabaseName>web=0?query=<QueryToExecute>`
 
@@ -164,9 +164,9 @@ https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSs
 您可以使用參數化查詢搭配深層連結。
 
 1. 建立查詢以形成參數化查詢（例如， `KustoLogs | where Timestamp > ago({Period}) | count` ） 
-1. 在此情況下，請為 URI 中的每個查詢參數提供參數：
+1. 為 URI 中的每個查詢參數提供參數，例如：
 
-https://mycluster.kusto.windows.net/MyDatabase?web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h
+   `https://mycluster.kusto.windows.net/MyDatabase?web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h`
 
 ### <a name="getting-shorter-links"></a>取得較短的連結
 
@@ -240,8 +240,8 @@ Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples
 ## <a name="next-steps"></a>後續步驟
 
 * [Kusto. Explorer 鍵盤快速鍵](kusto-explorer-shortcuts.md)
-* [Kusto. Explorer 選項](kusto-explorer-options.md)
-* [疑難排解 Kusto](kusto-explorer-troubleshooting.md)
+* [Kusto.Explorer 選項](kusto-explorer-options.md)
+* [針對 Kusto 進行疑難排解](kusto-explorer-troubleshooting.md)
 
 深入瞭解 Kusto. Explorer 工具和公用程式：
 * [Kusto. Explorer 程式碼分析器](kusto-explorer-code-analyzer.md)

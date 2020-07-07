@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7dd36181be1140d3960369b1c8a5284ed55e48f5
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 9f71a46e6c747b7f9d9f6a3ba2d2f8a308635128
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82616485"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967208"
 ---
-# <a name="alter-merge-table-column-docstrings"></a>alter-merge 資料表資料行-docstrings
+# <a name="alter-merge-table-column-docstrings"></a>.alter-merge table column-docstrings
 
-設定指定`docstring`之資料表的一個或多個資料行的屬性。 未明確設定的資料行會**保留**其現有的此屬性值（如果有的話）。
+設定 `docstring` 指定之資料表的一個或多個資料行的屬性。 未明確設定的資料行會**保留**其現有的此屬性值（如果有的話）。
 
 如需 alter table 資料行-docstring，請參閱[下面](#alter-table-column-docstrings)的。
 
 **語法**
 
-`.alter-merge``table` *TableName* `:` *Docstring1* *Col1* `:` * *Col1 Docstring1 [`,` *Col2* Docstring2] ... `column-docstring` `(``)`
+`.alter-merge``table` *TableName* `column-docstring` TableName `(`*Col1* `:`*Docstring1* [ `,` *Col2* `:` *Docstring2*] .。。`)`
 
 **範例** 
 
@@ -33,11 +33,11 @@ ms.locfileid: "82616485"
 
 ## <a name="alter-table-column-docstrings"></a>alter table 資料行-docstrings
 
-設定指定`docstring`之資料表的一個或多個資料行的屬性。 未明確設定的資料行將會**移除**此屬性。
+設定 `docstring` 指定之資料表的一個或多個資料行的屬性。 未明確設定的資料行將會**移除**此屬性。
 
 **語法**
 
-`.alter``table` *TableName* `:` *Docstring1* *Col1* `:` * *Col1 Docstring1 [`,` *Col2* Docstring2] ... `column-docstring` `(``)`
+`.alter``table` *TableName* `column-docstring` TableName `(`*Col1* `:`*Docstring1* [ `,` *Col2* `:` *Docstring2*] .。。`)`
 
 **範例** 
 

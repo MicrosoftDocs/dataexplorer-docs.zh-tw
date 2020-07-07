@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 9da59a53819396cf2cbd522f4a1e1296f585bf2f
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 33f21bdad11555ad2a55f285cbf40239236c561f
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617542"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967599"
 ---
-# <a name="restrictedviewaccess-policy"></a>RestrictedViewAccess 原則
+# <a name="restricted_view_access-policy-command"></a>restricted_view_access 原則命令
 
 *RestrictedViewAccess*原則記載于[此處](../management/restrictedviewaccesspolicy.md)。
 

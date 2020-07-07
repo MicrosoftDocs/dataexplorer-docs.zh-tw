@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 3c19426410046d7ff2357b4967333db8b039d9e6
-ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
+ms.openlocfilehash: 4a225c7d9cb1c5f99434c4595cbd798d020cfd9f
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/03/2020
-ms.locfileid: "84328988"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967429"
 ---
-# <a name="show-ingestion-mappings"></a>。顯示內嵌對應
+# <a name="show-ingestion-mapping"></a>.show 擷取對應
 
 顯示內嵌對應（全部或依名稱指定的對應）。
 

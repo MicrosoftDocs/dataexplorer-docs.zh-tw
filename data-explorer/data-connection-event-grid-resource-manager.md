@@ -1,20 +1,20 @@
 ---
-title: 使用 Azure 資源管理員樣本為 Azure 資料資源管理員建立事件網格資料連接
-description: 在本文中,您將瞭解如何通過使用 Azure 資源管理器範本為 Azure 資料資源管理器創建事件網格數據連接。
+title: 使用 Azure Resource Manager 範本來建立 Azure 資料總管的 Event Grid 資料連線
+description: 在本文中，您將瞭解如何使用 Azure Resource Manager 範本，為 Azure 資料總管建立 Event Grid 資料連線。
 author: lucygoldbergmicrosoft
 ms.author: lugoldbe
 ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/28/2019
-ms.openlocfilehash: 813ba82ba80aa5057adec3e29101b99a8fb518fe
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a3b60f5a2dba8e3d8b9c7b299cb371cda9932bf0
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81497859"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013862"
 ---
-# <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>使用 Azure 資源管理員樣本為 Azure 資料資源管理員建立事件網格資料連接
+# <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本來建立 Azure 資料總管的 Event Grid 資料連線
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-event-grid.md)
@@ -23,19 +23,19 @@ ms.locfileid: "81497859"
 > * [Azure Resource Manager 範本](data-connection-event-grid-resource-manager.md)
 
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料資源管理員提供從事件中心、IoT 中心和寫入 Blob 容器的 Blob 的引入(資料載入)。 在本文中,通過使用 Azure 資源管理器範本為 Azure 資料資源管理器創建事件網格數據連接。
+Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌（資料載入）。 在本文中，您會使用 Azure Resource Manager 範本來建立 Azure 資料總管的 Event Grid 資料連線。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
-* [建立叢集與資料庫](create-cluster-database-portal.md)
-* [建立表和列映射](ingest-data-event-grid.md#create-a-target-table-in-azure-data-explorer)
-* [建立事件中心](https://docs.microsoft.com/azure/event-hubs/event-hubs-create)
-* [使用事件格格訂閱建立儲存帳號](ingest-data-event-grid.md#create-an-event-grid-subscription-in-your-storage-account)。
+* 建立叢集[和資料庫](create-cluster-database-portal.md)
+* 建立[資料表和資料行對應](ingest-data-event-grid.md#create-a-target-table-in-azure-data-explorer)
+* 建立[事件中樞](/azure/event-hubs/event-hubs-create)
+* 建立[具有事件方格訂用帳戶的儲存體帳戶](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account)。
 
-## <a name="azure-resource-manager-template-for-adding-an-event-grid-data-connection"></a>新增事件網格資料連線的 Azure 資源管理員樣本
+## <a name="azure-resource-manager-template-for-adding-an-event-grid-data-connection"></a>用於新增事件方格資料連線的 Azure Resource Manager 範本
 
-下面的範例顯示了用於添加事件網格數據連接的 Azure 資源管理器範本。  可以使用[表單在 Azure 門戶編輯並編輯及部署樣本](/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal#edit-and-deploy-the-template)。
+下列範例顯示用來新增事件方格資料連線的 Azure Resource Manager 範本。  您可以使用表單來[編輯和部署 Azure 入口網站中的範本](/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal#edit-and-deploy-the-template)。
 
 ```json
 {

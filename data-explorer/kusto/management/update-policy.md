@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 5974909b6f5e40a977f935319972e7477a2a5755
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 6bb4a99b9fe226ce84bd02ee5ba04fc7a82fcd4c
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294367"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967276"
 ---
-# <a name="update-policy"></a>更新原則
+# <a name="update-policy-command"></a>更新原則命令
 
 [更新原則](updatepolicy.md)是一種資料表層級原則物件，會在將資料內嵌到另一個資料表時，自動執行查詢，然後內嵌結果。
 

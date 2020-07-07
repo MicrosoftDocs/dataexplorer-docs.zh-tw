@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: 3f36fa4c35ceb88c82b4dfcb7557e4839fed4aa2
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 2df8178bbc75b9338699c00cdd8a16e7ab3b057f
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780536"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967514"
 ---
-# <a name="rowlevelsecurity-policy-preview"></a>RowLevelSecurity 原則（預覽）
+# <a name="row_level_security-policy-command-preview"></a>row_level_security 原則命令（預覽）
 
 本文說明用來設定資料庫資料表之[row_level_security 原則](rowlevelsecuritypolicy.md)的命令。
 

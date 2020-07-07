@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/27/2020
-ms.openlocfilehash: ed70e01f7d955ba92806e7e11f740490e87cc664
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: 4de0e749ad47b8f2e3f2c0f26d5d18466efaff97
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011443"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967293"
 ---
 # <a name="tables-management"></a>資料表管理
 
-本主題討論資料表和相關聯之控制命令的生命週期。
+本主題討論資料表和相關聯之控制命令的生命週期，這些功能有助於探索、建立和改變數據表。
 
 選取下表中的連結以取得其相關詳細資訊。
 
-| 命令                                                                                                                 | 作業                       |
+| 命令                                                                                                                 | 操作                       |
 |--------------------------------------------------------------------------------------------------------------------------|---------------------------------|
 | [`.alter table docstring`](alter-table-docstring-command.md), [`.alter table folder`](alter-table-folder-command.md)                                                                                                                                                                                                   | 管理資料表顯示內容 |
 | [`.create ingestion mapping`](create-ingestion-mapping-command.md), [`.show ingestion mappings`](show-ingestion-mapping-command.md), [`.alter ingestion mapping`](alter-ingestion-mapping-command.md), [`.drop ingestion mapping`](drop-ingestion-mapping-command.md)                                                                    | 管理內嵌對應        |

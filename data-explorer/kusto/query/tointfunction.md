@@ -4,23 +4,23 @@ description: 本文說明 Azure 資料總管中的 toint （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7f0ede908be2689165f641038b2b6f699c0eb543
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: 1efd06b8fa2961528be65b630933aae74614e9a0
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550600"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013600"
 ---
 # <a name="toint"></a>toint()
 
 將輸入轉換成整數（帶正負號的32位）數位表示。
 
 ```kusto
-toint("123") == 123s
+toint("123") == int(123)
 ```
 
 **語法**

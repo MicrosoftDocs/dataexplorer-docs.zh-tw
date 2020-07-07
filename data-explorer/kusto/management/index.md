@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1277de1be577de7f9f6d4adf1b74460eac4a8c42
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b42cf002382cf4f7b79f7f734b6c7137f42fcbc8
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490339"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967021"
 ---
 # <a name="management-control-commands-overview"></a>管理 (控制命令) 概觀
 
@@ -41,6 +41,13 @@ Kusto 使用三種機制來區分查詢和控制命令：在語言層級、在�
 請注意，在所有情況下，整個組合在技術上都是控制命令，而不是查詢，因此要求的文字必須以點 (`.`) 字元開頭，且要求必須傳送至服務的管理端點。
 
 另請注意，[查詢陳述式](../query/statements.md)會出現在文字的查詢組件內 (不能在命令本身前面)。
+
+>[!NOTE]
+> 不要太常執行 [command-then-query] 作業。
+> 「command-then-query」 會將 control 命令的結果集傳送給管線，並在其套用在篩選/彙總上。
+>  * 例如： `.show ... | where ... | summarize ...`
+>   * 執行類似於 `.show cluster extents | count` (強調 `| count`) 時，Kusto 會先準備一個資料表，其中保存叢集中所有範圍的所有詳細資料。 系統接著會將記憶體內部的資料表傳送到 Kusto 引擎，以執行計數。 系統實際上是在未最佳化的路徑中運作，來為您提供這種簡單的答案。
+
 
 **AdminThenQuery** 會以下列兩種方式的其中一種來表示：
 
@@ -72,3 +79,5 @@ $command_results | extend LastColumn=useless(TableName)
 let text="Hello, World!";
 print str=Text
 ```
+
+

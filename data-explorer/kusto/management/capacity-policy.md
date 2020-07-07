@@ -1,6 +1,6 @@
 ---
-title: 容量策略控制命令 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的容量策略控制命令。
+title: 容量原則控制命令-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的容量原則控制命令。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,46 +8,46 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/02/2020
-ms.openlocfilehash: 929cfa885a7373b400b832d908677a7a5fb93ef6
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 512ab14c2abc1f777376d81d4944caf2c3343513
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522078"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967327"
 ---
-# <a name="capacity-policy-control-commands"></a>容量原則控制命令
+# <a name="capacity-policy-commands"></a>容量原則命令
 
-以下控制命令可用於管理叢集的[容量原則](../management/capacitypolicy.md)。
+下列控制命令可用於管理叢集的[容量原則](../management/capacitypolicy.md)。
 
-這些命令需要[所有資料庫管理員](../management/access-control/role-based-authorization.md)許可權。
+命令需要[AllDatabasesAdmin](../management/access-control/role-based-authorization.md)許可權。
 
-## <a name="show-cluster-policy-capacity"></a>顯示叢集政策容量
+## <a name="show-cluster-policy-capacity"></a>顯示叢集原則容量
 
 ```kusto
 .show cluster policy capacity
 ```
 
-顯示群集的當前容量策略。
+顯示叢集目前的容量原則。
 
 **輸出**
 
 |原則名稱 | 實體名稱 | 原則 | 子實體 | 實體類型
 |---|---|---|---|---
-|容量政策 | | JSON 格式的字串,表示策略 | 群組的資料庫清單 |叢集
+|CapacityPolicy | | JSON 格式的字串，代表原則 | 叢集中的資料庫清單 |叢集
 
 
-## <a name="alter-cluster-policy-capacity"></a>變更叢集政策容量
+## <a name="alter-cluster-policy-capacity"></a>改變叢集原則容量
 
 ```kusto
 .alter cluster policy capacity @'{ ... capacity policy JSON representation ... }'
 .alter-merge cluster policy capacity @'{ ... capacity policy partial-JSON representation ... }'
 ```
 
-**注意**:對群集容量策略的更改最多可能需要 1 小時才能生效。
+**注意**：叢集容量原則的變更可能需要最多1小時的時間才會生效。
 
 **範例：**
 
-* 明確變更叢集政策的屬性:
+* 明確改變叢集原則的所有屬性：
 
 ```kusto
 .alter cluster policy capacity
@@ -72,7 +72,7 @@ ms.locfileid: "81522078"
 '}'
 ```
 
-* 變更叢集級策略的單個屬性,保持所有其他屬性不變:
+* 改變叢集層級原則的單一屬性，讓其他所有屬性保持不變：
 
 ```kusto
 .alter-merge cluster policy capacity

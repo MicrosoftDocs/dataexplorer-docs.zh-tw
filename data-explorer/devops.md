@@ -8,12 +8,12 @@ ms.reviewer: jasonh
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/05/2019
-ms.openlocfilehash: cf6724a0f363eda510b5aa9cde195ec4fd3db65b
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 7d0c45a587a396da934bcb3465d60e101d0150a0
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373874"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967157"
 ---
 # <a name="azure-devops-task-for-azure-data-explorer"></a>適用于 Azure 資料總管的 Azure DevOps 工作
 
@@ -22,7 +22,7 @@ ms.locfileid: "83373874"
 
 本檔描述使用**Azure 資料總管–管理命令**工作將架構變更部署到資料庫的簡單範例。 如需完整的 CI/CD 管線，請參閱[Azure DevOps 檔](/azure/devops/user-guide/what-is-azure-devops?view=azure-devops#vsts)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * Azure 資料總管叢集設定：
@@ -42,7 +42,7 @@ ms.locfileid: "83373874"
 ![建立資料夾](media/devops/create-folders.png)
 
 > [!TIP]
-> 當您建立自己的工作流程時，我們建議讓您的程式碼具有等冪性。 例如，請使用[. create-merge table](kusto/management/create-table-command.md#create-merge-table) ，而不是[create table](kusto/management/create-table-command.md)，並使用[. create-或-alter](kusto/management/create-alter-function.md) function，而不是[create](kusto/management/create-function.md) function。
+> 當您建立自己的工作流程時，我們建議讓您的程式碼具有等冪性。 例如，請使用[. create-merge table](kusto/management/create-merge-table-command.md) ，而不是[create table](kusto/management/create-table-command.md)，並使用[. create-或-alter](kusto/management/create-alter-function.md) function，而不是[create](kusto/management/create-function.md) function。
 
 ## <a name="create-a-release-pipeline"></a>建立發行管線
 
@@ -101,11 +101,11 @@ ms.locfileid: "83373874"
     |**服務主體應用程式金鑰**     |    輸入 AAD 應用程式金鑰（建立為先決條件）    |
     |**AAD 租使用者識別碼**    |      輸入您的 AAD 租使用者（例如 microsoft.com，contoso.com ...）    |
 
-    選取 [**允許所有管線使用此連接**] 核取方塊。 選取 [確定]  。
+    選取 [**允許所有管線使用此連接**] 核取方塊。 選取 [確定]。
 
     ![新增服務連接](media/devops/add-service-connection.png)
 
-1. 重複步驟1-5 另兩*次，從 [函*式] 和 [*原則*] 資料夾部署檔案。 選取 [儲存]  。 在 [**工作]** 索引標籤中，查看建立的三個工作：**部署資料表**、**部署**函式，以及**部署原則**。
+1. 重複步驟1-5 另兩*次，從 [函*式] 和 [*原則*] 資料夾部署檔案。 選取 [儲存]。 在 [**工作]** 索引標籤中，查看建立的三個工作：**部署資料表**、**部署**函式，以及**部署原則**。
 
     ![部署所有資料夾](media/devops/deploy-all-folders.png)
 

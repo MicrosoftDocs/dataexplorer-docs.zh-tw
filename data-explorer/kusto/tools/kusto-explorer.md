@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 05/19/2020
-ms.openlocfilehash: 15c9ff61067f25f8a0f63ce4078b158277740db3
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
-ms.translationtype: HT
+ms.openlocfilehash: 6c36ace478e9bc026c028bfb6393bcfdf4eebdfa
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863452"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013923"
 ---
 # <a name="getting-started-with-kustoexplorer"></a>Kusto 入門
 
@@ -26,9 +26,9 @@ Kusto 是一個豐富的桌面應用程式，可讓您在便於使用的使用�
 
 ## <a name="installing-kustoexplorer"></a>安裝 Kusto
 
-* 安裝[Kusto. Explorer 工具](https://aka.ms/ke)
+* 安裝[Kusto 工具](https://aka.ms/ke)。
 
-* 請改為使用瀏覽器存取您的 Kusto 叢集，網址為： [HTTPs://<your_cluster>. kusto.windows.net](https://your_cluster.kusto.windows.net)。 以您的 Azure 資料總管叢集名稱取代 <your_cluster>。
+* 您可以使用瀏覽器來存取 Kusto 叢集，網址為 `https://<your_cluster>.kusto.windows.net` 。 （ `<your_cluster>` 將取代為您的 Azure 資料總管叢集名稱）。
 
 ### <a name="using-chrome-and-kustoexplorer"></a>使用 Chrome 和 Kusto
 
@@ -223,7 +223,7 @@ Kusto. Explorer 使用者介面的設計是以索引標籤和麵板為基礎，�
 ||---------*分析*---------|
 |分析報表| 開啟儀表板，其中包含多個預先建立的資料分析報表|
 ||---------*翻譯*---------|
-|查詢以 Power BI| 將查詢轉譯成適合在 Power BI 中使用的格式|
+|查詢 Power BI| 將查詢轉譯成適合在 Power BI 中使用的格式|
 ||---------*選項*---------|
 |重設選項| 將應用程式設定設為預設值|
 |選項| 開啟用來進行應用程式設定的工具。 深入瞭解[Kusto 選項](kusto-explorer-options.md)。|
@@ -258,7 +258,7 @@ Kusto. Explorer 使用者介面的設計是以索引標籤和麵板為基礎，�
 |功能表             | 行為|
 |-----------------|---------|
 ||---------*附帶*---------|
-|説明             | 開啟 Kusto 線上檔的連結  | 
+|[說明]             | 開啟 Kusto 線上檔的連結  | 
 |最新消息       | 開啟一份檔，列出所有 Kusto 的變更|
 |報告問題      |開啟包含兩個選項的對話方塊： <ul><li>報告與服務相關的問題</li><li>報告用戶端應用程式中的問題</li></ul> | 
 |建議功能  | 開啟 Kusto 意見反應論壇的連結 | 
@@ -319,10 +319,10 @@ Kusto 會嘗試解讀 [結果] 面板中每個資料列的嚴重性或詳細等�
 
 深入瞭解如何使用 Kusto：
 
-* [使用 Kusto](kusto-explorer-using.md)
+* [使用 Kusto.Explorer](kusto-explorer-using.md)
 * [Kusto. Explorer 鍵盤快速鍵](kusto-explorer-shortcuts.md)
-* [Kusto. Explorer 選項](kusto-explorer-options.md)
-* [疑難排解 Kusto](kusto-explorer-troubleshooting.md)
+* [Kusto.Explorer 選項](kusto-explorer-options.md)
+* [針對 Kusto 進行疑難排解](kusto-explorer-troubleshooting.md)
 
 深入瞭解 Kusto. Explorer 工具和公用程式：
 * [Kusto. Explorer 程式碼分析器](kusto-explorer-code-analyzer.md)

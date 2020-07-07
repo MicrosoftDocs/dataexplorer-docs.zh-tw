@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/09/2019
-ms.openlocfilehash: 3bbd14031adbfee3b5fac07194f5ff879ff33693
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 6bdf666b46adea8105b61fc2b907fc060530ba96
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373064"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967582"
 ---
-# <a name="regular-expressions"></a>規則運算式
+# <a name="re2-syntax"></a>RE2 語法
 
 RE2 正則運算式語法描述 Kusto （RE2）所使用之正則運算式程式庫的語法。
 Kusto 中有幾個函式會使用正則運算式執行字串比對、選取和解壓縮
@@ -25,8 +25,8 @@ Kusto 中有幾個函式會使用正則運算式執行字串比對、選取和�
 - [extract_all()](extractallfunction.md)
 - [符合 RegEx](datatypes-string-operators.md)
 - [parse 運算子](parseoperator.md)
-- [replace （）](replacefunction.md)
-- [trim （）](trimfunction.md)
+- [replace()](replacefunction.md)
+- [trim()](trimfunction.md)
 - [trimend （）](trimendfunction.md)
 - [trimstart （）](trimstartfunction.md)
 

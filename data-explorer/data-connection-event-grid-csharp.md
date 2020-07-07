@@ -1,20 +1,20 @@
 ---
-title: 使用 Czure 資料資源管理員建立事件網格資料連接#
-description: 在本文中,您將瞭解如何使用 C# 為 Azure 資料資源管理器創建事件網格數據連接。
+title: 使用 C 建立適用于 Azure 資料總管的 Event Grid 資料連線#
+description: '在本文中，您將瞭解如何使用 c # 來建立 Azure 資料總管的 Event Grid 資料連線。'
 author: lucygoldbergmicrosoft
 ms.author: lugoldbe
 ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: d2432d302640d20bb199972bc686dadab41278f1
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 627c60b1d5c39aa3e5c84f6ee87340c418fa542e
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81497807"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013865"
 ---
-# <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-c"></a>使用 Czure 資料資源管理員建立事件網格資料連接#
+# <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C 建立適用于 Azure 資料總管的 Event Grid 資料連線#
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-event-grid.md)
@@ -23,24 +23,24 @@ ms.locfileid: "81497807"
 > * [Azure Resource Manager 範本](data-connection-event-grid-resource-manager.md)
 
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料資源管理員提供從事件中心、IoT 中心和寫入 Blob 容器的 Blob 的引入(資料載入)。 在本文中,可以使用 C# 為 Azure 資料資源管理器創建事件網格數據連接。
+Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌（資料載入）。 在本文中，您會使用 c # 來建立 Azure 資料總管的 Event Grid 資料連線。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
-* 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 請確保在視覺化工作室設定期間開啟**Azure 開發**。
+* 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
-* [建立叢集與資料庫](create-cluster-database-csharp.md)
-* 建立[表和列映射](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
-* 設定[資料庫與表原則](database-table-policies-csharp.md)(選擇性的)
-* 使用[事件格線訂閱建立儲存帳號](ingest-data-event-grid.md#create-an-event-grid-subscription-in-your-storage-account)。
+* 建立叢集[和資料庫](create-cluster-database-csharp.md)
+* 建立[資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
+* 設定[資料庫和資料表原則](database-table-policies-csharp.md)（選擇性）
+* 建立[具有事件方格訂用帳戶的儲存體帳戶](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account)。
 
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
 
 [!INCLUDE [data-explorer-authentication](includes/data-explorer-authentication.md)]
 
-## <a name="add-an-event-grid-data-connection"></a>新增事件網格資料連線
+## <a name="add-an-event-grid-data-connection"></a>新增事件方格資料連線
 
-下面的範例展示如何以程式設計方式添加事件網格數據連接。 有關使用 Azure 門戶新增事件網格資料連線,請參閱[在 Azure 資料資源管理器中建立事件網格資料連接](ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer)。
+下列範例會示範如何以程式設計方式加入事件方格資料連線。 如需使用 Azure 入口網站新增事件方格資料連線，請參閱[在 Azure 中建立事件方格資料連線資料總管](ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer)。
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -79,34 +79,41 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 
 |**設定** | **建議的值** | **欄位描述**|
 |---|---|---|
-| tenantId | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄 ID。|
-| subscriptionId | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 用於資源創建的訂閱 ID。|
-| clientId | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 可以訪問租戶中資源的應用程式的客戶端 ID。|
-| clientSecret | *xxxxxxxxxxxxxxx* | 可以訪問租戶中資源的應用程式的用戶端機密。 |
-| resourceGroupName | *testrg* | 包含群集的資源組的名稱。|
-| clusterName | *mykustocluster* | 群集的名稱。|
-| databaseName | *mykustodatabase* | 群集中的目標資料庫的名稱。|
-| 資料連線名稱 | *myeventhubconnect* | 數據連接的所需名稱。|
-| tableName | *風暴事件* | 目標資料庫中的目標表的名稱。|
-| 對應規則名稱 | *StormEvents_CSV_Mapping* | 與目標表相關的列映射的名稱。|
-| 資料格式 | *Csv* | 消息的數據格式。|
-| 事件HubResourceId | *資源識別碼* | 事件格線設定為發送事件的事件中心的資源 ID。 |
-| 儲存帳戶資源 Id | *資源識別碼* | 儲存帳戶的資源 ID,用於保存要引入的數據。 |
-| 消費者群體 | *$Default* | 事件中心的消費者組。|
-| location | *美國中部* | 數據連接資源的位置。|
+| tenantId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
+| subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
+| clientId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
+| clientSecret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
+| resourceGroupName | *testrg* | 包含您叢集的資源組名。|
+| clusterName | *mykustocluster* | 叢集的名稱。|
+| databaseName | *mykustodatabase* | 叢集中的目標資料庫名稱。|
+| dataConnectionName | *myeventhubconnect* | 所需的資料連線名稱。|
+| tableName | *StormEvents* | 目標資料庫中目標資料表的名稱。|
+| mappingRuleName | *StormEvents_CSV_Mapping* | 與目標資料表相關之資料行對應的名稱。|
+| dataFormat | *csv* | 訊息的資料格式。|
+| eventHubResourceId | *資源識別碼* | 事件中樞的資源識別碼，其中事件方格已設定為傳送事件。 |
+| storageAccountResourceId | *資源識別碼* | 儲存體帳戶的資源識別碼，其中保存要內嵌的資料。 |
+| consumerGroup | *$Default* | 事件中樞的取用者群組。|
+| location | *美國中部* | 資料連線資源的位置。|
 
 ## <a name="generate-sample-data"></a>產生範例資料
 
-既然 Azure 資料檔案總管及儲存體帳戶已經連線，您可以建立範例資料並上傳至 Blob 儲存體。
+現在，Azure 資料總管和儲存體帳戶已連線，您可以建立範例資料，並將它上傳至儲存體。
 
-此指令碼會在儲存體帳戶中建立新的容器，將現有的檔案 (以 Blob 形式) 上傳至該容器，然後列出容器中的 Blob。
+> [!NOTE]
+> Azure 資料總管不會在內嵌後刪除 blob。 使用[Azure blob 儲存體生命週期](/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal)來管理 blob 刪除，以保留三到五天的 blob。
+
+### <a name="upload-file-using-azure-blob-storage-sdk"></a>使用 Azure Blob 儲存體 SDK 上傳檔案
+
+下列程式碼片段會在您的儲存體帳戶中建立新的容器、將現有的檔案（以 blob 形式）上傳至該容器，然後列出容器中的 blob。
 
 ```csharp
 var azureStorageAccountConnectionString=<storage_account_connection_string>;
 
-var containerName=<container_name>;
-var blobName=<blob_name>;
-var localFileName=<file_to_upload>;
+var containerName = <container_name>;
+var blobName = <blob_name>;
+var localFileName = <file_to_upload>;
+var uncompressedSizeInBytes = <uncompressed_size_in_bytes>;
+var mapping = <mappingReference>;
 
 // Creating the container
 var azureStorageAccount = CloudStorageAccount.Parse(azureStorageAccountConnectionString);
@@ -116,15 +123,49 @@ container.CreateIfNotExists();
 
 // Set metadata and upload file to blob
 var blob = container.GetBlockBlobReference(blobName);
-blob.Metadata.Add("rawSizeBytes", "4096‬"); // the uncompressed size is 4096 bytes
-blob.Metadata.Add("kustoIngestionMappingReference", "mapping_v2‬");
+blob.Metadata.Add("rawSizeBytes", uncompressedSizeInBytes);
+blob.Metadata.Add("kustoIngestionMappingReference", mapping);
 blob.UploadFromFile(localFileName);
 
 // List blobs
 var blobs = container.ListBlobs();
 ```
 
+### <a name="upload-file-using-azure-data-lake-sdk"></a>使用 Azure Data Lake SDK 上傳檔案
+
+使用 Data Lake Storage Gen2 時，您可以使用[AZURE DATA LAKE SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/)將檔案上傳至儲存體。 下列程式碼片段會在您的 Azure Data Lake 儲存體中建立新的檔案系統，並將含有中繼資料的本機檔案上傳至該檔案系統。
+
+```csharp
+var accountName = <storage_account_name>;
+var accountKey = <storage_account_key>;
+var fileSystemName = <file_system_name>;
+var fileName = <file_name>;
+var localFileName = <file_to_upload>;
+var uncompressedSizeInBytes = <uncompressed_size_in_bytes>;
+var mapping = <mapping_reference>;
+
+var sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
+var dfsUri = "https://" + accountName + ".dfs.core.windows.net";
+var dataLakeServiceClient = new DataLakeServiceClient(new Uri(dfsUri), sharedKeyCredential);
+
+// Create the filesystem and an empty file
+var dataLakeFileSystemClient = dataLakeServiceClient.CreateFileSystem(fileSystemName).Value;
+var dataLakeFileClient = dataLakeFileSystemClient.CreateFile(fileName).Value;
+
+// Set metadata
+IDictionary<String, String> metadata = new Dictionary<string, string>();
+metadata.Add("rawSizeBytes", uncompressedSizeInBytes);
+metadata.Add("kustoIngestionMappingReference", mapping);
+dataLakeFileClient.SetMetadata(metadata);
+
+// Write to the file and close it
+var fileStream = File.OpenRead(localFileName);
+var fileSize = fileStream.Length;
+dataLakeFileClient.Append(fileStream, offset: 0);
+dataLakeFileClient.Flush(position: fileSize, close: true); // Note: This line triggers the event being processed by the data connection
+```
+
 > [!NOTE]
-> Azure 資料資源管理員不會刪除引入後的 Blob。 通過使用[Azure Blob 儲存生命週期](https://docs.microsoft.com/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal)來管理 Blob 刪除,將 Blob 保留三到五天。
+> 使用[AZURE DATA LAKE SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/)上傳檔案時，第一次呼叫[CreateFile](/dotnet/api/azure.storage.files.datalake.datalakefilesystemclient.createfile?view=azure-dotnet)時，會觸發大小為0的事件方格事件，而 Azure 資料總管會忽略此事件。 使用設定為 "true" 的 "close" 參數呼叫 flush 時，會觸發另一個事件。 這個事件表示這是最後的更新，而且檔案資料流程已關閉。 此事件是由事件方格資料連線所處理。 如需有關排清的詳細資訊，請參閱[Azure Data Lake flush 方法](/dotnet/api/azure.storage.files.datalake.datalakefileclient.flush?view=azure-dotnet)。
 
 [!INCLUDE [data-explorer-data-connection-clean-resources-csharp](includes/data-explorer-data-connection-clean-resources-csharp.md)]

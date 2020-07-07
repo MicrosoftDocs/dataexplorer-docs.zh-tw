@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/04/2020
-ms.openlocfilehash: 51068a63adb16626c8b2812fde40782d2ac4a8f1
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 4f5abfd5c7fffd126033baeb2bbb9243b4400f58
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780570"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967395"
 ---
-# <a name="data-partitioning-policy-management"></a>資料分割原則管理
+# <a name="partitioning-policy-command"></a>資料分割原則命令
 
 [這裡](../management/partitioningpolicy.md)詳述資料分割原則。
 
@@ -31,7 +31,7 @@ ms.locfileid: "84780570"
 
 |原則名稱 | 實體名稱 | 原則 | 子實體 | 實體類型
 |---|---|---|---|---
-|DataPartitioning | 資料表名稱 | 原則物件的 JSON 序列化 | null | Table
+|DataPartitioning | 資料表名稱 | 原則物件的 JSON 序列化 | null | 資料表
 
 ## <a name="alter-and-alter-merge-policy"></a>alter 和 alter-merge 原則
 
