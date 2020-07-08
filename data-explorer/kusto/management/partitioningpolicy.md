@@ -8,12 +8,11 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 433d8786ad3664d02387efacd7dcd3865b4deb13
-ms.sourcegitcommit: ddafa58deb79417bd6f36e8bb3ad106d375b63e1
-ms.translationtype: MT
+ms.openlocfilehash: ca9d455bb1ca5a8736c279388d848ab1347c11e6
+ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85448497"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86058825"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
@@ -173,9 +172,9 @@ ms.locfileid: "85448497"
 * **MaxRowCountPerOperation**：
   * 單一資料分割作業之來源範圍的資料列計數總和的最大目標。
   * 這是選用屬性。 其預設值為 `0` ，預設目標為5000000記錄。
-    * 您可以考慮設定低於5M 的值，您會看到資料分割作業會耗用非常大量的記憶體/CPU （請參閱 #monitoring）。
+    * 如果您看到資料分割作業耗用的記憶體或 CPU 數量非常龐大，則您可以設定低於5M 的值。 如需詳細資訊，請參閱[監視](#monitoring)。
 
-## <a name="notes"></a>注意
+## <a name="notes"></a>備註
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
@@ -196,7 +195,7 @@ ms.locfileid: "85448497"
 輸出包含：
 
   * `MinPartitioningPercentageInSingleTable`：在叢集中具有資料分割原則的所有資料表上，分割資料的最小百分比。
-    * 如果此百分比持續維持在90% 以下，則請評估叢集的分割容量（請參閱[容量](partitioningpolicy.md#capacity)）。
+    * 如果此百分比持續維持在90% 以下，則請評估叢集的分割[容量](partitioningpolicy.md#capacity)。
   * `TableWithMinPartitioningPercentage`：資料表的完整名稱，如上所示的分割百分比。
 
 使用[. show 命令](commands.md)來監視分割命令及其資源使用率。 例如：
@@ -222,7 +221,7 @@ ms.locfileid: "85448497"
 * 如果雜湊分割區索引鍵所包含的值比其他專案更普遍，例如，空字串或泛型值（例如 `null` 或 `N/A` ），或是代表在 `tenant_id` 資料集內較普遍的實體（例如），可能會導致跨叢集節點的資料不平衡分佈，並降低查詢效能。
 * 如果統一範圍的 datetime 資料分割索引鍵的值足以達資料行中大多數值的「遠」百分比，例如，過去或未來的日期時間值，則可能會增加資料分割程式的額外負荷，並導致叢集需要追蹤的許多小範圍。
 
-在這兩種情況下，您都應該「修正」資料，或在內嵌期間篩選掉資料中任何不相關的記錄，以降低叢集上資料分割的額外負荷。 例如，使用[更新原則](updatepolicy.md)）。
+在這兩種情況下，您都應該「修正」資料，或在內嵌期間篩選掉資料中任何不相關的記錄，以降低叢集上資料分割的額外負荷。 例如，使用[更新原則](updatepolicy.md)。
 
 ## <a name="next-steps"></a>後續步驟
 
