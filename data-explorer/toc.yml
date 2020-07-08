@@ -70,9 +70,9 @@
           items:
             - name: 單鍵擷取概觀
               href: ingest-data-one-click.md
-            - name: 單鍵擷取至新資料表
+            - name: 從容器到新資料表的 CSV 資料
               href: one-click-ingestion-new-table.md
-            - name: 單鍵擷取至現有的資料表
+            - name: 從本機檔案到現有資料表的 JSON 資料
               href: one-click-ingestion-existing-table.md
         - name: 串流擷取
           items:
@@ -1486,7 +1486,21 @@
             - name: 範圍 (資料分區) 概觀
               href: ./kusto/management/extents-overview.md
             - name: 範圍命令
-              href: ./kusto/management/extents-commands.md
+              items:
+                - name: .alter extent
+                  href: ./kusto/management/alter-extent.md
+                - name: .drop extents
+                  href: ./kusto/management/drop-extents.md
+                - name: .drop extent 標記
+                  href: ./kusto/management/drop-extent-tags.md
+                - name: .merge extents
+                  href: ./kusto/management/merge-extents.md
+                - name: .move extents
+                  href: ./kusto/management/move-extents.md
+                - name: .replace extents
+                  href: ./kusto/management/replace-extents.md
+                - name: .show extents
+                  href: ./kusto/management/show-extents.md
             - name: 叢集關注者
               href: ./kusto/management/cluster-follower.md
             - name: 資料清除
