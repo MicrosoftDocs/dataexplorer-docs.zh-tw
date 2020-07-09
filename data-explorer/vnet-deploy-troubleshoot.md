@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: bbbf120c0a24a7ed14bc558b7dcd739bf2cae595
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 49041ec72439d8f36b54ece5fcd341fa4ca873fc
+ms.sourcegitcommit: bcb87ed043aca7c322792c3a03ba0508026136b4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374282"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86127326"
 ---
 # <a name="troubleshoot-access-ingestion-and-operation-of-your-azure-data-explorer-cluster-in-your-virtual-network"></a>針對您的虛擬網路中的 Azure 資料總管叢集存取、內嵌和操作進行疑難排解
 
@@ -85,6 +85,10 @@ ms.locfileid: "83374282"
 ## <a name="cluster-creation-and-operations-issues"></a>叢集建立和作業問題
 
 如果您遇到叢集建立或操作問題，而且懷疑它與虛擬網路設定相關，請遵循下列步驟來針對問題進行疑難排解。
+
+### <a name="check-the-dns-servers-configuration"></a>檢查「DNS 伺服器」設定
+
+不支援自訂 DNS 伺服器。 在虛擬網路的 [ **DNS 伺服器**設定] 區段中，使用預設選項。
 
 ### <a name="diagnose-the-virtual-network-with-the-rest-api"></a>使用 REST API 診斷虛擬網路
 

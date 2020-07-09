@@ -10,11 +10,12 @@ ms.topic: reference
 ms.date: 07/02/2020
 ms.openlocfilehash: cd193cb370136fd7f14a8892f157a895a1d7ad50
 ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 07/07/2020
 ms.locfileid: "86060609"
 ---
-# <a name="replace-extents"></a>。取代範圍
+# <a name="replace-extents"></a>.replace extents
 
 此命令會在特定資料庫的內容中執行。
 它會將指定的範圍從其來源資料表移到目的地資料表，然後從目的地資料表中卸載指定的範圍。
@@ -26,7 +27,7 @@ ms.locfileid: "86060609"
 > 資料分區在 Kusto 中稱為**範圍**，而所有命令都會使用「範圍」或「範圍」做為同義字。
 > 如需有關範圍的詳細資訊，請參閱[範圍（資料分區）總覽](extents-overview.md)。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `.replace`[ `async` ] `extents` `in` `table` *DestinationTableName*要 `<| 
 {` *從資料表查詢中卸載的範圍查詢*，以 `},{` *將範圍移至資料表*`}`
@@ -50,7 +51,7 @@ ms.locfileid: "86060609"
 
 ## <a name="return-output-for-sync-execution"></a>傳回輸出（用於同步執行）
 
-輸出參數 |類型 |Description
+輸出參數 |類型 |描述
 ---|---|---
 OriginalExtentId |字串 |來源資料表中已移至目的地資料表的原始範圍的唯一識別碼（GUID），或已卸載之目的地資料表中的範圍。
 ResultExtentId |字串 |已從來源資料表移到目的地資料表的結果範圍唯一識別碼（GUID）。 如果已從目的地資料表中卸載範圍，則為空白。 失敗時：「失敗」。

@@ -10,11 +10,12 @@ ms.topic: reference
 ms.date: 07/02/2020
 ms.openlocfilehash: dfa462ca82cd5e94adff77b3893b3b02d60c6cdc
 ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 07/07/2020
 ms.locfileid: "86060597"
 ---
-# <a name="drop-extents"></a>。放置範圍
+# <a name="drop-extents"></a>.drop extents
 
 從指定的資料庫或資料表中卸載範圍。
 
@@ -33,7 +34,7 @@ ms.locfileid: "86060597"
 
 如果 `whatif` 使用，只會報告它們，而不會實際卸載。
 
-### <a name="syntax"></a>Syntax
+### <a name="syntax"></a>語法
 
 `.drop``extents`[ `whatif` ] <|*查詢*
 
@@ -43,7 +44,7 @@ ms.locfileid: "86060597"
 
 如果未指定資料表名稱，則需要[資料庫系統管理員許可權](../management/access-control/role-based-authorization.md)。
 
-### <a name="syntax"></a>Syntax
+### <a name="syntax"></a>語法
 
 `.drop``extent` *ExtentId* [ `from` *TableName*]
 
@@ -53,7 +54,7 @@ ms.locfileid: "86060597"
 
 如果未指定資料表名稱，則需要[資料庫系統管理員許可權](../management/access-control/role-based-authorization.md)。
 
-### <a name="syntax"></a>Syntax
+### <a name="syntax"></a>語法
 
 `.drop``extents` `(` *ExtentId1* `,` .。。*ExtentIdN* `)`[ `from` *TableName*]
 
@@ -65,7 +66,7 @@ ms.locfileid: "86060597"
 
 如果未指定資料表名稱，則需要[資料庫系統管理員許可權](../management/access-control/role-based-authorization.md)。
 
-### <a name="syntax"></a>Syntax
+### <a name="syntax"></a>語法
 
 `.drop``extents`[ `older` *N* （ `days`  |  `hours` ）] `from` （*TableName*  |  `all` `tables` ） [ `trim` `by` （ `extentsize`  |  `datasize` ） *N* （ `MB`  |  `GB`  |  `bytes` ）] [ `limit` *LimitCount*]
 
@@ -108,7 +109,7 @@ ms.locfileid: "86060597"
 
 ## <a name="return-output"></a>傳回輸出
 
-|輸出參數 |類型 |Description 
+|輸出參數 |類型 |描述 
 |---|---|---
 |ExtentId |String |因為命令而卸載的 ExtentId
 |TableName |String |資料表名稱，其中的範圍所屬  

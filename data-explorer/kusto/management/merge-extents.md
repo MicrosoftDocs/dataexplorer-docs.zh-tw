@@ -10,11 +10,12 @@ ms.topic: reference
 ms.date: 07/02/2020
 ms.openlocfilehash: 6b633358713b0ff48d14fc9c5ca2a907bad0afab
 ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 07/07/2020
 ms.locfileid: "86060608"
 ---
-# <a name="merge-extents"></a>。合併範圍
+# <a name="merge-extents"></a>.merge extents
 
 此命令會合並指定的資料表中，其識別碼所指出的範圍。 
 
@@ -22,7 +23,7 @@ ms.locfileid: "86060608"
 > 資料分區在 Kusto 中稱為**範圍**，而所有命令都會使用「範圍」或「範圍」做為同義字。
 > 如需有關範圍的詳細資訊，請參閱[範圍（資料分區）總覽](extents-overview.md)。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `.merge``[async | dryrun]` *TableName* `(` *GUID1* [ `,` *GUID2* ...] `)``[with(rebuild=true)]`
 
@@ -39,7 +40,7 @@ ms.locfileid: "86060608"
 
 ## <a name="return-output"></a>傳回輸出
 
-輸出參數 |類型 |Description
+輸出參數 |類型 |描述
 ---|---|---
 OriginalExtentId |字串 |來源資料表中原始範圍的唯一識別碼（GUID），已合併至目標範圍。
 ResultExtentId |字串 |從來源範圍建立之範圍的唯一識別碼（GUID）。 失敗時：「失敗」或「已放棄」。
@@ -59,7 +60,7 @@ Duration |時間範圍 |完成合併作業所花費的時間週期。
 .merge MyTable (12345050-a1e2-4dad-8552-1f5cf47cab69, 98765b2d-9dd2-4d2c-a45e-b24c65aa6687)
 ```
 
-## <a name="notes"></a>備註
+## <a name="notes"></a>注意
 
 * 一般情況下， `.merge` 不應手動執行命令。 根據資料表和資料庫的[合併原則](mergepolicy.md)，這些命令會持續自動在叢集的背景中執行。  
   * 如需將多個範圍合併成單一範圍之準則的詳細資訊，請參閱[合併原則](mergepolicy.md)。

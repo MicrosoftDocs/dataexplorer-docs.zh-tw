@@ -10,6 +10,7 @@ ms.topic: reference
 ms.date: 07/02/2020
 ms.openlocfilehash: 00c4cfbb4b6415afcd68e8e41864ca4a68cc097e
 ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 07/07/2020
 ms.locfileid: "86060568"
@@ -26,7 +27,7 @@ ms.locfileid: "86060568"
 > 資料分區在 Kusto 中稱為**範圍**，而所有命令都會使用「範圍」或「範圍」做為同義字。
 > 如需有關範圍的詳細資訊，請參閱[範圍（資料分區）總覽](extents-overview.md)。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `.alter`[ `async` ] `extent` `tags` `(` '*Tag1*' [ `,` '*Tag2*' `,` ... `,` '*TagN*'] `)`  <|  *查詢*
 
@@ -41,7 +42,7 @@ ms.locfileid: "86060568"
 
 ## <a name="return-output"></a>傳回輸出
 
-|輸出參數 |類型 |Description|
+|輸出參數 |類型 |描述|
 |---|---|---|
 |OriginalExtentId |字串 |原始範圍的唯一識別碼（GUID），其標記已修改。 範圍會在作業中卸載。|
 |ResultExtentId |字串 |已修改標記之結果範圍的唯一識別碼（GUID）。 範圍會建立並加入做為作業的一部分。 失敗時-「失敗」。|

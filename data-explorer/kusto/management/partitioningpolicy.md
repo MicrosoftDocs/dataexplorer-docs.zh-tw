@@ -8,11 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: ca9d455bb1ca5a8736c279388d848ab1347c11e6
-ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.openlocfilehash: 7f299a730b451f608e0d2c81fc78565d515fc029
+ms.sourcegitcommit: bcb87ed043aca7c322792c3a03ba0508026136b4
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86058825"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86127304"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
@@ -34,7 +35,8 @@ ms.locfileid: "86058825"
 
 ### <a name="hash-partition-key"></a>雜湊分割區索引鍵
 
-`string`當大部分的查詢都使用相等篩選（ `==` ，）時， `in()` 或在 `string` *大型維度*（1千萬個或更高的基數）的特定類型資料行上匯總/聯結（例如 `application_ID` 、 `tenant_ID` 或） `user_ID` 時，將雜湊分割區索引鍵套用在資料表的類型資料行上是適當的。
+> [!NOTE]
+> `string`**只有**當大部分的查詢都使用相等篩選（ `==` ， `in()` ），或在 `string` *大型維度*（1千萬個或更高的基數）的特定類型資料行上匯總/聯結（例如 `application_ID` 、 `tenant_ID` 或） `user_ID` 時，才適合在資料表的類型資料行上套用雜湊資料分割索引鍵。
 
 * 雜湊模數函數可用來分割資料。
 * 屬於相同資料分割的所有同質（資料分割）範圍都會指派給相同的資料節點。
@@ -77,7 +79,10 @@ ms.locfileid: "86058825"
 
 ### <a name="uniform-range-datetime-partition-key"></a>統一範圍 datetime 資料分割索引鍵
 
-`datetime`當不太可能根據這個資料行來排序資料表中的資料內嵌時，將統一範圍的 datetime 資料分割索引鍵套用到資料表中的類型資料行上是適當的。 在範圍之間重新資料可能很有説明，因為每個範圍都有一段限制的時間範圍內的記錄。 重新輪換會導致資料行的篩選準則在 `datetime` 查詢時更有效率。
+> [!NOTE] 
+> `datetime`只有在資料表中內嵌的資料不太可能根據這個資料行進行排序時，**才**適合在資料表中的類型資料行上套用統一範圍 datetime 資料分割索引鍵。
+
+在這種情況下，在範圍之間重新資料可能會很有説明，因為每個範圍最後都會包含限制時間範圍內的記錄。 這會導致該資料行上的篩選準則在 `datetime` 查詢時更有效率。
 
 * 使用的資料分割函數是[bin_at （）](../query/binatfunction.md) ，無法自訂。
 
@@ -174,7 +179,7 @@ ms.locfileid: "86058825"
   * 這是選用屬性。 其預設值為 `0` ，預設目標為5000000記錄。
     * 如果您看到資料分割作業耗用的記憶體或 CPU 數量非常龐大，則您可以設定低於5M 的值。 如需詳細資訊，請參閱[監視](#monitoring)。
 
-## <a name="notes"></a>備註
+## <a name="notes"></a>注意
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 

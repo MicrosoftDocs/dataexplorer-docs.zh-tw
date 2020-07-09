@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
-ms.openlocfilehash: 6fa60c3c82a889d1161b30529586b225cee3efbd
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: e6b329380d507e93161415f51515656628564500
+ms.sourcegitcommit: bf2c9da0c23ebcaec19b229d2079032d54a2cc82
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863265"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86140548"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Azure 資料總管資料內嵌總覽 
 
@@ -34,7 +34,6 @@ Azure 資料總管會從外部來源提取資料，並從擱置中的 Azure 佇�
 
 * **許可權**：若要內嵌資料，進程需要[資料庫擷取器層級許可權](kusto/management/access-control/role-based-authorization.md)。 其他動作（例如查詢）可能需要資料庫管理員、資料庫使用者或資料表管理員許可權。
 
-
 ## <a name="batching-vs-streaming-ingestion"></a>批次處理 vs 串流內嵌
 
 * 批次處理內嵌會執行資料批次處理，並已針對高內嵌輸送量進行優化。 這個方法是內嵌的慣用和最高效能型別。 資料是根據內嵌屬性進行批次處理。 然後會合並少量的資料，並針對快速查詢結果進行優化。 您可以在資料庫或資料表上設定內嵌[批次處理](kusto/management/batchingpolicy.md)原則。 根據預設，最大的批次處理值為5分鐘、1000個專案，或總大小為 500 MB。
@@ -54,6 +53,12 @@ Azure 資料總管支援數種內嵌方法，各有其本身的目標案例。 �
 * **[事件中樞](https://azure.microsoft.com/services/event-hubs/)**：管線，可將事件從服務傳送至 Azure 資料總管。 如需詳細資訊，請參閱[將資料從事件中樞內嵌至 Azure 資料總管](ingest-data-event-hub.md)。
 
 * **[IoT 中樞](https://azure.microsoft.com/services/iot-hub/)**：用來將資料從支援的 IoT 裝置傳送至 Azure 資料總管的管線。 如需詳細資訊，請參閱[從 IoT 中樞](ingest-data-iot-hub.md)內嵌。
+
+* **Azure Data Factory （ADF）**：完全受控的資料整合服務，適用于 Azure 中的分析工作負載。 Azure Data Factory 與超過90個支援的來源連接，以提供有效率且可復原的資料傳輸。 ADF 會準備、轉換和來擴充資料，以提供可透過不同方式監視的深入解析。 這項服務可用來做為一次性解決方案、定期時間軸，或由特定事件所觸發。 
+  * [整合 Azure 資料總管與 Azure Data Factory](data-factory-integration.md)。
+  * [使用 Azure Data Factory 將資料從支援的來源複製到 Azure 資料總管](/azure/data-explorer/data-factory-load-data)。
+  * [使用 Azure Data Factory 範本，從資料庫大量複製到 Azure 資料總管](data-factory-template.md)。
+  * [使用 Azure Data Factory 命令活動來執行 Azure 資料總管控制命令](data-factory-command-activity.md)。
 
 ### <a name="ingestion-using-connectors-and-plugins"></a>使用連接器和外掛程式的擷取
 
@@ -85,12 +90,6 @@ Azure 資料總管會提供可用於查詢和資料擷取的 SDK。 程式設計
 
 ### <a name="tools"></a>工具
 
-* **Azure Data Factory （ADF）**：完全受控的資料整合服務，適用于 Azure 中的分析工作負載。 Azure Data Factory 與超過90個支援的來源連接，以提供有效率且可復原的資料傳輸。 ADF 會準備、轉換和來擴充資料，以提供可透過不同方式監視的深入解析。 這項服務可用來做為一次性解決方案、定期時間軸，或由特定事件所觸發。 
-  * [整合 Azure 資料總管與 Azure Data Factory](data-factory-integration.md)。
-  * [使用 Azure Data Factory 將資料從支援的來源複製到 Azure 資料總管](/azure/data-explorer/data-factory-load-data)。
-  * [使用 Azure Data Factory 範本，從資料庫大量複製到 Azure 資料總管](data-factory-template.md)。
-  * [使用 Azure Data Factory 命令活動來執行 Azure 資料總管控制命令](data-factory-command-activity.md)。
-
 * **[按一下](ingest-data-one-click.md)**[內嵌]：可讓您從各種來源類型建立和調整資料表，以快速內嵌資料。 按一下 [內嵌] 會根據 Azure 資料總管中的資料來源，自動建議資料表和對應結構。 按一下 [內嵌] 可用於單次內嵌，或透過事件方格，在內嵌資料的容器上定義連續內嵌。
 
 * **[LightIngest](lightingest.md)**：命令列公用程式，用於將臨機運算元據內嵌至 Azure 資料總管。 公用程式可以從本機資料夾或從 Azure blob 儲存體容器提取來源資料。
@@ -116,15 +115,15 @@ Azure 資料總管會提供可用於查詢和資料擷取的 SDK。 程式設計
 | [**LogStash**](ingest-data-logstash.md) | | | | |
 | [**Azure Data Factory**](kusto/tools/azure-data-factory.md) | [支援的資料格式](/azure/data-factory/copy-activity-overview#supported-data-stores-and-formats) | 無限制 * （每個 ADF 限制） | 批次處理或每個 ADF 觸發程式 | 支援通常不受支援的大型檔案格式，可從永久至雲端的超過90來源複製 | 內嵌時間 |
 |[**Azure 資料流程**](kusto/tools/flow.md) | | | | 在流程中內嵌命令| 必須具有高效能回應時間 |
-| [**IoT 中樞**](kusto/management/data-ingestion/iothub.md) | [支援的資料格式](kusto/management/data-ingestion/iothub.md#data-format)  | 不適用 | 批次處理，資料流程 | IoT 訊息，IoT 事件，IoT 屬性 | |
-| [**事件中樞**](kusto/management/data-ingestion/eventhub.md) | [支援的資料格式](kusto/management/data-ingestion/eventhub.md#data-format) | 不適用 | 批次處理，資料流程 | 訊息、事件 | |
+| [**IoT 中樞**](kusto/management/data-ingestion/iothub.md) | [支援的資料格式](kusto/management/data-ingestion/iothub.md#data-format)  | N/A | 批次處理，資料流程 | IoT 訊息，IoT 事件，IoT 屬性 | |
+| [**事件中樞**](kusto/management/data-ingestion/eventhub.md) | [支援的資料格式](kusto/management/data-ingestion/eventhub.md#data-format) | N/A | 批次處理，資料流程 | 訊息、事件 | |
 | [**事件方格**](kusto/management/data-ingestion/eventgrid.md) | [支援的資料格式](kusto/management/data-ingestion/eventgrid.md#data-format) | 未壓縮 1 GB | 批次處理 | 從 Azure 儲存體、Azure 儲存體中的外部資料進行連續內嵌 | 100 KB 是最佳的檔案大小，用於 blob 重新命名和建立 blob |
 | [**Net Std**](net-standard-ingest-data.md) | 支援的所有格式 | 未壓縮 1 GB （請參閱附注） | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**Python**](python-ingest-data.md) | 支援的所有格式 | 未壓縮 1 GB （請參閱附注） | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**Node.js**](node-ingest-data.md) | 支援的所有格式 | 未壓縮 1 GB （請參閱附注 | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**Java**](kusto/api/java/kusto-java-client-library.md) | 支援的所有格式 | 未壓縮 1 GB （請參閱附注） | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**REST**](kusto/api/netfx/kusto-ingest-client-rest.md) | 支援的所有格式 | 未壓縮 1 GB （請參閱附注） | 批次處理、串流、直接| 根據組織需求撰寫您自己的程式碼 |
-| [**Go**](kusto/api/golang/kusto-golang-client-library.md) | 支援的所有格式 | 未壓縮 1 GB （請參閱附注） | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
+| [**消失**](kusto/api/golang/kusto-golang-client-library.md) | 支援的所有格式 | 未壓縮 1 GB （請參閱附注） | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 
 > [!Note] 
 > 在上表中參考時，內嵌支援的檔案大小上限為 5 GB。 建議內嵌 100 MB 和 1 GB 之間的檔案。
