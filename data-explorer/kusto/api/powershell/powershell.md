@@ -8,25 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/29/2019
-ms.openlocfilehash: b454b9453c7afd0835041ac78d13318de73432e2
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 6804b71ff3985de17460dddfa60f081f3bb910c0
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382059"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188416"
 ---
 # <a name="using-the-net-client-libraries-from-powershell"></a>從 PowerShell 使用 .NET 用戶端程式庫
 
-PowerShell 腳本可以透過 PowerShell 與任意（非 PowerShell） .NET 程式庫的內建整合，使用 Azure 資料總管 .NET 用戶端程式庫。
+PowerShell 腳本可以使用 Azure 資料總管 .NET 用戶端程式庫，透過 PowerShell 的內建整合與任意 (非 PowerShell) .NET 程式庫。
 
 ## <a name="getting-the-net-client-libraries-for-scripting-with-powershell"></a>使用 PowerShell 取得 .NET 用戶端程式庫以進行腳本處理
 
 使用 PowerShell 開始使用 Azure 資料總管 .NET 用戶端程式庫。
 
 1. 下載[ `Microsoft.Azure.Kusto.Tools` NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)。
-1. 將套件中的「工具」目錄內容解壓縮（使用像是的封存工具 `7-zip` ）。
+    * 如果您是使用 Powershell 7 (或更新版本) ，請下載[ `Microsoft.Azure.Kusto.Tools.NETCore` NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools.NETCore/)。
+1. 將封裝中的「工具」目錄內容解壓縮 (使用) 之類的封存工具 `7-zip` 。
 1. `[System.Reflection.Assembly]::LoadFrom("path")`從 PowerShell 呼叫以載入所需的程式庫。 
-    - `path`命令的參數應該會指出解壓縮檔案的位置。
+    * `path`命令的參數應該會指出解壓縮檔案的位置。
 1. 載入所有相依的 .NET 元件之後：
    1. 建立 Kusto 連接字串。
    1. 具現化*查詢提供者*或系統*管理員提供者*。
@@ -65,6 +66,10 @@ $kcsb = New-Object Kusto.Data.KustoConnectionStringBuilder ($clusterUrl, $databa
 #     $applicationKey = "application key goes here"
 #     $authority = "authority goes here"
 #     $kcsb = $kcsb.WithAadApplicationKeyAuthentication($applicationId, $applicationKey, $authority)
+#
+#   NOTE: if you're running with Powershell 7 (or above) and the .NET Core library,
+#         AAD user authentication with prompt will not work, and you should choose
+#         a different authentication method.
 ```
 
 ### <a name="example-running-an-admin-command"></a>範例：執行管理命令
@@ -107,7 +112,7 @@ $dataView | Sort StartTime -Descending | Format-Table -AutoSize
 
 輸出如下：
 
-|StartTime           |EndTime             |EpisodeID |EventID |State          |EventType         |InjuriesDirect |InjuriesIndirect |DeathsDirect |DeathsIndirect
+|StartTime           |EndTime             |EpisodeID |EventID |狀態          |EventType         |InjuriesDirect |InjuriesIndirect |DeathsDirect |DeathsIndirect
 |---------           |-------             |--------- |------- |-----          |---------         |-------------- |---------------- |------------ |--------------
 |2007-12-30 16:00:00 |2007-12-30 16:05:00 |    11749 |  64588 |格魯吉亞        |Thunderstorm Wind |             0 |               0 |           0 |             0
 |2007-12-20 07:50:00 |2007-12-20 07:53:00 |    12554 |  68796 |MISSISSIPPI    |Thunderstorm Wind |             0 |               0 |           0 |             0

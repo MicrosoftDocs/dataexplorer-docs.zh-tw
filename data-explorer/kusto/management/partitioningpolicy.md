@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 7f299a730b451f608e0d2c81fc78565d515fc029
-ms.sourcegitcommit: bcb87ed043aca7c322792c3a03ba0508026136b4
+ms.openlocfilehash: 0bf2960d1bf585efc6b356a1b7075a27ca6616da
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86127304"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188365"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
-分割原則會針對特定資料表定義是否應該分割[範圍（資料分區）](../management/extents-overview.md) 。
+分割原則會針對特定資料表，定義是否應該分割[ (資料分區) 的範圍](../management/extents-overview.md)和方式。
 
 原則的主要目的是要改善已知的查詢效能，以縮小分割資料行中的值資料集，或在高基數位符串資料行上進行匯總/聯結。 原則也可能會導致資料的壓縮變得更好。
 
@@ -36,11 +36,13 @@ ms.locfileid: "86127304"
 ### <a name="hash-partition-key"></a>雜湊分割區索引鍵
 
 > [!NOTE]
-> `string`**只有**當大部分的查詢都使用相等篩選（ `==` ， `in()` ），或在 `string` *大型維度*（1千萬個或更高的基數）的特定類型資料行上匯總/聯結（例如 `application_ID` 、 `tenant_ID` 或） `user_ID` 時，才適合在資料表的類型資料行上套用雜湊資料分割索引鍵。
+> 只在下列實例中，將雜湊資料分割索引鍵套用到 `string` 資料表中的類型資料行：
+> * 如果大多數查詢都使用相等篩選 (`==` ， `in()`) 。
+> * 大多數查詢都會在 `string` 1 千萬個或更高的*大型維度* (基數) （例如 `application_ID` 、或）的特定類型資料行上匯總/聯結 `tenant_ID` `user_ID` 。
 
 * 雜湊模數函數可用來分割資料。
-* 屬於相同資料分割的所有同質（資料分割）範圍都會指派給相同的資料節點。
-* 同質（已分割）範圍中的資料是依雜湊資料分割索引鍵來排序。
+* 屬於相同資料分割的所有同質 (分割) 範圍都會指派給相同的資料節點。
+* 同質 (分割) 範圍中的資料是依雜湊資料分割索引鍵排序。
   * 如果資料表上有定義雜湊資料分割索引鍵，您就不需要將它包含在資料[列順序原則](roworderpolicy.md)中。
 * 使用[隨機播放策略](../query/shufflequery.md)的查詢，以及 `shuffle key` 資料表的雜湊分割區索引鍵所使用的，其 `join` `summarize` 預期會 `make-series` 執行得更好，因為在叢集節點之間移動所需的資料量會大幅降低。
 
@@ -48,7 +50,7 @@ ms.locfileid: "86127304"
 
 * `Function`這是要使用的雜湊模數函數名稱。
   * 支援的值： `XxHash64` 。
-* `MaxPartitionCount`這是每個時間週期內所要建立的分割區數目上限（雜湊模數函數的模數引數）。
+* `MaxPartitionCount`這是要建立的最大分割區數目， () 每個時間週期的雜湊模數函數的模數引數。
   * 支援的值在範圍內 `(1,1024]` 。
     * 此值應為：
       * 大於叢集中的節點數目
@@ -80,17 +82,17 @@ ms.locfileid: "86127304"
 ### <a name="uniform-range-datetime-partition-key"></a>統一範圍 datetime 資料分割索引鍵
 
 > [!NOTE] 
-> `datetime`只有在資料表中內嵌的資料不太可能根據這個資料行進行排序時，**才**適合在資料表中的類型資料行上套用統一範圍 datetime 資料分割索引鍵。
+> `datetime`當內嵌至資料表的資料不太可能根據這個資料行進行排序時，請只在資料表中的類型資料行上套用統一範圍 datetime 資料分割索引鍵。
 
 在這種情況下，在範圍之間重新資料可能會很有説明，因為每個範圍最後都會包含限制時間範圍內的記錄。 這會導致該資料行上的篩選準則在 `datetime` 查詢時更有效率。
 
-* 使用的資料分割函數是[bin_at （）](../query/binatfunction.md) ，無法自訂。
+使用的資料分割函數[bin_at ( # B1](../query/binatfunction.md) ，而且無法自訂。
 
 #### <a name="partition-properties"></a>磁碟分割內容
 
 * `RangeSize`這是一個純 `timespan` 量常數，表示每個 datetime 資料分割的大小。
   我們建議您：
-  * 開頭為值 `1.00:00:00` （一天）。
+  * 以 `1.00:00:00` (一天) 的值開始。
   * 請不要設定較短的值，因為它可能會導致資料表擁有無法合併的大量小型範圍。
 * `Reference`這是一個純 `datetime` 量常數，根據要對齊的日期時間分割區，指出固定的時間點。
   * 我們建議您從開始 `1970-01-01 00:00:00` 。
@@ -126,13 +128,13 @@ ms.locfileid: "86127304"
     * 一個[雜湊資料分割索引鍵](#hash-partition-key)和一個[統一範圍的 datetime 資料分割索引鍵](#uniform-range-datetime-partition-key)。
   * 每個分割區索引鍵都有下列屬性：
     * `ColumnName`： `string ` -資料行的名稱，將會根據該資料分割資料。
-    * `Kind`： `string` -要套用的資料分割類型（ `Hash` 或 `UniformRange` ）。
+    * `Kind`： `string` -要套用 (或) 的資料分割種類 `Hash` `UniformRange` 。
     * `Properties`： `property bag` -根據完成的資料分割定義參數。
 
 * **EffectiveDateTime**：
   * 原則生效的 UTC 日期時間。
   * 這是選用屬性。 如果未指定，原則會在套用原則之後，于資料內嵌上生效。
-  * 任何可能因為保留而卸載的非同質（非資料分割）範圍都會被分割程式忽略，因為它們的建立時間在資料表的有效虛刪除期間的90% 之前。
+  * 資料分割程式會忽略任何可能因保留而卸載的非同質 (非資料分割) 範圍，因為其建立時間在資料表的有效虛刪除期間的90% 之前。
 
 ### <a name="example"></a>範例
 
@@ -179,12 +181,12 @@ ms.locfileid: "86127304"
   * 這是選用屬性。 其預設值為 `0` ，預設目標為5000000記錄。
     * 如果您看到資料分割作業耗用的記憶體或 CPU 數量非常龐大，則您可以設定低於5M 的值。 如需詳細資訊，請參閱[監視](#monitoring)。
 
-## <a name="notes"></a>注意
+## <a name="notes"></a>附註
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
 * 資料分割會在叢集中做為內嵌後背景進程執行。
-  * 持續內嵌到的資料表預期一律會有資料的「結尾」，但尚未分割（非同質範圍）。
+  * 持續內嵌到的資料表預期一律會有資料的「尾」，但尚未分割 (非同質的範圍) 。
 * 不論原則中的屬性值為何，資料分割都只會在經常性存取範圍上執行 `EffectiveDateTime` 。
   * 如果需要分割冷範圍，您將需要暫時調整快取[原則](cachepolicy.md)。
 
@@ -223,7 +225,7 @@ ms.locfileid: "86127304"
 
 ### <a name="outliers-in-partitioned-columns"></a>分割資料行中的極端值
 
-* 如果雜湊分割區索引鍵所包含的值比其他專案更普遍，例如，空字串或泛型值（例如 `null` 或 `N/A` ），或是代表在 `tenant_id` 資料集內較普遍的實體（例如），可能會導致跨叢集節點的資料不平衡分佈，並降低查詢效能。
+* 如果雜湊分割區索引鍵所包含的值比其他專案更普遍，例如，空字串或泛型值 (例如 `null` 或 `N/A`) ，或是代表實體 (例如 `tenant_id` 資料集中較普遍的) ，這可能會導致在叢集節點上不平衡的資料分佈，並降低查詢效能。
 * 如果統一範圍的 datetime 資料分割索引鍵的值足以達資料行中大多數值的「遠」百分比，例如，過去或未來的日期時間值，則可能會增加資料分割程式的額外負荷，並導致叢集需要追蹤的許多小範圍。
 
 在這兩種情況下，您都應該「修正」資料，或在內嵌期間篩選掉資料中任何不相關的記錄，以降低叢集上資料分割的額外負荷。 例如，使用[更新原則](updatepolicy.md)。

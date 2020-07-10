@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/23/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8898f772af37e86ec33bff66e43779dfbaf4c053
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 2060d2996338cf1eee33b5905e9929c46040afa9
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370696"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188586"
 ---
 # <a name="tutorial"></a>教學課程
 
@@ -37,7 +37,7 @@ ms.locfileid: "83370696"
 我們的範例資料庫有一個稱為的資料表 `StormEvents` 。
 為了瞭解其大小，我們會將其內容傳送至只計算資料列的操作員：
 
-* *語法：* 查詢是一種資料來源（通常是資料表名稱），並可選擇性地後面接著一組或多組管道字元和某些表格式運算子。
+* *語法：* 查詢是一種資料來源 (通常是資料表名稱) ，並可選擇性地後面接著一組或多組管道字元和某些表格式運算子。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -46,7 +46,7 @@ StormEvents | count
 
 結果如下︰
 
-|計數|
+|Count|
 |-----|
 |59066|
     
@@ -68,7 +68,7 @@ StormEvents
 | project StartTime, EndTime , State , EventType , EpisodeNarrative
 ```
 
-|StartTime|EndTime|State|EventType|EpisodeNarrative|
+|StartTime|EndTime|狀態|EventType|EpisodeNarrative|
 |---|---|---|---|---|
 |2007-02-19 00：00：00.0000000|2007-02-19 08：00：00.0000000|加州|Flood|在南 San Joaquin 的正面系統之間移動的一小段時間，會在19日早上的一小時內，為西方字偶比對國家/地區帶來短暫的 rain。 在接近 Taft 的州高速公路166報告了次要洪水。|
 
@@ -83,7 +83,7 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|State|EventNarrative|
+|StartTime|EndTime|EventType|狀態|EventNarrative|
 |---|---|---|---|---|
 |2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|繁重 Rain|州|在近水樓臺 Volusia 縣的各個部分之間，最多有9英寸的 rain 落在24小時內。|
 |2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|龍捲風|州|Eustis 在 West Crooked Lake 的北結尾觸及了龍捲風。 龍捲風會快速更到 EF1 強度，因為它是透過 Eustis 移到西北部。 此曲目只在兩英里的時間內，寬度上限為300個碼。  龍捲風終結了7家。 二十七家家庭收到重大損害，而81家所回報的小損毀。 $6200000 不會有嚴重傷害和屬性損毀。|
@@ -108,7 +108,7 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|State|EventNarrative|
+|StartTime|EndTime|EventType|狀態|EventNarrative|
 |---|---|---|---|---|
 |2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪事件會持續到新年早上的一天。|
 |2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪事件會持續到新年早上的一天。|
@@ -138,7 +138,7 @@ StormEvents
 | project StartTime, EndTime, Duration, EventType, State
 ```
 
-|StartTime|EndTime|Duration|EventType|State|
+|StartTime|EndTime|持續時間|EventType|狀態|
 |---|---|---|---|---|
 |2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|22:00:00|繁重 Rain|州|
 |2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|00:08:00|龍捲風|州|
@@ -160,7 +160,7 @@ print x=1
 |---|---|
 |3|1|
 
-純量[運算式](./scalar-data-types/index.md)可以包含所有常見的運算子（ `+` 、 `-` 、 `*` 、 `/` 、 `%` ），而且有一系列有用的函式。
+純量[運算式](./scalar-data-types/index.md)可以包含所有一般運算子， `+` (`-` 、 `*` 、 `/` 、 `%`) ，而且有一系列有用的函式。
 
 ## <a name="summarize-aggregate-groups-of-rows"></a>摘要：匯總資料列群組
 
@@ -172,7 +172,7 @@ StormEvents
 | summarize event_count = count() by State
 ```
 
-將在子句中具有相同值的群組[匯總](./summarizeoperator.md)在一起 `by` ，然後使用彙總函式（例如 `count` ）將每個群組合並成單一資料列。 因此，在此情況下，每個狀態都有一個資料列，以及該狀態的資料列計數的資料行。
+將在子句中具有相同值的群組[匯總](./summarizeoperator.md)在一起 `by` ，然後使用彙總函式 (例如 `count`) ，將每個群組合並成單一資料列。 因此，在此情況下，每個狀態都有一個資料列，以及該狀態的資料列計數的資料行。
 
 有一系列的[彙總函式](./summarizeoperator.md#list-of-aggregation-functions)，您可以在一個匯總運算子中使用其中幾個來產生數個計算資料行。 例如，我們可以在每個狀態中取得風暴的計數，以及每個狀態的唯一一種電流類型的總和，  
 然後，我們可以使用[top](./topoperator.md)來取得最常受到影響的狀態：
@@ -184,7 +184,7 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-|State|StormCount|TypeOfStorms|
+|狀態|StormCount|TypeOfStorms|
 |---|---|---|
 |德克薩斯州|4701|27|
 |KANSAS|3166|21|
@@ -200,8 +200,8 @@ summarize 的結果有：
 
 ## <a name="summarize-by-scalar-values"></a>依純量值彙總
 
-您可以在子句中使用純量（數值、時間或間隔）值 `by` ，但您會想要將值放入「bin」中。  
-[Bin （）](./binfunction.md)函數適用于：
+您可以在子句中使用純量 (數值、時間或間隔) 值 `by` ，但您會想要將值放入 bin 中。  
+[Bin ( # B1](./binfunction.md)函數適用于：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -222,7 +222,7 @@ StormEvents
 |2007-02-19 00：00：00.0000000|52|
 |2007-02-20 00：00：00.0000000|60|
 
-[Bin （）](./binfunction.md)與許多語言中的[floor （）](./floorfunction.md)函數相同。 它只會將每個值減少到您提供的最接近的模數倍數，讓[總結](./summarizeoperator.md)可以將資料列指派給群組。
+[Bin ( # B1](./binfunction.md)與許多語言中的[Floor ( # B3](./floorfunction.md)函數相同。 它只會將每個值減少到您提供的最接近的模數倍數，讓[總結](./summarizeoperator.md)可以將資料列指派給群組。
 
 ## <a name="render-display-a-chart-or-table"></a>Render：顯示圖表或資料表
 
@@ -450,7 +450,8 @@ LightningStorms
 | distinct State
 ```
 
-> 提示：在 Kusto 用戶端中，請勿在這個的部分之間放置空白行。 務必執行所有一切。
+> [!TIP]
+> 在 Kusto Explorer 用戶端中，請勿在這幾個部分之間放置空白行。 務必執行所有一切。
 
 ## <a name="combining-data-from-several-databases-in-a-query"></a>在查詢中結合數個資料庫的資料
 
@@ -468,7 +469,7 @@ Logs | where ...
 database("db").Table
 ```
 
-因此，如果您有名為*診斷*和*遙測*的資料庫，而且想要讓部分資料相互關聯，您可以撰寫（假設*診斷*是您的預設資料庫）
+因此，如果您有名為 [*診斷*和*遙測*] 的資料庫，而且想要讓部分資料相互關聯，則您可能會撰寫 (假設 [*診斷*] 是您的預設資料庫) 
 
 ```kusto
 Logs | join database("Telemetry").Metrics on Request MachineId | ...
@@ -486,7 +487,8 @@ union Requests, database("Diagnostics").Logs | ...
 Logs | join cluster("TelemetryCluster").database("Telemetry").Metrics on Request MachineId | ...
 ```
 
-> 注意：指定叢集時，資料庫為強制性
+> [!NOTE]
+> 指定叢集時，資料庫為強制性
 
 ::: zone-end
 

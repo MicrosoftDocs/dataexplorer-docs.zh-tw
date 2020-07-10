@@ -7,12 +7,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/20/2019
-ms.openlocfilehash: 3daf9f5af46338a450a1f1a4e9c80a6c83841343
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: aa5aa5c2c370cc56487a242b9c13ef4692295cdc
+ms.sourcegitcommit: 67cb5aabd8100bf3f41e70fc23c338b998b5227e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374028"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86208430"
 ---
 # <a name="secure-your-cluster-in-azure-data-explorer---azure-portal"></a>在 Azure 中保護您的叢集資料總管-Azure 入口網站
 
@@ -20,7 +20,7 @@ ms.locfileid: "83374028"
   
 ## <a name="enable-encryption-at-rest-in-the-azure-portal"></a>在 Azure 入口網站中啟用待用加密
   
-您的叢集安全性設定可讓您在叢集上啟用磁片加密。 在您的叢集上啟用待用[加密](/azure/security/fundamentals/encryption-atrest)可為儲存的資料（待用）提供資料保護。 
+您的叢集安全性設定可讓您在叢集上啟用磁片加密。 在您的叢集上啟用待用[加密](/azure/security/fundamentals/encryption-atrest)可為待用儲存的資料提供資料保護， (待用) 。 
 
 1. 在 Azure 入口網站中，移至您的 Azure 資料總管叢集資源。 在 [**設定**] 標題下，選取 [**安全性**]。 
 
@@ -28,10 +28,14 @@ ms.locfileid: "83374028"
 
 1. 在 [**安全性**] 視窗中，針對 [**磁片加密**] 安全性設定選取 [**開啟**]。 
 
-1. 選取 [儲存]  。
+1. 選取 [Save] \(儲存\)。
  
 > [!NOTE]
 > 選取 [**關閉**] 以在啟用加密後予以停用。
+
+## <a name="azure-data-explorer-stores-data-within-a-region"></a>Azure 資料總管會將資料儲存在區域內
+
+每個 Azure 資料總管叢集都會在單一區域中的專用資源上執行。 所有資料都會儲存在區域內。 
 
 ## <a name="next-steps"></a>後續步驟
 

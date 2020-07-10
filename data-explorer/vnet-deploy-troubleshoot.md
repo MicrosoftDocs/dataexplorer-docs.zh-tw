@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: 49041ec72439d8f36b54ece5fcd341fa4ca873fc
-ms.sourcegitcommit: bcb87ed043aca7c322792c3a03ba0508026136b4
+ms.openlocfilehash: 6eab8ab3097876c74cc6aaa9116c8923ca9fc3db
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86127326"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188399"
 ---
 # <a name="troubleshoot-access-ingestion-and-operation-of-your-azure-data-explorer-cluster-in-your-virtual-network"></a>針對您的虛擬網路中的 Azure 資料總管叢集存取、內嵌和操作進行疑難排解
 
@@ -20,7 +20,7 @@ ms.locfileid: "86127326"
 
 ## <a name="access-issues"></a>存取問題
 
-如果您在使用公用（cluster.region.kusto.windows.net）或私用（private-cluster.region.kusto.windows.net）端點存取叢集時發生問題，而且懷疑它與虛擬網路設定相關，請執行下列步驟來針對問題進行疑難排解。
+如果您在使用公用 (cluster.region.kusto.windows.net) 或私用 (private-cluster.region.kusto.windows.net) 端點存取叢集時發生問題，而且您懷疑它與虛擬網路設定相關，請執行下列步驟來針對問題進行疑難排解。
 
 ### <a name="check-tcp-connectivity"></a>檢查 TCP 連線能力
 
@@ -28,43 +28,40 @@ ms.locfileid: "86127326"
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
-   1. 將[TCping](https://www.elifulkerson.com/projects/tcping.php)下載到連接到叢集的電腦。
-   1. 使用下列命令，從來源機器 Ping 目的地：
+1. 將[TCping](https://www.elifulkerson.com/projects/tcping.php)下載到連接到叢集的電腦。
+1. 使用下列命令，從來源機器 Ping 目的地：
 
-    ```cmd
-     C:\> tcping -t yourcluster.kusto.windows.net 443 
-    
-     ** Pinging continuously.  Press control-c to stop **
-    
-     Probing 1.2.3.4:443/tcp - Port is open - time=100.00ms
-     ```
+   ```cmd
+   C:\> tcping -t yourcluster.kusto.windows.net 443 
+   ** Pinging continuously.  Press control-c to stop **
+   Probing 1.2.3.4:443/tcp - Port is open - time=100.00ms
+   ```
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
-   1. 在連接到叢集的電腦上安裝*netcat*
+1. 在連接到叢集的電腦上安裝*netcat*
 
-    ```bash
-    $ apt-get install netcat
-     ```
+   ```bash
+   $ apt-get install netcat
+   ```
 
-   1. 使用下列命令，從來源機器 Ping 目的地：
+1. 使用下列命令，從來源機器 Ping 目的地：
 
-     ```bash
-     $ netcat -z -v yourcluster.kusto.windows.net 443
-    
-     Connection to yourcluster.kusto.windows.net 443 port [tcp/https] succeeded!
-     ```
+   ```bash
+   $ netcat -z -v yourcluster.kusto.windows.net 443
+   Connection to yourcluster.kusto.windows.net 443 port [tcp/https] succeeded!
+   ```
 ---
 
 如果測試不成功，請繼續進行下列步驟。 如果測試成功，問題不是因為 TCP 連線問題所造成。 請移至[操作問題](#cluster-creation-and-operations-issues)以進一步進行疑難排解。
 
-### <a name="check-the-network-security-group-nsg"></a>檢查網路安全性群組（NSG）
+### <a name="check-the-network-security-group-nsg"></a>檢查網路安全性群組 (NSG) 
 
-   檢查連接到叢集子網的[網路安全性群組](/azure/virtual-network/security-overview)（NSG）是否有輸入規則，允許從用戶端電腦的 IP 存取埠443。
+檢查連接到叢集子網的[網路安全性群組](/azure/virtual-network/security-overview) (NSG) 是否有輸入規則，允許從用戶端電腦的 IP 存取埠443。
 
 ### <a name="check-route-table"></a>檢查路由表
 
-   如果叢集的子網已將強制通道設定設為防火牆（子網具有包含預設路由 ' 0.0.0.0/0 ' 的[路由表](/azure/virtual-network/virtual-networks-udr-overview)），請確定電腦 IP 位址具有[下一個躍點類型](/azure/virtual-network/virtual-networks-udr-overview)為 VirtualNetwork/Internet 的路由。 需要此路由才能避免非對稱式路由問題。
+如果叢集的子網對防火牆 (子網具有強制通道設定，而[路由表](/azure/virtual-network/virtual-networks-udr-overview)包含預設路由 ' 0.0.0.0/0 ' ) ，請確定電腦 IP 位址的路由具有[下一個躍點類型](/azure/virtual-network/virtual-networks-udr-overview)為 VirtualNetwork/Internet。 需要此路由才能避免非對稱式路由問題。
 
 ## <a name="ingestion-issues"></a>內嵌問題
 
@@ -76,7 +73,7 @@ ms.locfileid: "86127326"
 
 ### <a name="check-security-rules-on-data-source-resources"></a>檢查資料來源資源的安全性規則
 
-如果計量指出沒有從資料來源處理的事件（事件/IoT 中樞的*事件已處理*計量），請確定資料來源資源（事件中樞或儲存體）允許從防火牆規則或服務端點中的叢集子網進行存取。
+如果計量指出沒有從資料來源處理的事件 (事件/IoT 中樞) 的*事件處理*計量，請確定資料來源資源 (事件中樞或儲存體) 允許從防火牆規則或服務端點中的叢集子網進行存取。
 
 ### <a name="check-security-rules-configured-on-clusters-subnet"></a>檢查叢集子網上設定的安全性規則
 
@@ -150,16 +147,16 @@ ms.locfileid: "86127326"
     }
     ```
 
-如果 [*結果*] 屬性顯示空的結果，表示所有的網路測試都已通過，而且沒有任何連線中斷。 如果顯示下列錯誤，輸出相依性 *' {dependencyName}： {埠} ' 可能不滿足（輸出）*，叢集就無法連線到依存的服務端點。 繼續進行下列步驟。
+如果 [*結果*] 屬性顯示空的結果，表示所有的網路測試都已通過，而且沒有任何連線中斷。 如果顯示下列錯誤，*可能不符合輸出相依性 ' {dependencyName}： {port} ' (傳出) *，叢集就無法連線到依存的服務端點。 繼續進行下列步驟。
 
-### <a name="check-network-security-group-nsg"></a>檢查網路安全性群組（NSG）
+### <a name="check-network-security-group-nsg"></a>檢查網路安全性群組 (NSG) 
 
 請根據[VNet 部署](vnet-deployment.md#dependencies-for-vnet-deployment)的相依性中的指示，確定已正確設定[網路安全性群組](/azure/virtual-network/security-overview)
 
 ### <a name="check-route-table"></a>檢查路由表
 
-如果叢集的子網已將強制通道設定為防火牆（具有包含預設路由 ' 0.0.0.0/0 ' 之[路由表](/azure/virtual-network/virtual-networks-udr-overview)的子網），請確定[管理 ip 位址](vnet-deployment.md#azure-data-explorer-management-ip-addresses)和[健全狀況監視 ip 位址](vnet-deployment.md#health-monitoring-addresses)具有[下一個躍點類型](/azure/virtual-network/virtual-networks-udr-overview##next-hop-types-across-azure-tools)為*網際網路*的路由，且[來源位址首碼](/azure/virtual-network/virtual-networks-udr-overview#how-azure-selects-a-route)為「*管理-ip/32* 」和「*健全狀況監視-ip/32*」。 此為避免非對稱式路由問題所需的路由。
+如果叢集的子網已將強制通道設定為防火牆 (子網，且[路由表](/azure/virtual-network/virtual-networks-udr-overview)包含預設路由 ' 0.0.0.0/0 ' ) 請確定[管理 ip 位址](vnet-deployment.md#azure-data-explorer-management-ip-addresses)) 和[健康狀態監視 ip 位址](vnet-deployment.md#health-monitoring-addresses)具有[下一個躍點類型](/azure/virtual-network/virtual-networks-udr-overview##next-hop-types-across-azure-tools)為*網際網路*的路由，且[來源位址首碼](/azure/virtual-network/virtual-networks-udr-overview#how-azure-selects-a-route)為 *' management-ip/32 '* 和 *' health-monitoring-ip/32 '*。 此為避免非對稱式路由問題所需的路由。
 
 ### <a name="check-firewall-rules"></a>檢查防火牆規則
 
-如果您強制將通道子網輸出流量傳送到防火牆，請確定防火牆設定中允許所有相依性 FQDN （例如， *blob.core.windows.net*），如[使用防火牆保護輸出流量](vnet-deployment.md#securing-outbound-traffic-with-firewall)中所述。
+如果您強制將通道子網輸出流量傳送到防火牆，請確定所有相依性 FQDN (例如，防火牆設定中允許 blob.core.windows.net) ，如[使用防火牆保護輸出流量](vnet-deployment.md#securing-outbound-traffic-with-firewall)中所述 *。*

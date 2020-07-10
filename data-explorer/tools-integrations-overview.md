@@ -1,5 +1,5 @@
 ---
-title: Azure 資料總管工具-Azure 資料總管
+title: Azure 資料總管工具和整合總覽-Azure 資料總管
 description: 本文說明 Azure 資料總管中的工具和整合。
 services: data-explorer
 author: orspod
@@ -8,14 +8,14 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 7f3e31b5c9c97eed49832a576d9eea7163e13f3d
-ms.sourcegitcommit: bf2c9da0c23ebcaec19b229d2079032d54a2cc82
+ms.openlocfilehash: 3a2b5cfb9ca02ec255e8cca7d40c103be18a0450
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86141161"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188535"
 ---
-# <a name="azure-data-explorer-tools-overview"></a>Azure 資料總管工具總覽
+# <a name="azure-data-explorer-tools-and-integrations-overview"></a>Azure 資料總管工具和整合總覽
 
 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流程。 Azure 資料總管會收集、儲存及分析各種資料，以改善產品、增強客戶體驗、監視裝置，以及提升營運效率。 
 
@@ -23,7 +23,7 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
 
 本文提供 Azure 資料總管工具、連接器和整合的清單，並提供相關檔的連結以取得其他資訊。
 
-## <a name="data-ingestion"></a>資料擷取 
+## <a name="ingest-data"></a>擷取資料 
 
 資料內嵌是用來將一或多個來源中的資料記錄載入 Azure 資料總管的程式。 一旦擷取之後，資料就會變成可供查詢。 Azure 資料總管為數據內嵌提供數個工具和連接器。 
 
@@ -38,9 +38,9 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
 ### <a name="ingestion-integrations"></a>內嵌整合
 
 * 事件中樞
-    * [從事件中樞內嵌]（[從事件中樞](kusto/management/data-ingestion/eventhub.md)內嵌
+    * [從事件中樞內嵌] ([從事件中樞](kusto/management/data-ingestion/eventhub.md)內嵌
     * 使用[Azure 入口網站](ingest-data-event-hub.md)、 [c #](data-connection-event-hub-csharp.md)、 [Python](data-connection-event-hub-python.md)或[Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)從事件中樞內嵌
-* 事件方格
+* Event Grid
     * [從事件方格內嵌](kusto/management/data-ingestion/eventgrid.md)
     * 使用[Azure 入口網站](ingest-data-event-grid.md)、 [c #](data-connection-event-grid-csharp.md)、 [Python](data-connection-event-grid-python.md)或[Azure Resource Manager 範本](data-connection-event-grid-resource-manager.md)從事件方格內嵌
 * IoT 中樞
