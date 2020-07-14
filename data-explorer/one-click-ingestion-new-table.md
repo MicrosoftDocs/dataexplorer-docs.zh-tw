@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: 4a390e0501d12b6d70d924e9a5c5576e77cec435
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 2c7cd53053582c02f610f364eb36e87ecdf5b03a
+ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85265291"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86058847"
 ---
 # <a name="use-one-click-ingestion-to-ingest-csv-data-from-a-container-to-a-new-table-in-azure-data-explorer"></a>在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表
 
@@ -36,25 +36,25 @@ ms.locfileid: "85265291"
     > [!NOTE]
     > 資料表名稱必須介於 1 到 1024 個字元之間。
 
-:::image type="content" source="media/one-click-ingestion-new-table/create-new-table.png" alt-text="建立新資料表單鍵擷取":::
+    :::image type="content" source="media/one-click-ingestion-new-table/create-new-table.png" alt-text="建立新資料表單鍵擷取":::
 
 ## <a name="select-an-ingestion-type"></a>選取擷取類型
 
-* 在 [擷取類型] 下，執行下列步驟：
+在 [擷取類型] 下，執行下列步驟：
    
   1. **從容器**選取 
   1. 在 [連結至儲存體] 欄位中，新增容器的 [SAS URL](/azure/vs-azure-tools-storage-explorer-blobs#get-the-sas-for-a-blob-container)，然後選擇性地輸入範例大小。
 
       :::image type="content" source="media/one-click-ingestion-new-table/from-container.png" alt-text="從容器單鍵擷取":::
 
- > [!TIP] 
- > 若是**從檔案**擷取，請參閱[在 Azure 資料總管中使用單鍵擷取將 JSON 資料從本機檔案擷取到現有的資料表](one-click-ingestion-existing-table.md#select-an-ingestion-type)
+     > [!TIP] 
+     > 若是**從檔案**擷取，請參閱[在 Azure 資料總管中使用單鍵擷取將 JSON 資料從本機檔案擷取到現有的資料表](one-click-ingestion-existing-table.md#select-an-ingestion-type)
 
-* 資料的範例隨即出現。 如果想要的話，您可加以篩選，只擷取以特定字元開頭的檔案。 當您調整篩選條件時，預覽會自動更新。
+資料的範例隨即出現。 如果想要的話，您可加以篩選，只擷取以特定字元開頭的檔案。 當您調整篩選條件時，預覽會自動更新。
   
-  例如，您可篩選所有以 *data* 開頭並以 *.csv.gz* 副檔名結尾的檔案。
+ * 例如，您可篩選所有以 *data* 開頭並以 *.csv.gz* 副檔名結尾的檔案。
 
-  :::image type="content" source="media/one-click-ingestion-new-table/from-container-with-filter.png" alt-text="單鍵擷取篩選條件":::
+    :::image type="content" source="media/one-click-ingestion-new-table/from-container-with-filter.png" alt-text="單鍵擷取篩選條件":::
   
 ## <a name="edit-the-schema"></a>編輯結構描述
 
@@ -68,8 +68,8 @@ ms.locfileid: "85265291"
 
         在此情況下，資料格式為 **CSV**
 
-    > [!TIP]
-    > 如果您想要使用 **JSON** 檔案，請參閱[在 Azure 資料總管中使用單鍵擷取將 JSON 資料從本機檔案擷取到現有的資料表](one-click-ingestion-existing-table.md#edit-the-schema)。
+        > [!TIP]
+        > 如果您想要使用 **JSON** 檔案，請參閱[在 Azure 資料總管中使用單鍵擷取將 JSON 資料從本機檔案擷取到現有的資料表](one-click-ingestion-existing-table.md#edit-the-schema)。
 
     * 您可以選取 [包含資料行名稱] 核取方塊，以忽略檔案的標題列。
 
@@ -81,14 +81,14 @@ ms.locfileid: "85265291"
 
 ### <a name="table"></a>Table
 
-1. 在資料表中： 
-    * 按兩下要編輯的新資料行名稱。
-    * 選取新的資料行標題並執行下列任何動作：
+在資料表中： 
+ * 按兩下要編輯的新資料行名稱。
+ * 選取新的資料行標題並執行下列任何動作：
 
-[!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
+    [!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
 
-> [!NOTE]
-> 若為表格式格式，每個資料行都可以內嵌到 Azure 資料總管中的一個資料行。
+    > [!NOTE]
+    > 若為表格式格式，每個資料行都可以內嵌到 Azure 資料總管中的一個資料行。
 
 [!INCLUDE [data-explorer-one-click-command-editor](includes/data-explorer-one-click-command-editor.md)]
 
@@ -106,7 +106,7 @@ ms.locfileid: "85265291"
 
 [!INCLUDE [data-explorer-one-click-ingestion-query-data](includes/data-explorer-one-click-ingestion-query-data.md)]
 
-## <a name="continuous-ingestion---container-only"></a>持續擷取 - 僅限容器
+## <a name="create-continuous-ingestion-for-container"></a>建立容器的連續擷取
 
 持續擷取可讓您建立事件方格，以接聽來源容器中的新檔案。 任何符合預先定義參數 (前置詞、尾碼等等) 準則的新檔案，都會自動擷取到目的地資料表。 
 

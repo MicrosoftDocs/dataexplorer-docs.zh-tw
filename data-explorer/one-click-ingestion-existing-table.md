@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: 422c930835e4ebe68cb59b27e51934d800fe14c1
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 4e87ab389179f308642de3b9469544fde6139507
+ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85265147"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86058910"
 ---
 # <a name="use-one-click-ingestion-to-ingest-json-data-from-a-local-file-to-an-existing-table-in-azure-data-explorer"></a>在 Azure 資料總管中使用單鍵擷取將 JSON 資料從本機檔案擷取到現有的資料表
 
@@ -25,9 +25,9 @@ ms.locfileid: "85265147"
 
 ## <a name="ingest-new-data"></a>內嵌新資料
 
-1. 在 Web UI 的左側功能表中，以滑鼠右鍵按一下 [資料庫] 或 [資料表]，然後選取 [內嵌新資料 (預覽)]。
+在 Web UI 的左側功能表中，以滑鼠右鍵按一下 [資料庫] 或 [資料表]，然後選取 [內嵌新資料 (預覽)]。
 
-    :::image type="content" source="media/one-click-ingestion-existing-table/one-click-ingestion-in-webui.png" alt-text="在 Web UI 中選取單鍵擷取":::
+   :::image type="content" source="media/one-click-ingestion-existing-table/one-click-ingestion-in-webui.png" alt-text="在 Web UI 中選取單鍵擷取":::
  
 ## <a name="select-an-ingestion-type"></a>選取擷取類型
 
@@ -42,14 +42,17 @@ ms.locfileid: "85265147"
 
    1. **從檔案**選取  
    1. 選取 [瀏覽] 以找出檔案，或將檔案拖曳到欄位中。
-    * 資料的範例隨即出現。 如果想要的話，您可加以篩選，只擷取以特定字元開頭的檔案。 
+    
+      :::image type="content" source="media/one-click-ingestion-existing-table/from-file.png" alt-text="從檔案單鍵擷取":::
+
+ 1. 資料的範例隨即出現。 您可加以篩選，只內嵌以特定字元開頭的檔案。 
+   
     >[!NOTE] 
     >當您調整篩選條件時，預覽會自動更新。
   
-      :::image type="content" source="media/one-click-ingestion-existing-table/from-file.png" alt-text="從檔案單鍵擷取":::
 
- > [!TIP]
- > 針對**從容器**擷取，請參閱[在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表](one-click-ingestion-new-table.md#select-an-ingestion-type)
+> [!TIP]
+> 針對**從容器**擷取，請參閱[在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表](one-click-ingestion-new-table.md#select-an-ingestion-type)
 
 ## <a name="edit-the-schema"></a>編輯結構描述
 
@@ -62,7 +65,7 @@ ms.locfileid: "85265147"
     * 在 [來源資料行] 欄位中，輸入要與 [目標資料行] 對應的資料行名稱。
     * 若要從對應中刪除資料行，請選取垃圾桶圖示。
 
-    :::image type="content" source="media/one-click-ingestion-existing-table/map-columns.png" alt-text="對應資料行視窗"::: 
+      :::image type="content" source="media/one-click-ingestion-existing-table/map-columns.png" alt-text="對應資料行視窗"::: 
     
 1. 選取 [更新]。
 1. 在 [結構描述] 索引標籤中：
@@ -70,15 +73,16 @@ ms.locfileid: "85265147"
         
     * 當您選取 [JSON] 時，也必須選取從 1 到 10 的 [JSON 層級]。 這些層級會決定資料表資料行資料分區。
 
-    :::image type="content" source="media/one-click-ingestion-existing-table/json-levels.png" alt-text="選取 JSON 層級":::
+        :::image type="content" source="media/one-click-ingestion-existing-table/json-levels.png" alt-text="選取 JSON 層級":::
     
-    > [!TIP]
-    > 如果您想要使用 **CSV** 檔案，請參閱[在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表](one-click-ingestion-new-table.md#edit-the-schema)
+       > [!TIP]
+       > 如果您想要使用 **CSV** 檔案，請參閱[在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表](one-click-ingestion-new-table.md#edit-the-schema)
 
 ### <a name="table"></a>Table 
 
 在資料表中： 
-    * 選取新的資料行標題以新增 [新的資料行]、[刪除資料行]、[遞增排序] 或 [遞減排序]。 在現有資料行上，只能使用資料排序。
+  * 選取新的資料行標題以新增 [新的資料行]、[刪除資料行]、[遞增排序] 或 [遞減排序]。 
+ * 在現有資料行上，只能使用資料排序。
 
 [!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
 
@@ -97,7 +101,7 @@ ms.locfileid: "85265147"
 :::image type="content" source="media/one-click-ingestion-existing-table/one-click-data-ingestion-complete.png" alt-text="單鍵擷取已完成":::
 
 > [!IMPORTANT]
-> 如果您想要設定從容器進行持續擷取，請參閱[在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表](one-click-ingestion-new-table.md#continuous-ingestion---container-only)
+> 若要設定從容器進行連續擷取，請參閱[在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表](one-click-ingestion-new-table.md#create-continuous-ingestion-for-container)
 
 [!INCLUDE [data-explorer-one-click-ingestion-query-data](includes/data-explorer-one-click-ingestion-query-data.md)]
 

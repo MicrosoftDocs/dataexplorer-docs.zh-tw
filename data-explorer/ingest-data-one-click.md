@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: 26b1633a13aa6ffbd98109e94113679620845160
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 98cfbf8b196d0496b4c7e86b03d6d2787ba6919f
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264501"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188450"
 ---
 # <a name="what-is-one-click-ingestion"></a>什麼是單鍵擷取？
 
@@ -35,17 +35,6 @@ ms.locfileid: "85264501"
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 建立 [Azure 資料總管叢集與資料庫](create-cluster-database-portal.md)。
 * 登入 [Azure 資料總管 Web UI](https://dataexplorer.azure.com/) 並[將連線新增至您的叢集](web-query-data.md#add-clusters)。
-
-## <a name="file-formats"></a>檔案格式
-
-單鍵擷取支援以下列任何格式從來源資料內嵌新的資料表：
-* JSON
-* CSV
-* TSV
-* SCSV
-* SOHSV
-* TSVE
-* PSV
 
 ## <a name="ingest-new-data"></a>內嵌新資料
 
@@ -70,22 +59,34 @@ ms.locfileid: "85264501"
 > * [使用 CSV 格式從容器擷取到新的資料表](one-click-ingestion-new-table.md)
 > * [使用 JSON 格式從本機檔案擷取到現有的資料表](one-click-ingestion-existing-table.md) 
 
-* 此精靈會引導您從下列選項中選取：
-    * 內嵌到[現有的資料表](one-click-ingestion-existing-table.md)
-    * 內嵌到[新的資料表](one-click-ingestion-new-table.md)
-    * 內嵌資料來源：
+此精靈會引導您從下列選項中選取：
+   * 內嵌到[現有的資料表](one-click-ingestion-existing-table.md)
+   * 內嵌到[新的資料表](one-click-ingestion-new-table.md)
+   * 內嵌資料來源：
       * Blob 儲存體
       * [本機檔案](one-click-ingestion-existing-table.md)
       * [容器](one-click-ingestion-new-table.md)
 
+
 ### <a name="schema-mapping"></a>結構描述對應
 
-* 服務會自動產生結構描述和擷取屬性，您可以加以變更。 根據您要擷取到新的或現有的資料表而定，您可以使用現有的對應結構，或建立一個新的對應結構。
+服務會自動產生結構描述和擷取屬性，您可以加以變更。 根據您要擷取到新的或現有的資料表而定，您可以使用現有的對應結構，或建立一個新的對應結構。
 
-* 在 [結構描述] 索引標籤中，您可以執行下列動作：
-    * 確認自動產生的壓縮類型。
-    * 選擇[資料的格式](#file-formats)。 不同的格式可讓您進行進一步的變更。
-      
+在 [結構描述] 索引標籤中，可以執行下列動作：
+   * 確認自動產生的壓縮類型。
+   * 選擇[資料的格式](#file-formats)。 不同的格式可讓您進行進一步的變更。
+
+#### <a name="file-formats"></a>檔案格式
+
+單鍵擷取支援以下列任何格式從來源資料內嵌新的資料表：
+* JSON
+* CSV
+* TSV
+* SCSV
+* SOHSV
+* TSVE
+* PSV
+
 ### <a name="editor-window"></a>編輯器視窗
 
 在 [編輯器] 視窗中，您可以視需要調整資料表資料行。 
@@ -102,13 +103,12 @@ ms.locfileid: "85264501"
 
 當您完成結構描述對應和資料行操作之後，擷取精靈就會啟動資料擷取程序。 
 
-* 從**非容器**來源擷取資料時：
-    * 擷取將會立即生效。
+* 從 **non-container** 來源內嵌資料時，擷取會立即生效。
 
 * 如果您的資料來源是**容器**：
     * Azure 資料總管的[批次處理原則](kusto/management/batchingpolicy.md)會彙總您的資料。 
     * 擷取之後，您可以下載擷取報告，並檢閱每個已解決 Blob 的效能。 
-    * 您可以選擇**建立持續擷取**，並且設定[使用事件方格進行持續擷取](one-click-ingestion-new-table.md#continuous-ingestion---container-only)。
+    * 您可以選取**建立連續擷取**，並且設定[使用事件方格進行連續擷取](one-click-ingestion-new-table.md#create-continuous-ingestion-for-container)。
  
 ### <a name="initial-data-exploration"></a>初始資料探索
    
