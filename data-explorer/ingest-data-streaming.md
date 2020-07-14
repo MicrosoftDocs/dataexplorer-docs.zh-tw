@@ -1,26 +1,26 @@
 ---
 title: 使用串流內嵌將資料內嵌至 Azure 資料總管
-description: 瞭解如何使用串流內嵌，將資料內嵌（載入）至 Azure 資料總管。
+description: 瞭解如何使用串流內嵌，將) 資料的 (載入至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/30/2019
-ms.openlocfilehash: 66118ad7b91d1bcfdd52679d4bfa3dc5ebc4c281
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: bda9afdda9d922df6188a3b9170aa4d4926f8ca3
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780230"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280426"
 ---
-# <a name="streaming-ingestion-preview"></a>串流內嵌（預覽）
+# <a name="streaming-ingestion-preview"></a>串流內嵌 (預覽) 
 
-當您需要低延遲且針對各種磁片區資料的內嵌時間小於10秒時，請使用串流內嵌。 它可用來在一或多個資料庫中優化許多資料表的工作處理，其中每個資料表中的資料流程相對較小（每秒少筆記錄），但整體資料內嵌磁片區為高（每秒數千筆記錄）。 
+當您需要低延遲且針對各種磁片區資料的內嵌時間小於10秒時，請使用串流內嵌。 它是用來在一或多個資料庫中優化許多資料表的工作處理，其中每個資料表中的資料流程 (幾個每秒的記錄都相當小) 但整體資料內嵌磁片區則是高 (每秒的數千筆記錄) 。 
 
 當資料量成長到每個資料表每小時 4 GB 以上時，請使用大量內嵌，而不是串流內嵌。 閱讀[資料內嵌總覽](ingest-data-overview.md)，以深入瞭解內嵌的各種方法。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 登入[WEB UI](https://dataexplorer.azure.com/)。
@@ -37,7 +37,7 @@ ms.locfileid: "84780230"
  
     ![串流內嵌于](media/ingest-data-streaming/streaming-ingestion-on.png)
  
-1. 在[WEB UI](https://dataexplorer.azure.com/)中，定義將接收串流資料之資料表或資料庫的[串流內嵌原則](kusto/management/streamingingestionpolicy.md)。 
+1. 在[WEB UI](https://dataexplorer.azure.com/)中，于將會接收串流資料的資料表 (s) 或資料庫 () 上，定義[串流處理內嵌原則](kusto/management/streamingingestionpolicy.md)。 
 
     > [!NOTE]
     > * 如果原則是在資料庫層級定義，則資料庫中的所有資料表都會啟用串流內嵌。
@@ -62,7 +62,7 @@ ms.locfileid: "84780230"
 > [!WARNING]
 > 停用串流內嵌可能需要幾個小時的時間。
 
-1. 從所有相關的資料表和資料庫中卸載[串流內嵌原則](kusto/management/streamingingestionpolicy.md)。 串流的內嵌原則移除會觸發從初始儲存體到資料行存放區（範圍或分區）中的永久儲存體的串流內嵌資料移動。 視初始儲存體中的資料量，以及叢集使用 CPU 和記憶體的方式而定，資料移動可以在數秒到幾個小時之間進行。
+1. 從所有相關的資料表和資料庫中卸載[串流內嵌原則](kusto/management/streamingingestionpolicy.md)。 串流的內嵌原則移除會觸發從初始儲存體到資料行存放區中的永久儲存體的串流內嵌資料移動， (範圍或分區) 。 視初始儲存體中的資料量，以及叢集使用 CPU 和記憶體的方式而定，資料移動可以在數秒到幾個小時之間進行。
 1. 在 Azure 入口網站中，移至您的 Azure 資料總管叢集。 在 [設定] 中 **，選取 [****設定**]。
 1. **在 [設定**] 窗格中，選取 [**關閉**] 以停用**串流**內嵌。
 1. 選取 [儲存]。
@@ -71,7 +71,7 @@ ms.locfileid: "84780230"
 
 ## <a name="limitations"></a>限制
 
-* 如果資料庫本身或其任何資料表已定義並啟用[串流內嵌原則](kusto/management/streamingingestionpolicy.md)，資料庫就不支援資料庫資料[指標](kusto/management/databasecursor.md)。
+* 如果資料庫本身或其任何資料表已定義並啟用[串流內嵌原則](kusto/management/streamingingestionpolicy.md)，資料庫就不支援資料庫[資料指標](kusto/management/databasecursor.md)。 在此情況下，不支援連續匯出，而且更新原則僅限於來源資料表的查詢。
 * 必須[預先建立](kusto/management/create-ingestion-mapping-command.md)[資料對應](kusto/management/mappings.md)，才能用於串流內嵌。 個別的串流內嵌要求不會容納內嵌資料對應。
 * 透過增加的 VM 和叢集大小，串流處理內嵌的效能和容量規模。 並行的內嵌要求數目限制為每個核心六個。 例如，針對16核心 Sku （例如 D14 和 L16 也），支援的最大負載為96並行內嵌要求。 針對兩個核心 Sku （例如 D11），支援的最大負載為12個並行內嵌要求。
 * 串流內嵌要求的資料大小限制為 4 MB。

@@ -50,6 +50,8 @@
           href: security.md
         - name: 安全性基準
           href: security-baseline.md
+    - name: 工具和整合概觀
+      href: tools-integrations-overview.md
 - name: 操作指南
   items:
     - name: 建立叢集和資料庫
@@ -110,14 +112,24 @@
               href: data-connection-iot-hub-python.md
             - name: Azure Resource Manager 範本
               href: data-connection-iot-hub-resource-manager.md
+            - name: Azure Data Factory
+              items: null
+            - name: 與 Data Factory 整合
+              href: data-factory-integration.md
+            - name: 使用 Azure Data Factory 複製資料
+              href: data-factory-load-data.md
+            - name: 使用 Azure Data Factory 範本大量複製資料
+              href: data-factory-template.md
+            - name: 使用 Azure Data Factory 執行控制項
+              href: data-factory-command-activity.md
         - name: 使用 SDK
           items:
             - name: Python
               href: python-ingest-data.md
             - name: Node SDK
               href: node-ingest-data.md
-            - name: .NET Standard SDK
-              href: net-standard-ingest-data.md
+            - name: .NET SDK
+              href: net-sdk-ingest-data.md
         - name: Kafka
           href: ingest-data-kafka.md
         - name: Logstash
@@ -273,16 +285,6 @@
           href: follower.md
     - name: 與其他工具整合
       items:
-        - name: Azure Data Factory
-          items:
-            - name: 與 Data Factory 整合
-              href: data-factory-integration.md
-            - name: 使用 Azure Data Factory 複製資料
-              href: data-factory-load-data.md
-            - name: 使用 Azure Data Factory 範本大量複製資料
-              href: data-factory-template.md
-            - name: 使用 Azure Data Factory 執行控制項
-              href: data-factory-command-activity.md
         - name: Power Automate
           items:
             - name: Power Automate 流程連接器
@@ -303,6 +305,8 @@
           href: azure-notebooks.md
         - name: Azure Pipelines
           href: devops.md
+        - name: 同步 Kusto
+          href: ./kusto/tools/synckusto.md
     - name: 疑難排解
       items:
         - name: 建立叢集
@@ -1189,6 +1193,28 @@
               href: ./kusto/query/re2.md
             - name: SQL 對 Kusto 的功能提要
               href: ./kusto/query/sqlcheatsheet.md
+        - name: 查詢工具
+          items:
+            - name: Kusto.Explorer
+              items:
+                - name: Kusto. Explorer 安裝和使用者介面
+                  href: ./kusto/tools/kusto-explorer.md
+                - name: 使用 Kusto.Explorer
+                  href: ./kusto/tools/kusto-explorer-using.md
+                - name: Kusto.Explorer 選項
+                  href: ./kusto/tools/kusto-explorer-options.md
+                - name: 鍵盤快速鍵
+                  href: ./kusto/tools/kusto-explorer-shortcuts.md
+                - name: 程式碼重構
+                  href: ./kusto/tools/kusto-explorer-refactor.md
+                - name: 程式碼巡覽
+                  href: ./kusto/tools/kusto-explorer-codenav.md
+                - name: 程式碼分析器
+                  href: ./kusto/tools/kusto-explorer-code-analyzer.md
+                - name: 針對 Kusto 進行疑難排解
+                  href: ./kusto/tools/kusto-explorer-troubleshooting.md
+            - name: Kusto.Cli
+              href: ./kusto/tools/kusto-cli.md
     - name: 概念
       href: ./kusto/concepts/index.md
       items:
@@ -1578,8 +1604,6 @@
                   href: ./kusto/api/netfx/kusto-ingest-best-practices.md
                 - name: 程式碼範例
                   href: ./kusto/api/netfx/kusto-ingest-client-examples.md
-                - name: 如何進行資料內嵌
-                  href: ./kusto/api/netfx/kusto-ingest-queued-ingest-sample.md
                 - name: 如何透過 REST API 進行資料內嵌
                   href: ./kusto/api/netfx/kusto-ingest-client-rest.md
         - name: Python SDK
@@ -1612,79 +1636,6 @@
               href: ./kusto/api/monaco/monaco-kusto.md
             - name: 在 iFrame 中內嵌 Web UX
               href: ./kusto/api/monaco/host-web-ux-in-iframe.md
-    - name: 工具
-      href: ./kusto/tools/index.md
-      items:
-        - name: 工具概觀
-          href: ./kusto/tools/index.md
-        - name: 特定查詢
-          items:
-            - name: Kusto.Explorer
-              items:
-                - name: Kusto. Explorer 安裝和使用者介面
-                  href: ./kusto/tools/kusto-explorer.md
-                - name: 使用 Kusto.Explorer
-                  href: ./kusto/tools/kusto-explorer-using.md
-                - name: Kusto.Explorer 選項
-                  href: ./kusto/tools/kusto-explorer-options.md
-                - name: 鍵盤快速鍵
-                  href: ./kusto/tools/kusto-explorer-shortcuts.md
-                - name: 程式碼重構
-                  href: ./kusto/tools/kusto-explorer-refactor.md
-                - name: 程式碼巡覽
-                  href: ./kusto/tools/kusto-explorer-codenav.md
-                - name: 程式碼分析器
-                  href: ./kusto/tools/kusto-explorer-code-analyzer.md
-                - name: 針對 Kusto 進行疑難排解
-                  href: ./kusto/tools/kusto-explorer-troubleshooting.md
-            - name: Web UI
-              href: ./web-query-data.md
-            - name: Kusto.Cli
-              href: ./kusto/tools/kusto-cli.md
-        - name: 視覺效果、儀表板和報告
-          items:
-            - name: Azure Notebooks
-              href: ./azure-notebooks.md
-            - name: Excel
-              items:
-                - name: Excel 空白查詢
-                  href: ./excel-blank-query.md
-                - name: Excel 連接器
-                  href: ./excel-connector.md
-            - name: Grafana
-              href: ./grafana.md
-            - name: Power BI
-              items:
-                - name: Power BI 最佳做法
-                  href: ./power-bi-best-practices.md
-                - name: Power BI 連接器
-                  href: ./power-bi-connector.md
-                - name: Power BI 已匯入查詢
-                  href: ./power-bi-imported-query.md
-                - name: Power BI SQL 查詢
-                  href: ./power-bi-sql-query.md
-        - name: 協調流程
-          items:
-            - name: Microsoft Flow (預覽)
-              items:
-                - name: Microsoft Flow 連接器
-                  href: ./flow.md
-                - name: Microsoft Flow 連接器使用範例
-                  href: ./flow-usage.md
-            - name: Microsoft Logic Apps (預覽)
-              href: ./kusto/tools/logicapps.md
-        - name: 資料擷取
-          items:
-            - name: LightIngest
-              href: ./lightingest.md
-            - name: Apache Spark 連接器
-              href: ./spark-connector.md
-        - name: 原始檔控制整合
-          items:
-            - name: 同步 Kusto
-              href: ./kusto/tools/synckusto.md
-            - name: Azure Pipelines/DevOps
-              href: ./devops.md
 - name: 資源
   items:
     - name: 部落格

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6c09bea9cfe25ea7ebe86170f71593db4db7d9a2
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: a1382703c4c70263ff0d8a066860071fd07ef179
+ms.sourcegitcommit: bf2c9da0c23ebcaec19b229d2079032d54a2cc82
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264346"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86140500"
 ---
 # <a name="getting-started-with-kusto"></a>開始使用 Kusto
 
@@ -33,7 +33,7 @@ Azure 資料總管是一種服務，可用於儲存和執行巨量資料的互�
 ## <a name="interacting-with-azure-data-explorer"></a>與 Azure 資料總管互動
 
 使用者用來與 Azure 資料總管 (Kusto) 互動的主要方式：
-* 使用許多可用的[用戶端工具](../tools/index.md)之一。 
+* 使用其中一個[查詢工具](../../tools-integrations-overview.md#azure-data-explorer-query-tools)。 
 * [SQL 查詢](../api/tds/t-sql.md)。
 *  [Kusto 查詢語言](../query/index.md)是互動的主要方式。 KQL 可讓您傳送資料查詢，並使用[控制命令](../management/index.md)來管理實體、探索中繼資料等等。
 查詢和控制命令都是簡短的文字「程式」。

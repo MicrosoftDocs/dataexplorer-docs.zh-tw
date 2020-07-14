@@ -7,12 +7,12 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/07/2020
-ms.openlocfilehash: f1a7167b36be66b145c51b2eeca8b8fe057f1b6a
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: 7b26d0585e4d6bc2ff8edfb9a906dd305278f967
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86195399"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280623"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-net-sdk"></a>使用 Azure 資料總管 .NET SDK 內嵌資料 
 
@@ -182,7 +182,10 @@ using (var kustoClient = KustoClientFactory.CreateCslAdminProvider(kustoConnecti
 
 ## <a name="queue-a-message-for-ingestion"></a>將訊息排入佇列以供擷取
 
-將訊息放入佇列，以從 Blob 儲存體提取資料，並將該資料內嵌至 Azure 資料總管。 會建立連線至 Azure 資料總管叢集的資料內嵌端點，並建立另一個用戶端來使用該端點。 相同的指導方針同樣適用于上一節。
+將訊息放入佇列，以從 Blob 儲存體提取資料，並將該資料內嵌至 Azure 資料總管。 會建立連線至 Azure 資料總管叢集的資料內嵌端點，並建立另一個用戶端來使用該端點。 
+
+> [!TIP]
+> 下列程式碼片段會為幾乎每次呼叫建立用戶端的實例。 這是為了讓每個程式碼片段可以個別執行。 在生產環境中，用戶端實例是可重新進入的，而且應該視需要保留。 一個 URI 的單一用戶端實例就已足夠，即使在使用多個資料庫時，也可以在命令層級) 上指定 (資料庫。
 
 ```csharp
 var ingestUri = "https://ingest-<ClusterName>.<Region>.kusto.windows.net";
