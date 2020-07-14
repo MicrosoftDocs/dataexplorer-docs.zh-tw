@@ -1,6 +1,6 @@
 ---
-title: ingestion_time （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 ingestion_time （）。
+title: 'ingestion_time ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 ingestion_time ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,37 +10,35 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 2474b8751be5cba2270bcbd2936c76b91f5f3ba0
-ms.sourcegitcommit: fbe298e88542c0dcea0f491bb53ac427f850f729
+ms.openlocfilehash: fea923b0d917beb505bd6a1cb9ee1339739d08c6
+ms.sourcegitcommit: 284152eba9ee52e06d710cc13200a80e9cbd0a8b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82030033"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86291554"
 ---
 # <a name="ingestion_time"></a>ingestion_time()
 
-抓取記錄的`$IngestionTime`隱藏`datetime`資料行，或為 null。
-當`$IngestionTime`資料表的時，會自動定義資料行
-
 ::: zone pivot="azuredataexplorer"
 
-已設定[IngestionTime 原則](../management/ingestiontimepolicy.md)（已啟用）。
+傳回目前記錄內嵌的大約時間。
+
+此函式必須用於內嵌資料之資料表的內容中，而[IngestionTime 原則](../management/ingestiontimepolicy.md)是在內嵌資料時啟用。 否則，此函數會產生 null 值。
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-已設定 IngestionTime 原則（已啟用）。
+`datetime`當記錄已內嵌且準備好進行查詢時，會抓取。
 
 ::: zone-end
 
-如果資料表未定義此原則，則會傳回 null 值。
-
-這個函數必須在實際資料表的內容中使用，才能傳回相關資料。 例如，如果是在運算子之後叫用`summarize` ，則它會針對所有記錄傳回 null。
+> [!NOTE]
+> 此函式所傳回的值只是近似值，因為內嵌程式可能需要幾分鐘的時間才能完成，而且可能會同時進行多個內嵌活動。 若要處理具有剛好一次保證之資料表的所有記錄，請使用[資料庫資料指標](../management/databasecursor.md)。
 
 **語法**
 
- `ingestion_time()`
+`ingestion_time()`
 
 **傳回**
 
@@ -49,6 +47,6 @@ ms.locfileid: "82030033"
 **範例**
 
 ```kusto
-T 
+T
 | extend ingestionTime = ingestion_time() | top 10 by ingestionTime
 ```

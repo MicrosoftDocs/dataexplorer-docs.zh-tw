@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: fc8e34be3d61c690bc94795e6bd37f2559d247e0
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: 0b2daf955515e4c023cdb7312fbd82039ca598bc
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013914"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280636"
 ---
 # <a name="using-kustoexplorer"></a>使用 Kusto.Explorer
 
@@ -28,11 +28,11 @@ Kusto 是一種桌面應用程式，可讓您在便於使用的使用者介面�
 1. 在 [編輯] 方塊中，輸入您的搜尋片語，然後選取 [ **Go**]。
 1. [資料表/時間位置] 方格的熱度圖會顯示出現的字詞和位置。
 
-:::image type="content" source="images/kusto-explorer-using/search-plus-plus.png" alt-text="搜尋 + + Kusto Explorer":::
+    :::image type="content" source="images/kusto-explorer-using/search-plus-plus.png" alt-text="搜尋 + + Kusto Explorer":::
 
 1. 選取方格中的資料格，然後選取 [ **View Details** ]，以在 [結果] 窗格中顯示相關專案。
 
-:::image type="content" source="images/kusto-explorer-using/search-plus-plus-results.png" alt-text="Kusto Explorer 搜尋 + + 結果":::
+    :::image type="content" source="images/kusto-explorer-using/search-plus-plus-results.png" alt-text="Kusto Explorer 搜尋 + + 結果":::
 
 ## <a name="query-mode"></a>查詢模式
 
@@ -101,7 +101,7 @@ StormEvents
 
 :::image type="content" source="images/kusto-explorer-using/parametrized-query-4.png" alt-text="Paramaterized 查詢 IntelliSense":::
 
-您可以有多個參數集（列在 [**參數集**] 下拉式方塊中）。
+您可以在 [**參數集**] 下拉式方塊中 (列出多個參數集) 。
 選取 [**加入新**的] 或 [**刪除目前**的] 以指令引數集清單。
 
 :::image type="content" source="images/kusto-explorer-using/parametrized-query-5.png" alt-text="參數集清單":::
@@ -115,19 +115,19 @@ StormEvents
 Kusto 提供一個便利的方式，讓您透過電子郵件共用查詢和查詢結果。
 
 1. 在 Kusto 中[執行查詢](#basic-queries)。
-1. 在 [首頁] 索引標籤的 [共用] 區段中，選取 [**匯出至剪貼**簿] \ （或按 Ctrl + Shift + C）。
+1. 在 [首頁] 索引標籤的 [共用] 區段中，選取 [**匯出至剪貼**簿] (或按 Ctrl + Shift + C) 。
 
-:::image type="content" source="images/kusto-explorer-using/menu-export.png" alt-text="匯出至剪貼簿":::
+    :::image type="content" source="images/kusto-explorer-using/menu-export.png" alt-text="匯出至剪貼簿":::
 
-    Kusto.Explorer pastes the following to the clipboard:
-    * Your query
-    * The query results (table or chart)
-    * The connection details for the Kusto cluster and database
-    * A link that will rerun the query automatically
+    Kusto 會將下列內容貼入剪貼簿：
+     * 您的查詢
+     *  (資料表或圖表的查詢結果) 
+     * Kusto 叢集和資料庫的連線詳細資料
+     * 會自動重新執行查詢的連結
 
 1. 將剪貼簿的內容貼入新的電子郵件訊息。
 
-:::image type="content" source="images/kusto-explorer-using/share-results-2.png" alt-text="在電子郵件中共用結果":::
+    :::image type="content" source="images/kusto-explorer-using/share-results-2.png" alt-text="在電子郵件中共用結果":::
 
 ### <a name="deep-linking-queries"></a>深層連結查詢
 
@@ -148,14 +148,14 @@ URI 的格式為：`https://<ClusterCname>.kusto.windows.net/<DatabaseName>web=0
 
 ### <a name="creating-a-deep-link"></a>建立深層連結
 
-建立深層連結最簡單的方式，就是在 Kusto 中撰寫查詢，然後使用將 `Export to Clipboard` 查詢（包括深層連結和結果）複製到剪貼簿。 然後您可以透過電子郵件來共用它。
+建立深層連結最簡單的方式，就是在 Kusto 中撰寫查詢，然後使用 `Export to Clipboard` 複製查詢 (包括 [深層連結] 和 [結果]) 至剪貼簿。 然後您可以透過電子郵件來共用它。
         
 複製到電子郵件時，深層連結會以小型字型顯示。 例如：
 
 https://help.kusto.windows.net:443/Samples[[按一下以執行查詢](https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVuDlqlEoLs3NTSzKrEpVSM4vzSvR0FRIqlRIyszTCC5JLCoJycxN1VEwT9EEKS1KzUtJLVIoAYolZwAlFQCB3oo%2bTAAAAA%3d%3d)] 
 
 第一個連結會開啟 Kusto，並適當地設定叢集和資料庫內容。
-第二個連結（ `Click to run query` ）是深層連結。 如果您將連結移至電子郵件訊息，然後按 CTRL + K，您就可以看到實際的 URL：
+第二個連結 (`Click to run query`) 是深層連結。 如果您將連結移至電子郵件訊息，然後按 CTRL + K，您就可以看到實際的 URL：
 
 https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVuDlqlEoLs3NTSzKrEpVSM4vzSvR0FRIqlRIyszTCC5JLCoJycxN1VEwT9EEKS1KzUtJLVIoAYolZwAlFQCB3oo%2bTAAAAA%3d%3d
 
@@ -163,10 +163,14 @@ https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSs
 
 您可以使用參數化查詢搭配深層連結。
 
-1. 建立查詢以形成參數化查詢（例如， `KustoLogs | where Timestamp > ago({Period}) | count` ） 
-1. 為 URI 中的每個查詢參數提供參數，例如：
+1. 建立查詢以形成參數化查詢 (例如， `KustoLogs | where Timestamp > ago({Period}) | count`)  
+1. 為 URI 中的每個查詢參數提供參數，例如： 
+    
+    `https://<your_cluster>.kusto.windows.net/MyDatabase?
+web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h`
 
-   `https://mycluster.kusto.windows.net/MyDatabase?web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h`
+    &lt; &gt; 以您的 Azure 資料總管叢集名稱取代 your_cluster。
+
 
 ### <a name="getting-shorter-links"></a>取得較短的連結
 
@@ -188,7 +192,7 @@ https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSs
 
 ## <a name="command-line-argument-syntax"></a>命令列引數語法
 
-Kusto 支援下列語法中的數個命令列引數（順序很重要）：
+Kusto 支援下列語法中的數個命令列引數 (順序的重要性) ：
 
 [*LocalScriptFile*][*QueryString*]
 
@@ -204,13 +208,13 @@ Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples
 |引數  |描述                                                               |
 |----------|--------------------------------------------------------------------------|
 |**要執行的查詢**                                                                 |
-|`query`   |要執行的查詢（base64 編碼）。 如果空白，請使用 `querysrc` 。          |
-|`querysrc`|保存要執行之查詢的檔案或 blob 的 URL （如果 `query` 是空的）。|
+|`query`   |要執行 (base64 編碼) 的查詢。 如果空白，請使用 `querysrc` 。          |
+|`querysrc`|保存要執行之查詢的檔案或 blob 的 URL，如果 `query` 是空的) 則為 (。|
 |**連接到 Kusto 叢集**                                                  |
 |`uri`     |要連接之 Kusto 叢集的連接字串。                 |
 |`name`    |連接至 Kusto 叢集的顯示名稱。                  |
 |**連接群組**                                                                 |
-|`path`    |要下載之連接群組檔案的 URL （URL 編碼）。             |
+|`path`    |要下載 (URL 編碼) 之連接群組檔案的 URL。             |
 |`group`   |連接群組的名稱。                                         |
 |`filename`|保留連接群組的本機檔案。                              |
 
@@ -220,7 +224,7 @@ Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples
 > [!Note]
 > 只有系統[管理員](../management/access-control/role-based-authorization.md)可以在自己的範圍中新增或卸載授權的主體。
 
-以滑鼠右鍵按一下 [連線][面板](kusto-explorer.md#connections-tab)中的目標實體，然後選取 [**管理叢集授權的主體**]。 （您也可以從 [管理] 功能表中選取此選項）。
+以滑鼠右鍵按一下 [連線][面板](kusto-explorer.md#connections-tab)中的目標實體，然後選取 [**管理叢集授權的主體**]。  (您也可以從 [管理] 功能表中選取此選項。 ) 
 
 :::image type="content" source="images/kusto-explorer-using/right-click-manage-authorized-principals.png" alt-text="管理授權的主體":::
 
@@ -247,4 +251,4 @@ Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples
 * [Kusto. Explorer 程式碼分析器](kusto-explorer-code-analyzer.md)
 * [Kusto. Explorer 程式碼導覽](kusto-explorer-codenav.md)
 * [Kusto 程式碼重構](kusto-explorer-refactor.md)
-* [Kusto 查詢語言（KQL）](https://docs.microsoft.com/azure/kusto/query/)
+* [Kusto 查詢語言 (KQL)](https://docs.microsoft.com/azure/kusto/query/)

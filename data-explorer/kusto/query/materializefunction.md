@@ -1,6 +1,6 @@
 ---
-title: 具體化（）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的具體化（）函數。
+title: '具體化 ( # A1-Azure 資料總管'
+description: '本文說明如何在 Azure 資料總管中具體化 ( # A1 函式。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/06/2020
-ms.openlocfilehash: f5ea896d4701aa5aec1b22c1ff20853aea18f065
-ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
+ms.openlocfilehash: 0580088bf04bffafd36990a3f42c32aa5c4ede53
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664937"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280463"
 ---
 # <a name="materialize"></a>materialize()
 
@@ -41,7 +41,7 @@ ms.locfileid: "84664937"
   這是每個叢集節點的限制，而且會與同時執行的所有查詢相互同步。
   如果查詢使用 `materialize()` ，而且快取無法保存任何其他資料，則查詢將會中止並產生錯誤。
 
-**範例**
+## <a name="examples-of-query-performance-improvement"></a>查詢效能改進的範例
 
 下列範例顯示如何 `materialize()` 使用來改善查詢的效能。
 運算式 `_detailed_data` 是使用函數所定義 `materialize()` ，因此只會計算一次。
@@ -57,7 +57,7 @@ _detailed_data
 | top 10 by EventPercentage
 ```
 
-|State|EventType|EventPercentage|事件|
+|狀態|EventType|EventPercentage|事件|
 |---|---|---|---|
 |夏威夷 WATERS|Waterspout|100|2|
 |LAKE 安大略|航海 Thunderstorm 風|100|8|
@@ -72,7 +72,7 @@ _detailed_data
 
 
 下列範例會產生一組亂數字，並計算： 
-* 集合中的相異值數目（Dcount）
+* set () 中的相異值數目 `Dcount`
 * 集合中的前三個值 
 * 集合中所有這些值的總和 
  
@@ -97,7 +97,7 @@ randomSet | summarize Sum=sum(value)
 
 結果集2： 
 
-|value|
+|值|
 |---|
 |9999998|
 |9999998|
@@ -105,6 +105,66 @@ randomSet | summarize Sum=sum(value)
 
 結果集3： 
 
-|Sum|
+|總和|
 |---|
 |15002960543563|
+
+## <a name="examples-of-using-materialize"></a>使用具體化 ( # A1 的範例
+
+> [!TIP]
+> 如果大部分的查詢都從動態物件中的數百萬個數據列提取欄位，請在內嵌時具體化您的資料行。
+> 
+> 若要使用 `let` 語句搭配您使用一次以上的值，請使用[具體化 ( # A1 函數](./materializefunction.md)。
+> 如需詳細資訊，請參閱[最佳做法](best-practices.md)
+
+嘗試推送會減少具體化資料集的所有可能運算子，但仍保留查詢的語法。 例如，篩選或僅專案必要的資料行。
+
+```kusto
+    let materializedData = materialize(Table
+    | where Timestamp > ago(1d));
+    union (materializedData
+    | where Text !has "somestring"
+    | summarize dcount(Resource1)), (materializedData
+    | where Text !has "somestring"
+    | summarize dcount(Resource2))
+```
+
+上的篩選 `Text` 是相互的，而且可以推送至具體化運算式。
+查詢只需要、、 `Timestamp` 和資料行 `Text` `Resource1` `Resource2` 。 將這些資料行投影到具體化運算式內。
+    
+```kusto
+    let materializedData = materialize(Table
+    | where Timestamp > ago(1d)
+    | where Text !has "somestring"
+    | project Timestamp, Resource1, Resource2, Text);
+    union (materializedData
+    | summarize dcount(Resource1)), (materializedData
+    | summarize dcount(Resource2))
+```
+    
+如果篩選器與在此查詢中的內容不同：  
+
+```kusto
+    let materializedData = materialize(Table
+    | where Timestamp > ago(1d));
+    union (materializedData
+    | where Text has "String1"
+    | summarize dcount(Resource1)), (materializedData
+    | where Text has "String2"
+    | summarize dcount(Resource2))
+ ```
+
+當結合的篩選準則大幅減少具體化的結果時，請依照下列查詢中的邏輯運算式，將具體化結果的兩個篩選器結合在一起 `or` 。 不過，請在每個聯集階段中保留篩選，以保留查詢的語法。
+     
+```kusto
+    let materializedData = materialize(Table
+    | where Timestamp > ago(1d)
+    | where Text has "String1" or Text has "String2"
+    | project Timestamp, Resource1, Resource2, Text);
+    union (materializedData
+    | where Text has "String1"
+    | summarize dcount(Resource1)), (materializedData
+    | where Text has "String2"
+    | summarize dcount(Resource2))
+```
+    

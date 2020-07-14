@@ -1,6 +1,6 @@
 ---
-title: geo_point_in_polygon （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 geo_point_in_polygon （）。
+title: 'geo_point_in_polygon ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 geo_point_in_polygon ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/10/2020
-ms.openlocfilehash: 25eb68a942eb0ff84ea34e47c94ea1a21cd09c90
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 96e3cfeba0002aa48a4300a994e9e12610deb9a3
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227214"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280572"
 ---
 # <a name="geo_point_in_polygon"></a>geo_point_in_polygon()
 
@@ -35,13 +35,14 @@ ms.locfileid: "83227214"
 
 > [!NOTE]
 > * 地理空間座標會以[WGS-84](https://earth-info.nga.mil/GandG/update/index.php?action=home)座標參考系統來表示。
-> * 用於在地球上測量的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。 多邊形邊緣會在球體上 geodesics。
+> * 用於在地球上測量的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。 多邊形邊緣會在球體上[geodesics](https://en.wikipedia.org/wiki/Geodesic) 。
+> * 如果輸入多邊形邊緣是直線笛線，請考慮使用[geo_polygon_densify ( # B1](geo-polygon-densify-function.md)將平面邊緣轉換成 geodesics。
 
 **多邊形定義和條件約束**
 
-dynamic （{"type"： "多邊形"，"座標"： [LinearRingShell，LinearRingHole_1,..., LinearRingHole_N]}）
+動態 ( {"type"： "多邊形"，"座標"： [LinearRingShell，LinearRingHole_1,..., LinearRingHole_N]} ) 
 
-dynamic （{"type"： "MultiPolygon"，"座標"： [[LinearRingShell，LinearRingHole_1,..., LinearRingHole_N],..., [LinearRingShell，LinearRingHole_1,..., LinearRingHole_M]]}）
+dynamic ( {"type"： "MultiPolygon"，"座標"： [[LinearRingShell，LinearRingHole_1,..., LinearRingHole_N],..., [LinearRingShell，LinearRingHole_1,..., LinearRingHole_M]]} ) 
 
 * LinearRingShell 是必要的，而且定義為 `counterclockwise` 座標 [[lng_1，lat_1],..., [lng_i，lat_i],..., [lng_j，lat_j],..., [lng_1，lat_1]] 的已排序陣列。 只能有一個 shell。
 * LinearRingHole 是選擇性的，而且定義為已 `clockwise` 排序的座標陣列 [[lng_1，lat_1],..., [lng_i，lat_i],..., [lng_j，lat_j],..., [lng_1，lat_1]]。 可以有任意數目的內部環形和孔。
@@ -73,7 +74,7 @@ datatable(longitude:real, latitude:real, description:string)
 | where geo_point_in_polygon(longitude, latitude, dynamic({"type":"Polygon","coordinates":[[[-73.92597198486328,40.87821814104651],[-73.94691467285156,40.85069618625578],[-73.94691467285156,40.841865966890786],[-74.01008605957031,40.7519385984599],[-74.01866912841797,40.704586878965245],[-74.01214599609375,40.699901911003046],[-73.99772644042969,40.70875101828792],[-73.97747039794922,40.71083299030839],[-73.97026062011719,40.7290474687069],[-73.97506713867186,40.734510840309376],[-73.970947265625,40.74543623770158],[-73.94210815429688,40.77586181063573],[-73.9434814453125,40.78080140115127],[-73.92974853515625,40.79691751000055],[-73.93077850341797,40.804454347291006],[-73.93489837646484,40.80965166748853],[-73.93524169921875,40.837190668541105],[-73.92288208007812,40.85770758108904],[-73.9101791381836,40.871728144624974],[-73.92597198486328,40.87821814104651]],[[-73.95824432373047,40.80071852197889],[-73.98206233978271,40.76815921628347],[-73.97309303283691,40.76422632379533],[-73.94914627075195,40.796949998204596],[-73.95824432373047,40.80071852197889]]]}))
 ```
 
-|經度 (longitude)|緯度 (latitude)|description|
+|經度 (longitude)|緯度 (latitude)|描述|
 |---|---|---|
 |-73.985654|40.748487|帝國狀態建立|
 
@@ -95,7 +96,7 @@ coordinates
 | where geo_point_in_polygon(longitude, latitude, multipolygon)
 ```
 
-|經度 (longitude)|緯度 (latitude)|description|
+|經度 (longitude)|緯度 (latitude)|描述|
 |---|---|---|
 |-73.9741|40.7914|右上方|
 |-73.995|40.734|格林威治 Village|
@@ -143,13 +144,13 @@ Polygons
 }
 ```
 
-|經度 (longitude)|緯度 (latitude)|description|
+|經度 (longitude)|緯度 (latitude)|描述|
 |---|---|---|
 |-73.95|40.75|紐約市地區|
 |-122。3|47.6|西雅圖區域|
 |-115.18|36.16|拉斯維加斯|
 
-另請參閱[geo_polygon_to_s2cells （）](geo-polygon-to-s2cells-function.md)。
+另請參閱[geo_polygon_to_s2cells ( # B1 ](geo-polygon-to-s2cells-function.md)。
 
 將數個多邊形折迭成一個 multipolygon 並加以查詢。
 
@@ -178,7 +179,7 @@ Coordinates
 | where geo_point_in_polygon(longitude, latitude, multipolygon)
 ```
 
-|經度 (longitude)|緯度 (latitude)|description|
+|經度 (longitude)|緯度 (latitude)|描述|
 |---|---|---|
 |-73.9741|40.7914|右上方|
 |-73.995|40.734|格林威治 Village|

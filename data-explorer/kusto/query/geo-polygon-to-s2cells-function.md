@@ -1,6 +1,6 @@
 ---
-title: geo_polygon_to_s2cells （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 geo_polygon_to_s2cells （）。
+title: 'geo_polygon_to_s2cells ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 geo_polygon_to_s2cells ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspod
@@ -8,16 +8,16 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/10/2020
-ms.openlocfilehash: 39d5b35a80ff9354a5fb6987866ff024471d7305
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: c4396087018e25c57f064e8d2f99a83cc0840c3a
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83232434"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280582"
 ---
-# <a name="geo_polygon_to_s2cells"></a>geo_polygon_to_s2cells （）
+# <a name="geo_polygon_to_s2cells"></a>geo_polygon_to_s2cells()
 
-計算在地球上涵蓋多邊形或 multipolygon 的 S2 資料格標記。
+計算在地球上涵蓋多邊形或 multipolygon 的 S2 資料格標記。 此函式是有用的地理空間聯結工具。
 
 閱讀更多有關[S2 資料格](https://s2geometry.io/devguide/s2cell_hierarchy)階層的資訊。
 
@@ -36,10 +36,11 @@ ms.locfileid: "83232434"
 
 > [!NOTE]
 >
-> * 以 S2 資料格標記來涵蓋多邊形，在比對座標與可能包含這些座標的多邊形時，會很有用。
+> * 以 S2 資料格標記來涵蓋多邊形，在比對座標與可能包含這些座標和符合多邊形的多邊形之間，可能會很有用。
 > * 涵蓋標記的多邊形屬於相同的 S2 資料格層級。
 > * 每個多邊形的權杖數目上限為65536。
-> * 用於在地球上測量的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。 多邊形邊緣會在球體上 geodesics。
+> * 用於在地球上測量的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。 多邊形邊緣會在球體上[Geodesics](https://en.wikipedia.org/wiki/Geodesic) 。
+> * 如果輸入多邊形邊緣是直線笛線，請考慮使用[geo_polygon_densify ( # B1](geo-polygon-densify-function.md) ，以便將平面邊緣轉換成 geodesics。
 
 **使用 S2 資料格標記來涵蓋多邊形的動機**
 
@@ -66,10 +67,10 @@ Polygons | extend dummy=1
 | project longitude, latitude, description
 ```
 
-|經度 (longitude)|緯度 (latitude)|description|
+|經度 (longitude)|緯度 (latitude)|描述|
 |---|---|---|
 |-73.95|40.75|紐約市|
-|-122。3|47.6|Seattle|
+|-122。3|47.6|西雅圖|
 |-115.18|36.16|拉斯維加斯|
 
 雖然此方法適用于某些情況，但卻沒有效率。 這個方法會進行交叉聯結，這表示它會嘗試將每個多邊形對應至每個點。 此程式會耗用大量的記憶體和計算資源。
@@ -79,17 +80,17 @@ Polygons | extend dummy=1
 1. 將多邊形轉換成層級 k 的 S2 資料格，
 1. 將點轉換成相同的 S2 資料格層級 k， 
 1. 加入 S2 資料格，
-1. 依[geo_point_in_polygon （）](geo-point-in-polygon-function.md)篩選。
+1. 依[geo_point_in_polygon ( # B1](geo-point-in-polygon-function.md)進行篩選。
 
 **選擇 S2 資料格層級**
 
 * 在理想的情況下，我們會想要使用一或幾個獨特的資料格來涵蓋每個多邊形，讓兩個多邊形不會共用相同的資料格。
-* 如果多邊形彼此接近，請選擇[S2 資料格層級](geo-point-to-s2cell-function.md)，使其資料格邊緣比平均多邊形的邊緣小（4、8、12倍）。
+* 如果多邊形彼此接近，請選擇[S2 資料格層級](geo-point-to-s2cell-function.md)，使其資料格邊緣 (4、8、12倍小) 小於平均多邊形的邊緣。
 * 如果多邊形距離不同，請選擇[S2 資料格層級](geo-point-to-s2cell-function.md)，使其資料格邊緣類似于平均多邊形的邊緣。
 * 實際上，涵蓋包含超過10000個數據格的多邊形可能無法產生良好的效能。
 * 範例使用案例：
    - S2 資料格層級5可能證明適用于涵蓋國家/地區。
-   - S2 資料格層級16可以涵蓋密集且相對較小的曼哈頓（紐約）臨近地區。
+   - S2 資料格層級16可以涵蓋 (紐約) 臨近地區的密集且相對較小的曼哈頓。
    - S2 資料格層級11可以用於涵蓋澳大利亞的市郊。
 * 查詢執行時間和記憶體耗用量可能會因為不同的 S2 資料格層級值而有所不同。
 
@@ -128,7 +129,7 @@ Polygons
 | project longitude, latitude, description
 ```
 
-|經度 (longitude)|緯度 (latitude)|description|
+|經度 (longitude)|緯度 (latitude)|描述|
 |---|---|---|
 |-73.9741|40.7914|右上方|
 |-73.995|40.734|格林威治 Village|

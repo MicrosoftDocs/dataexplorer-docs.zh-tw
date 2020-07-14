@@ -1,6 +1,6 @@
 ---
-title: geo_distance_point_to_line （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 geo_distance_point_to_line （）。
+title: 'geo_distance_point_to_line ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 geo_distance_point_to_line ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2020
-ms.openlocfilehash: 304b40a00fd471b7735ff11c01bdaa8b6ca3a8ec
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: b4a30aa4285b8f6e22e5d4057fe7d408d548a27b
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227435"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280557"
 ---
 # <a name="geo_distance_point_to_line"></a>geo_distance_point_to_line()
 
@@ -35,11 +35,12 @@ ms.locfileid: "83227435"
 
 > [!NOTE]
 > * 地理空間座標會以[WGS-84](https://earth-info.nga.mil/GandG/update/index.php?action=home)座標參考系統來表示。
-> * 用來測量地球距離的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。 線條邊緣會 geodesics 在球體上。
+> * 用來測量地球距離的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。 線條邊緣會[geodesics](https://en.wikipedia.org/wiki/Geodesic)在球體上。
+> * 如果輸入線條邊緣是直笛線，請考慮使用[geo_line_densify ( # B1](geo-line-densify-function.md) ，以便將平面邊緣轉換成 geodesics。
 
 **LineString 定義和條件約束**
 
-dynamic （{"type"： "LineString"，"座標"： [[lng_1，lat_1]，[lng_2，lat_2],..., [lng_N，lat_N]]}）
+dynamic ( {"type"： "LineString"，"座標"： [[lng_1，lat_1]，[lng_2，lat_2],..., [lng_N，lat_N]]} ) 
 
 * LineString 座標陣列必須包含至少兩個專案。
 * 座標 [經度，緯度] 必須是有效的，其中經度是範圍 [-180，+ 180] 中的實數，而緯度是範圍 [-90，+ 90] 中的實際數位。

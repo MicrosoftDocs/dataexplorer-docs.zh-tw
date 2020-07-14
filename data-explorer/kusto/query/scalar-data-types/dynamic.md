@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/09/2020
-ms.openlocfilehash: 1ac715f06945e3db99de1a00b09237ae6f6e241d
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: e909754a040308d752b19155e1e69a10097ab219
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86188552"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280508"
 ---
 # <a name="the-dynamic-data-type"></a>動態資料類型
 
@@ -52,7 +52,7 @@ print o=dynamic({"a":123, "b":"hello", "c":[1,2,3], "d":{}})
 ```
 
 為了方便起見， `dynamic` 出現在查詢文字本身中的常值也可能包含類型為的其他 Kusto 常值： `datetime` 、 `timespan` 、 `real` 、 `long` 、、 `guid` `bool` 和 `dynamic` 。
-剖析 (字串時無法使用此延伸模組，例如使用 `parse_json` 函數時或內嵌資料) 時，但可讓您執行此操作：
+剖析 (字串時無法使用此延伸模組，例如當使用 `parse_json` 函數或內嵌資料) 時，您可以執行下列動作：
 
 ```kusto
 print d=dynamic({"a": datetime(1970-05-11)})
@@ -88,7 +88,7 @@ print d=dynamic({"a": datetime(1970-05-11)})
   [2015-01-01,"{""EventType"":""Demo"", ""EventValue"":""Double-quote love!""}"]
 ```
 
-|時間戳記                   | 追蹤                                                 |
+|Timestamp                   | 追蹤                                                 |
 |----------------------------|-------------------------------------------------------|
 |2015-01-01 00：00：00.0000000 | {「事件2」： "Demo"，"EventValue"： "雙引號愛！"}|
 
@@ -102,7 +102,7 @@ print d=dynamic({"a": datetime(1970-05-11)})
 
 在下列範例中 `dict` ，和 `arr` 是動態類型的資料行：
 
-|運算式                        | 存取子運算式類型 | 意義                                                                              | 註解                                      |
+|運算是                        | 存取子運算式類型 | 意義                                                                              | 註解                                      |
 |----------------------------------|--------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------|
 |dict [col]                         | 機構名稱 (資料行)      | 使用資料行的值 `col` 做為索引鍵，做為字典的注標              | 資料行必須是字串類型                 | 
 |arr [index]                        | 實體索引 (資料行)     | 使用資料行的值做為索引，將陣列設 `index` 為下標              | 資料行的類型必須是整數或布林值     | 
@@ -120,7 +120,7 @@ print d=dynamic({"a": datetime(1970-05-11)})
 
 > 注標動態物件之後，您必須將值轉換成簡單類型。
 
-|運算式 | 值 | 類型|
+|運算是 | 值 | 類型|
 |---|---|---|
 | X | parse_json ( ' [100101102] ' ) | array|
 |X [0]|parse_json ( ' 100 ' ) |動態|
@@ -163,7 +163,7 @@ Cast 函數包括：
 
 ## <a name="operators-and-functions-over-dynamic-types"></a>動態類型的運算子和函式
 
-|||
+|Operator 或函數|使用動態資料類型的用法|
 |---|---|
 | *value* `in` *array*| 如果有 array** 項目 == value**，則為 true<br/>`where City in ('London', 'Paris', 'Rome')`
 | *value* `!in` *array*| 如果沒有 array** 項目 == value**，則為 true

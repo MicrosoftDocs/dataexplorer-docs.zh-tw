@@ -1,6 +1,6 @@
 ---
-title: extent_id （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 extent_id （）。
+title: 'extent_id ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 extent_id ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,20 +10,20 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 300f7961fd11b433ef4e420d5a20b9ad9150b269
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 1f5584233a24c834e0ca6c28ed60aa5d7496b411
+ms.sourcegitcommit: 284152eba9ee52e06d710cc13200a80e9cbd0a8b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737618"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86291520"
 ---
 # <a name="extent_id"></a>extent_id()
 
 ::: zone pivot="azuredataexplorer"
 
-傳回唯一識別碼，識別目前記錄所在的資料分區（「範圍」）。 
+傳回唯一識別碼，識別目前記錄所在 ( 「範圍」 ) 的資料分區。
 
-將此函數套用至未附加至資料分區的計算資料，會傳回空的 guid （全部為零）。
+將此函數套用至未附加至資料分區的計算資料時，會傳回空的 guid (所有零) 。
 
 **語法**
 
@@ -31,11 +31,11 @@ ms.locfileid: "82737618"
 
 **傳回**
 
-類型`guid`的值，識別目前記錄的資料分區或空的 guid （全部為零）。
+類型的值， `guid` 識別目前記錄的資料分區，或空的 guid (所有零) 。
 
 **範例**
 
-下列範例示範如何取得具有資料行`ActivityId`之特定值的所有資料分區清單，其中包含一小時前的記錄。 它會示範某些查詢運算子（在這裡是`where`運算子，但也適用于`extend`和`project`）會保留裝載記錄之資料分區的相關資訊。
+下列範例示範如何取得具有資料行之特定值的所有資料分區清單，其中包含一小時前的記錄 `ActivityId` 。 它會示範某些查詢運算子在這裡 (、 `where` 運算子，以及 `extend` `project`) 保留裝載記錄之資料分區的相關資訊。
 
 ```kusto
 T
