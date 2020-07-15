@@ -1,5 +1,5 @@
 ---
-title: '使用 Azure 資料總管 (Preview 來查詢 Azure 監視器中的資料) '
+title: 使用 Azure 資料總管查詢 Azure 監視器中的資料（預覽）
 description: 在本主題中，您可以使用 Application Insights 和 Log Analytics 建立用於跨產品查詢的 Azure 資料總管 proxy，以在 Azure 監視器中查詢資料。
 services: data-explorer
 author: orspod
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/28/2020
-ms.openlocfilehash: 1edca77125f46c59402edfde251262cebe5c1b70
-ms.sourcegitcommit: 284152eba9ee52e06d710cc13200a80e9cbd0a8b
+ms.openlocfilehash: e5e4e2642d41d045c7fc49efaca78c35e217b0e5
+ms.sourcegitcommit: f086298a6dd32790910350c7cd3b914b51d51226
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86291588"
+ms.lasthandoff: 07/14/2020
+ms.locfileid: "86374678"
 ---
-# <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>使用 Azure 資料總管 (Preview 來查詢 Azure 監視器中的資料) 
+# <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>使用 Azure 資料總管查詢 Azure 監視器中的資料（預覽）
 
-Azure 資料總管 proxy 叢集 (ADX Proxy) 是一個實體，可讓您在 Azure 資料總管、Application Insights [ (AI) ](/azure/azure-monitor/app/app-insights-overview)和[Log Analytics](/azure/azure-monitor/platform/data-platform-logs)之間執行跨產品查詢， [ (服務中) ](/azure/azure-monitor/) LA Azure 監視器。 您可以將 Azure 監視器 Log Analytics 工作區或 Application Insights 應用程式對應為 proxy 叢集。 接著，您可以使用 Azure 資料總管工具來查詢 proxy 叢集，並在跨叢集查詢中加以參考。 本文說明如何連線到 proxy 叢集、將 proxy 叢集新增至 Azure 資料總管 Web UI，以及從 Azure 資料總管對您的 AI 應用程式或 LA 工作區執行查詢。
+Azure 資料總管 proxy 叢集（ADX Proxy）是一個實體，可讓您在[Azure 監視器](/azure/azure-monitor/)服務中的 Azure 資料總管、 [Application Insights （AI）](/azure/azure-monitor/app/app-insights-overview)和[Log Analytics （LA）](/azure/azure-monitor/platform/data-platform-logs)之間執行跨產品查詢。 您可以將 Azure 監視器 Log Analytics 工作區或 Application Insights 應用程式對應為 proxy 叢集。 接著，您可以使用 Azure 資料總管工具來查詢 proxy 叢集，並在跨叢集查詢中加以參考。 本文說明如何連線到 proxy 叢集、將 proxy 叢集新增至 Azure 資料總管 Web UI，以及從 Azure 資料總管對您的 AI 應用程式或 LA 工作區執行查詢。
 
 Azure 資料總管 proxy 流程： 
 
 ![ADX proxy 流程](media/adx-proxy/adx-proxy-flow.png)
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 > [!NOTE]
 > ADX Proxy 處於預覽模式。 連線[到 proxy](#connect-to-the-proxy) ，為您的叢集啟用 ADX proxy 功能。 請洽詢[ADXProxy](mailto:adxproxy@microsoft.com)小組，並提供任何問題。
 
 ## <a name="connect-to-the-proxy"></a>連接到 proxy
 
-1. 請先確認您的 Azure 資料總管原生叢集 (例如說明叢集) 會出現在左側功能表上，然後再*連線*到您的 Log Analytics 或 Application Insights 叢集。
+1. *連線*到 Log Analytics 或 Application Insights 叢集之前，請先確認您的 Azure 資料總管原生叢集（例如 [說明叢集]）出現在左側功能表上。
 
     ![ADX 原生叢集](media/adx-proxy/web-ui-help-cluster.png)
 
-1. 在 [Azure 資料總管 UI] (中 https://dataexplorer.azure.com/clusters) ，選取 [**新增**叢集]。
+1. 在 Azure 資料總管 UI （ https://dataexplorer.azure.com/clusters) ）中，選取 [**新增**叢集]。
 
 1. 在 [**新增**叢集] 視窗中，將 URL 新增至 LA 或 AI 叢集。 
     
@@ -50,6 +50,9 @@ Azure 資料總管 proxy 流程：
 1. 建立連線之後，您的 LA 或 AI 叢集將會出現在左窗格中，其中包含您的原生 ADX 叢集。 
 
     ![Log Analytics 和 Azure 資料總管叢集](media/adx-proxy/la-adx-clusters.png)
+
+> [!NOTE]
+> 可以對應的 Azure 監視器工作區數目限制為100。
 
 ## <a name="run-queries"></a>執行查詢
 
@@ -73,7 +76,7 @@ Perf | take 10 // Demonstrate query through the proxy on the LA workspace
 
 ### <a name="cross-query-of-your-la-or-ai-adx-proxy-cluster-and-the-adx-native-cluster"></a>對 LA 或 AI ADX Proxy 叢集和 ADX 原生叢集的交叉查詢 
 
-當您從 proxy 執行跨叢集查詢時，請確認已在左窗格中選取您的 ADX native cluster。 下列範例示範如何搭配使用 `union`) 與 LA 工作區來結合 ADX 叢集資料表 (。
+當您從 proxy 執行跨叢集查詢時，請確認已在左窗格中選取您的 ADX native cluster。 下列範例示範如何將 ADX 叢集資料表（使用 `union` ）與 LA 工作區結合。
 
 ```kusto
 union StormEvents, cluster('https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>').database('<workspace-name>').Perf
@@ -87,11 +90,12 @@ union <ADX table>, cluster(CL1).database(<workspace-name>).<table name>
 
    [![從 Azure 資料總管 proxy 進行交叉查詢](media/adx-proxy/cross-query-adx-proxy.png)](media/adx-proxy/cross-query-adx-proxy.png#lightbox)
 
-使用[ `join` 運算子](kusto/query/joinoperator.md)（而不是 union）可能需要在 [`hint`](kusto/query/joinoperator.md#join-hints) Azure 資料總管原生叢集上執行， (而不是 proxy) 上。 
+使用[ `join` 運算子](kusto/query/joinoperator.md)（而不是 union）可能需要在 [`hint`](kusto/query/joinoperator.md#join-hints) Azure 資料總管原生叢集（而不是 proxy）上執行。 
 
 ## <a name="function-supportability"></a>函數支援性
+
 Azure 資料總管 proxy 叢集支援 Application Insights 和 Log Analytics 的功能。
-這可讓跨叢集查詢直接參考 Azure 監視器表格式函數。
+這項功能可讓跨叢集查詢直接參考 Azure 監視器表格式函數。
 Proxy 支援下列命令：
 
 ```kusto
@@ -105,14 +109,14 @@ Proxy 支援下列命令：
 
 ## <a name="additional-syntax-examples"></a>其他語法範例
 
-呼叫 Application Insights (AI) 或 Log Analytics (LA) 叢集時，可以使用下列語法選項：
+呼叫 Application Insights （AI）或 Log Analytics （LA）叢集時，可以使用下列語法選項：
 
 |語法描述  |Application Insights  |Log Analytics  |
 |----------------|---------|---------|
-| 叢集內僅包含此訂用帳戶中已定義資源的資料庫 (**建議用於跨叢集查詢**)  |   叢集 (`https://ade.applicationinsights.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.insights/components/<ai-app-name>').database('<ai-app-name>`)  | 叢集 (`https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>').database('<workspace-name>`)      |
-| 此訂用帳戶中包含所有應用程式/工作區的叢集    |     叢集 (`https://ade.applicationinsights.io/subscriptions/<subscription-id>`)     |    叢集 (`https://ade.loganalytics.io/subscriptions/<subscription-id>`)      |
-|此叢集包含訂用帳戶中的所有應用程式/工作區，且為此資源群組的成員    |   叢集 (`https://ade.applicationinsights.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>`)       |    叢集 (`https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>`)       |
-|僅包含此訂用帳戶中已定義資源的叢集      |    叢集 (`https://ade.applicationinsights.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.insights/components/<ai-app-name>`)     |  叢集 (`https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>`)      |
+| 叢集中只包含此訂用帳戶中已定義資源的資料庫（**建議用於跨叢集查詢**） |   cluster （ `https://ade.applicationinsights.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.insights/components/<ai-app-name>').database('<ai-app-name>` ） | cluster （ `https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>').database('<workspace-name>` ）     |
+| 此訂用帳戶中包含所有應用程式/工作區的叢集    |     cluster （ `https://ade.applicationinsights.io/subscriptions/<subscription-id>` ）    |    cluster （ `https://ade.loganalytics.io/subscriptions/<subscription-id>` ）     |
+|此叢集包含訂用帳戶中的所有應用程式/工作區，且為此資源群組的成員    |   cluster （ `https://ade.applicationinsights.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>` ）      |    cluster （ `https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>` ）      |
+|僅包含此訂用帳戶中已定義資源的叢集      |    cluster （ `https://ade.applicationinsights.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.insights/components/<ai-app-name>` ）    |  cluster （ `https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>` ）     |
 
 ## <a name="next-steps"></a>後續步驟
 
