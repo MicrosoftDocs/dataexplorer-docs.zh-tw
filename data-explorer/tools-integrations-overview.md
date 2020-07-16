@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 3a2b5cfb9ca02ec255e8cca7d40c103be18a0450
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: 166f109f96695380c979dd4060e324187c5b5efc
+ms.sourcegitcommit: 4ae1508bbaa8fe9642dcfc8618d77f009bc8ec9f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86188535"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86405465"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Azure 資料總管工具和整合總覽
 
@@ -38,9 +38,9 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
 ### <a name="ingestion-integrations"></a>內嵌整合
 
 * 事件中樞
-    * [從事件中樞內嵌] ([從事件中樞](kusto/management/data-ingestion/eventhub.md)內嵌
+    * [從事件中樞內嵌](kusto/management/data-ingestion/eventhub.md)
     * 使用[Azure 入口網站](ingest-data-event-hub.md)、 [c #](data-connection-event-hub-csharp.md)、 [Python](data-connection-event-hub-python.md)或[Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)從事件中樞內嵌
-* Event Grid
+* 事件方格
     * [從事件方格內嵌](kusto/management/data-ingestion/eventgrid.md)
     * 使用[Azure 入口網站](ingest-data-event-grid.md)、 [c #](data-connection-event-grid-csharp.md)、 [Python](data-connection-event-grid-python.md)或[Azure Resource Manager 範本](data-connection-event-grid-resource-manager.md)從事件方格內嵌
 * IoT 中樞
@@ -78,7 +78,7 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
 * [Azure Data Lake](data-lake-query-data.md)
 * [Apache Spark](spark-connector.md)
 * Microsoft Power Apps
-* Azure Data Studio
+* [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic)
 
 ## <a name="visualizations-dashboards-and-reporting"></a>視覺效果、儀表板和報告
 
@@ -88,7 +88,7 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
 
 * [Azure Notebooks](azure-notebooks.md)
 * [Jupyter Notebook](kqlmagic.md)
-* Azure Data Studio
+* [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic)
 
 ## <a name="orchestration"></a>協調流程
 
