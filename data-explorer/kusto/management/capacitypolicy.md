@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: a7f34f51ee38b10c51c469c0145081f5bb702d8f
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 98841c57c8e7c405eb113e3242df75bedf1ea3b7
+ms.sourcegitcommit: 8611ac88cc42178f2dead5385432d71fa7216c82
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780213"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86437565"
 ---
 # <a name="capacity-policy"></a>產能原則
 
@@ -48,7 +48,7 @@ ms.locfileid: "84780213"
 |屬性                           |類型    |描述                                                                                                |
 |-----------------------------------|--------|-----------------------------------------------------------------------------------------------------------|
 |MinimumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最小值。 預設值為1 |
-|MaximumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最大值。 預設值為5 |
+|MaximumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最大值。 預設值為3 |
 
 叢集的總範圍合併容量（如所[示），](../management/diagnostics.md#show-capacity)其計算方式如下：
 
@@ -101,14 +101,15 @@ ms.locfileid: "84780213"
 
 預設容量原則具有下列 JSON 標記法：
 
-```kusto 
+```json
 {
   "IngestionCapacity": {
     "ClusterMaximumConcurrentOperations": 512,
     "CoreUtilizationCoefficient": 0.75
   },
   "ExtentsMergeCapacity": {
-    "MaximumConcurrentOperationsPerNode": 1
+    "MinimumConcurrentOperationsPerNode": 1,
+    "MaximumConcurrentOperationsPerNode": 3
   },
   "ExtentsPurgeRebuildCapacity": {
     "MaximumConcurrentOperationsPerNode": 1
@@ -116,6 +117,10 @@ ms.locfileid: "84780213"
   "ExportCapacity": {
     "ClusterMaximumConcurrentOperations": 100,
     "CoreUtilizationCoefficient": 0.25
+  },
+  "ExtentsPartitionCapacity": {
+    "ClusterMinimumConcurrentOperations": 1,
+    "ClusterMaximumConcurrentOperations": 16
   }
 }
 ```

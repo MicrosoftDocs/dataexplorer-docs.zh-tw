@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/28/2020
-ms.openlocfilehash: e5e4e2642d41d045c7fc49efaca78c35e217b0e5
-ms.sourcegitcommit: f086298a6dd32790910350c7cd3b914b51d51226
+ms.openlocfilehash: b3f4ed8e0bb37b62c7f31c9444b373529cf24df9
+ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/14/2020
-ms.locfileid: "86374678"
+ms.lasthandoff: 07/16/2020
+ms.locfileid: "86423019"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>使用 Azure 資料總管查詢 Azure 監視器中的資料（預覽）
 
@@ -36,7 +36,7 @@ Azure 資料總管 proxy 流程：
 
 1. 在 Azure 資料總管 UI （ https://dataexplorer.azure.com/clusters) ）中，選取 [**新增**叢集]。
 
-1. 在 [**新增**叢集] 視窗中，將 URL 新增至 LA 或 AI 叢集。 
+1. 在 [**新增**叢集] 視窗中，新增 LA 或 AI 叢集的 URL。 
     
     * 針對 LA：`https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>`
     * AI：`https://ade.applicationinsights.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.insights/components/<ai-app-name>`
@@ -67,7 +67,7 @@ Azure 資料總管 proxy 流程：
 ### <a name="direct-query-from-your-la-or-ai-adx-proxy-cluster"></a>從 LA 或 AI ADX Proxy 叢集直接查詢
 
 在您的 LA 或 AI 叢集上執行查詢。 確認已在左窗格中選取您的叢集。 
-
+ 
 ```kusto
 Perf | take 10 // Demonstrate query through the proxy on the LA workspace
 ```
@@ -98,11 +98,13 @@ Azure 資料總管 proxy 叢集支援 Application Insights 和 Log Analytics 的
 這項功能可讓跨叢集查詢直接參考 Azure 監視器表格式函數。
 Proxy 支援下列命令：
 
-```kusto
-.show functions
-.show function {FunctionName}
-.show database {DataBaseName} schema as json
-```
+* `.show functions`
+* `.show function {FunctionName}`
+* `.show database {DatabaseName} schema as json`
+
+下圖描述從 Azure 資料總管 Web UI 查詢表格式函數的範例。 若要使用函數，請在查詢視窗中執行名稱。
+
+  [![從 Azure 資料總管 WEB UI 查詢表格式函數](media/adx-proxy/function-query-adx-proxy.png)](media/adx-proxy/function-query-adx-proxy.png#lightbox)
 
 > [!NOTE]
 > Azure 監視器只支援表格式函數。 表格式函數不支援參數。
