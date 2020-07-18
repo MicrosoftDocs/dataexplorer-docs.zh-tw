@@ -78,8 +78,10 @@
               href: one-click-ingestion-existing-table.md
         - name: 串流擷取
           items:
-            - name: 串流擷取
+            - name: Azure 入口網站
               href: ingest-data-streaming.md
+            - name: C#
+              href: ingest-data-streaming-csharp.md
         - name: 使用 LightIngest
           href: lightingest.md
         - name: 事件中樞
@@ -112,8 +114,8 @@
               href: data-connection-iot-hub-python.md
             - name: Azure Resource Manager 範本
               href: data-connection-iot-hub-resource-manager.md
-            - name: Azure Data Factory
-              items: null
+        - name: Azure Data Factory
+          items:
             - name: 與 Data Factory 整合
               href: data-factory-integration.md
             - name: 使用 Azure Data Factory 複製資料
@@ -317,7 +319,7 @@
           href: troubleshoot-database-table.md
 - name: 參考
   items:
-    - name: Kusto 查詢
+    - name: Kusto 查詢語言
       items:
         - name: 概觀
           href: ./kusto/query/index.md
@@ -1219,45 +1221,14 @@
                   href: ./kusto/tools/kusto-explorer-troubleshooting.md
             - name: Kusto.Cli
               href: ./kusto/tools/kusto-cli.md
-    - name: 概念
-      href: ./kusto/concepts/index.md
-      items:
-        - name: 開始使用
-          href: ./kusto/concepts/index.md
-          items:
-            - name: 沙箱
-              href: ./kusto/concepts/sandboxes.md
-        - name: 其他與錯誤
-          items:
-            - name: 查詢限制
-              href: ./kusto/concepts/querylimits.md
-            - name: 部分查詢失敗
-              href: ./kusto/concepts/partialqueryfailures.md
-              items:
-                - name: 結果截斷
-                  href: ./kusto/concepts/resulttruncation.md
-                - name: 失控查詢
-                  href: ./kusto/concepts/runawayqueries.md
-                - name: 溢出
-                  href: ./kusto/concepts/overflow.md
-            - name: 跨叢集查詢和結構描述變更
-              href: ./kusto/concepts/crossclusterandschemachanges.md
-            - name: 查詢一致性
-              href: ./kusto/concepts/queryconsistency.md
-            - name: 機器碼中的錯誤
-              href: ./kusto/concepts/errorsinnativecode.md
-            - name: 事實和維度資料表
-              href: ./kusto/concepts/fact-and-dimension-tables.md
     - name: 管理性
-      href: ./kusto/management/index.md
       items:
         - name: 管理 (控制命令) 概觀
           href: ./kusto/management/index.md
+        - name: 結構描述
           items:
             - name: 結構描述設計的最佳做法
               href: ./kusto/management/best-practices.md
-        - name: 結構描述
-          items:
             - name: 管理資料庫
               href: ./kusto/management/databases.md
               items:
@@ -1535,10 +1506,36 @@
               href: ./kusto/management/cluster-follower.md
             - name: 資料清除
               href: ./kusto/concepts/data-purge.md
-    - name: API
-      href: ./kusto/api/index.md
+    - name: 概念
       items:
-        - name: 概觀
+        - name: 開始使用
+          href: ./kusto/concepts/index.md
+        - name: 其他與錯誤
+          items:
+            - name: 沙箱
+              href: ./kusto/concepts/sandboxes.md
+            - name: 查詢限制
+              href: ./kusto/concepts/querylimits.md
+            - name: 部分查詢失敗
+              href: ./kusto/concepts/partialqueryfailures.md
+              items:
+                - name: 結果截斷
+                  href: ./kusto/concepts/resulttruncation.md
+                - name: 失控查詢
+                  href: ./kusto/concepts/runawayqueries.md
+                - name: 溢出
+                  href: ./kusto/concepts/overflow.md
+            - name: 跨叢集查詢和結構描述變更
+              href: ./kusto/concepts/crossclusterandschemachanges.md
+            - name: 查詢一致性
+              href: ./kusto/concepts/queryconsistency.md
+            - name: 機器碼中的錯誤
+              href: ./kusto/concepts/errorsinnativecode.md
+            - name: 事實和維度資料表
+              href: ./kusto/concepts/fact-and-dimension-tables.md
+    - name: API
+      items:
+        - name: API 概觀
           href: ./kusto/api/index.md
           items:
             - name: 用戶端程式庫
