@@ -8,32 +8,28 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-ms.openlocfilehash: bcbdb59355ce0461d735cbea902551c219479fd2
-ms.sourcegitcommit: a8575e80c65eab2a2118842e59f62aee0ff0e416
+ms.openlocfilehash: 84805cae07049af4ffa8a2fdb82e637261140f8f
+ms.sourcegitcommit: cf1da667be12656a8c4727c23144421b5a4b1099
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/17/2020
-ms.locfileid: "84943056"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86565432"
 ---
-# <a name="show-query-results-cache"></a>。顯示查詢結果快取
+# <a name="show-database-cache-query_results"></a>。顯示資料庫快取 query_results
 
-傳回資料表，其中顯示與[查詢結果](../query/query-results-cache.md)快取相關的統計資料。
+傳回資料表，其中顯示與針對內容資料庫所做之[查詢結果](../query/query-results-cache.md)快取相關的統計資料。
 
 **語法**
 
-`.show` `query` `results` `cache`
+`.show database query results cache`
 
 **輸出**
  
 |輸出參數 |類型 |描述 
 |---|---|---
-|點擊  |long |快取點擊次數。
-|遺漏  |long |快取遺漏的數目。
-|CacheCapacityInBytes |long |快取容量（以位元組為單位）。
-|UsedBytes  |long |快取已使用空間。
-|Count  |long | 儲存在快取中的唯一查詢結果數目。
-
-**限制**
-
-* 命令的輸出目前只會反映要求所進入的節點所收集的快取統計資料。
-* 此命令只會顯示「最近」的歷程記錄。
+|NodeId|`string`|叢集節點的識別碼。
+|點擊  |`long`|快取點擊次數。
+|遺漏  |`long`|快取遺漏的數目。
+|CacheCapacityInBytes |`long` |快取容量（以位元組為單位）。
+|UsedBytes  |`long` |快取已使用空間。
+|計數  |`long`| 儲存在快取中的唯一查詢結果數目。

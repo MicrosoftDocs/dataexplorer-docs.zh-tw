@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: b5bc65b94c45e27087345cfbaf7252ccc4bcaf40
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: c07a2e624d8f2657889431df51958017228774a8
+ms.sourcegitcommit: d79d3aa9aaa70cd23e3107ef12296159322e1eb5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264415"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86475587"
 ---
 # <a name="row-level-security-preview"></a>資料列層級安全性（預覽）
 
@@ -33,6 +33,12 @@ RLS 可讓您將其他應用程式和使用者的存取權提供給資料表的�
 
 > [!NOTE]
 > 您在生產資料庫上設定的 RLS 原則也會在執行的資料庫中生效。 您無法在生產和執行中的資料庫上設定不同的 RLS 原則。
+
+> [!TIP]
+> 這些函數通常適用于 row_level_security 查詢：
+> * [current_principal()](../query/current-principalfunction.md)
+> * [current_principal_details()](../query/current-principal-detailsfunction.md)
+> * [current_principal_is_member_of()](../query/current-principal-ismemberoffunction.md)
 
 ## <a name="limitations"></a>限制
 

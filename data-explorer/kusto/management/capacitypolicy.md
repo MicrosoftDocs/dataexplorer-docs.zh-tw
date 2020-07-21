@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 98841c57c8e7c405eb113e3242df75bedf1ea3b7
-ms.sourcegitcommit: 8611ac88cc42178f2dead5385432d71fa7216c82
+ms.openlocfilehash: 3835cc3e50cc589e13f7d038a7c1f8f83def9d15
+ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86437565"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86470072"
 ---
 # <a name="capacity-policy"></a>產能原則
 
@@ -54,7 +54,7 @@ ms.locfileid: "86437565"
 
 `Number of nodes in cluster`x`Concurrent operations per node`
 
-的有效值 `Concurrent operations per node` 會由系統在 [，] 範圍內自動調整 `MinimumConcurrentOperationsPerNode` `MaximumConcurrentOperationsPerNode` 。
+`Concurrent operations per node` `MinimumConcurrentOperationsPerNode` `MaximumConcurrentOperationsPerNode` 只要合併作業的成功率高於90%，系統就會自動在範圍 [，] 中調整的有效值。
 
 > [!Note]
 > * 在具有三個或更多節點的叢集中，admin 節點不會參與執行合併作業。 `Number of nodes in cluster`會減少一。
@@ -95,7 +95,7 @@ ms.locfileid: "86437565"
 
 叢集的總範圍分割區容量（如所示[。顯示容量](../management/diagnostics.md#show-capacity)）。
 
-的有效值會 `Concurrent operations` 由系統在 [，] 範圍內自動調整 `ClusterMinimumConcurrentOperations` `ClusterMaximumConcurrentOperations` 。
+`Concurrent operations` `ClusterMinimumConcurrentOperations` `ClusterMaximumConcurrentOperations` 當資料分割作業的成功率高於90% 時，的有效值會自動由系統在範圍 [，] 中調整。
 
 ## <a name="defaults"></a>Defaults
 

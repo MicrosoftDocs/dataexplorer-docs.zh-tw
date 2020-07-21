@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 19ffbe2f5e14a2c003c24d145b713970e6bb31b8
-ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
+ms.openlocfilehash: dd312c4a36bb095dbe4b5e475e758c141bbab6e0
+ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/29/2020
-ms.locfileid: "85517761"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86470089"
 ---
 # <a name="troubleshooting"></a>疑難排解
 
@@ -152,7 +152,7 @@ Following errors were detected during this operation.
 
 有時候，當先前的疑難排解步驟無法協助 Kusto 啟動時，清除儲存在本機的資料可能會有説明。
 
-Kusto 所儲存的資料可在這裡找到： `C:\Users\\[your alias]\AppData\Local\Kusto.Explorer` 。
+Kusto 所儲存的資料可在這裡找到： `C:\Users\[your username]\AppData\Local\Kusto.Explorer` 。
 
 > [!NOTE]
 > 清除資料會導致開啟的索引標籤（復原資料夾）、儲存的連接（連接資料夾）和應用程式設定（UserSettings 資料夾）遺失。

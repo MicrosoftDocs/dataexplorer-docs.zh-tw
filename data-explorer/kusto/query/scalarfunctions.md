@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 3b3f72bc2ea6b3b17cbdb6d4fb707b9837a2ed56
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: 1fa12a52994e19f8710294e440de98ee47922c86
+ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280599"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86470055"
 ---
 # <a name="scalar-function-types"></a>純量函式類型
 
@@ -33,9 +33,9 @@ ms.locfileid: "86280599"
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
-|[tobool()](toboolfunction.md)|將輸入轉換成布林值 (帶正負號的8位) 標記法。|
+|[tobool()](toboolfunction.md)|將輸入轉換成布林值（帶正負號的8位）標記法。|
 |[todatetime()](todatetimefunction.md)|將輸入轉換為 datetime 純量。|
-|[todouble ( # A1/toreal ( # B3](todoublefunction.md)|將輸入轉換成 real 類型的值。  (todouble ( # A2 和 toreal ( # A4 是同義字。 ) |
+|[todouble （）/toreal （）](todoublefunction.md)|將輸入轉換成 real 類型的值。 （todouble （）和 toreal （）是同義字）。|
 |[tostring()](tostringfunction.md)|將輸入轉換為字串表示。|
 |[totimespan()](totimespanfunction.md)|將輸入轉換為 timespan 純量。|
 
@@ -69,6 +69,10 @@ ms.locfileid: "86280599"
 |[startofyear()](startofyearfunction.md)|傳回包含日期的年份開頭，如果有提供，則會位移位移。|
 |[todatetime()](todatetimefunction.md)|將輸入轉換為 datetime 純量。|
 |[totimespan()](totimespanfunction.md)|將輸入轉換為 timespan 純量。|
+|[unixtime_microseconds_todatetime()](unixtime-microseconds-todatetimefunction.md)|將 unix-epoch 微秒轉換成 UTC 日期時間。|
+|[unixtime_milliseconds_todatetime()](unixtime-milliseconds-todatetimefunction.md)|將 unix epoch 毫秒轉換成 UTC 日期時間。|
+|[unixtime_nanoseconds_todatetime()](unixtime-nanoseconds-todatetimefunction.md)|將 unix-epoch 毫微秒轉換成 UTC 日期時間。|
+|[unixtime_seconds_todatetime()](unixtime-seconds-todatetimefunction.md)|將 unix-epoch 秒轉換成 UTC 日期時間。|
 |[weekofyear()](weekofyearfunction.md)|傳回代表周數的整數。|
 
 
@@ -83,8 +87,8 @@ ms.locfileid: "86280599"
 |[array_slice()](arrayslicefunction.md)|解壓縮動態陣列的配量。|
 |[array_split()](arraysplitfunction.md)|建立從輸入陣列分割的陣列陣列。|
 |[bag_keys()](bagkeysfunction.md)|列舉動態屬性包物件中的所有根機碼。|
-|[pack()](packfunction.md)|從名稱和值的清單中，建立 (屬性包) 的動態物件。|
-|[pack_all()](packallfunction.md)|從表格式運算式的所有資料行，建立 (屬性包) 的動態物件。|
+|[pack()](packfunction.md)|從名稱和值的清單建立動態物件（屬性包）。|
+|[pack_all()](packallfunction.md)|從表格式運算式的所有資料行建立動態物件（屬性包）。|
 |[pack_array()](packarrayfunction.md)|將所有輸入值封裝到動態陣列中。|
 |[repeat()](repeatfunction.md)|產生保存一系列相等值的動態陣列。|
 |[set_difference()](setdifferencefunction.md)|傳回第一個陣列中但不在其他陣列中的所有相異值集合的陣列。|
@@ -98,7 +102,7 @@ ms.locfileid: "86280599"
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
-|[下一步 ( # B1](nextfunction.md)|對於序列化的資料列集，會根據位移，從較新的資料列傳回指定資料行的值。|
+|[next()](nextfunction.md)|對於序列化的資料列集，會根據位移，從較新的資料列傳回指定資料行的值。|
 |[prev()](prevfunction.md)|針對序列化的資料列集，根據位移，傳回先前資料列中指定資料行的值。|
 |[row_cumsum()](rowcumsumfunction.md)|計算資料行的累計總和。|
 |[row_number()](rownumberfunction.md)|傳回序列化資料列集內的資料列編號-從指定索引開始的連續數位，或預設值為1。|
@@ -114,36 +118,36 @@ ms.locfileid: "86280599"
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[abs()](abs-function.md)|計算輸入的絕對值。|
-|[acos()](acosfunction.md)|傳回角度，其餘弦值為 (cos ( # A2 # A3 之反向運算的指定數位。|
-|[asin()](asinfunction.md)|傳回其正弦值為指定數位的角度， (sin ( # A2 # A3 的反向運算。|
-|[atan()](atanfunction.md)|傳回角度，其正切值為 (tan ( # A2 # A3 的反向運算所指定的數位。|
-|[atan2()](atan2function.md)|計算從正 X 軸到從原點到點 (y，x) 之間的角度（以弧度為單位）。|
+|[acos()](acosfunction.md)|傳回其餘弦為指定數位的角度（cos （）的反運算）。|
+|[asin()](asinfunction.md)|傳回其正弦為指定數位的角度（sin （）的反向運算）。|
+|[atan()](atanfunction.md)|傳回其正切為指定數位的角度（tan （）的反向運算）。|
+|[atan2()](atan2function.md)|計算從正 X 軸到原點到點（y，x）之間的角度（以弧度為單位）。|
 |[beta_cdf()](beta-cdffunction.md)|傳回標準累計搶鮮版（Beta）分佈函數。|
 |[beta_inv()](beta-invfunction.md)|傳回搶鮮版（Beta）累計機率測試密度函數的反向。|
 |[beta_pdf()](beta-pdffunction.md)|傳回機率密度搶鮮版（Beta）函數。|
 |[cos()](cosfunction.md)|傳回余弦函數。|
 |[cot()](cotfunction.md)|計算指定角度的三角餘切函數（以弧度為單位）。|
-|[degrees()](degreesfunction.md)|使用公式度數 = (180/PI) * 弧度的角度，將角度值以弧度轉換成值。|
+|[degrees()](degreesfunction.md)|使用公式度數 = （180/PI） * 以弧度為單位，將角度值以弧度轉換成值。|
 |[exp()](exp-function.md)|X 的 base-e 指數函式，其 e 會向乘冪 x： e ^ x。|
 |[exp10()](exp10-function.md)|X 的以10為底數的指數函式，其為乘冪 x： 10 ^ x 的10。|
 |[exp2()](exp2-function.md)|X 的基底2指數函式，其為2的乘冪 x： 2 ^ x。|
 |[gamma()](gammafunction.md)|計算 gamma 函數。|
-|[isfinite()](isfinitefunction.md)|傳回輸入是否為有限值 (不是無限或 NaN) 。|
-|[isinf()](isinffunction.md)|傳回輸入是否為無限 (正或負) 值。|
-|[isnan()](isnanfunction.md)|傳回輸入是否不是 (NaN) 值的數位。|
-|[記錄 ( # B1](log-function.md)|傳回自然對數函數。|
-|[log10()](log10-function.md)|傳回通用 (基底-10) 對數函數。|
+|[isfinite()](isfinitefunction.md)|傳回輸入是否為有限值（不是無限或 NaN）。|
+|[isinf （）](isinffunction.md)|傳回輸入是否為無限（正或負）值。|
+|[isnan()](isnanfunction.md)|傳回輸入是否為非數位（NaN）值。|
+|[log （）](log-function.md)|傳回自然對數函數。|
+|[log10()](log10-function.md)|傳回通用（底數為10）對數函數。|
 |[log2()](log2-function.md)|傳回以2為底數的對數函數。|
 |[loggamma()](loggammafunction.md)|計算 gamma 函數絕對值的記錄。|
-|[not()](notfunction.md)|反轉其 bool 引數的值。|
-|[pi()](pifunction.md)|傳回 Pi (π) 的常數值。|
+|[不是（）](notfunction.md)|反轉其 bool 引數的值。|
+|[pi()](pifunction.md)|傳回 Pi （π）的常數值。|
 |[pow()](powfunction.md)|傳回乘冪的結果。|
-|[radians()](radiansfunction.md)|使用公式弧度 = (PI/180) * 以度為單位的角度，將角度值以弧度轉換為值。|
-|[rand()](randfunction.md)|傳回亂數字。|
-|[range()](rangefunction.md)|產生動態陣列，保存一系列同等間距的值。|
+|[radians()](radiansfunction.md)|使用公式弧度 = （PI/180） * 以度為單位的角度，將角度值以弧度轉換為值。|
+|[rand （）](randfunction.md)|傳回亂數字。|
+|[範圍（）](rangefunction.md)|產生動態陣列，保存一系列同等間距的值。|
 |[round()](roundfunction.md)|傳回指定之有效位數的圓角來源。|
-|[sign()](signfunction.md)|數值運算式的正負號。|
-|[sin()](sinfunction.md)|傳回正弦函數。|
+|[sign （）](signfunction.md)|數值運算式的正負號。|
+|[sin （）](sinfunction.md)|傳回正弦函數。|
 |[sqrt()](sqrtfunction.md)|傳回平方根函數。|
 |[tan()](tanfunction.md)|傳回正切函數。|
 |[welch_test()](welch-testfunction.md)|計算[Welch-test 函數](https://en.wikipedia.org/wiki/Welch%27s_t-test)的 p 值。|
@@ -160,16 +164,16 @@ ms.locfileid: "86280599"
 |[current_principal_is_member_of()](current-principal-ismemberoffunction.md)|檢查目前執行查詢之主體的群組成員資格或主體身分識別。|
 |[cursor_after()](cursorafterfunction.md)|用來存取在先前的資料指標值之後所內嵌的記錄。|
 |[estimate_data_size()](estimate-data-sizefunction.md)|傳回表格式運算式所選資料行的估計資料大小。|
-|[extent_id()](extentidfunction.md)|傳回唯一識別碼，識別目前記錄所在 ( 「範圍」 ) 的資料分區。|
-|[extent_tags()](extenttagsfunction.md)|傳回動態陣列，其中包含目前記錄所在 ) 資料分區 ( 「範圍」的標記。|
-|[ingestion_time ( # B1](ingestiontimefunction.md)|抓取記錄的 $IngestionTime 隱藏日期時間資料行，或為 null。|
+|[extent_id()](extentidfunction.md)|傳回唯一識別碼，識別目前記錄所在的資料分區（「範圍」）。|
+|[extent_tags()](extenttagsfunction.md)|傳回動態陣列，其中包含目前記錄所在之資料分區（「範圍」）的標記。|
+|[ingestion_time （）](ingestiontimefunction.md)|抓取記錄的 $IngestionTime 隱藏日期時間資料行，或為 null。|
 
 ## <a name="rounding-functions"></a>進位函數
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[bin()](binfunction.md)|將值捨入為指定 bin 大小的整數倍數。|
-|[bin_at()](binatfunction.md)|將值向下舍入固定大小的「bin」，並控制 bin 的起點。  (另請參閱 bin 函數。 ) |
+|[bin_at()](binatfunction.md)|將值向下舍入固定大小的「bin」，並控制 bin 的起點。 （另請參閱 bin 函數）。|
 |[ceiling()](ceilingfunction.md)|計算大於或等於指定之數值運算式的最小整數。|
 |[floor()](floorfunction.md)|將值捨入為指定 bin 大小的整數倍數。|
 
@@ -178,8 +182,8 @@ ms.locfileid: "86280599"
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[case()](casefunction.md)|評估述詞清單，並傳回滿足述詞的第一個結果運算式。|
-|[聯合 ( # B1](coalescefunction.md)|評估運算式的清單，並傳回字串) 運算式的第一個非 null (或非空白的。|
-|[iif ( # A1/iff ( # B3](iiffunction.md)|評估 (述詞) 的第一個引數，並傳回第二個或第三個引數的值，取決於述詞是否評估為 true (第二個) 或 false (第三個) 。|
+|[聯合（）](coalescefunction.md)|評估運算式的清單，並傳回第一個非 null （或非空白的字串）運算式。|
+|[iif （）/iff （）](iiffunction.md)|評估第一個引數（述詞），並傳回第二個或第三個引數的值，取決於述詞是否評估為 true （第二個）或 false （第三個）。|
 |[max_of()](max-offunction.md)|傳回數個已評估之數值運算式的最大值。|
 |[min_of()](min-offunction.md)|傳回數個已評估之數值運算式的最小值。|
 
@@ -189,13 +193,13 @@ ms.locfileid: "86280599"
 |-------------------------|--------------------------------------------------------|
 |[series_add()](series-addfunction.md)|計算兩個數值數列輸入的元素取向相加。|
 |[series_divide()](series-dividefunction.md)|計算兩個數值數列輸入的元素成對除法。|
-|[series_equals()](series-equalsfunction.md)|計算 `==` 兩個數值數列輸入) 邏輯運算的元素相等 (。|
-|[series_greater()](series-greaterfunction.md)|計算 `>` 兩個數值數列輸入) 邏輯運算的更大 (。|
-|[series_greater_equals()](series-greater-equalsfunction.md)|計算 `>=` 兩個數值數列輸入之) 邏輯運算的元素取向大於或等於 (。|
-|[series_less()](series-lessfunction.md)|計算 `<` 兩個數值數列輸入的專案 () 邏輯運算較少的元素。|
-|[series_less_equals()](series-less-equalsfunction.md)|計算 `<=` 兩個數值數列輸入的 () 邏輯運算中，小於或等於的元素。|
+|[series_equals()](series-equalsfunction.md)|計算 `==` 兩個數值數列輸入的元素成對 equals （）邏輯運算。|
+|[series_greater()](series-greaterfunction.md)|計算兩個數值數列輸入的元素取向較大（ `>` ）邏輯運算。|
+|[series_greater_equals()](series-greater-equalsfunction.md)|計算兩個數值數列輸入的元素取向大於或等於（ `>=` ）邏輯運算。|
+|[series_less()](series-lessfunction.md)|計算 `<` 兩個數值數列輸入的元素較少（）邏輯運算。|
+|[series_less_equals()](series-less-equalsfunction.md)|計算兩個數值數列輸入的元素的小於或等於（ `<=` ）邏輯運算。|
 |[series_multiply()](series-multiplyfunction.md)|計算兩個數值數列輸入的元素取向乘法。|
-|[series_not_equals()](series-not-equalsfunction.md)|計算 `!=` 兩個數值數列輸入的) 邏輯運算 (的元素不等於。|
+|[series_not_equals()](series-not-equalsfunction.md)|計算 `!=` 兩個數值數列輸入的元素非 equals （）邏輯運算。|
 |[series_subtract()](series-subtractfunction.md)|計算兩個數值數列輸入的元素的減法。|
 
 ## <a name="series-processing-functions"></a>數列處理函式
@@ -231,7 +235,7 @@ ms.locfileid: "86280599"
 |[base64_decode_tostring()](base64_decode_tostringfunction.md)|將 base64 字串解碼為 UTF-8 字串。|
 |[base64_decode_toarray()](base64_decode_toarrayfunction.md)|將 base64 字串解碼為 long 值的陣列。|
 |[countof()](cotfunction.md)|計算子字串在字串中的出現次數。 純字串符合可能會重迭;RegEx 比對不符合。|
-|[extract()](extractfunction.md)|從文字字串取得 規則運算式 的相符項目。|
+|[解壓縮（）](extractfunction.md)|從文字字串取得 規則運算式 的相符項目。|
 |[extract_all()](extractallfunction.md)|從文字字串取得正則運算式的所有相符專案。|
 |[extractjson()](extractjsonfunction.md)|使用路徑運算式從 JSON 文字取出指定的項目。|
 |[indexof()](indexoffunction.md)|函式會報告輸入字串內指定之字串第一次出現時的所在索引（以零為基底）。|
@@ -241,25 +245,25 @@ ms.locfileid: "86280599"
 |[isnull()](isnullfunction.md)|評估其唯一引數，並傳回布林值，指出引數是否評估為 null 值。|
 |[parse_command_line()](parse-command-line.md)|剖析 Unicode 命令列字串，並傳回命令列引數的陣列。|
 |[parse_csv()](parsecsvfunction.md)|分割代表逗號分隔值的指定字串，並傳回具有這些值的字串陣列。|
-|[parse_ipv4()](parse-ipv4function.md)|將輸入轉換成 long (帶正負號的64位) 數位表示。|
-|[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|將輸入字串和 IP 首碼遮罩轉換成 long (帶正負號的64位) 數位標記法。|
+|[parse_ipv4()](parse-ipv4function.md)|將輸入轉換成 long （帶正負號的64位）數位表示。|
+|[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|將輸入字串和 IP 首碼遮罩轉換成 long （帶正負號的64位）數位表示。|
 |[parse_ipv6()](parse-ipv6function.md)|將 IPv6 或 IPv4 字串轉換成標準 IPv6 字串表示。|
 |[parse_ipv6_mask()](parse-ipv6-maskfunction.md)|將 IPv6 或 IPv4 字串和網路遮罩轉換成標準 IPv6 字串表示。|
-|[parse_json()](parsejsonfunction.md)|將字串解讀為) 的 JSON 值，並以動態方式傳回值。|
+|[parse_json()](parsejsonfunction.md)|將字串解讀為 JSON 值），並以動態方式傳回值。|
 |[parse_url()](parseurlfunction.md)|剖析絕對 URL 字串，並傳回動態物件，其中包含 URL 的所有部分。|
 |[parse_urlquery()](parseurlqueryfunction.md)|剖析 url 查詢字串，並傳回包含查詢參數的動態物件。|
 |[parse_version()](parse-versionfunction.md)|將版本的輸入字串表示轉換成可比較的十進位數。|
-|[replace()](replacefunction.md)|用另一個字串取代所有 regex 相符項目。|
+|[replace （）](replacefunction.md)|用另一個字串取代所有 regex 相符項目。|
 |[reverse()](reversefunction.md)|函式會反向輸入字串。|
 |[split()](splitfunction.md)|根據指定的分隔符號分割指定的字串，並傳回包含子字串的字串陣列。|
 |[strcat()](strcatfunction.md)|會串連1到64個引數。|
 |[strcat_delim()](strcat-delimfunction.md)|會串連2到64個引數，並以分隔符號形式提供作為第一個引數。|
 |[strcmp()](strcmpfunction.md)|比較兩個字串。|
 |[strlen()](strlenfunction.md)|傳回輸入字串的長度（以字元為單位）。|
-|[strrep()](strrepfunction.md)|重複指定的字串， (預設值為 1) 的次數。|
+|[strrep()](strrepfunction.md)|重複指定的字串所提供的次數（預設值為-1）。|
 |[substring()](substringfunction.md)|從從某個索引開始到字串結尾的來源字串，將子字串解壓縮。|
 |[toupper()](toupperfunction.md)|將字串轉換為大寫。|
-|[translate()](translatefunction.md)|以指定字串中 ( ' replacementList ' ) 的另一組字元取代 ( ' searchList ' ) 的一組字元。|
+|[translate()](translatefunction.md)|在指定的字串中，以另一組字元（' replacementList '）取代一組字元（' searchList '）。|
 |[trim()](trimfunction.md)|移除指定之正則運算式的所有開頭和結尾相符專案。|
 |[trim_end()](trimendfunction.md)|移除指定之正則運算式的尾端比對。|
 |[trim_start()](trimstartfunction.md)|移除指定之正則運算式的前置比對。|
@@ -272,8 +276,8 @@ ms.locfileid: "86280599"
 |-------------------------|--------------------------------------------------------|
 |[ipv4_compare()](ipv4-comparefunction.md)|比較兩個 IPv4 字串。|
 |[ipv4_is_match()](ipv4-is-matchfunction.md)|符合兩個 IPv4 字串。|
-|[parse_ipv4()](parse-ipv4function.md)|將輸入字串轉換為 long (帶正負號的64位) 數位表示。|
-|[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|將輸入字串和 IP 首碼遮罩轉換成 long (帶正負號的64位) 數位標記法。|
+|[parse_ipv4()](parse-ipv4function.md)|將輸入字串轉換為 long （帶正負號的64位）數位表示。|
+|[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|將輸入字串和 IP 首碼遮罩轉換成 long （帶正負號的64位）數位表示。|
 |[ipv6_compare()](ipv6-comparefunction.md)|比較兩個 IPv4 或 IPv6 字串。|
 |[ipv6_is_match()](ipv6-is-matchfunction.md)|符合兩個 IPv4 或 IPv6 字串。|
 |[parse_ipv6()](parse-ipv6function.md)|將 IPv6 或 IPv4 字串轉換成標準 IPv6 字串表示。|
@@ -289,12 +293,12 @@ ms.locfileid: "86280599"
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
-|[dcount_hll()](dcount-hllfunction.md)|根據 hll 或 hll 合併) 所產生的 hll 結果來計算 dcount (。|
-|[hll_merge()](hllmergefunction.md)|將 hll 結果合併 (純量版本的 hll-merge ( # A2 # A3。|
-|[percentile_tdigest()](percentile-tdigestfunction.md)|計算 tdigest 結果的百分位數結果， (由 tdigest 或 tdigests) 產生。|
+|[dcount_hll()](dcount-hllfunction.md)|計算 hll 結果中的 dcount （由 hll 或 hll 所產生）。|
+|[hll_merge()](hllmergefunction.md)|合併 hll 結果（純量版本的匯總版本 hll-merge （））。|
+|[percentile_tdigest()](percentile-tdigestfunction.md)|計算 tdigest 結果（由 tdigest 或 merge tdigests 產生）產生的百分位數結果。|
 |[percentrank_tdigest()](percentrank-tdigestfunction.md)|計算資料集內某個值的百分比等級。|
 |[rank_tdigest()](rank-tdigest.md)|計算集合中某個值的相對順位。|
-|[tdigest_merge()](tdigest-mergefunction.md)|將 tdigest 結果合併 (純量版本的 tdigest-merge ( # A2 # A3。|
+|[tdigest_merge()](tdigest-mergefunction.md)|合併 tdigest 結果（純量版本的匯總版本 tdigest-merge （））。|
 
 ## <a name="geospatial-functions"></a>GeoSpatial 函式
 
@@ -309,14 +313,14 @@ ms.locfileid: "86280599"
 |[geo_point_to_s2cell()](geo-point-to-s2cell-function.md)|計算地理位置的 S2 資料格權杖字串值。|
 |[geo_s2cell_to_central_point()](geo-s2cell-to-central-point-function.md)|計算代表 S2 資料格中心的地理空間座標。|
 |[geo_polygon_to_s2cells()](geo-polygon-to-s2cells-function.md)|計算在地球上涵蓋多邊形或 multipolygon 的 S2 資料格標記。 有用的地理空間聯結工具。|
-|[geo_line_densify ( # B1](geo-line-densify-function.md)|藉由加入中繼點，將平面線條邊緣轉換成 geodesics。|
-|[geo_polygon_densify ( # B1](geo-polygon-densify-function.md)|藉由加入中繼點，將多邊形或 multipolygon 平面邊緣轉換為 geodesics。|
+|[geo_line_densify()](geo-line-densify-function.md)|藉由加入中繼點，將平面線條邊緣轉換成 geodesics。|
+|[geo_polygon_densify()](geo-polygon-densify-function.md)|藉由加入中繼點，將多邊形或 multipolygon 平面邊緣轉換為 geodesics。|
 
 ## <a name="hash-functions"></a>雜湊函數
 
 |函數名稱|描述|
 |--------------------------------------------------------------------------|--------------------------------------------------------|
-|[雜湊 ( # B1](hashfunction.md)|傳回輸入值的雜湊值。|
+|[hash （）](hashfunction.md)|傳回輸入值的雜湊值。|
 |[hash_combine()](hash_combinefunction.md)|結合兩個或多個雜湊值。|
 |[hash_many()](hash_manyfunction.md)|傳回多個值的結合雜湊值。|
 |[hash_md5()](md5hashfunction.md)|傳回輸入值的 MD5 雜湊值。|

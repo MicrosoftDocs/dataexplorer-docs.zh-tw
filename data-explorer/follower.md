@@ -7,12 +7,12 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/07/2019
-ms.openlocfilehash: 942c0577b8fb784af74cf09aec4c8a68a7be8dda
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: b1855d12872c291e1ae45f62da1ad1fe0e792617
+ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294554"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86470106"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>使用在 Azure 資料總管中的資料，來連接資料庫
 
@@ -26,7 +26,7 @@ ms.locfileid: "84294554"
 * 單一叢集可以遵循來自多個領導者叢集的資料庫。 
 * 叢集可以同時包含進行中的資料庫和領導者資料庫
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 1. 如果您沒有 Azure 訂用帳戶，請在開始之前先[建立免費帳戶](https://azure.microsoft.com/free/)。
 1. 為領導者和進行中[建立叢集和資料庫](create-cluster-database-portal.md)。
@@ -182,7 +182,7 @@ poller = kusto_management_client.attached_database_configurations.create_or_upda
         {
             "name": "[concat(parameters('followerClusterName'), '/', parameters('attachedDatabaseConfigurationsName'))]",
             "type": "Microsoft.Kusto/clusters/attachedDatabaseConfigurations",
-            "apiVersion": "2019-09-07",
+            "apiVersion": "2020-02-15",
             "location": "[parameters('location')]",
             "properties": {
                 "databaseName": "[parameters('databaseName')]",
@@ -372,9 +372,9 @@ poller = kusto_management_client.clusters.detach_follower_databases(resource_gro
 
 |**種類** |**說明**  |
 |---------|---------|
-|**並**     |   附加的資料庫主體一律會包含原始資料庫主體，加上加入至資料後資料庫的額外新主體。      |
+|**Union**     |   附加的資料庫主體一律會包含原始資料庫主體，加上加入至資料後資料庫的額外新主體。      |
 |**取代**   |    不會繼承原始資料庫的主體。 必須為附加的資料庫建立新的主體。     |
-|**None**   |   附加的資料庫主體只包含原始資料庫的主體，且沒有其他主體。      |
+|**無**   |   附加的資料庫主體只包含原始資料庫的主體，且沒有其他主體。      |
 
 如需使用控制命令來設定授權主體的詳細資訊，請參閱[控制管理使用](kusto/management/cluster-follower.md)中叢集的命令。
 
@@ -393,7 +393,6 @@ poller = kusto_management_client.clusters.detach_follower_databases(resource_gro
 * 在領導者和後向叢集上不支援使用[客戶管理的金鑰](security.md#customer-managed-keys-with-azure-key-vault)進行資料加密。 
 * 卸離另一個叢集之前，您無法刪除該資料庫。
 * 卸離資料庫之前，您無法刪除已附加至不同叢集的叢集。
-* 您無法停止已連接到或領導者資料庫的叢集。 
 
 ## <a name="next-steps"></a>後續步驟
 
