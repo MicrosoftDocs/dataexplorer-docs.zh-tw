@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/28/2020
-ms.openlocfilehash: b3f4ed8e0bb37b62c7f31c9444b373529cf24df9
-ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
+ms.openlocfilehash: d4f9fe945281eb61c1d1e685d0c2689585951926
+ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86423019"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86870102"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>使用 Azure 資料總管查詢 Azure 監視器中的資料（預覽）
 
@@ -45,7 +45,8 @@ Azure 資料總管 proxy 流程：
 
     ![新增叢集](media/adx-proxy/add-cluster.png)
 
-    如果您將連接新增至多個 proxy 叢集，請為每個叢集提供不同的名稱。 否則，它們會在左窗格中具有相同的名稱。
+    >[!NOTE]
+    >如果您將連接新增至多個 proxy 叢集，請為每個叢集提供不同的名稱。 否則，它們會在左窗格中具有相同的名稱。
 
 1. 建立連線之後，您的 LA 或 AI 叢集將會出現在左窗格中，其中包含您的原生 ADX 叢集。 
 
@@ -61,8 +62,8 @@ Azure 資料總管 proxy 流程：
 > [!TIP]
 > * 資料庫名稱應該與 proxy 叢集中指定的資源名稱相同。 名稱區分大小寫。
 > * 在跨叢集查詢中，請確定 Application Insights 應用程式和 Log Analytics 工作區的命名是正確的。
->     * 如果名稱包含特殊字元，則會以 proxy 叢集名稱中的 URL 編碼來取代。 
->     * 如果名稱包含不符合[KQL 識別碼名稱規則](kusto/query/schema-entities/entity-names.md)的字元，則會以虛線字元來取代它們 **-** 。
+> * 如果名稱包含特殊字元，則會以 proxy 叢集名稱中的 URL 編碼來取代。 
+> * 如果名稱包含不符合[KQL 識別碼名稱規則](kusto/query/schema-entities/entity-names.md)的字元，則會以虛線字元來取代它們 **-** 。
 
 ### <a name="direct-query-from-your-la-or-ai-adx-proxy-cluster"></a>從 LA 或 AI ADX Proxy 叢集直接查詢
 

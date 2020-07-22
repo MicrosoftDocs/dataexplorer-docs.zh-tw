@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: 0b2daf955515e4c023cdb7312fbd82039ca598bc
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: c95ac178e82e414df41dd5a6d4456f344bb39c2f
+ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280636"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86870119"
 ---
 # <a name="using-kustoexplorer"></a>使用 Kusto.Explorer
 
@@ -75,15 +75,21 @@ StormEvents
 
 深入瞭解[Kusto 查詢語言](https://docs.microsoft.com/azure/kusto/query/)。
 
+> [!NOTE]
+> 查詢運算式中的空白行可能會影響執行查詢的哪個部分。
+>
+> 如果未選取任何文字，則會假設查詢或命令以空白行分隔。
+> 如果選取了 [文字]，則會執行選取的文字。
+
 ## <a name="client-side-query-parameterization"></a>用戶端查詢參數化
 
-> [!Note]
+> [!NOTE]
 > Kusto 中有兩種類型的查詢 parametrization 技術：
 > * [語言整合式查詢 parametrization](../query/queryparametersstatement.md)會實作為查詢引擎的一部分，並可供以程式設計方式查詢服務的應用程式使用。 本檔未說明這個方法。
 >
 > * 用戶端查詢 parametrization （如下所述）只是 Kusto 應用程式的一項功能。 這相當於在傳送這些查詢以由服務執行之前，先在查詢上使用字串取代作業。 下面所述的語法不是查詢語言本身的一部分，而且無法在傳送查詢至服務時使用，方法是 Kusto。
 
-如果您在多個查詢或多個索引標籤中使用相同的值，在每個使用的位置變更該值非常不方便。 這就是為什麼 Kusto 支援查詢參數的原因。 查詢參數會在索引標籤之間共用，因此可以輕鬆地重複使用。 參數是以 {} 括弧表示。 例如：`{parameter1}`
+如果您在多個查詢或多個索引標籤中使用相同的值，在每個使用的位置變更該值非常不方便。 這就是為什麼 Kusto 支援查詢參數的原因。 查詢參數會在索引標籤之間共用，因此可以輕鬆地重複使用。 參數是以 {} 括弧表示。 例如： `{parameter1}`
 
 腳本編輯器會反白顯示查詢參數：
 
@@ -101,7 +107,7 @@ StormEvents
 
 :::image type="content" source="images/kusto-explorer-using/parametrized-query-4.png" alt-text="Paramaterized 查詢 IntelliSense":::
 
-您可以在 [**參數集**] 下拉式方塊中 (列出多個參數集) 。
+您可以有多個參數集（列在 [**參數集**] 下拉式方塊中）。
 選取 [**加入新**的] 或 [**刪除目前**的] 以指令引數集清單。
 
 :::image type="content" source="images/kusto-explorer-using/parametrized-query-5.png" alt-text="參數集清單":::
@@ -115,13 +121,13 @@ StormEvents
 Kusto 提供一個便利的方式，讓您透過電子郵件共用查詢和查詢結果。
 
 1. 在 Kusto 中[執行查詢](#basic-queries)。
-1. 在 [首頁] 索引標籤的 [共用] 區段中，選取 [**匯出至剪貼**簿] (或按 Ctrl + Shift + C) 。
+1. 在 [首頁] 索引標籤的 [共用] 區段中，選取 [**匯出至剪貼**簿] \ （或按 Ctrl + Shift + C）。
 
     :::image type="content" source="images/kusto-explorer-using/menu-export.png" alt-text="匯出至剪貼簿":::
 
     Kusto 會將下列內容貼入剪貼簿：
      * 您的查詢
-     *  (資料表或圖表的查詢結果) 
+     * 查詢結果（資料表或圖表）
      * Kusto 叢集和資料庫的連線詳細資料
      * 會自動重新執行查詢的連結
 
@@ -139,23 +145,23 @@ Kusto 提供一個便利的方式，讓您透過電子郵件共用查詢和查�
 
 URI 的格式為：`https://<ClusterCname>.kusto.windows.net/<DatabaseName>web=0?query=<QueryToExecute>`
 
-例如：  [https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10](https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10)
+例如：[https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10](https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10)
  
 此 URI 會開啟 Kusto，連接到 `Help` Kusto 叢集，並在資料庫上執行指定的查詢 `Samples` 。 如果有 Kusto 實例已在執行中，則執行中的實例將會開啟新的索引標籤，並在其中執行查詢。
 
-> [!Note] 
+> [!NOTE] 
 > 基於安全性理由，已停用控制命令的深層連結。
 
 ### <a name="creating-a-deep-link"></a>建立深層連結
 
-建立深層連結最簡單的方式，就是在 Kusto 中撰寫查詢，然後使用 `Export to Clipboard` 複製查詢 (包括 [深層連結] 和 [結果]) 至剪貼簿。 然後您可以透過電子郵件來共用它。
+建立深層連結最簡單的方式，就是在 Kusto 中撰寫查詢，然後使用將 `Export to Clipboard` 查詢（包括深層連結和結果）複製到剪貼簿。 然後您可以透過電子郵件來共用它。
         
 複製到電子郵件時，深層連結會以小型字型顯示。 例如：
 
 https://help.kusto.windows.net:443/Samples[[按一下以執行查詢](https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVuDlqlEoLs3NTSzKrEpVSM4vzSvR0FRIqlRIyszTCC5JLCoJycxN1VEwT9EEKS1KzUtJLVIoAYolZwAlFQCB3oo%2bTAAAAA%3d%3d)] 
 
 第一個連結會開啟 Kusto，並適當地設定叢集和資料庫內容。
-第二個連結 (`Click to run query`) 是深層連結。 如果您將連結移至電子郵件訊息，然後按 CTRL + K，您就可以看到實際的 URL：
+第二個連結（ `Click to run query` ）是深層連結。 如果您將連結移至電子郵件訊息，然後按 CTRL + K，您就可以看到實際的 URL：
 
 https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVuDlqlEoLs3NTSzKrEpVSM4vzSvR0FRIqlRIyszTCC5JLCoJycxN1VEwT9EEKS1KzUtJLVIoAYolZwAlFQCB3oo%2bTAAAAA%3d%3d
 
@@ -163,7 +169,7 @@ https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSs
 
 您可以使用參數化查詢搭配深層連結。
 
-1. 建立查詢以形成參數化查詢 (例如， `KustoLogs | where Timestamp > ago({Period}) | count`)  
+1. 建立查詢以形成參數化查詢（例如， `KustoLogs | where Timestamp > ago({Period}) | count` ） 
 1. 為 URI 中的每個查詢參數提供參數，例如： 
     
     `https://<your_cluster>.kusto.windows.net/MyDatabase?
@@ -192,7 +198,7 @@ https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSs
 
 ## <a name="command-line-argument-syntax"></a>命令列引數語法
 
-Kusto 支援下列語法中的數個命令列引數 (順序的重要性) ：
+Kusto 支援下列語法中的數個命令列引數（順序很重要）：
 
 [*LocalScriptFile*][*QueryString*]
 
@@ -205,26 +211,26 @@ Kusto 支援下列語法中的數個命令列引數 (順序的重要性) ：
 Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples;Fed=true&name=Samples
 ```
 
-|引數  |描述                                                               |
+|引數  |說明                                                               |
 |----------|--------------------------------------------------------------------------|
 |**要執行的查詢**                                                                 |
-|`query`   |要執行 (base64 編碼) 的查詢。 如果空白，請使用 `querysrc` 。          |
-|`querysrc`|保存要執行之查詢的檔案或 blob 的 URL，如果 `query` 是空的) 則為 (。|
+|`query`   |要執行的查詢（base64 編碼）。 如果空白，請使用 `querysrc` 。          |
+|`querysrc`|保存要執行之查詢的檔案或 blob 的 URL （如果 `query` 是空的）。|
 |**連接到 Kusto 叢集**                                                  |
 |`uri`     |要連接之 Kusto 叢集的連接字串。                 |
 |`name`    |連接至 Kusto 叢集的顯示名稱。                  |
 |**連接群組**                                                                 |
-|`path`    |要下載 (URL 編碼) 之連接群組檔案的 URL。             |
+|`path`    |要下載之連接群組檔案的 URL （URL 編碼）。             |
 |`group`   |連接群組的名稱。                                         |
 |`filename`|保留連接群組的本機檔案。                              |
 
 
 ## <a name="manage-clusters-databases-tables-or-function-authorized-principals"></a>管理叢集、資料庫、資料表或功能授權的主體
 
-> [!Note]
+> [!NOTE]
 > 只有系統[管理員](../management/access-control/role-based-authorization.md)可以在自己的範圍中新增或卸載授權的主體。
 
-以滑鼠右鍵按一下 [連線][面板](kusto-explorer.md#connections-tab)中的目標實體，然後選取 [**管理叢集授權的主體**]。  (您也可以從 [管理] 功能表中選取此選項。 ) 
+以滑鼠右鍵按一下 [連線][面板](kusto-explorer.md#connections-tab)中的目標實體，然後選取 [**管理叢集授權的主體**]。 （您也可以從 [管理] 功能表中選取此選項）。
 
 :::image type="content" source="images/kusto-explorer-using/right-click-manage-authorized-principals.png" alt-text="管理授權的主體":::
 

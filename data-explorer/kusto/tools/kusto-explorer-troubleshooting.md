@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: dd312c4a36bb095dbe4b5e475e758c141bbab6e0
-ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
+ms.openlocfilehash: 6dd52dbe9b69000b109f613957d1405190194b13
+ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470089"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86870085"
 ---
 # <a name="troubleshooting"></a>疑難排解
 
@@ -26,7 +26,7 @@ ms.locfileid: "86470089"
 
 在啟動時，Kusto 會顯示 `InvalidOperationException` 錯誤。
 
-**可能的解決方案**
+**可能的解決方法**
 
 此錯誤可能會建議作業系統損毀或遺失一些必要的模組。
 若要檢查遺失或損毀的系統檔案，請遵循這裡所述的步驟：   
@@ -38,11 +38,11 @@ ms.locfileid: "86470089"
 
 每次開啟 Kusto 時，系統會提示您安裝新的版本。 Kusto 會下載整個封裝，而不會更新已安裝的版本。
 
-**可能的解決方案**
+**可能的解決方法**
 
 此徵兆可能是您本機 ClickOnce 存放區損毀的結果。 您可以在提升許可權的命令提示字元中執行下列命令，以清除本機 ClickOnce 存放區。
 
-> [!Important]
+> [!IMPORTANT]
 > 1. 如果有任何其他 ClickOnce 應用程式或的實例 `dfsvc.exe` ，請先將其終止，然後再執行此命令。
 > 1. 所有 ClickOnce 應用程式會在您下次執行時自動重新安裝，只要您可以存取儲存在應用程式快捷方式中的原始安裝位置即可。 應用程式快捷方式不會被刪除。
 
@@ -159,7 +159,7 @@ Kusto 所儲存的資料可在這裡找到： `C:\Users\[your username]\AppData\
 
 ## <a name="reset-kustoexplorer"></a>重設 Kusto
 
-如有需要，您可以完全重設 Kusto。 下列程式描述如何漸進重設 Kusto，直到它完全從您的電腦移除，而且必須從頭開始安裝為止。
+如有需要，您可以完全重設 Kusto。 下列程式描述如何漸進重設 Kusto，直到從電腦中移除，且必須從頭開始安裝為止。
 
 1. 在 Windows 中，開啟 [**變更] 或 [移除程式**] （也稱為 [**程式和功能**]）。
 1. 選取每個以開頭的專案 `Kusto.Explorer` 。
