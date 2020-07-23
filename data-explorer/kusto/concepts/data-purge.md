@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/12/2020
-ms.openlocfilehash: 144e56ee89cb35900b8e55cdbcdce597b26f8a68
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: ad659f9208bd057719a1adc31f8370c0cb11ffd3
+ms.sourcegitcommit: fb54d71660391a63b0c107a9703adea09bfc7cb9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225987"
+ms.lasthandoff: 07/22/2020
+ms.locfileid: "86946133"
 ---
 # <a name="data-purge"></a>資料清除
 
@@ -36,10 +36,10 @@ ms.locfileid: "83225987"
 
 從 Azure 資料總管選擇性清除資料的程式會在下列步驟中進行：
 
-1. 第1階段：提供具有 Azure 資料總管資料表名稱和每筆記錄述詞的輸入，指出要刪除的記錄。 Kusto 會掃描資料表，以找出會參與資料清除的資料分區。 識別的分區是有一或多筆記錄的述詞會傳回 true。
-1. 第2階段：（虛刪除）以 reingested 版本取代資料表中的每個資料分區（以步驟（1）識別）。 Reingested 版本不應該有述詞傳回 true 的記錄。 如果未將新資料內嵌到資料表中，則在這個階段結束時，查詢將不會再傳回述詞傳回 true 的資料。 清除虛刪除階段的持續時間取決於下列參數： 
+1. 第1階段：提供具有 Azure 資料總管資料表名稱和每筆記錄述詞的輸入，指出要刪除的記錄。 Kusto 會掃描資料表，以找出會參與資料清除的資料範圍。 識別的範圍是具有一或多筆記錄的值，述詞會傳回 true。
+1. 第2階段：（虛刪除）以 reingested 版本取代資料表中的每個資料範圍（以步驟（1）識別）。 Reingested 版本不應該有述詞傳回 true 的記錄。 如果未將新資料內嵌到資料表中，則在這個階段結束時，查詢將不會再傳回述詞傳回 true 的資料。 清除虛刪除階段的持續時間取決於下列參數： 
      * 必須清除的記錄數目 
-     * 記錄分散于叢集中的資料分區 
+     * 記錄分散于叢集中的資料範圍 
      * 叢集中的節點數目  
      * 用於清除作業的備用容量
      * 有幾個其他因素，階段2的持續時間可能會在數秒到數小時之間有所不同。
@@ -113,7 +113,7 @@ ms.locfileid: "83225987"
      .purge table [TableName] records in database [DatabaseName] with (verificationtoken='<verification token from step #1>') <| [Predicate]
      ```
     
-    | 參數  | 說明  |
+    | 參數  | 描述  |
     |---------|---------|
     | `DatabaseName`   |   資料庫名稱      |
     | `TableName`     |     資料表的名稱    |
@@ -159,7 +159,7 @@ ms.locfileid: "83225987"
 
     | `OperationId` | `DatabaseName` | `TableName`|`ScheduledTime` | `Duration` | `LastUpdatedOn` |`EngineOperationId` | `State` | `StateDetails` |`EngineStartTime` | `EngineDuration` | `Retries` |`ClientRequestId` | `Principal`|
     |--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-    | c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：00.1406211 |2019-01-20 11：41：05.4391686 | |排程 | | | |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。|
+    | c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：00.1406211 |2019-01-20 11：41：05.4391686 | |已排程 | | | |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。|
 
 #### <a name="example-single-step-purge"></a>範例：單一步驟清除
 
@@ -176,7 +176,7 @@ ms.locfileid: "83225987"
 
 | `OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`|
 |--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：00.1406211 |2019-01-20 11：41：05.4391686 | |排程 | | | |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。|
+| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：00.1406211 |2019-01-20 11：41：05.4391686 | |已排程 | | | |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。|
 
 ### <a name="cancel-purge-operation-command"></a>取消清除操作命令
 
@@ -223,12 +223,12 @@ ms.locfileid: "83225987"
 .show purges from '<StartDate>' to '<EndDate>' [in database <DatabaseName>]
 ```
 
-| [內容]  |說明  |強制/選擇性|
+| 屬性  |描述  |強制/選擇性|
 |---------|------------|-------|
 |`OperationId `   |      執行單一階段或第二個階段之後輸出的資料管理作業識別碼。   |強制性
-|`StartDate`    |   篩選作業的時間限制下限。 如果省略，則預設為目前時間的24小時。      |選用
-|`EndDate`    |  篩選作業的時間上限。 如果省略，則預設為目前時間。       |選用
-|`DatabaseName`    |     用來篩選結果的資料庫名稱。    |選用
+|`StartDate`    |   篩選作業的時間限制下限。 如果省略，則預設為目前時間的24小時。      |選擇性
+|`EndDate`    |  篩選作業的時間上限。 如果省略，則預設為目前時間。       |選擇性
+|`DatabaseName`    |     用來篩選結果的資料庫名稱。    |選擇性
 
 > [!NOTE]
 > 只有在用戶端具有[資料庫管理員](../management/access-control/role-based-authorization.md)許可權的資料庫上才會提供狀態。
@@ -247,7 +247,7 @@ ms.locfileid: "83225987"
 
 |`OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`
 |--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-|c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：33.6782130 |2019-01-20 11：42：34.6169153 |a0825d4d-6b0f-47f3-a499-54ac5681ab78 |Completed |已成功完成清除（儲存體成品待刪除） |2019-01-20 11：41：34.6486506 |00：00：04.4687310 |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。
+|c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：33.6782130 |2019-01-20 11：42：34.6169153 |a0825d4d-6b0f-47f3-a499-54ac5681ab78 |已完成 |已成功完成清除（儲存體成品待刪除） |2019-01-20 11：41：34.6486506 |00：00：04.4687310 |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。
 
 * `OperationId`-執行清除時傳回的 DM 作業識別碼。 
 * `DatabaseName`* *-資料庫名稱（區分大小寫）。 
@@ -307,7 +307,7 @@ ms.locfileid: "83225987"
      .purge table [TableName] in database [DatabaseName] allrecords with (verificationtoken='<verification token from step #1>')
      ```
 
-    | 參數  |說明  |
+    | 參數  |描述  |
     |---------|---------|
     | `DatabaseName`   |   資料庫的名稱。      |
     | `TableName`    |     資料表的名稱。    |

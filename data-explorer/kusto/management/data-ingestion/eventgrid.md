@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/01/2020
-ms.openlocfilehash: 3a69add7e395bbb5b18c390c4089a2e8ad80f674
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: 88a95ea2fc8e1f417114cfcfd89c4e5003d9bef2
+ms.sourcegitcommit: fb54d71660391a63b0c107a9703adea09bfc7cb9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013782"
+ms.lasthandoff: 07/22/2020
+ms.locfileid: "86946099"
 ---
 # <a name="ingest-from-storage-using-event-grid-subscription"></a>使用事件方格訂用帳戶從儲存體內嵌
 
@@ -74,7 +74,7 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
 > [!NOTE]
 > 為了達到最佳效能，請在 Azure 資料總管叢集所在的相同區域中建立所有資源。
 
-### <a name="prerequisites"></a>必要條件
+### <a name="prerequisites"></a>先決條件
 
 * [建立儲存體帳戶](/azure/storage/common/storage-quickstart-create-account)。
   事件方格通知訂閱可以在 Azure 儲存體帳戶上設定種類 `BlobStorage` 或 `StorageV2` 。
@@ -94,7 +94,7 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
 
     |**設定** | **建議的值** | **欄位描述**|
     |---|---|---|
-    | 名稱 | *test-grid-connection* | 您想要建立之事件方格訂用帳戶的名稱。|
+    | Name | *test-grid-connection* | 您想要建立之事件方格訂用帳戶的名稱。|
     | 事件結構描述 | *事件方格架構* | 應該用於事件格線的結構描述。 |
     | 主題類型 | *儲存體帳戶* | 事件格線主題的類型。 |
     | 來源資源 | *gridteststorage1* | 儲存體帳戶的名稱。 |
@@ -113,6 +113,9 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
    * 如需篩選事件的詳細資訊，請參閱[Blob 儲存體事件](/azure/storage/blobs/storage-blob-event-overview#filtering-events)。
     
         :::image type="content" source="../images/eventgrid/filters-tab.png" alt-text="[篩選] 索引標籤事件方格":::
+
+> [!NOTE]
+> 當端點未確認收到事件時，Azure 事件方格會啟用重試機制。 如果此重試傳遞失敗，事件方格會使用無效*信件的進程*，將未傳遞的事件傳遞至儲存體帳戶。 如需詳細資訊，請參閱 [Event Grid 訊息傳遞與重試](/azure/event-grid/delivery-and-retry#retry-schedule-and-duration)。
 
 ### <a name="data-ingestion-connection-to-azure-data-explorer"></a>Azure 資料總管的資料內嵌連接
 
