@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/27/2020
-ms.openlocfilehash: 4ea4532d8547011b2b281988ff1534cd1d49da86
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: c5f0d7e9a3fc8daedf55daf4630098af3fb4c07b
+ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84258074"
+ms.lasthandoff: 07/23/2020
+ms.locfileid: "87106471"
 ---
 # <a name="continuous-data-export"></a>連續資料匯出
 
@@ -28,7 +28,7 @@ ms.locfileid: "84258074"
 > * `impersonate`在其[連接字串](../../api/connection-strings/storage.md)中，外部資料表不支援連續匯出。
 > * 如果「連續匯出」使用的成品是用來觸發事件方格通知，請參閱[事件方格檔中的已知問題一節](../data-ingestion/eventgrid.md#known-issues)。
 
-## <a name="notes"></a>注意
+## <a name="notes"></a>附註
 
 * 僅針對 [[顯示匯出](#show-continuous-export-artifacts)的成品] 命令所報告的檔案，保證「剛好一次」匯出。 
 「連續匯出」並不保證每一筆記錄只會寫入至外部資料表一次。 如果在匯出開始之後發生失敗，而且某些成品已經寫入外部資料表，則外部資料表_可能會_包含重複專案（或甚至是損毀的檔案，以防在完成之前中止寫入作業）。 在這種情況下，成品不會從外部資料表中刪除，但*不*會在 [[顯示匯出](#show-continuous-export-artifacts)的成品] 命令中回報。 使用匯出的檔案 `show exported artifacts command` 。 
@@ -37,17 +37,23 @@ ms.locfileid: "84258074"
 您必須在查詢中所參考的所有資料表上啟用[IngestionTime 原則](../ingestiontime-policy.md)，而該查詢應在匯出中「剛好一次」處理。 預設會在所有新建立的資料表上啟用此原則。
 * 匯出查詢的輸出架構*必須*符合您匯出之外部資料表的架構。 
 * 連續匯出不支援跨資料庫/叢集呼叫。
-* 「連續匯出」會根據為其設定的時間週期執行。 此間隔的建議值至少為數分鐘，視您願意接受的延遲而定。 「連續匯出」*並不是*為了持續串流資料而設計的 Kusto。 它會以分散式模式執行，其中所有節點會同時匯出。 如果每次執行所查詢的資料範圍很小，則連續匯出的輸出會是許多小型成品（此數目取決於叢集中的節點數目）。 
-* 可以同時執行的匯出作業數目受限於叢集的資料匯出容量（請參閱[節流](../../management/capacitypolicy.md#throttling)）。 如果叢集沒有足夠的容量來處理所有連續匯出，有些會開始延遲。 
- 
+* 「連續匯出」會根據為其設定的時間週期執行。 此間隔的建議值至少為數分鐘，視您願意接受的延遲而定。 「連續匯出」*並不是*為了持續串流資料而設計的 Kusto。 它會以分散式模式執行，其中所有節點會同時匯出。
+如果每次執行所查詢的資料範圍很小，則連續匯出的輸出會是許多小型成品（此數目取決於叢集中的節點數目）。 
+* 可以同時執行的匯出作業數目受限於叢集的資料匯出容量（請參閱[節流](../../management/capacitypolicy.md#throttling)）。 如果叢集沒有足夠的容量來處理所有連續匯出，有些會開始延遲。
 * 根據預設，匯出查詢中參考的所有資料表都會假設為[事實資料表](../../concepts/fact-and-dimension-tables.md)。 
 因此，它們的*範圍*是資料庫資料指標。 匯出查詢只會包含自上一次匯出執行後聯結的記錄。 
 匯出查詢可能包含[維度](../../concepts/fact-and-dimension-tables.md)資料表，其中維度資料表的*所有*記錄都包含在*所有*匯出查詢中。 
     * 在連續匯出的事實和維度資料表之間使用聯結時，您必須記住，事實資料表中的記錄只會處理一次-如果在某些索引鍵的維度資料表遺漏記錄時執行匯出，則會遺漏個別索引鍵的記錄，或在匯出的檔案中包含維度資料行的 null 值（視查詢是否使用內部或外部聯結而定）。 連續匯出定義中的 forcedLatency 屬性在這類情況下很有用，因為事實和維度資料表會在同一時間內嵌（用於比對記錄）。
     * 不支援只對維度資料表進行連續匯出。 匯出查詢必須包含至少一個事實資料表。
     * 語法會明確宣告哪些資料表已設定範圍（事實），而不是範圍（維度）。 如需 `over` 詳細資訊，請參閱[create 命令](#create-or-alter-continuous-export)中的參數。
+* 如果匯出的資料量很大，強烈建議您為外部資料表設定多個儲存體帳戶，以避免儲存節流（請參閱將[資料匯出至儲存體](export-data-to-storage.md#known-issues)檔中的已知問題一節）。
+* 為了達到最佳效能，ADX 叢集和儲存體帳戶應共置於相同的 Azure 區域中。
+* 連續匯出中的預設散發為 `per_node` （所有節點都會同時匯出）。 
+  這項設定可以在連續匯出 create 命令的屬性中覆寫。 使用 `per_shard` 散發來增加並行（請注意，這會增加儲存體帳戶的負載，而且有機會達到節流限制）;使用 `single` （或 `distributed` = `false` ）完全停用散發（這可能會大幅降低連續匯出程式的速度）。 這項設定也會影響在每個連續匯出反復專案中建立的檔案數目（如需詳細資訊，請參閱[匯出至外部資料表命令](export-data-to-an-external-table.md)中的附注一節）。
+* 在每個連續匯出反復專案中匯出的檔案數目，視外部資料表的分割方式而定。 如需詳細資訊，請參閱[匯出至外部資料表命令](export-data-to-an-external-table.md)中的附注一節。
+每個連續匯出反復專案一律會寫入至*新*檔案，而且永遠不會附加至現有檔案。 因此，匯出的檔案數目也取決於連續匯出的執行頻率（ `intervalBetweenRuns` 參數）。
+* 「連續匯出」對叢集的影響取決於「連續匯出」正在執行的查詢，因為大部分的資源（CPU、記憶體）都是由查詢執行所耗用。 [[顯示命令和查詢] 命令](../commands-and-queries.md)可以用來估計資源耗用量。 篩選 `| where ClientActivityId startswith "RunContinuousExports"` 以查看與連續匯出相關聯的命令和查詢。
 
-* 在每個連續匯出反復專案中匯出的檔案數目，視外部資料表的分割方式而定。 如需詳細資訊，請參閱[匯出至外部資料表命令](export-data-to-an-external-table.md)中的附注一節。 每個連續匯出反復專案一律會寫入至*新*檔案，而且永遠不會附加至現有檔案。 因此，匯出的檔案數目也取決於連續匯出的執行頻率（ `intervalBetweenRuns` 參數）。
 
 所有連續匯出命令都需要[資料庫系統管理員許可權](../access-control/role-based-authorization.md)。
 
@@ -62,18 +68,18 @@ ms.locfileid: "84258074"
 
 **屬性**：
 
-| 屬性             | 類型     | 描述   |
+| 屬性             | 類型     | 說明   |
 |----------------------|----------|---------------------------------------|
-| ContinuousExportName | String   | 連續匯出的名稱。 名稱在資料庫內必須是唯一的，而且可用來定期執行連續匯出。      |
-| ExternalTableName    | String   | 要匯出的[外部資料表](../externaltables.md)名稱。  |
-| 查詢                | String   | 要匯出的查詢。  |
-| over （T1，T2）        | String   | 查詢中的選擇性事實資料表清單（以逗號分隔）。 如果未指定，查詢中參考的所有資料表都會假設為事實資料表。 如果指定，則*不*在此清單中的資料表會被視為維度資料表，而且不會設定範圍（所有記錄都會參與所有匯出）。 如需詳細資訊，請參閱[附注一節](#notes)。 |
+| ContinuousExportName | 字串   | 連續匯出的名稱。 名稱在資料庫內必須是唯一的，而且可用來定期執行連續匯出。      |
+| ExternalTableName    | 字串   | 要匯出的[外部資料表](../externaltables.md)名稱。  |
+| 查詢                | 字串   | 要匯出的查詢。  |
+| over （T1，T2）        | 字串   | 查詢中的選擇性事實資料表清單（以逗號分隔）。 如果未指定，查詢中參考的所有資料表都會假設為事實資料表。 如果指定，則*不*在此清單中的資料表會被視為維度資料表，而且不會設定範圍（所有記錄都會參與所有匯出）。 如需詳細資訊，請參閱[附注一節](#notes)。 |
 | intervalBetweenRuns  | Timespan | 連續匯出執行之間的時間範圍。 必須大於1分鐘。   |
 | forcedLatency        | Timespan | 一段選擇性的時間，可將查詢限制為只在這段期間內嵌的記錄（相對於目前時間）。 例如，如果查詢執行一些匯總/聯結，而您想要確保所有相關記錄都已經內嵌，然後再執行匯出，這個屬性就很有用。
 
 除了上述以外，連續匯出 create 命令支援 [[匯出至外部資料表] 命令](export-data-to-an-external-table.md)所支援的所有屬性。 
 
-**範例：**
+**範例︰**
 
 ```kusto
 .create-or-alter continuous-export MyExport
@@ -100,32 +106,32 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 描述                |
+| 屬性             | 類型   | 說明                |
 |----------------------|--------|----------------------------|
-| ContinuousExportName | String | 連續匯出的名稱。 |
+| ContinuousExportName | 字串 | 連續匯出的名稱。 |
 
 
 `.show` `continuous-exports`
 
 傳回資料庫中的所有連續匯出。 
 
-**輸出**
+**輸出：**
 
-| 輸出參數    | 類型     | 描述                                                             |
+| 輸出參數    | 類型     | 說明                                                             |
 |---------------------|----------|-------------------------------------------------------------------------|
-| CursorScopedTables  | String   | 明確限定範圍（事實）資料表的清單（JSON 序列化）               |
-| ExportProperties    | String   | 匯出屬性（JSON 序列化）                                     |
+| CursorScopedTables  | 字串   | 明確限定範圍（事實）資料表的清單（JSON 序列化）               |
+| ExportProperties    | 字串   | 匯出屬性（JSON 序列化）                                     |
 | ExportedTo          | Datetime | 已成功匯出的最後一個日期時間（內嵌時間）       |
-| ExternalTableName   | String   | 外部資料表的名稱                                              |
+| ExternalTableName   | 字串   | 外部資料表的名稱                                              |
 | ForcedLatency       | TimeSpan | 強制延遲（如果未提供，則為 null）                                   |
 | IntervalBetweenRuns | TimeSpan | 執行之間的間隔                                                   |
-| IsDisabled          | Boolean  | 如果連續匯出已停用，則為 True                               |
-| IsRunning           | Boolean  | 如果連續匯出目前正在執行，則為 True                      |
-| LastRunResult       | String   | 上次連續匯出執行的結果（ `Completed` 或 `Failed` ） |
+| IsDisabled          | 布林值  | 如果連續匯出已停用，則為 True                               |
+| IsRunning           | 布林值  | 如果連續匯出目前正在執行，則為 True                      |
+| LastRunResult       | 字串   | 上次連續匯出執行的結果（ `Completed` 或 `Failed` ） |
 | LastRunTime         | Datetime | 上次執行連續匯出的時間（開始時間）           |
-| 名稱                | String   | 連續匯出的名稱                                           |
-| 查詢               | String   | 匯出查詢                                                            |
-| StartCursor         | String   | 第一次執行此連續匯出的起點         |
+| 名稱                | 字串   | 連續匯出的名稱                                           |
+| 查詢               | 字串   | 匯出查詢                                                            |
+| StartCursor         | 字串   | 第一次執行此連續匯出的起點         |
 
 ## <a name="show-continuous-export-artifacts"></a>顯示連續匯出成品
 
@@ -137,26 +143,26 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 描述                |
+| 屬性             | 類型   | 說明                |
 |----------------------|--------|----------------------------|
-| ContinuousExportName | String | 連續匯出的名稱。 |
+| ContinuousExportName | 字串 | 連續匯出的名稱。 |
 
-**輸出**
+**輸出：**
 
 | 輸出參數  | 類型     | 描述                            |
 |-------------------|----------|----------------------------------------|
 | 時間戳記         | Datetime | 連續匯出執行的時間戳記 |
-| ExternalTableName | String   | 外部資料表的名稱             |
-| 路徑              | String   | 輸出路徑                            |
+| ExternalTableName | 字串   | 外部資料表的名稱             |
+| 路徑              | 字串   | 輸出路徑                            |
 | NumRecords        | long     | 匯出至路徑的記錄數目     |
 
-**範例：** 
+**範例︰** 
 
 ```kusto
 .show continuous-export MyExport exported-artifacts | where Timestamp > ago(1h)
 ```
 
-| 時間戳記                   | ExternalTableName | 路徑             | NumRecords | SizeInBytes |
+| Timestamp                   | ExternalTableName | 路徑             | NumRecords | SizeInBytes |
 |-----------------------------|-------------------|------------------|------------|-------------|
 | 2018-12-20 07：31：30.2634216 | ExternalBlob      | `http://storageaccount.blob.core.windows.net/container1/1_6ca073fd4c8740ec9a2f574eaa98f579.csv` | 10                          | 1024              |
 
@@ -170,28 +176,28 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 描述                |
+| 屬性             | 類型   | 說明                |
 |----------------------|--------|----------------------------|
-| ContinuousExportName | String | 連續匯出的名稱  |
+| ContinuousExportName | 字串 | 連續匯出的名稱  |
 
-**輸出**
+**輸出：**
 
 | 輸出參數 | 類型      | 描述                                         |
 |------------------|-----------|-----------------------------------------------------|
 | 時間戳記        | Datetime  | 失敗的時間戳記。                           |
-| OperationId      | String    | 失敗的作業識別碼。                    |
-| 名稱             | String    | 連續匯出名稱。                             |
-| LastSuccessRun   | 時間戳記 | 最後一次成功執行連續匯出。   |
-| FailureKind      | String    | 失敗/PartialFailure。 PartialFailure 表示某些成品在失敗發生之前已成功匯出。 |
-| 詳細資料          | String    | 失敗錯誤詳細資料。                              |
+| OperationId      | 字串    | 失敗的作業識別碼。                    |
+| 名稱             | 字串    | 連續匯出名稱。                             |
+| LastSuccessRun   | Timestamp | 最後一次成功執行連續匯出。   |
+| FailureKind      | 字串    | 失敗/PartialFailure。 PartialFailure 表示某些成品在失敗發生之前已成功匯出。 |
+| 詳細資料          | 字串    | 失敗錯誤詳細資料。                              |
 
-**範例：** 
+**範例︰** 
 
 ```kusto
 .show continuous-export MyExport failures 
 ```
 
-| 時間戳記                   | OperationId                          | 名稱     | LastSuccessRun              | FailureKind | 詳細資料    |
+| Timestamp                   | OperationId                          | 名稱     | LastSuccessRun              | FailureKind | 詳細資料    |
 |-----------------------------|--------------------------------------|----------|-----------------------------|-------------|------------|
 | 2019-01-01 11：07：41.1887304 | ec641435-2505-4532-ba19-d6ab88c96a9d | MyExport | 2019-01-01 11：06：35.6308140 | 失敗     | 詳細資料 .。。 |
 
@@ -203,11 +209,11 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 描述                |
+| 屬性             | 類型   | 說明                |
 |----------------------|--------|----------------------------|
-| ContinuousExportName | String | 連續匯出的名稱 |
+| ContinuousExportName | 字串 | 連續匯出的名稱 |
 
-**輸出**
+**輸出：**
 
 資料庫中剩餘的連續匯出（刪除後）。 輸出架構，如同 [[顯示連續匯出] 命令](#show-continuous-export)。
 
@@ -223,11 +229,11 @@ with
 
 **屬性**
 
-| 屬性             | 類型   | 描述                |
+| 屬性             | 類型   | 說明                |
 |----------------------|--------|----------------------------|
-| ContinuousExportName | String | 連續匯出的名稱 |
+| ContinuousExportName | 字串 | 連續匯出的名稱 |
 
-**輸出**
+**輸出：**
 
 改變連續匯出的 [[顯示連續匯出] 命令](#show-continuous-export)的結果。 
 

@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/12/2020
-ms.openlocfilehash: ad659f9208bd057719a1adc31f8370c0cb11ffd3
-ms.sourcegitcommit: fb54d71660391a63b0c107a9703adea09bfc7cb9
+ms.openlocfilehash: 86712a2e85f2785666b0b6245962aca39cd82729
+ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/22/2020
-ms.locfileid: "86946133"
+ms.lasthandoff: 07/23/2020
+ms.locfileid: "87106498"
 ---
 # <a name="data-purge"></a>資料清除
 
@@ -76,7 +76,7 @@ ms.locfileid: "86946133"
 
 ## <a name="trigger-the-purge-process"></a>觸發清除進程
 
-> [!Note]
+> [!NOTE]
 > 清除執行是藉由在資料管理端點 [YourClusterName] 上執行 [[清除資料表*TableName*記錄](#purge-table-tablename-records-command)] 命令來叫用 https://ingest- 。 [Region]. kusto. net。
 
 ### <a name="purge-table-tablename-records-command"></a>清除資料表 TableName 記錄命令
@@ -85,24 +85,24 @@ ms.locfileid: "86946133"
 
 * 以程式設計方式叫用：要由應用程式叫用的單一步驟。 呼叫此命令會直接觸發清除執行順序。
 
-    **語法**
+  **語法**
 
-     ```kusto
-     // Connect to the Data Management service
-     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
-     
-     .purge table [TableName] records in database [DatabaseName] with (noregrets='true') <| [Predicate]
-     ```
+  ```kusto
+  // Connect to the Data Management service
+  #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+ 
+  .purge table [TableName] records in database [DatabaseName] with (noregrets='true') <| [Predicate]
+   ```
 
-    > [!NOTE]
-    > 使用[Kusto 用戶端程式庫](../api/netfx/about-kusto-data.md)NuGet 套件中提供的 CslCommandGenerator API 來產生此命令。
+  > [!NOTE]
+  > 使用[Kusto 用戶端程式庫](../api/netfx/about-kusto-data.md)NuGet 套件中提供的 CslCommandGenerator API 來產生此命令。
 
 * 人為調用：需要明確確認做為個別步驟的兩步驟程式。 第一次叫用命令時，會傳回驗證 token，應提供此權杖來執行實際的清除。 此順序可降低不小心刪除不正確資料的風險。 使用此選項可能需要花很長的時間才能在具有大量冷快取資料的大型資料表上完成。
     <!-- If query times-out on DM endpoint (default timeout is 10 minutes), it is recommended to use the [engine `whatif` command](#purge-whatif-command) directly againt the engine endpoint while increasing the [server timeout limit](../concepts/querylimits.md#limit-on-request-execution-time-timeout). Only after you have verified the expected results using the engine whatif command, issue the purge command via the DM endpoint using the 'noregrets' option. -->
 
-     **語法**
+  **語法**
 
-     ```kusto
+  ```kusto
      // Connect to the Data Management service
      #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
      
@@ -111,9 +111,9 @@ ms.locfileid: "86946133"
 
      // Step #2 - input the verification token to execute purge
      .purge table [TableName] records in database [DatabaseName] with (verificationtoken='<verification token from step #1>') <| [Predicate]
-     ```
+  ```
     
-    | 參數  | 描述  |
+    | 參數  | 說明  |
     |---------|---------|
     | `DatabaseName`   |   資料庫名稱      |
     | `TableName`     |     資料表的名稱    |
@@ -132,50 +132,50 @@ ms.locfileid: "86946133"
 
 若要在兩步驟啟用案例中開始清除，請執行命令的步驟 #1：
 
-    ```kusto
+ ```kusto
     // Connect to the Data Management service
      #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
      
     .purge table MyTable records in database MyDatabase <| where CustomerId in ('X', 'Y')
-    ```
+ ```
 
-    **Output**
+**輸出**
 
-    | NumRecordsToPurge | EstimatedPurgeExecutionTime| VerificationToken
-    |--|--|--
-    | 1596 | 00:00:02 | e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b
+ | NumRecordsToPurge | EstimatedPurgeExecutionTime| VerificationToken
+ |---|---|---
+ | 1596 | 00:00:02 | e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b
 
-    Then, validate the NumRecordsToPurge before running step #2. 
+然後，在執行步驟 #2 之前驗證 NumRecordsToPurge。 
 
 若要在雙步驟啟用案例中完成清除，請使用步驟 #1 傳回的驗證權杖來執行步驟 #2：
 
-    ```kusto
-    .purge table MyTable records in database MyDatabase
-    with (verificationtoken='e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b')
-    <| where CustomerId in ('X', 'Y')
-    ```
+```kusto
+.purge table MyTable records in database MyDatabase
+ with(verificationtoken='e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b')
+<| where CustomerId in ('X', 'Y')
+```
 
-    **Output**
+**輸出**
 
-    | `OperationId` | `DatabaseName` | `TableName`|`ScheduledTime` | `Duration` | `LastUpdatedOn` |`EngineOperationId` | `State` | `StateDetails` |`EngineStartTime` | `EngineDuration` | `Retries` |`ClientRequestId` | `Principal`|
-    |--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-    | c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：00.1406211 |2019-01-20 11：41：05.4391686 | |已排程 | | | |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。|
+| `OperationId` | `DatabaseName` | `TableName`|`ScheduledTime` | `Duration` | `LastUpdatedOn` |`EngineOperationId` | `State` | `StateDetails` |`EngineStartTime` | `EngineDuration` | `Retries` |`ClientRequestId` | `Principal`|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：00.1406211 |2019-01-20 11：41：05.4391686 | |已排程 | | | |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。|
 
 #### <a name="example-single-step-purge"></a>範例：單一步驟清除
 
 若要在單一步驟啟用案例中觸發清除，請執行下列命令：
 
-    ```kusto
-    // Connect to the Data Management service
-     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
-     
-    .purge table MyTable records in database MyDatabase with (noregrets='true') <| where CustomerId in ('X', 'Y')
-    ```
+```kusto
+// Connect to the Data Management service
+ #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+ 
+.purge table MyTable records in database MyDatabase with (noregrets='true') <| where CustomerId in ('X', 'Y')
+```
 
 **輸出**
 
 | `OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`|
-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：00.1406211 |2019-01-20 11：41：05.4391686 | |已排程 | | | |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。|
 
 ### <a name="cancel-purge-operation-command"></a>取消清除操作命令
@@ -189,28 +189,28 @@ ms.locfileid: "86946133"
 
 ```kusto
  .cancel purge <OperationId>
- ```
+```
 
 **範例**
 
 ```kusto
  .cancel purge aa894210-1c60-4657-9d21-adb2887993e1
- ```
+```
 
 **輸出**
 
 此命令的輸出與「顯示清除*OperationId*」命令輸出相同，顯示取消的清除作業已更新的狀態。 如果嘗試成功，則作業狀態會更新為 `Abandoned` 。 否則，作業狀態不會變更。 
 
 |`OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`
-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：00.1406211 |2019-01-20 11：41：05.4391686 | |Abandoned | | | |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。
 
 ## <a name="track-purge-operation-status"></a>追蹤清除操作狀態 
 
-> [!Note]
+> [!NOTE]
 > 您可以使用 [[顯示清除](#show-purges-command)] 命令來追蹤清除作業，並對資料管理端點 https://ingest- [YourClusterName] 執行。 [region]. kusto. net。
 
-狀態 = 「已完成」表示清除作業的第一個階段成功完成，也就是已虛刪除記錄，而且無法再供查詢使用。 客戶**不**需要追蹤和驗證第二個階段（實刪除）完成。 這個階段是由 Azure 資料總管在內部進行監視。
+狀態 = 「已完成」表示清除作業的第一個階段成功完成，也就是已虛刪除記錄，而且無法再供查詢使用。 客戶不需要追蹤和驗證第二個階段（實刪除）完成。 這個階段是由 Azure 資料總管在內部進行監視。
 
 ### <a name="show-purges-command"></a>顯示清除命令
 
@@ -223,7 +223,7 @@ ms.locfileid: "86946133"
 .show purges from '<StartDate>' to '<EndDate>' [in database <DatabaseName>]
 ```
 
-| 屬性  |描述  |強制/選擇性|
+| [內容]  |說明  |強制/選擇性|
 |---------|------------|-------|
 |`OperationId `   |      執行單一階段或第二個階段之後輸出的資料管理作業識別碼。   |強制性
 |`StartDate`    |   篩選作業的時間限制下限。 如果省略，則預設為目前時間的24小時。      |選擇性
@@ -246,7 +246,7 @@ ms.locfileid: "86946133"
 **輸出** 
 
 |`OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`
-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11：41：05.4391686 |00：00：33.6782130 |2019-01-20 11：42：34.6169153 |a0825d4d-6b0f-47f3-a499-54ac5681ab78 |已完成 |已成功完成清除（儲存體成品待刪除） |2019-01-20 11：41：34.6486506 |00：00：04.4687310 |0 |KE.RunCommand; 1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD 應用程式識別碼 = .。。
 
 * `OperationId`-執行清除時傳回的 DM 作業識別碼。 
@@ -272,7 +272,7 @@ ms.locfileid: "86946133"
 
 清除資料表包含卸載資料表，並將其標示為已清除，讓[清除](#purge-process)程式中所述的實刪除程式可在其上執行。 卸載資料表而不清除它，並不會刪除它的所有儲存構件。 這些成品會根據一開始在資料表上設定的固定保留原則來刪除。 此 `purge table allrecords` 命令既快速又有效率，如果適用于您的案例，則最好是清除記錄程式。 
 
-> [!Note]
+> [!NOTE]
 > 此命令的叫用方式是在資料管理端點 [YourClusterName] 上執行 [[清除資料表*TableName* allrecords](#purge-table-tablename-allrecords-command) https://ingest- ] 命令。 [region]. kusto. net。
 
 ### <a name="purge-table-tablename-allrecords-command"></a>清除資料表*TableName* allrecords 命令
@@ -307,7 +307,7 @@ ms.locfileid: "86946133"
      .purge table [TableName] in database [DatabaseName] allrecords with (verificationtoken='<verification token from step #1>')
      ```
 
-    | 參數  |描述  |
+    | 參數  |說明  |
     |---------|---------|
     | `DatabaseName`   |   資料庫的名稱。      |
     | `TableName`    |     資料表的名稱。    |
@@ -328,7 +328,7 @@ ms.locfileid: "86946133"
     **輸出**
 
     | `VerificationToken`|
-    |--|
+    |---|
     | e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b|
 
 1.  若要在雙步驟啟用案例中完成清除，請使用步驟 #1 傳回的驗證權杖來執行步驟 #2：

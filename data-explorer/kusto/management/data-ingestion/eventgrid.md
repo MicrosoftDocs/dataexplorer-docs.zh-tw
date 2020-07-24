@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/01/2020
-ms.openlocfilehash: 88a95ea2fc8e1f417114cfcfd89c4e5003d9bef2
-ms.sourcegitcommit: fb54d71660391a63b0c107a9703adea09bfc7cb9
+ms.openlocfilehash: b8b72c2bc3b34f6d42ea71903272893ffde773fc
+ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/22/2020
-ms.locfileid: "86946099"
+ms.lasthandoff: 07/23/2020
+ms.locfileid: "87106463"
 ---
 # <a name="ingest-from-storage-using-event-grid-subscription"></a>使用事件方格訂用帳戶從儲存體內嵌
 
@@ -35,7 +35,7 @@ Azure 資料總管使用[Azure Event Grid](/azure/event-grid/overview)訂用帳�
 您可以指定透過 blob 中繼資料內嵌之 blob 的內嵌[屬性](../../../ingestion-properties.md)。
 您可以設定下列屬性：
 
-|屬性 | 描述|
+|屬性 | 說明|
 |---|---|
 | rawSizeBytes | 原始（未壓縮）資料的大小。 針對 Avro/ORC/Parquet，此值是套用格式特定壓縮之前的大小。|
 | kustoTable |  現有目標資料表的名稱。 覆寫分頁 `Table` 上的集合 `Data Connection` 。 |
@@ -74,7 +74,7 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
 > [!NOTE]
 > 為了達到最佳效能，請在 Azure 資料總管叢集所在的相同區域中建立所有資源。
 
-### <a name="prerequisites"></a>先決條件
+### <a name="prerequisites"></a>必要條件
 
 * [建立儲存體帳戶](/azure/storage/common/storage-quickstart-create-account)。
   事件方格通知訂閱可以在 Azure 儲存體帳戶上設定種類 `BlobStorage` 或 `StorageV2` 。
@@ -94,7 +94,7 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
 
     |**設定** | **建議的值** | **欄位描述**|
     |---|---|---|
-    | Name | *test-grid-connection* | 您想要建立之事件方格訂用帳戶的名稱。|
+    | 名稱 | *test-grid-connection* | 您想要建立之事件方格訂用帳戶的名稱。|
     | 事件結構描述 | *事件方格架構* | 應該用於事件格線的結構描述。 |
     | 主題類型 | *儲存體帳戶* | 事件格線主題的類型。 |
     | 來源資源 | *gridteststorage1* | 儲存體帳戶的名稱。 |
@@ -115,7 +115,7 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
         :::image type="content" source="../images/eventgrid/filters-tab.png" alt-text="[篩選] 索引標籤事件方格":::
 
 > [!NOTE]
-> 當端點未確認收到事件時，Azure 事件方格會啟用重試機制。 如果此重試傳遞失敗，事件方格會使用無效*信件的進程*，將未傳遞的事件傳遞至儲存體帳戶。 如需詳細資訊，請參閱 [Event Grid 訊息傳遞與重試](/azure/event-grid/delivery-and-retry#retry-schedule-and-duration)。
+> 當端點未確認收到事件時，Azure 事件方格會啟用重試機制。 如果此重試傳遞失敗，事件方格可以使用無效*信件的進程*，將未傳遞的事件傳遞至儲存體帳戶。 如需詳細資訊，請參閱 [Event Grid 訊息傳遞與重試](/azure/event-grid/delivery-and-retry#retry-schedule-and-duration)。
 
 ### <a name="data-ingestion-connection-to-azure-data-explorer"></a>Azure 資料總管的資料內嵌連接
 

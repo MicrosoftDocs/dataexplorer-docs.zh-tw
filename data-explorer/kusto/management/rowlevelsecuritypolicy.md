@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: c07a2e624d8f2657889431df51958017228774a8
-ms.sourcegitcommit: d79d3aa9aaa70cd23e3107ef12296159322e1eb5
+ms.openlocfilehash: 9952a7a7d95f03ee431b699a1833aa23b21d341b
+ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86475587"
+ms.lasthandoff: 07/23/2020
+ms.locfileid: "87106357"
 ---
 # <a name="row-level-security-preview"></a>資料列層級安全性（預覽）
 
@@ -105,7 +105,7 @@ union DataForGroup1, DataForGroup2, DataForGroup3
 
 首先，定義接收資料表名稱做為字串參數的函式，並使用運算子來參考資料表 `table()` 。 
 
-例如：
+例如:
 
 ```
 .create-or-alter function RLSForCustomersTables(TableName: string) {
@@ -123,6 +123,19 @@ union DataForGroup1, DataForGroup2, DataForGroup3
 .alter table Customers3 policy row_level_security enable "RLSForCustomersTables('Customers3')"
 ```
 
+### <a name="produce-an-error-upon-unauthorized-access"></a>在未經授權的存取時產生錯誤
+
+如果您想要非授權的資料表使用者收到錯誤，而不是傳回空的資料表，請使用 `[assert()](../query/assert-function.md)` 函數。 下列範例顯示如何在 RLS 函式中產生此錯誤：
+
+```
+.create-or-alter function RLSForCustomersTables() {
+    MyTable
+    | where assert(current_principal_is_member_of('aadgroup=mygroup@mycompany.com') == true, "You don't have access")
+}
+```
+
+您可以將此方法與其他範例結合。 例如，您可以對不同 AAD 群組中的使用者顯示不同的結果，並為其他人產生錯誤。
+
 ## <a name="more-use-cases"></a>更多使用案例
 
 * 「撥打電話中心」支援人員可以透過數個數字的社會安全號碼或信用卡號碼來識別呼叫者。 這些號碼不應完全公開給支援人員。 RLS 原則可以套用在資料表上，以遮罩任何查詢結果集中任何社交安全性或信用卡號碼的最後四個數字。
@@ -138,7 +151,7 @@ union DataForGroup1, DataForGroup2, DataForGroup3
 * Azure Active Directory 中的成員資格檢查
 * 套用於資料的篩選
 
-例如：
+例如:
 
 ```kusto
 let IsRestrictedUser = current_principal_is_member_of('aadgroup=some_group@domain.com');
