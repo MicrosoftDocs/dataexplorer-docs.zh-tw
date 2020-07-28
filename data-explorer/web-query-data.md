@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 06/15/2020
-ms.openlocfilehash: 05c9a805e1391a34fe2d751c33178fcac16d15a9
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: c1202e4578f9d1d3d4520984e6dc3b6de0ef33b0
+ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780128"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86870153"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>快速入門：在 Azure 資料總管 Web UI 中查詢資料
 
@@ -114,6 +114,12 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
     結果應會類似於下列圖表。
 
     ![直條圖](media/web-query-data/column-chart.png)
+
+> [!NOTE]
+> 查詢運算式中的空白行可能會影響執行查詢的哪個部分。
+>
+> 如果未選取任何文字，則會假設查詢或命令以空白行分隔。
+> 如果選取文字，則會執行選取的文字。
 
 ## <a name="work-with-the-table-grid"></a>使用資料表格線
 
@@ -218,7 +224,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 ## <a name="provide-feedback"></a>提供意見反應
 
-1. 在應用程式右上角，選取意見反應圖示 ![意見反應圖示](media/web-query-data/icon-feedback.png)。
+1. 在應用程式右上角，選取意見反應圖示 ![意見反應圖示](media/web-query-data/icon-feedback.png).
 
 1. 輸入您的意見反應，然後選取 [提交]。
 
