@@ -1,6 +1,6 @@
 ---
-title: '具體化 ( # A1-Azure 資料總管'
-description: '本文說明如何在 Azure 資料總管中具體化 ( # A1 函式。'
+title: 具體化（）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的具體化（）函數。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/06/2020
-ms.openlocfilehash: 0580088bf04bffafd36990a3f42c32aa5c4ede53
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: 8858b261cb366842b475a76a1b2c3246b8a3e7b5
+ms.sourcegitcommit: de81b57b6c09b6b7442665e5c2932710231f0773
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280463"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87264693"
 ---
 # <a name="materialize"></a>materialize()
 
@@ -27,19 +27,14 @@ ms.locfileid: "86280463"
 
 * *expression*：要在查詢執行期間評估和快取的表格式運算式。
 
-**提示**
+> [!NOTE]
+> 具體化的快取大小限制為**5 GB**。 這是每個叢集節點的限制，而且會與同時執行的所有查詢相互同步。 如果查詢使用 `materialize()` ，而且快取無法保存任何其他資料，則查詢將會中止並產生錯誤。
 
-* 當其運算元具有可執行一次的相互子查詢時，請使用具體化搭配 join 或 union。 請參閱以下範例。
-
-* 在需要聯結/聯集分岔流程的情況下也很有用。
-
-* 當您提供快取的結果名稱時，具體化只能在 let 語句中使用。
-
-**注意**
-
-* 具體化的快取大小限制為**5 GB**。 
-  這是每個叢集節點的限制，而且會與同時執行的所有查詢相互同步。
-  如果查詢使用 `materialize()` ，而且快取無法保存任何其他資料，則查詢將會中止並產生錯誤。
+>[!TIP]
+>
+>* 推送可減少具體化資料集的所有可能運算子，並保留查詢的語法。 例如，使用篩選準則，或只投影必要的資料行。
+>* 當其運算元具有可執行一次的相互子查詢時，請使用具體化搭配 join 或 union。 例如，聯結/聯集分支支線。 請參閱[使用 join 運算子的範例](#examples-of-query-performance-improvement)。
+>* 當您提供快取的結果名稱時，具體化只能在 let 語句中使用。 請參閱[使用 let 語句的範例](#examples-of-using-materialize)）。
 
 ## <a name="examples-of-query-performance-improvement"></a>查詢效能改進的範例
 
@@ -72,7 +67,7 @@ _detailed_data
 
 
 下列範例會產生一組亂數字，並計算： 
-* set () 中的相異值數目 `Dcount`
+* 集合中有多少相異值（ `Dcount` ）
 * 集合中的前三個值 
 * 集合中所有這些值的總和 
  
@@ -97,7 +92,7 @@ randomSet | summarize Sum=sum(value)
 
 結果集2： 
 
-|值|
+|value|
 |---|
 |9999998|
 |9999998|
@@ -105,19 +100,16 @@ randomSet | summarize Sum=sum(value)
 
 結果集3： 
 
-|總和|
+|加總|
 |---|
 |15002960543563|
 
-## <a name="examples-of-using-materialize"></a>使用具體化 ( # A1 的範例
+## <a name="examples-of-using-materialize"></a>使用具體化（）的範例
 
 > [!TIP]
 > 如果大部分的查詢都從動態物件中的數百萬個數據列提取欄位，請在內嵌時具體化您的資料行。
-> 
-> 若要使用 `let` 語句搭配您使用一次以上的值，請使用[具體化 ( # A1 函數](./materializefunction.md)。
-> 如需詳細資訊，請參閱[最佳做法](best-practices.md)
 
-嘗試推送會減少具體化資料集的所有可能運算子，但仍保留查詢的語法。 例如，篩選或僅專案必要的資料行。
+若要使用 `let` 語句搭配您使用的值超過一次，請使用[具體化（）函數](./materializefunction.md)。 嘗試推送會減少具體化資料集的所有可能運算子，但仍保留查詢的語法。 例如，使用篩選準則，或只投影必要的資料行。
 
 ```kusto
     let materializedData = materialize(Table
@@ -142,7 +134,7 @@ randomSet | summarize Sum=sum(value)
     | summarize dcount(Resource2))
 ```
     
-如果篩選器與在此查詢中的內容不同：  
+如果篩選準則不相同，如下列查詢所示：  
 
 ```kusto
     let materializedData = materialize(Table
