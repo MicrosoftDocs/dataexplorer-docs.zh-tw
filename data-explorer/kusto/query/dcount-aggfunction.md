@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7f8464ed7dca8d712900bb7a1047875b6292d243
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 2fc8ee7e8c7ab3ce372d786ec87edf55265e1249
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85265009"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348440"
 ---
 # <a name="dcount-aggregation-function"></a>dcount （）（彙總函式）
 
 傳回摘要群組中純量運算式所使用之相異值數目的估計。
 
-**語法**
+## <a name="syntax"></a>語法
 
 ... `|` `summarize` `dcount` `(`*`Expr`*[, *`Accuracy`*]`)` ...
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：要計算其相異值的純量運算式。
 * *精確度*：定義所 `int` 要求估計精確度的選擇性常值。 請參閱下方的支援值。 如果未指定，則 `1` 會使用預設值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回群組中相異值數目的估計 *`Expr`* 。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 PageViewLog | summarize countries=dcount(country) by continent
@@ -40,7 +40,7 @@ PageViewLog | summarize countries=dcount(country) by continent
 
 :::image type="content" source="images/dcount-aggfunction/dcount.png" alt-text="D 計數":::
 
-**注意事項**
+**備註**
 
 `dcount()`彙總函式主要適用于估計大型集合的基數。 它會針對精確度來交易效能，而且可能會傳回不同執行之間的結果。 輸入的順序可能會影響其輸出。
 

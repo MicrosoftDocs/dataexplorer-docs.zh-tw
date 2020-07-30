@@ -1,18 +1,18 @@
 ---
 title: 使用 Azure Resource Manager 範本在 Azure 資料總管中設定客戶管理的金鑰
 description: 本文說明如何使用 Azure Resource Manager 範本，在 Azure 資料總管中的資料上設定客戶管理的金鑰加密。
-author: saguiitay
-ms.author: itsagui
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: dc181e1509f720a8871fd4c41c43f940cef72728
-ms.sourcegitcommit: a7e040fc844098323aa1c00e254bcbcd41fe587f
+ms.openlocfilehash: ad3351045f61f4fb9ddb9ce08c63201746ac05bb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84426515"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350225"
 ---
 # <a name="configure-customer-managed-keys-using-the-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本設定客戶管理的金鑰
 

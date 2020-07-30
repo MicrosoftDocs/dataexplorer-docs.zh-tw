@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 76ead8fabe755d5e3e200a767cb8b7518121b2ac
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 7a7cbb563a10b1cd1bdd91f12b0ce9d7da1c0e7b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128949"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346026"
 ---
 # <a name="project-operator"></a>project 運算子
 
@@ -25,7 +25,7 @@ ms.locfileid: "85128949"
 T | project cost=price*quantity, price
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| project` *ColumnName* [ `=` *Expression*] [ `,` ...]
   
@@ -33,7 +33,7 @@ T | project cost=price*quantity, price
   
 *T* `| project` [*ColumnName*  |  `(` *columnname*[ `,` ] `)` `=` ]*運算式*[ `,` ...]
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入資料表。
 * *ColumnName：* 要出現在輸出中的選擇性資料行名稱。 如果沒有*運算式*，則*ColumnName*是強制性的，且該名稱的資料行必須出現在輸入中。 如果省略，則會自動產生名稱。 如果*Expression*傳回一個以上的資料行，則可以在括弧中指定資料行名稱的清單。 在此情況下，會提供指定名稱給*運算式*的輸出資料行，並卸載所有其餘的輸出資料行（如果有的話）。 如果未指定資料行名稱的清單，將會在輸出中加入所有具有所產生名稱的*運算式*輸出資料行。
@@ -41,11 +41,11 @@ T | project cost=price*quantity, price
 
     所傳回的新計算資料行名稱可以和輸入中的現有資料行同名。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 具有命名為引數的資料行，且資料列數目和輸入資料表相同的資料表。
 
-**範例**
+## <a name="example"></a>範例
 
 下列範例示範幾種可以使用 `project` 運算子完成的操作。 輸入資料表 `T` 有三個類型為 `int` 的資料行：`A`、`B` 和 `C`。 
 

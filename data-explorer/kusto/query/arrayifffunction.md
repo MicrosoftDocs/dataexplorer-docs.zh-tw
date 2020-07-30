@@ -1,6 +1,6 @@
 ---
-title: array_iif() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的array_iif()。
+title: array_iif （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 array_iif （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,41 +8,41 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/28/2019
-ms.openlocfilehash: f99b9aa8a9d081a7f28cd2e5bb8750b15f2fcdac
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 1844d87dffb5ac0046c3f62600b8c4914dc93a89
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663907"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349579"
 ---
 # <a name="array_iif"></a>array_iif()
 
-動態陣列上的元素 iif 函數。
+動態陣列上的元素型 iif 函數。
 
-另一個別名:array_iff()。
+另一個別名： array_iff （）。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`array_iif(`*條件陣列*,*如果 True*,*如果假*-`)`
+`array_iif(`*ConditionArray*、 *IfTrue*、 *IfFalse*]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *條件陣列*:布*林 值*或數值的輸入陣列,必須是動態數位。
-* *ifTrue*:輸入值或基元值的陣列 -*當條件陣列*的相應值*為 true*時的結果值。
-* *ifFalse*: 輸入值或基元值的陣列 -*當條件陣列*的相應值*為 false*時的結果值。
+* *conditionArray*：*布林*值或數值的輸入陣列必須是動態陣列。
+* *ifTrue*：值或基本值的輸入陣列- *ConditionArray*的對應值為*true*時的結果值。
+* *ifFalse*：值或基本值的輸入陣列- *ConditionArray*的對應值為*false*時的結果值。
 
-**注意事項**
+**備註**
 
-* 結果長度是*條件陣組*的長度。
-* 數值準則的數字值被*視為條件*。= *0*。
-* 非數位/空條件值在結果的相應索引中將為空。
-* 缺少的值(在較短長度的陣列中)被視為空值。
+* 結果長度是*conditionArray*的長度。
+* 數值條件值會視為*condition* ！ = *0*。
+* 非數值/null 條件值在結果的對應索引中會有 null。
+* 遺漏值（長度較短的陣列）會視為 null。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-根據條件陣列的相應值從*IfTrue*或*IfFalse* [陣列] 值獲取的值的動態陣列。
+根據條件陣列的對應值，從*IfTrue*或*IfFalse* [陣列] 值中取得之值的動態陣列。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 print condition=dynamic([true,false,true]), l=dynamic([1,2,3]), r=dynamic([4,5,6]) 
@@ -51,4 +51,4 @@ print condition=dynamic([true,false,true]), l=dynamic([1,2,3]), r=dynamic([4,5,6
 
 |condition (條件)|l|r|res|
 |---|---|---|---|
-|[真,假,真]|[1, 2, 3]|[4, 5, 6]|[1, 5, 3]|
+|[true，false，true]|[1, 2, 3]|[4，5，6]|[1，5，3]|

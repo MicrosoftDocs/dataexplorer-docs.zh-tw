@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8fd83615de466c238a590273b228c118e2cd1b46
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: 1f9cc982c213a9c2143b169dcf8a12103d617257
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84257835"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346706"
 ---
 # <a name="mv-apply-operator"></a>mv-apply 運算子
 
@@ -57,7 +57,7 @@ T | mv-apply Metric to typeof(real) on
 
 `mv-apply`運算子可視為運算子的一般化 [`mv-expand`](./mvexpandoperator.md) （事實上，如果子查詢只包含投影，後者就可以由前者來執行）。
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `|` `mv-apply` [*ItemIndex*] *ColumnsToExpand* [*RowLimit*] `on` `(` *子查詢*`)`
 
@@ -75,7 +75,7 @@ T | mv-apply Metric to typeof(real) on
 
 和*子查詢*具有與任何查詢語句相同的語法。
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *ItemIndex*：如果使用，則指出類型的資料行名稱，此資料行會 `long` 附加至輸入做為陣列擴充階段的一部分，並指出擴充值的以0為基礎的陣列索引。
 
@@ -94,11 +94,11 @@ T | mv-apply Metric to typeof(real) on
 
 * *子查詢*：具有隱含表格式來源的表格式查詢運算式，會套用至每個陣列擴充的 subtable。
 
-**注意事項**
+**備註**
 
 * 不同于 [`mv-expand`](./mvexpandoperator.md) 運算子， `mv-apply` 運算子僅支援陣列擴充。 不支援擴充屬性包。
 
-**範例**
+## <a name="examples"></a>範例
 
 ## <a name="getting-the-largest-element-from-the-array"></a>從陣列取得最大的元素
 

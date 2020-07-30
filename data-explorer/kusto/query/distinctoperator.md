@@ -1,6 +1,6 @@
 ---
-title: 不同的運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的不同運算符。
+title: distinct 運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的相異運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,38 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4287ca48d3fb5006e67a9266ea05287a7d8a06f6
-ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
+ms.openlocfilehash: 233d3fdb0e25720b860a0c11515daec7c597dadd
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82030358"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348338"
 ---
 # <a name="distinct-operator"></a>distinct 運算子
 
-生成具有輸入表提供的列的不同組合的表。 
+產生資料表，其中包含輸入資料表之所提供資料行的相異組合。 
 
 ```kusto
 T | distinct Column1, Column2
 ```
 
-生成具有輸入表中所有列的不同組合的表。
+產生一個資料表，其中包含輸入資料表中所有資料行的相異組合。
 
 ```kusto
 T | distinct *
 ```
 
-**範例**
+## <a name="example"></a>範例
 
-顯示水果和價格的獨特組合。
+顯示水果和價格的相異組合。
 
 ```kusto
 Table | distinct fruit, price
 ```
 
-:::image type="content" source="images/distinctoperator/distinct.PNG" alt-text="不同":::
+:::image type="content" source="images/distinctoperator/distinct.PNG" alt-text="Distinct":::
 
-**注意事項**
+**備註**
 
-* 與`summarize by ...`不同`distinct`,運算符支援提供星號 ()`*`作為組鍵,因此更易於用於寬表。
-* 如果按鍵分組具有高基數,則使用`summarize by ...`[隨機操作策略](shufflequery.md)可能很有用。
+* 不同于 `summarize by ...` ， `distinct` 運算子支援提供星號（ `*` ）做為群組索引鍵，讓寬型資料表更容易使用。
+* 如果 group by 索引鍵是高基數，使用 `summarize by ...` 與[隨機播放策略](shufflequery.md)可能會很有用。

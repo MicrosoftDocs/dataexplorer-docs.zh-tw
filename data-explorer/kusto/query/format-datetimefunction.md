@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 073bf45977648bd654f72fff47b62f92ac1b3d27
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: d0a60a61e5319d9a190f6172b9c0bd8fb7fe1300
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227378"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347964"
 ---
 # <a name="format_datetime"></a>format_datetime()
 
@@ -23,22 +23,22 @@ ms.locfileid: "83227378"
 format_datetime(datetime(2015-12-14 02:03:04.12345), 'y-M-d h:m:s.fffffff') == "15-12-14 2:3:4.1234500"
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `format_datetime(`*datetime* `,`*格式*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * `datetime`：類型的值 `datetime` 。
 * `format`：格式規範字符串，由一或多個[格式元素](#supported-formats)組成。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 具有格式結果的字串。
 
 ## <a name="supported-formats"></a>支援的格式
 
-|格式規範   |說明    |範例
+|格式規範   |描述    |範例
 |---|---|---
 |`d`    |月份天數，從 1 到 31。 | 2009-06-01T13：45： 30-> 1，2009-06-15T13：45： 30-> 15
 |`dd`   |月份天數，從 01 到 31。| 2009-06-01T13：45： 30-> 01，2009-06-15T13：45： 30-> 15
@@ -87,7 +87,7 @@ format_datetime(datetime(2015-12-14 02:03:04.12345), 'y-M-d h:m:s.fffffff') == "
 |`'['`||
 |`']'`||
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

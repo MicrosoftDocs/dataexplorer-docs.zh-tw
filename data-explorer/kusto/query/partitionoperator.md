@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 417d4afb74e9170301baebde6be73d97df097f0f
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 2b082e516a1118638bc8e61b545471326dd400e5
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271531"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346230"
 ---
 # <a name="partition-operator"></a>partition 運算子
 
@@ -25,13 +25,13 @@ T | partition by Col1 ( top 10 by MaxValue )
 T | partition by Col1 { U | where Col2=toscalar(Col1) }
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `|` `partition` [*PartitionParameters*] 資料 `by` *行* `(` *CoNtextualSubquery*`)`
 
 *T* `|` `partition` [*PartitionParameters*] 資料 `by` *行* `{` *子查詢*`}`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：要由運算子處理其資料的表格式來源。
 
@@ -46,14 +46,14 @@ T | partition by Col1 { U | where Col2=toscalar(Col1) }
   |名稱               |值         |描述|
   |-------------------|---------------|-----------|
   |`hint.materialized`|`true`,`false` |如果設定為， `true` 將會具體化運算子的來源 `partition` （預設值： `false` ）|
-  |`hint.concurrency`|*數字*|提示系統 `partition` 應該以平行方式執行運算子的多個並行子查詢。 *預設值*：叢集的單一節點上的 CPU 核心數量（2到16個）。|
-  |`hint.spread`|*數字*|提示系統並行子查詢執行應使用的節點數目 `partition` 。 *預設值*：1。|
+  |`hint.concurrency`|*Number*|提示系統 `partition` 應該以平行方式執行運算子的多個並行子查詢。 *預設值*：叢集的單一節點上的 CPU 核心數量（2到16個）。|
+  |`hint.spread`|*Number*|提示系統並行子查詢執行應使用的節點數目 `partition` 。 *預設值*：1。|
 
-**傳回**
+## <a name="returns"></a>傳回
 
 運算子會傳回將子查詢套用到輸入資料的每個分割區之結果的聯集。
 
-**注意事項**
+**備註**
 
 * 資料分割運算子目前受限於磁碟分割數目。
   可能會建立最多64個相異的分割區。
@@ -111,7 +111,7 @@ StormEvents
 |---|---|
 |Trained Spotter|12770|
 |執法機關|8570|
-|公用|6157|
+|公開|6157|
 |Emergency Manager|4900|
 |合作基金觀察者|3039|
 
@@ -175,6 +175,6 @@ StormEvents
 |---|---|
 |Trained Spotter|12770|
 |執法機關|8570|
-|公用|6157|
+|公開|6157|
 |Emergency Manager|4900|
 |合作基金觀察者|3039|

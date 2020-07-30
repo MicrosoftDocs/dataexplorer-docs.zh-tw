@@ -1,6 +1,6 @@
 ---
-title: array_length() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的array_length()。
+title: array_length （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 array_length （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0bb1daeba6d24f8bd7326fcd0b8c17f06003e30b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 14203e3078b7fe30222ea26320ed1391000d5c05
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518593"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349545"
 ---
 # <a name="array_length"></a>array_length()
 
-計算動態陣列中的元素數。
+計算動態陣列中的元素數目。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`array_length(`*陣列*`)`
+`array_length(`*array*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *陣列*`dynamic`: 值。
+* *array*： `dynamic` 值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 array** 中的項目數，如果 array** 不是陣列，則為 `null`。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 print array_length(parse_json('[1, 2, 3, "four"]')) == 4

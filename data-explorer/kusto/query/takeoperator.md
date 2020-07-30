@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 98586f8f8380d4c1fc36a88b288b47798c10e09e
-ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
+ms.openlocfilehash: 4083c304711c4d77b15809221ac4ace4629fb4dd
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/29/2020
-ms.locfileid: "85517914"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87342099"
 ---
 # <a name="take-operator"></a>take 運算子
 
@@ -25,14 +25,14 @@ T | take 5
 
 除非來源資料已排序，否則不保證會傳回哪些記錄。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `take`*NumberOfRows* 
  NumberOfRows `limit`*NumberOfRows*
 
 （ `take` 和 `limit` 都是同義字）。
 
-**注意事項**
+**備註**
 
 `take`當您以互動方式流覽資料時，是一種簡單快速且有效率的方式來查看記錄的小型樣本，但請注意，在執行多次時，即使資料集尚未變更，它也不保證其結果的一致性。
 

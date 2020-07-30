@@ -1,6 +1,6 @@
 ---
-title: 聯合運算符 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的聯合運算符。
+title: 聯集運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的聯集運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b62c259e1abf1ff0e0e98a90ac4da5a000db5320
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 6dd305ccf5e260666072a4ab2b0d8b6707894902
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765415"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87339488"
 ---
 # <a name="union-operator"></a>union 運算子
 
@@ -25,92 +25,92 @@ ms.locfileid: "81765415"
 Table1 | union Table2, Table3
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-*T* `| union` =*以參數*`kind=``inner`|`outer``withsource=``isfuzzy=``true`|`false`[ * 欄*位名稱*`,` *=*= 表 =*表** ...  
+*T* `| union` [*UnionParameters*] [ `kind=` `inner` | `outer` ] [ `withsource=` *ColumnName*] [ `isfuzzy=` `true` | `false` ]*資料表*[ `,` *資料表*] .。。  
 
-沒有導管輸入的替代表單:
+不含輸送輸入的替代表單：
 
-`union`【*Paro 參數*】`kind=` `inner` 【 `isfuzzy=` `outer` * * * * * 表 * 表 * ... | `true` | `false` `,` *Table* *ColumnName* *Table* `withsource=`  
+`union`[*UnionParameters*][ `kind=` `inner` | `outer` ] [ `withsource=` *ColumnName*] [ `isfuzzy=` `true` | `false` ]*資料表*[ `,` *資料表*] .。。  
 
-**引數**
+## <a name="arguments"></a>引數
 
 ::: zone pivot="azuredataexplorer"
 
 * `Table`:
     *  資料表名稱，例如 `Events`；或
-    *  必須與括弧(如`(Events | where id==42)``(cluster("https://help.kusto.windows.net:443").database("Samples").table("*"))`或 ;或
-    *  使用萬用字元指定的一組資料表。 例如,`E*`將形成資料庫中名稱`E`開始 的所有表的合併。
+    *  必須以括弧括住的查詢運算式，例如 `(Events | where id==42)` 或 `(cluster("https://help.kusto.windows.net:443").database("Samples").table("*"))` ; 或
+    *  使用萬用字元指定的一組資料表。 例如， `E*` 會形成名稱開始之資料庫中所有資料表的聯集 `E` 。
 * `kind`: 
     * `inner` - 結果中會有所有輸入資料表共有的資料行子集。
-    * `outer`- (預設)。 結果具有出現在任何輸入中的所有列。 沒有輸入行定義的儲存格設定為`null`。
-* `withsource`=*欄位*:如果指定,輸出將包括一個名為*列Name*的欄,其值指示每行貢獻的源表。
-如果查詢有效(通配符匹配後)引用來自多個資料庫的表(默認資料庫始終計數),則此列的值將具有資料庫限定的表名稱。
-同樣,如果引用了多個群集,則值中將存在__群集和資料庫__限定。 
-* `isfuzzy=``true` `isfuzzy`  |  :如果 設定為 - 允許對聯合腿進行模糊解析。 `false` `true` `Fuzzy`套用來源集`union`。 這意味著,在分析查詢並準備執行時,聯合源集將減少到當時存在且可訪問的表引用集。 如果至少找到一個此類表,則任何解析失敗都會在查詢狀態結果中產生警告(每個缺少的引用一個),但不會阻止查詢執行;如果沒有解決方案成功 - 查詢將返回錯誤。
+    * `outer`-（預設值）。 結果會有任何輸入中出現的所有資料行。 輸入資料列未定義的資料格會設為 `null` 。
+* `withsource`=*Columnname*：如果指定，輸出會包含一個名為*ColumnName*的資料行，其值會指出哪一個來源資料表已貢獻每個資料列。
+如果查詢有效（在萬用字元比對之後）參考多個資料庫中的資料表（預設資料庫一律計算），則此資料行的值將具有以資料庫限定的資料表名稱。
+同樣地，如果參考一個以上的叢集，值中就會出現叢集__和資料庫__的合格限制。 
+* `isfuzzy=``true`  |  `false` ：如果 `isfuzzy` 設為，則允許對等 `true` 位邊緣進行模糊解析。 `Fuzzy`適用于 `union` 來源集。 這表示在分析查詢並準備執行時，會將一組聯集來源縮減為存在且可在當時存取的資料表參考集。 如果至少找到一個這類資料表，任何解決錯誤都會在查詢狀態結果中產生警告（每個遺漏參考各一個），但不會防止查詢執行;如果沒有成功的解決方式，查詢將會傳回錯誤。
 預設值為 `isfuzzy=` `false`。
-* *聯合參數*:以*名稱*`=`*值*的形式控制行匹配操作和執行計劃的行為的零個或多個(空間分隔)參數。 支援下列參數： 
+* *UnionParameters*：*名稱*值格式為零或多個（以空格分隔）的參數 `=` *Value* ，可控制資料列比對作業和執行計畫的行為。 支援下列參數： 
 
   |名稱           |值                                        |描述                                  |
   |---------------|----------------------------------------------|---------------------------------------------|
-  |`hint.concurrency`|*數量*|提示系統應並行執行`union`運算符的併發子查詢數。 *默認值*:群集單個節點上的 CPU 內核量(2 到 16)。|
-  |`hint.spread`|*數量*|提示系統併發`union`子查詢執行應使用多少個節點。 *默認值*:1。|
+  |`hint.concurrency`|*Number*|提示系統 `union` 應該以平行方式執行運算子的多個並行子查詢。 *預設值*：叢集的單一節點上的 CPU 核心數量（2到16個）。|
+  |`hint.spread`|*Number*|提示系統並行子查詢執行應使用的節點數目 `union` 。 *預設值*：1。|
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
 * `Table`:
-    *  表的名稱,例如`Events`
-    *  必須與括弧一起包含的查詢表示式,例如`(Events | where id==42)`
-    *  使用萬用字元指定的一組資料表。 例如,`E*`將形成資料庫中名稱`E`開始 的所有表的合併。
+    *  資料表的名稱，例如`Events`
+    *  必須以括弧括住的查詢運算式，例如`(Events | where id==42)`
+    *  使用萬用字元指定的一組資料表。 例如， `E*` 會形成名稱開始之資料庫中所有資料表的聯集 `E` 。
 * `kind`: 
     * `inner` - 結果中會有所有輸入資料表共有的資料行子集。
-    * `outer`- (預設)。 結果具有出現在任何輸入中的所有列。 沒有輸入行定義的儲存格設定為`null`。
-* `withsource`=*欄位*:如果指定,輸出將包括一個名為*列Name*的欄,其值指示每行貢獻的源表。
-如果查詢有效(通配符匹配後)引用來自多個資料庫的表(默認資料庫始終計數),則此列的值將具有資料庫限定的表名稱。
-同樣,如果引用了多個群集,則該值中將存在__群集和資料庫__限定。 
-* `isfuzzy=``true` `isfuzzy`  |  :如果 設定為 - 允許對聯合腿進行模糊解析。 `false` `true` `Fuzzy`套用來源集`union`。 這意味著,在分析查詢並準備執行時,聯合源集將減少到當時存在且可訪問的表引用集。 如果至少找到一個此類表,則任何解析失敗都會在查詢狀態結果中產生警告(每個缺少的引用一個),但不會阻止查詢執行;如果沒有解決方案成功 - 查詢將返回錯誤。
+    * `outer`-（預設值）。 結果會有任何輸入中出現的所有資料行。 輸入資料列未定義的資料格會設為 `null` 。
+* `withsource`=*Columnname*：如果指定，輸出會包含一個名為*ColumnName*的資料行，其值會指出每個資料列所提供的來源資料表。
+如果查詢有效（在萬用字元比對之後）參考多個資料庫中的資料表（預設資料庫一律計算），則此資料行的值將具有以資料庫限定的資料表名稱。
+同樣地，如果參考多個叢集，則值中將會出現叢集__和資料庫__的資格。 
+* `isfuzzy=``true`  |  `false` ：如果 `isfuzzy` 設為，則允許對等 `true` 位邊緣進行模糊解析。 `Fuzzy`適用于 `union` 來源集。 這表示在分析查詢並準備執行時，會將一組聯集來源縮減為存在且可在當時存取的資料表參考集。 如果至少找到一個這類資料表，任何解決錯誤都會在查詢狀態結果中產生警告（每個遺漏參考各一個），但不會防止查詢執行;如果沒有成功的解決方式，查詢將會傳回錯誤。
 預設值為 `isfuzzy=false`。
 
 ::: zone-end
 
-**傳回**
+## <a name="returns"></a>傳回
 
 所含資料列數目和所有輸入資料表中的資料列數目一樣多的資料表。
 
-**注意事項**
+**備註**
 
 ::: zone pivot="azuredataexplorer"
 
-1. `union`範圍可以包括[let 語句](./letstatement.md),如果這些語句與[檢視關鍵字](./letstatement.md)屬性化
-2. `union`範圍將不含[函數](../management/functions.md)。 要在同盟欄位中包含函數,請使用[檢視關鍵字](./letstatement.md)定義[let 語句](./letstatement.md)
-3. 如果`union`輸入是[表](../management/tables.md)格[(與表格表示式](./tabularexpressionstatements.md)`union`相反),則後跟 where[運算子](./whereoperator.md),為了更好的性能,請考慮將兩者取代為[find](./findoperator.md)。 請注意`find`運算子產生的不同[輸出架構](./findoperator.md#output-schema)。 
-4. `isfuzzy=true`僅適用於`union`源解析階段。 確定源表集后,將不會抑制可能的其他查詢失敗。
-5. 使用`outer union`時,結果具有任何輸入中出現的所有列,每個名稱和類型匹配項都有一列。 這意味著,如果列出現在多個表中並且具有多種類型,則將在`union`結果中為每一種類型具有相應的列。 這裡的名稱後置為"*",後跟原體列[型態](./scalar-data-types/index.md)。
+1. `union`範圍可以包含[let 語句](./letstatement.md)（如果它們是使用[view 關鍵字](./letstatement.md)進行屬性化）
+2. `union`範圍不會包含[函數](../management/functions.md)。 若要在聯集範圍中包含函式，請使用[view 關鍵字](./letstatement.md)定義[let 語句](./letstatement.md)
+3. 如果 `union` 輸入是[資料表](../management/tables.md)（如相比為[表格式運算式](./tabularexpressionstatements.md)），且 `union` 後面接著[where 運算子](./whereoperator.md)，則請考慮以[find](./findoperator.md)取代這兩個。 請注意運算子所產生的不同[輸出架構](./findoperator.md#output-schema) `find` 。 
+4. `isfuzzy=true`僅適用于 `union` 來源解析階段。 一旦決定來源資料表的集合之後，就不會隱藏可能的其他查詢失敗。
+5. 使用時 `outer union` ，結果會有所有輸入中出現的所有資料行，每個名稱和類型出現的一個資料行。 這表示如果資料行出現在多個資料表中，而且有多個類型，則在結果中，每個類型都會有對應的資料行 `union` 。 此資料行名稱後置字元會加上 ' _ '，後面接著來源資料行[類型](./scalar-data-types/index.md)。
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-1. `union`範圍可以包括[let 語句](./letstatement.md),如果這些語句與[檢視關鍵字](./letstatement.md)屬性化
-2. `union`作用域將不包括函數。 在同盟範圍中包含函數 -[使用 檢視關鍵字](./letstatement.md)定義[let 語句](./letstatement.md)
-3. 如果`union`輸入是表(與[表格表達式](./tabularexpressionstatements.md)相反),後`union`跟where[運算符](./whereoperator.md),請考慮用[Find](./findoperator.md)替換兩者以獲得更好的性能。 請注意`find`管理員產生的不同[輸出架構](./findoperator.md#output-schema)。 
-4. `isfuzzy=``true`僅適用於源解析的`union`階段。 確定源表集后,將不會抑制可能的其他查詢失敗。
-5. 使用`outer union`時,結果具有任何輸入中出現的所有列,每個名稱和類型匹配項都有一列。 這意味著,如果列出現在多個表中並且具有多種類型,則將在`union`結果中為每一種類型具有相應的列。 這裡的名稱後置為"*",後跟原體列[型態](./scalar-data-types/index.md)。
+1. `union`範圍可以包含[let 語句](./letstatement.md)（如果它們是使用[view 關鍵字](./letstatement.md)進行屬性化）
+2. `union`範圍不會包含函數。 若要在聯集範圍中包含函式-使用[view 關鍵字](./letstatement.md)定義[let 語句](./letstatement.md)
+3. 如果 `union` 輸入是資料表（如相比為[表格式運算式](./tabularexpressionstatements.md)），且 `union` 後面接著[where 運算子](./whereoperator.md)，請考慮以「[尋找](./findoperator.md)」取代這兩個，以獲得更好的效能。 請注意運算子所產生的不同[輸出架構](./findoperator.md#output-schema) `find` 。 
+4. `isfuzzy=``true`僅適用于來源解析的階段 `union` 。 一旦決定來源資料表的集合之後，就不會隱藏可能的其他查詢失敗。
+5. 使用時 `outer union` ，結果會有所有輸入中出現的所有資料行，每個名稱和類型出現的一個資料行。 這表示如果資料行出現在多個資料表中，而且有多個類型，則在結果中，每個類型都會有對應的資料行 `union` 。 此資料行名稱後置字元會加上 ' _ '，後面接著來源資料行[類型](./scalar-data-types/index.md)。
 
 ::: zone-end
 
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 union K* | where * has "Kusto"
 ```
 
-資料庫中名稱以`K`開頭的所有表的行,其中任何列都包含單`Kusto`詞 。
+資料庫中的所有資料表中，名稱開頭為的資料 `K` 列，以及其中任何資料行包含該單字的 `Kusto` 。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 union withsource=SourceTable kind=outer Query, Command
@@ -130,7 +130,7 @@ Query
 
 這個更有效率的版本會產生相同的結果。 它會先篩選每個資料表再建立聯集。
 
-**範例:使用`isfuzzy=true`**
+**範例：使用`isfuzzy=true`**
  
 ```kusto     
 // Using union isfuzzy=true to access non-existing view:                                     
@@ -144,11 +144,11 @@ union isfuzzy=true
 | count 
 ```
 
-|Count|
+|計數|
 |---|
 |2|
 
-觀察查詢狀態 - 傳回以下警告:`Failed to resolve entity 'View_3'`
+觀察查詢狀態-傳回下列警告：`Failed to resolve entity 'View_3'`
 
 ```kusto
 // Using union isfuzzy=true and wildcard access:
@@ -159,13 +159,13 @@ union isfuzzy=true View*, SomeView*, OtherView*
 | count 
 ```
 
-|Count|
+|計數|
 |---|
 |3|
 
-觀察查詢狀態 - 傳回以下警告:`Failed to resolve entity 'SomeView*'`
+觀察查詢狀態-傳回下列警告：`Failed to resolve entity 'SomeView*'`
 
-**範例:來源類型不符**
+**範例：來源資料行類型不符**
  
 ```kusto     
 let View_1 = view () { print x=1 };
@@ -191,4 +191,4 @@ union withsource=TableName View_1, View_2, View_3
 |View_2   |       |2     |      |
 |View_3   |       |      |3     |
 
-從`x``View_1`接收後綴的`_long`列 ,`x_long`當名為 的列在結果架構中已存在時,列名稱被去重複,生成一個新的列-`x_long1`
+從收到後置詞的資料行，與 `x` `View_1` `_long` 名稱 `x_long` 已存在於結果架構中的資料行名稱已重複複製，產生新的資料行-`x_long1`

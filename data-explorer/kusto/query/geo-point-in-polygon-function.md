@@ -1,6 +1,6 @@
 ---
-title: 'geo_point_in_polygon ( # A1-Azure 資料總管'
-description: '本文說明 Azure 資料總管中的 geo_point_in_polygon ( # A1。'
+title: geo_point_in_polygon （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 geo_point_in_polygon （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,41 +8,41 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/10/2020
-ms.openlocfilehash: 96e3cfeba0002aa48a4300a994e9e12610deb9a3
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: 49b3e8b92d022ac5d1d8191bef8f00436b9f7211
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280572"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347794"
 ---
 # <a name="geo_point_in_polygon"></a>geo_point_in_polygon()
 
 計算地理空間座標是否在多邊形內部，或 multipolygon 在地球上。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `geo_point_in_polygon(`*經度* `, `*緯度* `, `*多邊形*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *經度*：地理空間座標、經度值（以度為單位）。 有效的值為實數，且範圍為 [-180，+ 180]。
 * *緯度*：地理空間座標，以度為單位的緯度值。 有效的值為實數，且範圍為 [-90，+ 90]。
 * *多邊形*： [GeoJSON 格式](https://tools.ietf.org/html/rfc7946)的多邊形或 multipolygon，以及[動態](./scalar-data-types/dynamic.md)資料類型的。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 指出地理空間座標是否在多邊形內。 如果座標或多邊形無效，查詢將會產生 null 結果。 
 
 > [!NOTE]
 > * 地理空間座標會以[WGS-84](https://earth-info.nga.mil/GandG/update/index.php?action=home)座標參考系統來表示。
 > * 用於在地球上測量的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。 多邊形邊緣會在球體上[geodesics](https://en.wikipedia.org/wiki/Geodesic) 。
-> * 如果輸入多邊形邊緣是直線笛線，請考慮使用[geo_polygon_densify ( # B1](geo-polygon-densify-function.md)將平面邊緣轉換成 geodesics。
+> * 如果輸入多邊形邊緣是直線笛線，請考慮使用[geo_polygon_densify （）](geo-polygon-densify-function.md) ，將平面邊緣轉換成 geodesics。
 
 **多邊形定義和條件約束**
 
-動態 ( {"type"： "多邊形"，"座標"： [LinearRingShell，LinearRingHole_1,..., LinearRingHole_N]} ) 
+dynamic （{"type"： "多邊形"，"座標"： [LinearRingShell，LinearRingHole_1,..., LinearRingHole_N]}）
 
-dynamic ( {"type"： "MultiPolygon"，"座標"： [[LinearRingShell，LinearRingHole_1,..., LinearRingHole_N],..., [LinearRingShell，LinearRingHole_1,..., LinearRingHole_M]]} ) 
+dynamic （{"type"： "MultiPolygon"，"座標"： [[LinearRingShell，LinearRingHole_1,..., LinearRingHole_N],..., [LinearRingShell，LinearRingHole_1,..., LinearRingHole_M]]}）
 
 * LinearRingShell 是必要的，而且定義為 `counterclockwise` 座標 [[lng_1，lat_1],..., [lng_i，lat_i],..., [lng_j，lat_j],..., [lng_1，lat_1]] 的已排序陣列。 只能有一個 shell。
 * LinearRingHole 是選擇性的，而且定義為已 `clockwise` 排序的座標陣列 [[lng_1，lat_1],..., [lng_i，lat_i],..., [lng_j，lat_j],..., [lng_1，lat_1]]。 可以有任意數目的內部環形和孔。
@@ -57,7 +57,7 @@ dynamic ( {"type"： "MultiPolygon"，"座標"： [[LinearRingShell，LinearRing
 > * 使用常值多邊形可能會產生較佳的效能。
 > * 如果您想要知道是否有任何多邊形包含點，請嘗試下列步驟：將多邊形集合折迭成一個 multipolygon。 然後查詢此 multipolygon。 這可能會改善效能。 請參閱下方的範例。 
 
-**範例**
+## <a name="examples"></a>範例
 
 沒有中央公園的曼哈頓島。
 
@@ -74,7 +74,7 @@ datatable(longitude:real, latitude:real, description:string)
 | where geo_point_in_polygon(longitude, latitude, dynamic({"type":"Polygon","coordinates":[[[-73.92597198486328,40.87821814104651],[-73.94691467285156,40.85069618625578],[-73.94691467285156,40.841865966890786],[-74.01008605957031,40.7519385984599],[-74.01866912841797,40.704586878965245],[-74.01214599609375,40.699901911003046],[-73.99772644042969,40.70875101828792],[-73.97747039794922,40.71083299030839],[-73.97026062011719,40.7290474687069],[-73.97506713867186,40.734510840309376],[-73.970947265625,40.74543623770158],[-73.94210815429688,40.77586181063573],[-73.9434814453125,40.78080140115127],[-73.92974853515625,40.79691751000055],[-73.93077850341797,40.804454347291006],[-73.93489837646484,40.80965166748853],[-73.93524169921875,40.837190668541105],[-73.92288208007812,40.85770758108904],[-73.9101791381836,40.871728144624974],[-73.92597198486328,40.87821814104651]],[[-73.95824432373047,40.80071852197889],[-73.98206233978271,40.76815921628347],[-73.97309303283691,40.76422632379533],[-73.94914627075195,40.796949998204596],[-73.95824432373047,40.80071852197889]]]}))
 ```
 
-|經度 (longitude)|緯度 (latitude)|描述|
+|經度 (longitude)|緯度 (latitude)|description|
 |---|---|---|
 |-73.985654|40.748487|帝國狀態建立|
 
@@ -96,7 +96,7 @@ coordinates
 | where geo_point_in_polygon(longitude, latitude, multipolygon)
 ```
 
-|經度 (longitude)|緯度 (latitude)|描述|
+|經度 (longitude)|緯度 (latitude)|description|
 |---|---|---|
 |-73.9741|40.7914|右上方|
 |-73.995|40.734|格林威治 Village|
@@ -144,13 +144,13 @@ Polygons
 }
 ```
 
-|經度 (longitude)|緯度 (latitude)|描述|
+|經度 (longitude)|緯度 (latitude)|description|
 |---|---|---|
 |-73.95|40.75|紐約市地區|
 |-122。3|47.6|西雅圖區域|
 |-115.18|36.16|拉斯維加斯|
 
-另請參閱[geo_polygon_to_s2cells ( # B1 ](geo-polygon-to-s2cells-function.md)。
+另請參閱[geo_polygon_to_s2cells （）](geo-polygon-to-s2cells-function.md)。
 
 將數個多邊形折迭成一個 multipolygon 並加以查詢。
 
@@ -179,7 +179,7 @@ Coordinates
 | where geo_point_in_polygon(longitude, latitude, multipolygon)
 ```
 
-|經度 (longitude)|緯度 (latitude)|描述|
+|經度 (longitude)|緯度 (latitude)|description|
 |---|---|---|
 |-73.9741|40.7914|右上方|
 |-73.995|40.734|格林威治 Village|

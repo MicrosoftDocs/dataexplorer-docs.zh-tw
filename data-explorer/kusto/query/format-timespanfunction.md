@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ba4dffa50c605e9346807f28222809af7637ff09
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 923008d05ebc8c51a39955e29450e55af4100941
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227276"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347947"
 ---
 # <a name="format_timespan"></a>format_timespan()
 
@@ -23,22 +23,22 @@ ms.locfileid: "83227276"
 format_timespan(time(14.02:03:04.12345), 'h:m:s.fffffff') == "2:3:4.1234500"
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `format_timespan(`*timespan* `,`*格式*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * `timespan`：類型的值 `timespan` 。
 * `format`：格式規範字符串，由一或多個[格式元素](#supported-formats)組成。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 具有格式結果的字串。
 
 ## <a name="supported-formats"></a>支援的格式
 
-|格式規範   |說明    |範例
+|格式規範   |描述    |範例
 |---|---|---
 |`d`-`dddddddd` |時間間隔中的完整天數。 如有需要，以零填補。|   15.13：45：30： d-> 15，dd-> 15，ddd-> 015
 |`f`    |時間間隔中的十分之一秒。 |15.13：45： 30.6170000-> 6、15.13：45： 30.05-> 0
@@ -80,7 +80,7 @@ format_timespan(time(14.02:03:04.12345), 'h:m:s.fffffff') == "2:3:4.1234500"
 |`'['`||
 |`']'`||
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

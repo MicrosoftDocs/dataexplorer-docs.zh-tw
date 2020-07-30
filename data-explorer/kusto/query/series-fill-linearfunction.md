@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 4bf68800cc10bf301f6a5738d47e670905c2c46d
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 0831251bd38df4475c271cc6bcec9c15668860ea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763647"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87344162"
 ---
 # <a name="series_fill_linear"></a>series_fill_linear()
 
@@ -21,13 +21,13 @@ ms.locfileid: "85763647"
 
 採用包含動態數值陣列做為輸入的運算式，針對 missing_value_placeholder 的所有實例執行線性插補，並傳回產生的陣列。 如果陣列的開頭和結尾包含 missing_value_placeholder，則會使用 missing_value_placeholder 以外的最接近值來取代它。 這項功能可以關閉。 如果整個陣列是由 missing_value_placeholder 所組成，陣列將會填入 constant_value，如果未指定，則為0。  
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_fill_linear(`*x* `[,` *missing_value_placeholder* ` [,` *fill_edges* ` [,` *constant_value*`]]]))`
 * 會使用指定的參數傳回*x*的數列線性插補。
  
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：動態陣列純量運算式，這是數值的陣列。
 * *missing_value_placeholder*：選擇性參數，指定要取代的「遺漏值」的預留位置。 預設值為 `double` （*null*）。
@@ -47,7 +47,7 @@ make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) 
 * 如果*missing_value_placeholder*為 `double` （*null*）（或省略，其意義相同），則結果可能會包含*null*值。 使用其他插補函式來填滿這些*null*值。 目前只有[series_outliers （）](series-outliersfunction.md)支援輸入陣列中的*null*值。
 * 函式會保留陣列元素的原始類型。 如果 x 只包含 int 或 long 元素，則線性插補會傳回四捨五入的插補值，而不是精確的。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

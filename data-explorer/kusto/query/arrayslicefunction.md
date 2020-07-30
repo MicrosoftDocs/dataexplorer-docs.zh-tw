@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/03/2018
-ms.openlocfilehash: 612829f2cbcd8b3f495d516b254faf7a9cf6919a
-ms.sourcegitcommit: 02236d1f23f48f9dd41cc7433f46991356a869fc
+ms.openlocfilehash: e2216361022f055078be66f37f3d2b084afaa4c6
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84306566"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349528"
 ---
 # <a name="array_slice"></a>array_slice()
 
 解壓縮動態陣列的配量。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `array_slice`(*`arr`*, *`start`*, *`end`*)
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *`arr`*：要從中解壓縮配量的輸入陣列必須是動態陣列。
 * *`start`*：配量以零為基底的起始索引，負值會轉換成 array_length + start。
@@ -31,11 +31,11 @@ ms.locfileid: "84306566"
 
 注意：會忽略超出範圍的索引。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 範圍 [] 中值的動態陣列 `start..end` `arr` 。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

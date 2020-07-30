@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 7aafc6ce041395a914787ed2b406d88aa9910238
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 21a57e4c49e982fbb113917abe173f89426c74ed
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717154"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345142"
 ---
 # <a name="series_decompose_forecast"></a>series_decompose_forecast()
 
@@ -21,11 +21,11 @@ ms.locfileid: "84717154"
 
 接受包含數列（動態數值陣列）做為輸入的運算式，並預測最後一個尾端點的值。 如需詳細資訊，請參閱[series_decompose](series-decomposefunction.md)。
  
-**語法**
+## <a name="syntax"></a>語法
 
 `series_decompose_forecast(`*數列* `,`*點* `[,`*季節性* `,`*趨勢* `,`*Seasonality_threshold*`])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *數列*：數值的動態陣列資料格。 通常是[make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出。
 * *Points*：整數，指定要預測之數列結尾的點數（預測）。 這些點會從學習（回歸）流程中排除。
@@ -47,7 +47,7 @@ ms.locfileid: "84717154"
 > * 原始輸入數列的動態陣列應包含要預測的數個*點*插槽。 預測通常是使用[make 系列](make-seriesoperator.md)來完成，並在範圍內指定結束時間（包含要預測的時間範圍）。
 > * 應該啟用季節性或 trend，否則函式是多餘的，而且只會傳回填滿零的數列。
 
-**範例**
+## <a name="example"></a>範例
 
 在下列範例中，我們會以每小時的方式產生一連串的四周，每週季節性和一個小型向上趨勢。 然後，我們會使用 `make-series` ，並將另一個空白周新增至數列。 `series_decompose_forecast`呼叫的是一周（24 * 7 點），它會自動偵測季節性和趨勢，並產生整個五周週期的預測。
 

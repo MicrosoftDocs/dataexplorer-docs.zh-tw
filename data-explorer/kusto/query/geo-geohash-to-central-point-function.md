@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/27/2020
-ms.openlocfilehash: eb59eae0bc014c6ce9060d65f6c3aced80e4275c
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 40f3daa208c3c7ce18252d8c4f7276346206b250
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227123"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347845"
 ---
 # <a name="geo_geohash_to_central_point"></a>geo_geohash_to_central_point()
 
@@ -21,22 +21,22 @@ ms.locfileid: "83227123"
 
 閱讀更多相關資訊 [`geohash`](https://en.wikipedia.org/wiki/Geohash) 。  
 
-**語法**
+## <a name="syntax"></a>語法
 
 `geo_geohash_to_central_point(`*geohash*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 *geohash*： geohash 字串值，因為它是由[geo_point_to_geohash （）](geo-point-to-geohash-function.md)所計算。 Geohash 字串可以是1到18個字元。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 地理空間座標值為[GeoJSON 格式](https://tools.ietf.org/html/rfc7946)，而[動態](./scalar-data-types/dynamic.md)資料類型為。 如果 geohash 無效，查詢將會產生 null 結果。
 
 > [!NOTE]
 > GeoJSON 格式會指定經度 first 和緯度 second。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

@@ -1,18 +1,18 @@
 ---
 title: '使用 Azure 資料總管 c # SDK 建立原則'
 description: '在本文中，您將瞭解如何使用 c # 來建立原則。'
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 09/24/2019
-ms.openlocfilehash: 0d02b5916cabc3645a3d61a9154ed31061c762aa
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 892605953fae65e8cc5404ace215c5699e3971d6
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373905"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349970"
 ---
 # <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-c"></a>使用 C 建立適用于 Azure 資料總管的資料庫和資料表原則#
 

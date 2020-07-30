@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 5a8ce5a66da871dfaa6f65a0fbc8addeb0f42926
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 47b6ab3db5f0ea252fa86ef925026613654afeea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264586"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87341632"
 ---
 # <a name="tdigest-aggregation-function"></a>tdigest （）（彙總函式）
 
@@ -24,17 +24,17 @@ ms.locfileid: "85264586"
 
 如需詳細資訊，請參閱[基礎演算法（T-Digest）和估計的錯誤](percentiles-aggfunction.md#estimation-error-in-percentiles)。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `summarize` `tdigest`(*`Expr`* [`,` *`WeightExpr`*])
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：用於匯總計算的運算式。
 * *WeightExpr*：用來當做匯總計算之值權數的運算式。
 
     
-**傳回**
+## <a name="returns"></a>傳回
 
 整個群組的加權百分位數的中繼結果 `*Expr*` 。
  
@@ -45,7 +45,7 @@ ms.locfileid: "85264586"
 
 * 使用函數[percentile_tdigest （）](percentile-tdigestfunction.md)來計算結果的百分位數/percentilew `tdigest` 。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

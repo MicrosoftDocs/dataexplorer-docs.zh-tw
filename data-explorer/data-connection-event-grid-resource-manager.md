@@ -1,18 +1,18 @@
 ---
 title: 使用 Azure Resource Manager 範本來建立 Azure 資料總管的 Event Grid 資料連線
 description: 在本文中，您將瞭解如何使用 Azure Resource Manager 範本，為 Azure 資料總管建立 Event Grid 資料連線。
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/28/2019
-ms.openlocfilehash: a3b60f5a2dba8e3d8b9c7b299cb371cda9932bf0
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: b5196e126ffa36e3d767bfaacb79ce819ff9fa29
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013862"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350174"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本來建立 Azure 資料總管的 Event Grid 資料連線
 

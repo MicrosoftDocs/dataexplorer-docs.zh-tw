@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3fc4cfa307a283c4eb21ba60e3b83ba89b574757
-ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
+ms.openlocfilehash: 68b55ec5496f1eb68f979c56412f10191b9f5a68
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84626687"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87340797"
 ---
 # <a name="top-nested-operator"></a>top-nested 運算子
 
@@ -28,7 +28,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 例如， `top-nested` 運算子可以用來回答下列問題：「對於包含銷售資料的資料表（例如國家/地區、銷售人員和銷售量）：「銷售」的前五個國家/地區是什麼？ 這些國家/地區的前三名銷售人員有哪些？」
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `|` `top-nested` *TopNestedClause2* [ `,` *TopNestedClause2*...]
 
@@ -36,7 +36,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 [*N*] `of` [ *`ExprName`* `=` ] *`Expr`* [ `with` `others` `=` *`ConstExpr`* `by` *`AggName`* `=` *`Aggregation`* `asc`  |  ] [] [ `desc` ]
 
-**引數**
+## <a name="arguments"></a>引數
 
 針對每個*TopNestedClause*：
 
@@ -66,7 +66,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 * `asc`或 `desc` （預設值）可能會出現，以控制選取專案實際上是來自匯總值範圍的「底部」或「頂端」。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 這個運算子會傳回一個資料表，其中包含每個匯總子句的兩個數據行：
 
@@ -87,7 +87,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 如果匯總的散發量很大，請限制要傳回的相異值數目（藉由使用*N*），並使用 `with others=` *ConstExpr*選項來取得所有其他案例的「權數」指示。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -97,12 +97,12 @@ StormEvents
   top-nested 1 of EndLocation by sum(BeginLat)
 ```
 
-|州|aggregated_State|來源|aggregated_Source|EndLocation|aggregated_EndLocation|
+|State|aggregated_State|來源|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |KANSAS|87771.2355000001|執法機關|18744.823|FT SCOTT|264.858|
-|KANSAS|87771.2355000001|公用|22855.6206|BUCKLIN|488.2457|
+|KANSAS|87771.2355000001|公開|22855.6206|BUCKLIN|488.2457|
 |KANSAS|87771.2355000001|Trained Spotter|21279.7083|SHARON SPGS|388.7404|
-|德克薩斯州|123400.5101|公用|13650.9079|AMARILLO|246.2598|
+|德克薩斯州|123400.5101|公開|13650.9079|AMARILLO|246.2598|
 |德克薩斯州|123400.5101|執法機關|37228.5966|PERRYTON|289.3178|
 |德克薩斯州|123400.5101|Trained Spotter|13997.7124|CLAUDE|421.44|
 
@@ -118,18 +118,18 @@ StormEvents
 
 ```
 
-|州|aggregated_State|來源|aggregated_Source|EndLocation|aggregated_EndLocation|
+|State|aggregated_State|來源|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |KANSAS|87771.2355000001|執法機關|18744.823|FT SCOTT|264.858|
-|KANSAS|87771.2355000001|公用|22855.6206|BUCKLIN|488.2457|
+|KANSAS|87771.2355000001|公開|22855.6206|BUCKLIN|488.2457|
 |KANSAS|87771.2355000001|Trained Spotter|21279.7083|SHARON SPGS|388.7404|
-|德克薩斯州|123400.5101|公用|13650.9079|AMARILLO|246.2598|
+|德克薩斯州|123400.5101|公開|13650.9079|AMARILLO|246.2598|
 |德克薩斯州|123400.5101|執法機關|37228.5966|PERRYTON|289.3178|
 |德克薩斯州|123400.5101|Trained Spotter|13997.7124|CLAUDE|421.44|
 |KANSAS|87771.2355000001|執法機關|18744.823|所有其他結束位置|18479.965|
-|KANSAS|87771.2355000001|公用|22855.6206|所有其他結束位置|22367.3749|
+|KANSAS|87771.2355000001|公開|22855.6206|所有其他結束位置|22367.3749|
 |KANSAS|87771.2355000001|Trained Spotter|21279.7083|所有其他結束位置|20890.9679|
-|德克薩斯州|123400.5101|公用|13650.9079|所有其他結束位置|13404.6481|
+|德克薩斯州|123400.5101|公開|13650.9079|所有其他結束位置|13404.6481|
 |德克薩斯州|123400.5101|執法機關|37228.5966|所有其他結束位置|36939.2788|
 |德克薩斯州|123400.5101|Trained Spotter|13997.7124|所有其他結束位置|13576.2724|
 |KANSAS|87771.2355000001|||所有其他結束位置|24891.0836|
@@ -159,14 +159,14 @@ StormEvents
 | project-away tmp
 ```
 
-|州|aggregated_State|來源|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
+|State|aggregated_State|來源|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
 |---|---|---|---|---|---|---|
 |KANSAS|87771.2355000001|Trained Spotter|21279.7083|SHARON SPGS|388.7404|Thunderstorm Wind|
 |KANSAS|87771.2355000001|Trained Spotter|21279.7083|SHARON SPGS|388.7404|Hail|
 |KANSAS|87771.2355000001|Trained Spotter|21279.7083|SHARON SPGS|388.7404|龍捲風|
-|KANSAS|87771.2355000001|公用|22855.6206|BUCKLIN|488.2457|Hail|
-|KANSAS|87771.2355000001|公用|22855.6206|BUCKLIN|488.2457|Thunderstorm Wind|
-|KANSAS|87771.2355000001|公用|22855.6206|BUCKLIN|488.2457|Flood|
+|KANSAS|87771.2355000001|公開|22855.6206|BUCKLIN|488.2457|Hail|
+|KANSAS|87771.2355000001|公開|22855.6206|BUCKLIN|488.2457|Thunderstorm Wind|
+|KANSAS|87771.2355000001|公開|22855.6206|BUCKLIN|488.2457|Flood|
 |德克薩斯州|123400.5101|Trained Spotter|13997.7124|CLAUDE|421.44|Hail|
 |德克薩斯州|123400.5101|執法機關|37228.5966|PERRYTON|289.3178|Hail|
 |德克薩斯州|123400.5101|執法機關|37228.5966|PERRYTON|289.3178|Flood|
@@ -184,7 +184,7 @@ StormEvents
 | mv-expand EndLocations, endLocationSums, indicies
 ```
 
-|州|來源|EndLocations|endLocationSums|指數|
+|State|來源|EndLocations|endLocationSums|指數|
 |---|---|---|---|---|
 |德克薩斯州|Trained Spotter|CLAUDE|421.44|0|
 |德克薩斯州|Trained Spotter|AMARILLO|316.8892|1|
@@ -198,7 +198,7 @@ StormEvents
 |KANSAS|Trained Spotter|ATWOOD|358.6136|1|
 |KANSAS|Trained Spotter|LENORA|317.0718|2|
 |KANSAS|Trained Spotter|SCOTT 市|307.84|3|
-|KANSAS|公用|BUCKLIN|488.2457|0|
-|KANSAS|公用|ASHLAND|446.4218|1|
-|KANSAS|公用|保護|446.11|2|
-|KANSAS|公用|MEADE 狀態公園|371.1|3|
+|KANSAS|公開|BUCKLIN|488.2457|0|
+|KANSAS|公開|ASHLAND|446.4218|1|
+|KANSAS|公開|保護|446.11|2|
+|KANSAS|公開|MEADE 狀態公園|371.1|3|

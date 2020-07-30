@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/29/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 90b2a08d4fdde6ab6a74b12632c9310029f8fc1b
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: cf10a18a699e1e93521b4927008858cbebd2baf8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902092"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345839"
 ---
 # <a name="render-operator"></a>render 運算子
 
@@ -30,7 +30,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 > * Render 運算子不會修改資料。 它會將注釋（「視覺效果」）插入結果的擴充屬性中。 批註包含查詢中運算子所提供的資訊。
 > * 視覺效果資訊的轉譯是由使用者代理程式所完成。 不同的代理程式（例如 Kusto. Explorer、Kusto. WebExplorer）可能支援不同的視覺效果。
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `|` `render` *視覺效果*[ `with` `(` *PropertyName* `=` *PropertyValue* [ `,` ...] `)` ]
 
@@ -40,7 +40,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 ::: zone pivot="azuredataexplorer"
 
-|*視覺效果*     |說明|
+|*視覺效果*     |描述|
 |--------------------|-|
 | `anomalychart`     | 類似于 timechart，但使用[series_decompose_anomalies](./series-decompose-anomaliesfunction.md)函數來反白[顯示異常](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning)。 |
 | `areachart`        | 區域圖。 第一個資料行是 X 軸，而且應該是數值資料行。 其他數值資料行則為 y 軸。 |
@@ -61,7 +61,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 ::: zone pivot="azuremonitor"
 
-|*視覺效果*     |說明|
+|*視覺效果*     |描述|
 |--------------------|-|
 | `areachart`        | 區域圖。 第一個資料行是 X 軸，而且應該是數值資料行。 其他數值資料行則為 y 軸。 |
 | `barchart`         | 第一個資料行是 X 軸，而且可以是文字、日期時間或數值。 其他資料行是數值，會顯示為水準去除。|
@@ -81,7 +81,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 |*PropertyName*|*PropertyValue*                                                                   |
 |--------------|----------------------------------------------------------------------------------|
 |`accumulate`  |每個量值的值是否會加入其所有前置項。 （ `true` 或 `false` ）|
-|`kind`        |視覺效果種類的進一步詳述。 請參閱下列內容。                         |
+|`kind`        |視覺效果種類的進一步詳述。 請參閱下文。                         |
 |`legend`      |是否要顯示圖例（ `visible` 或 `hidden` ）。                       |
 |`series`      |以逗號分隔的資料行清單，其合併的每一記錄值會定義記錄所屬的數列。|
 |`ymin`        |要在 Y 軸上顯示的最小值。                                      |
@@ -92,7 +92,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 |`xtitle`      |X 軸的標題（類型為 `string` ）。                                       |
 |`yaxis`       |如何縮放 y 軸（ `linear` 或 `log` ）。                                      |
 |`ycolumns`    |以逗號分隔的資料行清單，其中包含 x 資料行的每個值所提供的值。|
-|`ysplit`      |如何分割多個視覺效果。 請參閱下列內容。                               |
+|`ysplit`      |如何分割多個視覺效果。 請參閱下文。                               |
 |`ytitle`      |Y 軸的標題（類型為 `string` ）。                                       |
 |`anomalycolumns`|僅與相關的屬性 `anomalychart` 。 以逗號分隔的資料行清單，將被視為異常數列，並在圖表上顯示為點|
 
@@ -102,7 +102,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 |*PropertyName*|*PropertyValue*                                                                   |
 |--------------|----------------------------------------------------------------------------------|
-|`kind`        |視覺效果種類的進一步詳述。 請參閱下列內容。                         |
+|`kind`        |視覺效果種類的進一步詳述。 請參閱下文。                         |
 |`series`      |以逗號分隔的資料行清單，其合併的每一記錄值會定義記錄所屬的數列。|
 |`title`       |視覺效果的標題（類型為 `string` ）。                                |
 |`yaxis`       |如何縮放 y 軸（ `linear` 或 `log` ）。                                      |
@@ -110,9 +110,9 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 ::: zone-end
 
 有些視覺效果可以藉由提供屬性進行進一步的詳細討論 `kind` 。
-它們是：
+這些節點為：
 
-|*視覺效果*|`kind`             |說明                        |
+|*視覺效果*|`kind`             |描述                        |
 |---------------|-------------------|-----------------------------------|
 |`areachart`    |`default`          |每個「區域」都代表自己。     |
 |               |`unstacked`        |與 `default` 相同。                 |
@@ -133,7 +133,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 有些視覺效果支援分割成多個 y 軸值：
 
-|`ysplit`  |說明                                                       |
+|`ysplit`  |描述                                                       |
 |----------|------------------------------------------------------------------|
 |`none`    |所有數列資料都會顯示單一 y 軸。 (預設值)       |
 |`axes`    |單一圖表會顯示多個 y 軸（每個數列一個）。|
@@ -155,7 +155,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 > * 排序資料以定義 X 軸的順序。
 > * 使用者代理程式可自由「猜測」查詢未指定的屬性值。 特別的是，在結果的架構中具有「無意義」的資料行，可能會轉譯成猜測錯誤。 當這種情況發生時，請嘗試投射這類資料行。 
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

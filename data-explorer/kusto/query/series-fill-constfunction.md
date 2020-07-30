@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e078919af16a9d2f7dadba0a309932b3a39b6ced
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: bb3f217b1ec0631f533a10433a7be368945667d7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763252"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87344530"
 ---
 # <a name="series_fill_const"></a>series_fill_const()
 
@@ -21,12 +21,12 @@ ms.locfileid: "85763252"
 
 採用包含動態數值陣列做為輸入的運算式，以指定的 constant_value 取代 missing_value_placeholder 的所有實例，並傳回產生的陣列。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_fill_const(`*x* `[, `*constant_value* `[,`*missing_value_placeholder*`]])`
 * 會傳回數列*x* ，其中的所有實例*missing_value_placeholder*都會取代為*constant_value*。
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：動態陣列純量運算式，這是數值的陣列。
 * *constant_value*：參數，指定要取代之遺漏值的預留位置。 預設值為*0*。 
@@ -48,7 +48,7 @@ make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) 
 * *Missing_value_placeholder*可以是任何類型，這會轉換成實際的元素類型。 因此， `double` （*null*）、 `long` （*null*）或 `int` （*null*）具有相同的意義。
 * 函式會保留陣列元素的原始類型。 
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

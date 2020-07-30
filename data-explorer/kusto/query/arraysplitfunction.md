@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/28/2018
-ms.openlocfilehash: 102077c9c1116bd9476c6dae59d993a6379b69bd
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: be993f3b0a58b56b9b4d171378bf71a645e77f1a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225543"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349511"
 ---
 # <a name="array_split"></a>array_split()
 
 根據分割索引，將陣列分割為多個陣列，並將產生的陣列封裝在動態陣列中。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `array_split`(*`arr`*, *`indices`*)
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *`arr`*：要分割的輸入陣列，必須是動態陣列。
 * *`indices`*：具有分割索引（以零為基底）的整數或動態整數陣列，負數值會轉換成 array_length + 值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 動態陣列，包含 N + 1 個數組，其中的值在範圍內 `[0..i1), [i1..i2), ... [iN..array_length)` `arr` ，其中 N 是輸入索引的數目，而 `i1...iN` 是索引。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

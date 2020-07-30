@@ -1,18 +1,18 @@
 ---
 title: 使用 C 設定客戶管理的金鑰#
 description: 本文說明如何在 Azure 資料總管中，針對您的資料設定客戶管理的金鑰加密。
-author: saguiitay
-ms.author: itsagui
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: 1d562939430aa5040dc2ab96ae59611d2685e057
-ms.sourcegitcommit: a7e040fc844098323aa1c00e254bcbcd41fe587f
+ms.openlocfilehash: 84d21c7cedd77a409e0d5e1c1ca0cc5f93fdad16
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84426554"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350242"
 ---
 # <a name="configure-customer-managed-keys-using-c"></a>使用 C 設定客戶管理的金鑰#
 

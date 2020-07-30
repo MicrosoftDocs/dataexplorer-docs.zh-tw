@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: b5847fec10eb76a6fe5a139809766d2a3ca4f089
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 7b6de7d141f02703c5f369dd831d1fbac82cb45e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372911"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345516"
 ---
 # <a name="series_add"></a>series_add()
 
 計算兩個數值數列輸入的元素取向相加。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_add(`*series1* `,`*series2*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *series1，series2*：輸入數值陣列，使其成為動態陣列結果中已加入的元素。 所有引數都必須是動態陣列。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 這兩個輸入之間的計算元素取向相加運算動態陣列。 任何非數值元素或不存在的專案（不同大小的陣列）都會產生 `null` 元素值。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

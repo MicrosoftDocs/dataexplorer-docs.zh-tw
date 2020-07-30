@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/16/2020
-ms.openlocfilehash: 57cceb2fabb16956090430161b98c1287efdef97
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 3511d15ebf0f5e3708deeeed981a8a6808da2e48
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227313"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347930"
 ---
 # <a name="funnel_sequence_completion-plugin"></a>funnel_sequence_completion plugin
 
@@ -23,11 +23,11 @@ ms.locfileid: "83227313"
 T | evaluate funnel_sequence_completion(id, datetime_column, startofday(ago(30d)), startofday(now()), 1d, state_column, dynamic(['S1', 'S2', 'S3']), dynamic([10m, 30min, 1h]))
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `funnel_sequence_completion(` *IdColumn* `,` *TimelineColumn* `,` *開始* `,` *結束* `,` *步驟* `,` *StateColumn* `,` *序列* `,` *MaxSequenceStepWindows*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *IdColum*：資料行參考，必須存在於來源運算式中。
@@ -39,7 +39,7 @@ T | evaluate funnel_sequence_completion(id, datetime_column, startofday(ago(30d)
 * *Sequence*：具有順序值的常數動態陣列（在中查閱值 `StateColumn` ）。
 * *MaxSequenceStepWindows*：純量常數動態陣列，其中包含序列中第一個和最後一個連續步驟之間的最大允許 timespan 值。 陣列中的每個視窗（期間）都會產生漏斗分析結果。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回單一資料表，適合用來針對分析的序列來建立漏斗圖：
 
@@ -48,7 +48,7 @@ T | evaluate funnel_sequence_completion(id, datetime_column, startofday(ago(30d)
 * `Period`：用來完成從序列的第一個步驟測量之漏斗序列中步驟的最大期間（視窗）。 *MaxSequenceStepWindows*中的每個值都會產生一個不同期間的漏斗分析。 
 * `dcount`： `IdColumn` 從第一個序列狀態轉換為值的時間範圍內的相異計數 `StateColumn` 。
 
-**範例**
+## <a name="examples"></a>範例
 
 ### <a name="exploring-storm-events"></a>探索風暴事件 
 

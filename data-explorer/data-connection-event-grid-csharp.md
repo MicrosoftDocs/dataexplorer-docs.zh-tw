@@ -1,18 +1,18 @@
 ---
 title: 使用 C 建立適用于 Azure 資料總管的 Event Grid 資料連線#
 description: '在本文中，您將瞭解如何使用 c # 來建立 Azure 資料總管的 Event Grid 資料連線。'
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 627c60b1d5c39aa3e5c84f6ee87340c418fa542e
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: a93b29d6557afa435cacbbeeb43b685c0dfbf3af
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013865"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350208"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C 建立適用于 Azure 資料總管的 Event Grid 資料連線#
 
@@ -93,7 +93,7 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 | eventHubResourceId | *資源識別碼* | 事件中樞的資源識別碼，其中事件方格已設定為傳送事件。 |
 | storageAccountResourceId | *資源識別碼* | 儲存體帳戶的資源識別碼，其中保存要內嵌的資料。 |
 | consumerGroup | *$Default* | 事件中樞的取用者群組。|
-| location | *美國中部* | 資料連線資源的位置。|
+| location | *Central US* | 資料連線資源的位置。|
 
 ## <a name="generate-sample-data"></a>產生範例資料
 

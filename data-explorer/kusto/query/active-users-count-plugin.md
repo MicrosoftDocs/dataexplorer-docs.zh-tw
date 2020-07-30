@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b40ca669df7671b1451166f6bfc1c7c680713166
-ms.sourcegitcommit: 1f50c6688a2b8d8a3976c0cd0ef40cde2ef76749
+ms.openlocfilehash: 75f1c92dfb76c56894d1f38dec24a31690f3f789
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84202954"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349834"
 ---
 # <a name="active_users_count-plugin"></a>active_users_count 外掛程式
 
@@ -25,11 +25,11 @@ ms.locfileid: "84202954"
 T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), startofday(now()), 7d, 1d, 2, 7d, dim1, dim2, dim3)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `active_users_count(` *IdColumn* `,` *TimelineColumn* `,` *Start* `,` *End* `,` *LookbackWindow* `,` *Period* `,` *ActivePeriodsCount* `,` *Bin* `,` [*dim1* `,` *dim2* `,` ...]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
@@ -42,7 +42,7 @@ T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), start
 * *Bin*：分析步驟期間的純量常數值。 可以是數值/日期時間/時間戳記值，或為的字串 `week` / `month` / `year` 。 所有期間都會是對應的[startofweek](startofweekfunction.md) / [startofmonth](startofmonthfunction.md) / [startofyear](startofyearfunction.md)函數。
 * *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回資料表，其中包含下列期間出現在 ActivePeriodCounts 中之識別碼的相異計數值：回顧期間、每個時間軸期間，以及每個現有的維度組合。
 
@@ -53,7 +53,7 @@ T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), start
 |類型：從*TimelineColumn*|..|..|..|long|
 
 
-**範例**
+## <a name="examples"></a>範例
 
 計算在過去八天的一段時間內，至少出現三個不同天數的每週相異使用者數目。 分析期間：2018年7月。
 
@@ -83,7 +83,7 @@ T | evaluate active_users_count(User, Timestamp, Start, End, LookbackWindow, Per
 
 ```
 
-|時間戳記|`dcount`|
+|Timestamp|`dcount`|
 |---|---|
 |2018-07-01 00：00：00.0000000|1|
 |2018-07-15 00：00：00.0000000|1|

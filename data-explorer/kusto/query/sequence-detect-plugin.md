@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e8da8a61b285b31f63f346ec82e5ba8a4ac00d27
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 7b4b3d2b43bea2eeb96c9bbca94131cb7887db8c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372939"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345686"
 ---
 # <a name="sequence_detect-plugin"></a>sequence_detect 外掛程式
 
@@ -23,11 +23,11 @@ ms.locfileid: "83372939"
 T | evaluate sequence_detect(datetime_column, 10m, 1h, e1 = (Col1 == 'Val'), e2 = (Col2 == 'Val2'), Dim1, Dim2)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `sequence_detect` `(` *TimelineColumn* `,` *MaxSequenceStepWindow* `,` *MaxSequenceSpan* `,` *運算式*運算式 `,` *2* `,` ...， *Dim1* `,` *Dim2* `,` .。。`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *TimelineColumn*：代表時間軸的資料行參考必須存在於來源運算式中
@@ -36,7 +36,7 @@ T | evaluate sequence_detect(datetime_column, 10m, 1h, e1 = (Col1 == 'Val'), e2 
 * *運算式類型 1*、*運算式 2*...：定義順序步驟的布林述詞運算式
 * *Dim1*、 *Dim2*、...：用來相互關聯順序的維度運算式
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回單一資料表，其中資料表中的每個資料列都代表一個序列出現次數：
 
@@ -44,7 +44,7 @@ T | evaluate sequence_detect(datetime_column, 10m, 1h, e1 = (Col1 == 'Val'), e2 
 * *運算式 1*-_*TimelineColumn*，*運算式*_*TimelineColumn*，...：具有時間值的資料行，代表每個順序步驟的時間軸。
 * *持續時間*：整體序列時間範圍
 
-**範例**
+## <a name="examples"></a>範例
 
 ### <a name="exploring-storm-events"></a>探索風暴事件 
 

@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8da464bca228df5a813f50e68fab5ddb2aa926cf
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: bd3e7a77a4de46b6dcebb2f58c98009a9edddb43
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128660"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87338604"
 ---
 # <a name="using-hll-and-tdigest"></a>使用 hll() 和 tdigest()
 
@@ -81,7 +81,7 @@ MyTable
 |0|
 
 
-**範例**
+## <a name="example"></a>範例
 
 有一個資料表， `PageViewsHllTDigest` 其中包含 `hll` 每小時所看到的頁面值。 您想要將這些值分類收納至 `12h` 。 `hll`使用彙總函式合併值 `hll_merge()` ，並將時間戳記分類收納為 `12h` 。 使用函式傳回 `dcount_hll` 最後的 `dcount` 值：
 
@@ -91,7 +91,7 @@ PageViewsHllTDigest
 | project Timestamp , dcount_hll(merged_hll)
 ```
 
-|時間戳記|`dcount_hll_merged_hll`|
+|Timestamp|`dcount_hll_merged_hll`|
 |---|---|
 |2016-05-01 12：00：00.0000000|20056275|
 |2016-05-02 00：00：00.0000000|38797623|
@@ -106,7 +106,7 @@ PageViewsHllTDigest
 | project Timestamp , dcount_hll(merged_hll)
 ```
 
-|時間戳記|`dcount_hll_merged_hll`|
+|Timestamp|`dcount_hll_merged_hll`|
 |---|---|
 |2016-05-01 00：00：00.0000000|20056275|
 |2016-05-02 00：00：00.0000000|64135183|
@@ -120,14 +120,14 @@ PageViewsHllTDigest
 | project Timestamp , percentile_tdigest(merged_tdigests, 95, typeof(long))
 ```
 
-|時間戳記|`percentile_tdigest_merged_tdigests`|
+|Timestamp|`percentile_tdigest_merged_tdigests`|
 |---|---|
 |2016-05-01 12：00：00.0000000|170200|
 |2016-05-02 00：00：00.0000000|152975|
 |2016-05-02 12：00：00.0000000|181315|
 |2016-05-03 00：00：00.0000000|146817|
  
-**範例**
+## <a name="example"></a>範例
 
 已達到 Kusto 限制，但資料集太大，您需要對資料集執行定期查詢，但執行一般查詢來計算 [`percentile()`](percentiles-aggfunction.md) 或 [`dcount()`](dcount-aggfunction.md) 超過大型資料集。
 
@@ -155,7 +155,7 @@ PageViews
 | summarize percentile(BytesDelivered, 90), dcount(Page,2) by bin(Timestamp, 1d)
 ```
 
-|時間戳記|percentile_BytesDelivered_90|dcount_Page|
+|Timestamp|percentile_BytesDelivered_90|dcount_Page|
 |---|---|---|
 |2016-05-01 00：00：00.0000000|83634|20056275|
 |2016-05-02 00：00：00.0000000|82770|64135183|
@@ -170,7 +170,7 @@ PageViewsHllTDigest
 | summarize  percentile_tdigest(merge_tdigests(tdigestBytesDel), 90), dcount_hll(hll_merge(hllPage)) by bin(Timestamp, 1d)
 ```
 
-|時間戳記|`percentile_tdigest_merge_tdigests_tdigestBytesDel`|`dcount_hll_hll_merge_hllPage`|
+|Timestamp|`percentile_tdigest_merge_tdigests_tdigestBytesDel`|`dcount_hll_hll_merge_hllPage`|
 |---|---|---|
 |2016-05-01 00：00：00.0000000|84224|20056275|
 |2016-05-02 00：00：00.0000000|83486|64135183|
@@ -178,7 +178,7 @@ PageViewsHllTDigest
 
 此查詢在較小的資料表上執行時，應該更具效能。 在此範例中，第一個查詢會執行 ~ 215M 筆記錄，而第二個則只會執行32筆記錄：
 
-**範例**
+## <a name="example"></a>範例
 
 保留查詢。
 假設您有一個資料表，其摘要說明每個維琪百科頁面的觀看時間（取樣大小為1千萬個），而且您想要尋找每個 date1 2 日的百分比，分別是在 date1 和 date2 中，相對於在 date1 上所看到的頁面（date1 < date2）。

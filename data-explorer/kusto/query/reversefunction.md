@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 22fe505eb8fd391e7a61120dbf42c214cb61c120
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: fa87dae85b158e162cea90c276057abb210ea23b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264822"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345771"
 ---
 # <a name="reverse"></a>reverse()
 
 函式會反轉輸入字串的順序。
 如果輸入值的類型不是，則函式會 `string` 強制將值轉換為類型 `string` 。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `reverse(`*來源*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *來源*：輸入值。  
 
-**傳回**
+## <a name="returns"></a>傳回
 
 字串值的反向順序。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 print str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

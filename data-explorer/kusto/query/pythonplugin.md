@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: e6439912d323b7677f6febc8b23068c880a735c2
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: 984e5c37f3d29a6c56f88c6eb9b6750635e48920
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902136"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345975"
 ---
 # <a name="python-plugin"></a>Python 外掛程式
 
@@ -36,7 +36,7 @@ Python 外掛程式會使用 Python 腳本來執行使用者定義函數（UDF�
 * *腳本*： `string` 常值，這是要執行的有效 Python 腳本。
 * *script_parameters*：選擇性的 `dynamic` 常值。 這是一組名稱/值組的屬性包，會傳遞至 Python 腳本做為保留的 `kargs` 字典。 如需詳細資訊，請參閱[保留的 Python 變數](#reserved-python-variables)。
 * *提示。散發*：要在多個叢集節點間散發之外掛程式執行的選擇性提示。
-  * 預設值為 `single`。
+  * 預設值是 `single`。
   * `single`：腳本的單一實例將會在整個查詢資料上執行。
   * `per_node`：如果散發 Python 區塊之前的查詢，腳本的實例將會在每個節點上，于其包含的資料上執行。
 * *external_artifacts*：選擇性的 `dynamic` 常值，這是一組名稱和 URL 組的屬性包，適用于可從雲端儲存體存取的成品。 它們可以讓腳本在執行時間使用。
@@ -134,7 +134,7 @@ print "This is an example for using 'external_artifacts'"
     * 您也可以使用[partition 運算子](partitionoperator.md)來分割輸入資料集。
 * 盡可能使用 Kusto 的查詢語言，以執行 Python 腳本的邏輯。
 
-    **範例**
+    ## <a name="example"></a>範例
 
     ```kusto    
     .show operations
@@ -159,7 +159,7 @@ print "This is an example for using 'external_artifacts'"
      * `"`Python 腳本中 python 字串常值的雙引號字元（）
 * 使用[ `externaldata` 運算子](externaldata-operator.md)來取得您儲存在外部位置（例如 Azure Blob 儲存體）的腳本內容。
   
-    **範例**
+    ## <a name="example"></a>範例
 
     ```kusto
     let script = 

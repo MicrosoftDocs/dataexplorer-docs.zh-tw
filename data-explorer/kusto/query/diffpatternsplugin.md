@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b3dece66f3bafae989643afd418557aeaaa7d746
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a02f275dc47e88c7b14b85d19040e907613d1b80
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225032"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348321"
 ---
 # <a name="diff-patterns-plugin"></a>diff 模式外掛程式
 
@@ -25,7 +25,7 @@ T | evaluate diffpatterns(splitColumn)
 ```
 
 
-**語法**
+## <a name="syntax"></a>語法
 
 `T | evaluate diffpatterns(SplitColumn, SplitValueA, SplitValueB [, WeightColumn, Threshold, MaxDimensions, CustomWildcard, ...])` 
 
@@ -43,7 +43,7 @@ T | evaluate diffpatterns(splitColumn)
 
     指定之 SplitColumn 中其中一個值的字串表示。 在其 SplitColumn 中具有此值的所有資料列都會被視為資料集 "B"。
 
-    範例：`T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure") `
+    範例： `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure") `
 
 **選擇性引數**
 
@@ -54,7 +54,7 @@ T | evaluate diffpatterns(splitColumn)
     根據指定的權數 (依預設每個資料都列具有權數 '1') 考慮輸入中的每個資料列。 引數必須是數值資料行的名稱（例如、、 `int` `long` `real` ）。
     權數資料行的常見用法是考慮已內嵌至各資料列的資料取樣或分組/彙總。
     
-    範例：`T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", sample_Count) `
+    範例： `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", sample_Count) `
 
 * 閾值-0.015 < *double* < 1 [預設值： 0.05]
 
@@ -74,9 +74,9 @@ T | evaluate diffpatterns(splitColumn)
     預設值是 null，而字串預設值為空字串。 如果預設值是資料中的可行值，則應該使用不同的萬用字元值（例如 `*` ）。
     請參閱下列範例。
 
-    範例：`T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
+    範例： `T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
 
-**傳回**
+## <a name="returns"></a>傳回
 
 `Diffpatterns`傳回一小組模式，用來在兩個集合中捕捉資料的不同部分（也就是，在第一個資料集中捕捉大量百分比的資料列，而在第二個集合中，資料列的百分比偏低的模式）。 每個模式會以結果中的一個資料列表示。
 
@@ -109,7 +109,7 @@ T | evaluate diffpatterns(splitColumn)
 
 * 注意： `diffpatterns` 目標是要尋找重要的模式（這會捕捉集合之間資料差異的部分），而不是用來進行逐列的差異。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

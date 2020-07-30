@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0ff4ad4adbae580e34c946eb9d18ca3337d3c49c
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 8d60ad8a5e2c9a94164fb816db9e9913dcff56ea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128881"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345754"
 ---
 # <a name="rolling_percentile-plugin"></a>rolling_percentile （）外掛程式
 
@@ -23,11 +23,11 @@ ms.locfileid: "85128881"
 T | evaluate rolling_percentile(ValueColumn, Percentile, IndexColumn, BinSize, BinsPerWindow)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `rolling_percentile(` *ValueColumn* `,` *百分位數* `,` *IndexColumn* `,` *BinSize* `,` *BinsPerWindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *ValueColumn*：資料行的名稱，其中包含要計算百分位數的值。 
@@ -37,7 +37,7 @@ T | evaluate rolling_percentile(ValueColumn, Percentile, IndexColumn, BinSize, B
 * *BinsPerWindow*：具有每個視窗中包含之 bin 數目的純量。
 * *dim1*， *dim2*，...：（選擇性）要做為配量依據的維度資料行清單。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回一個資料表，其中包含每個每個 bin 的資料列（如果有指定，則為維度的組合），其在視窗中的值是以在 bin 結尾（含）的滾動百分位數。 相異計數值、新值的相異計數、每個時間範圍的匯總相異計數。
 
@@ -48,7 +48,7 @@ T | evaluate rolling_percentile(ValueColumn, Percentile, IndexColumn, BinSize, B
 |---|---|---|---|---|
 
 
-**範例**
+## <a name="examples"></a>範例
 
 ### <a name="rolling-3-day-median-value-per-day"></a>每日輪流推出的3天中間值 
 
@@ -64,7 +64,7 @@ range idx from 0 to 24*10-1 step 1
  | evaluate rolling_percentile(val, 50, Timestamp, 1d, 3)
 ```
 
-|時間戳記|rolling_3_percentile_val_50|
+|Timestamp|rolling_3_percentile_val_50|
 |---|---|
 |2018-01-01 00：00：00.0000000|   12|
 |2018-01-02 00：00：00.0000000|   24|
@@ -91,7 +91,7 @@ range idx from 0 to 24*10-1 step 1
  | evaluate rolling_percentile(val, 50, Timestamp, 1d, 3, EvenOrOdd)
 ```
 
-|時間戳記| EvenOrOdd|  rolling_3_percentile_val_50|
+|Timestamp| EvenOrOdd|  rolling_3_percentile_val_50|
 |---|---|---|
 |2018-01-01 00：00：00.0000000|   仍|   12|
 |2018-01-02 00：00：00.0000000|   仍|   24|

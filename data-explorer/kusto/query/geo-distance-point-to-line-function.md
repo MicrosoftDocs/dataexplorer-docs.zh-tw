@@ -1,6 +1,6 @@
 ---
-title: 'geo_distance_point_to_line ( # A1-Azure 資料總管'
-description: '本文說明 Azure 資料總管中的 geo_distance_point_to_line ( # A1。'
+title: geo_distance_point_to_line （）-Azure 資料總管
+description: 本文說明 Azure 資料總管中的 geo_distance_point_to_line （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,39 +8,39 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2020
-ms.openlocfilehash: b4a30aa4285b8f6e22e5d4057fe7d408d548a27b
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: a7796c14098f773b73bd16735a3d2c9c879c8fd2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280557"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347862"
 ---
 # <a name="geo_distance_point_to_line"></a>geo_distance_point_to_line()
 
 計算在地球上座標和線條之間的最短距離。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `geo_distance_point_to_line(`*經度* `, `*緯度* `, `*lineString*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *經度*：地理空間座標經度值（以度為單位）。 有效的值為實數，且範圍為 [-180，+ 180]。
 * *緯度*：地理空間座標緯度值（以度為單位）。 有效的值為實數，且範圍為 [-90，+ 90]。
 * *lineString*： [GeoJSON 格式](https://tools.ietf.org/html/rfc7946)和[動態](./scalar-data-types/dynamic.md)資料類型的行。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 座標和地球上線條之間的最短距離（以量為單位）。 如果座標或 lineString 無效，查詢將會產生 null 結果。
 
 > [!NOTE]
 > * 地理空間座標會以[WGS-84](https://earth-info.nga.mil/GandG/update/index.php?action=home)座標參考系統來表示。
 > * 用來測量地球距離的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。 線條邊緣會[geodesics](https://en.wikipedia.org/wiki/Geodesic)在球體上。
-> * 如果輸入線條邊緣是直笛線，請考慮使用[geo_line_densify ( # B1](geo-line-densify-function.md) ，以便將平面邊緣轉換成 geodesics。
+> * 如果輸入線條邊緣是直笛線，請考慮使用[geo_line_densify （）](geo-line-densify-function.md) ，以將平面邊緣轉換成 geodesics。
 
 **LineString 定義和條件約束**
 
-dynamic ( {"type"： "LineString"，"座標"： [[lng_1，lat_1]，[lng_2，lat_2],..., [lng_N，lat_N]]} ) 
+dynamic （{"type"： "LineString"，"座標"： [[lng_1，lat_1]，[lng_2，lat_2],..., [lng_N，lat_N]]}）
 
 * LineString 座標陣列必須包含至少兩個專案。
 * 座標 [經度，緯度] 必須是有效的，其中經度是範圍 [-180，+ 180] 中的實數，而緯度是範圍 [-90，+ 90] 中的實際數位。
@@ -49,7 +49,7 @@ dynamic ( {"type"： "LineString"，"座標"： [[lng_1，lat_1]，[lng_2，lat_
 > [!TIP]
 > 為獲得較佳的效能，請使用常值行。
 
-**範例**
+## <a name="examples"></a>範例
 
 下列範例會尋找北內華達和附近道路之間的最短距離。
 

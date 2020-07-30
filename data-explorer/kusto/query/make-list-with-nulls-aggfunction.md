@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/09/2020
-ms.openlocfilehash: 41f07f16641fd303c9b8e76b4924238378b6ccc9
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: b78bed51da8422dced4d57406c10721639b68ccc
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83224811"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346978"
 ---
 # <a name="make_list_with_nulls-aggregation-function"></a>make_list_with_nulls （）（彙總函式）
 
@@ -21,15 +21,15 @@ ms.locfileid: "83224811"
 
 * 只能在[匯總](summarizeoperator.md)的內容中使用
 
-**語法**
+## <a name="syntax"></a>語法
 
 `summarize``make_list_with_nulls(` *Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：將用於匯總計算的運算式。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回 `dynamic` 群組中*Expr*所有值的（JSON）陣列，包括 null 值。
 如果 `summarize` 未排序運算子的輸入，則產生之陣列中的專案順序會是未定義的。

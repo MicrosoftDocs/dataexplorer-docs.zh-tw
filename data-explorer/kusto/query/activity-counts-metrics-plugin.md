@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 167ba8818709f52ccc344452e275405c42b1796e
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: df7b994350297d911a0f3be59c791b6538899d67
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227667"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349783"
 ---
 # <a name="activity_counts_metrics-plugin"></a>activity_counts_metrics plugin
 
@@ -23,11 +23,11 @@ ms.locfileid: "83227667"
 T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), startofday(now()), 1d, dim1, dim2, dim3)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `activity_counts_metrics(` *IdColumn* `,` *TimelineColumn* `,` *開始* `,` *結束* `,` *視窗*[世代 `,` * *] [ `,` *dim1* `,` *dim2* `,` ...] [ `,` *回顧*]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
@@ -37,7 +37,7 @@ T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), 
 * *Window*：以 [分析] 視窗期間的值為純量。 可以是數值/日期時間/時間戳記值，或為其中一個的字串 `week` / `month` / `year` ，在此情況下，所有週期都會[startofweek](startofweekfunction.md) / [startofmonth](startofmonthfunction.md)或[startofyear](startofyearfunction.md)。 
 * *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回資料表，其中包含：總計計數值、相異計數值、新值的相異計數，以及每個時間範圍的匯總相異計數。
 
@@ -54,7 +54,7 @@ T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), 
 * *`new_dcount`*：時間範圍和*維度*中的相異識別碼值，相較于先前的所有時間視窗。 
 * *`aggregated_dcount`*：從第一個時間範圍到目前（含）的每個*維度*匯總相異識別碼值總計。
 
-**範例**
+## <a name="examples"></a>範例
 
 ### <a name="daily-activity-counts"></a>每日活動計數 
 

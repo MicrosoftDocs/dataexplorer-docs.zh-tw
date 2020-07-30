@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7ef4bf5607979cc02976d00250e8754f3a0c4e69
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 9321f30d2643f6e398d73cf7960490708626f723
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225168"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348355"
 ---
 # <a name="diffpatterns_text-plugin"></a>diffpatterns_text 外掛程式
 
@@ -25,7 +25,7 @@ T | evaluate diffpatterns_text(TextColumn, BooleanCondition)
 
 `diffpatterns_text`會傳回一組文字模式，以在兩個集合中捕捉資料的不同部分（也就是當條件為時，會捕捉大量百分比的資料列 `true` ，而當條件為時，則會使用較低百分比的資料列 `false` ）。 這些模式是以連續標記（以空白字元分隔）來建立，其中包含來自文字資料行的 token，或 `*` 代表萬用字元。 每個模式會以結果中的一個資料列表示。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `T | evaluate diffpatterns_text(`TextColumn，BooleanCondition [，MinTokens，閾值，MaxTokens]`)` 
 
@@ -55,7 +55,7 @@ T | evaluate diffpatterns_text(TextColumn, BooleanCondition)
 
     設定每個結果模式的最大標記數目（從一開始），指定較低的限制會減少查詢執行時間。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 Diffpatterns_text 的結果會傳回下列資料行：
 
@@ -68,7 +68,7 @@ Diffpatterns_text 的結果會傳回下列資料行：
 > [!NOTE]
 > 模式不一定是相異的，而且可能不會提供完整的資料集涵蓋範圍。 模式可能會重迭，而且某些資料列可能不會符合任何模式。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

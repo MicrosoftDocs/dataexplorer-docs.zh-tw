@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: b1f3ef10ac5cee3eb9bc1c1dca4c0de26bd85477
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 2873f3d010464b82ef8cb6a9a3e09f7b0a56b8d9
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780196"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345703"
 ---
 # <a name="schema_merge-plugin"></a>schema_merge 外掛程式
 
@@ -29,19 +29,19 @@ let Schema2=Table2 | getschema;
 union Schema1, Schema2 | evaluate schema_merge()
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `T``|` `evaluate` `schema_merge(`*PreserveOrder*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *PreserveOrder*：（選擇性）當設定為時 `true` ，會指示外掛程式驗證資料行順序，如第一個保留的表格式架構所定義。 如果相同的資料行位於數個架構中，則資料行序數必須類似它所出現之第一個架構的資料行序數。 預設值為 `true`。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 外掛程式會傳回 `schema_merge` 類似 [`getschema`](./getschemaoperator.md) 運算子傳回的輸出。
 
-**範例**
+## <a name="examples"></a>範例
 
 合併具有附加新資料行的架構。
 

@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8476680ad5b8206dcd7dfe98bf116bb5b6dcefdc
-ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
+ms.openlocfilehash: a81c5faadb51b99cdcd233132f9b6a4843e3ce34
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85133445"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345788"
 ---
 # <a name="restrict-statement"></a>Restrict 陳述式
 
@@ -25,7 +25,7 @@ Restrict 語句會限制資料表/視圖實體的集合，這些實體會顯示�
 
 Restrict 語句的主要案例是針對接受使用者查詢的仲介層應用程式，而且想要在這些查詢上套用資料列層級的安全性機制。 中介層應用程式可以在使用者的查詢前面加上**邏輯模型**，這組 let 語句定義了限制使用者存取資料的視圖（例如 `T | where UserId == "..."` ）。 作為最後新增的語句，它會限制使用者只能存取邏輯模型。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `restrict``access` `to` `(`[*EntitySpecifier* [ `,` ...]]`)`
 
@@ -36,11 +36,11 @@ Restrict 語句的主要案例是針對接受使用者查詢的仲介層應用�
 
 所有資料表、表格式視圖或不是由 restrict 語句指定的模式都會變成「不可見」，以供查詢的其餘部分使用。 
 
-**注意事項**
+**備註**
 
 Restrict 語句可用來限制存取另一個資料庫或叢集中的實體（叢集名稱中不支援萬用字元）。
 
-**引數**
+## <a name="arguments"></a>引數
 
 Restrict 語句可以在實體的名稱解析期間，取得定義寬鬆限制的一個或多個參數。 實體可以是：
 - [let 語句](./letstatement.md)出現在 `restrict` 語句之前。 
@@ -80,7 +80,7 @@ restricts access to (database('DB2').*);
 ```
 
 
-**範例**
+## <a name="examples"></a>範例
 
 下列範例示範中介層應用程式如何在邏輯模型前面加上使用者的查詢，以防止使用者查詢任何其他使用者的資料。
 

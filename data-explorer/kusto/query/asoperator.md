@@ -1,6 +1,6 @@
 ---
-title: 作為運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文在 Azure 資料資源管理器中描述為運算符。
+title: as 運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 as 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 05dc96fb7eec773d1e55d8b94a33cdda928622ff
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f9d7a60b3c39fb0b7357c2bbe68533252f794347
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518423"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349477"
 ---
 # <a name="as-operator"></a>as 運算子
 
-將名稱綁定到運算符的輸入表格表示式,從而使查詢多次引用表格表達式的值,而不會破壞查詢並通過[let 語句](letstatement.md)綁定名稱。
+將名稱系結至運算子的輸入表格式運算式，讓查詢可以多次參考表格式運算式的值，而不會破壞查詢並透過[let 語句](letstatement.md)系結名稱。
 
-**語法**
+## <a name="syntax"></a>語法
 
-*T* `as` `=` T =*Name*名稱`true``|``hint.materialized`
+*T* `|` `as` [ `hint.materialized` `=` `true` ]*名稱*
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *T*: 表格表示式。
-* *名稱*:表表表達式的臨時名稱。
-* `hint.materialized`:如果設置為`true`,則表位表達式的值將具體化,就像它被[具體()函數](./materializefunction.md)調用包裹一樣。
+* *T*：表格式運算式。
+* *名稱*：表格式運算式的暫存名稱。
+* `hint.materialized`：如果設定為 `true` ，則會具體化表格式運算式的值，如同[具體化（）](./materializefunction.md)函式呼叫所包裝的。
 
-**注意事項**
+**備註**
 
-* 給出`as`的名稱將用於`withsource=`[聯合](./unionoperator.md)列、`source_`[尋找](./findoperator.md)列和`$table`[搜尋](./searchoperator.md)欄位。
+* 提供的名稱 `as` 將用於 union 的資料 `withsource=` 行、尋找[union](./unionoperator.md)的資料行 `source_` ，以及[find](./findoperator.md) `$table` [搜尋](./searchoperator.md)的資料行。
 
-* 在[聯接](./joinoperator.md)的外部表格輸入 ()`$left`中使用運算符命名的表格表達式也可用於聯接的表格內部輸入 ()。`$right`
+* 使用[聯結](./joinoperator.md)的外部表格式輸入（）中的運算子所命名的表格式運算式， `$left` 也可以用於聯結的表格式內部輸入（ `$right` ）。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 // 1. In the following 2 example the union's generated TableName column will consist of 'T1' and 'T2'

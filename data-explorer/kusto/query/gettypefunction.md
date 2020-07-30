@@ -1,6 +1,6 @@
 ---
-title: gettype() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 gettype()。
+title: gettype （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 gettype （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 3a28032320948f12b2f91febc9f59c7b35ad084e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0efa07b7a1b050fe81ce2f369e8df5af4c05e212
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514377"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347658"
 ---
 # <a name="gettype"></a>gettype()
 
-返回其單個參數的運行時類型。
+傳回其單一引數的執行時間類型。
 
-對於標稱類型為`dynamic`的運算式,運行時類型可能與標稱類型(靜態)類型不同。在這種情況下`gettype()`,可以有助於揭示實際值的類型(該值在記憶體中的編碼方式)。
+執行時間類型可能與名義類型為之運算式的名義（靜態）類型不同 `dynamic` ; 在這種情況下 `gettype()` ，顯示實際值的建立類型（此值在記憶體中的編碼方式）會很有用。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `gettype(`*Expr*`)`
 
-**傳回**
+## <a name="returns"></a>傳回
 
-表示其單個參數的運行時類型的字串。
+表示其單一引數之執行時間類型的字串。
 
-**範例**
+## <a name="examples"></a>範例
 
-|運算是                          |傳回值      |
+|運算是                          |傳回      |
 |------------------------------------|-------------|
 |`gettype("a")`                      |`string`     |
 |`gettype(111)`                      |`long`       |

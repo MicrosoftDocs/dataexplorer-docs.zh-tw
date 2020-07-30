@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c8031cd28a04949515ed50dbe37d3f8171d595d8
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: a4aae88f6ad435469719f8444bae9123975ee618
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85129000"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346213"
 ---
 # <a name="pattern-statement"></a>pattern 語句
 
@@ -46,7 +46,7 @@ app("ApplicationX").StartEvents
 
 此查詢將會從 Kusto 產生錯誤，指出無法解析下一個模式調用： `app("ApplicationX")["StartEvents"]` 和 `app("ApplicationX")["StopEvents"]` 。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `declare``pattern` *PatternName*
 
@@ -67,7 +67,7 @@ app("ApplicationX").StartEvents
 
 針對每個符合的模式所提供的運算式是資料表名稱或[let 語句](letstatement.md)的參考。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `declare``pattern` *PatternName*  =  PatternName `(`*ArgName* `:`*ArgType* [ `,` ...] `)`[ `[` *路徑名稱* `:` *PathArgType* `]` ]`{`
 &nbsp;&nbsp;&nbsp;&nbsp;`(` *ArgValue1* [ `,` *ArgValue2* ...] `)` [ `.[` * PathValue `]` ] `=` `{` *運算式* `};` &nbsp; &nbsp; &nbsp; &nbsp; [ &nbsp; &nbsp; &nbsp; &nbsp; `(` *ArgValue1_2* [ `,` *ArgValue2_2* ...] `)` [ `.[` *PathValue_2* `]` ] `=` `{` *expression_2* `};` &nbsp; &nbsp; &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp; &nbsp; ]        `}`
@@ -137,7 +137,7 @@ declare pattern A
 union (A('a1').Text), (A('a2').Text)
 ```
 
-|應用程式|SomeText|
+|App|SomeText|
 |---|---|
 |應用程式 #1|這是免費文字：1|
 |應用程式 #1|這是免費文字：2|

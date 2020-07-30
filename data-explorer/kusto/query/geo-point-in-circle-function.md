@@ -8,22 +8,22 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/03/2020
-ms.openlocfilehash: 6e6ef40fcdeb4942dc0924c86862ee8f6222ac12
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 1e94e8eca72e6cb679a84e7b91ea376b9ec4b29c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227146"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347811"
 ---
 # <a name="geo_point_in_circle"></a>geo_point_in_circle()
 
 計算地理空間座標是否在地球上的圓圈內。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `geo_point_in_circle(`*p_longitude* `, `*p_latitude* `, `*pc_longitude* `, `*pc_latitude* `, `*c_radius*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *p_longitude*：地理空間座標經度值（以度為單位）。 有效的值為實數，且範圍為 [-180，+ 180]。
 * *p_latitude*：地理空間座標緯度值（以度為單位）。 有效的值為實數，且範圍為 [-90，+ 90]。
@@ -31,7 +31,7 @@ ms.locfileid: "83227146"
 * *pc_latitude*：圓形中心地理空間座標緯度值（以度為單位）。 有效的值為實數，且範圍為 [-90，+ 90]。
 * *c_radius*：圓形半徑，以量為單位。 有效值必須是正數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 指出地理空間座標是否在圓形內。 如果座標或圓形無效，查詢將會產生 null 結果。
 
@@ -40,7 +40,7 @@ ms.locfileid: "83227146"
 >* 用來測量地球距離的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。
 >* 圓形是地球上的球面帽。 端點的半徑會沿著球體的表面測量。
 
-**範例**
+## <a name="examples"></a>範例
 
 下列查詢會尋找區域中由下列圓形所定義的所有位置：半徑為18公里，中心為 [-122.317404，47.609119] 座標。
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
-ms.openlocfilehash: ee9c4b236344e21bbbc1da68b76710b15b519baa
-ms.sourcegitcommit: 56bb7b69654900ed63310ac9537ae08b72bf7209
+ms.openlocfilehash: 8358bf9a8eb0dab38b8f5847521e069f21fe4a2c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85814206"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346689"
 ---
 # <a name="mv-expand-operator"></a>mv-expand 運算子
 
@@ -21,13 +21,13 @@ ms.locfileid: "85814206"
 
 `mv-expand`會套用在[動態](./scalar-data-types/dynamic.md)類型陣列或屬性包資料行上，讓集合中的每個值都能取得個別的資料列。 所展開資料列中的其他所有資料行則會重複。 
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| mv-expand ` [ `bagexpansion=` （ `bag`  |  `array` ）] [ `with_itemindex=` *IndexColumnName*] *columnname* [ `,` *columnname* ...] [ `limit` *Rowlimit*]
 
 *T* `| mv-expand ` [ `bagexpansion=` （ `bag`  |  `array` ）] [*Name* `=` ]*產生陣列*[ `to typeof(` *Typename* `)` ] [，[*Name* `=` ]*產生陣列*[ `to typeof(` *Typename* `)` ] ...] [ `limit` *Rowlimit*]
 
-**引數**
+## <a name="arguments"></a>引數
 
 * ** 在結果中，具名資料行中的陣列會展開為多個資料列。 
 * ** 產生陣列的運算式。 如果使用這種形式，則會新增新資料行，並保留現有資料行。
@@ -40,7 +40,7 @@ ms.locfileid: "85814206"
 
 * *IndexColumnName：* 如果 `with_itemindex` 指定了，輸出將會包含一個額外的資料行（名為*IndexColumnName*），其中包含原始展開集合中專案的索引（從0開始）。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 在命名或陣列運算式中，任何陣列中的每個值都有多個資料列。
 如果指定了多個資料行或運算式，它們就會以平行方式展開。 針對每個輸入資料列，會有多個輸出資料列，因為最長的展開運算式中有元素（較短的清單會以 null 填補）。 如果資料列中的值是空的陣列，資料列就會展開為 [無] （不會顯示在結果集中）。 不過，如果資料列中的值不是陣列，資料列就會保留在結果集中。 

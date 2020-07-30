@@ -1,6 +1,6 @@
 ---
-title: 方差(聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中的方差(聚合函數)。
+title: varianceif （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 varianceif （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9dfebb3796f07dec6c91d36d788a018f84f70961
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: bf1009d2d269bf21ea5ae14a9c828724d8bf8c70
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81504670"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87338468"
 ---
-# <a name="varianceif-aggregation-function"></a>方差 () (聚合函數)
+# <a name="varianceif-aggregation-function"></a>varianceif （）（彙總函式）
 
-計算*的字*`true`值為的群組中*Expr* [的方差](variance-aggfunction.md)。
+*計算述詞評估為*之整個群組的*Expr* [變異數](variance-aggfunction.md) `true` 。
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+* 只能在[匯總](summarizeoperator.md)的內容中使用
 
-**語法**
+## <a name="syntax"></a>語法
 
-總結`varianceif(` *Expr*`, `*謂詞*`)`
+總結 `varianceif(` *Expr* `, ` *Predicate*述詞`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *Expr*:將用於聚合計算的運算式。 
-* *謂詞*: 謂詞,如果為 true,*則 Expr*計算值將添加到方差中。
+* *Expr*：將用於匯總計算的運算式。 
+* 述*詞：如果*為 true，則*Expr*計算值會加入至變異數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-*謂詞*計算`true`為 的組中*Expr*的方差值。
+在述*詞評估為*的整個群組中， *Expr*的變異數值 `true` 。
  
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 range x from 1 to 100 step 1

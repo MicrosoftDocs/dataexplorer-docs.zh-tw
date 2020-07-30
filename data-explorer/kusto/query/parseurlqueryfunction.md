@@ -1,6 +1,6 @@
 ---
-title: parse_urlquery() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的parse_urlquery()。
+title: parse_urlquery （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 parse_urlquery （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3f00fefcd6245528d7ae50d6046d97289a92317d
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 6d34ece3a945485b8a809089d030fa954b070a28
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744607"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346264"
 ---
 # <a name="parse_urlquery"></a>parse_urlquery()
 
-返回包含`dynamic`查詢參數的物件。
+傳回 `dynamic` 包含查詢參數的物件。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `parse_urlquery(`*查詢*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *查詢*:字串表示 URL 查詢。
+* *query*：表示 url 查詢的字串。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-包含查詢參數的類型[動態](./scalar-data-types/dynamic.md)物件。
+[動態](./scalar-data-types/dynamic.md)類型的物件，其中包含查詢參數。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 parse_urlquery("k1=v1&k2=v2&k3=v3")
 ```
 
-將導致:
+會產生：
 
 ```kusto
  {
@@ -45,7 +45,7 @@ parse_urlquery("k1=v1&k2=v2&k3=v3")
  }
 ```
 
-**注意事項**
+**備註**
 
-* 輸入格式應遵循網址 查詢標準(鍵=值& ...)
+* 輸入格式應遵循 URL 查詢標準（索引鍵 = 值& ...）
  

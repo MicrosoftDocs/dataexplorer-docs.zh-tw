@@ -1,6 +1,6 @@
 ---
-title: abs() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 abs()。
+title: abs （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 abs （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,25 +8,25 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/14/2019
-ms.openlocfilehash: dadedbf03688c2bb6abc8e245464addf140cc60c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 399446a407d84a1985a3b63e8bf718cab80f1f80
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519358"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349868"
 ---
 # <a name="abs"></a>abs()
 
 計算輸入的絕對值。  
 
-**語法**
+## <a name="syntax"></a>語法
 
-`abs(`*X.*`)`
+`abs(`*x*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *x*: 整數或實數,或時間跨度值。
+* *x*：整數或實數，或 timespan 值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-* x 的絕對值。
+* X 的絕對值。

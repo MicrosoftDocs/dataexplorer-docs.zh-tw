@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/28/2019
-ms.openlocfilehash: b8f9d6d27643855ba81b2c1791dfd939b53cac9a
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 2191a26a0ee0bccd708c492690e58767d3cf52e9
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264873"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345618"
 ---
 # <a name="series_decompose_anomalies"></a>series_decompose_anomalies()
 
@@ -22,11 +22,11 @@ ms.locfileid: "85264873"
 
 函式會採用包含數列（動態數值陣列）做為輸入的運算式，並以分數來抽取異常點。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_decompose_anomalies (`*數列* `[, `*閾值* `,`*季節性* `,`*趨勢* `, `*Test_points* `, `*AD_method* `,`*Seasonality_threshold*`])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *數列*：做為數值陣列的動態陣列資料格，通常是[make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出
 * *閾值*：偵測輕度或較強異常的異常臨界值（預設值為1.5 （k value））

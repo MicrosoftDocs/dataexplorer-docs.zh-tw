@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: fe3af4218fcc8b714cd4d62e45e78d6f8c9c0270
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a094644e6f8a96631e5e1bcf1d2d15cf1ba7caad
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226902"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347743"
 ---
 # <a name="geo_point_to_s2cell"></a>geo_point_to_s2cell()
 
@@ -21,17 +21,17 @@ ms.locfileid: "83226902"
 
 閱讀更多有關[S2 資料格](https://s2geometry.io/devguide/s2cell_hierarchy)階層的資訊。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `geo_point_to_s2cell(`*經度* `, `*緯度* `, `*層級*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *經度*：地理位置的經度值。 如果*x*是實數，而*x*是在 [-180，+ 180] 範圍內，則經度*x*會視為有效。 
 * *緯度*：地理位置的緯度值。 如果 y 是實數，而 y 在範圍 [-90，+ 90] 中，則緯度 y 會視為有效。 
 * *level*： `int` 定義要求的資料格層級的選擇性。 支援的值位於 [0，30] 範圍內。 如果未指定，則 `11` 會使用預設值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 給定地理位置的 S2 資料格標記字串值。 如果座標或層級無效，查詢將會產生空的結果。
 
@@ -86,7 +86,7 @@ ms.locfileid: "83226902"
 
 另請參閱[geo_point_to_geohash （）](geo-point-to-geohash-function.md)。
 
-**範例**
+## <a name="examples"></a>範例
 
 S2cell 所匯總的美國風暴事件。
 

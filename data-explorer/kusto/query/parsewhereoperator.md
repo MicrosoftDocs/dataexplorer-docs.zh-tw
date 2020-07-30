@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/12/2020
-ms.openlocfilehash: 48231d24ca1e49938629dd9912804c5858d11ae1
-ms.sourcegitcommit: f9d3f54114fb8fab5c487b6aea9230260b85c41d
+ms.openlocfilehash: c2936ec7461850aaad6fdb4e9daa7624dd561c49
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/18/2020
-ms.locfileid: "85071893"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346247"
 ---
 # <a name="parse-where-operator"></a>parse-where 運算子
 
@@ -25,11 +25,11 @@ ms.locfileid: "85071893"
 T | parse-where Text with "ActivityName=" name ", ActivityType=" type
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| parse-where` [ `kind=regex` [ `flags=regex_flags` ] | `simple` ] *Expression* `with` `*` （*StringConstant* *ColumnName* [ `:` *ColumnType*]） `*` .。。
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入資料表。
 
@@ -47,7 +47,7 @@ T | parse-where Text with "ActivityName=" name ", ActivityType=" type
   
 * *ColumnType：* 應該是選擇性的純量類型，表示要將值轉換成的類型。 預設值為 [字串類型]。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 輸入資料表，會根據提供給運算子的資料行清單進行擴充。
 

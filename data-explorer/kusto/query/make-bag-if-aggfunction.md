@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2603aab066a7f77ff36553d8898bb713ace990b7
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 67e408653a4873dce3b5e8f21a91775573affbe2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763799"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347012"
 ---
 # <a name="make_bag_if-aggregation-function"></a>make_bag_if （）（彙總函式）
 
@@ -22,17 +22,17 @@ ms.locfileid: "85763799"
 > [!NOTE]
 > 只能用在[摘要內匯總](summarizeoperator.md)的內容中。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `summarize``make_bag_if(` *Expr*、 *Predicate*述詞 [ `,` *MaxSize*]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*： `dynamic` 將用於匯總計算之型別的運算式。
 * 述*詞：必須*評估為 `true` 的述詞，才能將 *' Expr '* 加入至結果。
 * *MaxSize*：傳回的元素數目上限的選擇性整數限制（預設值為*1048576*）。 MaxSize 值不能超過1048576。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 `dynamic`針對述詞評估為*的*屬性包（字典），傳回群組中所有 *' Expr '* 值的（JSON）屬性包（字典） `true` 。
 將略過非字典值。
@@ -41,7 +41,7 @@ ms.locfileid: "85763799"
 > [!NOTE]
 > 函式 [`make_bag`](./make-bag-aggfunction.md) 類似于不含述詞運算式的 make_bag_if （）。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 let T = datatable(prop:string, value:string, predicate:bool)

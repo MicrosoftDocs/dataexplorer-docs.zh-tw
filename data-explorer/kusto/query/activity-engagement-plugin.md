@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9aa85bcb12cd5f8d836f58ea9d16a318d8a40506
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: cdee53ad7f46aacb71b8a8277e5b875e60438874
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225950"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349817"
 ---
 # <a name="activity_engagement-plugin"></a>activity_engagement plugin
 
@@ -25,11 +25,11 @@ activity_engagement 外掛程式可用於計算 DAU/WAU/MAU （每日/每週/每
 T | evaluate activity_engagement(id, datetime_column, 1d, 30d)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `activity_engagement(` *IdColumn* `,` *TimelineColumn* `,` [*Start* `,` *End* `,` ] *InnerActivityWindow* `,` *OuterActivityWindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
@@ -40,7 +40,7 @@ T | evaluate activity_engagement(id, datetime_column, 1d, 30d)
 * *OuterActivityWindow*：以 [外部範圍分析] 視窗期間的值為純量。
 * *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 針對每個內部範圍視窗期間和每個現有的維度組合，傳回具有（內部範圍視窗內的識別碼值相異計數、外部範圍視窗內的識別碼值的相異計數，以及活動比率）的資料表。
 
@@ -51,7 +51,7 @@ T | evaluate activity_engagement(id, datetime_column, 1d, 30d)
 |類型：從*TimelineColumn*|long|long|double|..|..|..|
 
 
-**範例**
+## <a name="examples"></a>範例
 
 ### <a name="dauwau-calculation"></a>DAU/WAU 計算
 

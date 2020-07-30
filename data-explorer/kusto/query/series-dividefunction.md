@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 7d5bdba030687c17c355eb72ce2fc9c358c10ebd
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 39252fb8e7233ddc3532003afc7a131505cd4282
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372855"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345074"
 ---
 # <a name="series_divide"></a>series_divide()
 
 計算兩個數值數列輸入的元素成對除法。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_divide(`*series1* `,`*series2*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *series1，series2*：輸入數值陣列，第一個是以元素的方式除以第二個，成為動態陣列結果。 所有引數都必須是動態陣列。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 這兩個輸入之間的計算元素取向運算動態陣列。 任何非數值元素或不存在的專案（不同大小的陣列）都會產生 `null` 元素值。
 
 注意：結果數列是 double 型別，即使輸入是整數也一樣。 零除會沿著零除（例如2/0 產生雙精度（+ inf））。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

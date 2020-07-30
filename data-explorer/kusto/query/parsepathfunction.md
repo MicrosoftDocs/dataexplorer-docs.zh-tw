@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: ba74b7c1e78d568cc34845d56dc9768f2628192f
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: e2914e913402de7442d2533cf5159c2bd30fac60
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717371"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346298"
 ---
 # <a name="parse_path"></a>parse_path()
 
@@ -32,19 +32,19 @@ ms.locfileid: "84717371"
 * 長路徑。 例如，" \\ ？ \c： ..." "
 * 替代資料流。 例如，"file1.exe:file2.exe"
 
-**語法**
+## <a name="syntax"></a>語法
 
 `parse_path(`*path*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *path*：代表檔案路徑的字串。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 類型的物件 `dynamic` ，其中包含如上所列的路徑元件。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

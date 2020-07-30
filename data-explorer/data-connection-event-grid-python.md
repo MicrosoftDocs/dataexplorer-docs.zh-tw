@@ -1,18 +1,18 @@
 ---
 title: 使用 Python 建立 Azure 資料總管的 Event Grid 資料連線
 description: 在本文中，您將瞭解如何使用 Python 建立 Azure 資料總管的 Event Grid 資料連線。
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 6e8bb6797200c3f3591fa8bf46e9b3ff7d4da49f
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: f86b9ed21a0d818214d2193dbfa902b3a98809ba
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013897"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350191"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-python"></a>使用 Python 建立 Azure 資料總管的 Event Grid 資料連線
 
@@ -102,6 +102,6 @@ poller = kusto_management_client.data_connections.create_or_update(resource_grou
 | event_hub_resource_id | *資源識別碼* | 事件中樞的資源識別碼，其中事件方格已設定為傳送事件。 |
 | storage_account_resource_id | *資源識別碼* | 儲存體帳戶的資源識別碼，其中保存要內嵌的資料。 |
 | consumer_group | *$Default* | 事件中樞的取用者群組。|
-| location | *美國中部* | 資料連線資源的位置。|
+| location | *Central US* | 資料連線資源的位置。|
 
 [!INCLUDE [data-explorer-data-connection-clean-resources-python](includes/data-explorer-data-connection-clean-resources-python.md)]

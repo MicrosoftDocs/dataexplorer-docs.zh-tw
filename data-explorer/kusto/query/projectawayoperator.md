@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 444710775af405cc63193e0205e573b2ea77de3a
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 40bc5eafee803123ea1d73e763c32b5210f741ca
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373194"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346043"
 ---
 # <a name="project-away-operator"></a>project-away 運算子
 
@@ -25,16 +25,16 @@ T | project-away price, quantity, zz*
 
 結果中的資料行順序取決於其在資料表中的原始順序。 只會卸載指定為引數的資料行。 其他資料行則包含在結果中。  (另請參閱 `project`)。
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| project-away` *ColumnNameOrPattern* [ `,` ...]
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入資料表
 * *ColumnNameOrPattern：* 要從輸出中移除之資料行或資料行萬用字元模式的名稱。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 包含未命名為引數之資料行的資料表。 包含與輸入資料表相同的資料列數目。
 
@@ -46,7 +46,7 @@ T | project-away price, quantity, zz*
 * 您可以在 `project-away` 原始資料表中出現的任何資料行，或做為查詢一部分計算的資料行。
 
 
-**範例**
+## <a name="examples"></a>範例
 
 輸入資料表 `T` 有三個類型為 `long` 的資料行：`A`、`B` 和 `C`。
 

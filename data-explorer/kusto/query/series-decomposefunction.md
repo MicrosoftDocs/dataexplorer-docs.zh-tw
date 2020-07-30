@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 4500ec5b58c93901e011ea6dd270563d3405ee01
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: fa17d27506c4930fa9b9f7fb0a24f5ff31e1c974
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372858"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345159"
 ---
 # <a name="series_decompose"></a>series_decompose()
 
@@ -21,11 +21,11 @@ ms.locfileid: "83372858"
 
 接受包含數列（動態數值陣列）做為輸入的運算式，並將其會 decompose 至季節性、趨勢和剩餘元件。
  
-**語法**
+## <a name="syntax"></a>語法
 
 `series_decompose(`*數列* `[,`*季節性* `,`*趨勢* `,`*Test_points* `,`*Seasonality_threshold*`])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *數列*：動態陣列資料格，這是數值的陣列，通常是[make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出
 * *季節性*：控制季節性分析的整數，其中包含任一項
@@ -51,7 +51,7 @@ ms.locfileid: "83372858"
 * `residual`：剩餘元件的數列（也就是 x 基準）。
   
 
-**注意事項**
+**備註**
 
 * 元件執行順序：
     1. 摘錄季節性數列
@@ -66,7 +66,7 @@ ms.locfileid: "83372858"
 
 這個方法通常會套用到預期會產生資訊清單和/或趨勢行為的時間序列。 您可以使用方法來預測未來的度量值和/或偵測異常值。 此回歸程式的隱含假設是除了季節性和趨勢行為之外，時間序列會隨機並隨機散發。 從季節性和趨勢元件預測未來的度量值，同時忽略剩餘的部分。 僅根據最差的部分，偵測異常值。 如需進一步的詳細資料，請參閱[時間序列分解一章](https://www.otexts.org/fpp/6)。
 
-**範例**
+## <a name="examples"></a>範例
 
 **每週季節性**
 

@@ -8,22 +8,22 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/06/2020
-ms.openlocfilehash: 8858b261cb366842b475a76a1b2c3246b8a3e7b5
-ms.sourcegitcommit: de81b57b6c09b6b7442665e5c2932710231f0773
+ms.openlocfilehash: 0e08857e01ffa3da1bcb23d16d1df4908336f76f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 07/28/2020
-ms.locfileid: "87264693"
+ms.locfileid: "87346859"
 ---
 # <a name="materialize"></a>materialize()
 
 允許在查詢執行期間以其他子查詢可以參考部分結果的方式，來快取子查詢結果。
  
-**語法**
+## <a name="syntax"></a>語法
 
 `materialize(`*expression*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *expression*：要在查詢執行期間評估和快取的表格式運算式。
 
@@ -52,7 +52,7 @@ _detailed_data
 | top 10 by EventPercentage
 ```
 
-|狀態|EventType|EventPercentage|事件|
+|State|EventType|EventPercentage|事件|
 |---|---|---|---|
 |夏威夷 WATERS|Waterspout|100|2|
 |LAKE 安大略|航海 Thunderstorm 風|100|8|
