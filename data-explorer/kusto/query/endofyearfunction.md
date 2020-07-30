@@ -1,6 +1,6 @@
 ---
-title: 年末() - Azure 數據資源管理器 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的年末()。
+title: endofyear （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 endofyear （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,39 +8,39 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d4a14d1cc42d5b9116e8a144e2b67fb74c1932ee
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a76a402725eaefe9f12cbb67228381e3b0c25351
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515771"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348253"
 ---
 # <a name="endofyear"></a>endofyear()
 
-返回包含日期的年末,如果提供,則偏移量。
+傳回包含日期的年份結尾，如果有提供，則會位移位移。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`endofyear(`*日期*`,`[*位移*]`)`
+`endofyear(`*日期*[ `,` *位移*]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* `date`:輸入日期。
-* `offset`: 從輸入日期(整數,預設值 - 0)到可選的偏移年數。
+* `date`：輸入日期。
+* `offset`：輸入日期（整數，預設值為0）的選擇性位移年份數目。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-表示給定*日期*值的年末的日期和時間,如果指定,則帶有偏移量。
+表示給定*日期*值年份結束的日期時間，如果有指定，則為位移。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
   range offset from -1 to 1 step 1
  | project yearEnd = endofyear(datetime(2017-01-01 10:10:17), offset) 
 ```
 
-|年終|
+|yearEnd|
 |---|
-|2016-12-31 23:59:59.9999999|
-|2017-12-31 23:59:59.9999999|
-|2018-12-31 23:59:59.9999999|
+|2016-12-31 23：59：59.9999999|
+|2017-12-31 23：59：59.9999999|
+|2018-12-31 23：59：59.9999999|

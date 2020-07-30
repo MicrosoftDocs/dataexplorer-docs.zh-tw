@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c053cd307f8cff8ad00eff0a4224ebbea2808c6c
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 94644ae8bfae934bc908c7e06903be3825d8ccd8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737669"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348610"
 ---
 # <a name="cursor_before_or_at"></a>cursor_before_or_at()
 
@@ -23,19 +23,19 @@ ms.locfileid: "82737669"
 
 資料表記錄上的述詞，用來比較其對資料庫資料指標的內嵌時間。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `cursor_before_or_at``(` *RHS*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *RHS*：空字串常值，或有效的資料庫資料指標值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-類型`bool`的純量值，指出記錄是在資料庫資料指標*RHS* （`true`）之前或之後內嵌（`false`）。
+類型的純量值 `bool` ，指出記錄是在資料庫資料指標*RHS* （）之前或之後內嵌 `true` （ `false` ）。
 
-**注意事項**
+**備註**
 
 如需資料庫資料指標的其他詳細資料，請參閱[資料庫資料指標](../management/databasecursor.md)。
 

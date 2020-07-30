@@ -1,6 +1,6 @@
 ---
-title: 最小() (聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 min()(聚合函數)。
+title: min （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 min （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/24/2019
-ms.openlocfilehash: ca50210c84b39f19e6717b27089313d0d116e21a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: c7b3b189a85f46cb577c37a956c35bc755321d68
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512405"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346774"
 ---
-# <a name="min-aggregation-function"></a>最小 () (聚合函數)
+# <a name="min-aggregation-function"></a>min （）（彙總函式）
 
-返回整個組的最小值。 
+傳回整個群組的最小值。 
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+* 只能在[匯總](summarizeoperator.md)的內容中使用
 
-**語法**
+## <a name="syntax"></a>語法
 
 `summarize``min(` *Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *Expr*:將用於聚合計算的運算式。 
+* *Expr*：將用於匯總計算的運算式。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
-跨組的*Expr*的最小值。
+整個群組中*Expr*的最小值。
  
 > [!TIP]
-> 這為您提供了最小或最大值本身 - 例如,最高或最低價格。 但是,如果您希望行中的其他列(例如,價格最低的供應商的名稱)使用[arg_max](arg-max-aggfunction.md)或[arg_min。](arg-min-aggfunction.md)
+> 這可為您提供其本身的最小值或最大值，例如最高或最低價格。 但是，如果您想要資料列中的其他資料行（例如，價格最低的供應商名稱），請使用[arg_max](arg-max-aggfunction.md)或[arg_min](arg-min-aggfunction.md)。

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 5fd6221e4b877d066050f932a564f71d56d8c168
-ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
+ms.openlocfilehash: f5ad4cdc2b74ddb62a4572249bb06fab6c656243
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85332569"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347420"
 ---
 # <a name="infer_storage_schema-plugin"></a>infer_storage_schema 外掛程式
 
@@ -30,15 +30,15 @@ let options = dynamic({
 evaluate infer_storage_schema(options)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-`evaluate``infer_storage_schema(`*選項*`)`
+`evaluate` `infer_storage_schema(` *選項。* `)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 單一*選項*引數是類型的常數值 `dynamic` ，其中包含指定要求屬性的屬性包：
 
-|名稱                    |必要|說明|
+|名稱                    |必要|描述|
 |------------------------|--------|-----------|
 |`StorageContainers`|是|[儲存體連接字串](../api/connection-strings/storage.md)的清單，代表已儲存資料成品的前置詞 URI|
 |`DataFormat`|是|其中一種支援的[資料格式](../../ingestion-supported-formats.md)。|
@@ -46,7 +46,7 @@ evaluate infer_storage_schema(options)
 |`FileNamePrefix`|否|僅掃描開頭為此前置詞的檔案。 這不是必要的，但指定它可能會加速進程|
 |`Mode`|否|架構推斷策略，下列其中一個： `any` 、 `last` 、 `all` 。 從任何（第一個找到的）檔案、最後寫入的檔案，或從所有檔案推斷資料架構。 預設值是 `last`。|
 
-**傳回**
+## <a name="returns"></a>傳回
 
 外掛程式會傳回 `infer_storage_schema` 單一結果資料表，其中包含保留了 CSL 架構字串的單一資料列/資料行。
 
@@ -55,7 +55,7 @@ evaluate infer_storage_schema(options)
 > * 架構推斷策略「全部」是一種非常「昂貴」的作業，因為它意味著從找到的*所有*成品讀取併合並其架構。
 > * 某些傳回的類型可能不是由錯誤的類型猜測所造成的實際值（或做為架構合併程式的結果）。 這就是為什麼您應該先仔細檢查結果，再建立外部資料表。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 let options = dynamic({

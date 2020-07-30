@@ -1,6 +1,6 @@
 ---
-title: 下一個() - Azure 數據資源管理員 |微軟文件
-description: 本文在 Azure 數據資源管理器中介紹下一個()。
+title: 下一個（）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的下一個（）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f45e88942fdf9eb23451e1391866f57ca5f0e21a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a265d536f655df3086ece1b9953eaade4717781c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512116"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346621"
 ---
 # <a name="next"></a>next()
 
-返回行中列的值,該列在[序列化列集](./windowsfunctions.md#serialized-row-set)中的當前行之後以某種偏移量返回該列。
+傳回資料列中資料行的值，該資料列在序列化資料列[集中](./windowsfunctions.md#serialized-row-set)的目前資料列之後的某些位移上。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `next(column)`
 
@@ -27,16 +27,16 @@ ms.locfileid: "81512116"
 
 `next(column, offset, default_value)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* `column`:要從中獲取值的列。
+* `column`：要從中取得值的資料行。
 
-* `offset`:以行的方式前進的偏移量。 如果未指定偏移量,則使用預設偏移量 1。
+* `offset`：要在資料列中往前進行的位移。 如果沒有指定位移，則會使用預設位移1。
 
-* `default_value`:當沒有下一行要從中獲取該值時,將使用的默認值。 如果未指定預設值,則使用 null。
+* `default_value`：在沒有下一個資料列要接受值時，所要使用的預設值。 若未指定預設值，則會使用 null。
 
 
-**範例**
+## <a name="examples"></a>範例
 ```kusto
 Table | serialize | extend nextA = next(A,1)
 | extend diff = A - nextA

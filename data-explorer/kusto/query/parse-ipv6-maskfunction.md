@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: ec4c398d9079cd5e01875bd1d92ae06db0bb0908
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: a6c17f0505927c38d26c37a5e9872747541d129a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512566"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346434"
 ---
 # <a name="parse_ipv6_mask"></a>parse_ipv6_mask()
  
@@ -24,11 +24,11 @@ parse_ipv6_mask("127.0.0.1", 24) == '0000:0000:0000:0000:0000:ffff:7f00:0000'
 parse_ipv6_mask(":fe80::85d:e82c:9446:7994", 120) == 'fe80:0000:0000:0000:085d:e82c:9446:7900'
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `parse_ipv6_mask(`*`Expr`*`, `*`PrefixMask`*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *`Expr`*：字串運算式，代表將轉換成標準 IPv6 標記法的 IPv6/IPv4 網路位址。 字串可能包含使用[IP 首碼標記法](#ip-prefix-notation)的網路遮罩。
 * *`PrefixMask`*：介於0到128之間的整數，代表所考慮的最高有效位數。
@@ -38,12 +38,12 @@ parse_ipv6_mask(":fe80::85d:e82c:9446:7994", 120) == 'fe80:0000:0000:0000:085d:e
 您可以 `IP-prefix notation` 使用斜線（）字元來定義 IP 位址 `/` 。
 斜線（）左邊的 IP 位址 `/` 是基底 ip 位址。 斜線（）右邊的數位（1到127） `/` 是網路遮罩中連續1位的數目。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 如果轉換成功，則結果會是代表標準 IPv6 網路位址的字串。
 如果轉換不成功，則結果會是 `null` 。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

@@ -1,6 +1,6 @@
 ---
-title: isutf8() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 isutf8()。
+title: isutf8 （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 isutf8 （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 619fb90b72fed8ec0e10fe05ddc3c6df6ff1386e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 952ea030d351a9e23fe26bbd7f27a96d182a89e3
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513391"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347148"
 ---
 # <a name="isutf8"></a>isutf8()
 
-如果`true`參數是有效的 utf8 字串,則返回。
+`true`如果引數是有效的 utf8 字串，則傳回。
     
 ```kusto
 isutf8("some string") == true
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-`isutf8(`[*value*]`)`
+`isutf8(`[*值*]`)`
 
-**傳回**
+## <a name="returns"></a>傳回
 
-指示參數是否是有效的 utf8 字串。
+指出引數是否為有效的 utf8 字串。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 T

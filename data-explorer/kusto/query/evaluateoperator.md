@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: d01b3b5178801fe1b5e55f51987564674ce4aeae
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 519ac6b38a73cfc7334094ef503d1d20c7d2ecb9
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128626"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348219"
 ---
 # <a name="evaluate-operator-plugins"></a>evaluate 運算子外掛程式
 
@@ -21,7 +21,7 @@ ms.locfileid: "85128626"
 
 `evaluate`運算子是一種表格式運算子，可讓您叫用稱為**外掛程式**的查詢語言擴充功能。 外掛程式可以啟用或停用（不同于一律可供使用的其他語言結構），而且不會受到語言的關聯式本質的「系結」（例如，它們可能沒有預先定義、靜態判斷的輸出架構）。
 
-**語法** 
+## <a name="syntax"></a>語法 
 
 [*T* `|` ] `evaluate` [ *evaluateParameters* ] *PluginName* `(` [*PluginArg1* [ `,` *PluginArg2*] .。。`)`
 
@@ -37,10 +37,10 @@ ms.locfileid: "85128626"
   |名稱                |值                           |說明                                |
   |--------------------|---------------------------------|-------------------------------------------|
   |`hint.distribution` |`single`, `per_node`, `per_shard`| [散發提示](#distributionhints) |
-  |`hint.pass_filters` |`true`, `false`| 允許 `evaluate` 運算子在外掛程式之前傳遞任何相符的篩選準則。 如果參考的資料行是在運算子之前，則會將篩選視為「相符」 `evaluate` 。 預設：`false` |
+  |`hint.pass_filters` |`true`, `false`| 允許 `evaluate` 運算子在外掛程式之前傳遞任何相符的篩選準則。 如果參考的資料行是在運算子之前，則會將篩選視為「相符」 `evaluate` 。 預設： `false` |
   |`hint.pass_filters_column` |*column_name*| 允許外掛程式操作員傳遞在外掛程式之前參考*column_name*的篩選準則。 參數可以多次使用，並使用不同的資料行名稱。 |
 
-**注意事項**
+**備註**
 
 * 在語法上，其 `evaluate` 行為類似于叫用表格式函數的叫用[運算子](./invokeoperator.md)。
 * 透過評估運算子提供的外掛程式不會受到查詢執行或引數評估的一般規則所限制。

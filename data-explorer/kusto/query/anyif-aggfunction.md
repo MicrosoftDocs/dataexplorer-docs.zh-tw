@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 54431e2d088f60fa8ea2a56bffea9faa374faeda
-ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
+ms.openlocfilehash: 23285c0747e7fecbdce810536af195f72f27236f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84626675"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349715"
 ---
 # <a name="anyif-aggregation-function"></a>anyif （）（彙總函式）
 
 任意為[摘要運算子](summarizeoperator.md)中的每個群組選取一筆記錄，其述詞為 "true"。 函式會針對每個這類記錄傳回運算式的值。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `summarize``anyif` `(` *Expr*、 *Predicate*述詞`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：從要傳回的輸入中選取的每個記錄所傳回的運算式。
 * 述*詞：指出*哪些記錄可視為進行評估的述詞。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 `anyif`彙總函式會針對從摘要運算子的每個群組中隨機選取的每個記錄，傳回計算出之運算式的值。 只能選取述詞會傳回 "true *" 的記錄*。 如果述詞未傳回 "true"，則會產生 null 值。
 
@@ -38,7 +38,7 @@ ms.locfileid: "84626675"
 
 如果有這類值，函數會嘗試傳回非 null/非空白的值。
 
-**範例**
+## <a name="examples"></a>範例
 
 顯示填入300到600000000的隨機大陸。
 

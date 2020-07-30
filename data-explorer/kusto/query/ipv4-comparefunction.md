@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 67887aac4ab04e016ed63045e66ebcfab343c135
-ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
+ms.openlocfilehash: 247a653ead575b0fa04295d23b6b6071bd49edeb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84420861"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347352"
 ---
 # <a name="ipv4_compare"></a>ipv4_compare()
 
@@ -26,11 +26,11 @@ ipv4_compare('192.168.1.1/24', '192.168.1.255/24') == 0
 ipv4_compare('192.168.1.1', '192.168.1.255', 24) == 0
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `ipv4_compare(`*運算式 1* `, `*運算式 2* `[ ,`*PrefixMask*`])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *運算式 1*、運算式*2*：代表 IPv4 位址的字串運算式。 IPv4 字串可以使用[IP 首碼標記法](#ip-prefix-notation)來進行遮罩。
 * *PrefixMask*：介於0到32之間的整數，代表所考慮的最高有效位數。
@@ -42,7 +42,7 @@ ipv4_compare('192.168.1.1', '192.168.1.255', 24) == 0
 
 **範例：** 192.168.2.0/24 會有相關聯的 net/subnetmask，其中包含小數點十進位格式的24個連續位或255.255.255.0。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 * `0`：如果第一個 IPv4 字串引數的長標記法等於第二個 IPv4 字串引數
 * `1`：如果第一個 IPv4 字串引數的長表示大於第二個 IPv4 字串引數

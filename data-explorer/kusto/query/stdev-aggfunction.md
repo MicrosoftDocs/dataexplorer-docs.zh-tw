@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3a29621a18a364145585022b1f0651100cadab1c
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 18722a544ea3bbd0e19922d1d8988a3604b4d200
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618527"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87342898"
 ---
 # <a name="stdev-aggregation-function"></a>stdev （）（彙總函式）
 
@@ -25,19 +25,19 @@ ms.locfileid: "82618527"
 
 * 只能在[匯總](summarizeoperator.md)的內容中使用
 
-**語法**
+## <a name="syntax"></a>語法
 
-總結`stdev(` *Expr*`)`
+總結 `stdev(` *Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：將用於匯總計算的運算式。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 整個群組的*Expr*標準差值。
  
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 range x from 1 to 5 step 1

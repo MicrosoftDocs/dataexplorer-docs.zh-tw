@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bfa5286a03d06282682953a23c6b2a2705c58a9c
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 86e3ce4f1cbb957ebd126a8493ebb6b7bc5ac66b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717065"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349409"
 ---
 # <a name="autocluster-plugin"></a>autocluster 外掛程式
 
@@ -23,11 +23,11 @@ T | evaluate autocluster()
 
 `autocluster`尋找資料中離散屬性（維度）的一般模式。 然後，它會將原始查詢的結果（不論是100還是10萬個數據列）縮減成少量的模式。 外掛程式的開發目的是要協助分析失敗（例如例外狀況或當機），但可能會對任何篩選的資料集進行處理。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `T | evaluate autocluster(`*引數*`)`
 
-**傳回**
+## <a name="returns"></a>傳回
 
 外掛程式會傳回 `autocluster` 一組（通常是一小部分）的模式。 模式會在多個離散屬性中，使用共用的通用值來捕捉部分資料。 結果中的每個模式都會以一列來表示。
 
@@ -66,7 +66,7 @@ StormEvents
 | evaluate autocluster(0.6)
 ```
 
-|SegmentId|Count|百分比|State|EventType|Damage|
+|SegmentId|計數|百分比|State|EventType|Damage|
 |---|---|---|---|---|---|---|---|---|
 |0|2278|38.7||Hail|否
 |1|512|8.7||Thunderstorm Wind|YES
@@ -83,7 +83,7 @@ StormEvents
 | evaluate autocluster(0.2, '~', '~', '*')
 ```
 
-|SegmentId|Count|百分比|State|EventType|Damage|
+|SegmentId|計數|百分比|State|EventType|Damage|
 |---|---|---|---|---|---|---|---|---|
 |0|2278|38.7|\*|Hail|否
 |1|512|8.7|\*|Thunderstorm Wind|YES

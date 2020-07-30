@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 43e92edd74861acc8207a855243f9ec1e012070a
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 7fa1ad900eb91390436e88c44ad9fd7394ad087d
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717354"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348644"
 ---
 # <a name="current_principal"></a>current_principal()
 
@@ -23,17 +23,17 @@ ms.locfileid: "84717354"
 
 傳回執行查詢的目前主體名稱。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `current_principal()`
 
-**傳回**
+## <a name="returns"></a>傳回
 
 目前的主體完整名稱（FQN），其為 `string` 。  
 字串格式為：  
 *PrinciplaType* `=`*PrincipalId* `;`*TenantId*
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

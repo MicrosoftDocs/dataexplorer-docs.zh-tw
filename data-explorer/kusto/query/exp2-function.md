@@ -1,6 +1,6 @@
 ---
-title: exp2() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 exp2()。
+title: exp2 （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 exp2 （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 1302a64d52962d080dcf32403362125e60eceed2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1c2fbf2067aa83963801b6d5ec7b9f4204e99f4d
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515601"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348168"
 ---
 # <a name="exp2"></a>exp2()
 
-x 的基-2指數函數,該函數為 2,提升為功率 x:2+x。  
+X 的基底2指數函式，其為2的乘冪 x： 2 ^ x。  
 
-**語法**
+## <a name="syntax"></a>語法
 
-`exp2(`*X.*`)`
+`exp2(`*x*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *x*: 實數,指數值。
+* *x*：指數的實數值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-* x 的指數值。
-* 有關自然(基-2)對數,請參閱[log2()](log2-function.md)。
-* 有關基 e 和基-10 對數的指數函數,請參閱[exp()](exp-function.md) [,exp10()](exp10-function.md)
+* X 的指數值。
+* 如需自然（以2為基底）的對數，請參閱[log2 （）](log2-function.md)。
+* 若為以 e 為底數的指數函數和以10為基底的對數，請參閱[exp （）](exp-function.md)、 [exp10 （）](exp10-function.md)

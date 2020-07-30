@@ -1,6 +1,6 @@
 ---
-title: 計數() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 countof()。
+title: countof （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 countof （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1d932fbcea9b38849e7d7de09230c9a5aa9fa8e4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1d34b0611db134a6fc99daa49d04bfc19575a1c1
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516893"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348746"
 ---
 # <a name="countof"></a>countof()
 
@@ -24,21 +24,21 @@ countof("The cat sat on the mat", "at") == 3
 countof("The cat sat on the mat", @"\b.at\b", "regex") == 3
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-`countof(`*文字*`,`*搜尋*`,`[*類型*】`)`
+`countof(`*文字* `,`*搜尋*[ `,` *kind*]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *文字*:字串。
-* *搜尋*: 要符合*文字*內部的純字串或[正規表示式](./re2.md)。
-* *型態*`"normal"|"regex"`:`normal`預設值 。 
+* *text*：字串。
+* *搜尋*：要在文字中比對的純*文本*字串或[正則運算式](./re2.md)。
+* *種類*： `"normal"|"regex"` 預設值 `normal` 。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 搜尋字串可在容器中相符的次數。 純文字字串的相符項目可能會重疊；regex 的相符項目則不會。
 
-**範例**
+## <a name="examples"></a>範例
 
 |||
 |---|---

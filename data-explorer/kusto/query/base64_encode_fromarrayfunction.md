@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2020
-ms.openlocfilehash: bee6471ef2cf2a2cd484af8ce84d70cce749d5e0
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: ede35223b9cc57fddc5318659e6902130a80c011
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225321"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349273"
 ---
 # <a name="base64_encode_fromarray"></a>base64_encode_fromarray()
 
 從位元組陣列將 base64 字串編碼。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `base64_encode_fromarray(`*BytesArray*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *BytesArray*：要編碼為 base64 字串的輸入位元組陣列。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回以位元組陣列編碼的 base64 字串。
 
@@ -35,7 +35,7 @@ ms.locfileid: "83225321"
 * 如需將字串編碼為 base64 字串，請參閱[base64_encode_tostring （）](base64_encode_tostringfunction.md)
 * 此函式是 base64_decode_toarray 的反向[（）](base64_decode_toarrayfunction.md)
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

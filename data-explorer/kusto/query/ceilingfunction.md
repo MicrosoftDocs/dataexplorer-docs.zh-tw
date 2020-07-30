@@ -1,6 +1,6 @@
 ---
-title: 天花板() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的天花板()。
+title: 上限（）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的上限（）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f2ecd043c43bb1af6530364d200d5dc9db640f95
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e2a29d28b25d26d582aa49717d5ce5576276f450
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517250"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348899"
 ---
 # <a name="ceiling"></a>ceiling()
 
-計算大於或等於指定數值表達式的最小整數。
+計算大於或等於指定之數值運算式的最小整數。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`ceiling(`*X.*`)`
+`ceiling(`*x*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *x*: 實數。
+* *x*：實數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-* 大於或等於指定數值表達式的最小整數。 
+* 大於或等於指定之數值運算式的最小整數。 
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 print c1 = ceiling(-1.1), c2 = ceiling(0), c3 = ceiling(0.9)

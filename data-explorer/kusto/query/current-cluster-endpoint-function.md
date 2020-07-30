@@ -1,6 +1,6 @@
 ---
-title: current_cluster_endpoint() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的current_cluster_endpoint()。
+title: current_cluster_endpoint （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 current_cluster_endpoint （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 65ce130b4dd3e0a3125eefc6c410775647f9b964
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2c3ddbee55e729ae8afbb6c1fbcc213bd6bfd9ce
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516842"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348712"
 ---
 # <a name="current_cluster_endpoint"></a>current_cluster_endpoint()
 
-返回要查詢的當前群集的網路終結點(DNS 名稱)。
+傳回目前正在查詢之叢集的網路端點（DNS 名稱）。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `current_cluster_endpoint()`
 
-**傳回**
+## <a name="returns"></a>傳回
 
-正在查詢的當前群集的網路終結點(DNS 名稱)作為`string`類型的值。
+目前正在查詢之叢集的網路端點（DNS 名稱），其為類型的值 `string` 。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 print strcat("This query executed on: ", current_cluster_endpoint())

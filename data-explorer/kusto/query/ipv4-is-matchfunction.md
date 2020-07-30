@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 7b076f9878828ca8503c808b6ab94daf3375e2d4
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 90d65f80ed8b5defe1fd2fe1e19ca4ff385cc408
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294622"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347335"
 ---
-# <a name="ipv4_is_match"></a>ipv4_is_match （）
+# <a name="ipv4_is_match"></a>ipv4_is_match()
 
 符合兩個 IPv4 字串。 這兩個 IPv4 字串會經過剖析和比較，同時會計入引數前置詞所計算的結合 IP 首碼遮罩和選擇性 `PrefixMask` 引數。
 
@@ -26,11 +26,11 @@ ipv4_is_match('192.168.1.1/24', '192.168.1.255/24') == true
 ipv4_is_match('192.168.1.1', '192.168.1.255', 24) == true
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `ipv4_is_match(`*運算式 1* `, `*運算式 2* `[ ,`*PrefixMask*`])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *運算式 1*、運算式*2*：代表 IPv4 位址的字串運算式。 IPv4 字串可以使用[IP 首碼標記法](#ip-prefix-notation)來進行遮罩。
 * *PrefixMask*：介於0到32之間的整數，代表所考慮的最高有效位數。
@@ -40,7 +40,7 @@ ipv4_is_match('192.168.1.1', '192.168.1.255', 24) == true
 您可以 `IP-prefix notation` 使用斜線（）字元來定義 IP 位址 `/` 。 斜線（）左邊的 IP 位址 `/` 是基底 ip 位址。 斜線（）右邊的數位（1到32） `/` 是網路遮罩中連續1位的數目。 
 **範例：** 192.168.2.0/24 會有相關聯的 net/subnetmask，其中包含小數點十進位格式的24個連續位或255.255.255.0。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 * `true`：如果第一個 IPv4 字串引數的長標記法等於第二個 IPv4 字串引數。
 *  `false`別的.

@@ -1,6 +1,6 @@
 ---
-title: avgif() (聚合函數) - Azure 數據資源管理器 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 vgif() 聚合函數。
+title: avgif （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 avgif （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 61352be628b7c5a05085c092d0c022deaa0d9b6e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 587af53de774332db70ef9bffcadf74d9e2c069d
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518253"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349375"
 ---
-# <a name="avgif-aggregation-function"></a>avgif () (聚合函數)
+# <a name="avgif-aggregation-function"></a>avgif （）（彙總函式）
 
-計算*的字*值`true`為的群組中*Expr*的[平均值](avg-aggfunction.md)。
+計算述*詞評估為的整個*群組中的*Expr* [平均值](avg-aggfunction.md) `true` 。
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+* 只能在[匯總](summarizeoperator.md)的內容中使用
 
-**語法**
+## <a name="syntax"></a>語法
 
-總結`avgif(` *Expr*`, `*謂詞*`)`
+總結 `avgif(` *Expr* `, ` *Predicate*述詞`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *Expr*:將用於聚合計算的運算式。 值`null`的記錄將被忽略,並且不包括在計算中。
-* *謂詞*: 謂詞,如果為 true,*則 Expr*計算的值將添加到平均值中。
+* *Expr*：將用於匯總計算的運算式。 具有值的記錄 `null` 會被忽略，而且不會包含在計算中。
+* 述*詞：如果*為 true，則會將*Expr*計算值加到平均值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-*謂詞*計算`true`為 的組中*Expr*的平均值。
+在述*詞評估為*的整個群組中， *Expr*的平均值 `true` 。
  
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 range x from 1 to 100 step 1

@@ -8,19 +8,19 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4216f691345c7dffd3bb1974e5f82e877ffb70f2
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: fb781834d77aee678103a14714721ff0d46f7b3a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128983"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346094"
 ---
 # <a name="prev"></a>prev()
 
 傳回指定資料列中特定資料行的值。
 指定的資料列位於[序列化資料列集中](./windowsfunctions.md#serialized-row-set)目前資料列的指定位移。
 
-**語法**
+## <a name="syntax"></a>語法
 
 有幾種可能性。
 
@@ -30,7 +30,7 @@ ms.locfileid: "85128983"
 
 * `prev(column, offset, default_value)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * `column`：要從中取得值的資料行。
 
@@ -38,7 +38,7 @@ ms.locfileid: "85128983"
 
 * `default_value`：在沒有先前的資料列要接受值時，所要使用的預設值。 若未指定預設值，則會使用 null。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 Table | serialize | extend prevA = prev(A,1)

@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 29b35e5bd7265d89e65fe0129317a9f1672c7cad
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 143257a586bb951caeb116882551e55f89c8636e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373088"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345873"
 ---
 # <a name="rank_tdigest"></a>rank_tdigest()
 
 計算集合中值的近似順位。 集合中的值次序 `v` `S` 定義為 `S` 較小或等於的成員計數，由 `v` `S` 其代表 `tdigest` 。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `rank_tdigest(`*`TDigest`*`,` *`Expr`*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *TDigest*：由[TDigest （）](tdigest-aggfunction.md)或[tdigest_merge （）](tdigest-merge-aggfunction.md)所產生的運算式
 * *Expr*：代表要用於排序計算之值的運算式。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 資料集中的 rank foreach 值。
 
@@ -36,7 +36,7 @@ ms.locfileid: "83373088"
 
 1) 您想要取得其順位的值，其類型必須與相同 `tdigest` 。
 
-**範例**
+## <a name="examples"></a>範例
 
 在排序清單（1-1000）中，685的順位是其索引：
 

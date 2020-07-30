@@ -1,6 +1,6 @@
 ---
-title: datetime_add() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 datetime_add()。
+title: datetime_add （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 datetime_add （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,45 +8,45 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ead7e0ae5c4dee94930afe1b20c4d5b99e2b4664
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 766f0617b70e21194d731ae1cf8eabf1014265bb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516451"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348542"
 ---
 # <a name="datetime_add"></a>datetime_add()
 
-計算指定日期部份的新[日期時間](./scalar-data-types/datetime.md)乘以指定金額,新增到指定[日期時間](./scalar-data-types/datetime.md)。
+從指定的 datepart 乘以指定的數量來計算新的[日期時間](./scalar-data-types/datetime.md)，並加入至指定的[日期時間](./scalar-data-types/datetime.md)。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`datetime_add(`*period*`,`期間*amount*`,`值*日期時間*`)`
+`datetime_add(`*期間* `,`*金額* `,`*datetime*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* `period`:[字串](./scalar-data-types/string.md)。 
-* `amount`:[整數](./scalar-data-types/int.md)。
-* `datetime`:[日期時間](./scalar-data-types/datetime.md)值。
+* `period`：[字串](./scalar-data-types/string.md)。 
+* `amount`：[整數](./scalar-data-types/int.md)。
+* `datetime`：[日期時間](./scalar-data-types/datetime.md)值。
 
-*期間*的可能值 : 
-- Year
-- Quarter
-- Month
+*期間*的可能值： 
+- 年
+- 季
+- 月
 - 週
-- Day
+- 天
 - Hour
-- Minute
+- 分鐘
 - Second
 - Millisecond
 - 微秒
-- 奈秒
+- 100奈秒
 
-**傳回**
+## <a name="returns"></a>傳回
 
-已添加特定時間/日期間隔後的日期。
+加入特定時間/日期間隔之後的日期。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 print  year = datetime_add('year',1,make_datetime(2017,1,1)),
@@ -62,7 +62,7 @@ second = datetime_add('second',1,make_datetime(2017,1,1))
 
 |year|quarter|月|week|day|hour|minute|second|
 |---|---|---|---|---|---|---|---|
-|2018-01-01 00:00:00.0000000|2017-04-01 00:00:00.0000000|2017-02-01 00:00:00.0000000|2017-01-08 00:00:00.0000000|2017-01-02 00:00:00.0000000|2017-01-01 01:00:00.0000000|2017-01-01 00:01:00.0000000|2017-01-01 00:00:01.0000000|
+|2018-01-01 00：00：00.0000000|2017-04-01 00：00：00.0000000|2017-02-01 00：00：00.0000000|2017-01-08 00：00：00.0000000|2017-01-02 00：00：00.0000000|2017-01-01 01：00：00.0000000|2017-01-01 00：01：00.0000000|2017-01-01 00：00：01.0000000|
 
 
 

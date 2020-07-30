@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: b70ee322d4718f78a37144b650a147c5c9965a60
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 13cc0edad5e0e4673c34e7e5b1b517f097fa4e9a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85129017"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346179"
 ---
 # <a name="percentile-percentiles-aggregation-function"></a>百分位數（）、百分位數（）（彙總函式）
 
@@ -24,7 +24,7 @@ ms.locfileid: "85129017"
 * `percentilesw()`類似于 `percentilew()` ，但會計算多個加權百分位數值，這比個別計算每個百分位數更快。
 * `percentilew()`並 `percentilesw()` 讓您計算加權百分位數。 加權百分位數會以「加權」方式計算指定的百分位數，方法是在輸入中，將每個值視為重複的 `weight` 時間。
 
-**語法**
+## <a name="syntax"></a>語法
 
 匯總 `percentile(` *Expr* `,` *百分位數*`)`
 
@@ -42,18 +42,18 @@ ms.locfileid: "85129017"
 
 摘要 `percentilesw_array(` *Expr* `,` *WeightExpr* `,` *動態陣列*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * `*Expr*`：將用於匯總計算的運算式。
 * `*WeightExpr*`：將當做匯總計算之值的權數使用的運算式。
 * `*Percentile*`：指定百分位數的 double 常數。
 * `*Dynamic array*`：整數或浮點數的動態陣列中的百分位數清單。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回 `*Expr*` 群組中指定之百分位數的估計值。 
 
-**範例**
+## <a name="examples"></a>範例
 
 大於 `Duration` 95% 樣本集和小於5% 樣本集的值。
 
@@ -83,7 +83,7 @@ CallDetailRecords
 
 用 `summarize percentilesw(Duration, BucketSize, ...)` 來以「加權」方式計算給定的百分位數。 將持續時間的每個值視為在輸入中重複的 BucketSize 時間，而不需要確實具體化那些記錄。
 
-**範例**
+## <a name="example"></a>範例
 
 客戶具有一組延遲值（以毫秒為單位）： `{ 1, 1, 2, 2, 2, 5, 7, 7, 12, 12, 15, 15, 15, 18, 21, 22, 26, 35 }` 。
 

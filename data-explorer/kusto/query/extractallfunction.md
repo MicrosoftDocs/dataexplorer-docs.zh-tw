@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 55168d381ab69bf0d29e8560714e13cb635fd688
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: e52f90b911331bca6374318869d3f8ebf262d81f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780519"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348066"
 ---
 # <a name="extract_all"></a>extract_all()
 
@@ -24,19 +24,19 @@ ms.locfileid: "84780519"
 print extract_all(@"(\d+)", "a set of numbers: 123, 567 and 789") // results with the dynamic array ["123", "567", "789"]
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `extract_all(`*RegEx* `,`[*captureGroups* `,` ]*文字*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 |引數        |描述                                  |Required 或 Optional  |
 |----------------|---------------------------------------------|----------------------|
 |RegEx           | [正則運算式](./re2.md)。 運算式必須至少有一個「捕獲群組」和「小於或等於16個」捕獲群組                                                         |必要              |
 |captureGroups   |動態陣列常數，表示要解壓縮的 capture 群組。 有效值是從1到正則運算式中的捕捉群組數目。 也允許命名的 capture 群組（請參閱[範例](#examples)）|選用         |
-|text            |`string`要搜尋的                         |必要              |
+|文字            |`string`要搜尋的                         |必要              |
 
-**傳回**
+## <a name="returns"></a>傳回
 
 * 如果*RegEx*在*文字*中找到相符專案：會傳回動態陣列，包括對指定的 capture 群組*captureGroups*的所有相符專案，或*RegEx*中的所有捕捉群組。
 * 如果*captureGroups*數目為1：傳回的陣列具有符合值的單一維度。
@@ -54,7 +54,7 @@ print Id="82b8be2d-dfa7-4bd1-8f63-24ad26d31449"
 | extend guid_bytes = extract_all(@"([\da-f]{2})", Id) 
 ```
 
-|ID|guid_bytes|
+|識別碼|guid_bytes|
 |---|---|
 |82b8be2d-dfa7-4bd1-8f63-24ad26d31449|["82"，"b8"，"是"，"2d"，"df"，"a7"，"4b"，"d1"，"8f"，"63"，"24"，"ad"，"26"，"d3"，"14"，"49"]|
 
@@ -67,7 +67,7 @@ print Id="82b8be2d-dfa7-4bd1-8f63-24ad26d31449"
 | extend guid_bytes = extract_all(@"(\w)(\w+)(\w)", Id)
 ```
 
-|ID|guid_bytes|
+|識別碼|guid_bytes|
 |---|---|
 |82b8be2d-dfa7-4bd1-8f63-24ad26d31449|[["8"，"2b8be2"，"d"]，["d"，"fa"，"7"]，["4"，"bd"，"1"]，["8"，"f6"，"3"]，["2"，"4ad26d3144"，"9"]]|
 
@@ -80,7 +80,7 @@ print Id="82b8be2d-dfa7-4bd1-8f63-24ad26d31449"
 | extend guid_bytes = extract_all(@"(\w)(\w+)(\w)", dynamic([1,3]), Id) 
 ```
 
-|ID|guid_bytes|
+|識別碼|guid_bytes|
 |---|---|
 |82b8be2d-dfa7-4bd1-8f63-24ad26d31449|[["8"，"d"]，["d"，"7"]，["4"，"1"]，["8"，"3"]，["2"，"9"]]|
 
@@ -94,6 +94,6 @@ print Id="82b8be2d-dfa7-4bd1-8f63-24ad26d31449"
 | extend guid_bytes = extract_all(@"(?P<first>\w)(?P<middle>\w+)(?P<last>\w)", dynamic(['first',2,'last']), Id) 
 ```
 
-|ID|guid_bytes|
+|識別碼|guid_bytes|
 |---|---|
 |82b8be2d-dfa7-4bd1-8f63-24ad26d31449|[["8"，"2b8be2"，"d"]，["d"，"fa"，"7"]，["4"，"bd"，"1"]，["8"，"f6"，"3"]，["2"，"4ad26d3144"，"9"]]|

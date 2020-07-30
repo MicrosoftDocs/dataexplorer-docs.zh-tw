@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: ef64818c9c5e345ffb60999c97273670026be022
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 84858a28d1676306a34b2bfa7dfe9563e46227fb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227616"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349171"
 ---
 # <a name="between-operator"></a>between 運算子
 
@@ -26,7 +26,7 @@ Table1 | where Time between (datetime(2017-01-01) .. datetime(2017-01-01))
 
 `between`可以在任何數值、日期時間或 timespan 運算式上操作。
  
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `|` `where` *expr* `between` `(` *leftRange* ` .. ` *rightRange*`)`   
  
@@ -34,18 +34,18 @@ Table1 | where Time between (datetime(2017-01-01) .. datetime(2017-01-01))
 
 *T* `|` `where` *expr* `between` `(` *leftRangeDateTime* ` .. ` *rightRangeTimespan*`)`   
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T* -要比對其記錄的表格式輸入。
 * *expr* -要篩選的運算式。
 * *leftRange* -左邊範圍（含）的運算式。
 * *rightRange* -正確範圍（含）的運算式。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 *T*中的資料列（*expr*  >=  *leftRange*和*expr*  <=  *rightRange*）會評估為 `true` 。
 
-**範例**  
+## <a name="examples"></a>範例  
 
 **使用 ' between ' 運算子篩選數值**  
 

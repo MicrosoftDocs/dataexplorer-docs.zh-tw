@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 2a5881eacd0702720b7ea4b9a3237731a56a5180
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: cc62fcd04ad6a528836cc60a5c336ed4e8d1aecf
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85265029"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348559"
 ---
 # <a name="datatable-operator"></a>datatable 運算子
 
@@ -24,11 +24,11 @@ ms.locfileid: "85265029"
 > [!NOTE]
 > 這個運算子沒有管線輸入。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `datatable``(` *ColumnName* `:` *ColumnType* [ `,` ...] `)` `[` *scalarvalue 具有*[ `,` *scalarvalue 具有*...]`]`
 
-**引數**
+## <a name="arguments"></a>引數
 
 ::: zone pivot="azuredataexplorer"
 
@@ -45,11 +45,11 @@ ms.locfileid: "85265029"
 
 ::: zone-end
 
-**傳回**
+## <a name="returns"></a>傳回
 
 這個運算子會傳回給定架構和資料的資料表。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 datatable (Date:datetime, Event:string)

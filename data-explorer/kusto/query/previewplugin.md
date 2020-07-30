@@ -1,6 +1,6 @@
 ---
-title: 預覽外掛程式 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 數據資源管理器中的預覽外掛程式。
+title: 預覽外掛程式-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的預覽外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 18bda0a4348d0c0eb2776bf124c57397f318a989
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3d54852577281b66ed7754e419acbabbba989e7c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510977"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346077"
 ---
-# <a name="preview-plugin"></a>預覽外掛程式
+# <a name="preview-plugin"></a>preview 外掛程式
 
-返回具有最多來自輸入記錄集中的指定行數的表,以及輸入記錄集中的記錄總數。
+傳回資料表，其中包含輸入記錄集內的指定資料列數目，以及輸入記錄集中的記錄總數。
 
 ```kusto
 T | evaluate preview(50)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `T` `|` `evaluate` `preview(` *NumberOfRows* `)`
 
-**傳回**
+## <a name="returns"></a>傳回
 
-外掛`preview`程式 傳回兩個結果表:
-* 具有最多指定行數的表。
-  例如,上面的範例查詢等效於執行`T | take 50`。
-* 具有單個行/列的表,保存輸入記錄集中的記錄數。
-  例如,上面的範例查詢等效於執行`T | count`。
+外掛程式會傳回 `preview` 兩個結果資料表：
+* 最多包含指定資料列數目的資料表。
+  例如，上述範例查詢相當於 [執行中] `T | take 50` 。
+* 含有單一資料列/資料行的資料表，其中包含輸入記錄集中的記錄數目。
+  例如，上述範例查詢相當於 [執行中] `T | count` 。
 
-**技巧**
+**提示**
 
-如果`evaluate`前面有包含複雜篩選器的表格來源,或是參考大多數源表列的篩選器,則更喜歡使用函[`materialize`](materializefunction.md)式 。 例如：
+如果 `evaluate` 前面加上包含複雜篩選的表格式來源，或參考大部分來源資料表資料行的篩選，則偏好使用 [`materialize`](materializefunction.md) 函數。 例如：
 
 ```kusto
 let MaterializedT = materialize(T);

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/22/2020
-ms.openlocfilehash: f8abb1683a2f15f012e9a9271681688c19901af0
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: b8ebef923d1cc67c118317680e1ec414900a469e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227585"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348950"
 ---
 # <a name="bitset_count_ones"></a>bitset_count_ones()
 
@@ -23,19 +23,19 @@ ms.locfileid: "83227585"
 bitset_count_ones(42)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `bitset_count_ones(`*num1*' '） '
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *num1*： long 或 integer 數位。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回數位的二進位標記法中的集合位數目。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

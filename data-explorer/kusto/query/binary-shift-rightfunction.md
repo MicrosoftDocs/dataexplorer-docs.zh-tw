@@ -1,6 +1,6 @@
 ---
-title: binary_shift_right() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的binary_shift_right()。
+title: binary_shift_right （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 binary_shift_right （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a94c8c695f1c5d16ee0a7e3a92882486b8a8ef5d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 96da8894aa4320a2d423d072acc048994463a7b3
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517539"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349018"
 ---
 # <a name="binary_shift_right"></a>binary_shift_right()
 
-返回對一對數位的二進位移位右操作。
+傳回一對數位的二元移位右運算。
 
 ```kusto
 binary_shift_right(x,y) 
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-`binary_shift_right(`*num1* `,` *num2*`)`
+`binary_shift_right(`*num1* `,`*num2*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *數位1,**數位2:* 長數。
+* *num1*， *num2*： long 數位。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-返回對一對數位的二進位移位右操作:num1 >> (num2%64)。
-如果 n 為負,則傳回 NULL 值。
+傳回一對數位的二元右移 right 運算： num1 >>  （num2% 64）。
+如果 n 為負數，則會傳回 Null 值。

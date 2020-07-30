@@ -1,6 +1,6 @@
 ---
-title: arg_max() (聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的arg_max()(聚合函數)。
+title: arg_max （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 arg_max （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 73953a17b1819081c8458d5dbde3fa6d55c8866e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1ce8bb0635743fd6692cda3b707bbb7d88e07af9
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518950"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349698"
 ---
-# <a name="arg_max-aggregation-function"></a>arg_max() (聚合函數)
+# <a name="arg_max-aggregation-function"></a>arg_max （）（彙總函式）
 
-在組中查找最大化*ExprTo 最大化*的行,並返回*ExprToReturn*`*`的值(或返回整個行)。
+在群組中尋找最大化*exprtomaximize 資料列*的資料列，並傳回*ExprToReturn*的值（或傳回 `*` 整個資料列）。
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+* 只能在[匯總](summarizeoperator.md)的內容中使用
 
-**語法**
+## <a name="syntax"></a>語法
 
-`summarize`【`(`*名稱exprto最大化*`,`*名稱exprto傳回*】`,` ...`)=` `(` `*` | `,` *ExprToMaximize*[ exprTO 最大化 , *Exprtoto 傳回*】 . `arg_max``)`
+`summarize`[ `(` *NameExprToMaximize* `,` *NameExprToReturn* [ `,` ...] `)=` ] `arg_max` `(`*Exprtomaximize 資料列*， `*`  |  *ExprToReturn* [ `,` ...]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *ExprTo 最大化*:將用於聚合計算的運算式。 
-* *ExprToReturn*:當*ExprToMaximize*為最大值時將用於返回值的運算式。 要返回的運算式可以是通配符 (*), 用於返回輸入表的所有列。
-* *NameExprTo 最大化*:表示*ExprTo 最大化*的結果列的可選名稱。
-* *NameExprToReturn:* 表示*ExprToReturn*的結果列的其他可選名稱。
+* *Exprtomaximize 資料列*：將用於匯總計算的運算式。 
+* *ExprToReturn*：將用來在*exprtomaximize 資料列*為 maximum 時傳回值的運算式。 要傳回的運算式可能是萬用字元（*），以傳回輸入資料表的所有資料行。
+* *NameExprToMaximize*：代表*exprtomaximize 資料列*之結果資料行的選擇性名稱。
+* *NameExprToReturn*：代表*ExprToReturn*之結果資料行的其他選擇性名稱。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-在組中查找最大化*ExprTo 最大化*的行,並返回*ExprToReturn*`*`的值(或返回整個行)。
+在群組中尋找最大化*exprtomaximize 資料列*的資料列，並傳回*ExprToReturn*的值（或傳回 `*` 整個資料列）。
 
-**範例**
+## <a name="examples"></a>範例
 
-有關[arg_min()聚合](arg-min-aggfunction.md)函數的範例
+請參閱[arg_min （）](arg-min-aggfunction.md)彙總函式的範例

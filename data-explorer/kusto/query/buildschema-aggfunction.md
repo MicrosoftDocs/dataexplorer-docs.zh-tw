@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: cf21443beffb327e2708b8990017ac37fbbc8d21
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: 2520849508c9cef829d7c8c07f22d3f8c64cfcea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902045"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348933"
 ---
 # <a name="buildschema-aggregation-function"></a>buildschema （）（彙總函式）
 
@@ -21,22 +21,22 @@ ms.locfileid: "85902045"
 
 * 只能在匯總的內容中使用，在[摘要](summarizeoperator.md)中
 
-**語法**
+## <a name="syntax"></a>語法
 
 摘要 `buildschema(` *DynamicExpr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *DynamicExpr*：用於匯總計算的運算式。 參數資料行類型必須是 `dynamic` 。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 整個群組的最大值 *`Expr`* 。
 
 > [!TIP] 
 > 如果出現 `buildschema(json_column)` 語法錯誤：*是您 `json_column` 的字串，而不是動態物件嗎？* 然後使用 `buildschema(parsejson(json_column))` 。
 
-**範例**
+## <a name="example"></a>範例
 
 假設輸入資料行有三個動態值。
 

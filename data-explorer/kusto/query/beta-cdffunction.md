@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 76b16098d9340a98fb3a456dfa947c089507da6c
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a98fe59755e47be8f4f4e53595d25bb260004236
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227684"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349222"
 ---
 # <a name="beta_cdf"></a>beta_cdf()
 
@@ -27,21 +27,21 @@ beta_cdf(0.2, 10.0, 50.0)
 
 Beta 分佈常用於研究不同樣本 (例如人們在一天不同時段內花在看電視的時間) 之間的差異 (百分比)。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `beta_cdf(`*x* `, `*Alpha* `, `搶鮮*版*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：要在其上評估函數的值。
 * *Alpha*：分佈的參數。
 * 搶鮮*版（Beta*）：散發的參數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 * 累計搶鮮[版（Beta）分佈函數](https://en.wikipedia.org/wiki/Beta_distribution#Cumulative_distribution_function)。
 
-**注意事項**
+**備註**
 
 如果有任何引數是非數值，Beta_cdf （）會傳回 null 值。
 
@@ -49,7 +49,7 @@ Beta 分佈常用於研究不同樣本 (例如人們在一天不同時段內花�
 
 如果 Alpha ≤0或 Beta ≤0，Beta_cdf （）會傳回 NaN 值。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -63,7 +63,7 @@ datatable(x:double, alpha:double, beta:double, comment:string)
 | extend b = beta_cdf(x, alpha, beta)
 ```
 
-|x|alpha|beta|comment|b|
+|x|alpha|搶鮮版 (Beta)|comment|b|
 |---|---|---|---|---|
 |0.9|10|20|有效的輸入|0.999999999999959|
 |1.5|10|20|x > 1，產生 NaN|NaN|

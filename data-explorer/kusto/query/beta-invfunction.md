@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 60b054bbd234a77f81c47e375b98be0a5df103a5
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: b69fed2b3d7028fdc29d8098e8358c0088fcd8bb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227650"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349205"
 ---
 # <a name="beta_inv"></a>beta_inv()
 
@@ -27,21 +27,21 @@ beta_inv(0.1, 10.0, 50.0)
 
 Beta 分配可用於專案規劃中，以指定預期的完成時間和變化來建立可能完成時間模型。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `beta_inv(`*probability*機率 `, `*Alpha* `, `搶鮮*版*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * 機率：與搶鮮*版（Beta*）分佈相關聯的機率。
 * *Alpha*：分佈的參數。
 * 搶鮮*版（Beta*）：散發的參數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 * 搶鮮版（Beta）累計機率密度函數[Beta_cdf （）](./beta-cdffunction.md)的反向
 
-**注意事項**
+**備註**
 
 如果有任何引數是非數值，Beta_inv （）會傳回 null 值。
 
@@ -51,7 +51,7 @@ Beta 分配可用於專案規劃中，以指定預期的完成時間和變化來
 
 假設有 [機率] 的值，Beta_inv （）會搜尋值 x，使 Beta_cdf （x，Alpha，Beta） = 機率。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -64,7 +64,7 @@ datatable(p:double, alpha:double, beta:double, comment:string)
 | extend b = beta_inv(p, alpha, beta)
 ```
 
-|p|alpha|beta|comment|b|
+|p|alpha|搶鮮版 (Beta)|comment|b|
 |---|---|---|---|---|
 |0.1|10|20|有效的輸入|0.226415022388749|
 |1.5|10|20|p > 1，產生 null||

@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2019
-ms.openlocfilehash: d95bed91ab07be3feebecffbb97378866cb7c6c9
-ms.sourcegitcommit: a034b6a795ed5e62865fcf9340906f91945b3971
+ms.openlocfilehash: cf83690d61bb84d1b6b877e76a77d5776be35ad4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85197221"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349239"
 ---
-# <a name="basket-plugin"></a>購物籃外掛程式
+# <a name="basket-plugin"></a>basket 外掛程式
 
 ```kusto
 T | evaluate basket()
@@ -23,11 +23,11 @@ T | evaluate basket()
 
 購物籃會尋找資料中離散屬性（維度）的所有常見模式。 然後，它會傳回在原始查詢中傳遞頻率臨界值的常見模式。 購物籃保證會在資料中尋找每個常見的模式，但不保證會有多項式執行時間。 查詢的執行時間在資料列數目中是線性的，但可能是資料行數目（維度）的指數。 Basket 是以最初針對購物籃分析資料採礦而開發的 Apriori 演算法為基礎。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `T | evaluate basket(`*引數*`)`
 
-**傳回**
+## <a name="returns"></a>傳回
 
 購物籃會傳回顯示在資料列比率臨界值以上的所有常用模式。 預設閾值為0.05。 每個模式會以結果中的一個資料列表示。
 
@@ -63,13 +63,13 @@ T | evaluate basket()
 * CustomWildcard- *"any_value_per_type"*
 
     在結果資料表中設定特定類型的萬用字元值，會指出目前的模式沒有這個資料行的限制。
-    預設值為 null。 字串的預設值為空字串。 如果資料中的預設值是良好的，則應該使用不同的萬用字元值，例如 `*` 。
+    預設為 Null。 字串的預設值為空字串。 如果資料中的預設值是良好的，則應該使用不同的萬用字元值，例如 `*` 。
 
     例如：
 
      `T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -80,7 +80,7 @@ StormEvents
 | evaluate basket(0.2)
 ```
 
-|SegmentId|Count|百分比|State|EventType|Damage|DamageCrops|
+|SegmentId|計數|百分比|State|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4574|77.7|||否|0
 |1|2278|38.7||Hail|否|0
@@ -102,7 +102,7 @@ StormEvents
 | evaluate basket(0.2, '~', '~', '*', int(-1))
 ```
 
-|SegmentId|Count|百分比|State|EventType|Damage|DamageCrops|
+|SegmentId|計數|百分比|State|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4574|77.7|\*|\*|否|0
 |1|2278|38.7|\*|Hail|否|0

@@ -1,6 +1,6 @@
 ---
-title: bin_auto() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的 bin_auto()。
+title: bin_auto （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 bin_auto （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,35 +8,35 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ebb214ae6a2676bf59a37e1e4e9cc3c085374bb3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6df5d9793f2d076eb8f97156e911fb49aba4cc9c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517828"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349154"
 ---
 # <a name="bin_auto"></a>bin_auto()
 
-將值舍入到固定大小的"bin",控制查詢屬性提供的 bin 大小和起始點。
+將值向下舍入固定大小的 "bin"，以控制查詢屬性所提供的 bin 大小和起點。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `bin_auto``(`*運算式*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *運算式*:表示要捨入的值的數字類型的標量運算式。
+* *Expression*：數數值型別的純量運算式，表示要四捨五入的值。
 
 **用戶端要求屬性**
 
-* `query_bin_auto_size`:指示每個條柱大小的數字文本。
-* `query_bin_auto_at`: 表示*運算式*的一個值的數位文本,該值是"固定點"(即`fixed_point``bin_auto(fixed_point)`==`fixed_point`.) 的值。
+* `query_bin_auto_size`：指出每個 bin 大小的數值常值。
+* `query_bin_auto_at`：數值常值，表示*運算式*的一個值，這是一個「固定點」（也就是值 `fixed_point` `bin_auto(fixed_point)` == `fixed_point` ）。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-下面`query_bin_auto_at`*表示式*的最近倍數,`query_bin_auto_at`移動, 以便被翻譯成本身.
+下一個運算式的最接近倍數 `query_bin_auto_at` ，已移位，因此*Expression* `query_bin_auto_at` 會轉譯成其本身。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 set query_bin_auto_size=1h;
@@ -45,7 +45,7 @@ range Timestamp from datetime(2017-01-01 00:05) to datetime(2017-01-01 02:00) st
 | summarize count() by bin_auto(Timestamp)
 ```
 
-|時間戳記                    | count_|
+|Timestamp                    | count_|
 |-----------------------------|-------|
-|2017-01-01 00:05:00.0000000  | 60    |
-|2017-01-01 01:05:00.0000000  | 56    |
+|2017-01-01 00：05：00.0000000  | 60    |
+|2017-01-01 01：05：00.0000000  | 56    |

@@ -1,6 +1,6 @@
 ---
-title: 提取json() - Azure數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的提取json()。
+title: extractjson （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 extractjson （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6177a1c8a6ed4390093e6f6fd24c5f5e9fd04f8a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 21f366e8f211acf9c7c542b420006cfb23e683e7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515329"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348032"
 ---
 # <a name="extractjson"></a>extractjson()
 
@@ -25,22 +25,22 @@ ms.locfileid: "81515329"
 extractjson("$.hosts[1].AvailableMB", EventText, typeof(int))
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-`extractjson(`*jsonPath* `,` *資料來源*`)` 
+`extractjson(`*jsonPath* `,`*資料來源*`)` 
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *jsonPath:JsonPath*字串,用於在 JSON 文檔中定義訪問器。
-* *數據來源*:JSON 文檔。
+* *jsonPath*：在 JSON 檔中定義存取子的 jsonPath 字串。
+* *dataSource*： JSON 檔。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 此函式會對包含有效 JSON 字串的 dataSource 執行 JsonPath 查詢，並根據第三個引數選擇性地將該值轉換成另一種類型。
 
-**範例**
+## <a name="example"></a>範例
 
-支架表示法和點`.`( ) 符號`]``[`等效:
+`[`括弧 `]` notatation 和點（ `.` ）標記法是相等的：
 
 ```kusto
 T 

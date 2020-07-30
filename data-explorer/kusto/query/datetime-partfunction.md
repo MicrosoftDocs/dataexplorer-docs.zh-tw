@@ -1,6 +1,6 @@
 ---
-title: datetime_part() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的datetime_part()。
+title: datetime_part （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 datetime_part （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,53 +8,53 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: c64208725f0d5c49a7ea7733f8eb5a208e19225b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2c1a73d2d7e31eb180b37fae3d392fd5792cd69b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516366"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348508"
 ---
 # <a name="datetime_part"></a>datetime_part()
 
-將請求的日期部分提取為整數值。
+將要求的日期部分解壓縮成整數值。
 
 ```kusto
 datetime_part("Day",datetime(2015-12-14))
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-`datetime_part(`*部份*`,`*日期時間*`)`
+`datetime_part(`*部分* `,`*datetime*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * `date`: `datetime`
 * `part`: `string`
 
-的可能值`part`: 
-- Year
-- Quarter
-- Month
+可能的值 `part` ： 
+- 年
+- 季
+- 月
 - week_of_year
-- Day
+- 天
 - DayOfYear
 - Hour
-- Minute
+- 分鐘
 - Second
 - Millisecond
 - 微秒
-- 奈秒
+- 100奈秒
 
-**傳回**
+## <a name="returns"></a>傳回
 
-表示提取的零件的整數。
+表示已解壓縮之元件的整數。
 
 **注意**
 
-`week_of_year`返回表示周數的整數。 周數從一年的第一周計算,即包含第一個星期四的周數。
+`week_of_year`傳回代表周數的整數。 周數是由一年的第一周計算，也就是包含第一個星期四的一個星期。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 let dt = datetime(2017-10-30 01:02:03.7654321); 
@@ -79,5 +79,5 @@ nanosecond = datetime_part("nanosecond", dt)
 |2017|4|10|44|30|303|1|2|3|765|765432|765432100|
 
 > [!NOTE]
-> `weekofyear`是零件的`week_of_year`過時變體。 `weekofyear`不符合 ISO 8601 標準;一年的第一周被定義為一年的第一個星期。
-`week_of_year`符合 ISO 8601 標準;一年的第一周被定義為一年的第一個星期。 [有關詳細資訊](https://en.wikipedia.org/wiki/ISO_8601#Week_dates)。
+> `weekofyear`是元件的過時變體 `week_of_year` 。 `weekofyear`不符合 ISO 8601 規範;一年的第一周定義為一周，其中年份的第一個星期三。
+`week_of_year`符合 ISO 8601 規範;一年的第一周定義為一周，其中的第一個星期四。 [如需詳細資訊](https://en.wikipedia.org/wiki/ISO_8601#Week_dates)。

@@ -1,6 +1,6 @@
 ---
-title: atan2() - Azure 數據資源管理員 |微軟文件
-description: 本文在 Azure 資料資源管理器中介紹 atan2()。
+title: atan2 （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 atan2 （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c8b49191c9d955cf5a91bde2032798f4703f7910
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 60b500109f140290427a6d1ad3baba8e25849b57
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518389"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349443"
 ---
 # <a name="atan2"></a>atan2()
 
-計算正 x 軸和從原點到點 (y, x) 的光線之間的角度(以弧度表示)。
+計算從正 X 軸到原點到點（y，x）之間的角度（以弧度為單位）。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`atan2(`*y*`,`*x*`)`
+`atan2(`*y* `,`*x*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *x*: X 座標(實數)。
-* *Y*: Y 座標(實數)。
+* *x*： x 座標（實數）。
+* *y*： y 座標（實數）。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-* 正 x 軸與從原點到點 (y, x) 的光線之間的角度(以弧度表示)。
+* 從原點到點（y，x）的正 X 軸和光線之間的角度（以弧度為單位）。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 print atan2_0 = atan2(1,1) // Pi / 4 radians (45 degrees)

@@ -1,6 +1,6 @@
 ---
-title: isascii() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 isascii()。
+title: isascii （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 isascii （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: daba0f4015a4847155309964f8ac0909ff4bc9d0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d8a060e4a332988fd966e0dec9ed07b3c76d0e3f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513714"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347284"
 ---
 # <a name="isascii"></a>isascii()
 
-如果`true`參數是有效的 ascii 字串,則返回。
+`true`如果引數是有效的 ascii 字串，則傳回。
     
 ```kusto
 isascii("some string") == true
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-`isascii(`[*value*]`)`
+`isascii(`[*值*]`)`
 
-**傳回**
+## <a name="returns"></a>傳回
 
-指示參數是否是有效的 ascii 字串。
+指出引數是否為有效的 ascii 字串。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 T

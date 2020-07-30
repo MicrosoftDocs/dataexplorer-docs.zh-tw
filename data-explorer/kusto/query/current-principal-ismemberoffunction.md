@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/09/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: fdd062abc02ff1d98ba935fc9016d0a1505e69c3
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: 67d589f15a414ed715a75cc1871549b06f3dba9b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550396"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348661"
 ---
 # <a name="current_principal_is_member_of"></a>current_principal_is_member_of()
 
@@ -31,11 +31,11 @@ print current_principal_is_member_of(
     )
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `current_principal_is_member_of`(`*list of string literals*`)
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *運算式清單*-字串常值的逗號分隔清單，其中的每個常值都是主體完整名稱（FQN）字串，格式如下：  
 *PrinciplaType* `=`*PrincipalId* `;`*TenantId*
@@ -46,7 +46,7 @@ print current_principal_is_member_of(
 | AAD 群組       | `aadgroup=` |
 | AAD 應用程式 | `aadapp=`   |
 
-**傳回**
+## <a name="returns"></a>傳回
   
 此函式會傳回：
 * `true`：如果目前執行查詢的主體成功符合至少一個輸入引數。
@@ -60,7 +60,7 @@ print current_principal_is_member_of(
 > * `where current_principal_is_member_of('non-existing-group') != false` 
 
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 72797b54c3ba431b4a846f9e9661e9693359cceb
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 85c39128eeb9b6ded38366ccd3bea228820c67a7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780451"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347437"
 ---
 # <a name="indexof_regex"></a>indexof_regex()
 
@@ -21,11 +21,11 @@ ms.locfileid: "84780451"
 
 請參閱 [`indexof()`](indexoffunction.md)。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `indexof_regex(`*來源* `,`*查閱* `[,`*start_index* `[,`*長度* `[,`*發生次數*`]]])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 |引數     | 描述                                     |Required 或 Optional|
 |--------------|-------------------------------------------------|--------------------|
@@ -36,7 +36,7 @@ ms.locfileid: "84780451"
 |occurrence    | 尋找模式的第 N 個外觀索引。 
                  預設值為1，第一次出現的索引 |選用            |
 
-**傳回**
+## <a name="returns"></a>傳回
 
 *Lookup*以零為起始的索引位置。
 
@@ -47,7 +47,7 @@ ms.locfileid: "84780451"
      * 長度參數小於-1。
 
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 print

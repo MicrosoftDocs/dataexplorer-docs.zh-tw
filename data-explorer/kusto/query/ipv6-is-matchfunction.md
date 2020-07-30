@@ -8,14 +8,14 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: d5bd270e016f1694c28f663a7fe8bf1d9a8f0903
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: b6d76f8ed834ec40c53321644e5cd9b7f5f93168
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84301277"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347301"
 ---
-# <a name="ipv6_is_match"></a>ipv6_is_match （）
+# <a name="ipv6_is_match"></a>ipv6_is_match()
 
 符合兩個 IPv6 或 IPv4 網路位址字串。 這兩個 IPv6/IPv4 字串會經過剖析和比較，同時會計入引數前置詞所計算的結合 IP 首碼遮罩，以及選擇性的 `PrefixMask` 引數。
 
@@ -27,11 +27,11 @@ ipv6_is_match('fe80::85d:e82c:9446:7994/127', 'fe80::85d:e82c:9446:7995/127') ==
 ipv6_is_match('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == true
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `ipv6_is_match(`*運算式 1* `, `*運算式 2* `[ ,`*PrefixMask*`])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *運算式 1*、運算式*2*：代表 IPv6 或 IPv4 位址的字串運算式。 IPv6 和 IPv4 字串可以使用[IP 首碼標記法](#ip-prefix-notation)來進行遮罩。
 * *PrefixMask*：介於0到128之間的整數，代表所考慮的最高有效位數。
@@ -41,9 +41,10 @@ ipv6_is_match('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == tr
 您可以 `IP-prefix notation` 使用斜線（）字元來定義 IP 位址 `/` 。
 斜線（）左邊的 IP 位址 `/` 是基底 ip 位址。 斜線（）右邊的數位（1到127） `/` 是網路遮罩中連續1位的數目。 
 
-**範例**： fe80：：85d： e82c：9446： 7994/120 將會有相關聯的 net/subnetmask，其中包含120的連續位。
+## <a name="example"></a>範例：
+fe80：：85d： e82c：9446： 7994/120 將會有相關聯的 net/subnetmask，其中包含120的連續位。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 * `true`：如果第一個 IPv6/IPv4 字串引數的長標記法等於第二個 IPv6/IPv4 字串引數。
 * `false`別的.

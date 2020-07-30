@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f34f2ac316f122034fcf8ee19a8e82e51b6221df
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 6c157c014ec3b83aa39d4bdfcadda12e97e84f3e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780468"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346536"
 ---
 # <a name="pack_all"></a>pack_all()
 
 `dynamic`從表格式運算式的所有資料行建立物件（屬性包）。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `pack_all()`
 
-**注意事項**
+**備註**
 
 傳回之物件的標記法不保證會在執行之間以位元組層級相容。 例如，出現在包中的屬性可能會以不同的順序出現。
 
-**範例**
+## <a name="examples"></a>範例
 
 給定資料表 SmsMessages 
 

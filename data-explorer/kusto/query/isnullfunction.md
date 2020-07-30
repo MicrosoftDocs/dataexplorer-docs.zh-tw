@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4c57c7aba2bff2dfaecfa72b20ab76cc84ed17d6
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: d1bea6260ca86e6ca47be843a6acc4fb43a037b3
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550583"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347165"
 ---
 # <a name="isnull"></a>isnull()
 
@@ -23,15 +23,15 @@ ms.locfileid: "83550583"
 isnull(parse_json("")) == true
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `isnull(`*Expr*`)`
 
-**傳回**
+## <a name="returns"></a>傳回
 
 True 或 false，視值是否為 null 而定。
 
-**注意事項**
+**備註**
 
 * `string`值不可以是 null。 請使用[isempty](./isemptyfunction.md)來判斷類型的值 `string` 是否為空的。
 
@@ -43,7 +43,7 @@ True 或 false，視值是否為 null 而定。
 |`parse_json("[]")`|`false`    |
 |`parse_json("{}")`|`false`    |
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 T | where isnull(PossiblyNull) | count

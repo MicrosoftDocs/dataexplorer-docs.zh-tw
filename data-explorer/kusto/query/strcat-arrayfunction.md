@@ -1,6 +1,6 @@
 ---
-title: strcat_array)- Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的strcat_array()。
+title: strcat_array （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 strcat_array （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2d2412762cf68243e3952a8ad12a5b919d947bd3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5b8369d2e994477c9d01880632fac5f8a3ebaf6a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506948"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87342592"
 ---
 # <a name="strcat_array"></a>strcat_array()
 
-使用指定的分隔符建立串聯的陣元值字串。
+使用指定的分隔符號，建立陣列值的串連字號串。
     
-**語法**
+## <a name="syntax"></a>語法
 
-`strcat_array(`*陣列*,*分隔符*`)`
+`strcat_array(`*陣列*、*分隔符號*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *陣列*`dynamic`: 表示要串聯的值陣列的值。
-* *分值器*`string`: 將用於串聯*陣列*中的值值值
+* *array*： `dynamic` 代表要串連之值陣列的值。
+* *分隔符號*： `string` 將用來串連*array*中的值的值
 
-**傳回**
+## <a name="returns"></a>傳回
 
-陣列值,串聯到單個字串。
+陣列值，串連成單一字串。
 
-**範例**
+## <a name="examples"></a>範例
   
 ```kusto
 print str = strcat_array(dynamic([1, 2, 3]), "->")

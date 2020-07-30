@@ -1,6 +1,6 @@
 ---
-title: 使用運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的使用運算符。
+title: 使用運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的取用運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 65c2f2befc074042131b5c0d705fa942a1622035
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 85fd891590e359e31224ed5d707a837b1cc0eb41
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517114"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348831"
 ---
 # <a name="consume-operator"></a>consume 運算子
 
-使用交給操作員的表格數據流。 
+使用傳遞給運算子的表格式資料流程。 
 
-運算符`consume`主要用於觸發查詢副作用,而不實際將結果返回給調用方。
+`consume`運算子大多用於觸發查詢副作用，而不會實際將結果傳回給呼叫者。
 
 ```kusto
 T | consume
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-`consume`【`decodeblocks` `=` *解碼塊*】
+`consume`[ `decodeblocks` `=` *DecodeBlocks*]
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *解碼塊*:恆定的布爾值。 如果設定為`true`,或者請求`perftrace`屬性`true`設置`consume`為 , 則運算符將不僅在其輸入中枚舉記錄,而且實際強制對這些記錄中的每個值進行解壓縮和解碼。
+* *DecodeBlocks*：常數布林值。 如果設定為 `true` ，或如果要求屬性 `perftrace` 設定為 `true` ，則 `consume` 運算子不會只列舉其輸入的記錄，但實際上會強制將這些記錄中的每個值解壓縮和解碼。
 
-運算元`consume`可用於估計查詢的成本,而無需實際將結果返回用戶端。
-(由於各種原因,估計不精確;例如,`consume`是按分佈計算的,`T | consume`因此不會在群集的節點之間傳輸表的數據。
+`consume`運算子可用於估計查詢的成本，而不會實際將結果傳遞回用戶端。
+（估計不會因各種原因而精確; 例如， `consume` 是計算 distributively，因此不會在叢集的 `T | consume` 節點之間傳送資料表的資料）。
 
 <!--
 * *WithStats*: A constant Boolean value. If set to `true` (or if the global

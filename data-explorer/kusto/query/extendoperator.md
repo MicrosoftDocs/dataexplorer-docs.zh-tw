@@ -1,6 +1,6 @@
 ---
-title: 延伸運算子 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的擴展運算符。
+title: 擴充運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的擴充運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,42 +8,42 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4b9b7bdb9488b0e9d1b72b3e0ab4782020c9b841
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 32100f6668c2fb20ae715b985b0bf3612e13e69b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515584"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348151"
 ---
 # <a name="extend-operator"></a>extend 運算子
 
-創建計算列並將其追加到結果集中。
+建立匯出資料行，並將它們附加至結果集。
 
 ```kusto
 T | extend duration = endTime - startTime
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-*T* `| extend` =*欄位* | `(`*名稱*=`,` ...][ 運算`,`式*Expression*`)``=`]
+*T* `| extend` [*ColumnName*  |  `(` *columnname*[ `,` ...] `)` `=` ]*運算式*[ `,` ...]
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *T*: 輸入表格結果集。
-* *欄位名稱:* 選。 要添加或更新的列的名稱。 如果省略,將生成名稱。 如果*運算式*傳回多個列,則可以在括弧中指定列名稱的清單。 在這種情況下 *,將為表達式*的輸出列指定名稱,刪除輸出列的其餘部分(如果有)。 如果未指定列名稱的清單,則所有*運算式*的輸出列都將與生成的名稱一起添加到輸出中。
-* *運算式:* 對輸入列的計算。
+* *T*：輸入表格式結果集。
+* *ColumnName：* 選擇性. 要加入或更新之資料行的名稱。 如果省略，則會產生名稱。 如果*Expression*傳回一個以上的資料行，則可以在括弧中指定資料行名稱的清單。 在此情況下，會為*運算式*的輸出資料行提供指定的名稱，並卸載其餘的輸出資料行（如果有的話）。 如果未指定資料行名稱的清單，將會在輸出中加入所有具有所產生名稱的*運算式*輸出資料行。
+* *Expression：* 對輸入的資料行進行計算。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-輸入表格結果集的複本,以便:
-1. 輸入`extend`中已存在的列名稱將被刪除並追加為其新的計算值。
-2. 輸入中不存在的`extend`列名稱將作為其新的計算值追加。
+輸入表格式結果集的複本，如下所示：
+1. 在 `extend` 輸入中已存在的資料行名稱會被移除，並附加為其新的計算值。
+2. 記下的資料行名稱 `extend` （不存在於輸入中）會附加為其新的計算值。
 
-**技巧**
+**提示**
 
-* 運算子`extend`向沒有索引的輸入結果集添加新列。 **not** 在大多數情況下,如果新列設置為與具有索引的現有表列完全相同,則 Kusto 可以自動使用現有索引。 但是,在某些複雜方案中,此傳播不會完成。 在這種情況下,如果目標是重新命名欄,則改用[`project-rename`運算子](projectrenameoperator.md)。
+* `extend`運算子會將新的資料行加入至沒有索引的輸入結果**not**集。 在大多數情況下，如果新的資料行設定為與具有索引的現有資料表資料行完全相同，則 Kusto 可以自動使用現有的索引。 不過，在某些複雜的案例中，這項傳播並不會完成。 在這種情況下，如果目標是要重新命名資料行，請改用[ `project-rename` 運算子](projectrenameoperator.md)。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 Logs
@@ -53,4 +53,4 @@ Logs
     , IsSevere = Level == "Critical" or Level == "Error"
 ```
 
-可以使用[series_stats](series-statsfunction.md)函數返回多個列。
+您可以使用[series_stats](series-statsfunction.md)函數來傳回多個資料行。

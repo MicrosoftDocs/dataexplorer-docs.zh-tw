@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 7ea5210f0370b495c48615d28e763bf6e396d46e
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 711a8eb851e7df8ba5b78bd03c42a77eb05d8510
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763700"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87344497"
 ---
 # <a name="series_fill_forward"></a>series_fill_forward()
 
@@ -21,12 +21,12 @@ ms.locfileid: "85763700"
 
 包含動態數值陣列的運算式是輸入。 函式會將 missing_value_placeholder 的所有實例取代為 missing_value_placeholder 以外的最接近值，並傳回產生的陣列。 系統會保留最左邊的 missing_value_placeholder 實例。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_fill_forward(`*x* `[, `*missing_value_placeholder*`])`
 * 會傳回數列*x* ，其中包含所有*missing_value_placeholder*已向轉寄的實例。
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：動態陣列純量運算式，這是數值的陣列。 
 * *missing_value_placeholder*：選擇性參數，指定要取代之遺漏值的預留位置。 預設值為 `double` （*null*）。
@@ -44,7 +44,7 @@ make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) 
 * 如果 missing_value_placeholder 為（null）（或省略，其意義相同），則結果可能會包含*null*值。 若要填入這些*null*值，請使用其他插補函數。 目前只有[series_outliers （）](series-outliersfunction.md)支援輸入陣列中的*null*值。
 * 函式會保留陣列元素的原始類型。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
