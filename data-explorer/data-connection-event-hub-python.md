@@ -1,20 +1,20 @@
 ---
-title: 使用 Python 為 Azure 資料資源管理員建立事件中心資料連線
-description: 在本文中,您將瞭解如何使用 Python 為 Azure 資料資源管理器創建事件中心數據連接。
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+title: 使用 Python 建立 Azure 資料總管的事件中樞資料連線
+description: 在本文中，您將瞭解如何使用 Python 建立 Azure 資料總管的事件中樞資料連線。
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 36696a6fcdd74dc86705859ba62b608e9aa2ccf9
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7649a89208881ce323c0cbd970f3f247b0cf67da
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81495324"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350140"
 ---
-# <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-python"></a>使用 Python 為 Azure 資料資源管理員建立事件中心資料連線
+# <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-python"></a>使用 Python 建立 Azure 資料總管的事件中樞資料連線
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-event-hub.md)
@@ -22,7 +22,7 @@ ms.locfileid: "81495324"
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)
 
-在本文中,可以使用 Python 為 Azure 資料資源管理器創建事件中心數據連接。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料資源管理員提供從事件中心、IoT 中心和寫入 Blob 容器的 Blob 的引入或數據載入。
+在本文中，您會使用 Python 建立 Azure 資料總管的事件中樞資料連線。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌或資料載入。
 
 ## <a name="prerequisites"></a>Prerequisites
 
@@ -30,21 +30,21 @@ ms.locfileid: "81495324"
 
 * [Python 3.4+](https://www.python.org/downloads/)。
 
-* [叢集與資料庫](create-cluster-database-python.md)。
+* 叢集[和資料庫](create-cluster-database-python.md)。
 
-* [表和列對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)。
+* [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)。
 
-* [資料庫和表策略](database-table-policies-python.md)(可選)。
+* [資料庫和資料表原則](database-table-policies-python.md)（選擇性）。
 
-* [具有用於引入的資料中心](ingest-data-event-hub.md#create-an-event-hub)。
+* [具有內嵌資料的事件中樞](ingest-data-event-hub.md#create-an-event-hub)。
 
 [!INCLUDE [data-explorer-data-connection-install-package-python](includes/data-explorer-data-connection-install-package-python.md)]
 
 [!INCLUDE [data-explorer-authentication](includes/data-explorer-authentication.md)]
 
-## <a name="add-an-event-hub-data-connection"></a>新增事件中心資料連線
+## <a name="add-an-event-hub-data-connection"></a>新增事件中樞資料連線
 
-下面的範例展示如何以程式設計方式添加事件中心數據連接。 有關使用 Azure 門戶新增事件中心資料連線,請參閱[連接到事件中心](ingest-data-event-hub.md#connect-to-the-event-hub)。
+下列範例會示範如何以程式設計方式新增事件中樞資料連線。 請參閱[連接到事件中樞](ingest-data-event-hub.md#connect-to-the-event-hub)，以使用 Azure 入口網站新增事件中樞資料連線。
 
 ```Python
 from azure.mgmt.kusto import KustoManagementClient
@@ -86,19 +86,19 @@ poller = kusto_management_client.data_connections.create_or_update(resource_grou
 
 |**設定** | **建議的值** | **欄位描述**|
 |---|---|---|
-| tenant_id | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄 ID。|
-| subscriptionId | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 用於資源創建的訂閱 ID。|
-| client_id | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 可以訪問租戶中資源的應用程式的客戶端 ID。|
-| client_secret | *xxxxxxxxxxxxxxx* | 可以訪問租戶中資源的應用程式的用戶端機密。 |
-| resource_group_name | *testrg* | 包含群集的資源組的名稱。|
-| cluster_name | *mykustocluster* | 群集的名稱。|
-| database_name | *mykustodatabase* | 群集中的目標資料庫的名稱。|
-| data_connection_name | *myeventhubconnect* | 數據連接的所需名稱。|
-| table_name | *風暴事件* | 目標資料庫中的目標表的名稱。|
-| mapping_rule_name | *StormEvents_CSV_Mapping* | 與目標表相關的列映射的名稱。|
-| data_format | *Csv* | 消息的數據格式。|
-| event_hub_resource_id | *資源識別碼* | 事件中心的資源 ID,用於保存要引入的數據。 |
-| consumer_group | *$Default* | 事件中心的消費者組。|
-| location | *美國中部* | 數據連接資源的位置。|
+| tenant_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
+| subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
+| client_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
+| client_secret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
+| resource_group_name | *testrg* | 包含您叢集的資源組名。|
+| cluster_name | *mykustocluster* | 叢集的名稱。|
+| database_name | *mykustodatabase* | 叢集中的目標資料庫名稱。|
+| data_connection_name | *myeventhubconnect* | 所需的資料連線名稱。|
+| table_name | *StormEvents* | 目標資料庫中目標資料表的名稱。|
+| mapping_rule_name | *StormEvents_CSV_Mapping* | 與目標資料表相關之資料行對應的名稱。|
+| data_format | *csv* | 訊息的資料格式。|
+| event_hub_resource_id | *資源識別碼* | 您的事件中樞的資源識別碼，其中包含用於內嵌的資料。 |
+| consumer_group | *$Default* | 事件中樞的取用者群組。|
+| location | *Central US* | 資料連線資源的位置。|
 
 [!INCLUDE [data-explorer-data-connection-clean-resources-python](includes/data-explorer-data-connection-clean-resources-python.md)]

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7d157244a167e1264b454cd8cd3c103e297c3263
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 42eb17b6aca5fc722597bcbf656f18c6d92ba545
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373059"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345856"
 ---
 # <a name="reduce-operator"></a>reduce 運算子
 
@@ -25,18 +25,18 @@ T | reduce by LogMessage with threshold=0.1
 
 針對每個這類群組，它會輸出最能描述該群組的**模式**（可能使用星號（ `*` ）字元來代表萬用字元） **count** 、群組中的值數目，以及群組的**代表**（群組中的其中一個原始值）。
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `|` `reduce` [ `kind` `=` *ReduceKind*] `by` *Expr* [ `with` [ `threshold` `=` *閾值*] [ `,` `characters` `=` *字元*]]
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：評估為值的運算式 `string` 。
 * *閾值*： `real` 範圍（0 ..1）中的常值。 預設值為0.1。 若為大型輸入，臨界值應該小一點。 
 * *字元*：常值， `string` 其中包含要加入不會中斷字詞之字元清單中的字元清單。 （例如，如果您希望 `aaa=bbbb` 和 `aaa:bbb` 都是整個詞彙，而不是在和上中斷 `=` ， `:` 請使用 `":="` 做為字串常值）。
 * *ReduceKind*：指定 [縮減] 類別。 唯一有效的時間值為 `source` 。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 這個運算子會傳回具有三個數據行（、和）的資料表，以及與群組相同的資料列 `Pattern` `Count` `Representative` 數目。 `Pattern`這是群組的模式值，用 `*` 來做為萬用字元（代表任意插入字串）、 `Count` 計算運算子的輸入中有多少資料列是由這個模式表示，而且 `Representative` 是來自屬於此群組之輸入的一個值。
 
@@ -66,7 +66,7 @@ range x from 1 to 1000 step 1
 |----------------|-----|-----------------|
 |MachineLearning|1000 |MachineLearningX4|
 
-**範例**
+## <a name="examples"></a>範例
 
 下列範例示範如何將運算子套用至「已清理」的 `reduce` 輸入，其中要減少的資料行中的 guid 會在減少之前被取代
 
@@ -86,6 +86,6 @@ Trace | take 10000
 
 [autocluster](./autoclusterplugin.md)
 
-**注意事項**
+**備註**
 
 運算子的執行 `reduce` 主要是根據[來自事件記錄檔的資料群集演算法](https://ristov.github.io/publications/slct-ipom03-web.pdf)（Risto Vaarandi）。

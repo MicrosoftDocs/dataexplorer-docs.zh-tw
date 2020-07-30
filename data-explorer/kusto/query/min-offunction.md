@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0762b1416df32279b9801c47f129a6966772a7e2
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: ed8d14a4e793f253342c1b52269678874c96660f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271361"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346757"
 ---
 # <a name="min_of"></a>min_of()
 
@@ -23,22 +23,22 @@ ms.locfileid: "83271361"
 min_of(10, 1, -3, 17) == -3
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `min_of``(` *expr_1* `,` *expr_2* .。。`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *expr_i*：要評估的純量運算式。
 
 - 所有引數都必須是相同的類型。
 - 最多支援64個引數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 所有引數運算式的最小值。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples  -->
 ```kusto

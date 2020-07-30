@@ -1,6 +1,6 @@
 ---
-title: 翻譯() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的翻譯()。
+title: 翻譯（）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的轉譯（）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2019
-ms.openlocfilehash: f128ce31af7fc720ee81b7471d3d74616197b8d4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d0e99048f3f1b0e3ce5c6c59a65ea645b22d15fe
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81505707"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87340049"
 ---
 # <a name="translate"></a>translate()
 
-將一組字元("搜索清單")替換為給定字串中的另一組字元("替換清單")。
-此函式搜尋「搜尋清單」的字元,並將其取代為「取代清單」中的字元
+在指定的字串中，以另一組字元（' replacementList '）取代一組字元（' searchList '）。
+函式會搜尋 ' searchList ' 中的字元，並將其取代為 ' replacementList ' 中的對應字元
 
-**語法**
+## <a name="syntax"></a>語法
 
-`translate(`*搜尋清單*`,`*取代清單*`,`*文字*`)`
+`translate(`*searchList* `,`*replacementList* `,`*文字*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *搜尋清單*:要取代的字元清單
-* *取代清單*:要取代「搜尋清單」的字元清單
-* *文字*: 要搜尋的字串
+* *searchList*：應取代的字元清單
+* *replacementList*：應取代 ' searchList ' 中之字元的字元清單
+* *text*：要搜尋的字串
 
-**傳回**
+## <a name="returns"></a>傳回
 
-將「替代清單」 中字元的所有貨幣取代為「搜尋清單」 的字元後*的文字*
+將 ' replacementList ' 中所有字元的 ocurrences 取代為 ' searchList ' 中的對應字元之後的*文字*
 
-**範例**
+## <a name="examples"></a>範例
 
 |輸入                                 |輸出   |
 |--------------------------------------|---------|

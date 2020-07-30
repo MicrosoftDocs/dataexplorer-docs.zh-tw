@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ea57efe36fb86189d798e5f18fa3fe9470bfd634
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 410a0c84a1bafdfa1900ef8e21bc0a91327b64c3
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227531"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348865"
 ---
 # <a name="coalesce"></a>coalesce()
 
@@ -23,22 +23,22 @@ ms.locfileid: "83227531"
 coalesce(tolong("not a number"), tolong("42"), 33) == 42
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `coalesce(`*expr_1* `, `*expr_2* `,`...)
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *expr_i*：要評估的純量運算式。
 - 所有引數都必須是相同的類型。
 - 最多支援64個引數。
 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 第一個*expr_i*的值，其值為非 null （若為字串運算式，則為不是空的）。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples  -->
 ```kusto

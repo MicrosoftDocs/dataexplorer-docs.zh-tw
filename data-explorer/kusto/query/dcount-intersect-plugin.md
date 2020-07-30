@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: c431f17184570b294b9c8077028ac792719b4abd
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: de75014fb408b3d31acab37ad8e16923cabaadfd
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225202"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348406"
 ---
 # <a name="dcount_intersect-plugin"></a>dcount_intersect 外掛程式
 
@@ -27,21 +27,21 @@ S<sub>1</sub> ∩ s<sub>2</sub> ∩ .。。∩ S<sub>n</sub>
 
     T | evaluate dcount_intersect(hll_1, hll_2, hll_3)
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `dcount_intersect(` *hll_1*、 *hll_2*、[ `,` *hll_3* `,` ...]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *hll_i*：<sub>我</sub>以 Function 計算的 set S 值 [`hll()`](./hll-aggfunction.md) 。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回具有 N `dcount` 個值的資料表（每個資料行代表集合交集）。
 資料行名稱為 s0、s1 .。。（直到 n-1）。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

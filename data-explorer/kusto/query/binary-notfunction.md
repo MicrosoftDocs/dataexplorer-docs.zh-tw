@@ -1,6 +1,6 @@
 ---
-title: binary_not() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 azure 數據資源管理器中的binary_not()。
+title: binary_not （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 binary_not （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,29 +8,29 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ae808d3d9964b8e63053ed40d65d08f39adf6668
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b0672652836edce82be0fc13cd17d6d5d6fe5b62
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517658"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349069"
 ---
 # <a name="binary_not"></a>binary_not()
 
-返回對輸入值的一點否定。
+傳回輸入值的位否定。
 
 ```kusto
 binary_not(x)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `binary_not(`*num1*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *公尺元1*:數字 
+* *num1*：數值 
 
-**傳回**
+## <a name="returns"></a>傳回
 
-返回對數位的邏輯 NOT 操作:num1。
+傳回數位的邏輯 NOT 運算： num1。

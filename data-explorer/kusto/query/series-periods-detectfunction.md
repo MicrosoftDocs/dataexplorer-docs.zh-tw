@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: 876966391e67ad2f8f25a900dfc4c92bf0bfd11e
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 2ee587bfa7d01ae0602cc870e6c0b776593d53c0
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763267"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351329"
 ---
 # <a name="series_periods_detect"></a>series_periods_detect()
 
@@ -29,11 +29,11 @@ ms.locfileid: "85763267"
 * *期間*：包含已找到之期間的動態陣列，以依分數排序的空間大小單位。
 * *分數*：動態陣列，包含介於0到1之間的值。 每個陣列都會測量句點陣列中其各自位置的*某個期間的*重要性。
  
-**語法**
+## <a name="syntax"></a>語法
 
 `series_periods_detect(`*x* `,` *min_period* `,` *max_period* `,` *num_periods*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：動態陣列純量運算式，這是數值的陣列，通常是[make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出。
 * *min_period*： `real` 指定要搜尋之最短期間的數位。
@@ -47,7 +47,7 @@ ms.locfileid: "85763267"
 >
 > * 輸入時間序列必須是一般的。 也就是，在常數的 bin 中匯總，如果它是使用[make 系列](make-seriesoperator.md)所建立的，則一律是這樣。 否則，輸出就沒有意義。
 
-**範例**
+## <a name="example"></a>範例
 
 下列查詢會內嵌應用程式流量的一個月快照集，每日匯總兩次。 Bin 大小為12小時。
 

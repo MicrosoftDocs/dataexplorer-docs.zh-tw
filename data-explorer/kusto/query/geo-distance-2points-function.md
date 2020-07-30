@@ -8,29 +8,29 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2020
-ms.openlocfilehash: 64c61bcde7bfe02d55bb0f4a6719e9d7b1c1a681
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 0e8d57e76b0dfa45003f541b54360cb4ac414646
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227412"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347879"
 ---
 # <a name="geo_distance_2points"></a>geo_distance_2points()
 
 計算兩個地理空間座標在地球上的最短距離。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `geo_distance_2points(`*p1_longitude* `, `*p1_latitude* `, `*p2_longitude* `, `*p2_latitude*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *p1_longitude*：第一個地理空間座標，經度值，以度為單位。 有效的值為實數，且範圍為 [-180，+ 180]。
 * *p1_latitude*：第一個地理空間座標，以度為單位的緯度值。 有效的值為實數，且範圍為 [-90，+ 90]。
 * *p2_longitude*：第二個地理空間座標、經度值（以度為單位）。 有效的值為實數，且範圍為 [-180，+ 180]。
 * *p2_latitude*：第二個地理空間座標，以度為單位的緯度值。 有效的值為實數，且範圍為 [-90，+ 90]。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 地球上兩個地理位置之間的最短距離（以量為單位）。 如果座標無效，查詢將會產生 null 結果。
 
@@ -38,7 +38,7 @@ ms.locfileid: "83227412"
 > * 地理空間座標會以[WGS-84](https://earth-info.nga.mil/GandG/update/index.php?action=home)座標參考系統來表示。
 > * 用來測量地球距離的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。
 
-**範例**
+## <a name="examples"></a>範例
 
 下列範例會尋找西雅圖和洛杉磯之間的最短距離。
 

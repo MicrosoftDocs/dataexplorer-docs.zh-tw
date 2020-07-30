@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8ebd4cb0ab8a5bffec717f83892a3ea11b35f409
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 1b94f661973d1ec89fe7f60edc9063b8c0f36d3c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227633"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349188"
 ---
 # <a name="beta_pdf"></a>beta_pdf()
 
@@ -25,21 +25,21 @@ beta_pdf(0.2, 10.0, 50.0)
 
 Beta 分佈常用於研究不同樣本 (例如人們在一天不同時段內花在看電視的時間) 之間的差異 (百分比)。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `beta_pdf(`*x* `, `*Alpha* `, `搶鮮*版*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：要在其上評估函數的值。
 * *Alpha*：分佈的參數。
 * 搶鮮*版（Beta*）：散發的參數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 * 機率搶鮮[版（Beta）密度函數](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function)。
 
-**注意事項**
+**備註**
 
 如果有任何引數是非數值，Beta_pdf （）會傳回 null 值。
 
@@ -47,7 +47,7 @@ Beta 分佈常用於研究不同樣本 (例如人們在一天不同時段內花�
 
 如果 Alpha ≤0或 Beta ≤0，Beta_pdf （）會傳回 NaN 值。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -61,7 +61,7 @@ datatable(x:double, alpha:double, beta:double, comment:string)
 | extend r = beta_pdf(x, alpha, beta)
 ```
 
-|x|alpha|beta|comment|r|
+|x|alpha|搶鮮版 (Beta)|comment|r|
 |---|---|---|---|---|
 |0.5|10|20|有效的輸入|0.746176019310951|
 |1.5|10|20|x > 1，產生 NaN|NaN|

@@ -1,18 +1,18 @@
 ---
 title: 在 Azure 中保護 Azure 資料總管叢集
 description: 瞭解如何保護 Azure 中的叢集資料總管。
-author: saguiitay
-ms.author: itsagui
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: d8220055549c3bfa2892e7267521b08c0591f817
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: f3dfdbeda7ab0d9234c70d4bf5e0aa5613258480
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370259"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349936"
 ---
 # <a name="secure-azure-data-explorer-clusters-in-azure"></a>在 Azure 中保護 Azure 資料總管叢集
 
@@ -32,12 +32,12 @@ ms.locfileid: "83370259"
 
 ### <a name="customer-managed-keys-with-azure-key-vault"></a>客戶管理的金鑰與 Azure Key Vault
 
-根據預設，資料會使用 Microsoft 管理的金鑰進行加密。 若要進一步控制加密金鑰，您可以提供客戶管理的金鑰以用於資料加密。 您可以使用自己的金鑰來管理儲存體層級的資料加密。 客戶管理的金鑰是用來保護及控制根加密金鑰的存取權，用來加密和解密所有資料。 客戶管理的金鑰提供更大的彈性來建立、輪替、停用及撤銷存取控制。 您也可以審核用來保護資料的加密金鑰。
+根據預設，資料是以使用 Microsoft 管理的金鑰加密。 若要進一步控制加密金鑰，您可以提供客戶管理的金鑰以用於資料加密。 您可以使用自己的金鑰來管理儲存體層級的資料加密。 客戶管理的金鑰是用來保護及控制根加密金鑰的存取權，用來加密和解密所有資料。 客戶管理的金鑰可提供更大的彈性來建立、輪替、停用及撤銷存取控制。 您也可以審核用來保護資料的加密金鑰。
 
 使用 Azure Key Vault 來儲存客戶管理的金鑰。 您可以建立自己的金鑰，並將其儲存在金鑰保存庫中，或者您可以使用 Azure Key Vault API 來產生金鑰。 Azure 資料總管叢集和 Azure Key Vault 必須位於相同的區域，但它們可以位於不同的訂用帳戶中。 如需 Azure Key Vault 的詳細資訊，請參閱[什麼是 Azure Key Vault？](/azure/key-vault/key-vault-overview)。 如需客戶管理之金鑰的詳細說明，請參閱[客戶管理的金鑰與 Azure Key Vault](/azure/storage/common/storage-service-encryption)。 使用[c #](customer-managed-keys-csharp.md)或[Azure Resource Manager 範本](customer-managed-keys-resource-manager.md)在 Azure 資料總管叢集中設定客戶管理的金鑰
 
 > [!Note]
-> 客戶管理的金鑰依賴 Azure 資源的受控識別，這是一項 Azure Active Directory （Azure AD）的功能。 若要在 Azure 入口網站中設定客戶管理的金鑰，您必須依照[設定 Azure 資料總管](managed-identities.md)叢集的受控識別中的詳細說明，為您的叢集設定**SystemAssigned**受控識別。
+> 客戶管理的金鑰須依賴 Azure 資源的受控識別 (Azure Active Directory (Azure AD) 的一項功能)。 若要在 Azure 入口網站中設定客戶管理的金鑰，您必須依照[設定 Azure 資料總管](managed-identities.md)叢集的受控識別中的詳細說明，為您的叢集設定**SystemAssigned**受控識別。
 
 #### <a name="store-customer-managed-keys-in-azure-key-vault"></a>將客戶管理的金鑰儲存在 Azure Key Vault
 
@@ -45,11 +45,11 @@ ms.locfileid: "83370259"
 
 #### <a name="rotate-customer-managed-keys"></a>輪替客戶管理的金鑰
 
-您可以根據您的相容性原則，在 Azure Key Vault 中旋轉客戶管理的金鑰。 當金鑰旋轉時，您必須更新叢集以使用新的金鑰 URI。 輪替金鑰並不會在叢集中觸發資料重新加密。 
+您可以根據您的合規性原則，在 Azure Key Vault 中輪替客戶管理的金鑰。 當金鑰旋轉時，您必須更新叢集以使用新的金鑰 URI。 輪替金鑰並不會在叢集中觸發資料重新加密。 
 
 #### <a name="revoke-access-to-customer-managed-keys"></a>撤銷對客戶管理的金鑰的存取權
 
-若要撤銷對客戶管理的金鑰的存取權，請使用 PowerShell 或 Azure CLI。 如需詳細資訊，請參閱[Azure Key Vault PowerShell](/powershell/module/az.keyvault/)或[Azure Key Vault CLI](/cli/azure/keyvault)。 撤銷存取權會封鎖對叢集儲存體層級中所有資料的存取，因為 Azure 資料總管會導致無法存取加密金鑰。
+若要撤銷對客戶管理的金鑰的存取權，請使用 PowerShell 或 Azure CLI。 如需詳細資訊，請參閱 [Azure Key Vault PowerShell](/powershell/module/az.keyvault/) 或 [Azure Key Vault CLI](/cli/azure/keyvault)。 撤銷存取權會封鎖對叢集儲存體層級中所有資料的存取，因為 Azure 資料總管會導致無法存取加密金鑰。
 
 > [!Note]
 > 當 Azure 資料總管識別已撤銷客戶管理金鑰的存取權時，它會自動暫停叢集以刪除任何快取的資料。 一旦傳回金鑰的存取權，就必須手動繼續叢集。

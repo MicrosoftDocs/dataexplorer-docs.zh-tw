@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 092915c08b4b3d1e72722a4303e911403b2defd2
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 3e1f74d6605b4916a2718a00fd252141060d748f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737193"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348882"
 ---
 # <a name="cluster-scope-function"></a>cluster （）（scope 函數）
 
@@ -27,15 +27,15 @@ ms.locfileid: "82737193"
 cluster('help').database('Sample').SomeTable
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `cluster(`*stringConstant*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *stringConstant*：所參考的叢集名稱。 叢集名稱可以是完整的 DNS 名稱，或是尾碼為的字串`.kusto.windows.net`。 引數在查詢執行之前必須是_常數_，亦即，不能來自子查詢評估。
+* *stringConstant*：所參考的叢集名稱。 叢集名稱可以是完整的 DNS 名稱，或是尾碼為的字串 `.kusto.windows.net` 。 引數在查詢執行之前必須是_常數_，亦即，不能來自子查詢評估。
 
-**注意事項**
+**備註**
 
 * 用於存取相同叢集內的資料庫-use [database （）](databasefunction.md)函數。
 * [這裡](cross-cluster-or-database-queries.md)提供跨叢集和跨資料庫查詢的詳細資訊  
@@ -58,7 +58,7 @@ cluster('help.kusto.windows.net').database('Samples').StormEvents | count
 
 ### <a name="use-cluster-inside-let-statements"></a>使用 let 語句中的 cluster （） 
 
-與上述相同的查詢可以重寫成使用內嵌函式（let 語句）來接收參數`clusterName` （傳遞至 cluster （）函數）。
+與上述相同的查詢可以重寫成使用內嵌函式（let 語句）來接收參數（ `clusterName` 傳遞至 cluster （）函數）。
 
 ```kusto
 let foo = (clusterName:string)
@@ -74,7 +74,7 @@ foo('help')
 
 ### <a name="use-cluster-inside-functions"></a>在函式內部使用 cluster （） 
 
-與上述相同的查詢可以重寫，以便在接收參數`clusterName`的函式中使用，該函數會傳遞至 cluster （）函數。
+與上述相同的查詢可以重寫，以便在接收參數的函式中使用，該函數 `clusterName` 會傳遞至 cluster （）函數。
 
 ```kusto
 .create function foo(clusterName:string)

@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 0373525d0f1e369af31b17595900128e0d4e0bf4
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 54c09908096f9df4ac8b568cd5e897c6e4ecc8c2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763343"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345958"
 ---
 # <a name="query-parameters-declaration-statement"></a>查詢參數宣告語句
 
@@ -34,7 +34,7 @@ ms.locfileid: "85763343"
 
 若要參考查詢參數、查詢文字或其所使用的函式，必須先宣告所使用的查詢參數。 針對每個參數，宣告會提供名稱和純量類型。 （選擇性）參數也可以有預設值。 如果要求未提供參數的具體值，則會使用預設的。 然後，Kusto 會根據該類型的一般剖析規則，分析查詢參數的值。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `declare``query_parameters` `(` *Name1* `:` *Type1* [ `=` *DefaultValue1*] [ `,` ...]`);`
 
@@ -46,7 +46,7 @@ ms.locfileid: "85763343"
 > [!NOTE]
 > 如同[使用者定義函數](functions/user-defined-functions.md)，類型的查詢參數 `dynamic` 不能有預設值。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 declare query_parameters(UserName:string, Password:string);

@@ -1,18 +1,18 @@
 ---
 title: 將 Azure 資料總管部署至您的虛擬網路
 description: 瞭解如何將 Azure 資料總管部署至您的虛擬網路
-author: basaba
-ms.author: basaba
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/31/2019
-ms.openlocfilehash: 0b831b236c2604ef7d87c77f6955e6b5eaf2aae1
-ms.sourcegitcommit: 4ae1508bbaa8fe9642dcfc8618d77f009bc8ec9f
+ms.openlocfilehash: 7025567c9495f3eeefe547dcd88b19962e1be934
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86405482"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351636"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>將 Azure 資料總管叢集部署至您的虛擬網路
 
@@ -74,7 +74,7 @@ IP 位址總數：
 
 | **使用**   | **From**   | **若要**   | **通訊協定**   |
 | --- | --- | --- | --- |
-| 管理  |[ADX 管理位址](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement （ServiceTag） | ADX 子網：443  | TCP  |
+| 管理性  |[ADX 管理位址](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement （ServiceTag） | ADX 子網：443  | TCP  |
 | 健康狀況監視  | [ADX 健全狀況監視位址](#health-monitoring-addresses)  | ADX 子網：443  | TCP  |
 | ADX 內部通訊  | ADX 子網：所有埠  | ADX 子網：所有埠  | 全部  |
 | 允許 Azure 負載平衡器輸入（健康情況探查）  | AzureLoadBalancer  | ADX 子網：80443  | TCP  |
@@ -125,7 +125,7 @@ IP 位址總數：
 | 南韓中部 | 40.82.156.149 |
 | 南韓南部 | 40.80.234.9 |
 | 美國中北部 | 40.81.45.254 |
-| 北歐 | 52.142.91.221 |
+| 歐洲北部 | 52.142.91.221 |
 | 南非北部 | 102.133.129.138 |
 | 南非西部 | 102.133.0.97 |
 | 美國中南部 | 20.45.3.60 |
@@ -139,7 +139,7 @@ IP 位址總數：
 | 美國政府德克薩斯州 | 52.243.157.34 |
 | 美國政府維吉尼亞州 | 52.227.228.88 |
 | 美國中西部 | 52.159.55.120 |
-| West Europe | 51.145.176.215 |
+| 西歐 | 51.145.176.215 |
 | 印度西部 | 40.81.88.112, 104.211.160.120 |
 | 美國西部 | 13.64.38.225 |
 | 美國西部 2 | 40.90.219.23 |
@@ -171,7 +171,7 @@ IP 位址總數：
 | 南韓中部 | 138.91.19.129 |
 | 南韓南部 | 138.91.19.129 |
 | 美國中北部 | 23.96.212.108 |
-| 北歐 | 191.235.212.69 
+| 歐洲北部 | 191.235.212.69 
 | 南非北部 | 104.211.224.189 |
 | 南非西部 | 104.211.224.189 |
 | 美國中南部 | 23.98.145.105 |
@@ -185,7 +185,7 @@ IP 位址總數：
 | 美國政府德克薩斯州 | 52.238.116.34 |
 | 美國政府維吉尼亞州 | 23.97.0.26 |
 | 美國中西部 | 168.61.212.201 |
-| West Europe | 23.97.212.5 |
+| 西歐 | 23.97.212.5 |
 | 印度西部 | 23.99.5.162 |
 | 美國西部 | 23.99.5.162 |
 | 美國西部 2 | 23.99.5.162, 104.210.32.14 |    
@@ -215,7 +215,7 @@ IP 位址總數：
 | 南韓中部 | 13.75.117.221 |
 | 南韓南部 | 13.75.117.221 |
 | 美國中北部 | 52.162.240.236 |
-| 北歐 | 52.169.237.246 |
+| 歐洲北部 | 52.169.237.246 |
 | 南非北部 | 13.71.25.187 |
 | 南非西部 | 13.71.25.187 |
 | 美國中南部 | 13.84.173.99 |
@@ -229,7 +229,7 @@ IP 位址總數：
 | 美國政府德克薩斯州 | 13.72.37.111 |
 | 美國政府維吉尼亞州 | 13.72.37.111 |
 | 美國中西部 | 52.161.31.69 |
-| West Europe | 52.174.4.112 |
+| 西歐 | 52.174.4.112 |
 | 印度西部 | 13.71.25.187 |
 | 美國西部 | 40.78.70.148 |
 | 美國西部 2 | 52.151.20.103 |
@@ -238,9 +238,9 @@ IP 位址總數：
 
 如果您想要完全停用透過公用 IP 位址存取 Azure 資料總管，請在 NSG 中建立另一個輸入規則。 此規則必須有較低的[優先順序](/azure/virtual-network/security-overview#security-rules)（較高的數位）。 
 
-| **使用**   | **Source** | **來源服務標記** | **來源連接埠範圍**  | **Destination** | **目的地連接埠範圍** | * * 通訊協定 * * | **動作** | * * 優先順序 * * |
+| **使用**   | **Source** | **來源服務標記** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | * * 通訊協定 * * | **動作** | * * 優先順序 * * |
 | ---   | --- | --- | ---  | --- | --- | --- | --- | --- |
-| 停用來自網際網路的存取 | 服務標記 | 網際網路 | *  | VirtualNetwork | * | 任意 | Deny | 數位高於上述規則 |
+| 停用來自網際網路的存取 | 服務標記 | Internet | *  | VirtualNetwork | * | 任意 | 拒絕 | 數位高於上述規則 |
 
 此規則可讓您只透過下列 DNS 記錄（對應至每個服務的私人 IP）連接到 Azure 資料總管叢集：
 * `private-[clustername].[geo-region].kusto.windows.net`搜尋引擎優化
@@ -287,8 +287,8 @@ crl3.digicert.com:80
 
 | 名稱 | 位址首碼 | 下一個躍點 |
 | --- | --- | --- |
-| ADX_Management | 13.64.38.225/32 | 網際網路 |
-| ADX_Monitoring | 23.99.5.162/32 | 網際網路 |
+| ADX_Management | 13.64.38.225/32 | Internet |
+| ADX_Monitoring | 23.99.5.162/32 | Internet |
 
 ## <a name="deploy-azure-data-explorer-cluster-into-your-vnet-using-an-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本將 Azure 資料總管叢集部署至您的 VNet
 

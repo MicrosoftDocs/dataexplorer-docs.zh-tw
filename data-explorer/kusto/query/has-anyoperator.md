@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 19329b8822a1e1d484c5f751f5fbc2f8eb6343ac
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 4485dde5eb77478e5fd75ce388ada7f4232f2ddb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226732"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347624"
 ---
 # <a name="has_any-operator"></a>has_any 運算子
 
@@ -23,23 +23,23 @@ ms.locfileid: "83226732"
 Table1 | where col has_any ('value1', 'value2')
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T*純 `|` `where` *col* `has_any` `(` *量運算式的*T 欄清單`)`   
 *T* `|` `where` *欄* `has_any` `(` *表格式運算式*`)`   
  
-**引數**
+## <a name="arguments"></a>引數
 
 * 要篩選其記錄的*T*表格式輸入。
 * 要*篩選的欄-資料*行。
 * *運算式清單*-表格式、純量或常值運算式的逗號分隔清單  
 * *表格式運算式*-具有一組值的表格式運算式（如果 expression 有多個資料行，則會使用第一個資料行）
 
-**傳回**
+## <a name="returns"></a>傳回
 
 述詞為之*T*中的資料列`true`
 
-**注意事項**
+**備註**
 
 * 運算式清單可產生最多個 `10,000` 值。    
 * 若為表格式運算式，則會選取結果集的第一個資料行。   
@@ -55,7 +55,7 @@ StormEvents
 | summarize count() by State
 ```
 
-|State|count_|
+|狀態|count_|
 |---|---|
 |紐約|1750|
 |北卡羅萊納州|1721|
@@ -77,7 +77,7 @@ StormEvents
 | summarize count() by State
 ```
 
-|State|count_|
+|狀態|count_|
 |---|---|
 |北卡羅萊納州|1721|
 |南北達科他|1567|

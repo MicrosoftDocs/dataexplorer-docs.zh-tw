@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 116f585fe8a09b4befddd7d1429229ad1bac886f
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: ed207a9db0b6440bae8f8fb4ae1c250d274565d7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512465"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87338213"
 ---
 # <a name="where-operator"></a>where 運算子
 
@@ -25,16 +25,16 @@ T | where fruit=="apple"
 
 **別名**`filter`
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T*述詞 `| where` *Predicate*
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：要篩選其記錄的表格式輸入。
 * *Predicate*述詞： `boolean` *T*之資料行的[運算式](./scalar-data-types/bool.md)。它會針對*T*中的每個資料列進行評估。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 Predicate** 是 `true` 之 T** 中的資料列。
 
@@ -54,7 +54,7 @@ Predicate** 是 `true` 之 T** 中的資料列。
 
 如需詳細資訊，請參閱[可用的字串運算子](./datatypes-string-operators.md)摘要和[可用數值運算子](./numoperators.md)的摘要。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 Traces
@@ -67,7 +67,7 @@ Traces
 
 請注意，我們會在最後兩個數據行之間進行比較，因為它無法使用索引並強制執行掃描。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 Traces | where * has "Kusto"

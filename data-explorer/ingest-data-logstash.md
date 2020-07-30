@@ -1,24 +1,24 @@
 ---
 title: 將資料從 Logstash 擷取至 Azure 資料總管
-description: 在本文中,您將瞭解如何從 Logstash 將資料引入(載入)到 Azure 資料資源管理員中
-author: tamirkamara
-ms.author: takamara
-ms.reviewer: orspodek
+description: 在本文中，您將瞭解如何將資料從 Logstash 內嵌（載入）至 Azure 資料總管
+author: orspod
+ms.author: orspodek
+ms.reviewer: takamara
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: e7b4a8cf3dcd109de59ab12717f8fbc17b600ec9
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0beb88cbcb2b72a79ad2d6c1ad6aac44bdcb13bc
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81497950"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350514"
 ---
 # <a name="ingest-data-from-logstash-to-azure-data-explorer"></a>將資料從 Logstash 擷取至 Azure 資料總管
 
-[Logstash](https://www.elastic.co/products/logstash) 是開放原始碼的伺服器端資料處理管線，可同時從許多來源擷取資料、轉換資料，然後將資料傳送至您最愛的「隱藏」。 在本文中,您將將資料發送到 Azure 資料資源管理器,這是用於日誌和遙測數據的快速且高度可擴展的數據探索服務。 您將先在測試叢集中建立資料表和資料對應，然後指示 Logstash 將資料傳送至資料表，並驗證結果。
+[Logstash](https://www.elastic.co/products/logstash) 是開放原始碼的伺服器端資料處理管線，可同時從許多來源擷取資料、轉換資料，然後將資料傳送至您最愛的「隱藏」。 在本文中，您會將該資料傳送至 Azure 資料總管，這是快速且可高度調整的資料探索服務，適用于記錄和遙測資料。 您將先在測試叢集中建立資料表和資料對應，然後指示 Logstash 將資料傳送至資料表，並驗證結果。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 * Azure 訂用帳戶。 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * Azure 資料總管[測試叢集和資料庫](create-cluster-database-portal.md)
@@ -113,7 +113,7 @@ output {
 | **app_id**、**app_key** 和 **app_tenant**| 連線至 Azure 資料總管所需的認證。 請務必使用具有擷取權限的應用程式。 |
 | **database**| 要放置事件的資料庫名稱。 |
 | **table** | 要放置事件的目標資料表名稱。 |
-| **映射** | 對應可用來將傳入事件 Json 字串對應至正確的資料列格式 (定義哪個屬性會進入哪個資料行)。 |
+| **對應** | 對應可用來將傳入事件 Json 字串對應至正確的資料列格式 (定義哪個屬性會進入哪個資料行)。 |
 
 ## <a name="run-logstash"></a>執行 Logstash
 

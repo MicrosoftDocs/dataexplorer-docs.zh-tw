@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: 19c7b47318d0748510aba146968149cd0eb246a2
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 8aec2bdebacc1bfd87b84bbfc83a6aed5cb05427
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264567"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351126"
 ---
 # <a name="set_union"></a>set_union()
 
 傳回 `dynamic` 任何陣列中所有相異值集合的陣列-（arr1 ∪ arr2 ∪ ...）。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `set_union(`*arr1* `, `*arr2* `[` ，` *arr3*, ...]``)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *arr1 .。。arrN*：輸入陣列以建立聯集（至少兩個數組）。 所有引數都必須是動態陣列（請參閱[pack_array](packarrayfunction.md)）。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回任何陣列中所有相異值集合的動態陣列。 請參閱 [`set_intersect()`](setintersectfunction.md) 和 [`set_difference()`](setdifferencefunction.md) 。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

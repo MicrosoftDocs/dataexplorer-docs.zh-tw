@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9f8afae2413d65618cf6b6e2f400df2500b06078
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 4222e0672290a6d934382dd6f922aec082a19af7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618035"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87338672"
 ---
 # <a name="variance-aggregation-function"></a>變異數（）（彙總函式）
 
@@ -25,19 +25,19 @@ ms.locfileid: "82618035"
 
 * 只能在[匯總](summarizeoperator.md)的內容中使用
 
-**語法**
+## <a name="syntax"></a>語法
 
-總結`variance(` *Expr*`)`
+總結 `variance(` *Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：將用於匯總計算的運算式。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 整個群組中*Expr*的變異值。
  
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 range x from 1 to 5 step 1

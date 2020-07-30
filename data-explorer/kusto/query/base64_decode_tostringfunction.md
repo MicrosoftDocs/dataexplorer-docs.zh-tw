@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: ffef2fd609075b0d5e5af5c4064e079c27cd8c94
-ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
+ms.openlocfilehash: 17d88c8be518b6d31b67a327a7a5d42818132cb9
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84818511"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349290"
 ---
 # <a name="base64_decode_tostring"></a>base64_decode_tostring()
 
 將 base64 字串解碼為 UTF-8 字串。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `base64_decode_tostring(`*字串*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *String*：要從 base64 解碼成 UTF8-8 字串的輸入字串。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回從 base64 字串解碼的 UTF-8 字串。
 
 * 若要將 base64 字串解碼為 long 值陣列，請參閱[base64_decode_toarray （）](base64_decode_toarrayfunction.md)
 * 若要將字串解碼為 base64 字串，請參閱[base64_encode_tostring （）](base64_encode_tostringfunction.md)
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

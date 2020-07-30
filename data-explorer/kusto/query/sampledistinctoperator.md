@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5303801b983b326310065ea2a6ce6ded7d098001
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 3cb1de08604964d4d71c5868ef7564c728b1f2c4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372998"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351534"
 ---
 # <a name="sample-distinct-operator"></a>sample-distinct 運算子
 
@@ -25,11 +25,11 @@ ms.locfileid: "83372998"
 T | sample-distinct 5 of DeviceId
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| sample-distinct` *NumberOfValues* `of` *ColumnName*
 
-**引數**
+## <a name="arguments"></a>引數
 * *NumberOfValues*：要傳回之*T*的數位相異值。 您可以指定任何數值運算式。
 
 **提示**
@@ -40,7 +40,7 @@ T | sample-distinct 5 of DeviceId
 
  如果您想要取樣資料列（而非特定資料行的值），請參閱[範例運算子](sampleoperator.md)
 
-**範例**  
+## <a name="examples"></a>範例  
 
 從人口取得10個相異值
 

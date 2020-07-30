@@ -1,6 +1,6 @@
 ---
-title: exp() - Azure 資料資源管理員 |微軟文件
-description: 本文在 Azure 資料資源管理器中介紹 exp()。
+title: exp （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 exp （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: fbfc28c79bedfc387661192db10a297a304a7697
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d990fee2ba9a93781a702bd76739e9f7085ce92c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515686"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348202"
 ---
 # <a name="exp"></a>exp()
 
-x 的基-e 指數函數,該函數被提升到冪 x:e_x。  
+X 的 base-e 指數函式，其 e 會向乘冪 x： e ^ x。  
 
-**語法**
+## <a name="syntax"></a>語法
 
-`exp(`*X.*`)`
+`exp(`*x*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *x*: 實數,指數值。
+* *x*：指數的實數值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-* x 的指數值。
-* 有關自然(基-e)對數,請參閱[log()](log-function.md)。
-* 有關基2和基-10對數的指數函數,請參閱[exp2()](exp2-function.md) [,exp10()](exp10-function.md)
+* X 的指數值。
+* 如需自然（底數為 e）的對數，請參閱[log （）](log-function.md)。
+* 對於基底2和基底10對數的指數函式，請參閱[exp2 （）](exp2-function.md)、 [exp10 （）](exp10-function.md)

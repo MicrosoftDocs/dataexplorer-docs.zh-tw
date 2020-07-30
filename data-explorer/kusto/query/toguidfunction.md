@@ -1,6 +1,6 @@
 ---
-title: 到guid() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 toguid()。
+title: toguid （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 toguid （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: fb1df5fe91b75e5d3b7d1a9f40b8b3079cac9944
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a2eec6a582c4c8fc6cda6b3cf9a304f41ab48143
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506132"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350720"
 ---
 # <a name="toguid"></a>toguid()
 
-將輸入轉換為[`guid`](./scalar-data-types/guid.md)表示形式。
+將輸入轉換為 [`guid`](./scalar-data-types/guid.md) 表示。
 
 ```kusto
 toguid("70fc66f7-8279-44fc-9092-d364d70fce44") == guid("70fc66f7-8279-44fc-9092-d364d70fce44")
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `toguid(`*Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *Expr*: 將[`guid`](./scalar-data-types/guid.md)轉換為 標量的運算式。 
+* *Expr*：將轉換成純量的運算式 [`guid`](./scalar-data-types/guid.md) 。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
-如果轉換成功,結果將是一個[`guid`](./scalar-data-types/guid.md)標量。
-如果轉換不成功,結果會為`null`。
+如果轉換成功，則結果將會是純量 [`guid`](./scalar-data-types/guid.md) 。
+如果轉換不成功，則結果會是 `null` 。
 
-*注意*:如果可能,最好使用[guid()。](./scalar-data-types/guid.md)
+*注意*：可能的話，偏好使用[guid （）](./scalar-data-types/guid.md) 。

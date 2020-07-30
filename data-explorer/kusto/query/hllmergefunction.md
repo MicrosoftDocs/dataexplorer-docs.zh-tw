@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: 2cddd645b0b89b3356adabae26874f93b41f8815
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: ecf16a714b0466a7ffc2da7b69f117383c90970e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226545"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347522"
 ---
 # <a name="hll_merge"></a>hll_merge()
 
@@ -21,19 +21,19 @@ ms.locfileid: "83226545"
 
 閱讀[基礎演算法（*H*Yper*l*og*l*og）和估計精確度](dcount-aggfunction.md#estimation-accuracy)的相關資訊。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `hll_merge(`*運算式 1* `,`*運算式 2*`, ...)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * 具有 `hll` 要合併之值的資料行。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 將資料行 `*Exrp1*` （ `*Expr2*` ，...）合併 `*ExprN*` 成一個值的結果 `hll` 。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/KustoMonitoringPersistentDatabase -->
 ```kusto

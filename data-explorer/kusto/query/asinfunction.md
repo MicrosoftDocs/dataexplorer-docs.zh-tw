@@ -1,6 +1,6 @@
 ---
-title: asin() - Azure 資料資源管理員 |微軟文件
-description: 本文在 Azure 資料資源管理器中介紹 asin()。
+title: asin （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 asin （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 5db112daeba59dd841b02df8ba1a41185654ad6a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 360a936d136cd01760175cdf5b5da2718d0cfd91
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518542"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349494"
 ---
 # <a name="asin"></a>asin()
 
-返回正著子為指定數位([`sin()`](sinfunction.md)的反向操作)的角度。
+傳回其正弦為指定數位的角度（的反運算 [`sin()`](sinfunction.md) ）。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`asin(`*X.*`)`
+`asin(`*x*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *x*: 範圍 [-1, 1] 中的實數。
+* *x*：範圍 [-1，1] 中的實數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-* 弧正著的值`x`
-* `null`如果`x`<`x`-1 或 > 1
+* 的反正弦值`x`
+* `null`如果 `x` <-1 或 `x` > 1

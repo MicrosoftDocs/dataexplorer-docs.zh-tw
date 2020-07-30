@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/19/2019
-ms.openlocfilehash: 1925d9b27382dd3a888e14243bfecad51d37db0d
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: f71a0d0cdfa4fe0ca8cdb84e65a271ee42bc7dc7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226698"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347607"
 ---
 # <a name="hash_combine"></a>hash_combine()
 
 結合兩個或多個雜湊的雜湊值。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `hash_combine(`*h1* `,`*h2* [ `,` *h3* ...]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *h1*：代表第一個雜湊值的 Long 值。
 * *h2*：代表第二個雜湊值的 Long 值。
 * *hN*：代表 n 個雜湊值的 Long 值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 給定純量的結合雜湊值。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

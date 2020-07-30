@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8106d419f20dcacdec6386294a5b9ffb8d1bc8e2
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 69ba6a8ce3cd29d7459215184f7488b015d16558
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225899"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349800"
 ---
 # <a name="activity_metrics-plugin"></a>activity_metrics plugin
 
@@ -23,11 +23,11 @@ ms.locfileid: "83225899"
 T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startofday(now()), 1d, dim1, dim2, dim3)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `activity_metrics(` *IdColumn* `,` *TimelineColumn* `,` [*開始* `,` *結束* `,` ]*視窗*[ `,` *dim1* `,` *dim2* `,` ...]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
@@ -37,7 +37,7 @@ T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startof
 * *Window*：以 [分析] 視窗期間的值為純量。 可以是數值/日期時間/時間戳記值，或為其中一個的字串 `week` / `month` / `year` ，在此情況下，所有週期都會據以[startofweek](startofweekfunction.md) / [startofmonth](startofmonthfunction.md) / [startofyear](startofyearfunction.md) 。 
 * *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回資料表，其中具有相異計數值、新值的相異計數、每個時間軸期間和每個現有維度組合的流失率。
 
@@ -47,7 +47,7 @@ T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startof
 |---|---|---|---|---|--|--|--|--|--|--|
 |類型：從*TimelineColumn*|long|long|double|double|..|..|..|
 
-**注意事項**
+**備註**
 
 ***保留率定義***
 
@@ -90,7 +90,7 @@ T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startof
     [Retention rate] = 100.0% - [Churn Rate]
 
 
-**範例**
+## <a name="examples"></a>範例
 
 ### <a name="weekly-retention-rate-and-churn-rate"></a>每週保留率和變換率
 

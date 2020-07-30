@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e62432773d99d74a46022cad3199f3bab0cae50b
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 34734f3975b1720c1d009f190d4fae2ebc54283f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128445"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350752"
 ---
-# <a name="todouble-toreal"></a>todouble （）、toreal （）
+# <a name="todouble-toreal"></a>todouble(), toreal()
 
 將輸入轉換為類型的值 `real` 。 （ `todouble()` 和 `toreal()` 都是同義字）。
 
@@ -23,16 +23,16 @@ ms.locfileid: "85128445"
 toreal("123.4") == 123.4
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `toreal(`*Expr* `)` 
  Expr `todouble(`*Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：其值將轉換成類型值的運算式 `real` 。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 如果轉換成功，則結果會是類型的值 `real` 。
 如果轉換不成功，則結果會是值 `real(null)` 。

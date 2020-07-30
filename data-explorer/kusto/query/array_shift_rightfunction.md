@@ -8,28 +8,28 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 28a44365d6d79bf30ec188146d989f2af2ad12c1
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: 866f7865abe2debeab22bfbf13bc7641d9bc5078
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550651"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349613"
 ---
 # <a name="array_shift_right"></a>array_shift_right()
 
 `array_shift_right()`將陣列內的值向右移位。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `array_shift_right(`*`arr`*, *`shift_count`* [, *`fill_value`* ]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *`arr`*：要分割的輸入陣列，必須是動態陣列。
 * *`shift_count`*：整數，指定陣列元素要向右移動的位置數目。 如果值為負數，則會將元素向左移動。
 * *`fill_value`*：用來插入元素的純量值，而不是已移位和已移除的專案。 Default： null 值或空字串（視*arr*類型而定）。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 動態陣列，包含與原始陣列中相同數量的元素。 每個專案都已根據而移位 *`shift_count`* 。 新增的新專案（而不是移除的專案）會有值 *`fill_value`* 。
 
@@ -39,7 +39,7 @@ ms.locfileid: "83550651"
 * 如需旋轉陣列許可權，請參閱[array_rotate_right （）](array_rotate_rightfunction.md)。
 * 如需將陣列旋轉，請參閱[array_rotate_left （）](array_rotate_leftfunction.md)。
 
-**範例**
+## <a name="examples"></a>範例
 
 * 由兩個位置向右移位：
 

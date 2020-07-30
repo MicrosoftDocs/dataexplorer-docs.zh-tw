@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: a06bd3719fba4f9f61cf7b1c9501f96b17a48d58
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: a200d0619b25fe7410a82a941a3b1bf6e35d60ac
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717218"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87342609"
 ---
 # <a name="summarize-operator"></a>summarize 運算子
 
@@ -31,11 +31,11 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 顯示有多少項目的價格落在 [0,10.0]、[10.0,20.0] 等依此類推的間隔中的資料表。 此範例有一個用於放置計數的資料行，以及一個用於放置價格範圍的資料行。 其他所有輸入資料行則會遭到忽略。
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| summarize` [[*column* `=` ]*匯總*[ `,` ...]] [ `by` [*column* `=` ] *GroupExpression* [ `,` ...]]
 
-**引數**
+## <a name="arguments"></a>引數
 
 * ** 結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
 * *匯總：* 以資料[aggregation function](summarizeoperator.md#list-of-aggregation-functions) `count()` `avg()` 行名稱做為引數呼叫彙總函式（例如或）。 請參閱 [彙總函式清單](summarizeoperator.md#list-of-aggregation-functions)。
@@ -47,7 +47,7 @@ T | summarize count() by price_range=bin(price, 10.0)
 > * 如果未提供*GroupExpression* ，輸出將會是單一（空白）資料列。
 > * 如果提供*GroupExpression* ，輸出就不會有任何資料列。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 輸入資料列會各自分組到具有相同 `by` 運算式值的群組。 然後指定的彙總函式會針對每個群組進行計算，以便為每個群組產生資料列。 結果會包含 `by` 資料行，而且每個經過計算的彙總至少會佔有一個資料行。 (某些彙總函式會傳回多個資料行)。
 
@@ -63,11 +63,11 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 |函式|描述|
 |--------|-----------|
-|[any()](any-aggfunction.md)|傳回群組的隨機非空白值|
+|[any （）](any-aggfunction.md)|傳回群組的隨機非空白值|
 |[anyif()](anyif-aggfunction.md)|傳回群組的隨機非空白值（含述詞）|
 |[arg_max()](arg-max-aggfunction.md)|當引數最大化時，傳回一或多個運算式|
 |[arg_min()](arg-min-aggfunction.md)|當引數最小化時，傳回一或多個運算式|
-|[avg()](avg-aggfunction.md)|傳回整個群組的平均值|
+|[avg （）](avg-aggfunction.md)|傳回整個群組的平均值|
 |[avgif()](avgif-aggfunction.md)|傳回整個群組的平均值（含述詞）|
 |[binary_all_and](binary-all-and-aggfunction.md)|使用群組的二進位檔傳回匯總值 `AND`|
 |[binary_all_or](binary-all-or-aggfunction.md)|使用群組的二進位檔傳回匯總值 `OR`|
@@ -88,13 +88,13 @@ T | summarize count() by price_range=bin(price, 10.0)
 |[maxif()](maxif-aggfunction.md)|傳回整個群組的最大值（含述詞）|
 |[min()](min-aggfunction.md)|傳回整個群組的最小值|
 |[minif()](minif-aggfunction.md)|傳回整個群組的最小值（含述詞）|
-|[percentiles()](percentiles-aggfunction.md)|傳回群組的百分位數近似值|
+|[百分位數（）](percentiles-aggfunction.md)|傳回群組的百分位數近似值|
 |[percentiles_array （）](percentiles-aggfunction.md)|傳回群組的百分位數近似|
 |[percentilesw()](percentiles-aggfunction.md)|傳回群組的加權百分位近似|
 |[percentilesw_array （）](percentiles-aggfunction.md)|傳回群組的加權百分位數近似|
-|[stdev()](stdev-aggfunction.md)|傳回整個群組的標準差|
+|[stdev （）](stdev-aggfunction.md)|傳回整個群組的標準差|
 |[stdevif()](stdevif-aggfunction.md)|傳回整個群組的標準差（使用述詞）|
-|[sum()](sum-aggfunction.md)|傳回遷移群組的元素總和|
+|[sum （）](sum-aggfunction.md)|傳回遷移群組的元素總和|
 |[sumif()](sumif-aggfunction.md)|傳回遷移群組之元素的總和（使用述詞）|
 |[variance()](variance-aggfunction.md)|傳回整個群組的變異數|
 |[varianceif()](varianceif-aggfunction.md)|傳回整個群組的變異數（使用述詞）|
@@ -115,7 +115,7 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 :::image type="content" source="images/summarizeoperator/summarize-price-by-supplier.png" alt-text="依水果與供應商的價格總結":::
 
-**範例**
+## <a name="example"></a>範例
 
 判斷 `ActivityType` 和資料表中的唯一組合 `CompletionStatus` 。 沒有任何彙總函式，只是群組依據索引鍵。 輸出只會顯示這些結果的資料行：
 
@@ -130,7 +130,7 @@ Activities | summarize by ActivityType, completionStatus
 |`dancing`|`abandoned`
 |`singing`|`completed`
 
-**範例**
+## <a name="example"></a>範例
 
 尋找 [活動] 資料表中所有記錄的最小和最大時間戳記。 由於沒有 group-by 子句，因此輸出中只有一個資料列︰
 
@@ -142,7 +142,7 @@ Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
 |---|---
 |`1975-06-09 09:21:45` | `2015-12-24 23:45:00`
 
-**範例**
+## <a name="example"></a>範例
 
 為每個大陸建立一個資料列，其中顯示活動發生的城市計數。 因為「大陸」有幾個值，' by ' 子句中不需要有群組函數：
 
@@ -155,7 +155,7 @@ Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
 |`2673`|`North America`|
 
 
-**範例**
+## <a name="example"></a>範例
 
 下列範例會計算每個活動類型的長條圖。 因為 `Duration` 有許多值，請使用 `bin` 將其值分組成10分鐘的間隔：
 

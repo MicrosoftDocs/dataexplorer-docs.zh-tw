@@ -2,18 +2,18 @@
 title: 顯示查詢結果快取-Azure 資料總管
 description: 本文說明。在 Azure 資料總管中顯示查詢結果快取。
 services: data-explorer
-author: amitof
-ms.author: amitof
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: amitof
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-ms.openlocfilehash: 84805cae07049af4ffa8a2fdb82e637261140f8f
-ms.sourcegitcommit: cf1da667be12656a8c4727c23144421b5a4b1099
+ms.openlocfilehash: 7b7a96a01a4ec2b6c84609b2f9c518637d174390
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86565432"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349885"
 ---
 # <a name="show-database-cache-query_results"></a>。顯示資料庫快取 query_results
 

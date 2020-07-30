@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/27/2020
-ms.openlocfilehash: 7eabcb3cb0c3fd001290848e73bb534ff8ea4218
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 30075b5a75e273061423a6f1540f44947ef93cec
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226817"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347709"
 ---
 # <a name="geo_s2cell_to_central_point"></a>geo_s2cell_to_central_point()
 
@@ -21,22 +21,22 @@ ms.locfileid: "83226817"
 
 閱讀更多有關[S2 資料格](https://s2geometry.io/devguide/s2cell_hierarchy)階層的資訊。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `geo_s2cell_to_central_point(`*s2cell*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 *s2cell*： S2 資料格權杖字串值，因為它是由[geo_point_to_s2cell （）](geo-point-to-s2cell-function.md)所計算。 S2 資料格權杖的最大字串長度為16個字元。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 地理空間座標值為[GeoJSON 格式](https://tools.ietf.org/html/rfc7946)，而[動態](./scalar-data-types/dynamic.md)資料類型為。 如果 S2 資料格 token 無效，查詢將會產生 null 結果。
 
 > [!NOTE]
 > GeoJSON 格式會指定經度 first 和緯度 second。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 5c1d25c0eaa0a3f52c18cf2f1e5e4200775b7d9d
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: 4f303726532da7ead1c2416f3d485979d045b0b2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550566"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346961"
 ---
 # <a name="make-series-operator"></a>make-series 運算子
 
@@ -23,11 +23,11 @@ ms.locfileid: "83550566"
 T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from datetime(2016-01-01) to datetime(2016-01-10) step 1d by fruit, supplier
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| make-series` [*MakeSeriesParamters*] [*Column* `=` ]*匯總*[ `default` `=` *DefaultValue*] [ `,` ...] `on` *AxisColumn* [ `from` *start*] [ `to` *end*] `step` *step* [ `by` [*Column* `=` ] *GroupExpression* [ `,` ...]]
 
-**引數**
+## <a name="arguments"></a>引數
 
 * ** 結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
 * *DefaultValue：* 將使用的預設值，而不是不存在的值。 如果沒有具有*AxisColumn*和*GroupExpression*之特定值的資料列，則會在結果中將*DefaultValue*的對應元素指派給陣列。 如果省略*DefaultValue* ，則假設為0。 
@@ -43,7 +43,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
   |---------------|-------------------------------------|------------------------------------------------------------------------------|
   |`kind`          |`nonempty`                               |當 make 系列運算子的輸入為空白時，會產生預設結果|                                
 
-**傳回**
+## <a name="returns"></a>傳回
 
 輸入資料列會排列成具有相同 `by` 運算式值和 `bin_at(` *AxisColumn* `, ` *步驟* `, ` *開始* `)` 運算式的群組。 然後指定的彙總函式會針對每個群組進行計算，以便為每個群組產生資料列。 結果會包含資料 `by` 行、 *AxisColumn*資料行，以及每個計算匯總的至少一個資料行。 （不支援多個資料行或非數值結果的匯總）。
 
@@ -73,22 +73,22 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 
 ## <a name="list-of-aggregation-functions"></a>彙總函式的清單
 
-|函式|說明|
+|函式|描述|
 |--------|-----------|
-|[any()](any-aggfunction.md)|傳回群組的隨機非空白值|
+|[any （）](any-aggfunction.md)|傳回群組的隨機非空白值|
 |[avg （）](avg-aggfunction.md)|傳回整個群組的平均值|
 |[count （）](count-aggfunction.md)|傳回群組的計數|
 |[countif()](countif-aggfunction.md)|傳回具有群組之述詞的計數|
 |[dcount()](dcount-aggfunction.md)|傳回群組元素的近似相異計數|
-|[最大值（）](max-aggfunction.md)|傳回整個群組的最大值|
-|[min （）](min-aggfunction.md)|傳回整個群組的最小值|
+|[max()](max-aggfunction.md)|傳回整個群組的最大值|
+|[min()](min-aggfunction.md)|傳回整個群組的最小值|
 |[stdev （）](stdev-aggfunction.md)|傳回整個群組的標準差|
 |[sum （）](sum-aggfunction.md)|傳回群組內元素的總和。|
 |[variance()](variance-aggfunction.md)|傳回整個群組的變異數|
 
 ## <a name="list-of-series-analysis-functions"></a>數列分析函數清單
 
-|函式|說明|
+|函式|描述|
 |--------|-----------|
 |[series_fir()](series-firfunction.md)|套用[有限的脈衝回應](https://en.wikipedia.org/wiki/Finite_impulse_response)篩選|
 |[series_iir()](series-iirfunction.md)|套用[無限脈衝回應](https://en.wikipedia.org/wiki/Infinite_impulse_response)篩選|
@@ -104,7 +104,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
   
 ## <a name="list-of-series-interpolation-functions"></a>數列插補函式的清單
 
-|函式|說明|
+|函式|描述|
 |--------|-----------|
 |[series_fill_backward()](series-fill-backwardfunction.md)|執行數列中遺漏值的後置填滿插補|
 |[series_fill_const()](series-fill-constfunction.md)|以指定的常數值取代數列中的遺漏值|
@@ -185,7 +185,7 @@ data
 | count 
 ```
 
-|Count|
+|計數|
 |---|
 |0|
 

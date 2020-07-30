@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7d97d31b2fb97d5541400bc0605ee40e83807b62
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: cd9900b5087ed0d6ae7e97d2f2dad809bb909331
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83371887"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350803"
 ---
 # <a name="sumif-aggregation-function"></a>sumif （）（彙總函式）
 
@@ -23,20 +23,20 @@ ms.locfileid: "83371887"
 
 您也可以使用[sum （）](sum-aggfunction.md)函數來計算不含述詞運算式的資料列。
 
-**語法**
+## <a name="syntax"></a>語法
 
 總結 `sumif(` *Expr* `,` *Predicate*述詞`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：匯總計算的運算式。 
 * 述*詞：述*詞，如果為 true，則會將*Expr*的計算值新增至總和。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 述*詞評估為之* *Expr*的總和值 `true` 。
 
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 let T = datatable(name:string, day_of_birth:long)

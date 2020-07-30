@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: e3f874ecfc0bb1872f08efa3269c73b02971e4f3
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 1bfe42e18cfe0bb424e933b266eb9861c7676cea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737635"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348576"
 ---
 # <a name="database-scope-function"></a>database （）（scope 函數）
 
@@ -28,15 +28,15 @@ database('Sample').StormEvents
 cluster('help').database('Sample').StormEvents
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `database(`*stringConstant*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *stringConstant*：所參考之資料庫的名稱。 識別的資料庫可以是`DatabaseName`或`PrettyName`。 引數在執行查詢之前必須是_常數_，亦即，不能來自子查詢評估。
+* *stringConstant*：所參考之資料庫的名稱。 識別的資料庫可以是 `DatabaseName` 或 `PrettyName` 。 引數在執行查詢之前必須是_常數_，亦即，不能來自子查詢評估。
 
-**注意事項**
+**備註**
 
 * 如需存取遠端叢集和遠端資料庫的詳細資料，請參閱[cluster （）](clusterfunction.md) scope function。
 * [這裡](cross-cluster-or-database-queries.md)提供跨叢集和跨資料庫查詢的詳細資訊
@@ -55,7 +55,7 @@ database('Samples').StormEvents | count
 
 ### <a name="use-database-inside-let-statements"></a>在 let 語句內使用 database （） 
 
-與上述相同的查詢可以重寫成使用內嵌函式（let 語句）來接收參數`dbName` （傳遞至 database （）函數）。
+與上述相同的查詢可以重寫成使用內嵌函式（let 語句）來接收參數（ `dbName` 傳遞至 database （）函數）。
 
 ```kusto
 let foo = (dbName:string)
@@ -71,7 +71,7 @@ foo('help')
 
 ### <a name="use-database-inside-functions"></a>在函式內部使用資料庫（） 
 
-您可以重新撰寫與上述相同的查詢，以在接收參數`dbName`的函式中使用，這會傳遞至 database （）函數。
+您可以重新撰寫與上述相同的查詢，以在接收參數的函式中使用， `dbName` 這會傳遞至 database （）函數。
 
 ```kusto
 .create function foo(dbName:string)

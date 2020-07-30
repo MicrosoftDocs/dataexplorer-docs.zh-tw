@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: 616fee7b0a1b6852f66d3db22846b2645e03135f
-ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
+ms.openlocfilehash: ef72ce93dd0cc6d4ab95c46365bfb0351d9d565a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84665005"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87343969"
 ---
 # <a name="series_fir"></a>series_fir()
 
@@ -21,11 +21,11 @@ ms.locfileid: "84665005"
 
 函式會採用包含動態數值陣列做為輸入的運算式，並套用[有限的脈衝回應](https://en.wikipedia.org/wiki/Finite_impulse_response)篩選準則。 藉由指定 `filter` 係數，可以用來計算移動平均、凹凸貼圖、變更偵測，以及更多使用案例。 函式會採用包含動態陣列的資料行，以及篩選準則係數的靜態動態陣列做為輸入，並在資料行上套用篩選。 它會輸出新的動態陣列資料行，其中包含已篩選的輸出。  
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_fir(`*x* `,` *篩選*[正規化 `,` * *[ `,` *center*]]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：數值的動態陣列資料格。 [Make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出通常是。
 * *filter*：常數運算式，其中包含篩選準則的係數（儲存為數值的動態陣列）。
@@ -33,7 +33,7 @@ ms.locfileid: "84665005"
 正規化是一個方便的方式，可確保係數的總和為1。 然後，篩選準則不會擴展或 attenuate 數列。 例如，由*filter*= [1，1，1，1] 和*正規化*= true 指定四個分類的移動平均，這比輸入 [0.25，0.25.0.25，0.25] 更容易。
 * *center*：此為選擇性的布林值，指出是否要在目前點前後的時間範圍，或從目前點回溯的時間範圍，以對稱的來套用篩選。 根據預設，center 為 false，適用于串流資料的案例，我們只能在目前和較舊的點上套用篩選。 不過，針對臨機操作處理，您可以將它設定為 `true` ，讓它與時間序列保持同步。 請參閱下列範例。 這個參數會控制篩選的[群組延遲](https://en.wikipedia.org/wiki/Group_delay_and_phase_delay)。
 
-**範例**
+## <a name="examples"></a>範例
 
 * 藉由設定*filter*= [1，1，1，1，1 *] 並正規化* = `true` （預設值），來計算五個點的移動平均。 請注意*center* = `false` （預設值）與下列各項的效果 `true` ：
 

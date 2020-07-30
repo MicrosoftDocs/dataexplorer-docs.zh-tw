@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 4534705156669447a89cb5d85c360071dfcb2b2a
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 698acc481a6313160602c939774a6029978df483
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264992"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348100"
 ---
 # <a name="externaldata-operator"></a>externaldata 運算子
 
 運算子會傳回 `externaldata` 一個資料表，其架構是在查詢本身中定義，而其資料是從外部儲存成品（例如 Azure Blob 儲存體中的 blob）讀取。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `externaldata``(` *ColumnName* `:` *ColumnType* [ `,` ...] `)` `[` *StorageConnectionString* `]` [ `with` `(` *Prop1* `=` *Value1* [ `,` ...] `)` ]
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *ColumnName*、 *ColumnType*：引數會定義資料表的架構。
   語法與在[. create table](../management/create-table-command.md)中定義資料表時所使用的語法相同。
@@ -37,11 +37,11 @@ ms.locfileid: "85264992"
 > [!NOTE]
 > 此運算子沒有管線輸入。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 `externaldata`運算子會傳回給定架構的資料表，其資料是從指定的儲存體成品進行剖析，並以儲存體連接字串表示。
 
-**範例**
+## <a name="examples"></a>範例
 
 下列範例顯示如何在資料表中尋找資料 `UserID` 行屬於一組已知識別碼的所有記錄（每行一個），並保留在外部 blob 中。
 因為此集合是由查詢間接參考，所以可能會很大。

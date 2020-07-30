@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/18/2020
-ms.openlocfilehash: 4915371127acd229845cc9eac1ea1400484c313f
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: b5d0624504744bb28dfdb68ee27c48b2119242b8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372977"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351500"
 ---
 # <a name="sample-operator"></a>sample 運算子
 
@@ -23,15 +23,15 @@ ms.locfileid: "83372977"
 T | sample 5
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 _T_ `| sample` _NumberOfRows_
 
-**引數**
+## <a name="arguments"></a>引數
 
 - _NumberOfRows_：要傳回的_T_資料列數目。 您可以指定任何數值運算式。
 
-**注意事項**
+**備註**
 
 - `sample`適用于速度，而不是平均分佈值。 具體來說，這表示如果在兩個不同大小的資料集（例如 `union` or 運算子）後面使用運算子之後，它就不會產生 ' 公平 ' 結果 `join` 。 建議在 `sample` 資料表參考和篩選準則後面使用 right。
 
@@ -72,7 +72,7 @@ StormEvents | where rand() < 0.1
 
 - 如果您想要對索引鍵（而非資料列）進行取樣（例如，範例10識別碼並取得這些識別碼的所有資料列），您可以 [`sample-distinct`](./sampledistinctoperator.md) 搭配 `in` 運算子使用。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

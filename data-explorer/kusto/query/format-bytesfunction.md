@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4da07433be5a052d71740931d4dedd9df0399f56
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: f19883335149603fe7fc7429dabb62f565a0b402
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227312"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347981"
 ---
 # <a name="format_bytes"></a>format_bytes()
 
@@ -23,21 +23,21 @@ ms.locfileid: "83227312"
 format_bytes(1024) == '1 KB'"
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `format_bytes(`*值*[ `,` *精確度*[ `,` *單位*]]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * `value`：要格式化為資料大小（以位元組為單位）的數位。
 * `precision`：（選擇性）值將四捨五入的位數。 （預設值為0）。
 * `units`：（選擇性）字串格式將使用的目標資料大小單位（ `Bytes` 、 `KB` 、 `MB` 、 `GB` 、 `TB` 、 `PB` ）。 如果參數是空的，則會根據輸入值自動選取單位。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 具有格式結果的字串。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

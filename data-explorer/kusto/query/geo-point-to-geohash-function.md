@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: c37789ac490814288c7331f0b1ae86b8b2178d67
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 7998726637a7d19413954a509dd0ad9b34202f03
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226919"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347760"
 ---
 # <a name="geo_point_to_geohash"></a>geo_point_to_geohash()
 
@@ -21,17 +21,17 @@ ms.locfileid: "83226919"
 
 閱讀更多有關[geohash](https://en.wikipedia.org/wiki/Geohash)的資訊。  
 
-**語法**
+## <a name="syntax"></a>語法
 
 `geo_point_to_geohash(`*經度* `, `*緯度* `, `[*精確度*]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *經度*：地理位置的經度值。 如果 x 是實數，而且在 [-180，+ 180] 範圍內，則經度 x 會視為有效。 
 * *緯度*：地理位置的緯度值。 如果 y 是實數，而 y 的範圍是 [-90，+ 90]，則緯度 y 會視為有效。 
 * *精確度*：定義所 `int` 要求精確度的選擇性。 支援的值位於 [1，18] 範圍內。 如果未指定，則 `5` 會使用預設值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 具有所要求精確度長度之指定地理位置的 geohash 字串值。 如果座標或精確度無效，查詢將會產生空的結果。
 
@@ -69,7 +69,7 @@ ms.locfileid: "83226919"
 
 另請參閱[geo_point_to_s2cell （）](geo-point-to-s2cell-function.md)。
 
-**範例**
+## <a name="examples"></a>範例
 
 Geohash 所匯總的美國風暴事件。
 

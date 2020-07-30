@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: 99044d8762a1c7c7e86fb2633a8226ef48d66b55
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a366120428d14c713b18aee6652460817c75433a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225627"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349562"
 ---
 # <a name="array_index_of"></a>array_index_of()
 
 在陣列中搜尋指定的專案，並傳回其位置。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `array_index_of(`*陣列*，*值*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *array*：要搜尋的輸入陣列。
 * *value*：要搜尋的值。 此值的類型必須是 long、integer、double、datetime、timespan、decimal、string 或 guid。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 Lookup 以零為起始的索引位置。
 如果在陣列中找不到值，則傳回-1。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

@@ -1,6 +1,6 @@
 ---
-title: 叉運算符 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的分叉運算符。
+title: 分叉運算子-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的分支運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,46 +8,46 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 13cd837b3874a55ec758991f5609e089daba7c75
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b234a95b4a541099f3fc050501ca6b0fd9f67ccf
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515193"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347998"
 ---
 # <a name="fork-operator"></a>fork 運算子
 
-並行運行多個使用者運算符。
+以平行方式執行多個取用者運算子。
 
-**語法**
+## <a name="syntax"></a>語法
 
-*T* `|` T `=` `(` `)` `fork` =`=`名稱 = 子查詢 = 名稱 = 子查詢 ... `(` *name* `)` *name* *subquery* *subquery*
+*T* `|` `fork` [*name* `=` ] `(` *子查詢* `)` [*name* `=` ] `(` *子查詢* `)` .。。
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *子查詢*是查詢運算子的下游管道
-* *名稱*是子查詢結果表的暫存名稱
+* *子*查詢是查詢運算子的下游管線
+* *name*是子查詢結果資料表的暫時名稱
 
-**傳回**
+## <a name="returns"></a>傳回
 
-多個結果表,每個子查詢一個。
+多個結果資料表，每個子查詢各一個。
 
 **支援的運算子**
 
 [`as`](asoperator.md), [`count`](countoperator.md), [`extend`](extendoperator.md), [`parse`](parseoperator.md), [`where`](whereoperator.md), [`take`](takeoperator.md), [`project`](projectoperator.md), [`project-away`](projectawayoperator.md), [`summarize`](summarizeoperator.md), [`top`](topoperator.md), [`top-nested`](topnestedoperator.md), [`sort`](sortoperator.md), [`mv-expand`](mvexpandoperator.md), [`reduce`](reduceoperator.md)
 
-**注意事項**
+**備註**
 
-* [`materialize`](materializefunction.md)功能可用作使用[`join`](joinoperator.md)[`union`](unionoperator.md)或叉腿的替換。
-輸入流將按具體緩存,然後緩存的運算式可用於聯接/聯合支腿。
+* [`materialize`](materializefunction.md)函式可用來取代 [`join`](joinoperator.md) [`union`](unionoperator.md) 在分叉支線上使用或。
+輸入資料流程會藉由具體化進行快取，然後快取的運算式可以用於聯結/聯集的腿。
 
-* `name`參數或使用[`as`](asoperator.md)運算符給出的名稱將用作 工具[`Kusto.Explorer`](../tools/kusto-explorer.md)中 命名結果選項卡的名稱。
+* `name`引數或 using 運算子所指定的名稱， [`as`](asoperator.md) 將用來做為工具中的 [結果] 索引標籤名稱 [`Kusto.Explorer`](../tools/kusto-explorer.md) 。
 
-* 避免與`fork`單個子查詢一起使用。
+* 避免 `fork` 在單一子查詢中使用。
 
-* 首選使用[帶有](batches.md)[`materialize`](materializefunction.md)表格表達式語句的批`fork`處理而不是 運算符。
+* 偏好搭配使用[batch](batches.md)與 [`materialize`](materializefunction.md) 表格式運算式語句 over `fork` 運算子。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 KustoLogs

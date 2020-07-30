@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 5e02c7ca2874a779cc5a626fd65522392439b491
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: b376afda0874fdb70934ffc6861192ef9028e9aa
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271582"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347080"
 ---
 # <a name="new_activity_metrics-plugin"></a>new_activity_metrics plugin
 
@@ -22,11 +22,11 @@ ms.locfileid: "83271582"
 T | evaluate new_activity_metrics(id, datetime_column, startofday(ago(30d)), startofday(now()), 1d, dim1, dim2, dim3)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `new_activity_metrics(` *IdColumn* `,` *TimelineColumn* `,` *開始* `,` *結束* `,` *視窗*[世代 `,` * *] [ `,` *dim1* `,` *dim2* `,` ...] [ `,` *回顧*]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
@@ -38,7 +38,7 @@ T | evaluate new_activity_metrics(id, datetime_column, startofday(ago(30d)), sta
 * *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 * *回顧*：（選擇性）具有一組識別碼的表格式運算式屬於「回頭查看」期間
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回資料表，其中具有相異計數值、新值的相異計數、每個「從」和「到」時間軸週期的組合，以及每個現有維度組合的流失率。
 
@@ -56,12 +56,12 @@ T | evaluate new_activity_metrics(id, datetime_column, startofday(ago(30d)), sta
 * `retention_rate`-世代外的百分比 `dcount_retained_values` （使用者第一次見 `from_TimelineColumn` ）。
 * `churn_rate`-世代外的百分比 `dcount_churn_values` （使用者第一次見 `from_TimelineColumn` ）。
 
-**注意事項**
+**備註**
 
 如需和的定義 `Retention Rate` ， `Churn Rate` 請參閱[activity_metrics 外掛程式](./activity-metrics-plugin.md)檔中的**附注**一節。
 
 
-**範例**
+## <a name="examples"></a>範例
 
 下列範例資料集會顯示哪些使用者看到哪些日子。 資料表是根據來源資料表產生的 `Users` ，如下所示： 
 
@@ -69,7 +69,7 @@ T | evaluate new_activity_metrics(id, datetime_column, startofday(ago(30d)), sta
 Users | summarize tostring(make_set(user)) by bin(Timestamp, 1d) | order by Timestamp asc;
 ```
 
-|時間戳記|set_user|
+|Timestamp|set_user|
 |---|---|
 |2019-11-01 00：00：00.0000000|[0，2，3，4]|
 |2019-11-02 00：00：00.0000000|[0，1，3，4，5]|

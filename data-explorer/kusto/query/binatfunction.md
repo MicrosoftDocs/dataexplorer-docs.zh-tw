@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 90055f644dbf653eb65546202832f7cab834a0ac
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 8a480ad0af2d3f71dd3ae9279bb59b32d9654acb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227584"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348984"
 ---
 # <a name="bin_at"></a>bin_at()
 
 將值向下舍入固定大小的「bin」，並控制 bin 的起點。
 （另請參閱 [`bin function`](./binfunction.md) ）。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `bin_at``(` *Expression* `,` *BinSize* `, ` *FixedPoint*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expression*：數數值型別的純量運算式（包括 `datetime` 和 `timespan` ），指出要舍入的值。
 * *BinSize*：與*運算式*相同類型的純量常數，表示每個 bin 的大小。 
 * *FixedPoint*：與*運算式*相同類型的純量常數，表示*運算式*的一個值，也就是「固定點」（也就是的值 `fixed_point` `bin_at(fixed_point, bin_size, fixed_point) == fixed_point` ）。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 *BinSize*下方*運算式*的最接近倍數會移位，使*FixedPoint*會轉譯成本身。
 
-**範例**
+## <a name="examples"></a>範例
 
 |運算是                                                                    |結果                           |評價                   |
 |------------------------------------------------------------------------------|---------------------------------|---------------------------|

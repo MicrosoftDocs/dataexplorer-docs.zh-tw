@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/22/2020
-ms.openlocfilehash: e04abb6eed95e5129d6878486e3781173cbf0557
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 13254314bdbab7ddbdb74341e384867c26b6259d
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226783"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347692"
 ---
 # <a name="getmonth"></a>getmonth()
 
@@ -21,7 +21,7 @@ ms.locfileid: "83226783"
 
 另一個別名： monthoyear （）
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

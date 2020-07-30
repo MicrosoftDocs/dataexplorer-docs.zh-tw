@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: 3f45f579ad47dbdc9bf1fca707826948a598f63d
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: ab2132908dad26f5f21cf945a1af4af1b8a049cd
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780162"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347386"
 ---
 # <a name="in-and-in-operators"></a>in 和 !in 運算子
 
@@ -23,7 +23,7 @@ ms.locfileid: "84780162"
 Table1 | where col in ('value1', 'value2')
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *區分大小寫的語法：*
 
@@ -41,18 +41,18 @@ Table1 | where col in ('value1', 'value2')
 *T*純 `|` `where` *col* `!in~` `(` *量運算式的*T 欄清單`)`  
 *T* `|` `where` *欄* `!in~` `(` *表格式運算式*`)`   
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T* -要篩選其記錄的表格式輸入。
 * *col* -要篩選的資料行。
 * *運算式清單*-表格式、純量或常值運算式的逗號分隔清單。
 * *表格式運算式*-具有一組值的表格式運算式。 如果運算式有多個資料行，則會使用第一個資料行。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 述詞為之*T*中的資料列 `true` 。
 
-**注意事項**
+**備註**
 
 * 運算式清單可產生最多個 `1,000,000` 值。
 * 嵌套的陣列會壓平合併成單一的值清單。 例如，`x in (dynamic([1,[2,3]]))` 會成為 `x in (1,2,3)`。
@@ -70,7 +70,7 @@ StormEvents
 | count
 ```
 
-|Count|
+|計數|
 |---|
 |4775|  
 
@@ -84,7 +84,7 @@ StormEvents
 | count
 ```
 
-|Count|
+|計數|
 |---|
 |4775|  
 
@@ -97,7 +97,7 @@ StormEvents
 | count
 ```
 
-|Count|
+|計數|
 |---|
 |54291|  
 
@@ -112,7 +112,7 @@ StormEvents
 | count
 ```
 
-|Count|
+|計數|
 |---|
 |3218|
 
@@ -145,7 +145,7 @@ StormEvents
 | count
 ```
 
-|Count|
+|計數|
 |---|
 |14242|  
 
@@ -160,7 +160,7 @@ Lightning_By_State
 | summarize sum(lightning_events) by State 
 ```
 
-| State     | sum_lightning_events |
+| 狀態     | sum_lightning_events |
 |-----------|----------------------|
 | ALABAMA   | 29                   |
 | 威斯康辛 | 31                   |
@@ -177,7 +177,7 @@ StormEvents | where State in (InterestingStates()) | count
 
 ```
 
-|Count|
+|計數|
 |---|
 |4775|  
 

@@ -1,6 +1,6 @@
 ---
-title: arg_min() (聚合函數) - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的arg_min(聚合函數)。
+title: arg_min （）（彙總函式）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 arg_min （）（彙總函式）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,49 +8,49 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/12/2019
-ms.openlocfilehash: 58c590e124b01166ad07aa2b00fe865546947f96
-ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
+ms.openlocfilehash: 33e2657f2569957002d17d7061cfec863402027e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82030477"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349681"
 ---
-# <a name="arg_min-aggregation-function"></a>arg_min() (聚合函數)
+# <a name="arg_min-aggregation-function"></a>arg_min （）（彙總函式）
 
-在組中尋找最小化*ExprTo 最小化*的行,並返回*ExprToReturn*的`*`值(或返回整個行)。
+在群組中尋找最小化*ExprToMinimize*的資料列，並傳回*ExprToReturn*的值（或傳回 `*` 整個資料列）。
 
-* 只能在[匯總](summarizeoperator.md)的聚合上下文中使用
+* 只能在[匯總](summarizeoperator.md)的內容中使用
 
-**語法**
+## <a name="syntax"></a>語法
 
-`summarize`[`(`*名稱 exprto 最小化*`,`名稱`,`*exprto 傳回*】 ...`)=` `*`  |  `,` *ExprToReturn* *ExprToMinimize* [ `(` exprtoto 最小化 , exprto 傳回 】 `arg_min` ...`)`
+`summarize`[ `(` *NameExprToMinimize* `,` *NameExprToReturn* [ `,` ...] `)=` ] `arg_min` `(`*ExprToMinimize*， `*`  |  *ExprToReturn* [ `,` ...]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *ExprTo 最小化*:將用於聚合計算的運算式。 
-* *ExprToReturn*:當*ExprTo 最小化*為最小時,將用於返回該值的運算式。 要返回的運算式可以是通配符 (*), 用於返回輸入表的所有列。
-* *名稱ExprTo最小化*:表示*ExprTo 最小化*的結果列的可選名稱。
-* *NameExprToReturn:* 表示*ExprToReturn*的結果列的其他可選名稱。
+* *ExprToMinimize*：將用於匯總計算的運算式。 
+* *ExprToReturn*：將用來在*ExprToMinimize*最低時傳回值的運算式。 要傳回的運算式可能是萬用字元（*），以傳回輸入資料表的所有資料行。
+* *NameExprToMinimize*：代表*ExprToMinimize*之結果資料行的選擇性名稱。
+* *NameExprToReturn*：代表*ExprToReturn*之結果資料行的其他選擇性名稱。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-在組中尋找最小化*ExprTo 最小化*的行,並返回*ExprToReturn*的`*`值(或返回整個行)。
+在群組中尋找最小化*ExprToMinimize*的資料列，並傳回*ExprToReturn*的值（或傳回 `*` 整個資料列）。
 
-**範例**
+## <a name="examples"></a>範例
 
-顯示每種產品最便宜的供應商:
+顯示每項產品的最低價供應商：
 
 ```kusto
 Supplies | summarize arg_min(Price, Supplier) by Product
 ```
 
-顯示所有詳細資訊,而不僅僅是供應商名稱:
+顯示所有詳細資料，而不只是供應商名稱：
 
 ```kusto
 Supplies | summarize arg_min(Price, *) by Product
 ```
 
-查找每個大陸最南端的城市,其國家:
+尋找每個大陸中的 southernmost 城市，其國家/地區如下：
 
 ```kusto
 PageViewLog 
@@ -58,4 +58,4 @@ PageViewLog
     by continent
 ```
 
-:::image type="content" source="images/arg-min-aggfunction/arg-min.png" alt-text="阿格敏":::
+:::image type="content" source="images/arg-min-aggfunction/arg-min.png" alt-text="Arg min":::
