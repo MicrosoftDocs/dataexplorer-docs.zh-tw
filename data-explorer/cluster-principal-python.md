@@ -1,36 +1,36 @@
 ---
-title: 使用 Python 為 Azure 資料資源管理員加入叢集主體
-description: 在本文中,您將瞭解如何使用 Python 為 Azure 資料資源管理器添加群集主體。
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+title: 使用 Python 新增 Azure 資料總管的叢集主體
+description: 在本文中，您將瞭解如何使用 Python 來新增 Azure 資料總管的叢集主體。
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 02/03/2020
-ms.openlocfilehash: 73956a73f5ae84529018abfce64c3a373b9a8ca1
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5532be47c957ae2251e71dc25a17e67a8e57f474
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81496910"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350395"
 ---
-# <a name="add-cluster-principals-for-azure-data-explorer-by-using-python"></a>使用 Python 為 Azure 資料資源管理員加入叢集主體
+# <a name="add-cluster-principals-for-azure-data-explorer-by-using-python"></a>使用 Python 新增 Azure 資料總管的叢集主體
 
 > [!div class="op_single_selector"]
 > * [C#](cluster-principal-csharp.md)
 > * [Python](cluster-principal-python.md)
 > * [Azure Resource Manager 範本](cluster-principal-resource-manager.md)
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 在本文中,可以使用 Python 為 Azure 資料資源管理器添加群集主體。
+Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 在本文中，您會使用 Python 來新增 Azure 資料總管的叢集主體。
 
 ## <a name="prerequisites"></a>Prerequisites
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
-* [建立叢集](create-cluster-database-python.md)。
+* [建立](create-cluster-database-python.md)叢集。
 
 ## <a name="install-python-package"></a>安裝 Python 套件
 
-若要為 Azure 資料總管 (Kusto) 安裝 Python 套件，請開啟在其路徑中有 Python 的命令提示字元。 請執行這個命令：
+若要為 Azure 資料總管 (Kusto) 安裝 Python 套件，請開啟在其路徑中有 Python 的命令提示字元。 執行此命令：
 
 ```
 pip install azure-common
@@ -39,9 +39,9 @@ pip install azure-mgmt-kusto
 
 [!INCLUDE [data-explorer-authentication](includes/data-explorer-authentication.md)]
 
-## <a name="add-a-cluster-principal"></a>新增群集主體
+## <a name="add-a-cluster-principal"></a>新增叢集主體
 
-下面的範例展示如何以程式設計方式添加群集主體。
+下列範例說明如何以程式設計方式新增叢集主體。
 
 ```Python
 from azure.mgmt.kusto import KustoManagementClient
@@ -80,17 +80,17 @@ poller = kusto_management_client.cluster_principal_assignments.create_or_update(
 
 |**設定** | **建議的值** | **欄位描述**|
 |---|---|---|
-| tenant_id | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄 ID。|
-| subscription_id | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 用於資源創建的訂閱 ID。|
-| client_id | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 可以訪問租戶中資源的應用程式的客戶端 ID。|
-| client_secret | *xxxxxxxxxxxxxxx* | 可以訪問租戶中資源的應用程式的用戶端機密。 |
-| resource_group_name | *testrg* | 包含群集的資源組的名稱。|
-| cluster_name | *mykustocluster* | 群集的名稱。|
-| principal_assignment_name | *叢集主體分配1* | 群集主體資源的名稱。|
-| principal_id | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 主體ID,可以是使用者電子郵件、應用程式ID或安全組名稱。|
-| 角色 (role) | *所有資料庫管理* | 群集主體的角色,可以是"所有資料庫管理"或"所有資料庫查看器"。|
-| tenant_id_for_principal | *xxxxxx-xxxxxx-xxx-xxx-xxxxxxxxx* | 主體的租戶 ID。|
-| principal_type | *應用程式* | 主體的類型,可以是"使用者"、"應用"或"組"|
+| tenant_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
+| subscription_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
+| client_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
+| client_secret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
+| resource_group_name | *testrg* | 包含您叢集的資源組名。|
+| cluster_name | *mykustocluster* | 叢集的名稱。|
+| principal_assignment_name | *clusterPrincipalAssignment1* | 叢集主體資源的名稱。|
+| principal_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 主體識別碼，可以是使用者電子郵件、應用程式識別碼或安全性群組名稱。|
+| 角色 (role) | *AllDatabasesAdmin* | 叢集主體的角色，可以是 ' AllDatabasesAdmin' ' 或 ' AllDatabasesViewer '。|
+| tenant_id_for_principal | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 主體的租使用者識別碼。|
+| principal_type | *應用程式* | 主體的類型，可以是「使用者」、「應用程式」或「群組」|
 
 ## <a name="next-steps"></a>後續步驟
 

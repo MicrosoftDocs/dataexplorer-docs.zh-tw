@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2d5accaa0e6f6c4c6e5d5261a9709ba965de6965
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 8e237441d28f12ffc6f27f8a591980a701825e39
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264953"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347454"
 ---
 # <a name="indexof"></a>indexof()
 
@@ -23,11 +23,11 @@ ms.locfileid: "85264953"
 
 如需詳細資訊，請參閱 [`indexof_regex()`](indexofregexfunction.md)。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `indexof(`*來源* `,`*查閱* `[,`*start_index* `[,`*長度* `[,`*發生次數*`]]])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *來源*：輸入字串。  
 * *查閱*：要查詢的字串。
@@ -35,7 +35,7 @@ ms.locfileid: "85264953"
 * *長度*：要檢查的字元位置數目。 -1 的值表示無限制的長度。 選擇性。
 * *發生*次數：發生次數。 預設值：1。 選擇性。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 *Lookup*以零為起始的索引位置。
 
@@ -43,7 +43,7 @@ ms.locfileid: "85264953"
 
 如果不相關（小於0） *start_index*、*發生次數*或（小於-1）*長度*參數，則會傳回*null*。
 
-**範例**
+## <a name="examples"></a>範例
 ```kusto
 print
  idx1 = indexof("abcdefg","cde")    // lookup found in input string

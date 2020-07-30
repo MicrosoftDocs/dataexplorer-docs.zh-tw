@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c68cac70223b4779b4ca0acf33cd9f66d8c91765
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 67a5e05a5720c8a9290523344f793c07c47c5ed2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227395"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347913"
 ---
 # <a name="funnel_sequence-plugin"></a>funnel_sequence plugin
 
@@ -23,11 +23,11 @@ ms.locfileid: "83227395"
 T | evaluate funnel_sequence(id, datetime_column, startofday(ago(30d)), startofday(now()), 10m, 1d, state_column, dynamic(['S1', 'S2', 'S3']))
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `funnel_sequence(` *IdColumn* `,` *TimelineColumn* `,` *開始* `,` *結束* `,` *MaxSequenceStepWindow*、*步驟*、 *StateColumn*、*順序*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *IdColum*：資料行參考，必須存在於來源運算式中。
@@ -39,7 +39,7 @@ T | evaluate funnel_sequence(id, datetime_column, startofday(ago(30d)), startofd
 * *StateColumn*：代表狀態的資料行參考，必須存在於來源運算式中。
 * *Sequence*：具有順序值的常數動態陣列（在中查閱值 `StateColumn` ）。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 會傳回三個輸出資料表，這適用于針對分析的序列來建立 sankey 圖：
 
@@ -57,7 +57,7 @@ T | evaluate funnel_sequence(id, datetime_column, startofday(ago(30d)), startofd
     範例：對應到資料列序列的識別碼（來自 `IdColumn` ）陣列（最多會傳回128個識別碼）。 
 
 
-**範例**
+## <a name="examples"></a>範例
 
 ### <a name="exploring-storm-events"></a>探索風暴事件 
 

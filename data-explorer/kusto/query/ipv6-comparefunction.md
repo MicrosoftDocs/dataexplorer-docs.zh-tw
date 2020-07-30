@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 7d63ce48ba54377fa79ccd13484b2b9b08794bc6
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: 92c2c512fc81176cfa849ecdd66c0cdcfad9d8d3
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512362"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347318"
 ---
 # <a name="ipv6_compare"></a>ipv6_compare()
 
@@ -27,11 +27,11 @@ ipv6_compare('fe80::85d:e82c:9446:7994/127', 'fe80::85d:e82c:9446:7995/127') == 
 ipv6_compare('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == 0
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `ipv6_compare(`*運算式 1* `, `*運算式 2* `[ ,`*PrefixMask*`])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *運算式 1*、運算式*2*：代表 IPv6 或 IPv4 位址的字串運算式。 IPv6 和 IPv4 字串可以使用 IP 首碼標記法加以遮罩（請參閱附注）。
 * *PrefixMask*：介於0到128之間的整數，代表所考慮的最高有效位數。
@@ -42,9 +42,10 @@ ipv6_compare('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == 0
 >`IP-prefix notation`使用斜線（）字元來定義 IP 位址是常見的作法 `/` 。
 >斜線（）左邊的 IP 位址 `/` 是基底 IP 位址，而斜線（）右邊的數位（1到127） `/` 是網路遮罩中連續1位的數目。 
 >
-> **範例**： fe80：：85d： e82c：9446： 7994/120 將會有相關聯的 net/subnetmask，其中包含120的連續位。
+> ## <a name="example"></a>範例：
+> fe80：：85d： e82c：9446： 7994/120 將會有相關聯的 net/subnetmask，其中包含120的連續位。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 * `0`：如果第一個 IPv6 字串引數的長標記法等於第二個 IPv6 字串引數。
 * `1`：如果第一個 IPv6 字串引數的長表示大於第二個 IPv6 字串引數。

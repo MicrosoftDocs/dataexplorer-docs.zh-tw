@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 1d93535ff2caff096a18e2324fd3015ca91fc5b4
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 814124dc0ae9fa5f26a198fafc1bf1d7fd2b83e4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373259"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346196"
 ---
 # <a name="percentile_tdigest"></a>percentile_tdigest()
 
 計算 `tdigest` 結果（由[tdigest （）](tdigest-aggfunction.md)或[tdigest_merge （）](tdigest-merge-aggfunction.md)）產生的百分位數結果
 
-**語法**
+## <a name="syntax"></a>語法
 
 `percentile_tdigest(`*`Expr`*`,`*Percentile1* [ `,` *typeLiteral*]`)`
 
@@ -27,14 +27,14 @@ ms.locfileid: "83373259"
 
 `percentiles_array_tdigest(`*`Expr`*`,`*動態陣列*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：所產生的運算式， [`tdigest`](tdigest-aggfunction.md) 或[tdigest_merge （）](tdigest-merge-aggfunction.md)。
 * *百分*位數是指定百分位數的 double 常數。
 * *typeLiteral*：選擇性的類型常值（例如， `typeof(long)` ）。 如果有提供，結果集會是這個型別。 
 * *動態陣列*：整數或浮點數的動態陣列中的百分位數清單。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 中每個值的百分位數/percentilesw 值 *`Expr`* 。
 
@@ -46,7 +46,7 @@ ms.locfileid: "83373259"
 
 * 如果 *`Expr`* 包含 `tdigest` 不同類型的函式，請不要提供類型。 結果會是動態類型。 請參閱以下範例。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

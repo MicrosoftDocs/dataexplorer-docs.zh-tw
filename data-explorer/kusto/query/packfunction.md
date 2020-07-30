@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a94629ae8f4795e28cbfb0c41f06596731cdd8d9
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 560f7ca9f423eb57fd9be0478e0e51dc2ce26755
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717320"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346502"
 ---
 # <a name="pack"></a>pack()
 
@@ -21,16 +21,16 @@ ms.locfileid: "84717320"
 
 函式 `pack_dictionary()` 的別名。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `pack(`*key1* `,`*value1* `,`*key2* `,`*value2*`,... )`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * 索引鍵和值的替代清單（清單的總長度必須是偶數）
 * 所有索引鍵都必須是非空白的常數位串
 
-**範例**
+## <a name="examples"></a>範例
 
 下列範例會傳回 `{"Level":"Information","ProcessID":1234,"Data":{"url":"www.bing.com"}}`：
 

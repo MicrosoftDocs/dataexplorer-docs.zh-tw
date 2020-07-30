@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: b0377cd8af302d2680c0ee451d05f4b4b083ccec
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: 1f4213af91cfee667fdfc87b2d352fe42df3f915
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512600"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346451"
 ---
 # <a name="parse_ipv4"></a>parse_ipv4()
 
@@ -24,11 +24,11 @@ parse_ipv4("127.0.0.1") == 2130706433
 parse_ipv4('192.1.168.1') < parse_ipv4('192.1.168.2') == true
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `parse_ipv4(`*`Expr`*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *`Expr`*：字串運算式，代表將轉換成 long 的 IPv4。 字串可能包含使用[IP 首碼標記法](#ip-prefix-notation)的網路遮罩。
 
@@ -37,16 +37,16 @@ parse_ipv4('192.1.168.1') < parse_ipv4('192.1.168.2') == true
 您可以 `IP-prefix notation` 使用斜線（）字元來定義 IP 位址 `/` 。
 斜線（）左邊的 IP 位址 `/` 是基底 ip 位址。 斜線（/）右邊的數位（1到32）是網路遮罩中連續1位的數目。
 
-**範例**
+## <a name="example"></a>範例
 
 192.168.2.0/24 會有相關聯的 net/subnetmask，其中包含小數點十進位格式的24個連續位或255.255.255.0。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 如果轉換成功，則結果會是長數位。
 如果轉換不成功，則結果會是 `null` 。
  
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

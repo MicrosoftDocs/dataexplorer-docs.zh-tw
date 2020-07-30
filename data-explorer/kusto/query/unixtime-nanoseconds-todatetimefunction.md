@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/25/2019
-ms.openlocfilehash: 6c56d588ec9635b8225161ffdd47dc90eabdca3d
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 0786863589ece863278f9cadec79c9c86a4117eb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370509"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350599"
 ---
 # <a name="unixtime_nanoseconds_todatetime"></a>unixtime_nanoseconds_todatetime()
 
 將 unix-epoch 毫微秒轉換成 UTC 日期時間。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `unixtime_nanoseconds_todatetime(*nanoseconds*)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *毫微秒*：實際數位代表 epoch 時間戳記（以毫微秒為單位）。 `Datetime`在 epoch 時間（1970-01-01 00:00:00）之前發生的情況，其時間戳記值為負值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 如果轉換成功，則結果會是[日期時間](./scalar-data-types/datetime.md)值。 如果轉換不成功，則結果會是 null。
 
@@ -37,7 +37,7 @@ ms.locfileid: "83370509"
 * 使用[unixtime_milliseconds_todatetime （）](unixtime-milliseconds-todatetimefunction.md)，將 unix epoch 毫秒轉換成 UTC 日期時間。
 * 使用[unixtime_microseconds_todatetime （）](unixtime-microseconds-todatetimefunction.md)，將 unix-epoch 微秒轉換成 UTC 日期時間。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples  -->
 ```kusto

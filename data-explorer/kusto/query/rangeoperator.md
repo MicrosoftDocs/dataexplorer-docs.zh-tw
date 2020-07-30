@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9dc64e6d91d6832dd57345bf58200848ad5a5db4
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 5c736492745d47428b5919d9791aa6115aaf8566
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373107"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345890"
 ---
 # <a name="range-operator"></a>range 運算子
 
@@ -21,11 +21,11 @@ ms.locfileid: "83373107"
 
 請注意它沒有管線輸入。 
 
-**語法**
+## <a name="syntax"></a>語法
 
 `range`*columnName* `from`*啟動* `to`*停止* `step`*步驟*
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *columnName*：輸出資料表中的單一資料行名稱。
 * *start*：輸出中的最小值。
@@ -34,11 +34,11 @@ ms.locfileid: "83373107"
 
 引數必須是數字、日期或時間範圍值。 引數不能參考任何資料表的資料行  （如果您想要根據輸入資料表計算範圍，請使用 range 函式，也許是透過 mv-expand 運算子）。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 具有名為*columnName*之單一資料行的資料表，其值為*start*、 *start* `+` *step*、.。。直到*停止*為止。
 
-**範例**  
+## <a name="example"></a>範例  
 
 過去七天的午夜資料表。 bin(floor) 函式會逐次減少至一天的開始。
 

@@ -2,30 +2,30 @@
 title: 包含檔案
 description: 包含檔案
 services: iot-hub
-author: dominicbetts
+author: orspod
 ms.service: iot-hub
 ms.topic: include
 ms.date: 09/07/2018
-ms.author: dobett
+ms.author: orspodek
 ms.custom: include file
-ms.openlocfilehash: 68260bf8aafbbe5afd46ec7dfb763eb88ee2123e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8b6426c96070433ba489cc7579cc5168b25dce62
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81500368"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87375194"
 ---
-在本節中,您可以使用 Azure CLI 為本文創建設備標識。 裝置識別碼會區分大小寫。
+在本節中，您會使用 Azure CLI 建立本文中的裝置身分識別。 裝置識別碼會區分大小寫。
 
 1. 開啟 [Azure Cloud Shell](https://shell.azure.com/)。
 
-1. 在 Azure 雲外殼中,執行以下指令以安裝 Azure CLI 的 Microsoft Azure IoT 擴展:
+1. 在 Azure Cloud Shell 中執行下列命令，以安裝適用於 Azure CLI 的 Microsoft Azure IoT 延伸模組：
 
     ```azurecli-interactive
     az extension add --name azure-iot
     ```
 
-2. 建立名為`myDeviceId`的新裝置識別,並使用這些指令檢索裝置連接字串:
+2. 建立稱為 `myDeviceId` 的新裝置身分識別，並使用下列命令擷取裝置連接字串：
 
     ```azurecli-interactive
     az iot hub device-identity create --device-id myDeviceId --hub-name {Your IoT Hub name}

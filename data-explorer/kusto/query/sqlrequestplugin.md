@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/24/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c43f816cdf1ed2ef9504f93d2bb56edd52ea18bc
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: e412c1ec4f08af9820018f4c8dc172bd8c748a7f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85901976"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350973"
 ---
 # <a name="sql_request-plugin"></a>sql_request 外掛程式
 
@@ -25,7 +25,7 @@ ms.locfileid: "85901976"
 
 `sql_request`外掛程式會將 SQL 查詢傳送至 SQL Server 網路端點，並傳回結果中的第一個資料列集。
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *ConnectionString*： `string` 指出指向 SQL Server 網路端點之連接字串的常值。 請參閱[驗證的有效方法](#authentication)和如何指定[網路端點](#specify-the-network-endpoint)。
 

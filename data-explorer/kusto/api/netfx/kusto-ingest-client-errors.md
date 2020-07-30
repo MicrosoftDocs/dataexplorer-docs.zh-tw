@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 97798fa62d588769636966c7155dc5f398bd001a
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 6b94dfc0fab1150b598fad9d55beec2f3a81ad73
+ms.sourcegitcommit: f34535b0ca63cff22e65c598701cec13856c1742
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382313"
+ms.lasthandoff: 07/29/2020
+ms.locfileid: "87402333"
 ---
 # <a name="kustoingest-errors-and-exceptions"></a>Kusto。內嵌錯誤和例外狀況
 在用戶端上進行內嵌處理期間的任何錯誤，都是以 c # 例外狀況來表示。
@@ -52,7 +52,7 @@ ms.locfileid: "83382313"
 在 `IngestFromDataReader` 和 `IngestFromDataReaderAsync` 方法中，旗標 `retainCsvOnFailure` （其預設值為 `false` ）會判斷檔案是否應在失敗的內嵌之後保留。 如果此旗標設定為 `false` ，則不會保存失敗的內嵌資料，因此很難瞭解發生錯誤的原因。
 
 ### <a name="common-failures"></a>常見失敗
-|錯誤                         |原因           |降低                                   |
+|錯誤                         |原因           |緩和措施                                   |
 |------------------------------|-----------------|---------------------------------------------|
 |資料庫 <database name> 名稱不存在| 資料庫不存在|檢查資料庫的資料庫名稱 `kustoIngestionProperties` |
 |找不到類型為「資料表」的實體「資料表名稱不存在」。|資料表不存在，而且沒有 CSV 對應。| 新增 CSV 對應/建立必要的資料表 |
@@ -87,7 +87,10 @@ ms.locfileid: "83382313"
 |UpdatePolicy_IngestionError                    | 無法叫用更新原則。 發生內嵌錯誤|
 |UpdatePolicy_UnknownError                      | 無法叫用更新原則。 發生未知錯誤|
 |BadRequest_MissingJsonMappingtFailure          | 未使用 jsonMapping 參數內嵌 JSON 模式|
-|BadRequest_InvalidOrEmptyBlob                  | Blob 無效或為空的 zip 封存|
+|BadRequest_InvalidBlob                         | 引擎無法開啟和讀取非 zip blob|
+|BadRequest_EmptyBlob                           | 空的 blob|
+|BadRequest_EmptyArchive                        | Zip 檔案不包含任何已封存的元素|
+|BadRequest_EmptyBlobUri                        | 指定的 blob URI 是空的|
 |BadRequest_DatabaseNotExist                    | 資料庫不存在|
 |BadRequest_TableNotExist                       | 資料表不存在|
 |BadRequest_InvalidKustoIdentityToken           | 不正確 Kusto 身分識別權杖|
@@ -109,7 +112,7 @@ ms.locfileid: "83382313"
 
 |欄位名稱 |類型     |意義
 |-----------|---------|------------------------------|
-|錯誤      | 字串  | 嘗試從 DM 取得佇列時發生的錯誤
+|錯誤      | String  | 嘗試從 DM 取得佇列時發生的錯誤
                             
 只有在使用[Kusto 佇列內嵌用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。
 在內嵌程式期間，會嘗試幾次來抓取連結至 DM 的 Azure 佇列。 當這些嘗試失敗時，包含失敗原因的例外狀況會在 [錯誤] 欄位中引發。 可能也會引發 ' InnerException ' 欄位中的內部例外狀況。
@@ -123,7 +126,7 @@ ms.locfileid: "83382313"
 
 |欄位名稱   |類型     |意義       
 |-------------|---------|------------------------------|
-|KustoEndpoint| 字串  | 相關 DM 的端點
+|KustoEndpoint| String  | 相關 DM 的端點
                             
 只有在使用[Kusto 佇列內嵌用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。  
 內嵌不在 Azure 容器中的來源（例如檔案、DataReader 或資料流程）時，會將資料上傳至暫存 blob 以進行內嵌。 當找不到可將資料上傳至的容器時，就會引發例外狀況。
@@ -136,7 +139,7 @@ ms.locfileid: "83382313"
 
 |欄位名稱   |類型     |意義       
 |-------------|---------|------------------------------------|
-|PropertyName | 字串  | 重複屬性的名稱。
+|PropertyName | String  | 重複屬性的名稱。
                             
 ### <a name="postmessagetoqueuefailedexception"></a>PostMessageToQueueFailedException
 
@@ -146,8 +149,8 @@ ms.locfileid: "83382313"
 
 |欄位名稱   |類型     |意義       
 |-------------|---------|---------------------------------|
-|QueueUri     | 字串  | 佇列的 URI
-|錯誤        | 字串  | 嘗試張貼至佇列時所產生的錯誤訊息
+|QueueUri     | String  | 佇列的 URI
+|錯誤        | String  | 嘗試張貼至佇列時所產生的錯誤訊息
                             
 只有在使用[Kusto 佇列內嵌用戶端](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)時才相關。  
 佇列的內嵌用戶端會藉由將訊息上傳至相關的 Azure 佇列來內嵌資料。 如果發生 post 失敗，則會引發例外狀況。 它會包含佇列 URI、[錯誤] 欄位中失敗的原因，以及 [InnerException] 欄位中可能發生的內部例外狀況。
