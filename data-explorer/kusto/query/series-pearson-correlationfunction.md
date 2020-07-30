@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/31/2019
-ms.openlocfilehash: 9187c10ad62b4d925bf6211e64657fba5ae17b63
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 3b65dff40e644852555465fe6ce07ed94c4920ea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372513"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351313"
 ---
 # <a name="series_pearson_correlation"></a>series_pearson_correlation()
 
@@ -21,19 +21,19 @@ ms.locfileid: "83372513"
 
 請參閱：[皮耳森相互關聯係數](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_pearson_correlation(`*Series1* `,`*Series2*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Series1，Series2*：輸入用於計算相互關聯係數的數值陣列。 所有引數都必須是相同長度的動態陣列。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 兩個輸入之間的計算皮耳森相互關聯係數。 任何非數值元素或不存在的專案（不同大小的陣列）都會產生 `null` 結果。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5e4b318743380b13a26e90a7e83549c998926bd8
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: ae5268a4a062a6f45adb715650028d952cb89e0b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902117"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346383"
 ---
 # <a name="parse_version"></a>parse_version()
 
@@ -23,15 +23,15 @@ ms.locfileid: "85902117"
 parse_version("0.0.0.1")
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `parse_version``(` *Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *`Expr`*：類型的純量運算式 `string` ，指定要剖析的版本。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 如果轉換成功，則結果會是十進位。
 如果轉換不成功，則結果會是 `null` 。
@@ -44,7 +44,7 @@ parse_version("0.0.0.1")
 
 如果部分數目小於四個，所有遺漏的部分都會被視為尾端（ `1.0`  ==  `1.0.0.0` ）。
 
-**範例**
+## <a name="example"></a>範例
 ```kusto
 let dt = datatable(v:string)
 ["0.0.0.5","0.0.7.0","0.0.3","0.2","0.1.2.0","1.2.3.4","1","99999999.0.0.0"];

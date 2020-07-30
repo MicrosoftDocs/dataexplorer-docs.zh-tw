@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1efd06b8fa2961528be65b630933aae74614e9a0
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: 2daea4d190ed349c41a8eecf2eef53b2c2b93716
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013600"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350684"
 ---
 # <a name="toint"></a>toint()
 
@@ -23,15 +23,15 @@ ms.locfileid: "86013600"
 toint("123") == int(123)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `toint(`*Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：將轉換成整數的運算式。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 如果轉換成功，則結果會是整數。
 如果轉換不成功，則結果會是 `null` 。

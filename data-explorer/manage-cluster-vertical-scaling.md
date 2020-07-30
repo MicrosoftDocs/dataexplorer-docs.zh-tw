@@ -1,54 +1,54 @@
 ---
-title: 管理叢集垂直延伸(向上擴充),以符合 Azure 資料資源管理員中的需求
-description: 本文介紹根據不斷變化的需求向上擴展和縮小 Azure 數據資源管理器群集的步驟。
-author: radennis
-ms.author: radennis
-ms.reviewer: orspodek
+title: 管理叢集垂直調整（相應增加）以符合 Azure 資料總管中的需求
+description: 本文說明根據變更需求相應增加和縮小 Azure 資料總管叢集的步驟。
+author: orspod
+ms.author: orspodek
+ms.reviewer: radennis
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/14/2019
-ms.openlocfilehash: 95275598febae2b6b0355a7bc3e512490dae500d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: fc3b4af91cd24b60f8ace110551daa47ff8cf934
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81496182"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351602"
 ---
-# <a name="manage-cluster-vertical-scaling-scale-up-in-azure-data-explorer-to-accommodate-changing-demand"></a>在 Azure 資料資源管理員管理叢集垂直擴展(向上擴展),以適應不斷變化的需求
+# <a name="manage-cluster-vertical-scaling-scale-up-in-azure-data-explorer-to-accommodate-changing-demand"></a>在 Azure 資料總管中管理叢集垂直調整（相應增加）以配合變更需求
 
 適當調整叢集的大小對 Azure 資料總管的效能來說非常重要。 靜態叢集大小可能導致使用量過低或使用量過高，兩者皆不理想。
 
-由於無法絕對準確地預測群集的需求,因此更好的方法是*擴展*群集,根據不斷變化的需求添加和刪除容量和 CPU 資源。 
+由於叢集上的需求無法以絕對精確度來預測，因此更好的方法是*調整*叢集、新增和移除具有變更需求的容量和 CPU 資源。 
 
-有兩個工作流用於縮放 Azure 資料資源管理器群集:
+有兩個工作流程可調整 Azure 資料總管叢集：
 
-* [水準縮放](manage-cluster-horizontal-scaling.md),也稱為向上和向外縮放。
-* 垂直縮放,也稱為向上和向下縮放。
+* [水準調整](manage-cluster-horizontal-scaling.md)，也稱為相應縮小和放大。
+* 垂直調整，也稱為相應增加和減少。
 
-本文介紹垂直縮放工作流:
+本文說明垂直調整工作流程：
 
-## <a name="configure-vertical-scaling"></a>設定垂直縮放
+## <a name="configure-vertical-scaling"></a>設定垂直調整
 
-1. 在 Azure 門戶中,轉到 Azure 資料資源管理器群集資源。 在 **「設定」** 下,選擇 **「向上縮放**」。
+1. 在 Azure 入口網站中，移至您的 Azure 資料總管叢集資源。 在 [**設定**] 下，選取 [相應**增加**]。
 
-1. 在 **「向上縮放**」視窗中,您將看到群集的可用 SKU 清單。 例如,在下圖中,只有四個 SKU 可用。
+1. 在 [相應**增加**] 視窗中，您會看到叢集可用的 sku 清單。 例如，在下圖中，只有四個 Sku 可供使用。
 
     ![相應增加](media/manage-cluster-vertical-scaling/scale-up.png)
 
-    SKU 被禁用,因為它們是當前的 SKU,或者它們在群集所在的區域不可用。
+    Sku 已停用，因為它們是目前的 SKU，或在叢集所在的區域中無法使用。
 
-1. 要更改 SKU,請選擇新的 SKU,然後單擊「**選擇**」 。
+1. 若要變更您的 SKU，請選取新的 SKU，然後按一下 [**選取**]。
 
 > [!NOTE]
-> * 垂直縮放過程可能需要幾分鐘時間,在此期間,群集將掛起。 
-> * 向下擴展可能會損害群集性能。
-> * 價格是群集虛擬機和 Azure 數據資源管理器服務成本的估計。 不包括其他費用。 有關估計值,請參閱 Azure 資料資源管理器[成本估算器](https://dataexplorer.azure.com/AzureDataExplorerCostEstimator.html)頁,請參閱 Azure 資料資源管理器[定價頁](https://azure.microsoft.com/pricing/details/data-explorer/),瞭解完整的定價資訊。
+> * 垂直調整程式可能需要幾分鐘的時間，而在這段期間，您的叢集將會暫停。 
+> * 相應減少可能會危害您的叢集效能。
+> * 價格是叢集的虛擬機器和 Azure 資料總管服務成本的預估。 不包含其他成本。 如需完整的定價資訊，請參閱 Azure 資料總管[成本估計工具](https://dataexplorer.azure.com/AzureDataExplorerCostEstimator.html)頁面，以取得預估和 azure 資料總管[定價頁面](https://azure.microsoft.com/pricing/details/data-explorer/)。
 
-現在,您已為 Azure 資料資源管理器群集配置了垂直縮放。 為水準縮放添加另一個規則。 如果需要有關群集縮放問題,請在 Azure 門戶開啟[支援請求](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)。
+您現在已設定 Azure 資料總管叢集的垂直調整。 新增另一個規則來進行水準調整。 如果您需要叢集調整問題的協助，請在 Azure 入口網站中[開啟支援要求](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)。
 
 ## <a name="next-steps"></a>後續步驟
 
-* [管理群集水準縮放](manage-cluster-horizontal-scaling.md),以便根據指定的指標動態擴展實例計數。
+* [管理叢集水準調整](manage-cluster-horizontal-scaling.md)，以根據您指定的計量動態地相應放大實例計數。
 
-* 以依照本文監視資源使用方式:監視[Azure 資料資源管理員的效能、執行狀況以及指標的使用](using-metrics.md)。
+* 遵循這篇文章來監視您的資源使用量：[使用計量監視 Azure 資料總管效能、健康情況和使用量](using-metrics.md)。
 

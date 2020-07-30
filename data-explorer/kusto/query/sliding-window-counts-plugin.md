@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4d90bc3b6222896d45374d771ce5f87f4bdf6786
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: af223d31f008b972bc1b61a6a9ace7e19c988ff7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902018"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351041"
 ---
 # <a name="sliding_window_counts-plugin"></a>sliding_window_counts 外掛程式
 
@@ -25,11 +25,11 @@ ms.locfileid: "85902018"
 T | evaluate sliding_window_counts(id, datetime_column, startofday(ago(30d)), startofday(now()), 7d, 1d, dim1, dim2, dim3)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| evaluate` `sliding_window_counts(` *IdColumn* `,` *TimelineColumn* `,` *Start* `,` *End* `,` *LookbackWindow* `,` *Bin* `,` [*dim1* `,` *dim2* `,` ...]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
 * *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
@@ -40,7 +40,7 @@ T | evaluate sliding_window_counts(id, datetime_column, startofday(ago(30d)), st
 * *Bin*：分析步驟期間的純量常數值。 這個值可以是數值/日期時間/時間戳記值。 如果值是具有格式的字串，則 `week` / `month` / `year` 所有期間都會是[startofweek](startofweekfunction.md) / [startofmonth](startofmonthfunction.md) / [startofyear](startofyearfunction.md)。 
 * *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 針對每個時間軸（依 bin）和每個現有的維度組合，傳回在回顧期間內具有計數和相異計數值的資料表。
 
@@ -51,7 +51,7 @@ T | evaluate sliding_window_counts(id, datetime_column, startofday(ago(30d)), st
 |類型：從*TimelineColumn*|..|..|..|long|long|
 
 
-**範例**
+## <a name="examples"></a>範例
 
 計算 `dcounts` 過去一周內的使用者計數和時間（針對分析期間內的每一天）。 
 
@@ -83,7 +83,7 @@ T | evaluate sliding_window_counts(UserId, Timestamp, start, end, lookbackWindow
 
 ```
 
-|時間戳記|Count|`dcount`|
+|Timestamp|計數|`dcount`|
 |---|---|---|
 |2017-08-01 00：00：00.0000000|5|3|
 |2017-08-02 00：00：00.0000000|8|5|

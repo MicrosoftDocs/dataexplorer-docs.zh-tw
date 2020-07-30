@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f5c108b670534728f34db8975f16d713848dd8f4
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 6a991f9f64decbb3985830cf2611361d6c66db31
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264603"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350837"
 ---
 # <a name="todatetime"></a>todatetime()
 
@@ -23,15 +23,15 @@ ms.locfileid: "85264603"
 todatetime("2015-12-24") == datetime(2015-12-24)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `todatetime(`*Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：將轉換成[datetime](./scalar-data-types/datetime.md)的運算式。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 如果轉換成功，則結果會是[日期時間](./scalar-data-types/datetime.md)值。
 否則，結果會是 null。

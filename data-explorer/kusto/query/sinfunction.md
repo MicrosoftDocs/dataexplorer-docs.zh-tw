@@ -1,6 +1,6 @@
 ---
-title: sin() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 sin()。
+title: sin （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 sin （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,25 +8,25 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 65e372be749a77a2f3d90935f7740ced05a616aa
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 821b85bf3d49e76e7326f91b26494ba140420f93
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507509"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351058"
 ---
 # <a name="sin"></a>sin()
 
-返回子周函數。
+傳回正弦函數。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`sin(`*X.*`)`
+`sin(`*x*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *x*: 實數。
+* *x*：實數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 *  的結果。`sin(x)`

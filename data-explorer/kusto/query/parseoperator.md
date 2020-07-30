@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: dd70b2135a485303cbf52d984e0b406052c4023a
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: f9dc6e49e9e3d04aadb5aecf8507b7132d8a366a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264941"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346315"
 ---
 # <a name="parse-operator"></a>parse 運算子
 
@@ -24,11 +24,11 @@ ms.locfileid: "85264941"
 T | parse Text with "ActivityName=" name ", ActivityType=" type
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 *T* `| parse` [ `kind=regex` [ `flags=regex_flags` ] | `simple` | `relaxed` ] *Expression* `with` `*` （*StringConstant* *ColumnName* [ `:` *ColumnType*]） `*` .。。
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *T*：輸入資料表。
 * 種類：
@@ -47,7 +47,7 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
   
 * *ColumnType：* 選擇性. 純量值，表示要轉換值的類型。 預設值為 `string` 類型。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 輸入資料表，會根據提供給運算子的資料行清單進行擴充。
 
@@ -81,7 +81,7 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
         
     * `long`已轉譯為 `\-\d+` 。
 
-**範例**
+## <a name="examples"></a>範例
 
 `parse`運算子會 `extend` 在同一個運算式上使用多個應用程式，為數據表提供簡化的方式 `extract` `string` 。 當資料表有一個 `string` 資料行包含您想要細分為個別資料行的數個值時，這個結果就很有用。 例如，開發人員追蹤（" `printf` "/""）語句所產生的資料行 `Console.WriteLine` 。
 

@@ -1,18 +1,18 @@
 ---
 title: 使用 Azure CLI 建立 Azure 資料總管叢集 & DB
 description: 了解如何使用 Azure CLI 建立 Azure 資料總管叢集與資料庫
-author: radennis
-ms.author: radennis
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: radennis
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: b7e8611ba6427880f15d57137e31010047c39e01
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 673bf418bf38bf04d8b8fb9e81204f4db3499e19
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83224607"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350361"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-azure-cli"></a>使用 Azure CLI 建立 Azure 資料總管叢集與資料庫
 
@@ -26,7 +26,7 @@ ms.locfileid: "83224607"
 
 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 若要使用 Azure 資料總管，請先建立叢集，然後在該叢集中建立一或多個資料庫。 然後將資料內嵌 (載入) 至資料庫，讓您可以對資料執行查詢。 在本文中，您會使用 Azure CLI 來建立叢集和資料庫。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 若要完成本文，您需要 Azure 訂用帳戶。 如果您沒有 Azure 訂用帳戶，請在開始前[建立免費帳戶](https://azure.microsoft.com/free/)。
 
@@ -66,7 +66,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
    |**設定** | **建議的值** | **欄位描述**|
    |---|---|---|
-   | name | *azureclitest* | 所需的叢集名稱。|
+   | NAME | *azureclitest* | 所需的叢集名稱。|
    | sku | *Standard_D13_v2* | 將用於叢集的 SKU。 參數：*名稱*-SKU 名稱。 *層*-SKU 層。 |
    | resource-group | *testrg* | 將在其中建立叢集的資源群組名稱。 |
    | location | *westus* | 將建立叢集的位置。 |

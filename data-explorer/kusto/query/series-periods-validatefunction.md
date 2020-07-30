@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: 0e93383cf1c9ff11fdf4a14ebad5d83c0dfa7a74
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 24b47981e90c15e8a0f295d845ca28a03f324a88
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717405"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351296"
 ---
 # <a name="series_periods_validate"></a>series_periods_validate()
 
@@ -27,11 +27,11 @@ ms.locfileid: "84717405"
 * *期間*：包含要驗證之期間（在輸入中提供）的動態陣列。
 * *分數*：動態陣列，其中包含介於0和1之間的分數。 分數會顯示句點陣列中其各自位置的*某個期間的*重要性。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_periods_validate(`*x* `,` *period1* [ `,` *period2* ] `,` 。 . . ] `)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：動態陣列純量運算式，這是數值的陣列，通常是[make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出。
 * *period1*、 *period2*等等： `real` 指定要驗證之期間的數位（以 bin 大小的單位表示）。 例如，如果數列位於1h 的 bin 中，則每週期間為168的 bin。
@@ -43,7 +43,7 @@ ms.locfileid: "84717405"
 > 
 > * 函式最多可接受16個週期來進行驗證。
 
-**範例**
+## <a name="example"></a>範例
 
 下列查詢會內嵌應用程式流量的一個月快照集，每日匯總兩次（bin 大小為12小時）。
 

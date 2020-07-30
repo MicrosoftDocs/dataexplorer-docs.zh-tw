@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/10/2020
-ms.openlocfilehash: 87cee5244fb1276733d4cf44d0477cc3351b947c
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: d74ba88062f49e9f3274b7f38704aa7760dc7250
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372462"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351262"
 ---
 # <a name="series_stats_dynamic"></a>series_stats_dynamic()
 
@@ -28,16 +28,16 @@ ms.locfileid: "83372462"
 * `variance`：輸入陣列的樣本變異數
 * `stdev`：輸入陣列的樣本標準差
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_stats_dynamic(`*x* `[,` *ignore_nonfinite*`])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：動態陣列資料格，這是數值的陣列。 
 * *ignore_nonfinite*： Boolean （選擇性，預設值： `false` ）旗標，指定是否要計算統計資料，同時忽略非有限值（*null*、 *NaN*、 *inf*等等）。 如果設定為 `false` 傳回的結果，則為， `null` 如果陣列中有非有限的值，則為。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

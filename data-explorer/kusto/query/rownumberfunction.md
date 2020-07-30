@@ -1,6 +1,6 @@
 ---
-title: row_number() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的row_number()。
+title: row_number （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 row_number （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c8cb01ed098d24632154215ddf06dc2ab1d72695
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ea51e6171b8a7683a0454d177dc729ed754b8896
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510161"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351585"
 ---
 # <a name="row_number"></a>row_number()
 
-在[序列化行集中](./windowsfunctions.md#serialized-row-set)返回當前行的索引。
-行索引預設從第`1`一行開始,並且每行增加`1`。
-或者,行索引可以從與`1`的值不同的開始。
-此外,還可以根據某些提供的謂詞重置行索引。
+傳回[序列化資料列集中](./windowsfunctions.md#serialized-row-set)的目前資料列索引。
+根據預設，資料列索引 `1` 會針對第一個資料列開始，而且 `1` 每個額外的資料列會遞增。
+（選擇性）資料列索引可以從與不同的值開始 `1` 。
+此外，資料列索引可能會根據某些提供的述詞進行重設。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`row_number``(` 【*開始索引*】`,` *重新啟動**`)`
+`row_number``(`[*StartingIndex* [ `,` *重新開機*]]`)`
 
-* *StartIndex*是`long`一種類型的常量運算式,指示要開始(或重新啟動到)的行索引的值。 預設值是 `1`。
-* *重新啟動*是一種可選的`bool`類型 參數,指示何時將編號重新啟動到 *「啟動索引」* 值。 如果未提供,則使用`false`的 預設值。
+* *StartingIndex*是類型的常數運算式 `long` ，表示要開始的資料列索引值（或重新開機）。 預設值是 `1`。
+* *Restart*是類型的選擇性引數 `bool` ，表示要將編號重新開機為*StartingIndex*值的時間。 如果未提供，則會使用的預設值 `false` 。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-函數將當前行的行索引作為類型`long`的值返回。
+函數會傳回目前資料列的資料列索引，做為類型的值 `long` 。
 
-**範例**
+## <a name="examples"></a>範例
 
-下面的範例傳回一欄的表,`a`第一列 ()`10`的數字從`1`下到,`rn`第二`1`欄`10`( ), 數字從最高到 :
+下列範例會傳回包含兩個數據行的資料表，第一個 `a` 資料行（）的數位從 `10` 向下到 `1` ，而第二個數據行（ `rn` ）的數位從 `1` 到 `10` ：
 
 ```kusto
 range a from 1 to 10 step 1
@@ -43,7 +43,7 @@ range a from 1 to 10 step 1
 | extend rn=row_number()
 ```
 
-下面的示例與上述示例類似,只有第二列`rn`(`7`) 從 開始。
+下列範例與上述範例類似，只有第二個數據行（ `rn` ）會從開始 `7` ：
 
 ```kusto
 range a from 1 to 10 step 1
@@ -51,7 +51,7 @@ range a from 1 to 10 step 1
 | extend rn=row_number(7)
 ```
 
-最後一個示例演示如何對數據進行分區,併為每個分區對行進行編號。 在這裏,我們`Airport`按 :
+最後一個範例會示範如何分割資料，以及如何為每個分割區的資料列編號。 在這裡，我們會將資料分割為 `Airport` ：
 
 ```kusto
 datatable (Airport:string, Airline:string, Departures:long)
@@ -66,12 +66,12 @@ datatable (Airport:string, Airline:string, Departures:long)
 | extend Rank=row_number(1, prev(Airport) != Airport)
 ```
 
-執行此查詢會產生以下結果:
+執行此查詢會產生下列結果：
 
-機場  | 航空公司  | 離開  | Rank
+機場  | 航空公司  | 離開  | 排名
 ---------|----------|-------------|------
 SEA      | BA       | 2           | 1
-SEA      | Lh       | 1           | 2
+SEA      | LH       | 1           | 2
 SEA      | LY       | 0           | 3
 TLV      | LY       | 100         | 1
-TLV      | Lh       | 1           | 2
+TLV      | LH       | 1           | 2

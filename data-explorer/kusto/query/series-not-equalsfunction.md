@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 7b17d9b7150d6d58ae3b3b3be7abf83dc9979038
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 1c362dd57cc804e0705023f4744602d93ad47c0b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372560"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351364"
 ---
 # <a name="series_not_equals"></a>series_not_equals()
 
 計算 `!=` 兩個數值數列輸入的元素非 equals （）邏輯運算。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_not_equals (`*Series1* `,`*Series2*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Series1，Series2*：輸入要比較元素的數值陣列。 所有引數都必須是動態陣列。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 布林值的動態陣列，其中包含兩個輸入之間的計算元素不相等邏輯運算。 任何非數值元素或不存在的專案（不同大小的陣列）都會產生 `null` 元素值。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

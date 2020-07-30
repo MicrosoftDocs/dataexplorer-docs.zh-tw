@@ -1,37 +1,37 @@
 ---
-title: 透過 Python 將端到端 Blob 引入 Azure 資料資源管理員
-description: 在本文中,您將瞭解如何使用使用 Python 的端到端範例將 Blob 引入 Azure 資料資源管理員。
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+title: 透過 Python 在 Azure 資料總管中內嵌的端對端 blob
+description: 在本文中，您將瞭解如何使用使用 Python 的端對端範例，將 blob 內嵌至 Azure 資料總管。
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 02/03/2020
-ms.openlocfilehash: 0aa6cd7957dfbd6d76068c8fb4b6c92544e603c1
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: bc97ffad3ca4f6d824e10c85e570154764cc986a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81496234"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350463"
 ---
-# <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-python"></a>透過 Python 將端到端 Blob 引入 Azure 資料資源管理員
+# <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-python"></a>透過 Python 在 Azure 資料總管中內嵌的端對端 blob
 
 > [!div class="op_single_selector"]
 > * [C#](end-to-end-csharp.md)
 > * [Python](end-to-end-python.md)
 >
 
-Azure 資料總管是一項快速又可調整的資料探索服務，可用於處理記錄和遙測資料。 本文提供了如何將數據從 Azure Blob 儲存引入到 Azure 資料資源管理員的端到端範例。 
+Azure 資料總管是一項快速又可調整的資料探索服務，可用於處理記錄和遙測資料。 本文提供如何將資料從 Azure Blob 儲存體內嵌至 Azure 資料總管的端對端範例。 
 
-您將學習如何以程式設計方式創建資源組、儲存帳戶和容器、事件中心以及 Azure 資料資源管理器群集和資料庫。 您還將瞭解如何以程式設計方式將 Azure 資料資源管理員配置為從新儲存帳戶中引入數據。
+您將瞭解如何以程式設計方式建立資源群組、儲存體帳戶和容器、事件中樞，以及 Azure 資料總管叢集和資料庫。 您也將瞭解如何以程式設計方式設定 Azure 資料總管，以從新的儲存體帳戶內嵌資料。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
 ## <a name="install-the-python-package"></a>安裝 Python 封裝
 
-若要為 Azure 資料總管 (Kusto) 安裝 Python 套件，請開啟在其路徑中有 Python 的命令提示字元。 執行以下命令：
+若要為 Azure 資料總管 (Kusto) 安裝 Python 套件，請開啟在其路徑中有 Python 的命令提示字元。 執行下列命令：
 
 ```
 pip install azure-common
@@ -47,9 +47,9 @@ pip install azure-storage-blob
 
 ## <a name="code-example"></a>程式碼範例 
 
-以下代碼示例為您提供了一個分步過程,該過程會導致數據引入 Azure 數據資源管理器。 
+下列程式碼範例會逐步解說如何使資料內嵌至 Azure 資料總管。 
 
-首先創建資源組。 您還可以創建 Azure 資源(如儲存帳戶和容器、事件中心、Azure 資料資源管理器群集和資料庫)以及添加主體。 然後,在 Azure 資料資源管理器資料庫中創建 Azure 事件網格訂閱以及表和列映射。 最後,創建數據連接以將 Azure 資料資源管理員配置為從新儲存帳戶中引入數據。
+您必須先建立資源群組。 您也會建立 Azure 資源，例如儲存體帳戶和容器、事件中樞，以及 Azure 資料總管叢集和資料庫，以及新增主體。 接著，您會在 Azure 資料總管資料庫中建立 Azure 事件方格訂用帳戶，以及資料表和資料行對應。 最後，您會建立資料連線來設定 Azure 資料總管，以從新的儲存體帳戶內嵌資料。
 
 ```python
 from azure.common.credentials import ServicePrincipalCredentials
@@ -192,14 +192,14 @@ poller.wait()
 ```
 |**設定** | **欄位描述**|
 |---|---|---|
-| tenant_id | 您的租用戶識別碼。 它也稱為目錄 ID。|
-| subscription_id | 用於資源創建的訂閱 ID。|
-| client_id | 可以訪問租戶中資源的應用程式的客戶端 ID。|
-| client_secret | 可以訪問租戶中資源的應用程式的用戶端機密。 |
+| tenant_id | 您的租用戶識別碼。 它也稱為目錄識別碼。|
+| subscription_id | 您用來建立資源的訂用帳戶識別碼。|
+| client_id | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
+| client_secret | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
 
-## <a name="test-the-code-example"></a>測試代碼範例
+## <a name="test-the-code-example"></a>測試程式碼範例
 
-1. 將檔上載到存儲帳戶。
+1. 將檔案上傳到儲存體帳戶。
 
     ```python
     account_key = "xxxxxxxxxxxxxx"
@@ -211,9 +211,9 @@ poller.wait()
     ```
     |**設定** | **欄位描述**|
     |---|---|---|
-    | account_key | 以程式設計方式創建的儲存帳戶的訪問密鑰。|
+    | account_key | 以程式設計方式建立之儲存體帳戶的存取金鑰。|
 
-2. 在 Azure 數據資源管理器中運行測試查詢。
+2. 在 Azure 資料總管中執行測試查詢。
 
     ```python
     kusto_uri = "https://{}.{}.kusto.windows.net".format(kusto_cluster_name, location_small_case)
@@ -226,7 +226,7 @@ poller.wait()
 
 ## <a name="clean-up-resources"></a>清除資源
 
-要刪除資源群組並清除資源,請使用以下指令:
+若要刪除資源群組和清除資源，請使用下列命令：
 
 ```python
 #Returns an instance of LROPoller; see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
@@ -236,7 +236,7 @@ poller.wait()
 
 ## <a name="next-steps"></a>後續步驟
 
-*  要瞭解建立叢集與資料庫的其他方法,請參考[Azure 資料資源管理器叢集與資料庫](create-cluster-database-python.md)。
-* 要瞭解有關引入方法的更多,請參閱 Azure[資料資源管理員資料引入](ingest-data-overview.md)。
-* 要瞭解 Web 應用程式,請參閱[快速入門:Azure 資料資源管理員 Web UI 中的查詢資料](web-query-data.md)。
+*  若要深入瞭解建立叢集和資料庫的其他方式，請參閱[建立 Azure 資料總管叢集和資料庫](create-cluster-database-python.md)。
+* 若要深入瞭解內嵌方法，請參閱[Azure 資料總管資料](ingest-data-overview.md)內嵌。
+* 若要深入瞭解 web 應用程式，請參閱[快速入門：在 Azure 資料總管 WEB UI 中查詢資料](web-query-data.md)。
 * 使用 Kusto 查詢語言[撰寫查詢](write-queries.md)。

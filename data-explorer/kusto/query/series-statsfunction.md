@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/10/2020
-ms.openlocfilehash: 3fe88a5d53faaca4512d614d3e62204ac26e6fc5
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 69e09ec9528e99e250986657bf5d7cc0756b14f8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372438"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351245"
 ---
 # <a name="series_stats"></a>series_stats()
 
@@ -31,18 +31,18 @@ ms.locfileid: "83372438"
 > [!NOTE] 
 > 此函式會傳回多個資料行，因此不能當做另一個函數的引數使用。
 
-**語法**
+## <a name="syntax"></a>語法
 
 project `series_stats(` *x* `[,` *ignore_nonfinite* `])` 或 extend `series_stats(` *x*會傳回 `)` 前述所有具有下列名稱的資料行： series_stats_x_min、series_stats_x_min_idx 等等。
  
 專案（m，mi） = `series_stats(` *x* `)` 或 extend （m，mi） = `series_stats(` *x*會傳回 `)` 下列資料行： m （min）和 mi （min_idx）。
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：動態陣列資料格，這是數值的陣列。 
 * *ignore_nonfinite*： Boolean （選擇性，預設值： `false` ）旗標，指定是否要計算統計資料，同時忽略非有限值（*null*、 *NaN*、 *inf*等等）。 如果設定為 `false` ，則傳回的值會是 `null` 陣列中是否有非有限值。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

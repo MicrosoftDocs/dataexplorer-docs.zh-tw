@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: 8e96b97754600d308526a4cb059907521fda0521
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: 314244c58eca6082b9042b263e6b3e6faeb69840
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83862923"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351194"
 ---
 # <a name="set_has_element"></a>set_has_element()
 
 判斷指定的集合是否包含指定的元素。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `set_has_element(`*陣列*，*值*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *array*：要搜尋的輸入陣列。
 * *value*：要搜尋的值。 值應為、、、、、、 `long` `integer` 或類型 `double` `datetime` `timespan` `decimal` `string` `guid` 。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 [True] 或 [false]，視值是否存在於陣列中而定。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

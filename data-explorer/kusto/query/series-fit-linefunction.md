@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: f0401a5b10d2feb74c629e6b04b127e6d36057ad
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 0158753d3d2496e425247202d906633837aa023a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717163"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351483"
 ---
 # <a name="series_fit_line"></a>series_fit_line()
 
@@ -27,18 +27,18 @@ ms.locfileid: "84717163"
 * `interception`：攔截近似線（"b"，從 y = ax + b）。
 * `line_fit`：數位陣列，其中包含一系列最適合行的值。 序列長度等於輸入陣列的長度。 用於圖表的值。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_fit_line(`*x*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：數值的動態陣列。
 
 > [!TIP]
 > 使用此函式最方便的方式，是將它套用至[make 系列](make-seriesoperator.md)運算子的結果。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -49,6 +49,6 @@ print id=' ', x=range(bin(now(), 1h)-11h, bin(now(), 1h), 1h), y=dynamic([2,5,6,
 
 :::image type="content" source="images/series-fit-line/series-fit-line.png" alt-text="數列擬合線":::
 
-| RSquare | Slope | Variance | RVariance | Interception | LineFit                                                                                     |
+| RSquare | 斜率 | 變異數 | RVariance | Interception | LineFit                                                                                     |
 |---------|-------|----------|-----------|--------------|---------------------------------------------------------------------------------------------|
 | 0.982   | 2.730 | 98.628   | 1.686     | -1.666       | 1.064、3.7945、6.526、9.256、11.987、14.718、17.449、20.180、22.910、25.641、28.371、31.102 |

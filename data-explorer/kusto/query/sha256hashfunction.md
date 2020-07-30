@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: cf47fd98027859ebb5f0cf22208b790a5396dc61
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: b813ce4c0901ef66177e8e7bdaa42a1744bd5912
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763743"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351109"
 ---
 # <a name="hash_sha256"></a>hash_sha256()
 
 傳回輸入值的 sha256 雜湊值。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `hash_sha256(`*來源*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *來源*：要雜湊的值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 指定純量的 sha256 雜湊值，編碼為十六進位字串（字元字串，每兩個都代表0到255之間的一個十六進位數位）。
 
 > [!WARNING]
 > 此函式（SHA256）所使用的演算法保證不會在未來進行修改，但對計算而言非常複雜。 在單一查詢期間，需要「輕量」雜湊函式的使用者，建議改用函數[雜湊（）](./hashfunction.md) 。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

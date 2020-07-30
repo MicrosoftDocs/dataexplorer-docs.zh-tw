@@ -1,6 +1,6 @@
 ---
-title: strrep() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 strrep()。
+title: strrep （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 strrep （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 39b398e8fadb400c25cfeb97487c2ecf0669ad83
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 797684aa70cb8205463cc41558afec82449c433d
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506710"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350871"
 ---
 # <a name="strrep"></a>strrep()
 
-重複給定[字串](./scalar-data-types/string.md)提供的次數。
+重複指定的[字串](./scalar-data-types/string.md)所提供的時間量。
 
-* 如果第一個或第三個參數不是字串類型,它將強制轉換為字串。
+* 如果第一個或第三個引數不是字串類型，則會強制將它轉換成字串。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`strrep(`*值*,*乘數*, [*分隔符*]`)`
+`strrep(`*值*、*乘數*、[*分隔符號*]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *值*:輸入表示式
-* *乘數*: 正整數值 (從 1 到 1024)
-* *分隔符*:選擇字串表示式(預設值:空字串)
+* *值*：輸入運算式
+* *乘數*：正整數值（從1到1024）
+* *分隔符號*：選擇性的字串運算式（預設值：空字串）
 
-**傳回**
+## <a name="returns"></a>傳回
 
-重複指定次數的值,與*分隔串*聯。
+針對指定次數重複的值，與*分隔符號*串連。
 
-如果*乘數*大於最大允許值 (1024),則輸入字串將重複 1024 次。
+如果*乘數*大於允許的最大值（1024），則輸入字串會重複1024次。
  
-**範例**
+## <a name="example"></a>範例
 
 ```kusto
 print from_str = strrep('ABC', 2), from_int = strrep(123,3,'.'), from_time = strrep(3s,2,' ')

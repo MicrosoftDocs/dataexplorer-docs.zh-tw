@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: 6739b01f996c04829a1fdb78eab96f6e51b011bb
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 709da983599b4e8b0c8b06cf7bff4276ba03b5cf
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763663"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351160"
 ---
 # <a name="set_intersect"></a>set_intersect()
 
 傳回 `dynamic` 所有陣列中所有相異值集合的陣列-（arr1 ∩ arr2 ∩ ...）。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `set_intersect(`*arr1* `, `*arr2* `[` ，` *arr3*, ...])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *arr1 .。。arrN*：輸入陣列以建立交集集合（至少兩個數組）。 所有引數都必須是動態陣列。 如需詳細資訊，請參閱[pack_array](packarrayfunction.md)。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回所有陣列中所有相異值集合的動態陣列。 請參閱 [`set_union()`](setunionfunction.md) 和 [`set_difference()`](setdifferencefunction.md) 。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

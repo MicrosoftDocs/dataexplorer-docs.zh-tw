@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: b1f51f30825ceecfc025219f61d181c39ab0268f
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 5eb1dae8c45aee918ccec5a18d9f6ce16834acf6
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372588"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351398"
 ---
 # <a name="series_less"></a>series_less()
 
 計算 `<` 兩個數值數列輸入的元素較少（）邏輯運算。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_less (`*Series1* `,`*Series2*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Series1，Series2*：輸入要比較元素的數值陣列。 所有引數都必須是動態陣列。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 布林值的動態陣列，其中包含兩個輸入之間的計算元素較少邏輯運算。 任何非數值元素或不存在的專案（不同大小的陣列）都會產生 `null` 元素值。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

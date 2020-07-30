@@ -1,6 +1,6 @@
 ---
-title: 符號() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的符號()。
+title: sign （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 sign （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 86a57ed2fb7d43daf300731fe48233eca318bded
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8d6761cc2ffa9a8c28151c00720bbd1340a56875
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507560"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351075"
 ---
 # <a name="sign"></a>sign()
 
-數位運算式符號
+數值運算式的正負號
 
-**語法**
+## <a name="syntax"></a>語法
 
-`sign(`*X.*`)`
+`sign(`*x*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *x*: 實數。
+* *x*：實數。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-* 指定表達式的正 (+1)、零 (0) 或負 (-1) 符號。 
+* 指定運算式的正（+ 1）、零（0）或負（-1）符號。 
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 print s1 = sign(-42), s2 = sign(0), s3 = sign(11.2)

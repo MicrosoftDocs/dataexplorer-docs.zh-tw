@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: 7e13a9b652e1bdadb325cd866bddd78761b25b85
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: bd442f70b3411b61f213098fefec918622f8d916
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372385"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351177"
 ---
 # <a name="set_difference"></a>set_difference()
 
 傳回 `dynamic` 第一個陣列中但不在其他陣列中之所有相異值集合的（JSON）陣列-（（（arr1 \ arr2） \ arr3） \ ...）。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `set_difference(`*arr1* `, `*arr2* `[` ，` *arr3*, ...])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *arr1 .。。arrN*：輸入陣列以建立差異集合（至少兩個數組）。 所有引數都必須是動態陣列（請參閱[pack_array](packarrayfunction.md)）。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 傳回 arr1 中但不在其他陣列中的所有相異值集合的動態陣列。 請參閱 [`set_union()`](setunionfunction.md) 和 [`set_intersect()`](setintersectfunction.md) 。
 
-**範例**
+## <a name="example"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -47,7 +47,7 @@ range x from 1 to 3 step 1
 |---|
 |[4]|
 |8|
-|12|
+| [12]|
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

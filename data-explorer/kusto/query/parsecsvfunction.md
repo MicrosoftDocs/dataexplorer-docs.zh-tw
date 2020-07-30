@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b61934ec2efbfb22c17fe93a4f3969a1592cefab
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: eddf893d3c0d8096f57a3f624ddedf753fe35f91
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780655"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346349"
 ---
 # <a name="parse_csv"></a>parse_csv()
 
@@ -23,23 +23,23 @@ ms.locfileid: "84780655"
 parse_csv("aaa,bbb,ccc") == ["aaa","bbb","ccc"]
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `parse_csv(`*來源*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *來源*：代表逗號分隔值之單一記錄的來源字串。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 包含分割值的字串陣列。
 
-**注意事項**
+**備註**
 
 內嵌的換行文字、逗號和引號可以使用雙引號（' "'）來進行轉義。 此函式不支援每個資料列有多筆記錄（只會取得第一筆記錄）。
 
-**範例**
+## <a name="examples"></a>範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

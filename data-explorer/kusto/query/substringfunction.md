@@ -1,6 +1,6 @@
 ---
-title: 子字串() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的子字串()。
+title: substring （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的子字串（）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b0273b3e93c8778af9c380f164faec74349aa8cd
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b0e83e8d0baf33e5c11cb8b7ecafa607a08fe32b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506693"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350854"
 ---
 # <a name="substring"></a>substring()
 
-從源字串中提取子字串,從某些索引開始到字串的末尾。
+從從某個索引開始到字串結尾的來源字串，將子字串解壓縮。
 
 (選擇性) 您可以指定所要求子字串的長度。
 
@@ -25,25 +25,25 @@ ms.locfileid: "81506693"
 substring("abcdefg", 1, 2) == "bc"
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
-`substring(`*源*`,`*起始索引*`,`=*長度*|`)`
+`substring(`*來源* `,`*startingIndex* [ `,` *長度*]`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *來源*:子字串將從中獲取的源字串。
-* *起始索引*:請求子字串的零起始字元位置。
-* *長度*:可用於指定子字串中請求的字元數的可選參數。 
+* *來源*：將從中取得子字串的來源字串。
+* *startingIndex*：所要求子字串之以零為起始的起始字元位置。
+* *length*：選擇性參數，可用來指定子字串中所要求的字元數。 
 
-**注意事項**
+**備註**
 
-*起始索引*可以是負數,在這種情況下,將從源字串的末尾檢索子字串。
+*startingIndex*可以是負數，在此情況下，將會從來源字串的結尾抓取子字串。
 
-**傳回**
+## <a name="returns"></a>傳回
 
 指定字串中的子字串。 子字串開始於 startingIndex (以零為基礎的) 字元位置，並延續到字串結尾或長度字元 (如果有指定)。
 
-**範例**
+## <a name="examples"></a>範例
 
 ```kusto
 substring("123456", 1)        // 23456

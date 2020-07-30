@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: fbdf7b1a9a9f5b65e6c6ee7a78fe64afba2893af
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: e1b863b83e08fae680e1a387ca2fdd2a93d111a8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264788"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351432"
 ---
 # <a name="series_iir"></a>series_iir()
 
@@ -26,11 +26,11 @@ ms.locfileid: "85264788"
 
 函式會採用包含動態陣列的資料行，以及篩選準則*a*和*b*係數的兩個靜態動態陣列做為輸入，並在資料行上套用篩選。 它會輸出新的動態陣列資料行，其中包含已篩選的輸出。  
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_iir(`*x* `,` *b* `,` *a*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：動態陣列資料格，這是數值的陣列，通常是[make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出。
 * *b*：包含篩選之分子係數（儲存為數值的動態陣列）的常數運算式。

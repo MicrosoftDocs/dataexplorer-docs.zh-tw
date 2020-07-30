@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: 80e20e70bc51045f68fd3ef2068f099d750b2b3f
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: c5ada33d74f5ed3e1c7b357321b23bd7a76be64e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512430"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351347"
 ---
 # <a name="series_outliers"></a>series_outliers()
 
@@ -21,11 +21,11 @@ ms.locfileid: "84512430"
 
 函式會採用包含動態數值陣列的運算式做為輸入，並產生相同長度的動態數值陣列。 陣列的每個值都會使用「 [Tukey 的測試](https://en.wikipedia.org/wiki/Outlier#Tukey.27s_test)」來表示可能發生異常的分數。 在輸入的相同元素中，大於1.5 的值表示增加或拒絕異常。 小於-1.5 的值表示拒絕異常。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_outliers(`*x* `, `*種類* `, `*ignore_val* `, `*min_percentile* `, `*max_percentile*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *x*：動態陣列資料格，其為數值陣列
 * *種類：極端*偵測的演算法。 目前支援 `"tukey"` （傳統的 "Tukey"）和 `"ctukey"` （自訂的 "Tukey"）。 預設為 `"ctukey"`
@@ -43,7 +43,7 @@ ms.locfileid: "84512430"
 > [!TIP]
 > 使用此函式的最佳方式是將它套用至[make 系列](make-seriesoperator.md)運算子的結果。
 
-**範例**
+## <a name="example"></a>範例
 
 有一些雜訊的時間序列會建立極端值。 如果您想要將這些極端值（雜訊）取代為平均值，請使用 series_outliers （）來偵測極端值，然後加以取代。
 

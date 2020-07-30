@@ -1,6 +1,6 @@
 ---
-title: 到十進位() - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的十進位()。
+title: todecimal （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 todecimal （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2d5ac70dfe71f80c3963292516e1b8516a297875
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f699508436c9e2533661a440be2ac8f5f8d94688
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506302"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350769"
 ---
 # <a name="todecimal"></a>todecimal()
 
-將輸入轉換為十進位數位表示形式。
+將輸入轉換成十進位數表示。
 
 ```kusto
 todecimal("123.45678") == decimal(123.45678)
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `todecimal(`*Expr*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *Expr*: 將轉換為十進位的運算式。 
+* *Expr*：將轉換成十進位的運算式。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
-如果轉換成功,結果將為十進位數位。
-如果轉換不成功,結果會為`null`。
+如果轉換成功，則結果會是十進位數。
+如果轉換不成功，則結果會是 `null` 。
  
-*注意*:盡可能選擇[使用真實()。](./scalar-data-types/real.md)
+*注意*：可能的話，建議您盡可能使用[real （）](./scalar-data-types/real.md) 。

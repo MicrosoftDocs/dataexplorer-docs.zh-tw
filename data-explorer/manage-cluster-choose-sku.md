@@ -1,18 +1,18 @@
 ---
 title: 為您的 Azure 資料總管叢集選取正確的 VM SKU
 description: 本文說明如何為 Azure 資料總管叢集選取最佳的 SKU 大小。
-author: avneraa
-ms.author: avnera
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: avnera
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/14/2019
-ms.openlocfilehash: a2735a4f469ecf6dea9856a1ee8f0036ffc38fe5
-ms.sourcegitcommit: 8a88534eb6aa2c4260e97b7afd1818ce32786001
+ms.openlocfilehash: 61a43f767ea1f2bf048357e4032bb69025a85ad0
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83708455"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351619"
 ---
 # <a name="select-the-correct-vm-sku-for-your-azure-data-explorer-cluster"></a>為您的 Azure 資料總管叢集選取正確的 VM SKU 
 

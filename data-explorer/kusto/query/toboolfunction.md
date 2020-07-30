@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f99406d94e1cd64da8605e5000aa99136c2b119a
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: e0343ae5cb98e1cb3114e24c963fe2981be82c5b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763793"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350786"
 ---
 # <a name="tobool"></a>tobool()
 
@@ -26,16 +26,16 @@ tobool(1) == true
 tobool(123) == true
 ```
 
-**語法**
+## <a name="syntax"></a>語法
 
 `tobool(`*Expr* `)` 
  Expr `toboolean(`*Expr* `)`鋸齒
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *Expr*：將轉換成布林值的運算式。 
 
-**傳回**
+## <a name="returns"></a>傳回
 
 如果轉換成功，則結果會是布林值。
 如果轉換不成功，則結果會是 `null` 。

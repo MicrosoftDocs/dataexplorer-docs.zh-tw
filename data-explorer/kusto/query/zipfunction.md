@@ -1,6 +1,6 @@
 ---
-title: zip() - Azure 資料資源管理員 |微軟文件
-description: 本文在 Azure 資料資源管理器中介紹 zip()。
+title: zip （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 zip （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bd407ce652d41471be5b30a15c2c09b9f608edb1
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 28fc477d4dfc5432434261e493f36985514ea28b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81504228"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350548"
 ---
 # <a name="zip"></a>zip()
 
-函數`zip`接受任意數量`dynamic`的 陣列,並返回一個陣列,其元素都是一個陣列,包含同一索引的輸入陣列的元素。
+函式 `zip` 會接受任意數目的 `dynamic` 陣列，並傳回陣列，其專案為每個陣列，其中包含相同索引之輸入陣列的元素。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`zip(`*陣列1*`,`*陣列2*`, ... )`
+`zip(`*array1* `,`*array2*`, ... )`
 
-**引數**
+## <a name="arguments"></a>引數
 
-2 到 16 個動態陣列。
+介於2到16個動態陣列之間。
 
-**範例**
+## <a name="examples"></a>範例
 
 下列範例會傳回 `[[1,2],[3,4],[5,6]]`：
 

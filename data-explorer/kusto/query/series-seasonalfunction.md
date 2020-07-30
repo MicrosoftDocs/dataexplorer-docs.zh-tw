@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 054d4be758001609fbc3100a4a6c8698ef8f69f6
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: fb1f07c4b964615342adcf4d5ae51e7c99c05d13
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717303"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351279"
 ---
 # <a name="series_seasonal"></a>series_seasonal()
 
 根據偵測到或指定的季節性週期，計算數列的季節性元件。
 
-**語法**
+## <a name="syntax"></a>語法
 
 `series_seasonal(`*數列* `[,`*期間*`])`
 
-**引數**
+## <a name="arguments"></a>引數
 
 * *數列*：輸入數值動態陣列
 * *period* （選擇性）：每個季節性期間中的每個區間的整數數目，可能的值：
@@ -31,7 +31,7 @@ ms.locfileid: "84717303"
     * 正整數：用來做為季節性元件的期間
     * 任何其他值：忽略季節性，並傳回一系列的零
 
-**傳回**
+## <a name="returns"></a>傳回
 
 動態陣列，其長度與包含數列之計算季節性元件的*數列*輸入相同。 季節性元件的計算方式是將所有值對應至整個*期間的 bin*位置。
 

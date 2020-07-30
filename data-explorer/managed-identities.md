@@ -1,18 +1,18 @@
 ---
 title: 如何設定 Azure 資料總管叢集的受控識別
 description: 瞭解如何設定 Azure 資料總管叢集的受控識別。
-author: saguiitay
-ms.author: itsagui
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/12/2020
-ms.openlocfilehash: 523330f5ace4d9f2d652eccbd746b039d66df749
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: bed04e084621116033aa3dd2814192957032c26e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374289"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351568"
 ---
 # <a name="configure-managed-identities-for-your-azure-data-explorer-cluster"></a>設定 Azure 資料總管叢集的受控識別
 
@@ -45,7 +45,7 @@ ms.locfileid: "83374289"
 1. **Settings**  >  在入口網站的左窗格中選取 [設定] [身分**識別**]。
 1. 在 [身分**識別**] 窗格中 >**系統指派**] 索引標籤：
    1. 將 [**狀態**] 滑杆移至 [**開啟**]。
-   1. 選取 [儲存]  。
+   1. 選取 [儲存]。
    1. 在快顯視窗中，選取 **[是]**
 
     ![新增系統指派的身分識別](media/managed-identities/turn-system-assigned-identity-on.png)
@@ -60,7 +60,7 @@ ms.locfileid: "83374289"
 
 ### <a name="add-a-system-assigned-identity-using-c"></a>使用 C 新增系統指派的身分識別#
 
-#### <a name="prerequisites"></a>Prerequisites
+#### <a name="prerequisites"></a>必要條件
 
 使用 Azure 資料總管 c # 用戶端設定受控識別：
 
@@ -176,7 +176,7 @@ ms.locfileid: "83374289"
 1. **Settings**  >  在入口網站的左窗格中選取 [設定] [身分**識別**]。
 1. 在 [身分**識別**] 窗格中 >**系統指派**] 索引標籤：
     1. 將 [**狀態**] 滑杆移至 [**關閉**]。
-    1. 選取 [儲存]  。
+    1. 選取 [儲存]。
     1. 在快顯視窗中，選取 **[是]** 以停用系統指派的身分識別。 [身分**識別**] 窗格會還原成與新增系統指派的身分識別相同的條件。
 
     ![系統指派的身分識別關閉](media/managed-identities/system-assigned-identity.png)

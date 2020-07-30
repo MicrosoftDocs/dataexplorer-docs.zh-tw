@@ -1,6 +1,6 @@
 ---
-title: parse_xml() - Azure 數據資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的parse_xml()。
+title: parse_xml （）-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的 parse_xml （）。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,49 +8,49 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9743cbcb8d3c25707d97a4a6844f947352e63b0b
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 5e294a60545a081861597e772c39d2e7e99824e8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744632"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346366"
 ---
 # <a name="parse_xml"></a>parse_xml()
 
-將 解`string`譯為 XML 值,將數值為 JSON`dynamic`並將該值傳回為 。
+將轉譯 `string` 為 XML 值，並將值轉換為 JSON，並以形式傳回值 `dynamic` 。
 
-**語法**
+## <a name="syntax"></a>語法
 
-`parse_xml(`*Xml*`)`
+`parse_xml(`*xml*`)`
 
-**引數**
+## <a name="arguments"></a>引數
 
-* *xml*:`string`表示 XML 格式值的類型運算式。
+* *xml*：類型的運算式 `string` ，代表 xml 格式的值。
 
-**傳回**
+## <a name="returns"></a>傳回
 
-類型[動態](./scalar-data-types/dynamic.md)的物件,由*xml*的值或 null(如果 XML 格式無效)確定。
+[動態](./scalar-data-types/dynamic.md)類型的物件，由*xml*的值決定，如果 xml 格式無效，則為 null。
 
-將XML轉換為JSON是使用[xml2json](https://github.com/Cheedoong/xml2json)庫完成的。
+將 XML 轉換為 JSON 會使用[xml2json](https://github.com/Cheedoong/xml2json)程式庫來完成。
 
-轉換完成如下:
+轉換的執行方式如下：
 
 XML                                |JSON                                            |存取
 -----------------------------------|------------------------------------------------|--------------         
-`<e/>`                             | [ "e": null |                                  | o.e
-`<e>text</e>`                      | [ "e":" 文字" |                                | o.e
-`<e name="value" />`               | [ "e":\""@name值"|                     | o.e_"@name" ]
-`<e name="value">text</e>`         | [ "e":@name" "值" #text":"文本" | | o.e_"@name"o.e_"#text"]
-`<e> <a>text</a> <b>text</b> </e>` | [ "e": { "a":"文本","b":"文本" |          | o.e.a o.e.b
-`<e> <a>text</a> <a>text</a> </e>` | [ "e": { "a": [文本] "文字"*             | o.e.a[0] o.e.a[1]
-`<e> text <a>text</a> </e>`        | [ "e": " #text":"文本"," a":" 文本" |      | 1'o.e_"#text"]
+`<e/>`                             | {"e"： null}                                  | o. e
+`<e>text</e>`                      | {"e"： "text"}                                | o. e
+`<e name="value" />`               | {"e"： {" @name "： "value"}}                     | o. e [" @name "]
+`<e name="value">text</e>`         | {"e"： {" @name "： "value"，"#text"： "text"}} | o. e [" @name "] o. e ["#text"]
+`<e> <a>text</a> <b>text</b> </e>` | {"e"： {"a"： "text"，"b"： "text"}}          | e. o. e. b
+`<e> <a>text</a> <a>text</a> </e>` | {"e"： {"a"： ["text"，"text"]}}             | o. e. a [0] o. e. a [1]
+`<e> text <a>text</a> </e>`        | {"e"： {"#text"： "text"，"a"： "text"}}      | 1 ' o. e ["#text"] o. e. a
 
-**注意事項**
+**備註**
 
-* 的最大輸入`string`長度`parse_xml`為 128 KB。 較長字串解釋會導致空物件 
-* 將僅翻譯元素節點、屬性和文本節點。 其他一切都將被跳過
+* 的最大輸入 `string` 長度為 `parse_xml` 128 KB。 較長的字串轉譯會產生 null 物件 
+* 只會轉譯元素節點、屬性和文位元組點。 所有其他專案將會略過
  
-**範例**
+## <a name="example"></a>範例
 
 在下列範例中，當 `context_custom_metrics` 是類似下面內容的 `string` 時： 
 
@@ -67,7 +67,7 @@ XML                                |JSON                                        
 </duration>
 ```
 
-然後以下 CSL 片段將 XML 轉換為以下 JSON:
+然後，下列的 CSL 片段會將 XML 轉譯成下列 JSON：
 
 ```json
 {
@@ -83,7 +83,7 @@ XML                                |JSON                                        
 }
 ```
 
-並檢索`duration`物件中槽的值,並從中檢索兩個插`duration.value`槽`duration.min`和`118.0`(`110.0`和 。
+和會抓取物件中位置的值 `duration` ，並從該位置抓取兩個位置： `duration.value` 和 `duration.min` （分別為 `118.0` 和 `110.0` ）。
 
 ```kusto
 T
