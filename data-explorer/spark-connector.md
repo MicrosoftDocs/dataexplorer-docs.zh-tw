@@ -3,20 +3,20 @@ title: 使用適用于 Apache Spark 的 Azure 資料總管連接器，在 Azure 
 description: 本主題說明如何在 Azure 資料總管和 Apache Spark 叢集之間移動資料。
 author: orspod
 ms.author: orspodek
-ms.reviewer: michazag
+ms.reviewer: maraheja
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 1/14/2020
-ms.openlocfilehash: 28dee67b6ac412a9c0497d5713a69c9617d3ae55
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.date: 7/29/2020
+ms.openlocfilehash: 31aa478647b902353db9d39a5ad36b5d5830c127
+ms.sourcegitcommit: 6e84f50efc8c5c3fe57080341ed3effe72197886
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370474"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87440004"
 ---
 # <a name="azure-data-explorer-connector-for-apache-spark"></a>適用于 Apache Spark 的 Azure 資料總管連接器
 
-[Apache Spark](https://spark.apache.org/)是適用于大規模資料處理的整合分析引擎。 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析大量資料。 
+[Apache Spark](https://spark.apache.org/) 是用於進行大規模資料處理的整合分析引擎。 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析大量資料。 
 
 適用于 Spark 的 Azure 資料總管連接器是可在任何 Spark 叢集上執行的[開放原始碼專案](https://github.com/Azure/azure-kusto-spark)。 它會執行資料來源和資料接收，以便在 Azure 資料總管和 Spark 叢集之間移動資料。 您可以使用 Azure 資料總管和 Apache Spark，建立以資料導向案例為目標的快速且可擴充的應用程式。 例如，機器學習（ML）、解壓縮-轉換-載入（ETL）和 Log Analytics。 使用連接器時，Azure 資料總管會成為標準 Spark 來源和接收作業的有效資料存放區，例如 write、read 和 Writestream.format。
 
@@ -27,7 +27,7 @@ ms.locfileid: "83370474"
 > [!NOTE]
 > 雖然以下的部分範例參考[Azure Databricks](https://docs.azuredatabricks.net/) Spark 叢集，但 Azure 資料總管 Spark 連接器並不會直接相依于 Databricks 或任何其他 spark 散發。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [建立 Azure 資料總管叢集和資料庫](create-cluster-database-portal.md) 
 * 建立 Spark 叢集
@@ -37,7 +37,7 @@ ms.locfileid: "83370474"
 * 已安裝[Maven](https://maven.apache.org/download.cgi) 3。x
 
 > [!TIP]
-> 2.3. x 版本也受到支援，但可能需要在 pom .xml 相依性中進行一些變更。
+> 2.3. x 版本也受到支援，但可能需要變更 pom.xml 相依性。
 
 ## <a name="how-to-build-the-spark-connector"></a>如何建立 Spark 連接器
 
@@ -111,11 +111,14 @@ Azure 資料總管 Spark 連接器可讓您使用下列其中一種方法，透�
 
 Azure AD 應用程式驗證是最簡單且最常見的驗證方法，建議用於 Azure 資料總管 Spark 連接器。
 
-|屬性  |描述  |
-|---------|---------|
-|**KUSTO_AAD_CLIENT_ID**     |   Azure AD 應用程式（用戶端）識別碼。      |
-|**KUSTO_AAD_AUTHORITY_ID**     |  Azure AD 的驗證授權單位。 Azure AD Directory （租使用者）識別碼。        |
-|**KUSTO_AAD_CLIENT_PASSWORD**    |    Azure AD 用戶端的應用程式金鑰。     |
+|屬性  |選項字串  |描述  |
+|---------|---------|---------|
+|**KUSTO_AAD_APP_ID**     |kustoAadAppId     |   Azure AD 應用程式（用戶端）識別碼。      |
+|**KUSTO_AAD_AUTHORITY_ID**     |kustoAadAuthorityID     |  Azure AD 的驗證授權單位。 Azure AD Directory （租使用者）識別碼。        |
+|**KUSTO_AAD_APP_SECRET**    |kustoAadAppSecret     |    Azure AD 用戶端的應用程式金鑰。     |
+
+> [!NOTE]
+> 較舊的 API 版本（小於2.0.0）具有下列命名： "kustoAADClientID"、"kustoClientAADClientPassword"、"kustoAADAuthorityID"
 
 ### <a name="azure-data-explorer-privileges"></a>Azure 資料總管許可權
 
@@ -153,8 +156,8 @@ Azure AD 應用程式驗證是最簡單且最常見的驗證方法，建議用�
       .option(KustoSinkOptions.KUSTO_CLUSTER, cluster)
       .option(KustoSinkOptions.KUSTO_DATABASE, database)
       .option(KustoSinkOptions.KUSTO_TABLE, "Demo3_spark")
-      .option(KustoSinkOptions.KUSTO_AAD_CLIENT_ID, appId)
-      .option(KustoSinkOptions.KUSTO_AAD_CLIENT_PASSWORD, appKey)
+      .option(KustoSinkOptions.KUSTO_AAD_APP_ID, appId)
+      .option(KustoSinkOptions.KUSTO_AAD_APP_SECRET, appKey)
       .option(KustoSinkOptions.KUSTO_AAD_AUTHORITY_ID, authorityId)
       .option(KustoSinkOptions.KUSTO_TABLE_CREATE_OPTIONS, "CreateIfNotExist")
       .mode(SaveMode.Append)
@@ -204,8 +207,8 @@ Azure AD 應用程式驗證是最簡單且最常見的驗證方法，建議用�
 
     val query = s"$table | where (ColB % 1000 == 0) | distinct ColA"
     val conf: Map[String, String] = Map(
-          KustoSourceOptions.KUSTO_AAD_CLIENT_ID -> appId,
-          KustoSourceOptions.KUSTO_AAD_CLIENT_PASSWORD -> appKey
+          KustoSourceOptions.KUSTO_AAD_APP_ID -> appId,
+          KustoSourceOptions.KUSTO_AAD_APP_SECRET -> appKey
         )
 
     val df = spark.read.format("com.microsoft.kusto.spark.datasource").
@@ -242,8 +245,8 @@ Azure AD 應用程式驗證是最簡單且最常見的驗證方法，建議用�
 
         ```scala
          val conf3 = Map(
-              KustoSourceOptions.KUSTO_AAD_CLIENT_ID -> appId,
-              KustoSourceOptions.KUSTO_AAD_CLIENT_PASSWORD -> appKey
+              KustoSourceOptions.KUSTO_AAD_APP_ID -> appId,
+              KustoSourceOptions.KUSTO_AAD_APP_SECRET -> appKey
               KustoSourceOptions.KUSTO_BLOB_STORAGE_SAS_URL -> storageSas)
         val df2 = spark.read.kusto(cluster, database, "ReallyBigTable", conf3)
         
