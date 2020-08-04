@@ -204,8 +204,12 @@
               href: vnet-deployment.md
             - name: 對 VNet 叢集建立、連線能力和作業進行疑難排解
               href: vnet-deploy-troubleshoot.md
-        - name: 管理叢集安全性
-          href: manage-cluster-security.md
+        - name: 加密
+          items:
+            - name: 叢集磁片加密 - 入口網站
+              href: cluster-disk-encryption.md
+            - name: 雙重加密
+              href: double-encryption.md
         - name: 設定受控識別
           href: managed-identities.md
         - name: 設定客戶管理的金鑰
