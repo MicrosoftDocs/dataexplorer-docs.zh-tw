@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 984e5c37f3d29a6c56f88c6eb9b6750635e48920
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 98888ddd5dd6155c9476163337e7c031e0f84a1e
+ms.sourcegitcommit: afc369ab4c4bcc74f2dce22b397a340572db8ecf
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345975"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87528141"
 ---
 # <a name="python-plugin"></a>Python 外掛程式
 
@@ -24,7 +24,7 @@ ms.locfileid: "87345975"
 Python 外掛程式會使用 Python 腳本來執行使用者定義函數（UDF）。 Python 腳本會取得表格式資料做為其輸入，而且預期會產生表格式輸出。
 外掛程式的執行時間裝載于[沙箱](../concepts/sandboxes.md)中，並在叢集的節點上執行。
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 *T* `|` `evaluate` [ `hint.distribution` `=` （ `single`  |  `per_node` ）] `python(` *output_schema* `,` *腳本*[ `,` *script_parameters*] [ `,` *external_artifacts*]`)`
 
@@ -183,7 +183,7 @@ print "This is an example for using 'external_artifacts'"
 
 安裝套件，如下所示：
 
-### <a name="prerequisites"></a>必要條件
+### <a name="prerequisites"></a>先決條件
 
   1. 建立 blob 容器來裝載封裝，最好是與您的叢集位於相同的位置。 例如， `https://artifcatswestus.blob.core.windows.net/python` 假設您的叢集位於美國西部。
   1. 改變叢集的[標注原則](../management/calloutpolicy.md)，以允許存取該位置。

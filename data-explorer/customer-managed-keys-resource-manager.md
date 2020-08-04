@@ -7,12 +7,12 @@ ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: ad3351045f61f4fb9ddb9ce08c63201746ac05bb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c9594862d9dbe0eae1e8357a81e1bce5bba79da7
+ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350225"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87515791"
 ---
 # <a name="configure-customer-managed-keys-using-the-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本設定客戶管理的金鑰
 
@@ -85,6 +85,6 @@ ms.locfileid: "87350225"
 
 * [在 Azure 中保護 Azure 資料總管叢集](security.md)
 * [設定 Azure 資料總管叢集的受控識別](managed-identities.md)
-* 藉由啟用待用加密，[在 Azure 資料總管 Azure 入口網站中保護您](manage-cluster-security.md)的叢集。
+* 藉由啟用待用加密，[在 Azure 資料總管 Azure 入口網站中使用磁片加密來保護您](cluster-disk-encryption.md)的叢集。
 * [使用 C 設定客戶管理的金鑰#](customer-managed-keys-csharp.md)
 

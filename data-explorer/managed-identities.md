@@ -7,12 +7,12 @@ ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/12/2020
-ms.openlocfilehash: bed04e084621116033aa3dd2814192957032c26e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 59392c8ff555df99ccb7c4a5b7503266cb095552
+ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351568"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87515830"
 ---
 # <a name="configure-managed-identities-for-your-azure-data-explorer-cluster"></a>設定 Azure 資料總管叢集的受控識別
 
@@ -60,7 +60,7 @@ ms.locfileid: "87351568"
 
 ### <a name="add-a-system-assigned-identity-using-c"></a>使用 C 新增系統指派的身分識別#
 
-#### <a name="prerequisites"></a>必要條件
+#### <a name="prerequisites"></a>先決條件
 
 使用 Azure 資料總管 c # 用戶端設定受控識別：
 
@@ -210,6 +210,6 @@ await kustoManagementClient.Clusters.CreateOrUpdateAsync(resourceGroupName, clus
 ## <a name="next-steps"></a>後續步驟
 
 * [在 Azure 中保護 Azure 資料總管叢集](security.md)
-* 藉由啟用待用加密，[在 Azure 資料總管 Azure 入口網站中保護您](manage-cluster-security.md)的叢集。
+* 藉由啟用待用加密，[在 Azure 資料總管 Azure 入口網站中使用磁片加密來保護您](cluster-disk-encryption.md)的叢集。
  * [使用 C 設定客戶管理的金鑰#](customer-managed-keys-csharp.md)
  * [使用 Azure Resource Manager 範本設定客戶管理的金鑰](customer-managed-keys-resource-manager.md)

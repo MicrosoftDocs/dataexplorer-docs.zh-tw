@@ -7,12 +7,12 @@ ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: f3dfdbeda7ab0d9234c70d4bf5e0aa5613258480
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0330d0bf51e3bf8844e6545c9b57543274d56ed0
+ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349936"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87515731"
 ---
 # <a name="secure-azure-data-explorer-clusters-in-azure"></a>在 Azure 中保護 Azure 資料總管叢集
 
@@ -60,7 +60,7 @@ ms.locfileid: "87349936"
 
 ## <a name="next-steps"></a>後續步驟
 
-* 藉由啟用待用加密，[在 Azure 資料總管入口網站中保護您](manage-cluster-security.md)的叢集。
+* 藉由啟用待用加密，[在 Azure 資料總管入口網站中使用磁片加密來保護您](cluster-disk-encryption.md)的叢集。
 * [設定 Azure 資料總管叢集的受控識別](managed-identities.md)
 * [使用 Azure Resource Manager 範本設定客戶管理的金鑰](customer-managed-keys-resource-manager.md)
 * [使用 C 設定客戶管理的金鑰#](customer-managed-keys-csharp.md)
