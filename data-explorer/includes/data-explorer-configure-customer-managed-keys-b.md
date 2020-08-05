@@ -11,9 +11,9 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 04/15/2020
 ms.locfileid: "81496988"
 ---
-## <a name="create-a-new-key-vault"></a>建立新金鑰保存庫
+## <a name="create-a-new-key-vault"></a>建立新的金鑰保存庫
 
-要使用 PowerShell 建立新金鑰保管庫,請致電[New-AzKeyVault](/powershell/module/az.keyvault/new-azkeyvault)。 用於儲存 Azure 資料資源管理員加密的客戶管理金鑰的金鑰保管庫必須啟用兩個金鑰保護設置,**即"軟刪除****"和"不清除**"。 在下面的範例中,將括弧中的占位符值替換為您自己的值。
+若要使用 PowerShell 建立新的金鑰保存庫，請呼叫[AzKeyVault](/powershell/module/az.keyvault/new-azkeyvault)。 您用來儲存 Azure 資料總管加密客戶管理金鑰的金鑰保存庫，必須啟用兩個金鑰保護設定： [虛**刪除**] 和 [**不要清除**]。 以您自己的值取代括弧中的預留位置值，如下列範例所示。
 
 ```azurepowershell-interactive
 $keyVault = New-AzKeyVault -Name <key-vault> `
@@ -23,9 +23,9 @@ $keyVault = New-AzKeyVault -Name <key-vault> `
     -EnablePurgeProtection
 ```
 
-## <a name="configure-the-key-vault-access-policy"></a>設定金鑰保存庫存取原則
+## <a name="configure-the-key-vault-access-policy"></a>設定 key vault 存取原則
 
-接下來,為金鑰保管庫配置訪問策略,以便群集具有訪問它的許可權。 在此步驟中,您將使用以前分配給群集的系統分配的託管標識。 要設定金鑰保存的金鑰,請呼叫[Set-AzKeyVault 存取原則](/powershell/module/az.keyvault/set-azkeyvaultaccesspolicy)。 將括弧中的占位符值替換為您自己的值,並使用前面示例中定義的變數。
+接下來，設定金鑰保存庫的存取原則，讓叢集有許可權可以存取它。 在此步驟中，您將使用先前指派給叢集的系統指派受控識別。 若要設定金鑰保存庫的存取原則，請呼叫[set-set-azkeyvaultaccesspolicy](/powershell/module/az.keyvault/set-azkeyvaultaccesspolicy)。 以您自己的值取代括弧中的預留位置值，並使用先前範例中所定義的變數。
 
 ```azurepowershell-interactive
 Set-AzKeyVaultAccessPolicy `
@@ -36,7 +36,7 @@ Set-AzKeyVaultAccessPolicy `
 
 ## <a name="create-a-new-key"></a>建立新的金鑰
 
-接下來,在密鑰保管庫中創建一個新密鑰。 要建立新金鑰,請呼叫[Add-AzKeyVaultKey](/powershell/module/az.keyvault/add-azkeyvaultkey)。 將括弧中的占位符值替換為您自己的值,並使用前面示例中定義的變數。
+接下來，在金鑰保存庫中建立新的金鑰。 若要建立新的金鑰，請呼叫[AzKeyVaultKey](/powershell/module/az.keyvault/add-azkeyvaultkey)。 以您自己的值取代括弧中的預留位置值，並使用先前範例中所定義的變數。
 
 ```azurepowershell-interactive
 $key = Add-AzKeyVaultKey -VaultName $keyVault.VaultName -Name <key> -Destination 'Software'

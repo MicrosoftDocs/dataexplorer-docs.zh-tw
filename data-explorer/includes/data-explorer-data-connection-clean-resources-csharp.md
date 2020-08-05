@@ -13,7 +13,7 @@ ms.locfileid: "81497690"
 ---
 ## <a name="clean-up-resources"></a>清除資源
 
-要刪除資料連線,請使用以下指令:
+若要刪除資料連線，請使用下列命令：
 
 ```csharp
 kustoManagementClient.DataConnections.Delete(resourceGroupName, clusterName, databaseName, dataConnectionName);

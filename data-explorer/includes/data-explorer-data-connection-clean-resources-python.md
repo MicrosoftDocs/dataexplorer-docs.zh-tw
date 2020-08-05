@@ -13,7 +13,7 @@ ms.locfileid: "81495350"
 ---
 ## <a name="clean-up-resources"></a>清除資源
 
-要刪除資料連線,請使用以下指令:
+若要刪除資料連線，請使用下列命令：
 
 ```python
 kusto_management_client.data_connections.delete(resource_group_name=resource_group_name, cluster_name=kusto_cluster_name, database_name=kusto_database_name, data_connection_name=kusto_data_connection_name)

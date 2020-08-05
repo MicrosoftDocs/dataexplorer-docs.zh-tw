@@ -9,30 +9,30 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 09/13/2019
-ms.openlocfilehash: 34a0e5cd7107827cd97eb0baf9a3d40b408b2024
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: f74848ac3b634affbafde8d0441a4340aff230da
+ms.sourcegitcommit: dc42f4a7fa617a06b5566ce40b7cdc66cfd22185
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382064"
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87557613"
 ---
 # <a name="how-to-authenticate-with-aad-for-azure-data-explorer-access"></a>如何使用適用于 Azure 資料總管存取的 AAD 進行驗證
 
-若要存取 Azure 資料總管，建議的方式是向**Azure Active Directory**服務進行驗證（有時也稱為**Azure AD**，或只是**AAD**）。 這麼做可確保 Azure 資料總管永遠不會看到存取主體的目錄認證，方法是使用兩個階段的進程：
+若要存取 Azure 資料總管，建議的方法是向**Azure Active Directory**服務進行驗證 (有時也稱為**Azure AD**，或只是**AAD**) 。 這麼做可確保 Azure 資料總管永遠不會看到存取主體的目錄認證，方法是使用兩個階段的進程：
 
 1. 在第一個步驟中，用戶端會與 AAD 服務進行通訊、對其進行驗證，並要求針對用戶端想要存取的特定 Azure 資料總管端點所發行的存取權杖。
 2. 在第二個步驟中，用戶端會發出對 Azure 資料總管的要求，並提供第一個步驟取得的存取權杖，做為 Azure 資料總管的身分識別證明。
 
 接著，Azure 資料總管會代表 AAD 發出存取權杖的安全性主體來執行要求，並使用此身分識別來執行所有授權檢查。
 
-在大部分情況下，建議使用其中一個 Azure 資料總管 Sdk 以程式設計方式存取服務，因為它們會移除上述流程的許多麻煩（還有其他功能）。 例如，請參閱[.NET SDK](../../api/netfx/about-the-sdk.md)。
+在大部分情況下，建議使用其中一個 Azure 資料總管 Sdk 以程式設計方式存取服務，因為這會移除執行 (上述流程的許多麻煩，而其他) 則不容易。 例如，請參閱[.NET SDK](../../api/netfx/about-the-sdk.md)。
 然後， [Kusto 連接字串](../../api/connection-strings/kusto.md)會設定驗證屬性。
 如果無法這麼做，請繼續閱讀，以取得如何自行執行此流程的詳細資訊。
 
 主要的驗證案例包括：
 
 * **驗證已登入使用者的用戶端應用程式**。
-  在此案例中，互動式（用戶端）應用程式會針對認證（例如使用者名稱和密碼）觸發 AAD 提示。
+  在此案例中，互動式 (用戶端) 應用程式會對使用者觸發 AAD 提示， (例如使用者名稱和密碼) 。
   請參閱[使用者驗證](#user-authentication)、
 
 * 「無**外設」應用程式**。
@@ -56,7 +56,7 @@ https://help.kusto.windows.net
 
 ## <a name="specifying-the-aad-tenant-id"></a>指定 AAD 租使用者識別碼
 
-AAD 是多租使用者服務，而且每個組織都可以在 AAD 中建立名為**directory**的物件。 目錄物件會保存安全性相關的物件，例如使用者帳戶、應用程式和群組。 AAD 通常會以**租**使用者的身分來參考該目錄。 AAD 租使用者會以 GUID （**租使用者識別碼**）識別。 在許多情況下，也可以透過組織的功能變數名稱來識別 AAD 租使用者。
+AAD 是多租使用者服務，而且每個組織都可以在 AAD 中建立名為**directory**的物件。 目錄物件會保存安全性相關的物件，例如使用者帳戶、應用程式和群組。 AAD 通常會以**租**使用者的身分來參考該目錄。 AAD 租使用者會以 GUID (**租使用者識別碼**) 來識別。 在許多情況下，也可以透過組織的功能變數名稱來識別 AAD 租使用者。
 
 例如，名為 "Contoso" 的組織可能會有租使用者識別碼 `4da81d62-e0a8-4899-adad-4349ca6bfe24` 和功能變數名稱 `contoso.com` 。
 
@@ -64,8 +64,8 @@ AAD 是多租使用者服務，而且每個組織都可以在 AAD 中建立名�
 
 AAD 有數個用於驗證的端點：
 
-* 當裝載所要驗證之主體的租使用者已知時（亦即，當其中一個知道使用者或應用程式所在的 AAD 目錄）時，AAD 端點會是 `https://login.microsoftonline.com/{tenantId}` 。
-  在這裡， `{tenantId}` 是 AAD 中組織的租使用者識別碼或其功能變數名稱（例如 `contoso.com` ）。
+* 當知道要驗證之主體的租使用者時 (也就是，當其中一個人知道哪些 AAD 目錄中的使用者或應用程式) 時，AAD 端點就是 `https://login.microsoftonline.com/{tenantId}` 。
+  在這裡， `{tenantId}` 是 AAD 中組織的租使用者識別碼，或其功能變數名稱 (例如 `contoso.com`) 。
 
 * 當裝載所要驗證之主體的租使用者未知時，可以使用「通用」端點，將上面的取代 `{tenantId}` 為值 `common` 。
 
@@ -74,22 +74,22 @@ AAD 有數個用於驗證的端點：
 
 ## <a name="aad-token-cache"></a>AAD 權杖快取
 
-使用 Azure 資料總管 SDK 時，AAD 權杖會儲存在本機電腦的個別使用者權杖快取中（名為 **%APPDATA%\Kusto\tokenCache.data**的檔案，該檔案只能由登入的使用者存取或解密）。在提示使用者提供認證之前，會先檢查快取中是否有權杖，因而大幅減少使用者必須輸入認證的次數。
+使用 Azure 資料總管 SDK 時，AAD 權杖會儲存在本機電腦的每個使用者權杖快取中 (名為 **%APPDATA%\Kusto\tokenCache.data**的檔案，該檔案只能由登入的使用者存取或解密。 ) 在提示使用者提供認證之前檢查權杖的快取，進而大幅減少使用者必須輸入認證的次數。
 
 > [!NOTE]
 > AAD 權杖快取會減少使用者在存取 Azure 資料總管時所顯示的互動式提示數目，但不會降低其完成。 此外，當使用者收到認證的提示時，將無法預先預期。
-> 這表示如果需要支援非互動式登入（例如排程工作時），則不一定要嘗試使用使用者帳戶來存取 Azure 資料總管，因為當時間提示登入的使用者時，如果在非互動式登入下執行，則提示將會失敗。
+> 這表示如果需要支援非互動式登入 () 例如在非互動式登入下執行時，如果提示登入的使用者有認證，則不一定要嘗試使用使用者帳戶來存取 Azure 資料總管，因為這種情況是因為時間所發出，而不是在系統提示時，將會失敗。
 
 
 ## <a name="user-authentication"></a>使用者驗證
 
 以使用者驗證存取 Azure 資料總管最簡單的方式是使用 Azure 資料總管 SDK，並將 `Federated Authentication` azure 資料總管連接字串的屬性設定為 `true` 。 第一次使用 SDK 將要求傳送至服務時，使用者會看到登入表單以輸入 AAD 認證，而在驗證成功時，將會傳送要求。
 
-不使用 Azure 資料總管 SDK 的應用程式仍可使用 AAD 用戶端程式庫（ADAL），而不是執行 AAD 服務安全性通訊協定用戶端。 如需 https://github.com/AzureADSamples/WebApp-WebAPI-OpenIDConnect-DotNet 從 .net 應用程式執行這項操作的範例，請參閱 []。
+不使用 Azure 資料總管 SDK 的應用程式仍可使用 AAD 用戶端程式庫 (ADAL) ，而不是執行 AAD 服務安全性通訊協定用戶端。 如需 https://github.com/AzureADSamples/WebApp-WebAPI-OpenIDConnect-DotNet 從 .net 應用程式執行這項操作的範例，請參閱 []。
 
 若要驗證 Azure 資料總管存取的使用者，必須先將委派的許可權授與應用程式 `Access Kusto` 。 如需詳細資訊，請參閱[AAD 應用程式](how-to-provision-aad-app.md#set-up-delegated-permissions-for-kusto-service-application)布建的 Kusto 指南。
 
-下列簡短的程式碼片段示範如何使用 ADAL 來取得 AAD 使用者權杖，以存取 Azure 資料總管（啟動登入 UI）：
+下列簡短的程式碼片段示範如何使用 ADAL 來取得 AAD 使用者權杖，以存取 Azure 資料總管 (啟動登入 UI) ：
 
 ```csharp
 // Create an HTTP request
@@ -109,7 +109,7 @@ request.Headers.Set(HttpRequestHeader.Authorization, string.Format(CultureInfo.I
 
 ## <a name="application-authentication"></a>應用程式驗證
 
-下列簡短的程式碼片段示範如何使用 ADAL 來取得 AAD 應用程式權杖，以存取 Azure 資料總管。 在此流程中，不會顯示任何提示，而且應用程式必須向 AAD 註冊，並配備執行應用程式驗證所需的認證（例如 AAD 所發行的應用程式金鑰，或已預先向 AAD 註冊的 X509v2 憑證）。
+下列簡短的程式碼片段示範如何使用 ADAL 來取得 AAD 應用程式權杖，以存取 Azure 資料總管。 在此流程中，不會顯示任何提示，而且應用程式必須向 AAD 註冊，並配備執行應用程式驗證所需的認證 (例如 AAD 所發行的應用程式金鑰，或已預先向 AAD) 註冊的 X509v2 憑證。
 
 ```csharp
 // Create an HTTP request
@@ -133,13 +133,13 @@ request.Headers.Set(HttpRequestHeader.Authorization, string.Format(CultureInfo.I
 在此案例中，應用程式已針對應用程式所管理的部分任意資源傳送 AAD 存取權杖，並使用該權杖來取得 Azure 資料總管資源的新 AAD 存取權杖，讓應用程式可以代表原始 AAD 存取權杖所指示的主體來存取 Kusto。
 
 此流程稱為[OAuth2 token 交換流程](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-04)。
-通常需要使用 AAD 的多個設定步驟，在某些情況下（視 AAD 租使用者設定而定）可能需要 AAD 租使用者系統管理員的特殊同意。
+通常需要使用 AAD 的多個設定步驟，而在某些情況下 (視 AAD 租使用者設定而定) 可能需要 AAD 租使用者的系統管理員進行特殊同意。
 
 
 
 **步驟1：在您的應用程式與 Azure 資料總管服務之間建立信任關係**
 
-1. 開啟[Azure 入口網站](https://portal.azure.com/)，並確定您已登入正確的租使用者（請參閱用來登入入口網站的身分識別的右上角）。
+1. 開啟[Azure 入口網站](https://portal.azure.com/)，並確定您已登入正確的租使用者 (查看用來登入入口網站) 身分識別的右上角。
 
 2. 在 [資源] 窗格中，按一下 [ **Azure Active Directory**]，然後**應用程式註冊**]。
 
@@ -159,7 +159,7 @@ request.Headers.Set(HttpRequestHeader.Authorization, string.Format(CultureInfo.I
 // Create Auth Context for AAD (common or tenant-specific endpoint):
 AuthenticationContext authContext = new AuthenticationContext("AAD Authority URL");
 
-// Exchange your token for for Kusto token.
+// Exchange your token for a Kusto token.
 // You will need to provide your application's client ID and secret to authenticate your application
 var tokenForKusto = authContext.AcquireTokenAsync(
     "https://{serviceNameAndRegion}.kusto.windows.net",
@@ -178,7 +178,7 @@ var client = KustoClientFactory.CreateCslQueryProvider(kcsb);
 var queryResult = client.ExecuteQuery(databaseName, query, null);
 ```
 
-## <a name="web-client-javascript-authentication-and-authorization"></a>Web 用戶端（JavaScript）驗證和授權
+## <a name="web-client-javascript-authentication-and-authorization"></a>Web 用戶端 (JavaScript) 驗證和授權
 
 
 
@@ -189,9 +189,9 @@ var queryResult = client.ExecuteQuery(databaseName, query, null);
 
 **詳細資料**
 
-當用戶端是在使用者的瀏覽器中執行的 JavaScript 程式碼時，會使用隱含授與流程。 授與用戶端應用程式存取權給 Azure 資料總管服務的權杖，會在重新導向 URI （在 URI 片段中）成功驗證之後立即提供;此流程中未提供任何重新整理權杖，因此用戶端無法長時間快取權杖，並加以重複使用。
+當用戶端是在使用者的瀏覽器中執行的 JavaScript 程式碼時，會使用隱含授與流程。 授與用戶端應用程式存取權給 Azure 資料總管服務的權杖，會在 URI 片段中的重新導向 URI (的一部分之後立即提供) ;此流程中未提供任何重新整理權杖，因此用戶端無法長時間快取權杖，並加以重複使用。
 
-就像在 native client 流程中，應該有兩個 AAD 應用程式（伺服器和用戶端）具有已設定的關聯性。
+就像在 native client 流程中， (伺服器和用戶端) 都應該有兩個 AAD 應用程式，且兩者之間已設定關聯性。
 
 AdalJs 需要在進行任何 access_token 呼叫之前取得 id_token。
 
@@ -210,7 +210,7 @@ var config = {
 var authContext = new AuthenticationContext(config);
 ```
 
-* `authContext.login()` `acquireToken()` 如果您未登入，請在嘗試之前呼叫。 如果您登入或不是要知道是否有傳回，這是一個很好的方法。 `authContext.getCachedUser()` `false`
+* `authContext.login()` `acquireToken()` 如果您未登入，請在嘗試之前呼叫。 如果您登入或不是要知道) 它是否傳回，是一個很好的方法。 `authContext.getCachedUser()` `false`
 * `authContext.handleWindowCallback()`每當您的頁面載入時呼叫。 這段程式碼會攔截來自 AAD 的重新導向，並從片段 URL 提取權杖並加以快取。
 * 呼叫 `authContext.acquireToken()` 以取得實際的存取權杖，現在您已經有有效的識別碼權杖。 AcquireToken 的第一個參數將會是 Kusto 伺服器 AAD 應用程式資源 URL。
 

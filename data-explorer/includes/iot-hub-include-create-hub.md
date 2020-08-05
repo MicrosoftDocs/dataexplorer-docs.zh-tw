@@ -1,33 +1,33 @@
 ---
 title: 包含檔案
 description: 包含檔案
-author: robinsh
+author: orspod
 ms.service: iot-hub
 services: iot-hub
 ms.topic: include
 ms.date: 02/14/2020
-ms.author: robinsh
+ms.author: orspodek
 ms.custom: include file
-ms.openlocfilehash: c3f1c40fd61d83fdb40bca0bda368d88d4096906
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 8009d1317817fe399952879ce5b524d6cea4da6f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82109680"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87375652"
 ---
 本節將說明如何使用 [Azure 入口網站](https://portal.azure.com)建立 IoT 中樞。
 
 1. 登入 [Azure 入口網站](https://portal.azure.com)。
 
-1. 從 Azure 首頁中選擇 [+建立資源]  按鈕，然後在 [搜尋 Marketplace]  欄位中輸入「IoT 中樞」  。
+1. 從 Azure 首頁中選擇 [+建立資源] 按鈕，然後在 [搜尋 Marketplace] 欄位中輸入「IoT 中樞」。
 
-1. 從搜尋結果中選取 [IoT 中樞]  ，然後選取 [建立]  。
+1. 從搜尋結果中選取 [IoT 中樞]，然後選取 [建立]。
 
-1. 在 [基本資料]  索引標籤上，完成如下所示的欄位：
+1. 在 [基本資料] 索引標籤上，完成如下所示的欄位：
 
-   - 訂用帳戶  ：選取要為您的中樞使用的訂用帳戶。
+   - 訂用帳戶：選取要為您的中樞使用的訂用帳戶。
 
-   - **資源群組**：選取資源群組或建立新的資源群組。 若要建立新的資源群組，選取 [新建]  並填入您要使用的名稱。 若要使用現有資源群組，請選取該資源群組。 如需詳細資訊，請參閱[管理 Azure Resource Manager 資源群組](/azure/azure-resource-manager/management/manage-resource-groups-portal)。
+   - **資源群組**：選取資源群組或建立新的資源群組。 若要建立新的資源群組，選取 [新建] 並填入您要使用的名稱。 若要使用現有資源群組，請選取該資源群組。 如需詳細資訊，請參閱[管理 Azure Resource Manager 資源群組](/azure/azure-resource-manager/management/manage-resource-groups-portal)。
 
    - **區域**：選取您要放置中樞的區域。 選取最靠近您的位置。 某些功能 (例如 [IoT 中樞裝置串流](/azure/iot-hub/iot-hub-device-streams-overview)) 僅適用於特定區域。 針對這些有限的功能，您必須選取其中一個支援的區域。
 
@@ -37,7 +37,7 @@ ms.locfileid: "82109680"
 
    ![在 Azure 入口網站中建立中樞](./media/iot-hub-include-create-hub/iot-hub-create-screen-basics.png)
 
-1. 完成時，選取 [下一步:  大小與級別] 繼續建立中樞。
+1. 完成時，選取 [下一步:大小與級別] 繼續建立中樞。
 
    ![使用 Azure 入口網站設定新中樞的大小與級別](./media/iot-hub-include-create-hub/iot-hub-create-screen-size-scale.png)
 
@@ -60,8 +60,8 @@ ms.locfileid: "82109680"
 
     ![使用 Azure 入口網站為中樞指派標籤](./media/iot-hub-include-create-hub/iot-hub-create-tabs.png)
 
-1.  完成時，選取 [下一步:  檢閱 + 建立] 以檢閱您的選擇。 您會看到類似此畫面的內容，但使用您在建立中樞時所選取的值。 
+1.  完成時，選取 [下一步:檢閱 + 建立] 以檢閱您的選擇。 您會看到類似此畫面的內容，但使用您在建立中樞時所選取的值。 
 
     ![檢閱有關建立新中樞的資訊](./media/iot-hub-include-create-hub/iot-hub-create-review.png)
 
-1.  選取 [建立]  以建立新的中樞。 建立中樞需要幾分鐘的時間。
+1.  選取 [建立] 以建立新的中樞。 建立中樞需要幾分鐘的時間。

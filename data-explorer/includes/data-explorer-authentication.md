@@ -13,4 +13,4 @@ ms.locfileid: "81495311"
 ---
 ## <a name="authentication"></a>驗證
 
-要運行以下範例,需要一個可以存取資源的 Azure 活動目錄 (Azure AD) 應用程式和服務主體。 要建立免費的 Azure AD 應用程式並在訂閱等級新增角色分配,請參閱[建立 Azure AD 應用程式](/azure/active-directory/develop/howto-create-service-principal-portal)。 您還需要目錄(租戶)ID、應用程式 ID 和用戶端密鑰。
+若要執行下列範例，您需要 Azure Active Directory (Azure AD 可存取資源的) 應用程式和服務主體。 若要建立免費 Azure AD 應用程式，並在訂用帳戶層級新增角色指派，請參閱[建立 Azure AD 應用程式](/azure/active-directory/develop/howto-create-service-principal-portal)。 您也需要 (租使用者的目錄) 識別碼、應用程式識別碼和用戶端密碼。

@@ -11,6 +11,6 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 04/15/2020
 ms.locfileid: "81497066"
 ---
-## <a name="install-c-nuget"></a>安裝 C# NuGet
+## <a name="install-c-nuget"></a>安裝 c # NuGet
 
-* 安裝[Microsoft. Azure.管理.Kusto NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
+* 請安裝[Kusto NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。

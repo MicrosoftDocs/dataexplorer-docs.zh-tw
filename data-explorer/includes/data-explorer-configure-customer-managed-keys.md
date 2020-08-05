@@ -11,7 +11,7 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 05/13/2020
 ms.locfileid: "83383858"
 ---
-Azure 資料總管會加密待用儲存體帳戶中的所有資料。 根據預設，資料會使用 Microsoft 管理的金鑰進行加密。 若要進一步控制加密金鑰，您可以提供客戶管理的金鑰以用於資料加密。 
+Azure 資料總管會加密待用儲存體帳戶中的所有資料。 根據預設，資料是以使用 Microsoft 管理的金鑰加密。 若要進一步控制加密金鑰，您可以提供客戶管理的金鑰以用於資料加密。 
 
 客戶管理的金鑰必須儲存在[Azure Key Vault](/azure/key-vault/key-vault-overview)中。 您可以建立自己的金鑰，並將其儲存在金鑰保存庫中，或者您可以使用 Azure Key Vault API 來產生金鑰。 Azure 資料總管叢集和金鑰保存庫必須位於相同的區域中，但它們可以位於不同的訂用帳戶中。 如需客戶管理之金鑰的詳細說明，請參閱[客戶管理的金鑰與 Azure Key Vault](/azure/storage/common/storage-service-encryption)。 
 
