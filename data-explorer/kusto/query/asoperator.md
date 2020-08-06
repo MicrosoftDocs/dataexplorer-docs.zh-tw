@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f9d7a60b3c39fb0b7357c2bbe68533252f794347
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 857a48ab02ae04e68a8475b7109cebbb2275ca55
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349477"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803296"
 ---
 # <a name="as-operator"></a>as 運算子
 
@@ -27,13 +27,11 @@ ms.locfileid: "87349477"
 
 * *T*：表格式運算式。
 * *名稱*：表格式運算式的暫存名稱。
-* `hint.materialized`：如果設定為 `true` ，則會具體化表格式運算式的值，如同[具體化（）](./materializefunction.md)函式呼叫所包裝的。
+* `hint.materialized`：如果設定為 `true` ，則會具體化表格式運算式的值，如同[具體化 ( # B1](./materializefunction.md)函式呼叫所包裝的。
 
-**備註**
-
-* 提供的名稱 `as` 將用於 union 的資料 `withsource=` 行、尋找[union](./unionoperator.md)的資料行 `source_` ，以及[find](./findoperator.md) `$table` [搜尋](./searchoperator.md)的資料行。
-
-* 使用[聯結](./joinoperator.md)的外部表格式輸入（）中的運算子所命名的表格式運算式， `$left` 也可以用於聯結的表格式內部輸入（ `$right` ）。
+> [!NOTE]
+> * 提供的名稱 `as` 將用於 union 的資料 `withsource=` 行、尋找[union](./unionoperator.md)的資料行 `source_` ，以及[find](./findoperator.md) `$table` [搜尋](./searchoperator.md)的資料行。
+> * 在[聯結](./joinoperator.md)的外部表格式輸入中使用運算子命名的表格式運算式 (`$left`) 也可以用於聯結的表格式內部輸入 (`$right`) 。
 
 ## <a name="examples"></a>範例
 

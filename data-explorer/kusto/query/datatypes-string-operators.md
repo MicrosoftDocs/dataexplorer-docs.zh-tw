@@ -8,53 +8,78 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6718ad614166d5328dcd412d09405c1db8cc14dc
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 0c8e9b3397026c572d27c250fc4e817bd5f7f265
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85265077"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803670"
 ---
 # <a name="string-operators"></a>字串運算子
 
-下表摘要說明字串上的運算子：
+Kusto 提供各種查詢運算子來搜尋字串資料類型。 下列文章說明如何編制字串詞彙的索引、列出字串查詢運算子，並提供優化效能的秘訣。
+
+## <a name="understanding-string-terms"></a>瞭解字串詞彙
+
+Kusto 會為所有資料行編制索引，包括類型的資料行 `string` 。 視實際資料而定，會針對這類資料行建立多個索引。 這些索引不會直接公開，而是用於具有 `string` 做為其名稱一部分之運算子的查詢中， `has` 例如 `has` 、 `!has` 、 `hasprefix` 、 `!hasprefix` 。 這些運算子的語義取決於資料行的編碼方式。 這些運算子會比對*詞彙*，而不是執行「純」子字串相符。
+
+### <a name="what-is-a-term"></a>什麼是詞彙？ 
+
+根據預設，每個 `string` 值會細分成 ASCII 英數位元的最大序列，而每個序列都會變成一個詞彙。
+例如，在下列中， `string` 這些詞彙是 `Kusto` 、 `WilliamGates3rd` 和下列子字串： `ad67d136` 、 `c1db` 、 `4f9f` 、 `88ef` 、 `d94f3b6b0b5a` 。
+
+```
+Kusto:  ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
+```
+
+Kusto 會建立一個詞彙索引，其中包含*四個字元或更多*的詞彙，而此索引會由 `has` 、 `!has` 和使用。 如果查詢尋找的字詞小於四個字元，或使用 `contains` 運算子，則 Kusto 會在無法判斷相符的情況下，還原成掃描資料行中的值。 這個方法比查閱詞彙索引中的詞彙慢很多。
+
+## <a name="operators-on-strings"></a>字串上的運算子
+
+> [!NOTE]
+> 下表使用下列縮寫：
+> * RHS = 運算式的右手邊
+> * LHS = 運算式的左側
 
 運算子        |描述                                                       |區分大小寫|範例 (結果為 `true`)
 ----------------|------------------------------------------------------------------|--------------|-----------------------
-`==`            |Equals                                                            |Yes           |`"aBc" == "aBc"`
-`!=`            |不等於                                                        |Yes           |`"abc" != "ABC"`
-`=~`            |Equals                                                            |No            |`"abc" =~ "ABC"`
-`!~`            |不等於                                                        |No            |`"aBc" !~ "xyz"`
-`has`           |右側 (RHS) 是左側 (LHS) 中的完整詞彙     |No            |`"North America" has "america"`
-`!has`          |RHS 不是 LHS 中的完整詞彙                                     |No            |`"North America" !has "amer"` 
-`has_cs`        |右側 (RHS) 是左側 (LHS) 中的完整詞彙     |Yes           |`"North America" has_cs "America"`
-`!has_cs`       |RHS 不是 LHS 中的完整詞彙                                     |Yes           |`"North America" !has_cs "amer"` 
-`hasprefix`     |RHS 是 LHS 中的詞彙前置詞                                       |No            |`"North America" hasprefix "ame"`
-`!hasprefix`    |RHS 不是 LHS 中的詞彙前置詞                                   |No            |`"North America" !hasprefix "mer"` 
-`hasprefix_cs`  |RHS 是 LHS 中的詞彙前置詞                                       |Yes           |`"North America" hasprefix_cs "Ame"`
-`!hasprefix_cs` |RHS 不是 LHS 中的詞彙前置詞                                   |Yes           |`"North America" !hasprefix_cs "CA"` 
-`hassuffix`     |RHS 是 LHS 中的字詞尾碼                                       |No            |`"North America" hassuffix "ica"`
-`!hassuffix`    |RHS 不是 LHS 中的字詞尾碼                                   |No            |`"North America" !hassuffix "americ"`
-`hassuffix_cs`  |RHS 是 LHS 中的字詞尾碼                                       |Yes           |`"North America" hassuffix_cs "ica"`
-`!hassuffix_cs` |RHS 不是 LHS 中的字詞尾碼                                   |Yes           |`"North America" !hassuffix_cs "icA"`
-`contains`      |RHS 作為 LHS 的子序列發生                                |No            |`"FabriKam" contains "BRik"`
-`!contains`     |RHS 未在 LHS 中發生                                         |No            |`"Fabrikam" !contains "xyz"`
-`contains_cs`   |RHS 作為 LHS 的子序列發生                                |Yes           |`"FabriKam" contains_cs "Kam"`
-`!contains_cs`  |RHS 未在 LHS 中發生                                         |Yes           |`"Fabrikam" !contains_cs "Kam"`
-`startswith`    |RHS 是 LHS 的起始子序列                              |No            |`"Fabrikam" startswith "fab"`
-`!startswith`   |RHS 不是 LHS 的起始子序列                          |No            |`"Fabrikam" !startswith "kam"`
-`startswith_cs` |RHS 是 LHS 的起始子序列                              |Yes           |`"Fabrikam" startswith_cs "Fab"`
-`!startswith_cs`|RHS 不是 LHS 的起始子序列                          |Yes           |`"Fabrikam" !startswith_cs "fab"`
-`endswith`      |RHS 是 LHS 的右子序列                               |No            |`"Fabrikam" endswith "Kam"`
-`!endswith`     |RHS 不是 LHS 的右子序列                           |No            |`"Fabrikam" !endswith "brik"`
-`endswith_cs`   |RHS 是 LHS 的右子序列                               |Yes           |`"Fabrikam" endswith "Kam"`
-`!endswith_cs`  |RHS 不是 LHS 的右子序列                           |Yes           |`"Fabrikam" !endswith "brik"`
-`matches regex` |LHS 包含 RHS 的相符項目                                      |Yes           |`"Fabrikam" matches regex "b.*k"`
-`in`            |等於其中一個元素                                     |Yes           |`"abc" in ("123", "345", "abc")`
-`!in`           |不等於任何元素                                 |Yes           |`"bca" !in ("123", "345", "abc")`
-`in~`           |等於其中一個元素                                     |No            |`"abc" in~ ("123", "345", "ABC")`
-`!in~`          |不等於任何元素                                 |No            |`"bca" !in~ ("123", "345", "ABC")`
-`has_any`       |與相同， `has` 但適用于任何元素                    |No            |`"North America" has_any("south", "north")`
+`==`            |Equals                                                            |是           |`"aBc" == "aBc"`
+`!=`            |不等於                                                        |是           |`"abc" != "ABC"`
+`=~`            |Equals                                                            |否            |`"abc" =~ "ABC"`
+`!~`            |不等於                                                        |否            |`"aBc" !~ "xyz"`
+`has`           |右側 (RHS) 是左側 (LHS) 中的完整詞彙     |否            |`"North America" has "america"`
+`!has`          |RHS 不是 LHS 中的完整詞彙                                     |否            |`"North America" !has "amer"` 
+`has_cs`        |RHS 是 LHS 中的完整詞彙                                        |是           |`"North America" has_cs "America"`
+`!has_cs`       |RHS 不是 LHS 中的完整詞彙                                     |是           |`"North America" !has_cs "amer"` 
+`hasprefix`     |RHS 是 LHS 中的詞彙前置詞                                       |否            |`"North America" hasprefix "ame"`
+`!hasprefix`    |RHS 不是 LHS 中的詞彙前置詞                                   |否            |`"North America" !hasprefix "mer"` 
+`hasprefix_cs`  |RHS 是 LHS 中的詞彙前置詞                                       |是           |`"North America" hasprefix_cs "Ame"`
+`!hasprefix_cs` |RHS 不是 LHS 中的詞彙前置詞                                   |是           |`"North America" !hasprefix_cs "CA"` 
+`hassuffix`     |RHS 是 LHS 中的字詞尾碼                                       |否            |`"North America" hassuffix "ica"`
+`!hassuffix`    |RHS 不是 LHS 中的字詞尾碼                                   |否            |`"North America" !hassuffix "americ"`
+`hassuffix_cs`  |RHS 是 LHS 中的字詞尾碼                                       |是           |`"North America" hassuffix_cs "ica"`
+`!hassuffix_cs` |RHS 不是 LHS 中的字詞尾碼                                   |是           |`"North America" !hassuffix_cs "icA"`
+`contains`      |RHS 作為 LHS 的子序列發生                                |否            |`"FabriKam" contains "BRik"`
+`!contains`     |RHS 未在 LHS 中發生                                         |否            |`"Fabrikam" !contains "xyz"`
+`contains_cs`   |RHS 作為 LHS 的子序列發生                                |是           |`"FabriKam" contains_cs "Kam"`
+`!contains_cs`  |RHS 未在 LHS 中發生                                         |是           |`"Fabrikam" !contains_cs "Kam"`
+`startswith`    |RHS 是 LHS 的起始子序列                              |否            |`"Fabrikam" startswith "fab"`
+`!startswith`   |RHS 不是 LHS 的起始子序列                          |否            |`"Fabrikam" !startswith "kam"`
+`startswith_cs` |RHS 是 LHS 的起始子序列                              |是           |`"Fabrikam" startswith_cs "Fab"`
+`!startswith_cs`|RHS 不是 LHS 的起始子序列                          |是           |`"Fabrikam" !startswith_cs "fab"`
+`endswith`      |RHS 是 LHS 的右子序列                               |否            |`"Fabrikam" endswith "Kam"`
+`!endswith`     |RHS 不是 LHS 的右子序列                           |否            |`"Fabrikam" !endswith "brik"`
+`endswith_cs`   |RHS 是 LHS 的右子序列                               |是           |`"Fabrikam" endswith "Kam"`
+`!endswith_cs`  |RHS 不是 LHS 的右子序列                           |是           |`"Fabrikam" !endswith "brik"`
+`matches regex` |LHS 包含 RHS 的相符項目                                      |是           |`"Fabrikam" matches regex "b.*k"`
+`in`            |等於其中一個元素                                     |是           |`"abc" in ("123", "345", "abc")`
+`!in`           |不等於任何元素                                 |是           |`"bca" !in ("123", "345", "abc")`
+`in~`           |等於其中一個元素                                     |否            |`"abc" in~ ("123", "345", "ABC")`
+`!in~`          |不等於任何元素                                 |否            |`"bca" !in~ ("123", "345", "ABC")`
+`has_any`       |與相同， `has` 但適用于任何元素                    |否            |`"North America" has_any("south", "north")`
+
+> [!TIP]
+> 包含 `has` 搜尋四個或更多字元的索引*詞彙*，而不是子字串相符專案的所有運算子。 將字串細分成 ASCII 英數位元的序列，就會建立一個詞彙。 請參閱[瞭解字串詞彙](#understanding-string-terms)。
 
 ## <a name="performance-tips"></a>效能秘訣
 
@@ -74,20 +99,3 @@ ms.locfileid: "85265077"
 EventLog | where continent has "North" | count;
 EventLog | where continent contains "nor" | count
 ```
-
-## <a name="understanding-string-terms"></a>瞭解字串詞彙
-
-根據預設，Kusto 會為所有資料行編制索引，包括類型的資料行 `string` 。
-視實際資料而定，會針對這類資料行建立多個索引。 這些索引不會直接公開（除了其對查詢效能的正面影響以外），但 `string` 包含在 `has` 其名稱中的運算子（例如 `has` 、 `!has` 、 `hasprefix` 、 `!hasprefix` ）除外。
-這些運算子是特殊的，因為它們的語義是由資料行的編碼方式所決定。 這些運算子會比對**詞彙**，而不是執行「純」子字串相符。
-
-若要瞭解以詞彙為基礎的相符，您必須先瞭解什麼是詞彙。 根據預設，每個 `string` 值會細分成 ASCII 英數位元的最大序列，而每個序列都會變成一個詞彙。
-
-例如，在下列中， `string` 這些詞彙是 `Kusto` 、 `WilliamGates3rd` 和下列子字串： `ad67d136` 、 `c1db` 、 `4f9f` 、 `88ef` 、 `d94f3b6b0b5a` 。
-
-```
-Kusto:  ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
-```
-
-根據預設，Kusto 會建立一個詞彙索引，其中包含**四個字元或更多**的所有詞彙，而且 `has` `!has` 當查閱的字詞也是四個字元或更多時，會使用這個索引，依此類推。
-如果查詢尋找的字詞小於四個字元，或使用 `contains` 運算子，則 Kusto 會在無法判斷相符的情況下，還原成掃描資料行中的值。 這個方法比查閱詞彙索引中的詞彙慢很多。

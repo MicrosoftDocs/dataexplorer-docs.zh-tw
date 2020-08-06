@@ -1,6 +1,6 @@
 ---
-title: dcount （）（彙總函式）-Azure 資料總管
-description: 本文描述 Azure 資料總管中的 dcount （）（彙總函式）。
+title: 'dcount ( # A1 (彙總函式) -Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 dcount ( # A1 (彙總函式) 。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,19 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2fc8ee7e8c7ab3ce372d786ec87edf55265e1249
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 45ab913fdc659444ac578ca725e2afb24256a38b
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348440"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803704"
 ---
-# <a name="dcount-aggregation-function"></a>dcount （）（彙總函式）
+# <a name="dcount-aggregation-function"></a>dcount ( # A1 (彙總函式) 
 
 傳回摘要群組中純量運算式所使用之相異值數目的估計。
+
+> [!NOTE]
+> `dcount()`彙總函式主要適用于估計大型集合的基數。 它會針對精確度來交易效能，而且可能會傳回不同執行之間的結果。 輸入的順序可能會影響其輸出。
 
 ## <a name="syntax"></a>語法
 
@@ -40,10 +43,6 @@ PageViewLog | summarize countries=dcount(country) by continent
 
 :::image type="content" source="images/dcount-aggfunction/dcount.png" alt-text="D 計數":::
 
-**備註**
-
-`dcount()`彙總函式主要適用于估計大型集合的基數。 它會針對精確度來交易效能，而且可能會傳回不同執行之間的結果。 輸入的順序可能會影響其輸出。
-
 取得分組依據之相異值的確切計數 `V` `G` 。
 
 ```kusto
@@ -60,9 +59,9 @@ T | summarize dcount(B) by G | count
 
 ## <a name="estimation-accuracy"></a>估計精確度
 
-`dcount()`彙總函式會使用[HYPERLOGLOG （HLL）演算法](https://en.wikipedia.org/wiki/HyperLogLog)的變體，它會對設定的基數進行隨機估計。 此演算法提供「旋鈕」，可用來平衡每個記憶體大小的精確度和執行時間：
+`dcount()`彙總函式會使用[HYPERLOGLOG (HLL) 演算法](https://en.wikipedia.org/wiki/HyperLogLog)的變體，它會對設定的基數進行隨機估計。 此演算法提供「旋鈕」，可用來平衡每個記憶體大小的精確度和執行時間：
 
-|精確度|錯誤（%）|專案計數   |
+|精確度|錯誤 (% ) |專案計數   |
 |--------|---------|--------------|
 |       0|      1.6|2<sup>12</sup>|
 |       1|      0.8|2<sup>14</sup>|
@@ -73,11 +72,11 @@ T | summarize dcount(B) by G | count
 > [!NOTE]
 > 「專案計數」資料行是 HLL 執行中的1個位元組計數器數目。
 
-如果設定的基數夠小，此演算法就會包含一些執行最佳計數（零錯誤）的規定。
+如果設定的基數夠小，此演算法就會包含一些執行最佳計數的規定 (零錯誤) 。
 * 當精確度層級為時 `1` ，會傳回1000值
 * 當精確度層級為時 `2` ，會傳回8000值
 
-所系結的錯誤是概率，而不是理論上的界限。 值是錯誤分佈的標準差（sigma），而99.7% 的估計將會在 3 x sigma 之下具有相對錯誤。
+所系結的錯誤是概率，而不是理論上的界限。 值是 (sigma) 的錯誤散發標準差，而99.7% 的估計將會有 3 x sigma 之下的相對錯誤。
 
 下圖顯示所有支援的精確度設定之相對估計錯誤的機率分佈函數（以百分比表示）：
 

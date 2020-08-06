@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d2f9db1dbace646c41d8751272cf44cf6d04c2c3
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: ed7f6f69669cd580482beb2d3debd0e5c45bf54b
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346128"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803143"
 ---
 # <a name="pivot-plugin"></a>pivot 外掛程式
 
@@ -23,6 +23,9 @@ ms.locfileid: "87346128"
 T | evaluate pivot(PivotColumn)
 ```
 
+> [!NOTE]
+> 外掛程式的輸出架構 `pivot` 是以資料為基礎，因此查詢可能會針對兩個執行產生不同的架構。 這也表示參考解壓縮資料行的查詢可能會在任何時間變成「已中斷」。 基於這個理由，建議您不要將此外掛程式用於自動化作業。
+
 ## <a name="syntax"></a>語法
 
 `T | evaluate pivot(`*pivotColumn* `[, `*aggregationFunction* `] [,`*column1* `[,`*column2* .。。`]])`
@@ -30,16 +33,12 @@ T | evaluate pivot(PivotColumn)
 ## <a name="arguments"></a>引數
 
 * *pivotColumn*：要旋轉的資料行。 此資料行中的每個唯一值都是輸出資料表中的資料行。
-* *彙總函式*：（選擇性）將輸入資料表中的多個資料列匯總到輸出資料表中的單一資料列。 目前支援的函式：、、、、、、、、、、、 `min()` `max()` `any()` `sum()` `dcount()` `avg()` `stdev()` `variance()` `make_list()` `make_bag()` `make_set()` `count()` （預設值為 `count()` ）。
-* *column1*、 *column2*、...：（選擇性）資料行名稱。 輸出資料表會在每個指定的資料行中包含一個額外的資料行。 預設值： [已切換] 資料行和 [匯總] 資料行以外的所有資料行。
+* *彙總函式*： (選擇性) 將輸入資料表中的多個資料列匯總到輸出資料表中的單一資料列。 目前支援的函式： `min()` 、、、、、、、、、、 `max()` `any()` `sum()` `dcount()` `avg()` `stdev()` `variance()` `make_list()` `make_bag()` `make_set()` `count()` (預設值是 `count()`) 。
+* *column1*、 *column2*、...： (選擇性) 資料行名稱。 輸出資料表會在每個指定的資料行中包含一個額外的資料行。 預設值： [已切換] 資料行和 [匯總] 資料行以外的所有資料行。
 
 ## <a name="returns"></a>傳回
 
-Pivot 會傳回具有指定之資料行的旋轉資料表（*column1*、 *column2*、...）加上 pivot 資料行的所有唯一值。 切換資料行的每個資料格都會包含彙總函式計算。
-
-**注意**
-
-外掛程式的輸出架構 `pivot` 是以資料為基礎，因此查詢可能會針對兩個執行產生不同的架構。 這也表示參考解壓縮資料行的查詢可能會在任何時間變成「已中斷」。 基於這個理由，建議您不要將此外掛程式用於自動化作業。
+Pivot 會傳回具有指定之資料行的旋轉資料表 (*column1*、 *column2*、... ) 加上 pivot 資料行的所有唯一值。 切換資料行的每個資料格都會包含彙總函式計算。
 
 ## <a name="examples"></a>範例
 
@@ -64,7 +63,7 @@ StormEvents
 |強式風|22|0|
 
 
-### <a name="pivot-by-a-column-with-aggregation-function"></a>依據具有彙總函式的資料行進行 Pivot。
+### <a name="pivot-by-a-column-with-aggregation-function"></a>依據具有彙總函式的資料行進行 Pivot
 
 針對每個具有開頭為 ' AR ' 的事件數和狀態，顯示直接裝死的總數。
 
@@ -87,7 +86,7 @@ StormEvents
 |熱度|3|0|
 
 
-### <a name="pivot-by-a-column-with-aggregation-function-and-a-single-additional-column"></a>依據具有彙總函式和單一額外資料行的資料行來進行 Pivot。
+### <a name="pivot-by-a-column-with-aggregation-function-and-a-single-additional-column"></a>依據具有彙總函式和單一額外資料行的資料行進行 Pivot
 
 結果與上一個範例相同。
 
@@ -110,7 +109,7 @@ StormEvents
 |熱度|3|0|
 
 
-### <a name="specify-the-pivoted-column-aggregation-function-and-multiple-additional-columns"></a>指定 [已切換資料行]、[彙總函式] 和多個其他資料行。
+### <a name="specify-the-pivoted-column-aggregation-function-and-multiple-additional-columns"></a>指定切換資料行、彙總函式和多個其他資料行
 
 針對每個事件種類 [來源] 和 [狀態]，加總直接裝死的數目。
 

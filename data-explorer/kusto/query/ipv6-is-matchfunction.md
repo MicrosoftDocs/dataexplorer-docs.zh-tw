@@ -1,6 +1,6 @@
 ---
-title: ipv6_is_match （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 ipv6_is_match （）函數。
+title: 'ipv6_is_match ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 ipv6_is_match ( # A1 函數。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: b6d76f8ed834ec40c53321644e5cd9b7f5f93168
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: d03e28c0f7df404d6bee81f7f749aab361cc45b9
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347301"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803874"
 ---
 # <a name="ipv6_is_match"></a>ipv6_is_match()
 
@@ -27,6 +27,9 @@ ipv6_is_match('fe80::85d:e82c:9446:7994/127', 'fe80::85d:e82c:9446:7995/127') ==
 ipv6_is_match('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == true
 ```
 
+> [!NOTE]
+> 函式可以接受並比較代表 IPv6 和 IPv4 網路位址的引數。 如果呼叫者知道引數為 IPv4 格式，請使用[ipv4_is_match ( # B1](./ipv4-is-matchfunction.md)函數。 此函式會產生較佳的執行時間效能。
+
 ## <a name="syntax"></a>語法
 
 `ipv6_is_match(`*運算式 1* `, `*運算式 2* `[ ,`*PrefixMask*`])`
@@ -38,20 +41,16 @@ ipv6_is_match('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == tr
 
 ## <a name="ip-prefix-notation"></a>IP 首碼標記法
  
-您可以 `IP-prefix notation` 使用斜線（）字元來定義 IP 位址 `/` 。
-斜線（）左邊的 IP 位址 `/` 是基底 ip 位址。 斜線（）右邊的數位（1到127） `/` 是網路遮罩中連續1位的數目。 
+您可以 `IP-prefix notation` 使用斜線 () 字元來定義 IP 位址 `/` 。
+斜線 (左邊的 IP 位址 `/`) 是基底 IP 位址。 斜線 (右邊 (1 到 127) 的數位， `/`) 是網路遮罩中連續1位的數目。 
 
-## <a name="example"></a>範例：
-fe80：：85d： e82c：9446： 7994/120 將會有相關聯的 net/subnetmask，其中包含120的連續位。
+例如，fe80：：85d： e82c：9446： 7994/120 將會有相關聯的 net/subnetmask，其中包含120的連續位。
 
 ## <a name="returns"></a>傳回
 
 * `true`：如果第一個 IPv6/IPv4 字串引數的長標記法等於第二個 IPv6/IPv4 字串引數。
 * `false`別的.
 * `null`：如果兩個 IPv6/IPv4 字串其中之一的轉換不成功，則為。
-
-> [!Note]
-> 函式可以接受並比較代表 IPv6 和 IPv4 網路位址的引數。 如果呼叫者知道引數為 IPv4 格式，請使用[ipv4_is_match （）](./ipv4-is-matchfunction.md)函數。 此函式會產生較佳的執行時間效能。
 
 ## <a name="examples"></a>範例
 

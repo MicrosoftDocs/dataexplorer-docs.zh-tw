@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9321f30d2643f6e398d73cf7960490708626f723
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: b0a71f9db9062d83f55ebf9db1efabb6d86f9786
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348355"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803279"
 ---
 # <a name="diffpatterns_text-plugin"></a>diffpatterns_text 外掛程式
 
@@ -23,13 +23,15 @@ ms.locfileid: "87348355"
 T | evaluate diffpatterns_text(TextColumn, BooleanCondition)
 ```
 
-`diffpatterns_text`會傳回一組文字模式，以在兩個集合中捕捉資料的不同部分（也就是當條件為時，會捕捉大量百分比的資料列 `true` ，而當條件為時，則會使用較低百分比的資料列 `false` ）。 這些模式是以連續標記（以空白字元分隔）來建立，其中包含來自文字資料行的 token，或 `*` 代表萬用字元。 每個模式會以結果中的一個資料列表示。
+`diffpatterns_text`會傳回一組文字模式，以在兩個集合中捕捉資料的不同部分 (也就是當條件為時，會以一種模式來捕捉大量百分比的資料列 `true` ，而當條件為) 時，則是資料列的百分比偏低 `false` 。 這些模式是從連續的 token 建立而成， (以空白字元分隔) 、文字資料行中的標記，或是 `*` 代表萬用字元的。 每個模式會以結果中的一個資料列表示。
 
 ## <a name="syntax"></a>語法
 
 `T | evaluate diffpatterns_text(`TextColumn，BooleanCondition [，MinTokens，閾值，MaxTokens]`)` 
 
-**必要的引數**
+## <a name="arguments"></a>引數
+
+### <a name="required-arguments"></a>必要的引數
 
 * TextColumn- *column_name*
 
@@ -37,9 +39,9 @@ T | evaluate diffpatterns_text(TextColumn, BooleanCondition)
     
 * BooleanCondition-*布林運算式*
 
-    定義如何產生要與輸入資料表比較的兩個記錄子集。 演算法會根據條件將查詢分割成兩個資料集 "True" 和 "False"，然後分析兩者之間的（文字）差異。 
+    定義如何產生要與輸入資料表比較的兩個記錄子集。 演算法會根據條件將查詢分割成兩個資料集 "True" 和 "False"，然後分析 (的文字) 兩者之間的差異。 
 
-**選擇性引數**
+### <a name="optional-arguments"></a>選擇性引數
 
 所有其他引數皆為選用，但必須為下列順序。 
 
@@ -49,11 +51,11 @@ T | evaluate diffpatterns_text(TextColumn, BooleanCondition)
 
 * 閾值-0.015 < *double* < 1 [預設值： 0.05]
 
-    設定兩個集合之間的最小模式（比率）差異（請參閱[diffpatterns](diffpatternsplugin.md)）。
+    設定兩個集合之間) 差異的最小模式 (比例 (參閱[diffpatterns](diffpatternsplugin.md)) 。
 
 * MaxTokens-0 < *int* [預設值： 20]
 
-    設定每個結果模式的最大標記數目（從一開始），指定較低的限制會減少查詢執行時間。
+    設定從每個結果模式開始)  (的最大權杖數目，指定較低的限制會減少查詢執行時間。
 
 ## <a name="returns"></a>傳回
 
@@ -86,4 +88,3 @@ StormEvents
 |0|42|0|7.71|* * * * * * * * * * * * * * * * * * * * * * * 在西歐。 *|
 |0|45|0|8.26|* * 低於正常 *|
 |0|110|0|20.18|低於一般 *|
-

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: debd0a83f4c27fa05415805404ad450bab1d3ca1
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0a94b4f0e274d01a15edd06cbb725547e65d8381
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347369"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803942"
 ---
 # <a name="invoke-operator"></a>invoke 運算子
 
@@ -23,6 +23,9 @@ ms.locfileid: "87347369"
 T | invoke foo(param1, param2)
 ```
 
+> [!NOTE]
+> 如需如何宣告可接受表格式引數之 lambda 運算式的詳細資訊，請參閱[let 語句](./letstatement.md)。
+ 
 ## <a name="syntax"></a>語法
 
 `T | invoke`函式*function* `(`[*param1* `,`*param2*]`)`
@@ -36,10 +39,6 @@ T | invoke foo(param1, param2)
 ## <a name="returns"></a>傳回
 
 傳回已評估運算式的結果。
-
-**備註**
-
-如需詳細資訊，請參閱[let 語句](./letstatement.md)，以瞭解如何宣告可以接受表格式引數的 lambda 運算式。
 
 ## <a name="example"></a>範例
 

@@ -10,20 +10,22 @@ ms.topic: reference
 ms.date: 02/24/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: e412c1ec4f08af9820018f4c8dc172bd8c748a7f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: e4752828b3e4b145026f7ee47a1ade3f8685262e
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350973"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803466"
 ---
 # <a name="sql_request-plugin"></a>sql_request 外掛程式
 
 ::: zone pivot="azuredataexplorer"
 
-  `evaluate``sql_request` `(` *ConnectionString* `,` *SqlQuery* [ `,` *SqlParameters* [ `,` *Options*]]`)`
-
 `sql_request`外掛程式會將 SQL 查詢傳送至 SQL Server 網路端點，並傳回結果中的第一個資料列集。
+
+## <a name="syntax"></a>語法
+
+  `evaluate``sql_request` `(` *ConnectionString* `,` *SqlQuery* [ `,` *SqlParameters* [ `,` *Options*]]`)`
 
 ## <a name="arguments"></a>引數
 
@@ -66,7 +68,7 @@ evaluate sql_request(
 ```
 
 下列範例會將 SQL 查詢傳送至 Azure SQL DB 資料庫，以從接收所有記錄 `[dbo].[Table]` ，同時附加另一個資料 `datetime` 行，然後在 Kusto 端處理結果。
-它會指定 `@param0` 要在 SQL 查詢中使用的 sql 參數（）。
+它會指定 `@param0` 要在 SQL 查詢中使用 () 的 sql 參數。
 
 ```kusto
 evaluate sql_request(

@@ -1,6 +1,6 @@
 ---
-title: parse_version （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 parse_version （）。
+title: 'parse_version ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 parse_version ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ae5268a4a062a6f45adb715650028d952cb89e0b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 57ef9eef8f4df5564adc70ed6dd965329fa1807a
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346383"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87804044"
 ---
 # <a name="parse_version"></a>parse_version()
 
@@ -31,20 +31,18 @@ parse_version("0.0.0.1")
 
 * *`Expr`*：類型的純量運算式 `string` ，指定要剖析的版本。
 
+> [!NOTE]
+> * 輸入字串必須包含一到四個版本元件，以數位表示，並以句點分隔 ( ' '。) 。
+> * 版本的每個部分最多可包含八位數，最大值為99999999。
+> * 如果部分數目小於四個，所有遺漏的部分都會被視為尾端 (`1.0`  ==  `1.0.0.0`) 。
+
 ## <a name="returns"></a>傳回
 
 如果轉換成功，則結果會是十進位。
 如果轉換不成功，則結果會是 `null` 。
 
-**備註**
-
-輸入字串必須包含一到四個版本元件，以數位表示，並以句點（'. '）分隔。
-
-版本的每個部分最多可包含八位數，最大值為99999999。
-
-如果部分數目小於四個，所有遺漏的部分都會被視為尾端（ `1.0`  ==  `1.0.0.0` ）。
-
 ## <a name="example"></a>範例
+
 ```kusto
 let dt = datatable(v:string)
 ["0.0.0.5","0.0.7.0","0.0.3","0.2","0.1.2.0","1.2.3.4","1","99999999.0.0.0"];

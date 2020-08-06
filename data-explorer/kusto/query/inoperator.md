@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: ab2132908dad26f5f21cf945a1af4af1b8a049cd
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a6551ee2d4ac01d6d896cc8daff466f3c4a7852e
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347386"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803959"
 ---
 # <a name="in-and-in-operators"></a>in 和 !in 運算子
 
@@ -23,9 +23,15 @@ ms.locfileid: "87347386"
 Table1 | where col in ('value1', 'value2')
 ```
 
+> [!NOTE]
+> * 將 ' ~ ' 新增至運算子會使值的搜尋不區分大小寫： `x in~ (expression)` 或 `x !in~ (expression)` 。
+> * 在表格式運算式中，會選取結果集的第一個資料行。
+> * 運算式清單可產生最多個 `1,000,000` 值。
+> * 嵌套的陣列會壓平合併成單一的值清單。 例如，`x in (dynamic([1,[2,3]]))` 會成為 `x in (1,2,3)`。
+ 
 ## <a name="syntax"></a>語法
 
-*區分大小寫的語法：*
+### <a name="case-sensitive-syntax"></a>區分大小寫的語法
 
 *T*純 `|` `where` *col* `in` `(` *量運算式的*T 欄清單`)`   
 *T* `|` `where` *欄* `in` `(` *表格式運算式*`)`   
@@ -33,7 +39,7 @@ Table1 | where col in ('value1', 'value2')
 *T*純 `|` `where` *col* `!in` `(` *量運算式的*T 欄清單`)`  
 *T* `|` `where` *欄* `!in` `(` *表格式運算式*`)`   
 
-*不區分大小寫的語法：*
+### <a name="case-insensitive-syntax"></a>不區分大小寫語法
 
 *T*純 `|` `where` *col* `in~` `(` *量運算式的*T 欄清單`)`   
 *T* `|` `where` *欄* `in~` `(` *表格式運算式*`)`   
@@ -52,16 +58,9 @@ Table1 | where col in ('value1', 'value2')
 
 述詞為之*T*中的資料列 `true` 。
 
-**備註**
+## <a name="examples"></a>範例  
 
-* 運算式清單可產生最多個 `1,000,000` 值。
-* 嵌套的陣列會壓平合併成單一的值清單。 例如，`x in (dynamic([1,[2,3]]))` 會成為 `x in (1,2,3)`。
-* 在表格式運算式中，會選取結果集的第一個資料行。
-* 將 ' ~ ' 新增至運算子會使值的搜尋不區分大小寫： `x in~ (expression)` 或 `x !in~ (expression)` 。
-
-**範例：**  
-
-**「In」運算子的簡單用法：**  
+### <a name="use-in-operator"></a>使用 ' in ' 運算子
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -74,8 +73,7 @@ StormEvents
 |---|
 |4775|  
 
-
-**' In ~ ' 運算子的簡單用法：**  
+### <a name="use-in-operator"></a>使用 ' in ~ ' 運算子  
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -88,7 +86,7 @@ StormEvents
 |---|
 |4775|  
 
-**'！ In ' 運算子的簡單用法：**  
+### <a name="use-in-operator"></a>使用 '！ in ' 運算子
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -102,7 +100,7 @@ StormEvents
 |54291|  
 
 
-**使用動態陣列：**
+### <a name="use-dynamic-array"></a>使用動態陣列
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -116,8 +114,7 @@ StormEvents
 |---|
 |3218|
 
-
-**子查詢範例：**  
+### <a name="subquery"></a>子查詢
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -149,7 +146,7 @@ StormEvents
 |---|
 |14242|  
 
-**包含其他範例的頂端：**  
+### <a name="top-with-other-example"></a>包含其他範例的頂端
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -160,7 +157,7 @@ Lightning_By_State
 | summarize sum(lightning_events) by State 
 ```
 
-| 狀態     | sum_lightning_events |
+| 州     | sum_lightning_events |
 |-----------|----------------------|
 | ALABAMA   | 29                   |
 | 威斯康辛 | 31                   |
@@ -169,7 +166,7 @@ Lightning_By_State
 | 格魯吉亞   | 106                  |
 | 其他     | 415                  |
 
-**使用函式所傳回的靜態清單：**  
+### <a name="use-a-static-list-returned-by-a-function"></a>使用函式所傳回的靜態清單
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -190,4 +187,4 @@ StormEvents | where State in (InterestingStates()) | count
 
 |名稱|參數|主體|資料夾|DocString|
 |---|---|---|---|---|
-|InterestingStates|()|{dynamic （["華盛頓"，"佛羅里達"，"格魯吉亞"，"紐約"]）}
+|InterestingStates|()|{dynamic ( ["華盛頓"，"佛羅里達"，"格魯吉亞"，"紐約"] ) }

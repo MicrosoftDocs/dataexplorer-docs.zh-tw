@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3d54852577281b66ed7754e419acbabbba989e7c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7c4ee69c4f82c25c6f4cf7d4b63ad9a659892a28
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346077"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87802990"
 ---
 # <a name="preview-plugin"></a>preview 外掛程式
 
@@ -35,9 +35,8 @@ T | evaluate preview(50)
 * 含有單一資料列/資料行的資料表，其中包含輸入記錄集中的記錄數目。
   例如，上述範例查詢相當於 [執行中] `T | count` 。
 
-**提示**
-
-如果 `evaluate` 前面加上包含複雜篩選的表格式來源，或參考大部分來源資料表資料行的篩選，則偏好使用 [`materialize`](materializefunction.md) 函數。 例如：
+> [!TIP]
+> 如果 `evaluate` 前面加上包含複雜篩選的表格式來源，或參考大部分來源資料表資料行的篩選，則偏好使用 [`materialize`](materializefunction.md) 函數。 例如：
 
 ```kusto
 let MaterializedT = materialize(T);

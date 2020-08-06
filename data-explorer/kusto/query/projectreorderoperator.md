@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 233f5f7f6e6064b10d1385eaef8a28302368e74b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 98887c8044be6ea1b429c51953c6f3f9a899d090
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345992"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87802956"
 ---
 # <a name="project-reorder-operator"></a>project-reorder operator
 
@@ -33,22 +33,20 @@ T | project-reorder Col2, Col1, Col* asc
 * *ColumnNameOrPattern：* 加入至輸出的資料行或資料行萬用字元模式的名稱。
 * 針對萬用字元模式：以 `asc` `desc` 遞增或遞減順序使用其名稱來指定或排序資料行。 如果 `asc` `desc` 未指定或，則順序是由符合來源資料表中的資料行所決定。
 
+> [!NOTE]
+> * 在不明確的*ColumnNameOrPattern*比對中，資料行會出現在符合模式的第一個位置。
+> * 指定的資料行 `project-reorder` 是選擇性的。 未明確指定的資料行會顯示為輸出資料表的最後一個資料行。
+> * 用 [`project-away`](projectawayoperator.md) 來移除資料行。
+> * 用 [`project-rename`](projectrenameoperator.md) 來重新命名資料行。
+
+
 ## <a name="returns"></a>傳回
 
 包含依運算子引數所指定順序之資料行的資料表。 `project-reorder`不會重新命名或移除資料表中的資料行，因此，存在於來源資料表中的所有資料行都會出現在結果資料表中。
 
-**備註**
-
-- 在不明確的*ColumnNameOrPattern*比對中，資料行會出現在符合模式的第一個位置。
-- 指定的資料行 `project-reorder` 是選擇性的。 未明確指定的資料行會顯示為輸出資料表的最後一個資料行。
-
-* 用 [`project-away`](projectawayoperator.md) 來移除資料行。
-* 用 [`project-rename`](projectrenameoperator.md) 來重新命名資料行。
-
-
 ## <a name="examples"></a>範例
 
-以三個數據行（a、b、c）重新排序資料表，第二個數據行（b）會先出現。
+重新排列具有三個數據行的資料表 (a、b、c) ，讓第二個數據行 (b) 會先出現。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

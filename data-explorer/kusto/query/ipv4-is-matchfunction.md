@@ -1,6 +1,6 @@
 ---
-title: ipv4_is_match （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 ipv4_is_match （）。
+title: 'ipv4_is_match ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 ipv4_is_match ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 90d65f80ed8b5defe1fd2fe1e19ca4ff385cc408
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1abe99a4739d68e6acb76b800af293e77e62b2f0
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347335"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803908"
 ---
 # <a name="ipv4_is_match"></a>ipv4_is_match()
 
@@ -37,8 +37,9 @@ ipv4_is_match('192.168.1.1', '192.168.1.255', 24) == true
 
 ## <a name="ip-prefix-notation"></a>IP 首碼標記法
 
-您可以 `IP-prefix notation` 使用斜線（）字元來定義 IP 位址 `/` 。 斜線（）左邊的 IP 位址 `/` 是基底 ip 位址。 斜線（）右邊的數位（1到32） `/` 是網路遮罩中連續1位的數目。 
-**範例：** 192.168.2.0/24 會有相關聯的 net/subnetmask，其中包含小數點十進位格式的24個連續位或255.255.255.0。
+您可以 `IP-prefix notation` 使用斜線 () 字元來定義 IP 位址 `/` 。 斜線 (左邊的 IP 位址 `/`) 是基底 IP 位址。 斜線 (右邊 (1 到 32) 的數位， `/`) 是網路遮罩中連續1位的數目。 
+
+例如，192.168.2.0/24 會有相關聯的 net/subnetmask，其中包含小數點十進位格式的24個連續位或255.255.255.0。
 
 ## <a name="returns"></a>傳回
 
@@ -48,7 +49,7 @@ ipv4_is_match('192.168.1.1', '192.168.1.255', 24) == true
 
 ## <a name="examples"></a>範例
 
-### <a name="ipv4-comparison-equality---ip-prefix-notation-specified-inside-the-ipv4-strings"></a>IPv4 比較是否相等-IPv4 字串內指定的 IP 首碼標記法。
+### <a name="ipv4-comparison-equality---ip-prefix-notation-specified-inside-the-ipv4-strings"></a>IPv4 比較相等-IPv4 字串內指定的 IP 首碼標記法
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

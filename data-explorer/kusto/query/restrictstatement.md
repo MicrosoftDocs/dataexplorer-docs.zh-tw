@@ -10,20 +10,23 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: a81c5faadb51b99cdcd233132f9b6a4843e3ce34
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 52cec808795024bd58b6a4ef6cf08e5b700c0e33
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345788"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803619"
 ---
 # <a name="restrict-statement"></a>Restrict 陳述式
 
 ::: zone pivot="azuredataexplorer"
 
-Restrict 語句會限制資料表/視圖實體的集合，這些實體會顯示在其後面的查詢語句。 例如，在包含兩個數據表（，）的資料庫中 `A` `B` ，應用程式可以防止查詢的其他部分存取， `B` 而且只會使用 view 來「查看」有限的資料表形式 `A` 。
+Restrict 語句會限制資料表/視圖實體的集合，這些實體會顯示在其後面的查詢語句。 例如，在包含兩個數據表 (的資料庫中 `A` `B`) ，應用程式可以防止查詢的其他部分存取， `B` 而且只能使用 view 來「查看」有限的資料表形式 `A` 。
 
-Restrict 語句的主要案例是針對接受使用者查詢的仲介層應用程式，而且想要在這些查詢上套用資料列層級的安全性機制。 中介層應用程式可以在使用者的查詢前面加上**邏輯模型**，這組 let 語句定義了限制使用者存取資料的視圖（例如 `T | where UserId == "..."` ）。 作為最後新增的語句，它會限制使用者只能存取邏輯模型。
+Restrict 語句的主要案例是針對接受使用者查詢的仲介層應用程式，而且想要在這些查詢上套用資料列層級的安全性機制。 仲介層應用程式可以在使用者的查詢前面加上**邏輯模型**，這組 let 語句定義了限制使用者存取資料 (例如) 的視圖 `T | where UserId == "..."` 。 作為最後新增的語句，它會限制使用者只能存取邏輯模型。
+
+> [!NOTE]
+> Restrict 語句可用來限制對另一個資料庫或叢集中的實體的存取， (不支援在叢集名稱) 中使用萬用字元。
 
 ## <a name="syntax"></a>語法
 
@@ -31,54 +34,49 @@ Restrict 語句的主要案例是針對接受使用者查詢的仲介層應用�
 
 其中*EntitySpecifier*是下列其中一項：
 * 由 let 語句定義為表格式視圖的識別碼。
-* 資料表參考（與 union 語句所使用的相同）。
+* 資料表參考 (類似 union 語句所使用的) 。
 * 模式聲明所定義的模式。
 
 所有資料表、表格式視圖或不是由 restrict 語句指定的模式都會變成「不可見」，以供查詢的其餘部分使用。 
 
-**備註**
-
-Restrict 語句可用來限制存取另一個資料庫或叢集中的實體（叢集名稱中不支援萬用字元）。
-
 ## <a name="arguments"></a>引數
 
 Restrict 語句可以在實體的名稱解析期間，取得定義寬鬆限制的一個或多個參數。 實體可以是：
-- [let 語句](./letstatement.md)出現在 `restrict` 語句之前。 
+* [let 語句](./letstatement.md)出現在 `restrict` 語句之前。 
 
-```kusto
-// Limit access to 'Test' let statement only
-let Test = () { print x=1 };
-restrict access to (Test);
-```
+  ```kusto
+  // Limit access to 'Test' let statement only
+  let Test = () { print x=1 };
+  restrict access to (Test);
+  ```
 
-- 資料庫中繼資料中定義的[資料表](../management/tables.md)或[函數](../management/functions.md)。
+* 資料庫中繼資料中定義的[資料表](../management/tables.md)或[函數](../management/functions.md)。
 
-```kusto
-// Assuming the database that the query uses has table Table1 and Func1 defined in the metadata, 
-// and other database 'DB2' has Table2 defined in the metadata
- 
-restrict access to (database().Table1, database().Func1, database('DB2').Table2);
-```
+    ```kusto
+    // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata, 
+    // and other database 'DB2' has Table2 defined in the metadata
+    
+    restrict access to (database().Table1, database().Func1, database('DB2').Table2);
+    ```
 
-- 可以比對[let 語句](./letstatement.md)或資料表/函式之倍數的萬用字元模式  
+* 可以比對[let 語句](./letstatement.md)或資料表/函式之倍數的萬用字元模式  
 
-```kusto
-let Test1 = () { print x=1 };
-let Test2 = () { print y=1 };
-restrict access to (*);
-// Now access is restricted to Test1, Test2 and no tables/functions are accessible.
+    ```kusto
+    let Test1 = () { print x=1 };
+    let Test2 = () { print y=1 };
+    restrict access to (*);
+    // Now access is restricted to Test1, Test2 and no tables/functions are accessible.
 
-// Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
-// Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
-restricts access to (database().*);
-// Now access is restricted to all tables/functions of the current database ('DB2' is not accessible).
+    // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
+    // Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
+    restricts access to (database().*);
+    // Now access is restricted to all tables/functions of the current database ('DB2' is not accessible).
 
-// Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
-// Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
-restricts access to (database('DB2').*);
-// Now access is restricted to all tables/functions of the database 'DB2'
-```
-
+    // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
+    // Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
+    restricts access to (database('DB2').*);
+    // Now access is restricted to all tables/functions of the database 'DB2'
+    ```
 
 ## <a name="examples"></a>範例
 

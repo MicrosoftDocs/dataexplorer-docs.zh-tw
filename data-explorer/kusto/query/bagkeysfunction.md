@@ -1,6 +1,6 @@
 ---
-title: bag_keys （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 bag_keys （）。
+title: 'bag_keys ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 bag_keys ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 4ce05f536b8903810739c6aa7780f9eaf72c4f87
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 2fa63bf0b4eea594a54a3abe132a0127929e0c52
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349324"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803791"
 ---
 # <a name="bag_keys"></a>bag_keys()
 
 列舉動態屬性包物件中的所有根機碼。
+
+## <a name="syntax"></a>語法
 
 `bag_keys(`*動態物件*`)`
 

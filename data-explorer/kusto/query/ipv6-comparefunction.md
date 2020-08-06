@@ -1,6 +1,6 @@
 ---
-title: ipv6_compare （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 ipv6_compare （）函數。
+title: 'ipv6_compare ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 ipv6_compare ( # A1 函數。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 92c2c512fc81176cfa849ecdd66c0cdcfad9d8d3
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: ce14c466d927dd2431ae8e057bceec0d5fdd38b8
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347318"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803891"
 ---
 # <a name="ipv6_compare"></a>ipv6_compare()
 
@@ -27,23 +27,24 @@ ipv6_compare('fe80::85d:e82c:9446:7994/127', 'fe80::85d:e82c:9446:7995/127') == 
 ipv6_compare('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == 0
 ```
 
+> [!Note]
+> 函式可以接受並比較代表 IPv6 和 IPv4 網路位址的引數。 不過，如果呼叫者知道引數為 IPv4 格式，請使用[ipv4_is_compare ( # B1](./ipv4-comparefunction.md)函數。 此函式會產生較佳的執行時間效能。
+
 ## <a name="syntax"></a>語法
 
 `ipv6_compare(`*運算式 1* `, `*運算式 2* `[ ,`*PrefixMask*`])`
 
 ## <a name="arguments"></a>引數
 
-* *運算式 1*、運算式*2*：代表 IPv6 或 IPv4 位址的字串運算式。 IPv6 和 IPv4 字串可以使用 IP 首碼標記法加以遮罩（請參閱附注）。
+* *運算式 1*、運算式*2*：代表 IPv6 或 IPv4 位址的字串運算式。 IPv6 和 IPv4 字串可以使用 IP 首碼標記法加以遮罩 (請參閱附注) 。
 * *PrefixMask*：介於0到128之間的整數，代表所考慮的最高有效位數。
 
-> [!Note] 
->**IP 首碼標記法**
-> 
->`IP-prefix notation`使用斜線（）字元來定義 IP 位址是常見的作法 `/` 。
->斜線（）左邊的 IP 位址 `/` 是基底 IP 位址，而斜線（）右邊的數位（1到127） `/` 是網路遮罩中連續1位的數目。 
->
-> ## <a name="example"></a>範例：
-> fe80：：85d： e82c：9446： 7994/120 將會有相關聯的 net/subnetmask，其中包含120的連續位。
+## <a name="ip-prefix-notation"></a>IP 首碼標記法
+
+`IP-prefix notation`使用斜線 () 字元來定義 IP 位址是常見的作法 `/` 。
+斜線 (的左邊的 IP 位址 `/`) 是基底 IP 位址，而斜線的右邊 (1 到 127) 的數位 `/` (是網路遮罩中連續1位的數目。 
+
+例如，fe80：：85d： e82c：9446： 7994/120 將會有相關聯的 net/subnetmask，其中包含120的連續位。
 
 ## <a name="returns"></a>傳回
 
@@ -51,9 +52,6 @@ ipv6_compare('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == 0
 * `1`：如果第一個 IPv6 字串引數的長表示大於第二個 IPv6 字串引數。
 * `-1`：如果第一個 IPv6 字串引數的長表示小於第二個 IPv6 字串引數。
 * `null`：如果兩個 IPv6 字串其中之一的轉換不成功，則為。
-
-> [!Note]
-> 函式可以接受並比較代表 IPv6 和 IPv4 網路位址的引數。 不過，如果呼叫者知道引數為 IPv4 格式，請使用[ipv4_is_compare （）](./ipv4-comparefunction.md)函數。 此函式會產生較佳的執行時間效能。
 
 ## <a name="examples-ipv6ipv4-comparison-equality-cases"></a>範例： IPv6/IPv4 比較相等案例
 

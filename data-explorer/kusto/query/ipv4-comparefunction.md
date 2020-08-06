@@ -1,6 +1,6 @@
 ---
-title: ipv4_compare （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 ipv4_compare （）。
+title: 'ipv4_compare ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 ipv4_compare ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 247a653ead575b0fa04295d23b6b6071bd49edeb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 68082b68a1c7772135f711248ddfcd4079bc753e
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347352"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803925"
 ---
 # <a name="ipv4_compare"></a>ipv4_compare()
 
@@ -37,10 +37,10 @@ ipv4_compare('192.168.1.1', '192.168.1.255', 24) == 0
 
 ## <a name="ip-prefix-notation"></a>IP 首碼標記法
  
-您可以 `IP-prefix notation` 使用斜線（）字元來定義 IP 位址 `/` 。
-斜線（）左邊的 IP 位址 `/` 是基底 ip 位址。 斜線（）右邊的數位（1到32） `/` 是網路遮罩中連續1位的數目。 
+您可以 `IP-prefix notation` 使用斜線 () 字元來定義 IP 位址 `/` 。
+斜線 (左邊的 IP 位址 `/`) 是基底 IP 位址。 斜線 (右邊 (1 到 32) 的數位， `/`) 是網路遮罩中連續1位的數目。 
 
-**範例：** 192.168.2.0/24 會有相關聯的 net/subnetmask，其中包含小數點十進位格式的24個連續位或255.255.255.0。
+例如，192.168.2.0/24 會有相關聯的 net/subnetmask，其中包含小數點十進位格式的24個連續位或255.255.255.0。
 
 ## <a name="returns"></a>傳回
 
