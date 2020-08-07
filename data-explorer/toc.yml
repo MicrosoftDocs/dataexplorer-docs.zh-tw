@@ -50,6 +50,12 @@
           href: security.md
         - name: 安全性基準
           href: security-baseline.md
+    - name: 業務持續性
+      items:
+        - name: 概觀
+          href: business-continuity-overview.md
+        - name: 建立解決方案
+          href: business-continuity-create-solution.md
     - name: 工具和整合概觀
       href: tools-integrations-overview.md
 - name: 操作指南
@@ -1291,7 +1297,7 @@
             - name: 外部資料表
               items:
                 - name: 外部資料表一般控制項命令
-                  href: ./kusto/management/externaltables.md
+                  href: ./kusto/management/external-table-commands.md
                 - name: 建立和改變外部 SQL 資料表
                   href: ./kusto/management/external-sql-tables.md
                 - name: 建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
