@@ -1,6 +1,6 @@
 ---
-title: 在 Azure 資料工廠中使用 Azure 資料資源管理員控制命令
-description: 在本主題中,在 Azure 資料工廠中使用 Azure 資料資源管理器控制項命令
+title: 在 Azure Data Factory 中使用 Azure 資料總管控制命令
+description: 在本主題中，使用中的 Azure 資料總管控制命令 Azure Data Factory
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,90 +8,90 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 09/15/2019
-ms.openlocfilehash: d59e77af1cebe9edb1c026a6dc557facec958917
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b2078ee88b6721f414d280e657d1463925f5a31f
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81497365"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803999"
 ---
-# <a name="use-azure-data-factory-command-activity-to-run-azure-data-explorer-control-commands"></a>使用 Azure 資料工廠指令活動執行 Azure 資料資源管理員控制命令
+# <a name="use-azure-data-factory-command-activity-to-run-azure-data-explorer-control-commands"></a>使用 Azure Data Factory 命令活動來執行 Azure 資料總管 control 命令
 
-[Azure 資料工廠](/azure/data-factory/)(ADF) 是一種基於雲端資料整合服務,允許您對資料執行活動組合。 使用 ADF 創建資料驅動的工作流,以便協調和自動化數據行動和資料轉換。 Azure**資料資源管理員命令**作用在 Azure 資料工廠中, 讓您能夠在 ADF 工作串流中執行[Azure 資料資源管理員控制項指令](kusto/concepts/index.md#control-commands)。 本文介紹如何創建具有查找活動和 ForEach 活動包含 Azure 資料資源管理器命令活動的管道。
+[Azure Data Factory](/azure/data-factory/) (ADF) 是以雲端為基礎的資料整合服務，可讓您對資料執行一組活動的組合。 使用 ADF 來建立資料導向的工作流程，以協調和自動化資料移動和資料轉換。 Azure Data Factory 中的**azure 資料總管命令**活動可讓您在 ADF 工作流程內執行[azure 資料總管控制命令](kusto/concepts/index.md#control-commands)。 本文會教您如何使用查閱活動和包含 Azure 資料總管命令活動的 ForEach 活動來建立管線。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
-* [Azure 資料資源管理器叢集和資料庫](create-cluster-database-portal.md)
-* 數據源。
-* [資料工廠](data-factory-load-data.md#create-a-data-factory)
+* [Azure 資料總管叢集和資料庫](create-cluster-database-portal.md)
+* 資料的來源。
+* [Data factory](data-factory-load-data.md#create-a-data-factory)
 
 ## <a name="create-a-new-pipeline"></a>建立新管線
 
-1. 選擇 **「作者**」鉛筆工具。 
-1. 通過選擇**+** 然後從下拉清單中選擇**管道**來創建新管道。
+1. 選取 [**撰寫**鉛筆] 工具。 
+1. 選取 **+** ，然後從下拉式選單選取 [**管線**]，以建立新的管線。
 
-   ![建立新導管](media/data-factory-command-activity/create-pipeline.png)
+   ![建立新管線](media/data-factory-command-activity/create-pipeline.png)
 
-## <a name="create-a-lookup-activity"></a>建立搜尋活動
+## <a name="create-a-lookup-activity"></a>建立查閱活動
 
-[查找活動](/azure/data-factory/control-flow-lookup-activity)可以從任何 Azure 數據工廠支援的數據源中檢索數據集。 查找活動的輸出可用於 ForEach 或其他活動。
+[查閱活動](/azure/data-factory/control-flow-lookup-activity)可以從任何支援 Azure Data Factory 的資料來源抓取資料集。 查閱活動的輸出可用於 ForEach 或其他活動中。
 
-1. 在"**活動"** 窗格中,在 **「一般**」下,選擇 **「尋找」** 活動。 將其拖放到右側的主畫布中。
+1. 在 [**活動**] 窗格的 **[一般**] 底下，選取 [**查閱**] 活動。 將它拖放到右側的主畫布中。
  
-    ![選擇搜尋活動](media/data-factory-command-activity/select-activity.png)
+    ![選取查閱活動](media/data-factory-command-activity/select-activity.png)
 
-1. 畫布現在包含您創建的查找活動。 使用畫布下方的選項卡更改任何相關參數。 **通常**,重新命名活動。 
+1. 畫布現在包含您所建立的查閱活動。 使用畫布下方的索引標籤來變更任何相關的參數。 在 **[一般**] 中，重新命名活動。 
 
-    ![編輯搜尋活動](media/data-factory-command-activity/edit-lookup-activity.PNG)
+    ![編輯查閱活動](media/data-factory-command-activity/edit-lookup-activity.png)
 
     > [!TIP]
-    > 單擊空畫布區域以查看管道屬性。 使用 **「常規**」選項卡重命名管道。 我們的管道被命名為*管道-4-docs。*
+    > 按一下空白畫布區域以查看管線屬性。 使用 [**一般**] 索引標籤來重新命名管線。 我們的管線稱為「*管線-4-* 檔」。
 
-### <a name="create-an-azure-data-explorer-dataset-in-lookup-activity"></a>在尋找活動中建立 Azure 資料資源管理員資料集
+### <a name="create-an-azure-data-explorer-dataset-in-lookup-activity"></a>在查閱活動中建立 Azure 資料總管資料集
 
-1. 在 **「設定」中**,選擇預先建立的 Azure 資料資源管理員**來源資料集**,或選擇 **「新建」** 以建立新資料集。
+1. 在 [**設定**] 中，選取預先建立的 Azure 資料總管**源資料集**，或選取 [ **+ 新增**] 來建立新的資料集。
  
-    ![在尋找設定中新增資料集](media/data-factory-command-activity/lookup-settings.png)
+    ![在查閱設定中加入資料集](media/data-factory-command-activity/lookup-settings.png)
 
-1. 從 **「新資料集」** 視窗選擇**Azure 資料資源管理員(庫托)** 資料集。 選擇 **「繼續**新增新資料集」。
+1. 從 [**新增資料集**] 視窗中選取 [ **Azure 資料總管 (Kusto) **資料集。 選取 [**繼續**] 以加入新的資料集。
 
-   ![選擇新資料集](media/data-factory-command-activity/select-new-dataset.png) 
+   ![選取新的資料集](media/data-factory-command-activity/select-new-dataset.png) 
 
-1. 新的 Azure 資料資源管理器資料集參數在 **「設定」** 中可見。 要更新參數,請選擇 **「編輯**」。
+1. 新的 Azure 資料總管資料集參數會顯示在 [**設定**] 中。 若要更新參數，請選取 [**編輯**]。
 
-    ![使用 Azure 資料資源管理員資料集尋找設定](media/data-factory-command-activity/lookup-settings-with-adx-dataset.png)
+    ![使用 Azure 資料總管資料集進行查閱設定](media/data-factory-command-activity/lookup-settings-with-adx-dataset.png)
 
-1. **AzureDataExplorerTable**新選項卡將在主畫布中打開。 
-    * 選擇 **「一般」** 並編輯資料集名稱。 
-    * 選擇 **「連線**」以編輯資料集屬性。 
-    * 從下拉清單中選擇 **「連結服務**」,或選擇 **「新建」** 以建立新的連結服務。
+1. [ **AzureDataExplorerTable**新增] 索引標籤會在主畫布中開啟。 
+    * 選取 **[一般**]，然後編輯資料集名稱。 
+    * 選取 [**連接**] 以編輯資料集屬性。 
+    * 從下拉式選單選取**連結服務**，或選取 [ **+ 新增**] 來建立新的連結服務。
 
-    ![編輯 Azure 資料資源管理員資料集屬性](media/data-factory-command-activity/adx-dataset-properties-edit-connections.png)
+    ![編輯 Azure 資料總管資料集屬性](media/data-factory-command-activity/adx-dataset-properties-edit-connections.png)
 
-1. 建立新連結服務時,將開啟 **「新連結服務(Azure 資料資源管理員)」** 頁:
+1. 建立新的連結服務時，會開啟**新的連結服務 (Azure 資料總管) ** ] 頁面：
 
-    ![ADX 新連結服務](media/data-factory-command-activity/adx-new-linked-service.png)
+    ![ADX 新的連結服務](media/data-factory-command-activity/adx-new-linked-service.png)
 
-   * 為 Azure 資料資源管理員連結服務選擇**名稱**。 如果需要 **,新增說明**。
-   * 在**通過整合式執行時連接**時,如果需要,更改當前設置。 
-   * 在 **"科目選擇"方法**中,使用以下兩種方法之一選擇群集: 
-        * 選擇「**從 Azure 訂閱**單選」按鈕,然後選擇**Azure 訂閱**帳戶。 然後,**選擇群組集**。 請注意,下拉清單將僅列出屬於使用者的群集。
-        * 相反,選擇 **「輸入手動**單選」按鈕並輸入**終結點**(群集 URL)。
-    * 指定**租戶**。
-    * 輸入**服務主體代碼**。 根據所使用的命令所需的許可權級別,主體ID必須具有足夠的許可權。
-    * 選擇**服務主體鍵**按鍵並輸入**服務主體金鑰**。
-    * 從下拉選單中選擇**資料庫**。 或者,選擇 **「編輯」** 選選框並輸入資料庫名稱。
-    * 選擇 **「測試連接**」以測試您創建的連結服務連接。 如果可以連線到您的設定,將顯示綠色複選標記**連線成功**。
-    * 選擇 **"完成"** 以完成連結的服務創建。
+   * 選取 [Azure 資料總管連結服務的**名稱**]。 視需要新增**描述**。
+   * 在 **[透過整合運行**時間連線] 中，視需要變更目前的設定。 
+   * 在 [**帳戶選取方法**] 中，使用下列兩種方法之一來選取您的叢集： 
+        * 選取 [**從 azure 訂用**帳戶] 選項按鈕，然後選取您的**Azure 訂**用帳戶。 然後，**選取您的**叢集。 請注意，下拉式清單只會列出屬於使用者的叢集。
+        * 相反地，請選取 [**手動輸入**] 選項按鈕，然後輸入您的**端點** (叢集 URL) 。
+    * 指定**租**使用者。
+    * 輸入**服務主體識別碼**。 主體識別碼必須具有適當的許可權，根據所使用命令所需的許可權層級。
+    * 選取 [**服務主體金鑰**] 按鈕，然後輸入**服務主體金鑰**。
+    * 從下拉式功能表中選取您的**資料庫**。 或者，選取 [**編輯**] 核取方塊，並輸入您的資料庫名稱。
+    * 選取 [**測試連接**] 來測試您所建立的連結服務連接。 如果您可以連接到您的設定，則會出現綠色的核取記號連線**成功**。
+    * 選取 **[完成]** 以完成已連結的服務建立。
 
-1. 設置連結服務後,在**AzureDataExplorerTable** > **連接**中,添加**表**名稱。 選擇**預覽數據**,以確保數據正確顯示。
+1. 設定連結服務之後，請在**AzureDataExplorerTable**  >  **連接**中新增**資料表**名稱。 選取 [**預覽資料**]，確認資料已正確呈現。
 
-   資料集現已準備就緒,您可以繼續編輯管道。
+   您的資料集現在已準備就緒，您可以繼續編輯您的管線。
 
-### <a name="add-a-query-to-your-lookup-activity"></a>向查詢活動
+### <a name="add-a-query-to-your-lookup-activity"></a>將查詢新增至查閱活動
 
-1. 在**導管 4 文件** > **設定**中,在**查詢**文字框中新增查詢,例如:
+1. 在 [**管線-4-** 檔  >  **設定**] 中，在 [**查詢**] 文字方塊中加入查詢，例如：
 
     ```kusto
     ClusterQueries
@@ -99,39 +99,39 @@ ms.locfileid: "81497365"
     | summarize count() by Database
     ```
 
-1. 依需要變更**查詢逾時**或**無截斷****與第一行屬性**。 在此流中,我們保留預設**查詢超時**並取消選中複選框。 
+1. 視需要變更 [**查詢超時**] 或 [**不截斷**] 和 [**僅限第一個資料列**] 屬性。 在此流程中，我們會保留預設**查詢超時**，並取消選取核取方塊。 
 
-    ![尋找作用的最終設定](media/data-factory-command-activity/lookup-activity-final-settings.png)
+    ![查閱活動的最後設定](media/data-factory-command-activity/lookup-activity-final-settings.png)
 
-## <a name="create-a-for-each-activity"></a>建立每個活動建立一個 
+## <a name="create-a-for-each-activity"></a>建立每個活動的 
 
-[For-每個](/azure/data-factory/control-flow-for-each-activity)活動用於反覆運算集合並在循環中執行指定的活動。 
+每個活動都是用來[逐一查看](/azure/data-factory/control-flow-for-each-activity)集合，並在迴圈中執行指定的活動。 
 
-1. 現在,您將"每個"活動添加到管道中。 此活動將處理從查找活動返回的數據。 
-    * 在 **"活動"** 窗格中,在 **"反覆運算&條件**"下,選擇**ForEach**活動並將其拖放到畫布中。
-    * 在「查找」活動的輸出和畫布中 ForEach 活動的輸入之間繪製一條線以連接它們。
+1. 現在您要將每個活動新增至管線。 此活動會處理從查閱活動傳回的資料。 
+    * 在 [**活動**] 窗格的 [**反復專案 & 條件**] 底下，選取 [ **ForEach** ] 活動，並將它拖放到畫布中。
+    * 在查閱活動的輸出和畫布中的 ForEach 活動輸入之間繪製一條線來連接它們。
 
         ![ForEach 活動](media/data-factory-command-activity/for-each-activity.png)
 
-1.    選擇畫布中的「ForEach」 活動。 在下面的 **「設定」** 選項卡中:
-    * 選中 **「順序**」複選框,瞭解查找結果的順序處理,或取消選中該複選框以創建並行處理。
+1. 選取畫布中的 [ForEach] 活動。 在下方的 [**設定**] 索引標籤中：
+    * 核取 [**連續**] 核取方塊以進行查閱結果的連續處理，或保持未核取狀態以建立平行處理。
     * 設定**批次計數**。
-    * 在**Items 中**,提供以下對輸出值的引用*@activity:("查找 1")。輸出值。*
+    * 在 [**專案**] 中，提供下列輸出值的參考： * @activity ( ' Lookup1 ' ) . 輸出。值*
 
        ![ForEach 活動設定](media/data-factory-command-activity/for-each-activity-settings.png)
 
-## <a name="create-an-azure-data-explorer-command-activity-within-the-foreach-activity"></a>在 ForEach 作用中建立 Azure 資料資源管理員命令活動
+## <a name="create-an-azure-data-explorer-command-activity-within-the-foreach-activity"></a>在 ForEach 活動內建立 Azure 資料總管命令活動
 
-1. 按兩下畫布中的 ForEach 活動以在新畫布中打開該活動,以指定 ForEach 中的活動。
-1. 在 **「活動」** 窗格中,在**Azure 資料資源管理員**下,選擇**Azure 資料資源管理員命令**活動並將其拖放到畫布中。
+1. 按兩下畫布中的 ForEach 活動，在新的畫布中開啟，以指定 ForEach 內的活動。
+1. 在 [**活動**] 窗格的 [ **azure 資料總管**] 底下，選取 [ **azure 資料總管命令**] 活動，並將它拖放到畫布中。
 
-    ![Azure 資料資源管理員指令活動](media/data-factory-command-activity/adx-command-activity.png)
+    ![Azure 資料總管命令活動](media/data-factory-command-activity/adx-command-activity.png)
 
-1.    在**連接「連線」** 選項卡中,選擇以前創建的相同連結服務。
+1. 在 [**連接**] 索引標籤中，選取先前建立的相同已連結服務。
 
-    ![azure 資料資源管理員指令活動連線選項卡](media/data-factory-command-activity/adx-command-activity-connection-tab.png)
+    ![azure 資料瀏覽器命令活動連接索引標籤](media/data-factory-command-activity/adx-command-activity-connection-tab.png)
 
-1. 在 **「指令」** 選項卡中,提供以下指令:
+1. 在 [**命令**] 索引標籤中，提供下列命令：
 
     ```kusto
     .export
@@ -143,34 +143,34 @@ ms.locfileid: "81497365"
     <| ClusterQueries | where Database == "@{item().Database}"
     ```
 
-    該**命令**指示 Azure 資料資源管理員以壓縮格式將給定查詢的結果匯出到 Blob 儲存中。 它非同步運行(使用非同步修改器)。
-    查詢處理「查找」活動結果中每行的資料庫列。 **命令超時**可以保持不變。
+    **命令**會指示 Azure 資料總管以壓縮格式將給定查詢的結果匯出至 blob 儲存體。 它會使用 async 修飾詞) 以非同步方式執行 (。
+    查詢會定址查閱活動結果中每個資料列的資料庫資料行。 **命令 timeout**可以保持不變。
 
     ![命令活動](media/data-factory-command-activity/command.png)   
 
     > [!NOTE]
-    > 命令活動具有以下限制:
-    > * 大小限制:1 MB 回應大小
-    > * 時間限制:20 分鐘(預設值),1 小時(最大值)。
-    > * 如果需要,可以使用[AdminThenQuery](kusto/management/index.md#combining-queries-and-control-commands)將查詢追加到結果,以減少結果的大小/時間。
+    > 命令活動具有下列限制：
+    > * 大小限制： 1 MB 回應大小
+    > * 時間限制： (預設) ，1小時 (最大) 的20分鐘。
+    > * 如有需要，您可以使用[AdminThenQuery](kusto/management/index.md#combining-queries-and-control-commands)將查詢附加至結果，以減少產生的大小/時間。
 
-1.    現在管道已經準備好了。 您可以通過單擊管道名稱返回主管道視圖。
+1. 現在管線已就緒。 您可以按一下管線名稱，回到主要管線視圖。
 
-    ![Azure 資料資源管理員命令導管](media/data-factory-command-activity/adx-command-pipeline.png)
+    ![Azure 資料總管命令管線](media/data-factory-command-activity/adx-command-pipeline.png)
 
-1. 在宣告導管之前選擇**除錯**。 可以在 **「輸出」** 選項卡中監視管道進度。
+1. 在發佈管線之前，請選取 [ **Debug** ]。 您可以在 [**輸出**] 索引標籤中監視管線進度。
 
-    ![azure 資料資源管理員指令活動輸出](media/data-factory-command-activity/command-activity-output.png)
+    ![azure 資料瀏覽器命令活動輸出](media/data-factory-command-activity/command-activity-output.png)
 
-1. 您可以**發佈所有內容**,然後**添加觸發器**以執行管道。 
+1. 您可以**發佈全部**，然後**新增觸發**程式來執行管線。 
 
-## <a name="control-command-outputs"></a>控制指令輸出
+## <a name="control-command-outputs"></a>控制命令輸出
 
-命令活動輸出的結構詳見下文。 此輸出可以由管道中的下一個活動使用。
+命令活動輸出的結構詳述如下。 管線中的下一個活動可以使用此輸出。
 
-### <a name="returned-value-of-a-non-async-control-command"></a>非同步控制命令的傳回值
+### <a name="returned-value-of-a-non-async-control-command"></a>非 async control 命令的傳回值
 
-在非同步控制命令中,返回值的結構類似於查找活動結果的結構。 此欄位`count`指示返回的記錄數。 固定陣列欄位`value`包含記錄清單。 
+在非非同步控制命令中，傳回值的結構與查閱活動結果的結構類似。 `count`欄位會指出傳回的記錄數目。 固定陣列欄位 `value` 包含記錄清單。 
 
 ```json
 { 
@@ -190,9 +190,9 @@ ms.locfileid: "81497365"
 } 
 ```
  
-### <a name="returned-value-of-an-async-control-command"></a>非同步控制指令的傳回值
+### <a name="returned-value-of-an-async-control-command"></a>非同步控制命令的傳回值
 
-在非同步控制命令中,活動在後台輪詢操作表,直到異步操作完成或超時。因此,返回的值將包含給定`.show operations OperationId`**的「操作 Id」** 屬性的結果。 檢查**狀態**和**狀態**屬性的值,以驗證操作的完成成功。
+在 async control 命令中，活動會在幕後輪詢作業資料表，直到非同步作業完成或超時為止。因此，傳回的值將包含 `.show operations OperationId` 給定**OperationId**屬性的結果。 檢查 [**狀態**] 和 [**狀態**] 屬性的值，以確認作業已成功完成。
 
 ```json
 { 
@@ -219,5 +219,5 @@ ms.locfileid: "81497365"
 
 ## <a name="next-steps"></a>後續步驟
 
-* 瞭解如何[使用 Azure 資料工廠將資料複製到 Azure 資料資源管理員](data-factory-load-data.md)。
-* 瞭解如何使用[Azure 資料工廠樣本將批次複製到 Azure 資料資源管理員](data-factory-template.md)。
+* 深入瞭解如何[使用 Azure Data Factory 將資料複製到 Azure 資料總管](data-factory-load-data.md)。
+* 瞭解如何使用[Azure Data Factory 範本，從資料庫大量複製到 Azure 資料總管](data-factory-template.md)。
