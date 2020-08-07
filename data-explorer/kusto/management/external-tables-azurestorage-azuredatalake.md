@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1b857ee464b0fff973293cd03afadecc8c893af2
-ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
+ms.openlocfilehash: 2616605d29f90a283f5a5d8fef367bf77df65a15
+ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86422988"
+ms.lasthandoff: 08/06/2020
+ms.locfileid: "87871930"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -23,7 +23,7 @@ ms.locfileid: "86422988"
 
 **語法**
 
-（ `.create`  |  `.alter` ） `external` `table` *[TableName](#table-name)* `(` *[架構](#schema)*`)`  
+ (`.create`  |  `.alter`  |  `.create-or-alter`) `external` `table` *[TableName](#table-name)* `(` *[架構](#schema)*`)`  
 `kind` `=` (`blob` | `adl`)  
 [資料分割 `partition` `by` `(` *[Partitions](#partitions)* `)` [ `pathformat` `=` `(` *[PathFormat](#path-format)* `)` ]]  
 `dataformat``=` *[格式](#format)*  
@@ -33,7 +33,7 @@ ms.locfileid: "86422988"
 在執行命令的資料庫中，建立或改變新的外部資料表。
 
 > [!NOTE]
-> * 如果資料表存在， `.create` 命令將會失敗並產生錯誤。 使用 `.alter` 修改現有的資料表。 
+> * 如果資料表存在， `.create` 命令將會失敗並產生錯誤。 使用 `.create-or-alter` 或 `.alter` 修改現有的資料表。
 > * 不支援改變外部 blob 資料表的架構、格式或資料分割定義。 
 > * 作業需要的[資料庫使用者許可權](../management/access-control/role-based-authorization.md) `.create` 和的[資料表管理員許可權](../management/access-control/role-based-authorization.md) `.alter` 。 
 
@@ -60,13 +60,13 @@ ms.locfileid: "86422988"
 <a name="partitions"></a>
 *資料分割*
 
-用來分割外部資料表的資料行清單（以逗號分隔）。 分割區資料行可存在於資料檔案本身，或檔案路徑的 sa 部分（深入瞭解[虛擬資料行](#virtual-columns)）。
+用來分割外部資料表的資料行清單（以逗號分隔）。 分割區資料行可以存在於資料檔案本身，或檔案路徑的 sa 部分 (在) 的[虛擬資料行](#virtual-columns)上進一步瞭解。
 
 資料分割清單是資料分割資料行的任意組合，使用下列其中一種格式來指定：
 
 * 分割區，代表[虛擬資料行](#virtual-columns)。
 
-  *PartitionName* `:`(`datetime` | `string`)
+  *PartitionName* `:` (`datetime`  |  `string`) 
 
 * 以字串資料行值為基礎的資料分割。
 
@@ -78,7 +78,7 @@ ms.locfileid: "86422988"
 
 * 資料分割，以日期時間資料行的截斷值為基礎。 請參閱[startofyear](../query/startofyearfunction.md)、 [startofmonth](../query/startofmonthfunction.md)、 [startofweek](../query/startofweekfunction.md)、 [startofday](../query/startofdayfunction.md)或[bin](../query/binfunction.md)函數的相關檔。
 
-  *PartitionName* `:``datetime` `=` （ `startofyear` \| `startofmonth` \| `startofweek` \| `startofday` ） `(` *ColumnName*`)`  
+  *PartitionName* `:``datetime` `=` (`startofyear` \| `startofmonth` \| `startofweek` \| `startofday`) `(` *ColumnName*`)`  
   *PartitionName* `:``datetime` `=` `bin``(` *ColumnName* `,` *TimeSpan*`)`
 
 
@@ -124,7 +124,7 @@ ms.locfileid: "86422988"
 <a name="connection-string"></a>
 *StorageConnectionString*
 
-Azure Blob 儲存體 Blob 容器或 Azure Data Lake 存放區檔案系統（虛擬目錄或資料夾）（包括認證）的一或多個路徑。
+Azure Blob 儲存體 Blob 容器或 Azure Data Lake 儲存檔案系統的一或多個路徑)  (虛擬目錄或資料夾，包括認證。
 如需詳細資訊，請參閱[儲存體連接字串](../api/connection-strings/storage.md)。
 
 > [!TIP]
@@ -137,11 +137,11 @@ Azure Blob 儲存體 Blob 容器或 Azure Data Lake 存放區檔案系統（虛�
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | 資料表的資料夾                                                                     |
 | `docString`      | `string` | 記錄資料表的字串                                                       |
-| `compressed`     | `bool`   | 如果設定，則指出檔案是否壓縮成檔案 `.gz` （僅用於[匯出案例](data-export/export-data-to-an-external-table.md)） |
+| `compressed`     | `bool`   | 如果設定，則會指出是否要將檔案壓縮為 `.gz` 僅供[匯出案例](data-export/export-data-to-an-external-table.md)使用的檔案 ()  |
 | `includeHeaders` | `string` | 針對 CSV 或 TSV 檔案，指出檔案是否包含標頭                     |
 | `namePrefix`     | `string` | 如果設定，則表示檔案的前置詞。 在寫入作業中，所有檔案都會以這個前置詞寫入。 讀取作業時，只會讀取具有這個前置詞的檔案。 |
 | `fileExtension`  | `string` | 如果設定，則表示檔案的副檔名。 在寫入時，檔案名的結尾會是這個尾碼。 讀取時，只會讀取具有此副檔名的檔案。           |
-| `encoding`       | `string` | 表示文字的編碼方式： `UTF8NoBOM` （預設）或 `UTF8BOM` 。             |
+| `encoding`       | `string` | 表示文字的編碼方式： `UTF8NoBOM` (預設) 或 `UTF8BOM` 。             |
 | `sampleUris`     | `bool`   | 如果設定，命令結果會提供外部資料表定義所預期的幾個外部資料檔 URI 範例。 |
 | `validateNotEmpty` | `bool`   | 如果設定，則會驗證連接字串中是否有內容。 如果指定的 URI 位置不存在，或沒有足夠的存取權限，此命令將會失敗。 |
 
@@ -151,7 +151,7 @@ Azure Blob 儲存體 Blob 容器或 Azure Data Lake 存放區檔案系統（虛�
 <a name="examples"></a>
 **典型** 
 
-非資料分割的外部資料表。 資料檔案應直接放在定義的容器底下：
+非資料分割的外部資料表。 資料檔案應直接放在) 定義的容器 (：
 
 ```kusto
 .create external table ExternalTable (x:long, s:string)  
@@ -200,7 +200,7 @@ dataformat=csv
 )
 ```
 
-外部資料表會先依客戶名稱雜湊（模數10）進行分割，然後再依日期進行分割。 預期的目錄結構為，例如 `customer_id=5/dt=20190201` 。 資料檔案名稱的結尾都是 `.txt` 副檔名：
+先依客戶名稱雜湊分割的外部資料表 (模數 10) ，然後依日期。 預期的目錄結構為，例如 `customer_id=5/dt=20190201` 。 資料檔案名稱的結尾都是 `.txt` 副檔名：
 
 ```kusto
 .create external table ExternalTable (Timestamp:datetime, CustomerName:string) 
@@ -218,12 +218,12 @@ with (fileExtension = ".txt")
 
 |TableName|TableType|資料夾|DocString|屬性|ConnectionStrings|資料分割|PathFormat|
 |---------|---------|------|---------|----------|-----------------|----------|----------|
-|ExternalTable|Blob|ExternalTables|Docs|{"Format"： "Csv"，"壓縮"： false，"CompressionType"： null，"FileExtension"： null，"IncludeHeaders"： "None"，"Encoding"： null，"NamePrefix"： null}|["https://storageaccount.blob.core.windows.net/container1;\*\*\*\*\*\*\*"]|[{"Mod"：10，"Name"： "CustomerId"，"ColumnName"： "CustomerName"，"序數"： 0}，{"Function"： "StartOfDay"，"Name"： "Date"，"ColumnName"： "Timestamp"，"序數"： 1}]|"customer \_ id =" CustomerId "/dt =" 日期時間 \_ 模式（"yyyyMMdd"，日期）|
+|ExternalTable|Blob|ExternalTables|Docs|{"Format"： "Csv"，"壓縮"： false，"CompressionType"： null，"FileExtension"： null，"IncludeHeaders"： "None"，"Encoding"： null，"NamePrefix"： null}|["https://storageaccount.blob.core.windows.net/container1;\*\*\*\*\*\*\*"]|[{"Mod"：10，"Name"： "CustomerId"，"ColumnName"： "CustomerName"，"序數"： 0}，{"Function"： "StartOfDay"，"Name"： "Date"，"ColumnName"： "Timestamp"，"序數"： 1}]|"customer \_ id =" CustomerId "/dt =" datetime \_ 模式 ( "yyyyMMdd"，日期) |
 
 <a name="virtual-columns"></a>
 **虛擬資料行**
 
-從 Spark 匯出資料時，分割區資料行（在資料框架寫入器的方法中指定 `partitionBy` ）不會寫入資料檔案中。 此程式可避免資料重複，因為資料已出現在 "folder" 名稱中。 例如， `column1=<value>/column2=<value>/` 和 Spark 可以在讀取時辨識它。
+從 Spark 匯出資料時，資料框架寫入器的方法) 中指定的分割區資料行 (`partitionBy` 不會寫入資料檔案中。 此程式可避免資料重複，因為資料已出現在 "folder" 名稱中。 例如， `column1=<value>/column2=<value>/` 和 Spark 可以在讀取時辨識它。
 
 外部資料表支援下列指定虛擬資料行的語法：
 
@@ -248,7 +248,7 @@ dataformat=parquet
 
 1. 建立 URI 模式，代表找到檔案的位置。 一開始，URI 模式等於外部資料表定義中提供的連接字串。 如果有定義任何資料分割，則會使用*[PathFormat](#path-format)* 來轉譯資料分割，然後將其附加至 URI 模式。
 
-2. 針對在建立的 URI 模式下找到的所有檔案，檢查：
+2. 針對在 URI 模式下找到 (s) 建立的所有檔案，請檢查：
 
    * 資料分割值符合查詢中使用的述詞。
    * `NamePrefix`如果定義了這類屬性，Blob 名稱就會以為開頭。
@@ -276,7 +276,7 @@ dataformat=parquet
 
 | 輸出參數 | 類型   | 描述                       |
 |------------------|--------|-----------------------------------|
-| Uri              | string | 外部儲存體資料檔案的 URI |
+| Uri              | 字串 | 外部儲存體資料檔案的 URI |
 
 > [!TIP]
 > 視檔案數目而定，逐一查看外部資料表所參考的所有檔案可能會相當耗費成本。 `limit`如果您只想要查看一些 URI 範例，請務必使用參數。
@@ -307,7 +307,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| Name     | 種類 | 對應                                                           |
+| 名稱     | 種類 | 對應                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -325,7 +325,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| Name     | 種類 | 對應                                                                |
+| 名稱     | 種類 | 對應                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -335,7 +335,7 @@ dataformat=parquet
 
 `.show``external` `table` *ExternalTableName* ExternalTableName `json``mappings`
 
-顯示對應（全部或依名稱指定的對應）。
+顯示所有 (的對應，或名稱) 指定的對應。
  
 **範例** 
  
@@ -347,7 +347,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| Name     | 種類 | 對應                                                                         |
+| 名稱     | 種類 | 對應                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 

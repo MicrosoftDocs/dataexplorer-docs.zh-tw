@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1f9cc982c213a9c2143b169dcf8a12103d617257
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 656d1d5d9120baebced624fee476d261214eff57
+ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346706"
+ms.lasthandoff: 08/06/2020
+ms.locfileid: "87871845"
 ---
 # <a name="mv-apply-operator"></a>mv-apply 運算子
 
@@ -35,7 +35,7 @@ T | mv-apply Metric to typeof(real) on
 1. 將零個或多個資料行加入至產生的 subtable。 這些資料行包含未展開之來源資料行的值，而且會在需要時重複。
 1. 傳回結果的聯集。
 
-`mv-expand`運算子會取得下列輸入：
+`mv-apply`運算子會取得下列輸入：
 
 1. 一或多個評估為要展開之動態陣列的運算式。
    每個展開的 subtable 中的記錄數目是每個動態陣列的最大長度。 如果指定了多個運算式，而且對應的陣列有不同的長度，則會加入 Null 值。
@@ -55,7 +55,7 @@ T | mv-apply Metric to typeof(real) on
 
 1. （選擇性）要展開之陣列元素的最大數目。
 
-`mv-apply`運算子可視為運算子的一般化 [`mv-expand`](./mvexpandoperator.md) （事實上，如果子查詢只包含投影，後者就可以由前者來執行）。
+`mv-apply`運算子可視為運算子的一般化 [`mv-expand`](./mvexpandoperator.md) (事實上，如果子查詢只包含投影，後者就可以由前者來執行。 ) 
 
 ## <a name="syntax"></a>語法
 
@@ -84,17 +84,17 @@ T | mv-apply Metric to typeof(real) on
   如果*產生陣列*不是簡單的資料行名稱，就會產生隨機名稱。
 
 * *產生陣列*：類型的運算式， `dynamic` 其值將會被陣列擴充。
-  如果運算式是輸入中的資料行名稱，則會從輸入中移除輸入資料行，而且會在輸出中顯示相同名稱的新資料行（如果有指定，則為*ColumnName* ）。
+  如果運算式是輸入中的資料行名稱，則會從輸入中移除輸入資料行，而如果指定) 出現在輸出中，則 (或*ColumnName*的新資料行。
 
 * *Typename*：如果使用，則為數組中個別元素所產生陣列的類型名稱 `dynamic` 。 *ArrayExpression* 不符合此類型的專案將會取代為 null 值。
-  （如果未指定， `dynamic` 預設會使用）。
+   (如果未指定， `dynamic` 預設會使用。 ) 
 
 * *RowLimit*：如果使用，則為每個輸入記錄所產生的記錄數目限制。
-  （如果未指定，則會使用2147483647）。
+   (如果未指定，則會使用2147483647。 ) 
 
 * *子查詢*：具有隱含表格式來源的表格式查詢運算式，會套用至每個陣列擴充的 subtable。
 
-**備註**
+**注意事項**
 
 * 不同于 [`mv-expand`](./mvexpandoperator.md) 運算子， `mv-apply` 運算子僅支援陣列擴充。 不支援擴充屬性包。
 

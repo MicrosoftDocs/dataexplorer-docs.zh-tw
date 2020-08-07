@@ -1,18 +1,18 @@
 ---
 title: 使用 Azure 資料總管 .NET SDK 內嵌資料
-description: 在本文中，您將瞭解如何使用 .NET SDK 將資料內嵌（載入）至 Azure 資料總管。
+description: 在本文中，您將瞭解如何使用 .NET SDK，將) 資料的 (載入至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/07/2020
-ms.openlocfilehash: 8a31c4a482f047f9f92edd75fe1119c1729deaf9
-ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
+ms.openlocfilehash: 5e1502260c58c0acfcef4ead17a5ad779870cced
+ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86422999"
+ms.lasthandoff: 08/06/2020
+ms.locfileid: "87871998"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-net-sdk"></a>使用 Azure 資料總管 .NET SDK 內嵌資料 
 
@@ -80,7 +80,7 @@ var blobPath = "https://kustosamplefiles.blob.core.windows.net/samplefiles/Storm
 建立名為 `StormEvents` 的資料表，該資料表與 `StormEvents.csv` 檔案中的資料結構描述相符。
 
 > [!TIP]
-> 下列程式碼片段會為幾乎每次呼叫建立用戶端的實例。 這是為了讓每個程式碼片段可以個別執行。 在生產環境中，用戶端實例是可重新進入的，而且應該視需要保留。 即使使用多個資料庫（可以在命令層級指定資料庫），每個 URI 的單一用戶端實例就已足夠。
+> 下列程式碼片段會為幾乎每次呼叫建立用戶端的實例。 這是為了讓每個程式碼片段可以個別執行。 在生產環境中，用戶端實例是可重新進入的，而且應該視需要保留。 一個 URI 的單一用戶端實例就已足夠，即使在使用多個資料庫時，也可以在命令層級) 上指定 (資料庫。
 
 ```csharp
 var databaseName = "<DatabaseName>";
@@ -185,7 +185,7 @@ using (var kustoClient = KustoClientFactory.CreateCslAdminProvider(kustoConnecti
 將訊息放入佇列，以從 Blob 儲存體提取資料，並將該資料內嵌至 Azure 資料總管。 會建立連線至 Azure 資料總管叢集的資料內嵌端點，並建立另一個用戶端來使用該端點。 
 
 > [!TIP]
-> 下列程式碼片段會為幾乎每次呼叫建立用戶端的實例。 這是為了讓每個程式碼片段可以個別執行。 在生產環境中，用戶端實例是可重新進入的，而且應該視需要保留。 即使使用多個資料庫（可以在命令層級指定資料庫），每個 URI 的單一用戶端實例就已足夠。
+> 下列程式碼片段會為幾乎每次呼叫建立用戶端的實例。 這是為了讓每個程式碼片段可以個別執行。 在生產環境中，用戶端實例是可重新進入的，而且應該視需要保留。 一個 URI 的單一用戶端實例就已足夠，即使在使用多個資料庫時，也可以在命令層級) 上指定 (資料庫。
 
 ```csharp
 var ingestUri = "https://ingest-<ClusterName>.<Region>.kusto.windows.net";
@@ -205,7 +205,7 @@ using (var ingestClient = KustoIngestFactory.CreateQueuedIngestClient(ingestConn
             IgnoreFirstRecord = true
         };
 
-    ingestClient.IngestFromStorageAsync(blobPath, ingestionProperties: properties);
+    ingestClient.IngestFromStorageAsync(blobPath, ingestionProperties: properties).GetAwaiter().GetResult();
 }
 ```
 
