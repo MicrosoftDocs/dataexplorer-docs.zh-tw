@@ -7,45 +7,45 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/31/2019
-ms.openlocfilehash: 7025567c9495f3eeefe547dcd88b19962e1be934
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 10c2cf41ae1ab149b6eeffe35f94052069309152
+ms.sourcegitcommit: b8415e01464ca2ac9cd9939dc47e4c97b86bd07a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351636"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88028505"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>將 Azure 資料總管叢集部署至您的虛擬網路
 
-本文說明當您將 Azure 資料總管叢集部署至自訂 Azure 虛擬網路時，所存在的資源。 這項資訊可協助您將叢集部署到虛擬網路（VNet）中的子網。 如需 Azure 虛擬網路的詳細資訊，請參閱[什麼是 azure 虛擬網路？](/azure/virtual-network/virtual-networks-overview)
+本文說明當您將 Azure 資料總管叢集部署至自訂 Azure 虛擬網路時，所存在的資源。 這項資訊可協助您將叢集部署到虛擬網路 (VNet) 中的子網。 如需 Azure 虛擬網路的詳細資訊，請參閱[什麼是 azure 虛擬網路？](/azure/virtual-network/virtual-networks-overview)
 
    ![vnet 圖表](media/vnet-deployment/vnet-diagram.png)
 
-Azure 資料總管支援將叢集部署至您虛擬網路（VNet）中的子網。 這項功能可讓您：
+Azure 資料總管支援將叢集部署至您虛擬網路 (VNet) 中的子網。 這項功能可讓您：
 
-* 強制執行 Azure 資料總管叢集流量的[網路安全性群組](/azure/virtual-network/security-overview)（NSG）規則。
+* 在您的 Azure 資料總管叢集流量上強制執行[網路安全性群組](/azure/virtual-network/security-overview) (NSG) 規則。
 * 將內部部署網路連線到 Azure 資料總管叢集的子網。
-* 使用[服務端點](/azure/virtual-network/virtual-network-service-endpoints-overview)來保護您的資料連線來源（[事件中樞](/azure/event-hubs/event-hubs-about)和[事件方格](/azure/event-grid/overview)）。
+*  ([事件中樞](/azure/event-hubs/event-hubs-about)和[事件方格](/azure/event-grid/overview)) 使用[服務端點](/azure/virtual-network/virtual-network-service-endpoints-overview)來保護您的資料連線來源。
 
 ## <a name="access-your-azure-data-explorer-cluster-in-your-vnet"></a>在您的 VNet 中存取您的 Azure 資料總管叢集
 
-您可以使用每個服務（引擎和資料管理服務）的下列 IP 位址來存取 Azure 資料總管叢集：
+您可以針對每個服務 (引擎和資料管理服務) ，使用下列 IP 位址來存取 Azure 資料總管叢集：
 
 * **私人 IP**：用來存取 VNet 內的叢集。
 * **公用 IP**：用來從 VNet 外部存取叢集以進行管理和監視，以及做為從叢集啟動之輸出連線的來源位址。
 
 系統會建立下列 DNS 記錄來存取服務： 
 
-* `[clustername].[geo-region].kusto.windows.net`（引擎） `ingest-[clustername].[geo-region].kusto.windows.net`（資料管理）會對應到每個服務的公用 IP。 
+* `[clustername].[geo-region].kusto.windows.net` (引擎) `ingest-[clustername].[geo-region].kusto.windows.net` (資料管理) 會對應到每個服務的公用 IP。 
 
-* `private-[clustername].[geo-region].kusto.windows.net`（引擎） `private-ingest-[clustername].[geo-region].kusto.windows.net`（資料管理）會對應到每個服務的私人 IP。
+* `private-[clustername].[geo-region].kusto.windows.net` (引擎) `private-ingest-[clustername].[geo-region].kusto.windows.net` (資料管理) 會對應到每個服務的私人 IP。
 
 ## <a name="plan-subnet-size-in-your-vnet"></a>規劃 VNet 中的子網大小
 
-部署子網之後，就無法改變用來裝載 Azure 資料總管叢集的子網大小。 在您的 VNet 中，Azure 資料總管會針對每個 VM 使用一個私人 IP 位址，並為內部負載平衡器（引擎和資料管理）使用兩個私人 IP 位址。 Azure 網路也會針對每個子網使用五個 IP 位址。 Azure 資料總管會布建兩個適用于資料管理服務的 Vm。 系統會根據使用者設定調整容量來布建引擎服務 Vm。
+部署子網之後，就無法改變用來裝載 Azure 資料總管叢集的子網大小。 在您的 VNet 中，Azure 資料總管會針對每個 VM 使用一個私人 IP 位址，並為內部負載平衡器使用兩個私人 IP 位址， (引擎和資料管理) 。 Azure 網路也會針對每個子網使用五個 IP 位址。 Azure 資料總管會布建兩個適用于資料管理服務的 Vm。 系統會根據使用者設定調整容量來布建引擎服務 Vm。
 
 IP 位址總數：
 
-| 用途 | 位址數目 |
+| 使用 | 位址數目 |
 | --- | --- |
 | 引擎服務 | 每個實例1個 |
 | 資料管理服務 | 2 |
@@ -68,16 +68,16 @@ IP 位址總數：
 
 ### <a name="network-security-groups-configuration"></a>網路安全性群組設定
 
-[網路安全性群組（NSG）](/azure/virtual-network/security-overview)提供控制 VNet 內網路存取的能力。 您可以使用兩個端點來存取 Azure 資料總管： HTTPs （443）和 TDS （1433）。 下列 NSG 規則必須設定為允許存取這些端點，以進行叢集的管理、監視和適當操作。 其他規則則取決於您的安全性方針。
+[ (NSG 的網路安全性群組) ](/azure/virtual-network/security-overview)提供控制 VNet 內網路存取的能力。 您可以使用兩個端點來存取 Azure 資料總管： HTTPs (443) 和 TDS (1433) 。 下列 NSG 規則必須設定為允許存取這些端點，以進行叢集的管理、監視和適當操作。 其他規則則取決於您的安全性方針。
 
 #### <a name="inbound-nsg-configuration"></a>輸入 NSG 設定
 
 | **使用**   | **From**   | **若要**   | **通訊協定**   |
 | --- | --- | --- | --- |
-| 管理性  |[ADX 管理位址](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement （ServiceTag） | ADX 子網：443  | TCP  |
+| 管理性  |[ADX management addresses](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement (ServiceTag)  | ADX 子網：443  | TCP  |
 | 健康狀況監視  | [ADX 健全狀況監視位址](#health-monitoring-addresses)  | ADX 子網：443  | TCP  |
 | ADX 內部通訊  | ADX 子網：所有埠  | ADX 子網：所有埠  | 全部  |
-| 允許 Azure 負載平衡器輸入（健康情況探查）  | AzureLoadBalancer  | ADX 子網：80443  | TCP  |
+| 允許 Azure 負載平衡器輸入 (健康情況探查)   | AzureLoadBalancer  | ADX 子網：80443  | TCP  |
 
 #### <a name="outbound-nsg-configuration"></a>輸出 NSG 設定
 
@@ -87,8 +87,7 @@ IP 位址總數：
 | Azure Data Lake 的相依性  | ADX 子網  | AzureDataLake：443  | TCP  |
 | EventHub 內嵌和服務監視  | ADX 子網  | EventHub：443、5671  | TCP  |
 | 發行計量  | ADX 子網  | AzureMonitor：443 | TCP  |
-| Azure 監視器設定下載  | ADX 子網  | [Azure 監視器設定端點位址](#azure-monitor-configuration-endpoint-addresses)：443 | TCP  |
-| Active Directory （如果適用） | ADX 子網 | AzureActiveDirectory：443 | TCP |
+| Active Directory (（如果適用）)  | ADX 子網 | AzureActiveDirectory：443 | TCP |
 | 憑證授權單位 | ADX 子網 | 網際網路：80 | TCP |
 | 內部通訊  | ADX 子網  | ADX 子網：所有埠  | 全部  |
 | 用於 `sql\_request` 和外掛程式的埠 `http\_request`  | ADX 子網  | 網際網路：自訂  | TCP  |
@@ -188,71 +187,27 @@ IP 位址總數：
 | 西歐 | 23.97.212.5 |
 | 印度西部 | 23.99.5.162 |
 | 美國西部 | 23.99.5.162 |
-| 美國西部 2 | 23.99.5.162, 104.210.32.14 |    
-
-#### <a name="azure-monitor-configuration-endpoint-addresses"></a>Azure 監視器設定端點位址
-
-| 區域 | 位址 |
-| --- | --- |
-| 澳大利亞中部 | 52.148.86.165 |
-| 澳大利亞中部 2 | 52.148.86.165 |
-| 澳大利亞東部 | 52.148.86.165 |
-| 澳大利亞東南部 | 52.148.86.165 |
-| 巴西南部 | 13.68.89.19 |
-| 加拿大中部 | 13.90.43.231 |
-| 加拿大東部 | 13.90.43.231 |
-| 印度中部 | 13.71.25.187 |
-| 美國中部 | 52.173.95.68 |
-| 美國中部 EUAP | 13.90.43.231 |
-| 東亞 | 13.75.117.221 |
-| 美國東部 | 13.90.43.231 |
-| 美國東部 2 | 13.68.89.19 |    
-| 美國東部 2 EUAP | 13.68.89.19 |
-| 法國中部 | 52.174.4.112 |
-| 法國南部 | 52.174.4.112 |
-| 日本東部 | 13.75.117.221 |
-| 日本西部 | 13.75.117.221 |
-| 南韓中部 | 13.75.117.221 |
-| 南韓南部 | 13.75.117.221 |
-| 美國中北部 | 52.162.240.236 |
-| 歐洲北部 | 52.169.237.246 |
-| 南非北部 | 13.71.25.187 |
-| 南非西部 | 13.71.25.187 |
-| 美國中南部 | 13.84.173.99 |
-| 印度南部 | 13.71.25.187 |
-| 東南亞 | 52.148.86.165 |
-| 英國南部 | 52.174.4.112 |
-| 英國西部 | 52.169.237.246 |
-| US DoD 中部 | 13.72.37.111 |
-| US DoD 東部 | 13.72.37.111 |
-| 美國政府亞利桑那州 | 13.72.37.111 |
-| 美國政府德克薩斯州 | 13.72.37.111 |
-| 美國政府維吉尼亞州 | 13.72.37.111 |
-| 美國中西部 | 52.161.31.69 |
-| 西歐 | 52.174.4.112 |
-| 印度西部 | 13.71.25.187 |
-| 美國西部 | 40.78.70.148 |
-| 美國西部 2 | 52.151.20.103 |
+| 美國西部 2 | 23.99.5.162, 104.210.32.14 |
 
 ## <a name="disable-access-to-azure-data-explorer-from-the-public-ip"></a>停用從公用 IP 存取 Azure 資料總管
 
-如果您想要完全停用透過公用 IP 位址存取 Azure 資料總管，請在 NSG 中建立另一個輸入規則。 此規則必須有較低的[優先順序](/azure/virtual-network/security-overview#security-rules)（較高的數位）。 
+如果您想要完全停用透過公用 IP 位址存取 Azure 資料總管，請在 NSG 中建立另一個輸入規則。 此規則必須有較低的[優先順序](/azure/virtual-network/security-overview#security-rules) (較高的) 數目。 
 
-| **使用**   | **Source** | **來源服務標記** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | * * 通訊協定 * * | **動作** | * * 優先順序 * * |
+| **使用**   | **Source** | **來源服務標籤** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | * * 通訊協定 * * | **動作** | * * 優先順序 * * |
 | ---   | --- | --- | ---  | --- | --- | --- | --- | --- |
 | 停用來自網際網路的存取 | 服務標記 | Internet | *  | VirtualNetwork | * | 任意 | 拒絕 | 數位高於上述規則 |
 
-此規則可讓您只透過下列 DNS 記錄（對應至每個服務的私人 IP）連接到 Azure 資料總管叢集：
-* `private-[clustername].[geo-region].kusto.windows.net`搜尋引擎優化
-* `private-ingest-[clustername].[geo-region].kusto.windows.net`（資料管理）
+此規則可讓您只透過下列 DNS 記錄來連線到 Azure 資料總管叢集， (對應到每個服務) 的私人 IP：
+* `private-[clustername].[geo-region].kusto.windows.net` (引擎) 
+* `private-ingest-[clustername].[geo-region].kusto.windows.net` (資料管理) 
 
 ## <a name="expressroute-setup"></a>ExpressRoute 設定
 
-使用 ExpressRoute 將內部部署網路連線到 Azure 虛擬網路。 常見的設定是透過邊界閘道協定（BGP）會話通告預設路由（0.0.0.0/0）。 這會強制將來自虛擬網路的流量轉送到客戶的內部網路，以捨棄流量，進而導致輸出流量中斷。 若要克服此預設值，可以設定[使用者定義的路由（UDR）](/azure/virtual-network/virtual-networks-udr-overview#user-defined) （0.0.0.0/0），而下一個躍點將是*網際網路*。 由於 UDR 的優先順序高於 BGP，因此流量會傳送到網際網路。
+使用 ExpressRoute 將內部部署網路連線到 Azure 虛擬網路。 常見的設定是透過邊界閘道協定 (BGP) 會話，通告預設路由 (0.0.0.0/0) 。 這會強制將來自虛擬網路的流量轉送到客戶的內部網路，以捨棄流量，進而導致輸出流量中斷。 若要克服這個預設值，[使用者定義的路由 (UDR) ](/azure/virtual-network/virtual-networks-udr-overview#user-defined) (0.0.0.0/0) 可以設定，而下一個躍點將是*網際網路*。 由於 UDR 的優先順序高於 BGP，因此流量會傳送到網際網路。
 
 ## <a name="securing-outbound-traffic-with-firewall"></a>使用防火牆保護輸出流量
 
-如果您想要使用[Azure 防火牆](/azure/firewall/overview)或任何虛擬裝置來保護輸出流量，以限制功能變數名稱，防火牆中必須允許下列完整功能變數名稱（FQDN）。
+如果您想要使用[Azure 防火牆](/azure/firewall/overview)或任何虛擬裝置來保護輸出流量，以限制功能變數名稱，防火牆中必須允許下列 (FQDN) 的完整功能變數名稱。
 
 ```
 prod.warmpath.msftcloudes.com:443

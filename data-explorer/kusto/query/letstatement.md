@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的 Let 語句。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 02/13/2020
-ms.openlocfilehash: 2994a65e8726edaba22c6905290b4b69660e0586
-ms.sourcegitcommit: 284152eba9ee52e06d710cc13200a80e9cbd0a8b
+ms.date: 08/09/2020
+ms.openlocfilehash: 879b858904ac9f024f70dfef6096141a9ff81bd7
+ms.sourcegitcommit: b8415e01464ca2ac9cd9939dc47e4c97b86bd07a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86291537"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88028471"
 ---
 # <a name="let-statement"></a>Let 陳述式
 
@@ -129,16 +129,72 @@ Events
 | take n
 ```
 
+### <a name="use-let-statement-with-arguments-for-scalar-calculation"></a>使用 let 語句搭配純量計算的引數
+
+這個範例會使用 let 語句搭配純量計算的引數。 此查詢定義了 `MultiplyByN` 兩個數字相乘的函數。
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
+```kusto
+let MultiplyByN = (val:long, n:long) { val * n };
+range x from 1 to 5 step 1 
+| extend result = MultiplyByN(x, 5)
+```
+
+|x|result|
+|---|---|
+|1|5|
+|2|10|
+|3|15|
+|4|20|
+|5|25|
+
+下列範例會從輸入中移除開頭/尾端 `1` 的 () 。
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
+```kusto
+let TrimOnes = (s:string) { trim("1", s) };
+range x from 10 to 15 step 1 
+| extend result = TrimOnes(tostring(x))
+```
+
+|x|result|
+|---|---|
+|10|0|
+|11||
+|12|2|
+|13|3|
+|14|4|
+|15|5|
+
+
 ### <a name="use-multiple-let-statements"></a>使用多個 let 語句
 
 這個範例會定義兩個 let 語句，其中一個語句 (`foo2`) 使用另一個 (`foo1`) 。
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let foo1 = (_start:long, _end:long, _step:long) { range x from _start to _end step _step};
 let foo2 = (_step:long) { foo1(1, 100, _step)};
 foo2(2) | count
 // Result: 50
 ```
+
+### <a name="use-the-view-keyword-in-a-let-statement"></a>`view`在 let 語句中使用關鍵字
+
+這個範例會示範如何使用 let 語句搭配 `view` 關鍵字。
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
+```kusto
+let Range10 = view () { range MyColumn from 1 to 10 step 1 };
+let Range20 = view () { range MyColumn from 1 to 20 step 1 };
+search MyColumn == 5
+```
+
+|$table|MyColumn|
+|---|---|
+|Range10|5|
+|Range20|5|
+
 
 ### <a name="use-materialize-function"></a>使用具體化函式
 
