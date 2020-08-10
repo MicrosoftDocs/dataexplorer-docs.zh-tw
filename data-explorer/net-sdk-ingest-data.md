@@ -7,14 +7,20 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/07/2020
-ms.openlocfilehash: 5e1502260c58c0acfcef4ead17a5ad779870cced
-ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
+ms.openlocfilehash: 35dff1c9aa4ecb9bee96c5c7f2c54898abd45089
+ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87871998"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88039160"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-net-sdk"></a>使用 Azure 資料總管 .NET SDK 內嵌資料 
+
+> [!div class="op_single_selector"]
+> * [.NET](net-sdk-ingest-data.md)
+> * [Python](python-ingest-data.md)
+> * [節點](node-ingest-data.md)
+> * [Go](go-ingest-data.md)
 
 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 它提供兩個適用于 .NET 的用戶端程式庫：內嵌連結[庫](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Ingest/)和[資料連結庫](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data/)。 如需 .NET SDK 的詳細資訊，請參閱[關於 .NET sdk](/azure/data-explorer/kusto/api/netfx/about-the-sdk)。
 這些程式庫可讓您將資料內嵌 (載入) 至叢集，並從您的程式碼查詢資料。 在本文中，您會先在測試叢集中建立資料表和資料對應。 然後，您將叢集的擷取排入佇列並驗證結果。
@@ -27,7 +33,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 ## <a name="install-the-ingest-library"></a>安裝內嵌程式庫
 
-```
+```azurecli
 Install-Package Microsoft.Azure.Kusto.Ingest
 ```
 
@@ -37,13 +43,13 @@ Install-Package Microsoft.Azure.Kusto.Ingest
 
 若要驗證應用程式，Azure 資料總管 SDK 會使用您的 AAD 租使用者識別碼。 若要尋找您的租用戶識別碼，請使用下列 URL，並以您的網域取代 *YourDomain*。
 
-```
+```http
 https://login.windows.net/<YourDomain>/.well-known/openid-configuration/
 ```
 
 例如，如果您的網域為 *contoso.com*，則 URL 會是：[https://login.windows.net/contoso.com/.well-known/openid-configuration/](https://login.windows.net/contoso.com/.well-known/openid-configuration/)。 按一下此 URL 來查看結果；第一行如下所示。 
 
-```
+```console
 "authorization_endpoint":"https://login.windows.net/6babcaad-604b-40ac-a9d7-9fd97c0b779f/oauth2/authorize"
 ```
 

@@ -1,28 +1,34 @@
 ---
 title: 使用 Azure 資料總管 Node 程式庫擷取資料
-description: 在本文中,您將瞭解如何使用 Node.js 將數據引入(載入)到 Azure 資料資源管理員中。
+description: 在本文中，您將瞭解如何使用 Node.js，將) 資料的 (載入至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: 19da42437cfe1d7b63dfed4bd2b30716d691a0e3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 33117a41c48a6aa3a9fc33566f201e6009b288ac
+ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81495376"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88039177"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-node-library"></a>使用 Azure 資料總管 Node 程式庫擷取資料
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管提供兩個適用於 Node 的用戶端程式庫：[擷取程式庫](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-ingest)和[資料程式庫](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-data)。 這些程式庫可讓您將資料內嵌 (載入) 至叢集，並從您的程式碼查詢資料。 在本文中,您首先在測試群集中創建表和數據映射。 然後，您將叢集的擷取排入佇列並驗證結果。
+> [!div class="op_single_selector"]
+> * [.NET](net-sdk-ingest-data.md)
+> * [Python](python-ingest-data.md)
+> * [節點](node-ingest-data.md)
+> * [Go](go-ingest-data.md)
+
+Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管提供兩個適用於 Node 的用戶端程式庫：[擷取程式庫](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-ingest)和[資料程式庫](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-data)。 這些程式庫可讓您將資料內嵌 (載入) 至叢集，並從您的程式碼查詢資料。 在本文中，您會先在測試叢集中建立資料表和資料對應。 然後，您將叢集的擷取排入佇列並驗證結果。
 
 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
-除了 Azure 訂閱之外,還需要執行以下操作才能完成本文:
+除了 Azure 訂用帳戶之外，您還需要下列專案才能完成這篇文章：
 
 * [測試叢集和資料庫](create-cluster-database-portal.md)
 
@@ -76,7 +82,7 @@ const destTableMapping = "StormEvents_CSV_Mapping";
 
 ## <a name="set-source-file-information"></a>設定來源檔案資訊
 
-匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **風暴事件**樣本數據集包含來自[國家環境資訊中心](https://www.ncdc.noaa.gov/stormevents/)的天氣相關數據。
+匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents**範例資料集包含[國家/地區中心的天氣相關資料，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
 
 ```javascript
 const container = "samplefiles";
@@ -141,7 +147,7 @@ kustoClient.execute(kustoDatabase, query, (err, results) => {
 
 ## <a name="run-troubleshooting-queries"></a>執行疑難排解查詢
 
-登錄到[https://dataexplorer.azure.com](https://dataexplorer.azure.com)群集並連接到群集。 在資料庫中執行下列命令，以查看最後四個小時是否有任何擷取失敗。 先取代資料庫名稱，再執行。
+登入 [https://dataexplorer.azure.com](https://dataexplorer.azure.com) 並聯機到您的叢集。 在資料庫中執行下列命令，以查看最後四個小時是否有任何擷取失敗。 先取代資料庫名稱，再執行。
     
 ```Kusto
 .show ingestion failures
@@ -158,7 +164,7 @@ kustoClient.execute(kustoDatabase, query, (err, results) => {
 
 ## <a name="clean-up-resources"></a>清除資源
 
-如果您計劃關注我們的其他文章,請保留您創建的資源。 否則，請在資料庫中執行下列命令，來清除 `StormEvents` 資料表。
+如果您打算遵循其他文章，請保留您建立的資源。 否則，請在資料庫中執行下列命令，來清除 `StormEvents` 資料表。
 
 ```Kusto
 .drop table StormEvents

@@ -1,40 +1,46 @@
 ---
 title: 使用 Azure 資料總管 Python 程式庫內嵌資料
-description: 在本文中,您將瞭解如何使用 Python 將資料引入(載入)到 Azure 資料資源管理器中。
+description: 在本文中，您將瞭解如何使用 Python，將) 資料的 (載入至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: 28151476ce96fabc92e04078396119d0eb8c2f17
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1ebbbac5da0230ff00cbc13670b18f12fbedd2a1
+ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81501564"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88039194"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-python-library"></a>使用 Azure 資料總管 Python 程式庫內嵌資料
 
-在本文中,您可以使用 Azure 資料資源管理員 Python 庫引入資料。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管提供兩個適用於 Python 的用戶端程式庫：[內嵌程式庫](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-ingest)和[資料程式庫](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-data)。 這些庫使您能夠將數據引入或載入到群集中,並從代碼中查詢數據。
+> [!div class="op_single_selector"]
+> * [.NET](net-sdk-ingest-data.md)
+> * [Python](python-ingest-data.md)
+> * [節點](node-ingest-data.md)
+> * [Go](go-ingest-data.md)
 
-首先,在群集中創建表和數據映射。 然後，您將叢集的擷取排入佇列並驗證結果。
+在本文中，您會使用 Azure 資料總管 Python 程式庫內嵌資料。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管提供兩個適用於 Python 的用戶端程式庫：[內嵌程式庫](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-ingest)和[資料程式庫](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-data)。 這些程式庫可讓您將資料內嵌或載入至叢集，並從您的程式碼查詢資料。
 
-本文也可作為[Azure 筆記本](https://notebooks.azure.com/ManojRaheja/libraries/KustoPythonSamples/html/QueuedIngestSingleBlob.ipynb)提供。
+首先，在叢集中建立資料表和資料對應。 然後，您將叢集的擷取排入佇列並驗證結果。
 
-## <a name="prerequisites"></a>Prerequisites
+這篇文章也以[Azure 筆記本](https://notebooks.azure.com/ManojRaheja/libraries/KustoPythonSamples/html/QueuedIngestSingleBlob.ipynb)的形式提供。
+
+## <a name="prerequisites"></a>必要條件
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [免費建立帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
 
 * [Python 3.4+](https://www.python.org/downloads/)。
 
-* [叢集與資料庫](create-cluster-database-portal.md)。
+* 叢集[和資料庫](create-cluster-database-portal.md)。
 
 ## <a name="install-the-data-and-ingest-libraries"></a>安裝資料並內嵌程式庫
 
 安裝 *azure-kusto-data* 和 *azure-kusto-ingest*。
 
-```
+```python
 pip install azure-kusto-data
 pip install azure-kusto-ingest
 ```
@@ -51,13 +57,13 @@ from azure.kusto.data.helpers import dataframe_from_result_table
 
 為了驗證應用程式，Azure 資料總管會使用您的 AAD 租用戶識別碼。 若要尋找您的租用戶識別碼，請使用下列 URL，並以您的網域取代 *YourDomain*。
 
-```
+```http
 https://login.windows.net/<YourDomain>/.well-known/openid-configuration/
 ```
 
 例如，如果您的網域為 *contoso.com*，則 URL 會是：[https://login.windows.net/contoso.com/.well-known/openid-configuration/](https://login.windows.net/contoso.com/.well-known/openid-configuration/)。 按一下此 URL 來查看結果；第一行如下所示。 
 
-```
+```console
 "authorization_endpoint":"https://login.windows.net/6babcaad-604b-40ac-a9d7-9fd97c0b779f/oauth2/authorize"
 ```
 
@@ -70,7 +76,7 @@ KUSTO_INGEST_URI = "https://ingest-<ClusterName>.<Region>.kusto.windows.net:443/
 KUSTO_DATABASE = "<DatabaseName>"
 ```
 
-現在來建構連接字串。 此範例使用服務驗證來存取叢集。 您還可以使用[AAD 應用程式憑證](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L24)[、AAD 應用程式金鑰](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L20)以及[AAD 使用者與密碼](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L34)。
+現在來建構連接字串。 此範例使用服務驗證來存取叢集。 您也可以使用[aad 應用程式憑證](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L24)、 [aad 應用程式金鑰](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L20)，以及[aad 使用者和密碼](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L34)。
 
 您可以在稍後的步驟中建立目的地資料表和對應。
 
@@ -87,7 +93,7 @@ DESTINATION_TABLE_COLUMN_MAPPING = "StormEvents_CSV_Mapping"
 
 ## <a name="set-source-file-information"></a>設定來源檔案資訊
 
-匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **風暴事件**樣本數據集包含來自[國家環境資訊中心](https://www.ncdc.noaa.gov/stormevents/)的天氣相關數據。
+匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents**範例資料集包含[國家/地區中心的天氣相關資料，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
 
 ```python
 from azure.storage.blob import BlockBlobService
@@ -160,7 +166,7 @@ dataframe_from_result_table(RESPONSE.primary_results[0])
 
 ## <a name="run-troubleshooting-queries"></a>執行疑難排解查詢
 
-登錄到[https://dataexplorer.azure.com](https://dataexplorer.azure.com)群集並連接到群集。 在資料庫中執行下列命令，以查看最後四個小時是否有任何擷取失敗。 先取代資料庫名稱，再執行。
+登入 [https://dataexplorer.azure.com](https://dataexplorer.azure.com) 並聯機到您的叢集。 在資料庫中執行下列命令，以查看最後四個小時是否有任何擷取失敗。 先取代資料庫名稱，再執行。
 
 ```Kusto
 .show ingestion failures
@@ -177,7 +183,7 @@ dataframe_from_result_table(RESPONSE.primary_results[0])
 
 ## <a name="clean-up-resources"></a>清除資源
 
-如果您計劃關注我們的其他文章,請保留您創建的資源。 否則，請在資料庫中執行下列命令，來清除 StormEvents 資料表。
+如果您打算遵循其他文章，請保留您建立的資源。 否則，請在資料庫中執行下列命令，來清除 StormEvents 資料表。
 
 ```Kusto
 .drop table StormEvents

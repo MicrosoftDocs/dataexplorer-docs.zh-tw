@@ -7,18 +7,18 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/12/2020
-ms.openlocfilehash: 8a4a4e68333255c322708993b1c9429a89ae7a00
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: bf479a7248033d2aa70a8e09b039814361c78031
+ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373757"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88039228"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-kibana-with-the-k2bridge-open-source-connector"></a>使用 K2Bridge 開放原始碼連接器將 Kibana 中 Azure 資料總管的資料視覺化
 
-K2Bridge （Kibana-Kusto Bridge）可讓您使用 Azure 資料總管做為資料來源，並將 Kibana 中的資料視覺化。 K2Bridge 是[開放原始](https://github.com/microsoft/K2Bridge)碼的容器化應用程式。 它會作為 Kibana 實例與 Azure 資料總管叢集之間的 proxy。 本文說明如何使用 K2Bridge 來建立該連接。
+K2Bridge (Kibana-Kusto Bridge) 可讓您使用 Azure 資料總管做為資料來源，並將 Kibana 中的資料視覺化。 K2Bridge 是[開放原始](https://github.com/microsoft/K2Bridge)碼的容器化應用程式。 它會作為 Kibana 實例與 Azure 資料總管叢集之間的 proxy。 本文說明如何使用 K2Bridge 來建立該連接。
 
-K2Bridge 會將 Kibana 查詢轉譯為 Kusto 查詢語言（KQL），並將 Azure 資料總管結果傳送回 Kibana。
+K2Bridge 會將 Kibana 查詢轉譯為 Kusto 查詢語言 (KQL) ，並將 Azure 資料總管結果傳回 Kibana。
 
    ![透過 K2Bridge Kibana 與 Azure 資料總管的連線](media/k2bridge/k2bridge-chart.png)
 
@@ -34,25 +34,25 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
 
    [![系結至 Azure 資料總管的 Kibana 頁面](media/k2bridge/k2bridge-kibana-page.png)](media/k2bridge/k2bridge-kibana-page.png#lightbox)
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 在您可以將 Kibana 中的 Azure 資料總管的資料視覺化之前，請備妥下列內容：
 
 * [Helm v3](https://github.com/helm/helm#install)，這是 Kubernetes 套件管理員。
 
-* Azure Kubernetes Service （AKS）叢集或任何其他 Kubernetes 叢集。 已測試並驗證版本1.14 到1.16。 如果您需要 AKS 叢集，請參閱如何[使用 Azure CLI](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough)或[使用 Azure 入口網站](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough-portal)部署 AKS 叢集。
+* Azure Kubernetes Service (AKS) 叢集或任何其他的 Kubernetes 叢集。 已測試並驗證版本1.14 到1.16。 如果您需要 AKS 叢集，請參閱如何[使用 Azure CLI](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough)或[使用 Azure 入口網站](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough-portal)部署 AKS 叢集。
 
 * [Azure 資料總管](create-cluster-database-portal.md)叢集，包括叢集的 URL 和資料庫名稱。
 
-* 已獲授權可在 Azure 資料總管中查看資料的 Azure Active Directory （Azure AD）服務主體，包括用戶端識別碼和用戶端密碼。
+* Azure Active Directory (Azure AD) 服務主體授權在 Azure 資料總管中查看資料，包括用戶端識別碼和用戶端密碼。
 
     我們建議您使用具有檢視器許可權的服務主體，並不鼓勵您使用較高層級的許可權。 [設定 Azure AD 服務主體的叢集 [view] 許可權](manage-database-permissions.md#manage-permissions-in-the-azure-portal)。
 
     如需 Azure AD 服務主體的詳細資訊，請參閱[建立 Azure AD 服務主體](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#create-an-azure-active-directory-application)。
 
-## <a name="run-k2bridge-on-azure-kubernetes-service-aks"></a>在 Azure Kubernetes Service 上執行 K2Bridge （AKS）
+## <a name="run-k2bridge-on-azure-kubernetes-service-aks"></a>在 Azure Kubernetes Service (AKS 上執行 K2Bridge) 
 
-根據預設，K2Bridge 的 Helm 圖會參考位於 Microsoft Container Registry （MCR）中的公開可用映射。 MCR 不需要任何認證。
+根據預設，K2Bridge 的 Helm 圖會參考位於 Microsoft Container Registry (MCR) 中的公開可用映射。 MCR 不需要任何認證。
 
 1. 下載必要的 Helm 圖表。
 
@@ -69,7 +69,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
 
         1. 從[GitHub](https://github.com/microsoft/K2Bridge)複製存放庫。
         1. 移至 K2Bridges 根存放庫目錄。
-        1. 請執行這個命令：
+        1. 執行此命令：
 
             ```bash
             helm dependency update charts/k2bridge
@@ -102,7 +102,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
 
         在[[設定] 中，](https://github.com/microsoft/K2Bridge/blob/master/docs/configuration.md)您可以找到一組完整的設定選項。
 
-    1. 上一個命令的輸出會建議用來部署 Kibana 的下一個 Helm 命令。 （選擇性）執行此命令：
+    1. <a name="install-kibana-service"></a>上一個命令的輸出會建議用來部署 Kibana 的下一個 Helm 命令。 （選擇性）執行此命令：
 
         ```bash
         helm install kibana elastic/kibana -n k2bridge --set image=docker.elastic.co/kibana/kibana-oss --set imageTag=6.8.5 --set elasticsearchHosts=http://k2bridge:8080
@@ -118,7 +118,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
 
     1. 向使用者公開 Kibana。 有多種方法可以這麼做。 您所使用的方法主要取決於您的使用案例。
 
-        例如，您可以將服務公開為 Load Balancer 服務。 若要這麼做，請將 **--set 服務**新增至[先前的 K2Bridge Helm **install**命令](#install-k2bridge-chart)。
+        例如，您可以將服務公開為 Load Balancer 服務。 若要這麼做，請將 **--set 服務**新增至[先前的 Kibana Helm **install**命令](#install-kibana-service)。
 
         然後執行此命令：
 
@@ -133,7 +133,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
         kibana-kibana   LoadBalancer   xx.xx.xx.xx    <pending>     5601:30128/TCP   4m24s
         ```
 
-        接著，您可以使用顯示的 [產生的外部 IP] 值。 使用它來存取 Kibana，方法是開啟瀏覽器並前往 [ \< 外部 IP \> ： 5601]。
+        接著，您可以使用顯示的 [產生的外部 IP] 值。 使用它來存取 Kibana，方法是開啟瀏覽器並前往 \<EXTERNAL-IP\> ：5601。
 
 1. 設定索引模式來存取您的資料。
 
@@ -142,7 +142,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
     1. 開啟 Kibana。
     1. 流覽至 [**管理**]。
     1. 選取 [**索引模式**]。
-    1. 建立索引模式。 索引的名稱必須完全符合資料表名稱或函數名稱，但不含星號（ \* ）。 您可以從清單中複製相關的行。
+    1. 建立索引模式。 索引的名稱必須完全符合資料表名稱或函式名稱，而不含星號 (\*) 。 您可以從清單中複製相關的行。
 
 > [!Note]
 > 若要在其他 Kubernetes 提供者上執行 K2Bridge，請變更 values. yaml 中的 Elasticsearch **storageClassName**值，使其符合提供者建議的值。
@@ -176,7 +176,7 @@ K2Bridge 支援 Kibana 的 [**探索**] 索引標籤，您可以在其中：
         * 搜尋「錯誤」以尋找包含此值的所有記錄。
         * 搜尋 "status： 200" 以取得狀態值為200的所有記錄。
     * 使用邏輯運算子**AND**、 **OR**和**NOT**。
-    * 使用星號（ \* ）和問號（？）萬用字元。 例如，查詢 "destination_city： L *" 符合記錄，其中目的地-城市值開頭為 "L" 或 "l"。 （K2Bridge 不區分大小寫）。
+    * 使用星號 (\*) 和問號 (？ ) 萬用字元。 例如，查詢 "destination_city： L *" 符合記錄，其中目的地-城市值開頭為 "L" 或 "l"。  (K2Bridge 不區分大小寫。 ) 
 
     ![執行查詢](media/k2bridge/k2bridge-run-query.png)
 
