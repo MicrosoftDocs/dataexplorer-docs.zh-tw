@@ -7,12 +7,12 @@ ms.reviewer: herauch
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/05/2020
-ms.openlocfilehash: 4c3a4a522192510ffb1a4ac2a1c46d9ddaf7c823
-ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
+ms.openlocfilehash: 0b37d65d095806d108a632c315820d164f45a520
+ms.sourcegitcommit: 39a055e246539ac64d651abb42531892dd4393e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87877145"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88028888"
 ---
 # <a name="create-business-continuity-and-disaster-recovery-solutions-with-azure-data-explorer"></a>使用 Azure 資料總管建立商務持續性和嚴重損壞修復解決方案
 
@@ -40,7 +40,7 @@ Azure 資料總管不支援自動保護整個 Azure 區域中斷的情況。 這
 在每個複本中複寫管理活動，使其具有相同的叢集設定。
 
 1. 在每個複本上建立相同的： 
-    * [Databases]: You can use the [Azure portal to create a new database](create-cluster-database-portal.md#create-a-database) or one of our [SDKs](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/kusto/Microsoft.Azure.Management.Kusto).
+    * 資料庫：您可以使用[Azure 入口網站](create-cluster-database-portal.md#create-a-database)或我們的其中一個[sdk](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/kusto/Microsoft.Azure.Management.Kusto)來建立新的資料庫。
     * [資料表](kusto/management/create-table-command.md)
     * [對應](kusto/management/create-ingestion-mapping-command.md)
     * [原則](kusto/management/policies.md)
