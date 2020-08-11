@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
-ms.openlocfilehash: 8358bf9a8eb0dab38b8f5847521e069f21fe4a2c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6ca5b5a4e6af8ece7d6f7a6543782665062b5d80
+ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346689"
+ms.lasthandoff: 08/11/2020
+ms.locfileid: "88072407"
 ---
 # <a name="mv-expand-operator"></a>mv-expand 運算子
 
@@ -23,9 +23,9 @@ ms.locfileid: "87346689"
 
 ## <a name="syntax"></a>語法
 
-*T* `| mv-expand ` [ `bagexpansion=` （ `bag`  |  `array` ）] [ `with_itemindex=` *IndexColumnName*] *columnname* [ `,` *columnname* ...] [ `limit` *Rowlimit*]
+*T* `| mv-expand ` [ `bagexpansion=` (`bag`  |  `array`) ] [ `with_itemindex=` *IndexColumnName*] *ColumnName* [ `,` *columnname* ...] [ `limit` *Rowlimit*]
 
-*T* `| mv-expand ` [ `bagexpansion=` （ `bag`  |  `array` ）] [*Name* `=` ]*產生陣列*[ `to typeof(` *Typename* `)` ] [，[*Name* `=` ]*產生陣列*[ `to typeof(` *Typename* `)` ] ...] [ `limit` *Rowlimit*]
+*T* `| mv-expand ` [ `bagexpansion=` (`bag`  |  `array`) ] [*Name* `=` ]*產生陣列*[ `to typeof(` *Typename* `)` ] [，[*name* `=` ]*產生陣列*[ `to typeof(` *Typename* `)` ] ...] [ `limit` *Rowlimit*]
 
 ## <a name="arguments"></a>引數
 
@@ -38,18 +38,18 @@ ms.locfileid: "87346689"
   > [!Note]
   > 運算子的舊版和過時形式的 `mvexpand` 預設資料列限制為128。
 
-* *IndexColumnName：* 如果 `with_itemindex` 指定了，輸出將會包含一個額外的資料行（名為*IndexColumnName*），其中包含原始展開集合中專案的索引（從0開始）。 
+* *IndexColumnName：* 如果 `with_itemindex` 指定了，輸出將會包含名為*IndexColumnName*的其他資料行 () ，其中包含從原始展開的集合中的專案 0) 開始的索引 (。 
 
 ## <a name="returns"></a>傳回
 
 在命名或陣列運算式中，任何陣列中的每個值都有多個資料列。
-如果指定了多個資料行或運算式，它們就會以平行方式展開。 針對每個輸入資料列，會有多個輸出資料列，因為最長的展開運算式中有元素（較短的清單會以 null 填補）。 如果資料列中的值是空的陣列，資料列就會展開為 [無] （不會顯示在結果集中）。 不過，如果資料列中的值不是陣列，資料列就會保留在結果集中。 
+如果指定了多個資料行或運算式，它們就會以平行方式展開。 針對每個輸入資料列，會有多個輸出資料列，因為最長的展開運算式中有元素 (較短的清單會以 null 填補) 。 如果資料列中的值是空的陣列，資料列就會展開為沒有任何 (不會顯示在結果集) 中。 不過，如果資料列中的值不是陣列，資料列就會保留在結果集中。 
 
 展開的資料行一律具有動態類型。 如果您想要計算或彙總多個值，請使用轉換函式，例如 `todatetime()` 或 `tolong()`。
 
 有兩種屬性包展開模式可受到支援︰
 * `bagexpansion=bag`︰屬性包會展開為單一項目屬性包。 此模式為預設展開。
-* `bagexpansion=array`：屬性包會展開為兩個元素的索引 `[` *鍵值* `,` *value* `]` 陣列結構，允許對索引鍵和值的統一存取（也就是在屬性名稱上執行相異計數匯總）。 
+* `bagexpansion=array`：屬性包會展開為兩個元素的索引 `[` *鍵值* `,` *value* `]` 陣列結構，允許對索引鍵和值的統一存取 (也就是在屬性名稱) 上執行相異計數匯總。 
 
 ## <a name="examples"></a>範例
 
@@ -88,21 +88,28 @@ datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), d
 
 如果您想要取得可展開兩個數據行的笛卡兒乘積，請在另一個後面展開一個：
 
-<!-- csl: https://help.kusto.windows.net:443/Samples -->
+<!-- csl: https://kuskusdfv3.kusto.windows.net/Kuskus -->
 ```kusto
-datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), dynamic([5])]
-| mv-expand b 
+datatable (a:int, b:dynamic, c:dynamic)
+  [
+  1,
+  dynamic({"prop1":"a", "prop2":"b"}),
+  dynamic([5, 6])
+  ]
+| mv-expand b
 | mv-expand c
 ```
 
 |a|b|c|
 |---|---|---|
 |1|{"prop1"： "a"}|5|
+|1|{"prop1"： "a"}|6|
 |1|{"this.prop2"： "b"}|5|
+|1|{"this.prop2"： "b"}|6|
 
 ### <a name="convert-output"></a>轉換輸出
 
-如果您想要強制將 mv-expand 的輸出設為特定類型（預設為動態），請使用 `to typeof` ：
+如果您想要強制將 mv-展開為特定類型 (預設為動態) ，請使用 `to typeof` ：
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -141,5 +148,5 @@ range x from 1 to 4 step 1
 
 * 如需更多範例，請參閱經過一段[時間的即時活動圖表計數](./samples.md#chart-concurrent-sessions-over-time)。
 * [mv-apply](./mv-applyoperator.md)運算子。
-* [摘要 make_list （）](makelist-aggfunction.md)，這是 mv-expand 的相反功能。
-* [bag_unpack （）](bag-unpackplugin.md)外掛程式，可使用屬性包索引鍵將動態 JSON 物件展開為數據行。
+* [摘要 make_list ( # B1 ](makelist-aggfunction.md)，這是 mv-expand 的相反功能。
+* [bag_unpack ( # B1](bag-unpackplugin.md)外掛程式，以使用屬性包索引鍵將動態 JSON 物件擴充至資料行。

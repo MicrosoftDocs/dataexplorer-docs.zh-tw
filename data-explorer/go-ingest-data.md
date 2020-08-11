@@ -1,18 +1,18 @@
 ---
 title: 使用 Azure 資料總管 Go SDK 內嵌資料
 description: 在本文中，您將瞭解如何使用 Go SDK，將) 資料的 (載入至 Azure 資料總管。
-author: abhirockzz
-ms.author: abhishgu
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/10/2020
-ms.openlocfilehash: 38063f3e00ebd22da17d48abba1dd9b3510273ec
-ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
+ms.openlocfilehash: 010ee029c4f16248b0f9249d7331da436439cdc0
+ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88039726"
+ms.lasthandoff: 08/11/2020
+ms.locfileid: "88072356"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-go-sdk"></a>使用 Azure 資料總管 Go SDK 內嵌資料 
 
@@ -26,7 +26,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 在本文中，您會先在測試叢集中建立資料表和資料對應。 接著，您可以使用 Go SDK 將內嵌加入叢集，並驗證結果。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 安裝 [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)。

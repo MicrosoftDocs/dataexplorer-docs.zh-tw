@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: bd3e7a77a4de46b6dcebb2f58c98009a9edddb43
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: f56bd1c9f87833f7c1a9d29580a71557fedb894c
+ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87338604"
+ms.lasthandoff: 08/11/2020
+ms.locfileid: "88072390"
 ---
 # <a name="using-hll-and-tdigest"></a>使用 hll() 和 tdigest()
 
@@ -27,7 +27,8 @@ ms.locfileid: "87338604"
 
 > [!NOTE]
 > 在某些情況下，或彙總函式所產生的動態物件 `hll` `tdigest` 可能會很大，而且會超過編碼原則中的預設 MaxValueSize 屬性。 若是如此，物件將會內嵌為 null。
-例如，當以精確度層級4保存函式的輸出時 `hll` ，物件的大小 `hll` 會超過預設 MaxValueSize，也就是1mb。
+> 例如，當以精確度層級4保存函式的輸出時 `hll` ，物件的大小 `hll` 會超過預設 MaxValueSize，也就是1mb。
+> 若要避免這個問題，請修改資料行的編碼原則，如下列範例所示。
 
 ```kusto
 range x from 1 to 1000000 step 1
@@ -91,7 +92,7 @@ PageViewsHllTDigest
 | project Timestamp , dcount_hll(merged_hll)
 ```
 
-|Timestamp|`dcount_hll_merged_hll`|
+|時間戳記|`dcount_hll_merged_hll`|
 |---|---|
 |2016-05-01 12：00：00.0000000|20056275|
 |2016-05-02 00：00：00.0000000|38797623|
@@ -106,7 +107,7 @@ PageViewsHllTDigest
 | project Timestamp , dcount_hll(merged_hll)
 ```
 
-|Timestamp|`dcount_hll_merged_hll`|
+|時間戳記|`dcount_hll_merged_hll`|
 |---|---|
 |2016-05-01 00：00：00.0000000|20056275|
 |2016-05-02 00：00：00.0000000|64135183|
@@ -120,7 +121,7 @@ PageViewsHllTDigest
 | project Timestamp , percentile_tdigest(merged_tdigests, 95, typeof(long))
 ```
 
-|Timestamp|`percentile_tdigest_merged_tdigests`|
+|時間戳記|`percentile_tdigest_merged_tdigests`|
 |---|---|
 |2016-05-01 12：00：00.0000000|170200|
 |2016-05-02 00：00：00.0000000|152975|
@@ -145,7 +146,7 @@ PageViewsHllTDigest
 
 當您需要取得這些值的最終結果時，查詢可能會使用 `hll` / `tdigest` 合併： [`hll-merge()`](hll-merge-aggfunction.md) / [`tdigest_merge()`](tdigest-merge-aggfunction.md) 。 然後，在取得合併的值之後， [`percentile_tdigest()`](percentile-tdigestfunction.md)  /  [`dcount_hll()`](dcount-hllfunction.md) 就可以在這些合併值上叫用，以取得 `dcount` 或百分位數的最終結果。
 
-假設有一個資料表 PageViews，每日內嵌資料，每日您想要計算每分鐘在日期 = datetime （2016-05-01 18：00：00.0000000）之後所看到的相異頁面計數。
+假設有一個資料表 PageViews，每日內嵌資料，每日您想要計算每分鐘在日期 = datetime (2016-05-01 18：00： 00.0000000) 的相異頁面計數。
 
 執行下列查詢：
 
@@ -155,22 +156,22 @@ PageViews
 | summarize percentile(BytesDelivered, 90), dcount(Page,2) by bin(Timestamp, 1d)
 ```
 
-|Timestamp|percentile_BytesDelivered_90|dcount_Page|
+|時間戳記|percentile_BytesDelivered_90|dcount_Page|
 |---|---|---|
 |2016-05-01 00：00：00.0000000|83634|20056275|
 |2016-05-02 00：00：00.0000000|82770|64135183|
 |2016-05-03 00：00：00.0000000|72920|13685621|
 
-此查詢將會在您每次執行此查詢時匯總所有值（例如，如果您想要每天執行多次）。
+此查詢將會在您每次執行此查詢時匯總所有值 (例如，如果您想要一天執行多次) 。
 
-如果您將 `hll` 和 `tdigest` 值（也就是 `dcount` 和百分位數的中繼結果）儲存到臨時表中， `PageViewsHllTDigest` 使用更新原則或設定/附加命令，您只能合併值，然後使用 `dcount_hll` / `percentile_tdigest` 下列查詢：
+如果您儲存 `hll` 和 `tdigest` 值 (這是在臨時表中) 的中繼結果 `dcount` 和百分位數， `PageViewsHllTDigest` 請使用更新原則或 set/append 命令，只會合並值，然後使用 `dcount_hll` / `percentile_tdigest` 下列查詢：
 
 ```kusto
 PageViewsHllTDigest
 | summarize  percentile_tdigest(merge_tdigests(tdigestBytesDel), 90), dcount_hll(hll_merge(hllPage)) by bin(Timestamp, 1d)
 ```
 
-|Timestamp|`percentile_tdigest_merge_tdigests_tdigestBytesDel`|`dcount_hll_hll_merge_hllPage`|
+|時間戳記|`percentile_tdigest_merge_tdigests_tdigestBytesDel`|`dcount_hll_hll_merge_hllPage`|
 |---|---|---|
 |2016-05-01 00：00：00.0000000|84224|20056275|
 |2016-05-02 00：00：00.0000000|83486|64135183|
@@ -181,7 +182,7 @@ PageViewsHllTDigest
 ## <a name="example"></a>範例
 
 保留查詢。
-假設您有一個資料表，其摘要說明每個維琪百科頁面的觀看時間（取樣大小為1千萬個），而且您想要尋找每個 date1 2 日的百分比，分別是在 date1 和 date2 中，相對於在 date1 上所看到的頁面（date1 < date2）。
+假設您有一個資料表，其中摘要說明每個維琪百科頁面的觀看時間 (範例大小1千萬個) ，而您想要尋找每個 date1 2 日的百分比，分別是在 date1 和 date2 中，相對於在 date1 (date1 < date2) 上所看到的頁面。
   
 簡單的方式是使用聯結和摘要運算子：
 

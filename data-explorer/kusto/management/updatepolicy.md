@@ -8,20 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: 7eb5adc76c963065940365973aadc5281ff5f553
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 9b2d35c796cfd1f41dc2fd8e9385a4c446000b86
+ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803400"
+ms.lasthandoff: 08/11/2020
+ms.locfileid: "88072441"
 ---
 # <a name="update-policy-overview"></a>更新原則總覽
 
-[更新原則](update-policy.md)會指示 Kusto 在每次將新資料插入來源資料表時，自動將資料附加至目標資料表。 更新原則的查詢會在插入來源資料表的資料上執行。 例如，原則可讓您建立一個資料表做為另一個資料表的篩選視圖。 新的資料表可以有不同的架構、保留原則等等。 
-
-更新原則受限於一般內嵌的相同限制和最佳作法。 原則會以叢集的大小向外延展，如果擷取在大型 bulks 中執行，則會更有效率地運作。
+[更新原則](update-policy.md)會指示 Kusto 在每次新資料插入來源資料表時，自動將資料附加至目標資料表，這是根據插入來源資料表之資料上執行的轉換查詢。
 
 :::image type="content" source="images/updatepolicy/update-policy-overview.png" alt-text="Azure 資料總管中的更新原則總覽":::
+
+例如，原則可讓您建立一個資料表做為另一個資料表的篩選視圖。 新的資料表可以有不同的架構、保留原則等等。 
+
+更新原則受限於一般內嵌的相同限制和最佳作法。 原則會以叢集的大小向外延展，如果擷取在大型 bulks 中執行，則會更有效率地運作。
 
 > [!NOTE]
 > 定義更新原則的來源資料表和資料表必須位於相同的資料庫中。
