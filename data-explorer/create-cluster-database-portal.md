@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 07/22/2019
-ms.openlocfilehash: ed0c570449a0c21e9eace1273228539db7c208da
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cdd44f6d90e5549153cb1a1a0673a2e054839f1f
+ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491673"
+ms.lasthandoff: 08/06/2020
+ms.locfileid: "87871949"
 ---
 # <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>快速入門：建立 Azure 資料總管叢集與資料庫
 
@@ -106,9 +106,12 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 1. 若要停止叢集，請在 [概觀]  索引標籤頂端選取 [停止]  。
 
-    叢集停止時，資料無法供查詢之用，且無法內嵌新的資料。
+    :::image type="content" source="media/create-cluster-database-portal/stop-button.png" alt-text="[停止] 按鈕":::
 
-1. 若要重新啟動叢集，請在 [概觀]  索引標籤頂端選取 [啟動]  。
+    > [!NOTE]
+    > 叢集停止時，資料無法供查詢之用，且無法內嵌新的資料。
+
+1. 若要重新啟動叢集，請在 [概觀]**** 索引標籤頂端選取 [啟動]****。
 
     叢集重新啟動後，約需要 10 分鐘才可供使用 (與最初佈建時相同)。 此外還需要額外的時間將資料載入到經常性快取中。  
 
@@ -116,9 +119,9 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 如果您打算按照其他快速入門和教學課程繼續進行，請保留您建立的資源。 否則，請清除您的資源群組，以避免產生費用。
 
-1. 在 Azure 入口網站中選取靠左側的 [資源群組]  ，然後選取包含資料總管叢集的資源群組。  
+1. 在 Azure 入口網站中選取靠左側的 [資源群組]****，然後選取包含資料總管叢集的資源群組。  
 
-1. 選取 [刪除資源群組]  以刪除整個資源群組。 如果使用現有的資源群組，則可以選擇僅刪除資料總管叢集。
+1. 選取 [刪除資源群組]**** 以刪除整個資源群組。 如果使用現有的資源群組，則可以選擇僅刪除資料總管叢集。
 
 ## <a name="next-steps"></a>後續步驟
 
