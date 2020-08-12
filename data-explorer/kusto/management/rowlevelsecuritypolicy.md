@@ -1,6 +1,6 @@
 ---
-title: 資料列層級安全性（預覽）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的資料列層級安全性（預覽）。
+title: 資料列層級安全性 (Preview) -Azure 資料總管
+description: 本文說明 Azure 資料總管中資料列層級安全性 (Preview) 。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: 9952a7a7d95f03ee431b699a1833aa23b21d341b
-ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
+ms.openlocfilehash: a82c4b48358a90460f917f181b73b718f6c5e455
+ms.sourcegitcommit: c7b16409995087a7ad7a92817516455455ccd2c5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/23/2020
-ms.locfileid: "87106357"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88148110"
 ---
-# <a name="row-level-security-preview"></a>資料列層級安全性（預覽）
+# <a name="row-level-security-preview"></a>資料列層級安全性 (預覽) 
 
 使用群組成員資格或執行內容來控制對資料庫資料表中之資料列的存取。
 
-資料列層級安全性（RLS）可簡化安全性的設計和編碼。 它可讓您對應用程式中的資料列存取套用限制。 例如，限制使用者存取其部門的相關資料列，或限制客戶只能存取其公司相關的資料。
+資料列層級安全性 (RLS) 簡化了安全性的設計和編碼。 它可讓您對應用程式中的資料列存取套用限制。 例如，限制使用者存取其部門的相關資料列，或限制客戶只能存取其公司相關的資料。
 
 存取限制邏輯位於資料庫層，而不是遠離另一個應用層中的資料。 資料庫系統會在每次嘗試從任何層存取資料時套用存取限制。 這個邏輯藉由減少安全性系統的介面區，讓您的安全性系統更可靠且更穩固。
 
@@ -105,7 +105,7 @@ union DataForGroup1, DataForGroup2, DataForGroup3
 
 首先，定義接收資料表名稱做為字串參數的函式，並使用運算子來參考資料表 `table()` 。 
 
-例如:
+例如：
 
 ```
 .create-or-alter function RLSForCustomersTables(TableName: string) {
@@ -125,7 +125,7 @@ union DataForGroup1, DataForGroup2, DataForGroup3
 
 ### <a name="produce-an-error-upon-unauthorized-access"></a>在未經授權的存取時產生錯誤
 
-如果您想要非授權的資料表使用者收到錯誤，而不是傳回空的資料表，請使用 `[assert()](../query/assert-function.md)` 函數。 下列範例顯示如何在 RLS 函式中產生此錯誤：
+如果您想要非授權的資料表使用者收到錯誤，而不是傳回空的資料表，請使用 [`assert()`](../query/assert-function.md) 函數。 下列範例顯示如何在 RLS 函式中產生此錯誤：
 
 ```
 .create-or-alter function RLSForCustomersTables() {
@@ -139,10 +139,10 @@ union DataForGroup1, DataForGroup2, DataForGroup3
 ## <a name="more-use-cases"></a>更多使用案例
 
 * 「撥打電話中心」支援人員可以透過數個數字的社會安全號碼或信用卡號碼來識別呼叫者。 這些號碼不應完全公開給支援人員。 RLS 原則可以套用在資料表上，以遮罩任何查詢結果集中任何社交安全性或信用卡號碼的最後四個數字。
-* 設定 RLS 原則來遮罩個人識別資訊（PII），並讓開發人員查詢生產環境以進行疑難排解，而不違反合規性法規。
+* 設定 RLS 原則來遮罩個人識別資訊 (PII) ，並可讓開發人員查詢生產環境以進行疑難排解，而不違反合規性法規。
 * 醫院可以設定 RLS 原則，讓護士只能針對其病人查看資料列。
 * 銀行可以根據員工的營業單位或角色，設定 RLS 原則來限制財務資料列的存取權。
-* 多租使用者應用程式可以在單一 tableset （有效率）中儲存來自多個租使用者的資料。 他們會使用 RLS 原則，對每個租使用者的資料列強制執行邏輯區隔，讓每個租使用者只能看到它的資料列。
+* 多租使用者應用程式可以在單一 tableset (中儲存許多租使用者的資料，) 有效率。 他們會使用 RLS 原則，對每個租使用者的資料列強制執行邏輯區隔，讓每個租使用者只能看到它的資料列。
 
 ## <a name="performance-impact-on-queries"></a>對查詢的效能影響
 
@@ -151,7 +151,7 @@ union DataForGroup1, DataForGroup2, DataForGroup3
 * Azure Active Directory 中的成員資格檢查
 * 套用於資料的篩選
 
-例如:
+例如：
 
 ```kusto
 let IsRestrictedUser = current_principal_is_member_of('aadgroup=some_group@domain.com');
