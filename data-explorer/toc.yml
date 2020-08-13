@@ -1460,7 +1460,21 @@
             - name: 至外部資料表
               href: ./kusto/management/data-export/export-data-to-an-external-table.md
             - name: 連續資料匯出
-              href: ./kusto/management/data-export/continuous-data-export.md
+              items:
+                - name: 概觀
+                  href: ./kusto/management/data-export/continuous-data-export.md
+                - name: 建立或改變連續匯出
+                  href: ./kusto/management/data-export/create-alter-continuous.md
+                - name: 停用或啟用連續匯出
+                  href: ./kusto/management/data-export/disable-enable-continuous.md
+                - name: 置放連續匯出
+                  href: ./kusto/management/data-export/drop-continuous-export.md
+                - name: 顯示連續匯出
+                  href: ./kusto/management/data-export/show-continuous-export.md
+                - name: 顯示連續匯出成品
+                  href: ./kusto/management/data-export/show-continuous-artifacts.md
+                - name: 顯示連續匯出失敗
+                  href: ./kusto/management/data-export/show-continuous-failures.md
         - name: 資料庫指標
           href: ./kusto/management/databasecursor.md
         - name: 查詢結果快取
