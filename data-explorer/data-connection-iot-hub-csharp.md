@@ -7,14 +7,14 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: a77549d729b8ccba91333922e5add8a9296527c4
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: fa6d65b8a3db0d00849f4def77da5d09c0e9b694
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350106"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201304"
 ---
-# <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-c-preview"></a>使用 c # 建立適用于 Azure 資料總管的 IoT 中樞資料連線（預覽）
+# <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-c-preview"></a>使用 c # (Preview 建立適用于 Azure 資料總管的 IoT 中樞資料連線) 
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-iot-hub.md)
@@ -22,16 +22,17 @@ ms.locfileid: "87350106"
 > * [Python](data-connection-iot-hub-python.md)
 > * [Azure Resource Manager 範本](data-connection-iot-hub-resource-manager.md)
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌（資料載入）。 在本文中，您會使用 c # 來建立 Azure 資料總管的 IoT 中樞資料連線。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+在本文中，您會使用 c # 來建立 Azure 資料總管的 IoT 中樞資料連線。
 
 ## <a name="prerequisites"></a>必要條件
 
 * 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
-* 建立叢集[和資料庫](create-cluster-database-csharp.md)
-* 建立[資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
-* 設定[資料庫和資料表原則](database-table-policies-csharp.md)（選擇性）
-* 建立[已設定共用存取原則的 IoT 中樞](ingest-data-iot-hub.md#create-an-iot-hub)。
+* 建立叢集 [和資料庫](create-cluster-database-csharp.md)
+* 建立 [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
+*  (選擇性) 設定[資料庫和資料表原則](database-table-policies-csharp.md)
+* 建立 [已設定共用存取原則的 IoT 中樞](ingest-data-iot-hub.md#create-an-iot-hub)。
 
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
 
@@ -39,7 +40,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 ## <a name="add-an-iot-hub-data-connection"></a>新增 IoT 中樞資料連線 
 
-下列範例會示範如何以程式設計方式加入 IoT 中樞資料連線。 請參閱[將 Azure 資料總管資料表連線到 IoT 中樞](ingest-data-iot-hub.md#connect-azure-data-explorer-table-to-iot-hub)，以使用 Azure 入口網站來新增 IoT 中樞資料連線。
+下列範例會示範如何以程式設計方式加入 IoT 中樞資料連線。 請參閱 [將 Azure 資料總管資料表連線到 IoT 中樞](ingest-data-iot-hub.md#connect-azure-data-explorer-table-to-iot-hub) ，以使用 Azure 入口網站來新增 IoT 中樞資料連線。
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID

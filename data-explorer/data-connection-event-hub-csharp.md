@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 8d09782d29377d702b80fa9e049fa578a92ccd47
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: d71dabaa3ed597b641d0e16c2ff152779fda2d53
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350157"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201372"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C 建立適用于 Azure 資料總管的事件中樞資料連線#
 
@@ -22,16 +22,17 @@ ms.locfileid: "87350157"
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌（資料載入）。 在本文中，您會使用 c # 來建立 Azure 資料總管的事件中樞資料連線。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+在本文中，您會使用 c # 來建立 Azure 資料總管的事件中樞資料連線。
 
 ## <a name="prerequisites"></a>必要條件
 
 * 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
-* 建立叢集[和資料庫](create-cluster-database-csharp.md)
-* 建立[資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
-* 設定[資料庫和資料表原則](database-table-policies-csharp.md)（選擇性）
-* 建立[包含資料的事件中樞以進行](ingest-data-event-hub.md#create-an-event-hub)內嵌。 
+* 建立叢集 [和資料庫](create-cluster-database-csharp.md)
+* 建立 [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
+*  (選擇性) 設定[資料庫和資料表原則](database-table-policies-csharp.md)
+* 建立 [包含資料的事件中樞以進行](ingest-data-event-hub.md#create-an-event-hub)內嵌。 
 
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
 
@@ -39,7 +40,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 ## <a name="add-an-event-hub-data-connection"></a>新增事件中樞資料連線
 
-下列範例會示範如何以程式設計方式新增事件中樞資料連線。 請參閱[連接到事件中樞](ingest-data-event-hub.md#connect-to-the-event-hub)，以使用 Azure 入口網站新增事件中樞資料連線。
+下列範例會示範如何以程式設計方式新增事件中樞資料連線。 請參閱 [連接到事件中樞](ingest-data-event-hub.md#connect-to-the-event-hub) ，以使用 Azure 入口網站新增事件中樞資料連線。
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID

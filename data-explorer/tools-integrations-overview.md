@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 166f109f96695380c979dd4060e324187c5b5efc
-ms.sourcegitcommit: 4ae1508bbaa8fe9642dcfc8618d77f009bc8ec9f
+ms.openlocfilehash: 9522ee72e639c967f7b735c9c52d67c236498522
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86405465"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201695"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Azure 資料總管工具和整合總覽
 
@@ -38,13 +38,13 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
 ### <a name="ingestion-integrations"></a>內嵌整合
 
 * 事件中樞
-    * [從事件中樞內嵌](kusto/management/data-ingestion/eventhub.md)
+    * [從事件中樞內嵌](ingest-data-event-hub-overview.md)
     * 使用[Azure 入口網站](ingest-data-event-hub.md)、 [c #](data-connection-event-hub-csharp.md)、 [Python](data-connection-event-hub-python.md)或[Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)從事件中樞內嵌
 * 事件方格
-    * [從事件方格內嵌](kusto/management/data-ingestion/eventgrid.md)
+    * [從事件方格內嵌](ingest-data-event-grid-overview.md)
     * 使用[Azure 入口網站](ingest-data-event-grid.md)、 [c #](data-connection-event-grid-csharp.md)、 [Python](data-connection-event-grid-python.md)或[Azure Resource Manager 範本](data-connection-event-grid-resource-manager.md)從事件方格內嵌
 * IoT 中樞
-    * [從 IoT 中樞內嵌](kusto/management/data-ingestion/iothub.md)
+    * [從 IoT 中樞內嵌](ingest-data-iot-hub-overview.md)
     * 使用[Azure 入口網站](ingest-data-iot-hub.md)、 [c #](data-connection-iot-hub-csharp.md)、 [Python](data-connection-iot-hub-python.md)或[Azure Resource Manager 範本](data-connection-iot-hub-resource-manager.md)從 IoT 中樞內嵌
 * [Logstash](ingest-data-logstash.md)
 * Azure Data Factory
@@ -68,7 +68,7 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
     * [安裝和使用者介面](kusto/tools/kusto-explorer.md)
     * [使用 Kusto.Explorer](kusto/tools/kusto-explorer-using.md)
     * [options](kusto/tools/kusto-explorer-options.md)
-    * 其他主題包括[疑難排解](kusto/tools/kusto-explorer-troubleshooting.md)、[鍵盤快速鍵](kusto/tools/kusto-explorer-shortcuts.md)、程式[代碼重構](kusto/tools/kusto-explorer-refactor.md)、程式[代碼導覽](kusto/tools/kusto-explorer-codenav.md)和程式[代碼分析](kusto/tools/kusto-explorer-code-analyzer.md)
+    * 其他主題包括 [疑難排解](kusto/tools/kusto-explorer-troubleshooting.md)、 [鍵盤快速鍵](kusto/tools/kusto-explorer-shortcuts.md)、程式 [代碼重構](kusto/tools/kusto-explorer-refactor.md)、程式 [代碼導覽](kusto/tools/kusto-explorer-codenav.md)和程式 [代碼分析](kusto/tools/kusto-explorer-code-analyzer.md)
 * [Web UI](web-query-data.md)
 * [Kusto.Cli](kusto/tools/kusto-cli.md)
 

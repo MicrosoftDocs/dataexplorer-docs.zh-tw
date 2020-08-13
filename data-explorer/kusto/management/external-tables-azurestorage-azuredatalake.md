@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 2616605d29f90a283f5a5d8fef367bf77df65a15
-ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
+ms.openlocfilehash: 866436d74e3e37319ec06b477503c11e3d7d6be7
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87871930"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201332"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -35,14 +35,14 @@ ms.locfileid: "87871930"
 > [!NOTE]
 > * 如果資料表存在， `.create` 命令將會失敗並產生錯誤。 使用 `.create-or-alter` 或 `.alter` 修改現有的資料表。
 > * 不支援改變外部 blob 資料表的架構、格式或資料分割定義。 
-> * 作業需要的[資料庫使用者許可權](../management/access-control/role-based-authorization.md) `.create` 和的[資料表管理員許可權](../management/access-control/role-based-authorization.md) `.alter` 。 
+> * 作業需要的 [資料庫使用者許可權](../management/access-control/role-based-authorization.md) `.create` 和的 [資料表管理員許可權](../management/access-control/role-based-authorization.md) `.alter` 。 
 
 **參數**
 
 <a name="table-name"></a>
 *TableName*
 
-遵守[機構名稱](../query/schema-entities/entity-names.md)規則的外部資料表名稱。
+遵守 [機構名稱](../query/schema-entities/entity-names.md) 規則的外部資料表名稱。
 外部資料表不能與相同資料庫中的一般資料表具有相同的名稱。
 
 <a name="schema"></a>
@@ -52,19 +52,19 @@ ms.locfileid: "87871930"
 
 &nbsp;&nbsp;*ColumnName* `:`*ColumnType* [ `,` *ColumnName* `:` *ColumnType* ...]
 
-其中， *ColumnName*會遵循[實體命名](../query/schema-entities/entity-names.md)規則，而*ColumnType*是其中一種[支援的資料類型](../query/scalar-data-types/index.md)。
+其中， *ColumnName* 會遵循 [實體命名](../query/schema-entities/entity-names.md) 規則，而 *ColumnType* 是其中一種 [支援的資料類型](../query/scalar-data-types/index.md)。
 
 > [!TIP]
-> 如果外部資料架構不明，請使用[推斷 \_ 儲存 \_ 架構](../query/inferstorageschemaplugin.md)外掛程式，這有助於根據外部檔案內容推斷架構。
+> 如果外部資料架構不明，請使用 [推斷 \_ 儲存 \_ 架構](../query/inferstorageschemaplugin.md) 外掛程式，這有助於根據外部檔案內容推斷架構。
 
 <a name="partitions"></a>
 *資料分割*
 
-用來分割外部資料表的資料行清單（以逗號分隔）。 分割區資料行可以存在於資料檔案本身，或檔案路徑的 sa 部分 (在) 的[虛擬資料行](#virtual-columns)上進一步瞭解。
+用來分割外部資料表的資料行清單（以逗號分隔）。 分割區資料行可以存在於資料檔案本身，或檔案路徑的 sa 部分 (在) 的 [虛擬資料行](#virtual-columns) 上進一步瞭解。
 
 資料分割清單是資料分割資料行的任意組合，使用下列其中一種格式來指定：
 
-* 分割區，代表[虛擬資料行](#virtual-columns)。
+* 分割區，代表 [虛擬資料行](#virtual-columns)。
 
   *PartitionName* `:` (`datetime`  |  `string`) 
 
@@ -72,11 +72,11 @@ ms.locfileid: "87871930"
 
   *PartitionName* `:``string` `=` *ColumnName*
 
-* 分割區，以字串資料行值[hash](../query/hashfunction.md)，模數*數位*為基礎。
+* 分割區，以字串資料行值 [hash](../query/hashfunction.md)，模數 *數位*為基礎。
 
   *PartitionName* `:``long` `=` `hash``(` *ColumnName* `,` *數目*`)`
 
-* 資料分割，以日期時間資料行的截斷值為基礎。 請參閱[startofyear](../query/startofyearfunction.md)、 [startofmonth](../query/startofmonthfunction.md)、 [startofweek](../query/startofweekfunction.md)、 [startofday](../query/startofdayfunction.md)或[bin](../query/binfunction.md)函數的相關檔。
+* 資料分割，以日期時間資料行的截斷值為基礎。 請參閱 [startofyear](../query/startofyearfunction.md)、 [startofmonth](../query/startofmonthfunction.md)、 [startofweek](../query/startofweekfunction.md)、 [startofday](../query/startofdayfunction.md) 或 [bin](../query/binfunction.md) 函數的相關檔。
 
   *PartitionName* `:``datetime` `=` (`startofyear` \| `startofmonth` \| `startofweek` \| `startofday`) `(` *ColumnName*`)`  
   *PartitionName* `:``datetime` `=` `bin``(` *ColumnName* `,` *TimeSpan*`)`
@@ -87,17 +87,17 @@ ms.locfileid: "87871930"
 
 外部資料 URI 檔案路徑格式，除了分割區之外，還可以指定。 路徑格式是一系列的資料分割元素和文字分隔符號：
 
-&nbsp;&nbsp;[*StringSeparator*]*Partition* [*StringSeparator*] [*partition* [*StringSeparator*] ...]  
+&nbsp;&nbsp;[*StringSeparator*] *Partition* [*StringSeparator*] [*partition* [*StringSeparator*] ...]  
 
-其中*partition*指的是在子句中宣告的資料分割 `partition` `by` ，而*StringSeparator*是以引號括住的任何文字。 連續的分割區元素必須使用*StringSeparator*來分開設定。
+其中 *partition* 指的是在子句中宣告的資料分割 `partition` `by` ，而 *StringSeparator* 是以引號括住的任何文字。 連續的分割區元素必須使用 *StringSeparator*來分開設定。
 
 您可以使用轉譯為字串的分割區元素，並以對應的文字分隔符號來建立原始檔案路徑前置詞。 若要指定用來轉譯 datetime 資料分割值的格式，可以使用下列宏：
 
 &nbsp;&nbsp;`datetime_pattern``(` *DateTimeFormat* `,` *PartitionName*`)`  
 
-其中*DateTimeFormat*會遵循 .net 格式規格，並允許將格式規範括在大括弧中。 例如，下列兩種格式是相等的：
+其中 *DateTimeFormat* 會遵循 .net 格式規格，並允許將格式規範括在大括弧中。 例如，下列兩種格式是相等的：
 
-&nbsp;&nbsp;`'year='yyyy'/month='MM`和`year={yyyy}/month={MM}`
+&nbsp;&nbsp;`'year='yyyy'/month='MM` 和 `year={yyyy}/month={MM}`
 
 根據預設，datetime 值會使用下列格式來轉譯：
 
@@ -111,42 +111,42 @@ ms.locfileid: "87871930"
 | `bin(`*排*`, 1h)` | `yyyy/MM/dd/HH` |
 | `bin(`*排*`, 1m)` | `yyyy/MM/dd/HH/mm` |
 
-如果外部資料表定義中省略了*PathFormat* ，則會假設使用分隔符號來分隔所有分割區（以其定義的完全相同的順序） `/` 。 資料分割會使用其預設字串呈現來轉譯。
+如果外部資料表定義中省略了 *PathFormat* ，則會假設使用分隔符號來分隔所有分割區（以其定義的完全相同的順序） `/` 。 資料分割會使用其預設字串呈現來轉譯。
 
 <a name="format"></a>
 *編排*
 
-資料格式，任何內嵌[格式](../../ingestion-supported-formats.md)。
+資料格式，任何內嵌 [格式](../../ingestion-supported-formats.md)。
 
 > [!NOTE]
-> 使用[匯出案例](data-export/export-data-to-an-external-table.md)的外部資料表僅限於下列格式： `CSV` 、 `TSV` `JSON` 和 `Parquet` 。
+> 使用 [匯出案例](data-export/export-data-to-an-external-table.md) 的外部資料表僅限於下列格式： `CSV` 、 `TSV` `JSON` 和 `Parquet` 。
 
 <a name="connection-string"></a>
 *StorageConnectionString*
 
 Azure Blob 儲存體 Blob 容器或 Azure Data Lake 儲存檔案系統的一或多個路徑)  (虛擬目錄或資料夾，包括認證。
-如需詳細資訊，請參閱[儲存體連接字串](../api/connection-strings/storage.md)。
+如需詳細資訊，請參閱 [儲存體連接字串](../api/connection-strings/storage.md) 。
 
 > [!TIP]
-> 提供多個單一儲存體帳戶，以避免在將大量資料[匯出](data-export/export-data-to-an-external-table.md)至外部資料表時進行儲存體節流。 匯出會在提供的所有帳戶之間散發寫入。 
+> 提供多個單一儲存體帳戶，以避免在將大量資料 [匯出](data-export/export-data-to-an-external-table.md) 至外部資料表時進行儲存體節流。 匯出會在提供的所有帳戶之間散發寫入。 
 
 <a name="properties"></a>
 *選擇性屬性*
 
-| 屬性         | 類型     | 描述       |
+| 屬性         | 類型     | Description       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | 資料表的資料夾                                                                     |
 | `docString`      | `string` | 記錄資料表的字串                                                       |
-| `compressed`     | `bool`   | 如果設定，則會指出是否要將檔案壓縮為 `.gz` 僅供[匯出案例](data-export/export-data-to-an-external-table.md)使用的檔案 ()  |
-| `includeHeaders` | `string` | 針對 CSV 或 TSV 檔案，指出檔案是否包含標頭                     |
+| `compressed`     | `bool`   | 如果設定，則會指出是否要將檔案壓縮為 `.gz` 僅供 [匯出案例](data-export/export-data-to-an-external-table.md) 使用的檔案 ()  |
+| `includeHeaders` | `string` | 若為分隔的文字格式 (CSV，TSV，... ) ，表示檔案是否包含標頭。 可能的值為： `All` (所有檔案都包含標頭) ， `FirstFile` (資料夾中的第一個檔案包含標頭) ， `None` (沒有檔案包含標頭) 。 |
 | `namePrefix`     | `string` | 如果設定，則表示檔案的前置詞。 在寫入作業中，所有檔案都會以這個前置詞寫入。 讀取作業時，只會讀取具有這個前置詞的檔案。 |
 | `fileExtension`  | `string` | 如果設定，則表示檔案的副檔名。 在寫入時，檔案名的結尾會是這個尾碼。 讀取時，只會讀取具有此副檔名的檔案。           |
 | `encoding`       | `string` | 表示文字的編碼方式： `UTF8NoBOM` (預設) 或 `UTF8BOM` 。             |
-| `sampleUris`     | `bool`   | 如果設定，命令結果會提供外部資料表定義所預期的幾個外部資料檔 URI 範例。 |
+| `sampleUris`     | `bool`   | 如果設定，則命令結果會提供一些外部資料表定義所預期的外部資料檔 URI 範例 (範例會在第二個結果資料表中傳回) 。 此選項可協助驗證是否已正確定義資料 *[分割和](#partitions)* *[PathFormat](#path-format)* 參數。 |
 | `validateNotEmpty` | `bool`   | 如果設定，則會驗證連接字串中是否有內容。 如果指定的 URI 位置不存在，或沒有足夠的存取權限，此命令將會失敗。 |
 
 > [!TIP]
-> 若要深入瞭解在 `namePrefix` `fileExtension` 查詢期間于資料檔案篩選中扮演的角色和屬性，請參閱檔案[篩選邏輯](#file-filtering)一節。
+> 若要深入瞭解在 `namePrefix` `fileExtension` 查詢期間于資料檔案篩選中扮演的角色和屬性，請參閱檔案 [篩選邏輯](#file-filtering) 一節。
  
 <a name="examples"></a>
 **典型** 
@@ -216,7 +216,7 @@ with (fileExtension = ".txt")
 
 **範例輸出**
 
-|TableName|TableType|資料夾|DocString|屬性|ConnectionStrings|資料分割|PathFormat|
+|TableName|TableType|資料夾|DocString|屬性|ConnectionStrings|分割區|PathFormat|
 |---------|---------|------|---------|----------|-----------------|----------|----------|
 |ExternalTable|Blob|ExternalTables|Docs|{"Format"： "Csv"，"壓縮"： false，"CompressionType"： null，"FileExtension"： null，"IncludeHeaders"： "None"，"Encoding"： null，"NamePrefix"： null}|["https://storageaccount.blob.core.windows.net/container1;\*\*\*\*\*\*\*"]|[{"Mod"：10，"Name"： "CustomerId"，"ColumnName"： "CustomerName"，"序數"： 0}，{"Function"： "StartOfDay"，"Name"： "Date"，"ColumnName"： "Timestamp"，"序數"： 1}]|"customer \_ id =" CustomerId "/dt =" datetime \_ 模式 ( "yyyyMMdd"，日期) |
 
@@ -246,7 +246,7 @@ dataformat=parquet
 
 在查詢外部資料表時，查詢引擎會藉由篩選掉不相關的外部儲存體檔案來改善效能。 以下說明逐一查看檔案和決定是否應處理檔案的程式。
 
-1. 建立 URI 模式，代表找到檔案的位置。 一開始，URI 模式等於外部資料表定義中提供的連接字串。 如果有定義任何資料分割，則會使用*[PathFormat](#path-format)* 來轉譯資料分割，然後將其附加至 URI 模式。
+1. 建立 URI 模式，代表找到檔案的位置。 一開始，URI 模式等於外部資料表定義中提供的連接字串。 如果有定義任何資料分割，則會使用 *[PathFormat](#path-format)* 來轉譯資料分割，然後將其附加至 URI 模式。
 
 2. 針對在 URI 模式下找到 (s) 建立的所有檔案，請檢查：
 
@@ -264,17 +264,17 @@ dataformat=parquet
 傳回查詢給定外部資料表時將處理的所有檔案清單。
 
 > [!NOTE]
-> 作業需要[資料庫使用者](../management/access-control/role-based-authorization.md)權力。
+> 作業需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 **語法：** 
 
 `.show``external` `table` *TableName* `artifacts` [ `limit` *MaxResults*]
 
-其中*MaxResults*是選擇性參數，可以設定來限制結果的數目。
+其中 *MaxResults* 是選擇性參數，可以設定來限制結果的數目。
 
 **輸出**
 
-| 輸出參數 | 類型   | 描述                       |
+| 輸出參數 | 類型   | Description                       |
 |------------------|--------|-----------------------------------|
 | Uri              | 字串 | 外部儲存體資料檔案的 URI |
 
@@ -297,7 +297,7 @@ dataformat=parquet
 
 `.create``external` `table` *ExternalTableName* `json` `mapping` *MappingName* *MappingInJsonFormat*
 
-建立新的對應。 如需詳細資訊，請參閱[資料](./mappings.md#json-mapping)對應。
+建立新的對應。 如需詳細資訊，請參閱 [資料](./mappings.md#json-mapping)對應。
 
 **範例** 
  

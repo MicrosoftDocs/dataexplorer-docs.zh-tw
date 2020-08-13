@@ -1,6 +1,6 @@
 ---
-title: bin_at （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 bin_at （）。
+title: 'bin_at ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 bin_at ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 8a480ad0af2d3f71dd3ae9279bb59b32d9654acb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 530f58aaf733add61b5f0aeb54ca12180f5a818e
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348984"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201688"
 ---
 # <a name="bin_at"></a>bin_at()
 
 將值向下舍入固定大小的「bin」，並控制 bin 的起點。
-（另請參閱 [`bin function`](./binfunction.md) ）。
+ (另請參閱 [`bin function`](./binfunction.md) 。 ) 
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 `bin_at``(` *Expression* `,` *BinSize* `, ` *FixedPoint*`)`
 
 ## <a name="arguments"></a>引數
 
-* *Expression*：數數值型別的純量運算式（包括 `datetime` 和 `timespan` ），指出要舍入的值。
-* *BinSize*：與*運算式*相同類型的純量常數，表示每個 bin 的大小。 
-* *FixedPoint*：與*運算式*相同類型的純量常數，表示*運算式*的一個值，也就是「固定點」（也就是的值 `fixed_point` `bin_at(fixed_point, bin_size, fixed_point) == fixed_point` ）。
+* *Expression*：數數值型別的純量運算式， (包括 `datetime` 並 `timespan`) 指出要舍入的值。
+* *BinSize*：數數值型別的純量常數，或是 `timespan` `datetime` 或運算式的 (`timespan` *Expression* ，表示每個 bin 的大小) 。
+* *FixedPoint*：與 *運算式* 相同類型的純量常數，表示 *運算式* 的一個值，也就是「固定點」 (也就是的值 `fixed_point` `bin_at(fixed_point, bin_size, fixed_point) == fixed_point` 。 ) 
 
 ## <a name="returns"></a>傳回
 
@@ -36,7 +36,7 @@ ms.locfileid: "87348984"
 
 ## <a name="examples"></a>範例
 
-|運算是                                                                    |結果                           |評價                   |
+|運算式                                                                    |結果                           |註解                   |
 |------------------------------------------------------------------------------|---------------------------------|---------------------------|
 |`bin_at(6.5, 2.5, 7)`                                                         |`4.5`                            ||
 |`bin_at(time(1h), 1d, 12h)`                                                   |`-12h`                           ||

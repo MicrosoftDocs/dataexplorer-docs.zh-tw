@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 7649a89208881ce323c0cbd970f3f247b0cf67da
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7a4cc1efef506f046e17af901a87b501e0272d08
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350140"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201294"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-python"></a>使用 Python 建立 Azure 資料總管的事件中樞資料連線
 
@@ -22,20 +22,16 @@ ms.locfileid: "87350140"
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)
 
-在本文中，您會使用 Python 建立 Azure 資料總管的事件中樞資料連線。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌或資料載入。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+在本文中，您會使用 Python 建立 Azure 資料總管的事件中樞資料連線。 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [免費建立帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
-
 * [Python 3.4+](https://www.python.org/downloads/)。
-
 * 叢集[和資料庫](create-cluster-database-python.md)。
-
 * [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)。
-
-* [資料庫和資料表原則](database-table-policies-python.md)（選擇性）。
-
+* [資料庫和資料表原則](database-table-policies-python.md) (選擇性) 。
 * [具有內嵌資料的事件中樞](ingest-data-event-hub.md#create-an-event-hub)。
 
 [!INCLUDE [data-explorer-data-connection-install-package-python](includes/data-explorer-data-connection-install-package-python.md)]
@@ -44,7 +40,7 @@ ms.locfileid: "87350140"
 
 ## <a name="add-an-event-hub-data-connection"></a>新增事件中樞資料連線
 
-下列範例會示範如何以程式設計方式新增事件中樞資料連線。 請參閱[連接到事件中樞](ingest-data-event-hub.md#connect-to-the-event-hub)，以使用 Azure 入口網站新增事件中樞資料連線。
+下列範例會示範如何以程式設計方式新增事件中樞資料連線。 請參閱 [連接到事件中樞](ingest-data-event-hub.md#connect-to-the-event-hub) ，以使用 Azure 入口網站新增事件中樞資料連線。
 
 ```Python
 from azure.mgmt.kusto import KustoManagementClient

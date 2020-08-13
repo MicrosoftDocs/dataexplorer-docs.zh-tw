@@ -7,14 +7,14 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: b85ec79c962ab4e63c0831f415ee7c3f2074c970
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 89fc499e0e74bcd521c8c2fbc7c2038536c097da
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350089"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201569"
 ---
-# <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-python-preview"></a>使用 Python 建立適用于 Azure 資料總管的 IoT 中樞資料連線（預覽）
+# <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-python-preview"></a>使用 Python (Preview 建立適用于 Azure 資料總管的 IoT 中樞資料連線) 
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-iot-hub.md)
@@ -22,20 +22,16 @@ ms.locfileid: "87350089"
 > * [Python](data-connection-iot-hub-python.md)
 > * [Azure Resource Manager 範本](data-connection-iot-hub-resource-manager.md)
 
-在本文中，您會使用 Python 建立適用于 Azure 資料總管的 IoT 中樞資料連線。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌或資料載入。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+在本文中，您會使用 Python 建立適用于 Azure 資料總管的 IoT 中樞資料連線。 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [免費建立帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
-
 * [Python 3.4+](https://www.python.org/downloads/)。
-
 * 叢集[和資料庫](create-cluster-database-python.md)。
-
 * [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)。
-
-* [資料庫和資料表原則](database-table-policies-python.md)（選擇性）。
-
+* [資料庫和資料表原則](database-table-policies-python.md) (選擇性) 。
 * [已設定共用存取原則的 IoT 中樞](ingest-data-iot-hub.md#create-an-iot-hub)。
 
 [!INCLUDE [data-explorer-data-connection-install-package-python](includes/data-explorer-data-connection-install-package-python.md)]
@@ -44,7 +40,7 @@ ms.locfileid: "87350089"
 
 ## <a name="add-an-iot-hub-data-connection"></a>新增 IoT 中樞資料連線 
 
-下列範例會示範如何以程式設計方式加入 IoT 中樞資料連線。 請參閱[將 Azure 資料總管資料表連線到 IoT 中樞](ingest-data-iot-hub.md#connect-azure-data-explorer-table-to-iot-hub)，以使用 Azure 入口網站來新增 IoT 中樞資料連線。
+下列範例會示範如何以程式設計方式加入 IoT 中樞資料連線。 請參閱 [將 Azure 資料總管資料表連線到 IoT 中樞](ingest-data-iot-hub.md#connect-azure-data-explorer-table-to-iot-hub) ，以使用 Azure 入口網站來新增 IoT 中樞資料連線。
 
 ```Python
 from azure.mgmt.kusto import KustoManagementClient

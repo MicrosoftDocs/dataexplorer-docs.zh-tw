@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: a93b29d6557afa435cacbbeeb43b685c0dfbf3af
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 597eb522da9e3cb383cb3c0aad5ccc7c78de6ce3
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350208"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201398"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C 建立適用于 Azure 資料總管的 Event Grid 資料連線#
 
@@ -23,16 +23,17 @@ ms.locfileid: "87350208"
 > * [Azure Resource Manager 範本](data-connection-event-grid-resource-manager.md)
 
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌（資料載入）。 在本文中，您會使用 c # 來建立 Azure 資料總管的 Event Grid 資料連線。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+ 在本文中，您會使用 c # 來建立 Azure 資料總管的 Event Grid 資料連線。
 
 ## <a name="prerequisites"></a>必要條件
 
 * 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
-* 建立叢集[和資料庫](create-cluster-database-csharp.md)
-* 建立[資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
-* 設定[資料庫和資料表原則](database-table-policies-csharp.md)（選擇性）
-* 建立[具有事件方格訂用帳戶的儲存體帳戶](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account)。
+* 建立叢集 [和資料庫](create-cluster-database-csharp.md)
+* 建立 [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
+*  (選擇性) 設定[資料庫和資料表原則](database-table-policies-csharp.md)
+* 建立 [具有事件方格訂用帳戶的儲存體帳戶](ingest-data-event-grid.md)。
 
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
 
@@ -40,7 +41,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 ## <a name="add-an-event-grid-data-connection"></a>新增事件方格資料連線
 
-下列範例會示範如何以程式設計方式加入事件方格資料連線。 如需使用 Azure 入口網站新增事件方格資料連線，請參閱[在 Azure 中建立事件方格資料連線資料總管](ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer)。
+下列範例會示範如何以程式設計方式加入事件方格資料連線。 如需使用 Azure 入口網站新增事件方格資料連線，請參閱 [在 Azure 中建立事件方格資料連線資料總管](ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer) 。
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -100,11 +101,11 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 現在，Azure 資料總管和儲存體帳戶已連線，您可以建立範例資料，並將它上傳至儲存體。
 
 > [!NOTE]
-> Azure 資料總管不會在內嵌後刪除 blob。 使用[Azure blob 儲存體生命週期](/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal)來管理 blob 刪除，以保留三到五天的 blob。
+> Azure 資料總管不會在內嵌後刪除 blob。 使用 [Azure blob 儲存體生命週期](/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal) 來管理 blob 刪除，以保留三到五天的 blob。
 
 ### <a name="upload-file-using-azure-blob-storage-sdk"></a>使用 Azure Blob 儲存體 SDK 上傳檔案
 
-下列程式碼片段會在您的儲存體帳戶中建立新的容器、將現有的檔案（以 blob 形式）上傳至該容器，然後列出容器中的 blob。
+下列程式碼片段會在您的儲存體帳戶中建立新的容器、將現有的檔案 (以 blob) 的形式上傳至該容器，然後列出容器中的 blob。
 
 ```csharp
 var azureStorageAccountConnectionString=<storage_account_connection_string>;
@@ -133,7 +134,7 @@ var blobs = container.ListBlobs();
 
 ### <a name="upload-file-using-azure-data-lake-sdk"></a>使用 Azure Data Lake SDK 上傳檔案
 
-使用 Data Lake Storage Gen2 時，您可以使用[AZURE DATA LAKE SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/)將檔案上傳至儲存體。 下列程式碼片段會在您的 Azure Data Lake 儲存體中建立新的檔案系統，並將含有中繼資料的本機檔案上傳至該檔案系統。
+使用 Data Lake Storage Gen2 時，您可以使用 [AZURE DATA LAKE SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/) 將檔案上傳至儲存體。 下列程式碼片段會在您的 Azure Data Lake 儲存體中建立新的檔案系統，並將含有中繼資料的本機檔案上傳至該檔案系統。
 
 ```csharp
 var accountName = <storage_account_name>;
@@ -166,6 +167,6 @@ dataLakeFileClient.Flush(position: fileSize, close: true); // Note: This line tr
 ```
 
 > [!NOTE]
-> 使用[AZURE DATA LAKE SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/)上傳檔案時，第一次呼叫[CreateFile](/dotnet/api/azure.storage.files.datalake.datalakefilesystemclient.createfile?view=azure-dotnet)時，會觸發大小為0的事件方格事件，而 Azure 資料總管會忽略此事件。 使用設定為 "true" 的 "close" 參數呼叫 flush 時，會觸發另一個事件。 這個事件表示這是最後的更新，而且檔案資料流程已關閉。 此事件是由事件方格資料連線所處理。 如需有關排清的詳細資訊，請參閱[Azure Data Lake flush 方法](/dotnet/api/azure.storage.files.datalake.datalakefileclient.flush?view=azure-dotnet)。
+> 使用 [AZURE DATA LAKE SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/) 上傳檔案時，第一次呼叫 [CreateFile](/dotnet/api/azure.storage.files.datalake.datalakefilesystemclient.createfile?view=azure-dotnet) 時，會觸發大小為0的事件方格事件，而 Azure 資料總管會忽略此事件。 使用設定為 "true" 的 "close" 參數呼叫 flush 時，會觸發另一個事件。 這個事件表示這是最後的更新，而且檔案資料流程已關閉。 此事件是由事件方格資料連線所處理。 如需有關排清的詳細資訊，請參閱 [Azure Data Lake flush 方法](/dotnet/api/azure.storage.files.datalake.datalakefileclient.flush?view=azure-dotnet)。
 
 [!INCLUDE [data-explorer-data-connection-clean-resources-csharp](includes/data-explorer-data-connection-clean-resources-csharp.md)]

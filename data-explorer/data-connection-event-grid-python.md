@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: f86b9ed21a0d818214d2193dbfa902b3a98809ba
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5bf7d894acc5111a43f8078874f0465f9616a166
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350191"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201476"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-python"></a>使用 Python 建立 Azure 資料總管的 Event Grid 資料連線
 
@@ -22,21 +22,17 @@ ms.locfileid: "87350191"
 > * [Python](data-connection-event-grid-python.md)
 > * [Azure Resource Manager 範本](data-connection-event-grid-resource-manager.md)
 
-在本文中，您會使用 Python 建立 Azure 資料總管的 Event Grid 資料連線。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌或資料載入。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+在本文中，您會使用 Python 建立 Azure 資料總管的 Event Grid 資料連線。
 
 ## <a name="prerequisites"></a>必要條件
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [建立免費帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
-
 * [Python 3.4+](https://www.python.org/downloads/)。
-
 * 叢集[和資料庫](create-cluster-database-python.md)。
-
 * [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)。
-
-* [資料庫和資料表原則](database-table-policies-csharp.md)（選擇性）。
-
-* [具有事件方格訂用帳戶的儲存體帳戶](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account)。
+* [資料庫和資料表原則](database-table-policies-csharp.md) (選擇性) 。
+* [具有事件方格訂用帳戶的儲存體帳戶](ingest-data-event-grid.md)。
 
 [!INCLUDE [data-explorer-data-connection-install-package-python](includes/data-explorer-data-connection-install-package-python.md)]
 
@@ -44,7 +40,7 @@ ms.locfileid: "87350191"
 
 ## <a name="add-an-event-grid-data-connection"></a>新增事件方格資料連線
 
-下列範例會示範如何以程式設計方式加入事件方格資料連線。 如需使用 Azure 入口網站新增事件方格資料連線，請參閱[在 Azure 中建立事件方格資料連線資料總管](ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer)。
+下列範例會示範如何以程式設計方式加入事件方格資料連線。 如需使用 Azure 入口網站新增事件方格資料連線，請參閱 [在 Azure 中建立事件方格資料連線資料總管](ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer) 。
 
 
 ```Python
