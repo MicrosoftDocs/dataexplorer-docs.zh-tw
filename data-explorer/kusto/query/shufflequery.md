@@ -8,26 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e011ffa61b70c79d51941518de0624030d847c4e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: d3625be5a3a97b456a2d6d84802b11602f959f3e
+ms.sourcegitcommit: bb7c2ba9f9dcae08710be2345ee6e63004629ea1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351092"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88218990"
 ---
 # <a name="shuffle-query"></a>隨機查詢
 
 隨機查詢是一組支援隨機播放策略之運算子的語義保留轉換。 視實際資料而定，此查詢可能會產生顯著的效能提升。
 
-在 Kusto 中支援隨機的運算子包括 [[聯結](joinoperator.md)]、[[摘要](summarizeoperator.md)] 和 [[構成系列](make-seriesoperator.md)]。
+在 Kusto 中支援隨機的運算子包括 [ [聯結](joinoperator.md)]、[ [摘要](summarizeoperator.md)] 和 [ [構成系列](make-seriesoperator.md)]。
 
 使用查詢參數或來設定隨機查詢 `hint.strategy = shuffle` 策略 `hint.shufflekey = <key>` 。
 
-在資料表上定義[資料分割原則](../management/partitioningpolicy.md)。 
-
-設定 `shufflekey` 為數據表的雜湊分割區索引鍵，以達到更佳的效能，因為在叢集節點之間移動所需的資料量會降低。
-
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 ```kusto
 T | where Event=="Start" | project ActivityId, Started=Timestamp
@@ -48,11 +44,11 @@ T
 ```
 
 此策略會共用所有叢集節點上的負載，其中每個節點都會處理資料的一個分割區。
-當索引鍵（索引鍵、索引 `join` `summarize` 鍵或索引 `make-series` 鍵）具有高基數和一般查詢策略點擊查詢限制時，使用隨機查詢策略會很有用。
+當索引鍵 (索引鍵、索引 `join` `summarize` 鍵或索引 `make-series` 鍵) 具有高基數和一般查詢策略點擊查詢限制時，使用隨機查詢策略會很有用。
 
 **提示之間的差異。策略 = 隨機和提示。 shufflekey = key**
 
-`hint.strategy=shuffle`表示所有按鍵都會隨機加上隨機操作的運算子。
+`hint.strategy=shuffle` 表示所有按鍵都會隨機加上隨機操作的運算子。
 例如，在此查詢中：
 
 ```kusto
@@ -95,7 +91,7 @@ on ActivityId, numeric_column
 | summarize avg(Duration)
 ```
 
-如果您套用 `hint.strategy=shuffle` （而不是在查詢計劃期間忽略策略），並依複合索引鍵 [，] 隨機播放資料 `ActivityId` `numeric_column` ，則結果將會不正確。
+如果您套用 `hint.strategy=shuffle` (，而不是在查詢計劃期間忽略策略) 並依複合索引鍵 [，] 隨機播放資料 `ActivityId` `numeric_column` ，結果將會不正確。
 `summarize`運算子位於運算子的左邊 `join` 。 這個運算子會依索引鍵的子集分組 `join` ，在我們的案例中為 `ActivityId` 。 因此，會使用索引鍵來 `summarize` 分組 `ActivityId` ，而資料則是以複合索引鍵 [ `ActivityId` ，] 進行分割 `numeric_column` 。
 隨機 by 複合索引鍵 [ `ActivityId` ， `numeric_column` ] 不一定表示索引鍵的隨機 `ActivityId` 是有效的，而且結果可能不正確。
 
@@ -116,7 +112,7 @@ datatable(ActivityId:string, NumericColumn:long)
 |activity1|2|56|
 |activity1|1|65|
 
-這兩個記錄的複合索引鍵都對應到不同的資料分割（56和65），但這兩個記錄的值相同 `ActivityId` 。 `summarize`左側的運算子 `join` 需要資料行的類似值 `ActivityId` ，才會在同一個分割區中。 此查詢會產生不正確的結果。
+這兩個記錄的複合索引鍵都對應到不同的分割區 (56 和 65) ，但這兩個記錄的值相同 `ActivityId` 。 `summarize`左側的運算子 `join` 需要資料行的類似值 `ActivityId` ，才會在同一個分割區中。 此查詢會產生不正確的結果。
 
 若要解決這個問題，您可以使用 `hint.shufflekey` 來指定聯結上的隨機播放索引鍵 `hint.shufflekey = ActivityId` 。 這個金鑰組于所有可隨機操作的運算子而言都是常見的。
 在此情況下，隨機是安全的，因為和都是以 `join` `summarize` 相同的金鑰隨機播放。 因此，所有類似的值都會位於相同的分割區中，且結果會正確：
@@ -182,7 +178,7 @@ orders
 
 下列範例顯示具有兩個叢集節點的叢集上的改善、資料表具有60M 記錄，以及 group by 索引鍵的基數是2M。
 
-執行查詢時，不 `hint.num_partitions` 會使用兩個分割區（作為叢集節點編號），而下列查詢將會花費 ~ 1:10 分鐘：
+執行查詢時不 `hint.num_partitions` 會使用兩個分割區 (做為叢集節點編號) ，而下列查詢將會花費 ~ 1:10 分鐘：
 
 ```kusto
 lineitem    
@@ -230,7 +226,7 @@ on $left.c_custkey == $right.o_custkey
 
 
 下列範例顯示具有兩個叢集節點的叢集上的改善、資料表具有60M 記錄，而且索引鍵的基數 `join` 是2M。
-執行查詢時，不 `hint.num_partitions` 會使用兩個分割區（作為叢集節點編號），而下列查詢將會花費 ~ 1:10 分鐘：
+執行查詢時不 `hint.num_partitions` 會使用兩個分割區 (做為叢集節點編號) ，而下列查詢將會花費 ~ 1:10 分鐘：
 
 ```kusto
 lineitem
