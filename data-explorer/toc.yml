@@ -92,6 +92,8 @@
           href: lightingest.md
         - name: 事件中樞
           items:
+            - name: 連線至事件中樞
+              href: ingest-data-event-hub-overview.md
             - name: Azure 入口網站
               href: ingest-data-event-hub.md
             - name: C#
@@ -102,6 +104,8 @@
               href: data-connection-event-hub-resource-manager.md
         - name: 事件方格
           items:
+            - name: 連線至事件方格
+              href: ingest-data-event-grid-overview.md
             - name: Azure 入口網站
               href: ingest-data-event-grid.md
             - name: C#
@@ -112,6 +116,8 @@
               href: data-connection-event-grid-resource-manager.md
         - name: IoT 中樞
           items:
+            - name: 連線至 IoT 中樞
+              href: ingest-data-iot-hub-overview.md
             - name: Azure 入口網站
               href: ingest-data-iot-hub.md
             - name: C#
@@ -1438,12 +1444,6 @@
               href: ./kusto/management/data-ingestion/ingest-from-query.md
             - name: 內嵌式內嵌
               href: ./kusto/management/data-ingestion/ingest-inline.md
-            - name: 使用事件方格訂用帳戶從儲存體內嵌
-              href: ./kusto/management/data-ingestion/eventgrid.md
-            - name: 從事件中樞內嵌
-              href: ./kusto/management/data-ingestion/eventhub.md
-            - name: 從 IoT 中樞內嵌
-              href: ./kusto/management/data-ingestion/iothub.md
             - name: 串流擷取
               items:
                 - name: 串流內嵌和架構變更
