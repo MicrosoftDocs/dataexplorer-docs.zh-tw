@@ -8,22 +8,23 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: a200d0619b25fe7410a82a941a3b1bf6e35d60ac
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 19f86e4973a2822de6f25e38edb07ccd8fbda9d1
+ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87342609"
+ms.lasthandoff: 08/16/2020
+ms.locfileid: "88260117"
 ---
 # <a name="summarize-operator"></a>summarize 運算子
 
 產生資料表來彙總輸入資料表的內容。
 
 ```kusto
-T | summarize count(), avg(price) by fruit, supplier
+Sales | summarize NumTransactions=count(), Total=sum(UnitPrice * NumUnits) by Fruit, StartOfMonth=startofmonth(SellDateTime)
 ```
 
-顯示每個供應商之每個水果的數目和平均價格的資料表。 針對水果和供應商的每個相異組合，輸出中會有一個資料列。 輸出資料行會顯示 [計數]、[平均價格]、[水果] 和 [供應商]。 其他所有輸入資料行則會遭到忽略。
+傳回資料表，其中包含多少銷售交易以及每個水果和銷售月份的總金額。
+輸出資料行會顯示交易計數、交易數量、水果，以及記錄交易的月份開始日期時間。
 
 ```kusto
 T | summarize count() by price_range=bin(price, 10.0)
@@ -33,25 +34,26 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 ## <a name="syntax"></a>語法
 
-*T* `| summarize` [[*column* `=` ]*匯總*[ `,` ...]] [ `by` [*column* `=` ] *GroupExpression* [ `,` ...]]
+*T* `| summarize` [[*column* `=` ] *匯總* [ `,` ...]] [ `by` [*column* `=` ] *GroupExpression* [ `,` ...]]
 
 ## <a name="arguments"></a>引數
 
 * ** 結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
 * *匯總：* 以資料[aggregation function](summarizeoperator.md#list-of-aggregation-functions) `count()` `avg()` 行名稱做為引數呼叫彙總函式（例如或）。 請參閱 [彙總函式清單](summarizeoperator.md#list-of-aggregation-functions)。
-* ** 可提供一組相異值的資料行運算式。 它通常是已提供一組受限值的資料行名稱，或是以數值或時間資料行做為引數的 `bin()` 。 
+* *GroupExpression：* 可以參考輸入資料的純量運算式。
+  輸出會有與所有群組運算式的相異值一樣多的記錄。
 
 > [!NOTE]
-> 當輸入資料表是空的時，輸出取決於是否使用*GroupExpression* ：
+> 當輸入資料表是空的時，輸出取決於是否使用 *GroupExpression* ：
 >
-> * 如果未提供*GroupExpression* ，輸出將會是單一（空白）資料列。
-> * 如果提供*GroupExpression* ，輸出就不會有任何資料列。
+> * 如果未提供 *GroupExpression* ，輸出將會是單一 (空白) 資料列。
+> * 如果提供 *GroupExpression* ，輸出就不會有任何資料列。
 
 ## <a name="returns"></a>傳回
 
 輸入資料列會各自分組到具有相同 `by` 運算式值的群組。 然後指定的彙總函式會針對每個群組進行計算，以便為每個群組產生資料列。 結果會包含 `by` 資料行，而且每個經過計算的彙總至少會佔有一個資料行。 (某些彙總函式會傳回多個資料行)。
 
-結果有多個不同的 `by` 值組合（可能是零）的資料列。 如果未提供任何群組索引鍵，則結果會有一筆記錄。
+結果所擁有的資料列數目會與不同的 `by` 值組合 (可能是零) 。 如果未提供任何群組索引鍵，則結果會有一筆記錄。
 
 若要總結數值範圍，請使用 `bin()` 來將範圍減少為離散值。
 
@@ -63,41 +65,41 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 |函式|描述|
 |--------|-----------|
-|[any （）](any-aggfunction.md)|傳回群組的隨機非空白值|
-|[anyif()](anyif-aggfunction.md)|傳回群組的隨機非空白值（含述詞）|
+|[any()](any-aggfunction.md)|傳回群組的隨機非空白值|
+|[anyif()](anyif-aggfunction.md)|使用述詞，傳回群組 (的隨機非空白值) |
 |[arg_max()](arg-max-aggfunction.md)|當引數最大化時，傳回一或多個運算式|
 |[arg_min()](arg-min-aggfunction.md)|當引數最小化時，傳回一或多個運算式|
-|[avg （）](avg-aggfunction.md)|傳回整個群組的平均值|
-|[avgif()](avgif-aggfunction.md)|傳回整個群組的平均值（含述詞）|
+|[avg()](avg-aggfunction.md)|傳回整個群組的平均值|
+|[avgif()](avgif-aggfunction.md)|使用述詞，傳回跨群組 (的平均值) |
 |[binary_all_and](binary-all-and-aggfunction.md)|使用群組的二進位檔傳回匯總值 `AND`|
 |[binary_all_or](binary-all-or-aggfunction.md)|使用群組的二進位檔傳回匯總值 `OR`|
 |[binary_all_xor](binary-all-xor-aggfunction.md)|使用群組的二進位檔傳回匯總值 `XOR`|
 |[buildschema()](buildschema-aggfunction.md)|傳回 dynamicexpression 輸入之所有值的最小架構 `dynamic`|
-|[count （）](count-aggfunction.md)|傳回群組的計數|
+|[count()](count-aggfunction.md)|傳回群組的計數|
 |[countif()](countif-aggfunction.md)|傳回具有群組之述詞的計數|
 |[dcount()](dcount-aggfunction.md)|傳回群組元素的近似相異計數|
-|[dcountif()](dcountif-aggfunction.md)|傳回群組元素的近似相異計數（含述詞）|
+|[dcountif()](dcountif-aggfunction.md)|傳回使用述詞 (之群組元素的近似相異計數) |
 |[make_bag()](make-bag-aggfunction.md)|傳回群組內動態值的屬性包|
-|[make_bag_if()](make-bag-if-aggfunction.md)|傳回群組內動態值的屬性包（使用述詞）|
+|[make_bag_if()](make-bag-if-aggfunction.md)|使用述詞，傳回群組 (中動態值的屬性包) |
 |[make_list()](makelist-aggfunction.md)|傳回群組內所有值的清單|
-|[make_list_if()](makelistif-aggfunction.md)|傳回群組內所有值的清單（含述詞）|
+|[make_list_if()](makelistif-aggfunction.md)|使用述詞，傳回群組 (中所有值的清單) |
 |[make_list_with_nulls()](make-list-with-nulls-aggfunction.md)|傳回群組中所有值的清單，包括 null 值|
 |[make_set()](makeset-aggfunction.md)|傳回群組內的一組相異值|
-|[make_set_if()](makesetif-aggfunction.md)|傳回群組內的一組相異值（使用述詞）|
+|[make_set_if()](makesetif-aggfunction.md)|使用述詞，傳回群組 (中的一組相異值) |
 |[max()](max-aggfunction.md)|傳回整個群組的最大值|
-|[maxif()](maxif-aggfunction.md)|傳回整個群組的最大值（含述詞）|
+|[maxif()](maxif-aggfunction.md)|使用述詞，傳回跨群組 (的最大值) |
 |[min()](min-aggfunction.md)|傳回整個群組的最小值|
-|[minif()](minif-aggfunction.md)|傳回整個群組的最小值（含述詞）|
-|[百分位數（）](percentiles-aggfunction.md)|傳回群組的百分位數近似值|
-|[percentiles_array （）](percentiles-aggfunction.md)|傳回群組的百分位數近似|
-|[percentilesw()](percentiles-aggfunction.md)|傳回群組的加權百分位近似|
-|[percentilesw_array （）](percentiles-aggfunction.md)|傳回群組的加權百分位數近似|
-|[stdev （）](stdev-aggfunction.md)|傳回整個群組的標準差|
-|[stdevif()](stdevif-aggfunction.md)|傳回整個群組的標準差（使用述詞）|
-|[sum （）](sum-aggfunction.md)|傳回遷移群組的元素總和|
-|[sumif()](sumif-aggfunction.md)|傳回遷移群組之元素的總和（使用述詞）|
+|[minif()](minif-aggfunction.md)|使用述詞，傳回跨群組 (的最小值) |
+|[百分位數 ( # B1 ](percentiles-aggfunction.md)|傳回群組的百分位數近似值|
+|[percentiles_array ( # B1 ](percentiles-aggfunction.md)|傳回群組的百分位數近似|
+|[percentilesw ( # B1 ](percentiles-aggfunction.md)|傳回群組的加權百分位近似|
+|[percentilesw_array ( # B1 ](percentiles-aggfunction.md)|傳回群組的加權百分位數近似|
+|[stdev()](stdev-aggfunction.md)|傳回整個群組的標準差|
+|[stdevif()](stdevif-aggfunction.md)|使用述詞，傳回跨群組 (的標準差) |
+|[sum()](sum-aggfunction.md)|傳回遷移群組的元素總和|
+|[sumif()](sumif-aggfunction.md)|傳回遷移群組 (的元素加上述詞的總和) |
 |[variance()](variance-aggfunction.md)|傳回整個群組的變異數|
-|[varianceif()](varianceif-aggfunction.md)|傳回整個群組的變異數（使用述詞）|
+|[varianceif()](varianceif-aggfunction.md)|使用述詞，傳回整個群組 (的變異數) |
 
 ## <a name="aggregates-default-values"></a>匯總預設值
 
@@ -106,10 +108,10 @@ T | summarize count() by price_range=bin(price, 10.0)
 運算子       |預設值                         
 ---------------|------------------------------------
  `count()`, `countif()`, `dcount()`, `dcountif()`         |   0                            
- `make_bag()`, `make_bag_if()`, `make_list()`, `make_list_if()`, `make_set()`, `make_set_if()` |    空的動態陣列（[]）          
+ `make_bag()`, `make_bag_if()`, `make_list()`, `make_list_if()`, `make_set()`, `make_set_if()` |    空的動態陣列 ( [] )           
  All others          |   null                           
 
- 在包含 null 值的實體上使用這些匯總時，將會忽略 null 值，而且不會參與計算（請參閱下列範例）。
+ 在包含 null 值的實體上使用這些匯總時，將會忽略 null 值，而且不會參與計算 (請參閱下面) 的範例。
 
 ## <a name="examples"></a>範例
 
@@ -206,7 +208,7 @@ datatable(x:long)[]
 |---|---|
 |[]|[]|
 
-匯總所有非 null 的平均值，而且只會計算參與計算的值（不會將 null 列入考慮）。
+匯總所有非 null 的平均總和，而且只會計算參與計算 (不會將 null 列入考慮) 。
 
 ```kusto
 range x from 1 to 2 step 1
