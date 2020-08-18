@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: alexans
 ms.service: data-explorer
-ms.topic: overview
+ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: db8951c71d6f63859becab69b34597b0e0ae09a4
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: f0e11bffec414ef52495fcf7b7e9a0201931ff2a
+ms.sourcegitcommit: 31ebf208d6bfd901f825d048ea69c9bb3d8b87af
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87804214"
+ms.lasthandoff: 08/17/2020
+ms.locfileid: "88501632"
 ---
 # <a name="kustoexplorer-installation-and-user-interface"></a>Kusto. Explorer 安裝和使用者介面
 

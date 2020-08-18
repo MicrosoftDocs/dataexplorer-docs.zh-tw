@@ -1,6 +1,6 @@
 ---
-title: parse_ipv4_mask （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 parse_ipv6_mask （）函數。
+title: 'parse_ipv6_mask ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 函式 parse_ipv6_mask。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: a6c17f0505927c38d26c37a5e9872747541d129a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: b917d592a00bb2bacd940b4dc943186e10d1bf8c
+ms.sourcegitcommit: 5e903c61e779f7bf62f745f13a6038ce2a32e934
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346434"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88512541"
 ---
 # <a name="parse_ipv6_mask"></a>parse_ipv6_mask()
  
@@ -30,18 +30,18 @@ parse_ipv6_mask(":fe80::85d:e82c:9446:7994", 120) == 'fe80:0000:0000:0000:085d:e
 
 ## <a name="arguments"></a>引數
 
-* *`Expr`*：字串運算式，代表將轉換成標準 IPv6 標記法的 IPv6/IPv4 網路位址。 字串可能包含使用[IP 首碼標記法](#ip-prefix-notation)的網路遮罩。
-* *`PrefixMask`*：介於0到128之間的整數，代表所考慮的最高有效位數。
+* *`Expr`*：字串運算式，代表將轉換成標準 IPv6 標記法的 IPv6/IPv4 網路位址。 字串可包含使用 [IP 首碼標記法](#ip-prefix-notation)的網路遮罩。
+* *`PrefixMask`*：從0到128的整數，代表納入考慮的最高有效位數目。
 
 ## <a name="ip-prefix-notation"></a>IP 首碼標記法
 
-您可以 `IP-prefix notation` 使用斜線（）字元來定義 IP 位址 `/` 。
-斜線（）左邊的 IP 位址 `/` 是基底 ip 位址。 斜線（）右邊的數位（1到127） `/` 是網路遮罩中連續1位的數目。
+您可以 `IP-prefix notation` 使用斜線 () 字元來定義 IP 位址 `/` 。
+斜線 () 左邊的 IP 位址 `/` 是基底 IP 位址。  (斜線的右邊 (1 到 127) `/`) 是網路遮罩中連續1位的數目。
 
 ## <a name="returns"></a>傳回
 
-如果轉換成功，則結果會是代表標準 IPv6 網路位址的字串。
-如果轉換不成功，則結果會是 `null` 。
+如果轉換成功，結果將會是表示標準 IPv6 網路位址的字串。
+如果轉換不成功，結果將會是 `null` 。
 
 ## <a name="example"></a>範例
 
