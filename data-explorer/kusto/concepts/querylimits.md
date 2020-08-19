@@ -8,17 +8,17 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: f0b2dcc8537c7bf959d60283a63f9227b22c168b
-ms.sourcegitcommit: 31ebf208d6bfd901f825d048ea69c9bb3d8b87af
+ms.openlocfilehash: a9818f2efb6b48621c59619e89b3f2c9a4315e42
+ms.sourcegitcommit: 5137a4291d70327b7bb874bbca74a4a386e57d32
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/17/2020
-ms.locfileid: "88501564"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88566410"
 ---
 # <a name="query-limits"></a>查詢限制
 
 Kusto 是一種臨機操作查詢引擎，可裝載大型資料集，並藉由將所有相關資料保留在記憶體中，來嘗試滿足查詢。
-有一種固有的風險，查詢會獨佔服務資源，而不會有界限。 Kusto 以預設查詢限制的形式提供一些內建保護。
+有一種固有的風險，查詢會獨佔服務資源，而不會有界限。 Kusto 以預設查詢限制的形式提供一些內建保護。 如果您考慮移除這些限制，請先判斷您是否真的得到任何價值。
 
 ## <a name="limit-on-query-concurrency"></a>查詢平行存取限制
 
@@ -74,6 +74,12 @@ set truncationmaxrecords=1105;
 MyTable | where User=="Ploni"
 ```
 
+移除結果截斷限制表示您想要將大量資料移出 Kusto。
+
+您可以使用 `.export` 命令或針對稍後的匯總，移除結果截斷限制，以供匯出之用。 如果您選擇 [稍後匯總]，請考慮使用 Kusto 進行匯總。
+
+讓 Kusto 小組知道您是否有任何一項建議解決方案無法滿足的商務案例。  
+
 Kusto 用戶端程式庫目前假設有此限制存在。 雖然您可以在沒有界限的情況下增加限制，但最終您會達到目前無法設定的用戶端限制。
 
 不想要將所有資料提取到單一大量的客戶可以嘗試下列因應措施：
@@ -114,10 +120,6 @@ The TopNested operator has exceeded the memory budget during evaluation. Results
 set maxmemoryconsumptionperiterator=68719476736;
 MyTable | ...
 ```
-
-當考慮移除這些限制時，請先判斷您是否真的得到任何價值。 尤其是，移除結果截斷限制表示您想要將大量資料移出 Kusto。
-您可以使用命令來移除結果截斷限制，也可以使用 `.export` 命令或進行後續的匯總，在此情況下，請考慮使用 Kusto 進行匯總。
-讓 Kusto 小組知道您是否有任何一項建議解決方案無法滿足的商務案例。  
 
 在許多情況下，您可以藉由取樣資料集來避免超過此限制。 下列兩個查詢示範如何進行取樣。 第一個是統計取樣，) 使用亂數產生器。 第二種是具決定性的取樣，藉由從資料集的某個資料行進行雜湊處理（通常是一些識別碼）來完成。
 
