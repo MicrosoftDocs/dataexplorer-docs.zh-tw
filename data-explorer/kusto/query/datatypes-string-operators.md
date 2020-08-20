@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0c8e9b3397026c572d27c250fc4e817bd5f7f265
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 8ad104b7802bde2355b46bc31e74e63a6708d4f4
+ms.sourcegitcommit: d2edf654f71f8686d1f03d8ec16200f84e671b12
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803670"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88659258"
 ---
 # <a name="string-operators"></a>字串運算子
 
-Kusto 提供各種查詢運算子來搜尋字串資料類型。 下列文章說明如何編制字串詞彙的索引、列出字串查詢運算子，並提供優化效能的秘訣。
+Kusto 提供各種查詢運算子來搜尋字串資料類型。 下列文章說明如何編制字串詞彙的索引、列出字串查詢運算子，以及提供優化效能的秘訣。
 
 ## <a name="understanding-string-terms"></a>瞭解字串詞彙
 
-Kusto 會為所有資料行編制索引，包括類型的資料行 `string` 。 視實際資料而定，會針對這類資料行建立多個索引。 這些索引不會直接公開，而是用於具有 `string` 做為其名稱一部分之運算子的查詢中， `has` 例如 `has` 、 `!has` 、 `hasprefix` 、 `!hasprefix` 。 這些運算子的語義取決於資料行的編碼方式。 這些運算子會比對*詞彙*，而不是執行「純」子字串相符。
+Kusto 會編制所有資料行的索引，包括類型的資料行 `string` 。 針對這類資料行，會根據實際資料建立多個索引。 這些索引不會直接公開，但會在具有作為其名稱一部分之運算子的查詢中使用， `string` `has` 例如 `has` 、、 `!has` `hasprefix` 、 `!hasprefix` 。 這些運算子的語法是以資料行的編碼方式來決定。 這些運算子不會執行「純」子字串比對，而是與 *詞彙*相符。
 
 ### <a name="what-is-a-term"></a>什麼是詞彙？ 
 
-根據預設，每個 `string` 值會細分成 ASCII 英數位元的最大序列，而每個序列都會變成一個詞彙。
-例如，在下列中， `string` 這些詞彙是 `Kusto` 、 `WilliamGates3rd` 和下列子字串： `ad67d136` 、 `c1db` 、 `4f9f` 、 `88ef` 、 `d94f3b6b0b5a` 。
+根據預設，每個 `string` 值會分成 ASCII 英數位元的最大序列，且每個順序都會變成詞彙。
+例如，在下列內容中， `string` 詞彙是 `Kusto` 、 `WilliamGates3rd` 和下列子字串： `ad67d136` 、 `c1db` 、 `4f9f` 、 `88ef` 、 `d94f3b6b0b5a` 。
 
 ```
 Kusto:  ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
 ```
 
-Kusto 會建立一個詞彙索引，其中包含*四個字元或更多*的詞彙，而此索引會由 `has` 、 `!has` 和使用。 如果查詢尋找的字詞小於四個字元，或使用 `contains` 運算子，則 Kusto 會在無法判斷相符的情況下，還原成掃描資料行中的值。 這個方法比查閱詞彙索引中的詞彙慢很多。
+Kusto 會建立一個詞彙索引，其中包含 *四個字元*以上的所有詞彙，而且此索引會由 `has` 、 `!has` 等等使用。 如果查詢尋找的詞彙小於四個字元，或使用 `contains` 運算子，則 Kusto 將會還原為在資料行中的值無法判斷相符的情況下進行掃描。 這個方法比查詢詞彙索引中的詞彙慢很多。
 
 ## <a name="operators-on-strings"></a>字串上的運算子
 
@@ -43,9 +43,9 @@ Kusto 會建立一個詞彙索引，其中包含*四個字元或更多*的詞彙
 
 運算子        |描述                                                       |區分大小寫|範例 (結果為 `true`)
 ----------------|------------------------------------------------------------------|--------------|-----------------------
-`==`            |Equals                                                            |是           |`"aBc" == "aBc"`
+`==`            |等於                                                            |是           |`"aBc" == "aBc"`
 `!=`            |不等於                                                        |是           |`"abc" != "ABC"`
-`=~`            |Equals                                                            |否            |`"abc" =~ "ABC"`
+`=~`            |等於                                                            |否            |`"abc" =~ "ABC"`
 `!~`            |不等於                                                        |否            |`"aBc" !~ "xyz"`
 `has`           |右側 (RHS) 是左側 (LHS) 中的完整詞彙     |否            |`"North America" has "america"`
 `!has`          |RHS 不是 LHS 中的完整詞彙                                     |否            |`"North America" !has "amer"` 
@@ -79,19 +79,19 @@ Kusto 會建立一個詞彙索引，其中包含*四個字元或更多*的詞彙
 `has_any`       |與相同， `has` 但適用于任何元素                    |否            |`"North America" has_any("south", "north")`
 
 > [!TIP]
-> 包含 `has` 搜尋四個或更多字元的索引*詞彙*，而不是子字串相符專案的所有運算子。 將字串細分成 ASCII 英數位元的序列，就會建立一個詞彙。 請參閱[瞭解字串詞彙](#understanding-string-terms)。
+> 所有運算子都包含 `has` 搜尋四個或更多字元的索引 *字詞* ，而不是子字串相符專案。 建立詞彙的方法是將字串分解成 ASCII 英數位元的序列。 請參閱 [瞭解字串字詞](#understanding-string-terms)。
 
 ## <a name="performance-tips"></a>效能秘訣
 
-為獲得較佳的效能，當有兩個運算子執行相同的工作時，請使用區分大小寫的。
+為了獲得更好的效能，當有兩個運算子執行相同的工作時，請使用區分大小寫的。
 例如：
 
-* 而不是 `=~` 使用`==`
-* 而不是 `in~` 使用`in`
-* 而不是 `contains` 使用`contains_cs`
+* 請改用 `=~``==`
+* 請改用 `in~``in`
+* 請改用 `contains``contains_cs`
 
-為加快結果，如果您要測試的是不是以非英數位元或欄位的開頭或結尾所系結的符號或英數位元的存在，請使用 `has` 或 `in` 。 
-`has`的運作速度比 `contains` 、或更快 `startswith` `endswith` 。
+為了更快得到結果，如果您要測試的是以非英數位元或欄位開頭或結尾所系結的符號或英數位元字組是否存在，請使用 `has` 或 `in` 。 
+`has` 的運作速度比 `contains` 、或更快 `startswith` `endswith` 。
 
 例如，這些查詢的第一個執行速度會更快：
 
