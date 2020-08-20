@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: f0e11bffec414ef52495fcf7b7e9a0201931ff2a
-ms.sourcegitcommit: 31ebf208d6bfd901f825d048ea69c9bb3d8b87af
+ms.openlocfilehash: a96e47eeb8c0a27ffb1f1446b68d6adc8e564e4b
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/17/2020
-ms.locfileid: "88501632"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610639"
 ---
 # <a name="kustoexplorer-installation-and-user-interface"></a>Kusto. Explorer 安裝和使用者介面
 
@@ -26,7 +26,7 @@ Kusto.Explorer 是一個豐富的桌面應用程式，可讓您在便於使用�
 
 ## <a name="installing-kustoexplorer"></a>安裝 Kusto.Explorer
 
-* 安裝 [Kusto.Explorer 工具](https://aka.ms/ke)。
+* 從 [https://aka.ms/ke](https://aka.ms/ke) 下載並安裝 Kusto.Explorer 工具
 
 * 請改為在下列位置使用瀏覽器存取您的 Kusto 叢集：`https://<your_cluster>.kusto.windows.net.`
    以您的 Azure 資料總管叢集名稱取代 &lt;your_cluster&gt;。
