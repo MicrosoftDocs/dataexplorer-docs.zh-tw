@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的查詢限制。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: a9818f2efb6b48621c59619e89b3f2c9a4315e42
-ms.sourcegitcommit: 5137a4291d70327b7bb874bbca74a4a386e57d32
+ms.openlocfilehash: 5bb05de1ad5a3a055201f42541927619777cafcd
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88566410"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793720"
 ---
 # <a name="query-limits"></a>查詢限制
 
@@ -30,7 +30,7 @@ Kusto 是一種臨機操作查詢引擎，可裝載大型資料集，並藉由�
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>結果集大小 (結果截斷的限制) 
 
-**結果截斷** 是在查詢所傳回的結果集上預設設定的限制。 Kusto 會將傳回給用戶端的記錄數目限制為 **500000**，並將這些記錄的整體記憶體限制為 **64 MB**。 當超過其中一項限制時，查詢就會失敗，並出現「部分查詢失敗」。 超過整體記憶體將會產生例外狀況，並顯示下列訊息：
+**結果截斷** 是在查詢所傳回的結果集上預設設定的限制。 Kusto 會將傳回給用戶端的記錄數目限制為 **500000**，並將這些記錄的整體資料大小限制為 **64 MB**。 當超過其中一項限制時，查詢就會失敗，並出現「部分查詢失敗」。 超過整體資料大小將會產生例外狀況，並顯示下列訊息：
 
 ```
 The Kusto DataEngine has failed to execute a query: 'Query result set has exceeded the internal data size limit 67108864 (E_QUERY_RESULT_SET_TOO_LARGE).'
@@ -47,7 +47,7 @@ The Kusto DataEngine has failed to execute a query: 'Query result set has exceed
 * 藉由將查詢修改為只傳回感興趣的資料，來減少結果集大小。 當初始失敗查詢太「寬」時，此策略會很有用。 例如，查詢不會將不需要的資料行投射在外。
 * 將後置查詢處理（例如匯總）移至查詢本身，以減少結果集大小。 當查詢的輸出會送到另一個處理系統，然後執行其他匯總時，此策略會很有用。
 * 當您想要從服務匯出大量資料集時，請從查詢切換到使用 [資料匯出](../management/data-export/index.md) 。
-* 指示服務抑制此查詢限制。
+* 使用 `set` 下面所列的語句或 [用戶端要求屬性](../api/netfx/request-properties.md)中的旗標，指示服務隱藏此查詢限制。
 
 減少查詢所產生之結果集大小的方法包括：
 
@@ -71,22 +71,12 @@ MyTable | take 1000000
 ```kusto
 set truncationmaxsize=1048576;
 set truncationmaxrecords=1105;
-MyTable | where User=="Ploni"
+MyTable | where User=="UserId1"
 ```
 
 移除結果截斷限制表示您想要將大量資料移出 Kusto。
 
 您可以使用 `.export` 命令或針對稍後的匯總，移除結果截斷限制，以供匯出之用。 如果您選擇 [稍後匯總]，請考慮使用 Kusto 進行匯總。
-
-讓 Kusto 小組知道您是否有任何一項建議解決方案無法滿足的商務案例。  
-
-Kusto 用戶端程式庫目前假設有此限制存在。 雖然您可以在沒有界限的情況下增加限制，但最終您會達到目前無法設定的用戶端限制。
-
-不想要將所有資料提取到單一大量的客戶可以嘗試下列因應措施：
-* 在 KustoConnectionStringBuilder 上將某些 Sdk 切換至串流模式 (串流 = true 屬性) 
-* 切換至 .NET v2 API
-
-讓 Kusto 小組知道您是否遇到此問題，因此我們可以提高串流用戶端優先順序。
 
 Kusto 提供數個用戶端程式庫，可處理「無限大」結果，方法是將它們串流至呼叫端。 使用其中一個程式庫，並將它設定為串流模式。 例如，使用 .NET Framework 用戶端 (Kusto) 並將連接字串的串流屬性設為 *true*，或使用一律串流結果的 *ExecuteQueryV2Async ( # B3 * 呼叫。
 
@@ -146,9 +136,7 @@ MyTable | ...
 ```
 Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the limit of ...GB (see https://aka.ms/kustoquerylimits)')
 
-Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the maximum count of 2G items (see http://aka.ms/kustoquerylimits)')
-
-Runaway query (E_RUNAWAY_QUERY). (message: 'Single string size shouldn't exceed the limit of 2GB (see http://aka.ms/kustoquerylimits)')
+Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the maximum count of ..GB items (see http://aka.ms/kustoquerylimits)')
 ```
 
 目前沒有任何開關可增加字串集大小上限。

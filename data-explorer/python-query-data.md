@@ -1,30 +1,30 @@
 ---
 title: 使用 Azure 資料總管 Python 程式庫查詢資料
-description: 在本文中,您將瞭解如何使用 Python 從 Azure 資料資源管理器查詢數據。
+description: 在本文中，您將瞭解如何使用 Python 來查詢 Azure 資料總管中的資料。
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/05/2019
-ms.openlocfilehash: ebd65f2dcbb0040b764290627bbfd2901aa9a7d3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5187b6b91e18fa8e41e2be6480067e3c53b0bc54
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81501434"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793909"
 ---
 # <a name="query-data-using-the-azure-data-explorer-python-library"></a>使用 Azure 資料總管 Python 程式庫查詢資料
 
-在本文中,使用 Azure 數據資源管理員查詢數據。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。
+在本文中，您會使用 Azure 資料總管來查詢資料。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。
 
-Azure 資料總管提供一個[適用於 Python 的資料用戶端程式庫](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-data) \(英文\)。 此程式庫可讓您從程式碼中查詢資料。 連接到我們為幫助學習而設置*的説明群集*上的表。 您可以查詢該群集上的表並返回結果。
+Azure 資料總管提供一個[適用於 Python 的資料用戶端程式庫](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-data) \(英文\)。 此程式庫可讓您從程式碼中查詢資料。 連接到已設定協助學習 *的說明* 叢集上的資料表。 您可以查詢該叢集上的資料表，並傳回結果。
 
-本文也可作為[Azure 筆記本](https://notebooks.azure.com/ManojRaheja/libraries/KustoPythonSamples/html/QueryKusto.ipynb)提供。
+本文也會以 [Azure 筆記本](https://notebooks.azure.com/ManojRaheja/libraries/KustoPythonSamples/html/QueryKusto.ipynb)的形式提供。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
-* [Python 3.4°](https://www.python.org/downloads/)
+* [Python 3.4 +](https://www.python.org/downloads/)
 
 * 屬於 Azure Active Directory (AAD) 成員的組織電子郵件帳戶
 
@@ -41,7 +41,7 @@ pip install azure-kusto-data
 從程式庫匯入類別，以及 *pandas* (資料分析程式庫)。
 
 ```python
-from azure.kusto.data.request import KustoClient, KustoConnectionStringBuilder
+from azure.kusto.data import KustoClient, KustoConnectionStringBuilder
 from azure.kusto.data.exceptions import KustoServiceError
 from azure.kusto.data.helpers import dataframe_from_result_table
 import pandas as pd
@@ -67,7 +67,7 @@ KUSTO_CLUSTER = "https://help.kusto.windows.net/"
 KUSTO_DATABASE = "Samples"
 ```
 
-現在來建構連接字串。 此範例使用服務驗證來存取叢集。 您還可以使用[AAD 應用程式憑證](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L24)[、AAD 應用程式金鑰](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L20)以及[AAD 使用者與密碼](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L34)。
+現在來建構連接字串。 此範例使用服務驗證來存取叢集。 您也可以使用 [aad 應用程式憑證](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L24)、 [aad 應用程式金鑰](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L20)，以及 [aad 使用者和密碼](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L34)。
 
 ```python
 KCSB = KustoConnectionStringBuilder.with_aad_device_authentication(
@@ -100,4 +100,4 @@ df
 ## <a name="next-steps"></a>後續步驟
 
 > [!div class="nextstepaction"]
-> [使用 Azure 資料資源管理員 Python 函式庫引入資料](python-ingest-data.md)
+> [使用 Azure 資料總管 Python 程式庫內嵌資料](python-ingest-data.md)

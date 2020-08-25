@@ -1,6 +1,6 @@
 ---
 title: activity_metrics 外掛程式-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 activity_metrics 外掛程式。
+description: 本文說明 Azure 資料總管中 activity_metrics 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 69ba6a8ce3cd29d7459215184f7488b015d16558
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 2ab8a9b8a687b695859c52e75ab4e9f88aac408b
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349800"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793706"
 ---
 # <a name="activity_metrics-plugin"></a>activity_metrics plugin
 
-根據目前的期間與上一個期間時間範圍，計算有用的活動計量（相異計數值、新值的相異計數、保留率和變換率）（不同于每個時間範圍與*所有*先前的時段比較的[activity_counts_metrics 外掛程式](activity-counts-metrics-plugin.md)）。
+ (相異計數值、新值的相異計數、新值的相異計數、保留率及流失率) 根據目前期間時間範圍*和先前) * [activity_counts_metrics](activity-counts-metrics-plugin.md) (期間的時間範圍，計算出有用的活動度量
 
 ```kusto
 T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startofday(now()), 1d, dim1, dim2, dim3)
@@ -30,71 +30,71 @@ T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startof
 ## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
-* *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
+* *IdColumn*：具有代表使用者活動之識別碼值的資料行名稱。 
 * *TimelineColumn*：代表時間軸的資料行名稱。
-* *Start*：（選擇性）流量分析開始期間的值來進行純量。
-* *End*：（選擇性）以 [分析結束期間] 的值為純量。
-* *Window*：以 [分析] 視窗期間的值為純量。 可以是數值/日期時間/時間戳記值，或為其中一個的字串 `week` / `month` / `year` ，在此情況下，所有週期都會據以[startofweek](startofweekfunction.md) / [startofmonth](startofmonthfunction.md) / [startofyear](startofyearfunction.md) 。 
-* *dim1*， *dim2*，...：（選擇性）分割活動度量計算的維度資料行清單。
+* *啟動*： (選擇性) 純量值，並以分析開始期間的值。
+* *End*： (選擇性的) 純量值，且其值為分析結束週期。
+* *視窗*：具有分析視窗期間值的純量值。 可以是數值/日期時間/時間戳記值，也可以是的字串 `week` / `month` / `year` ，在此情況下，所有期間都會據以[startofweek](startofweekfunction.md) / [startofmonth](startofmonthfunction.md) / [startofyear](startofyearfunction.md) 。 
+* *dim1*， *dim2*，...： () 選用的維度資料行清單來分割活動計量計算。
 
 ## <a name="returns"></a>傳回
 
-傳回資料表，其中具有相異計數值、新值的相異計數、每個時間軸期間和每個現有維度組合的流失率。
+傳回資料表，該資料表具有相異計數值、新值的相異計數、保留率，以及每個現有維度組合的流失率。
 
 輸出資料表架構為：
 
 |*TimelineColumn*|dcount_values|dcount_newvalues|retention_rate|churn_rate|dim1|..|dim_n|
 |---|---|---|---|---|--|--|--|--|--|--|
-|類型：從*TimelineColumn*|long|long|double|double|..|..|..|
+|類型： *TimelineColumn*的|long|long|double|double|..|..|..|
 
 **備註**
 
-***保留率定義***
+***保留速率定義***
 
-`Retention Rate`在一段期間內，會計算為：
+`Retention Rate` 在一段期間的計算方式如下：
 
-    # of customers returned during the period
-    / (divided by)
-    # customers at the beginning of the period
+> *在期間內傳回的客戶數目*  
+> / (除以)   
+> *在期間開始時為客戶編碼*  
 
-其中 `# of customers returned during the period` 定義為：
+其中的 `# of customers returned during the period` 定義為：
 
-    # of customers at end of period
-    - (minus)
-    # of new customers acquired during the period
+> *期間結束的客戶數目*  
+> \- (減號)   
+> *在期間內取得的新客戶數目*  
 
-`Retention Rate`可能會從0.0 變更為1。0  
+`Retention Rate` 可能會從0.0 變更為1。0  
 較高的分數表示傳回的使用者數量較大。
 
 
 ***變換率定義***
 
-`Churn Rate`在一段期間內，會計算為：
+`Churn Rate` 在一段期間的計算方式如下：
     
-    # of customers lost in the period
-    / (divided by)
-    # of customers at the beginning of the period
+> *期間內遺失的客戶數目*  
+> / (除以)   
+> *期間開始時的客戶數目*  
 
-其中 `# of customer lost in the period` 定義為：
+其中的 `# of customer lost in the period` 定義為：
 
-    # of customers at the beginning of the period
-    - (minus)
-    # of customers at the end of the period
+> *期間開始時的客戶數目*  
+> \- (減號)   
+> *期間結束時的客戶數目*  
 
-`Churn Rate`可能會從0.0 到1.0，分數越高，表示較大量的使用者不會返回服務。
+`Churn Rate` 從0.0 到1.0 會有較高的分數，表示較大量的使用者不會返回服務。
 
-***流失與保留率***
+***變換率與保留率***
 
-衍生自和的定義 `Churn Rate` `Retention Rate` ，下列一定是 true：
+從和的定義衍生而來的 `Churn Rate` `Retention Rate` ，以下一律成立：
 
-    [Retention rate] = 100.0% - [Churn Rate]
+> [ `Retention Rate` ] = 100.0%-[ `Churn Rate` ]
 
 
 ## <a name="examples"></a>範例
 
-### <a name="weekly-retention-rate-and-churn-rate"></a>每週保留率和變換率
+### <a name="weekly-retention-rate-and-churn-rate"></a>每週保留率和流失率
 
-下一個查詢會計算 [每週周數] 視窗的保留和流失率。
+下一個查詢會計算每週的保留和流失率時間範圍。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -137,11 +137,11 @@ range _day from _start to _end  step 1d
 |2017-05-22 00：00：00.0000000|0.199122325836533|0.800877674163467|
 |2017-05-29 00：00：00.0000000|0.063468992248062|0.936531007751938|
 
-:::image type="content" source="images/activity-metrics-plugin/activity-metrics-churn-and-retention.png" border="false" alt-text="活動計量流失和保留":::
+:::image type="content" source="images/activity-metrics-plugin/activity-metrics-churn-and-retention.png" border="false" alt-text="活動計量流失和保留期":::
 
-### <a name="distinct-values-and-distinct-new-values"></a>相異值和相異的「新」值 
+### <a name="distinct-values-and-distinct-new-values"></a>相異值和相異的 ' new ' 值 
 
-下一個查詢會計算 [每週星期] 視窗的相異值和「新」值（未顯示在上一個時間範圍內的識別碼）。
+下一個查詢會計算相異的值和 ' new ' 值 (在上一周時間範圍中未出現的識別碼，) 每週的時間範圍。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -184,4 +184,4 @@ range _day from _start to _end  step 1d
 |2017-05-22 00：00：00.0000000|1740|1017|
 |2017-05-29 00：00：00.0000000|960|756|
 
-:::image type="content" source="images/activity-metrics-plugin/activity-metrics-dcount-and-dcount-newvalues.png" border="false" alt-text="活動計量的 dcount 和 dcount 新值":::
+:::image type="content" source="images/activity-metrics-plugin/activity-metrics-dcount-and-dcount-newvalues.png" border="false" alt-text="活動度量的 dcount 和 dcount 新值":::

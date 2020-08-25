@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: 15756e0971069e6ff619b5362d2fddeb045fe6dd
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 3bd0826f200a6c92b480c0495709e019381863a9
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350276"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793776"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-c"></a>使用 C# 建立 Azure 資料總管叢集與資料庫
 
@@ -34,7 +34,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
 
 ## <a name="authentication"></a>驗證
-若要執行本文中的範例，我們需要 Azure AD 應用程式和服務主體，才能存取資源。 核取 [[建立 Azure AD 應用程式](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal)] 以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍中新增角色指派。 它也會說明如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
+若要執行本文中的範例，我們需要可存取資源 Azure AD 應用程式和服務主體。 核取 [ [建立 Azure AD 應用程式](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal) ] 以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 它也會顯示如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
 
 ## <a name="create-the-azure-data-explorer-cluster"></a>建立 Azure 資料總管叢集
 
@@ -72,11 +72,11 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
    | clusterName | *mykustocluster* | 所需的叢集名稱。|
    | skuName | *Standard_D13_v2* | 將用於叢集的 SKU。 |
    | tier | *Standard* | SKU 層。 |
-   | 處理能力 | *number* | 叢集的實例數目。 |
-   | resourceGroupName | *testrg* | 將在其中建立叢集的資源群組名稱。 |
+   | 處理能力 | *number* | 群集實例的數目。 |
+   | resourceGroupName | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
 
     > [!NOTE]
-    > **建立**叢集是長時間執行的作業，因此強烈建議使用 CreateOrUpdateAsync，而不是 CreateOrUpdate。 
+    > **建立** 叢集是長時間執行的作業，因此強烈建議使用 CreateOrUpdateAsync，而不是 CreateOrUpdate。 
 
 1. 執行下列命令來檢查是否已成功建立叢集：
 
@@ -99,14 +99,14 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
     await kustoManagementClient.Databases.CreateOrUpdateAsync(resourceGroupName, clusterName, databaseName, database);
     ```
 
-        [!NOTE]
-        If you are using C# version 2.0.0 or below, use Database instead of ReadWriteDatabase.
+    > [!NOTE]
+    > 如果您使用 c # 版本2.0.0 或以下版本，請使用資料庫，而不是 ReadWriteDatabase。
 
    |**設定** | **建議的值** | **欄位描述**|
    |---|---|---|
    | clusterName | *mykustocluster* | 將在其中建立資料庫的叢集名稱。|
    | databaseName | *mykustodatabase* | 您的資料庫名稱。|
-   | resourceGroupName | *testrg* | 將在其中建立叢集的資源群組名稱。 |
+   | resourceGroupName | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
    | softDeletePeriod | *3650:00:00:00* | 將保留資料以供查詢的時間長度。 |
    | hotCachePeriod | *3650:00:00:00* | 資料將保留在快取中的時間長度。 |
 

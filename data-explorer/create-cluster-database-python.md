@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: 80bb9802b3048cdf6332cb7a43b5eae3a99dec8c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 60b485a7abe9f505da3ca32c4f35fbbfda101321
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350259"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793869"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-python"></a>使用 Python 建立 Azure 資料總管叢集與資料庫
 
@@ -26,13 +26,13 @@ ms.locfileid: "87350259"
 
 在本文中，您會使用 Python 建立 Azure 資料總管叢集和資料庫。 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 若要使用 Azure 資料總管，請先建立叢集，然後在該叢集中建立一或多個資料庫。 然後將資料內嵌或載入至資料庫，讓您可以對其執行查詢。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [建立免費帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
 
 * [Python 3.4+](https://www.python.org/downloads/)。
 
-* [可以存取資源的 Azure AD 應用程式和服務主體](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal)。 取得 `Directory (tenant) ID` 、和的值 `Application ID` `Client Secret` 。
+* [可存取資源 Azure AD 應用程式和服務主體](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal)。 取得 `Directory (tenant) ID` 、和的值 `Application ID` `Client Secret` 。
 
 ## <a name="install-python-package"></a>安裝 Python 套件
 
@@ -43,7 +43,7 @@ pip install azure-common
 pip install azure-mgmt-kusto
 ```
 ## <a name="authentication"></a>驗證
-若要執行本文中的範例，我們需要 Azure AD 應用程式和服務主體，才能存取資源。 核取 [[建立 Azure AD 應用程式](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal)] 以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍中新增角色指派。 它也會說明如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
+若要執行本文中的範例，我們需要可存取資源 Azure AD 應用程式和服務主體。 核取 [ [建立 Azure AD 應用程式](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal) ] 以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 它也會顯示如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
 
 ## <a name="create-the-azure-data-explorer-cluster"></a>建立 Azure 資料總管叢集
 
@@ -87,11 +87,11 @@ pip install azure-mgmt-kusto
    | cluster_name | *mykustocluster* | 所需的叢集名稱。|
    | sku_name | *Standard_D13_v2* | 將用於叢集的 SKU。 |
    | tier | *Standard* | SKU 層。 |
-   | 處理能力 | *number* | 叢集的實例數目。 |
-   | resource_group_name | *testrg* | 將在其中建立叢集的資源群組名稱。 |
+   | 處理能力 | *number* | 群集實例的數目。 |
+   | resource_group_name | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
 
     > [!NOTE]
-    > **建立**叢集是長時間執行的作業。 方法**create_or_update**會傳回 LROPoller 的實例，請參閱[LROPoller 類別](/python/api/msrest/msrest.polling.lropoller?view=azure-python)以取得詳細資訊。
+    > **建立** 叢集是長時間執行的作業。 方法 **create_or_update** 傳回 LROPoller 的實例，請參閱 [LROPoller 類別](/python/api/msrest/msrest.polling.lropoller?view=azure-python) 以取得詳細資訊。
 
 1. 執行下列命令來檢查是否已成功建立叢集：
 
@@ -122,14 +122,14 @@ pip install azure-mgmt-kusto
     poller =database_operations.create_or_update(resource_group_name = resource_group_name, cluster_name = clusterName, database_name = databaseName, parameters = _database)
     ```
 
-        [!NOTE]
-        If you are using Python version 0.4.0 or below, use Database instead of ReadWriteDatabase.
+    > [!NOTE]
+    > 如果您使用 Python 版本0.4.0 或以下版本，請使用資料庫，而不是 ReadWriteDatabase。
 
    |**設定** | **建議的值** | **欄位描述**|
    |---|---|---|
    | cluster_name | *mykustocluster* | 將在其中建立資料庫的叢集名稱。|
    | database_name | *mykustodatabase* | 您的資料庫名稱。|
-   | resource_group_name | *testrg* | 將在其中建立叢集的資源群組名稱。 |
+   | resource_group_name | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
    | soft_delete_period | *3650 天，0:00:00* | 將保留資料以供查詢的時間長度。 |
    | hot_cache_period | *3650 天，0:00:00* | 資料將保留在快取中的時間長度。 |
 

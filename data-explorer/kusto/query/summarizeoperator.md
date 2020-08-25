@@ -1,6 +1,6 @@
 ---
-title: 摘要運算子-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的摘要運算子。
+title: 摘要操作員-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的摘要操作員。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: 19f86e4973a2822de6f25e38edb07ccd8fbda9d1
-ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
+ms.openlocfilehash: 00d205a710b7b3bf41dc181e79e5e6d0baa95fc6
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/16/2020
-ms.locfileid: "88260117"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793932"
 ---
 # <a name="summarize-operator"></a>summarize 運算子
 
@@ -23,8 +23,8 @@ ms.locfileid: "88260117"
 Sales | summarize NumTransactions=count(), Total=sum(UnitPrice * NumUnits) by Fruit, StartOfMonth=startofmonth(SellDateTime)
 ```
 
-傳回資料表，其中包含多少銷售交易以及每個水果和銷售月份的總金額。
-輸出資料行會顯示交易計數、交易數量、水果，以及記錄交易的月份開始日期時間。
+傳回資料表，其中包含多少銷售交易和每個水果和銷售月份的總金額。
+輸出資料行會顯示交易記錄的交易計數、交易數量、水果數量，以及記錄月份開頭的日期時間。
 
 ```kusto
 T | summarize count() by price_range=bin(price, 10.0)
@@ -34,28 +34,28 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 ## <a name="syntax"></a>語法
 
-*T* `| summarize` [[*column* `=` ] *匯總* [ `,` ...]] [ `by` [*column* `=` ] *GroupExpression* [ `,` ...]]
+*T* `| summarize` [[*column* `=` ] *匯總* [ `,` ...]] [[資料 `by` *行* `=` ] *GroupExpression* [ `,` ...]]
 
 ## <a name="arguments"></a>引數
 
 * ** 結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
-* *匯總：* 以資料[aggregation function](summarizeoperator.md#list-of-aggregation-functions) `count()` `avg()` 行名稱做為引數呼叫彙總函式（例如或）。 請參閱 [彙總函式清單](summarizeoperator.md#list-of-aggregation-functions)。
+* *匯總：*[aggregation function](summarizeoperator.md#list-of-aggregation-functions) `count()` 使用資料 `avg()` 行名稱做為引數的彙總函式（例如或）的呼叫。 請參閱 [彙總函式清單](summarizeoperator.md#list-of-aggregation-functions)。
 * *GroupExpression：* 可以參考輸入資料的純量運算式。
-  輸出會有與所有群組運算式的相異值一樣多的記錄。
+  輸出的記錄會與所有群組運算式的相異值一樣多。
 
 > [!NOTE]
-> 當輸入資料表是空的時，輸出取決於是否使用 *GroupExpression* ：
+> 當輸入資料表是空的時，輸出會根據是否使用 *GroupExpression* 而定：
 >
-> * 如果未提供 *GroupExpression* ，輸出將會是單一 (空白) 資料列。
-> * 如果提供 *GroupExpression* ，輸出就不會有任何資料列。
+> * 如果未提供 *GroupExpression* ，則輸出將會是單一 (空白) 資料列。
+> * 如果有提供 *GroupExpression* ，輸出就不會有資料列。
 
 ## <a name="returns"></a>傳回
 
 輸入資料列會各自分組到具有相同 `by` 運算式值的群組。 然後指定的彙總函式會針對每個群組進行計算，以便為每個群組產生資料列。 結果會包含 `by` 資料行，而且每個經過計算的彙總至少會佔有一個資料行。 (某些彙總函式會傳回多個資料行)。
 
-結果所擁有的資料列數目會與不同的 `by` 值組合 (可能是零) 。 如果未提供任何群組索引鍵，則結果會有一筆記錄。
+結果具有不同值組合的資料列數目 `by` (可能是零) 。 如果未提供任何群組索引鍵，則結果會有單一記錄。
 
-若要總結數值範圍，請使用 `bin()` 來將範圍減少為離散值。
+若要匯總數值的範圍，請使用 `bin()` 將範圍減少為離散值。
 
 > [!NOTE]
 > * 雖然您可以為彙總與群組運算式提供任意運算式，但更有效率的方法是使用簡單的資料行名稱，或對數值資料行套用 `bin()` 。
@@ -65,45 +65,45 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 |函式|描述|
 |--------|-----------|
-|[any()](any-aggfunction.md)|傳回群組的隨機非空白值|
-|[anyif()](anyif-aggfunction.md)|使用述詞，傳回群組 (的隨機非空白值) |
+|[任何 ( # B1 ](any-aggfunction.md)|傳回群組的隨機非空白值|
+|[anyif()](anyif-aggfunction.md)|使用述詞傳回群組 (的隨機非空白值) |
 |[arg_max()](arg-max-aggfunction.md)|當引數最大化時，傳回一或多個運算式|
 |[arg_min()](arg-min-aggfunction.md)|當引數最小化時，傳回一或多個運算式|
-|[avg()](avg-aggfunction.md)|傳回整個群組的平均值|
-|[avgif()](avgif-aggfunction.md)|使用述詞，傳回跨群組 (的平均值) |
+|[avg ( # B1 ](avg-aggfunction.md)|傳回整個群組的平均值|
+|[avgif()](avgif-aggfunction.md)|使用述詞傳回整個群組 (的平均值) |
 |[binary_all_and](binary-all-and-aggfunction.md)|使用群組的二進位檔傳回匯總值 `AND`|
 |[binary_all_or](binary-all-or-aggfunction.md)|使用群組的二進位檔傳回匯總值 `OR`|
 |[binary_all_xor](binary-all-xor-aggfunction.md)|使用群組的二進位檔傳回匯總值 `XOR`|
-|[buildschema()](buildschema-aggfunction.md)|傳回 dynamicexpression 輸入之所有值的最小架構 `dynamic`|
-|[count()](count-aggfunction.md)|傳回群組的計數|
-|[countif()](countif-aggfunction.md)|傳回具有群組之述詞的計數|
+|[buildschema()](buildschema-aggfunction.md)|傳回認可輸入所有值的最基本架構 `dynamic`|
+|[計數 ( # B1 ](count-aggfunction.md)|傳回群組的計數|
+|[countif()](countif-aggfunction.md)|傳回包含群組述詞的計數|
 |[dcount()](dcount-aggfunction.md)|傳回群組元素的近似相異計數|
-|[dcountif()](dcountif-aggfunction.md)|傳回使用述詞 (之群組元素的近似相異計數) |
+|[dcountif()](dcountif-aggfunction.md)|傳回與述詞 (之群組元素的近似相異計數) |
 |[make_bag()](make-bag-aggfunction.md)|傳回群組內動態值的屬性包|
-|[make_bag_if()](make-bag-if-aggfunction.md)|使用述詞，傳回群組 (中動態值的屬性包) |
-|[make_list()](makelist-aggfunction.md)|傳回群組內所有值的清單|
-|[make_list_if()](makelistif-aggfunction.md)|使用述詞，傳回群組 (中所有值的清單) |
+|[make_bag_if()](make-bag-if-aggfunction.md)|使用述詞，傳回群組 (內動態值的屬性包) |
+|[make_list()](makelist-aggfunction.md)|傳回群組中所有值的清單。|
+|[make_list_if()](makelistif-aggfunction.md)|使用述詞傳回群組 (內所有值的清單) |
 |[make_list_with_nulls()](make-list-with-nulls-aggfunction.md)|傳回群組中所有值的清單，包括 null 值|
 |[make_set()](makeset-aggfunction.md)|傳回群組內的一組相異值|
-|[make_set_if()](makesetif-aggfunction.md)|使用述詞，傳回群組 (中的一組相異值) |
+|[make_set_if()](makesetif-aggfunction.md)|使用述詞，傳回群組 (內的一組相異值) |
 |[max()](max-aggfunction.md)|傳回整個群組的最大值|
-|[maxif()](maxif-aggfunction.md)|使用述詞，傳回跨群組 (的最大值) |
+|[maxif()](maxif-aggfunction.md)|使用述詞傳回跨群組 (的最大值) |
 |[min()](min-aggfunction.md)|傳回整個群組的最小值|
-|[minif()](minif-aggfunction.md)|使用述詞，傳回跨群組 (的最小值) |
+|[minif()](minif-aggfunction.md)|使用述詞傳回跨群組 (的最小值) |
 |[百分位數 ( # B1 ](percentiles-aggfunction.md)|傳回群組的百分位數近似值|
 |[percentiles_array ( # B1 ](percentiles-aggfunction.md)|傳回群組的百分位數近似|
-|[percentilesw ( # B1 ](percentiles-aggfunction.md)|傳回群組的加權百分位近似|
+|[percentilesw ( # B1 ](percentiles-aggfunction.md)|傳回群組的加權百分位數近似值|
 |[percentilesw_array ( # B1 ](percentiles-aggfunction.md)|傳回群組的加權百分位數近似|
-|[stdev()](stdev-aggfunction.md)|傳回整個群組的標準差|
-|[stdevif()](stdevif-aggfunction.md)|使用述詞，傳回跨群組 (的標準差) |
-|[sum()](sum-aggfunction.md)|傳回遷移群組的元素總和|
-|[sumif()](sumif-aggfunction.md)|傳回遷移群組 (的元素加上述詞的總和) |
-|[variance()](variance-aggfunction.md)|傳回整個群組的變異數|
-|[varianceif()](varianceif-aggfunction.md)|使用述詞，傳回整個群組 (的變異數) |
+|[stdev ( # B1 ](stdev-aggfunction.md)|傳回整個群組的標準差|
+|[stdevif()](stdevif-aggfunction.md)|使用述詞傳回群組 (之間的標準差) |
+|[sum ( # B1 ](sum-aggfunction.md)|傳回群組內元素的總和|
+|[sumif()](sumif-aggfunction.md)|使用述詞傳回群組 (內元素的總和) |
+|[差異 ( # B1 ](variance-aggfunction.md)|傳回整個群組的變異數|
+|[varianceif()](varianceif-aggfunction.md)|使用述詞傳回群組 (之間的變異數) |
 
 ## <a name="aggregates-default-values"></a>匯總預設值
 
-下表摘要說明匯總的預設值：
+下表摘要列出匯總的預設值：
 
 運算子       |預設值                         
 ---------------|------------------------------------
@@ -111,15 +111,15 @@ T | summarize count() by price_range=bin(price, 10.0)
  `make_bag()`, `make_bag_if()`, `make_list()`, `make_list_if()`, `make_set()`, `make_set_if()` |    空的動態陣列 ( [] )           
  All others          |   null                           
 
- 在包含 null 值的實體上使用這些匯總時，將會忽略 null 值，而且不會參與計算 (請參閱下面) 的範例。
+ 在包含 null 值的實體上使用這些匯總時，將會忽略 null 值，而且不會參與計算 (請參閱下面的範例) 。
 
 ## <a name="examples"></a>範例
 
-:::image type="content" source="images/summarizeoperator/summarize-price-by-supplier.png" alt-text="依水果與供應商的價格總結":::
+:::image type="content" source="images/summarizeoperator/summarize-price-by-supplier.png" alt-text="依水果和供應商摘要定價":::
 
 ## <a name="example"></a>範例
 
-判斷 `ActivityType` 和資料表中的唯一組合 `CompletionStatus` 。 沒有任何彙總函式，只是群組依據索引鍵。 輸出只會顯示這些結果的資料行：
+判斷 `ActivityType` 和資料表中有哪些唯一的組合 `CompletionStatus` 。 沒有任何彙總函式，只是分組依據的索引鍵。 輸出只會顯示這些結果的資料行：
 
 ```kusto
 Activities | summarize by ActivityType, completionStatus
@@ -134,7 +134,7 @@ Activities | summarize by ActivityType, completionStatus
 
 ## <a name="example"></a>範例
 
-尋找 [活動] 資料表中所有記錄的最小和最大時間戳記。 由於沒有 group-by 子句，因此輸出中只有一個資料列︰
+尋找活動資料表中所有記錄的最小和最大時間戳記。 由於沒有 group-by 子句，因此輸出中只有一個資料列︰
 
 ```kusto
 Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
@@ -146,9 +146,11 @@ Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
 
 ## <a name="example"></a>範例
 
-為每個大陸建立一個資料列，其中顯示活動發生的城市計數。 因為「大陸」有幾個值，' by ' 子句中不需要有群組函數：
+為每個大陸建立一個資料列，顯示發生活動的城市計數。 因為「大陸」有幾個值，所以 ' by ' 子句中不需要任何群組函數：
 
-    Activities | summarize cities=dcount(city) by continent
+```kusto
+Activities | summarize cities=dcount(city) by continent
+```
 
 |`cities`|`continent`
 |---:|---
@@ -159,7 +161,7 @@ Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
 
 ## <a name="example"></a>範例
 
-下列範例會計算每個活動類型的長條圖。 因為 `Duration` 有許多值，請使用 `bin` 將其值分組成10分鐘的間隔：
+下列範例會計算每個活動類型的長條圖。 由於 `Duration` 有許多值，因此請使用 `bin` 將其值分組為10分鐘的間隔：
 
 ```kusto
 Activities | summarize count() by ActivityType, length=bin(Duration, 10m)
@@ -177,9 +179,9 @@ Activities | summarize count() by ActivityType, length=bin(Duration, 10m)
 
 **匯總預設值的範例**
 
-當運算子的輸入 `summarize` 至少有一個空白的 group by 索引鍵時，也會是空的結果。
+當運算子的輸入 `summarize` 至少有一個空白群組索引鍵時，它的結果也會是空的。
 
-當運算子的輸入沒有 `summarize` 空白的 group by 索引鍵時，結果會是中使用之匯總的預設值 `summarize` ：
+當運算子的輸入沒有 `summarize` 空白的分組依據索引鍵時，結果會是中使用的匯總預設值 `summarize` ：
 
 ```kusto
 datatable(x:long)[]
@@ -208,7 +210,7 @@ datatable(x:long)[]
 |---|---|
 |[]|[]|
 
-匯總所有非 null 的平均總和，而且只會計算參與計算 (不會將 null 列入考慮) 。
+匯總平均加總非 null，並只計算參與計算 (不會將 null 納入帳戶) 。
 
 ```kusto
 range x from 1 to 2 step 1

@@ -1,6 +1,6 @@
 ---
 title: dcount_intersect 外掛程式-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 dcount_intersect 外掛程式。
+description: 本文說明 Azure 資料總管中 dcount_intersect 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,24 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: de75014fb408b3d31acab37ad8e16923cabaadfd
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9c969cafbf2ec38d9d192cf28c7b1e5599f58631
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348406"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793432"
 ---
 # <a name="dcount_intersect-plugin"></a>dcount_intersect 外掛程式
 
-根據值計算 N 個集合之間 `hll` 的交集（[2.. 16] 範圍內的 n 個），並傳回 n 個 `dcount` 值。
+根據 `hll` [2.. 16] ) 範圍中 (N 的值，計算 n 個集合之間的交集，並傳回 n 個 `dcount` 值。
 
-提供的設定為 S<sub>1</sub>、s<sub>2</sub>、.。 S<sub>n</sub> -傳回值將代表的相異計數：  
+給定的組<sub>1</sub>，s<sub>2</sub>，.。。 S<sub>n</sub> -傳回值會代表相異計數：  
 S<sub>1</sub>，s<sub>1</sub> ∩ s<sub>2</sub>，  
 S<sub>1</sub> ∩ s<sub>2</sub> ∩ s<sub>3</sub>，  
 ... ,  
 S<sub>1</sub> ∩ s<sub>2</sub> ∩ .。。∩ S<sub>n</sub>
 
-    T | evaluate dcount_intersect(hll_1, hll_2, hll_3)
+```kusto
+T | evaluate dcount_intersect(hll_1, hll_2, hll_3)
+```
 
 ## <a name="syntax"></a>語法
 
@@ -34,12 +36,12 @@ S<sub>1</sub> ∩ s<sub>2</sub> ∩ .。。∩ S<sub>n</sub>
 ## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
-* *hll_i*：<sub>我</sub>以 Function 計算的 set S 值 [`hll()`](./hll-aggfunction.md) 。
+* *hll_i*：<sub>我</sub> 以函式計算的 set S 值 [`hll()`](./hll-aggfunction.md) 。
 
 ## <a name="returns"></a>傳回
 
-傳回具有 N `dcount` 個值的資料表（每個資料行代表集合交集）。
-資料行名稱為 s0、s1 .。。（直到 n-1）。
+傳回資料表 `dcount` ，其中每個資料行都有 N 個值 (，代表設定的交集) 。
+資料行名稱為 s0、s1、... (直到 n-1) 為止。
 
 ## <a name="examples"></a>範例
 
