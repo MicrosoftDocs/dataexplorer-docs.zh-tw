@@ -7,12 +7,12 @@ ms.reviewer: kerend
 ms.service: data-explorer
 ms.topic: tutorial
 ms.date: 05/19/2020
-ms.openlocfilehash: 0808d0dadd410ae6d220b03ef54191192b925a21
-ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
+ms.openlocfilehash: 43b8e3f4d1adee7cf96cc7933aab8d8ef18d7638
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83722179"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610588"
 ---
 # <a name="tutorial-ingest-and-query-monitoring-data-in-azure-data-explorer"></a>教學課程：在 Azure 資料總管中擷取和查詢監視資料 
 
@@ -573,11 +573,9 @@ DiagnosticMetrics
 
 查詢結果：
 
-|   |   |
-| --- | --- |
-|   |  avg_Average |
-|   | 00:06.156 |
-| | |
+| avg_Average |
+| --- |
+| 00:06.156 |
 
 # <a name="diagnostic-logs"></a>[診斷記錄](#tab/diagnostic-logs)
 ### <a name="query-the-diagnostic-logs-table"></a>查詢診斷記錄資料表
@@ -593,11 +591,9 @@ DiagnosticLogs
 
 查詢結果：
 
-|   |   |
-| --- | --- |
-|   |  count_ | any_Database | any_Table | any_IngestionSourcePath
-|   | 00:06.156 | TestDatabase | DiagnosticRawRecords | `https://rtmkstrldkereneus00.blob.core.windows.net/20190827-readyforaggregation/1133_TestDatabase_DiagnosticRawRecords_6cf02098c0c74410bd8017c2d458b45d.json.zip`
-| | |
+| count_ | any_Database | any_Table | any_IngestionSourcePath |
+| --- | --- | --- | --- |
+| 00:06.156 | TestDatabase | DiagnosticRawRecords | `https://rtmkstrldkereneus00.blob.core.windows.net/20190827-readyforaggregation/1133_TestDatabase_DiagnosticRawRecords_6cf02098c0c74410bd8017c2d458b45d.json.zip` |
 
 # <a name="activity-logs"></a>[活動記錄](#tab/activity-logs)
 ### <a name="query-the-activity-logs-table"></a>查詢活動記錄資料表
@@ -613,11 +609,9 @@ ActivityLogs
 
 查詢結果：
 
-|   |   |
-| --- | --- |
-|   |  avg(DurationMs) |
-|   | 768.333 |
-| | |
+| avg(DurationMs) |
+| --- |
+| 768.333 |
 
 ---
 
