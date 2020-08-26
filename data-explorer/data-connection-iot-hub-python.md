@@ -1,20 +1,20 @@
 ---
-title: 使用 Python 建立適用于 Azure 資料總管的 IoT 中樞資料連線
+title: 使用 Python 建立 Azure 資料總管的 IoT 中樞資料連線
 description: 在本文中，您將瞭解如何使用 Python 建立 Azure 資料總管的 IoT 中樞資料連線。
 author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: 89fc499e0e74bcd521c8c2fbc7c2038536c097da
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 4c54ae4aeded5579a4c7e5e016d60c8b46ba0908
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201569"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88873282"
 ---
-# <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-python-preview"></a>使用 Python (Preview 建立適用于 Azure 資料總管的 IoT 中樞資料連線) 
+# <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-python-preview"></a>使用 Python (Preview) 建立適用于 Azure 資料總管的 IoT 中樞資料連線
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-iot-hub.md)
@@ -23,9 +23,9 @@ ms.locfileid: "88201569"
 > * [Azure Resource Manager 範本](data-connection-iot-hub-resource-manager.md)
 
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
-在本文中，您會使用 Python 建立適用于 Azure 資料總管的 IoT 中樞資料連線。 
+在本文中，您會使用 Python 來建立適用于 Azure 資料總管的 IoT 中樞資料連線。 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [免費建立帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
 * [Python 3.4+](https://www.python.org/downloads/)。
@@ -40,7 +40,7 @@ ms.locfileid: "88201569"
 
 ## <a name="add-an-iot-hub-data-connection"></a>新增 IoT 中樞資料連線 
 
-下列範例會示範如何以程式設計方式加入 IoT 中樞資料連線。 請參閱 [將 Azure 資料總管資料表連線到 IoT 中樞](ingest-data-iot-hub.md#connect-azure-data-explorer-table-to-iot-hub) ，以使用 Azure 入口網站來新增 IoT 中樞資料連線。
+下列範例會示範如何以程式設計方式新增 IoT 中樞資料連線。 請參閱將 [Azure 資料總管資料表連接到 Iot 中樞](ingest-data-iot-hub.md#connect-azure-data-explorer-table-to-iot-hub) ，以使用 Azure 入口網站來新增 iot 中樞資料連線。
 
 ```Python
 from azure.mgmt.kusto import KustoManagementClient
@@ -84,19 +84,19 @@ poller = kusto_management_client.data_connections.create_or_update(resource_grou
 
 |**設定** | **建議的值** | **欄位描述**|
 |---|---|---|
-| tenant_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
-| subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
-| client_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
-| client_secret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
-| resource_group_name | *testrg* | 包含您叢集的資源組名。|
+| tenant_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
+| subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
+| client_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
+| client_secret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可存取您租使用者中的資源。 |
+| resource_group_name | *>testrg* | 包含您叢集的資源組名。|
 | cluster_name | *mykustocluster* | 叢集的名稱。|
-| database_name | *mykustodatabase* | 叢集中的目標資料庫名稱。|
-| data_connection_name | *myeventhubconnect* | 所需的資料連線名稱。|
-| table_name | *StormEvents* | 目標資料庫中目標資料表的名稱。|
+| database_name | *mykustodatabase* | 叢集中目標資料庫的名稱。|
+| data_connection_name | *myeventhubconnect* | 您的資料連線所需的名稱。|
+| table_name | *StormEvents* | 目標資料庫中的目標資料表名稱。|
 | mapping_rule_name | *StormEvents_CSV_Mapping* | 與目標資料表相關之資料行對應的名稱。|
-| data_format | *csv* | 訊息的資料格式。|
-| iot_hub_resource_id | *資源識別碼* | 您的 IoT 中樞的資源識別碼，其中保存要用於內嵌的資料。|
-| shared_access_policy_name | *iothubforread* | 共用存取原則的名稱，定義裝置和服務連接到 IoT 中樞的許可權。 |
+| data_format | *Csv* | 訊息的資料格式。|
+| iot_hub_resource_id | *資源識別碼* | IoT 中樞的資源識別碼，其中包含要內嵌的資料。|
+| shared_access_policy_name | *iothubforread* | 共用存取原則的名稱，可定義裝置和服務連接到 IoT 中樞的許可權。 |
 | consumer_group | *$Default* | 事件中樞的取用者群組。|
 | location | *Central US* | 資料連線資源的位置。|
 

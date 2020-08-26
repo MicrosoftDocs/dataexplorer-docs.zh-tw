@@ -1,20 +1,20 @@
 ---
-title: 使用 Azure Resource Manager 範本來建立 Azure 資料總管的事件中樞資料連線
-description: 在本文中，您將瞭解如何使用 Azure Resource Manager 範本來建立 Azure 資料總管的事件中樞資料連線。
+title: 使用 Azure Resource Manager 範本，建立 Azure 資料總管的事件中樞資料連線
+description: 在本文中，您將瞭解如何使用 Azure Resource Manager 範本，為 Azure 資料總管建立事件中樞資料連線。
 author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/28/2019
-ms.openlocfilehash: 8b1b76830bb7c2c827b10fe5b6018d2cbe805416
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 3a17d9e63f0e6803b6950d39ccd58183d44bb51e
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201361"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88873571"
 ---
-# <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本來建立 Azure 資料總管的事件中樞資料連線
+# <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本，建立 Azure 資料總管的事件中樞資料連線
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-event-hub.md)
@@ -23,18 +23,18 @@ ms.locfileid: "88201361"
 > * [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)
 
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)] 
-在本文中，您會使用 Azure Resource Manager 範本來建立 Azure 資料總管的事件中樞資料連線。
+在本文中，您將使用 Azure Resource Manager 範本，建立 Azure 資料總管的事件中樞資料連線。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 建立叢集 [和資料庫](create-cluster-database-portal.md)
 * 建立 [資料表和資料行對應](ingest-data-event-hub.md#create-a-target-table-in-azure-data-explorer)
 * 建立 [事件中樞](https://docs.microsoft.com/azure/event-hubs/event-hubs-create)
 
-## <a name="azure-resource-manager-template-for-adding-an-event-hub-data-connection"></a>用於新增事件中樞資料連線的 Azure Resource Manager 範本
+## <a name="azure-resource-manager-template-for-adding-an-event-hub-data-connection"></a>新增事件中樞資料連線的 Azure Resource Manager 範本
 
-下列範例顯示新增事件中樞資料連線的 Azure Resource Manager 範本。  您可以使用表單來 [編輯和部署 Azure 入口網站中的範本](/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal#edit-and-deploy-the-template) 。
+下列範例顯示新增事件中樞資料連線的 Azure Resource Manager 範本。  您可以使用表單， [在 Azure 入口網站中編輯和部署範本](/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal#edit-and-deploy-the-template) 。
 
 ```json
 {

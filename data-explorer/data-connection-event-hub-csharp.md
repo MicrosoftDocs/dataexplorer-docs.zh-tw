@@ -1,20 +1,20 @@
 ---
-title: 使用 C 建立適用于 Azure 資料總管的事件中樞資料連線#
-description: '在本文中，您將瞭解如何使用 c # 來建立 Azure 資料總管的事件中樞資料連線。'
+title: 使用 C 建立 Azure 資料總管的事件中樞資料連線#
+description: '在本文中，您將瞭解如何使用 c # 建立 Azure 資料總管的事件中樞資料連線。'
 author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: d71dabaa3ed597b641d0e16c2ff152779fda2d53
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 41768e01dfd41745615a0483d9a9ad9818f080f1
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201372"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88873690"
 ---
-# <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C 建立適用于 Azure 資料總管的事件中樞資料連線#
+# <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C 建立 Azure 資料總管的事件中樞資料連線#
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-event-hub.md)
@@ -25,14 +25,14 @@ ms.locfileid: "88201372"
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 在本文中，您會使用 c # 來建立 Azure 資料總管的事件中樞資料連線。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 建立叢集 [和資料庫](create-cluster-database-csharp.md)
 * 建立 [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
-*  (選擇性) 設定[資料庫和資料表原則](database-table-policies-csharp.md)
-* 建立 [包含資料的事件中樞以進行](ingest-data-event-hub.md#create-an-event-hub)內嵌。 
+*  (選擇性的) 設定[資料庫和資料表原則](database-table-policies-csharp.md)
+* 建立 [具有內嵌資料的事件中樞](ingest-data-event-hub.md#create-an-event-hub)。 
 
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
 
@@ -77,18 +77,18 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 
 |**設定** | **建議的值** | **欄位描述**|
 |---|---|---|
-| tenantId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
-| subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
-| clientId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
-| clientSecret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可以存取您租使用者中的資源。|
-| resourceGroupName | *testrg* | 包含您叢集的資源組名。|
+| tenantId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
+| subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
+| clientId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
+| clientSecret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可存取您租使用者中的資源。|
+| resourceGroupName | *>testrg* | 包含您叢集的資源組名。|
 | clusterName | *mykustocluster* | 叢集的名稱。|
-| databaseName | *mykustodatabase* | 叢集中的目標資料庫名稱。|
-| dataConnectionName | *myeventhubconnect* | 所需的資料連線名稱。|
-| tableName | *StormEvents* | 目標資料庫中目標資料表的名稱。|
+| databaseName | *mykustodatabase* | 叢集中目標資料庫的名稱。|
+| dataConnectionName | *myeventhubconnect* | 您的資料連線所需的名稱。|
+| tableName | *StormEvents* | 目標資料庫中的目標資料表名稱。|
 | mappingRuleName | *StormEvents_CSV_Mapping* | 與目標資料表相關之資料行對應的名稱。|
-| dataFormat | *csv* | 訊息的資料格式。|
-| eventHubResourceId | *資源識別碼* | 您的事件中樞的資源識別碼，其中包含用於內嵌的資料。 |
+| dataFormat | *Csv* | 訊息的資料格式。|
+| eventHubResourceId | *資源識別碼* | 您事件中樞的資源識別碼，其中包含要內嵌的資料。 |
 | consumerGroup | *$Default* | 事件中樞的取用者群組。|
 | location | *Central US* | 資料連線資源的位置。|
 

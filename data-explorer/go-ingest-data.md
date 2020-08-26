@@ -1,18 +1,18 @@
 ---
 title: 使用 Azure 資料總管 Go SDK 內嵌資料
-description: 在本文中，您將瞭解如何使用 Go SDK，將) 資料的 (載入至 Azure 資料總管。
+description: 在本文中，您將瞭解如何使用 Go SDK，將) 資料內嵌 (載入至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: abhishgu
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/10/2020
-ms.openlocfilehash: 010ee029c4f16248b0f9249d7331da436439cdc0
-ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
+ms.openlocfilehash: b733e70c78d9792e53dfe9cf133efe759e8ea91e
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/11/2020
-ms.locfileid: "88072356"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88873979"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-go-sdk"></a>使用 Azure 資料總管 Go SDK 內嵌資料 
 
@@ -22,20 +22,20 @@ ms.locfileid: "88072356"
 > * [節點](node-ingest-data.md)
 > * [Go](go-ingest-data.md)
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 它提供可與 Azure 資料總管服務互動的[GO SDK 用戶端程式庫](kusto/api/golang/kusto-golang-client-library.md)。 您可以使用[GO SDK](https://github.com/Azure/azure-kusto-go)來內嵌、控制及查詢 Azure 資料總管叢集中的資料。 
+Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 它提供了 [GO SDK 用戶端程式庫](kusto/api/golang/kusto-golang-client-library.md) ，可與 Azure 資料總管服務互動。 您可以使用 [GO SDK](https://github.com/Azure/azure-kusto-go) 在 Azure 資料總管叢集中內嵌、控制和查詢資料。 
 
-在本文中，您會先在測試叢集中建立資料表和資料對應。 接著，您可以使用 Go SDK 將內嵌加入叢集，並驗證結果。
+在本文中，您會先在測試叢集中建立資料表和資料對應。 然後，您可以使用 Go SDK 將內嵌排入佇列，並驗證結果。
 
 ## <a name="prerequisites"></a>Prerequisites
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 安裝 [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)。
-* 使用下列[GO SDK 的最低需求](kusto/api/golang/kusto-golang-client-library.md#minimum-requirements)來安裝[Go](https://golang.org/) 。 
-* 建立[Azure 資料總管叢集和資料庫](create-cluster-database-portal.md)。
+* 使用下列[GO SDK 最低需求](kusto/api/golang/kusto-golang-client-library.md#minimum-requirements)安裝[go](https://golang.org/) 。 
+* 建立 [Azure 資料總管叢集和資料庫](create-cluster-database-portal.md)。
 
 ## <a name="install-the-go-sdk"></a>安裝 Go SDK
 
-當您執行 [使用[Go 模組](https://golang.org/ref/mod)的範例應用程式] 時，將會自動安裝 Azure 資料總管 Go SDK。 如果您已安裝適用于另一個應用程式的 Go SDK，請建立 Go 模組，並使用) 提取 Azure 資料總管套件 (例如 `go get` ：
+當您執行 [使用 [Go 模組](https://golang.org/ref/mod)的範例應用程式] 時，將會自動安裝 Azure 資料總管 Go SDK。 如果您已安裝其他應用程式的 Go SDK，請建立 Go 模組，並使用) 提取 Azure 資料總管套件 (`go get` 例如：
 
 ```console
 go mod init foo.com/bar
@@ -46,22 +46,22 @@ go get github.com/Azure/azure-kusto-go/kusto
 
 ## <a name="review-the-code"></a>檢閱程式碼
 
-這段[檢查程式碼](#review-the-code)區段是選擇性的。 如果您想要瞭解程式碼的運作方式，您可以查看下列程式碼片段。 或是，您可以直接跳到[執行應用程式](#run-the-application)。
+這會 [檢查程式碼](#review-the-code) 區段是選擇性的。 如果您想要瞭解程式碼的運作方式，您可以參閱下列程式碼片段。 或是，您可以直接跳到[執行應用程式](#run-the-application)。
 
 ### <a name="authenticate"></a>Authenticate
 
-在執行任何作業之前，程式必須向 Azure 資料總管服務進行驗證。
+在執行任何作業之前，程式必須先向 Azure 資料總管 service 進行驗證。
 
 ```go
 auth := kusto.Authorization{Config: auth.NewClientCredentialsConfig(clientID, clientSecret, tenantID)}
 client, err := kusto.New(kustoEndpoint, auth)
 ```
 
-Kusto 的實例[。授權](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#Authorization)是使用服務主體認證所建立。 然後，它會用來建立[kusto。](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#Client)具有[新](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#New])函式的用戶端也會接受叢集端點。
+Kusto 的實例 [。](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#Authorization) 使用服務主體認證建立授權。 然後用它來建立 [kusto。用戶端](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#Client) ，其具有同時接受叢集端點的 [新](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#New]) 函數。
 
 ### <a name="create-table"></a>建立資料表
 
-Create table 命令是以[Kusto 語句](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#Stmt)表示。管理[函數是](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#Client.Mgmt)用來執行管理命令。 它是用來執行命令以建立資料表。 
+Create table 命令會以 [Kusto 語句](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#Stmt)表示。管理 [函數是](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#Client.Mgmt) 用來執行管理命令。 它是用來執行命令以建立資料表。 
 
 ```go
 func createTable(kc *kusto.Client, kustoDB string) {
@@ -74,7 +74,7 @@ func createTable(kc *kusto.Client, kustoDB string) {
 ```
 
 > [!TIP]
-> 根據預設，Kusto 語句是常數，以獲得更好的安全性。 [`NewStmt`](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#NewStmt)接受字串常數。 [`UnsafeStmt`](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#UnsafeStmt)API 允許使用非常數語句區段，但不建議這麼做。
+> Kusto 語句預設為常數，以提升安全性。 [`NewStmt`](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#NewStmt) 接受字串常數。 [`UnsafeStmt`](https://godoc.org/github.com/Azure/azure-kusto-go/kusto#UnsafeStmt)API 允許使用非常數語句區段，但不建議使用。
 
 Kusto create table 命令如下所示：
 
@@ -84,7 +84,7 @@ Kusto create table 命令如下所示：
 
 ### <a name="create-mapping"></a>建立對應
 
-資料對應會在內嵌期間用來將傳入的資料對應至 Azure 資料總管資料表中的資料行。 如需詳細資訊，請參閱[資料對應](kusto/management/mappings.md)。 對應的建立方式與資料表相同，使用 `Mgmt` 函數搭配資料庫名稱和適當的命令。 [範例的 GitHub](https://github.com/Azure-Samples/Azure-Data-Explorer-Go-SDK-example-to-ingest-data/blob/main/main.go#L20)存放庫中提供完整的命令。
+資料對應會在內嵌期間用來將內送資料對應至 Azure 資料總管資料表內的資料行。 如需詳細資訊，請參閱 [資料對應](kusto/management/mappings.md)。 使用 `Mgmt` 具有資料庫名稱和適當命令的函數，以與資料表相同的方式來建立對應。 您可以在 GitHub 存放庫中 [取得範例](https://github.com/Azure-Samples/Azure-Data-Explorer-Go-SDK-example-to-ingest-data/blob/main/main.go#L20)的完整命令。
 
 ```go
 func createMapping(kc *kusto.Client, kustoDB string) {
@@ -98,7 +98,7 @@ func createMapping(kc *kusto.Client, kustoDB string) {
 
 ### <a name="ingest-data"></a>擷取資料
 
-內嵌會使用現有 Azure Blob 儲存體容器中的檔案來排入佇列。 
+內嵌會使用現有 Azure Blob 儲存體容器中的檔案進行佇列。 
 
 ```go
 func ingestFile(kc *kusto.Client, blobStoreAccountName, blobStoreContainer, blobStoreToken, blobStoreFileName, kustoMappingRefName, kustoDB, kustoTable string) {
@@ -116,7 +116,7 @@ func ingestFile(kc *kusto.Client, blobStoreAccountName, blobStoreContainer, blob
 }
 ```
 
-內嵌[用戶端](https://godoc.org/github.com/Azure/azure-kusto-go/kusto/ingest#Ingestion)是使用內嵌建立的[。新增](https://godoc.org/github.com/Azure/azure-kusto-go/kusto/ingest#New)。 [FromFile](https://godoc.org/github.com/Azure/azure-kusto-go/kusto/ingest#Ingestion.FromFile)函數是用來參考 Azure Blob 儲存體 URI。 對應參考名稱和資料類型會以[FileOption](https://godoc.org/github.com/Azure/azure-kusto-go/kusto/ingest#FileOption)的形式傳遞。 
+內嵌 [用戶端](https://godoc.org/github.com/Azure/azure-kusto-go/kusto/ingest#Ingestion) 是使用內嵌所建立 [。新](https://godoc.org/github.com/Azure/azure-kusto-go/kusto/ingest#New)的。 [FromFile](https://godoc.org/github.com/Azure/azure-kusto-go/kusto/ingest#Ingestion.FromFile)函數是用來參考 AZURE BLOB 儲存體的 URI。 對應參考名稱和資料類型會以 [FileOption](https://godoc.org/github.com/Azure/azure-kusto-go/kusto/ingest#FileOption)的形式傳遞。 
 
 ## <a name="run-the-application"></a>執行應用程式
 
@@ -127,7 +127,7 @@ func ingestFile(kc *kusto.Client, blobStoreAccountName, blobStoreContainer, blob
     cd Azure-Data-Explorer-Go-SDK-example-to-ingest-data
     ```
 
-1. 從執行此程式碼片段中所示的範例程式碼 `main.go` ： 
+1. 執行範例程式碼，如下列程式碼片段所示 `main.go` ： 
 
     ```go
     func main {
@@ -141,16 +141,16 @@ func ingestFile(kc *kusto.Client, blobStoreAccountName, blobStoreContainer, blob
     ```
 
     > [!TIP]
-    > 若要嘗試不同的作業組合，您可以將中的個別函式取消批註/批註 `main.go` 。
+    > 若要嘗試不同的作業組合，您可以取消批註/批註中的個別函式 `main.go` 。
 
     當您執行範例程式碼時，會執行下列動作：
     
-    1. **Drop table**： `StormEvents` 如果資料表存在) 中，則會卸載它 (。
-    1. **資料表建立**： `StormEvents` 資料表已建立。
+    1. **Drop table**： `StormEvents` 當資料表存在) 時，會卸載資料表 (。
+    1. **資料表建立**： `StormEvents` 已建立資料表。
     1. 建立**對應**： `StormEvents_CSV_Mapping` 建立對應。
     1. 檔案**內嵌： Azure Blob 儲存體**) 中 (的 CSV 檔案已排入佇列以進行內嵌。
 
-1. 若要建立驗證的服務主體，請使用 Azure CLI 搭配[az ad sp create-rbac](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac)命令。 以程式將使用的環境變數形式，將服務主體資訊設定為叢集端點和資料庫名稱：
+1. 若要建立驗證的服務主體，請使用 Azure CLI 搭配 [az ad sp 建立-rbac](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) 命令。 以程式將使用的環境變數格式，以叢集端點和資料庫名稱來設定服務主體資訊：
 
     ```console
     export AZURE_SP_CLIENT_ID="<replace with appID>"
@@ -166,7 +166,7 @@ func ingestFile(kc *kusto.Client, blobStoreAccountName, blobStoreContainer, blob
     go run main.go
     ```
 
-    您會得到類似的輸出：
+    您將會得到類似的輸出：
 
     ```console
     Connected to Azure Data Explorer
@@ -179,9 +179,9 @@ func ingestFile(kc *kusto.Client, blobStoreAccountName, blobStoreContainer, blob
 
 ## <a name="validate-and-troubleshoot"></a>驗證和疑難排解
 
-等待佇列內嵌的5至10分鐘，以排程內嵌進程，並將資料載入 Azure 資料總管。 
+等候佇列內建的5到10分鐘，以排程內嵌進程，並將資料載入 Azure 資料總管。 
 
-1. 登入 [https://dataexplorer.azure.com](https://dataexplorer.azure.com) 並聯機到您的叢集。 然後執行下列命令，以取得資料表中的記錄計數 `StormEvents` 。
+1. 登入 [https://dataexplorer.azure.com](https://dataexplorer.azure.com) 並聯機至您的叢集。 然後執行下列命令，以取得資料表中的記錄計數 `StormEvents` 。
 
     ```kusto
     StormEvents | count
@@ -204,7 +204,7 @@ func ingestFile(kc *kusto.Client, blobStoreAccountName, blobStoreContainer, blob
 
 ## <a name="clean-up-resources"></a>清除資源
 
-如果您打算遵循其他文章，請保留您建立的資源。 如果不是，請在您的資料庫中執行下列命令，以卸載 `StormEvents` 資料表。
+如果您打算遵循其他文章，請保留您建立的資源。 如果沒有，請在您的資料庫中執行下列命令，以卸載 `StormEvents` 資料表。
 
 ```kusto
 .drop table StormEvents

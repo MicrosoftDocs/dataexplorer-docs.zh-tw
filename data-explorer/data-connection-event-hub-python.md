@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: 7a4cc1efef506f046e17af901a87b501e0272d08
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 9bca4be307cd532c4bcd5ccff2a82ca76cf27ae6
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201294"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88873622"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-python"></a>使用 Python 建立 Azure 資料總管的事件中樞資料連線
 
@@ -25,7 +25,7 @@ ms.locfileid: "88201294"
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 在本文中，您會使用 Python 建立 Azure 資料總管的事件中樞資料連線。 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [免費建立帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
 * [Python 3.4+](https://www.python.org/downloads/)。
@@ -82,18 +82,18 @@ poller = kusto_management_client.data_connections.create_or_update(resource_grou
 
 |**設定** | **建議的值** | **欄位描述**|
 |---|---|---|
-| tenant_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
-| subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
-| client_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
-| client_secret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
-| resource_group_name | *testrg* | 包含您叢集的資源組名。|
+| tenant_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
+| subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
+| client_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
+| client_secret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可存取您租使用者中的資源。 |
+| resource_group_name | *>testrg* | 包含您叢集的資源組名。|
 | cluster_name | *mykustocluster* | 叢集的名稱。|
-| database_name | *mykustodatabase* | 叢集中的目標資料庫名稱。|
-| data_connection_name | *myeventhubconnect* | 所需的資料連線名稱。|
-| table_name | *StormEvents* | 目標資料庫中目標資料表的名稱。|
+| database_name | *mykustodatabase* | 叢集中目標資料庫的名稱。|
+| data_connection_name | *myeventhubconnect* | 您的資料連線所需的名稱。|
+| table_name | *StormEvents* | 目標資料庫中的目標資料表名稱。|
 | mapping_rule_name | *StormEvents_CSV_Mapping* | 與目標資料表相關之資料行對應的名稱。|
-| data_format | *csv* | 訊息的資料格式。|
-| event_hub_resource_id | *資源識別碼* | 您的事件中樞的資源識別碼，其中包含用於內嵌的資料。 |
+| data_format | *Csv* | 訊息的資料格式。|
+| event_hub_resource_id | *資源識別碼* | 您事件中樞的資源識別碼，其中包含要內嵌的資料。 |
 | consumer_group | *$Default* | 事件中樞的取用者群組。|
 | location | *Central US* | 資料連線資源的位置。|
 
