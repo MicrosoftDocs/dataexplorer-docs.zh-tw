@@ -1,34 +1,34 @@
 ---
-title: 使用 Power BI 匯入查詢視覺化 Azure 資料資源管理員中的資料
-description: 在本文中,您將瞭解如何使用 Power BI 中可視化數據的三個選項之一:從 Azure 資料資源管理器導入查詢。
+title: 使用 Power BI 匯入的查詢將 Azure 資料總管中的資料視覺化
+description: 在本文中，您將瞭解如何使用三個選項中的其中一個來視覺化 Power BI 中的資料：從 Azure 資料總管匯入查詢。
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/10/2019
-ms.openlocfilehash: 81efe25e5d644549bf24a2f958a0762afc161b67
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4ab51eaef43596da0f2b511a4a617afaade939cf
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81501928"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88875067"
 ---
 # <a name="visualize-data-using-a-query-imported-into-power-bi"></a>在 Power BI 中使用匯入的查詢將資料視覺化
 
 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Power BI 是一個商務分析解決方案，可讓您將資料視覺化並在整個組織共用結果。
 
-Azure 資料總管提供三個選項以便連線到 Power BI 中的資料：使用內建連接器，從 Azure 資料總管匯入查詢，或使用 SQL 查詢。 本文介紹如何導入查詢,以便獲取數據並在 Power BI 報表中可視化。
+Azure 資料總管提供三個選項以便連線到 Power BI 中的資料：使用內建連接器，從 Azure 資料總管匯入查詢，或使用 SQL 查詢。 本文說明如何匯入查詢，讓您可以在 Power BI 報表中取得資料並將其視覺化。
 
 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
-完成本文需要以下內容:
+您需要下列專案才能完成這篇文章：
 
 * 屬於 Azure Active Directory 成員的組織電子郵件帳戶，以便您連線到 [Azure 資料總管說明叢集](https://dataexplorer.azure.com/clusters/help/databases/samples)。
 
-* [Power BI Desktop](https://powerbi.microsoft.com/get-started/) (選取 [免費下載]****)
+* [Power BI Desktop](https://powerbi.microsoft.com/get-started/) (選取 [免費下載])
 
 * [Azure 資料總管傳統型應用程式](kusto/tools/kusto-explorer.md)
 
@@ -36,7 +36,7 @@ Azure 資料總管提供三個選項以便連線到 Power BI 中的資料：使�
 
 首先，您會在 Azure 資料總管傳統型應用程式中建立查詢，並將它匯出以便在 Power BI 中使用。 然後，連線到 Azure 資料總管說明叢集，並從 *StormEvents* 資料表帶入資料子集。 [!INCLUDE [data-explorer-storm-events](includes/data-explorer-storm-events.md)]
 
-1. 在瀏覽器中,轉到[https://help.kusto.windows.net/](https://help.kusto.windows.net/)啟動 Azure 資料資源管理器桌面應用。
+1. 在瀏覽器中，移至 [https://help.kusto.windows.net/](https://help.kusto.windows.net/) 以啟動 Azure 資料總管 desktop 應用程式。
 
 1. 在傳統型應用程式中，將下列查詢複製到右上方查詢視窗，然後加以執行。
 
@@ -78,7 +78,7 @@ Azure 資料總管提供三個選項以便連線到 Power BI 中的資料：使�
 
 ## <a name="clean-up-resources"></a>清除資源
 
-如果不再需要為本文創建的報表,請刪除 Power BI 桌面 (.pbix) 檔。
+如果您不再需要針對本文所建立的報表，請刪除 Power BI Desktop 的 ( .pbix) 檔。
 
 ## <a name="next-steps"></a>後續步驟
 

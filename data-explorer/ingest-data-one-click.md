@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: tzgitlin
 ms.service: data-explorer
-ms.topic: overview
+ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 98cfbf8b196d0496b4c7e86b03d6d2787ba6919f
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: d77c02ee3da7c33fc77416fa712a9108411c2276
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86188450"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874795"
 ---
 # <a name="what-is-one-click-ingestion"></a>什麼是單鍵擷取？
 

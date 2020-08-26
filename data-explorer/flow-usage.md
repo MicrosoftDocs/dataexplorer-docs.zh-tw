@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: dorcohen
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/15/2020
-ms.openlocfilehash: 56851a159f6d8d2cee5f3991dab290070fb8c482
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: a9f2be17e02103a64fa31a10bc6195076addb1fc
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610486"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874523"
 ---
 # <a name="usage-examples-for-azure-data-explorer-connector-to-power-automate-preview"></a>適用于 Azure 資料總管 connector 以 Power Automate (Preview 的使用範例) 
 

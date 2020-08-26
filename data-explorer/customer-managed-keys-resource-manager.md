@@ -1,18 +1,18 @@
 ---
-title: 使用 Azure Resource Manager 範本在 Azure 資料總管中設定客戶管理的金鑰
+title: 使用 Azure Resource Manager 範本，在 Azure 資料總管中設定客戶管理的金鑰
 description: 本文說明如何使用 Azure Resource Manager 範本，在 Azure 資料總管中的資料上設定客戶管理的金鑰加密。
 author: orspod
 ms.author: orspodek
 ms.reviewer: itsagui
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/06/2020
-ms.openlocfilehash: c9594862d9dbe0eae1e8357a81e1bce5bba79da7
-ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
+ms.openlocfilehash: d67705722fb3f78cc4e69b2dcb38153ab3800b0b
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87515791"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88872024"
 ---
 # <a name="configure-customer-managed-keys-using-the-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本設定客戶管理的金鑰
 
@@ -29,7 +29,7 @@ ms.locfileid: "87515791"
 
 ## <a name="configure-encryption-with-customer-managed-keys"></a>使用客戶管理的金鑰設定加密
 
-在本節中，您會使用 Azure Resource Manager 範本來設定客戶管理的金鑰。 根據預設，Azure 資料總管加密會使用 Microsoft 管理的金鑰。 在此步驟中，請將您的 Azure 資料總管叢集設定為使用客戶管理的金鑰，並指定要與叢集產生關聯的金鑰。
+在本節中，您會使用 Azure Resource Manager 範本來設定客戶管理的金鑰。 根據預設，Azure 資料總管加密會使用 Microsoft 管理的金鑰。 在此步驟中，請將您的 Azure 資料總管叢集設定為使用客戶管理的金鑰，並指定要與叢集相關聯的金鑰。
 
 您可以使用 Azure 入口網站或使用 PowerShell 來部署 Azure Resource Manager 範本。
 
@@ -79,12 +79,12 @@ ms.locfileid: "87515791"
 
 ## <a name="update-the-key-version"></a>更新金鑰版本
 
-當您建立新版本的金鑰時，您必須更新叢集以使用新的版本。 首先，呼叫 `Get-AzKeyVaultKey` 以取得金鑰的最新版本。 然後，將叢集的 key vault 屬性更新為使用新版本的金鑰，如以[客戶管理的金鑰設定加密](#configure-encryption-with-customer-managed-keys)中所示。
+當您建立新版本的金鑰時，您必須將叢集更新為使用新版本。 首先，呼叫 `Get-AzKeyVaultKey` 以取得最新版本的金鑰。 然後，將叢集的金鑰保存庫內容更新為使用新版本的金鑰，如使用 [客戶管理的金鑰進行加密設定](#configure-encryption-with-customer-managed-keys)所示。
 
 ## <a name="next-steps"></a>後續步驟
 
-* [在 Azure 中保護 Azure 資料總管叢集](security.md)
+* [保護 Azure 中的 Azure 資料總管叢集](security.md)
 * [設定 Azure 資料總管叢集的受控識別](managed-identities.md)
-* 藉由啟用待用加密，[在 Azure 資料總管 Azure 入口網站中使用磁片加密來保護您](cluster-disk-encryption.md)的叢集。
+* [在 Azure 中使用磁片加密來保護您的叢集資料總管 Azure 入口網站](cluster-disk-encryption.md) ，方法是啟用待用加密。
 * [使用 C 設定客戶管理的金鑰#](customer-managed-keys-csharp.md)
 

@@ -1,25 +1,25 @@
 ---
-title: 使用 Jupyter Notebook 來分析 Azure 中的資料資料總管
-description: 本主題說明如何使用 Jupyter Notebook 和 kqlmagic 延伸模組來分析 Azure 資料總管中的資料。
+title: 使用 Jupyter Notebook 來分析 Azure 資料總管中的資料
+description: 本主題說明如何使用 Jupyter Notebook 和 kqlmagic 擴充功能來分析 Azure 資料總管中的資料。
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/10/2019
-ms.openlocfilehash: f8f67599872c920e323e788dd79e082fdc22e0f0
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 9794c9448ce8f7243d328eb039e8ca4322f3b933
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82616502"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88872959"
 ---
-# <a name="use-a-jupyter-notebook-and-kqlmagic-extension-to-analyze-data-in-azure-data-explorer"></a>使用 Jupyter Notebook 和 kqlmagic 延伸模組來分析 Azure 中的資料資料總管
+# <a name="use-a-jupyter-notebook-and-kqlmagic-extension-to-analyze-data-in-azure-data-explorer"></a>使用 Jupyter Notebook 和 kqlmagic 擴充功能來分析 Azure 中的資料資料總管
 
 Jupyter Notebook 是開放原始碼的 Web 應用程式，可讓您建立及共用含有即時程式碼、方程式、視覺效果和敘述文字的文件。 使用方式包含資料清理和轉換、數字模擬、統計模型、資料視覺效果和機器學習。
-[Jupyter Notebook](https://jupyter.org/) 支援 magic 函式，可藉由支援其他命令來擴展核心的功能。 kqlmagic 是一個命令，可在 Jupyter Notebook 中擴充 Python 核心的功能，讓您能夠以原生方式執行 Kusto 語言查詢。 您可以輕鬆地結合 Python 和 Kusto 查詢語言，使用與`render`命令整合的豐富 Plot.ly 程式庫來查詢和視覺化資料。 支援用於執行查詢的資料來源。 這些資料來源包括 Azure 資料總管，這是適用于記錄和遙測資料的快速且可高度調整的資料探索服務，以及 Azure 監視器記錄和 Application Insights。 kqlmagic 也適用于 Azure Notebooks、Jupyter Lab 和 Visual Studio Code Jupyter 擴充功能。
+[Jupyter Notebook](https://jupyter.org/) 支援 magic 函式，可藉由支援其他命令來擴展核心的功能。 kqlmagic 是一種命令，可在 Jupyter Notebook 中擴充 Python 核心的功能，讓您能夠以原生方式執行 Kusto 語言查詢。 您可以輕鬆地結合 Python 和 Kusto 查詢語言，以使用與命令整合的豐富 Plot.ly 程式庫來查詢資料並將其視覺化 `render` 。 支援用於執行查詢的資料來源。 這些資料來源包括 Azure 資料總管、適用于記錄和遙測資料的快速且可高度調整的資料探索服務，以及 Azure 監視器記錄和 Application Insights。 kqlmagic 也可搭配 Azure Notebooks、Jupyter Lab 和 Visual Studio Code Jupyter 延伸模組使用。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 - 屬於 Azure Active Directory (AAD) 成員的組織電子郵件帳戶。
 - 本機電腦上已安裝 Jupyter Notebook，或使用 Azure Notebook 並複製範例 [Azure Notebook](https://kustomagicsamples-manojraheja.notebooks.azure.com/j/notebooks/Getting%20Started%20with%20kqlmagic%20on%20Azure%20Data%20Explorer.ipynb)
@@ -40,7 +40,7 @@ Jupyter Notebook 是開放原始碼的 Web 應用程式，可讓您建立及共�
     %reload_ext Kqlmagic
     ```
     > [!NOTE]
-    > 按一下核心 > 變更核心 > Python 3.6，將核心版本變更為 Python 3。6
+    > 按一下核心 > 變更核心 > Python 3.6，以將核心版本變更為 Python 3。6
     
 ## <a name="connect-to-the-azure-data-explorer-help-cluster"></a>連線至 Azure 資料總管協助叢集
 
@@ -79,7 +79,7 @@ StormEvents
 
 ### <a name="customize-the-chart-colors"></a>自訂圖表色彩
 
-如果您不喜歡預設的調色板，請使用 [調色板] 選項自訂圖表。 您可以在這裡找到可用的調色板：[選擇 kqlmagic 查詢圖表結果的色彩調色板](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FColorYourCharts.ipynb)
+如果您不喜歡預設的色彩選擇區，請使用 [調色板] 選項自訂圖表。 您可以在這裡找到可用的調色板：[選擇 kqlmagic 查詢圖表結果的色彩選擇](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FColorYourCharts.ipynb)區
 
 1. 獲取調色盤清單：
 
@@ -100,7 +100,7 @@ StormEvents
 
 ## <a name="parameterize-a-query-with-python"></a>使用 Python 將查詢參數化
 
-Kqlmagic 可讓您簡單地在 Kusto 查詢語言與 Python 之間進行交換。 若要深入瞭解：[使用 Python 參數化您的 kqlmagic 查詢](https://mybinder.org/v2/gh/Microsoft/jupyter-Kqlmagic/master?filepath=notebooks%2FParametrizeYourQuery.ipynb)
+Kqlmagic 可讓您簡單地在 Kusto 查詢語言與 Python 之間進行交換。 若要深入瞭解：[使用 Python 將 kqlmagic 查詢參數](https://mybinder.org/v2/gh/Microsoft/jupyter-Kqlmagic/master?filepath=notebooks%2FParametrizeYourQuery.ipynb)化
 
 ### <a name="use-a-python-variable-in-your-kql-query"></a>在 KQL 查詢中使用 Python 變數
 
@@ -168,13 +168,13 @@ df.head(10)
     ```
 
 > [!TIP]
-> 若要接收所有可用設定的相關`%config Kqlmagic`資訊，請使用。 若要疑難排解並捕捉 Kusto 錯誤（例如連接問題和不正確的查詢），請使用`%config Kqlmagic.short_errors=False`
+> 若要接收所有可用設定的相關資訊，請使用 `%config Kqlmagic` 。 若要疑難排解和捕獲 Kusto 錯誤（例如連接問題和不正確的查詢），請使用 `%config Kqlmagic.short_errors=False`
 
 ## <a name="next-steps"></a>後續步驟
 
 執行 help 命令來瀏覽下列包含所有支援功能的範例 Notebook：
 - [開始使用適用于 Azure 資料總管的 kqlmagic](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FQuickStart.ipynb) 
-- [開始使用 kqlmagic for Application Insights](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FQuickStartAI.ipynb) 
-- [開始使用適用于 Azure 監視器記錄的 kqlmagic](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FQuickStartLA.ipynb) 
-- [使用 Python 將 kqlmagic 您的 kqlmagic 查詢](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FParametrizeYourQuery.ipynb) 
-- [選擇 kqlmagic 查詢圖表結果的色彩調色板](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FColorYourCharts.ipynb)
+- [開始使用 kqlmagic 進行 Application Insights](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FQuickStartAI.ipynb) 
+- [開始使用 kqlmagic 進行 Azure 監視器記錄](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FQuickStartLA.ipynb) 
+- [使用 Python 參數化您的 kqlmagic 查詢](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FParametrizeYourQuery.ipynb) 
+- [選擇 kqlmagic 查詢圖表結果的色彩選擇區](https://mybinder.org/v2/gh/Microsoft/jupyter-kqlmagic/master?filepath=notebooks%2FColorYourCharts.ipynb)

@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: tzgitlin
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 2785ec685041c47943ce618b9223eadd46ad9b2a
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 25c82c8890342e00279d137eb749f3acc7df986f
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201734"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874982"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>訂閱 Event Grid 通知，以便將 Blob 擷取至 Azure 資料總管
 
@@ -24,9 +24,9 @@ ms.locfileid: "88201734"
 
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 
-在本文中，您將瞭解如何使用事件方格資料連線，將 blob 從儲存體帳戶內嵌到 Azure 資料總管。 您將建立可設定 [Azure Event grid](/azure/event-grid/overview) 訂用帳戶的事件方格資料連線。 事件方格訂用帳戶會透過 Azure 事件中樞，將事件從您的儲存體帳戶路由至 Azure 資料總管。 接著，您會在整個系統中看到資料流程的範例。
+在本文中，您將瞭解如何使用 Event Grid 資料連線，將 blob 從儲存體帳戶內嵌到 Azure 資料總管。 您將建立可設定 [Azure 事件方格](/azure/event-grid/overview) 訂用帳戶的事件方格資料連線。 事件方格訂用帳戶會透過 Azure 事件中樞，將事件從您的儲存體帳戶路由傳送到 Azure 資料總管。 然後，您會看到整個系統中的資料流程範例。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * Azure 訂用帳戶。 建立 [免費的 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 叢集[和資料庫](create-cluster-database-portal.md)。
@@ -46,7 +46,7 @@ ms.locfileid: "88201734"
     .create table TestTable (TimeStamp: datetime, Value: string, Source:string)
     ```
 
-    :::image type="content" source="media/ingest-data-event-grid/run-create-table.png" alt-text="執行命令建立資料表":::
+    :::image type="content" source="media/ingest-data-event-grid/run-create-table.png" alt-text="執行命令 create table":::
 
 1. 將下列命令複製到視窗中，然後選取 [執行]**** 以將傳入的 JSON 資料對應至資料表 (TestTable) 的資料行名稱與資料類型。
 
@@ -56,70 +56,70 @@ ms.locfileid: "88201734"
 
 ## <a name="create-an-event-grid-data-connection-in-azure-data-explorer"></a>在 Azure 資料總管中建立 Event Grid 資料連線
 
-現在，將儲存體帳戶連接到 Azure 資料總管，以便將流入儲存體的資料串流處理至測試資料表。 
+現在，將儲存體帳戶連線至 Azure 資料總管，以便將流入儲存體的資料串流處理到測試資料表。 
 
-1. 在您建立的叢集下方，選取 [**資料庫**]  >  **TestDatabase**。
+1. 在您建立的叢集下方，選取 [**資料庫**  >  **>testdatabase**]。
 
     :::image type="content" source="media/ingest-data-event-grid/select-test-database.png" alt-text="選取測試資料庫":::
 
 1. 選取 [**資料**內嵌  >  **新增資料連線**]。
 
-    :::image type="content" source="media/ingest-data-event-grid/data-ingestion-create.png" alt-text="為數據內嵌新增資料連線":::
+    :::image type="content" source="media/ingest-data-event-grid/data-ingestion-create.png" alt-text="新增資料內嵌的資料連線":::
 
-1. 選取 [連線類型]： [ **Blob 儲存體**]。
+1. 選取連線類型： **Blob 儲存體**。
 
 1. 在表單中填寫以下資訊：
 
-    :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-basics.png" alt-text="以連線基本概念填寫事件方格表單":::
+    :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-basics.png" alt-text="在事件方格表單中填寫連接基本概念":::
 
      資料來源：
 
     |**設定** | **建議的值** | **欄位描述**|
     |---|---|---|
     | 資料連線名稱 | *test-grid-connection* | 您想要在 Azure 資料總管中建立的連線名稱。|
-    | 儲存體帳戶訂用帳戶 | 您的訂用帳戶識別碼 | 您的儲存體帳戶所在的訂用帳戶識別碼。|
+    | 儲存體帳戶訂用帳戶 | 您的訂用帳戶識別碼 | 儲存體帳戶所在的訂用帳戶識別碼。|
     | 儲存體帳戶 | *gridteststorage1* | 您先前建立之儲存體帳戶的名稱。|
-    | 建立資源 | *自動* | 定義您是否要讓 Azure 資料總管為您建立事件方格訂用帳戶、事件中樞命名空間和事件中樞。 如需如何手動建立事件方格訂閱的詳細說明，請參閱在 [儲存體帳戶中建立事件方格訂閱](ingest-data-event-grid.md) 一節中的參考。|
+    | 資源建立 | *自動* | 定義您是否希望 Azure 資料總管建立事件方格訂用帳戶、事件中樞命名空間和事件中樞。 如需如何手動建立事件方格訂用帳戶的詳細說明，請參閱「在 [儲存體帳戶中建立事件方格訂用帳戶](ingest-data-event-grid.md) 」一節中的參考。|
 
 1. 如果您想要追蹤特定的主題，請選取 [ **篩選設定** ]。 設定通知的篩選條件，如下所示：
-    * [**首碼**] 欄位是主體的*常*值前置詞。 當套用的模式是 *startswith*時，它可以跨越多個容器、資料夾或 blob。 不允許使用萬用字元。
+    * [**前置**詞] 欄位是主旨的*常*值前置詞。 當套用的模式為 *startswith*時，它可以跨越多個容器、資料夾或 blob。 不允許使用萬用字元。
         * 若要在 blob 容器上定義篩選，欄位 *必須* 設定如下： *`/blobServices/default/containers/[container prefix]`* 。
-        * 若要在 blob 首碼 (或 Azure Data Lake Gen2) 中的資料夾定義篩選，欄位 *必須* 設定如下： *`/blobServices/default/containers/[container name]/blobs/[folder/blob prefix]`* 。
+        * 若要在 blob 首碼 (或 Azure Data Lake Gen2) 中的資料夾上定義篩選，欄位 *必須* 設定如下： *`/blobServices/default/containers/[container name]/blobs/[folder/blob prefix]`* 。
     * **尾碼** 欄位是 blob 的 *常* 值尾碼。 不允許使用萬用字元。
-    * [**區分大小寫**] 欄位指出前置詞和尾碼篩選是否區分大小寫
-    * 如需篩選事件的詳細資訊，請參閱 [Blob 儲存體事件](/azure/storage/blobs/storage-blob-event-overview#filtering-events)。
+    * 區分**大小寫**欄位指出前置詞和後置詞篩選準則是否區分大小寫
+    * 如需有關篩選事件的詳細資訊，請參閱 [Blob 儲存體事件](/azure/storage/blobs/storage-blob-event-overview#filtering-events)。
     
     :::image type="content" source="media/ingest-data-event-grid/filter-settings.png" alt-text="篩選設定事件方格":::    
 
 1. 選取 **[下一步：內嵌屬性]**。
 
-1. 在表單中填寫下列資訊，然後選取 **[下一步：審查 + 建立]**。 資料表和對應名稱會區分大小寫：
+1. 填寫表單中的下列資訊，然後選取 **[下一步：檢查 + 建立]**。 資料表和對應名稱會區分大小寫：
 
-   :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-ingest-properties.png" alt-text="審查和建立資料表和對應內嵌屬性":::
+   :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-ingest-properties.png" alt-text="檢查和建立資料表和對應內嵌屬性":::
 
     內嵌屬性：
 
      **設定** | **建議的值** | **欄位描述**
     |---|---|---|
-    | Table | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
-    | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO、RAW 和的 W3CLOG。 支援的壓縮選項為 Zip 和 GZip。 |
+    | 資料表 | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
+    | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO、RAW 和 W3CLOG。 支援的壓縮選項為 Zip 和 GZip。 |
     | 對應 | *TestMapping* | 您在 **TestDatabase** 中建立的對應，會將傳入的 JSON 資料對應至 **TestTable** 的資料行名稱與資料類型。|
 
-1. 檢查自動為您建立的資源，然後選取 [ **建立**]。
+1. 檢查為您自動建立的資源，然後選取 [ **建立**]。
 
-    :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-review-create.png" alt-text="審查和建立事件方格的資料連線":::
+    :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-review-create.png" alt-text="檢查和建立事件方格的資料連線":::
 
-1. 請等候部署完成。 如果您的部署失敗，請選取失敗階段旁的 [作業 **詳細資料** ]，以取得失敗原因的詳細資訊。 選取 [重新 **部署** ] 以再次嘗試部署資源。
+1. 請等候部署完成。 如果您的部署失敗，請選取失敗階段旁邊的作業 **詳細資料** ，以取得失敗原因的詳細資訊。 選取 [重新 **部署** ] 以嘗試再次部署資源。
 
     :::image type="content" source="media/ingest-data-event-grid/deploy-event-grid-resources.png" alt-text="部署事件方格資源":::
 
 ## <a name="generate-sample-data"></a>產生範例資料
 
-現在，Azure 資料總管和儲存體帳戶已連線，您可以建立範例資料，並將它上傳至儲存體容器。
+既然 Azure 資料總管和儲存體帳戶已連接，您可以建立範例資料，並將它上傳至儲存體容器。
 
 我們將使用可發出一些基本 Azure CLI 命令的小型殼層指令碼，來與 Azure 儲存體資源互動。 此腳本會執行下列動作： 
 1. 在儲存體帳戶中建立新的容器。
-1. 將現有的檔案 (以 blob) 的形式上傳至該容器。
+1. 將現有的檔案 (作為 blob) 上傳至該容器。
 1. 列出容器中的 blob。 
 
 您可以使用 [Azure Cloud Shell](/azure/cloud-shell/overview)，直接在入口網站中執行指令碼。
@@ -155,11 +155,11 @@ ms.locfileid: "88201734"
 ```
 
 > [!NOTE]
-> 為了達到最佳的內嵌效能，必須傳達針對內嵌所提交之壓縮 blob 的 *未壓縮* 大小。 由於事件方格通知只包含基本的詳細資料，因此必須明確地傳達大小資訊。 藉由在 `rawSizeBytes` blob 中繼資料上設定具有 *未壓縮* 資料大小（以位元組為單位）的屬性，即可提供未壓縮的大小資訊。
+> 為了達到最佳的內嵌效能，必須傳達針對內嵌提交的壓縮 blob 的 *未壓縮* 大小。 因為事件方格通知只包含基本的詳細資料，所以必須明確地傳達大小資訊。 您可以藉由在 `rawSizeBytes` blob 中繼資料上設定屬性（以位元組為單位），以提供 *未壓縮的* 大小資訊。
 
 ### <a name="ingestion-properties"></a>內嵌屬性
 
-您可以指定透過 blob 中繼資料內嵌之 blob 的內嵌 [屬性](ingestion-properties.md) 。
+您可以透過 blob 中繼資料指定 blob 內嵌的內嵌 [屬性](ingestion-properties.md) 。
 
 您可以設定這些屬性：
 
@@ -167,7 +167,7 @@ ms.locfileid: "88201734"
 
 > [!NOTE]
 > Azure 資料總管不會在內嵌後刪除 blob。
-> 保留三到五天的 blob。
+> 將 blob 保留三至五天。
 > 使用 [Azure blob 儲存體生命週期](/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal) 來管理 Blob 刪除。 
 
 ## <a name="review-the-data-flow"></a>檢閱資料流程
@@ -175,11 +175,11 @@ ms.locfileid: "88201734"
 > [!NOTE]
 > Azure 資料總管具有資料擷取的彙總 (批次處理) 原則，可將擷取程序最佳化。
 根據預設，此原則設定為 5 分鐘。
-如有需要，您可以稍後再變更原則。 在本文中，您可以預期會有幾分鐘的延遲。
+您稍後可以視需要修改原則。 在本文中，您可以預期會有幾分鐘的延遲。
 
 1. 當應用程式正在執行時，在 Azure 入口網站內事件格線的下方，您會看見活動爆增。
 
-    :::image type="content" source="media/ingest-data-event-grid/event-grid-graph.png" alt-text="事件方格的活動圖":::
+    :::image type="content" source="media/ingest-data-event-grid/event-grid-graph.png" alt-text="事件方格的活動圖形":::
 
 1. 若要檢查目前為止已有多少則訊息成功進入資料庫，請在測試資料庫中執行下列查詢。
 
@@ -200,38 +200,38 @@ ms.locfileid: "88201734"
 
 ## <a name="clean-up-resources"></a>清除資源
 
-如果您不打算再次使用您的事件格線，請清除已自動為您建立的事件方格訂用帳戶、事件中樞命名空間和事件中樞，以避免產生成本。
+如果您不打算再次使用您的事件方格，請清除為您自動建立的事件方格訂用帳戶、事件中樞命名空間和事件中樞，以避免產生成本。
 
 1. 在 Azure 入口網站中，移至左側功能表，然後選取 [ **所有資源**]。
 
-    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-all-resource.png" alt-text="選取 [所有資源] 以進行事件方格清除":::    
+    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-all-resource.png" alt-text="選取事件方格清除的所有資源":::    
 
-1. 搜尋您的事件中樞命名空間，然後選取 [ **刪除** ] 將它刪除：
+1. 搜尋您的事件中樞命名空間，然後選取 [ **刪除** ] 以刪除它：
 
     :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-find-eventhub-namespace-delete.png" alt-text="清除事件中樞命名空間":::
 
-1. 在 [刪除資源] 表單中，確認刪除動作以刪除事件中樞命名空間和事件中樞資源。
+1. 在 [刪除資源] 表單中，確認刪除以刪除事件中樞命名空間和事件中樞資源。
 
 1. 移至您的儲存體帳戶。 在左側功能表中，選取 [ **事件**]：
 
-    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-events.png" alt-text="選取要清除事件方格的事件":::
+    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-events.png" alt-text="選取事件方格要清除的事件":::
 
-1. 在圖表下方選取您的 Event Grid 訂用帳戶，然後選取 [ **刪除** ] 將它刪除：
+1. 在圖形下方，選取您的事件方格訂用帳戶，然後選取 [ **刪除** ] 以刪除它：
 
     :::image type="content" source="media/ingest-data-event-grid/delete-event-grid-subscription.png" alt-text="刪除事件方格訂用帳戶":::
 
-1. 若要刪除您的 Event Grid 資料連線，請移至您的 Azure 資料總管叢集。 在左側功能表上，選取 [ **資料庫**]。
+1. 若要刪除您的 Event Grid 資料連線，請移至您的 Azure 資料總管叢集中。 在左側功能表中，選取 [ **資料庫**]。
 
-1. 選取您的資料庫 **TestDatabase**：
+1. 選取您的資料庫 **>testdatabase**：
 
     :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-database.png" alt-text="選取要清除資源的資料庫":::
 
-1. 在左側功能表上，選取 [ **資料**內嵌]：
+1. 在左側功能表中，選取 [ **資料**內嵌：
 
     :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-data-ingestion.png" alt-text="選取資料內嵌以清除資源":::
 
-1. 選取您的資料連線 *測試-格線* 連線，然後選取 [ **刪除** ] 將其刪除。
+1. 選取您的資料連線 *測試格線連接* ，然後選取 [ **刪除** ] 以刪除它。
 
 ## <a name="next-steps"></a>後續步驟
 
-* [查詢 Azure 中的資料資料總管](web-query-data.md)
+* [在 Azure 資料總管中查詢資料](web-query-data.md)

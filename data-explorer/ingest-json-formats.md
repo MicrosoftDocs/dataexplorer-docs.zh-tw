@@ -1,40 +1,40 @@
 ---
 title: 將 JSON 格式的資料內嵌至 Azure 資料總管
-description: 深入瞭解如何將 JSON 格式的資料內嵌至 Azure 資料總管。
+description: 瞭解如何將 JSON 格式的資料內嵌至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: kerend
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/19/2020
-ms.openlocfilehash: 856749fc15a89ffe18c6b0cba92b62579c3ea8b0
-ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
+ms.openlocfilehash: 711ea8d819fbf8fc66c792a51c0ddc3844647a5e
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83722128"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874744"
 ---
 # <a name="ingest-json-formatted-sample-data-into-azure-data-explorer"></a>將 JSON 格式的範例資料內嵌至 Azure 資料總管
 
-本文說明如何將 JSON 格式的資料內嵌至 Azure 資料總管資料庫。 您將從簡單的原始和對應 JSON 範例開始，繼續進行多線條 JSON，然後處理更複雜的 JSON 架構，其中包含陣列和字典。  這些範例會詳細說明使用 Kusto 查詢語言（KQL）、c # 或 Python 來內嵌 JSON 格式資料的程式。 Kusto 查詢語言 `ingest` 控制命令會直接執行至引擎端點。 在生產案例中，會使用用戶端程式庫或資料連線，對資料管理服務執行內嵌。 請參閱[使用 azure 資料總管 Python 程式庫內嵌資料](python-ingest-data.md)和[使用 AZURE 資料總管 .NET Standard SDK 內嵌資料](net-standard-ingest-data.md)，以取得有關使用這些用戶端程式庫內嵌資料的逐步解說。
+本文說明如何將 JSON 格式的資料內嵌至 Azure 資料總管資料庫。 您將從簡單的原始和對應 JSON 範例開始，繼續進行多線條 JSON，然後處理包含陣列和字典的更複雜 JSON 架構。  這些範例詳細說明使用 Kusto 查詢語言來擷取 JSON 格式資料的程式 (KQL) 、c # 或 Python。 Kusto 查詢語言 `ingest` 控制命令會直接執行至引擎端點。 在生產案例中，會使用用戶端程式庫或資料連線，將內嵌執行至資料管理服務。 使用 azure [資料總管 Python 程式庫](python-ingest-data.md) 來讀取內嵌資料，並 [使用 AZURE 資料總管 .NET Standard SDK 內嵌資料](net-standard-ingest-data.md) ，以取得有關使用這些用戶端程式庫擷取資料的逐步解說。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 [測試叢集和資料庫](create-cluster-database-portal.md)
 
 ## <a name="the-json-format"></a>JSON 格式
 
 Azure 資料總管支援兩種 JSON 檔案格式：
-* `json`：以行分隔的 JSON。 輸入資料中的每一行只會有一筆 JSON 記錄。
-* `multijson`：多線條 JSON。 剖析器會忽略行分隔符號，並從上一個位置讀取記錄到有效 JSON 的結尾。
+* `json`：以行分隔的 JSON。 輸入資料中的每一行都只有一筆 JSON 記錄。
+* `multijson`：多線條 JSON。 剖析器會忽略行分隔符號，並將先前位置的記錄讀入有效 JSON 的結尾。
 
 ### <a name="ingest-and-map-json-formatted-data"></a>內嵌和對應 JSON 格式化資料
 
-若要內嵌 JSON 格式的資料，您必須使用 [內嵌[屬性](ingestion-properties.md)] 來指定*格式*。 內嵌 JSON 資料需要[對應](kusto/management/mappings.md)，其會將 json 來源專案對應到其目標資料行。 內嵌資料時，請使用 `IngestionMapping` 屬性搭配其 `ingestionMappingReference` （適用于預先定義的對應）內嵌屬性或其 `IngestionMappings` 屬性。 本文將使用內嵌 `ingestionMappingReference` 屬性，這是在用於內嵌的資料表上預先定義的。 在下列範例中，我們一開始會將 JSON 記錄當做原始資料內嵌至單一資料行資料表。 然後，我們會使用對應，將每個屬性內嵌到其對應的資料行。 
+JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.md)來指定*格式*。 JSON 資料的內嵌需要 [對應](kusto/management/mappings.md)，此對應會將 json 來源專案對應至其目標資料行。 擷取資料時，請使用 `IngestionMapping` 屬性，並將其 `ingestionMappingReference` (用於預先定義的對應) 內嵌屬性或其 `IngestionMappings` 屬性。 本文將使用內嵌 `ingestionMappingReference` 屬性，此屬性是在用於內嵌的資料表上預先定義的。 在下列範例中，我們一開始會先將 JSON 記錄擷取成單一資料行資料表的原始資料。 接著，我們將使用對應，將每個屬性內嵌至其對應的資料行。 
 
-### <a name="simple-json-example"></a>簡單的 JSON 範例
+### <a name="simple-json-example"></a>簡單 JSON 範例
 
-下列範例是具有平面結構的簡單 JSON。 資料有數個裝置所收集的溫度和濕度資訊。 每筆記錄都會以識別碼和時間戳記標示。
+下列範例是具有平面結構的簡單 JSON。 資料具有溫度和濕度資訊，由數個裝置收集。 每一筆記錄都會標示識別碼和時間戳記。
 
 ```json
 {
@@ -48,7 +48,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
 
 ## <a name="ingest-raw-json-records"></a>內嵌原始 JSON 記錄 
 
-在此範例中，您會將 JSON 記錄當做原始資料內嵌至單一資料行資料表。 資料的操作、使用查詢和更新原則都是在內嵌資料之後完成。
+在此範例中，您會將 JSON 記錄以原始資料的形式內嵌至單一資料行資料表。 資料操作、使用查詢和更新原則會在內嵌資料之後完成。
 
 # <a name="kql"></a>[KQL](#tab/kusto-query-language)
 
@@ -56,17 +56,17 @@ Azure 資料總管支援兩種 JSON 檔案格式：
 
 1. 登入 [https://dataexplorer.azure.com](https://dataexplorer.azure.com)。
 
-1. 選取 [新增叢集]****。
+1. 選取 [新增叢集]。
 
 1. 在 [新增叢集]**** 對話方塊中，以 `https://<ClusterName>.<Region>.kusto.windows.net/` 格式輸入您的叢集 URL，然後選取 [新增]****。
 
-1. 貼上下列命令，然後選取 [**執行**] 以建立資料表。
+1. 貼上下列命令，然後選取 [ **執行** ] 以建立資料表。
 
     ```kusto
     .create table RawEvents (Event: dynamic)
     ```
 
-    此查詢會建立一個資料表，其中包含 `Event` [動態](kusto/query/scalar-data-types/dynamic.md)資料類型的單一資料行。
+    此查詢會建立具有 `Event` [動態](kusto/query/scalar-data-types/dynamic.md) 資料類型之單一資料行的資料表。
 
 1. 建立 JSON 對應。
 
@@ -74,7 +74,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
     .create table RawEvents ingestion json mapping 'RawEventMapping' '[{"column":"Event","Properties":{"path":"$"}}]'
     ```
 
-    此命令會建立對應，並將 JSON 根路徑對應 `$` 至資料 `Event` 行。
+    此命令會建立對應，並將 JSON 根路徑對應 `$` 到資料 `Event` 行。
 
 1. 將資料內嵌到 `RawEvents` 資料表中。
 
@@ -84,7 +84,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
 
 # <a name="c"></a>[C#](#tab/c-sharp)
 
-使用 c # 來內嵌原始 JSON 格式的資料。
+使用 c # 以原始 JSON 格式內嵌資料。
 
 1. 建立 `RawEvents` 資料表。
 
@@ -129,7 +129,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
 
     kustoClient.ExecuteControlCommand(command);
     ```
-    此命令會建立對應，並將 JSON 根路徑對應 `$` 至資料 `Event` 行。
+    此命令會建立對應，並將 JSON 根路徑對應 `$` 到資料 `Event` 行。
 
 1. 將資料內嵌到 `RawEvents` 資料表中。
 
@@ -161,7 +161,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
     ```
 
 > [!NOTE]
-> 資料是根據批次[原則](kusto/management/batchingpolicy.md)進行匯總，因此會產生幾分鐘的延遲。
+> 資料會根據 [批次處理原則](kusto/management/batchingpolicy.md)進行匯總，因此會延遲幾分鐘。
 
 # <a name="python"></a>[Python](#tab/python)
 
@@ -204,7 +204,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
     ```
 
     > [!NOTE]
-    > 資料是根據批次[原則](kusto/management/batchingpolicy.md)進行匯總，因此會產生幾分鐘的延遲。
+    > 資料會根據 [批次處理原則](kusto/management/batchingpolicy.md)進行匯總，因此會延遲幾分鐘。
 
 ---
 
@@ -214,7 +214,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
 
 # <a name="kql"></a>[KQL](#tab/kusto-query-language)
 
-1. 使用與 JSON 輸入資料相似的架構來建立新的資料表。 我們將使用此表格來取得下列所有範例和內嵌命令。 
+1. 使用與 JSON 輸入資料類似的架構來建立新的資料表。 我們將使用此資料表來取得下列所有範例和內嵌命令。 
 
     ```kusto
     .create table Events (Time: datetime, Device: string, MessageId: string, Temperature: double, Humidity: double)
@@ -226,7 +226,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
     .create table Events ingestion json mapping 'FlatEventMapping' '[{"column":"Time","Properties":{"path":"$.timestamp"}},{"column":"Device","Properties":{"path":"$.deviceId"}},{"column":"MessageId","Properties":{"path":"$.messageId"}},{"column":"Temperature","Properties":{"path":"$.temperature"}},{"column":"Humidity","Properties":{"path":"$.humidity"}}]'
     ```
 
-    在此對應中，如資料表架構所定義， `timestamp` 專案將會以 `Time` 資料類型的形式內嵌到 `datetime` 資料行。
+    在這個對應中，如同資料表架構所定義， `timestamp` 專案將會以資料類型的形式內嵌至 `Time` `datetime` 資料行。
 
 1. 將資料內嵌到 `Events` 資料表中。
 
@@ -234,11 +234,11 @@ Azure 資料總管支援兩種 JSON 檔案格式：
     .ingest into table Events (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"json", "ingestionMappingReference":"FlatEventMapping"}'
     ```
 
-    檔案 ' simple. json ' 有幾行分隔的 JSON 記錄。 格式為 `json` ，而內嵌命令中使用的對應是 `FlatEventMapping` 您所建立的。
+    檔案 ' simple.json ' 有一些行分隔的 JSON 記錄。 格式為 `json` ，而且內嵌命令中使用的對應是 `FlatEventMapping` 您所建立的。
 
 # <a name="c"></a>[C#](#tab/c-sharp)
 
-1. 使用與 JSON 輸入資料相似的架構來建立新的資料表。 我們將使用此表格來取得下列所有範例和內嵌命令。 
+1. 使用與 JSON 輸入資料類似的架構來建立新的資料表。 我們將使用此資料表來取得下列所有範例和內嵌命令。 
 
     ```csharp
     var table = "Events";
@@ -278,7 +278,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
     kustoClient.ExecuteControlCommand(command);
     ```
 
-    在此對應中，如資料表架構所定義， `timestamp` 專案將會以 `Time` 資料類型的形式內嵌到 `datetime` 資料行。    
+    在這個對應中，如同資料表架構所定義， `timestamp` 專案將會以資料類型的形式內嵌至 `Time` `datetime` 資料行。    
 
 1. 將資料內嵌到 `Events` 資料表中。
 
@@ -297,11 +297,11 @@ Azure 資料總管支援兩種 JSON 檔案格式：
     ingestClient.IngestFromStorageAsync(blobPath, properties);
     ```
 
-    檔案 ' simple. json ' 有幾行分隔的 JSON 記錄。 格式為 `json` ，而內嵌命令中使用的對應是 `FlatEventMapping` 您所建立的。
+    檔案 ' simple.json ' 有一些行分隔的 JSON 記錄。 格式為 `json` ，而且內嵌命令中使用的對應是 `FlatEventMapping` 您所建立的。
 
 # <a name="python"></a>[Python](#tab/python)
 
-1. 使用與 JSON 輸入資料相似的架構來建立新的資料表。 我們將使用此表格來取得下列所有範例和內嵌命令。 
+1. 使用與 JSON 輸入資料類似的架構來建立新的資料表。 我們將使用此資料表來取得下列所有範例和內嵌命令。 
 
     ```python
     TABLE = "RawEvents"
@@ -330,12 +330,12 @@ Azure 資料總管支援兩種 JSON 檔案格式：
         BLOB_DESCRIPTOR, ingestion_properties=INGESTION_PROPERTIES)
     ```
 
-    檔案 ' simple. json ' 有幾行分隔的 JSON 記錄。 格式為 `json` ，而內嵌命令中使用的對應是 `FlatEventMapping` 您所建立的。    
+    檔案 ' simple.json ' 有幾行分隔的 JSON 記錄。 格式為 `json` ，而且內嵌命令中使用的對應是 `FlatEventMapping` 您所建立的。    
 ---
 
 ## <a name="ingest-multi-lined-json-records"></a>內嵌多線條 JSON 記錄
 
-在此範例中，您會內嵌多線條 JSON 記錄。 每個 JSON 屬性都會對應到資料表中的單一資料行。 檔案 ' multilined ' 有幾個縮排的 JSON 記錄。 格式會 `multijson` 指示引擎讀取 JSON 結構的記錄。
+在此範例中，您會內嵌多個線條的 JSON 記錄。 每個 JSON 屬性都會對應到資料表中的單一資料行。 檔案 ' multilined.json ' 有一些縮排的 JSON 記錄。 格式會 `multijson` 告知引擎讀取 JSON 結構的記錄。
 
 # <a name="kql"></a>[KQL](#tab/kusto-query-language)
 
@@ -382,7 +382,7 @@ INGESTION_CLIENT.ingest_from_blob(
 
 ## <a name="ingest-json-records-containing-arrays"></a>內嵌包含陣列的 JSON 記錄
 
-陣列資料類型是已排序的值集合。 JSON 陣列的內嵌是由[更新原則](kusto/management/update-policy.md)完成。 JSON 會依現有的方式內嵌至中繼資料表。 更新原則會在資料表上執行預先定義的函數 `RawEvents` ，並將結果 reingesting 至目標資料表。 我們將內嵌具有下列結構的資料：
+陣列資料類型是已排序的值集合。 JSON 陣列的內嵌是由 [更新原則](kusto/management/update-policy.md)所完成。 JSON 會依原樣內嵌至中繼資料表。 更新原則會在資料表上執行預先定義的函數 `RawEvents` ，並將結果 reingesting 至目標資料表。 我們將內嵌具有下列結構的資料：
 
 ```json
 {
@@ -408,7 +408,7 @@ INGESTION_CLIENT.ingest_from_blob(
 
 # <a name="kql"></a>[KQL](#tab/kusto-query-language)
 
-1. 建立 `update policy` 擴充集合的函式， `records` 讓集合中的每個值都能使用運算子接收個別的資料列 `mv-expand` 。 我們會使用資料表 `RawEvents` 做為來源資料表和 `Events` 目標資料表。
+1. 建立 `update policy` 擴充集合的函式， `records` 讓集合中的每個值都使用運算子接收個別的資料列 `mv-expand` 。 我們將使用資料表 `RawEvents` 做為來源資料表和 `Events` 目標資料表。
 
     ```kusto
     .create function EventRecordsExpand() {
@@ -429,7 +429,7 @@ INGESTION_CLIENT.ingest_from_blob(
     EventRecordsExpand() | getschema
     ```
 
-1. 將更新原則新增至目標資料表。 此原則會自動對中繼資料表中的任何新內嵌資料執行查詢 `RawEvents` ，並將結果內嵌到 `Events` 資料表中。 定義零保留原則，以避免保存中繼資料表。
+1. 將更新原則新增至目標資料表。 這項原則會自動對中繼資料表中任何新內嵌的資料執行查詢 `RawEvents` ，並將結果內嵌到 `Events` 資料表中。 定義零保留原則，以避免保存中繼資料表。
 
     ```kusto
     .alter table Events policy update @'[{"Source": "RawEvents", "Query": "EventRecordsExpand()", "IsEnabled": "True"}]'
@@ -441,7 +441,7 @@ INGESTION_CLIENT.ingest_from_blob(
     .ingest into table RawEvents (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/array.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"multijson", "ingestionMappingReference":"RawEventMapping"}'
     ```
 
-1. 查看資料表中的資料 `Events` 。
+1. 檢查資料表中的資料 `Events` 。
 
     ```kusto
     Events
@@ -449,7 +449,7 @@ INGESTION_CLIENT.ingest_from_blob(
 
 # <a name="c"></a>[C#](#tab/c-sharp)
 
-1. 建立擴充集合的 update 函式， `records` 讓集合中的每個值都能使用運算子接收個別的資料列 `mv-expand` 。 我們會使用資料表 `RawEvents` 做為來源資料表和 `Events` 目標資料表。   
+1. 建立擴充集合的更新函式， `records` 讓集合中的每個值都使用運算子接收個別的資料列 `mv-expand` 。 我們將使用資料表 `RawEvents` 做為來源資料表和 `Events` 目標資料表。   
 
     ```csharp
     var command =
@@ -474,7 +474,7 @@ INGESTION_CLIENT.ingest_from_blob(
     > [!NOTE]
     > 函數所接收的架構必須符合目標資料表的架構。
 
-1. 將更新原則新增至目標資料表。 此原則會自動對中繼資料表中的任何新內嵌資料執行查詢 `RawEvents` ，並將其結果內嵌到 `Events` 資料表中。 定義零保留原則，以避免保存中繼資料表。
+1. 將更新原則新增至目標資料表。 這項原則會自動對中繼資料表中任何新內嵌的資料執行查詢 `RawEvents` ，並將其結果內嵌 `Events` 到資料表中。 定義零保留原則，以避免保存中繼資料表。
 
     ```csharp
     var command =
@@ -502,11 +502,11 @@ INGESTION_CLIENT.ingest_from_blob(
     ingestClient.IngestFromStorageAsync(blobPath, properties);
     ```
     
-1. 查看資料表中的資料 `Events` 。
+1. 檢查資料表中的資料 `Events` 。
 
 # <a name="python"></a>[Python](#tab/python)
 
-1. 建立擴充集合的 update 函式， `records` 讓集合中的每個值都能使用運算子接收個別的資料列 `mv-expand` 。 我們會使用資料表 `RawEvents` 做為來源資料表和 `Events` 目標資料表。   
+1. 建立擴充集合的更新函式， `records` 讓集合中的每個值都使用運算子接收個別的資料列 `mv-expand` 。 我們將使用資料表 `RawEvents` 做為來源資料表和 `Events` 目標資料表。   
 
     ```python
     CREATE_FUNCTION_COMMAND = 
@@ -527,7 +527,7 @@ INGESTION_CLIENT.ingest_from_blob(
     > [!NOTE]
     > 函數所接收的架構必須符合目標資料表的架構。
 
-1. 將更新原則新增至目標資料表。 此原則會自動對中繼資料表中的任何新內嵌資料執行查詢 `RawEvents` ，並將其結果內嵌到 `Events` 資料表中。 定義零保留原則，以避免保存中繼資料表。
+1. 將更新原則新增至目標資料表。 這項原則會自動對中繼資料表中任何新內嵌的資料執行查詢 `RawEvents` ，並將其結果內嵌 `Events` 到資料表中。 定義零保留原則，以避免保存中繼資料表。
 
     ```python
     CREATE_UPDATE_POLICY_COMMAND = 
@@ -548,13 +548,13 @@ INGESTION_CLIENT.ingest_from_blob(
         BLOB_DESCRIPTOR, ingestion_properties=INGESTION_PROPERTIES)
     ```
 
-1. 查看資料表中的資料 `Events` 。
+1. 檢查資料表中的資料 `Events` 。
 
 ---    
 
 ## <a name="ingest-json-records-containing-dictionaries"></a>內嵌包含字典的 JSON 記錄
 
-字典結構化的 JSON 包含機碼值組。 Json 記錄會使用中的邏輯運算式來進行內嵌對應 `JsonPath` 。 您可以使用下列結構內嵌資料：
+字典結構化 JSON 包含機碼值組。 Json 記錄會使用中的邏輯運算式來進行內嵌對應 `JsonPath` 。 您可以使用下列結構內嵌資料：
 
 ```json
 {

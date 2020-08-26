@@ -1,20 +1,20 @@
 ---
-title: 使用 C 在 Azure 資料總管叢集上設定串流內嵌#
-description: 瞭解如何設定您的 Azure 資料總管叢集，並開始使用 C 的串流內嵌載入資料#
+title: 使用 C 設定 Azure 資料總管叢集上的串流內嵌#
+description: 瞭解如何設定 Azure 資料總管叢集，並開始使用 C 進行串流內嵌來載入資料#
 author: orspod
 ms.author: orspodek
 ms.reviewer: alexefro
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/13/2020
-ms.openlocfilehash: 73d1308ab38cf032eca52f772627f0946b5ea252
-ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
+ms.openlocfilehash: 72525e15427d7c2135f881bc63e34826791050f2
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86424254"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874829"
 ---
-# <a name="configure-streaming-ingestion-on-your-azure-data-explorer-cluster-using-c"></a>使用 C 在 Azure 資料總管叢集上設定串流內嵌#
+# <a name="configure-streaming-ingestion-on-your-azure-data-explorer-cluster-using-c"></a>使用 C 設定 Azure 資料總管叢集上的串流內嵌#
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-streaming.md)
@@ -24,13 +24,13 @@ ms.locfileid: "86424254"
 
 ## <a name="prerequisites"></a>先決條件
 
-* 如果您未安裝 Visual Studio 2019，請下載並使用**免費**的[Visual Studio 2019 的社區版本](https://www.visualstudio.com/downloads/)。  在 Visual Studio 設定期間啟用**Azure 開發**。
+* 如果您未安裝 Visual Studio 2019，請下載並使用 **免費**的 [Visual Studio 2019 社區版](https://www.visualstudio.com/downloads/)。  在 Visual Studio 設定期間啟用 **Azure 開發** 。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
-* 建立[Azure 資料總管叢集和資料庫](create-cluster-database-csharp.md)
+* 建立 [Azure 資料總管叢集和資料庫](create-cluster-database-csharp.md)
    
-## <a name="enable-streaming-ingestion-on-your-cluster-using-c"></a>使用 C 在叢集上啟用串流內嵌#
+## <a name="enable-streaming-ingestion-on-your-cluster-using-c"></a>使用 C 在您的叢集上啟用串流內嵌#
 
-### <a name="enable-streaming-ingestion-while-creating-a-new-cluster"></a>在建立新叢集時啟用串流內嵌
+### <a name="enable-streaming-ingestion-while-creating-a-new-cluster"></a>建立新叢集時啟用串流內嵌
 
 您可以在建立新的 Azure 資料總管叢集時啟用串流內嵌。
 
@@ -40,9 +40,9 @@ var cluster = new Cluster(location, sku, enableStreamingIngest:true);
 ...
 ```
 
-### <a name="enable-streaming-ingestion-on-an-existing-cluster"></a>在現有叢集上啟用串流內嵌
+### <a name="enable-streaming-ingestion-on-an-existing-cluster"></a>在現有的叢集上啟用串流內嵌
 
-若要在您的 Azure 資料總管叢集上啟用串流內嵌，請執行下列程式碼：
+若要在 Azure 資料總管叢集上啟用串流內嵌，請執行下列程式碼：
 
 ```csharp
     var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -68,7 +68,7 @@ var cluster = new Cluster(location, sku, enableStreamingIngest:true);
 ```
 
 > [!WARNING]
-> 在啟用串流內嵌之前，請先檢查[限制](#limitations)。
+> 在啟用串流內嵌之前，請先檢查 [限制](#limitations) 。
 
 ## <a name="create-a-target-table-and-define-the-policy-using-c"></a>使用 C 建立目標資料表並定義原則#
 
@@ -107,7 +107,7 @@ var cluster = new Cluster(location, sku, enableStreamingIngest:true);
 
 [!INCLUDE [ingest-data-streaming-disable](includes/ingest-data-streaming-disable.md)]
 
-### <a name="drop-the-streaming-ingestion-policy-using-c"></a>使用 C 卸載串流內嵌原則#
+### <a name="drop-the-streaming-ingestion-policy-using-c"></a>使用 C 放置串流內嵌原則#
 
 若要從資料表中卸載串流內嵌原則，請執行下列程式碼：
     
@@ -127,9 +127,9 @@ var cluster = new Cluster(location, sku, enableStreamingIngest:true);
         }
 ```
 
-### <a name="disable-streaming-ingestion-using-c"></a>停用使用 C 的串流內嵌#
+### <a name="disable-streaming-ingestion-using-c"></a>使用 C 停用串流內嵌#
 
-若要停用叢集上的串流內嵌，請執行下列程式碼：
+若要停用叢集中的串流內嵌，請執行下列程式碼：
     
 ```csharp
         var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -158,4 +158,4 @@ var cluster = new Cluster(location, sku, enableStreamingIngest:true);
 
 ## <a name="next-steps"></a>後續步驟
 
-* [查詢 Azure 中的資料資料總管](web-query-data.md)
+* [在 Azure 資料總管中查詢資料](web-query-data.md)

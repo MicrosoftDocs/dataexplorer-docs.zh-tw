@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: roshauli
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/04/2020
-ms.openlocfilehash: ff9ad23e1e534e831e981e64cb2839f5e36d67c7
-ms.sourcegitcommit: a7e040fc844098323aa1c00e254bcbcd41fe587f
+ms.openlocfilehash: 5c52253a6d8c4978931aeff3a5a5a73367f14ce5
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84428358"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88871990"
 ---
 # <a name="configure-customer-managed-keys-using-powershell"></a>使用 PowerShell 設定客戶管理的金鑰
 
@@ -25,9 +25,9 @@ ms.locfileid: "84428358"
 
 [!INCLUDE [data-explorer-configure-customer-managed-keys](includes/data-explorer-configure-customer-managed-keys.md)]
 
-## <a name="enable-encryption-with-customer-managed-keys-using-powershell"></a>使用 PowerShell 搭配客戶管理的金鑰來啟用加密
+## <a name="enable-encryption-with-customer-managed-keys-using-powershell"></a>使用 PowerShell 以客戶管理的金鑰啟用加密
 
-本文說明如何使用 PowerShell 啟用客戶管理的金鑰加密。 根據預設，Azure 資料總管加密會使用 Microsoft 管理的金鑰。 將您的 Azure 資料總管叢集設定為使用客戶管理的金鑰，並指定要與叢集產生關聯的金鑰。
+本文說明如何使用 PowerShell 啟用客戶管理的金鑰加密。 根據預設，Azure 資料總管加密會使用 Microsoft 管理的金鑰。 設定您的 Azure 資料總管叢集以使用客戶管理的金鑰，並指定要與叢集相關聯的金鑰。
 
 1. 執行下列命令以登入 Azure：
 

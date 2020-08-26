@@ -1,18 +1,18 @@
 ---
-title: 排除 Azure 資料資源管理器叢集連線故障
-description: 本文介紹了連接到 Azure 數據資源管理器中的群集的故障排除步驟。
+title: 針對 Azure 資料總管叢集連接失敗進行疑難排解
+description: 本文說明在 Azure 資料總管中連接到叢集的疑難排解步驟。
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/24/2018
-ms.openlocfilehash: c71af799f614e9cd28221d79634666cbc3b2c987
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 406e41728b34d0b0de48d71b1d7c2cf7ce0098bc
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81495363"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874098"
 ---
 # <a name="troubleshoot-failure-to-connect-to-a-cluster-in-azure-data-explorer"></a>移難排解：無法在 Azure 資料總管中連線至叢集
 
@@ -28,6 +28,6 @@ ms.locfileid: "81495363"
 
 1. 查看 [Azure 服務健康情況儀表板](https://azure.microsoft.com/status/)。 請在您要嘗試連線至叢集的區域中尋找 Azure 資料總管的狀態。
 
-    如果**狀態不好(** 綠色複選標記),請嘗試在狀態改善後連接到群集。
+    如果狀態不 **良好** (綠色核取記號) ，請在狀態改善之後嘗試連線至叢集。
 
 1. 若您仍然需要協助來解決問題，請在 [Azure 入口網站](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)中開啟支援要求。

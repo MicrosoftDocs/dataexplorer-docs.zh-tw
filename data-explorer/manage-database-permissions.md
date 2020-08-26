@@ -1,18 +1,18 @@
 ---
-title: 在 Azure 資料資源管理員中管理資料庫權限
+title: 管理 Azure 資料總管中的資料庫許可權
 description: 本文會說明 Azure 資料總管中適用於資料庫和資料表的角色型存取控制。
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/24/2018
-ms.openlocfilehash: da56848dda4f129732408d062836586b1da4a0d3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 25bdd9c36c63d521cd662ab5c69f3dfec974b1e6
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81496156"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874761"
 ---
 # <a name="manage-azure-data-explorer-database-permissions"></a>管理 Azure 資料總管資料庫權限
 
@@ -56,13 +56,13 @@ Azure 資料總管會有下列角色：
 
     ![在 Azure 入口網站中管理權限](media/manage-database-permissions/new-principals.png)
 
-1. 選取 [儲存]  。
+1. 選取 \[儲存\]。
 
     ![在 Azure 入口網站中管理權限](media/manage-database-permissions/save-permission.png)
 
 ## <a name="manage-permissions-with-management-commands"></a>使用管理命令管理權限
 
-1. 登錄到[https://dataexplorer.azure.com](https://dataexplorer.azure.com),如果群集不可用,則添加群集。
+1. 登入 [https://dataexplorer.azure.com](https://dataexplorer.azure.com) ，並新增您的叢集（如果它尚未提供）。
 
 1. 在左窗格中，選取適當的資料庫。
 
@@ -74,7 +74,7 @@ Azure 資料總管會有下列角色：
 
     該命令的輸出顯示現有使用者的清單，以及他們在資料庫中受指派的角色。
     
-    有關 Azure 活動目錄與 Kusto 授權模型的範例,請參考[原則和識別提供者](kusto/management/access-control/principals-and-identity-providers.md)
+    如需 Azure Active Directory 和 Kusto 授權模型的相關範例，請參閱 [原則和身分識別提供者](kusto/management/access-control/principals-and-identity-providers.md)
 
 ## <a name="next-steps"></a>後續步驟
 

@@ -1,59 +1,59 @@
 ---
-title: 使用 VS 代碼除錯 Kusto 查詢語言內聯 Python - Azure 資料資源管理員
-description: 瞭解如何使用 VS 代碼除錯 Kusto 查詢語言 (KQL) 內聯 Python。
+title: 使用 VS Code 來 Debug Kusto 查詢語言內嵌 Python-Azure 資料總管
+description: 瞭解如何使用 VS Code， (KQL) 內嵌 Python 來將 Kusto 查詢語言進行調試。
 author: orspod
 ms.author: orspodek
 ms.reviewer: adieldar
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/04/2019
-ms.openlocfilehash: 808d51ff5bc070449c87d14822fe4f41d2038950
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 21e3da862931219a338d2364117b8990280118d9
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81499094"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874285"
 ---
-# <a name="debug-kusto-query-language-inline-python-using-vs-code"></a>使用 VS 代碼除錯庫斯托查詢語言內聯 Python
+# <a name="debug-kusto-query-language-inline-python-using-vs-code"></a>使用 VS Code Debug Kusto 查詢語言內嵌 Python
 
-Azure 資料資源管理員支援使用[python() 外掛程式](kusto/query/pythonplugin.md)執行嵌入庫斯托查詢語言中的 Python 代碼。 外掛程式執行時託管在沙箱中,這是一個隔離和安全的 Python 環境。 python() 外掛程式功能擴展了 Kusto 查詢語言本機功能與 OSS Python 包的巨大存檔。 此擴展使您能夠運行高級演演演算法,如機器學習、人工智慧、統計和時間序列作為查詢的一部分。
+Azure 資料總管支援使用 [python ( # A1 外掛程式](kusto/query/pythonplugin.md)，以 Kusto 查詢語言執行內嵌的 python 程式碼。 外掛程式執行時間裝載于沙箱中，也就是隔離且安全的 Python 環境。 Python ( # A1 外掛程式功能可將 Kusto 的查詢語言原生功能延伸至 OSS Python 套件的大量保存。 此延伸模組可讓您在查詢中執行先進的演算法，例如機器學習、人工智慧、統計和時間序列。
 
-Kusto 查詢語言工具對於開發和調試 Python 演演演算法不方便。 因此,在您最喜愛的 Python 整合式開發環境中開發演演演算法,例如 Jupyter、PyCharm、VS 或 VS 代碼。 演演算法完成後,複製並粘貼到 KQL 中。 為了改進和簡化此工作流,Azure 資料資源管理員支援 Kusto 資源管理器或 Web UI 用戶端與 VS 代碼之間的整合,用於創作和調試 KQL 內聯 Python 代碼。 
+Kusto 查詢語言工具不方便開發和偵測 Python 演算法。 因此，在您最愛的 Python 整合式開發環境（例如 Jupyter、PyCharm、VS 或 VS Code）上開發演算法。 當演算法完成時，請複製並貼到 KQL 中。 為了改善並簡化此工作流程，Azure 資料總管支援 Kusto Explorer 或 Web UI 用戶端之間的整合 VS Code，以及用於撰寫和 KQL 內嵌 Python 程式碼的。 
 
 > [!NOTE]
-> 此工作流只能用於調試相對較小的輸入表(最多 MB)。 因此,您可能需要限制調試的輸入。  如果需要處理大型表,請使用限制它進行除錯`| take``| sample``where rand() < 0.x`。
+> 此工作流程只能用來偵測相對較小的輸入資料表， (最多) 個 MB。 因此，您可能需要限制輸入以進行調試。  如果您需要處理大型資料表，請將它限制為使用 `| take` 、 `| sample` 或進行調試 `where rand() < 0.x` 。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
-1. 安裝 Python [Anaconda 分轉](https://www.anaconda.com/distribution/#download-section)。 在**進階選項**中,選擇**將 Anaconda 加入的 PATH 環境變數**。
-2. 安裝[視覺化工作室代碼](https://code.visualstudio.com/Download)
-3. 安裝[Visual Studio 代碼的 Python 延伸](https://marketplace.visualstudio.com/items?itemName=ms-python.python)。
+1. 安裝 Python [Anaconda 散發](https://www.anaconda.com/distribution/#download-section)套件。 在 [ **Advanced Options**] 中，選取 [ **將 Anaconda 新增至我的 PATH 環境變數**]。
+2. 安裝 [Visual Studio Code](https://code.visualstudio.com/Download)
+3. 安裝 [適用于 Visual Studio Code 的 Python 擴充](https://marketplace.visualstudio.com/items?itemName=ms-python.python)功能。
 
-## <a name="run-your-query-in-your-client-application"></a>在用戶端應用程式中執行查詢
+## <a name="run-your-query-in-your-client-application"></a>在用戶端應用程式中執行您的查詢
 
-1. 在用戶端應用程式中,在包含內聯 Python 的查詢前置碼`set query_python_debug;`
+1. 在您的用戶端應用程式中，為包含內嵌 Python 的查詢加上前置詞 `set query_python_debug;`
 1. 執行查詢。
-    * Kusto 資源管理員:VS 代碼自動啟動與*debug_python.py*文稿。
-    * 庫斯托 Web UI: 
-        1. 下載並保存*debug_python.py*debug_python.py,df.txt,和*kargs.txt。* *df.txt* 在視窗中,選擇「**允許**」。 **將檔保存在**選定的目錄中。 
+    * Kusto Explorer：系統會使用 *debug_python .py* 腳本自動啟動 VS Code。
+    * Kusto Web UI： 
+        1. 下載並儲存 *debug_python .py*、 *df.txt*和 *kargs.txt*。 在視窗中，選取 [ **允許**]。 **將檔案儲存** 在選取的目錄中。 
 
-            ![Web UI 下載內聯 python 檔案](media/debug-inline-python/webui-inline-python.png)
+            ![Web UI 會下載內嵌的 python 檔案](media/debug-inline-python/webui-inline-python.png)
 
-        1. 右鍵按*下 debug_python.py,* 然後開啟 VS 代碼。 
-        *debug_python.py*文稿包含內聯 Python 代碼,來自 KQL 查詢,由範本代碼預定,用於初始化*df.txt*的輸入資料框和來自*kargs.txt*的參數位典。    
+        1. 在 [.py] 上 *debug_python* 按一下滑鼠右鍵，然後使用 VS code 開啟。 
+        .Py 腳本包含內嵌的 Python 程式碼，從 KQL 查詢中，以範本程式碼作為前置詞，以從*df.txt*和*kargs.txt*的參數字典初始化輸入資料框架。 *debug_python*    
             
-1. 在 VS 代碼中,啟動 VS 代碼除錯器:**除錯** > **啟動除錯 (F5),** 選擇**Python**設定。 除錯器將啟動並自動中斷點以調試內聯代碼。
+1. 在 vs code 中，啟動 vs code 偵錯工具： **Debug**  >  **開始偵錯工具 (F5) **，然後選取 [ **Python**設定]。 偵錯工具將會啟動並自動中斷點來偵測內嵌程式碼。
 
-### <a name="how-does-inline-python-debugging-in-vs-code-work"></a>VS 代碼中的內聯 Python 除錯如何工作?
+### <a name="how-does-inline-python-debugging-in-vs-code-work"></a>VS Code 中的內嵌 Python 調試作業如何運作？
 
-1. 在伺服器中解析和執行查詢,直到達到所需的`| evaluate python()`子句。
-1. 調用 Python 沙箱,但它不是運行代碼,而是序列化輸入表、參數位典和代碼,並將它們發送回用戶端。
-1. 這三個物件儲存在三個檔中 *:df.txt、kargs.txt*和*debug_python.py*在選取的目錄 (Web UI) 或用戶端 %TEMP% 目錄*kargs.txt*(Kusto 資源管理器) 中。
-1. VS 代碼啟動,預載入*debug_python.py*檔案,該檔包含前置碼,用於從各自的檔案中初始化 df 和 Kargs,然後是嵌入在 KQL 查詢中的 Python 文稿。
+1. 查詢會在伺服器中進行剖析和執行，直到達到必要的 `| evaluate python()` 子句為止。
+1. 將會叫用 Python 沙箱，但不會執行程式碼，而是序列化輸入資料表、參數的字典和程式碼，然後將其傳回給用戶端。
+1. 這三個物件會儲存在下列三個檔案中： *df.txt*、 *kargs.txt*和 *debug_python.* 在選取的目錄 (Web UI) 或用戶端% TEMP% 目錄 (Kusto Explorer) 中 .py。
+1. VS code 會啟動，並預先載入 *debug_python .py* 檔案，其中包含前置詞程式碼，可從其個別的檔案中初始化 df 和 kargs，後面接著內嵌于 KQL 查詢中的 python 腳本。
 
 ## <a name="query-example"></a>查詢範例
 
-1. 在用戶端應用程式中執行以下 KQL 查詢:
+1. 在您的用戶端應用程式中執行下列 KQL 查詢：
 
     ```kusto
     range x from 1 to 4 step 1
@@ -64,16 +64,16 @@ Kusto 查詢語言工具對於開發和調試 Python 演演演算法不方便。
     , pack('exp', 4))
     ```
 
-    請參考產生的表:
+    請參閱產生的表格：
 
-    | x  | x4  |
+    | x  | 四  |
     |---------|---------|
     | 1     |   1      |
     | 2     |   16      |
     | 3     |   81      |
     | 4     |    256     |
     
-1. 使用`set query_python_debug;`客戶端應用程式執行相同的 KQL 查詢:
+1. 使用下列程式，在您的用戶端應用程式中執行相同的 KQL 查詢 `set query_python_debug;` ：
 
     ```kusto
     set query_python_debug;
@@ -85,13 +85,13 @@ Kusto 查詢語言工具對於開發和調試 Python 演演演算法不方便。
     , pack('exp', 4))
     ```
 
-1. VS 代碼啟動:
+1. VS Code 已啟動：
 
-    ![啟動 VS 代碼](media/debug-inline-python/launch-vs-code.png)
+    ![啟動 VS code](media/debug-inline-python/launch-vs-code.png)
 
-1. VS 代碼在除錯控制台中除錯並列印「結果」資料幀:
+1. VS Code 在 debug 主控台中進行調試和列印「結果」資料框架：
 
-    ![VS 代碼除錯](media/debug-inline-python/debug-vs-code.png)
+    ![VS code 偵錯工具](media/debug-inline-python/debug-vs-code.png)
 
 > [!NOTE]
-> Python 沙箱映像和本地安裝之間可能存在差異。 [以查詢外掛程式,檢查特定套件的沙箱影像](https://github.com/Azure/azure-kusto-analytics-lib/blob/master/Utils/functions/get_modules_version.csl)。
+> Python 沙箱映射和您的本機安裝之間可能會有差異。 藉[由查詢外掛程式來檢查特定封裝的沙箱映射](https://github.com/Azure/azure-kusto-analytics-lib/blob/master/Utils/functions/get_modules_version.csl)。

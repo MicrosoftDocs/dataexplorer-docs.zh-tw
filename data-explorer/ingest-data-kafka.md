@@ -1,18 +1,18 @@
 ---
 title: 將資料從 Kafka 擷取至 Azure 資料總管
-description: 在本文中,您將瞭解如何從 Kafka 將數據引入(載入)到 Azure 資料資源管理器中。
+description: 在本文中，您將瞭解如何從 Kafka 將) 資料內嵌 (載入 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 03b46ff50683149a22c71ccb155480a0f08455bd
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 64b36db01bc1ab9867025723bf966279b4b4b115
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81500667"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874812"
 ---
 # <a name="ingest-data-from-kafka-into-azure-data-explorer"></a>將資料從 Kafka 擷取至 Azure 資料總管
  
@@ -22,9 +22,9 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
  
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。 
  
-* [測試叢集與資料庫](create-cluster-database-portal.md)。
+* [測試叢集和資料庫](create-cluster-database-portal.md)。
  
-* 產生資料並將傳送到卡夫卡[的範例應用程式](https://github.com/Azure/azure-kusto-samples-dotnet/tree/master/kafka)。
+* 產生資料並將其傳送至 Kafka 的[範例應用程式](https://github.com/Azure/azure-kusto-samples-dotnet/tree/master/kafka)。
 
 * 用於執行範例應用程式的 [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)。
  
@@ -32,7 +32,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 Kafka Connect 工具能夠彈性且可靠地在 Apache Kafka 和其他系統之間串流資料。 此工具可讓您輕鬆且快速地定義連接器，以移動傳入和傳出 Kafka 的大型資料集合。 ADX Kafka 接收器可作為 Kafka 中的連接器。
  
-### <a name="bundle"></a>組合
+### <a name="bundle"></a>套件組合
 
 Kafka 可將 `.jar` 載入為外掛程式，以作為自訂連接器使用。 若要產生這類 `.jar`，我們會在本機複製程式碼，並使用 Maven 建置。 
 
@@ -162,4 +162,4 @@ cd ./azure-kusto-samples-dotnet/kafka/
  
 ## <a name="next-steps"></a>後續步驟
  
-* [Azure 資料資源管理員中的查詢資料](web-query-data.md)
+* [在 Azure 資料總管中查詢資料](web-query-data.md)

@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/05/2019
-ms.openlocfilehash: 5187b6b91e18fa8e41e2be6480067e3c53b0bc54
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: 50e949d7ef15948dd46f5553fad8d10dad5faa96
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793909"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88875050"
 ---
 # <a name="query-data-using-the-azure-data-explorer-python-library"></a>使用 Azure 資料總管 Python 程式庫查詢資料
 
@@ -22,7 +22,7 @@ Azure 資料總管提供一個[適用於 Python 的資料用戶端程式庫](htt
 
 本文也會以 [Azure 筆記本](https://notebooks.azure.com/ManojRaheja/libraries/KustoPythonSamples/html/QueryKusto.ipynb)的形式提供。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * [Python 3.4 +](https://www.python.org/downloads/)
 

@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: tzgitlin
 ms.service: data-explorer
-ms.topic: overview
+ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 2c7cd53053582c02f610f364eb36e87ecdf5b03a
-ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.openlocfilehash: b9fa22a5cc3831ae2763c18dbfae69e24fd29318
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86058847"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88872840"
 ---
 # <a name="use-one-click-ingestion-to-ingest-csv-data-from-a-container-to-a-new-table-in-azure-data-explorer"></a>在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表
 

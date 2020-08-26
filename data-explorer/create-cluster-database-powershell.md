@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: e4b13b57e7a9c70464be7c754ee2b0f74dbebe4d
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5fe6776c1df631f6debc00bedabd579a9285f521
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350299"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88872670"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-powershell"></a>使用 PowerShell 建立 Azure 資料總管叢集與資料庫
 
@@ -34,7 +34,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 [!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
 
-如果您選擇在本機安裝和使用 Azure CLI，本文會要求 Azure CLI 版本2.0.4 版或更新版本。 執行 `az --version` 來檢查您的版本。 如果您需要安裝或升級，請參閱[安裝 Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest)。
+如果您選擇在本機安裝和使用 Azure CLI，本文需要 Azure CLI 版本2.0.4 版或更新版本。 執行 `az --version` 來檢查您的版本。 如果您需要安裝或升級，請參閱[安裝 Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest)。
 
 ## <a name="configure-parameters"></a>設定參數
 
@@ -69,7 +69,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
    |---|---|---|
    | 名稱 | *mykustocluster* | 所需的叢集名稱。|
    | SKU | *D13_v2* | 將用於叢集的 SKU。 |
-   | resourceGroupName | *testrg* | 將在其中建立叢集的資源群組名稱。 |
+   | resourceGroupName | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
 
     有其他選擇性參數可供您使用，例如叢集的容量。
 
@@ -93,7 +93,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
    |---|---|---|
    | ClusterName | *mykustocluster* | 將在其中建立資料庫的叢集名稱。|
    | 名稱 | *mykustodatabase* | 您的資料庫名稱。|
-   | resourceGroupName | *testrg* | 將在其中建立叢集的資源群組名稱。 |
+   | resourceGroupName | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
    | SoftDeletePeriod | *3650:00:00:00* | 將保留資料以供查詢的時間長度。 |
    | HotCachePeriod | *3650:00:00:00* | 資料將保留在快取中的時間長度。 |
 

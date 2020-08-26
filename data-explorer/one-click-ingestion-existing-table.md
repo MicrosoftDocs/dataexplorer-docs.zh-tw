@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: tzgitlin
 ms.service: data-explorer
-ms.topic: overview
+ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 4e87ab389179f308642de3b9469544fde6139507
-ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.openlocfilehash: 293425b54514b4ee1628fd6b96d892459a929d77
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86058910"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88875084"
 ---
 # <a name="use-one-click-ingestion-to-ingest-json-data-from-a-local-file-to-an-existing-table-in-azure-data-explorer"></a>在 Azure 資料總管中使用單鍵擷取將 JSON 資料從本機檔案擷取到現有的資料表
 

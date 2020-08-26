@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/03/2020
-ms.openlocfilehash: 5532be47c957ae2251e71dc25a17e67a8e57f474
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7081f96bf948a7d3f0e99b6d9f7aaf6fa77b9c65
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350395"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88872211"
 ---
 # <a name="add-cluster-principals-for-azure-data-explorer-by-using-python"></a>使用 Python 新增 Azure 資料總管的叢集主體
 
@@ -41,7 +41,7 @@ pip install azure-mgmt-kusto
 
 ## <a name="add-a-cluster-principal"></a>新增叢集主體
 
-下列範例說明如何以程式設計方式新增叢集主體。
+下列範例會示範如何以程式設計方式新增叢集主體。
 
 ```Python
 from azure.mgmt.kusto import KustoManagementClient
@@ -80,17 +80,17 @@ poller = kusto_management_client.cluster_principal_assignments.create_or_update(
 
 |**設定** | **建議的值** | **欄位描述**|
 |---|---|---|
-| tenant_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
-| subscription_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
-| client_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
-| client_secret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
-| resource_group_name | *testrg* | 包含您叢集的資源組名。|
+| tenant_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
+| subscription_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
+| client_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
+| client_secret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可存取您租使用者中的資源。 |
+| resource_group_name | *>testrg* | 包含您叢集的資源組名。|
 | cluster_name | *mykustocluster* | 叢集的名稱。|
 | principal_assignment_name | *clusterPrincipalAssignment1* | 叢集主體資源的名稱。|
-| principal_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 主體識別碼，可以是使用者電子郵件、應用程式識別碼或安全性群組名稱。|
+| principal_id | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 主體識別碼，可以是使用者電子郵件、應用程式識別碼或安全性群組名稱。|
 | 角色 (role) | *AllDatabasesAdmin* | 叢集主體的角色，可以是 ' AllDatabasesAdmin' ' 或 ' AllDatabasesViewer '。|
-| tenant_id_for_principal | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx-xxxx-xxxxxxxxx* | 主體的租使用者識別碼。|
-| principal_type | *應用程式* | 主體的類型，可以是「使用者」、「應用程式」或「群組」|
+| tenant_id_for_principal | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 主體的租使用者識別碼。|
+| principal_type | *App* | 主體的型別，可以是「使用者」、「應用程式」或「群組」|
 
 ## <a name="next-steps"></a>後續步驟
 

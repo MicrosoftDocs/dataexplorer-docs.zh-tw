@@ -1,18 +1,18 @@
 ---
 title: 使用 C 設定客戶管理的金鑰#
-description: 本文說明如何在 Azure 資料總管中，針對您的資料設定客戶管理的金鑰加密。
+description: 本文說明如何在 Azure 資料總管中為您的資料設定客戶管理的金鑰加密。
 author: orspod
 ms.author: orspodek
 ms.reviewer: itsagui
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/06/2020
-ms.openlocfilehash: 5d06b226edd08cbe4696499f6a7ec206fc902608
-ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
+ms.openlocfilehash: ade06e6fffb31a5c76fa12fe02d5192e4126091e
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87515783"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88872092"
 ---
 # <a name="configure-customer-managed-keys-using-c"></a>使用 C 設定客戶管理的金鑰#
 
@@ -29,7 +29,7 @@ ms.locfileid: "87515783"
 
 ## <a name="configure-encryption-with-customer-managed-keys"></a>使用客戶管理的金鑰設定加密
 
-本節說明如何使用 Azure 資料總管 c # 用戶端來設定客戶管理的金鑰加密。 
+本節說明如何使用 Azure 資料總管 c # 用戶端設定客戶管理的金鑰加密。 
 
 ### <a name="prerequisites"></a>先決條件
 
@@ -39,17 +39,17 @@ ms.locfileid: "87515783"
 
 ### <a name="install-c-nuget"></a>安裝 c # NuGet
 
-* 安裝[Azure 資料總管（Kusto） NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
+* 安裝 [Azure 資料總管 (Kusto) NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
 
-* 安裝 Microsoft.identitymodel 的驗證[NuGet 套件](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/)。
+* 安裝 [Microsoft.identitymodel NuGet 套件](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/) 以進行驗證。
 
 ### <a name="authentication"></a>驗證
 
-若要執行本文中的範例，請建立可存取資源的[Azure AD 應用程式](/azure/active-directory/develop/howto-create-service-principal-portal)和服務主體。 您可以在訂用帳戶範圍加入角色指派，並取得所需的 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
+若要執行本文中的範例，請建立可存取資源 [Azure AD 應用程式](/azure/active-directory/develop/howto-create-service-principal-portal) 和服務主體。 您可以在訂用帳戶範圍新增角色指派，並取得必要的 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
 
 ### <a name="configure-cluster"></a>設定叢集
 
-根據預設，Azure 資料總管加密會使用 Microsoft 管理的金鑰。 將您的 Azure 資料總管叢集設定為使用客戶管理的金鑰，並指定要與叢集產生關聯的金鑰。
+根據預設，Azure 資料總管加密會使用 Microsoft 管理的金鑰。 設定您的 Azure 資料總管叢集以使用客戶管理的金鑰，並指定要與叢集相關聯的金鑰。
 
 1. 使用下列程式碼更新您的叢集：
 
@@ -79,23 +79,23 @@ ms.locfileid: "87515783"
     await kustoManagementClient.Clusters.UpdateAsync(resourceGroupName, clusterName, clusterUpdate);
     ```
 
-1. 執行下列命令，以檢查您的叢集是否已成功更新：
+1. 執行下列命令來檢查是否已成功更新您的叢集：
 
     ```csharp
     kustoManagementClient.Clusters.Get(resourceGroupName, clusterName);
     ```
 
-    如果結果包含 `ProvisioningState` 值為的 `Succeeded` ，則已成功更新您的叢集。
+    如果結果包含 `ProvisioningState` `Succeeded` 值，則已成功更新您的叢集。
 
 ## <a name="update-the-key-version"></a>更新金鑰版本
 
-當您建立新版本的金鑰時，您必須更新叢集以使用新的版本。 首先，呼叫 `Get-AzKeyVaultKey` 以取得金鑰的最新版本。 然後，將叢集的 key vault 屬性更新為使用新版本的金鑰，如[設定](#configure-cluster)叢集中所示。
+當您建立新版本的金鑰時，您必須將叢集更新為使用新版本。 首先，呼叫 `Get-AzKeyVaultKey` 以取得最新版本的金鑰。 然後更新叢集的金鑰保存庫內容，以使用新版本的金鑰，如「 [設定](#configure-cluster)叢集」所示。
 
 ## <a name="next-steps"></a>後續步驟
 
-* [在 Azure 中保護 Azure 資料總管叢集](security.md)
+* [保護 Azure 中的 Azure 資料總管叢集](security.md)
 * [設定 Azure 資料總管叢集的受控識別](managed-identities.md)
-* 藉由啟用待用加密，[在 Azure 資料總管 Azure 入口網站中使用磁片加密來保護您](cluster-disk-encryption.md)的叢集。
+* [在 Azure 中使用磁片加密來保護您的叢集資料總管 Azure 入口網站](cluster-disk-encryption.md) ，方法是啟用待用加密。
 * [使用 Azure Resource Manager 範本設定客戶管理的金鑰](customer-managed-keys-resource-manager.md)
 
 

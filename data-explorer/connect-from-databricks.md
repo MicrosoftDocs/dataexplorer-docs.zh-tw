@@ -5,20 +5,20 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: maraheja
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/21/2020
-ms.openlocfilehash: 08ac06b5f0a1a65afec6a71106943f3b58c1b9f5
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: adbf974852f071dde54cc668b213e7b7d6d7cfea
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610299"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88871939"
 ---
 # <a name="connect-to-azure-data-explorer-from-azure-databricks"></a>從 Azure Databricks 連接到 Azure 資料總管
 
 [Azure Databricks](https://docs.microsoft.com/azure/azure-databricks/what-is-azure-databricks) 是針對 Microsoft Azure 平台進行最佳化的 Apache Spark 分析平台。 本文說明如何使用 Azure Databricks 來存取 Azure 資料總管的資料。 您可以透過數種方式向 Azure 資料總管進行驗證，包括裝置登入和 Azure Active Directory (Azure AD) 應用程式。
  
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
 - [建立 Azure 資料總管叢集和資料庫](create-cluster-database-portal.md)。
 - [建立 Azure Databricks 工作區](/azure/azure-databricks/quickstart-create-databricks-workspace-portal#create-an-azure-databricks-workspace)。 在 [Azure Databricks 服務]**** 下方的 [定價層]**** 下拉式清單中，選取 [Premium]****。 此選取項目可讓您使用 Azure Databricks 祕密儲存您的認證，並在 Notebook 和作業中加以參考。

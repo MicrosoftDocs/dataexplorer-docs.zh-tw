@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: docohe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/14/2020
-ms.openlocfilehash: 9ac8011f8bc126c4fc6ea13fdb174bb7af0ba0af
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: ae79fd334b3ac2a59a99c5ad8d63fccf0ed6784c
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610605"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88875220"
 ---
 # <a name="microsoft-logic-app-and-azure-data-explorer"></a>Microsoft 邏輯應用程式和 Azure 資料總管
 

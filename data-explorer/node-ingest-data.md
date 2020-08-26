@@ -1,18 +1,18 @@
 ---
 title: 使用 Azure 資料總管 Node 程式庫擷取資料
-description: 在本文中，您將瞭解如何使用 Node.js，將) 資料的 (載入至 Azure 資料總管。
+description: 在本文中，您將瞭解如何使用 Node.js，將) 資料內嵌 (載入至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 33117a41c48a6aa3a9fc33566f201e6009b288ac
-ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
+ms.openlocfilehash: a579f3ac5eaa1c1029b68802a89ea0003f812bf6
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88039177"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88875254"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-node-library"></a>使用 Azure 資料總管 Node 程式庫擷取資料
 
@@ -82,7 +82,7 @@ const destTableMapping = "StormEvents_CSV_Mapping";
 
 ## <a name="set-source-file-information"></a>設定來源檔案資訊
 
-匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents**範例資料集包含[國家/地區中心的天氣相關資料，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
+匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents**範例資料集包含來自國家中心的氣象相關資料[，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
 
 ```javascript
 const container = "samplefiles";
@@ -147,7 +147,7 @@ kustoClient.execute(kustoDatabase, query, (err, results) => {
 
 ## <a name="run-troubleshooting-queries"></a>執行疑難排解查詢
 
-登入 [https://dataexplorer.azure.com](https://dataexplorer.azure.com) 並聯機到您的叢集。 在資料庫中執行下列命令，以查看最後四個小時是否有任何擷取失敗。 先取代資料庫名稱，再執行。
+登入 [https://dataexplorer.azure.com](https://dataexplorer.azure.com) 並聯機至您的叢集。 在資料庫中執行下列命令，以查看最後四個小時是否有任何擷取失敗。 先取代資料庫名稱，再執行。
     
 ```Kusto
 .show ingestion failures

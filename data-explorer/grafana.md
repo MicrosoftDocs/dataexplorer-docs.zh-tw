@@ -1,32 +1,32 @@
 ---
-title: 使用 Grafana 視覺化 Azure 資料資源管理員中的資料
-description: 在本文中,您將學習將 Azure 資料資源管理員設置為 Grafana 的數據源,然後可視化範例群集中的數據。
+title: 使用 Grafana 將 Azure 資料總管中的資料視覺化
+description: 在本文中，您將瞭解如何將 Azure 資料總管設定為 Grafana 的資料來源，然後將範例叢集中的資料視覺化。
 author: orspod
 ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/13/2019
-ms.openlocfilehash: d58e557ecbd7e51e0295bf1a8ece3aaa4996da47
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 30a78efa9cc9a54ac12eeaa6bfbdf8f5a7541eeb
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81500147"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874438"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-grafana"></a>在 Grafana 中從 Azure 資料總管將資料視覺化
 
-Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的視覺效果建立並共用儀表板。 Grafana 提供 Azure 資料總管「外掛程式」**，可讓您從 Azure 資料總管連線到資料並加以視覺化。 在本文中,您將學習將 Azure 資料資源管理員設置為 Grafana 的數據源,然後可視化範例群集中的數據。
+Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的視覺效果建立並共用儀表板。 Grafana 提供 Azure 資料總管「外掛程式」**，可讓您從 Azure 資料總管連線到資料並加以視覺化。 在本文中，您將瞭解如何將 Azure 資料總管設定為 Grafana 的資料來源，然後將範例叢集中的資料視覺化。
 
-使用以下視訊,瞭解如何使用 Grafana 的 Azure 資料資源管理器外掛程式,將 Azure 資料資源管理員設置為 Grafana 的數據源,然後可視化數據。 
+使用下列影片，瞭解如何使用 Grafana 的 Azure 資料總管外掛程式、將 Azure 資料總管設定為 Grafana 的資料來源，然後將資料視覺化。 
 
 > [!VIDEO https://www.youtube.com/embed/fSR_qCIFZSA]
 
-或者,您可以[配置數據源](#configure-the-data-source),並[可視化如下](#visualize-data)文章中詳述的數據。
+或者，您可以[設定資料來源並將](#configure-the-data-source)[資料視覺化](#visualize-data)，如下列文章中所述。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
-完成本文需要以下內容:
+您需要下列專案才能完成這篇文章：
 
 * 適用於您作業系統的 [Grafana 5.3.0 版或更新版本](https://docs.grafana.org/installation/)
 
@@ -66,7 +66,7 @@ Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的
 
 1. 選取 [儲存並測試]****。
 
-    如果測試成功，請移至下一節。 如果遇到任何問題,請檢查您在 Grafana 中指定的值,並查看前面的步驟。
+    如果測試成功，請移至下一節。 如果您遇到任何問題，請檢查您在 Grafana 中指定的值，並檢查先前的步驟。
 
 ## <a name="visualize-data"></a>顯現資料
 
@@ -101,7 +101,7 @@ Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的
 
     ![過去六小時](media/grafana/last-six-hours.png)
 
-1. 指定自訂範圍以涵蓋 2007 年，也就是 StormEvents 範例資料集包含的年份。 選取 [套用]  。
+1. 指定自訂範圍以涵蓋 2007 年，也就是 StormEvents 範例資料集包含的年份。 選取 [ **套用**]。
 
     ![自訂日期範圍](media/grafana/custom-date-range.png)
 
@@ -113,24 +113,24 @@ Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的
 
 ## <a name="create-alerts"></a>建立警示
 
-1. 在「主頁儀錶板」中,選擇 **「警報** > **通知通道**」以建立新的通知通道
+1. 在 [首頁] 儀表板中，選取**警示**  >  **通知通道**以建立新的通知通道
 
-    ![建立通知頻道](media/grafana/create-notification-channel.png)
+    ![建立通知通道](media/grafana/create-notification-channel.png)
 
-1. 建立新**的通知頻道**,然後**儲存**。
+1. 建立新的 **通知通道**，然後 **儲存**。
 
-    ![建立新的通知頻道](media/grafana/new-notification-channel-adx.png)
+    ![建立新的通知通道](media/grafana/new-notification-channel-adx.png)
 
-1. 在**儀表板**上,從下拉清單中選擇 **「編輯**」。
+1. 在 [ **儀表板**] 上，從下拉式清單中選取 [ **編輯** ]。
 
-    ![在儀表板中選擇編輯](media/grafana/edit-panel-4-alert.png)
+    ![選取儀表板中的 [編輯]](media/grafana/edit-panel-4-alert.png)
 
-1. 選擇「警報鈴」圖示以打開 **「警報」** 窗格。 選擇 **「建立警報**」。 在 **「警報」** 窗格中完成以下屬性。
+1. 選取警示鐘圖示以開啟 [ **警示** ] 窗格。 選取 [ **建立警示**]。 在 [ **警示** ] 窗格中完成下列屬性。
 
     ![警示屬性](media/grafana/alert-properties.png)
 
-1. 選擇 **「保存儀錶板」** 圖示以儲存更改。
+1. 選取 [ **儲存儀表板** ] 圖示以儲存您的變更。
 
 ## <a name="next-steps"></a>後續步驟
 
-* [為 Azure 資料資源管理員編寫查詢](write-queries.md)
+* [撰寫 Azure 資料總管的查詢](write-queries.md)
