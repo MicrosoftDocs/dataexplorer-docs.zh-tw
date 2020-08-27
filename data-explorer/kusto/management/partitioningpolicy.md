@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 944ada323a1a928d4b63c2d8f4e168c442e78ffa
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: cbafde1b87807c449923b8b010c57e3394c4a74f
+ms.sourcegitcommit: d08b3344d7e9a6201cf01afc8455c7aea90335aa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793679"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "88964739"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
@@ -53,11 +53,11 @@ ms.locfileid: "88793679"
 * `MaxPartitionCount` 這是要建立的分割區數目上限， (雜湊模數函數的模數引數) 每一段時間。
   * 支援的值位於範圍內 `(1,1024]` 。
     * 值應為：
-      * 大於叢集中的節點數目。
+      * 大於叢集中節點數目的5倍。
       * 小於資料行的基數。
     * 值愈高，在叢集節點上，資料分割進程的額外負荷就愈大，而且每個時間週期的範圍數目愈高。
-    * 對於少於30個節點的叢集，我們建議您從的值開始 `256` 。
-      * 視需要調整值、根據上述考慮，或根據查詢效能的優點，以及在內嵌資料分割資料的額外負荷。
+    * 針對具有少於50個節點的叢集，我們建議您從的值開始 `256` 。
+      * 根據上述考慮，視需要調整值 (例如，叢集中的節點數目會成長) ，或根據查詢效能的優點，以及在內嵌資料分割資料的額外負荷。
 * `Seed` 這是用來隨機化雜湊值的值。
   * 值應為正整數。
   * 建議值為 `1` ，如果未指定，則為預設值。
@@ -181,7 +181,7 @@ ms.locfileid: "88793679"
   * 這是選用屬性。 其預設值為 `0` ，預設目標為5000000記錄。
     * 如果您看到資料分割作業耗用極大量的記憶體或 CPU （每項作業），則可以設定低於5M 的值。 如需詳細資訊，請參閱 [監視](#monitoring)。
 
-## <a name="notes"></a>備註
+## <a name="notes"></a>注意
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 

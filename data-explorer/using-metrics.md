@@ -7,18 +7,19 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/19/2020
-ms.openlocfilehash: 0d1b570bc1fac901af67d9dd9602ef6864cb8336
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.custom: contperfq1
+ms.openlocfilehash: 51b595554029c29d961445e6013a668cbd110cd5
+ms.sourcegitcommit: d08b3344d7e9a6201cf01afc8455c7aea90335aa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875339"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "88964756"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>使用計量來監視 Azure 資料總管效能、健康情況和使用量
 
 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 若要使用 Azure 資料總管，請先建立叢集，然後在該叢集中建立一或多個資料庫。 然後將資料內嵌 (載入) 至資料庫，讓您可以對資料執行查詢。 Azure 資料總管計量提供叢集資源健康情況和效能的關鍵指標。 使用本文詳述的計量，在您的特定案例中監視 Azure 資料總管叢集健康情況和效能，作為獨立的計量。 您也可以使用計量作為操作 [Azure 儀表板](/azure/azure-portal/azure-portal-dashboards) 和 [Azure 警示](/azure/azure-monitor/platform/alerts-metric-overview)的基礎。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 * Azure 訂用帳戶。 如果您沒有帳戶，可以建立一個免費的 [Azure 帳戶](https://azure.microsoft.com/free/)。
 * 叢集 [和資料庫](create-cluster-database-portal.md)。
