@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: tutorial
 ms.date: 02/03/2020
-ms.openlocfilehash: bc97ffad3ca4f6d824e10c85e570154764cc986a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
-ms.translationtype: MT
+ms.openlocfilehash: 520b0821eaa9955916bd8212970f73e1d5cce95e
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350463"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874608"
 ---
 # <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-python"></a>透過 Python 在 Azure 資料總管中內嵌的端對端 blob
 
@@ -25,7 +25,7 @@ Azure 資料總管是一項快速又可調整的資料探索服務，可用於�
 
 您將瞭解如何以程式設計方式建立資源群組、儲存體帳戶和容器、事件中樞，以及 Azure 資料總管叢集和資料庫。 您也將瞭解如何以程式設計方式設定 Azure 資料總管，以從新的儲存體帳戶內嵌資料。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
@@ -192,10 +192,10 @@ poller.wait()
 ```
 |**設定** | **欄位描述**|
 |---|---|---|
-| tenant_id | 您的租用戶識別碼。 它也稱為目錄識別碼。|
+| tenant_id | 您的租用戶識別碼。 也稱為目錄識別碼。|
 | subscription_id | 您用來建立資源的訂用帳戶識別碼。|
-| client_id | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
-| client_secret | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
+| client_id | 應用程式的用戶端識別碼，可存取您租用戶中的資源。|
+| client_secret | 應用程式的用戶端密碼，可以存取您租用戶中的資源。 |
 
 ## <a name="test-the-code-example"></a>測試程式碼範例
 
@@ -211,9 +211,9 @@ poller.wait()
     ```
     |**設定** | **欄位描述**|
     |---|---|---|
-    | account_key | 以程式設計方式建立之儲存體帳戶的存取金鑰。|
+    | account_key | 以程式設計方式建立儲存體帳戶的存取金鑰。|
 
-2. 在 Azure 資料總管中執行測試查詢。
+2. 在 Azure Data Explorer 中執行測試查詢。
 
     ```python
     kusto_uri = "https://{}.{}.kusto.windows.net".format(kusto_cluster_name, location_small_case)
@@ -226,7 +226,7 @@ poller.wait()
 
 ## <a name="clean-up-resources"></a>清除資源
 
-若要刪除資源群組和清除資源，請使用下列命令：
+若要刪除資源群組並清除資源，請使用下列命令︰
 
 ```python
 #Returns an instance of LROPoller; see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
@@ -237,6 +237,6 @@ poller.wait()
 ## <a name="next-steps"></a>後續步驟
 
 *  若要深入瞭解建立叢集和資料庫的其他方式，請參閱[建立 Azure 資料總管叢集和資料庫](create-cluster-database-python.md)。
-* 若要深入瞭解內嵌方法，請參閱[Azure 資料總管資料](ingest-data-overview.md)內嵌。
-* 若要深入瞭解 web 應用程式，請參閱[快速入門：在 Azure 資料總管 WEB UI 中查詢資料](web-query-data.md)。
+* 若要深入了解擷取方法，請參閱 [Azure 資料總管資料擷取](ingest-data-overview.md)。
+* 若要深入了解 Web 應用程式，請參閱[快速入門：在 Azure 資料總管 Web UI 中查詢資料](web-query-data.md)。
 * 使用 Kusto 查詢語言[撰寫查詢](write-queries.md)。

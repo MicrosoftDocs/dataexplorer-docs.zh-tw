@@ -1,20 +1,20 @@
 ---
-title: 透過 C 在 Azure 資料總管中內嵌的端對端 blob#
-description: '在本文中，您將瞭解如何使用使用 c # 的端對端範例，將 blob 內嵌至 Azure 資料總管。'
+title: 透過 C# 在 Azure 資料總管中內嵌的端對端 blob
+description: 在本文中，您將瞭解如何使用使用 C# 的端對端範例，將 blob 內嵌至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: tutorial
 ms.date: 05/19/2020
-ms.openlocfilehash: 2a7416a2f86963ab30f84ce0a7e2fd098af52108
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
-ms.translationtype: MT
+ms.openlocfilehash: 8ad1fd41adca11e51c44c7cb3778e766892cc56c
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350431"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874642"
 ---
-# <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-c"></a>透過 C 在 Azure 資料總管中內嵌的端對端 blob#
+# <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-c"></a>透過 C# 在 Azure 資料總管中內嵌的端對端 blob
 
 > [!div class="op_single_selector"]
 > * [C#](end-to-end-csharp.md)
@@ -29,13 +29,13 @@ Azure 資料總管是一項快速又可調整的資料探索服務，可用於�
 
 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
-## <a name="install-c-nuget"></a>安裝 c # NuGet
+## <a name="install-c-nuget"></a>安裝 C# Nuget
 
-* 請安裝[kusto](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
-* 安裝[Microsoft. Azure 管理元件](https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager)。
-* 請安裝[EventGrid](https://www.nuget.org/packages/Microsoft.Azure.Management.EventGrid/)。
-* 安裝[Microsoft Azure 儲存體 Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/)。
-* 安裝[ClientRuntime](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime.Azure.Authentication)以進行驗證。
+* 安裝 [Microsoft.Azure.Management.kusto](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
+* 安裝 [Microsoft.Azure.Management.ResourceManager](https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager)。
+* 安裝 [Microsoft.Azure.Management.EventGrid](https://www.nuget.org/packages/Microsoft.Azure.Management.EventGrid/)。
+* 安裝 [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/)。
+* 安裝 [Microsoft.Rest.ClientRuntime.Azure.Authentication](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime.Azure.Authentication) 來進行驗證。
 
 [!INCLUDE [data-explorer-authentication](includes/data-explorer-authentication.md)]
 
@@ -176,10 +176,10 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 ```
 | **設定** | **欄位描述** |
 |---|---|---|
-| tenantId | 您的租用戶識別碼。 它也稱為目錄識別碼。|
+| tenantId | 您的租用戶識別碼。 也稱為目錄識別碼。|
 | subscriptionId | 您用來建立資源的訂用帳戶識別碼。|
-| clientId | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
-| clientSecret | 應用程式的用戶端密碼，可以存取您租使用者中的資源。 |
+| clientId | 應用程式的用戶端識別碼，可存取您租用戶中的資源。|
+| clientSecret | 應用程式的用戶端密碼，可以存取您租用戶中的資源。 |
 
 ## <a name="test-the-code-example"></a>測試程式碼範例
 
@@ -197,9 +197,9 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
     ```
     |**設定** | **欄位描述**|
     |---|---|---|
-    | storageConnectionString | 以程式設計方式建立之儲存體帳戶的連接字串。|
+    | storageConnectionString | 以程式設計方式建立儲存體帳戶的連接字串。|
 
-2. 在 Azure 資料總管中執行測試查詢。
+2. 在 Azure Data Explorer 中執行測試查詢。
 
     ```csharp
     var kustoUri = $"https://{kustoClusterName}.{locationSmallCase}.kusto.windows.net";
@@ -226,7 +226,7 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 
 ## <a name="clean-up-resources"></a>清除資源
 
-若要刪除資源群組和清除資源，請使用下列命令：
+若要刪除資源群組並清除資源，請使用下列命令︰
 
 ```csharp
 await resourceManagementClient.ResourceGroups.DeleteAsync(resourceGroupName);
@@ -234,7 +234,7 @@ await resourceManagementClient.ResourceGroups.DeleteAsync(resourceGroupName);
 
 ## <a name="next-steps"></a>後續步驟
 
-*  若要深入瞭解建立叢集和資料庫的其他方式，請參閱[建立 Azure 資料總管叢集和資料庫](create-cluster-database-csharp.md)。
-* 若要深入瞭解內嵌方法，請參閱[Azure 資料總管資料](ingest-data-overview.md)內嵌。
-* 若要深入瞭解 web 應用程式，請參閱[快速入門：在 Azure 資料總管 WEB UI 中查詢資料](web-query-data.md)。
+*  若要深入了解建立叢集和資料庫的其他方式，請參閱 [建立 Azure 資料總管叢集和資料庫](create-cluster-database-csharp.md)。
+* 若要深入了解擷取方法，請參閱 [Azure 資料總管資料擷取](ingest-data-overview.md)。
+* 若要深入了解 Web 應用程式，請參閱[快速入門：在 Azure 資料總管 Web UI 中查詢資料](web-query-data.md)。
 * 使用 Kusto 查詢語言[撰寫查詢](write-queries.md)。
