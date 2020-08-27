@@ -15,4 +15,4 @@ ms.contentlocale: zh-TW
 ms.lasthandoff: 08/13/2020
 ms.locfileid: "88201147"
 ---
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管可從事件中樞、IoT 中樞和寫入 blob 容器的 blob，提供內嵌 (資料載入) 。
+Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管提供從事件中樞、IoT 中樞和寫入至 blob 容器的 blob) 的內嵌 (資料載入。
