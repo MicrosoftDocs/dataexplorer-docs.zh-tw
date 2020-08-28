@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 95c222bb1c04115927d799481bb817c8f2539fd3
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: ac291bb802214d8b877f905d440942ec2e0b802e
+ms.sourcegitcommit: 66d7b5d8fac6e69edfa2d7249c52828a8e00d428
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875237"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "89041290"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>將 Azure 資料總管叢集部署到您的虛擬網路
 
@@ -195,7 +195,7 @@ IP 位址的總數目：
 
 | **使用**   | **Source** | **來源服務標籤** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | * * 通訊協定 * * | **動作** | * * 優先權 * * |
 | ---   | --- | --- | ---  | --- | --- | --- | --- | --- |
-| 停用從網際網路存取 | 服務標記 | 網際網路 | *  | VirtualNetwork | * | 任意 | 拒絕 | 高於上述規則的數位 |
+| 停用從網際網路存取 | 服務標記 | 網際網路 | *  | VirtualNetwork | * | 任意 | Deny | 高於上述規則的數位 |
 
 此規則可讓您只透過下列 DNS 記錄連線到 Azure 資料總管叢集 (對應至每個服務) 的私人 IP：
 * `private-[clustername].[geo-region].kusto.windows.net` (引擎) 
@@ -221,7 +221,7 @@ wdcp.microsoft.com:443
 login.microsoftonline.com:443
 azureprofilerfrontdoor.cloudapp.net:443
 *.core.windows.net:443
-*.servicebus.windows.net:443
+*.servicebus.windows.net:443,5671
 shoebox2.metrics.nsatc.net:443
 prod-dsts.dsts.core.windows.net:443
 ocsp.msocsp.com:80
@@ -235,6 +235,9 @@ www.microsoft.com:80
 adl.windows.com:80
 crl3.digicert.com:80
 ```
+
+> [!NOTE]
+> 如果您使用的是 [Azure 防火牆](/azure/firewall/overview) ，您需要新增「網路規則」以允許埠443的 *AzureMonitor* (服務標記) 。
 
 您也需要使用下一個躍點*網際網路*的[管理位址](#azure-data-explorer-management-ip-addresses)和[健全狀況監視位址](#health-monitoring-addresses)，在子網上定義[路由表](/azure/virtual-network/virtual-networks-udr-overview)，以防止非對稱式路由問題。
 
