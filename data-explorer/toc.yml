@@ -577,7 +577,7 @@
               href: ./kusto/query/tablefunction.md
             - name: toscalar()
               href: ./kusto/query/toscalarfunction.md
-        - name: Scalar 運算子
+        - name: 純量運算子
           items:
             - name: 位元 (二元) 運算子
               href: ./kusto/query/binoperators.md
@@ -1316,10 +1316,10 @@
               items:
                 - name: 外部資料表一般控制項命令
                   href: ./kusto/management/external-table-commands.md
-                - name: 建立和改變外部 SQL 資料表
-                  href: ./kusto/management/external-sql-tables.md
                 - name: 建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
                   href: ./kusto/management/external-tables-azurestorage-azuredatalake.md
+                - name: 建立和改變外部 SQL 資料表
+                  href: ./kusto/management/external-sql-tables.md
             - name: 資料行
               items:
                 - name: 資料行管理

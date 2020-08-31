@@ -1,6 +1,6 @@
 ---
-title: 列管理 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的列管理。
+title: 資料行管理-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的資料行管理。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,20 +8,21 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: db0f51d3f34a16771231bf6d0e917f029ba9c04d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 92f432f1367fb28f3343c4f63b6ccf62679ee336
+ms.sourcegitcommit: 487485c87706183a9824f695e5b56b0bc5ade048
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521942"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89056246"
 ---
-# <a name="columns-management"></a>欄位管理
+# <a name="columns-management"></a>資料行管理
 
-本節介紹用於管理表列的以下控制命令:
+本節說明用來管理資料表資料行的下列控制命令：
 
 |Command |描述 |
 |------- | -------|
-|[變更欄位](alter-column.md) |變更現有表列的資料型態 |
-|[變更合併表列](alter-merge-table-column.md)與[變更表列-文件字串](alter-merge-table-column.md#alter-table-column-docstrings) | 設定`docstring`指定表的一個或多個欄位屬性
-|[刪除欄位與放置表列](drop-column.md) |從表格中移除一欄或多欄位 |
-|[重新命名欄位或欄位](rename-column.md) |變更現有或多個表列的名稱 |
+|[改變數據行](alter-column.md) |改變現有資料表資料行的資料類型 |
+|[alter-merge 資料表資料行](alter-merge-table-column.md) 和 [alter table 資料行-docstrings](alter-merge-table-column.md#alter-table-column-docstrings) | 設定 `docstring` 指定之資料表的一或多個資料行的屬性。
+|[`.alter table`](alter-table-command.md), [`.alter-merge table`](alter-table-command.md) | 修改資料表的架構 (新增/移除資料行)  |
+|[drop column 和 drop table 資料行](drop-column.md) |從資料表中移除一個或多個資料行 |
+|[重新命名資料行或資料行](rename-column.md) |變更現有或多個資料表資料行的名稱 |

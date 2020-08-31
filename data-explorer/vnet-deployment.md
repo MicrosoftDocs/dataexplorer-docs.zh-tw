@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: ac291bb802214d8b877f905d440942ec2e0b802e
-ms.sourcegitcommit: 66d7b5d8fac6e69edfa2d7249c52828a8e00d428
+ms.openlocfilehash: 93860688f798c3b9ac2552052f22cc1ca1ca565e
+ms.sourcegitcommit: 91e7d49a1046575bbc63a4f25724656ebfc070db
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "89041290"
+ms.lasthandoff: 08/30/2020
+ms.locfileid: "89151190"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>將 Azure 資料總管叢集部署到您的虛擬網路
 
@@ -64,6 +64,14 @@ IP 位址的總數目：
 > [!NOTE]
 > 搭配使用 EventGrid 安裝與 [儲存體](/azure/storage/common/storage-introduction) 和 [事件中樞] 時，訂用帳戶中使用的儲存體帳戶可以使用服務端點鎖定至 Azure 資料總管的子網，同時允許 [防火牆](/azure/storage/common/storage-network-security)設定中受信任的 azure 平臺服務，但事件中樞無法啟用服務端點，因為它不支援信任的 [azure 平臺服務](/azure/event-hubs/event-hubs-service-endpoints)。
 
+## <a name="private-endpoints"></a>私人端點
+
+[私人端點](/azure/private-link/private-endpoint-overview) 允許私人存取 Azure 資源 (例如儲存體/事件中樞/Data Lake Gen 2) ，並使用虛擬網路的私人 IP，將資源有效地帶入您的 VNet 中。
+建立 [私人端點](/azure/private-link/private-endpoint-overview) ，以供資料連線使用的資源（例如事件中樞和儲存體）和外部資料表（例如儲存體、Data Lake Gen 2）和外部資料表（例如儲存體、Gen 2），以及從您的 VNet SQL Database，以私下存取基礎資源。
+
+ [!NOTE]
+ > 設定私人端點需要設定 [DNS](/azure/private-link/private-endpoint-dns)，我們僅支援 [Azure 私人 dns 區域](/azure/dns/private-dns-privatednszone) 設定。 不支援自訂 DNS 伺服器。 
+
 ## <a name="dependencies-for-vnet-deployment"></a>VNet 部署的相依性
 
 ### <a name="network-security-groups-configuration"></a>網路安全性群組設定
@@ -74,7 +82,7 @@ IP 位址的總數目：
 
 | **使用**   | **From**   | **若要**   | **通訊協定**   |
 | --- | --- | --- | --- |
-| 管理  |[ADX 管理位址](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement (ServiceTag)  | ADX 子網：443  | TCP  |
+| 管理性  |[ADX 管理位址](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement (ServiceTag)  | ADX 子網：443  | TCP  |
 | 健康狀況監視  | [ADX 健康情況監視位址](#health-monitoring-addresses)  | ADX 子網：443  | TCP  |
 | ADX 內部通訊  | ADX 子網：所有埠  | ADX 子網：所有埠  | 全部  |
 | 允許 Azure 負載平衡器輸入 (健康情況探查)   | AzureLoadBalancer  | ADX 子網：80443  | TCP  |
@@ -195,7 +203,7 @@ IP 位址的總數目：
 
 | **使用**   | **Source** | **來源服務標籤** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | * * 通訊協定 * * | **動作** | * * 優先權 * * |
 | ---   | --- | --- | ---  | --- | --- | --- | --- | --- |
-| 停用從網際網路存取 | 服務標記 | 網際網路 | *  | VirtualNetwork | * | 任意 | Deny | 高於上述規則的數位 |
+| 停用從網際網路存取 | 服務標記 | 網際網路 | *  | VirtualNetwork | * | 任意 | 拒絕 | 高於上述規則的數位 |
 
 此規則可讓您只透過下列 DNS 記錄連線到 Azure 資料總管叢集 (對應至每個服務) 的私人 IP：
 * `private-[clustername].[geo-region].kusto.windows.net` (引擎) 

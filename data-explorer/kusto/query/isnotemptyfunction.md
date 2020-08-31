@@ -1,6 +1,6 @@
 ---
-title: isnotempty （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 isnotempty （）。
+title: 'isnotempty ( # A1-Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 isnotempty ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6d325861c7264c77535caf6df6c363ec801dd697
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9f7811c2668bd0bb2d6e3711800ee5d9a450b9ec
+ms.sourcegitcommit: 487485c87706183a9824f695e5b56b0bc5ade048
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347199"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89056229"
 ---
 # <a name="isnotempty"></a>isnotempty()
 
@@ -23,8 +23,16 @@ ms.locfileid: "87347199"
 isnotempty("") == false
 ```
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 `isnotempty(`[*值*]`)`
 
-`notempty(`[*值*] `)`--的別名`isnotempty`
+`notempty(`[*值*] `)` --別名 `isnotempty`
+
+## <a name="example"></a>範例
+
+```kusto
+T
+| where isnotempty(fieldName)
+| count
+```
