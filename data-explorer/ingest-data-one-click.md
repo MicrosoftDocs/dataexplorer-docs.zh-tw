@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: d77c02ee3da7c33fc77416fa712a9108411c2276
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: fa18a89e44a09a877cedb41c6d6e77384c965801
+ms.sourcegitcommit: 811cf98edefd919b412d80201400919eedcab5cd
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874795"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89274589"
 ---
 # <a name="what-is-one-click-ingestion"></a>什麼是單鍵擷取？
 
@@ -36,7 +36,7 @@ ms.locfileid: "88874795"
 * 建立 [Azure 資料總管叢集與資料庫](create-cluster-database-portal.md)。
 * 登入 [Azure 資料總管 Web UI](https://dataexplorer.azure.com/) 並[將連線新增至您的叢集](web-query-data.md#add-clusters)。
 
-## <a name="ingest-new-data"></a>內嵌新資料
+## <a name="access-the-one-click-wizard"></a>存取單鍵精靈
 
 單鍵擷取精靈會引導您完成單鍵擷取流程。
 
@@ -48,7 +48,9 @@ ms.locfileid: "88874795"
 
     :::image type="content" source="media/ingest-data-one-click/one-click-ingestion-in-webui.png" alt-text="在 Web UI 中選取單鍵擷取":::
 
-<!-- TODO either change the local file tutorial to blob storage or create another one to show users how to do this-->
+* 若要從 Azure 入口網站存取精靈，請選取左側功能表中的 [查詢]，對 [資料庫] 或 [資料表] 按右鍵，然後選取 [內嵌新資料 (預覽)]。
+
+    :::image type="content" source="media/ingest-data-one-click/access-from-portal.png" alt-text="從 Azure 入口網站存取單鍵擷取精靈":::
 
 ## <a name="one-click-ingestion-wizard"></a>單鍵擷取精靈
 
@@ -112,7 +114,7 @@ ms.locfileid: "88874795"
  
 ### <a name="initial-data-exploration"></a>初始資料探索
    
-擷取之後，精靈會提供您使用 **[快速命令](one-click-ingestion-existing-table.md#quick-queries-and-tools)** 的選項，以進行資料的初始探索。
+擷取之後，精靈會提供您使用 **[快速命令](one-click-ingestion-existing-table.md#explore-quick-queries-and-tools)** 的選項，以進行資料的初始探索。
 
 ## <a name="next-steps"></a>後續步驟
 

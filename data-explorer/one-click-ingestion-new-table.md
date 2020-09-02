@@ -7,14 +7,18 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: b9fa22a5cc3831ae2763c18dbfae69e24fd29318
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 9427692d0533550967bfe84a35fd833a4c03b39e
+ms.sourcegitcommit: 811cf98edefd919b412d80201400919eedcab5cd
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872840"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89274760"
 ---
 # <a name="use-one-click-ingestion-to-ingest-csv-data-from-a-container-to-a-new-table-in-azure-data-explorer"></a>在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表
+
+> [!div class="op_single_selector"]
+> * [將 CSV 資料從容器內嵌至新的資料表](one-click-ingestion-new-table.md)
+> * [從本機檔案到現有資料表內嵌到 JSON 資料](one-click-ingestion-existing-table.md)
 
 [單鍵擷取](ingest-data-one-click.md)可讓您快速將 JSON、CSV 和其他格式的資料擷取到資料表中，並且輕鬆建立對應結構。 資料可以在一次性或持續擷取程序中，從儲存體、本機檔案或容器中擷取。  
 
@@ -28,7 +32,7 @@ ms.locfileid: "88872840"
 1. 在 Web UI 的左側功能表中，以滑鼠右鍵按一下 [資料庫]，然後選取 [內嵌新資料 (預覽)]。
 
     :::image type="content" source="media/one-click-ingestion-new-table/one-click-ingestion-in-web-ui.png" alt-text="擷取新資料":::
- 
+
 1. 在 [內嵌新資料 (預覽)] 視窗中，已選取 [來源] 索引標籤。 
 
 1. 選取 [建立新資料表]，然後輸入新資料表的名稱。 您可使用英數位元、連字號和底線。 但不支援萬用字元。
@@ -50,36 +54,36 @@ ms.locfileid: "88872840"
      > [!TIP] 
      > 若是**從檔案**擷取，請參閱[在 Azure 資料總管中使用單鍵擷取將 JSON 資料從本機檔案擷取到現有的資料表](one-click-ingestion-existing-table.md#select-an-ingestion-type)
 
-資料的範例隨即出現。 如果想要的話，您可加以篩選，只擷取以特定字元開頭的檔案。 當您調整篩選條件時，預覽會自動更新。
-  
- * 例如，您可篩選所有以 *data* 開頭並以 *.csv.gz* 副檔名結尾的檔案。
+資料的範例隨即出現。 如果想要的話，可篩選資料來擷取以特定字元開頭或結尾的檔案。 當您調整篩選條件時，預覽會自動更新。
 
-    :::image type="content" source="media/one-click-ingestion-new-table/from-container-with-filter.png" alt-text="單鍵擷取篩選條件":::
+例如，篩選以 .csv 副檔名開頭的所有檔案。
+
+:::image type="content" source="media/one-click-ingestion-new-table/from-container-with-filter.png" alt-text="單鍵擷取篩選條件":::
   
 ## <a name="edit-the-schema"></a>編輯結構描述
 
 選取 [編輯結構描述] 以查看和編輯資料表資料行設定。 系統會隨機選取其中一個 Blob，並根據該 Blob 產生結構描述。 服務會藉由查看來源名稱，自動識別其是否壓縮。
 
-### <a name="schema-tab"></a>結構描述索引標籤
+在 [結構描述] 索引標籤中：
 
-1. 在 [結構描述] 索引標籤中：
-
-    * 選取 [資料格式]：
+   1. 選取 [資料格式]：
 
         在此情況下，資料格式為 **CSV**
 
         > [!TIP]
         > 如果您想要使用 **JSON** 檔案，請參閱[在 Azure 資料總管中使用單鍵擷取將 JSON 資料從本機檔案擷取到現有的資料表](one-click-ingestion-existing-table.md#edit-the-schema)。
 
-    * 您可以選取 [包含資料行名稱] 核取方塊，以忽略檔案的標題列。
+   1. 您可以選取 [包含資料行名稱] 核取方塊，以忽略檔案的標題列。
 
         :::image type="content" source="media/one-click-ingestion-new-table/non-json-format.png" alt-text="選取包含資料行名稱":::
 
-1. 在 [對應名稱] 欄位中，輸入對應名稱。 您可使用英數位元和底線。 不支援空格、特殊字元和連字號。
+在 [對應名稱] 欄位中，輸入對應名稱。 您可使用英數位元和底線。 不支援空格、特殊字元和連字號。
 
-    :::image type="content" source="media/one-click-ingestion-new-table/table-mapping.png" alt-text="資料表對應名稱單鍵擷取":::
+:::image type="content" source="media/one-click-ingestion-new-table/table-mapping.png" alt-text="資料表對應名稱單鍵擷取":::
 
-### <a name="table"></a>Table
+### <a name="edit-the-table"></a>編輯資料表
+
+當內嵌至新的資料表時，請在建立資料表時，改變資料表的各個層面。
 
 在資料表中： 
  * 按兩下要編輯的新資料行名稱。
@@ -87,8 +91,8 @@ ms.locfileid: "88872840"
 
     [!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
 
-    > [!NOTE]
-    > 若為表格式格式，每個資料行都可以內嵌到 Azure 資料總管中的一個資料行。
+  > [!NOTE]
+  > 若為表格式格式，每個資料行都可以內嵌到 Azure 資料總管中的一個資料行。
 
 [!INCLUDE [data-explorer-one-click-command-editor](includes/data-explorer-one-click-command-editor.md)]
 
@@ -98,7 +102,7 @@ ms.locfileid: "88872840"
 
 :::image type="content" source="media/one-click-ingestion-new-table/start-ingestion.png" alt-text="開始擷取單鍵擷取":::
 
-## <a name="data-ingestion-completed"></a>資料擷取已完成
+## <a name="complete-data-ingestion"></a>完成資料擷取
 
 在 [資料擷取已完成] 視窗中，當資料擷取成功完成時，這三個步驟都會標示綠色勾號。
 
@@ -110,7 +114,7 @@ ms.locfileid: "88872840"
 
 持續擷取可讓您建立事件方格，以接聽來源容器中的新檔案。 任何符合預先定義參數 (前置詞、尾碼等等) 準則的新檔案，都會自動擷取到目的地資料表。 
 
-1. 選取右下角的 [建立持續擷取] 按鈕，以開啟 Azure 入口網站。 資料連線頁面隨即開啟，其中已開啟事件方格資料連接器，並已輸入來源和目標參數 (來源容器、資料表和對應)。
+1. 在 [連續擷取]圖格中，選取 [事件方格] 以開啟 Azure 入口網站。 資料連線頁面隨即開啟，其中已開啟事件方格資料連接器，並已輸入來源和目標參數 (來源容器、資料表和對應)。
     
     :::image type="content" source="media/one-click-ingestion-new-table/continuous-button.png" alt-text="持續擷取按鈕":::
 
