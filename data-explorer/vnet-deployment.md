@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 0b9080b0a76edbb046343eb3f67bc4bacd3df499
-ms.sourcegitcommit: 811cf98edefd919b412d80201400919eedcab5cd
+ms.openlocfilehash: 41899f49cdb980ba6ae31ff9a543b57026d07caa
+ms.sourcegitcommit: d54e4ebb611da2b30158720e14103e81a7daa5af
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 09/01/2020
-ms.locfileid: "89274570"
+ms.locfileid: "89286436"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>將 Azure 資料總管叢集部署到您的虛擬網路
 
@@ -69,7 +69,7 @@ IP 位址的總數目：
 [私人端點](/azure/private-link/private-endpoint-overview) 允許私人存取 Azure 資源 (例如儲存體/事件中樞/Data Lake Gen 2) ，並使用虛擬網路的私人 IP，將資源有效地帶入您的 VNet 中。
 建立 [私人端點](/azure/private-link/private-endpoint-overview) ，以供資料連線使用的資源（例如事件中樞和儲存體）和外部資料表（例如儲存體、Data Lake Gen 2）和外部資料表（例如儲存體、Gen 2），以及從您的 VNet SQL Database，以私下存取基礎資源。
 
- [!NOTE]
+ > [!NOTE]
  > 設定私人端點需要設定 [DNS](/azure/private-link/private-endpoint-dns)，我們僅支援 [Azure 私人 dns 區域](/azure/dns/private-dns-privatednszone) 設定。 不支援自訂 DNS 伺服器。 
 
 ## <a name="dependencies-for-vnet-deployment"></a>VNet 部署的相依性
