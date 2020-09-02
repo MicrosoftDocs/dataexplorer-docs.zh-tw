@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/26/2020
-ms.openlocfilehash: 0b5633dc7ed54f9b4a763400ae8de84ba32f09e6
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 47ca1ebdd4136b3add6b4476757f34a24b08eeea
+ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872585"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89366081"
 ---
 # <a name="visualize-data-with-azure-data-explorer-dashboards"></a>使用 Azure 資料總管儀表板將資料視覺化
 
@@ -50,7 +50,7 @@ Azure 資料總管儀表板提供三個主要優點：
     1. 輸入叢集 **URI** 或部分名稱（包括區域），然後選取 **[連接]**。 
     1. 從下拉式清單中選取**資料庫**。
     1. 如有需要，請使用預設值或修改 **資料來源名稱**。 
-    1. 選取 [ **套用**]。
+    1. 選取 [套用]。
 
     :::image type="content" source="media/adx-dashboards/data-source-pane.png" alt-text="資料來源窗格":::
 
@@ -100,7 +100,63 @@ Azure 資料總管儀表板提供三個主要優點：
 
     :::image type="content" source="media/adx-dashboards/save-dashboard.png" alt-text="儲存儀表板":::
 
+## <a name="share-dashboards"></a>共用儀表板
+
+您可以使用 [共用] 功能表將 [許可權授](#grant-permissions) 與儀表板、 [變更使用者的許可權等級](#change-a-user-permission-level)，以及 [共用儀表板連結](#share-the-dashboard-link)。
+
+> [!IMPORTANT]
+> 若要存取儀表板，儀表板檢視器需要下列各項：
+> * 存取的儀表板連結
+> * 儀表板許可權
+> * 存取 Azure 資料總管叢集中的基礎資料庫  
+
+1. 在儀表板的頂端列中，選取 [ **共用** ] 功能表項目。
+1. 從下拉式清單中選取 [ **管理許可權** ]。 
+
+    :::image type="content" source="media/adx-dashboards/share-dashboard.png" alt-text="共用儀表板下拉式清單":::
+
+### <a name="grant-permissions"></a>授與權限
+
+若要在 [ **儀表板許可權** ] 窗格中將許可權授與使用者：
+1. 在 [ **加入新成員** ] 方塊中，寫入使用者的名稱或電子郵件。
+1. 選取 [**可查看**] 或 [**可以編輯**] 的**許可權**等級，然後按一下 [**新增**]。
+
+:::image type="content" source="media/adx-dashboards/dashboard-permissions.png" alt-text="管理儀表板許可權":::
+
+### <a name="change-a-user-permission-level"></a>變更使用者權限等級
+
+若要在 [ **儀表板許可權** ] 窗格中變更使用者權限層級：
+1. 使用搜尋方塊或滾動使用者清單來尋找使用者。
+1. 視需要變更 **許可權** 層級。
+
+### <a name="share-the-dashboard-link"></a>共用儀表板連結
+
+共用儀表板連結：
+* 選取 [ **共用** ] 下拉式清單，然後選取 [ **複製連結** ] 或
+* 在 [ **儀表板許可權** ] 視窗中，選取 [ **複製連結**]。 
+
+## <a name="enable-auto-refresh"></a>啟用自動重新整理 
+
+1. 選取 [儀表板] 功能表中的 [ **編輯** ]，以切換至編輯模式。
+1. 選取 [ **自動**重新整理]。 
+ 
+    :::image type="content" source="media/adx-dashboards/auto-refresh.png" alt-text="選取 [自動重新整理]":::
+
+1. 切換選項，以 **啟用**自動重新整理。 
+1. 選取 [ **最小時間間隔** ] 和 [預設重新整理 **頻率**] 的值。 
+
+    :::image type="content" source="media/adx-dashboards/auto-refresh-toggle.png" alt-text="啟用自動重新整理":::
+
+1. 選取 **[** 套用並 **儲存** 儀表板]。
+
+> [!NOTE]
+> * 選取最小的最小時間間隔，以減少叢集中不必要的負載。 
+> * 儀表板檢視器： 
+>    * 只能變更個人使用的最小時間間隔。 
+>    * 無法選取小於編輯器所指定之 **最小時間間隔** 的值。
+
 ## <a name="next-steps"></a>後續步驟
 
 * [在 Azure 資料總管儀表板中使用參數](dashboard-parameters.md)
+* [自訂儀表板視覺效果](dashboard-customize-visuals.md)
 * [在 Azure 資料總管中查詢資料](web-query-data.md)

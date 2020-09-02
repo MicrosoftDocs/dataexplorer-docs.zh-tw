@@ -8,12 +8,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/09/2020
-ms.openlocfilehash: fd33ea4d4607c9c3af0ded26ec7f58de761f24ea
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4921a48ff879879084ec1941ab69c6e9d29b9773
+ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873843"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89366158"
 ---
 # <a name="use-parameters-in-azure-data-explorer-dashboards"></a>在 Azure 資料總管儀表板中使用參數
 
@@ -44,10 +44,10 @@ ms.locfileid: "88873843"
 
 :::image type="content" source="media/dashboard-parameters/properties.png" alt-text="新增參數屬性":::
 
-|欄位  |說明 |
+|欄位  |描述 |
 |---------|---------|
 |**參數顯示名稱**    |   儀表板或編輯卡片上顯示的參數名稱。      |
-|**參數類型**    |下列其中之一：<ul><li>**單一選取**：可在篩選中選取一個值，作為參數的輸入。</li><li>**多重選取**：可以在篩選中選取一個或多個值，作為參數的輸入 (s) 。</li><li>**時間範圍**：允許建立額外的參數，以根據時間篩選查詢和儀表板。 依預設，每個儀表板都有時間範圍選擇器。</li></ul>    |
+|**參數類型**    |下列其中一個參數：<ul><li>**單一選取**：可在篩選中選取一個值，作為參數的輸入。</li><li>**多重選取**：可以在篩選中選取一個或多個值，作為參數的輸入 (s) 。</li><li>**時間範圍**：允許建立額外的參數，以根據時間篩選查詢和儀表板。 依預設，每個儀表板都有時間範圍選擇器。</li><li>**自由文字**：篩選中未填入任何值。 使用者可以輸入值，或複製/貼上文字欄位的值。 篩選會保留最近使用的值。</li></ul>    |
 |**變數名稱**     |   要在查詢中使用的參數名稱。      |
 |**Data type**    |    參數值的資料類型。     |
 |**釘選為儀表板篩選**   |   將參數型篩選釘選到儀表板或從儀表板取消釘選。       |
@@ -152,7 +152,7 @@ EventsAll
 
 ### <a name="use-the-multiple-selection-fixed-value-parameters"></a>使用多重選取固定值參數
 
-固定值參數是以使用者指定的預先定義值為基礎。 下列範例會示範如何建立和使用多重選取固定值參數。
+固定值參數是以使用者指定的預先定義值為基礎。 下列範例會示範如何建立和使用多重選取的固定值參數。
 
 #### <a name="create-the-parameters"></a>建立參數
 
@@ -220,7 +220,7 @@ EventsAll
 
 #### <a name="use-a-parameter-in-the-query"></a>在查詢中使用參數
 
-1. 以下是使用新事件參數的範例查詢，方法是使用 `_ event` 變數：
+1. 下列使用新事件參數的查詢範例會使用 `_ event` 變數：
 
     ``` kusto
     EventsAll
@@ -232,7 +232,7 @@ EventsAll
 
 1. 選取不同的值來更新視覺效果。
 
-### <a name="use-the-multiple-selection-query-based-parameter"></a>使用多重選取專案查詢型參數
+### <a name="use-the-multiple-selection-query-based-parameter"></a>使用多重選取查詢型參數
 
 以查詢為基礎的參數值是在儀表板載入時間，藉由執行使用者指定的查詢來衍生。 下列範例會示範如何建立多重選取查詢型參數：
 
@@ -264,3 +264,43 @@ EventsAll
     新的參數會顯示在儀表板頂端的參數清單中。 
 
 1. 選取一或多個不同的值來更新視覺效果。
+
+### <a name="use-the-free-text-parameter"></a>使用免費文字參數
+
+自由文字參數不包含任何值。 它們可讓您引進自己的價值。
+
+#### <a name="create-the-parameter"></a>建立參數
+
+1. 選取 [ **參數** ] 以開啟 [ **參數] 窗格** ，然後選取 [ **新增參數**]。
+1. 填入詳細資料，如下所示：
+    * **參數顯示名稱**：公司
+    * **參數類型**：自由文字
+    * **變數名稱**： _company
+    * **資料類型**：字串
+    * **釘選為儀表板篩選**：已核取
+    * **預設值**：沒有預設值
+
+#### <a name="use-parameters-in-the-query"></a>在查詢中使用參數
+
+1. 使用新的 *公司* 參數執行範例查詢，方法是使用 `_company` 變數名稱：
+
+    ```kusto
+    EventsAll
+    | where CreatedAt > ago(7d)
+    | where Type == "WatchEvent"
+    | where Repo.name has _company
+    | summarize WatchEvents=count() by RepoName = tolower(tostring(Repo.name))
+    | top 5 by WatchEvents
+    ```
+
+新的參數現在會顯示在儀表板頂端的參數清單中。
+
+## <a name="use-filter-search-for-single-and-multiple-selection-filters"></a>使用篩選準則搜尋單一和多重選取範圍篩選
+
+在 [單一] 和 [多重選取] 篩選中，輸入您想要的值。 篩選準則搜尋會顯示符合搜尋詞彙的所有最近抓取值。
+
+## <a name="next-steps"></a>後續步驟
+
+* [自訂儀表板視覺效果](dashboard-customize-visuals.md)
+* [在 Azure 資料總管中查詢資料](web-query-data.md) 
+
