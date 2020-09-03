@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 41899f49cdb980ba6ae31ff9a543b57026d07caa
-ms.sourcegitcommit: d54e4ebb611da2b30158720e14103e81a7daa5af
+ms.openlocfilehash: 9fa58d36815ede98a4f0239f1ce68a6542f24c4b
+ms.sourcegitcommit: cb55064b7cdd57c792ad259b09069525bf799fa0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89286436"
+ms.lasthandoff: 09/03/2020
+ms.locfileid: "89410803"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>將 Azure 資料總管叢集部署到您的虛擬網路
 
@@ -203,7 +203,7 @@ IP 位址的總數目：
 
 | **使用**   | **Source** | **來源服務標籤** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | * * 通訊協定 * * | **動作** | * * 優先權 * * |
 | ---   | --- | --- | ---  | --- | --- | --- | --- | --- |
-| 停用從網際網路存取 | 服務標記 | 網際網路 | *  | VirtualNetwork | * | 任意 | 拒絕 | 高於上述規則的數位 |
+| 停用從網際網路存取 | 服務標記 | 網際網路 | *  | VirtualNetwork | * | 任意 | Deny | 高於上述規則的數位 |
 
 此規則可讓您只透過下列 DNS 記錄連線到 Azure 資料總管叢集 (對應至每個服務) 的私人 IP：
 * `private-[clustername].[geo-region].kusto.windows.net` (引擎) 
@@ -245,13 +245,16 @@ crl3.digicert.com:80
 ```
 
 > [!NOTE]
-> 如果您使用的是 [Azure 防火牆](/azure/firewall/overview) ，您需要新增「網路規則」以允許埠443的 *AzureMonitor* (服務標記) 。
+> 如果您使用的是 [Azure 防火牆](/azure/firewall/overview)，請使用下列屬性新增 **網路規則** ：
+> | **通訊協定**   | **來源類型** | **Source** | **服務標記**  | **目的地埠** |
+> | ---   | --- | --- | ---  | --- |
+> | TCP | IP 位址 | * | AzureMonitor | 443 |
 
 您也需要使用下一個躍點*網際網路*的[管理位址](#azure-data-explorer-management-ip-addresses)和[健全狀況監視位址](#health-monitoring-addresses)，在子網上定義[路由表](/azure/virtual-network/virtual-networks-udr-overview)，以防止非對稱式路由問題。
 
 例如，針對 **美國西部** 區域，必須定義下列 udr：
 
-| Name | 位址首碼 | 下一個躍點 |
+| 名稱 | 位址首碼 | 下一個躍點 |
 | --- | --- | --- |
 | ADX_Management | 13.64.38.225/32 | 網際網路 |
 | ADX_Monitoring | 23.99.5.162/32 | 網際網路 |
