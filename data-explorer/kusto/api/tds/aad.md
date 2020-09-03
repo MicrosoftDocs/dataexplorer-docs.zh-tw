@@ -1,6 +1,6 @@
 ---
-title: MS-具有 Azure Active Directory 的 TDS-Azure 資料總管 |Microsoft Docs
-description: 本文描述使用 Azure 資料總管中的 Azure Active Directory 的 MS TDS。
+title: MS-TDS 與 Azure Active Directory-Azure 資料總管 |Microsoft Docs
+description: 本文說明在 Azure 資料總管中使用 Azure Active Directory 的 MS TDS。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -9,22 +9,22 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 01/02/2019
-ms.openlocfilehash: 5511155eaa131c85a49a2082322ad95fcd022418
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: 6766a817a1568eeb3cbcf2eb5bc0440cdd10eec6
+ms.sourcegitcommit: 9e0289945270db517e173aa10024e0027b173b52
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82862001"
+ms.lasthandoff: 09/03/2020
+ms.locfileid: "89428424"
 ---
-# <a name="ms-tds-with-azure-active-directory"></a>MS-具有 Azure Active Directory 的 TDS
+# <a name="ms-tds-with-azure-active-directory"></a>MS-TDS 與 Azure Active Directory
 
-## <a name="aad-user-authentication"></a>AAD 使用者驗證
+## <a name="azure-ad-user-authentication"></a>Azure AD 使用者驗證
 
-支援 AAD 使用者驗證的 SQL 用戶端可以與 Kusto 搭配使用。
+支援 Azure AD 使用者驗證的 SQL 用戶端可以與 Azure 資料總管搭配使用。
 
-### <a name="net-sql-client-user"></a>.NET SQL 用戶端（使用者）
+### <a name="net-sql-client-user"></a>.NET SQL 用戶端 (使用者) 
 
-例如，針對整合式 AAD：
+例如，針對整合式 Azure AD：
 ```csharp
     var csb = new SqlConnectionStringBuilder()
     {
@@ -34,7 +34,7 @@ ms.locfileid: "82862001"
     };
 ```
 
-Kusto 支援使用已取得的存取權杖進行驗證：
+Kusto 支援已取得存取權杖的驗證：
 ```csharp
     var csb = new SqlConnectionStringBuilder()
     {
@@ -48,7 +48,7 @@ Kusto 支援使用已取得的存取權杖進行驗證：
     }
 ```
 
-### <a name="jdbc-user"></a>JDBC （使用者）
+### <a name="jdbc-user"></a>JDBC (使用者) 
 
 ```java
 import java.sql.Connection;
@@ -80,13 +80,13 @@ public class Sample {
 }
 ```
 
-## <a name="aad-application-authentication"></a>AAD 應用程式驗證
+## <a name="azure-ad-application-authentication"></a>Azure AD 應用程式驗證
 
-為 Kusto 布建的 AAD 應用程式可以使用支援 AAD 的 SQL 用戶端程式庫來連線到 Kusto。 如需 AAD 應用程式的詳細資訊，請參閱[建立 Aad 應用程式](../../management/access-control/how-to-provision-aad-app.md)。
+針對 Kusto 布建的 Azure AD 應用程式，可以使用支援連接至 Kusto 之 Azure AD 的 SQL 用戶端程式庫。 如需 Azure AD 應用程式的詳細資訊，請參閱 [建立 Azure AD 應用程式](../../management/access-control/how-to-provision-aad-app.md)。
 
-### <a name="net-sql-client-application"></a>.NET SQL 用戶端（應用程式）
+### <a name="net-sql-client-application"></a>.NET SQL 用戶端 (應用程式) 
 
-假設您已布建具有*ApplicationClientId*和*ApplicationKey*的 AAD 應用程式，並授與它存取叢集*ClusterDnsName*上資料庫*DatabaseName*的許可權，下列範例會示範如何使用 .net SQL 用戶端進行此 AAD 應用程式的查詢。
+假設您已布建具有*ApplicationClientId*和*ApplicationKey*的 Azure AD 應用程式，並授與它存取叢集*ClusterDnsName*上資料庫*DatabaseName*的許可權，下列範例將示範如何使用 .net SQL 用戶端來進行此 Azure AD 應用程式中的查詢。
 
 ```csharp
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
@@ -138,7 +138,7 @@ namespace Sample
 }
 ```
 
-### <a name="jdbc-application"></a>JDBC （應用程式）
+### <a name="jdbc-application"></a>JDBC (應用程式) 
 
 ```java
 import java.sql.*;
