@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: cbafde1b87807c449923b8b010c57e3394c4a74f
-ms.sourcegitcommit: d08b3344d7e9a6201cf01afc8455c7aea90335aa
+ms.openlocfilehash: 0b85d0c4bd0604f46375e314cb1fe029647b8d32
+ms.sourcegitcommit: 9b96a0c1ba0d07fec81f29bdf8f71b9549e79b3a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88964739"
+ms.lasthandoff: 09/04/2020
+ms.locfileid: "89472235"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
@@ -51,7 +51,7 @@ ms.locfileid: "88964739"
 * `Function` 這是要使用的雜湊模數函數名稱。
   * 支援的值： `XxHash64` 。
 * `MaxPartitionCount` 這是要建立的分割區數目上限， (雜湊模數函數的模數引數) 每一段時間。
-  * 支援的值位於範圍內 `(1,1024]` 。
+  * 支援的值位於範圍內 `(1,2048]` 。
     * 值應為：
       * 大於叢集中節點數目的5倍。
       * 小於資料行的基數。
@@ -181,7 +181,7 @@ ms.locfileid: "88964739"
   * 這是選用屬性。 其預設值為 `0` ，預設目標為5000000記錄。
     * 如果您看到資料分割作業耗用極大量的記憶體或 CPU （每項作業），則可以設定低於5M 的值。 如需詳細資訊，請參閱 [監視](#monitoring)。
 
-## <a name="notes"></a>注意
+## <a name="notes"></a>備忘稿
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
