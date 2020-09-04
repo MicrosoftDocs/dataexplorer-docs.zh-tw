@@ -180,6 +180,8 @@
               href: azure-data-explorer-dashboards.md
             - name: 使用儀表板參數
               href: dashboard-parameters.md
+            - name: 自訂儀表板視覺效果
+              href: dashboard-customize-visuals.md
         - name: Power BI
           items:
             - name: 最佳作法
