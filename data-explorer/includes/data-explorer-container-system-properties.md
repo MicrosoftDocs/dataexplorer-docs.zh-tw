@@ -4,22 +4,16 @@ ms.service: data-explorer
 ms.topic: include
 ms.date: 02/27/2020
 ms.author: orspodek
-ms.openlocfilehash: a2297301a0b9c0540c73c0f50483cccfc3181a0f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 40334f81e39317839c05ce09a2e4923be4e0747c
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81498821"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502650"
 ---
-### <a name="event-system-properties-mapping"></a>事件系統屬性對應
+### <a name="schema-mapping-examples"></a>架構對應範例
 
-> [!Note]
-> * 單一記錄事件支援系統屬性。
-> * 若為對應 `csv` ，會在記錄的開頭加入屬性。 針對對應 `json` ，會根據下拉式清單中顯示的名稱來新增屬性。
-
-如果您在資料表的 [**資料來源**] 區段中選取了 [**事件系統屬性**]，就必須在資料表架構和對應中包含下列屬性。
-
-**資料表架構範例**
+**資料表架構對應範例**
 
 如果您的資料包含三個數據行 (`Timespan` 、 `Metric` 和 `Value`) 而且您包含的屬性是 `x-opt-enqueued-time` 和 `x-opt-offset` ，請使用下列命令來建立或修改資料表架構：
 
@@ -44,7 +38,7 @@ ms.locfileid: "81498821"
  
 **JSON 對應範例**
 
-您可以使用 [ **資料連線** 分頁] **事件系統屬性** 清單中出現的系統屬性名稱來加入資料。 執行下列命令：
+使用系統屬性對應來新增資料。 執行下列命令：
 
 ```kusto
     .create table TestTable ingestion json mapping "JsonMapping1"

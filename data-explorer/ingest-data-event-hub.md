@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: b9a55915ebef61bef534e42ca0aef6a7c19868ac
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 84f4348f1d172238bd71de55e989ed8520f78b93
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874948"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502750"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>將資料從事件中樞內嵌至 Azure 資料總管
 
@@ -25,6 +25,8 @@ ms.locfileid: "88874948"
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 
 Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌服務進行內嵌 (載入資料)。 [事件中樞](/azure/event-hubs/event-hubs-about)可以近乎即時地每秒鐘處理數百萬個事件。 在本文中，您會建立事件中樞、從 Azure 資料總管連線到該中樞，並查看整個系統的資料流程。
+
+如需從事件中樞擷取至 Azure 資料總管的一般資訊，請參閱 [連接到事件中樞](ingest-data-event-hub-overview.md)。
 
 ## <a name="prerequisites"></a>Prerequisites
 
@@ -43,11 +45,11 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 1. 若要建立事件中樞，請使用下列按鈕開始部署。 按一下滑鼠右鍵並選取 [在新視窗中開啟]****，以便依照本文中的其餘步驟操作。
 
-    [![部署至 Azure](media/ingest-data-event-hub/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-event-hubs-create-event-hub-and-consumer-group%2Fazuredeploy.json)
+    [![部署至 Azure 按鈕](media/ingest-data-event-hub/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-event-hubs-create-event-hub-and-consumer-group%2Fazuredeploy.json)
 
     [部署至 Azure]**** 按鈕可將您帶往 Azure 入口網站，填寫部署表單。
 
-    ![部署至 Azure](media/ingest-data-event-hub/deploy-to-azure.png)
+    ![建立事件中樞表單](media/ingest-data-event-hub/deploy-to-azure.png)
 
 1. 選取用於建立事件中樞的訂用帳戶，然後建立一個名為 *test-hub-rg* 的資源群組。
 
@@ -73,7 +75,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 1. 在工具列上選取 [通知]**** 以監視佈建程序。 可能需要幾分鐘的時間，部署才會成功，但您現在可以移至下一個步驟。
 
-    ![通知](media/ingest-data-event-hub/notifications.png)
+    ![通知圖示](media/ingest-data-event-hub/notifications.png)
 
 ## <a name="create-a-target-table-in-azure-data-explorer"></a>在 Azure 資料總管中建立目標資料表
 
@@ -120,7 +122,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     | 事件中樞 | *test-hub* | 您建立的事件中樞。 |
     | 取用者群組 | *test-group* | 在您所建立事件中樞中定義的取用者群組。 |
     | 事件系統屬性 | 選取相關屬性 | [事件中樞系統屬性](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations)。 如果每個事件訊息有多筆記錄，系統屬性將會新增至第一個。 新增系統屬性時，請 [建立](kusto/management/create-table-command.md) 或 [更新](kusto/management/alter-table-command.md) 資料表架構和 [對應](kusto/management/mappings.md) 以包含選取的屬性。 |
-    | 壓縮 | *None* | 事件中樞訊息承載的壓縮類型。 支援的壓縮類型： *無、GZip*。|
+    | 壓縮 | *無* | 事件中樞訊息承載的壓縮類型。 支援的壓縮類型： *無、GZip*。|
     | | |
 
     **目標資料表：**
@@ -130,7 +132,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
      **設定** | **建議的值** | **欄位描述**
     |---|---|---|
-    | 資料表 | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
+    | Table | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
     | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO 和 W3CLOG。 |
     | 資料行對應 | *TestMapping* | 您在 **>testdatabase**中建立的[對應](kusto/management/mappings.md)，會將傳入的 JSON 資料對應至**TestTable**的資料行名稱和資料類型。 JSON 或多行 JSON 的必要參數，以及其他格式的選擇性。|
     | | |
@@ -141,7 +143,15 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     > * 您也可以透過 [範例應用程式](https://github.com/Azure-Samples/event-hubs-dotnet-ingest)中所示的動態屬性來設定壓縮類型。
     > * GZip 壓縮裝載不支援 Avro、ORC 和 PARQUET 格式，以及事件系統屬性。
 
-[!INCLUDE [data-explorer-container-system-properties](includes/data-explorer-container-system-properties.md)]
+
+### <a name="event-system-properties-mapping"></a>事件系統屬性對應
+
+> [!Note]
+> * 單一記錄事件支援系統屬性。
+> * 若為對應 `csv` ，會在記錄的開頭加入屬性。 針對對應 `json` ，會根據下拉式清單中顯示的名稱來新增屬性。
+
+如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，就必須在資料表架構和對應中包含[系統屬性](ingest-data-event-hub-overview.md#system-properties)。
+
 
 ## <a name="copy-the-connection-string"></a>複製連接字串
 

@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 25c82c8890342e00279d137eb749f3acc7df986f
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: c96203ccfa0c4dc70fff83454dac217cccfc0a6c
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874982"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502767"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>訂閱 Event Grid 通知，以便將 Blob 擷取至 Azure 資料總管
 
@@ -26,6 +26,8 @@ ms.locfileid: "88874982"
 
 在本文中，您將瞭解如何使用 Event Grid 資料連線，將 blob 從儲存體帳戶內嵌到 Azure 資料總管。 您將建立可設定 [Azure 事件方格](/azure/event-grid/overview) 訂用帳戶的事件方格資料連線。 事件方格訂用帳戶會透過 Azure 事件中樞，將事件從您的儲存體帳戶路由傳送到 Azure 資料總管。 然後，您會看到整個系統中的資料流程範例。
 
+如需從事件方格擷取至 Azure 資料總管的一般資訊，請參閱 [連接到事件方格](ingest-data-event-grid-overview.md)。
+
 ## <a name="prerequisites"></a>先決條件
 
 * Azure 訂用帳戶。 建立 [免費的 Azure 帳戶](https://azure.microsoft.com/free/)。
@@ -38,7 +40,7 @@ ms.locfileid: "88874982"
 
 1. 在 Azure 入口網站中，您的叢集下方，選取 [查詢]****。
 
-    :::image type="content" source="media/ingest-data-event-grid/query-explorer-link.png" alt-text="連結至查詢瀏覽器":::    
+    :::image type="content" source="media/ingest-data-event-grid/query-explorer-link.png" alt-text="連結至查詢瀏覽器"::: 
 
 1. 將下列命令複製到視窗，然後選取 [執行]**** 以建立資料表 (TestTable)，該資料表會接收內嵌的資料。
 
@@ -101,7 +103,7 @@ ms.locfileid: "88874982"
 
      **設定** | **建議的值** | **欄位描述**
     |---|---|---|
-    | 資料表 | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
+    | Table | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
     | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO、RAW 和 W3CLOG。 支援的壓縮選項為 Zip 和 GZip。 |
     | 對應 | *TestMapping* | 您在 **TestDatabase** 中建立的對應，會將傳入的 JSON 資料對應至 **TestTable** 的資料行名稱與資料類型。|
 
@@ -159,11 +161,7 @@ ms.locfileid: "88874982"
 
 ### <a name="ingestion-properties"></a>內嵌屬性
 
-您可以透過 blob 中繼資料指定 blob 內嵌的內嵌 [屬性](ingestion-properties.md) 。
-
-您可以設定這些屬性：
-
-[!INCLUDE [ingestion-properties-event-grid](includes/ingestion-properties-event-grid.md)]
+您可以透過 blob 中繼資料指定 blob 內嵌的內嵌 [屬性](ingest-data-event-grid-overview.md#set-ingestion-properties) 。 
 
 > [!NOTE]
 > Azure 資料總管不會在內嵌後刪除 blob。

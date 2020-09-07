@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/08/2020
-ms.openlocfilehash: 578141c63daeecd285d397b356260a4f22720621
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4433126f67187d1bb2a190821dc6a59d96be3f5b
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874931"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502784"
 ---
 # <a name="ingest-data-from-iot-hub-into-azure-data-explorer"></a>將資料從 IoT 中樞內嵌至 Azure 資料總管 
 
@@ -25,6 +25,8 @@ ms.locfileid: "88874931"
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 
 本文說明如何從 IoT 中樞（大型資料串流平臺和 IoT 內嵌服務）將資料內嵌至 Azure 資料總管。
+
+如需從 IoT 中樞擷取至 Azure 資料總管的一般資訊，請參閱 [連接到 Iot 中樞](ingest-data-iot-hub-overview.md)。
 
 ## <a name="prerequisites"></a>Prerequisites
 
@@ -97,7 +99,7 @@ ms.locfileid: "88874931"
 
      **設定** | **建議的值** | **欄位描述**
     |---|---|---|
-    | 資料表 | *TestTable* | 您在 **testdb**中建立的資料表。 |
+    | Table | *TestTable* | 您在 **testdb**中建立的資料表。 |
     | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO 和 W3CLOG。|
     | 資料行對應 | *TestMapping* | 您在**testdb**中建立的[對應](kusto/management/mappings.md)，會將傳入的 JSON 資料對應至**testdb**的資料行名稱和資料類型。 JSON、多行 JSON 和 AVRO 的必要參數，以及其他格式的選擇性。|
     | | |
@@ -106,7 +108,13 @@ ms.locfileid: "88874931"
     > * 選取 [我的資料包含路由資訊]**** 來使用動態路由，其中您的資料會包含必要的路由資訊，如[範例應用程式](https://github.com/Azure-Samples/event-hubs-dotnet-ingest)註解中所示。 如果靜態和動態屬性都已設定，則動態屬性會覆寫靜態屬性。 
     > * 只有在建立資料連線之後排入佇列的事件才會內嵌。
 
-[!INCLUDE [data-explorer-container-system-properties](includes/data-explorer-container-system-properties.md)]
+### <a name="event-system-properties-mapping"></a>事件系統屬性對應
+
+> [!Note]
+> * 單一記錄事件支援系統屬性。
+> * 若為對應 `csv` ，會在記錄的開頭加入屬性。 針對對應 `json` ，會根據下拉式清單中顯示的名稱來新增屬性。
+
+如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，就必須在資料表架構和對應中包含[系統屬性](ingest-data-iot-hub-overview.md#system-properties)。
 
 ## <a name="generate-sample-data-for-testing"></a>產生測試用的範例資料
 
@@ -177,7 +185,7 @@ ms.locfileid: "88874931"
 
 1. 在 [test-resource-group]**** 下方，選取 [刪除資源群組]****。
 
-2. 在新的視窗中，輸入要刪除的資源組名，然後選取 [ **刪除**]。
+1. 在新的視窗中，輸入要刪除的資源組名，然後選取 [ **刪除**]。
 
 ## <a name="next-steps"></a>後續步驟
 

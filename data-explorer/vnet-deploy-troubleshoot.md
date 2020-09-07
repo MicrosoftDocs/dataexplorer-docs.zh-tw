@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/24/2020
-ms.openlocfilehash: 498912016c595646e1ef4b4df9bec427c262b6e9
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 6f3831580c998814d956b57a58acc8acd7269abb
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873877"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502427"
 ---
 # <a name="troubleshoot-access-ingestion-and-operation-of-your-azure-data-explorer-cluster-in-your-virtual-network"></a>針對您的虛擬網路中的 Azure 資料總管叢集存取、內嵌和操作進行疑難排解
 
@@ -69,7 +69,7 @@ ms.locfileid: "88873877"
 
 ### <a name="check-ingestion-health"></a>檢查內嵌健全狀況
 
-確認叢集內嵌 [計量](using-metrics.md#ingestion-health-and-performance-metrics) 指出狀況良好的狀態。
+確認叢集內嵌 [計量](using-metrics.md#ingestion-metrics) 指出狀況良好的狀態。
 
 ### <a name="check-security-rules-on-data-source-resources"></a>檢查資料來源資源的安全性規則
 
