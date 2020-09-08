@@ -92,7 +92,7 @@
           href: lightingest.md
         - name: 事件中樞
           items:
-            - name: 連線至事件中樞
+            - name: 建立事件中樞的連線
               href: ingest-data-event-hub-overview.md
             - name: Azure 入口網站
               href: ingest-data-event-hub.md
@@ -104,7 +104,7 @@
               href: data-connection-event-hub-resource-manager.md
         - name: 事件方格
           items:
-            - name: 連線至事件方格
+            - name: 建立事件方格的連線
               href: ingest-data-event-grid-overview.md
             - name: Azure 入口網站
               href: ingest-data-event-grid.md
@@ -116,7 +116,7 @@
               href: data-connection-event-grid-resource-manager.md
         - name: IoT 中樞
           items:
-            - name: 連線至 IoT 中樞
+            - name: 建立 IoT 中樞的連線
               href: ingest-data-iot-hub-overview.md
             - name: Azure 入口網站
               href: ingest-data-iot-hub.md
@@ -297,7 +297,8 @@
       items:
         - name: 使用診斷記錄來監視擷取
           href: using-diagnostic-logs.md
-        - name: 使用計量來監視叢集健康情況
+        - name: 使用計量監視 Azure 資料總管
+          displayName: 'health, performance'
           href: using-metrics.md
         - name: 使用資源健康情況來監視叢集健康情況
           href: monitor-with-resource-health.md
