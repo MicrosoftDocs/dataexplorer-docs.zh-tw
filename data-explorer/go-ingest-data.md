@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/10/2020
-ms.openlocfilehash: b733e70c78d9792e53dfe9cf133efe759e8ea91e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 82302fc2071eca8bf2fb1e4c89b96de50b1a8806
+ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873979"
+ms.lasthandoff: 09/08/2020
+ms.locfileid: "89557338"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-go-sdk"></a>使用 Azure 資料總管 Go SDK 內嵌資料 
 
@@ -26,12 +26,13 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 在本文中，您會先在測試叢集中建立資料表和資料對應。 然後，您可以使用 Go SDK 將內嵌排入佇列，並驗證結果。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 安裝 [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)。
 * 使用下列[GO SDK 最低需求](kusto/api/golang/kusto-golang-client-library.md#minimum-requirements)安裝[go](https://golang.org/) 。 
 * 建立 [Azure 資料總管叢集和資料庫](create-cluster-database-portal.md)。
+* 建立 [應用程式註冊，並授與資料庫的許可權](provision-azure-ad-app.md)。 儲存用戶端識別碼和用戶端密碼以供稍後使用。
 
 ## <a name="install-the-go-sdk"></a>安裝 Go SDK
 

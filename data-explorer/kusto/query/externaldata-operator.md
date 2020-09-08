@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: f86c952fdbfadd0b6ff4177ce7aa194019639b20
-ms.sourcegitcommit: d54e4ebb611da2b30158720e14103e81a7daa5af
+ms.openlocfilehash: 8bb30180a7506b594e5747e3591f0d1aff80f8c3
+ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89286419"
+ms.lasthandoff: 09/08/2020
+ms.locfileid: "89557355"
 ---
 # <a name="externaldata-operator"></a>externaldata 運算子
 
@@ -36,7 +36,7 @@ ms.locfileid: "89286419"
 
 目前支援的屬性為：
 
-| 屬性         | 類型     | 說明       |
+| 屬性         | 類型     | 描述       |
 |------------------|----------|-------------------|
 | `format`         | `string` | 資料格式。 如果未指定，則會嘗試從副檔名偵測資料格式 (預設為 `CSV`) 。 支援任何內嵌 [資料格式](../../ingestion-supported-formats.md) 。 |
 | `ignoreFirstRecord` | `bool` | 如果設定為 true，表示忽略每個檔案中的第一筆記錄。 使用標頭查詢 CSV 檔案時，這個屬性很有用。 |
@@ -44,7 +44,8 @@ ms.locfileid: "89286419"
 
 
 > [!NOTE]
-> 這個運算子不接受任何管線輸入。
+> * 這個運算子不接受任何管線輸入。
+> * 標準 [查詢限制](../concepts/querylimits.md) 也適用于外部資料查詢。
 
 ## <a name="returns"></a>傳回
 

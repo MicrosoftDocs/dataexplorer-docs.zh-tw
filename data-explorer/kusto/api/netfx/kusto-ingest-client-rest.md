@@ -1,6 +1,6 @@
 ---
-title: 不含內嵌程式庫的 Kusto 資料內嵌-Azure 資料總管
-description: 本文說明在 Azure 資料總管中，不含 Kusto 的做法資料內嵌程式庫。
+title: 未內嵌程式庫的 Kusto 資料內嵌-Azure 資料總管
+description: 本文說明在 Azure 資料總管中，沒有 Kusto 內嵌程式庫的做法資料內嵌。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -9,36 +9,36 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: eb13b53ba5f6785c79aaa586de50478074901c8d
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: 10f59a167de12e4b688f6d9b5f15d3f0f15d8291
+ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85901919"
+ms.lasthandoff: 09/08/2020
+ms.locfileid: "89557389"
 ---
-# <a name="ingestion-without-kustoingest-library"></a>不 Kusto 內嵌程式庫的內嵌
+# <a name="ingestion-without-kustoingest-library"></a>內嵌而不 Kusto 內嵌程式庫
 
-Kusto 是將資料內嵌至 Azure 資料總管慣用的程式庫。 不過，您仍然可以達成幾乎相同的功能，而不需依賴 Kusto 的封裝。
-本文將為您示範如何使用適用于生產等級管線的 Azure 資料總管的*佇列*內嵌。
+將資料擷取至 Azure 資料總管時，最好要有 Kusto 程式庫。 不過，您仍然可以達到幾乎相同的功能，而不需要相依于 Kusto 的封裝。
+本文說明如何使用 Azure 資料總管的 *佇列* 內嵌來執行生產等級的管線。
 
 > [!NOTE]
-> 下列程式碼是以 c # 撰寫，並利用 Azure 儲存體 SDK、ADAL 驗證程式庫和封裝上的 NewtonSoft.JS來簡化範例程式碼。 如有需要，您可以將對應的程式碼取代為適當的[Azure 儲存體 REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api)呼叫、 [non-.NET ADAL 封裝](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)，以及任何可用的 JSON 處理封裝。
+> 下列程式碼是以 c # 撰寫，並利用 Azure 儲存體 SDK、ADAL 驗證程式庫和套件上的 NewtonSoft.JS來簡化範例程式碼。 如有需要，您可以將對應的程式碼取代為適當的 [Azure 儲存體 REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api) 呼叫、 [non-.NET ADAL 封裝](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)，以及任何可用的 JSON 處理封裝。
 
-本文會處理建議的內嵌模式。 針對 Kusto 程式庫，其對應的實體是[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)介面。 在這裡，用戶端程式代碼會藉由將內嵌通知訊息張貼至 Azure 佇列，來與 Azure 資料總管服務互動。 訊息的參考是從 Kusto 資料管理（也稱為內嵌）服務取得。 與服務的互動必須使用 Azure Active Directory （Azure AD）進行驗證。
+本文將討論建議的內嵌模式。 針對 Kusto 程式庫，其對應的實體是 [IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) 介面。 在這裡，用戶端程式代碼會藉由將內嵌通知訊息張貼到 Azure 佇列，與 Azure 資料總管服務互動。 訊息的參考是從 Kusto 資料管理取得 (也稱為「內嵌) 」服務。 與服務的互動必須使用 Azure Active Directory (Azure AD) 進行驗證。
 
-下列程式碼顯示 Kusto 資料管理服務如何處理佇列的資料內嵌，而不需要使用 Kusto 程式庫。 如果完整的 .NET 因環境或其他限制而無法存取或無法使用，此範例可能會很有用。
+下列程式碼顯示 Kusto 資料管理服務如何處理已排入佇列的資料，而不使用 Kusto 的內嵌程式庫。 如果因為環境或其他限制而無法存取或無法使用完整的 .NET，此範例可能會很有用。
 
-程式碼包含建立 Azure 儲存體用戶端並將資料上傳至 blob 的步驟。
+此程式碼包含建立 Azure 儲存體用戶端，並將資料上傳至 blob 的步驟。
 在範例程式碼之後，會更詳細地說明每個步驟。
 
-1. [取得驗證權杖以存取 Azure 資料總管的內嵌服務](#obtain-authentication-evidence-from-azure-ad)
-1. 查詢 Azure 資料總管的內嵌服務，以取得：
-    * [內嵌資源（佇列和 blob 容器）](#retrieve-azure-data-explorer-ingestion-resources)
-    * [將新增至每個內嵌訊息的 Kusto 身分識別權杖](#obtain-a-kusto-identity-token)
-1. [將資料上傳至從（2）中的 Kusto 取得的其中一個 blob 容器上的 blob](#upload-data-to-the-azure-blob-container)
-1. [撰寫可識別目標資料庫和資料表，並從指向 blob 的內嵌訊息（3）](#compose-the-azure-data-explorer-ingestion-message)
-1. [將我們在（4）中撰寫的內嵌訊息，張貼至從中的 Azure 資料總管取得的內建佇列（2）](#post-the-azure-data-explorer-ingestion-message-to-the-azure-data-explorer-ingestion-queue)**
-1. [抓取服務在內嵌期間發現的任何錯誤](#check-for-error-messages-from-the-azure-queue)
+1. [取得用來存取 Azure 資料總管內嵌服務的驗證權杖](#obtain-authentication-evidence-from-azure-ad)
+1. 查詢 Azure 資料總管內嵌服務以取得：
+    * [內嵌資源 (佇列和 blob 容器) ](#retrieve-azure-data-explorer-ingestion-resources)
+    * [將會新增至每個內嵌訊息的 Kusto 身分識別權杖](#obtain-a-kusto-identity-token)
+1. [將資料上傳至 (2 中從 Kusto 取得的其中一個 blob 容器上的 blob) ](#upload-data-to-the-azure-blob-container)
+1. [撰寫內嵌訊息，以識別目標資料庫和資料表，並指向 (3 的 blob) ](#compose-the-azure-data-explorer-ingestion-message)
+1. [將我們以 (4) 所撰寫的內嵌訊息，張貼到 (2 中從 Azure 資料總管取得的內嵌佇列) ](#post-the-azure-data-explorer-ingestion-message-to-the-azure-data-explorer-ingestion-queue)**
+1. [在內嵌期間捕獲服務發現的任何錯誤](#check-for-error-messages-from-the-azure-queue)
 
 ```csharp
 // A container class for ingestion resources we are going to obtain from Azure Data Explorer
@@ -99,12 +99,12 @@ public static void IngestSingleFile(string file, string db, string table, string
 }
 ```
 
-## <a name="using-queued-ingestion-to-azure-data-explorer-for-production-grade-pipelines"></a>針對生產等級管線使用已佇列的內嵌至 Azure 資料總管
+## <a name="using-queued-ingestion-to-azure-data-explorer-for-production-grade-pipelines"></a>針對生產等級的管線使用佇列內嵌至 Azure 資料總管
 
-### <a name="obtain-authentication-evidence-from-azure-ad"></a>從 Azure AD 取得驗證辨識項
+### <a name="obtain-authentication-evidence-from-azure-ad"></a>從 Azure AD 取得驗證證據
 
-在此，我們會使用 ADAL 來取得 Azure AD token，以存取 Kusto 資料管理服務並要求其輸入佇列。
-如有需要，可在[非 Windows 平臺](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)上使用 ADAL。
+在這裡，我們會使用 ADAL 來取得 Azure AD 權杖，以存取 Kusto 資料管理服務，並要求其輸入佇列。
+如有需要，可在 [非 Windows 平臺](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries) 上使用 ADAL。
 
 ```csharp
 // Authenticates the interactive user and retrieves Azure AD Access token for specified resource
@@ -121,10 +121,10 @@ internal static string AuthenticateInteractiveUser(string resource)
 }
 ```
 
-### <a name="retrieve-azure-data-explorer-ingestion-resources"></a>取得 Azure 資料總管的內嵌資源
+### <a name="retrieve-azure-data-explorer-ingestion-resources"></a>取出 Azure 資料總管內嵌資源
 
-手動建立資料管理服務的 HTTP POST 要求，並要求傳回內嵌資源。 這些資源包括 DM 服務正在接聽的佇列，以及用於資料上傳的 blob 容器。
-資料管理服務會處理任何訊息，其中包含抵達其中一個佇列的內嵌要求。
+手動對資料管理服務建立 HTTP POST 要求，要求傳回內嵌資源。 這些資源包括 DM 服務正在接聽的佇列，以及用於資料上傳的 blob 容器。
+資料管理服務將會處理任何訊息，其中包含抵達其中一個佇列的內嵌要求。
 
 ```csharp
 // Retrieve ingestion resources (queues and blob containers) with SAS from specified Azure Data Explorer Ingestion service using supplied Access token
@@ -194,7 +194,7 @@ internal static WebResponse SendPostRequest(string uriString, string authToken, 
 
 ### <a name="obtain-a-kusto-identity-token"></a>取得 Kusto 身分識別權杖
 
-內嵌訊息會透過非直接通道（Azure 佇列）遞交給 Azure 資料總管，因此不可能進行頻外授權驗證以存取 Azure 資料總管的內嵌服務。 解決方案是將身分識別權杖附加到每個內嵌訊息。 權杖會啟用頻內授權驗證。 此帶正負號的權杖會在收到內嵌訊息時，由 Azure 資料總管服務進行驗證。
+內嵌訊息會透過非直接通道 (Azure 佇列) 遞交給 Azure 資料總管，因此不可能進行頻外授權驗證以存取 Azure 資料總管內嵌服務。 解決方法是將身分識別權杖附加至每個內嵌訊息。 權杖會啟用頻內授權驗證。 此簽署的權杖可在接收到內嵌訊息時由 Azure 資料總管服務驗證。
 
 ```csharp
 // Retrieves a Kusto identity token that will be added to every ingest message
@@ -218,7 +218,7 @@ internal static string RetrieveKustoIdentityToken(string ingestClusterBaseUri, s
 
 ### <a name="upload-data-to-the-azure-blob-container"></a>將資料上傳至 Azure Blob 容器
 
-此步驟是關於將本機檔案上傳至 Azure Blob，而該檔案將會針對內嵌進行傳遞。 這段程式碼會使用 Azure 儲存體 SDK。 如果無法進行相依性，可以使用[Azure Blob 服務 REST API](https://docs.microsoft.com/rest/api/storageservices/fileservices/blob-service-rest-api)來達成相關性。
+此步驟是關於將本機檔案上傳至 Azure Blob，以供內嵌之用。 此程式碼會使用 Azure 儲存體 SDK。 如果無法使用相依性，您可以使用 [Azure Blob 服務 REST API](https://docs.microsoft.com/rest/api/storageservices/fileservices/blob-service-rest-api)來達成。
 
 ```csharp
 // Uploads a single local file to an Azure Blob container, returns blob URI and original data size
@@ -238,21 +238,21 @@ internal static string UploadFileToBlobContainer(string filePath, string blobCon
 }
 ```
 
-### <a name="compose-the-azure-data-explorer-ingestion-message"></a>撰寫 Azure 資料總管的內嵌訊息
+### <a name="compose-the-azure-data-explorer-ingestion-message"></a>撰寫 Azure 資料總管內嵌訊息
 
-封裝上的 NewtonSoft.JS將再次撰寫有效的內嵌要求，以識別目標資料庫和資料表，並指向 blob。
-訊息將會張貼到相關的 Kusto 資料管理服務正在接聽的 Azure 佇列。
+封裝上的 NewtonSoft.JS會再次撰寫有效的內嵌要求，以識別目標資料庫和資料表，並指向 blob。
+此訊息將會張貼至相關 Kusto 資料管理服務正在接聽的 Azure 佇列。
 
 以下是一些要考慮的重點。
 
 * 此要求是內嵌訊息的最小值。
 
 > [!NOTE]
-> 身分識別權杖是必要的，而且必須是**AdditionalProperties** JSON 物件的一部分。
+> 身分識別權杖是必要的，而且必須是 **AdditionalProperties** JSON 物件的一部分。
 
 * 必要時，也必須提供 CsvMapping 或 JsonMapping 屬性
-* 如需詳細資訊，請參閱[預先建立的內嵌對應文章](../../management/create-ingestion-mapping-command.md)。
-* 區段內嵌[訊息內部結構](#ingestion-message-internal-structure)提供內建訊息結構的說明
+* 如需詳細資訊，請參閱 [建立預先建立對應的文章](../../management/create-ingestion-mapping-command.md)。
+* 區段內嵌 [訊息內部結構](#ingestion-message-internal-structure) 提供內嵌訊息結構的說明
 
 ```csharp
 internal static string PrepareIngestionMessage(string db, string table, string dataUri, long blobSizeBytes, string mappingRef, string identityToken)
@@ -278,12 +278,12 @@ internal static string PrepareIngestionMessage(string db, string table, string d
 }
 ```
 
-### <a name="post-the-azure-data-explorer-ingestion-message-to-the-azure-data-explorer-ingestion-queue"></a>將 Azure 資料總管內嵌訊息張貼至 Azure 資料總管的內嵌佇列
+### <a name="post-the-azure-data-explorer-ingestion-message-to-the-azure-data-explorer-ingestion-queue"></a>將 Azure 資料總管內嵌訊息張貼到 Azure 資料總管內嵌佇列
 
-最後，將您所建立的訊息張貼到您從 Azure 資料總管取得的所選內嵌佇列。
+最後，將您所建立的訊息張貼至您從 Azure 資料總管取得的選取內嵌佇列。
 
 > [!NOTE]
-> .Net 儲存體用戶端在使用時，預設會將訊息編碼為 base64。 如需詳細資訊，請參閱[儲存體](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage)檔。如果您不是使用該用戶端，請務必適當地編碼訊息內容。
+> 依預設，在 v12 底下的 .net 儲存體用戶端版本會將訊息編碼為 base64 以取得詳細資訊，請參閱 [儲存體](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage)檔。如果您使用的是 v12 以上的 .Net 儲存體用戶端版本，您必須正確地編碼訊息內容。
 
 ```csharp
 internal static void PostMessageToQueue(string queueUriWithSas, string message)
@@ -295,9 +295,9 @@ internal static void PostMessageToQueue(string queueUriWithSas, string message)
 }
 ```
 
-### <a name="check-for-error-messages-from-the-azure-queue"></a>檢查來自 Azure 佇列的錯誤訊息
+### <a name="check-for-error-messages-from-the-azure-queue"></a>檢查 Azure 佇列中的錯誤訊息
 
-在內嵌之後，我們會檢查來自資料管理寫入的相關佇列中的失敗訊息。 如需失敗訊息結構的詳細資訊，請參閱內嵌[失敗訊息結構](#ingestion-failure-message-structure)。 
+在內嵌之後，我們會檢查資料管理寫入的相關佇列中的失敗訊息。 如需失敗訊息結構的詳細資訊，請參閱內嵌 [失敗訊息結構](#ingestion-failure-message-structure)。 
 
 ```csharp
 internal static IEnumerable<string> PopTopMessagesFromQueue(string queueUriWithSas, int count)
@@ -319,7 +319,7 @@ internal static IEnumerable<string> PopTopMessagesFromQueue(string queueUriWithS
 
 ### <a name="ingestion-message-internal-structure"></a>內嵌訊息內部結構
 
-Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列格式的 JSON 檔。
+Kusto 資料管理服務預期從輸入 Azure 佇列讀取的訊息是採用下列格式的 JSON 檔。
 
 ```JSON
 {
@@ -336,34 +336,34 @@ Kusto 資料管理服務預期要從輸入 Azure 佇列讀取的訊息是下列�
 }
 ```
 
-|屬性 | 說明 |
+|屬性 | 描述 |
 |---------|-------------|
-|Id |訊息識別碼（GUID） |
-|BlobPath |Blob 的路徑（URI），包括授與 Azure 資料總管許可權以讀取/寫入/刪除它的 SAS 金鑰。 需要許可權，才能讓 Azure 資料總管在內嵌資料完成後刪除 blob|
-|RawDataSize |未壓縮資料的大小（以位元組為單位）。 提供此值可讓 Azure 資料總管藉由可能匯總多個 blob 來優化內嵌。 此屬性是選擇性的，但如果未指定，Azure 資料總管只會存取 blob 以取得大小 |
+|Id | (GUID) 的訊息識別碼 |
+|BlobPath |路徑 (URI) 至 blob，包括授與 Azure 資料總管讀取/寫入/刪除許可權的 SAS 金鑰。 需要許可權，才能讓 Azure 資料總管在擷取資料完成後刪除 blob|
+|RawDataSize |未壓縮資料的大小（以位元組為單位）。 提供此值可讓 Azure 資料總管藉由可能匯總多個 blob 來優化內嵌。 這個屬性是選擇性的，但如果未提供，Azure 資料總管將會存取 blob，只是要取得大小 |
 |DatabaseName |目標資料庫名稱 |
 |TableName |目標資料表名稱 |
-|RetainBlobOnSuccess |如果設定為 `true` ，則一旦成功完成內嵌之後，將不會刪除 blob。 預設為 `false` |
+|RetainBlobOnSuccess |如果設定為 `true` ，一旦成功完成內嵌，將不會刪除 blob。 預設為 `false` |
 |FlushImmediately |如果設定為 `true` ，則會略過任何匯總。 預設為 `false` |
-|ReportLevel |成功/錯誤報表層級： 0-失敗，1-無，2-全部 |
+|>reportlevel |成功/錯誤報表層級： 0-失敗，1-無，2-全部 |
 |ReportMethod |報告機制： 0-佇列，1-資料表 |
-|AdditionalProperties |其他屬性，例如 `format` 、 `tags` 和 `creationTime` 。 如需詳細資訊，請參閱[資料內嵌屬性](../../../ingestion-properties.md)。|
+|AdditionalProperties |其他屬性，例如 `format` 、 `tags` 和 `creationTime` 。 如需詳細資訊，請參閱 [資料內嵌屬性](../../../ingestion-properties.md)。|
 
 ### <a name="ingestion-failure-message-structure"></a>內嵌失敗訊息結構
 
-資料管理預期要從輸入 Azure 佇列讀取的訊息是下列格式的 JSON 檔。
+資料管理預期從輸入 Azure 佇列讀取的訊息是採用下列格式的 JSON 檔。
 
-|屬性 | 說明 |
+|屬性 | 描述 |
 |---------|-------------
-|OperationId |可以用來追蹤服務端作業的作業識別碼（GUID） |
+|OperationId |可以用來追蹤服務端作業的作業識別碼 (GUID)  |
 |資料庫 |目標資料庫名稱 |
 |Table |目標資料表名稱 |
 |FailedOn |失敗時間戳記 |
 |IngestionSourceId |識別 Azure 資料總管無法內嵌之資料區塊的 GUID |
-|IngestionSourcePath |Azure 資料總管無法內嵌的資料區塊路徑（URI） |
+|IngestionSourcePath |路徑 (URI) Azure 資料總管無法內嵌的資料區塊 |
 |詳細資料 |失敗訊息 |
-|ErrorCode |Azure 資料總管錯誤碼（請參閱[這裡](kusto-ingest-client-errors.md#ingestion-error-codes)的所有錯誤碼） |
-|FailureStatus |指出失敗是永久的還是暫時性的 |
-|RootActivityId |可用於追蹤服務端作業的 Azure 資料總管相互關聯識別碼（GUID） |
-|OriginatesFromUpdatePolicy |指出失敗是否由錯誤的[交易式更新原則](../../management/updatepolicy.md)所造成 |
-|ShouldRetry | 指出如已重試，內嵌是否可以成功 |
+|ErrorCode |Azure 資料總管錯誤碼 (請參閱 [此處](kusto-ingest-client-errors.md#ingestion-error-codes) 的所有錯誤碼)  |
+|FailureStatus |指出失敗是永久或暫時性的 |
+|RootActivityId |Azure 資料總管相互關聯識別碼 (GUID) ，可用來追蹤服務端的作業 |
+|OriginatesFromUpdatePolicy |指出失敗是否由錯誤的[交易更新原則](../../management/updatepolicy.md)所造成 |
+|ShouldRetry | 指出如果重試時，內嵌是否成功 |
