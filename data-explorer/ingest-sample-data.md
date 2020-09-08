@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 08/12/2019
-ms.openlocfilehash: 3ece5a9d225e48654a0a3a96c3b7b78327565841
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3b5958740460bf1c6439544ac095849064216fbb
+ms.sourcegitcommit: 626a0e8695d2655e724283cfc4bdbe8e1d371de4
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491913"
+ms.lasthandoff: 09/05/2020
+ms.locfileid: "89493618"
 ---
 # <a name="quickstart-ingest-sample-data-into-azure-data-explorer"></a>快速入門：將範例資料擷取至 Azure 資料總管
 
@@ -43,7 +43,7 @@ ms.locfileid: "81491913"
 1. 貼上下列命令，然後選取 [執行]  以將資料擷取至 StormEvents 資料表。
 
     ```Kusto
-    .ingest into table StormEvents h'https://kustosamplefiles.blob.core.windows.net/samplefiles/StormEvents.csv?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D' with (ignoreFirstRecord=true)
+    .ingest into table StormEvents h'https://kustosamplefiles.blob.core.windows.net/samplefiles/StormEvents.csv?sv=2019-12-12&ss=b&srt=o&sp=r&se=2022-09-05T02:23:52Z&st=2020-09-04T18:23:52Z&spr=https&sig=VrOfQMT1gUrHltJ8uhjYcCequEcfhjyyMX%2FSc3xsCy4%3D' with (ignoreFirstRecord=true)
     ```
 
 1. 在擷取完成之後，貼上下列查詢，在視窗中選取該查詢，然後選取 [執行]  。
