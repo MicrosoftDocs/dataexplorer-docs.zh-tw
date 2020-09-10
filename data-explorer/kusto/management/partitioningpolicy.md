@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 0b85d0c4bd0604f46375e314cb1fe029647b8d32
-ms.sourcegitcommit: 9b96a0c1ba0d07fec81f29bdf8f71b9549e79b3a
+ms.openlocfilehash: c3f7212b062adaae1bd56399753270653204ad22
+ms.sourcegitcommit: 53a727fceaa89e6022bc593a4aae70f1e0232f49
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2020
-ms.locfileid: "89472235"
+ms.lasthandoff: 09/10/2020
+ms.locfileid: "89652106"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
 分割原則會針對特定資料表，定義是否要分割 [ (資料分區) 的範圍 ](../management/extents-overview.md) 和方式。
 
-原則的主要目的是要改善已知的查詢效能，以縮小分割資料行中值的資料集，或在高基數位符串資料行上匯總/聯結。 原則也可能會導致資料壓縮更好。
+原則的主要目的是要藉由篩選資料分割資料行，或在高基數位符串資料行上進行匯總/聯結，來改善已知可縮小資料集範圍的查詢效能。 原則也可能會導致資料壓縮更好。
 
 > [!CAUTION]
 > 在可以定義原則的資料表數目上，沒有任何硬式編碼的限制設定。 不過，每個額外的資料表都會在叢集節點上執行的背景資料分割進程增加額外負荷。 它可能會導致使用更多的叢集資源。 如需詳細資訊，請參閱 [監視](#monitoring) 和 [容量](#capacity)。
@@ -41,7 +41,6 @@ ms.locfileid: "89472235"
 > * 大部分的查詢會針對 `string` 1 千萬個或更高) 的 *大型維度* (基數的特定類型資料行進行匯總/聯結 `application_ID` ，例如，、 `tenant_ID` 或 `user_ID` 。
 
 * 雜湊模數函數用來分割資料。
-* 屬於相同資料分割的所有同質 (分割) 範圍都會指派給相同的資料節點。
 * 同質 (資料分割) 範圍中的資料會依照雜湊分割索引鍵來排序。
   * 如果資料表上有定義雜湊分割索引鍵，則您不需要將它包含在資料 [列順序原則](roworderpolicy.md)中。
 * 使用 [隨機執行策略](../query/shufflequery.md)的查詢， `shuffle key` `join` `summarize` 或 `make-series` 資料表的雜湊分割索引鍵所使用的查詢，會因為在叢集節點之間移動所需的資料量大幅降低而變得更好。
@@ -61,6 +60,11 @@ ms.locfileid: "89472235"
 * `Seed` 這是用來隨機化雜湊值的值。
   * 值應為正整數。
   * 建議值為 `1` ，如果未指定，則為預設值。
+* `PartitionAssignmentMode` 這是用來將磁碟分割指派給叢集中節點的模式。
+  * 支援的模式：
+    * `Default`：屬於相同資料分割的所有同質 (分割) 範圍都會指派給相同的節點。
+    * `Uniform`：會忽略範圍的資料分割值，而且會將範圍統一指派給叢集的節點。
+  * 如果查詢未聯結或匯總雜湊資料分割索引鍵使用 `Uniform` 。 否則，使用 `Default`。
 
 #### <a name="example"></a>範例
 
@@ -74,7 +78,8 @@ ms.locfileid: "89472235"
   "Properties": {
     "Function": "XxHash64",
     "MaxPartitionCount": 256,
-    "Seed": 1
+    "Seed": 1,
+    "PartitionAssignmentMode": "Default"
   }
 }
 ```
@@ -153,7 +158,8 @@ ms.locfileid: "89472235"
       "Properties": {
         "Function": "XxHash64",
         "MaxPartitionCount": 256,
-        "Seed": 1
+        "Seed": 1,
+        "PartitionAssignmentMode": "Default"
       }
     },
     {
@@ -181,7 +187,7 @@ ms.locfileid: "89472235"
   * 這是選用屬性。 其預設值為 `0` ，預設目標為5000000記錄。
     * 如果您看到資料分割作業耗用極大量的記憶體或 CPU （每項作業），則可以設定低於5M 的值。 如需詳細資訊，請參閱 [監視](#monitoring)。
 
-## <a name="notes"></a>備忘稿
+## <a name="notes"></a>注意
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
