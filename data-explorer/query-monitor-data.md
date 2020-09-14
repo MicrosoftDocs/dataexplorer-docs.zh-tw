@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/28/2020
-ms.openlocfilehash: 39865b049512252e08dac9c182a6b1e20a388abe
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 078737ff7e5cd74d15792cc2f0f058cb3ea12a19
+ms.sourcegitcommit: e0cf581d433bbbb2eda5a4209a8eabcdae80c21b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874999"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90059492"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>使用 Azure 資料總管 Azure 監視器查詢資料 (預覽) 
 
@@ -59,6 +59,9 @@ Azure 資料總管 proxy 流程：
 
 您可以使用支援 Kusto 查詢的用戶端工具來執行查詢，例如： Kusto Explorer、ADX Web UI、Jupyter Kqlmagic、Flow、PowerQuery、PowerShell、Jarvis、鏡頭 REST API。
 
+> [!NOTE]
+> ADX Proxy 功能僅供資料抓取之用。 如需詳細資訊，請參閱 [函數可支援](#function-supportability)性。
+
 > [!TIP]
 > * 資料庫名稱的名稱應該與在 proxy 叢集中指定的資源相同。 名稱會區分大小寫。
 > * 在跨叢集查詢中，請確定 Application Insights apps 與 Log Analytics 工作區的命名正確。
@@ -75,13 +78,13 @@ Perf | take 10 // Demonstrate query through the proxy on the LA workspace
 
 ![查詢 LA 工作區](media/adx-proxy/query-la.png)
 
-### <a name="cross-query-of-your-la-or-ai-adx-proxy-cluster-and-the-adx-native-cluster"></a>對 LA 或 AI ADX Proxy 叢集和 ADX 原生叢集的交叉查詢 
+### <a name="cross-query-of-your-la-or-ai-adx-proxy-cluster-and-the-adx-native-cluster"></a>對 LA 或 AI ADX Proxy 叢集和 ADX 原生叢集的交叉查詢
 
 當您從 proxy 執行跨叢集查詢時，請確認已在左窗格中選取您的 ADX 原生叢集。 下列範例示範如何使用 `union`) 搭配 LA 工作區 (，結合 ADX 叢集資料表。
 
 ```kusto
 union StormEvents, cluster('https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>').database('<workspace-name>').Perf
-| take 10 
+| take 10
 ```
 
 ```kusto
@@ -103,7 +106,8 @@ Proxy 支援下列命令：
 * `.show function {FunctionName}`
 * `.show database {DatabaseName} schema as json`
 
-下圖描述從 Azure 資料總管 Web UI 查詢表格式函數的範例。 若要使用函數，請在查詢視窗中執行名稱。
+下圖描述從 Azure 資料總管 Web UI 查詢表格式函數的範例。
+若要使用函數，請在查詢視窗中執行名稱。
 
   [![從 Azure 資料總管 WEB UI 查詢表格式函數](media/adx-proxy/function-query-adx-proxy.png)](media/adx-proxy/function-query-adx-proxy.png#lightbox)
 
