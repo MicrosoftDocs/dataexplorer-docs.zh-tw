@@ -8,12 +8,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/09/2020
-ms.openlocfilehash: 4921a48ff879879084ec1941ab69c6e9d29b9773
-ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
+ms.openlocfilehash: 4e11ccd1c775fa2cae2e25f7cf1bd8b802a11567
+ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89366158"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90533995"
 ---
 # <a name="use-parameters-in-azure-data-explorer-dashboards"></a>在 Azure 資料總管儀表板中使用參數
 
@@ -22,7 +22,7 @@ ms.locfileid: "89366158"
 > [!NOTE]
 > 參數管理可在編輯模式中提供給儀表板編輯器。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 [使用 Azure 資料總管儀表板將資料視覺化](azure-data-explorer-dashboards.md)
 
@@ -44,7 +44,7 @@ ms.locfileid: "89366158"
 
 :::image type="content" source="media/dashboard-parameters/properties.png" alt-text="新增參數屬性":::
 
-|欄位  |描述 |
+|欄位  |說明 |
 |---------|---------|
 |**參數顯示名稱**    |   儀表板或編輯卡片上顯示的參數名稱。      |
 |**參數類型**    |下列其中一個參數：<ul><li>**單一選取**：可在篩選中選取一個值，作為參數的輸入。</li><li>**多重選取**：可以在篩選中選取一個或多個值，作為參數的輸入 (s) 。</li><li>**時間範圍**：允許建立額外的參數，以根據時間篩選查詢和儀表板。 依預設，每個儀表板都有時間範圍選擇器。</li><li>**自由文字**：篩選中未填入任何值。 使用者可以輸入值，或複製/貼上文字欄位的值。 篩選會保留最近使用的值。</li></ul>    |
@@ -297,10 +297,9 @@ EventsAll
 
 ## <a name="use-filter-search-for-single-and-multiple-selection-filters"></a>使用篩選準則搜尋單一和多重選取範圍篩選
 
-在 [單一] 和 [多重選取] 篩選中，輸入您想要的值。 篩選準則搜尋會顯示符合搜尋詞彙的所有最近抓取值。
+在 [單一] 和 [多重選取] 篩選中，輸入您想要的值。 篩選準則搜尋只會顯示符合搜尋詞彙的最近抓取值。
 
 ## <a name="next-steps"></a>後續步驟
 
 * [自訂儀表板視覺效果](dashboard-customize-visuals.md)
 * [在 Azure 資料總管中查詢資料](web-query-data.md) 
-

@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/26/2020
-ms.openlocfilehash: 47ca1ebdd4136b3add6b4476757f34a24b08eeea
-ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
+ms.openlocfilehash: 66bbaddc6fcc953c620b2b439027ecec97016f19
+ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89366081"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90534012"
 ---
 # <a name="visualize-data-with-azure-data-explorer-dashboards"></a>使用 Azure 資料總管儀表板將資料視覺化
 
@@ -27,6 +27,9 @@ Azure 資料總管儀表板提供三個主要優點：
 下圖描述 Azure 資料總管儀表板。
 
 :::image type="content" source="media/adx-dashboards/dash.png" alt-text="最終的儀表板":::
+
+> [!IMPORTANT]
+> 您的資料是安全的。 與使用者相關的儀表板和儀表板相關中繼資料會在待用時加密。
 
 ## <a name="create-a-dashboard"></a>建立儀表板
 

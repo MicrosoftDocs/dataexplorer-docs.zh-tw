@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 11/13/2019
-ms.openlocfilehash: 30a78efa9cc9a54ac12eeaa6bfbdf8f5a7541eeb
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.date: 09/09/2020
+ms.openlocfilehash: 08093fd06fed1facc1d8e55d98785abb952632c8
+ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874438"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90534039"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-grafana"></a>在 Grafana 中從 Azure 資料總管將資料視覺化
 
@@ -22,15 +22,15 @@ Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的
 
 > [!VIDEO https://www.youtube.com/embed/fSR_qCIFZSA]
 
-或者，您可以[設定資料來源並將](#configure-the-data-source)[資料視覺化](#visualize-data)，如下列文章中所述。
+相反地，您可以 [設定資料來源](#configure-the-data-source) 並以 [視覺化方式呈現資料](#visualize-data) ，如下列文章中所述。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 您需要下列專案才能完成這篇文章：
 
 * 適用於您作業系統的 [Grafana 5.3.0 版或更新版本](https://docs.grafana.org/installation/)
 
-* 適用於 Grafana 的 [Azure 資料總管外掛程式](https://grafana.com/plugins/grafana-azure-data-explorer-datasource/installation)
+* 適用于 Grafana 的 [Azure 資料總管外掛程式](https://grafana.com/plugins/grafana-azure-data-explorer-datasource/installation) 。 需要外掛程式版本3.0.5 或更新版本，才能使用 Grafana query builder。
 
 * 包含 StormEvents 範例資料的叢集。 如需詳細資訊。請參閱[快速入門：建立 Azure 資料總管叢集與資料庫](create-cluster-database-portal.md)及[將範例資料內嵌至 Azure 資料總管](ingest-sample-data.md)。
 
@@ -70,13 +70,13 @@ Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的
 
 ## <a name="visualize-data"></a>顯現資料
 
-現在您已將 Azure 資料總管設為 Grafana 的資料來源，是時候將資料視覺化了。 我們將在此示範基本範例，但您可以做的事還很多。 我們建議您查看[撰寫 Azure 資料總管的查詢](write-queries.md)，以取得其他針對範例資料集執行的查詢範例。
+現在您已將 Azure 資料總管設為 Grafana 的資料來源，是時候將資料視覺化了。 我們將示範一個使用查詢產生器模式和 [查詢編輯器] 的 raw 模式的基本範例。 我們建議您查看[撰寫 Azure 資料總管的查詢](write-queries.md)，以取得其他針對範例資料集執行的查詢範例。
 
 1. 在 Grafana 的左側功能表中，選取加號圖示，然後選取 [儀表板]****。
 
     ![建立儀表板](media/grafana/create-dashboard.png)
 
-1. 在 [新增]**** 索引標籤底下，選取 [圖表]****。
+1. 在 [ **新增** ] 索引標籤下，選取 [ **加入新面板**]。
 
     ![新增圖表](media/grafana/add-graph.png)
 
@@ -88,7 +88,46 @@ Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的
 
     ![選取資料來源](media/grafana/select-data-source.png)
 
-1. 在 [查詢] 窗格中，複製下列查詢，然後選取 [執行]****。 查詢會包含範例資料集的每日事件計數。
+### <a name="query-builder-mode"></a>查詢產生器模式
+
+查詢編輯器有兩種模式。 查詢產生器模式和 raw 模式。 使用查詢產生器模式來定義您的查詢。
+
+1. 在 [資料來源] 底下，選取 [ **資料庫** ]，然後從下拉式清單中選擇您的資料庫。 
+1. 從下拉式 **清單中選取並選擇** 您的資料表。
+
+    :::image type="content" source="media/grafana/query-builder-from-table.png" alt-text="在查詢產生器中選取資料表":::    
+
+1. 定義資料表之後，請篩選資料、選取要顯示的值，然後定義這些值的群組。
+
+    **Filter**
+    1. 按一下 **+** 以 ** (篩選) ** 從資料表的下拉式清單中選取一個或多個資料行。 
+    1. 針對每個篩選準則，使用適用的運算子來定義)  (s 值。 
+    此選項類似于在 Kusto 查詢語言中使用 [where 運算子](kusto/query/whereoperator.md) 。
+
+    **值選取**
+    1. 按一下 [ **+** 值資料 **行** ]，即可從下拉式清單中選取要顯示在面板中的值資料行。
+    1. 針對每個 [值] 資料行，設定匯總類型。 
+    可以設定一或多個值資料行。 此選項相當於使用 [摘要運算子](kusto/query/summarizeoperator.md)。
+
+    **值群組** <br> 
+    按一下 **+** [ **群組依據] ([摘要]) ** ，從下拉式清單中選取要用來將值排列成群組的一或多個資料行。 這相當於摘要運算子中的群組運算式。
+
+1. 若要執行查詢，請選取 [ **執行查詢**]。
+
+    :::image type="content" source="media/grafana/query-builder-all-values.png" alt-text="所有值都已完成的查詢產生器":::
+
+    > [!TIP]
+    > 在查詢產生器中完成設定時，會建立 Kusto 查詢語言查詢。 此查詢會顯示您使用圖形化查詢編輯器所建造的邏輯。 
+
+1. 選取 [ **編輯 KQL** ] 以移至 raw 模式，並使用 Kusto 查詢語言的彈性和功能來編輯查詢。
+
+:::image type="content" source="media/grafana/query-builder-with-raw-query.png" alt-text="具有原始查詢的查詢產生器":::
+
+### <a name="raw-mode"></a>Raw 模式
+
+使用 raw 模式來編輯查詢。 
+
+1. 在 [查詢] 窗格中，複製下列查詢，然後選取 [ **執行查詢**]。 查詢會包含範例資料集的每日事件計數。
 
     ```kusto
     StormEvents
@@ -101,7 +140,7 @@ Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的
 
     ![過去六小時](media/grafana/last-six-hours.png)
 
-1. 指定自訂範圍以涵蓋 2007 年，也就是 StormEvents 範例資料集包含的年份。 選取 [ **套用**]。
+1. 指定自訂範圍以涵蓋 2007 年，也就是 StormEvents 範例資料集包含的年份。 選取 [套用]。
 
     ![自訂日期範圍](media/grafana/custom-date-range.png)
 
@@ -110,6 +149,11 @@ Grafana 是分析平台，可讓您查詢和視覺化資料，然後根據您的
     ![已完成的圖表](media/grafana/finished-graph.png)
 
 1. 在最上層功能表中，選取儲存圖示： ![[儲存] 圖示](media/grafana/save-icon.png).
+
+> [!IMPORTANT]
+> 若要切換到 [查詢產生器] 模式，請選取 [ **切換至**產生器]。 Grafana 會將查詢轉換成查詢產生器中的可用邏輯。 查詢產生器邏輯會受到限制，因此您可能會遺失對查詢所做的手動變更。
+
+:::image type="content" source="media/grafana/raw-mode.png" alt-text="從原始模式移至 builder":::
 
 ## <a name="create-alerts"></a>建立警示
 
