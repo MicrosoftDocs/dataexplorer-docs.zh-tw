@@ -7,12 +7,12 @@ ms.reviewer: elbirnbo
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/09/2020
-ms.openlocfilehash: 55de6b9560b2b47496c122e6454e1a128dc26428
-ms.sourcegitcommit: 9e0289945270db517e173aa10024e0027b173b52
+ms.openlocfilehash: 7c2dfe62852b05239215f0c88c711cea4093808e
+ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/03/2020
-ms.locfileid: "89428958"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90067567"
 ---
 # <a name="create-a-private-endpoint-in-your-azure-data-explorer-cluster-in-your-virtual-network"></a>在您的虛擬網路中的 Azure 資料總管叢集中建立私人端點
 
@@ -20,10 +20,12 @@ ms.locfileid: "89428958"
 
 若要設定您的 [Private Link 服務](https://docs.microsoft.com/azure/private-link/private-link-service-overview)，請使用私人端點與 Azure VNet 位址空間中的 IP 位址。 [Azure 私人端點](https://docs.microsoft.com/azure/private-link/private-endpoint-overview) 會使用您 VNet 中的私人 IP 位址，以私人且安全的方式將您連線到 Azure 資料總管。 您也需要重新設定叢集上的 [DNS](https://docs.microsoft.com/azure/private-link/private-endpoint-dns) 設定，以使用您的私人端點進行連接。 透過此設定，您私人網路上的用戶端與 Azure 資料總管叢集之間的網路流量會透過 VNet 和 Microsoft 骨幹網路上的 [Private Link](https://docs.microsoft.com/azure/private-link/) 來傳送，以移除公用網際網路的暴露程度。 本文說明如何在叢集中建立和設定查詢 (引擎) 和內嵌 (資料管理) 的私人端點。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * [在您的虛擬網路中建立 Azure 資料總管](https://docs.microsoft.com/azure/data-explorer/vnet-create-cluster-portal)叢集
-* [停](https://docs.microsoft.com/azure/private-link/disable-private-endpoint-network-policy) 用網路安全性群組，例如 (NSG) 的網路原則。 私人端點不支援這些群組。
+* 停用網路原則：
+  * 在 Azure 資料總管叢集虛擬網路中，停用 [Private Link 服務原則](https://docs.microsoft.com/azure/private-link/disable-private-link-service-network-policy)。
+  * 在私人端點虛擬網路（可與 Azure 資料總管叢集虛擬網路相同）中，停用 [私人端點原則](https://docs.microsoft.com/azure/private-link/disable-private-endpoint-network-policy)。
 
 ## <a name="create-private-link-service"></a>建立 Private Link 服務
 
@@ -52,7 +54,7 @@ ms.locfileid: "89428958"
 
     |**設定** | **建議的值** | **欄位描述**
     |---|---|---|
-    | Load Balancer | 您的引擎或 *資料管理* Load Balancer | 選取為您的叢集引擎建立的負載平衡器、負載平衡器，以指向您的引擎公用 IP。  負載平衡器引擎名稱會採用下列格式： kucompute-{clustername}-elb <br> *Load Balancer 的資料管理名稱將採用下列格式： kudatamgmt-{clustername}-elb*|
+    | 負載平衡器 | 您的引擎或 *資料管理* Load Balancer | 選取為您的叢集引擎建立的負載平衡器、負載平衡器，以指向您的引擎公用 IP。  負載平衡器引擎名稱會採用下列格式： kucompute-{clustername}-elb <br> *Load Balancer 的資料管理名稱將採用下列格式： kudatamgmt-{clustername}-elb*|
     | 負載平衡器前端 IP 位址 | 您的引擎或資料管理公用 IP。 | 選取 Load Balancer 的公用 IP 位址。 |
     | 來源 NAT 子網路 | 叢集的子網 | 部署叢集的子網。
     
