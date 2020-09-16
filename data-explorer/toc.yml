@@ -248,6 +248,8 @@
       items:
         - name: 叢集
           items:
+            - name: 使用 Advisor 建議來最佳化您的叢集
+              href: azure-advisor.md
             - name: 選取叢集虛擬機器 SKU
               href: manage-cluster-choose-sku.md
             - name: 管理叢集的水平調整
@@ -452,6 +454,8 @@
                   href: ./kusto/query/bag-unpackplugin.md
                 - name: basket 外掛程式
                   href: ./kusto/query/basketplugin.md
+                - name: cosmosdb_sql_request 外掛程式
+                  href: ./kusto/query/cosmosdb-plugin.md
                 - name: dcount_intersect 外掛程式
                   href: ./kusto/query/dcount-intersect-plugin.md
                 - name: diffpatterns 外掛程式
@@ -1682,18 +1686,18 @@
       items:
         - name: 函數的清單
           href: kusto/functions-library/functions-library.md
-        - name: predict_lf()
-          href: kusto/functions-library/predict-lf.md
-        - name: predict_onnx_lf()
-          href: kusto/functions-library/predict-onnx-lf.md
-        - name: quantize_lf()
-          href: kusto/functions-library/quantize-lf.md
-        - name: series_fit_poly_lf()
-          href: kusto/functions-library/series-fit-poly-lf.md
-        - name: series_moving_avg_lf()
-          href: kusto/functions-library/series-moving-avg-lf.md
-        - name: series_rolling_lf()
-          href: kusto/functions-library/series-rolling-lf.md
+        - name: predict_fl()
+          href: kusto/functions-library/predict-fl.md
+        - name: predict_onnx_fl()
+          href: kusto/functions-library/predict-onnx-fl.md
+        - name: quantize_fl()
+          href: kusto/functions-library/quantize-fl.md
+        - name: series_fit_poly_fl()
+          href: kusto/functions-library/series-fit-poly-fl.md
+        - name: series_moving_avg_fl()
+          href: kusto/functions-library/series-moving-avg-fl.md
+        - name: series_rolling_fl()
+          href: kusto/functions-library/series-rolling-fl.md
 - name: 資源
   items:
     - name: 部落格
