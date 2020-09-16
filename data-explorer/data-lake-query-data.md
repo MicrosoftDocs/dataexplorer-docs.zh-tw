@@ -7,12 +7,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/17/2020
-ms.openlocfilehash: 7762ec885a52df7ba47c90d5ac91c1019150cf17
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 058a42cc21c6af9642d91231e6b1620315f94f55
+ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873248"
+ms.lasthandoff: 09/16/2020
+ms.locfileid: "90680703"
 ---
 # <a name="query-data-in-azure-data-lake-using-azure-data-explorer"></a>使用 Azure 資料總管在 Azure Data Lake 中查詢資料
 
@@ -125,7 +125,7 @@ dataformat=multijson
 定義將資料欄位對應至外部資料表定義欄位的 JSON 對應：
 
 ```kusto
-.create external table ApiCalls json mapping 'MyMapping' '[{"Column":"Timestamp","Properties":{"Path":"$.time"}},{"Column":"TenantId","Properties":{"Path":"$.data.tenant"}},{"Column":"MethodName","Properties":{"Path":"$.data.method"}}]'
+.create external table ApiCalls json mapping 'MyMapping' '[{"Column":"Timestamp","Properties":{"Path":"$.timestamp"}},{"Column":"TenantId","Properties":{"Path":"$.data.tenant"}},{"Column":"MethodName","Properties":{"Path":"$.data.method"}}]'
 ```
 
 當您查詢外部資料表時，將會叫用對應，而相關資料將會對應至外部資料表資料行：

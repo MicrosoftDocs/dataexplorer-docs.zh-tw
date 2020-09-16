@@ -7,20 +7,20 @@ ms.reviewer: elbirnbo
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/09/2020
-ms.openlocfilehash: 7c2dfe62852b05239215f0c88c711cea4093808e
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: aeb807db9b69c6c5b806a7f4b152330ea2dabc72
+ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90067567"
+ms.lasthandoff: 09/16/2020
+ms.locfileid: "90680745"
 ---
-# <a name="create-a-private-endpoint-in-your-azure-data-explorer-cluster-in-your-virtual-network"></a>在您的虛擬網路中的 Azure 資料總管叢集中建立私人端點
+# <a name="create-a-private-endpoint-in-your-azure-data-explorer-cluster-in-your-virtual-network-preview"></a>在您的虛擬網路 (預覽版中，在 Azure 資料總管叢集中建立私人端點) 
 
 搭配私人端點使用 Private Link，以安全地存取虛擬網路中的 Azure 資料總管叢集 (VNet) 。 
 
 若要設定您的 [Private Link 服務](https://docs.microsoft.com/azure/private-link/private-link-service-overview)，請使用私人端點與 Azure VNet 位址空間中的 IP 位址。 [Azure 私人端點](https://docs.microsoft.com/azure/private-link/private-endpoint-overview) 會使用您 VNet 中的私人 IP 位址，以私人且安全的方式將您連線到 Azure 資料總管。 您也需要重新設定叢集上的 [DNS](https://docs.microsoft.com/azure/private-link/private-endpoint-dns) 設定，以使用您的私人端點進行連接。 透過此設定，您私人網路上的用戶端與 Azure 資料總管叢集之間的網路流量會透過 VNet 和 Microsoft 骨幹網路上的 [Private Link](https://docs.microsoft.com/azure/private-link/) 來傳送，以移除公用網際網路的暴露程度。 本文說明如何在叢集中建立和設定查詢 (引擎) 和內嵌 (資料管理) 的私人端點。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * [在您的虛擬網路中建立 Azure 資料總管](https://docs.microsoft.com/azure/data-explorer/vnet-create-cluster-portal)叢集
 * 停用網路原則：

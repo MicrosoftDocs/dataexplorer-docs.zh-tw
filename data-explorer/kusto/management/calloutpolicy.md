@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: ad2a4180be714e5220121dfeaff5b34f801c4745
-ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
+ms.openlocfilehash: 809088f35567f85444755d89ab30e02fad46abaf
+ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90533978"
+ms.lasthandoff: 09/16/2020
+ms.locfileid: "90680672"
 ---
 # <a name="callout-policy"></a>註標原則
 
@@ -26,6 +26,7 @@ ms.locfileid: "90533978"
 * `cosmosdb` -控制 [CosmosDB 外掛程式](../query/cosmosdb-plugin.md)。
 * `webapi` -控制其他外部 Web 呼叫。
 * `sandbox_artifacts`-控制 ([python](../query/pythonplugin.md)  |  [R](../query/rplugin.md)) 的沙箱化外掛程式。
+* `external_data` -透過 [外部資料表](../query/schema-entities/externaltables.md) 或 [externaldata](../query/externaldata-operator.md) 運算子控制外部資料的存取。
 
 注標原則是由下列各項所組成。
 
