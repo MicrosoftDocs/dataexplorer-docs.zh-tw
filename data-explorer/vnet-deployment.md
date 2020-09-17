@@ -7,18 +7,18 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 9fa58d36815ede98a4f0239f1ce68a6542f24c4b
-ms.sourcegitcommit: cb55064b7cdd57c792ad259b09069525bf799fa0
+ms.openlocfilehash: 74d72ced89b1953b2f7e327656517f1febe4166f
+ms.sourcegitcommit: 803a572ab6f04494f65dbc60a4c5df7fcebe1600
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/03/2020
-ms.locfileid: "89410803"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90714018"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>將 Azure 資料總管叢集部署到您的虛擬網路
 
 本文說明當您將 Azure 資料總管叢集部署到自訂 Azure 虛擬網路時，所存在的資源。 這項資訊可協助您將叢集部署到虛擬網路中的子網 (VNet) 。 如需 Azure 虛擬網路的詳細資訊，請參閱 [什麼是 Azure 虛擬網路？](/azure/virtual-network/virtual-networks-overview)
 
-   ![vnet 圖表](media/vnet-deployment/vnet-diagram.png)
+:::image type="content" source="media/vnet-deployment/vnet-diagram.png" alt-text="顯示示意性虛擬網路架構的圖表"::: 
 
 Azure 資料總管支援將叢集部署到虛擬網路中的子網 (VNet) 。 這項功能可讓您：
 
@@ -45,7 +45,7 @@ Azure 資料總管支援將叢集部署到虛擬網路中的子網 (VNet) 。 �
 
 IP 位址的總數目：
 
-| 用途 | 位址數目 |
+| 使用 | 位址數目 |
 | --- | --- |
 | 引擎服務 | 每個實例1個 |
 | 資料管理服務 | 2 |
@@ -62,7 +62,7 @@ IP 位址的總數目：
 將 Azure 資料總管叢集部署至您的子網，可讓您使用 [事件中樞](/azure/event-hubs/event-hubs-about) 或 [事件方格](/azure/event-grid/overview) 設定資料連線，同時限制 Azure 資料總管子網的基礎資源。
 
 > [!NOTE]
-> 搭配使用 EventGrid 安裝與 [儲存體](/azure/storage/common/storage-introduction) 和 [事件中樞] 時，訂用帳戶中使用的儲存體帳戶可以使用服務端點鎖定至 Azure 資料總管的子網，同時允許 [防火牆](/azure/storage/common/storage-network-security)設定中受信任的 azure 平臺服務，但事件中樞無法啟用服務端點，因為它不支援信任的 [azure 平臺服務](/azure/event-hubs/event-hubs-service-endpoints)。
+> 搭配使用 EventGrid 設定與 [儲存體](/azure/storage/common/storage-introduction) 和 [事件中樞](/azure/event-hubs/event-hubs-about)時，訂用帳戶中使用的儲存體帳戶可以使用服務端點鎖定至 Azure 資料總管的子網，同時允許 [防火牆](/azure/storage/common/storage-network-security)設定中受信任的 Azure 平臺服務，但事件中樞無法啟用服務端點，因為它不支援信任的 [azure 平臺服務](/azure/event-hubs/event-hubs-service-endpoints)。
 
 ## <a name="private-endpoints"></a>私人端點
 
@@ -201,9 +201,9 @@ IP 位址的總數目：
 
 如果您想要完全停用透過公用 IP 位址存取 Azure 資料總管，請在 NSG 中建立另一個輸入規則。 此規則的 [優先順序](/azure/virtual-network/security-overview#security-rules) 必須較低 () 較高的數位。 
 
-| **使用**   | **Source** | **來源服務標籤** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | * * 通訊協定 * * | **動作** | * * 優先權 * * |
+| **使用**   | **Source** | **來源服務標籤** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | **通訊協定** | **動作** | **優先順序** |
 | ---   | --- | --- | ---  | --- | --- | --- | --- | --- |
-| 停用從網際網路存取 | 服務標記 | 網際網路 | *  | VirtualNetwork | * | 任意 | Deny | 高於上述規則的數位 |
+| 停用從網際網路存取 | 服務標記 | Internet | *  | VirtualNetwork | * | 任意 | 拒絕 | 高於上述規則的數位 |
 
 此規則可讓您只透過下列 DNS 記錄連線到 Azure 資料總管叢集 (對應至每個服務) 的私人 IP：
 * `private-[clustername].[geo-region].kusto.windows.net` (引擎) 
@@ -245,10 +245,8 @@ crl3.digicert.com:80
 ```
 
 > [!NOTE]
-> 如果您使用的是 [Azure 防火牆](/azure/firewall/overview)，請使用下列屬性新增 **網路規則** ：
-> | **通訊協定**   | **來源類型** | **Source** | **服務標記**  | **目的地埠** |
-> | ---   | --- | --- | ---  | --- |
-> | TCP | IP 位址 | * | AzureMonitor | 443 |
+> 如果您使用的是 [Azure 防火牆](/azure/firewall/overview)，請使用下列屬性新增 **網路規則** ： <br>
+> **通訊協定**： TCP <br> **來源類型**： IP 位址 <br> **來源**： * <br> **服務標記**： AzureMonitor <br> **目的地埠**：443
 
 您也需要使用下一個躍點*網際網路*的[管理位址](#azure-data-explorer-management-ip-addresses)和[健全狀況監視位址](#health-monitoring-addresses)，在子網上定義[路由表](/azure/virtual-network/virtual-networks-udr-overview)，以防止非對稱式路由問題。
 
@@ -256,8 +254,8 @@ crl3.digicert.com:80
 
 | 名稱 | 位址首碼 | 下一個躍點 |
 | --- | --- | --- |
-| ADX_Management | 13.64.38.225/32 | 網際網路 |
-| ADX_Monitoring | 23.99.5.162/32 | 網際網路 |
+| ADX_Management | 13.64.38.225/32 | Internet |
+| ADX_Monitoring | 23.99.5.162/32 | Internet |
 
 ## <a name="deploy-azure-data-explorer-cluster-into-your-vnet-using-an-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本將 Azure 資料總管叢集部署到您的 VNet
 
