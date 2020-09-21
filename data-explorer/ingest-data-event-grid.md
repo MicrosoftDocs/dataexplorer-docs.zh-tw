@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: c96203ccfa0c4dc70fff83454dac217cccfc0a6c
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: 5cab29b20ad726c1482fa892ad4dadece464f01d
+ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502767"
+ms.lasthandoff: 09/21/2020
+ms.locfileid: "90832704"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>訂閱 Event Grid 通知，以便將 Blob 擷取至 Azure 資料總管
 
@@ -28,7 +28,7 @@ ms.locfileid: "89502767"
 
 如需從事件方格擷取至 Azure 資料總管的一般資訊，請參閱 [連接到事件方格](ingest-data-event-grid-overview.md)。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 * Azure 訂用帳戶。 建立 [免費的 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 叢集[和資料庫](create-cluster-database-portal.md)。
@@ -68,19 +68,20 @@ ms.locfileid: "89502767"
 
     :::image type="content" source="media/ingest-data-event-grid/data-ingestion-create.png" alt-text="新增資料內嵌的資料連線":::
 
+### <a name="data-connection---basics-tab"></a>資料連線-基本資料索引標籤
+
 1. 選取連線類型： **Blob 儲存體**。
 
 1. 在表單中填寫以下資訊：
 
-    :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-basics.png" alt-text="在事件方格表單中填寫連接基本概念":::
-
-     資料來源：
+    :::image type="content" source="media/ingest-data-event-grid/data-connection-basics.png" alt-text="在事件方格表單中填寫連接基本概念":::
 
     |**設定** | **建議的值** | **欄位描述**|
     |---|---|---|
     | 資料連線名稱 | *test-grid-connection* | 您想要在 Azure 資料總管中建立的連線名稱。|
     | 儲存體帳戶訂用帳戶 | 您的訂用帳戶識別碼 | 儲存體帳戶所在的訂用帳戶識別碼。|
     | 儲存體帳戶 | *gridteststorage1* | 您先前建立之儲存體帳戶的名稱。|
+    | 事件類型 | *Blob 已建立* 或 *blob 重新命名* | 觸發內嵌的事件種類。 |
     | 資源建立 | *自動* | 定義您是否希望 Azure 資料總管建立事件方格訂用帳戶、事件中樞命名空間和事件中樞。 如需如何手動建立事件方格訂用帳戶的詳細說明，請參閱「在 [儲存體帳戶中建立事件方格訂用帳戶](ingest-data-event-grid.md) 」一節中的參考。|
 
 1. 如果您想要追蹤特定的主題，請選取 [ **篩選設定** ]。 設定通知的篩選條件，如下所示：
@@ -95,25 +96,36 @@ ms.locfileid: "89502767"
 
 1. 選取 **[下一步：內嵌屬性]**。
 
-1. 填寫表單中的下列資訊，然後選取 **[下一步：檢查 + 建立]**。 資料表和對應名稱會區分大小寫：
+### <a name="data-connection---ingest-properties-tab"></a>資料連線-內嵌屬性索引標籤
 
-   :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-ingest-properties.png" alt-text="檢查和建立資料表和對應內嵌屬性":::
+1. 在表單中填寫以下資訊。 資料表和對應名稱會區分大小寫：
+
+   :::image type="content" source="media/ingest-data-event-grid/data-connection-ingest-properties.png" alt-text="檢查和建立資料表和對應內嵌屬性":::
 
     內嵌屬性：
 
      **設定** | **建議的值** | **欄位描述**
     |---|---|---|
-    | Table | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
+    | 資料表名稱 | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
     | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO、RAW 和 W3CLOG。 支援的壓縮選項為 Zip 和 GZip。 |
     | 對應 | *TestMapping* | 您在 **TestDatabase** 中建立的對應，會將傳入的 JSON 資料對應至 **TestTable** 的資料行名稱與資料類型。|
+    | 進階設定 | *我的資料有標頭* | 忽略標頭。 支援 * SV 類型的檔案。|
+
+   > [!NOTE]
+   > 您不需要指定所有 **預設路由設定**。 也接受部分設定。
+1. 選取 **下一個：檢查 + 建立**
+
+### <a name="data-connection---review--create-tab"></a>資料連線-[檢查 + 建立] 索引標籤
 
 1. 檢查為您自動建立的資源，然後選取 [ **建立**]。
 
     :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-review-create.png" alt-text="檢查和建立事件方格的資料連線":::
 
-1. 請等候部署完成。 如果您的部署失敗，請選取失敗階段旁邊的作業 **詳細資料** ，以取得失敗原因的詳細資訊。 選取 [重新 **部署** ] 以嘗試再次部署資源。
+### <a name="deployment"></a>部署
 
-    :::image type="content" source="media/ingest-data-event-grid/deploy-event-grid-resources.png" alt-text="部署事件方格資源":::
+請等候部署完成。 如果您的部署失敗，請選取失敗階段旁邊的作業 **詳細資料** ，以取得失敗原因的詳細資訊。 選取 [重新 **部署** ] 以嘗試再次部署資源。 您可以在部署之前變更參數。
+
+:::image type="content" source="media/ingest-data-event-grid/deploy-event-grid-resources.png" alt-text="部署事件方格資源":::
 
 ## <a name="generate-sample-data"></a>產生範例資料
 

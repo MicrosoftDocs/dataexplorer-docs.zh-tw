@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/16/2020
-ms.openlocfilehash: 13406b7bca657a7a9ae2b2e1d9e0ec9cf51e5e7c
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.openlocfilehash: 61e0a4f13aba871a92bdcf36a8af9ed78bb09624
+ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680784"
+ms.lasthandoff: 09/21/2020
+ms.locfileid: "90832564"
 ---
 # <a name="monitor-azure-data-explorer-ingestion-commands-and-queries-using-diagnostic-logs"></a>使用診斷記錄來監視 Azure 資料總管內嵌、命令和查詢
 
@@ -21,7 +21,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 > [!IMPORTANT] 
 > 診斷記錄資料可能包含機密資料。 根據您的監視需求，限制記錄目的地的許可權。 
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 如果您沒有 Azure 訂用帳戶，請建立 [免費的 azure 帳戶](https://azure.microsoft.com/free/)。
 * 登入 [Azure 入口網站](https://portal.azure.com/)。
@@ -64,11 +64,14 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
     1. 選取診斷設定的 **名稱** 。
     1. 選取一或多個目標：儲存體帳戶、事件中樞或 Log Analytics。
-    1. 選取要收集的記錄： `SucceededIngestion` 、 `FailedIngestion` 、 `Commands` 或 `Queries` 。
+    1. 選取要收集的記錄： `SucceededIngestion` 、 `FailedIngestion` 、 `Command` 或 `Query` 。
     1. 選取要收集的 [計量](using-metrics.md#supported-azure-data-explorer-metrics) (選擇性) 。  
     1. 選取 [ **儲存** ]，以儲存新的診斷記錄設定和計量。
 
 將會在幾分鐘內設定新的設定。 然後，記錄會出現在設定的封存目標中 (儲存體帳戶、事件中樞或 Log Analytics) 。 
+
+    > [!NOTE]
+    > If you send logs to Log Analytics, the `SucceededIngestion`, `FailedIngestion`, `Command`, and `Query` logs will be stored in Log Analytics tables named: `SucceededIngestion`, `FailedIngestion`, `ADXCommand`, `ADXQuery`, respectively.
 
 ## <a name="diagnostic-logs-schema"></a>診斷記錄結構描述
 
@@ -119,7 +122,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |succeededOn        |內嵌完成的時間
 |operationId        |Azure 資料總管內嵌作業識別碼
 |[資料庫]           |目標資料庫的名稱
-|table              |目標資料表的名稱
+|資料表              |目標資料表的名稱
 |ingestionSourceId  |內嵌資料來源的識別碼
 |ingestionSourcePath|內嵌資料來源或 blob URI 的路徑
 |rootActivityId     |活動識別碼
@@ -160,7 +163,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |failedOn           |內嵌完成的時間
 |operationId        |Azure 資料總管內嵌作業識別碼
 |[資料庫]           |目標資料庫的名稱
-|table              |目標資料表的名稱
+|資料表              |目標資料表的名稱
 |ingestionSourceId  |內嵌資料來源的識別碼
 |ingestionSourcePath|內嵌資料來源或 blob URI 的路徑
 |rootActivityId     |活動識別碼
@@ -222,7 +225,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |StartedOn        |此命令開始 (UTC) 時間
 |LastUpdatedOn        |此命令結束的時間 (UTC) 
 |資料庫          |命令執行所在的資料庫名稱
-|州              |命令結束的狀態
+|State              |命令結束的狀態
 |FailureReason  |失敗原因
 |TotalCpu |總 CPU 持續時間
 |CommandType     |命令類型
@@ -308,7 +311,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |StartedOn        |此命令開始 (UTC) 時間
 |LastUpdatedOn           |此命令結束的時間 (UTC) 
 |資料庫              |命令執行所在的資料庫名稱
-|州  |命令結束的狀態
+|State  |命令結束的狀態
 |FailureReason|失敗原因
 |TotalCpu     |總 CPU 持續時間
 |ApplicationName            |叫用查詢的應用程式名稱

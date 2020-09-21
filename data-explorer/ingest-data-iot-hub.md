@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/08/2020
-ms.openlocfilehash: 4433126f67187d1bb2a190821dc6a59d96be3f5b
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: 47fce36f598c334c5e372ccb7bc44d21bd9ff94f
+ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502784"
+ms.lasthandoff: 09/21/2020
+ms.locfileid: "90832759"
 ---
 # <a name="ingest-data-from-iot-hub-into-azure-data-explorer"></a>將資料從 IoT 中樞內嵌至 Azure 資料總管 
 
@@ -75,38 +75,48 @@ ms.locfileid: "89502784"
     
     ![選取測試資料庫](media/ingest-data-iot-hub/select-database.png)
 
-1. 選取 [資料擷取]****，然後選取 [新增資料連線]****。 然後，在表單中填寫以下資訊。 當您完成時，請選取 [ **建立** ]。
+1. 選取 [資料擷取]****，然後選取 [新增資料連線]****。
 
-    ![IoT 中樞連接](media/ingest-data-iot-hub/iot-hub-connection.png)
+    :::image type="content" source="media/ingest-data-iot-hub/iot-hub-connection.png" alt-text="建立與 IoT 中樞的資料連線-Azure 資料總管":::
 
-    **資料來源**：
+### <a name="create-a-data-connection"></a>建立資料連線
+
+1. 在表單中填寫以下資訊。 
+    
+    :::image type="content" source="media/ingest-data-iot-hub/data-connection-pane.png" alt-text="IoT 中樞內的 [資料連線] 窗格-Azure 資料總管":::
 
     **設定** | **欄位描述**
     |---|---|
     | 資料連線名稱 | 您想要在 Azure 中建立的連線名稱資料總管
+    | 訂用帳戶 |  事件中樞資源所在的訂用帳戶識別碼。  |
     | IoT 中樞 | IoT 中樞名稱 |
     | 共用存取原則 | 共用存取原則的名稱。 必須具有讀取權限 |
     | 取用者群組 |  IoT 中樞內建端點中定義的取用者群組 |
     | 事件系統屬性 | [IoT 中樞事件系統屬性](/azure/iot-hub/iot-hub-devguide-messages-construct#system-properties-of-d2c-iot-hub-messages)。 新增系統屬性時，請 [建立](kusto/management/create-table-command.md) 或 [更新](kusto/management/alter-table-command.md) 資料表架構和 [對應](kusto/management/mappings.md) 以包含選取的屬性。 | | | 
 
-    > [!NOTE]
-    > 在 [手動容錯移轉](/azure/iot-hub/iot-hub-ha-dr#manual-failover)的情況下，您必須重新建立資料連線。
+#### <a name="target-table"></a>目標資料表
 
-    **目標資料表**：
+路由內嵌資料有兩個選項：靜態** 和動態**。 在本文中，您將使用靜態路由，您會指定資料表名稱、資料格式和對應。 如果事件中樞訊息包含資料路由資訊，此路由資訊將會覆寫預設設定。
 
-    路由內嵌資料有兩個選項：靜態** 和動態**。 
-    在本文中，您將使用靜態路由，您會指定資料表名稱、資料格式和對應。 因此，將 [我的資料包含路由資訊]**** 保留為未選取。
+1. 填寫下列路由設定：
+    
+    :::image type="content" source="media/ingest-data-iot-hub/default-routing-settings.png" alt-text="預設路由屬性-IoT 中樞-Azure 資料總管":::
 
      **設定** | **建議的值** | **欄位描述**
     |---|---|---|
-    | Table | *TestTable* | 您在 **testdb**中建立的資料表。 |
+    | 資料表名稱 | *TestTable* | 您在 **testdb**中建立的資料表。 |
     | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO 和 W3CLOG。|
-    | 資料行對應 | *TestMapping* | 您在**testdb**中建立的[對應](kusto/management/mappings.md)，會將傳入的 JSON 資料對應至**testdb**的資料行名稱和資料類型。 JSON、多行 JSON 和 AVRO 的必要參數，以及其他格式的選擇性。|
+    | 對應 | *TestMapping* | 您在**testdb**中建立的[對應](kusto/management/mappings.md)，會將傳入的資料對應至**testdb**的資料行名稱和資料類型。 JSON、多行 JSON 和 AVRO 的必要參數，以及其他格式的選擇性。|
     | | |
 
+    > [!WARNING]
+    > 在 [手動容錯移轉](/azure/iot-hub/iot-hub-ha-dr#manual-failover)的情況下，您必須重新建立資料連線。
+    
     > [!NOTE]
-    > * 選取 [我的資料包含路由資訊]**** 來使用動態路由，其中您的資料會包含必要的路由資訊，如[範例應用程式](https://github.com/Azure-Samples/event-hubs-dotnet-ingest)註解中所示。 如果靜態和動態屬性都已設定，則動態屬性會覆寫靜態屬性。 
+    > * 您不需要指定所有 **預設路由設定**。 也接受部分設定。
     > * 只有在建立資料連線之後排入佇列的事件才會內嵌。
+
+1. 選取 [建立]。
 
 ### <a name="event-system-properties-mapping"></a>事件系統屬性對應
 

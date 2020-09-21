@@ -6,14 +6,14 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 01/19/2020
+ms.date: 09/19/2020
 ms.custom: contperfq1
-ms.openlocfilehash: efc074ae726f2934f2568e330d9f04239276013d
-ms.sourcegitcommit: 391cb1bb792322095f48a470b41d15c3b8e30225
+ms.openlocfilehash: 46bc2cceb59ef8e3553582adc7d9b093df10f250
+ms.sourcegitcommit: 0ea876a3e61c3aeb48caa7692ccfecdbc83793f6
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/18/2020
-ms.locfileid: "90773859"
+ms.lasthandoff: 09/21/2020
+ms.locfileid: "90825309"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>使用計量來監視 Azure 資料總管效能、健康情況和使用量
 

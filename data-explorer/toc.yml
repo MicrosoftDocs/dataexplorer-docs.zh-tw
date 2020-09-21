@@ -72,6 +72,8 @@
           href: create-cluster-database-python.md
         - name: Azure Resource Manager 範本
           href: create-cluster-database-resource-manager.md
+    - name: 建立資料表
+      href: one-click-table.md
     - name: 擷取資料
       items:
         - name: 單鍵擷取
@@ -316,10 +318,12 @@
       items:
         - name: Power Automate
           items:
-            - name: Power Automate 流程連接器
+            - name: Power Automate 連接器
               href: flow.md
+              displayName: 'Microsoft Flow, flow, flow connector'
             - name: Power Automate 連接器使用範例
               href: flow-usage.md
+              displayName: 'Microsoft Flow, flow, flow connector'
         - name: Logic Apps
           href: kusto/tools/logicapps.md
         - name: Apache Spark 連接器

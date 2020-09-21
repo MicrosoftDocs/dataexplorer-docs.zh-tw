@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 84f4348f1d172238bd71de55e989ed8520f78b93
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: 69438457dfcbfc4e29805d5d193c227538910e45
+ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502750"
+ms.lasthandoff: 09/21/2020
+ms.locfileid: "90832625"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>將資料從事件中樞內嵌至 Azure 資料總管
 
@@ -65,7 +65,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     |---|---|---|
     | 訂用帳戶 | 您的訂用帳戶 | 選取您要用於事件中樞的 Azure 訂用帳戶。|
     | 資源群組 | *test-hub-rg* | 建立新的資源群組。 |
-    | Location | *美國西部* | 請在本文中選取 [ *美國西部* ]。 至於生產系統，請選取最符合您需求的區域。 將事件中樞命名空間建立在與 Kusto 相同的 [位置] 可獲得最佳效能 (對於高輸送量的事件中樞命名空間格外重要)。
+    | 位置 | *美國西部* | 請在本文中選取 [ *美國西部* ]。 至於生產系統，請選取最符合您需求的區域。 將事件中樞命名空間建立在與 Kusto 相同的 [位置] 可獲得最佳效能 (對於高輸送量的事件中樞命名空間格外重要)。
     | 命名空間名稱 | 唯一命名空間名稱 | 選擇可識別您命名空間的唯一名稱。 例如，*mytestnamespace*。 網域名稱 *servicebus.windows.net* 已附加至您提供的名稱。 名稱只能包含字母、數字和連字號。 名稱必須以字母開頭，且必須以字母或數字結尾。 此值長度必須介於 6 至 50 個字元之間。
     | 事件中樞名稱 | *test-hub* | 事件中樞位於命名空間之下，其會提供專屬的唯一範圍容器。 事件中樞名稱在命名空間內不可重複。 |
     | 取用者群組名稱 | *test-group* | 取用者群組能讓多個取用應用程式各自擁有獨立的事件串流檢視。 |
@@ -109,40 +109,45 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
     ![選取測試資料庫](media/ingest-data-event-hub/select-test-database.png)
 
-1. 選取 [資料擷取]****，然後選取 [新增資料連線]****。 然後，在表單中填寫以下資訊。 完成後，選取 [建立]****。
+1. 選取 [資料擷取]****，然後選取 [新增資料連線]****。 
 
-    ![事件中樞連線](media/ingest-data-event-hub/event-hub-connection.png)
+    :::image type="content" source="media/ingest-data-event-hub/event-hub-connection.png" alt-text="在事件中樞中選取資料內嵌和新增資料連線-Azure 資料總管":::
 
-    **資料來源：**
+### <a name="create-a-data-connection"></a>建立資料連線
+
+1. 在表單中填寫以下資訊：
+
+    :::image type="content" source="media/ingest-data-event-hub/data-connection-pane.png" alt-text="資料連線窗格事件中樞-Azure 資料總管":::
 
     **設定** | **建議的值** | **欄位描述**
     |---|---|---|
     | 資料連線名稱 | *test-hub-connection* | 您想要在 Azure 資料總管中建立的連線名稱。|
+    | 訂用帳戶 |      | 事件中樞資源所在的訂用帳戶識別碼。  |
     | 事件中樞命名空間 | 唯一命名空間名稱 | 您先前選擇用來辨識命名空間的名稱。 |
     | 事件中樞 | *test-hub* | 您建立的事件中樞。 |
-    | 取用者群組 | *test-group* | 在您所建立事件中樞中定義的取用者群組。 |
+    | 取用者群組 | *test-group* | 在您建立的事件中樞中定義的取用者群組。 |
     | 事件系統屬性 | 選取相關屬性 | [事件中樞系統屬性](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations)。 如果每個事件訊息有多筆記錄，系統屬性將會新增至第一個。 新增系統屬性時，請 [建立](kusto/management/create-table-command.md) 或 [更新](kusto/management/alter-table-command.md) 資料表架構和 [對應](kusto/management/mappings.md) 以包含選取的屬性。 |
-    | 壓縮 | *無* | 事件中樞訊息承載的壓縮類型。 支援的壓縮類型： *無、GZip*。|
-    | | |
+    | 壓縮 | *None* | 事件中樞訊息承載的壓縮類型。 支援的壓縮類型： *無、GZip*。|
+    
+#### <a name="target-table"></a>目標資料表
 
-    **目標資料表：**
+路由內嵌資料有兩個選項：靜態** 和動態**。 在本文中，您將使用靜態路由，您可以在此指定資料表名稱、資料格式和對應作為預設值。 如果事件中樞訊息包含資料路由資訊，此路由資訊將會覆寫預設設定。
 
-    路由內嵌資料有兩個選項：靜態** 和動態**。 
-    在本文中，您將使用靜態路由，您會指定資料表名稱、資料格式和對應。 因此，將 [我的資料包含路由資訊]**** 保留為未選取。
+1. 填寫下列路由設定：
+  
+   :::image type="content" source="media/ingest-data-event-hub/default-routing-settings.png" alt-text="將資料擷取至事件中樞的預設路由設定-Azure 資料總管":::
+        
+   |**設定** | **建議的值** | **欄位描述**
+   |---|---|---|
+   | 資料表名稱 | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
+   | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO 和 W3CLOG。 |
+   | 對應 | *TestMapping* | 您在 **>testdatabase**中建立的[對應](kusto/management/mappings.md)，會將傳入的資料對應至**TestTable**的資料行名稱和資料類型。 JSON、多行 JSON 和 AVRO 的必要參數，以及其他格式的選擇性。|
+    
+   > [!NOTE]
+   > * 您不需要指定所有 **預設路由設定**。 也接受部分設定。
+   > * 只有在建立資料連線之後排入佇列的事件才會內嵌。
 
-     **設定** | **建議的值** | **欄位描述**
-    |---|---|---|
-    | Table | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
-    | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO 和 W3CLOG。 |
-    | 資料行對應 | *TestMapping* | 您在 **>testdatabase**中建立的[對應](kusto/management/mappings.md)，會將傳入的 JSON 資料對應至**TestTable**的資料行名稱和資料類型。 JSON 或多行 JSON 的必要參數，以及其他格式的選擇性。|
-    | | |
-
-    > [!NOTE]
-    > * 選取 [我的資料包含路由資訊]**** 來使用動態路由，其中您的資料會包含必要的路由資訊，如[範例應用程式](https://github.com/Azure-Samples/event-hubs-dotnet-ingest)註解中所示。 如果靜態和動態屬性都已設定，則動態屬性會覆寫靜態屬性。 
-    > * 只有在建立資料連線之後排入佇列的事件才會內嵌。
-    > * 您也可以透過 [範例應用程式](https://github.com/Azure-Samples/event-hubs-dotnet-ingest)中所示的動態屬性來設定壓縮類型。
-    > * GZip 壓縮裝載不支援 Avro、ORC 和 PARQUET 格式，以及事件系統屬性。
-
+1. 選取 [建立]。 
 
 ### <a name="event-system-properties-mapping"></a>事件系統屬性對應
 
