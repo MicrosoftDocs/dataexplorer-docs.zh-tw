@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/19/2020
 ms.custom: contperfq1
-ms.openlocfilehash: f1a7a0d9be744e4014732689e76220adab3bcd93
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: efc074ae726f2934f2568e330d9f04239276013d
+ms.sourcegitcommit: 391cb1bb792322095f48a470b41d15c3b8e30225
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502718"
+ms.lasthandoff: 09/18/2020
+ms.locfileid: "90773859"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>使用計量來監視 Azure 資料總管效能、健康情況和使用量
 
@@ -21,7 +21,7 @@ Azure 資料總管計量提供 Azure 資料總管叢集資源的健康情況和�
 
 如需 Azure 計量瀏覽器的詳細資訊，請參閱 [計量瀏覽器](/azure/azure-monitor/platform/metrics-getting-started)。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
 * Azure 訂用帳戶。 如果您沒有帳戶，可以建立一個免費的 [Azure 帳戶](https://azure.microsoft.com/free/)。
 * 叢集 [和資料庫](create-cluster-database-portal.md)。
@@ -71,7 +71,7 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 | 快取使用率 | 百分比 | Avg、Max、Min | 叢集目前正在使用的已配置快取資源百分比。 Cache 是根據定義的快取原則，為使用者活動配置的 SSD 大小。 <br> <br> 平均快取使用率80% 或更低是叢集的持續性狀態。 如果平均快取使用率高於80%，則叢集應該是 <br> [擴充](manage-cluster-vertical-scaling.md) 至儲存體優化定價層或 <br> [相應放大](manage-cluster-horizontal-scaling.md) 至多個實例。 或者，在快取) 中調整快取原則 (較少的天數。 如果快取使用率超過100%，則根據快取原則快取的資料大小，會大於叢集上的快取大小總計。 | 無 |
 | CPU | 百分比 | Avg、Max、Min | 叢集中的電腦目前正在使用的已配置計算資源百分比。 <br> <br> 叢集的平均 CPU （80% 或更低）是可持續的。 CPU 的最大值是100%，這表示沒有額外的計算資源可處理資料。 <br> 當叢集未正常執行時，請檢查 CPU 的最大值，以判斷是否有特定的 Cpu 被封鎖。 | 無 |
 | 擷取使用率 | 百分比 | Avg、Max、Min | 實際資源百分比，用來從配置的總資源（在容量原則中）內嵌資料，以執行內嵌。 預設容量原則不超過512的並行內嵌作業，或投資于內嵌的叢集資源75%。 <br> <br> 80% 或更低的平均內嵌使用率是叢集的持續性狀態。 內嵌使用率的最大值為100%，這表示會使用所有叢集內嵌功能，並可能產生內嵌佇列。 | 無 |
-| 保持運作 | Count | Avg | 追蹤叢集的回應性。 <br> <br> 完全回應的叢集會傳回值1，且封鎖或中斷連線的叢集會傳回0。 |
+| 保持運作 | Count | 平均 | 追蹤叢集的回應性。 <br> <br> 完全回應的叢集會傳回值1，且封鎖或中斷連線的叢集會傳回0。 |
 | 節流命令的總數 | 計數 | Avg、Max、Min、Sum | 因為已達到允許的並行 (平行) 命令數目上限，所以 (在叢集中拒絕) 命令的節流數目。 | 無 |
 | 延伸區總數 | 計數 | Avg、Max、Min、Sum | 叢集中的資料範圍總數。 <br> <br> 此計量中的變更可能表示大量資料結構變更和叢集上的高負載，因為合併資料範圍是大量 CPU 的活動。 | 無 |
 
@@ -81,7 +81,7 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 
 |**計量** | **單位** | **聚集** | **度量說明** | **維度** |
 |---|---|---|---|---|
-匯出記錄的連續匯出數目    | 計數 | Sum | 所有連續匯出作業中匯出的記錄數目。 | 無 |
+匯出記錄的連續匯出數目    | 計數 | Sum | 所有連續匯出作業中匯出的記錄數目。 | ContinuousExportName |
 連續匯出最大延遲 |    計數   | 最大值   | 延遲 (（分鐘），) 由叢集中的連續匯出工作所報告。 | 無 |
 連續匯出暫止計數 | 計數 | 最大值   | 暫止連續匯出作業的數目。 這些作業已準備好執行，但在佇列中等候，可能是因為容量不足) 。 
 連續匯出結果    | Count |   Count   | 每個連續匯出執行的失敗/成功結果。 | ContinuousExportName |
@@ -113,7 +113,7 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 串流內嵌資料速率 |    Count   | RateRequestsPerSecond | 內嵌至叢集的總數據量。 | 無 |
 串流內嵌持續時間   | 毫秒  | Avg、Max、Min | 所有串流內嵌要求的總持續時間。 | 無 |
 串流內嵌要求率   | Count | Count、Avg、Max、Min、Sum | 串流內嵌要求的總數。 | 無 |
-串流內嵌結果 | Count | Avg   | 依結果類型的串流內嵌要求總數。 | 結果 |
+串流內嵌結果 | Count | 平均   | 依結果類型的串流內嵌要求總數。 | 結果 |
 
 ## <a name="query-metrics"></a>查詢計量
 

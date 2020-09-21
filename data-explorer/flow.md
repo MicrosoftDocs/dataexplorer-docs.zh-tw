@@ -7,16 +7,16 @@ ms.reviewer: dorcohen
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/25/2020
-ms.openlocfilehash: 58b384b502683b69020c1f211345bfcec8c095b5
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 7c40d6b1f62014e8ede6ed3328dd3a3974d41a88
+ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874268"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90740298"
 ---
 # <a name="azure-data-explorer-connector-to-power-automate-preview"></a>Azure 資料總管連接器以 Power Automate (預覽) 
 
-Azure 資料總管 flow 連接器可讓 Azure 資料總管使用 [Microsoft Power Automate](https://flow.microsoft.com/)的流程功能。 您可以在已排程或觸發的工作中自動執行 Kusto 查詢和命令。
+Azure 資料總管 Power Automate (之前的 Microsoft Flow) 連接器，可讓 Azure 資料總管使用 [Microsoft Power Automate](https://flow.microsoft.com/)的流程功能。 您可以在已排程或觸發的工作中自動執行 Kusto 查詢和命令。
 
 您可以：
 
@@ -25,7 +25,7 @@ Azure 資料總管 flow 連接器可讓 Azure 資料總管使用 [Microsoft Powe
 * 排程叢集上的控制命令。
 * 在 Azure 資料總管與其他資料庫之間匯出和匯入資料。 
 
-如需詳細資訊，請參閱 [Azure 資料總管 flow 連接器使用範例](flow-usage.md)。
+如需詳細資訊，請參閱 [Azure 資料總管 Power Automate 連接器使用範例](flow-usage.md)。
 
 ##  <a name="sign-in"></a>登入 
 
@@ -66,7 +66,7 @@ Azure 資料總管 flow 連接器可讓 Azure 資料總管使用 [Microsoft Powe
 
 ## <a name="find-the-azure-kusto-connector"></a>尋找 Azure Kusto 連接器
 
-若要使用 flow 連接器，您必須先新增觸發程式。 您可以根據週期性時間週期來定義觸發程式，或以回應先前的流程動作。
+若要使用 Power Automate 連接器，您必須先新增觸發程式。 您可以根據週期性時間週期來定義觸發程式，或以回應先前的流程動作。
 
 1. [建立新的流程](https://flow.microsoft.com/manage/flows/new)，或從 Microsoft Power Automate 首頁選取 [**我的流程**  >  **+ 新增**]。
 
@@ -95,18 +95,18 @@ Azure 資料總管 flow 連接器可讓 Azure 資料總管使用 [Microsoft Powe
 
 使用這個動作來執行 [控制項命令](kusto/management/index.md)。
 
-1. 指定叢集 URL。 例如 `https://clusterName.eastus.kusto.windows.net`。
+1. 指定叢集 URL。 例如，`https://clusterName.eastus.kusto.windows.net`。
 1. 輸入資料庫的名稱。
 1. 指定控制命令：
-   - 從流程中使用的應用程式和連接器選取動態內容。
-   - 加入運算式以存取、轉換和比較值。
+   * 從流程中使用的應用程式和連接器選取動態內容。
+   * 加入運算式以存取、轉換和比較值。
 1. 若要透過電子郵件將此動作的結果傳送為數據表或圖表，請指定圖表類型。 這可以是：
-   - HTML 資料表。
-   - 圓形圖。
-   - 時間圖表。
-   - 橫條圖。
+   * HTML 資料表。
+   * 圓形圖。
+   * 時間圖表。
+   * 橫條圖。
 
-![執行控制命令的螢幕擷取畫面，並將結果視覺化](./media/flow/flow-runcontrolcommand.png)
+![[執行控制] 命令的螢幕擷取畫面，並在 [週期] 窗格中將結果視覺化](./media/flow/flow-runcontrolcommand.png)
 
 > [!IMPORTANT]
 > 在 [叢集 **名稱** ] 欄位中，輸入叢集 URL。
@@ -157,7 +157,7 @@ Azure 資料總管 flow 連接器可讓 Azure 資料總管使用 [Microsoft Powe
 1. 在 [ **附件內容**] 底下，選取 [ **附件內容**]。
 1. 如有必要，請新增更多的附件。 
 1. 如有必要，請設定重要性層級。
-1. 選取 \[儲存\]。
+1. 選取 [儲存]。
 
 ![[傳送電子郵件] 對話方塊的螢幕擷取畫面，其中已醒目提示 [附件名稱]、[附件內容] 和 [儲存]](./media/flow/flow-add-attachments.png)
 

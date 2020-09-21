@@ -8,32 +8,32 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 9522ee72e639c967f7b735c9c52d67c236498522
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: e341b70dfc2a7c0d3038d6d60d9c8ae2b40b6218
+ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201695"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90740247"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Azure 資料總管工具和整合總覽
 
-Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流程。 Azure 資料總管會收集、儲存及分析各種資料，以改善產品、增強客戶體驗、監視裝置，以及提升營運效率。 
+Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料。 Azure 資料總管會收集、儲存及分析各種不同的資料，以改善產品、增強客戶體驗、監視裝置，以及提升營運效率。 
 
-Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢、視覺化、協調流程等。 除了其原生服務之外，Azure 資料總管可讓使用者輕鬆地與各種產品和平臺整合、啟用各種客戶使用案例、藉由簡化工作流程來優化商務程式，以及降低成本。 
+Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查詢、視覺效果、協調流程等等。 除了其原生服務，Azure 資料總管可讓使用者輕鬆地與各種產品和平臺整合、提供各種客戶使用案例、簡化工作流程，並降低成本。 
 
-本文提供 Azure 資料總管工具、連接器和整合的清單，並提供相關檔的連結以取得其他資訊。
+本文提供 Azure 資料總管工具、連接器和整合的清單，以及相關檔的連結，以取得其他資訊。
 
 ## <a name="ingest-data"></a>擷取資料 
 
-資料內嵌是用來將一或多個來源中的資料記錄載入 Azure 資料總管的程式。 一旦擷取之後，資料就會變成可供查詢。 Azure 資料總管為數據內嵌提供數個工具和連接器。 
+資料內嵌是用來將資料記錄從一或多個來源載入至 Azure 資料總管的程式。 一旦擷取之後，資料就會變成可供查詢。 Azure 資料總管針對資料內嵌提供數個工具和連接器。 
 
-### <a name="azure-data-explorer-ingestion-tools"></a>Azure 資料總管的內嵌工具
+### <a name="azure-data-explorer-ingestion-tools"></a>Azure 資料總管內嵌工具
 
 * [LightIngest](lightingest.md) - 用於將特定資料內嵌至 Azure 資料總管的說明公用程式
 * 單鍵內嵌
     * [單鍵擷取概觀](ingest-data-one-click.md) 
-    * [將資料從容器內嵌至新的資料表](one-click-ingestion-new-table.md)
-    * [將資料從本機檔案內嵌至現有的資料表](one-click-ingestion-existing-table.md)
+    * [將容器中的資料內嵌至新的資料表](one-click-ingestion-new-table.md)
+    * [將本機檔案中的資料內嵌到現有的資料表](one-click-ingestion-existing-table.md)
 
 ### <a name="ingestion-integrations"></a>內嵌整合
 
@@ -51,7 +51,7 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
     * [與 Azure Data Factory 整合](data-factory-integration.md)
     * [複製資料](data-factory-load-data.md)
     * [使用 Azure Data Factory 範本從資料庫大量複製](data-factory-template.md)
-    * [使用 Azure Data Factory 命令活動來執行 Azure 資料總管 control 命令](data-factory-command-activity.md)
+    * [使用 Azure Data Factory 命令活動來執行 Azure 資料總管控制命令](data-factory-command-activity.md)
 * Apache 
     * [Spark](spark-connector.md)
     * [Kafka](ingest-data-kafka.md)
@@ -62,7 +62,7 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
 
 ### <a name="azure-data-explorer-query-tools"></a>Azure 資料總管查詢工具
 
-有數個工具可用來在 Azure 資料總管中執行查詢。
+有幾個工具可在 Azure 資料總管中執行查詢。
 
 * Kusto.Explorer
     * [安裝和使用者介面](kusto/tools/kusto-explorer.md)
@@ -82,7 +82,7 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
 
 ## <a name="visualizations-dashboards-and-reporting"></a>視覺效果、儀表板和報告
 
-[視覺效果總覽](viz-overview.md)會詳細說明資料視覺化、儀表板和報表選項。 
+[視覺效果總覽](viz-overview.md)會詳細說明資料視覺效果、儀表板和報表選項。 
 
 ## <a name="notebook-connectivity"></a>筆記本連線能力
 
@@ -93,7 +93,7 @@ Azure 資料總管提供不同的工具和整合來進行資料內嵌、查詢�
 ## <a name="orchestration"></a>協調流程
 
 * Power Automate
-    * [電源自動化流程連接器](flow.md)
+    * [Power Automate 連接器](flow.md)
     * [Power Automate 連接器使用範例](flow-usage.md)
 * [Microsoft 邏輯應用程式](kusto/tools/logicapps.md) 
 * [Azure Data Factory](data-factory-integration.md)

@@ -212,6 +212,8 @@
           href: k2bridge.md
     - name: 安全
       items:
+        - name: 隔離計算
+          href: isolated-compute.md
         - name: 網路隔離 (VNet)
           items:
             - name: 在您的 VNet 中建立叢集 - 入口網站
@@ -297,7 +299,7 @@
               href: dealing-with-duplicates.md
     - name: 監視
       items:
-        - name: 使用診斷記錄來監視擷取
+        - name: 使用診斷記錄來監視擷取、命令和查詢
           href: using-diagnostic-logs.md
         - name: 使用計量監視 Azure 資料總管
           displayName: 'health, performance'

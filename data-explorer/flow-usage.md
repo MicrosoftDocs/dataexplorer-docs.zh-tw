@@ -7,34 +7,34 @@ ms.reviewer: dorcohen
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/15/2020
-ms.openlocfilehash: a9f2be17e02103a64fa31a10bc6195076addb1fc
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 03422de8987e125b5565b0625434ef660426b40a
+ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874523"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90740264"
 ---
 # <a name="usage-examples-for-azure-data-explorer-connector-to-power-automate-preview"></a>適用于 Azure 資料總管 connector 以 Power Automate (Preview 的使用範例) 
 
-Azure 資料總管 flow 連接器可讓 Azure 資料總管使用 [Microsoft Power Automate](https://flow.microsoft.com/)的流程功能。 您可以在已排程或觸發的工作中自動執行 Kusto 查詢和命令。 本文包含數個常見的流程連接器使用範例。
+Azure 資料總管 Power Automate (之前的 Microsoft flow) 連接器，可讓 Azure 資料總管使用 [Microsoft Power Automate](https://flow.microsoft.com/)的流程功能。 您可以在已排程或觸發的工作中自動執行 Kusto 查詢和命令。 本文包含數個常見的 Power Automate 連接器使用範例。
 
-如需詳細資訊，請參閱 [Azure 資料總管 flow 連接器 (Preview) ](flow.md)。
+如需詳細資訊，請參閱 [Azure 資料總管 Power Automate connector (Preview) ](flow.md)。
 
-## <a name="flow-connector-and-your-sql-database"></a>Flow 連接器和您的 SQL database
+## <a name="power-automate-connector-and-your-sql-database"></a>Power Automate 連接器和您的 SQL database
 
-使用 flow 連接器來查詢您的資料，並將其匯總在 SQL 資料庫中。
+使用 Power Automate 連接器來查詢您的資料，並將其匯總在 SQL 資料庫中。
 
 > [!Note]
-> 只針對少量的輸出資料使用 flow 連接器。 針對每個資料列，SQL 插入作業會分開執行。 
+> 只針對少量的輸出資料使用 Power Automate 連接器。 針對每個資料列，SQL 插入作業會分開執行。 
 
-![使用 flow 連接器來查詢資料的螢幕擷取畫面](./media/flow-usage/flow-sqlexample.png)
+![使用 Power Automate 連接器來查詢資料的螢幕擷取畫面](./media/flow-usage/flow-sqlexample.png)
 
 > [!IMPORTANT]
 > 在 [叢集 **名稱** ] 欄位中，輸入叢集 URL。
 
 ## <a name="push-data-to-a-microsoft-power-bi-dataset"></a>將資料推送至 Microsoft Power BI 資料集
 
-您可以使用 flow 連接器搭配 Power BI 連接器，將資料從 Kusto 查詢推送至 Power BI 的串流資料集。
+您可以搭配使用 Power Automate 連接器與 Power BI 連接器，將資料從 Kusto 查詢推送至 Power BI 串流資料集。
 
 1. 建立新的 **執行查詢並列出結果** 動作。
 1. 選取 [新增步驟]。
@@ -54,7 +54,7 @@ Azure 資料總管 flow 連接器可讓 Azure 資料總管使用 [Microsoft Powe
 
 ## <a name="conditional-queries"></a>條件式查詢
 
-您可以使用 Kusto 查詢的結果做為下一個流程動作的輸入或條件。
+您可以使用 Kusto 查詢的結果做為下一個 Power Automate 動作的輸入或條件。
 
 在下列範例中，我們會查詢 Kusto，找出過去一天發生的事件。 針對每個已解決的事件，都會張貼一則延後訊息，並建立推播通知。
 針對仍在使用中的每個事件，我們會查詢 Kusto 以取得類似事件的詳細資訊。 它會以電子郵件形式傳送該資訊，並在 Azure DevOps Server 中開啟相關工作。
