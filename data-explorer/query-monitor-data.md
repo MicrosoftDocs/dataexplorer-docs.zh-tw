@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/28/2020
-ms.openlocfilehash: 078737ff7e5cd74d15792cc2f0f058cb3ea12a19
-ms.sourcegitcommit: e0cf581d433bbbb2eda5a4209a8eabcdae80c21b
+ms.openlocfilehash: b8de71ffcda28a7baa0f8452e501c7485e861122
+ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90059492"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90999005"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>使用 Azure 資料總管 Azure 監視器查詢資料 (預覽) 
 
@@ -23,7 +23,7 @@ Azure 資料總管 proxy 流程：
 
 ![ADX proxy 流程](media/adx-proxy/adx-proxy-flow.png)
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 > [!NOTE]
 > ADX Proxy 處於預覽模式。 [連接至 proxy](#connect-to-the-proxy) 以啟用叢集的 ADX proxy 功能。 如有任何問題，請洽詢 [ADXProxy](mailto:adxproxy@microsoft.com) 團隊。
@@ -41,7 +41,7 @@ Azure 資料總管 proxy 流程：
     * 適用于 LA： `https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>`
     * 針對 AI： `https://ade.applicationinsights.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.insights/components/<ai-app-name>`
 
-    * 選取 [新增]。
+    * 選取 [新增]  。
 
     ![新增叢集](media/adx-proxy/add-cluster.png)
 
@@ -63,7 +63,7 @@ Azure 資料總管 proxy 流程：
 > ADX Proxy 功能僅供資料抓取之用。 如需詳細資訊，請參閱 [函數可支援](#function-supportability)性。
 
 > [!TIP]
-> * 資料庫名稱的名稱應該與在 proxy 叢集中指定的資源相同。 名稱會區分大小寫。
+> * 資料庫名稱的名稱應該與在 proxy 叢集中指定的資源相同。 名稱區分大小寫。
 > * 在跨叢集查詢中，請確定 Application Insights apps 與 Log Analytics 工作區的命名正確。
 > * 如果名稱包含特殊字元，則會以 proxy 叢集名稱中的 URL 編碼來取代它們。 
 > * 如果名稱包含的字元不符合 [KQL 識別碼名稱規則](kusto/query/schema-entities/entity-names.md)，則會以虛線字元取代這些字元 **-** 。
@@ -95,6 +95,20 @@ union <ADX table>, cluster(CL1).database(<workspace-name>).<table name>
    [![從 Azure 資料總管 proxy 進行交叉查詢](media/adx-proxy/cross-query-adx-proxy.png)](media/adx-proxy/cross-query-adx-proxy.png#lightbox)
 
 使用[ `join` 運算子](kusto/query/joinoperator.md)（而非 union）可能需要在 [`hint`](kusto/query/joinoperator.md#join-hints) Azure 資料總管原生叢集 (上執行，而不是在 proxy) 上執行。 
+
+### <a name="join-data-from-an-adx-cluster-in-one-tenant-with-an-azure-monitor-resource-in-another"></a>使用另一個租使用者中的 Azure 監視器資源，從一個租使用者中的 ADX 叢集中聯結資料
+
+ADX Proxy 不支援跨租使用者查詢。 您已登入單一租使用者，以執行橫跨這兩個資源的查詢。
+
+如果 Azure 資料總管資源位於租使用者 ' A '，而 LA 工作區位於租使用者 ' B ' 中，請使用下列兩種方法之一：
+
+1. Azure 資料總管可讓您為不同租使用者中的主體新增角色。 在租使用者 ' B ' 中新增您的使用者識別碼，作為 Azure 資料總管叢集上的授權使用者。 驗證 Azure 資料總管叢集中包含租使用者 ' B ' 的 *' ExternalTrustedTenant '* 屬性。 在租使用者 ' B ' 中完整執行交叉查詢。 
+
+2. 使用 [Lighthouse](https://docs.microsoft.com/azure/lighthouse/) 將 Azure 監視器資源投影至租使用者 ' A '。
+
+### <a name="connect-to-azure-data-explorer-clusters-from-different-tenants"></a>從不同的租使用者連接到 Azure 資料總管叢集
+
+Kusto Explorer 會自動將您登入使用者帳戶原本所屬的租使用者。 若要使用相同的使用者帳戶存取其他租使用者中的資源，必須 `tenantId` 在連接字串中明確指定： `Data Source=https://ade.applicationinsights.io/subscriptions/SubscriptionId/resourcegroups/ResourceGroupName;Initial Catalog=NetDefaultDB;AAD Federated Security=True;Authority ID=\*\*TenantId**`
 
 ## <a name="function-supportability"></a>函數支援能力
 

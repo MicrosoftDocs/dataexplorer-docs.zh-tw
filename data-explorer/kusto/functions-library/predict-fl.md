@@ -7,21 +7,22 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/09/2020
-ms.openlocfilehash: 31f35f02951c057de4776ec83c8cd42fdbcbc9f5
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: 29db6fd462311ab30b5c477d27b04606ecfd2915
+ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90075106"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90998954"
 ---
-# <a name="predict_fl"></a>predict_fl ( # A1
+# <a name="predict_fl"></a>predict_fl()
 
 函數會 `predict_fl()` 使用現有的已定型機器學習模型來預測。 此模型是使用 [scikit-learn 學習](https://scikit-learn.org/stable/)、序列化為字串，然後儲存在標準的 Azure 資料總管資料表中所建立。
 
 > [!NOTE]
-> `predict_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
+> * `predict_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。
+> * 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 `T | invoke predict_fl(`*models_tbl* `,`*model_name* `,`*features_cols* `,`*pred_col*`)`
 

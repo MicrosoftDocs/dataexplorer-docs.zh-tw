@@ -7,21 +7,22 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/09/2020
-ms.openlocfilehash: 068dd159da048d28849f61ea04d935979f13eac5
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: 9cc70418b39ece5c33d6059c7fc90c47f3039ece
+ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90075108"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90998971"
 ---
-# <a name="predict_onnx_fl"></a>predict_onnx_fl ( # A1
+# <a name="predict_onnx_fl"></a>predict_onnx_fl()
 
 函數會 `predict_onnx_fl()` 使用現有的已定型機器學習模型來預測。 此模型已轉換成 [ONNX](https://onnx.ai/) 格式、序列化為字串，並儲存在標準 Azure 資料總管資料表中。
 
 > [!NOTE]
-> `predict_onnx_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
+> * `predict_onnx_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。
+> * 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 `T | invoke predict_onnx_fl(`*models_tbl* `,`*model_name* `,`*features_cols* `,`*pred_col*`)`
 

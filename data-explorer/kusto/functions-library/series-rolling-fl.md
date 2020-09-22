@@ -7,22 +7,23 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: 38c3933eb7e09709594892d0d73082c1171a6355
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: 218ef000869e4cea0f237137a0481a9b4d72d65e
+ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90075102"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90998988"
 ---
-# <a name="series_rolling_fl"></a>series_rolling_fl ( # A1
+# <a name="series_rolling_fl"></a>series_rolling_fl()
 
 
 函數會 `series_rolling_fl()` 在數列上套用輪流匯總。 它會採用一個包含多個數列 (動態數值陣列的資料表) 並適用于每個數列的滾動彙總函式。
 
 > [!NOTE]
-> `series_rolling_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。  此函式會 ontains 內嵌 Python，並需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
+> * `series_rolling_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。
+> * 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 `T | invoke series_rolling_fl(`*y_series* `,`*y_rolling_series* `,`*n* `,` *aggr* `,` *aggr_params* `,` *中心*`)`
 
