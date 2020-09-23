@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8a3711594ec5d1cbcaf36c7286f1484a708c29a0
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: b500f5f0e727fde315bea8d77ab60f600f127271
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90067516"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103412"
 ---
 # <a name="beta_cdf"></a>beta_cdf()
 
@@ -73,7 +73,7 @@ datatable(x:double, alpha:double, beta:double, comment:string)
 |0.1|-1|20|Alpha 是 < 0，產生 NaN|NaN|
 
 
-**另請參閱**
+## <a name="see-also"></a>另請參閱
 
 
 * 如需計算搶鮮版（Beta）累計機率密度函數的反向，請參閱 [Beta-inv ( # B1 ](./beta-invfunction.md)。

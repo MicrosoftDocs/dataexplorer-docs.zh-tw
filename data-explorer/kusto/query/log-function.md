@@ -1,6 +1,6 @@
 ---
-title: log （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 log （）。
+title: '記錄 ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的記錄 ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 283cd1427dedb04b036d7cb23e650d8f0651a58c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: e81266bf43da93d2b36f0be5846e5d74f3157c7f
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347131"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103221"
 ---
 # <a name="log"></a>log()
 
-`log()`傳回自然對數函數。  
+`log()` 傳回自然對數函數。  
 
 ## <a name="syntax"></a>語法
 
-`log(`*x*`)`
+`log(`*X*`)`
 
 ## <a name="arguments"></a>引數
 
@@ -29,10 +29,10 @@ ms.locfileid: "87347131"
 
 ## <a name="returns"></a>傳回
 
-* 自然對數是以 e 為底數的對數：自然指數函數（exp）的反向。
-* `null`如果引數為負數或 null 或無法轉換為值，則為 `real` 。 
+* 自然對數是以 e 為底數的對數：自然指數函數的反向 (exp) 。
+* `null` 如果引數為負數或 null，或無法轉換成 `real` 值。 
 
-**另請參閱**
+## <a name="see-also"></a>另請參閱
 
-* 針對常見（以10為基底）的對數，請參閱[log10 （）](log10-function.md)。
-* 若是以2為底數的對數，請參閱[log2 （）](log2-function.md)
+* 針對常見的 (base-10) 對數，請參閱 [log10 ( # B3 ](log10-function.md)。
+* 如需以2為底數的對數，請參閱 [log2 ( # B1 ](log2-function.md)

@@ -1,6 +1,6 @@
 ---
-title: make_list_if （）（彙總函式）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 make_list_if （）（彙總函式）。
+title: 'make_list_if ( # A1 (彙總函式) -Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中 ( # A1 (彙總函式) make_list_if。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: dda177c39959f860ad7e019371133f16e1de91e2
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9090e752f018c4abcce759c37a8ecb3571e2fbd6
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346927"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91102914"
 ---
-# <a name="make_list_if-aggregation-function"></a>make_list_if （）（彙總函式）
+# <a name="make_list_if-aggregation-function"></a>make_list_if ( # A1 (彙總函式) 
 
-傳回 `dynamic` 群組中*Expr*所有值的（JSON）陣列，其中*的述*詞會評估為 `true` 。
+傳回 `dynamic` 群組中所有*Expr*值的 (JSON) 陣列，其述詞會評估為*Predicate* `true` 。
 
-* 只能在[匯總](summarizeoperator.md)的內容中使用
+* 只能用在[摘要內匯總](summarizeoperator.md)的內容中
 
 ## <a name="syntax"></a>語法
 
-`summarize``make_list_if(` *Expr*、 *Predicate*述詞 [ `,` *MaxSize*]`)`
+`summarize``make_list_if(` *Expr*， *Predicate*述詞 [ `,` *MaxSize*]`)`
 
 ## <a name="arguments"></a>引數
 
 * *Expr*：將用於匯總計算的運算式。
-* 述*詞：必須*評估為 `true` ，才能將*Expr*加入至結果。
-* *MaxSize*是傳回的最大專案數目的選擇性整數限制（預設為*1048576*）。 MaxSize 值不能超過1048576。
+* 述*詞：必須*評估為 `true` 的述詞，以便將*Expr*加入結果中。
+* *MaxSize* 是選擇性的整數限制， (預設值為 *1048576*) 時傳回的元素數目上限。 MaxSize 值不能超過1048576。
 
 ## <a name="returns"></a>傳回
 
-傳回 `dynamic` 群組中*Expr*所有值的（JSON）陣列，其中*的述*詞會評估為 `true` 。
-如果 `summarize` 未排序運算子的輸入，則產生之陣列中的專案順序會是未定義的。
-如果對運算子的輸入 `summarize` 進行排序，則產生之陣列中的專案順序會追蹤輸入的內容。
+傳回 `dynamic` 群組中所有*Expr*值的 (JSON) 陣列，其述詞會評估為*Predicate* `true` 。
+如果 `summarize` 未排序運算子的輸入，則產生之陣列中的專案順序是未定義的。
+如果排序運算子的輸入 `summarize` ，則產生的陣列中的元素順序會追蹤輸入的專案順序。
 
 ## <a name="example"></a>範例
 
@@ -55,6 +55,6 @@ T
 |----|
 |["George"，"Ringo"]|
 
-**另請參閱**
+## <a name="see-also"></a>另請參閱
 
-[`make_list`](./makelist-aggfunction.md)函式，它會執行相同的（不含述詞運算式）。
+[`make_list`](./makelist-aggfunction.md) 函數，它會執行相同的，但不含述詞運算式。

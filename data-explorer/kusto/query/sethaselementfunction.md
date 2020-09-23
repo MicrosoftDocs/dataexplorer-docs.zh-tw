@@ -1,6 +1,6 @@
 ---
-title: set_has_element （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 set_has_element （）。
+title: 'set_has_element ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 set_has_element。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: 314244c58eca6082b9042b263e6b3e6faeb69840
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: b62e5032d6f2ccedc2883b6cbccaf7be69e1cebf
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351194"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103516"
 ---
 # <a name="set_has_element"></a>set_has_element()
 
@@ -21,16 +21,16 @@ ms.locfileid: "87351194"
 
 ## <a name="syntax"></a>語法
 
-`set_has_element(`*陣列*，*值*`)`
+`set_has_element(`*陣列*、*值*`)`
 
 ## <a name="arguments"></a>引數
 
 * *array*：要搜尋的輸入陣列。
-* *value*：要搜尋的值。 值應為、、、、、、 `long` `integer` 或類型 `double` `datetime` `timespan` `decimal` `string` `guid` 。
+* *value*：要搜尋的值。 值的類型必須是、、、、、、 `long` `integer` `double` `datetime` `timespan` `decimal` `string` 或 `guid` 。
 
 ## <a name="returns"></a>傳回
 
-[True] 或 [false]，視值是否存在於陣列中而定。
+True 或 false，取決於值是否存在於陣列中。
 
 ## <a name="example"></a>範例
 
@@ -44,6 +44,6 @@ print arr=dynamic(["this", "is", "an", "example"])
 |---|
 |1|
 
-**另請參閱**
+## <a name="see-also"></a>另請參閱
 
-使用 [`array_index_of(arr, value)`](arrayindexoffunction.md) 來尋找陣列中的值所在位置。 這兩個函數的效能都相同。
+用 [`array_index_of(arr, value)`](arrayindexoffunction.md) 來尋找值存在於陣列中的位置。 這兩個函式的效能也相同。

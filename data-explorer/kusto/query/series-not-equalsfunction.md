@@ -1,6 +1,6 @@
 ---
-title: series_not_equals （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 series_not_equals （）。
+title: 'series_not_equals ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 series_not_equals。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 1c362dd57cc804e0705023f4744602d93ad47c0b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 579cc4a7b86340b7e2df3e47482406ce7d31e388
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351364"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103558"
 ---
 # <a name="series_not_equals"></a>series_not_equals()
 
-計算 `!=` 兩個數值數列輸入的元素非 equals （）邏輯運算。
+計算 `!=` 兩個數值序列輸入的 () 邏輯運算的不等於元素。
 
 ## <a name="syntax"></a>語法
 
@@ -25,11 +25,11 @@ ms.locfileid: "87351364"
 
 ## <a name="arguments"></a>引數
 
-* *Series1，Series2*：輸入要比較元素的數值陣列。 所有引數都必須是動態陣列。 
+* *Series1，Series2*：輸入數值陣列以進行元素的比較。 所有引數都必須是動態陣列。 
 
 ## <a name="returns"></a>傳回
 
-布林值的動態陣列，其中包含兩個輸入之間的計算元素不相等邏輯運算。 任何非數值元素或不存在的專案（不同大小的陣列）都會產生 `null` 元素值。
+布林值的動態陣列，包含兩個輸入之間的計算專案不相等邏輯運算。 任何非數值元素或非現有的元素 (不同大小的陣列，) 產生 `null` 元素值。
 
 ## <a name="example"></a>範例
 
@@ -43,8 +43,8 @@ print s1 = dynamic([1,2,4]), s2 = dynamic([4,2,1])
 |---|---|---|
 |[1，2，4]|[4，2，1]|[true，false，true]|
 
-**另請參閱**
+## <a name="see-also"></a>另請參閱
 
-如需整個數列統計資料的比較，請參閱：
+如需完整系列統計資料的比較，請參閱：
 * [series_stats()](series-statsfunction.md)
 * [series_stats_dynamic()](series-stats-dynamicfunction.md)

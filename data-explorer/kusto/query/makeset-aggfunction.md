@@ -1,6 +1,6 @@
 ---
-title: make_set （）（彙總函式）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 make_set （）（彙總函式）。
+title: 'make_set ( # A1 (彙總函式) -Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中 ( # A1 (彙總函式) make_set。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: c85738928aa65bf2a4476f10afa065c2a8ca1faf
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0ae1a01af019e18e8e9f05454a1c52ef6a1f856c
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346910"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103081"
 ---
-# <a name="make_set-aggregation-function"></a>make_set （）（彙總函式）
+# <a name="make_set-aggregation-function"></a>make_set ( # A1 (彙總函式) 
 
 傳回一組相異值的 `dynamic` (JSON) 陣列，這些是 Expr** 在群組中取得的值。
 
-* 只能在[匯總](summarizeoperator.md)的內容中使用
+* 只能用在[摘要內匯總](summarizeoperator.md)的內容中
 
 ## <a name="syntax"></a>語法
 
@@ -27,19 +27,19 @@ ms.locfileid: "87346910"
 
 ## <a name="arguments"></a>引數
 
-* *Expr*：匯總計算的運算式。
-* *MaxSize*是傳回的最大專案數目的選擇性整數限制（預設為*1048576*）。 MaxSize 值不能超過1048576。
+* *Expr*：用於匯總計算的運算式。
+* *MaxSize* 是選擇性的整數限制， (預設值為 *1048576*) 時傳回的元素數目上限。 MaxSize 值不能超過1048576。
 
 > [!NOTE]
-> 此函式的舊版和過時變體： `makeset()` 具有*MaxSize* = 128 的預設限制。
+> 此函式的舊版和過時變數：的 `makeset()` 預設限制為 *MaxSize* = 128。
 
 ## <a name="returns"></a>傳回
 
 傳回一組相異值的 `dynamic` (JSON) 陣列，這些是 Expr** 在群組中取得的值。
-陣列的排序次序未定義。
+陣列的排序次序是未定義的。
 
 > [!TIP]
-> 若只要計算相異值，請使用[dcount （）](dcount-aggfunction.md)
+> 若只要計算相異的值，請使用 [dcount ( # B1 ](dcount-aggfunction.md)
 
 ## <a name="example"></a>範例
 
@@ -48,9 +48,9 @@ PageViewLog
 | summarize countries=make_set(country) by continent
 ```
 
-:::image type="content" source="images/makeset-aggfunction/makeset.png" alt-text="Makeset":::
+:::image type="content" source="images/makeset-aggfunction/makeset.png" alt-text="顯示 Kusto 查詢在 Azure 資料總管中依大陸摘要國家/地區的表格":::
 
-**另請參閱**
+## <a name="see-also"></a>另請參閱
 
-* [`mv-expand`](./mvexpandoperator.md)針對相反的函式使用運算子。
-* [`make_set_if`](./makesetif-aggfunction.md)運算子類似于 `make_set` ，不同之處在于它也接受述詞。
+* 將 [`mv-expand`](./mvexpandoperator.md) 運算子用於相反的函式。
+* [`make_set_if`](./makesetif-aggfunction.md) 運算子與相同 `make_set` ，但它也接受述詞。
