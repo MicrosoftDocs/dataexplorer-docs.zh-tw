@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 11/25/2019
-ms.openlocfilehash: 7031ecf15ea3f7a472fbfbe1791d166e2e35b065
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 7b97d62e007b5294bf776fb5d5adcbac435056ef
+ms.sourcegitcommit: 3fc8e9b6a313a863916031d4beba84123edcf123
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763890"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847848"
 ---
 # <a name="kusto-access-control-overview"></a>Kusto 存取控制概觀
 
@@ -61,7 +61,7 @@ Azure AD 是在 Microsoft 中向 Azure 資料總管驗證的慣用方法。 其�
 ### <a name="microsoft-accounts-msas"></a>Microsoft 帳戶 (MSA)
 
 Microsoft 帳戶 (MSA) 一詞用於所有 Microsoft 管理的非組織使用者帳戶 (例如 `hotmail.com`、`live.com`、`outlook.com`)。
-Kusto 支援 MSM 的使用者驗證 (不具安全性群組概念)，這是由其通用主體名稱 (UPN) 所識別。
+Kusto 支援 MSM 的使用者驗證 (不具安全性群組概念)，這是由其使用者主體名稱 (UPN) 所識別。
 
 若已在 Azure 資料總管資源上設定 MSA 主體，則 Azure 資料總管**不會**嘗試解析所提供的 UPN。
 
