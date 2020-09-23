@@ -1,6 +1,6 @@
 ---
-title: 安全角色管理 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的安全角色管理。
+title: 安全性角色管理-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的安全性角色管理。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,132 +8,133 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ea56911ff2ad320d1070da2a4b92d94f060273cf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4bda122b589e3ba297b3e7c350d15687da6ee123
+ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520089"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91056997"
 ---
-# <a name="security-roles-management"></a>安全角色管理
+# <a name="security-roles-management"></a>安全性角色管理
 
 > [!IMPORTANT]
-> 在變更 Kusto 叢集上的授權規則之前,請閱讀以下內容:[基於 Kusto 存取控制概述](../management/access-control/index.md) 
-> [角色的授權](../management/access-control/role-based-authorization.md) 
+> 在 Kusto 叢集 (s) 上改變授權規則之前，請先閱讀下列內容： [Kusto 存取控制總覽](../management/access-control/index.md)以  
+>  [角色為基礎的授權](../management/access-control/role-based-authorization.md) 
 
-本文介紹了用於管理安全角色的控制命令。
-安全角色定義哪些安全主體(用戶和應用程式)有權對安全資源(如資料庫或表)進行操作,以及允許執行哪些操作。 例如,具有特定資料庫`database viewer`安全角色的主體可以查詢和查看該資料庫的所有實體(受限表除外)。
+本文說明用來管理安全性角色的控制項命令。
+安全性角色會定義哪些安全性主體 (使用者和應用程式) 有權在安全的資源（例如資料庫或資料表）上操作，以及允許的作業。 例如，具有 `database viewer` 特定資料庫安全性角色的主體可以查詢和查看該資料庫的所有實體 (但限制資料表) 除外。
 
-安全角色可以與安全主體或安全組(可以具有其他安全主體或其他安全組)相關聯。 當安全主體嘗試對安全資源執行操作時,系統會檢查主體是否與至少一個授予對資源執行此操作許可權的安全角色相關聯。 這稱為**授權檢查**。 授權檢查失敗將中止操作。
+安全性角色可以與安全性主體或安全性群組相關聯， (可以有其他安全性主體或其他安全性群組) 。 當安全性主體嘗試在受保護的資源上進行作業時，系統會檢查主體是否與至少一個安全性角色相關聯，此角色會授與在資源上執行這項作業的許可權。 這稱為 **授權檢查**。 失敗的授權檢查會中止作業。
 
 **語法**
 
-安全角色管理命令的語法:
+安全性角色管理命令的語法：
 
-*動詞**可保護物件類型**可安全物件名稱**角色*`(`[*主體*`)`清單 »*描述*]
+*動詞* *SecurableObjectType* *SecurableObjectName* *Role* [ `(` *ListOfPrincipals* `)` [*Description*]]
 
-* *沒有設定字*`.show`型指示要執行的操作型`.add`態`.drop`:`.set`, 與與 。
+* *動詞* 命令表示要執行的動作類型： `.show` 、 `.add` 、 `.drop` 和 `.set` 。
 
-    |*動詞* |描述                                  |
+    |*動詞命令* |描述                                  |
     |-------|---------------------------------------------|
-    |`.show`|返回當前值或值。         |
-    |`.add` |向角色添加一個或多個主體。     |
-    |`.drop`|從角色中刪除一個或多個主體。|
-    |`.set` |將角色設置到主體的特定清單,刪除所有以前的主體(如果有)。|
+    |`.show`|傳回目前的值或值。         |
+    |`.add` |將一或多個主體新增至角色。     |
+    |`.drop`|移除角色中的一或多個主體。|
+    |`.set` |將角色設定為特定主體清單，移除所有先前的主體 (如果有任何) 。|
 
-* *Secur 可物件類型*是指定其角色的物件類型。
+* *SecurableObjectType* 是指定其角色的物件類型。
 
-    |*可安全物件類型*|描述|
+    |*SecurableObjectType*|描述|
     |---------------------|-----------|
     |`database`|指定的資料庫|
-    |`table`|指定的表|
+    |`table`|指定的資料表|
+    |`materialized-view`| 指定的 [具體化視圖](materialized-views/materialized-view-overview.md)| 
 
-* *可安全物件名稱*是對象的名稱。
+* *SecurableObjectName* 是物件的名稱。
 
-* *角色*是相關角色的名稱。
+* *Role* 是相關角色的名稱。
 
     |*角色*      |描述|
     |------------|-----------|
-    |`principals`|只能作為動詞的一`.show`部分出現;返回可能影響可保護物件的主體清單。|
-    |`admins`    |控制可保護物件,包括查看、修改物件和刪除物件和所有子物件的能力。|
-    |`users`     |可以查看可保護物件,並在其下方創建新物件。|
-    |`viewers`   |可以查看可保護物件。|
-    |`unrestrictedviewers`|僅在資料庫級別,允許查看受限表(這些表不會暴露給"正常"`viewers``users`和 )。|
-    |`ingestors` |僅在資料庫級別,允許將數據引入所有表。|
+    |`principals`|只能出現為動詞的一部分; 會傳回 `.show` 可能影響安全物件的主體清單。|
+    |`admins`    |擁有安全物件的控制權，包括能夠加以查看、修改，以及移除物件和所有子物件。|
+    |`users`     |可以查看安全物件，並在其下建立新的物件。|
+    |`viewers`   |可以查看安全物件。|
+    |`unrestrictedviewers`|只有在資料庫層級上，才允許查看受限制的資料表 (不會公開至「正常」 `viewers` 和 `users`) 。|
+    |`ingestors` |在資料庫層級，允許將資料內嵌到所有資料表中。|
     |`monitors`  ||
 
-* *Listofis*是安全主體識別碼(`string`類型值)的可選、逗號分隔清單。
+* *ListOfPrincipals* 是以逗號分隔的選擇性安全性主體識別碼清單， () 類型的值 `string` 。
 
-* *描述*是與關聯一起`string`存儲的可選類型值,用於將來的審核目的。
+* [*描述*] 是一種選擇性的值， `string` 會與關聯儲存在一起，以供未來的進行審核之用。
 
 ## <a name="example"></a>範例
 
-以下控制命令列出了對資料庫中表`StormEvents`具有某種訪問許可權的所有安全主體:
+下列控制命令會列出對資料庫中資料表具有部分存取權的所有安全性主體 `StormEvents` ：
 
 ```kusto
 .show table StormEvents principals
 ```
 
-以下是此指令的潛在結果:
+以下是此命令可能產生的結果：
 
-|角色 |PrincipalType |主體顯示名稱 |主體物件Id |本金 
+|角色 |PrincipalType |PrincipalDisplayName |PrincipalObjectId |PrincipalFQN 
 |---|---|---|---|---
-|資料庫 Apsty 管理員 |AAD 使用者 |馬克·史密斯 |cd709aed-a26c-e3953dec735e |亞達瑟。msmith@fabrikam.com|
+|資料庫 Apsty 管理員 |Azure AD 使用者 |Mark Smith |cd709aed-a26c-e3953dec735e |aaduser =msmith@fabrikam.com|
 
 
 
 
 
-## <a name="managing-database-security-roles"></a>管理資料庫安全角色
+## <a name="managing-database-security-roles"></a>管理資料庫安全性角色
 
-`.set``database`*資料庫名稱**角色*`none``skip-results`|
+`.set``database` *DatabaseName* *角色* `none` [ `skip-results` ]
 
-`.set``database`*資料庫名稱**角色*`(`*主體*`,`=*主體*...`)` [`skip-results`] [ ]*描述*】
+`.set``database` *DatabaseName* *Role* `(` *Principal* [ `,` *principal*...] `)` [ `skip-results` ] [*Description*]
 
-`.add``database`*資料庫名稱**角色*`(`*主體*`,`=*主體*...`)` [`skip-results`] [ ]*描述*】
+`.add``database` *DatabaseName* *Role* `(` *Principal* [ `,` *principal*...] `)` [ `skip-results` ] [*Description*]
 
-`.drop``database`*資料庫名稱**角色*`(`*主體*`,`=*主體*...`)` [`skip-results`] [ ]*描述*】
+`.drop``database` *DatabaseName* *Role* `(` *Principal* [ `,` *principal*...] `)` [ `skip-results` ] [*Description*]
 
-第一個命令從角色中刪除所有主體。 第二個主體從角色中刪除所有主體,並設置一組新的主體。 第三個在不刪除現有主體的情況下向角色添加新主體。 最後一個從角色中刪除指示的主體,並保留其他主體。
+第一個命令會移除角色中的所有主體。 第二個會移除角色中的所有主體，並設定一組新的主體。 第三個會將新的主體新增至角色，而不會移除現有的主體。 最後，會從角色中移除指定的主體，並保留其他角色。
 
 其中：
 
-* *資料庫名稱*是正在修改其安全角色的資料庫的名稱。
+* *DatabaseName* 是正在修改其安全性角色的資料庫名稱。
 
-* *角色*為`admins``ingestors`: `monitors` `unrestrictedviewers` `users` `viewers` 、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
+* *Role* 為： `admins` 、、、 `ingestors` `monitors` `unrestrictedviewers` 、 `users` 或 `viewers` 。
 
-* *校長*是一個或多個主體。 有關如何指定這些主體,請參閱[主體和標識提供者](./access-control/principals-and-identity-providers.md)。
+* *主體* 是一或多個主體。 如需如何指定這些主體的詳細 [資訊，請參閱主體和身分識別提供者](./access-control/principals-and-identity-providers.md) 。
 
-* `skip-results`,如果提供,請求該命令不會返回資料庫主體的更新清單。
+* `skip-results`如果有提供，要求命令不會傳回資料庫主體的更新清單。
 
-* *說明*(如果提供)是與更改關聯的文本,並由`.show`相應的 命令檢索。
+* *描述*（如有提供）是將與變更相關聯的文字，並由對應的 `.show` 命令抓取。
 
 <!-- TODO: Need more examples for the public syntax. Until then we're keeping this internal -->
 
 
-## <a name="managing-table-security-roles"></a>管理表安全角色
+## <a name="managing-table-security-roles"></a>管理資料表安全性角色
 
-`.set``table`*表名**角色*`none``skip-results`|
+`.set``table` *TableName* *Role* `none` [ `skip-results` ]
 
-`.set``table`*表格**名稱 角色*`(`*主體*`,`=*主體*...`)` [`skip-results`] [ ]*描述*】
+`.set``table` *TableName* *Role* `(` *Principal* [ `,` *principal*...] `)` [ `skip-results` ] [*Description*]
 
-`.add``table`*表格**名稱 角色*`(`*主體*`,`=*主體*...`)` [`skip-results`] [ ]*描述*】
+`.add``table` *TableName* *Role* `(` *Principal* [ `,` *principal*...] `)` [ `skip-results` ] [*Description*]
 
-`.drop``table`*表格**名稱 角色*`(`*主體*`,`=*主體*...`)` [`skip-results`] [ ]*描述*】
+`.drop``table` *TableName* *Role* `(` *Principal* [ `,` *principal*...] `)` [ `skip-results` ] [*Description*]
 
-第一個命令從角色中刪除所有主體。 第二個主體從角色中刪除所有主體,並設置一組新的主體。 第三個在不刪除現有主體的情況下向角色添加新主體。 最後一個從角色中刪除指示的主體,並保留其他主體。
+第一個命令會移除角色中的所有主體。 第二個會移除角色中的所有主體，並設定一組新的主體。 第三個會將新的主體新增至角色，而不會移除現有的主體。 最後，會從角色中移除指定的主體，並保留其他角色。
 
 其中：
 
-* *表名稱*是正在修改其安全角色的表的名稱。
+* *TableName* 是正在修改其安全性角色的資料表名稱。
 
-* *角色*是`admins``ingestors`: 或 。
+* *角色* 為： `admins` 或 `ingestors` 。
 
-* *校長*是一個或多個主體。 有關如何指定這些主體,請參閱[主體和標識提供者](./access-control/principals-and-identity-providers.md)。
+* *主體* 是一或多個主體。 如需如何指定這些主體的詳細 [資訊，請參閱主體和身分識別提供者](./access-control/principals-and-identity-providers.md) 。
 
-* `skip-results`如果提供,則請求該命令不會返回更新的表主體清單。
+* `skip-results`如果有提供，要求命令不會傳回資料表主體的更新清單。
 
-* *說明*(如果提供)是與更改關聯的文本,並由`.show`相應的 命令檢索。
+* *描述*（如有提供）是將與變更相關聯的文字，並由對應的 `.show` 命令抓取。
 
 **範例**
 
@@ -141,29 +142,44 @@ ms.locfileid: "81520089"
 .add table Test admins ('aaduser=imike@fabrikam.com ')
 ```
 
-## <a name="managing-function-security-roles"></a>管理功能安全角色
+## <a name="managing-materialized-view-security-roles"></a>管理具體化視圖安全性角色
 
-`.set``function`*函數名稱**角色*`none``skip-results`|
+`.show``materialized-view` *MaterializedViewName*`principals`
 
-`.set``function`*函數名稱**角色*`(`*主體*`,`=*主體*...`)` [`skip-results`] [ ]*描述*】
+`.set``materialized-view` *MaterializedViewName* `admins` MaterializedViewName `(`*主體* `,[`*主體 ...*`])`
 
-`.add``function`*函數名稱**角色*`(`*主體*`,`=*主體*...`)` [`skip-results`] [ ]*描述*】
+`.add``materialized-view` *MaterializedViewName* `admins` MaterializedViewName `(`*主體* `,[`*主體 ...*`])`
 
-`.drop``function`*函數名稱**角色*`(`*主體*`,`=*主體*...`)` [`skip-results`] [ ]*描述*】
-
-第一個命令從角色中刪除所有主體。 第二個主體從角色中刪除所有主體,並設置一組新的主體。 第三個在不刪除現有主體的情況下向角色添加新主體。 最後一個從角色中刪除指示的主體,並保留其他主體。
+`.drop``materialized-view` *MaterializedViewName* `admins` MaterializedViewName `(`*主體* `,[`*主體 ...*`])`
 
 其中：
 
-* *函數名稱*是正在修改其安全角色的函數的名稱。
+* *MaterializedViewName* 是要修改其安全性角色的具體化視圖名稱。
+* *主體* 是一或多個主體。 查看 [主體和身分識別提供者](./access-control/principals-and-identity-providers.md)
 
-* *角色*`admin`總是 。
+## <a name="managing-function-security-roles"></a>管理函數安全性角色
 
-* *校長*是一個或多個主體。 有關如何指定這些主體,請參閱[主體和標識提供者](./access-control/principals-and-identity-providers.md)。
+`.set``function` *FunctionName* *角色* `none` [ `skip-results` ]
 
-* `skip-results`,如果提供,請求該命令不會返回更新的函數主體清單。
+`.set``function` *FunctionName* *Role* `(` *Principal* [ `,` *principal*...] `)` [ `skip-results` ] [*Description*]
 
-* *說明*(如果提供)是與更改關聯的文本,並由`.show`相應的 命令檢索。
+`.add``function` *FunctionName* *Role* `(` *Principal* [ `,` *principal*...] `)` [ `skip-results` ] [*Description*]
+
+`.drop``function` *FunctionName* *Role* `(` *Principal* [ `,` *principal*...] `)` [ `skip-results` ] [*Description*]
+
+第一個命令會移除角色中的所有主體。 第二個會移除角色中的所有主體，並設定一組新的主體。 第三個會將新的主體新增至角色，而不會移除現有的主體。 最後，會從角色中移除指定的主體，並保留其他角色。
+
+其中：
+
+* *FunctionName* 是要修改其安全性角色的函式名稱。
+
+* *角色* 一律為 `admin` 。
+
+* *主體* 是一或多個主體。 如需如何指定這些主體的詳細 [資訊，請參閱主體和身分識別提供者](./access-control/principals-and-identity-providers.md) 。
+
+* `skip-results`如果有提供，要求命令不會傳回已更新的函式主體清單。
+
+* *描述*（如有提供）是將與變更相關聯的文字，並由對應的 `.show` 命令抓取。
 
 **範例**
 

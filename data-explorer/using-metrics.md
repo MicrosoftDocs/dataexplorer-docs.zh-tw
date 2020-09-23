@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/19/2020
 ms.custom: contperfq1
-ms.openlocfilehash: d12e1d2382c3d7fe9a980b2b777a02205d28e5de
-ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
+ms.openlocfilehash: e2adf84e869638d6019b149af7623e12a64930d8
+ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/21/2020
-ms.locfileid: "90832547"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91056963"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>使用計量來監視 Azure 資料總管效能、健康情況和使用量
 
@@ -59,6 +59,7 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 * [內嵌計量](#ingestion-metrics) 
 * [串流內嵌計量](#streaming-ingest-metrics)
 * [查詢計量](#query-metrics) 
+* [具體化視圖計量](#materialized-view-metrics)
 
 如需以字母順序列出 Azure 資料瀏覽器的 Azure 監視器計量清單，請參閱 [支援的 azure 資料總管叢集計量](/azure/azure-monitor/platform/metrics-supported#microsoftkustoclusters)。
 
@@ -68,12 +69,12 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 
 |**計量** | **單位** | **聚集** | **度量說明** | **維度** |
 |---|---|---|---|---|
-| 快取使用率 | 百分比 | Avg、Max、Min | 叢集目前正在使用的已配置快取資源百分比。 Cache 是根據定義的快取原則，為使用者活動配置的 SSD 大小。 <br> <br> 平均快取使用率80% 或更低是叢集的持續性狀態。 如果平均快取使用率高於80%，則叢集應該是 <br> [擴充](manage-cluster-vertical-scaling.md) 至儲存體優化定價層或 <br> [相應放大](manage-cluster-horizontal-scaling.md) 至多個實例。 或者，在快取) 中調整快取原則 (較少的天數。 如果快取使用率超過100%，則根據快取原則快取的資料大小，會大於叢集上的快取大小總計。 | None |
-| CPU | 百分比 | Avg、Max、Min | 叢集中的電腦目前正在使用的已配置計算資源百分比。 <br> <br> 叢集的平均 CPU （80% 或更低）是可持續的。 CPU 的最大值是100%，這表示沒有額外的計算資源可處理資料。 <br> 當叢集未正常執行時，請檢查 CPU 的最大值，以判斷是否有特定的 Cpu 被封鎖。 | None |
-| 擷取使用率 | 百分比 | Avg、Max、Min | 實際資源百分比，用來從配置的總資源（在容量原則中）內嵌資料，以執行內嵌。 預設容量原則不超過512的並行內嵌作業，或投資于內嵌的叢集資源75%。 <br> <br> 80% 或更低的平均內嵌使用率是叢集的持續性狀態。 內嵌使用率的最大值為100%，這表示會使用所有叢集內嵌功能，並可能產生內嵌佇列。 | None |
+| 快取使用率 | 百分比 | Avg、Max、Min | 叢集目前正在使用的已配置快取資源百分比。 Cache 是根據定義的快取原則，為使用者活動配置的 SSD 大小。 <br> <br> 平均快取使用率80% 或更低是叢集的持續性狀態。 如果平均快取使用率高於80%，則叢集應該是 <br> [擴充](manage-cluster-vertical-scaling.md) 至儲存體優化定價層或 <br> [相應放大](manage-cluster-horizontal-scaling.md) 至多個實例。 或者，在快取) 中調整快取原則 (較少的天數。 如果快取使用率超過100%，則根據快取原則快取的資料大小，會大於叢集上的快取大小總計。 | 無 |
+| CPU | 百分比 | Avg、Max、Min | 叢集中的電腦目前正在使用的已配置計算資源百分比。 <br> <br> 叢集的平均 CPU （80% 或更低）是可持續的。 CPU 的最大值是100%，這表示沒有額外的計算資源可處理資料。 <br> 當叢集未正常執行時，請檢查 CPU 的最大值，以判斷是否有特定的 Cpu 被封鎖。 | 無 |
+| 擷取使用率 | 百分比 | Avg、Max、Min | 實際資源百分比，用來從配置的總資源（在容量原則中）內嵌資料，以執行內嵌。 預設容量原則不超過512的並行內嵌作業，或投資于內嵌的叢集資源75%。 <br> <br> 80% 或更低的平均內嵌使用率是叢集的持續性狀態。 內嵌使用率的最大值為100%，這表示會使用所有叢集內嵌功能，並可能產生內嵌佇列。 | 無 |
 | 保持運作 | Count | 平均 | 追蹤叢集的回應性。 <br> <br> 完全回應的叢集會傳回值1，且封鎖或中斷連線的叢集會傳回0。 |
-| 節流命令的總數 | Count | Avg、Max、Min、Sum | 因為已達到允許的並行 (平行) 命令數目上限，所以 (在叢集中拒絕) 命令的節流數目。 | None |
-| 延伸區總數 | Count | Avg、Max、Min、Sum | 叢集中的資料範圍總數。 <br> <br> 此計量中的變更可能表示大量資料結構變更和叢集上的高負載，因為合併資料範圍是大量 CPU 的活動。 | None |
+| 節流命令的總數 | Count | Avg、Max、Min、Sum | 因為已達到允許的並行 (平行) 命令數目上限，所以 (在叢集中拒絕) 命令的節流數目。 | 無 |
+| 延伸區總數 | Count | Avg、Max、Min、Sum | 叢集中的資料範圍總數。 <br> <br> 此計量中的變更可能表示大量資料結構變更和叢集上的高負載，因為合併資料範圍是大量 CPU 的活動。 | 無 |
 
 ## <a name="export-metrics"></a>匯出度量
 
@@ -82,10 +83,10 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 |**計量** | **單位** | **聚集** | **度量說明** | **維度** |
 |---|---|---|---|---|
 匯出記錄的連續匯出數目    | Count | Sum | 所有連續匯出作業中匯出的記錄數目。 | ContinuousExportName |
-連續匯出最大延遲 |    Count   | 最大值   | 延遲 (（分鐘），) 由叢集中的連續匯出工作所報告。 | None |
+連續匯出最大延遲 |    Count   | 最大值   | 延遲 (（分鐘），) 由叢集中的連續匯出工作所報告。 | 無 |
 連續匯出暫止計數 | Count | 最大值   | 暫止連續匯出作業的數目。 這些作業已準備好執行，但在佇列中等候，可能是因為容量不足) 。 
 連續匯出結果    | Count |   Count   | 每個連續匯出執行的失敗/成功結果。 | ContinuousExportName |
-匯出使用率 |    百分比 | 最大值   | 已使用的匯出容量，在叢集中的總匯出容量 (介於0與100之間) 。 | None |
+匯出使用率 |    百分比 | 最大值   | 已使用的匯出容量，在叢集中的總匯出容量 (介於0與100之間) 。 | 無 |
 
 ## <a name="ingestion-metrics"></a>內嵌計量
 
@@ -99,7 +100,7 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 | 已處理的批次 | Count | Avg、Max、Min | 針對內嵌完成的批次數目。 `Batching Type`：批次是否達到批次處理時間、資料大小或檔案數目限制（依 [批次處理原則](/azure/data-explorer/kusto/management/batchingpolicy)設定）。 | 資料庫，批次處理類型 |
 | 探索延遲 | 秒 | Avg、Max、Min | 從資料佇列到資料連線探索為止的時間。 此時間未包含在 **Kusto total 內建持續時間** 或 **KustoEventAge (內嵌延遲) ** | 資料庫、資料表、資料連線類型、資料連線名稱 |
 | 已處理的事件 (針對事件/IoT 中樞) | Count | 最大值、最小值、總和 | 從事件中樞讀取並由叢集處理的事件總數。 這些事件會分割成被拒絕的事件，以及叢集引擎所接受的事件。 | EventStatus |
-| 內嵌延遲 | 秒 | Avg、Max、Min | 資料內嵌的延遲時間，從叢集中收到資料到準備進行查詢為止。 內嵌延遲期間取決於內嵌案例。 | None |
+| 內嵌延遲 | 秒 | Avg、Max、Min | 資料內嵌的延遲時間，從叢集中收到資料到準備進行查詢為止。 內嵌延遲期間取決於內嵌案例。 | 無 |
 | 擷取結果 | Count | Count | 失敗和成功的內嵌作業總數。 <br> <br> 使用 [套用**分割**] 來建立成功和失敗結果的 bucket，並分析維度 (**值**  >  **狀態**) 。| IngestionResultDetails |
 | 擷取量 (以 MB 為單位) | Count | Max、Sum | 在壓縮之前，內嵌至叢集 (的資料大小總計（MB）) 。 | 資料庫 |
 | 階段延遲 | 秒 | Avg、Max、Min | 特定元件處理此批次資料的持續時間。 所有資料批次元件的階段延遲總計等於其內嵌延遲。 | 資料庫、資料連線類型、資料連線名稱|
@@ -110,9 +111,9 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 
 |**計量** | **單位** | **聚集** | **度量說明** | **維度** |
 |---|---|---|---|---|
-串流內嵌資料速率 |    Count   | RateRequestsPerSecond | 內嵌至叢集的總數據量。 | None |
-串流內嵌持續時間   | 毫秒  | Avg、Max、Min | 所有串流內嵌要求的總持續時間。 | None |
-串流內嵌要求率   | Count | Count、Avg、Max、Min、Sum | 串流內嵌要求的總數。 | None |
+串流內嵌資料速率 |    Count   | RateRequestsPerSecond | 內嵌至叢集的總數據量。 | 無 |
+串流內嵌持續時間   | 毫秒  | Avg、Max、Min | 所有串流內嵌要求的總持續時間。 | 無 |
+串流內嵌要求率   | Count | Count、Avg、Max、Min、Sum | 串流內嵌要求的總數。 | 無 |
 串流內嵌結果 | Count | 平均   | 依結果類型的串流內嵌要求總數。 | 結果 |
 
 ## <a name="query-metrics"></a>查詢計量
@@ -122,8 +123,19 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 |**計量** | **單位** | **聚集** | **度量說明** | **維度** |
 |---|---|---|---|---|
 | 查詢持續時間 | 毫秒 | Avg、Min、Max、Sum | 收到查詢結果之前的總時間 (不包括) 的網路延遲。 | QueryStatus |
-| 並行查詢總數 | Count | Avg、Max、Min、Sum | 在叢集中平行執行的查詢數目。 此計量是估計叢集負載的好方法。 | None |
-| 節流查詢總數 | Count | Avg、Max、Min、Sum | 在叢集中 (拒絕) 查詢的節流數目。 並行查詢原則中定義了允許的並行 (平行) 查詢數目上限。 | None |
+| 並行查詢總數 | Count | Avg、Max、Min、Sum | 在叢集中平行執行的查詢數目。 此計量是估計叢集負載的好方法。 | 無 |
+| 節流查詢總數 | Count | Avg、Max、Min、Sum | 在叢集中 (拒絕) 查詢的節流數目。 並行查詢原則中定義了允許的並行 (平行) 查詢數目上限。 | 無 |
+
+## <a name="materialized-view-metrics"></a>具體化視圖計量
+
+|**計量** | **單位** | **聚集** | **度量說明** | **維度** |
+|---|---|---|---|---|
+|MaterializedViewHealth                    | 1，0    | 平均     |  如果視圖被視為狀況良好，則值為1，否則為0。 | Database、MaterializedViewName |
+|MaterializedViewAgeMinutes                | 分鐘 | 平均     | `age`視圖的是由目前時間所定義，減去 view 所處理的最後一個內嵌時間。 計量值是以分鐘為單位的時間， (值越低，則 view 是 "健康" ) 。 | Database、MaterializedViewName |
+|MaterializedViewResult                    | 1       | 平均     | 度量包含的 `Result` 維度指出最後具體化週期的結果 (查看下列可能的值) 。 度量值一律等於1。 | 資料庫、MaterializedViewName、結果 |
+|MaterializedViewRecordsInDelta            | 記錄計數 | 平均 | 目前在來源資料表未處理之部分中的記錄數目。 如需詳細資訊，請參閱 [具體化視圖的運作方式](./kusto/management/materialized-views/materialized-view-overview.md#how-materialized-views-work)| Database、MaterializedViewName |
+|MaterializedViewExtentsRebuild            | 範圍計數 | 平均 | 具體化迴圈中重建的範圍數目。 | Database、MaterializedViewName|
+|MaterializedViewDataLoss                  | 1       | 最大值    | 當未處理的來源資料接近保留時，就會引發度量。 | Database、MaterializedViewName、Kind |
 
 ## <a name="next-steps"></a>後續步驟
 
