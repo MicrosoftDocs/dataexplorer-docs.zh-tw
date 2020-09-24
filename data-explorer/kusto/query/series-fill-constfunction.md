@@ -1,6 +1,6 @@
 ---
-title: series_fill_const （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 series_fill_const （）。
+title: 'series_fill_const ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 series_fill_const。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,45 +8,45 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bb3f217b1ec0631f533a10433a7be368945667d7
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 8433773111f65e0271692bc3d1ba68cf0bc7c544
+ms.sourcegitcommit: 44a4f7ea5c5d75301d7a09b7dc1254a1e5f08eaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87344530"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210506"
 ---
 # <a name="series_fill_const"></a>series_fill_const()
 
 以指定的常數值取代數列中的遺漏值。
 
-採用包含動態數值陣列做為輸入的運算式，以指定的 constant_value 取代 missing_value_placeholder 的所有實例，並傳回產生的陣列。
+採用包含動態數值陣列的運算式做為輸入，以指定的 constant_value 取代 missing_value_placeholder 的所有實例，並傳回產生的陣列。
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
-`series_fill_const(`*x* `[, `*constant_value* `[,`*missing_value_placeholder*`]])`
-* 會傳回數列*x* ，其中的所有實例*missing_value_placeholder*都會取代為*constant_value*。
+`series_fill_const(`*x* `, `*constant_value* `[,`*missing_value_placeholder*`])`
+* 會傳回數列 *x* ，其中所有的 *missing_value_placeholder* 實例都取代為 *constant_value*。
 
 ## <a name="arguments"></a>引數
 
 * *x*：動態陣列純量運算式，這是數值的陣列。
-* *constant_value*：參數，指定要取代之遺漏值的預留位置。 預設值為*0*。 
-* *missing_value_placeholder*：選擇性參數，指定要取代之遺漏值的預留位置。 預設值為 `double` （*null*）。
+* *constant_value*：取代遺漏值的值。 
+* *missing_value_placeholder*：選擇性參數，指定要取代之遺漏值的預留位置。 預設值為 `double` *null*)  (。
 
 **備註**
-* 您可以使用 DefaultValue 語法來建立填滿常數值的數列 `default = ` *DefaultValue* （或只省略會假設為0的）。 如需詳細資訊，請參閱[make 系列](make-seriesoperator.md)。
+* 如果您使用「 [建立](make-seriesoperator.md) 數列」運算子來建立數列，則預設會填滿遺漏值0，或者您可以 `default = ` 在「建立數列」語句中指定 *DefaultValue* 來指定要填滿的常數值。
 
 ```kusto
 make-series num=count() default=-1 on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
 ```
   
-* 若要在[make 系列](make-seriesoperator.md)之後套用任何插補函式，請將*null*指定為預設值： 
+* 若要在 [make 系列](make-seriesoperator.md)之後套用任何插補函數，請將 *null* 指定為預設值： 
 
 ```kusto
 make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
 ```
   
-* *Missing_value_placeholder*可以是任何類型，這會轉換成實際的元素類型。 因此， `double` （*null*）、 `long` （*null*）或 `int` （*null*）具有相同的意義。
-* 函式會保留陣列元素的原始類型。 
+* *Missing_value_placeholder*可以是任何型別，而這些型別會轉換成實際的元素類型。 如此一來， `double` (*null*) ， `long` (*null*) 或 `int` (*null*) 具有相同的意義。
+* 函式會保留陣列元素的原始型別。 
 
 ## <a name="example"></a>範例
 
@@ -64,4 +64,4 @@ data
 
 |`arr`|`fill_const1`|`fill_const2`|
 |---|---|---|
-|[111，null，36，41，23，null，16，61，33，null，null]|[111，0.0，36，41，23，0.0，16，61，33，0.0，0.0]|[111，-1，36，41，23，-1，16，61，33，-1，-1]|
+|[111，null，36，41，23，null，16，61，33，null，null]|[111、0.0、36、41、23、0.0、16、61、33、0.0、0.0]|[111，-1，36，41，23，-1，16，61，33，-1，-1]|
