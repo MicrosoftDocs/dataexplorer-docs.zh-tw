@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8433773111f65e0271692bc3d1ba68cf0bc7c544
-ms.sourcegitcommit: 44a4f7ea5c5d75301d7a09b7dc1254a1e5f08eaa
+ms.openlocfilehash: 7e587ab08c009516788e3a44b0b8e4a321741d94
+ms.sourcegitcommit: 8853e50a798ee7c78b69bf9822bbf1ced3abe73c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210506"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91227019"
 ---
 # <a name="series_fill_const"></a>series_fill_const()
 
@@ -33,7 +33,7 @@ ms.locfileid: "91210506"
 * *missing_value_placeholder*：選擇性參數，指定要取代之遺漏值的預留位置。 預設值為 `double` *null*)  (。
 
 **備註**
-* 如果您使用「 [建立](make-seriesoperator.md) 數列」運算子來建立數列，則預設會填滿遺漏值0，或者您可以 `default = ` 在「建立數列」語句中指定 *DefaultValue* 來指定要填滿的常數值。
+* 如果您使用「 [製作系列](make-seriesoperator.md) 」運算子來建立數列，則會使用預設值0填滿遺漏值。 或者，您可以藉由在 `default = ` 建立數列語句中指定 *DefaultValue* 來指定要填入的常數值。
 
 ```kusto
 make-series num=count() default=-1 on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
