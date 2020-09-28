@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/06/2020
-ms.openlocfilehash: 8732edf3b2cb9600fcce1ed03097d893c6615528
-ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
+ms.openlocfilehash: 3302e7cb94a2184be64664f3c3d8698b8bea7643
+ms.sourcegitcommit: 92b8057a36bd7daa16226f1526b29253bceb3602
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90740935"
+ms.lasthandoff: 09/28/2020
+ms.locfileid: "91402732"
 ---
 # <a name="create-a-table-in-azure-data-explorer-preview"></a>在 Azure 資料總管 (preview 中建立資料表) 
 
@@ -41,19 +41,19 @@ ms.locfileid: "90740935"
 1. 在 [ **來源類型**] 中，選取您要用來建立資料表對應的資料來源。 從下列選項中選擇： **從 blob**、 **檔案**或 **容器**。
    
     
-    * 如果您使用的是 **blob**：
+    * 如果您使用的是 **容器**：
         * 輸入 blob 的儲存體 url，並選擇性地輸入範例大小。 
         * 使用檔案 **篩選**器篩選您的檔案。 
         * 選取將在下一個步驟中用來定義架構的檔案。
 
-        :::image type="content" source="media/one-click-table/blob.png" alt-text="使用 blob 建立資料表以建立架構對應":::
+        :::image type="content" source="media/one-click-table/storage.png" alt-text="使用 blob 建立資料表以建立架構對應":::
     
     * 如果您使用的是 **本機**檔案：
         * 選取 [瀏覽] 以找出檔案，或將檔案拖曳到欄位中。
 
         :::image type="content" source="./media/one-click-table/data-from-file.png" alt-text="根據本機檔案中的資料建立資料表 ":::
 
-    * 如果您使用的是 **容器**：
+    * 如果您使用的是 **blob**：
         * 在 [ **儲存體的連結** ] 欄位中，新增容器的 [SAS URL](/azure/vs-azure-tools-storage-explorer-blobs#get-the-sas-for-a-blob-container) ，並選擇性地輸入範例大小。 
 
 1. 選取 [ **編輯架構** ] 以繼續前往 [ **架構** ] 索引標籤。
