@@ -8,26 +8,35 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 807ca8a9bfd8d3f356fd849b6adc2102201513cf
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 354908df7ab0e65c8d4110dbff3a45a876b748a0
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057114"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452743"
 ---
-# <a name="create-materialized-view"></a>。建立具體化-view
+# <a name="create-materialized-view"></a>.create materialized-view
 
 [具體化 view](materialized-view-overview.md)是對來源資料表的匯總查詢，代表單一摘要語句。
-如需建立具體化視圖的一般資訊和指導方針，請參閱 [建立具體化視圖](materialized-view-overview.md#create-a-materialized-view)。
 
-需要 [資料庫管理員](../access-control/role-based-authorization.md) 許可權。
+有兩種可能的方式可以建立具體化視圖，在命令中使用 *回填* 選項來注明：
 
-具體化視圖一律以單一為基礎 `fact table` ，而且也可以參考一或多個 [`dimension tables`](../../concepts/fact-and-dimension-tables.md) 。 如需在具體化視圖中聯結維度資料表的限制，請參閱 [屬性](#properties)。 如需一般限制，請參閱 [建立具體化視圖的限制](materialized-view-overview.md#limitations-on-creating-materialized-views)。 
+ * **根據來源資料表中的現有記錄來建立：** 
+      * 建立可能需要很長的時間才能完成，視來源資料表中的記錄數目而定。 在完成之前，此視圖將無法供查詢使用。
+      * 使用這個選項時，create 命令必須是 `async` ，而且可以使用 [. show operations](../operations.md#show-operations) 命令來監視執行。
 
-* 使用 [ [顯示作業](../operations.md#show-operations) ] 命令追蹤建立程式。
-* 使用 [. cancel operation](#cancel-materialized-view-creation) 命令取消建立進程。
+    * 您可以使用 [. cancel operation](#cancel-materialized-view-creation) 命令取消回填程式。
 
-## <a name="syntax"></a>語法
+      > [!IMPORTANT]
+      > * 冷快取中的資料不支援使用回填選項。 如有必要，請增加熱快取期間以建立視圖。 這可能需要相應放大。    
+      > * 針對大型來源資料表，使用回填選項可能需要很長的時間才能完成。 如果這個進程暫時在執行時失敗，將不會自動重試，而且需要重新執行 create 命令。
+    
+* **從現在開始建立具體化視圖：** 
+    * 具體化視圖會建立空白，而且只會在建立視圖之後包含內嵌記錄。 這種類型的建立會立即傳回，不需要 `async` ，而且此視圖會立即可供查詢。
+
+建立作業需要 [資料庫系統管理員](../access-control/role-based-authorization.md) 許可權。 具體化視圖的建立者會成為它的系統管理員。
+
+## <a name="syntax"></a>Syntax
 
 `.create` [`async`] `materialized-view` <br>
 [ `with` `(` *PropertyName* `=` *PropertyValue* `,` ... `)` ] <br>
@@ -48,10 +57,10 @@ ms.locfileid: "91057114"
 
 * 查詢引數應該參考成為具體化視圖來源的單一事實資料表、包含單一摘要運算子，以及由一或多個依運算式匯總的一或多個彙總函式。 摘要運算子必須一律是查詢中的最後一個運算子。
 
-* 查詢不應包含相依于 `now()` 或的任何運算子 `ingestion_time()` 。 例如，查詢不應該有 `where Timestamp > ago(5d)` 。 具有匯總的具體化視圖 `arg_max` / `arg_min` / `any` 無法包含任何其他支援的彙總函式。 使用具體化視圖上的保留原則，限制 view 所涵蓋的時間長度。
-
 * View `arg_max` / `arg_min` / `any` 可以是 (這些函式可同時在相同的 view) 或任何其他支援的函式中使用，但不能同時在相同的具體化視圖中使用。 
     例如， `SourceTable | summarize arg_max(Timestamp, *), count() by Id` 不支援。 
+
+* 查詢不應包含相依于 `now()` 或的任何運算子 `ingestion_time()` 。 例如，查詢不應該有 `where Timestamp > ago(5d)` 。 具有匯總的具體化視圖 `arg_max` / `arg_min` / `any` 無法包含任何其他支援的彙總函式。 使用具體化視圖上的保留原則，限制 view 所涵蓋的時間長度。
 
 * 具體化視圖定義中不支援複合匯總。 例如，您可以將 `SourceTable | summarize Result=sum(Column1)/sum(Column2) by Id` 具體化 view 定義為：，而不是下列視圖： `SourceTable | summarize a=sum(Column1), b=sum(Column2) by Id` 。 在 view 查詢階段期間，執行- `ViewName | project Id, Result=a/b` 。 您可以將視圖的必要輸出（包括匯出資料行 (`a/b`) ）封裝在 [預存](../../query/functions/user-defined-functions.md)函式中。 存取預存函式，而不是直接存取具體化 view。
 
@@ -59,32 +68,34 @@ ms.locfileid: "91057114"
 
 * 不支援 [external_table ( # B1 ](../../query/externaltablefunction.md) 和 [externaldata](../../query/externaldata-operator.md) 的參考。
 
+* 除了視圖的來源資料表之外，它也可以參考一或多個 [`dimension tables`](../../concepts/fact-and-dimension-tables.md) 。 您必須在 view 屬性中明確地呼叫維度資料表。 請務必瞭解聯結維度資料表時的行為：
+
+    * 視圖來源資料表中的記錄 (事實資料表) 只會具體化一次。 事實資料表與維度資料表之間的不同內嵌延遲可能會影響視圖結果。
+
+    * **範例**：視圖定義包含具有維度資料表的內部聯結。 在具體化時，維度記錄未完全內嵌，但已內嵌到事實資料表。 此記錄將會從視圖中卸載，且永遠不會重新處理。 
+
+        同樣地，如果聯結是外部聯結，則會處理事實資料表中的記錄，並將其加入至維度資料表資料行的 null 值。 已新增 () 值為 null 值的記錄將不會再次處理。 它們在維度資料表的資料行中的值會維持 null。
+
 ## <a name="properties"></a>屬性
 
 子句支援下列各項 `with(propertyName=propertyValue)` 。 所有屬性都是選擇性的。
 
-|屬性|類型|描述 | 注意 |
-|----------------|-------|---|---|
-|回填|bool|是否要根據目前在 *SourceTable* () 中的所有記錄來建立視圖 `true` ，或從 [從現在開始] (`false`) 建立。 預設為 `false`。| 此命令必須是 `async` ，而且在建立完成之前，無法使用此視圖來進行查詢。 依回填的資料量而定，使用回填建立可能需要很長的時間。 它刻意「緩慢」，以確保它不會耗用太多叢集資源。 請參閱 [回填說明](materialized-view-overview.md#create-a-materialized-view) |
+|屬性|類型|描述 |
+|----------------|-------|---|
+|回填|bool|是否要根據目前在 *SourceTable* () 中的所有記錄來建立視圖 `true` ，或從 [從現在開始] (`false`) 建立。 預設為 `false`。| 
 |effectiveDateTime|Datetime| 如果與一起指定 `backfill=true` ，則只會建立回填，並在日期時間之後內嵌記錄。 回填也必須設定為 true。 需要日期時間常值，例如 `effectiveDateTime=datetime(2019-05-01)`|
-|dimensionTables|Array|View 中的維度資料表清單（以逗號分隔）。|  您必須在 view 屬性中明確地呼叫維度資料表。 使用維度資料表的聯結/查閱應使用 [查詢最佳做法](../../query/best-practices.md)。 請參閱 [加入維度資料表](#join-with-dimension-table)。
-|autoUpdateSchema|bool|是否要在來源資料表變更時自動更新視圖。 預設為 `false`。| 只有 `autoUpdateSchema` `arg_max(Timestamp, *)`  /  `arg_min(Timestamp, *)`  /  `any(*)` 在) 資料行引數時，此選項才適用于型別 (的視圖 `*` 。 如果此選項設定為 true，則來源資料表的變更將會自動反映在具體化視圖中。 使用這個選項時，不支援所有來源資料表的變更。 如需詳細資訊，請參閱 [。 alter 具體化-view](materialized-view-alter.md)。 |
+|dimensionTables|Array|View 中的維度資料表清單（以逗號分隔）。 請參閱 [查詢引數](#query-argument)
+|autoUpdateSchema|bool|是否要在來源資料表變更時自動更新視圖。 預設為 `false`。 只有 `arg_max(Timestamp, *)`  /  `arg_min(Timestamp, *)`  /  `any(*)` 在) 資料行引數時，此選項才適用于 (類型的視圖 `*` 。 如果此選項設定為 true，則來源資料表的變更將會自動反映在具體化視圖中。
 |folder|字串|具體化視圖的資料夾。|
 |docString|字串|記錄具體化視圖的字串|
 
 > [!WARNING]
-> `autoUpdateSchema`當來源資料表中的資料行卸載時，使用可能會導致無法復原的資料遺失。 如果此 view 未設定為，則會停用 `autoUpdateSchema` ，而且會對來源資料表進行變更，以將架構變更變更為具體化視圖。 如果問題已修正，請使用 [ [啟用具體化 view](materialized-view-enable-disable.md) ] 命令重新啟用具體化 view。 
+> * `autoUpdateSchema`當來源資料表中的資料行卸載時，使用可能會導致無法復原的資料遺失。 
+> * 如果來源資料表的變更導致具體化視圖的架構變更，而且 `autoUpdateSchema` 是 false，則會自動停用此視圖。 
+>    * 使用 `arg_max(Timestamp, *)` 並將資料行加入至來源資料表時，通常會發生這個錯誤。 
+>    * 將 view 查詢定義為或使用選項，以避免此失敗 `arg_max(Timestamp, Column1, Column2, ...)` `autoUpdateSchema` 。
+> * 如果因為這些原因而停用 view，您可以在使用 [ [啟用具體化 view](materialized-view-enable-disable.md) ] 命令修正問題之後重新啟用。
 >
->使用 `arg_max(Timestamp, *)` 並將資料行加入至來源資料表時，此程式很常見。 將 view 查詢定義為或使用選項，以避免失敗 `arg_max(Timestamp, Column1, Column2, ...)` `autoUpdateSchema` 。 
-
-### <a name="join-with-dimension-table"></a>與維度資料表聯結
-
-視圖的來源資料表中的記錄 (事實資料表) 只會具體化一次。 事實資料表與維度資料表之間的不同內嵌延遲可能會影響視圖結果。
-
-**範例**：視圖定義包含具有維度資料表的內部聯結。 在具體化時，維度記錄未完全內嵌，但已內嵌到事實資料表。 此記錄將會從視圖中卸載，且永遠不會重新處理。 
-
-若要解決此情況，請假設聯結是外部聯結。 將會處理事實資料表中的記錄，並將其加入至維度資料表資料行的 null 值。 已新增 () 值為 null 值的記錄將不會再次處理。 它們在維度資料表的資料行中的值會維持 null。
-
 
 ## <a name="examples"></a>範例
 
@@ -239,6 +250,20 @@ ms.locfileid: "91057114"
 > [!NOTE]
 > 如果您需要最佳查詢時間效能，但可能會犧牲一些資料的有效期限，請使用 [materialized_view ( # A1 函數](../../query/materialized-view-function.md)。
 
+## <a name="limitations-on-creating-materialized-views"></a>建立具體化視圖的限制
+
+* 無法建立具體化 view：
+    * 在另一個具體化視圖的上方。
+    * 在進行中的 [資料庫](../../../follower.md)。 「流覽者」資料庫是唯讀的，而具體化的視圖則需要寫入作業。  您可以從其追蹤者查詢領導者資料庫上定義的具體化視圖，就像領導者中的任何其他資料表一樣。 
+* 具體化視圖的來源資料表：
+    * 必須是要直接內嵌至的資料表，方法是使用其中一個內嵌 [方法](../../../ingest-data-overview.md#ingestion-methods-and-tools)、使用 [更新原則](../updatepolicy.md)，或 [從查詢命令](../data-ingestion/ingest-from-query.md)內嵌。
+        * 具體而言，不支援使用 [將範圍](../move-extents.md) 從其他資料表移至具體化視圖的來源資料表。 移動範圍可能會失敗，並出現下列錯誤： `Cannot drop/move extents from/to table 'TableName' since Materialized View 'ViewName' is currently processing some of these extents` 。 
+    * 必須啟用 [IngestionTime 原則](../ingestiontimepolicy.md) (預設值已啟用) 。
+    * 無法啟用串流內嵌。
+    * 不可以是已啟用資料列層級安全性的受限制資料表或資料表。
+* 資料[指標函數](../databasecursor.md#cursor-functions)不能用在具體化視圖上。
+* 不支援從具體化視圖連續匯出。
+
 ## <a name="cancel-materialized-view-creation"></a>取消具體化視圖建立
 
 使用選項時，請取消具體化視圖建立的進程 `backfill` 。 當建立花費的時間太長，而您想要在執行期間中止它時，此動作會很有用。  
@@ -248,7 +273,7 @@ ms.locfileid: "91057114"
 
 無法立即中止建立程式。 Cancel 命令會通知具體化停止，並定期建立檢查是否已要求取消。 Cancel 命令會等待最多10分鐘的時間，直到具體化視圖建立程式取消並在取消作業成功時回報。 即使在10分鐘內取消作業失敗，且 cancel 命令回報失敗，具體化視圖也可能會在稍後的建立程式中自行中止。 [ [顯示作業](../operations.md#show-operations) ] 命令會指出是否已取消操作。 `cancel operation`只有具體化視圖建立取消支援命令，而不支援取消任何其他作業。
 
-### <a name="syntax"></a>語法
+### <a name="syntax"></a>Syntax
 
 `.cancel``operation` *operationId*
 

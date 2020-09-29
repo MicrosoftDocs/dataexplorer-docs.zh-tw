@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 74d72ced89b1953b2f7e327656517f1febe4166f
-ms.sourcegitcommit: 803a572ab6f04494f65dbc60a4c5df7fcebe1600
+ms.openlocfilehash: 5a7f680dc2ab76a9f952efa52d60b59c7b1d1c93
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90714018"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452845"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>將 Azure 資料總管叢集部署到您的虛擬網路
 
@@ -37,7 +37,7 @@ Azure 資料總管支援將叢集部署到虛擬網路中的子網 (VNet) 。 �
 
 * `[clustername].[geo-region].kusto.windows.net` (引擎) `ingest-[clustername].[geo-region].kusto.windows.net` (資料管理) 會對應到每個服務的公用 IP。 
 
-* `private-[clustername].[geo-region].kusto.windows.net` (引擎) `private-ingest-[clustername].[geo-region].kusto.windows.net` (資料管理) 會對應到每個服務的私人 IP。
+* `private-[clustername].[geo-region].kusto.windows.net` (引擎) `ingest-private-[clustername].[geo-region].kusto.windows.net` \\ `private-ingest-[clustername].[geo-region].kusto.windows.net` (資料管理) 會對應到每個服務的私人 IP。
 
 ## <a name="plan-subnet-size-in-your-vnet"></a>規劃 VNet 中的子網大小
 
@@ -82,7 +82,7 @@ IP 位址的總數目：
 
 | **使用**   | **From**   | **若要**   | **通訊協定**   |
 | --- | --- | --- | --- |
-| 管理性  |[ADX 管理位址](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement (ServiceTag)  | ADX 子網：443  | TCP  |
+| 管理  |[ADX 管理位址](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement (ServiceTag)  | ADX 子網：443  | TCP  |
 | 健康狀況監視  | [ADX 健康情況監視位址](#health-monitoring-addresses)  | ADX 子網：443  | TCP  |
 | ADX 內部通訊  | ADX 子網：所有埠  | ADX 子網：所有埠  | 全部  |
 | 允許 Azure 負載平衡器輸入 (健康情況探查)   | AzureLoadBalancer  | ADX 子網：80443  | TCP  |

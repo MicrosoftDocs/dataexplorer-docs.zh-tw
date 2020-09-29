@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/28/2020
-ms.openlocfilehash: b8de71ffcda28a7baa0f8452e501c7485e861122
-ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
+ms.openlocfilehash: 334d2bc27709c78c53bd57c92c8c3b3364bbe3bb
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90999005"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452898"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>使用 Azure 資料總管 Azure 監視器查詢資料 (預覽) 
 
 Azure 資料總管 proxy 叢集 (ADX Proxy) 是一個實體，可讓您在 Azure 資料總管、 [Application Insights (AI) ](/azure/azure-monitor/app/app-insights-overview)，以及[ (](/azure/azure-monitor/)服務中的[Log Analytics) LA Azure 監視器](/azure/azure-monitor/platform/data-platform-logs)之間執行交叉乘積查詢。 您可以將 Azure 監視器 Log Analytics 工作區或 Application Insights 應用程式對應為 proxy 叢集。 然後，您可以使用 Azure 資料總管工具來查詢 proxy 叢集，並在跨叢集查詢中參考它。 本文說明如何連線到 proxy 叢集、將 proxy 叢集新增至 Azure 資料總管 Web UI，以及對您的 AI 應用程式或 Azure 資料總管的 LA 工作區執行查詢。
 
-Azure 資料總管 proxy 流程： 
+Azure 資料總管 proxy 流程：
 
-![ADX proxy 流程](media/adx-proxy/adx-proxy-flow.png)
+![ADX proxy 流程](media/adx-proxy/adx-proxy-workflow.png)
 
 ## <a name="prerequisites"></a>必要條件
 
@@ -41,7 +41,7 @@ Azure 資料總管 proxy 流程：
     * 適用于 LA： `https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>`
     * 針對 AI： `https://ade.applicationinsights.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.insights/components/<ai-app-name>`
 
-    * 選取 [新增]  。
+    * 選取 [新增]。
 
     ![新增叢集](media/adx-proxy/add-cluster.png)
 
@@ -102,13 +102,13 @@ ADX Proxy 不支援跨租使用者查詢。 您已登入單一租使用者，以
 
 如果 Azure 資料總管資源位於租使用者 ' A '，而 LA 工作區位於租使用者 ' B ' 中，請使用下列兩種方法之一：
 
-1. Azure 資料總管可讓您為不同租使用者中的主體新增角色。 在租使用者 ' B ' 中新增您的使用者識別碼，作為 Azure 資料總管叢集上的授權使用者。 驗證 Azure 資料總管叢集中包含租使用者 ' B ' 的 *' ExternalTrustedTenant '* 屬性。 在租使用者 ' B ' 中完整執行交叉查詢。 
+1. Azure 資料總管可讓您為不同租使用者中的主體新增角色。 在租使用者 ' B ' 中新增您的使用者識別碼，作為 Azure 資料總管叢集上的授權使用者。 驗證 Azure 資料總管叢集中包含租使用者 ' B ' 的 *[' TrustedExternalTenant '](https://docs.microsoft.com/powershell/module/az.kusto/update-azkustocluster)* 屬性。 在租使用者 ' B ' 中完整執行交叉查詢。
 
 2. 使用 [Lighthouse](https://docs.microsoft.com/azure/lighthouse/) 將 Azure 監視器資源投影至租使用者 ' A '。
 
 ### <a name="connect-to-azure-data-explorer-clusters-from-different-tenants"></a>從不同的租使用者連接到 Azure 資料總管叢集
 
-Kusto Explorer 會自動將您登入使用者帳戶原本所屬的租使用者。 若要使用相同的使用者帳戶存取其他租使用者中的資源，必須 `tenantId` 在連接字串中明確指定： `Data Source=https://ade.applicationinsights.io/subscriptions/SubscriptionId/resourcegroups/ResourceGroupName;Initial Catalog=NetDefaultDB;AAD Federated Security=True;Authority ID=\*\*TenantId**`
+Kusto Explorer 會自動將您登入使用者帳戶原本所屬的租使用者。 若要使用相同的使用者帳戶存取其他租使用者中的資源，必須 `tenantId` 在連接字串中明確指定： `Data Source=https://ade.applicationinsights.io/subscriptions/SubscriptionId/resourcegroups/ResourceGroupName;Initial Catalog=NetDefaultDB;AAD Federated Security=True;Authority ID=` **TenantId**
 
 ## <a name="function-supportability"></a>函數支援能力
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 319a71e5db7019ed28001f44a1d4a4bcb21984e9
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: 9b080badd2dc1015319e9b6d44c4c477061f92f9
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967242"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452709"
 ---
 # <a name="cache-policy-command"></a>快取原則命令
 
@@ -21,18 +21,19 @@ ms.locfileid: "85967242"
 
 ## <a name="displaying-the-cache-policy"></a>顯示快取原則
 
-您可以在資料或資料表上設定此原則，並使用下列其中一個命令來顯示它：
+您可以在資料庫、資料表或 [具體化視圖](materialized-views/materialized-view-overview.md)上設定原則，並使用下列其中一個命令來顯示此原則：
 
-* `.show` `database` *DatabaseName* `policy` `caching`
-* `.show``table` *DatabaseName* `.` *TableName* TableName `policy``caching`
+* `.show``database` *DatabaseName* DatabaseName `policy``caching`
+* `.show``table` *TableName* TableName `policy``caching`
+* `.show``materialized-view` *MaterializedViewName* MaterializedViewName `policy``caching`
 
 ## <a name="altering-the-cache-policy"></a>改變快取原則
 
 ```kusto
-.alter <entity_type> <database_or_table_name> policy caching hot = <timespan>
+.alter <entity_type> <database_or_table_or_materialized-view_name> policy caching hot = <timespan>
 ```
 
-改變多個資料表的快取原則（在相同的資料庫內容中）：
+變更多個資料表的快取原則， (在相同的資料庫內容) ：
 
 ```kusto
 .alter tables (table_name [, ...]) policy caching hot = <timespan>
@@ -51,13 +52,13 @@ ms.locfileid: "85967242"
 }
 ```
 
-* `entity_type`：資料表、資料庫或叢集
-* `database_or_table`：如果實體是資料表或資料庫，則應在命令中指定其名稱，如下所示- 
+* `entity_type` ：資料表、資料庫或叢集
+* `database_or_table_or_materialized-view`：如果實體是資料表或資料庫，則應該在命令中指定其名稱，如下所示： 
   - `database_name` 或 
   - `database_name.table_name` 或 
-  - `table_name`（在特定資料庫的內容中執行時）
+  - `table_name` 在特定資料庫的內容中執行時， () 
 
-## <a name="deleting-the-cache-policy"></a>刪除快取原則
+## <a name="deleting-the-cache-policy"></a>正在刪除快取原則
 
 ```kusto
 .delete <entity_type> <database_or_table_name> policy caching
@@ -71,13 +72,14 @@ ms.locfileid: "85967242"
 .show table MyDatabase.MyTable policy caching 
 ```
 
-將資料表的快取原則 `MyTable` （在資料庫內容中）設定為3天：
+將資料庫內容中資料表 (的快取原則 `MyTable`) 設定為3天：
 
 ```kusto
 .alter table MyTable policy caching hot = 3d
+.alter materialized-view MyMaterializedView policy caching hot = 3d
 ```
 
-將多個資料表的原則（在資料庫內容中）設為3天：
+將資料庫內容)  (多個資料表的原則設定為3天：
 
 ```kusto
 .alter tables (MyTable1, MyTable2, MyTable3) policy caching hot = 3d
@@ -89,7 +91,13 @@ ms.locfileid: "85967242"
 .delete table MyTable policy caching
 ```
 
-刪除資料庫上所設定的原則：
+刪除具體化視圖上設定的原則：
+
+```kusto
+.delete materialized-view MyMaterializedView policy caching
+```
+
+刪除資料庫上設定的原則：
 
 ```kusto
 .delete database MyDatabase policy caching

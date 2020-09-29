@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 809088f35567f85444755d89ab30e02fad46abaf
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.openlocfilehash: 6e3bb943347e4ea794733451fcf65674e5e23ca7
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680672"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452658"
 ---
 # <a name="callout-policy"></a>註標原則
 
@@ -24,13 +24,12 @@ ms.locfileid: "90680672"
 * `kusto` -控制 Azure 資料總管跨叢集查詢。
 * `sql` -控制 [SQL 外掛程式](../query/sqlrequestplugin.md)。
 * `cosmosdb` -控制 [CosmosDB 外掛程式](../query/cosmosdb-plugin.md)。
-* `webapi` -控制其他外部 Web 呼叫。
 * `sandbox_artifacts`-控制 ([python](../query/pythonplugin.md)  |  [R](../query/rplugin.md)) 的沙箱化外掛程式。
 * `external_data` -透過 [外部資料表](../query/schema-entities/externaltables.md) 或 [externaldata](../query/externaldata-operator.md) 運算子控制外部資料的存取。
 
 注標原則是由下列各項所組成。
 
-* **CalloutType** -定義標注的類型，而且可以是 `kusto` 、或。 `sql``webapi`
+* **CalloutType** -定義標注的類型，而且可以是 `kusto` 或 `sql` 。
 * **CalloutUriRegex** -指定標注網域的允許 Regex
 * **CanCall** -指出是否允許外部呼叫標注。
 
@@ -63,13 +62,13 @@ ms.locfileid: "90680672"
 **Alter callout 原則**
 
 ```kusto
-.alter cluster policy callout @'[{"CalloutType": "webapi","CalloutUriRegex": "en\\.wikipedia\\.org","CanCall": true}]'
+.alter cluster policy callout @'[{"CalloutType": "sql","CalloutUriRegex": "sqlname.database.azure.com","CanCall": true}]'
 ```
 
 **新增一組允許的標注**
 
 ```kusto
-.alter-merge cluster policy callout @'[{"CalloutType": "webapi","CalloutUriRegex": "en\\.wikipedia\\.org","CanCall": true}, {"CalloutType": "webapi","CalloutUriRegex": "bing\\.com","CanCall": true}]'
+.alter-merge cluster policy callout @'[{"CalloutType": "sql","CalloutUriRegex": "sqlname.database.azure.com","CanCall": true}]'
 ```
 
 **刪除所有不可變的標注原則**

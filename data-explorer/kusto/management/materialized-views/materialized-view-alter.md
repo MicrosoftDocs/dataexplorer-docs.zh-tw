@@ -8,23 +8,23 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: ac9fb575f46bb60e313da4fa2b3c023ac826daec
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: eaa4e759f0987940a86c509788f5e8a58b2f9e75
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057118"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452726"
 ---
-# <a name="alter-materialized-view"></a>。 alter 具體化-view
+# <a name="alter-materialized-view"></a>.alter materialized-view
 
 改變 [具體化視圖](materialized-view-overview.md) 可以用來變更具體化視圖的查詢，同時保留視圖中的現有資料。
 
-改變具體化視圖需要 [資料庫管理員](../access-control/role-based-authorization.md) 許可權，或具體化視圖的系統管理員許可權。 如需詳細資訊，請參閱 [安全性角色管理](../security-roles.md)。
+需要 [資料庫管理員](../access-control/role-based-authorization.md) 許可權，或具體化視圖的系統管理員許可權。
 
 > [!WARNING]
 > 改變具體化視圖時，請特別小心。 不正確的使用可能會導致資料遺失。
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 `.alter` `materialized-view`  
 [ `with` `(` *PropertyName* `=` *PropertyValue* `,` ... `)` ]  

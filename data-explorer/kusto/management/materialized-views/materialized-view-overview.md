@@ -8,25 +8,25 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: c1f96fa2fcfd8989936f31ac0c3b608dabdd6830
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 77c86708a20349f5864bd10fa298719dce0fbab9
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057101"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452794"
 ---
 # <a name="materialized-views-preview"></a> (預覽) 具體化視圖
 
-[具體化視圖](../../query/materialized-view-function.md) 會對來源資料表公開 *聚合* 查詢。 具體化視圖一律會傳回匯總查詢的最新結果， (一律是最新的) 。 [查詢具體化視圖](#materialized-views-queries)（這是一次性的資料清理進程）比直接在來源資料表上執行匯總（執行每個查詢）更有效率。
+[具體化視圖](../../query/materialized-view-function.md) 會對來源資料表公開 *聚合* 查詢。 具體化視圖一律會傳回匯總查詢的最新結果， (一律是最新的) 。 [查詢具體化視圖](#materialized-views-queries) 比直接在來源資料表上執行匯總（執行每個查詢）的效能更高。
 
 > [!NOTE]
-> 具體化視圖有一些 [限制](#limitations-on-creating-materialized-views)，而且不保證適用于所有案例。 使用此功能之前，請先參閱 [效能考慮](#performance-considerations) 。
+> 具體化視圖有一些 [限制](materialized-view-create.md#limitations-on-creating-materialized-views)，而且不保證適用于所有案例。 使用此功能之前，請先參閱 [效能考慮](#performance-considerations) 。
 
 使用下列命令來管理具體化視圖：
-* [。建立具體化-view](materialized-view-create.md)
-* [。 alter 具體化-view](materialized-view-alter.md)
-* [。 drop 具體化-view](materialized-view-drop.md)
-* [。停用 |. 啟用具體化-view](materialized-view-enable-disable.md)
+* [.create materialized-view](materialized-view-create.md)
+* [.alter materialized-view](materialized-view-alter.md)
+* [.drop materialized-view](materialized-view-drop.md)
+* [.disable | .enable materialized-view](materialized-view-enable-disable.md)
 * [。顯示具體化-views 命令](materialized-view-show-commands.md)
 
 ## <a name="why-use-materialized-views"></a>為何要使用具體化視圖？
@@ -37,7 +37,16 @@ ms.locfileid: "91057101"
 
 * **時效性：** 具體化視圖查詢一律會傳回最新的結果，而不受具體化最後一次發生的時間影響。 此查詢會將視圖的具體化部分與來源資料表中的記錄結合，而這些記錄尚未具體化 (`delta` 元件) ，一律提供最新的結果。
 
-* **減少成本：** [查詢具體化視圖](#materialized-views-queries) 會從叢集取用較少的資源，而不是對整個來源資料表進行匯總。 如果只需要匯總，則可以減少來源資料表的保留原則。 此設定可減少來源資料表的經常性存取快取成本。
+* **減少成本：** [查詢具體化視圖](#materialized-views-queries) 會從叢集取用較少的資源，而不是對來源資料表進行匯總。 如果只需要匯總，則可以減少來源資料表的保留原則。 此設定可減少來源資料表的經常性存取快取成本。
+
+## <a name="materialized-views-use-cases"></a>具體化視圖使用案例
+
+以下是使用具體化 view 可以解決的常見案例：
+
+* 使用 [arg_max ( # A1 (彙總函式) ](../../query/arg-max-aggfunction.md)，查詢每個實體的最後一筆記錄。
+* 使用 [任何 ( # A1 (彙總函式) ](../../query/any-aggfunction.md)，在資料表中消除重複的記錄。
+* 藉由計算原始資料的定期統計資料，來減少資料的解決方式。 依時間週期使用各種 [彙總函式](materialized-view-create.md#supported-aggregation-functions) 。
+    * 例如，用 `T | summarize dcount(User) by bin(Timestamp, 1d)` 來維護每天不同使用者的最新快照集。
 
 ## <a name="how-materialized-views-work"></a>具體化視圖的運作方式
 
@@ -46,46 +55,8 @@ ms.locfileid: "91057101"
 * *具體化*元件-包含來源資料表中已處理之匯總記錄的 Azure 資料總管資料表。  此資料表一律會依匯總的群組保存單一記錄。
 * *差異*-來源資料表中尚未處理的新內嵌記錄。
 
-查詢具體化視圖會結合具體化元件與 delta 部分，提供匯總查詢的最新結果。 離線具體化進程會從 *差異* 內嵌至具體化資料表的新記錄，並取代現有的記錄。 取代是藉由重建保存要取代之記錄的範圍來完成。 如果 *差異* 中的記錄與 *具體化* 元件中的所有資料分區持續相交，則每個具體化迴圈都需要重建整個 *具體化* 元件，而且可能不會跟上步調。 內嵌速率將高於具體化速率。 在此情況下，此視圖會變成狀況不良，且 *差異* 會不斷成長。
-
-## <a name="create-a-materialized-view"></a>建立具體化視圖
-
-有兩種可能的方式可以建立具體化視圖，在[create 命令](materialized-view-create.md)中以*回填*選項注明：
- * **根據來源資料表中的現有記錄來建立：** 
-      * 建立可能需要很長的時間才能完成，視來源資料表中的記錄數目而定。 在完成之前，此視圖將無法供查詢使用。
-      * 使用這個選項時，create 命令必須是 `async` ，而且可以使用 [. show operations](../operations.md#show-operations) 命令來監視執行。
-    
-      > [!IMPORTANT]
-      > * 冷快取中的資料不支援使用回填選項。 如有必要，請增加熱快取期間以建立視圖。 這可能需要相應放大。    
-      > * 針對大型來源資料表，使用回填選項可能需要很長的時間才能完成。 如果這個進程暫時在執行時失敗，將不會自動重試，而且需要重新執行 create 命令。
-    
-* **從現在開始建立具體化視圖：** 
-    * 具體化視圖會建立空白，而且只會在建立視圖之後包含內嵌記錄。 這種類型的建立會立即傳回，不需要 `async` ，而且此視圖會立即可供查詢。
-
-### <a name="limitations-on-creating-materialized-views"></a>建立具體化視圖的限制
-
-* 無法建立具體化 view：
-    * 在另一個具體化視圖的上方。
-    * 在進行中的 [資料庫](../../../follower.md)。 「流覽者」資料庫是唯讀的，而具體化的視圖則需要寫入作業。  您可以從其追蹤者查詢領導者資料庫上定義的具體化視圖，就像領導者中的任何其他資料表一樣。 
-* 具體化視圖的來源資料表：
-    * 必須是要直接內嵌至的資料表，方法是使用其中一個內嵌 [方法](../../../ingest-data-overview.md#ingestion-methods-and-tools)、使用 [更新原則](../updatepolicy.md)，或 [從查詢命令](../data-ingestion/ingest-from-query.md)內嵌。
-        * 具體而言，不支援使用 [將範圍](../move-extents.md) 從其他資料表移至具體化視圖的來源資料表。 移動範圍可能會失敗，並出現下列錯誤： `Cannot drop/move extents from/to table 'TableName' since Materialized View 'ViewName' is currently processing some of these extents` 。 
-    * 必須啟用 [IngestionTime 原則](../ingestiontimepolicy.md) (預設值已啟用) 。
-    * 無法啟用串流內嵌。
-    * 不可以是已啟用資料列層級安全性的受限制資料表或資料表。
-* 資料[指標函數](../databasecursor.md#cursor-functions)不能用在具體化視圖上。
-* 不支援從具體化視圖連續匯出。
-
-### <a name="materialized-view-retention-policy"></a>具體化視圖保留原則
-
-具體化視圖預設會衍生資料庫保留原則。 您可以使用 [control 命令](../retentionpolicy.md)變更原則。
-   
-   * 具體化視圖的保留原則與來源資料表的保留原則無關。
-   * 如果未使用來源資料表記錄，則可以將來源資料表的保留原則降至最低。 具體化視圖仍會根據在 view 上設定的保留原則來儲存資料。 
-   * 當具體化視圖處於預覽模式時，建議您至少允許最少七天，並將復原能力設定為 true。 此設定可讓您快速復原錯誤和診斷用途。
-    
-> [!NOTE]
-> 目前不支援來源資料表的保留原則為零。
+查詢具體化視圖會結合具體化元件與 delta 部分，提供匯總查詢的最新結果。 離線具體化進程會從 *差異* 內嵌至具體化資料表的新記錄，並取代現有的記錄。 取代是藉由重建保存要取代之記錄的範圍來完成。 如果 *差異* 中的記錄與 *具體化* 元件中的所有資料分區持續相交，則每個具體化迴圈都需要重建整個 *具體化* 元件，而且可能不會跟上內建的速率。 在此情況下，此視圖會變成狀況不良，且 *差異* 會不斷成長。
+[ [監視](#materialized-views-monitoring) ] 區段說明如何針對這類情況進行疑難排解。
 
 ## <a name="materialized-views-queries"></a>具體化視圖查詢
 
@@ -95,16 +66,7 @@ ms.locfileid: "91057101"
 
 此視圖可以參與跨叢集或跨資料庫的查詢，但不會包含在萬用字元等位或搜尋中。
 
-### <a name="query-use-cases"></a>查詢使用案例
-
-以下是使用具體化 view 可以解決的常見案例：
-
-* 使用 [arg_max ( # A1 (彙總函式) ](../../query/arg-max-aggfunction.md)，查詢每個實體的最後一筆記錄。
-* 使用 [任何 ( # A1 (彙總函式) ](../../query/any-aggfunction.md)，在資料表中消除重複的記錄。
-* 藉由計算原始資料的定期統計資料，來減少資料的解決方式。 依時間週期使用各種 [彙總函式](materialized-view-create.md#supported-aggregation-functions) 。
-    * 例如，用 `T | summarize dcount(User) by bin(Timestamp, 1d)` 來維護每天不同使用者的最新快照集。
-
-### <a name="query-examples"></a>查詢範例
+### <a name="examples"></a>範例
 
 1. 查詢整個視圖。 來源資料表中的最新記錄包含：
     
@@ -119,7 +81,7 @@ ms.locfileid: "91057101"
     ```kusto
     materialized_view("ViewName")
     ```
-    
+  
 ## <a name="performance-considerations"></a>效能考量
 
 可能影響具體化 view health 的主要參與者如下：
@@ -133,6 +95,19 @@ ms.locfileid: "91057101"
 * 叢集中**的具體化視圖數目：** 上述考慮適用于叢集中定義的每個個別具體化 view。 每個視圖都會取用自己的資源，而許多視圖會在可用的資源上互相競爭。 叢集中的具體化視圖數目沒有硬式編碼的限制。 不過，一般建議是在叢集上沒有超過10個具體化視圖。 如果叢集中定義了一個以上的具體化視圖，則可以調整 [容量原則](../capacitypolicy.md#materialized-views-capacity-policy) 。
 
 * **具體化視圖定義**：具體化 view 定義必須根據查詢最佳做法來定義，以獲得最佳查詢效能。 如需詳細資訊，請參閱 [建立命令效能提示](materialized-view-create.md#performance-tips)。
+
+## <a name="materialized-views-policies"></a>具體化視圖原則
+
+您可以定義具體化視圖的 [保留原則](../retentionpolicy.md) 和快取 [原則](../cachepolicy.md) ，就像任何 Azure 資料總管資料表一樣。
+
+具體化視圖預設會衍生資料庫保留和快取原則。 您可以使用 [保留原則控制命令](../retention-policy.md) 或快取 [原則控制命令](../cache-policy.md)來變更原則。
+   
+   * 具體化視圖的保留原則與來源資料表的保留原則無關。
+   * 如果未使用來源資料表記錄，則可以將來源資料表的保留原則降至最低。 具體化視圖仍會根據在 view 上設定的保留原則來儲存資料。 
+   * 當具體化視圖處於預覽模式時，建議您至少允許最少七天，並將復原能力設定為 true。 此設定可讓您快速復原錯誤和診斷用途。
+    
+> [!NOTE]
+> 目前不支援來源資料表的保留原則為零。
 
 ## <a name="materialized-views-monitoring"></a>具體化視圖監視
 
@@ -184,5 +159,5 @@ ms.locfileid: "91057101"
 ## <a name="next-steps"></a>後續步驟
 
 * [。建立具體化視圖](materialized-view-create.md)
-* [。 alter 具體化-view](materialized-view-alter.md)
+* [.alter materialized-view](materialized-view-alter.md)
 * [具體化視圖顯示命令](materialized-view-show-commands.md)

@@ -8,21 +8,20 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 1be8f66300b2d605c4004661c68e64f741437dc1
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: bb1fab3f211de4b33ca0dd2cee6a8cfa0cc796a9
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057079"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452675"
 ---
-# <a name="disable--enable-materialized-view"></a>。停用 |. 啟用具體化-view
+# <a name="disable--enable-materialized-view"></a>.disable | .enable materialized-view
 
 您可以使用下列任何一種方式停用具體化視圖：
 
 * **系統自動停用：**  如果具體化因為永久錯誤而失敗，則會自動停用具體化 view。 此程式可能會發生在下列實例中： 
     * 與 view 定義不一致的架構變更。  
-    * 對來源資料表所做的變更，造成具體化 view 查詢在語義上無效。 <br>
-    如需詳細資訊，請參閱 [建立具體化-view](materialized-view-create.md)。
+    * 對來源資料表所做的變更，造成具體化 view 查詢在語義上無效。 
 * **明確停用具體化視圖：**  如果具體化視圖對叢集的健康狀態有負面影響 (例如，耗用太多 CPU) ，請使用下列 [命令](#syntax) 停用此視圖。
 
 > [!NOTE]
@@ -31,7 +30,7 @@ ms.locfileid: "91057079"
 
 只有當您懷疑該觀點影響到叢集的健康狀態時，才建議停用 view。
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 `.enable` | `disable``materialized-view` *MaterializedViewName*
 
