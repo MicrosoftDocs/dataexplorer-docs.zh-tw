@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 77c86708a20349f5864bd10fa298719dce0fbab9
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: f19104111d8db615c82eff2e399fb4857f27c841
+ms.sourcegitcommit: 463ee13337ed6d6b4f21eaf93cf58885d04bccaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452794"
+ms.lasthandoff: 09/30/2020
+ms.locfileid: "91572154"
 ---
 # <a name="materialized-views-preview"></a> (預覽) 具體化視圖
 
@@ -47,6 +47,8 @@ ms.locfileid: "91452794"
 * 使用 [任何 ( # A1 (彙總函式) ](../../query/any-aggfunction.md)，在資料表中消除重複的記錄。
 * 藉由計算原始資料的定期統計資料，來減少資料的解決方式。 依時間週期使用各種 [彙總函式](materialized-view-create.md#supported-aggregation-functions) 。
     * 例如，用 `T | summarize dcount(User) by bin(Timestamp, 1d)` 來維護每天不同使用者的最新快照集。
+
+如需所有使用案例的範例，請參閱 [具體化 view create 命令](materialized-view-create.md#examples)。
 
 ## <a name="how-materialized-views-work"></a>具體化視圖的運作方式
 

@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 354908df7ab0e65c8d4110dbff3a45a876b748a0
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: f67b2d61cfed297886447a97dd178dfb578a2c68
+ms.sourcegitcommit: 463ee13337ed6d6b4f21eaf93cf58885d04bccaa
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452743"
+ms.lasthandoff: 09/30/2020
+ms.locfileid: "91572138"
 ---
 # <a name="create-materialized-view"></a>.create materialized-view
 
@@ -36,7 +36,7 @@ ms.locfileid: "91452743"
 
 建立作業需要 [資料庫系統管理員](../access-control/role-based-authorization.md) 許可權。 具體化視圖的建立者會成為它的系統管理員。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `.create` [`async`] `materialized-view` <br>
 [ `with` `(` *PropertyName* `=` *PropertyValue* `,` ... `)` ] <br>
@@ -47,9 +47,9 @@ ms.locfileid: "91452743"
 
 |引數|類型|描述
 |----------------|-------|---|
-|ViewName|String|具體化視圖名稱。 視圖名稱無法與相同資料庫中的資料表或函數名稱衝突，而且必須遵守 [識別碼命名規則](../../query/schema-entities/entity-names.md#identifier-naming-rules)。 |
-|SourceTableName|String|定義此視圖的來源資料表名稱。|
-|查詢|String|具體化 view 查詢。 如需詳細資訊，請參閱 [查詢](#query-argument)。|
+|ViewName|字串|具體化視圖名稱。 視圖名稱無法與相同資料庫中的資料表或函數名稱衝突，而且必須遵守 [識別碼命名規則](../../query/schema-entities/entity-names.md#identifier-naming-rules)。 |
+|SourceTableName|字串|定義此視圖的來源資料表名稱。|
+|查詢|字串|具體化 view 查詢。 如需詳細資訊，請參閱 [查詢](#query-argument)。|
 
 ### <a name="query-argument"></a>查詢引數
 
@@ -83,7 +83,7 @@ ms.locfileid: "91452743"
 |屬性|類型|描述 |
 |----------------|-------|---|
 |回填|bool|是否要根據目前在 *SourceTable* () 中的所有記錄來建立視圖 `true` ，或從 [從現在開始] (`false`) 建立。 預設為 `false`。| 
-|effectiveDateTime|Datetime| 如果與一起指定 `backfill=true` ，則只會建立回填，並在日期時間之後內嵌記錄。 回填也必須設定為 true。 需要日期時間常值，例如 `effectiveDateTime=datetime(2019-05-01)`|
+|effectiveDateTime|日期時間| 如果與一起指定 `backfill=true` ，則只會建立回填，並在日期時間之後內嵌記錄。 回填也必須設定為 true。 需要日期時間常值，例如 `effectiveDateTime=datetime(2019-05-01)`|
 |dimensionTables|Array|View 中的維度資料表清單（以逗號分隔）。 請參閱 [查詢引數](#query-argument)
 |autoUpdateSchema|bool|是否要在來源資料表變更時自動更新視圖。 預設為 `false`。 只有 `arg_max(Timestamp, *)`  /  `arg_min(Timestamp, *)`  /  `any(*)` 在) 資料行引數時，此選項才適用于 (類型的視圖 `*` 。 如果此選項設定為 true，則來源資料表的變更將會自動反映在具體化視圖中。
 |folder|字串|具體化視圖的資料夾。|
@@ -99,7 +99,7 @@ ms.locfileid: "91452743"
 
 ## <a name="examples"></a>範例
 
-1. 建立空的視圖，只會從現在開始具體化記錄內嵌： 
+1. 建立空的 arg_max 視圖，只會從現在開始具體化記錄內嵌：
 
     <!-- csl -->
     ```
@@ -109,7 +109,7 @@ ms.locfileid: "91452743"
     }
     ```
     
-1. 使用下列方法建立具有回填選項的具體化 view `async` ：
+1. 使用下列方法建立使用回填選項的每日匯總的具體化視圖 `async` ：
 
     <!-- csl -->
     ```
@@ -132,7 +132,17 @@ ms.locfileid: "91452743"
         | summarize count(), dcount(User), max(Duration) by Customer, Day
     } 
     ```
-    
+1. 根據 EventId 資料行取消複製來源資料表的具體化視圖：
+
+    <!-- csl -->
+    ```
+    .create materialized-view DedupedT on table T
+    {
+        T
+        | summarize any(*) by EventId
+    }
+    ```
+
 1. 定義可以在語句之前包含其他運算子 `summarize` ，只要 `summarize` 是最後一個運算子即可：
 
     <!-- csl -->
@@ -146,7 +156,7 @@ ms.locfileid: "91452743"
         | summarize count(), dcount(User), max(Duration) by Customer, Api, Month
     }
     ```
-    
+
 1. 與維度資料表聯結的具體化視圖：
 
     <!-- csl -->
@@ -273,7 +283,7 @@ ms.locfileid: "91452743"
 
 無法立即中止建立程式。 Cancel 命令會通知具體化停止，並定期建立檢查是否已要求取消。 Cancel 命令會等待最多10分鐘的時間，直到具體化視圖建立程式取消並在取消作業成功時回報。 即使在10分鐘內取消作業失敗，且 cancel 命令回報失敗，具體化視圖也可能會在稍後的建立程式中自行中止。 [ [顯示作業](../operations.md#show-operations) ] 命令會指出是否已取消操作。 `cancel operation`只有具體化視圖建立取消支援命令，而不支援取消任何其他作業。
 
-### <a name="syntax"></a>Syntax
+### <a name="syntax"></a>語法
 
 `.cancel``operation` *operationId*
 
@@ -288,8 +298,8 @@ ms.locfileid: "91452743"
 |輸出參數 |類型 |描述
 |---|---|---
 |OperationId|Guid|Create 具體化 view 命令的作業識別碼。
-|作業|String|作業種類。
-|StartedOn|Datetime|建立作業的開始時間。
+|作業|字串|作業種類。
+|StartedOn|日期時間|建立作業的開始時間。
 |CancellationState|字串|其中一個 `Cancelled successfully` (的建立已取消) ， `Cancellation failed` (等候取消超時) ， `Unknown` (視圖建立已不再執行，但這項作業) 尚未取消。
 |ReasonPhrase|字串|取消失敗的原因。
 
