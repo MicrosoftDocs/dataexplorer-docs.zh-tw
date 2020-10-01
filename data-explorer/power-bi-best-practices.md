@@ -7,18 +7,18 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: f277ff9caaaf29b39b7e1fac4175ce2fa862c269
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 404d8f2d6b7eacc61571575613fd8017baadb54d
+ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872976"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91614844"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>使用 Power BI 來查詢 Azure 資料總管資料並將其視覺化的最佳作法
 
 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 [Power BI](https://docs.microsoft.com/power-bi/) 是一種商務分析解決方案，可讓您將資料視覺化，並在整個組織中共用結果。 Azure 資料總管提供三種連接到 Power BI 中資料的選項。 使用 [內建連接器](power-bi-connector.md)， [從 Azure 資料總管將查詢匯入 Power BI](power-bi-imported-query.md)，或使用 [SQL 查詢](power-bi-sql-query.md)。 本文提供您使用 Power BI 查詢和視覺化 Azure 資料總管資料的秘訣。 
 
-## <a name="best-practices-for-using-power-bi"></a>使用 Power BI 的最佳作法 
+## <a name="best-practices-for-using-power-bi"></a>使用 Power BI 的最佳作法
 
 使用數 tb 的最新原始資料時，請遵循下列指導方針，讓 Power BI 的儀表板和報表保持 snappy 和更新：
 
@@ -30,15 +30,16 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 * **平行** 處理原則-Azure 資料總管是可線性調整的資料平臺，因此，您可以藉由增加端對端流程的平行處理原則來改善儀表板轉譯的效能，如下所示：
 
-   * 在 [Power BI 中增加 DirectQuery 的並行連接](https://docs.microsoft.com/power-bi/desktop-directquery-about#maximum-number-of-connections-option-for-directquery)數目。
+  * 在 [Power BI 中增加 DirectQuery 的並行連接](https://docs.microsoft.com/power-bi/desktop-directquery-about#maximum-number-of-connections-option-for-directquery)數目。
 
-   * 使用 [弱式一致性來改善平行](kusto/concepts/queryconsistency.md)處理原則。 這可能會影響資料的時效性。
+  * 使用 [弱式一致性來改善平行](kusto/concepts/queryconsistency.md)處理原則。 這可能會影響資料的時效性。
 
 * **有效** 交叉分析篩選器–使用 [同步](https://docs.microsoft.com/power-bi/visuals/power-bi-visualization-slicers#sync-and-use-slicers-on-other-pages) 交叉分析篩選器，在您準備就緒之前，防止報表載入資料。 在您結構資料集、放置所有視覺效果，並標示所有交叉分析篩選器之後，您可以選取同步交叉分析篩選器，只載入所需的資料。
 
 * **使用篩選器** -盡可能使用最多的 Power BI 篩選，以專注于 Azure 資料總管搜尋相關的資料分區。
 
 * **有效率的視覺效果** -為您的資料選取效能最高的視覺效果。
+
 
 ## <a name="tips-for-using-the-azure-data-explorer-connector-for-power-bi-to-query-data"></a>使用 Azure 資料總管連接器 Power BI 來查詢資料的秘訣
 
@@ -62,15 +63,39 @@ Power BI 不包含 *相對* 的日期時間運算子，例如 `ago()` 。
 
 使用下列對等查詢：
 
-```powerquery-m
+```m
 let
-    Source = Kusto.Contents("help", "Samples", "StormEvents", []),
+    Source = AzureDataExplorer.Contents("help", "Samples", "StormEvents", []),
     #"Filtered Rows" = Table.SelectRows(Source, each [StartTime] > (DateTime.FixedLocalNow()-#duration(5,0,0,0)))
 in
     #"Filtered Rows"
 ```
 
-### <a name="reaching-kusto-query-limits"></a>到達 Kusto 查詢限制 
+### <a name="configuring-azure-data-explorer-connector-options-in-m-query"></a>在 M 查詢中設定 Azure 資料總管 connector 選項
+
+您可以從 PBI 的進階編輯器中，以 M 查詢語言設定 Azure 資料總管連接器的選項。 您可以使用這些選項來控制要傳送至 Azure 資料總管叢集的已產生查詢。
+
+```m
+let
+    Source = AzureDataExplorer.Contents("help", "Samples", "StormEvents", [<options>])
+in
+    Source
+```
+
+您可以使用 M 查詢中的下列任何選項：
+
+| 選項 | 範例 | 描述
+|---|---|---
+| MaxRows | `[MaxRows=300000]` | 將 `truncationmaxrecords` set 語句加入至查詢。 覆寫查詢可能傳回給呼叫者的預設最大記錄數目 (截斷) 。
+| MaxSize | `[MaxSize=4194304]` | 將 `truncationmaxsize` set 語句加入至查詢。 覆寫預設的資料大小上限：查詢可以傳回給呼叫者 (截斷) 。
+| NoTruncate | `[NoTruncate=true]` | 將 `notruncation` set 語句加入至查詢。 允許隱藏傳回給呼叫端的查詢結果截斷。
+| AdditionalSetStatements | `[AdditionalSetStatements="set query_datascope=hotcache"]` | 將提供的 set 語句加入至查詢。 這些語句是用來設定查詢持續時間的查詢選項。 查詢選項可控制查詢如何執行和傳回結果。
+| CaseInsensitive | `[CaseInsensitive=true]` | 讓連接器產生不區分大小寫的查詢- `=~` 在比較值時，查詢會使用運算子而不是 `==` 運算子。
+
+    > [!NOTE]
+    > You can combine multiple options together to reach the desired behavior: `[NoTruncate=true, CaseInsensitive=true]`
+
+### <a name="reaching-kusto-query-limits"></a>到達 Kusto 查詢限制
 
 依預設，Kusto 查詢會傳回最多500000個數據列或 64 MB，如 [查詢限制](kusto/concepts/querylimits.md)中所述。 您可以使用**Azure 資料總管 (Kusto) **連線視窗中的 [ **Advanced options** ] 來覆寫這些預設值：
 
@@ -78,9 +103,21 @@ in
 
 這些選項會與您的查詢一起發出 [set 語句](kusto/query/setstatement.md) ，以變更預設的查詢限制：
 
-  * **限制查詢結果記錄號碼** 會產生 `set truncationmaxrecords`
-  * **限制查詢結果資料大小（以位元組為單位）** 產生 `set truncationmaxsize`
-  * **停用結果集截斷** 會產生 `set notruncation`
+* **限制查詢結果記錄號碼** 會產生 `set truncationmaxrecords`
+* **限制查詢結果資料大小（以位元組為單位）** 產生 `set truncationmaxsize`
+* **停用結果集截斷** 會產生 `set notruncation`
+
+### <a name="case-sensitivity"></a>區分大小寫
+
+根據預設，連接器會 `==` 在比較字串值時產生使用區分大小寫運算子的查詢。 如果資料不區分大小寫，這就不是想要的行為。 若要變更產生的查詢，請使用 `CaseInsensitive` connector 選項：
+
+```m
+let
+    Source = AzureDataExplorer.Contents("help", "Samples", "StormEvents", [CaseInsensitive=true]),
+    #"Filtered Rows" = Table.SelectRows(Source, each [State] == "aLaBama")
+in
+    #"Filtered Rows"
+```
 
 ### <a name="using-query-parameters"></a>使用查詢參數
 
@@ -94,28 +131,28 @@ in
 
 1. 尋找查詢的下一節：
 
-    ```powerquery-m
-    Source = Kusto.Contents("<Cluster>", "<Database>", "<Query>", [])
+    ```m
+    Source = AzureDataExplorer.Contents("<Cluster>", "<Database>", "<Query>", [])
     ```
-   
+
    例如：
 
-    ```powerquery-m
-    Source = Kusto.Contents("Help", "Samples", "StormEvents | where State == 'ALABAMA' | take 100", [])
+    ```m
+    Source = AzureDataExplorer.Contents("Help", "Samples", "StormEvents | where State == 'ALABAMA' | take 100", [])
     ```
 
 1. 以您的參數取代查詢的相關部分。 將查詢分割成多個部分，並使用連字號 ( # A0) 和參數將它們串連在一起。
 
    例如，在上述查詢中，我們將會取得 `State == 'ALABAMA'` 部分，並將它分割為： `State == '` 和， `'` 我們會將參數放置在 `State` 它們之間：
-   
+
     ```kusto
     "StormEvents | where State == '" & State & "' | take 100"
     ```
 
-1. 如果您的查詢包含引號，請正確編碼。 例如，下列查詢： 
+1. 如果您的查詢包含引號，請正確編碼。 例如，下列查詢：
 
    ```kusto
-   "StormEvents | where State == "ALABAMA" | take 100" 
+   "StormEvents | where State == "ALABAMA" | take 100"
    ```
 
    會以下列兩個引號出現在 **進階編輯器** 中：
@@ -147,7 +184,3 @@ Power BI 包含可定期針對資料來源發出查詢的資料重新整理排�
 ## <a name="next-steps"></a>後續步驟
 
 [使用適用於 Power BI 的 Azure 資料總管連接器將資料視覺化](power-bi-connector.md)
-
-
-
-

@@ -7,18 +7,18 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 07/10/2019
-ms.openlocfilehash: 591f8add363f0d1b09d8314c21a209fdc4cbedac
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: d6c3e49aa2141e2428251f806b29b47a9c65c164
+ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875169"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91615048"
 ---
 # <a name="visualize-data-using-the-azure-data-explorer-connector-for-power-bi"></a>使用適用於 Power BI 的 Azure 資料總管連接器將資料視覺化
 
 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Power BI 是一個商務分析解決方案，可讓您將資料視覺化並在整個組織共用結果。 Azure 資料總管提供三個選項以便連線到 Power BI 中的資料：使用內建連接器，從 Azure 資料總管匯入查詢，或使用 SQL 查詢。 本文說明如何使用內建連接器來取得資料，並在 Power BI 報表中將其視覺化。 使用 Azure 資料總管 native connector 來建立 Power BI 儀表板很簡單。 Power BI 連接器支援匯 [入和直接查詢連接模式](https://docs.microsoft.com/power-bi/desktop-directquery-about)。 您可以使用 [匯 **入** ] 或 [ **DirectQuery** ] 模式來建立儀表板，視案例、規模和效能需求而定。 
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 您需要下列專案才能完成這篇文章：
 
@@ -42,26 +42,35 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
     ![叢集、資料庫、資料表選項](media/power-bi-connector/cluster-database-table.png)
 
-    **設定** | **ReplTest1** | **欄位描述**
-    |---|---|---|
+    | 設定 | 值 | 欄位描述
+    |---|---|---
     | 叢集 | *https://help.kusto.windows.net* | 說明叢集的 URL。 若是其他叢集，URL 的格式為 HTTPs://。 * \<ClusterName\> \<Region\>kusto.windows.net*。 |
     | 資料庫 | 保留空白 | 裝載於所要連線叢集上的資料庫。 我們會在稍後步驟中選取此項目。 |
     | 資料表名稱 | 保留空白 | 資料庫的其中一個資料表，或是 <code>StormEvents \| take 1000</code>之類的查詢。 我們會在稍後步驟中選取此項目。 |
-    | 進階選項 | 保留空白 | 您查詢的選項，例如結果集大小。 |
+    | 進階選項 | 保留空白 | 您查詢的選項，例如結果集大小。
     | 資料連線模式 | *DirectQuery* | 決定 Power BI 是否匯入資料或直接連線到資料來源。 您可以使用任一選項搭配此連接器。 |
-    | | | |
-    
+
     > [!NOTE]
     > 在匯 **入** 模式中，資料會移至 Power BI。 在 **DirectQuery** 模式中，資料會直接從您的 Azure 資料總管叢集中查詢。
     >
     > 使用匯 **入** 模式的時機：
+    >
     > * 您的資料集很小。
-    > * 您不需要近乎即時的資料。 
-    > * 您的資料已匯總，或您 [在 Kusto 中執行匯總](kusto/query/summarizeoperator.md#list-of-aggregation-functions)    
+    > * 您不需要近乎即時的資料。
+    > * 您的資料已匯總，或您 [在 Kusto 中執行匯總](kusto/query/summarizeoperator.md#list-of-aggregation-functions)
     >
     > 使用 **DirectQuery** 模式的時機：
-    > * 您的資料集非常大。 
-    > * 您需要近乎即時的資料。   
+    > * 您的資料集非常大。
+    > * 您需要近乎即時的資料。
+
+    ### <a name="advanced-options"></a>進階選項
+
+    | 設定 | 範例值 | 欄位描述
+    |---|---|---
+    | 限制查詢結果記錄號碼| `300000` | 要在結果中傳回的記錄數目上限 |
+    | 限制查詢結果資料大小 | `4194304` | 要在結果中傳回的資料大小上限（以位元組為單位） |
+    | 停用結果集截斷 | `true` | 使用 notruncation 要求選項啟用/停用結果截斷 |
+    | 其他 set 語句 | `set query_datascope=hotcache` | 設定查詢持續時間的查詢選項。 查詢選項可控制查詢如何執行和傳回結果。 |
 
 1. 如果您還沒有說明叢集的連線，請登入。 使用組織帳戶登入，然後選取 [連線]****。
 
