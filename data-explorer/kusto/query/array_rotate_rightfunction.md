@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 7d6e9cfac03e0169bd0bfae12a01ac685d265736
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 267e2b4d5769efee87dd90b9a3265310998fcbd9
+ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91102784"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91712097"
 ---
 # <a name="array_rotate_right"></a>array_rotate_right()
 
-`array_rotate_right()` 將陣列中的值旋轉到右邊。
+將陣列中的值旋轉 `dynamic` 到右邊。
 
 ## <a name="syntax"></a>語法
 
@@ -28,7 +28,7 @@ ms.locfileid: "91102784"
 * *arr*：要分割的輸入陣列，必須是動態陣列。
 * *rotate_count*：整數，指定陣列元素將旋轉到右邊的位置數目。 如果值為負數，則會將元素向左旋轉。
 
-## <a name="returns"></a>傳回
+## <a name="returns"></a>傳回值
 
 動態陣列，包含與原始陣列中相同數量的元素，其中每個專案都會根據 *rotate_count*旋轉。
 

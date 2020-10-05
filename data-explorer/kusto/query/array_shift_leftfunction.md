@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 883aa2e22c02584de34c705b89a979b86e10475e
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 25498fa86803914c7445373e96167ca000cd4737
+ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91102788"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91712063"
 ---
 # <a name="array_shift_left"></a>array_shift_left()
 
-`array_shift_left()` 將陣列中的值向左移動。
+將陣列中的值 `dynamic` 向左移動。
 
 ## <a name="syntax"></a>語法
 
@@ -29,7 +29,7 @@ ms.locfileid: "91102788"
 * *`shift_count`*：指定陣列元素要向左移位的位置數目的整數。 如果值為負數，則會將元素向右移動。
 * *`fill_value`*：用來插入專案的純量值，而非移位和移除的專案。 預設值： null 值或空字串 (視 *`arr`*) 類型而定。
 
-## <a name="returns"></a>傳回
+## <a name="returns"></a>傳回值
 
 動態陣列，包含與原始陣列中相同數量的元素。 每個元素都已根據 *shift_count*來移動。 為了取代移除的元素而加入的新專案，將會有 *fill_value*的值。
 
