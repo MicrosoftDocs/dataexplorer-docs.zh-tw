@@ -8,18 +8,18 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: eb974793875fd5f797fe1a1b801598abdc60e354
-ms.sourcegitcommit: 454b9bf6449449fc3382ff5794894502f920795a
+ms.openlocfilehash: 3a6897bc7acce8cf216c0f21cd46251c2f033d6c
+ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91517611"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91712131"
 ---
 # <a name="scalar-function-types"></a>純量函式類型
 
 ## <a name="binary-functions"></a>二進位函式
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[binary_and()](binary-andfunction.md)|傳回兩個值之間的位 and 運算結果。|
 |[binary_not()](binary-notfunction.md)|傳回輸入值的位否定。|
@@ -31,17 +31,17 @@ ms.locfileid: "91517611"
 
 ## <a name="conversion-functions"></a>轉換函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[tobool()](toboolfunction.md)|將輸入轉換為布林值， (帶正負號的8位) 標記法。|
 |[todatetime()](todatetimefunction.md)|將輸入轉換為 datetime 純量。|
-|[todouble ( # A1/toreal ( # B3 ](todoublefunction.md)|將輸入轉換為實數值型別的值。  (todouble ( # A2 和 toreal ( # A4 是同義字。 ) |
+|[todouble ( # B1/toreal ( # B3 ](todoublefunction.md)|將輸入轉換為實數值型別的值。  (todouble ( # A2 和 toreal ( # A4 是同義字。 ) |
 |[tostring ( # B1 ](tostringfunction.md)|將輸入轉換成字串表示。|
 |[totimespan()](totimespanfunction.md)|將輸入轉換成 timespan 純量。|
 
 ## <a name="datetimetimespan-functions"></a>DateTime/timespan 函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[ago()](agofunction.md)|從目前的 UTC 時鐘時間減去指定的時間範圍。|
 |[datetime_add ( # B1 ](datetime-addfunction.md)|從指定的 datepart 乘以指定的數量來計算新的日期時間，並將其加入至指定的日期時間。|
@@ -51,9 +51,9 @@ ms.locfileid: "91517611"
 |[dayofweek()](dayofweekfunction.md)|傳回自上一個星期日起算的整數天數（以 timespan 為單位）。|
 |[dayofyear ( # B1 ](dayofyearfunction.md)|傳回整數值，代表指定年份的日數。|
 |[endofday()](endofdayfunction.md)|傳回包含日期的日結尾，如有提供，則會位移位移。|
-|[endofmonth()](endofmonthfunction.md)|傳回包含日期的月份結尾，如有提供，則會位移位移。|
+|[endofmonth ( # B1 ](endofmonthfunction.md)|傳回包含日期的月份結尾，如有提供，則會位移位移。|
 |[endofweek()](endofweekfunction.md)|傳回包含日期的周結束，如有提供，則會位移位移。|
-|[endofyear()](endofyearfunction.md)|傳回包含日期的年份結尾，如有提供，則會位移位移。|
+|[endofyear ( # B1 ](endofyearfunction.md)|傳回包含日期的年份結尾，如有提供，則會位移位移。|
 |[format_datetime()](format-datetimefunction.md)|根據格式模式參數來格式化 datetime 參數。|
 |[format_timespan()](format-timespanfunction.md)|根據格式模式參數來格式化格式 timespan 參數。|
 |[getmonth()](getmonthfunction.md)|從日期時間取得月份 (1-12)。|
@@ -62,11 +62,11 @@ ms.locfileid: "91517611"
 |[make_datetime()](make-datetimefunction.md)|從指定的日期和時間建立 datetime 純量值。|
 |[make_timespan()](make-timespanfunction.md)|從指定的時段建立 timespan 純量值。|
 |[monthofyear()](monthofyearfunction.md)|傳回整數值，代表指定年份的月數。|
-|[now()](nowfunction.md)|傳回目前的 UTC 時鐘時間，選擇性地以指定的 timespan 為位移。|
+|[現在 ( # B1 ](nowfunction.md)|傳回目前的 UTC 時鐘時間，選擇性地以指定的 timespan 為位移。|
 |[startofday()](startofdayfunction.md)|傳回包含日期的一天開始時間，如果有提供，則以位移位移。|
-|[startofmonth()](startofmonthfunction.md)|傳回包含日期的月份開頭，如有提供，則會位移位移。|
+|[startofmonth ( # B1 ](startofmonthfunction.md)|傳回包含日期的月份開頭，如有提供，則會位移位移。|
 |[startofweek()](startofweekfunction.md)|傳回包含日期的周次開始，如有提供，則會位移位移。|
-|[startofyear()](startofyearfunction.md)|傳回包含日期的年份開頭，如有提供，則會位移位移。|
+|[startofyear ( # B1 ](startofyearfunction.md)|傳回包含日期的年份開頭，如有提供，則會位移位移。|
 |[todatetime()](todatetimefunction.md)|將輸入轉換為 datetime 純量。|
 |[totimespan()](totimespanfunction.md)|將輸入轉換成 timespan 純量。|
 |[unixtime_microseconds_todatetime()](unixtime-microseconds-todatetimefunction.md)|將 unix-epoch 微秒轉換成 UTC 日期時間。|
@@ -78,29 +78,35 @@ ms.locfileid: "91517611"
 
 ## <a name="dynamicarray-functions"></a>動態/陣列函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[array_concat ( # B1 ](arrayconcatfunction.md)|將許多動態陣列串連到單一陣列。|
 |[array_iif()](arrayifffunction.md)|在陣列上套用元素的 iif 函數。|
 |[array_index_of()](arrayindexoffunction.md)|在陣列中搜尋指定的專案，並傳回其位置。|
 |[array_length ( # B1 ](arraylengthfunction.md)|計算動態陣列中的元素數目。|
+|[array_rotate_left()](array_rotate_leftfunction.md)|將動態陣列中的值旋轉至左方。|
+|[array_rotate_right()](array_rotate_rightfunction.md)|將動態陣列中的值旋轉到右邊。|
+|[array_shift_left()](array_shift_leftfunction.md)|將動態陣列中的值右移至左方。|
+|[array_shift_right()](array_shift_rightfunction.md)|將動態陣列中的值右移至右邊。|
 |[array_slice ( # B1 ](arrayslicefunction.md)|解壓縮動態陣列的磁區。|
 |[array_split()](arraysplitfunction.md)|建立從輸入陣列分割之陣列的陣列。|
 |[bag_keys()](bagkeysfunction.md)|列舉動態屬性包物件中的所有根金鑰。|
+|[bag_merge()](bag-merge-function.md)|將動態屬性包合併為動態屬性包，併合並所有屬性。|
+|[bag_remove_keys ( # B1 ](bag-remove-keys-function.md)|從動態屬性包中移除索引鍵和相關聯的值。|
 |[pack()](packfunction.md)|從名稱和值清單中建立動態物件 (屬性包) 。|
 |[pack_all()](packallfunction.md)|從表格式運算式的所有資料行建立動態物件 (屬性包) 。|
 |[pack_array()](packarrayfunction.md)|將所有輸入值封裝至動態陣列中。|
-|[repeat()](repeatfunction.md)|產生包含一系列相等值的動態陣列。|
+|[重複 ( # B1 ](repeatfunction.md)|產生包含一系列相等值的動態陣列。|
 |[set_difference()](setdifferencefunction.md)|傳回第一個陣列中但不在其他陣列中之所有相異值集合的陣列。|
 |[set_has_element()](sethaselementfunction.md)|判斷指定的陣列是否包含指定的元素。|
 |[set_intersect()](setintersectfunction.md)|傳回所有陣列中所有相異值集合的陣列。|
 |[set_union()](setunionfunction.md)|傳回所有提供的陣列中的所有相異值集合的陣列。|
 |[treepath()](treepathfunction.md)|列舉所有可識別動態物件中分葉的路徑運算式。|
-|[zip()](zipfunction.md)|Zip 函數接受任意數目的動態陣列。 傳回陣列，其專案為具有相同索引之輸入陣列元素的陣列。|
+|[zip ( # B1 ](zipfunction.md)|Zip 函數接受任意數目的動態陣列。 傳回陣列，其專案為具有相同索引之輸入陣列元素的陣列。|
 
 ## <a name="window-scalar-functions"></a>視窗純量函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[下一步 ( # B1 ](nextfunction.md)|針對已序列化的資料列集，根據位移，傳回之後資料列中所指定資料行的值。|
 |[prev()](prevfunction.md)|針對已序列化的資料列集，根據位移傳回先前資料列中所指定資料行的值。|
@@ -109,13 +115,13 @@ ms.locfileid: "91517611"
 
 ## <a name="flow-control-functions"></a>流程式控制制函數
 
-|函數名稱            |說明                                             |
+|函數名稱            |描述                                             |
 |-------------------------|--------------------------------------------------------|
 |[toscalar()](toscalarfunction.md)|傳回評估運算式的純量常數值。|
 
 ## <a name="mathematical-functions"></a>數學函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[abs ( # B1 ](abs-function.md)|計算輸入的絕對值。|
 |[acos ( # B1 ](acosfunction.md)|傳回角度，其餘弦值為 ( ( # A2 # A3 之 cos 反向運算的指定數位。|
@@ -154,7 +160,7 @@ ms.locfileid: "91517611"
 
 ## <a name="metadata-functions"></a>中繼資料函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[column_ifexists()](columnifexists.md)|使用資料行名稱做為字串和預設值。 傳回資料行的參考（如果有的話），否則傳回預設值。|
 |[current_cluster_endpoint()](current-cluster-endpoint-function.md)|傳回目前執行查詢的叢集。|
@@ -170,7 +176,7 @@ ms.locfileid: "91517611"
 
 ## <a name="rounding-functions"></a>進位函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[bin()](binfunction.md)|將值捨入為指定 bin 大小的整數倍數。|
 |[bin_at()](binatfunction.md)|將值向下舍入為固定大小的「bin」，可控制 bin 的起點。  (另請參閱 bin 函數。 ) |
@@ -179,17 +185,17 @@ ms.locfileid: "91517611"
 
 ## <a name="conditional-functions"></a>條件式函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[case()](casefunction.md)|評估述詞的清單，並傳回滿足其述詞的第一個結果運算式。|
 |[聯合 ( # B1 ](coalescefunction.md)|評估運算式的清單，並傳回字串) 運算式的第一個非 null (或非空白的。|
-|[iif ( # A1/如果 ( # B3 ](iiffunction.md)|評估 (述詞) 的第一個引數，並傳回第二個或第三個引數的值，取決於述詞是否評估為 true (第二個) 或 false (第三) 。|
+|[iif ( # B1/iff ( # B3 ](iiffunction.md)|評估 (述詞) 的第一個引數，並傳回第二個或第三個引數的值，取決於述詞是否評估為 true (第二個) 或 false (第三) 。|
 |[max_of()](max-offunction.md)|傳回數個評估數值運算式的最大值。|
 |[min_of()](min-offunction.md)|傳回數個評估數值運算式的最小值。|
 
 ## <a name="series-element-wise-functions"></a>數列元素取向函式
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[series_add()](series-addfunction.md)|計算兩個數值數列輸入的元素的加法。|
 |[series_divide()](series-dividefunction.md)|計算兩個數值數列輸入的元素面向除法。|
@@ -204,7 +210,7 @@ ms.locfileid: "91517611"
 
 ## <a name="series-processing-functions"></a>數列處理函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[series_decompose()](series-decomposefunction.md)|會將數列分解為元件。|
 |[series_decompose_anomalies()](series-decompose-anomaliesfunction.md)|根據序列分解來尋找數列中的異常。|
@@ -231,7 +237,7 @@ ms.locfileid: "91517611"
 
 ## <a name="string-functions"></a>字串函數
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[base64_encode_tostring()](base64_encode_tostringfunction.md)|將字串編碼為 base64 字串。|
 |[base64_decode_tostring()](base64_decode_tostringfunction.md)|將 base64 字串解碼為 UTF-8 字串。|
@@ -241,7 +247,7 @@ ms.locfileid: "91517611"
 |[extract_all()](extractallfunction.md)|從文字字串取得正則運算式的所有符合專案。|
 |[extractjson()](extractjsonfunction.md)|使用路徑運算式從 JSON 文字取出指定的項目。|
 |[indexof ( # B1 ](indexoffunction.md)|函數會報告輸入字串內，第一次出現指定字串之以零為起始的索引。|
-|[isempty()](isemptyfunction.md)|如果引數為空字串或為 null，則傳回 true。|
+|[isempty ( # B1 ](isemptyfunction.md)|如果引數為空字串或為 null，則傳回 true。|
 |[isnotempty()](isnotemptyfunction.md)|如果引數不是空字串或 null，則傳回 true。|
 |[isnotnull()](isnotnullfunction.md)|如果引數不是 null，則傳回 true。|
 |[isnull ( # B1 ](isnullfunction.md)|評估其唯一的引數，並傳回布林值，指出引數是否評估為 null 值。|
@@ -274,7 +280,7 @@ ms.locfileid: "91517611"
 
 ## <a name="ipv4ipv6-functions"></a>IPv4/IPv6 功能
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[ipv4_compare()](ipv4-comparefunction.md)|比較兩個 IPv4 字串。|
 |[ipv4_is_match()](ipv4-is-matchfunction.md)|符合兩個 IPv4 字串。|
@@ -289,13 +295,13 @@ ms.locfileid: "91517611"
 
 ## <a name="type-functions"></a>類型函式
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[gettype()](gettypefunction.md)|傳回其單一引數的執行時間型別。|
 
 ## <a name="scalar-aggregation-functions"></a>純量彙總函式
 
-|函數名稱     |說明                                          |
+|函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[dcount_hll()](dcount-hllfunction.md)|從 hll 結果計算 dcount， (由 hll 或 hll 合併) 所產生。|
 |[hll_merge()](hllmergefunction.md)|合併 hll 結果 (純量版本的匯總版本 hll-merge ( # A2 # A3。|
@@ -306,7 +312,7 @@ ms.locfileid: "91517611"
 
 ## <a name="geospatial-functions"></a>GeoSpatial 函式
 
-|函數名稱|說明|
+|函數名稱|描述|
 |--------------------------------------------------------------------------|--------------------------------------------------------|
 |[geo_distance_2points()](geo-distance-2points-function.md)|計算地球上兩個地理空間座標之間的最短距離。|
 |[geo_distance_point_to_line()](geo-distance-point-to-line-function.md)|計算地球上座標和線條之間的最短距離。|
@@ -322,7 +328,7 @@ ms.locfileid: "91517611"
 
 ## <a name="hash-functions"></a>雜湊函數
 
-|函數名稱|說明|
+|函數名稱|描述|
 |--------------------------------------------------------------------------|--------------------------------------------------------|
 |[雜湊 ( # B1 ](hashfunction.md)|傳回輸入值的雜湊值。|
 |[hash_combine()](hash_combinefunction.md)|結合兩個或多個雜湊值。|

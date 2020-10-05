@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: f1d77e91ba625b3f38c4b1fde31a841377bb88a5
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: 769ebc16da0780f1d1832dcbf49bad516c47abd3
+ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610513"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91712012"
 ---
 # <a name="user-defined-functions"></a>使用者自訂函數
 
@@ -279,10 +279,10 @@ union T*
 
 ## <a name="restrictions"></a>限制
 
-適用以下限制：
+適用下列限制：
 
 * 使用者自訂函數無法傳遞至 [toscalar ( # B1 ](../toscalarfunction.md) 調用資訊，其相依于呼叫函式的資料列內容。
-* 傳回表格式運算式 can'tbe 的使用者定義函數，這個引數會因數據列內容而異。
+* 傳回表格式運算式的使用者自訂函數，不能以與資料列內容不同的引數叫用。
 * 無法在遠端叢集上叫用至少接受一個表格式輸入的函數。
 * 無法在遠端叢集上叫用純量函數。
 

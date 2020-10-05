@@ -7,21 +7,21 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/19/2020
-ms.openlocfilehash: 89ee29e70c71c29afb65ee81fc4ce8e498faee33
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: 4f7e61755b12c84fc49373a12edc0b507aee9bf4
+ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502631"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91712046"
 ---
 # <a name="data-formats-supported-by-azure-data-explorer-for-ingestion"></a>適用于內嵌的 Azure 資料總管所支援的資料格式
 
 資料內嵌是指將資料新增至資料表並可在 Azure 資料總管中進行查詢的程式。 對於內嵌自查詢以外的所有內嵌方法，資料必須是其中一種支援的格式。 下表列出並說明 Azure 資料總管針對資料內嵌所支援的格式。
 
-|格式   |分機   |描述|
+|格式   |副檔名   |描述|
 |---------|------------|-----------|
-|Avro     |`.avro`     |[Avro容器檔案](https://avro.apache.org/docs/current/)。 支援以下程式碼：`null`、`deflate` (`snappy` 目前不支援)。|
-|ApacheAvro|`.avro`    |[Avro](https://avro.apache.org/docs/current/)格式的實驗原生執行，可支援[邏輯類型](https://avro.apache.org/docs/current/spec.html#Logical+Types)和 `snappy` 壓縮編解碼器。|
+|ApacheAvro|`.avro`    |[Avro](https://avro.apache.org/docs/current/)格式，可支援[邏輯類型](https://avro.apache.org/docs/current/spec.html#Logical+Types)和 `snappy` 壓縮編解碼器。|
+|Avro     |`.avro`     |[Avro 容器](https://avro.apache.org/docs/current/)檔案的舊版執行。 以下是支援的程式碼 `null` ： `deflate` (的 `snappy` 使用 `apacheavro` 檔案格式) 。|
 |CSV      |`.csv`      |具有逗號分隔值的文字檔 (`,`)。 請參閱 [RFC 4180： _逗點分隔值的一般格式和 MIME 類型 (CSV) _](https://www.ietf.org/rfc/rfc4180.txt)檔。|
 |JSON     |`.json`     |具有以 `\n` 或 `\r\n` 分隔的 JSON 文字檔。 請參閱 [JSON 程式碼行 (JSONL)](http://jsonlines.org/)。|
 |MultiJSON|`.multijson`|文字檔，其中包含屬性包的 JSON 陣列 (每個屬性包都代表一筆記錄)，或任意多個以空白字元分隔的屬性包，`\n` 或 `\r\n`。 每個屬性包都可以散佈在多行上。 `JSON`除非資料是非屬性包，否則偏好此格式。|
@@ -40,7 +40,7 @@ ms.locfileid: "89502631"
 
 Blob 和檔案可透過下列任何壓縮演算法來壓縮：
 
-|壓縮|分機|
+|壓縮|副檔名|
 |-----------|---------|
 |GZip       |.gz      |
 |Zip        |.zip     |
