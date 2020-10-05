@@ -656,6 +656,8 @@
               href: ./kusto/query/bagkeysfunction.md
             - name: bag_merge()
               href: ./kusto/query/bag-merge-function.md
+            - name: bag_remove_keys()
+              href: ./kusto/query/bag-remove-keys-function.md
             - name: base64_decode_toarray()
               href: ./kusto/query/base64_decode_toarrayfunction.md
             - name: base64_decode_tostring()
@@ -1333,6 +1335,8 @@
                   href: ./kusto/management/show-table-details-command.md
                 - name: .show 資料表結構描述
                   href: ./kusto/management/show-table-schema-command.md
+                - name: .clear 表格資料
+                  href: ./kusto/management/clear-table-data-command.md
             - name: 外部資料表
               items:
                 - name: 外部資料表一般控制項命令
