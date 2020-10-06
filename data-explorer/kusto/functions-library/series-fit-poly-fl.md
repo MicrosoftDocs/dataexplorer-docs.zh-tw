@@ -7,19 +7,25 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: 7be785a7a3a0abe0c1f6483e016484ee0124f29b
-ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
+ms.openlocfilehash: eff9a5cd8ed2d9ed7e518be9aade9ecf2aded7bf
+ms.sourcegitcommit: d0f8d71261f8f01e7676abc77283f87fc450c7b1
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/21/2020
-ms.locfileid: "90832598"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91765475"
 ---
 # <a name="series_fit_poly_fl"></a>series_fit_poly_fl()
 
-函數會 `series_fit_poly_fl()` 對數列套用多項式回歸。 它會採用一個包含多個數列 (動態數值陣列的資料表) 並且針對每個數列產生最適合使用 [多項式回歸](https://en.wikipedia.org/wiki/Polynomial_regression)的高序位多項式。 此函數會傳回數列係數和內插多項式的範圍。
+函數會 `series_fit_poly_fl()` 對數列套用多項式回歸。 此函式會採用包含多個數列 (動態數值陣列的資料表) 並使用 [多項式回歸](https://en.wikipedia.org/wiki/Polynomial_regression)為每個數列產生最適合的高序位多項式。 此函數會傳回數列係數和內插多項式的範圍。
 
 > [!NOTE]
-> `series_fit_poly_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。 若為平均間距的數列（由 [建立數列運算子](../query/make-seriesoperator.md)所建立）的線性回歸，請使用原生函式 [Series_fit_line ( # B1 ](../query/series-fit-linefunction.md)。
+> 使用原生函式 [series_fit_poly ( # B1 ](../query/series-fit-poly-function.md)。 下列函式僅供參考。
+
+
+> [!NOTE]
+> * `series_fit_poly_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。
+> * 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
+> * 若為平均間距的數列（由 [建立數列運算子](../query/make-seriesoperator.md)所建立）的線性回歸，請使用原生函式 [Series_fit_line ( # B1 ](../query/series-fit-linefunction.md)。
 
 ## <a name="syntax"></a>語法
 
@@ -81,7 +87,7 @@ let series_fit_poly_fl=(tbl:(*), y_series:string, y_fit_series:string, fit_coeff
      | evaluate python(typeof(*), code, kwargs)
 };
 //
-// Fit 5th order polynomial to a regular (evenly spaced) time series, created with make-series
+// Fit fifth order polynomial to a regular (evenly spaced) time series, created with make-series
 //
 let max_t = datetime(2016-09-03);
 demo_make_series1
@@ -143,7 +149,7 @@ series_fit_poly_fl(tbl:(*), y_series:string, y_fit_series:string, fit_coeff:stri
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 //
-// Fit 5th order polynomial to a regular (evenly spaced) time series, created with make-series
+// Fit fifth order polynomial to a regular (evenly spaced) time series, created with make-series
 //
 let max_t = datetime(2016-09-03);
 demo_make_series1
@@ -165,9 +171,6 @@ demo_make_series1
     
     <!-- csl: https://help.kusto.windows.net:443/Samples -->
     ```kusto
-    //
-    //  Test irregular (unevenly spaced) time series
-    //
     let max_t = datetime(2016-09-03);
     demo_make_series1
     | where TimeStamp between ((max_t-2d)..max_t)
@@ -180,20 +183,16 @@ demo_make_series1
     | render timechart with(ycolumns=num, fnum)
     ```
     
-    :::image type="content" source="images/series-fit-poly-fl/irregular-time-series.png" alt-text="顯示8個順序多項式符合不規則時間序列的圖表" border="false":::
+    :::image type="content" source="images/series-fit-poly-fl/irregular-time-series.png" alt-text="顯示五個順序多項式符合一般時間序列的圖表" border="false":::
 
-1. 第5個順序多項式，x & y 軸上的雜訊
+1. X & y 軸上的第五個順序多項式與雜訊
 
     <!-- csl: https://help.kusto.windows.net:443/Samples -->
     ```kusto
-    //
-    // 5th order polynomial with noise on x & y axes
-    //
     range x from 1 to 200 step 1
     | project x = rand()*5 - 2.3
     | extend y = pow(x, 5)-8*pow(x, 3)+10*x+6
     | extend y = y + (rand() - 0.5)*0.5*y
-    | order by x asc 
     | summarize x=make_list(x), y=make_list(y)
     | extend y_fit = dynamic(null), coeff=dynamic(null)
     | invoke series_fit_poly_fl('y', 'y_fit', 'coeff', 5, 'x')
@@ -201,6 +200,6 @@ demo_make_series1
     | render linechart
     ```
         
-    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise.png" alt-text="在 x & y 軸上，符合5個順序多項式與雜訊的圖表":::
+    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise.png" alt-text="顯示五個順序多項式符合一般時間序列的圖表":::
        
-    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise-table.png" alt-text="符合五個順序多項式與雜訊的係數" border="false":::
+    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise-table.png" alt-text="顯示五個順序多項式符合一般時間序列的圖表" border="false":::
