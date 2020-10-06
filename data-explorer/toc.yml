@@ -1431,6 +1431,12 @@
                   href: ./kusto/management/partitioningpolicy.md
                 - name: 資料分割原則命令
                   href: ./kusto/management/partitioning-policy.md
+            - name: 查詢節流
+              items:
+                - name: 查詢節流原則
+                  href: ./kusto/management/query-throttling-policy.md
+                - name: 查詢節流原則命令
+                  href: ./kusto/management/query-throttling-policy-commands.md
             - name: 保留
               items:
                 - name: 保留原則
