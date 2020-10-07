@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1db42577a0d4d10da732b54b0a5032ab2be11b69
-ms.sourcegitcommit: 91e7d49a1046575bbc63a4f25724656ebfc070db
+ms.openlocfilehash: c10e6502c4e18a5c30d971c4814c2270a0b27ff1
+ms.sourcegitcommit: 830837607f344f1ce1f146f946a41e45bfebcb22
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/30/2020
-ms.locfileid: "89151156"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91806677"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -279,6 +279,8 @@ dataformat=parquet
 | 輸出參數 | 類型   | 描述                       |
 |------------------|--------|-----------------------------------|
 | Uri              | 字串 | 外部儲存體資料檔案的 URI |
+| 大小             | long   | 檔案長度（以位元組為單位）              |
+| 資料分割        | 動態 | 描述分割區外部資料表之檔案分割區的動態物件 |
 
 > [!TIP]
 > 根據檔案數目，反覆運算外部資料表所參考的所有檔案可能相當昂貴。 `limit`如果您只想要查看一些 URI 範例，請務必使用參數。
@@ -291,9 +293,19 @@ dataformat=parquet
 
 **輸出：**
 
-| Uri                                                                     |
-|-------------------------------------------------------------------------|
-| `https://storageaccount.blob.core.windows.net/container1/folder/file.csv` |
+| Uri                                                                     | 大小 | 資料分割 |
+|-------------------------------------------------------------------------| ---- | --------- |
+| `https://storageaccount.blob.core.windows.net/container1/folder/file.csv` | 10743 | `{}`   |
+
+
+如果是資料分割資料表， `Partition` 資料行將包含已解壓縮的資料分割值：
+
+**輸出：**
+
+| Uri                                                                     | 大小 | 資料分割 |
+|-------------------------------------------------------------------------| ---- | --------- |
+| `https://storageaccount.blob.core.windows.net/container1/customer=john.doe/dt=20200101/file.csv` | 10743 | `{"Customer": "john.doe", "Date": "2020-01-01T00:00:00.0000000Z"}` |
+
 
 ## <a name="create-external-table-mapping"></a>. 建立外部資料表對應
 
