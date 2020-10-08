@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的資料對應。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: ohbitton
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/19/2020
-ms.openlocfilehash: cd498d43d98250bad0a7ce00c4a8fec7b4f3ad4f
-ms.sourcegitcommit: d08b3344d7e9a6201cf01afc8455c7aea90335aa
+ms.openlocfilehash: 9695bd1a1330b4dc7cd44131d566c538c0264de4
+ms.sourcegitcommit: eff06eb34f78630fd78470d918ebc04ff5dc863e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88964722"
+ms.lasthandoff: 10/08/2020
+ms.locfileid: "91847191"
 ---
 # <a name="data-mappings"></a>資料對應
 
@@ -67,19 +67,6 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
 > [!NOTE]
 > 當您在控制命令中提供上述的對應時， `.ingest` 它會序列化為 JSON 字串。
 
-* 當上述對應 [預先建立](create-ingestion-mapping-command.md) 時，可以在控制命令中參考它 `.ingest` ：
-
-```kusto
-.ingest into Table123 (@"source1", @"source2")
-    with 
-    (
-        format="csv", 
-        ingestionMappingReference = "Mapping1"
-    )
-```
-
-* 當您在控制命令中提供上述的對應時，會 `.ingest` 將其序列化為 JSON 字串：
-
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
     with 
@@ -93,7 +80,20 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
     )
 ```
 
-**注意：** 下列不含屬性包的對應格式 `Properties` 已被取代。
+> [!NOTE]
+> 當上述對應 [預先建立](create-ingestion-mapping-command.md) 時，可以在控制命令中參考它 `.ingest` ：
+
+```kusto
+.ingest into Table123 (@"source1", @"source2")
+    with 
+    (
+        format="csv", 
+        ingestionMappingReference = "Mapping1"
+    )
+```
+
+> [!NOTE]
+> 下列不含屬性包的對應格式 `Properties` 已被取代。
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -116,7 +116,7 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
 
 |屬性|描述|
 |----|--|
-|`path`|如果開頭為 `$` ：將會成為 json 檔中資料行內容之欄位的 json 路徑 (會) 表示整份檔的 json 路徑 `$` 。 如果值的開頭不 `$` 是：會使用常數值。|
+|`path`|如果開頭為 `$` ：將會成為 json 檔中資料行內容之欄位的 json 路徑 (會) 表示整份檔的 json 路徑 `$` 。 如果值的開頭不 `$` 是：會使用常數值。 包含空白字元的 JSON 路徑應以 [屬性名稱] 的形式來將其轉義 \' \' 。|
 |`transform`| (應在具有 [對應轉換](#mapping-transformations)的內容上套用的選擇性) 轉換。|
 
 ### <a name="example-of-json-mapping"></a>JSON 對應範例
@@ -141,6 +141,23 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
 > 當您在控制命令中提供上述的對應時， `.ingest` 它會序列化為 JSON 字串。
 
 ```kusto
+.ingest into Table123 (@"source1", @"source2") 
+  with 
+  (
+      format = "json", 
+      ingestionMapping = 
+      "["
+        "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
+        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}",
+        "{\"column\":\"custom_column\",  \"Properties\":{\"Path\":\"$.[\'property name with space\']\"}}"
+      "]"
+  )
+```
+
+> [!NOTE]
+> 當上述對應 [預先建立](create-ingestion-mapping-command.md) 時，可以在控制命令中參考它 `.ingest` ：
+
+```kusto
 .ingest into Table123 (@"source1", @"source2")
     with 
     (
@@ -149,7 +166,8 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
     )
 ```
 
-**注意：** 下列不含屬性包的對應格式 `Properties` 已被取代。
+> [!NOTE]
+> 下列不含屬性包的對應格式 `Properties` 已被取代。
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -173,7 +191,7 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
 |屬性|描述|
 |----|--|
 |`Field`|Avro 記錄中的功能變數名稱。|
-|`Path`|`field`如果有必要，則使用的替代方法允許接受 Avro 記錄欄位的內部部分。 此值代表來自記錄根目錄的 JSON 路徑。 如需詳細資訊，請參閱下列附注。 |
+|`Path`|`field`如果有必要，則使用的替代方法允許接受 Avro 記錄欄位的內部部分。 此值代表來自記錄根目錄的 JSON 路徑。 如需詳細資訊，請參閱下列附注。 包含空白字元的 JSON 路徑應以 [屬性名稱] 的形式來將其轉義 \' \' 。|
 |`transform`| (選用的) 轉換，應套用至 [支援的轉換](#mapping-transformations)內容。|
 
 **備註**
@@ -214,6 +232,22 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
 > 當您在控制命令中提供上述的對應時， `.ingest` 它會序列化為 JSON 字串。
 
 ```kusto
+.ingest into Table123 (@"source1", @"source2") 
+  with 
+  (
+      format = "avro", 
+      ingestionMapping = 
+      "["
+        "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
+        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}"
+      "]"
+  )
+```
+
+> [!NOTE]
+> 當上述對應 [預先建立](create-ingestion-mapping-command.md) 時，可以在控制命令中參考它 `.ingest` ：
+
+```kusto
 .ingest into Table123 (@"source1", @"source2")
     with 
     (
@@ -222,7 +256,8 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
     )
 ```
 
-**注意：** 下列不含屬性包的對應格式 `Properties` 已被取代。
+> [!NOTE]
+> 下列不含屬性包的對應格式 `Properties` 已被取代。
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -245,7 +280,7 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
 
 |屬性|描述|
 |----|--|
-|`path`|如果開頭為 `$` ：將成為 Parquet 檔中資料行內容之欄位的 json 路徑， (代表整個檔的 json 路徑 `$`) 。 如果值的開頭不 `$` 是：會使用常數值。|
+|`path`|如果開頭為 `$` ：將成為 Parquet 檔中資料行內容之欄位的 json 路徑， (代表整個檔的 json 路徑 `$`) 。 如果值的開頭不 `$` 是：會使用常數值。 包含空白字元的 JSON 路徑應以 [屬性名稱] 的形式來將其轉義 \' \' 。 |
 |`transform`| (應套用於內容的選擇性) [對應轉換](#mapping-transformations) 。
 
 
@@ -268,7 +303,22 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
 > [!NOTE]
 > 當您在控制命令中提供上述的對應時， `.ingest` 它會序列化為 JSON 字串。
 
-* 當上述對應 [預先建立](create-ingestion-mapping-command.md) 時，可以在控制命令中參考它 `.ingest` ：
+```kusto
+.ingest into Table123 (@"source1", @"source2") 
+  with 
+  (
+      format = "parquet", 
+      ingestionMapping = 
+      "["
+        "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
+        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}",
+        "{\"column\":\"custom_column\",  \"Properties\":{\"Path\":\"$.[\'property name with space\']\"}}"
+      "]"
+  )
+```
+
+> [!NOTE]
+> 當上述對應 [預先建立](create-ingestion-mapping-command.md) 時，可以在控制命令中參考它 `.ingest` ：
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -279,21 +329,6 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
     )
 ```
 
-* 當您在控制命令中提供上述的對應時，會 `.ingest` 將其序列化為 JSON 字串：
-
-```kusto
-.ingest into Table123 (@"source1", @"source2") 
-  with 
-  (
-      format = "parquet", 
-      ingestionMapping = 
-      "["
-        "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
-        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}"
-      "]"
-  )
-```
-
 ## <a name="orc-mapping"></a>Orc 對應
 
 當來源檔案的格式為 Orc 時，檔案內容會對應到 Kusto 資料表。 除非針對所有對應的資料行指定有效的資料類型，否則資料表必須存在於 Kusto 資料庫中。 除非針對所有不存在的資料行指定資料類型，否則 Orc 對應中對應的資料行必須存在於 Kusto 資料表中。
@@ -302,7 +337,7 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
 
 |屬性|描述|
 |----|--|
-|`path`|如果開頭為 `$` ：將成為 Orc 檔中資料行內容之欄位的 json 路徑， (代表整個檔的 json 路徑 `$`) 。 如果值的開頭不 `$` 是：會使用常數值。|
+|`path`|如果開頭為 `$` ：將成為 Orc 檔中資料行內容之欄位的 json 路徑， (代表整個檔的 json 路徑 `$`) 。 如果值的開頭不 `$` 是：會使用常數值。 包含空白字元的 JSON 路徑應以 [屬性名稱] 的形式來將其轉義 \' \' 。|
 |`transform`| (應套用於內容的選擇性) [對應轉換](#mapping-transformations) 。
 
 ### <a name="example-of-orc-mapping"></a>Orc 對應的範例
@@ -332,9 +367,22 @@ CSV 對應可套用至所有分隔符號分隔格式： CSV、TSV、PSV、SCSV �
       ingestionMapping = 
       "["
         "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
-        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}"
+        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}",
+        "{\"column\":\"custom_column\",  \"Properties\":{\"Path\":\"$.[\'property name with space\']\"}}"
       "]"
   )
+```
+
+> [!NOTE]
+> 當上述對應 [預先建立](create-ingestion-mapping-command.md) 時，可以在控制命令中參考它 `.ingest` ：
+
+```kusto
+.ingest into Table123 (@"source1", @"source2")
+    with 
+    (
+        format="orc", 
+        ingestionMappingReference = "Mapping1"
+    )
 ```
 
 ## <a name="mapping-transformations"></a>對應轉換
