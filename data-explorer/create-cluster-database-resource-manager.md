@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 5b72bb604ef7de1b5ca01b5720566b977c2e1ab2
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 46ccf006c6f2cf167953c64bcaa2f3de0fbaf4b6
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872041"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942211"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-an-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本建立 Azure 資料總管叢集和資料庫
 
@@ -104,11 +104,11 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 1. 若要建立叢集和資料庫，請使用下列按鈕來開始部署。 按一下滑鼠右鍵並選取 [在新視窗中開啟]****，以便依照本文中的其餘步驟操作。
 
-    [![部署至 Azure](media/create-cluster-database-resource-manager/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-kusto-cluster-database%2Fazuredeploy.json)
+    [![藍色按鈕的螢幕擷取畫面，其中圖片雲端和已標示為 [部署至 Azure]。](media/create-cluster-database-resource-manager/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-kusto-cluster-database%2Fazuredeploy.json)
 
     [部署至 Azure]**** 按鈕可將您帶往 Azure 入口網站，填寫部署表單。
 
-    ![部署至 Azure](media/create-cluster-database-resource-manager/deploy-2-azure.png)
+    :::image type="content" source="media/create-cluster-database-resource-manager/deploy-2-azure.png" alt-text="Azure 入口網站上範本的螢幕擷取畫面。所有用於編輯的按鈕、方塊和核取方塊都會反白顯示。" border="false":::
 
     您可以使用表單， [在 Azure 入口網站中編輯和部署範本](/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal#edit-and-deploy-the-template) 。
 

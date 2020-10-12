@@ -7,12 +7,12 @@ ms.reviewer: prvavill
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/31/2020
-ms.openlocfilehash: 5de30b4e6eb2ac9d01314482b693f6643075ca4a
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 630b03fc0e89005f1031aba4cbd1a86d803ff275
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872738"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942024"
 ---
 # <a name="monitor-azure-data-explorer-using-resource-health-preview"></a>使用資源健康狀態 (Preview 來監視 Azure 資料總管) 
 
@@ -40,13 +40,13 @@ ms.locfileid: "88872738"
 
 健康狀態為 [ **可用** ] 表示您的 Azure 資料總管資源狀況良好且沒有任何問題。
 
-![可用](media/monitor-with-resource-health/available.png)
+:::image type="content" source="media/monitor-with-resource-health/available.png" alt-text="Azure 資料總管資源的資源健康狀態頁面螢幕擷取畫面。狀態會列出為 [可用]，並會反白顯示。" border="false":::
 
 ### <a name="unavailable"></a>[無法使用]
 
 健全狀況狀態為 [ **無法使用** ] 表示 Azure 資料總管資源發生問題，導致無法在查詢和內嵌時使用。 例如，Azure 資料總管資源中的節點可能未預期地重新開機。 如果您的 Azure 資料總管資源在一段長時間內仍維持此狀態，請聯絡 [支援]()人員。
 
-![[無法使用]](media/monitor-with-resource-health/unavailable.png)
+:::image type="content" source="media/monitor-with-resource-health/unavailable.png" alt-text="Azure 資料總管資源的資源健康狀態頁面螢幕擷取畫面。狀態會列出為 [可用]，並會反白顯示。" border="false":::
 
 > [!TIP]
 > 您可以使用 [ [系統資訊] 命令](kusto/management/systeminfo.md) 找出問題的來源。
@@ -58,13 +58,13 @@ ms.locfileid: "88872738"
 > [!TIP]
 > 如果 Azure 資料總管叢集資源健康狀態為「已停止」狀態，則會是 **未知** 的。
 
-![Unknown](media/monitor-with-resource-health/unknown.png)
+:::image type="content" source="media/monitor-with-resource-health/unknown.png" alt-text="Azure 資料總管資源的資源健康狀態頁面螢幕擷取畫面。狀態會列出為 [可用]，並會反白顯示。" border="false":::
 
 ## <a name="historical-information"></a>歷程記錄資訊
 
 在 **資源健康狀態** 窗格中 > 健康情況歷程 **記錄**，最多可存取四周的資源健康狀態資訊。 針對此窗格中所報告的健康情況事件問題，選取箭號以取得詳細資訊。 
 
-![記錄](media/monitor-with-resource-health/healthhistory.png)
+![歷程記錄](media/monitor-with-resource-health/healthhistory.png)
 
 ## <a name="next-steps"></a>後續步驟
 

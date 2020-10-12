@@ -1,21 +1,21 @@
 ---
-title: 資料列層級安全性 (Preview) -Azure 資料總管
-description: 本文說明 Azure 資料總管中資料列層級安全性 (Preview) 。
+title: 資料列層級安全性-Azure 資料總管
+description: 本文說明 Azure 資料總管中的資料列層級安全性。
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/25/2020
-ms.openlocfilehash: f3d42835733ffe9303806687891c69df4dcc2178
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.date: 10/11/2020
+ms.openlocfilehash: 2b81319740143a1c0ebc31c4a9b93d7b3b2e5223
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610452"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91941803"
 ---
-# <a name="row-level-security-preview"></a>資料列層級安全性 (Preview) 
+# <a name="row-level-security"></a>資料列層級安全性
 
 使用群組成員資格或執行內容來控制資料庫資料表中資料列的存取權。
 

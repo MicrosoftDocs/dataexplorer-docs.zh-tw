@@ -1,6 +1,6 @@
 ---
-title: geo_point_in_polygon （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 geo_point_in_polygon （）。
+title: 'geo_point_in_polygon ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 geo_point_in_polygon。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/10/2020
-ms.openlocfilehash: 49b3e8b92d022ac5d1d8191bef8f00436b9f7211
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: d8bbebc4043ed2b3a64e90e12f629a1ab9521e6d
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347794"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91941786"
 ---
 # <a name="geo_point_in_polygon"></a>geo_point_in_polygon()
 
-計算地理空間座標是否在多邊形內部，或 multipolygon 在地球上。
+計算地理空間座標是否在地球的多邊形或 multipolygon 內。
 
 ## <a name="syntax"></a>語法
 
@@ -25,33 +25,33 @@ ms.locfileid: "87347794"
 
 ## <a name="arguments"></a>引數
 
-* *經度*：地理空間座標、經度值（以度為單位）。 有效的值為實數，且範圍為 [-180，+ 180]。
-* *緯度*：地理空間座標，以度為單位的緯度值。 有效的值為實數，且範圍為 [-90，+ 90]。
-* *多邊形*： [GeoJSON 格式](https://tools.ietf.org/html/rfc7946)的多邊形或 multipolygon，以及[動態](./scalar-data-types/dynamic.md)資料類型的。
+* *經度*：地理空間座標、經度值（以度為單位）。 有效的值為實數，在範圍 [-180，+ 180] 中。
+* *緯度*：地理空間座標、緯度值（以度為單位）。 有效的值為實數，在範圍 [-90，+ 90] 中。
+* *多邊形*： [GeoJSON 格式](https://tools.ietf.org/html/rfc7946) 和 [動態](./scalar-data-types/dynamic.md) 資料類型的多邊形或 multipolygon。
 
 ## <a name="returns"></a>傳回
 
 指出地理空間座標是否在多邊形內。 如果座標或多邊形無效，查詢將會產生 null 結果。 
 
 > [!NOTE]
-> * 地理空間座標會以[WGS-84](https://earth-info.nga.mil/GandG/update/index.php?action=home)座標參考系統來表示。
-> * 用於在地球上測量的[geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum)是一個球體。 多邊形邊緣會在球體上[geodesics](https://en.wikipedia.org/wiki/Geodesic) 。
-> * 如果輸入多邊形邊緣是直線笛線，請考慮使用[geo_polygon_densify （）](geo-polygon-densify-function.md) ，將平面邊緣轉換成 geodesics。
+> * 地理空間座標會以 [WGS-84](https://earth-info.nga.mil/GandG/update/index.php?action=home) 座標參考系統的表示來解讀。
+> * 用來測量地球的 [geodetic 基準](https://en.wikipedia.org/wiki/Geodetic_datum) 是球體。 多邊形邊緣是在球體上 [geodesics](https://en.wikipedia.org/wiki/Geodesic) 。
+> * 如果輸入多邊形邊緣是直線笛卡兒線，請考慮使用 [geo_polygon_densify ( # B1 ](geo-polygon-densify-function.md) 將平面邊緣轉換成 geodesics。
 
 **多邊形定義和條件約束**
 
-dynamic （{"type"： "多邊形"，"座標"： [LinearRingShell，LinearRingHole_1,..., LinearRingHole_N]}）
+dynamic ( {"type"： "多邊形"，"座標"： [LinearRingShell，LinearRingHole_1,..., LinearRingHole_N]} ) 
 
-dynamic （{"type"： "MultiPolygon"，"座標"： [[LinearRingShell，LinearRingHole_1,..., LinearRingHole_N],..., [LinearRingShell，LinearRingHole_1,..., LinearRingHole_M]]}）
+dynamic ( {"type"： "MultiPolygon"，"座標"： [[LinearRingShell，LinearRingHole_1,..., LinearRingHole_N],..., [LinearRingShell，LinearRingHole_1,..., LinearRingHole_M]]} ) 
 
-* LinearRingShell 是必要的，而且定義為 `counterclockwise` 座標 [[lng_1，lat_1],..., [lng_i，lat_i],..., [lng_j，lat_j],..., [lng_1，lat_1]] 的已排序陣列。 只能有一個 shell。
-* LinearRingHole 是選擇性的，而且定義為已 `clockwise` 排序的座標陣列 [[lng_1，lat_1],..., [lng_i，lat_i],..., [lng_j，lat_j],..., [lng_1，lat_1]]。 可以有任意數目的內部環形和孔。
-* LinearRing 頂點必須與至少三個座標不同。 第一個座標必須等於最後一個。 至少需要四個專案。
-* 座標 [經度，緯度] 必須是有效的。 經度必須是範圍 [-180，+ 180] 中的實數，而緯度必須是範圍 [-90，+ 90] 中的實數。
-* LinearRingShell 會包含在球體的一半。 LinearRing 會將球體劃分成兩個區域。 將選擇兩個區域中較小的一個。
-* LinearRing 邊緣長度必須小於180度。 將選擇兩個頂點之間的最短邊緣。
-* LinearRings 不得交叉且不得共用邊緣。 LinearRings 可能會共用頂點。
-* 多邊形不一定包含其頂點。 定義多邊形中的點內含專案，如此一來，當地球細分成多邊形時，每個點都只包含一個多邊形。
+* LinearRingShell 是必要的，且定義為 `counterclockwise` 座標 [[lng_1，lat_1],..., [lng_i，lat_i],..., [lng_j，lat_j],..., [lng_1，lat_1]] 的已排序陣列。 只能有一個 shell。
+* LinearRingHole 是選擇性的，且定義為 `clockwise` 座標 [[lng_1，lat_1],..., [lng_i，lat_i],..., [lng_j，lat_j],..., [lng_1，lat_1]] 的排序陣列。 您可以有任意數目的內部環形和漏洞。
+* LinearRing 頂點必須與至少三個座標不同。 第一個座標必須等於最後一個座標。 至少需要四個專案。
+* 座標 [經度，緯度] 必須是有效的。 經度必須是範圍 [-180，+ 180] 內的實數，且緯度必須是範圍 [-90，+ 90] 的實數。
+* LinearRingShell 最多會在球體的一半中。 LinearRing 會將球體分割成兩個區域。 將會選擇兩個區域中較小的一個。
+* LinearRing edge 長度必須小於180度。 將會選擇兩個頂點之間的最短邊緣。
+* LinearRings 不得跨且不得共用邊緣。 LinearRings 可能共用頂點。
+* 多邊形不一定包含其頂點。 定義多邊形中的點內含專案，如此一來，如果地球已細分成多邊形，則每個點都只會包含一個多邊形。
 
 > [!TIP]
 > * 使用常值多邊形可能會產生較佳的效能。
@@ -61,7 +61,7 @@ dynamic （{"type"： "MultiPolygon"，"座標"： [[LinearRingShell，LinearRin
 
 沒有中央公園的曼哈頓島。
 
-:::image type="content" source="images/geo-point-in-polygon-function/polygon-manhattan-with-hole.png" alt-text="具有洞的曼哈頓":::
+:::image type="content" source="images/geo-point-in-polygon-function/polygon-manhattan-with-hole.png" alt-text="曼哈頓區域地圖的螢幕擷取畫面，以及地標、博物館和機場的標記。島會顯示為暗灰色，但中央公園除外。":::
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -78,9 +78,9 @@ datatable(longitude:real, latitude:real, description:string)
 |---|---|---|
 |-73.985654|40.748487|帝國狀態建立|
 
-在 multipolygon 中搜尋座標。
+搜尋 multipolygon 中的座標。
 
-:::image type="content" source="images/geo-point-in-polygon-function/multipolygon-manhattan.png" alt-text="具有洞的曼哈頓":::
+:::image type="content" source="images/geo-point-in-polygon-function/multipolygon-manhattan.png" alt-text="曼哈頓區域地圖的螢幕擷取畫面，以及地標、博物館和機場的標記。島會顯示為暗灰色，但中央公園除外。":::
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -99,11 +99,11 @@ coordinates
 |經度 (longitude)|緯度 (latitude)|description|
 |---|---|---|
 |-73.9741|40.7914|右上方|
-|-73.995|40.734|格林威治 Village|
+|-73.995|40.734|威治村|
 
-加州中的風暴事件。 事件會依加州狀態多邊形進行篩選，並依事件種類和雜湊進行匯總。
+加州的風暴事件。 這些事件會依加州州多邊形進行篩選，並依事件種類和雜湊進行匯總。
 
-:::image type="content" source="images/geo-point-in-polygon-function/california-storm-events.png" alt-text="加州中的風暴事件":::
+:::image type="content" source="images/geo-point-in-polygon-function/california-storm-events.png" alt-text="曼哈頓區域地圖的螢幕擷取畫面，以及地標、博物館和機場的標記。島會顯示為暗灰色，但中央公園除外。":::
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -116,7 +116,7 @@ StormEvents
 | render piechart with (kind=map) // map rendering available in Kusto Explorer desktop
 ```
 
-下列範例顯示如何使用資料[分割](./partitionoperator.md)運算子，將座標分類為多邊形。
+下列範例顯示如何使用資料 [分割](./partitionoperator.md) 運算子將座標分類至多邊形。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -146,13 +146,13 @@ Polygons
 
 |經度 (longitude)|緯度 (latitude)|description|
 |---|---|---|
-|-73.95|40.75|紐約市地區|
+|-73.95|40.75|紐約城市區域|
 |-122。3|47.6|西雅圖區域|
 |-115.18|36.16|拉斯維加斯|
 
-另請參閱[geo_polygon_to_s2cells （）](geo-polygon-to-s2cells-function.md)。
+另請參閱 [geo_polygon_to_s2cells ( # B1 ](geo-polygon-to-s2cells-function.md)。
 
-將數個多邊形折迭成一個 multipolygon 並加以查詢。
+將數個多邊形折迭成一個 multipolygon 並進行查詢。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -182,9 +182,9 @@ Coordinates
 |經度 (longitude)|緯度 (latitude)|description|
 |---|---|---|
 |-73.9741|40.7914|右上方|
-|-73.995|40.734|格林威治 Village|
+|-73.995|40.734|威治村|
 
-下列範例會傳回 null 結果，因為座標輸入無效。
+下列範例將傳回 null 結果，因為座標輸入無效。
 
 ```kusto
 print in_polygon = geo_point_in_polygon(200,1,dynamic({"type": "Polygon","coordinates": [[[0,0],[10,10],[10,1],[0,0]]]}))
@@ -194,7 +194,7 @@ print in_polygon = geo_point_in_polygon(200,1,dynamic({"type": "Polygon","coordi
 |------------|
 |            |
 
-下列範例會傳回 null 結果，因為有不正確多邊形輸入。
+由於不正確多邊形輸入，下列範例將會傳回 null 結果。
 
 ```kusto
 print in_polygon = geo_point_in_polygon(1,1,dynamic({"type": "Polygon","coordinates": [[[0,0],[10,10],[10,10],[0,0]]]}))

@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 404d8f2d6b7eacc61571575613fd8017baadb54d
-ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
+ms.openlocfilehash: 3d1e8b4df2507a9b2eb7126973dea891edc1d6ac
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91614844"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91941973"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>使用 Power BI 來查詢 Azure 資料總管資料並將其視覺化的最佳作法
 
@@ -92,8 +92,8 @@ in
 | AdditionalSetStatements | `[AdditionalSetStatements="set query_datascope=hotcache"]` | 將提供的 set 語句加入至查詢。 這些語句是用來設定查詢持續時間的查詢選項。 查詢選項可控制查詢如何執行和傳回結果。
 | CaseInsensitive | `[CaseInsensitive=true]` | 讓連接器產生不區分大小寫的查詢- `=~` 在比較值時，查詢會使用運算子而不是 `==` 運算子。
 
-    > [!NOTE]
-    > You can combine multiple options together to reach the desired behavior: `[NoTruncate=true, CaseInsensitive=true]`
+> [!NOTE]
+> 您可以結合多個選項，以達到所需的行為： `[NoTruncate=true, CaseInsensitive=true]`
 
 ### <a name="reaching-kusto-query-limits"></a>到達 Kusto 查詢限制
 

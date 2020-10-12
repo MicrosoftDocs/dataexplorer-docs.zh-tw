@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/16/2020
-ms.openlocfilehash: 61e0a4f13aba871a92bdcf36a8af9ed78bb09624
-ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
+ms.openlocfilehash: 5446337177d0e261bd86fbd18119c34b861b89e4
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/21/2020
-ms.locfileid: "90832564"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942381"
 ---
 # <a name="monitor-azure-data-explorer-ingestion-commands-and-queries-using-diagnostic-logs"></a>使用診斷記錄來監視 Azure 資料總管內嵌、命令和查詢
 
@@ -21,7 +21,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 > [!IMPORTANT] 
 > 診斷記錄資料可能包含機密資料。 根據您的監視需求，限制記錄目的地的許可權。 
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請建立 [免費的 azure 帳戶](https://azure.microsoft.com/free/)。
 * 登入 [Azure 入口網站](https://portal.azure.com/)。
@@ -70,8 +70,8 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 將會在幾分鐘內設定新的設定。 然後，記錄會出現在設定的封存目標中 (儲存體帳戶、事件中樞或 Log Analytics) 。 
 
-    > [!NOTE]
-    > If you send logs to Log Analytics, the `SucceededIngestion`, `FailedIngestion`, `Command`, and `Query` logs will be stored in Log Analytics tables named: `SucceededIngestion`, `FailedIngestion`, `ADXCommand`, `ADXQuery`, respectively.
+> [!NOTE]
+> 如果您將記錄傳送至 log analytics，則 `SucceededIngestion` 、、 `FailedIngestion` `Command` 和 `Query` 記錄會分別儲存在名為： `SucceededIngestion` 、 `FailedIngestion` 、、的 `ADXCommand` log analytics 資料表中 `ADXQuery` 。
 
 ## <a name="diagnostic-logs-schema"></a>診斷記錄結構描述
 
@@ -231,7 +231,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |CommandType     |命令類型
 |應用程式     |叫用命令的應用程式名稱
 |ResourceUtilization     |命令資源使用量
-|持續時間     |命令持續時間
+|Duration     |命令持續時間
 |User     |叫用查詢的使用者
 |主體     |叫用查詢的主體
 
@@ -316,7 +316,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |TotalCpu     |總 CPU 持續時間
 |ApplicationName            |叫用查詢的應用程式名稱
 |MemoryPeak          |記憶體尖峰
-|持續時間      |命令持續時間
+|Duration      |命令持續時間
 |User|叫用查詢的使用者
 |主體        |叫用查詢的主體
 |ScannedExtentsStatistics        | 包含掃描的範圍統計資料
@@ -327,7 +327,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |TotalRowsCount        |總數據列計數
 |ScannedRowsCount        |掃描的資料列計數
 |CacheStatistics        |包含快取統計資料
-|記憶體        |包含快取記憶體統計資料
+|Memory        |包含快取記憶體統計資料
 |點擊        |記憶體快取點擊
 |遺漏        |記憶體快取遺漏
 |磁碟        |包含快取磁片統計資料

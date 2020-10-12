@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/24/2018
-ms.openlocfilehash: 25bdd9c36c63d521cd662ab5c69f3dfec974b1e6
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 0ff2b0892231f52390f103fe299f219a7a3f3860
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874761"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942041"
 ---
 # <a name="manage-azure-data-explorer-database-permissions"></a>管理 Azure 資料總管資料庫權限
 
@@ -54,11 +54,11 @@ Azure 資料總管會有下列角色：
 
 1. 查詢主體、選取它，然後 [選取]****。
 
-    ![在 Azure 入口網站中管理權限](media/manage-database-permissions/new-principals.png)
+    :::image type="content" source="media/manage-database-permissions/new-principals.png" alt-text="Azure 入口網站新主體] 頁面的螢幕擷取畫面。系統會選取並反白顯示主體名稱和影像。[選取] 按鈕也會反白顯示。" border="false":::
 
-1. 選取 \[儲存\]。
+1. 選取 [儲存]****。
 
-    ![在 Azure 入口網站中管理權限](media/manage-database-permissions/save-permission.png)
+    :::image type="content" source="media/manage-database-permissions/save-permission.png" alt-text="Azure 入口網站新主體] 頁面的螢幕擷取畫面。系統會選取並反白顯示主體名稱和影像。[選取] 按鈕也會反白顯示。" border="false":::
 
 ## <a name="manage-permissions-with-management-commands"></a>使用管理命令管理權限
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 6ed841a6f47eb9a0a1e73182a3b9acd1c0209bd9
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.openlocfilehash: 56742b04386bfda9e2cdbaa40a85d2220f2373d5
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680759"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942347"
 ---
 # <a name="make-series-operator"></a>make-series 運算子
 
@@ -76,7 +76,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 |函式|描述|
 |--------|-----------|
 |[任何 ( # B1 ](any-aggfunction.md)|傳回群組的隨機非空白值|
-|[avg()](avg-aggfunction.md)|傳回整個群組的平均值|
+|[avg ( # B1 ](avg-aggfunction.md)|傳回整個群組的平均值|
 |[avgif()](avgif-aggfunction.md)|傳回具有群組述詞的平均值|
 |[計數 ( # B1 ](count-aggfunction.md)|傳回群組的計數|
 |[countif()](countif-aggfunction.md)|傳回包含群組述詞的計數|
@@ -86,10 +86,10 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 |[maxif()](maxif-aggfunction.md)|使用群組的述詞傳回最大值|
 |[min()](min-aggfunction.md)|傳回整個群組的最小值|
 |[minif()](minif-aggfunction.md)|使用群組的述詞傳回最小值|
-|[stdev()](stdev-aggfunction.md)|傳回整個群組的標準差|
-|[sum()](sum-aggfunction.md)|傳回群組內元素的總和|
+|[stdev ( # B1 ](stdev-aggfunction.md)|傳回整個群組的標準差|
+|[sum ( # B1 ](sum-aggfunction.md)|傳回群組內元素的總和|
 |[sumif()](sumif-aggfunction.md)|傳回具有群組述詞之元素的總和|
-|[variance()](variance-aggfunction.md)|傳回整個群組的變異數|
+|[差異 ( # B1 ](variance-aggfunction.md)|傳回整個群組的變異數|
 
 ## <a name="list-of-series-analysis-functions"></a>數列分析函數清單
 
@@ -127,7 +127,7 @@ T | make-series PriceAvg=avg(Price) default=0
 on Purchase from datetime(2016-09-10) to datetime(2016-09-13) step 1d by Supplier, Fruit
 ```
 
-:::image type="content" source="images/make-seriesoperator/makeseries.png" alt-text="Makeseries":::  
+:::image type="content" source="images/make-seriesoperator/makeseries.png" alt-text="三個數據表。第一個清單會列出未經處理的資料，第二個只會有不同的供應商水果和日組合，而第三個則包含構成系列結果。":::  
 
 <!-- csl: https://help.kusto.windows.net:443/Samples --> 
 ```kusto

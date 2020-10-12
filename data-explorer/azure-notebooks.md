@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 04/01/2020
-ms.openlocfilehash: d41c9e2719ef5139d89986ff5333c03e6e34d26c
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4cb0e319cafbd1c59680c7bccc35e2d865d29d40
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872466"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942194"
 ---
 # <a name="use-azure-notebooks-to-analyze-data-in-azure-data-explorer"></a>使用 Azure Notebooks 來分析 Azure 資料總管中的資料
 
@@ -37,7 +37,7 @@ ms.locfileid: "88872466"
     1. 清除 [ **公用** ] 核取方塊。
         >[!Important]
         > 如果您未清除 [公用] 核取方塊，您的專案就會在開啟的網際網路上公開。
-    1. 選取 [建立]  。
+    1. 選取 [建立]****。
     
     ![建立新專案](media/azurenotebooks/an-create-new-project-blank.png)
 
@@ -48,13 +48,13 @@ ms.locfileid: "88872466"
 1. 在您的新專案中建立筆記本。 筆記本應使用支援的 [語言](https://github.com/Azure/azure-kusto-python#minimum-requirements)。
 若要建立筆記本，請選取 [ **+ 新增** ]，然後選取 [ **筆記本**]。
 
-    ![建立新的筆記本](media/azurenotebooks/an-create-new-notebook-menu.png) 
+    :::image type="content" source="media/azurenotebooks/an-create-new-notebook-menu.png" alt-text="[專案] 頁面、[我的專案] 索引標籤、Microsoft Azure Notebooks、Azure 資料總管" border="false":::
 
 1. 在 [ **建立新的筆記本** ] 對話方塊中，輸入筆記本名稱。
 
 1. 選取 [ **Python 3.6** ]，然後選取 [ **新增**]。
     
-    ![建立新的筆記本](media/azurenotebooks/an-create-new-notebook.png) 
+    :::image type="content" source="media/azurenotebooks/an-create-new-notebook.png" alt-text="[專案] 頁面、[我的專案] 索引標籤、Microsoft Azure Notebooks、Azure 資料總管" border="false"::: 
     
 1. 在您的專案中，選取新的筆記本。
 
@@ -90,7 +90,7 @@ ms.locfileid: "88872466"
 
 1. 返回您的筆記本以查看驗證的結果。 
 
-:::image type="content" source="media/azurenotebooks/an-python-commands.png" alt-text="驗證結果輸出、筆記本視窗、Microsoft Azure Notebooks、Azure 資料總管" lightbox="media/azurenotebooks/an-python-commands.png#lightbox":::
+:::image type="content" source="media/azurenotebooks/an-python-commands.png" alt-text="[專案] 頁面、[我的專案] 索引標籤、Microsoft Azure Notebooks、Azure 資料總管" lightbox="media/azurenotebooks/an-python-commands.png#lightbox":::
 
 ## <a name="execute-a-kusto-query"></a>執行 Kusto 查詢
 
@@ -103,7 +103,7 @@ ms.locfileid: "88872466"
         print(", ".join(row))
     ```    
 
-:::image type="content" source="media/azurenotebooks/an-commands.png" alt-text="執行按鈕、筆記本視窗、Microsoft Azure Notebooks、Azure 資料總管" lightbox="media/azurenotebooks/an-commands.png#lightbox":::
+:::image type="content" source="media/azurenotebooks/an-commands.png" alt-text="[專案] 頁面、[我的專案] 索引標籤、Microsoft Azure Notebooks、Azure 資料總管" lightbox="media/azurenotebooks/an-commands.png#lightbox":::
 
 ## <a name="next-steps"></a>後續步驟
 

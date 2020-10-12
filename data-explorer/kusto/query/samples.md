@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1408bfa0af8c07166bde94c2738b53cd0065ec97
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: bc28fcb860dc067d55dd2e5ce9de3f3a17b402f2
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902165"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942313"
 ---
 # <a name="samples"></a>範例
 
@@ -34,9 +34,9 @@ StormEvents
 
 * 第一個資料行形成 X 軸。 可以是數值、日期時間或字串。 
 * 使用 `where` 、 `summarize` 和 `top` 來限制您所顯示的資料量。
-* 排序結果以定義 X 軸的順序。
+* 排序結果來定義 X 軸的順序。
 
-:::image type="content" source="images/samples/060.png" alt-text="060":::
+:::image type="content" source="images/samples/060.png" alt-text="直條圖的螢幕擷取畫面。Y 軸的範圍是從0到50左右。十個彩色資料行描繪10個位置的個別值。":::
 
 ## <a name="get-sessions-from-start-and-stop-events"></a>從開始和停止事件取得工作階段
 
@@ -44,14 +44,14 @@ StormEvents
 
 |名稱|City|SessionId|時間戳記|
 |---|---|---|---|
-|開始|London|2817330|2015-12-09T10:12:02.32|
-|遊戲|London|2817330|2015-12-09T10:12:52.45|
-|開始|曼徹斯特|4267667|2015-12-09T10:14:02.23|
-|Stop|London|2817330|2015-12-09T10:23:43.18|
+|Start|London|2817330|2015-12-09T10:12:02.32|
+|Game|London|2817330|2015-12-09T10:12:52.45|
+|Start|曼徹斯特|4267667|2015-12-09T10:14:02.23|
+|停止|London|2817330|2015-12-09T10:23:43.18|
 |取消|曼徹斯特|4267667|2015-12-09T10:27:26.29|
-|Stop|曼徹斯特|4267667|2015-12-09T10:28:31.72|
+|停止|曼徹斯特|4267667|2015-12-09T10:28:31.72|
 
-每個事件都有 SessionId。 問題是要比對具有相同識別碼的開始和停止事件。
+每個事件都有 SessionId。 問題是要與相同識別碼的開始和停止事件相符。
 
 ```kusto
 let Events = MyLogTable | where ... ;
@@ -66,9 +66,9 @@ Events
 | project City, SessionId, StartTime, StopTime, Duration = StopTime - StartTime
 ```
 
-1. 在 [`let`](./letstatement.md) 進入聯結之前，您可以使用來命名資料表的投影。
-1. 使用 [`Project`](./projectoperator.md) 來變更時間戳記的名稱，讓啟動和停止時間可以出現在結果中。 
-   它也會選取要在結果中查看的其他資料行。 
+1. 您 [`let`](./letstatement.md) 可以使用來命名資料表的投射，此資料表在進入聯結之前，會盡可能精簡下。
+1. 使用 [`Project`](./projectoperator.md) 變更時間戳記的名稱，讓開始和停止時間可以出現在結果中。 
+   它也會選取要在結果中看到的其他資料行。 
 1. 使用 [`join`](./joinoperator.md) 來比對相同活動的開始和停止專案，為每個活動建立一個資料列。 
 1. 最後， `project` 會再次加入資料行以顯示活動的持續時間。
 
@@ -78,9 +78,9 @@ Events
 |London|2817330|2015-12-09T10:12:02.32|2015-12-09T10:23:43.18|00:11:40.46|
 |曼徹斯特|4267667|2015-12-09T10:14:02.23|2015-12-09T10:28:31.72|00:14:29.49|
 
-### <a name="get-sessions-without-session-id"></a>取得會話，但不含會話識別碼
+### <a name="get-sessions-without-session-id"></a>取得會話，沒有會話識別碼
 
-假設 [啟動] 和 [停止] 事件沒有方便的會話識別碼可供使用。 但我們有工作階段執行位置的用戶端 IP 位址。 假設每個用戶端位址一次只會產生一個工作階段，我們可以將來自相同 IP 位址的每個開始事件與下一個結束事件配對。
+假設 [開始] 和 [停止] 事件不會有可比對的會話識別碼。 但我們有工作階段執行位置的用戶端 IP 位址。 假設每個用戶端位址一次只會產生一個工作階段，我們可以將來自相同 IP 位址的每個開始事件與下一個結束事件配對。
 
 ```kusto
 Events 
@@ -100,14 +100,14 @@ Events
 
 聯結會將來自相同用戶端 IP 位址的開始時間與所有的停止時間配對。 
 1. 移除與先前停止時間相符的專案。
-1. 依據開始時間和 IP 分組，以取得每個會話的群組。 
-1. `bin`為 StartTime 參數提供函數。 如果您沒有這麼做，Kusto 將會自動使用1小時的區間，這會比對一些開始時間與錯誤的停止時間。
+1. 依開始時間和 IP 分組，以取得每個會話的群組。 
+1. 提供 `bin` StartTime 參數的函數。 如果您沒有這樣做，Kusto 會自動使用1小時的 bin，以符合某些開始時間與錯誤的停止時間。
 
-`arg_min`挑選每個群組中具有最小持續時間的資料列， `*` 參數會通過所有其他資料行。 引數前置詞「min_」到每個資料行名稱。 
+`arg_min` 挑選每個群組中最小持續時間的資料列，而 `*` 參數會傳遞所有其他資料行。 引數首碼 "min_" 至每個資料行名稱。 
 
-:::image type="content" source="images/samples/040.png" alt-text="040"::: 
+:::image type="content" source="images/samples/040.png" alt-text="直條圖的螢幕擷取畫面。Y 軸的範圍是從0到50左右。十個彩色資料行描繪10個位置的個別值。"::: 
 
-新增程式碼，以方便調整的大小來計算持續時間。在此範例中，由於橫條圖的喜好設定，會除以 `1s` 以將時間範圍轉換成數位。 
+新增程式碼，以方便調整大小的容器計算持續時間。在此範例中，因為橫條圖的喜好設定，請除以 `1s` 以將時間範圍轉換為數字。 
 
 ```
     // Count the frequency of each duration:
@@ -118,7 +118,7 @@ Events
     | sort by duration asc | render barchart 
 ```
 
-:::image type="content" source="images/samples/050.png" alt-text="050":::
+:::image type="content" source="images/samples/050.png" alt-text="直條圖的螢幕擷取畫面。Y 軸的範圍是從0到50左右。十個彩色資料行描繪10個位置的個別值。":::
 
 ### <a name="real-example"></a>真實範例
 
@@ -191,9 +191,9 @@ on UnitOfWorkId
 
 ## <a name="chart-concurrent-sessions-over-time"></a>一段時間的並行工作階段圖表
 
-假設您有一份活動資料表及其開始和結束時間。 顯示一段時間的圖表，以顯示任何時間的活動同時執行的數目。
+假設您的活動資料表具有其開始和結束時間。 顯示一段時間的圖表，顯示在任何時間內同時執行的活動數目。
 
-以下是稱為的範例輸入 `X` 。
+以下是範例輸入，稱為 `X` 。
 
 |SessionId | StartTime | StopTime |
 |---|---|---|
@@ -201,7 +201,7 @@ on UnitOfWorkId
 | b | 10:01:29 | 10:03:10 |
 | c | 10:03:02 | 10:05:20 |
 
-若是1分鐘的圖表，請建立一個專案，在每個1m 的間隔中，每個執行中的活動都會有一個計數。
+若為1分鐘的圖層中的圖表，請建立一個會在每個1m 間隔的位置，每個執行中的活動都有一個計數。
 
 以下是中繼結果。
 
@@ -209,7 +209,7 @@ on UnitOfWorkId
 X | extend samples = range(bin(StartTime, 1m), StopTime, 1m)
 ```
 
-`range`依指定的間隔產生值的陣列。
+`range` 依指定的間隔產生值的陣列。
 
 |SessionId | StartTime | StopTime  | 範例|
 |---|---|---|---|
@@ -217,7 +217,7 @@ X | extend samples = range(bin(StartTime, 1m), StopTime, 1m)
 | b | 10:02:29 | 10:03:45 | [10:02:00,10:03:00]|
 | c | 10:03:12 | 10:04:30 | [10:03:00,10:04:00]|
 
-不要保留這些陣列，而是使用 [ [mv-展開](./mvexpandoperator.md)] 加以展開。
+使用 [mv](./mvexpandoperator.md)展開，而不是保留這些陣列。
 
 ```kusto
 X | mv-expand samples = range(bin(StartTime, 1m), StopTime , 1m)
@@ -244,8 +244,8 @@ X
 | summarize count(SessionId) by bin(todatetime(samples),1m)
 ```
 
-* 使用 todatetime （），因為[mv-expand](./mvexpandoperator.md)會產生動態類型的資料行。
-* 使用 bin （），因為對於數值和日期，摘要一律會以預設間隔套用 bin 函式（如果您沒有提供的話）。 
+* 使用 todatetime ( # A1 的原因是， [mv 展開](./mvexpandoperator.md) 會產生動態類型的資料行。
+* 使用 bin ( # A1，因為對於數值和日期，如果您未提供 bin 函式，則 [摘要] 一律會套用預設間隔的 bin 函數。 
 
 
 | count_SessionId | 範例|
@@ -257,11 +257,11 @@ X
 | 1 | 10:05:00|
 | 1 | 10:06:00|
 
-結果可以呈現為橫條圖或時間圖表。
+您可以將結果轉譯為橫條圖或時間圖。
 
-## <a name="introduce-null-bins-into-summarize"></a>將 null bin 引進摘要
+## <a name="introduce-null-bins-into-summarize"></a>將 null 分類引入摘要
 
-將 `summarize` 運算子套用至由資料行所組成的群組索引鍵時 `datetime` ，會將這些值「bin」到固定寬度的 bin。
+將 `summarize` 運算子套用至包含資料行的群組索引鍵時 `datetime` ，請將這些值「bin」至固定寬度的 bin。
 
 ```kusto
 let StartTime=ago(12h);
@@ -272,9 +272,9 @@ T
 | summarize Count=count() by bin(Timestamp, 5m)
 ```
 
-上述範例會產生一個資料表，其中每個資料列群組的單一資料列 `T` 會落在五分鐘的每個 bin 中。 而不是 `StartTime` `StopTime` 在與中沒有對應資料列的之間，新增「null bin」--time bin 值的資料列 `T` 。 
+上述範例會產生資料表，其中每個資料列群組都有一個資料列 `T` ，這些資料列落在五分鐘的每個資料列中。 它不會新增「null bin」-- `StartTime` 在與之間沒有對應資料列的 time bin 值資料列 `StopTime` `T` 。 
 
-最好是使用這些 bin 「填補」資料表。以下是其中一種方法。
+最好使用這些 bin 來「填補」資料表。以下是其中一種做法。
 
 ```kusto
 let StartTime=ago(12h);
@@ -293,18 +293,18 @@ T
 
 以下是上述查詢的逐步說明： 
 
-1. `union`運算子可讓您將額外的資料列加入至資料表。 這些資料列是由運算式所產生 `union` 。
+1. `union`運算子可讓您在資料表中加入其他資料列。 這些資料列是由運算式所產生 `union` 。
 1. `range`運算子會產生具有單一資料列/資料行的資料表。
-   除了 for 以外，不會使用資料表 `mv-expand` 來處理。
-1. `mv-expand`函式上的運算子 `range` 會建立多個資料列，因為和之間有5分鐘的 bin `StartTime` `EndTime` 。
+   資料表不會用於以外的任何其他 `mv-expand` 作業。
+1. `mv-expand`函數的運算子 `range` 會建立和之間有5分鐘的資料列數目 `StartTime` `EndTime` 。
 1. 使用 `Count` 的 `0` 。
-1. 運算子會將 `summarize` 來自原始（左或外部）引數的 bin 群組在一起 `union` 。 運算子也會從內部引數到它（null 的 bin 資料列）。 此程式可確保每個 bin 的輸出都有一個資料列，其值為零或原始計數。  
+1. 運算子會將 `summarize` 來自原始 (左方或外部) 引數的 bin 群組在一起 `union` 。 運算子也會將內部引數分類 (null bin 資料列) 。 此程式可確保每個 bin 的輸出都有一個資料列，其值為零或原始計數。  
 
-## <a name="get-more-out-of-your-data-in-kusto-with-machine-learning"></a>利用 Machine Learning 充分利用 Kusto 中的資料 
+## <a name="get-more-out-of-your-data-in-kusto-with-machine-learning"></a>利用 Machine Learning 在 Kusto 中充分利用您的資料 
 
-有許多有趣的使用案例會利用機器學習演算法，並從遙測資料衍生出有趣的深入解析。 通常，這些演算法需要非常結構化的資料集做為其輸入。 原始記錄資料通常不會符合所需的結構和大小。 
+有許多有趣的使用案例，可利用機器學習演算法，並衍生出遙測資料的有趣見解。 這些演算法通常需要非常結構化的資料集做為輸入。 原始記錄資料通常不會符合所需的結構和大小。 
 
-一開始請先尋找特定 Bing 推斷服務錯誤率的異常。 Logs 資料表具有65B 記錄。 下列簡單查詢會篩選250K 錯誤，並建立使用異常偵測函數的錯誤計數的時間序列資料[series_decompose_anomalies](series-decompose-anomaliesfunction.md)。 Kusto 服務會偵測到異常狀況，並在時間序列圖表上反白顯示為紅點。
+首先，尋找特定 Bing 推斷服務錯誤率的異常。 Logs 資料表有65B 記錄。 下列簡單查詢會篩選250K 錯誤，並建立使用異常偵測函式 [series_decompose_anomalies](series-decompose-anomaliesfunction.md)之錯誤計數的時間序列資料。 Kusto 服務會偵測到異常狀況，並在時間序列圖上以紅色點反白顯示。
 
 ```kusto
 Logs
@@ -314,11 +314,11 @@ Logs
 | render anomalychart 
 ```
 
-服務發現幾個具有可疑錯誤率的時間值區。 使用 Kusto 來放大此時間範圍，並執行在 ' Message ' 資料行上匯總的查詢。 嘗試找出最常見的錯誤。 
+服務識別出幾個具有可疑錯誤率的時間值區。 使用 Kusto 來放大此時間範圍，然後執行在 ' Message ' 資料行上匯總的查詢。 嘗試找出最常見的錯誤。 
 
-訊息整個堆疊追蹤的相關部分會遭到修剪，使其更符合頁面。 
+訊息整個堆疊追蹤的相關部分會被修剪，使其更符合頁面的大小。 
 
-您可以看到前八個錯誤的成功識別。 不過，由於錯誤訊息是由包含變更資料的格式字串所建立，因此會發生一系列長的錯誤。 
+您可以看到前八個錯誤的成功識別。 但是，由於錯誤訊息是由包含變更資料的格式字串所建立，因此會出現一系列長串的錯誤。 
 
 ```kusto
 Logs
@@ -334,15 +334,15 @@ Logs
 |7125|方法 ' RunCycleFromInterimData ' 的 ExecuteAlgorithmMethod 失敗 .。。
 |7125|InferenceHostService 呼叫 failed..System。NullReferenceException：物件參考未設定為物件的實例 .。。
 |7124|未預期的推斷系統 error..System。NullReferenceException：物件參考未設定為物件的實例 .。。 
-|5112|未預期的推斷系統 error..System。NullReferenceException：物件參考未設定為物件的實例。。
-|174|InferenceHostService 呼叫 failed..System. CommunicationException：寫入管道時發生錯誤： .。。
+|5112|未預期的推斷系統 error..System。NullReferenceException：物件參考未設定為物件的實例。
+|174|InferenceHostService call failed..System. CommunicationException：寫入管道時發生錯誤： .。。
 |10|方法 ' RunCycleFromInterimData ' 的 ExecuteAlgorithmMethod 失敗 .。。
-|10|推斷系統錯誤。。UserInterimDataManagerException：......。
-|3|InferenceHostService 呼叫 failed..System。 CommunicationObjectFaultedException： .。。
-|1|推斷系統錯誤 .。。SocialGraph. OperationResponse .。。AIS TraceId： 8292FC561AC64BED8FA243808FE74EFD .。。
-|1|推斷系統錯誤 .。。SocialGraph. OperationResponse .。。AIS TraceId： 5F79F7587FF943EC9B641E02E701AFBF .。。
+|10|推斷系統錯誤。UserInterimDataManagerException：......。
+|3|InferenceHostService call failed..System. System.servicemodel.communicationobjectfaultedexception： .。。
+|1|推斷系統錯誤 .。。SocialGraph。 OperationResponse .。。AIS TraceId： 8292FC561AC64BED8FA243808FE74EFD .。。
+|1|推斷系統錯誤 .。。SocialGraph。 OperationResponse .。。AIS TraceId： 5F79F7587FF943EC9B641E02E701AFBF .。。
 
-這是 `reduce` 運算子協助的地方。 運算子識別出63程式碼中相同追蹤檢測點所產生的不同錯誤，並協助將焦點放在該時間範圍內其他有意義的錯誤追蹤。
+這是 `reduce` 操作員可協助的地方。 操作員識別出63不同的錯誤，這些錯誤是由程式碼中的相同追蹤檢測點所產生，並且有助於將焦點放在該時間範圍內的其他有意義的錯誤追蹤。
 
 ```kusto
 Logs
@@ -352,24 +352,24 @@ Logs
 | project Count, Pattern
 ```
 
-|Count|模式
+|計數|模式
 |---|---
 |7125|方法 ' RunCycleFromInterimData ' 的 ExecuteAlgorithmMethod 失敗 .。。
 |  7125|InferenceHostService 呼叫 failed..System。NullReferenceException：物件參考未設定為物件的實例 .。。
 |  7124|未預期的推斷系統 error..System。NullReferenceException：物件參考未設定為物件的實例 .。。
-|  5112|未預期的推斷系統 error..System。NullReferenceException：物件參考未設定為物件的實例。。
-|  174|InferenceHostService 呼叫 failed..System. CommunicationException：寫入管道時發生錯誤： .。。
-|  63|推斷系統錯誤。。\*： Write \* 以寫入物件老闆。 \* ： SocialGraph. Reques.....。
+|  5112|未預期的推斷系統 error..System。NullReferenceException：物件參考未設定為物件的實例。
+|  174|InferenceHostService call failed..System. CommunicationException：寫入管道時發生錯誤： .。。
+|  63|推斷系統錯誤。\*SocialGraph： write， \* 寫入物件老闆. \* ：. Reques .... （.）
 |  10|方法 ' RunCycleFromInterimData ' 的 ExecuteAlgorithmMethod 失敗 .。。
-|  10|推斷系統錯誤。。UserInterimDataManagerException：......。
-|  3|InferenceHostService 呼叫 failed..System。System.servicemodel. \* ：的物件（system.servicemodel. \* + \* ） \* \* 是 \* .。。  在 Syst .。。
+|  10|推斷系統錯誤。UserInterimDataManagerException：......。
+|  3|InferenceHostService 呼叫 failed..System。System.servicemodel. \* ：物件（system.servicemodel.... \* + \* ） \* \* 是 \* .。。  在 Syst .。。
 
-現在，您對偵測到的異常的前幾個錯誤有良好的觀點。
+現在您可以充分瞭解對偵測到的異常造成的最大錯誤。
 
-若要瞭解這些錯誤跨範例系統的影響： 
-* 「記錄」資料表包含其他維度資料，例如「Component」、「Cluster」等等。
-* 新的 ' autocluster ' 外掛程式可以使用簡單的查詢來協助衍生該深入解析。 
-* 在下列範例中，您可以清楚看到每個前四個錯誤都是元件特有的。 此外，雖然前三個錯誤是 DB4 叢集特有的，但第四個是在所有叢集上發生。
+若要瞭解這些錯誤對於跨範例系統的影響： 
+* ' Logs ' 資料表包含額外的維度資料，例如 ' Component '、' Cluster ' 等等。
+* 新的 ' autocluster ' 外掛程式可協助您使用簡單的查詢來衍生該深入解析。 
+* 在下列範例中，您可以清楚地看到每個前四個錯誤都是元件特有的。 此外，雖然前三個錯誤是 DB4 叢集特有的，但第四個錯誤會發生在所有叢集。
 
 ```kusto
 Logs
@@ -378,21 +378,21 @@ Logs
 | evaluate autocluster()
 ```
 
-|Count |百分比 (%)|元件|叢集|訊息
+|計數 |百分比 (%)|元件|叢集|訊息
 |---|---|---|---|---
-|7125|26.64|InferenceHostService|DB4|ExecuteAlgorithmMethod for method ...。
-|7125|26.64|未知的元件|DB4|InferenceHostService 呼叫失敗 ...。
+|7125|26.64|InferenceHostService|DB4|方法的 ExecuteAlgorithmMethod .。。
+|7125|26.64|未知的元件|DB4|InferenceHostService 呼叫失敗 .。。
 |7124|26.64|InferenceAlgorithmExecutor|DB4|未預期的推斷系統錯誤 .。。
 |5112|19.11|InferenceAlgorithmExecutor|*|未預期的推斷系統錯誤 .。。 
 
-## <a name="map-values-from-one-set-to-another"></a>將值從一個集合對應到另一個
+## <a name="map-values-from-one-set-to-another"></a>將值從一個集合對應到另一個集合
 
 常見的使用案例是值的靜態對應，有助於讓結果更美觀。
-例如，請考慮下一個資料表。 
-`DeviceModel`指定裝置的型號，這不是很方便的參考裝置名稱的形式。  
+例如，請考慮下一個表格。 
+`DeviceModel` 指定裝置的模型，這並不是很方便參考裝置名稱的形式。  
 
 
-|DeviceModel |Count 
+|DeviceModel |計數 
 |---|---
 |iPhone5，1 |32 
 |iPhone3，2 |432 
@@ -400,16 +400,16 @@ Logs
 |iPhone5，2 |66 
 
   
-以下是較佳的表示方式。  
+以下是較佳的標記法。  
 
-|FriendlyName |Count 
+|FriendlyName |計數 
 |---|---
 |iPhone 5 |32 
 |iPhone 4 |432 
 |iPhone 6 |55 
 |iPhone5 |66 
 
-以下兩種方法會示範如何達成標記法。  
+下列兩種方法會示範如何達成標記法。  
 
 ### <a name="mapping-using-dynamic-dictionary"></a>使用動態字典進行對應
 
@@ -437,18 +437,18 @@ Source
 | project FriendlyName = phone_mapping[DeviceModel], Count
 ```
 
-|FriendlyName|Count|
+|FriendlyName|計數|
 |---|---|
 |iPhone 5|32|
 |iPhone 4|432|
 |iPhone 6|55|
 |iPhone5|66|
 
-### <a name="map-using-static-table"></a>使用靜態資料表的對應
+### <a name="map-using-static-table"></a>使用靜態資料表對應
 
 此方法會顯示與持續性資料表和聯結運算子的對應。
  
-建立對應資料表，只要一次即可。
+建立對應表，只要一次即可。
 
 ```kusto
 .create table Devices (DeviceModel: string, FriendlyName: string) 
@@ -457,7 +457,7 @@ Source
     ["iPhone5,1","iPhone 5"]["iPhone3,2","iPhone 4"]["iPhone7,2","iPhone 6"]["iPhone5,2","iPhone5"]
 ```
 
-裝置的內容。
+立即的裝置內容。
 
 |DeviceModel |FriendlyName 
 |---|---
@@ -484,7 +484,7 @@ Devices
 
 結果：
 
-|FriendlyName |Count 
+|FriendlyName |計數 
 |---|---
 |iPhone 5 |32 
 |iPhone 4 |432 
@@ -492,9 +492,9 @@ Devices
 |iPhone5 |66 
 
 
-## <a name="create-and-use-query-time-dimension-tables"></a>建立和使用查詢時間維度資料表
+## <a name="create-and-use-query-time-dimension-tables"></a>建立和使用查詢階段維度資料表
 
-您通常會想要聯結查詢的結果與某些不會儲存在資料庫中的特定維度資料表。 您可以定義一個運算式，其結果為範圍限定于單一查詢的資料表。 例如：
+您通常會想要將查詢的結果與未儲存在資料庫中的某些特定維度資料表聯結。 您可以定義運算式，其結果為範圍設定為單一查詢的資料表。 例如：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -531,14 +531,14 @@ JobHistory
   | project JobName, StartTime, ExecutionTimeSpan, ResultString, ResultMessage
 ```
 
-## <a name="retrieve-the-latest-records-by-timestamp-per-identity"></a>取得每個身分識別的最新記錄（依時間戳記）
+## <a name="retrieve-the-latest-records-by-timestamp-per-identity"></a>依每個身分識別的時間戳記) 抓取 (的最新記錄
 
 假設您有一個資料表，其中包含：
-* `ID`識別與每個資料列相關聯之實體的資料行，例如使用者識別碼或節點識別碼
+* `ID`識別與每個資料列相關聯之實體的資料行，例如使用者識別碼或節點識別碼。
 * `timestamp`提供資料列時間參考的資料行
 * 其他資料行
 
-針對資料行的每個值傳回最新兩筆記錄的查詢 `ID` ，其中「最新」定義為「具有最高的值」， `timestamp` 可以使用[最上層嵌套的運算子](topnestedoperator.md)來進行。
+此查詢會傳回資料行之每個值的最新兩筆記錄 `ID` ，其中「最新」定義為「具有最大值」， `timestamp` 可使用 [最上層嵌套運算子](topnestedoperator.md)來建立。
 
 例如：
 
@@ -558,20 +558,20 @@ datatable(id:string, timestamp:datetime, bla:string)           // #1
 | project-away dummy0, dummy1, dummy2                          // #5
 ```
 
-以下的附注編號指的是程式碼範例中的數位（最右邊）。
+以下的附注編號是指程式碼範例中最右邊的數位。
 
-1. `datatable`是產生一些測試資料以供示範之用的方法。 一般來說，您會在這裡使用實際資料。
+1. `datatable`是一種產生一些測試資料的方式，以供示範之用。 一般來說，您會在這裡使用真正的資料。
 1. 這一行基本上表示「傳回所有相異值」 `id` 。
-1. 這一行接著會針對最大化的前兩筆記錄傳回：
+1. 這一行接著會傳回最大化的前兩筆記錄：
      * 資料 `timestamp` 行
-     * 上一個層級的資料行（在這裡，只是 `id` ）
-     * 在此層級指定的資料行（這裡， `timestamp` ）
-1. 這一行會 `bla` 針對上一個層級所傳回的每個記錄，加入資料行的值。 如果資料表有其他相關的資料行，您可以針對每個這類資料行重複這一行。
-1. 這最後一行會使用「[專案離開」運算子](projectawayoperator.md)來移除所引進的「額外」資料行 `top-nested` 。
+     * 先前層級 (的資料行，只是 `id`) 
+     * 在此層級指定的資料行 (這裡， `timestamp`) 
+1. 這行會 `bla` 針對前一個層級所傳回的每個記錄，加入資料行的值。 如果資料表有其他感興趣的資料行，您可以針對每個這類資料行重複這一行。
+1. 這最後一行使用 [專案離開運算子](projectawayoperator.md) 來移除所引進的「額外」資料行 `top-nested` 。
 
-## <a name="extend-a-table-with-some-percent-of-total-calculation"></a>擴充具有某個總百分比計算的資料表
+## <a name="extend-a-table-with-some-percent-of-total-calculation"></a>使用總計計算百分比來擴充資料表
 
-包含數值資料行的表格式運算式，對使用者加上與其值（以總計的百分比表示）時，會更有用。 例如，假設有一個會產生下列資料表的查詢：
+包含數值資料行的表格式運算式在伴隨時會更有用，而且其值會以總計的百分比表示。 例如，假設有一個會產生下表的查詢：
 
 |SomeSeries|SomeInt|
 |----------|-------|
@@ -585,7 +585,7 @@ datatable(id:string, timestamp:datetime, bla:string)           // #1
 |Foo       |    100|33.3|
 |橫條圖       |    200|66.6|
 
-接著，您必須計算資料行的總計（總和） `SomeInt` ，然後將此資料行的每個值除以總計。 針對任意結果，請使用[as 運算子](asoperator.md)。
+然後，您必須計算資料行的總 (總和) `SomeInt` ，然後將此資料行的每個值除以總計。 針對任意的結果，請使用 [as 運算子](asoperator.md)。
 
 ```kusto
 // The following table literal represents a long calculation
@@ -601,31 +601,31 @@ datatable (SomeInt:int, SomeSeries:string) [
 | extend Pct = 100 * bin(todouble(SomeInt) / toscalar(X | summarize sum(SomeInt)), 0.001)
 ```
 
-## <a name="perform-aggregations-over-a-sliding-window"></a>透過滑動視窗執行匯總
+## <a name="perform-aggregations-over-a-sliding-window"></a>在滑動視窗上執行匯總
 
 下列範例顯示如何使用滑動視窗摘要資料行。
-使用下表，其中包含依時間戳記的水果價格。 使用七天的滑動視窗，計算每日水果的最小值、最大值和總和成本。 結果集中的每一筆記錄都會匯總過去七天，而結果會包含分析期間每天的記錄。  
+使用下表，其中包含依時間戳記的水果價格。 使用七天的滑動時間範圍，計算每日水果的最小值、最大值和總和成本。 結果集中的每一筆記錄都會匯總前七天，且結果會在分析期間包含每天的一筆記錄。  
 
 水果資料表：
 
-|時間戳記|水果|Price|
+|時間戳記|水果|價格|
 |---|---|---|
 |2018-09-24 21：00：00.0000000|香蕉|3|
 |2018-09-25 20：00：00.0000000|蘋果|9|
 |2018-09-26 03：00：00.0000000|香蕉|4|
-|2018-09-27 10：00：00.0000000|Plums|8|
+|2018-09-27 10：00：00.0000000|李子|8|
 |2018-09-28 07：00：00.0000000|香蕉|6|
 |2018-09-29 21：00：00.0000000|香蕉|8|
-|2018-09-30 01：00：00.0000000|Plums|2|
+|2018-09-30 01：00：00.0000000|李子|2|
 |2018-10-01 05：00：00.0000000|香蕉|0|
 |2018-10-02 02：00：00.0000000|香蕉|0|
-|2018-10-03 13：00：00.0000000|Plums|4|
+|2018-10-03 13：00：00.0000000|李子|4|
 |2018-10-04 14：00：00.0000000|蘋果|8|
 |2018-10-05 05：00：00.0000000|香蕉|2|
-|2018-10-06 08：00：00.0000000|Plums|8|
+|2018-10-06 08：00：00.0000000|李子|8|
 |2018-10-07 12：00：00.0000000|香蕉|0|
 
-滑動視窗匯總查詢。
+滑動視窗彙總查詢。
 以下是查詢結果的說明：
 
 ```kusto
@@ -647,41 +647,41 @@ Fruits
 |---|---|---|---|---|
 |2018-10-01 00：00：00.0000000|蘋果|9|9|9|
 |2018-10-01 00：00：00.0000000|香蕉|0|8|18|
-|2018-10-01 00：00：00.0000000|Plums|2|8|10|
+|2018-10-01 00：00：00.0000000|李子|2|8|10|
 |2018-10-02 00：00：00.0000000|香蕉|0|8|18|
-|2018-10-02 00：00：00.0000000|Plums|2|8|10|
-|2018-10-03 00：00：00.0000000|Plums|2|8|14|
+|2018-10-02 00：00：00.0000000|李子|2|8|10|
+|2018-10-03 00：00：00.0000000|李子|2|8|14|
 |2018-10-03 00：00：00.0000000|香蕉|0|8|14|
 |2018-10-04 00：00：00.0000000|香蕉|0|8|14|
-|2018-10-04 00：00：00.0000000|Plums|2|4|6|
+|2018-10-04 00：00：00.0000000|李子|2|4|6|
 |2018-10-04 00：00：00.0000000|蘋果|8|8|8|
 |2018-10-05 00：00：00.0000000|香蕉|0|8|10|
-|2018-10-05 00：00：00.0000000|Plums|2|4|6|
+|2018-10-05 00：00：00.0000000|李子|2|4|6|
 |2018-10-05 00：00：00.0000000|蘋果|8|8|8|
-|2018-10-06 00：00：00.0000000|Plums|2|8|14|
+|2018-10-06 00：00：00.0000000|李子|2|8|14|
 |2018-10-06 00：00：00.0000000|香蕉|0|2|2|
 |2018-10-06 00：00：00.0000000|蘋果|8|8|8|
 |2018-10-07 00：00：00.0000000|香蕉|0|2|2|
-|2018-10-07 00：00：00.0000000|Plums|4|8|12|
+|2018-10-07 00：00：00.0000000|李子|4|8|12|
 |2018-10-07 00：00：00.0000000|蘋果|8|8|8|
 
 查詢詳細資料：
 
-查詢會將輸入資料表中的每筆記錄「伸展」（重複）于其實際外觀後的七天內。 每筆記錄實際上會出現七次。
-因此，每日匯總會包含過去七天的所有記錄。
+查詢「伸展」 (重複) 輸入資料表中的每一筆記錄在其實際外觀後的七天內。 每一筆記錄實際上都會出現七次。
+如此一來，每日匯總就會包含過去七天的所有記錄。
 
-下面的逐步解說說明是指程式碼範例中的數位，最右側是：
-1. 將每一筆記錄 Bin 為一天（相對於 _start）。 
-2. 判斷每筆記錄的範圍結束-_bin + 7d，除非這超出 _（開始、結束）_ 範圍，在此情況下會進行調整。 
-3. 針對每一筆記錄，建立從目前記錄當天開始的七天（時間戳記）陣列。 
-4. mv-展開陣列，藉此將每一筆記錄複製到七筆記錄，每隔1天。 
-5. 執行每天的彙總函式。 由於 #4，這實際上會匯總_過去_七天。 
-6. 前七天的資料不完整。 前七天沒有7d 回顧週期。 前七天會從最終結果中排除。 在此範例中，它們只會參與2018-10-01 的匯總。
+以下逐步解說編號是指程式碼範例中的數位，最右邊：
+1. 將每一筆記錄分類至一天， (相對於 _start) 。 
+2. 判斷每一筆記錄的範圍結尾-_bin + 7d，除非這超出 _ (開始、結束) _ 範圍，在此情況下會進行調整。 
+3. 針對每一筆記錄，建立七天的陣列 (時間戳記) ，從目前的記錄天開始。 
+4. mv-展開陣列，藉此將每一筆記錄複製到七筆記錄，彼此相隔1天。 
+5. 每天執行彙總函式。 由於 #4，這實際上會匯總 _過去_ 七天。 
+6. 前七天的資料不完整。 前七天沒有任何7d 回顧期限。 前七天會從最終結果中排除。 在此範例中，他們只會參與2018-10-01 的匯總。
 
-## <a name="find-preceding-event"></a>尋找上一個事件
-下一個範例示範如何尋找2個資料集之間的先前事件。  
+## <a name="find-preceding-event"></a>尋找先前的活動
+下一個範例示範如何在2個資料集之間尋找先前的事件。  
 
-*目的：* 有兩個資料集： A 和 B。針對 B 中的每筆記錄，尋找其在中的先前事件（也就是中的 arg_max 記錄，其仍然是「舊」，而不是 B）。 以下是下列範例資料集的預期輸出。 
+*目的：*：有兩個資料集： A 和 B。針對 B 中的每筆記錄，在 (中找到其先前的事件，也就是中的 arg_max 記錄，該記錄仍「早于」 B) 。 以下是下列範例資料集的預期輸出。 
 
 ```kusto
 let A = datatable(Timestamp:datetime, ID:string, EventA:string)
@@ -702,7 +702,7 @@ let B = datatable(Timestamp:datetime, ID:string, EventB:string)
 A; B
 ```
 
-|時間戳記|ID|EventB|
+|時間戳記|識別碼|EventB|
 |---|---|---|
 |2019-01-01 00：00：00.0000000|x|Ax1|
 |2019-01-01 00：00：00.0000000|z|Az1|
@@ -712,7 +712,7 @@ A; B
 
 </br>
 
-|時間戳記|ID|EventA|
+|時間戳記|識別碼|EventA|
 |---|---|---|
 |2019-01-01 00：00：03.0000000|x|B|
 |2019-01-01 00：00：04.0000000|x|B|
@@ -721,21 +721,21 @@ A; B
 
 預期輸出： 
 
-|ID|時間戳記|EventB|A_Timestamp|EventA|
+|識別碼|時間戳記|EventB|A_Timestamp|EventA|
 |---|---|---|---|---|
 |x|2019-01-01 00：00：03.0000000|B|2019-01-01 00：00：01.0000000|Ax2|
 |x|2019-01-01 00：00：04.0000000|B|2019-01-01 00：00：01.0000000|Ax2|
 |y|2019-01-01 00：00：04.0000000|B|2019-01-01 00：00：02.0000000|Ay1|
 |z|2019-01-01 00：02：00.0000000|B|2019-01-01 00：00：00.0000000|Az1|
 
-有兩種不同的方法可針對此問題提出建議。 您應該在您的特定資料集上進行測試，以找出最適合您的一種。
+這個問題有兩種不同的方法建議。 您應在特定資料集上進行測試，以找出最適合您的資料集。
 
 > [!NOTE] 
 > 每個方法在不同的資料集上可能會以不同的方式執行。
 
 ### <a name="suggestion-1"></a>建議 #1
 
-這項建議會依識別碼和時間戳記序列化這兩個資料集，然後將所有 B 事件群組在所有事件前面，並從中挑選 `arg_max` 所有的，就像群組中的一樣。
+這項建議會依識別碼和時間戳記序列化這兩個資料集，然後將所有 B 事件全部群組在事件前面，然後挑選 `arg_max` 所有的，如同群組中一樣。
 
 ```kusto
 A
@@ -752,9 +752,9 @@ A
 
 ### <a name="suggestion-2"></a>建議 #2
 
-這項建議需要回顧期間（相較于 B，中的記錄可能會有多少）。然後，方法會在識別碼和此回顧期間聯結兩個資料集。 聯結會產生所有可能的候選項目、所有早于 B 並在回顧期間內的記錄，然後將最接近的一筆記錄篩選 arg_min （TimestampB – TimestampA）。 回顧期限越短，查詢結果就越好。
+這項建議需要最大回顧期限 (在與 B 相較之下，可能會有多少「舊」記錄。方法接著會聯結識別碼和這個回顧期間的兩個資料集。 聯結會產生所有可能的候選項目、所有早于 B 且在回顧期限內的記錄，然後將最接近 B 的一筆記錄篩選 arg_min (TimestampB – TimestampA) 。 回顧期限越短，查詢結果就越好。
 
-在下列範例中，回顧期限設定為1m，而識別碼為 ' z ' 的記錄沒有對應的 ' A ' 事件，因為它的 ' A ' 已由2m 使用。
+在下列範例中，回顧期限設定為1m，且識別碼為 ' z ' 的記錄沒有對應的 ' A ' 事件，因為2m 的 ' A ' 是較舊的。
 
 ```kusto 
 let _maxLookbackPeriod = 1m;  
