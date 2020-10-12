@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: 00d205a710b7b3bf41dc181e79e5e6d0baa95fc6
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: 9514f7c94568e73a704e6ba6f4bcc5bf61590d2f
+ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793932"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91954768"
 ---
 # <a name="summarize-operator"></a>summarize 運算子
 
@@ -90,7 +90,7 @@ T | summarize count() by price_range=bin(price, 10.0)
 |[maxif()](maxif-aggfunction.md)|使用述詞傳回跨群組 (的最大值) |
 |[min()](min-aggfunction.md)|傳回整個群組的最小值|
 |[minif()](minif-aggfunction.md)|使用述詞傳回跨群組 (的最小值) |
-|[百分位數 ( # B1 ](percentiles-aggfunction.md)|傳回群組的百分位數近似值|
+|[percentiles()](percentiles-aggfunction.md)|傳回群組的百分位數近似值|
 |[percentiles_array ( # B1 ](percentiles-aggfunction.md)|傳回群組的百分位數近似|
 |[percentilesw ( # B1 ](percentiles-aggfunction.md)|傳回群組的加權百分位數近似值|
 |[percentilesw_array ( # B1 ](percentiles-aggfunction.md)|傳回群組的加權百分位數近似|
@@ -117,7 +117,7 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 :::image type="content" source="images/summarizeoperator/summarize-price-by-supplier.png" alt-text="依水果和供應商摘要定價":::
 
-## <a name="example"></a>範例
+## <a name="example-unique-combination"></a>範例：唯一的組合
 
 判斷 `ActivityType` 和資料表中有哪些唯一的組合 `CompletionStatus` 。 沒有任何彙總函式，只是分組依據的索引鍵。 輸出只會顯示這些結果的資料行：
 
@@ -132,7 +132,7 @@ Activities | summarize by ActivityType, completionStatus
 |`dancing`|`abandoned`
 |`singing`|`completed`
 
-## <a name="example"></a>範例
+## <a name="example-minimum-and-maximum-timestamp"></a>範例：最小和最大時間戳記
 
 尋找活動資料表中所有記錄的最小和最大時間戳記。 由於沒有 group-by 子句，因此輸出中只有一個資料列︰
 
@@ -144,7 +144,7 @@ Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
 |---|---
 |`1975-06-09 09:21:45` | `2015-12-24 23:45:00`
 
-## <a name="example"></a>範例
+## <a name="example-distinct-count"></a>範例：相異計數
 
 為每個大陸建立一個資料列，顯示發生活動的城市計數。 因為「大陸」有幾個值，所以 ' by ' 子句中不需要任何群組函數：
 
@@ -159,7 +159,7 @@ Activities | summarize cities=dcount(city) by continent
 |`2673`|`North America`|
 
 
-## <a name="example"></a>範例
+## <a name="example-histogram"></a>範例：長條圖
 
 下列範例會計算每個活動類型的長條圖。 由於 `Duration` 有許多值，因此請使用 `bin` 將其值分組為10分鐘的間隔：
 

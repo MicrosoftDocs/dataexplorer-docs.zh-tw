@@ -1,6 +1,6 @@
 ---
-title: Kusto 資料分割 & 撰寫中繼匯總結果-Azure 資料總管
-description: 本文說明如何在 Azure 資料總管中分割和撰寫匯總的中繼結果。
+title: Kusto 分割 & 撰寫中繼匯總結果-Azure 資料總管
+description: 本文說明如何在 Azure 資料總管中分割及撰寫匯總的中繼結果。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,24 +10,24 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: f56bd1c9f87833f7c1a9d29580a71557fedb894c
-ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
+ms.openlocfilehash: 30d4f6bd315b5a32c67570ab16b9abc3160f0177
+ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/11/2020
-ms.locfileid: "88072390"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91954479"
 ---
 # <a name="using-hll-and-tdigest"></a>使用 hll() 和 tdigest()
 
-假設您想要計算過去七天每天的相異使用者計數。 您可以 `summarize dcount(user)` 一天執行一次，並將範圍篩選為過去七天。 這個方法沒有效率，因為每次執行計算時，先前的計算會有六天的重迭。 您也可以計算每一天的匯總，然後結合這些匯總。 這個方法會要求您「記住」最後六個結果，但效率更高。
+假設您想要在過去七天內每天計算不同使用者的計數。 您可以 `summarize dcount(user)` 一天執行一次，並將範圍篩選至過去七天。 這種方法的效率不佳，因為每次執行計算時，會有六天與先前的計算重迭。 您也可以計算每天的匯總，然後合併這些匯總。 這個方法會要求您「記住」最後六個結果，但效率更高。
 
-如所述，分割查詢很容易用於簡單的匯總，例如 `count()` 和 `sum()` 。 它也適用于複雜的匯總，例如 `dcount()` 和 `percentiles()` 。 本主題說明 Kusto 如何支援這類計算。
+如所述，資料分割查詢很容易用於簡單的匯總，例如 `count()` 和 `sum()` 。 它也適用于複雜的匯總，例如 `dcount()` 和 `percentiles()` 。 本主題說明 Kusto 如何支援這類計算。
 
-下列範例示範如何使用 `hll` / `tdigest` 並示範在某些情況下，使用這些命令的效能非常高效：
+下列範例示範如何使用 `hll` / `tdigest` 和示範在某些情況下，使用這些命令的效能非常高效：
 
 > [!NOTE]
-> 在某些情況下，或彙總函式所產生的動態物件 `hll` `tdigest` 可能會很大，而且會超過編碼原則中的預設 MaxValueSize 屬性。 若是如此，物件將會內嵌為 null。
-> 例如，當以精確度層級4保存函式的輸出時 `hll` ，物件的大小 `hll` 會超過預設 MaxValueSize，也就是1mb。
+> 在某些情況下，或彙總函式所產生的動態物件 `hll` `tdigest` 可能會很大，而且在編碼原則中會超過預設的 MaxValueSize 屬性。 如果是，物件將會內嵌為 null。
+> 例如，使用精確度層級4來保存函式的輸出時 `hll` ，物件的大小 `hll` 會超過預設 MaxValueSize，也就是1mb。
 > 若要避免這個問題，請修改資料行的編碼原則，如下列範例所示。
 
 ```kusto
@@ -40,7 +40,7 @@ range x from 1 to 1000000 step 1
 |---|
 |1.0000524520874|
 
-套用這種原則之前，請先將此物件內嵌到資料表中，以內嵌 null：
+套用這類原則之前，請先將此物件擷取到資料表中，以內嵌 null：
 
 ```kusto
 .set-or-append MyTable <| range x from 1 to 1000000 step 1
@@ -52,17 +52,17 @@ MyTable
 | project isempty(hll_x)
 ```
 
-| Column1 |
+| 資料行1 |
 |---------|
 | 1       |
 
-若要避免內嵌 null，請使用特殊編碼原則類型，這會 `bigobject` 覆寫 `MaxValueSize` 為 2 MB，如下所示：
+若要避免擷取 null，請使用特殊的編碼原則類型 `bigobject` ，此類型會覆寫 `MaxValueSize` 為 2 MB，如下所示：
 
 ```kusto
 .alter column MyTable.hll_x policy encoding type='bigobject'
 ```
 
-將值立即內嵌到上一個資料表：
+現在將值擷取到相同的資料表：
 
 ```kusto
 .set-or-append MyTable <| range x from 1 to 1000000 step 1
@@ -76,15 +76,15 @@ MyTable
 | project isempty(hll_x)
 ```
 
-|Column1|
+|資料行1|
 |---|
 |1|
 |0|
 
 
-## <a name="example"></a>範例
+## <a name="example-count-with-binned-timestamp"></a>範例：具有分類收納時間戳記的計數
 
-有一個資料表， `PageViewsHllTDigest` 其中包含 `hll` 每小時所看到的頁面值。 您想要將這些值分類收納至 `12h` 。 `hll`使用彙總函式合併值 `hll_merge()` ，並將時間戳記分類收納為 `12h` 。 使用函式傳回 `dcount_hll` 最後的 `dcount` 值：
+其中有一個資料表， `PageViewsHllTDigest` 其中包含 `hll` 每小時查看的頁面值。 您希望這些值分類收納到 `12h` 。 `hll`使用 `hll_merge()` 彙總函式來合併值，並將時間戳記分類收納至 `12h` 。 使用函數傳回 `dcount_hll` 最後的 `dcount` 值：
 
 ```kusto
 PageViewsHllTDigest
@@ -99,7 +99,7 @@ PageViewsHllTDigest
 |2016-05-02 12：00：00.0000000|39316056|
 |2016-05-03 00：00：00.0000000|13685621|
 
-若要執行下列動作的 bin 時間戳記 `1d` ：
+若要將時間戳記分類為 `1d` ：
 
 ```kusto
 PageViewsHllTDigest
@@ -113,7 +113,7 @@ PageViewsHllTDigest
 |2016-05-02 00：00：00.0000000|64135183|
 |2016-05-03 00：00：00.0000000|13685621|
 
-相同的查詢可能會透過的值來完成 `tdigest` ，這代表 `BytesDelivered` 每小時的：
+相同的查詢可能會透過的值來完成 `tdigest` ，這表示 `BytesDelivered` 每小時的：
 
 ```kusto
 PageViewsHllTDigest
@@ -128,25 +128,25 @@ PageViewsHllTDigest
 |2016-05-02 12：00：00.0000000|181315|
 |2016-05-03 00：00：00.0000000|146817|
  
-## <a name="example"></a>範例
+## <a name="example-temporary-table"></a>範例：臨時表
 
-已達到 Kusto 限制，但資料集太大，您需要對資料集執行定期查詢，但執行一般查詢來計算 [`percentile()`](percentiles-aggfunction.md) 或 [`dcount()`](dcount-aggfunction.md) 超過大型資料集。
+如果資料集太大，您需要對資料集執行定期查詢，但要執行定期查詢來計算 [`percentile()`](percentiles-aggfunction.md) 或 [`dcount()`](dcount-aggfunction.md) 超過大型資料集，就會達到 Kusto 限制。
 
 ::: zone pivot="azuredataexplorer"
 
-若要解決這個問題，新增的資料可能會在所 `hll` `tdigest` [`hll()`](hll-aggfunction.md) 需的作業是時， `dcount` 或使用 [`tdigest()`](tdigest-aggfunction.md) 或的需要的作業為百分位數 [`set/append`](../../ingest-data-overview.md) [`update policy`](../management/updatepolicy.md) 時，以或值的形式加入至臨時表。 在這種情況下，或的中繼結果 `dcount` `tdigest` 會儲存至另一個資料集，而該 dataset 應小於目標大型。
+若要解決這個問題，您可以將新加入的資料新增到臨時表中，或在所需 `hll` `tdigest` 的作業是， [`hll()`](hll-aggfunction.md) `dcount` 或 [`tdigest()`](tdigest-aggfunction.md) 使用或時所需的作業為百分位數時使用 [`set/append`](../../ingest-data-overview.md) [`update policy`](../management/updatepolicy.md) 。 在此情況下，或的中繼 `dcount` 結果 `tdigest` 會儲存至另一個資料集，此資料集應該小於目標大型資料集。
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-若要解決這個問題， `hll` `tdigest` [`hll()`](hll-aggfunction.md) 當必要的作業為時，新加入的資料可能會以或值的形式加入至臨時表 `dcount` 。 在這種情況下，的中繼結果 `dcount` 會儲存至另一個資料集，而該 dataset 應小於目標大型。
+若要解決這個問題， `hll` `tdigest` [`hll()`](hll-aggfunction.md) 當所需的作業是時，新加入的資料可能會新增至臨時表，或是使用的值 `dcount` 。 在此情況下，的中繼結果 `dcount` 會儲存至另一個資料集，此資料集應該小於目標大型資料集。
 
 ::: zone-end
 
-當您需要取得這些值的最終結果時，查詢可能會使用 `hll` / `tdigest` 合併： [`hll-merge()`](hll-merge-aggfunction.md) / [`tdigest_merge()`](tdigest-merge-aggfunction.md) 。 然後，在取得合併的值之後， [`percentile_tdigest()`](percentile-tdigestfunction.md)  /  [`dcount_hll()`](dcount-hllfunction.md) 就可以在這些合併值上叫用，以取得 `dcount` 或百分位數的最終結果。
+當您需要取得這些值的最終結果時，查詢可能會使用 `hll` / `tdigest` 合併： [`hll-merge()`](hll-merge-aggfunction.md) / [`tdigest_merge()`](tdigest-merge-aggfunction.md) 。 然後，在取得合併的值之後， [`percentile_tdigest()`](percentile-tdigestfunction.md)  /  [`dcount_hll()`](dcount-hllfunction.md) 可能會在這些合併的值上叫用，以取得或百分位數的最終結果 `dcount` 。
 
-假設有一個資料表 PageViews，每日內嵌資料，每日您想要計算每分鐘在日期 = datetime (2016-05-01 18：00： 00.0000000) 的相異頁面計數。
+假設有一個資料表 PageViews，其中的資料會每天內嵌，您每天都要在日期 = datetime (2016-05-01 18：00： 00.0000000) 計算每分鐘查看的相異頁面計數。
 
 執行下列查詢：
 
@@ -162,9 +162,9 @@ PageViews
 |2016-05-02 00：00：00.0000000|82770|64135183|
 |2016-05-03 00：00：00.0000000|72920|13685621|
 
-此查詢將會在您每次執行此查詢時匯總所有值 (例如，如果您想要一天執行多次) 。
+此查詢會在您每次執行此查詢時匯總所有值 (例如，如果您想要一天) 執行多次。
 
-如果您儲存 `hll` 和 `tdigest` 值 (這是在臨時表中) 的中繼結果 `dcount` 和百分位數， `PageViewsHllTDigest` 請使用更新原則或 set/append 命令，只會合並值，然後使用 `dcount_hll` / `percentile_tdigest` 下列查詢：
+如果您儲存 `hll` 和 `tdigest` 值 (這是 `dcount` 和百分位數的中繼結果) 到臨時表中， `PageViewsHllTDigest` 使用更新原則或 set/append 命令，您可能只會合並值，然後使用 `dcount_hll` / `percentile_tdigest` 下列查詢：
 
 ```kusto
 PageViewsHllTDigest
@@ -177,12 +177,12 @@ PageViewsHllTDigest
 |2016-05-02 00：00：00.0000000|83486|64135183|
 |2016-05-03 00：00：00.0000000|72247|13685621|
 
-此查詢在較小的資料表上執行時，應該更具效能。 在此範例中，第一個查詢會執行 ~ 215M 筆記錄，而第二個則只會執行32筆記錄：
+此查詢的效能會更高，因為它會在較小的資料表上執行。 在此範例中，第一個查詢會執行超過 ~ 215M 筆記錄，而第二個查詢則只會執行32記錄：
 
-## <a name="example"></a>範例
+## <a name="example-intermediate-results"></a>範例：中繼結果
 
 保留查詢。
-假設您有一個資料表，其中摘要說明每個維琪百科頁面的觀看時間 (範例大小1千萬個) ，而您想要尋找每個 date1 2 日的百分比，分別是在 date1 和 date2 中，相對於在 date1 (date1 < date2) 上所看到的頁面。
+假設您有一個資料表，摘要說明每個維琪百科頁面的觀看時間 (範例大小是1千萬個) ，而您想要尋找每個值1：1：1：1：1：1：1日和) < (2：
   
 簡單的方式是使用聯結和摘要運算子：
 
@@ -221,7 +221,7 @@ on $left.Day1 == $right.Day
  
 上述查詢花費 ~ 18 秒。
 
-當您使用、和函式時 [`hll()`](hll-aggfunction.md) [`hll_merge()`](hll-merge-aggfunction.md) [`dcount_hll()`](dcount-hllfunction.md) ，相等的查詢將會在 ~ 1.3 秒後結束，並顯示函式可將 `hll` 上述查詢加速到 ~ 14 次：
+當您使用、和函式時 [`hll()`](hll-aggfunction.md) [`hll_merge()`](hll-merge-aggfunction.md) [`dcount_hll()`](dcount-hllfunction.md) ，對等查詢將會在 ~ 1.3 秒後結束，並顯示函式將 `hll` 上述查詢加速超過 ~ 14 次：
 
 ```kusto
 let Stats=PageViewsSample | summarize pagehll=hll(Page, 2) by day=startofday(Timestamp); // saving the hll values (intermediate results of the dcount values)
@@ -242,11 +242,11 @@ Stats
 | project day1, day2, Percentage = intersection_size*100.0 / pages1
 ```
 
-|第1天|day2|百分比|
+|day1.ps1|day2.ps1|百分比|
 |---|---|---|
 |2016-05-01 00：00：00.0000000|2016-05-02 00：00：00.0000000|33.2298494510578|
 |2016-05-01 00：00：00.0000000|2016-05-03 00：00：00.0000000|16.9773830213667|
 |2016-05-02 00：00：00.0000000|2016-05-03 00：00：00.0000000|14.5160020350006|
 
 > [!NOTE] 
-> 查詢的結果不是100% 精確，因為函式發生錯誤 `hll` 。 如需有關錯誤的詳細資訊，請參閱 [`dcount()`](dcount-aggfunction.md) 。
+> 由於函數的錯誤，查詢的結果不是100% 精確 `hll` 。 如需錯誤的詳細資訊，請參閱 [`dcount()`](dcount-aggfunction.md) 。
