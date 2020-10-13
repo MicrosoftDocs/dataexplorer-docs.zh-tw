@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 11/07/2019
-ms.openlocfilehash: 36c5201f7b9d9f1cad2b82d569733c9d9f2abb90
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.date: 10/06/2020
+ms.openlocfilehash: d07dc282ba3996113903bd1b7c5ab08672d46543
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873996"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003057"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>使用資料的資料庫在 Azure 資料總管中附加資料庫
 
@@ -34,18 +34,21 @@ ms.locfileid: "88873996"
 
 ## <a name="attach-a-database"></a>附加資料庫
 
-您可以使用各種方法來附加資料庫。 在本文中，我們將討論如何使用 c #、Python 或 Azure Resource Manager 範本附加資料庫。 若要附加資料庫，您必須擁有使用者、群組、服務主體或受控識別，且在領導者叢集和消費者叢集上至少具有「參與者」角色。 您可以使用 [Azure 入口網站](/azure/role-based-access-control/role-assignments-portal)、 [PowerShell](/azure/role-based-access-control/role-assignments-powershell)、 [Azure CLI](/azure/role-based-access-control/role-assignments-cli) 和 [ARM 範本](/azure/role-based-access-control/role-assignments-template)來新增或移除角色指派。 您可以 (Azure RBAC) 和[不同的角色](/azure/role-based-access-control/rbac-and-directory-admin-roles)，深入瞭解[azure 角色型存取控制](/azure/role-based-access-control/overview)。 
+您可以使用各種方法來附加資料庫。 在本文中，我們將討論如何使用 c #、Python、Powershell 或 Azure Resource Manager 範本附加資料庫。 若要附加資料庫，您必須擁有使用者、群組、服務主體或受控識別，且在領導者叢集和消費者叢集上至少具有「參與者」角色。 您可以使用 [Azure 入口網站](/azure/role-based-access-control/role-assignments-portal)、 [PowerShell](/azure/role-based-access-control/role-assignments-powershell)、 [Azure CLI](/azure/role-based-access-control/role-assignments-cli) 和 [ARM 範本](/azure/role-based-access-control/role-assignments-template)來新增或移除角色指派。 您可以 (Azure RBAC) 和[不同的角色](/azure/role-based-access-control/rbac-and-directory-admin-roles)，深入瞭解[azure 角色型存取控制](/azure/role-based-access-control/overview)。 
+
+
+# <a name="c"></a>[C#](#tab/csharp)
 
 ### <a name="attach-a-database-using-c"></a>使用 C 附加資料庫#
 
 #### <a name="needed-nugets"></a>需要的 Nuget
 
-* 請安裝 [kusto](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
+* 安裝 [Microsoft.Azure.Management.kusto](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
 * 安裝 [ClientRuntime 驗證以進行驗證](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime.Azure.Authentication)。
 
-#### <a name="code-example"></a>程式碼範例
+#### <a name="example"></a>範例
 
-```Csharp
+```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
 var clientId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Application ID
 var clientSecret = "xxxxxxxxxxxxxx";//Client secret
@@ -77,6 +80,8 @@ AttachedDatabaseConfiguration attachedDatabaseConfigurationProperties = new Atta
 var attachedDatabaseConfigurations = resourceManagementClient.AttachedDatabaseConfigurations.CreateOrUpdate(followerResourceGroupName, followerClusterName, attachedDatabaseConfigurationName, attachedDatabaseConfigurationProperties);
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
 ### <a name="attach-a-database-using-python"></a>使用 Python 附加資料庫
 
 #### <a name="needed-modules"></a>需要的模組
@@ -86,7 +91,7 @@ pip install azure-common
 pip install azure-mgmt-kusto
 ```
 
-#### <a name="code-example"></a>程式碼範例
+#### <a name="example"></a>範例
 
 ```python
 from azure.mgmt.kusto import KustoManagementClient
@@ -124,6 +129,51 @@ attached_database_configuration_properties = AttachedDatabaseConfiguration(clust
 #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
 poller = kusto_management_client.attached_database_configurations.create_or_update(follower_resource_group_name, follower_cluster_name, attached_database_Configuration_name, attached_database_configuration_properties)
 ```
+
+# <a name="powershell"></a>[Powershell](#tab/azure-powershell)
+
+### <a name="attach-a-database-using-powershell"></a>使用 Powershell 附加資料庫
+
+#### <a name="needed-modules"></a>需要的模組
+
+```
+Install : Az.Kusto
+```
+
+#### <a name="example"></a>範例
+
+```Powershell
+$FollowerClustername = 'follower'
+$FollowerClusterSubscriptionID = 'xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx'
+$FollowerResourceGroupName = 'followerResouceGroup'
+$DatabaseName = "db"  ## Can be specific database name or * for all databases
+$LeaderClustername = 'leader'
+$LeaderClusterSubscriptionID = 'xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx'
+$LeaderClusterResourceGroup = 'leaderResouceGroup'
+$DefaultPrincipalsModificationKind = 'Union'
+##Construct the LeaderClusterResourceId and Location
+$getleadercluster = Get-AzKustoCluster -Name $LeaderClustername -ResourceGroupName $LeaderClusterResourceGroup -SubscriptionId $LeaderClusterSubscriptionID -ErrorAction Stop
+$LeaderClusterResourceid = $getleadercluster.Id
+$Location = $getleadercluster.Location
+##Handle the config name if all databases needs to be followed
+if($DatabaseName -eq '*')  {
+        $configname = $FollowerClustername + 'config'
+       } 
+else {
+        $configname = $DatabaseName   
+     }
+New-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername `
+    -Name $configname `
+    -ResourceGroupName $FollowerResourceGroupName `
+    -SubscriptionId $FollowerClusterSubscriptionID `
+    -DatabaseName $DatabaseName `
+    -ClusterResourceId $LeaderClusterResourceid `
+    -DefaultPrincipalsModificationKind $DefaultPrincipalsModificationKind `
+    -Location $Location `
+    -ErrorAction Stop 
+```
+
+# <a name="resource-manager-template"></a>[Resource Manager 範本](#tab/azure-resource-manager)
 
 ### <a name="attach-a-database-using-an-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本附加資料庫
 
@@ -200,7 +250,6 @@ poller = kusto_management_client.attached_database_configurations.create_or_upda
 
    ![範本部署](media/follower/template-deployment.png)
 
-
 |**設定**  |**說明**  |
 |---------|---------|
 |進行的叢集名稱     |  進行中的叢集名稱;將部署範本的位置。  |
@@ -209,28 +258,38 @@ poller = kusto_management_client.attached_database_configurations.create_or_upda
 |領導者叢集資源識別碼    |   領導者叢集的資源識別碼。      |
 |預設主體修改種類    |   預設的主要修改種類。 可以是 `Union` 、 `Replace` 或 `None` 。 如需預設主體修改種類的詳細資訊，請參閱 [主體修改種類控制命令](kusto/management/cluster-follower.md#alter-follower-database-principals-modification-kind)。      |
 |Location   |   所有資源的位置。 領導人和採用者必須位於相同的位置。       |
- 
-### <a name="verify-that-the-database-was-successfully-attached"></a>確認資料庫已成功附加
 
-若要確認資料庫是否成功附加，請在 [Azure 入口網站](https://portal.azure.com)中尋找您附加的資料庫。 
+---
+
+## <a name="verify-that-the-database-was-successfully-attached"></a>確認資料庫已成功附加
+
+若要確認資料庫是否成功附加，請在 [Azure 入口網站](https://portal.azure.com)中尋找您附加的資料庫。 您可以確認已成功將資料庫連接到「成功 [」或「](#check-your-follower-cluster) [領導者](#check-your-leader-cluster) 」叢集中。
+
+### <a name="check-your-follower-cluster"></a>檢查您的對等叢集  
 
 1. 流覽至「移至」叢集，然後選取 [**資料庫**]
 1. 在 [資料庫] 清單中搜尋新的唯讀資料庫。
 
     ![唯讀的資料從資料庫](media/follower/read-only-follower-database.png)
 
-或者：
+### <a name="check-your-leader-cluster"></a>檢查您的領導者叢集
 
 1. 流覽至領導者叢集，然後選取 [**資料庫**]
 2. 檢查相關的資料庫是否已標示為**與其他人共用**的資料庫  >  **是**
 
     ![讀取和寫入附加的資料庫](media/follower/read-write-databases-shared.png)
 
-## <a name="detach-the-follower-database-using-c"></a>使用 C 來卸離使用中的資料庫# 
+## <a name="detach-the-follower-database"></a>卸離的資料庫  
 
-### <a name="detach-the-attached-follower-database-from-the-follower-cluster"></a>將連接的資料來源從進行中的叢集卸離
+> [!NOTE]
+> 若要將資料庫從從上或領導人卸離，您必須擁有使用者、群組、服務主體或受控識別，而且在您要從中卸離資料庫的叢集上必須有至少的參與者角色。 在下列範例中，我們會使用服務主體。
 
-您可以依照下列方式，將任何附加的資料庫卸離：
+# <a name="c"></a>[C#](#tab/csharp)
+
+### <a name="detach-the-attached-follower-database-from-the-follower-cluster-using-c"></a>使用 C 將連接的資料從從的資料庫卸離#
+
+
+您可以如下所示，將任何附加的資料連線資料庫卸離：
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -252,10 +311,7 @@ var attachedDatabaseConfigurationsName = "uniqueName";
 resourceManagementClient.AttachedDatabaseConfigurations.Delete(followerResourceGroupName, followerClusterName, attachedDatabaseConfigurationsName);
 ```
 
-若要將資料庫與從資料來源卸離，您必須擁有使用者、群組、服務主體或受控識別，而且在該伺服器上必須具有「參與者」叢集的「參與者」角色。
-在上述範例中，我們使用服務主體。
-
-### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>從領導者叢集中卸離連接的資料來源資料庫
+### <a name="detach-the-attached-follower-database-from-the-leader-cluster-using-c"></a>使用 C 從領導者叢集卸離連結的資料連線資料庫#
 
 領導者叢集可以卸離任何附加的資料庫，如下所示：
 
@@ -285,11 +341,9 @@ var followerDatabaseDefinition = new FollowerDatabaseDefinition()
 resourceManagementClient.Clusters.DetachFollowerDatabases(leaderResourceGroupName, leaderClusterName, followerDatabaseDefinition);
 ```
 
-若要從領導者端卸離資料庫，您必須擁有使用者、群組、服務主體或受控識別，且具有領導者叢集上的「參與者」角色。 在上述範例中，我們使用服務主體。
+# <a name="python"></a>[Python](#tab/python)
 
-## <a name="detach-the-follower-database-using-python"></a>使用 Python 卸離使用中的資料庫
-
-### <a name="detach-the-attached-follower-database-from-the-follower-cluster"></a>將連接的資料來源從進行中的叢集卸離
+### <a name="detach-the-attached-follower-database-from-the-follower-cluster-using-python"></a>使用 Python 將連接的資料從從中移除的資料庫卸離
 
 您可以依照下列方式，將任何附加的資料庫卸離：
 
@@ -319,10 +373,8 @@ attached_database_configurationName = "uniqueName"
 #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
 poller = kusto_management_client.attached_database_configurations.delete(follower_resource_group_name, follower_cluster_name, attached_database_configurationName)
 ```
-若要將資料庫與從資料來源卸離，您必須擁有使用者、群組、服務主體或受控識別，而且在該伺服器上必須具有「參與者」叢集的「參與者」角色。
-在上述範例中，我們使用服務主體。
 
-### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>從領導者叢集中卸離連接的資料來源資料庫
+### <a name="detach-the-attached-follower-database-from-the-leader-cluster-using-python"></a>使用 Python 從領導者叢集卸離連結的資料連線資料庫
 
 領導者叢集可以卸離任何附加的資料庫，如下所示：
 
@@ -356,13 +408,40 @@ attached_database_configuration_name = "uniqueName"
 location = "North Central US"
 cluster_resource_id = "/subscriptions/" + follower_subscription_id + "/resourceGroups/" + follower_resource_group_name + "/providers/Microsoft.Kusto/Clusters/" + follower_cluster_name
 
-
 #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
 poller = kusto_management_client.clusters.detach_follower_databases(resource_group_name = leader_resource_group_name, cluster_name = leader_cluster_name, cluster_resource_id = cluster_resource_id, attached_database_configuration_name = attached_database_configuration_name)
 ```
 
-若要從領導者端卸離資料庫，您必須擁有使用者、群組、服務主體或受控識別，且具有領導者叢集上的「參與者」角色。
-在上述範例中，我們使用服務主體。
+# <a name="powershell"></a>[Powershell](#tab/azure-powershell)
+
+### <a name="detach-a-database-using-powershell"></a>使用 Powershell 卸離資料庫
+
+#### <a name="needed-modules"></a>需要的模組
+
+```
+Install : Az.Kusto
+```
+
+#### <a name="example"></a>範例
+
+```Powershell
+$FollowerClustername = 'follower'
+$FollowerClusterSubscriptionID = 'xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx'
+$FollowerResourceGroupName = 'followerResouceGroup'
+$DatabaseName = "sanjn"  ## Can be specific database name or * for all databases
+
+##Construct the Configuration name 
+$confignameraw = (Get-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername -ResourceGroupName $FollowerResourceGroupName -SubscriptionId $FollowerClusterSubscriptionID) | Where-Object {$_.DatabaseName -eq $DatabaseName }
+$configname =$confignameraw.Name.Split("/")[1]
+
+Remove-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername -Name $configname -ResourceGroupName $FollowerResourceGroupName
+```
+
+# <a name="resource-manager-template"></a>[Resource Manager 範本](#tab/azure-resource-manager)
+
+使用 c #、Python 或 PowerShell 卸[離資料的資料庫](#detach-the-follower-database)。
+
+---
 
 ## <a name="manage-principals-permissions-and-caching-policy"></a>管理主體、許可權和快取原則
 
@@ -397,3 +476,4 @@ poller = kusto_management_client.clusters.detach_follower_databases(resource_gro
 ## <a name="next-steps"></a>後續步驟
 
 * 如需有關「進行」叢集設定的詳細資訊，請參閱 [控制管理資料叢集的控制命令](kusto/management/cluster-follower.md)。
+

@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: e341b70dfc2a7c0d3038d6d60d9c8ae2b40b6218
-ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
+ms.openlocfilehash: c1be494fd290b051455010d6e6e082d01650107c
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90740247"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003140"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Azure 資料總管工具和整合總覽
 
@@ -30,31 +30,18 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
 ### <a name="azure-data-explorer-ingestion-tools"></a>Azure 資料總管內嵌工具
 
 * [LightIngest](lightingest.md) - 用於將特定資料內嵌至 Azure 資料總管的說明公用程式
-* 單鍵內嵌
-    * [單鍵擷取概觀](ingest-data-one-click.md) 
-    * [將容器中的資料內嵌至新的資料表](one-click-ingestion-new-table.md)
-    * [將本機檔案中的資料內嵌到現有的資料表](one-click-ingestion-existing-table.md)
+* 單鍵內嵌： [總覽](ingest-data-one-click.md) 和將資料 [從容器內嵌至新的資料表](one-click-ingestion-new-table.md) ，或 [從本機檔案內嵌至現有的資料表](one-click-ingestion-existing-table.md)
 
 ### <a name="ingestion-integrations"></a>內嵌整合
 
-* 事件中樞
-    * [從事件中樞內嵌](ingest-data-event-hub-overview.md)
-    * 使用[Azure 入口網站](ingest-data-event-hub.md)、 [c #](data-connection-event-hub-csharp.md)、 [Python](data-connection-event-hub-python.md)或[Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)從事件中樞內嵌
-* 事件方格
-    * [從事件方格內嵌](ingest-data-event-grid-overview.md)
-    * 使用[Azure 入口網站](ingest-data-event-grid.md)、 [c #](data-connection-event-grid-csharp.md)、 [Python](data-connection-event-grid-python.md)或[Azure Resource Manager 範本](data-connection-event-grid-resource-manager.md)從事件方格內嵌
-* IoT 中樞
-    * [從 IoT 中樞內嵌](ingest-data-iot-hub-overview.md)
-    * 使用[Azure 入口網站](ingest-data-iot-hub.md)、 [c #](data-connection-iot-hub-csharp.md)、 [Python](data-connection-iot-hub-python.md)或[Azure Resource Manager 範本](data-connection-iot-hub-resource-manager.md)從 IoT 中樞內嵌
+* 事件中樞： [從事件中樞內嵌總覽](ingest-data-event-hub-overview.md) 和使用 [Azure 入口網站](ingest-data-event-hub.md)、 [c #](data-connection-event-hub-csharp.md)、 [Python](data-connection-event-hub-python.md) 或 [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)
+* 事件方格： [從事件方格中內嵌總覽](ingest-data-event-grid-overview.md) 和使用 [Azure 入口網站](ingest-data-event-grid.md)、 [c #](data-connection-event-grid-csharp.md)、 [Python](data-connection-event-grid-python.md) 或 [Azure Resource Manager 範本](data-connection-event-grid-resource-manager.md)
+* Iot 中樞： [從 iot 中樞內嵌總覽](ingest-data-iot-hub-overview.md) 和使用 [Azure 入口網站](ingest-data-iot-hub.md)、 [c #](data-connection-iot-hub-csharp.md)、 [Python](data-connection-iot-hub-python.md) 或 [Azure Resource Manager 範本](data-connection-iot-hub-resource-manager.md)
 * [Logstash](ingest-data-logstash.md)
-* Azure Data Factory
-    * [與 Azure Data Factory 整合](data-factory-integration.md)
-    * [複製資料](data-factory-load-data.md)
-    * [使用 Azure Data Factory 範本從資料庫大量複製](data-factory-template.md)
-    * [使用 Azure Data Factory 命令活動來執行 Azure 資料總管控制命令](data-factory-command-activity.md)
-* Apache 
-    * [Spark](spark-connector.md)
-    * [Kafka](ingest-data-kafka.md)
+* Azure Data Factory： [整合總覽](data-factory-integration.md)、 [複製資料](data-factory-load-data.md)、 [使用 Azure Data Factory 範本大量複製](data-factory-template.md)，以及 [使用 Azure Data Factory 命令活動執行 Azure 資料總管控制命令](data-factory-command-activity.md)
+* [Azure Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
+* [Apache Spark](spark-connector.md)
+* [Apache Kafka](ingest-data-kafka.md)
 * [Cosmos DB](https://github.com/Azure/azure-kusto-labs/tree/master/cosmosdb-adx-integration)
 * [Power Automate](flow.md)
 
@@ -65,10 +52,8 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
 有幾個工具可在 Azure 資料總管中執行查詢。
 
 * Kusto.Explorer
-    * [安裝和使用者介面](kusto/tools/kusto-explorer.md)
-    * [使用 Kusto.Explorer](kusto/tools/kusto-explorer-using.md)
-    * [options](kusto/tools/kusto-explorer-options.md)
-    * 其他主題包括 [疑難排解](kusto/tools/kusto-explorer-troubleshooting.md)、 [鍵盤快速鍵](kusto/tools/kusto-explorer-shortcuts.md)、程式 [代碼重構](kusto/tools/kusto-explorer-refactor.md)、程式 [代碼導覽](kusto/tools/kusto-explorer-codenav.md)和程式 [代碼分析](kusto/tools/kusto-explorer-code-analyzer.md)
+    * [使用 Kusto](kusto/tools/kusto-explorer-using.md)的[安裝和使用者介面](kusto/tools/kusto-explorer.md)
+    * 其他主題包括 [選項](kusto/tools/kusto-explorer-options.md)、 [疑難排解](kusto/tools/kusto-explorer-troubleshooting.md)、 [鍵盤快速鍵](kusto/tools/kusto-explorer-shortcuts.md)、程式 [代碼重構](kusto/tools/kusto-explorer-refactor.md)、程式碼 [導覽](kusto/tools/kusto-explorer-codenav.md)和程式 [代碼分析](kusto/tools/kusto-explorer-code-analyzer.md)
 * [Web UI](web-query-data.md)
 * [Kusto.Cli](kusto/tools/kusto-cli.md)
 
@@ -76,9 +61,10 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
 
 * [Azure 監視器](query-monitor-data.md)
 * [Azure Data Lake](data-lake-query-data.md)
+* [Azure Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
 * [Apache Spark](spark-connector.md)
 * Microsoft Power Apps
-* [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic)
+* Azure Data Studio： [Kusto 延伸模組總覽](https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?context=/azure/data-explorer/context/context)、 [使用 Kusto](https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=/azure/data-explorer/context/context)，以及 [使用 Kqlmagic](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic?context=/azure/data-explorer/context/context)
 
 ## <a name="visualizations-dashboards-and-reporting"></a>視覺效果、儀表板和報告
 
@@ -88,7 +74,7 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
 
 * [Azure Notebooks](azure-notebooks.md)
 * [Jupyter Notebook](kqlmagic.md)
-* [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic)
+* Azure Data Studio： [Kusto 延伸模組總覽](https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?context=/azure/data-explorer/context/context)、 [使用 Kusto](https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=/azure/data-explorer/context/context)，以及 [使用 Kqlmagic](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic?context=/azure/data-explorer/context/context)
 
 ## <a name="orchestration"></a>協調流程
 

@@ -1,18 +1,18 @@
 ---
 title: 使用 Azure 入口網站設定客戶管理的金鑰
-description: 本文說明如何在 Azure 資料總管中為您的資料設定客戶管理的金鑰加密。
+description: 瞭解如何使用 Azure 入口網站來設定客戶管理的金鑰，以加密 Azure 資料總管資料。
 author: orspod
 ms.author: orspodek
 ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/26/2020
-ms.openlocfilehash: 4d828905ce673c3b1c6453d31974334312bd3b5e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 3c8aaf6f4a6a876707a362ac163de146630a86cb
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872143"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003020"
 ---
 # <a name="configure-customer-managed-keys-using-the-azure-portal"></a>使用 Azure 入口網站設定客戶管理的金鑰
 
@@ -40,7 +40,7 @@ ms.locfileid: "88872143"
 
 1. 選取 [ **金鑰**]。
 1. 選取 [ **版本**]。
-1. 按一下 [選取]  。
+1. 按一下 [選取]。
 
     ![從 Azure Key Vault 選取金鑰](media/customer-managed-keys-portal/cmk-key-vault.png)
 
@@ -59,6 +59,5 @@ ms.locfileid: "88872143"
 * [在 Azure 中使用磁片加密來保護您的叢集資料總管 Azure 入口網站](cluster-disk-encryption.md) ，方法是啟用待用加密。
 * [使用 Azure Resource Manager 範本設定客戶管理的金鑰](customer-managed-keys-resource-manager.md)
 * [使用 C 設定客戶管理的金鑰#](customer-managed-keys-csharp.md)
-
 
 

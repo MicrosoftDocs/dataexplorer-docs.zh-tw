@@ -1,6 +1,6 @@
 ---
 title: Kusto RestrictedViewAccess 原則管理-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 RestrictedViewAccess 原則。
+description: 瞭解 Azure 資料總管中的 RestrictedViewAccess 原則命令。 請參閱如何查看、啟用、停用、變更和刪除此原則。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 33f21bdad11555ad2a55f285cbf40239236c561f
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: 9ec328e3a15af3cedb833354f7e8ecea0fdc22c8
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967599"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92002916"
 ---
 # <a name="restricted_view_access-policy-command"></a>restricted_view_access 原則命令
 
 *RestrictedViewAccess*原則記載于[此處](../management/restrictedviewaccesspolicy.md)。
 
-在資料庫的資料表上啟用或停用原則的控制命令如下：
+在資料庫的資料表 (s) 上啟用或停用原則的控制命令如下：
 
 若要啟用/停用原則：
 ```kusto
@@ -38,7 +38,7 @@ ms.locfileid: "85967599"
 .show table * policy restricted_view_access  
 ```
 
-若要刪除原則（相當於停用）：
+若要刪除原則 (相當於停用) ：
 ```kusto
 .delete table TableName policy restricted_view_access  
 ```

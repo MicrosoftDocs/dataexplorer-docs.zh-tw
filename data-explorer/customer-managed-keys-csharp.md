@@ -1,18 +1,18 @@
 ---
 title: 使用 C 設定客戶管理的金鑰#
-description: 本文說明如何在 Azure 資料總管中為您的資料設定客戶管理的金鑰加密。
+description: '本文說明如何使用 c # 設定客戶管理的金鑰來加密 Azure 資料總管資料。'
 author: orspod
 ms.author: orspodek
 ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/06/2020
-ms.openlocfilehash: ade06e6fffb31a5c76fa12fe02d5192e4126091e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: db20566a9aa9b5c720ea9f72ec9c980042db0625
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872092"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003004"
 ---
 # <a name="configure-customer-managed-keys-using-c"></a>使用 C 設定客戶管理的金鑰#
 
@@ -27,17 +27,17 @@ ms.locfileid: "88872092"
 
 [!INCLUDE [data-explorer-configure-customer-managed-keys part 2](includes/data-explorer-configure-customer-managed-keys-b.md)]
 
-## <a name="configure-encryption-with-customer-managed-keys"></a>使用客戶管理的金鑰設定加密
+## <a name="configure-encryption-with-customer-managed-keys"></a>使用客戶自控金鑰來設定加密
 
 本節說明如何使用 Azure 資料總管 c # 用戶端設定客戶管理的金鑰加密。 
 
-### <a name="prerequisites"></a>先決條件
+### <a name="prerequisites"></a>必要條件
 
 * 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
-### <a name="install-c-nuget"></a>安裝 c # NuGet
+### <a name="install-c-nuget"></a>安裝 C# Nuget
 
 * 安裝 [Azure 資料總管 (Kusto) NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
 
