@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 3d1e8b4df2507a9b2eb7126973dea891edc1d6ac
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 4cb2c64e2a66d8412277717e505626965bca1052
+ms.sourcegitcommit: 7024f73c76bf5b506557fd0ef7a0f4f40ec7d313
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91941973"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92021214"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>使用 Power BI 來查詢 Azure 資料總管資料並將其視覺化的最佳作法
 
@@ -91,6 +91,7 @@ in
 | NoTruncate | `[NoTruncate=true]` | 將 `notruncation` set 語句加入至查詢。 允許隱藏傳回給呼叫端的查詢結果截斷。
 | AdditionalSetStatements | `[AdditionalSetStatements="set query_datascope=hotcache"]` | 將提供的 set 語句加入至查詢。 這些語句是用來設定查詢持續時間的查詢選項。 查詢選項可控制查詢如何執行和傳回結果。
 | CaseInsensitive | `[CaseInsensitive=true]` | 讓連接器產生不區分大小寫的查詢- `=~` 在比較值時，查詢會使用運算子而不是 `==` 運算子。
+| 逾時 | `[Timeout=#duration(0,10,0,0)]` | 將查詢的用戶端和伺服器超時設定為提供的持續時間。
 
 > [!NOTE]
 > 您可以結合多個選項，以達到所需的行為： `[NoTruncate=true, CaseInsensitive=true]`
