@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 03/23/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 2060d2996338cf1eee33b5905e9929c46040afa9
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: 64736d944c71d84c4950dea0341089732b258f27
+ms.sourcegitcommit: a10e7c6ba96bdb94d95ef23f5d1506eb8fda0041
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86188586"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92058677"
 ---
 # <a name="tutorial"></a>教學課程
 
 ::: zone pivot="azuredataexplorer"
 
-瞭解 Kusto 查詢語言的最佳方式是查看一些簡單的查詢，以使用[具有一些範例資料的資料庫](https://help.kusto.windows.net/Samples)來取得語言的「風格」。 本文中所示範的查詢應該在該資料庫上執行。 `StormEvents`此範例資料庫中的表格提供有關在美國發生的風暴的一些資訊
+瞭解 Kusto 查詢語言的最佳方式，就是查看一些簡單的查詢，以使用 [具有一些範例資料的資料庫](https://help.kusto.windows.net/Samples)，來取得語言的「感覺」。 本文中示範的查詢應該在該資料庫上執行。 `StormEvents`此範例資料庫中的表格提供有關在美國發生的風暴的一些資訊。
 
 <!--
   TODO: Provide link to reference data we used originally in StormEvents
@@ -34,10 +34,10 @@ ms.locfileid: "86188586"
 
 ## <a name="count-rows"></a>計算資料列數目
 
-我們的範例資料庫有一個稱為的資料表 `StormEvents` 。
-為了瞭解其大小，我們會將其內容傳送至只計算資料列的操作員：
+我們的範例資料庫有一個名為的資料表 `StormEvents` 。
+為了找出有多大，我們會將其內容輸送到只計算資料列的運算子：
 
-* *語法：* 查詢是一種資料來源 (通常是資料表名稱) ，並可選擇性地後面接著一組或多組管道字元和某些表格式運算子。
+* *語法：* 查詢是資料來源 (通常是) 資料表名稱，並選擇性地接著一或多個管道字元和某些表格式運算子。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -54,11 +54,11 @@ StormEvents | count
 
 ## <a name="project-select-a-subset-of-columns"></a>專案：選取資料行的子集
 
-使用[project](./projectoperator.md)只挑選您想要的資料行。 請參閱下列使用[專案](./projectoperator.md)和[take](./takeoperator.md)運算子的範例。
+使用 [project](./projectoperator.md) 只挑選您想要的資料行。 請參閱下列使用 [project](./projectoperator.md) 和 [take](./takeoperator.md) 運算子的範例。
 
 ## <a name="where-filtering-by-a-boolean-expression"></a>where：依布林運算式篩選
 
-讓我們 `flood` 在 `California` 2007 年2月的期間僅查看中的：
+讓我們 `flood` 在 `California` 2007 年2月1日查看：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -68,9 +68,9 @@ StormEvents
 | project StartTime, EndTime , State , EventType , EpisodeNarrative
 ```
 
-|StartTime|EndTime|狀態|EventType|EpisodeNarrative|
+|StartTime|EndTime|State|EventType|EpisodeNarrative|
 |---|---|---|---|---|
-|2007-02-19 00：00：00.0000000|2007-02-19 08：00：00.0000000|加州|Flood|在南 San Joaquin 的正面系統之間移動的一小段時間，會在19日早上的一小時內，為西方字偶比對國家/地區帶來短暫的 rain。 在接近 Taft 的州高速公路166報告了次要洪水。|
+|2007-02-19 00：00：00.0000000|2007-02-19 08：00：00.0000000|加州|Flood|在南 San Joaquin 的正面系統中，移動了一小段時間，在19日的早期早上時，會有一小段高達西歐的國家/地區間距。 在接近 Taft 的州高速公路166之間回報輕微氾濫。|
 
 ## <a name="take-show-me-n-rows"></a>take：顯示 n 個數據列
 
@@ -83,20 +83,20 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|狀態|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
-|2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|繁重 Rain|州|在近水樓臺 Volusia 縣的各個部分之間，最多有9英寸的 rain 落在24小時內。|
-|2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|龍捲風|州|Eustis 在 West Crooked Lake 的北結尾觸及了龍捲風。 龍捲風會快速更到 EF1 強度，因為它是透過 Eustis 移到西北部。 此曲目只在兩英里的時間內，寬度上限為300個碼。  龍捲風終結了7家。 二十七家家庭收到重大損害，而81家所回報的小損毀。 $6200000 不會有嚴重傷害和屬性損毀。|
-|2007-09-29 08：11：00.0000000|2007-09-29 08：11：00.0000000|Waterspout|大西洋南部|在墨爾本海灘的大西洋東南部中形成的 waterspout，並短暫地向支援腳步。|
-|2007-12-20 07：50：00.0000000|2007-12-20 07：53：00.0000000|Thunderstorm Wind|MISSISSIPPI|許多大型樹狀結構的電源線已關閉。 東部 Adams 縣（市）中發生損毀。|
-|2007-12-30 16：00：00.0000000|2007-12-30 16：05：00.0000000|Thunderstorm Wind|格魯吉亞|國家/地區分派報告數個樹狀結構沿著 Quincey Batten 迴圈，接近狀態道路206。 已估計樹狀結構移除的成本。|
+|2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|大雨|佛羅里達|在近水樓臺 Volusia 國家/地區的每個部分，在24小時的期間內，最多會有9英寸的 rain。|
+|2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|龍捲風|佛羅里達|在北西部 Crooked Lake 的 Eustis 中，有一次龍捲風觸及。 當您在 Eustis 移動北美洲時，會快速更至 EF1 強度。 此播放軌的長度為兩英里以下，最大寬度為300碼。  龍捲風終結7家庭。 20個家庭收到重大損害，而81家中回報了輕微的損毀。 在 $6200000 設定的嚴重傷害和財產損毀。|
+|2007-09-29 08：11：00.0000000|2007-09-29 08：11：00.0000000|Waterspout|大西洋南部|在墨爾本海灘的大西洋東南部中形成的 waterspout，並短暫地移往支援腳步。|
+|2007-12-20 07：50：00.0000000|2007-12-20 07：53：00.0000000|Thunderstorm Wind|密西西比|許多大型樹狀結構都有一些電源線的下降。 在東部 Adams 縣中發生損毀。|
+|2007-12-30 16：00：00.0000000|2007-12-30 16：05：00.0000000|Thunderstorm Wind|格魯吉亞|縣市分派報告了數個樹狀結構，並在接近州道路206的 Quincey Batten 迴圈下進行。 已預估移除樹狀結構的成本。|
 
-但是[take 會](./takeoperator.md)以不特定的順序顯示資料表中的資料列，因此讓我們將它們排序。
-* [limit](./takeoperator.md)是[take](./takeoperator.md)的別名，會有相同的效果。
+但是 [，請以](./takeoperator.md) 沒有特定順序的方式來顯示資料表中的資料列，讓我們加以排序。
+* [limit](./takeoperator.md) 是 [take](./takeoperator.md) 的別名，而且會有相同的效果。
 
 ## <a name="sort-and-top"></a>排序和頂端
 
-* *語法：* 有些運算子具有由關鍵字引入的參數，例如 `by` 。
+* *語法：* 某些運算子具有由關鍵字（例如）引進的參數 `by` 。
 * `desc` = 遞減順序，`asc` = 遞增。
 
 顯示前 n 個資料列 (依特定資料行排序)︰
@@ -108,27 +108,27 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|狀態|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
-|2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪事件會持續到新年早上的一天。|
-|2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪事件會持續到新年早上的一天。|
-|2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪事件會持續到新年早上的一天。|
-|2007-12-31 23：53：00.0000000|2007-12-31 23：53：00.0000000|高風|加州|Ventura 國家/地區的山脈中回報了北部到東北部股 gusting 至大約 58 mph。|
-|2007-12-31 23：53：00.0000000|2007-12-31 23：53：00.0000000|高風|加州|暖彈簧 RAWS 感應器回報 northerly 股 gusting 到 58 mph。|
+|2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪活動會延續到新年的提早早上。|
+|2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪活動會延續到新年的提早早上。|
+|2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪活動會延續到新年的提早早上。|
+|2007-12-31 23：53：00.0000000|2007-12-31 23：53：00.0000000|高風|加州|在 Ventura 縣（山脈）中回報到 58 >mph 的北部至東北部接近尾聲 gusting。|
+|2007-12-31 23：53：00.0000000|2007-12-31 23：53：00.0000000|高風|加州|暖彈簧 RAWS 感應器回報北邊接近尾聲 gusting 至 58 >mph。|
 
-使用[sort](./sortoperator.md)和[take](./takeoperator.md)運算子可以達成相同的目的
+您可以使用 [sort](./sortoperator.md) 和 [take](./takeoperator.md) 運算子來達成相同的目的
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | sort by StartTime desc
 | take 5
-| project  StartTime, EndLat, EventType, EventNarrative
+| project  StartTime, EndTime, EventType, EventNarrative
 ```
 
 ## <a name="extend-compute-derived-columns"></a>擴充：計算衍生的資料行
 
-藉由計算每個資料列中的值，建立新的資料行：
+藉由計算每個資料列中的值來建立新的資料行：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -138,16 +138,16 @@ StormEvents
 | project StartTime, EndTime, Duration, EventType, State
 ```
 
-|StartTime|EndTime|持續時間|EventType|狀態|
+|StartTime|EndTime|Duration|EventType|State|
 |---|---|---|---|---|
-|2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|22:00:00|繁重 Rain|州|
-|2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|00:08:00|龍捲風|州|
+|2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|22:00:00|大雨|佛羅里達|
+|2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|00:08:00|龍捲風|佛羅里達|
 |2007-09-29 08：11：00.0000000|2007-09-29 08：11：00.0000000|00:00:00|Waterspout|大西洋南部|
-|2007-12-20 07：50：00.0000000|2007-12-20 07：53：00.0000000|00:03:00|Thunderstorm Wind|MISSISSIPPI|
+|2007-12-20 07：50：00.0000000|2007-12-20 07：53：00.0000000|00:03:00|Thunderstorm Wind|密西西比|
 |2007-12-30 16：00：00.0000000|2007-12-30 16：05：00.0000000|00:05:00|Thunderstorm Wind|格魯吉亞|
 
 您可以重複使用資料行名稱，並將計算結果指派給相同的資料行。
-例如：
+例如︰
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -160,7 +160,7 @@ print x=1
 |---|---|
 |3|1|
 
-純量[運算式](./scalar-data-types/index.md)可以包含所有一般運算子， `+` (`-` 、 `*` 、 `/` 、 `%`) ，而且有一系列有用的函式。
+純量[運算式](./scalar-data-types/index.md)可包含所有一般運算子， (`+` 、 `-` 、 `*` 、 `/` 、 `%`) ，而且有一系列有用的函式。
 
 ## <a name="summarize-aggregate-groups-of-rows"></a>摘要：匯總資料列群組
 
@@ -172,10 +172,10 @@ StormEvents
 | summarize event_count = count() by State
 ```
 
-將在子句中具有相同值的群組[匯總](./summarizeoperator.md)在一起 `by` ，然後使用彙總函式 (例如 `count`) ，將每個群組合並成單一資料列。 因此，在此情況下，每個狀態都有一個資料列，以及該狀態的資料列計數的資料行。
+[摘要](./summarizeoperator.md) 群組在子句中具有相同值的資料列 `by` ，然後使用彙總函式 (例如 `count`) ，將每個群組合並成單一資料列。 因此在此情況下，每個狀態都有一個資料列，以及該狀態的資料列計數的資料行。
 
-有一系列的[彙總函式](./summarizeoperator.md#list-of-aggregation-functions)，您可以在一個匯總運算子中使用其中幾個來產生數個計算資料行。 例如，我們可以在每個狀態中取得風暴的計數，以及每個狀態的唯一一種電流類型的總和，  
-然後，我們可以使用[top](./topoperator.md)來取得最常受到影響的狀態：
+其中有一個 [彙總函式](./summarizeoperator.md#list-of-aggregation-functions)範圍，您可以在一個摘要運算子中使用其中幾個來產生數個計算資料行。 例如，我們可以取得每個狀態的風暴計數，也可以取得每個狀態的唯一風暴類型總和，  
+然後，我們可以使用 [top](./topoperator.md) 來取得最常受到影響的狀態：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -184,18 +184,18 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-|狀態|StormCount|TypeOfStorms|
+|State|StormCount|TypeOfStorms|
 |---|---|---|
 |德克薩斯州|4701|27|
-|KANSAS|3166|21|
+|堪薩斯|3166|21|
 |愛荷華州|2337|19|
 |伊利諾州|2022|23|
-|MISSOURI|2016|20|
+|密蘇里州|2016|20|
 
 summarize 的結果有：
 
 * `by`中具名的每個資料行；
-* 每個計算運算式的資料行。
+* 每個計算運算式的資料行;
 * 每一組 `by` 值的一個資料列。
 
 ## <a name="summarize-by-scalar-values"></a>依純量值彙總
@@ -210,7 +210,7 @@ StormEvents
 | summarize event_count = count() by bin(StartTime, 1d)
 ```
 
-這會將所有時間戳記縮減為1天的間隔：
+這可將所有時間戳記縮減為1天的間隔：
 
 |StartTime|event_count|
 |---|---|
@@ -222,7 +222,7 @@ StormEvents
 |2007-02-19 00：00：00.0000000|52|
 |2007-02-20 00：00：00.0000000|60|
 
-[Bin ( # B1](./binfunction.md)與許多語言中的[Floor ( # B3](./floorfunction.md)函數相同。 它只會將每個值減少到您提供的最接近的模數倍數，讓[總結](./summarizeoperator.md)可以將資料列指派給群組。
+[Bin ( # B1](./binfunction.md)與許多語言的[Floor ( # B3](./floorfunction.md)函數相同。 它只會將每個值縮減為您所提供之模數的最接近倍數，讓 [摘要](./summarizeoperator.md) 可以將資料列指派給群組。
 
 ## <a name="render-display-a-chart-or-table"></a>Render：顯示圖表或資料表
 
@@ -240,14 +240,14 @@ StormEvents
 
 :::image type="content" source="images/tutorial/event-counts-state.png" alt-text="依州/省的風暴事件計數直條圖":::
 
-雖然我們已從 `mid` 專案作業中移除，但如果我們想要讓圖表以該順序顯示國家/地區，仍然需要它。
+雖然我們已 `mid` 在專案作業中移除，但如果我們想要讓圖表以該順序顯示國家/地區，仍然需要它。
 
-嚴格來說，「render」是用戶端的一項功能，而不是查詢語言的一部分。 不過，它會整合到語言中，而且在構想結果時非常有用。
+嚴格來說，「轉譯」是用戶端的一項功能，而不是查詢語言的一部分。 同樣地，它也已整合至語言，而且非常適合用來構思您的結果。
 
 
 ## <a name="timecharts"></a>時間表
 
-回到數值箱，讓我們來顯示一個時間序列：
+回到數值箱，讓我們來顯示時間序列：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -256,7 +256,7 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/time-series-start-bin.png" alt-text="依時間分類收納的折線圖事件":::
+:::image type="content" source="images/tutorial/time-series-start-bin.png" alt-text="依州/省的風暴事件計數直條圖":::
 
 ## <a name="multiple-series"></a>多個系列
 
@@ -270,19 +270,19 @@ StormEvents
 | summarize count() by bin(StartTime, 10h), Source
 ```
 
-:::image type="content" source="images/tutorial/table-count-source.png" alt-text="依來源的資料表計數":::
+:::image type="content" source="images/tutorial/table-count-source.png" alt-text="依州/省的風暴事件計數直條圖":::
 
-只要將轉譯詞彙加入至上述： `| render timechart` 。
+只需將轉譯詞彙新增至上述內容： `| render timechart` 。
 
-:::image type="content" source="images/tutorial/line-count-source.png" alt-text="依來源的折線圖計數":::
+:::image type="content" source="images/tutorial/line-count-source.png" alt-text="依州/省的風暴事件計數直條圖":::
 
-請注意，會 `render timechart` 使用第一個資料行做為 X 軸，然後將其他欄位顯示為個別的線條。
+請注意， `render timechart` 使用第一個資料行做為 X 軸，然後將其他資料行顯示為個別的線條。
 
 ## <a name="daily-average-cycle"></a>每日平均週期
 
-活動在平均一天的變化如何？
+活動在平均當日有何不同？
 
-依時間模數一天計數事件，分類收納為小時。 請注意，我們會使用 `floor` 而不是 bin：
+依時間模數一天計算事件數目，分類收納為小時。 請注意，我們使用 `floor` 的不是 bin：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -293,15 +293,15 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/time-count-hour.png" alt-text="時間圖表計數（依小時）":::
+:::image type="content" source="images/tutorial/time-count-hour.png" alt-text="依州/省的風暴事件計數直條圖":::
 
-目前無法 `render` 正確標示持續時間，但我們可以改用 `| render columnchart` ：
+目前 `render` 不會正確地標示持續時間，但我們可以改用 `| render columnchart` ：
 
-:::image type="content" source="images/tutorial/column-count-hour.png" alt-text="直條圖計數（依小時）":::
+:::image type="content" source="images/tutorial/column-count-hour.png" alt-text="依州/省的風暴事件計數直條圖":::
 
 ## <a name="compare-multiple-daily-series"></a>比較多個每日系列
 
-活動在不同狀態的當天時間有何差異？
+活動在不同狀態的當日時間有何不同？
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -312,9 +312,9 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/time-hour-state.png" alt-text="時間圖表（依小時和州）":::
+:::image type="content" source="images/tutorial/time-hour-state.png" alt-text="依州/省的風暴事件計數直條圖":::
 
-除以 `1h` 以將 X 軸變成小時數，而不是持續時間：
+除 `1h` 以將 X 軸轉換成小時數，而不是持續時間：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -325,13 +325,13 @@ StormEvents
 | render columnchart
 ```
 
-:::image type="content" source="images/tutorial/column-hour-state.png" alt-text="依小時和州的直條圖":::
+:::image type="content" source="images/tutorial/column-hour-state.png" alt-text="依州/省的風暴事件計數直條圖":::
 
 ## <a name="join"></a>Join
 
-如何找出兩個指定的 EventTypes 在兩個狀態中發生的情況？
+如何尋找兩個指定的 EventTypes 在兩個狀態中發生的狀態？
 
-您可以使用第一個事件1和第二個事件集來提取風暴事件，然後聯結兩個集合的狀態。
+您可以使用第一個事件1和第二個事件1，然後在狀態上聯結兩個集合。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -344,17 +344,17 @@ StormEvents
 | distinct State
 ```
 
-:::image type="content" source="images/tutorial/join-events-la.png" alt-text="加入事件閃電和大量":::
+:::image type="content" source="images/tutorial/join-events-la.png" alt-text="依州/省的風暴事件計數直條圖":::
 
 ## <a name="user-session-example-of-join"></a>Join 的使用者會話範例
 
-這一節不會使用 `StormEvents` 資料表。
+本節不使用 `StormEvents` 資料表。
 
-假設您的資料包含標示每個使用者會話開始和結束的事件，以及每個會話的唯一識別碼。 
+假設您的資料包含每個使用者會話的開頭和結束記號的事件，每個會話都有唯一的識別碼。 
 
-每個使用者會話持續多久？
+每個使用者會話會持續多久？
 
-藉由使用 `extend` 提供兩個時間戳記的別名，您就可以計算會話的持續時間。
+藉由使用 `extend` 提供這兩個時間戳記的別名，您就可以計算會話的持續時間。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -370,14 +370,14 @@ Events
 | take 10
 ```
 
-:::image type="content" source="images/tutorial/user-session-extend.png" alt-text="使用者會話延伸":::
+:::image type="content" source="images/tutorial/user-session-extend.png" alt-text="依州/省的風暴事件計數直條圖":::
 
 在執行聯結之前，使用 `project` 只選取我們需要的資料行是相當好的做法。
 在相同的子句中，我們會將時間戳記資料行重新命名。
 
 ## <a name="plot-a-distribution"></a>繪製分佈圖
 
-有多少個有不同長度的最大衝擊？
+有多少個風暴有不同的長度？
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -391,33 +391,33 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/event-count-duration.png" alt-text="依持續時間的事件計數 timechart":::
+:::image type="content" source="images/tutorial/event-count-duration.png" alt-text="依州/省的風暴事件計數直條圖":::
 
 或使用 `| render columnchart` ：
 
-:::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="依持續時間 timechart 的直條圖事件計數":::
+:::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="依州/省的風暴事件計數直條圖":::
 
 ## <a name="percentiles"></a>百分位數
 
-哪些持續時間範圍涵蓋了不同的風暴百分比？
+哪些持續時間範圍涵蓋不同的風暴百分比？
 
-使用上述查詢，但將取代 `render` 為：
+使用上述查詢，但 `render` 以下列內容取代：
 
 ```kusto
 | summarize percentiles(duration, 5, 20, 50, 80, 95)
 ```
 
-在此情況下，我們不提供 `by` 子句，因此結果為單一資料列：
+在此情況下，我們不提供任何 `by` 子句，因此結果為單一資料列：
 
-:::image type="content" source="images/tutorial/summarize-percentiles-duration.png" alt-text="資料表摘要百分位數（依持續時間）":::
+:::image type="content" source="images/tutorial/summarize-percentiles-duration.png" alt-text="依州/省的風暴事件計數直條圖":::
 
 我們可以從中看到︰
 
-* 5% 的大電流時間小於 5m;
+* 5% 的風暴持續時間小於 5m;
 * 50% 的風暴最後小於 1h 25m;
-* 5% 的風暴最後至少為下半年50m。
+* 5% 的風暴最後至少是下半年50m。
 
-若要取得每個狀態的個別明細，我們只需要透過兩個摘要運算子來分別顯示 state 資料行：
+若要針對每個狀態取得個別的明細，我們只需要透過兩個摘要運算子來分開顯示 state 資料行：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -431,11 +431,11 @@ StormEvents
 | summarize percentiles(duration, 5, 20, 50, 80, 95) by State
 ```
 
-:::image type="content" source="images/tutorial/summarize-percentiles-state.png" alt-text="資料表摘要百分位數的持續時間（依狀態）":::
+:::image type="content" source="images/tutorial/summarize-percentiles-state.png" alt-text="依州/省的風暴事件計數直條圖":::
 
 ## <a name="let-assign-a-result-to-a-variable"></a>Let︰將結果指派給變數
 
-使用 [ [let](./letstatement.md) ] 來分隔上述「聯結」範例中的查詢運算式部分。 結果不變：
+使用「 [讓](./letstatement.md) 」分隔上述「聯結」範例中的查詢運算式部分。 結果不變：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -455,7 +455,7 @@ LightningStorms
 
 ## <a name="combining-data-from-several-databases-in-a-query"></a>在查詢中結合數個資料庫的資料
 
-如需詳細討論，請參閱[跨資料庫查詢](./cross-cluster-or-database-queries.md)
+查看 [跨資料庫查詢](./cross-cluster-or-database-queries.md) 以取得詳細討論
 
 當您撰寫樣式的查詢時：
 
@@ -463,32 +463,32 @@ LightningStorms
 Logs | where ...
 ```
 
-名為 Logs 的資料表必須位於您的預設資料庫中。 如果您想要從另一個資料庫存取資料表，請使用下列語法：
+名為 Logs 的資料表必須在您的預設資料庫中。 如果您想要從另一個資料庫存取資料表，請使用下列語法：
 
 ```kusto
 database("db").Table
 ```
 
-因此，如果您有名為 [*診斷*和*遙測*] 的資料庫，而且想要讓部分資料相互關聯，則您可能會撰寫 (假設 [*診斷*] 是您的預設資料庫) 
+因此，如果您有名稱為 [ *診斷* ] 和 [ *遙測* ] 的資料庫，而您想要讓某些資料相互關聯，您可以撰寫 (假設 *診斷* 是您的預設資料庫) 
 
 ```kusto
 Logs | join database("Telemetry").Metrics on Request MachineId | ...
 ```
 
-或者，如果您的預設資料庫是*遙測*
+或者，如果您的預設資料庫是 *遙測*
 
 ```kusto
 union Requests, database("Diagnostics").Logs | ...
 ```
     
-上述所有資料庫都假設兩個資料庫都位於您目前連接的叢集中。 假設*遙測*資料庫屬於另一個名為*TelemetryCluster.kusto.windows.net*的叢集，然後再存取您需要的
+上述所有資料庫都假設兩個資料庫都位於您目前所連接的叢集中。 假設 *遙測* 資料庫屬於另一個名為 *TelemetryCluster.kusto.windows.net* 的叢集，然後存取您需要的
 
 ```kusto
 Logs | join cluster("TelemetryCluster").database("Telemetry").Metrics on Request MachineId | ...
 ```
 
 > [!NOTE]
-> 指定叢集時，資料庫為強制性
+> 指定叢集時，資料庫是強制的
 
 ::: zone-end
 
