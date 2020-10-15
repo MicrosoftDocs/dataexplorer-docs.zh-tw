@@ -29,6 +29,8 @@
       href: visualize-power-bi.md
 - name: 概念
   items:
+    - name: EngineV3
+      href: engine-v3.md
     - name: 資料擷取
       items:
         - name: 資料擷取概觀
@@ -316,26 +318,43 @@
           href: follower.md
     - name: 與其他工具整合
       items:
-        - name: Power Automate
+        - name: 協調
           items:
-            - name: Power Automate 連接器
-              href: flow.md
-              displayName: 'Microsoft Flow, flow, flow connector'
-            - name: Power Automate 連接器使用範例
-              href: flow-usage.md
-              displayName: 'Microsoft Flow, flow, flow connector'
-        - name: Logic Apps
-          href: kusto/tools/logicapps.md
-        - name: Apache Spark 連接器
-          href: spark-connector.md
+            - name: Power Automate
+              items:
+                - name: Power Automate 連接器
+                  href: flow.md
+                  displayName: 'Microsoft Flow, flow, flow connector'
+                - name: Power Automate 連接器使用範例
+                  href: flow-usage.md
+                  displayName: 'Microsoft Flow, flow, flow connector'
+            - name: Logic Apps
+              href: kusto/tools/logicapps.md
         - name: Cosmos DB
           href: 'https://github.com/Azure/azure-kusto-labs/tree/master/cosmosdb-adx-integration'
+        - name: Apache Spark 連接器
+          href: spark-connector.md
+        - name: 從 Azure Synapse Apache Spark 連線
+          href: 'https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
         - name: 從 Azure Databricks 連線
           href: connect-from-databricks.md
-        - name: 在 Jupyter Notebook 和 Kqlmagic 中分析資料
-          href: kqlmagic.md
-        - name: 分析 Azure Notebooks 中的資料
-          href: azure-notebooks.md
+        - name: Notebooks
+          items:
+            - name: 在 Jupyter Notebook 和 Kqlmagic 中分析資料
+              href: kqlmagic.md
+            - name: 分析 Azure Notebooks 中的資料
+              href: azure-notebooks.md
+            - name: Azure Data Studio
+              items:
+                - name: Kusto 延伸模組概觀
+                  displayName: Azure Data Studio
+                  href: 'https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
+                - name: 使用 Kusto 延伸模組
+                  displayName: Azure Data Studio
+                  href: 'https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
+                - name: 使用 Kqlmagic
+                  displayName: Azure Data Studio
+                  href: 'https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kqlmagic?context=/azure/data-explorer/context/context'
         - name: Azure Pipelines
           href: devops.md
         - name: 同步 Kusto
@@ -1745,7 +1764,7 @@
       href: 'https://azure.microsoft.com/blog/tag/azure-data-explorer/'
     - name: 論壇
       items:
-        - name: 堆疊溢位
+        - name: Stack Overflow
           href: 'https://stackoverflow.com/questions/tagged/azure-data-explorer'
         - name: Microsoft 技術社群
           href: 'https://techcommunity.microsoft.com/t5/Azure-Data-Explorer/bd-p/Kusto'
