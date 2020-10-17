@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
-ms.openlocfilehash: e6630067cb02f3bf4685e274d2d5d2a6d00a97c5
-ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
+ms.openlocfilehash: 04b1f53ad16d8658d3a12d36370261afac02fe86
+ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91615031"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92098416"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Azure 資料總管資料內嵌總覽 
 
@@ -123,10 +123,10 @@ Azure 資料總管會提供可用於查詢和資料擷取的 SDK。 程式設計
 | [**Node.js**](node-ingest-data.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注 | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**Java**](kusto/api/java/kusto-java-client-library.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**REST**](kusto/api/netfx/kusto-ingest-client-rest.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接| 根據組織需求撰寫您自己的程式碼 |
-| [**Go**](kusto/api/golang/kusto-golang-client-library.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
+| [**去**](kusto/api/golang/kusto-golang-client-library.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 
 > [!Note] 
-> 在上表中參考時，內嵌支援的檔案大小上限為 5 GB。 建議內嵌 100 MB 和 1 GB 之間的檔案。
+> 在上表中參考時，內嵌支援的檔案大小上限為 4 GB。 建議內嵌 100 MB 和 1 GB 之間的檔案。
 
 ## <a name="ingestion-process"></a>內嵌進程
 

@@ -118,6 +118,9 @@
               href: data-connection-event-grid-python.md
             - name: Azure Resource Manager 範本
               href: data-connection-event-grid-resource-manager.md
+            - name: 在 Azure 入口網站中手動建立資源
+              displayName: Manually create resources for Event Grid ingestion
+              href: ingest-data-event-grid-manual.md
         - name: IoT 中樞
           items:
             - name: 建立 IoT 中樞的連線

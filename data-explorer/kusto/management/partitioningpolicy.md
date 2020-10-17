@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: c3f7212b062adaae1bd56399753270653204ad22
-ms.sourcegitcommit: 53a727fceaa89e6022bc593a4aae70f1e0232f49
+ms.openlocfilehash: d1e1af6e7fef39295dde61034f63701a466abb51
+ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/10/2020
-ms.locfileid: "89652106"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92098382"
 ---
 # <a name="data-partitioning-policy"></a>資料分割原則
 
@@ -140,6 +140,8 @@ ms.locfileid: "89652106"
   * 原則生效的 UTC 日期時間。
   * 這是選用屬性。 如果未指定，則原則會在套用原則之後對資料內嵌生效。
   * 資料分割進程會忽略任何可能因為保留而卸載的非同質 (非資料分割) 範圍，因為它們的建立時間在資料表有效的虛刪除期間的90% 之前。
+  * **注意：** 您可以設定過去的日期時間值，並讓該結果具有已分割的內嵌資料。
+    不過，這麼做可能會大幅增加分割區程式的資源使用率，您也應該權衡這樣做的優點。
 
 ### <a name="example"></a>範例
 
@@ -187,7 +189,7 @@ ms.locfileid: "89652106"
   * 這是選用屬性。 其預設值為 `0` ，預設目標為5000000記錄。
     * 如果您看到資料分割作業耗用極大量的記憶體或 CPU （每項作業），則可以設定低於5M 的值。 如需詳細資訊，請參閱 [監視](#monitoring)。
 
-## <a name="notes"></a>注意
+## <a name="notes"></a>備註
 
 ### <a name="the-data-partitioning-process"></a>資料分割進程
 
