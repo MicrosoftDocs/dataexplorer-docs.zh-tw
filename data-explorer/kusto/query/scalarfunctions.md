@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 4e16e739048bc12a0a621e7fd98933b8e60073be
-ms.sourcegitcommit: d0f8d71261f8f01e7676abc77283f87fc450c7b1
+ms.openlocfilehash: 02271e3b282dd632a94631c09fca11b8b06db3cf
+ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91765440"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92169569"
 ---
 # <a name="scalar-function-types"></a>純量函式類型
 
@@ -89,6 +89,8 @@ ms.locfileid: "91765440"
 |[array_shift_left()](array_shift_leftfunction.md)|將動態陣列中的值右移至左方。|
 |[array_shift_right()](array_shift_rightfunction.md)|將動態陣列中的值右移至右邊。|
 |[array_slice()](arrayslicefunction.md)|解壓縮動態陣列的磁區。|
+|[array_sort_asc ( # B1 ](arraysortascfunction.md)|依遞增順序排序陣列的集合。|
+|[array_sort_desc ( # B1 ](arraysortdescfunction.md)|依遞減順序排序陣列的集合。|
 |[array_split()](arraysplitfunction.md)|建立從輸入陣列分割之陣列的陣列。|
 |[bag_keys()](bagkeysfunction.md)|列舉動態屬性包物件中的所有根金鑰。|
 |[bag_merge()](bag-merge-function.md)|將動態屬性包合併為動態屬性包，併合並所有屬性。|
@@ -225,7 +227,7 @@ ms.locfileid: "91765440"
 |[series_fit_2lines_dynamic()](series-fit-2lines-dynamicfunction.md)|在數列上套用兩個區段線性回歸，並傳回動態物件。|
 |[series_fit_line()](series-fit-linefunction.md)|對數列套用線性回歸，並傳回多個資料行。|
 |[series_fit_line_dynamic()](series-fit-line-dynamicfunction.md)|對數列套用線性回歸，並傳回動態物件。|
-|[series_fit_poly ( # B1 ](series-fit-poly-function.md)|在數列上套用多項式回歸，並傳回多個資料行。|
+|[series_fit_poly()](series-fit-poly-function.md)|在數列上套用多項式回歸，並傳回多個資料行。|
 |[series_ifft()](series-ifft-function.md)|在數列上 (IFFT) 套用反向的傅立葉轉換。|
 |[series_iir()](series-iirfunction.md)|在數列上套用無限脈衝回應篩選。|
 |[series_outliers()](series-outliersfunction.md)|針對數列中的異常點進行評分。|
@@ -244,7 +246,7 @@ ms.locfileid: "91765440"
 |[base64_decode_tostring()](base64_decode_tostringfunction.md)|將 base64 字串解碼為 UTF-8 字串。|
 |[base64_decode_toarray()](base64_decode_toarrayfunction.md)|將 base64 字串解碼為 long 值陣列。|
 |[countof()](countoffunction.md)|計算子字串在字串中的出現次數。 純字串相符專案可能會重迭;RegEx 比對不相符。|
-|[解壓縮 ( # B1 ](extractfunction.md)|從文字字串取得 規則運算式 的相符項目。|
+|[extract()](extractfunction.md)|從文字字串取得 規則運算式 的相符項目。|
 |[extract_all()](extractallfunction.md)|從文字字串取得正則運算式的所有符合專案。|
 |[extractjson()](extractjsonfunction.md)|使用路徑運算式從 JSON 文字取出指定的項目。|
 |[indexof()](indexoffunction.md)|函數會報告輸入字串內，第一次出現指定字串之以零為起始的索引。|

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8380e26b01f74585b2c3e99bb3eb4cd8c51df01c
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 4fb1ca893f80c045432715cd99e2dc4ea3d18c2a
+ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103066"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92169518"
 ---
 # <a name="mv-apply-operator"></a>mv-apply 運算子
 
@@ -57,7 +57,7 @@ T | mv-apply Metric to typeof(real) on
 
 `mv-apply`運算子可視為運算子的一般化 [`mv-expand`](./mvexpandoperator.md) (事實上，如果子查詢只包含投影，則後者可以由前者執行。 ) 
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 *T* `|` `mv-apply` [*ItemIndex*] *ColumnsToExpand* [*RowLimit*] `on` `(` *子查詢*`)`
 
@@ -161,35 +161,6 @@ _data
 |4|9|
 |3|8|
 |4|10|
-
-## <a name="using-the-mv-apply-operator-to-sort-the-output-of-make_list-aggregate-by-some-key"></a>使用 `mv-apply` 運算子來排序 `make_list` 依某些索引鍵匯總的輸出
-
-<!-- csl: https://help.kusto.windows.net/Samples -->
-```kusto
-datatable(command:string, command_time:datetime, user_id:string)
-[
-    'chmod',        datetime(2019-07-15),   "user1",
-    'ls',           datetime(2019-07-02),   "user1",
-    'dir',          datetime(2019-07-22),   "user1",
-    'mkdir',        datetime(2019-07-14),   "user1",
-    'rm',           datetime(2019-07-27),   "user1",
-    'pwd',          datetime(2019-07-25),   "user1",
-    'rm',           datetime(2019-07-23),   "user2",
-    'pwd',          datetime(2019-07-25),   "user2",
-]
-| summarize commands_details = make_list(pack('command', command, 'command_time', command_time)) by user_id
-| mv-apply command_details = commands_details on
-(
-    order by todatetime(command_details['command_time']) asc
-    | summarize make_list(tostring(command_details['command']))
-)
-| project-away commands_details
-```
-
-|`user_id`|`list_command_details_command`|
-|---|---|
-|user1|[<br>  "ls"、<br>  "mkdir"、<br>  "chmod"、<br>  "dir"、<br>  "pwd"、<br>  ws-rm<br>]|
-|user2|[<br>  「rm」、<br>  pwd<br>]|
 
 ## <a name="see-also"></a>另請參閱
 

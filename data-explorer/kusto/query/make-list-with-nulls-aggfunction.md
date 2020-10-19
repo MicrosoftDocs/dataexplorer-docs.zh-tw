@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/09/2020
-ms.openlocfilehash: 1d4dafdab4c727b89838f18e13b016d771262f08
-ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
+ms.openlocfilehash: c53faca94e273bf816abcfa34ed400708a7433a3
+ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89366005"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92169552"
 ---
 # <a name="make_list_with_nulls-aggregation-function"></a>make_list_with_nulls ( # A1 (彙總函式) 
 
@@ -21,7 +21,7 @@ ms.locfileid: "89366005"
 
 * 只能用在[摘要內匯總](summarizeoperator.md)的內容中
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 `summarize``make_list_with_nulls(` *Expr*`)`
 
@@ -36,4 +36,4 @@ ms.locfileid: "89366005"
 如果排序運算子的輸入 `summarize` ，則產生的陣列中的元素順序會追蹤輸入的專案順序。
 
 > [!TIP]
-> 使用 [`mv-apply`](./mv-applyoperator.md) 運算子依某些索引鍵建立已排序的清單。 請參閱[此處的](./mv-applyoperator.md#using-the-mv-apply-operator-to-sort-the-output-of-make_list-aggregate-by-some-key)範例。
+> 使用 [`array_sort_asc()`](./arraysortascfunction.md) 或 [`array_sort_desc()`](./arraysortdescfunction.md) 函數，依某些索引鍵建立已排序的清單。
