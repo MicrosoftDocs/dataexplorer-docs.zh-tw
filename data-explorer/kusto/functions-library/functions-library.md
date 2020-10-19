@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: 8cdccf261f755a0ea7a3d6a6299aa54ce021f366
-ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
+ms.openlocfilehash: ebde38055cb2d962b6007668117a55c779cc9c94
+ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91614966"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92175503"
 ---
 # <a name="functions-library"></a>函式程式庫
 
@@ -24,6 +24,7 @@ ms.locfileid: "91614966"
 
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
+|[kmeans_fl ( # B1 ](kmeans-fl.md)|使用 k 表示演算法將叢集化。 |
 |[predict_fl()](predict-fl.md)|使用現有的定型機器學習模型進行預測。 |
 |[predict_onnx_fl()](predict-onnx-fl.md)| 使用 ONNX 格式的現有定型機器學習模型來預測。 |
 
@@ -32,6 +33,7 @@ ms.locfileid: "91614966"
 |函數名稱     |描述                                          |
 |-------------------------|--------------------------------------------------------|
 |[quantize_fl()](quantize-fl.md)|量化計量資料行。 |
-|[series_fit_poly_fl()](series-fit-poly-fl.md)|使用迴歸分析將多項式符合數列。 |
+|[series_dot_product_fl ( # B1 ](series-dot-product-fl.md)|計算兩個數值向量的點乘積。 |
+|[series_fit_poly_fl()](series-fit-poly-fl.md)|使用迴歸分析將多項式納入數列。 |
 |[series_moving_avg_fl()](series-moving-avg-fl.md)|在數列上套用移動平均篩選。 |
 |[series_rolling_fl()](series-rolling-fl.md)|在數列上套用滾動彙總函式。 |

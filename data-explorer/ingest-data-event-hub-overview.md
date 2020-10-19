@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: b3a8c379ad010a9787fdb8b7d4e2961fb58ead9e
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: c20e18a31105dca584ebe35198462e8755cf8dc4
+ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502651"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92175716"
 ---
-# <a name="create-a-connection-to-event-hub"></a>建立與事件中樞的連線
+# <a name="create-a-connection-to-event-hub"></a>建立事件中樞的連線
 
 [Azure 事件中樞](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) 是大型的資料串流平臺和事件內嵌服務。 Azure 資料總管可從客戶管理的事件中樞提供連續的內嵌。
 
@@ -30,7 +30,7 @@ ms.locfileid: "89502651"
     > [!NOTE]
     > 事件中樞不支援 raw 格式。
 
-* 請參閱 [支援的壓縮](ingestion-supported-formats.md#supported-data-compression-formats)。
+* 您可以使用壓縮演算法來壓縮資料 `GZip` 。 `Compression`在內嵌[屬性](#set-ingestion-properties)中指定。
    * 壓縮格式不支援資料壓縮 (Avro、Parquet、ORC) 。
    * 壓縮資料不支援自訂編碼和內嵌的 [系統屬性](#set-event-system-properties-mapping) 。
   

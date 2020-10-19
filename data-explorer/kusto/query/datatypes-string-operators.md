@@ -7,13 +7,13 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 02/13/2020
-ms.openlocfilehash: 8ad104b7802bde2355b46bc31e74e63a6708d4f4
-ms.sourcegitcommit: d2edf654f71f8686d1f03d8ec16200f84e671b12
+ms.date: 10/19/2020
+ms.openlocfilehash: c2a841bc78c8f17ac3a929b2541b08d5db682da1
+ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/20/2020
-ms.locfileid: "88659258"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92175527"
 ---
 # <a name="string-operators"></a>字串運算子
 
@@ -69,8 +69,8 @@ Kusto 會建立一個詞彙索引，其中包含 *四個字元*以上的所有�
 `!startswith_cs`|RHS 不是 LHS 的起始子序列                          |是           |`"Fabrikam" !startswith_cs "fab"`
 `endswith`      |RHS 是 LHS 的右子序列                               |否            |`"Fabrikam" endswith "Kam"`
 `!endswith`     |RHS 不是 LHS 的右子序列                           |否            |`"Fabrikam" !endswith "brik"`
-`endswith_cs`   |RHS 是 LHS 的右子序列                               |是           |`"Fabrikam" endswith "Kam"`
-`!endswith_cs`  |RHS 不是 LHS 的右子序列                           |是           |`"Fabrikam" !endswith "brik"`
+`endswith_cs`   |RHS 是 LHS 的右子序列                               |是           |`"Fabrikam" endswith_cs "kam"`
+`!endswith_cs`  |RHS 不是 LHS 的右子序列                           |是           |`"Fabrikam" !endswith_cs "brik"`
 `matches regex` |LHS 包含 RHS 的相符項目                                      |是           |`"Fabrikam" matches regex "b.*k"`
 `in`            |等於其中一個元素                                     |是           |`"abc" in ("123", "345", "abc")`
 `!in`           |不等於任何元素                                 |是           |`"bca" !in ("123", "345", "abc")`
