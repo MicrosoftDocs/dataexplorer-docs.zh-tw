@@ -7,19 +7,16 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 09/24/2018
-ms.openlocfilehash: 323e8ba2d7f49a2d44ac4000d207316d75e9bd6e
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 764dea2e3fe82bf795db81a4e8d3f89e256d3517
+ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942075"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92098450"
 ---
 # <a name="what-is-azure-data-explorer"></a>什麼是 Azure 資料總管？
 
 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 可協助您處理新式軟體所發出的許多資料流，以便您收集、儲存及分析資料。 Azure 資料總管很適合用於分析來自任何資料來源 (例如網站、應用程式、IoT 裝置等等) 的大量多樣資料。 這份資料會用於診斷、監視、報告、機器學習及其他分析功能。 Azure 資料總管可輕鬆內嵌這份資料，並可讓您在幾秒鐘內對資料進行複雜的臨機操作查詢。
-
-深入了解 Azure 資料總管：新聞、公告和客戶案例。 
-[註冊線上活動 2020 年 10 月 14 日](https://aka.ms/adxevent)
 
 ## <a name="what-makes-azure-data-explorer-unique"></a>是什麼讓 Azure 資料總管與眾不同？
 
