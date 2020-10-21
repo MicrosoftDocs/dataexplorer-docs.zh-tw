@@ -1,23 +1,23 @@
 ---
-title: series_subtract （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 series_subtract （）。
+title: 'series_subtract ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 series_subtract。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 9276b3d920259b4a73d3fb45c056837439b43fba
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 09d208b25096afa58bd9f673d0103b30f7e8bb47
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351228"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241951"
 ---
 # <a name="series_subtract"></a>series_subtract()
 
-計算兩個數值數列輸入的元素的減法。
+計算兩個數值數列輸入的元素成對減法。
 
 ## <a name="syntax"></a>語法
 
@@ -25,11 +25,11 @@ ms.locfileid: "87351228"
 
 ## <a name="arguments"></a>引數
 
-* *series1，series2*：輸入數值陣列，第二個是元素從第一個到動態陣列結果的減法。 所有引數都必須是動態陣列。 
+* *series1，series2*：輸入數值陣列，第二個會從第一次減去為動態陣列結果中的元素。 所有引數都必須是動態陣列。 
 
 ## <a name="returns"></a>傳回
 
-在兩個輸入之間的計算專案的動態減法運算的動態陣列。 任何非數值元素或不存在的專案（不同大小的陣列）都會產生 `null` 元素值。
+這兩個輸入之間的匯出專案的雙向減法運算動態陣列。 任何非數值元素或非現有的元素 (不同大小的陣列，) 產生 `null` 元素值。
 
 ## <a name="example"></a>範例
 

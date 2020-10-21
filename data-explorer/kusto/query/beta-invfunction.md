@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 Beta_inv。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: deb91e6131d5662017ebdf714a79d0ee391c8ba1
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 4e302f997addbdc4f2f9da4bd906844dbd1d07a4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103297"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248005"
 ---
 # <a name="beta_inv"></a>beta_inv()
 

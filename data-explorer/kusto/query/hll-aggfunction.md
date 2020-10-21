@@ -1,25 +1,25 @@
 ---
-title: hll （）（彙總函式）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 hll （）（彙總函式）。
+title: 'hll ( # A1 (彙總函式) -Azure 資料總管'
+description: '本文說明 Azure 資料總管中的 hll ( # A1 (彙總函式) 。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/15/2020
-ms.openlocfilehash: e602a920dd07089f688f39115805a2f99d505c9c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 4474299c804e1b54d3060d639d171652e770d989
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347556"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241603"
 ---
-# <a name="hll-aggregation-function"></a>hll （）（彙總函式）
+# <a name="hll-aggregation-function"></a>hll ( # A1 (彙總函式) 
 
-會計算整個群組的中繼結果 [`dcount`](dcount-aggfunction.md) ，而只會在[摘要內匯總](summarizeoperator.md)的內容中。
+計算整個群組的中繼結果 [`dcount`](dcount-aggfunction.md) ，只在 [摘要內匯總](summarizeoperator.md)的內容中。
 
-閱讀[基礎演算法（*H*Yper*l*og*l*og）和估計精確度](dcount-aggfunction.md#estimation-accuracy)的相關資訊。
+閱讀 [基礎演算法 (*H*Yper*l*og*l*og) 和估計精確度](dcount-aggfunction.md#estimation-accuracy)。
 
 ## <a name="syntax"></a>語法
 
@@ -28,15 +28,15 @@ ms.locfileid: "87347556"
 ## <a name="arguments"></a>引數
 
 * *`Expr`*：將用於匯總計算的運算式。 
-* *`Accuracy`*（如果指定的話）會控制速度和精確度之間的平衡。
+* *`Accuracy`* 如果有指定，就會控制速度和精確度之間的平衡。
 
   |精確度值 |精確度  |速度  |錯誤  |
   |---------|---------|---------|---------|
-  |`0` | lowest | 廣泛 | 1.6% |
-  |`1` | 預設  | 對稱 | 0.8% |
+  |`0` | lowest | 快 | 1.6% |
+  |`1` | default  | 平衡 | 0.8% |
   |`2` | high | slow | 0.4%  |
   |`3` | high | slow | 0.28% |
-  |`4` | 極高 | 最 | 0.2% |
+  |`4` | 額外高度 | 慢 | 0.2% |
     
 ## <a name="returns"></a>傳回
 
@@ -44,9 +44,9 @@ ms.locfileid: "87347556"
  
 **提示**
 
-1. 您可以使用彙總函式 [`hll_merge`](hll-merge-aggfunction.md) 來合併一個以上 `hll` 的中繼結果（僅適用于 `hll` 輸出）。
+1. 您可以使用彙總函式 [`hll_merge`](hll-merge-aggfunction.md) 來合併多個 `hll` 中繼結果 (只適用于 `hll` 輸出) 。
 
-1. 您可以使用函數來 [`dcount_hll`](dcount-hllfunction.md) 計算 `dcount` from `hll`  /  `hll_merge` 彙總函式。
+1. 您可以使用函數 [`dcount_hll`](dcount-hllfunction.md) ，這將會 `dcount` 從 `hll`  /  `hll_merge` 彙總函式計算。
 
 ## <a name="examples"></a>範例
 

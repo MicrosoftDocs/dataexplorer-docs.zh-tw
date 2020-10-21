@@ -4,36 +4,36 @@ description: 本文說明 Azure 資料總管中的 Alias 語句。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 5e243984bd6a011b8de224d2c9cdd0108ab1b38f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 822c8eccf50dc30fd3f56f4402c10a9fafb34084
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349749"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248291"
 ---
 # <a name="alias-statement"></a>Alias 陳述式
 
 ::: zone pivot="azuredataexplorer"
 
-Alias 語句可讓您定義資料庫的別名，稍後可以在相同的查詢中使用。
+Alias 語句可讓您定義資料庫的別名，稍後可在相同的查詢中使用。
 
-當您使用數個叢集，但想要像是在較少的叢集上運作時，這會很有用。
-別名必須根據下列語法來定義，其中*clustername*和*databasename*是現有和有效的實體。
+當您使用數個叢集，但想要看起來像是使用較少的叢集時，這非常有用。
+您必須根據下列語法定義別名，其中 *clustername* 和 *databasename* 是現有的有效實體。
 
 ## <a name="syntax"></a>語法
 
-`alias`database [*' DatabaseAliasName '*] 叢集 `=` （"HTTPs：//*clustername*. kusto"）. database （"*databasename*"）
+`alias` 資料庫 [*' DatabaseAliasName '*] 叢集 `=` ( "HTTPs://*clustername*. kusto.windows.net:443" ) . 資料庫 ( "*databasename*" ) 
 
-`alias`資料庫*DatabaseAliasName*叢集 `=` （"HTTPs：//*clustername*. kusto"）. 資料庫（"*databasename*"）
+`alias` 資料庫 *DatabaseAliasName*叢集 `=` ( "HTTPs://*clustername*. kusto.windows.net:443" ) . 資料庫 ( "*databasename*" ) 
 
 * *' DatabaseAliasName '* 可以是現有的名稱或新名稱。
-* 對應的叢集 uri 和對應的資料庫名稱必須出現在雙引號（"）或單引號（'）內
+* 對應的叢集 uri 和對應的資料庫名稱必須出現在雙引號內 ( ") 或單引號 ( ' ) 
 
 ## <a name="examples"></a>範例
 

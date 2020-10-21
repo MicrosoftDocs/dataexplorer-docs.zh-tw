@@ -1,23 +1,23 @@
 ---
-title: datetime_add （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 datetime_add （）。
+title: 'datetime_add ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 datetime_add。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 766f0617b70e21194d731ae1cf8eabf1014265bb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: ab395dadf178b296929300fe4cfd42742fba5f27
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348542"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247730"
 ---
 # <a name="datetime_add"></a>datetime_add()
 
-從指定的 datepart 乘以指定的數量來計算新的[日期時間](./scalar-data-types/datetime.md)，並加入至指定的[日期時間](./scalar-data-types/datetime.md)。
+從指定的 datepart 乘以指定的數量來計算新的 [日期時間](./scalar-data-types/datetime.md) ，並將其加入至指定的 [日期時間](./scalar-data-types/datetime.md)。
 
 ## <a name="syntax"></a>語法
 
@@ -25,14 +25,14 @@ ms.locfileid: "87348542"
 
 ## <a name="arguments"></a>引數
 
-* `period`：[字串](./scalar-data-types/string.md)。 
-* `amount`：[整數](./scalar-data-types/int.md)。
-* `datetime`：[日期時間](./scalar-data-types/datetime.md)值。
+* `period`： [字串](./scalar-data-types/string.md)。 
+* `amount`： [整數](./scalar-data-types/int.md)。
+* `datetime`： [日期時間](./scalar-data-types/datetime.md) 值。
 
-*期間*的可能值： 
+可能的 *期間*值： 
 - 年
 - 季
-- 月
+- Month
 - 週
 - 天
 - Hour
@@ -40,11 +40,11 @@ ms.locfileid: "87348542"
 - Second
 - Millisecond
 - 微秒
-- 100奈秒
+- 納 秒
 
 ## <a name="returns"></a>傳回
 
-加入特定時間/日期間隔之後的日期。
+新增特定時間/日期間隔之後的日期。
 
 ## <a name="examples"></a>範例
 
@@ -60,7 +60,7 @@ second = datetime_add('second',1,make_datetime(2017,1,1))
 
 ```
 
-|year|quarter|月|week|day|hour|minute|second|
+|year|quarter|月|week|day|hour|分|秒|
 |---|---|---|---|---|---|---|---|
 |2018-01-01 00：00：00.0000000|2017-04-01 00：00：00.0000000|2017-02-01 00：00：00.0000000|2017-01-08 00：00：00.0000000|2017-01-02 00：00：00.0000000|2017-01-01 01：00：00.0000000|2017-01-01 00：01：00.0000000|2017-01-01 00：00：01.0000000|
 

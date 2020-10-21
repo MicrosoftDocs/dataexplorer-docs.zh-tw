@@ -1,37 +1,37 @@
 ---
-title: column_ifexists （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 column_ifexists （）。
+title: 'column_ifexists ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 column_ifexists。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5eeecf9e4756ac18cdeb5c6297aea1bcca5bac14
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 570a832673d94d57d69dfa9c8442d56802ecd7ac
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348848"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247875"
 ---
 # <a name="column_ifexists"></a>column_ifexists()
 
-接受資料行名稱做為字串和預設值。 傳回資料行的參考（如果有的話），否則傳回預設值。
+使用資料行名稱做為字串和預設值。 傳回資料行的參考（如果有的話），否則傳回預設值。
 
 ## <a name="syntax"></a>語法
 
-`column_ifexists(`*columnName* `, `*defaultValue*）
+`column_ifexists(`*columnName* `, `*defaultValue*) 
 
 ## <a name="arguments"></a>引數
 
 * *columnName*：資料行的名稱
-* *defaultValue*：當資料行不存在於用於函數的內容中時，所要使用的值。
-                  這個值可以是任何純量運算式（例如另一個資料行的參考）。
+* *defaultValue*：當資料行不存在於用來使用函數的內容中時，所要使用的值。
+                  這個值可以是任何純量運算式 (例如) 的另一個資料行的參考。
 
 ## <a name="returns"></a>傳回
 
-如果*columnName*存在，則為它所參考的資料行。 否則為- *defaultValue*。
+如果 *columnName* 存在，則為它所參考的資料行。 否則為- *defaultValue*。
 
 ## <a name="examples"></a>範例
 

@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 unixtime_seconds_todatet
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/25/2019
-ms.openlocfilehash: d24619325ff550f79a522f2942588c8bed1cb680
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: c0b771ca788c9cd988d3041f5ca008096eedb3af
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103430"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248377"
 ---
 # <a name="unixtime_seconds_todatetime"></a>unixtime_seconds_todatetime()
 

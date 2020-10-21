@@ -1,23 +1,23 @@
 ---
-title: datetime_diff （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 datetime_diff （）。
+title: 'datetime_diff ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 datetime_diff。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2e116661610e343c90276a43421d263bf74cd1b5
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 50ed62b60436fc13d679b5e729a84bcdcefa7275
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348525"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247715"
 ---
 # <a name="datetime_diff"></a>datetime_diff()
 
-計算兩個[日期時間](./scalar-data-types/datetime.md)值之間的 calendarian 差異。
+計算兩個 [日期時間](./scalar-data-types/datetime.md) 值之間的 calendarian 差異。
 
 ## <a name="syntax"></a>語法
 
@@ -26,13 +26,13 @@ ms.locfileid: "87348525"
 ## <a name="arguments"></a>引數
 
 * `period`: `string`. 
-* `datetime_1`：[日期時間](./scalar-data-types/datetime.md)值。
-* `datetime_2`：[日期時間](./scalar-data-types/datetime.md)值。
+* `datetime_1`： [日期時間](./scalar-data-types/datetime.md) 值。
+* `datetime_2`： [日期時間](./scalar-data-types/datetime.md) 值。
 
-*期間*的可能值： 
+可能的 *期間*值： 
 - 年
 - 季
-- 月
+- Month
 - 週
 - 天
 - Hour
@@ -40,11 +40,11 @@ ms.locfileid: "87348525"
 - Second
 - Millisecond
 - 微秒
-- 100奈秒
+- 納 秒
 
 ## <a name="returns"></a>傳回
 
-整數，代表 `periods` 減法（）結果中的數量 `datetime_1`  -  `datetime_2` 。
+整數，代表 `periods` 減法 () 的結果數量 `datetime_1`  -  `datetime_2` 。
 
 ## <a name="examples"></a>範例
 
@@ -63,7 +63,7 @@ microsecond = datetime_diff('microsecond',datetime(2017-10-30 23:00:00.1009001),
 nanosecond = datetime_diff('nanosecond',datetime(2017-10-30 23:00:00.0000000),datetime(2017-10-30 23:00:00.0000007))
 ```
 
-|year|quarter|月|week|day|hour|minute|second|毫秒|微秒|奈秒|
+|year|quarter|月|week|day|hour|分|秒|毫秒|微秒|奈秒|
 |---|---|---|---|---|---|---|---|---|---|---|
 |17|2|13|5|29|2|5|10|100|100|-700|
 

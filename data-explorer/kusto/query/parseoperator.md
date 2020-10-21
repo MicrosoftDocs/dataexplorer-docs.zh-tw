@@ -1,24 +1,24 @@
 ---
-title: parse 運算子-Azure 資料總管
+title: 剖析運算子-Azure 資料總管
 description: 本文說明 Azure 資料總管中的 parse 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f9dc6e49e9e3d04aadb5aecf8507b7132d8a366a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a942015908c9608a76d3c49c411de9d17d6e70f5
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346315"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248621"
 ---
 # <a name="parse-operator"></a>parse 運算子
 
-評估字串運算式，並將其值剖析至一或多個計算的資料行。 計算結果欄會有 null，用於未成功剖析的字串。
-如需詳細資訊，請參閱[parse-where 運算子](parsewhereoperator.md)。
+評估字串運算式，並將其值剖析至一或多個計算的資料行。 針對未成功剖析的字串，計算結果欄會有 null。
+如需詳細資訊，請參閱 [parse： where 運算子](parsewhereoperator.md)。
 
 ```kusto
 T | parse Text with "ActivityName=" name ", ActivityType=" type
@@ -26,67 +26,67 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
 
 ## <a name="syntax"></a>語法
 
-*T* `| parse` [ `kind=regex` [ `flags=regex_flags` ] | `simple` | `relaxed` ] *Expression* `with` `*` （*StringConstant* *ColumnName* [ `:` *ColumnType*]） `*` .。。
+*T* `| parse` [ `kind=regex` [ `flags=regex_flags` ] | `simple` | `relaxed` ]*運算式* `with` `*` (*StringConstant* *ColumnName* [ `:` *ColumnType*] ) `*` .。。
 
 ## <a name="arguments"></a>引數
 
 * *T*：輸入資料表。
 * 種類：
 
-    * simple （預設值）： StringConstant 是一般字串值，比對是嚴格的。 所有字串分隔符號都應該出現在剖析的字串中，而且所有擴充的資料行都必須符合所需的類型。
+    * 簡單 (預設) ： StringConstant 是一般字串值，而相符項是 strict。 所有字串分隔符號應該會出現在剖析的字串中，而且所有的擴充資料行都必須符合所需的類型。
         
-    * RegEx： StringConstant 可以是正則運算式，而相符項則是嚴格的。 所有字串分隔符號（可以是此模式的 RegEx）應會出現在剖析的字串中，而且所有擴充的資料行都必須符合所需的類型。
+    * RegEx： StringConstant 可以是正則運算式，且相符項是 strict。 所有字串分隔符號（可以是此模式的 RegEx）應該會出現在剖析的字串中，而且所有的擴充資料行都必須符合所需的類型。
     
-    * flags：在 RE2 旗標中，用於 RegEx 模式的旗標，例如 `U` （Ungreedy）、 `m` （多行模式）、（ `s` 符合新行 `\n` ）、 `i` （ [RE2 flags](re2.md)不區分大小寫）。
+    * 旗標：在 RegEx 模式中使用的旗標 `U` ，例如 (Ungreedy) 、 `m` (多行模式) 、 `s` (符合新 `\n` 的行) 、 `i` ([RE2 旗標](re2.md)中不區分大小寫的) 。
         
-    * 寬鬆： StringConstant 是一般字串值，比對是寬鬆的。 所有字串分隔符號都應該出現在剖析的字串中，但是擴充的資料行可能部分符合必要的類型。 不符合所需類型的擴充資料行將會取得 null 值。
+    * 寬鬆： StringConstant 是一般字串值，而且比對會放寬。 所有字串分隔符號應該會出現在剖析的字串中，但是擴充的資料行可能部分符合所需的類型。 不符合所需類型的擴充資料行將會取得值 null。
 
-* *Expression*：評估為字串的運算式。
+* *運算式*：評估為字串的運算式。
 
-* *ColumnName：* 要指派值的資料行名稱，從字串運算式中解壓縮。 
+* *ColumnName：* 要指派值的資料行名稱（從字串運算式解壓縮）。 
   
-* *ColumnType：* 選擇性. 純量值，表示要轉換值的類型。 預設值為 `string` 類型。
+* *ColumnType：* 選。 純量值，指出要將值轉換成的類型。 預設值為 `string` 類型。
 
 ## <a name="returns"></a>傳回
 
-輸入資料表，會根據提供給運算子的資料行清單進行擴充。
+輸入資料表，根據提供給運算子的資料行清單進行擴充。
 
 **提示**
 
-* [`project`](projectoperator.md)如果您也想要捨棄或重新命名某些資料行，請使用。
+* [`project`](projectoperator.md)如果您也想要卸載或重新命名某些資料行，請使用。
 
-* 在模式中使用 * 來略過垃圾值。 
+* 在模式中使用 * 來略過垃圾的值。 
 
     > [!NOTE] 
-    > `*`不能用在類型資料 `string` 行之後。
+    > `*`無法在類型資料行之後 `string` 使用。
 
-* 剖析模式的開頭可能是*ColumnName* ，而不只是*StringConstant*。
+* 剖析模式的開頭可能是 *ColumnName* ，而不只是 *StringConstant*。
 
-* 如果剖析的*運算式*不屬於類型 `string` ，則會將它轉換成類型 `string` 。
+* 如果剖析的 *運算式* 不是型別 `string` ，則會轉換成類型 `string` 。
 
-* 如果使用 RegEx 模式，有一個選項可加入 RegEx 旗標，以控制用於剖析的整個 RegEx。
+* 如果使用 RegEx 模式，則有一個選項可加入 RegEx 旗標，以控制剖析中使用的整個 RegEx。
 
-* 在 RegEx 模式中，parse 會將模式轉譯成 RegEx。 請使用[RE2 語法](re2.md)來執行比對，並使用在內部處理的編號已捕獲群組。
+* 在 RegEx 模式中，parse 會將模式轉譯成 RegEx。 使用 [RE2 語法](re2.md) 來執行比對，並使用在內部處理的編號已捕獲群組。
     例如：
 
     ```kusto
     parse kind=regex Col with * <regex1> var1:string <regex2> var2:long
     ```
 
-    在 parse 語句中，剖析會內部產生的 RegEx 是 `.*?<regex1>(.*?)<regex2>(\-\d+)` 。
+    在 parse 語句中，剖析將在內部產生的 RegEx 為 `.*?<regex1>(.*?)<regex2>(\-\d+)` 。
         
-    * `*`已轉譯為 `.*?` 。
+    * `*` 已轉譯為 `.*?` 。
         
-    * `string`已轉譯為 `.*?` 。
+    * `string` 已轉譯為 `.*?` 。
         
-    * `long`已轉譯為 `\-\d+` 。
+    * `long` 已轉譯為 `\-\d+` 。
 
 ## <a name="examples"></a>範例
 
-`parse`運算子會 `extend` 在同一個運算式上使用多個應用程式，為數據表提供簡化的方式 `extract` `string` 。 當資料表有一個 `string` 資料行包含您想要細分為個別資料行的數個值時，這個結果就很有用。 例如，開發人員追蹤（" `printf` "/""）語句所產生的資料行 `Console.WriteLine` 。
+`parse`運算子會 `extend` 使用相同運算式上的多個應用程式，為數據表提供簡化的方式 `extract` `string` 。 當資料表的 `string` 資料行包含數個您想要分成個別資料行的值時，這個結果就很有用。 例如，開發人員追蹤所產生的資料行 ( " `printf` "/" `Console.WriteLine` " ) 語句。
 
 在下列範例中，假設資料表的資料行 `EventText` `Traces` 包含表單的字串 `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})` 。
-作業會擴充包含六個數據行的資料表： `resourceName` 、 `totalSlices` 、 `sliceNumber` 、 `lockTime ` 、、、 `releaseTime` `previousLockTime` `Month` 和 `Day` 。 
+此作業會擴充具有六個數據行的資料表： `resourceName` 、 `totalSlices` 、 `sliceNumber` 、 `lockTime ` 、、 `releaseTime` `previousLockTime` 、 `Month` 和 `Day` 。 
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -138,7 +138,7 @@ Traces
 
 **使用 RegEx 旗標的 RegEx 模式**
 
-如果您只想要取得此「使用量」，請使用下列查詢：
+如果您只想要取得僅限，請使用下列查詢：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -157,16 +157,16 @@ Traces
 
 |resourceName|
 |---|
-|PipelineScheduler，totalSlices = 27，sliceNumber = 23，lockTime = 02/17/2016 08:40:01，releaseTime = 02/17/2016 08:40:01|
-|PipelineScheduler，totalSlices = 27，sliceNumber = 15，lockTime = 02/17/2016 08:40:00，releaseTime = 02/17/2016 08:40:00|
-|PipelineScheduler，totalSlices = 27，sliceNumber = 20，lockTime = 02/17/2016 08:40:01，releaseTime = 02/17/2016 08:40:01|
-|PipelineScheduler，totalSlices = 27，sliceNumber = 22，lockTime = 02/17/2016 08:41:01，releaseTime = 02/17/2016 08:41:00|
-|PipelineScheduler，totalSlices = 27，sliceNumber = 16，lockTime = 02/17/2016 08:41:00，releaseTime = 02/17/2016 08:41:00|
+|PipelineScheduler、totalSlices = 27、sliceNumber = 23、lockTime = 02/17/2016 08:40:01、releaseTime = 02/17/2016 08:40:01|
+|PipelineScheduler、totalSlices = 27、sliceNumber = 15、lockTime = 02/17/2016 08:40:00、releaseTime = 02/17/2016 08:40:00|
+|PipelineScheduler、totalSlices = 27、sliceNumber = 20、lockTime = 02/17/2016 08:40:01、releaseTime = 02/17/2016 08:40:01|
+|PipelineScheduler、totalSlices = 27、sliceNumber = 22、lockTime = 02/17/2016 08:41:01、releaseTime = 02/17/2016 08:41:00|
+|PipelineScheduler、totalSlices = 27、sliceNumber = 16、lockTime = 02/17/2016 08:41:00、releaseTime = 02/17/2016 08:41:00|
 
-您不會得到預期的結果，因為預設模式是 [貪婪]。
-如果您有一些記錄，其中的*使用方式有時候會*顯示為小寫，有時候是大寫，則某些值可能會是 null。
+您將不會得到預期的結果，因為預設模式為貪婪。
+如果您有幾筆記錄有時候會顯示為較 *低的案例*  ，有時也會顯示為大寫，則您可能會取得某些值的 null。
 
-若要取得想要的結果，請使用非貪婪的來執行查詢， `U` 並停用區分大小寫的 `i` RegEx 旗標。
+若要取得所需的結果，請使用非貪婪的查詢執行查詢， `U` 並停用區分大小寫的 `i` RegEx 旗標。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -191,7 +191,7 @@ Traces
 |PipelineScheduler|
 |PipelineScheduler|
 
-如果剖析的字串具有分行符號，請使用旗標 `s` 來剖析文字。
+如果剖析的字串有分行符號，請使用旗標 `s` 來剖析文字。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -218,14 +218,14 @@ Traces
 
 **寬鬆模式**
 
-在此寬鬆模式的範例中， *totalSlices*擴充資料行的類型必須是 `long` 。 不過，在剖析的字串中，其值為*nonValidLongValue*。
-在*releaseTime*擴充資料行中， *nonValidDateTime*值無法剖析為*datetime*。
-這兩個擴充的資料行會取得 null 值，而另一個則是*sliceNumber*，但仍會取得正確的值。
+在這個寬鬆模式的範例中， *totalSlices* 擴充資料行的類型必須是 `long` 。 不過，在剖析的字串中，它的值為 *nonValidLongValue*。
+在 *releaseTime* 擴充資料行中，無法將值 *nonValidDateTime* 剖析為 *datetime*。
+這兩個擴充的資料行會取得 null 值，而其他資料行（例如 *sliceNumber*）仍會取得正確的值。
 
-如果您在下面的相同查詢中使用選項*種類 = simple* ，所有擴充資料行都會得到 null。 此選項在擴充資料行上是嚴格的，而且是寬鬆模式與簡單模式之間的差異。
+如果您針對下列相同的查詢使用選項 *種類 = simple* ，則所有的擴充資料行都會得到 null。 這個選項在擴充的資料行上是嚴格的，而且是寬鬆和簡單模式之間的差異。
 
  > [!NOTE] 
- > 在寬鬆模式中，擴充的資料行可以部分相符。
+ > 在寬鬆模式下，擴充的資料行可以部分相符。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 unixtime_nanoseconds_tod
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/25/2019
-ms.openlocfilehash: 869a89510e96c1c3fbc99feb9a01bd70d2728149
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: ca933f8d7ae61cbb0f49cf1e2226ffe51ba7bff7
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103450"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241153"
 ---
 # <a name="unixtime_nanoseconds_todatetime"></a>unixtime_nanoseconds_todatetime()
 

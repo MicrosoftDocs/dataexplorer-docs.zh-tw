@@ -1,19 +1,19 @@
 ---
-title: parse_url （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 parse_url （）。
+title: 'parse_url ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 parse_url。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 94a35dbf742b6df31012e68b5f2b2f09bec9b7e5
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0ce68151270369bd7dc0898b98029bacddf0c243
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346281"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248624"
 ---
 # <a name="parse_url"></a>parse_url()
 
@@ -22,7 +22,7 @@ ms.locfileid: "87346281"
 
 ## <a name="syntax"></a>語法
 
-`parse_url(`*連結*`)`
+`parse_url(`*Url*`)`
 
 ## <a name="arguments"></a>引數
 

@@ -4,16 +4,16 @@ description: '本文說明 Azure 資料總管中的 log10 ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 62813f5680e89c2bca0a6ec547fd7055ddc0e414
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 978e40f3a2727b08dd404068ad364c7416361f66
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103194"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241402"
 ---
 # <a name="log10"></a>log10()
 

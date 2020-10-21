@@ -4,27 +4,27 @@ description: 本文說明 Azure 資料總管中的 diffpatterns 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0be0dc12f48723bc83376a36db04f764991f7f0d
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: f269bb12c4e4f73f7a7e6c4e9818d47dfc8002ef
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803092"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249480"
 ---
-# <a name="diff-patterns-plugin"></a>diff 模式外掛程式
+# <a name="diff-patterns-plugin"></a>差異模式外掛程式
 
-比較相同結構的兩個資料集，並尋找離散屬性的模式 (維度) 這兩個資料集之間的差異。
- `Diffpatterns`開發目的是為了協助分析失敗 (例如，藉由比較給定時間範圍內的失敗與非失敗) ，但可能會發現相同結構的任何兩個資料集之間的差異。 
+比較相同結構的兩個資料集，並找出離散屬性 (維度) 的模式，以描述兩個資料集之間的差異。
+ `Diffpatterns` 開發目的是為了協助分析失敗 (例如，藉由比較特定時間範圍內的失敗與非失敗的) ，但可能會找出相同結構的兩個資料集之間的差異。 
 
 ```kusto
 T | evaluate diffpatterns(splitColumn)
 ```
 > [!NOTE]
-> `diffpatterns`目標是尋找 (的重要模式，以捕捉) 集合之間的部分資料差異，而不是用於逐列的差異。
+> `diffpatterns` 目標是找出顯著的模式 (，以捕捉集合) 之間的部分資料差異，而不是針對逐資料列的差異。
 
 ## <a name="syntax"></a>語法
 
@@ -54,57 +54,57 @@ T | evaluate diffpatterns(splitColumn)
 
 * WeightColumn - *column_name*
 
-    根據指定的權數 (依預設每個資料都列具有權數 '1') 考慮輸入中的每個資料列。 引數必須是數值資料行的名稱 (例如、、 `int` `long` `real`) 。
+    根據指定的權數 (依預設每個資料都列具有權數 '1') 考慮輸入中的每個資料列。 引數必須是數值資料行的名稱 (例如，、 `int` `long` 、 `real`) 。
     權數資料行的常見用法是考慮已內嵌至各資料列的資料取樣或分組/彙總。
     
     範例： `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", sample_Count) `
 
-* 閾值-0.015 < *double* < 1 [預設值： 0.05]
+* 閾值-0.015 < *雙精度* < 1 [預設值： 0.05]
 
     設定兩個集合之間的最小模式 (比率) 差異。
 
     範例：`T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", 0.04)`
 
-* MaxDimensions-0 < *int* [預設值：無限制]
+* MaxDimensions-0 < *int* [default：無限制]
 
     設定每個結果模式的不相關維度數目上限。 藉由指定限制，您可以減少查詢執行時間。
 
     範例：`T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", 3)`
 
-* CustomWildcard-「*每一類型的任何值*」
+* CustomWildcard-「*每個類型的任何值*」
 
     在結果資料表中設定特定類型的萬用字元值，會指出目前的模式沒有這個資料行的限制。
-    預設值是 null，而字串預設值為空字串。 如果預設值是資料中的可行值，則應該使用不同的萬用字元值 (例如， `*`) 。
+    預設值是 null，而字串預設值為空字串。 如果預設值在資料中是可行的值，則應該使用不同的萬用字元值 (例如 `*`) 。
     請參閱下列範例。
 
     範例： `T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
 
 ## <a name="returns"></a>傳回
 
-`Diffpatterns`傳回一小組模式，用來在兩個集合中捕捉資料的不同部分 (也就是，這是一種模式，它會在第一個資料集中捕捉大量百分比的資料列，並在第二個集合) 中取得較低百分比的資料列。 每個模式會以結果中的一個資料列表示。
+`Diffpatterns` 傳回一組較小的模式，以在兩個集合中捕捉資料的不同部分 (也就是，在第一個資料集中捕獲大量百分比的資料列，以及第二個集合) 中資料列的低百分比。 每個模式會以結果中的一個資料列表示。
 
 的結果會傳回 `diffpatterns` 下列資料行：
 
-* SegmentId：指派給目前查詢中模式的身分識別 (注意：在) 的重複查詢中，不保證識別碼相同。
+* SegmentId：指派給目前查詢中模式的身分識別 (注意：重複查詢) 不保證識別碼相同。
 
-* CountA： Set A (Set A 中由模式所捕獲的資料列數目，相當於 `where tostring(splitColumn) == SplitValueA`) 。
+* CountA： Set A (Set A 中的模式所捕捉的資料列數目，相當於 `where tostring(splitColumn) == SplitValueA`) 。
 
-* CountB： Set B (Set B 中的模式所捕獲的資料列數目，等同于 `where tostring(splitColumn) == SplitValueB`) 。
+* CountB： Set B (Set B 中的模式所捕捉的資料列數目相當於 `where tostring(splitColumn) == SplitValueB`) 。
 
-* PercentA： Set A 中的資料列百分比，由模式所捕捉 (100.0 * CountA/count (SetA) # A3。
+* PercentA： Set A 中由模式所捕捉的資料列百分比 (100.0 * CountA/count (SetA) # A3。
 
-* PercentB：由模式所捕獲的集合 B 中的資料列百分比 (100.0 * CountB/count (SetB) # A3。
+* PercentB： 100.0 * CountB/count (SetB) # A3 (模式所捕獲之 Set B 中的資料列百分比。
 
-* PercentDiffAB： A 和 B (之間的絕對百分比點差異 |PercentA-PercentB |) 是描述兩個集合之間差異的模式主要量值。
+* PercentDiffAB： A 和 B (之間的絕對百分比點差異 |PercentA-PercentB |) 是描述兩個集合之間差異之模式重要性的主要量值。
 
-* 其餘的資料行：是輸入的原始架構，而且會描述模式，每個資料列 (模式) reresents 資料行的非萬用字元值交集 (`where col1==val1 and col2==val2 and ... colN=valN` 對等) 中的每個非萬用字元值。
+* 其餘的資料行：是輸入的原始架構並描述模式，每個資料列 (模式) reresents 資料) 行之非萬用字元值的交集 (對等的資料列 `where col1==val1 and col2==val2 and ... colN=valN` 中的每個非萬用字元值的交集。
 
-針對每個模式，模式中未設定的資料行 (也就是，沒有特定值的限制) 會包含萬用字元值，預設為 null。 請參閱下面的引數一節：如何以手動方式變更萬用字元。
+針對每個模式，不會在模式中設定的資料行 (也就是不限制特定值的) 將包含萬用字元值，預設值為 null。 請參閱下面的引數區段，以手動方式變更萬用字元。
 
-* 注意：模式通常不是相異的。 它們可能會重迭，而且通常不會涵蓋所有原始資料列。 某些資料列可能不會落在任何模式之下。
+* 注意：通常不會有不同的模式。 它們可能會重迭，而且通常不會涵蓋所有原始資料列。 某些資料列可能不會落在任何模式之下。
 
 > [!TIP]
-> * 在輸入管道中使用 where 和[project](./projectoperator.md) ，將資料減少到您感興趣的[位置](./whereoperator.md)。
+> * 在輸入管道中使用 [where](./whereoperator.md) 和 [project](./projectoperator.md) ，將資料縮減為您感興趣的內容。
 > * 當您找到有趣的資料列時，您可藉由將其特定值加入至您的 `where` 篩選器，進一步深入探索。
 
 ## <a name="example"></a>範例
@@ -118,7 +118,7 @@ StormEvents
 | evaluate diffpatterns(Damage, "0", "1" )
 ```
 
-|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|州|EventType|來源|DamageCrops|
+|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|狀態|EventType|來源|DamageCrops|
 |---|---|---|---|---|---|---|---|---|---|
 |0|2278|93|49.8|7.1|42.7||Hail||0|
 |1|779|512|17.03|39.08|22.05||Thunderstorm Wind|||
