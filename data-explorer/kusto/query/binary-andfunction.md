@@ -1,23 +1,23 @@
 ---
-title: binary_and （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 binary_and （）。
+title: 'binary_and ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 binary_and。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 611580aebbfd974377f5a22ec904bbbcdbeb6e3f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 93318785cff98c7ca024b638e5e90f58cd9cd9d6
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349086"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249361"
 ---
 # <a name="binary_and"></a>binary_and()
 
-傳回 `and` 兩個值之間位運算的結果。
+傳回 `and` 兩個值之間的位運算結果。
 
 ```kusto
 binary_and(x,y) 

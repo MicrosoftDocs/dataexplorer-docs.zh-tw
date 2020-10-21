@@ -1,19 +1,19 @@
 ---
-title: hash_sha256 （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 hash_sha256 （）。
+title: 'hash_sha256 ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 hash_sha256。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b813ce4c0901ef66177e8e7bdaa42a1744bd5912
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 3d6cd8b71ac5abed2d56e567c992a15512141063
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351109"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242590"
 ---
 # <a name="hash_sha256"></a>hash_sha256()
 
@@ -21,7 +21,7 @@ ms.locfileid: "87351109"
 
 ## <a name="syntax"></a>語法
 
-`hash_sha256(`*來源*`)`
+`hash_sha256(`*源*`)`
 
 ## <a name="arguments"></a>引數
 
@@ -29,10 +29,10 @@ ms.locfileid: "87351109"
 
 ## <a name="returns"></a>傳回
 
-指定純量的 sha256 雜湊值，編碼為十六進位字串（字元字串，每兩個都代表0到255之間的一個十六進位數位）。
+給定純量的 sha256 雜湊值（以十六進位字串編碼為十六進位字串） (字元字串，每兩個字元都代表0和 255) 之間的單一十六進位數位。
 
 > [!WARNING]
-> 此函式（SHA256）所使用的演算法保證不會在未來進行修改，但對計算而言非常複雜。 在單一查詢期間，需要「輕量」雜湊函式的使用者，建議改用函數[雜湊（）](./hashfunction.md) 。
+> 此函式所使用的演算法 (SHA256) 保證不會在未來進行修改，但很複雜，無法進行計算。 建議在單一查詢期間需要「輕量」雜湊函數的使用者，改為使用函式 [雜湊 ( # B1 ](./hashfunction.md) 。
 
 ## <a name="examples"></a>範例
 
@@ -56,10 +56,10 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-|State|StateHash|StormCount|
+|狀態|StateHash|StormCount|
 |---|---|---|
 |德克薩斯州|9087f20f23f91b5a77e8406846117049029e6798ebbd0d38aea68da73a00ca37|4701|
-|KANSAS|c80e328393541a3181b258cdb4da4d00587c5045e8cf3bb6c8fdb7016b69cc2e|3166|
+|堪薩斯|c80e328393541a3181b258cdb4da4d00587c5045e8cf3bb6c8fdb7016b69cc2e|3166|
 |愛荷華州|f85893dca466f779410f65cd904fdc4622de49e119ad4e7c7e4a291ceed1820b|2337|
 |伊利諾州|ae3eeabfd7eba3d9a4ccbfed6a9b8cff269dc43255906476282e0184cf81b7fd|2022|
-|MISSOURI|d15dfc28abc3ee73b7d1f664a35980167ca96f6f90e034db2a6525c0b8ba61b1|2016|
+|密蘇里州|d15dfc28abc3ee73b7d1f664a35980167ca96f6f90e034db2a6525c0b8ba61b1|2016|

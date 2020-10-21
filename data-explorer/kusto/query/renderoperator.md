@@ -4,18 +4,18 @@ description: 本文說明 Azure 資料總管中的轉譯運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/29/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 5485088ba8dd4e348733c9d8e14e2dc54dd2c858
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: 069733d2215257106ede58f4fd6e4f2a923a8982
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452828"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243116"
 ---
 # <a name="render-operator"></a>render 運算子
 
@@ -30,7 +30,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 > * 轉譯運算子不會修改資料。 它會在結果的擴充屬性中插入批註 ( 「視覺效果」 ) 。 批註包含運算子在查詢中提供的資訊。
 > * 視覺效果資訊的解讀是由使用者代理程式所完成。 不同的代理程式 (例如 Kusto，Kusto. WebExplorer) 可能支援不同的視覺效果。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 *T* `|` `render` *視覺效果* [ `with` `(` *PropertyName* `=` *PropertyValue* [ `,` ...] `)` ]
 

@@ -1,62 +1,62 @@
 ---
 title: in 和 notin 運算子-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 in 和 notin 運算子。
+description: 本文說明 Azure 資料總管中的和 notin 操作員。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: a6551ee2d4ac01d6d896cc8daff466f3c4a7852e
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 52e26bb5564079de56817e75a203a400ef7f1a50
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803959"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248981"
 ---
 # <a name="in-and-in-operators"></a>in 和 !in 運算子
 
-根據提供的一組值來篩選記錄集。
+根據提供的值集篩選記錄集。
 
 ```kusto
 Table1 | where col in ('value1', 'value2')
 ```
 
 > [!NOTE]
-> * 將 ' ~ ' 新增至運算子會使值的搜尋不區分大小寫： `x in~ (expression)` 或 `x !in~ (expression)` 。
+> * 將 ' ~ ' 新增至運算子會讓值的搜尋不區分大小寫： `x in~ (expression)` 或 `x !in~ (expression)` 。
 > * 在表格式運算式中，會選取結果集的第一個資料行。
-> * 運算式清單可產生最多個 `1,000,000` 值。
-> * 嵌套的陣列會壓平合併成單一的值清單。 例如，`x in (dynamic([1,[2,3]]))` 會成為 `x in (1,2,3)`。
+> * 運算式清單可以產生最多 `1,000,000` 值。
+> * 嵌套陣列會壓平合併成單一值清單。 例如，`x in (dynamic([1,[2,3]]))` 會成為 `x in (1,2,3)`。
  
 ## <a name="syntax"></a>語法
 
-### <a name="case-sensitive-syntax"></a>區分大小寫的語法
+### <a name="case-sensitive-syntax"></a>區分大小寫語法
 
 *T*純 `|` `where` *col* `in` `(` *量運算式的*T 欄清單`)`   
-*T* `|` `where` *欄* `in` `(` *表格式運算式*`)`   
+*T* `|` `where` *col* `in` `(` *表格式運算式*`)`   
  
 *T*純 `|` `where` *col* `!in` `(` *量運算式的*T 欄清單`)`  
-*T* `|` `where` *欄* `!in` `(` *表格式運算式*`)`   
+*T* `|` `where` *col* `!in` `(` *表格式運算式*`)`   
 
 ### <a name="case-insensitive-syntax"></a>不區分大小寫語法
 
 *T*純 `|` `where` *col* `in~` `(` *量運算式的*T 欄清單`)`   
-*T* `|` `where` *欄* `in~` `(` *表格式運算式*`)`   
+*T* `|` `where` *col* `in~` `(` *表格式運算式*`)`   
  
 *T*純 `|` `where` *col* `!in~` `(` *量運算式的*T 欄清單`)`  
-*T* `|` `where` *欄* `!in~` `(` *表格式運算式*`)`   
+*T* `|` `where` *col* `!in~` `(` *表格式運算式*`)`   
 
 ## <a name="arguments"></a>引數
 
 * *T* -要篩選其記錄的表格式輸入。
 * *col* -要篩選的資料行。
-* *運算式清單*-表格式、純量或常值運算式的逗號分隔清單。
-* *表格式運算式*-具有一組值的表格式運算式。 如果運算式有多個資料行，則會使用第一個資料行。
+* *運算式清單* -表格式、純量或常值運算式的逗號分隔清單。
+* *表格式運算式* -具有一組值的表格式運算式。 如果運算式有多個資料行，則會使用第一個資料行。
 
 ## <a name="returns"></a>傳回
 
-述詞為之*T*中的資料列 `true` 。
+述詞為 *T* 中的資料列 `true` 。
 
 ## <a name="examples"></a>範例  
 
@@ -128,7 +128,7 @@ StormEvents
 | count
 ```
 
-相同的查詢可以撰寫為：
+您可以撰寫相同的查詢，如下所示：
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -146,7 +146,7 @@ StormEvents
 |---|
 |14242|  
 
-### <a name="top-with-other-example"></a>包含其他範例的頂端
+### <a name="top-with-other-example"></a>Top 與其他範例
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -157,16 +157,16 @@ Lightning_By_State
 | summarize sum(lightning_events) by State 
 ```
 
-| 州     | sum_lightning_events |
+| 狀態     | sum_lightning_events |
 |-----------|----------------------|
 | ALABAMA   | 29                   |
-| 威斯康辛 | 31                   |
+| 威斯康辛州 | 31                   |
 | 德克薩斯州     | 55                   |
-| 州   | 85                   |
+| 佛羅里達   | 85                   |
 | 格魯吉亞   | 106                  |
 | 其他     | 415                  |
 
-### <a name="use-a-static-list-returned-by-a-function"></a>使用函式所傳回的靜態清單
+### <a name="use-a-static-list-returned-by-a-function"></a>使用函數所傳回的靜態清單
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -185,6 +185,6 @@ StormEvents | where State in (InterestingStates()) | count
 .show function InterestingStates
 ```
 
-|名稱|參數|主體|資料夾|DocString|
+|名稱|參數|body|資料夾|DocString|
 |---|---|---|---|---|
-|InterestingStates|()|{dynamic ( ["華盛頓"，"佛羅里達"，"格魯吉亞"，"紐約"] ) }
+|InterestingStates|()|{dynamic ( [「華盛頓州」、「佛羅里達州」、「南喬治亞」、「紐約」 ) }

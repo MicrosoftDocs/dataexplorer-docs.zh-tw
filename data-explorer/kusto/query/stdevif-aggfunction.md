@@ -1,38 +1,38 @@
 ---
-title: stdevif （）（彙總函式）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 stdevif （）（彙總函式）。
+title: 'stdevif ( # A1 (彙總函式) -Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 stdevif ( # A1 (彙總函式) 。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a158a623768a7beb6ec497ca8d8467aecd7c3b61
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 831011bcd72c2fc9b06c3c68c6ebda7929d49e4b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87342813"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242537"
 ---
-# <a name="stdevif-aggregation-function"></a>stdevif （）（彙總函式）
+# <a name="stdevif-aggregation-function"></a>stdevif ( # A1 (彙總函式) 
 
-針對述*詞評估為的整個*群組，計算*Expr*的[stdev](stdev-aggfunction.md) `true` 。
+在述*詞評估為的群組*中，計算*Expr*的[stdev](stdev-aggfunction.md) `true` 。
 
-* 只能在[匯總](summarizeoperator.md)的內容中使用
+* 只能用在[摘要內匯總](summarizeoperator.md)的內容中
 
 ## <a name="syntax"></a>語法
 
-總結 `stdevif(` *Expr* `, ` *Predicate*述詞`)`
+摘要 `stdevif(` *運算式* `, ` *Predicate*述詞`)`
 
 ## <a name="arguments"></a>引數
 
 * *Expr*：將用於匯總計算的運算式。 
-* 述*詞：如果*為 true，則會將*Expr*計算值加入標準差。
+* 述*詞：若*為 true，則會將*Expr*計算值新增至標準差。
 
 ## <a name="returns"></a>傳回
 
-在述*詞評估為*的整個群組中， *Expr*的標準差值 `true` 。
+在*群組中，* 述詞評估為的*運算式*標準差值 `true` 。
  
 ## <a name="examples"></a>範例
 

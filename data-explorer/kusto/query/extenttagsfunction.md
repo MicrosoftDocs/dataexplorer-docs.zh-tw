@@ -1,29 +1,29 @@
 ---
-title: extent_tags （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 extent_tags （）。
+title: 'extent_tags ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 extent_tags。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: f745d9cb180842e86c184a24ed24c4e2f024f129
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: da705d558a09bdcc52bf07fc807e53fdccb9396c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348117"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249083"
 ---
 # <a name="extent_tags"></a>extent_tags()
 
 ::: zone pivot="azuredataexplorer"
 
-傳回動態陣列，其中包含目前記錄所在之資料分區（「範圍」）的[標記](../management/extents-overview.md#extent-tagging)。 
+傳回動態陣列，其中含有目前記錄所在 ( 「範圍」 ) 資料分區的 [標記](../management/extents-overview.md#extent-tagging) 。 
 
-將此函數套用至未附加至資料分區的計算資料會傳回空值。
+將此函數套用至未附加至資料分區的計算資料時，會傳回空值。
 
 ## <a name="syntax"></a>語法
 
@@ -31,11 +31,11 @@ ms.locfileid: "87348117"
 
 ## <a name="returns"></a>傳回
 
-類型的值， `dynamic` 這是保留目前記錄範圍標籤的陣列，或空白值。
+型別的值， `dynamic` 這個值是保存目前記錄之範圍標籤的陣列，或空白值。
 
 ## <a name="examples"></a>範例
 
-下列範例顯示如何取得清單，其中包含一小時前具有資料行之特定值的所有資料分區標記 `ActivityId` 。 它會示範某些查詢運算子（在這裡 `where` 是運算子，但也適用于 `extend` 和）會 `project` 保留裝載記錄之資料分區的相關資訊。
+下列範例示範如何取得具有資料行之特定值的所有資料分區，以及資料行之特定值的標記 `ActivityId` 。 它會示範某些查詢運算子 (在這裡， `where` 也就是運算子，但這也適用于 `extend` 和 `project`) 保留裝載記錄之資料分區的相關資訊。
 
 ```kusto
 T
@@ -45,7 +45,7 @@ T
 | summarize by tostring(tags)
 ```
 
-下列範例示範如何取得過去一小時內所有記錄的計數（儲存在標有標記的範圍中 `MyTag` （也可能是其他標記），但不會以標記標記） `drop-by:MyOtherTag` 。
+下列範例會示範如何取得過去一小時內的所有記錄計數，這些記錄會儲存在標記 (標籤的範圍中， `MyTag` 而且可能有其他標記) ，但未標記標記 `drop-by:MyOtherTag` 。
 
 ```kusto
 T

@@ -1,31 +1,31 @@
 ---
-title: row_cumsum （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 row_cumsum （）。
+title: 'row_cumsum ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 row_cumsum。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 83dc48589fce7332c8e24d1e5a47c75a6cfca608
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6ad1df20972238bee17217f5d9de19a020b4cbce
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345720"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242847"
 ---
 # <a name="row_cumsum"></a>row_cumsum()
 
-計算序列化資料列[集中資料行](./windowsfunctions.md#serialized-row-set)的累計總和。
+計算已序列化之資料列 [集中資料行](./windowsfunctions.md#serialized-row-set)的累計總和。
 
 ## <a name="syntax"></a>語法
 
 `row_cumsum``(`*詞彙*[ `,` *重新開機*]`)`
 
-* *詞彙*是運算式，表示要加總的值。
-  運算式必須是下列其中一種類型的純量： `decimal` 、 `int` 、 `long` 或 `real` 。 Null*詞彙*值不會影響總和。
-* *Restart*是類型的選擇性引數 `bool` ，表示何時應重新開機累積作業（設定回0）。 它可以用來表示資料的分割區;請參閱下列第二個範例。
+* 「詞彙」（ *Term* ）是指出要加總的值的運算式。
+  運算式必須是下列其中一種類型的純量： `decimal` 、 `int` 、 `long` 或 `real` 。 Null *詞彙* 值不會影響總和。
+* *Restart* 是類型的選擇性引數 `bool` ，可指出何時應重新開機累積作業 (設定回 0) 。 可以用來表示資料的資料分割;請參閱下列第二個範例。
 
 ## <a name="returns"></a>傳回
 
@@ -51,7 +51,7 @@ a    | cs
 8    | 20
 10   | 30
 
-這個範例示範如何計算資料分割時的累計總和（此處的 `salary` ） `name` ：
+此範例示範如何在這裡計算資料分割 (的) 累計總和 (， `salary` 方法是 `name`) ：
 
 ```kusto
 datatable (name:string, month:int, salary:long)

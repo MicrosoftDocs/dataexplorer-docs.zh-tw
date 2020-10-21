@@ -1,25 +1,25 @@
 ---
-title: pack （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 pack （）。
+title: '套件 ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管 ( # A1 套件。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 560f7ca9f423eb57fd9be0478e0e51dc2ce26755
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7b72a4ab3f64fb119d8a35767ea4e5cfedfdf71f
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346502"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248666"
 ---
 # <a name="pack"></a>pack()
 
-`dynamic`從名稱和值的清單建立物件（屬性包）。
+`dynamic`從名稱和值清單中建立 (屬性包) 的物件。
 
-函式 `pack_dictionary()` 的別名。
+`pack_dictionary()`函數的別名。
 
 ## <a name="syntax"></a>語法
 
@@ -27,8 +27,8 @@ ms.locfileid: "87346502"
 
 ## <a name="arguments"></a>引數
 
-* 索引鍵和值的替代清單（清單的總長度必須是偶數）
-* 所有索引鍵都必須是非空白的常數位串
+* 索引鍵和值的替代清單 (清單的總長度必須是偶數) 
+* 所有索引鍵都必須是非空白的常數位符串
 
 ## <a name="examples"></a>範例
 
@@ -38,7 +38,7 @@ ms.locfileid: "87346502"
 pack("Level", "Information", "ProcessID", 1234, "Data", pack("url", "www.bing.com"))
 ```
 
-讓我們採用2個數據表，SmsMessages 和 MmsMessages：
+讓我們採用2個數據表： SmsMessages 和 MmsMessages：
 
 資料表 SmsMessages 
 

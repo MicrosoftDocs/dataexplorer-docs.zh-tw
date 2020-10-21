@@ -1,38 +1,38 @@
 ---
-title: round （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 round （）。
+title: '四捨五入 ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中 ( # A1 的舍入方式。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c281d3347e82b429ded187ee142ea13fa7594567
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 90d424929fe0b2034e4778ca2167e1e14dfbf79e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345737"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242895"
 ---
 # <a name="round"></a>round()
 
-傳回指定之有效位數的圓角來源。
+將圓角來源傳回至指定的有效位數。
 
 ## <a name="syntax"></a>語法
 
-`round(`*來源*[ `,` *精確度*]`)`
+`round(`*來源* [有效 `,` *位數*]`)`
 
 ## <a name="arguments"></a>引數
 
-* *來源*：迴圈的計算來源純量。
-* *精確度*：來源將四捨五入的位數。（預設值為0）
+* *來源*：計算迴圈的來源純量。
+* 有效*位數：來源*將四捨五入至的位數。 (預設值為 0) 
 
 ## <a name="returns"></a>傳回
 
-四捨五入的來源與指定的有效位數。
+指定之有效位數的舍入來源。
 
-Round 與不同 [`bin()`](binfunction.md) / [`floor()`](floorfunction.md) 之處在于，第一個會將某個數位四捨五入成特定數目的數位，而最後一個會將值四捨五入為指定之大小時數的整數倍數（round （2.15，1）會傳回2.2，而 bin （2.15，1）則會傳回2）。
+Round 不同于 [`bin()`](binfunction.md) / [`floor()`](floorfunction.md) 在中，第一個會將數位四捨五入到特定的位數，而最後將值四捨五入為指定之大括弧大小的整數倍數 (四捨五入 (2.15，1) 傳回2.2，而 bin (2.15，1) 會傳回 2) 。
  
 
 ## <a name="examples"></a>範例

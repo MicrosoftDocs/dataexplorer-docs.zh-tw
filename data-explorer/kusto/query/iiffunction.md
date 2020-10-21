@@ -1,23 +1,23 @@
 ---
-title: iif （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 iif （）。
+title: 'iif ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 iif ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0d912f94a224b073fe9214f70077067d3a24c906
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0279e3b0bfc28397b2270f012b8152b456c770cd
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347471"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242407"
 ---
 # <a name="iif"></a>iif()
 
-評估第一個引數（述詞），並傳回第二個或第三個引數的值，視述詞是否評估為 `true` （秒）或 `false` （第三個）而定。
+評估 (述詞) 的第一個引數，並傳回第二個或第三個引數的值，取決於述詞是否評估為 `true` (第二個) 或 `false` (第三個) 。
 
 第二個引數和第三個引數的類型必須相同。
 
@@ -28,8 +28,8 @@ ms.locfileid: "87347471"
 ## <a name="arguments"></a>引數
 
 * 述*詞：評估*為值的運算式 `boolean` 。
-* *ifTrue*：如果述詞評估為 *，則會*評估並從函式傳回其值的運算式 `true` 。
-* *ifFalse*：如果述詞評估為 *，則會*評估並從函式傳回其值的運算式 `false` 。
+* *ifTrue* *：當述* 詞評估為時，會取得評估的運算式以及從函式傳回的值 `true` 。
+* *ifFalse* *：當述* 詞評估為時，會取得評估的運算式以及從函式傳回的值 `false` 。
 
 ## <a name="returns"></a>傳回
 

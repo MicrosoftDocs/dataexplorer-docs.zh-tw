@@ -1,25 +1,25 @@
 ---
 title: 範例-相異運算子-Azure 資料總管
-description: 本文說明 Azure 資料總管中的範例相異運算子。
+description: 本文說明 Azure 資料總管中的相異範例運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3cb1de08604964d4d71c5868ef7564c728b1f2c4
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: cfd8385a5dc8f959e1fe195bfe333a6868f55cb4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351534"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242739"
 ---
 # <a name="sample-distinct-operator"></a>sample-distinct 運算子
 
 傳回單一資料行，其中包含所要求資料行的相異值數目上限。 
 
-運算子的預設值（目前只有）類別會嘗試儘快傳回解答（而不是嘗試建立合理的範例）
+預設的 (和目前只有) 的類別類別會嘗試儘快傳回答案 (而不是嘗試建立公平範例) 
 
 ```kusto
 T | sample-distinct 5 of DeviceId
@@ -30,19 +30,19 @@ T | sample-distinct 5 of DeviceId
 *T* `| sample-distinct` *NumberOfValues* `of` *ColumnName*
 
 ## <a name="arguments"></a>引數
-* *NumberOfValues*：要傳回之*T*的數位相異值。 您可以指定任何數值運算式。
+* *NumberOfValues*：要傳回的 *T* 的數位相異值。 您可以指定任何數值運算式。
 
 **提示**
 
- 藉由放 `sample-distinct` 入 let 語句，並在稍後使用運算子進行篩選 `in` （請參閱範例），可以派上用場的樣本。 
+ 藉由 `sample-distinct` 在 let 語句中放入 let 語句並稍後使用運算子進行篩選，可以派上用場的範例 `in` (請參閱範例)  
 
- 如果您想要最前面的值，而不只是範例，您可以使用[hitters](tophittersoperator.md)運算子 
+ 如果您想要使用最前面的值而不只是範例，您可以使用 [hitters](tophittersoperator.md) 運算子 
 
- 如果您想要取樣資料列（而非特定資料行的值），請參閱[範例運算子](sampleoperator.md)
+ 如果您想要 (資料列的範例，而不是特定資料行) 的值，請參閱 [範例運算子](sampleoperator.md)
 
 ## <a name="examples"></a>範例  
 
-從人口取得10個相異值
+取得人口的10個相異值
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
