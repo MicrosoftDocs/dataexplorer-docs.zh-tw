@@ -1,23 +1,23 @@
 ---
 title: 'bag_keys ( # A1-Azure 資料總管 |Microsoft Docs'
-description: '本文說明 Azure 資料總管中的 bag_keys ( # A1。'
+description: '本文描述 Azure 資料總管中 ( # A1 bag_keys。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 2fa63bf0b4eea594a54a3abe132a0127929e0c52
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: f36022bb1e9d0f72f2f63e14be888c0f462ccc70
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803791"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245473"
 ---
 # <a name="bag_keys"></a>bag_keys()
 
-列舉動態屬性包物件中的所有根機碼。
+列舉動態屬性包物件中的所有根金鑰。
 
 ## <a name="syntax"></a>語法
 
@@ -25,7 +25,7 @@ ms.locfileid: "87803791"
 
 ## <a name="returns"></a>傳回
 
-索引鍵的陣列，順序是不確定的。
+索引鍵的陣列，但不確定順序。
 
 ## <a name="examples"></a>範例
 

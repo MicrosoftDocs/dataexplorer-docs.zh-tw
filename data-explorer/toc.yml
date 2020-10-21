@@ -54,7 +54,7 @@
           href: security-baseline.md
     - name: 業務持續性
       items:
-        - name: 總覽
+        - name: 概觀
           href: business-continuity-overview.md
         - name: 建立解決方案
           href: business-continuity-create-solution.md
@@ -345,16 +345,14 @@
           items:
             - name: 在 Jupyter Notebook 和 Kqlmagic 中分析資料
               href: kqlmagic.md
-            - name: 分析 Azure Notebooks 中的資料
-              href: azure-notebooks.md
             - name: Azure Data Studio
               items:
                 - name: Kusto 延伸模組概觀
                   displayName: Azure Data Studio
-                  href: 'https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
+                  href: 'https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?context=/azure/data-explorer/context/context'
                 - name: 使用 Kusto 延伸模組
                   displayName: Azure Data Studio
-                  href: 'https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
+                  href: 'https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=/azure/data-explorer/context/context'
                 - name: 使用 Kqlmagic
                   displayName: Azure Data Studio
                   href: 'https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kqlmagic?context=/azure/data-explorer/context/context'

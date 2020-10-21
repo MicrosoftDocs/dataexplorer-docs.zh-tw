@@ -1,25 +1,25 @@
 ---
-title: dcount_hll （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 dcount_hll （）。
+title: 'dcount_hll ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 dcount_hll。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: 2e3847f0ad6c120f076461c5b4774f60349d6125
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 743f35b6bf6d461c1d08c3082bb235b88b57ada2
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348423"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252379"
 ---
 # <a name="dcount_hll"></a>dcount_hll()
 
-計算 hll 結果中的 dcount （由[hll](hll-aggfunction.md)或[hll_merge](hll-merge-aggfunction.md)所產生）。
+計算由 [hll](hll-aggfunction.md) 或 [hll_merge](hll-merge-aggfunction.md)) 產生之 hll 結果 (的 dcount。
 
-閱讀[基礎演算法（*H*Yper*l*og*l*og）和估計精確度](dcount-aggfunction.md#estimation-accuracy)的相關資訊。
+深入瞭解 [基礎演算法 (*H*Yper*l*og*l*og) 和估計精確度](dcount-aggfunction.md#estimation-accuracy)。
 
 ## <a name="syntax"></a>語法
 
@@ -27,11 +27,11 @@ ms.locfileid: "87348423"
 
 ## <a name="arguments"></a>引數
 
-* *Expr*：由[hll](hll-aggfunction.md)或 hll 所產生的運算式[-merge](hll-merge-aggfunction.md)
+* *Expr*： [hll](hll-aggfunction.md) 或 hll 所產生的運算式 [-merge](hll-merge-aggfunction.md)
 
 ## <a name="returns"></a>傳回
 
-*Expr*中每個值的相異計數
+*運算式*中每個值的相異計數
 
 ## <a name="examples"></a>範例
 

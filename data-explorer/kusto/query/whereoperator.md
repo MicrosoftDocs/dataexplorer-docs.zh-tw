@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的 where 操作員。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 79eb1314fad1c3d3bdbbda242b3bd6a86c19e158
-ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
+ms.openlocfilehash: 738683b3042295678f7d507425443b47c9dec79e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91954462"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251796"
 ---
 # <a name="where-operator"></a>where 運算子
 

@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中 dcount_intersect 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 15720109ffa49eb89b2595d2de3105c15749960d
-ms.sourcegitcommit: 58faa053eb003192db01df034cd6f5067ecc31bd
+ms.openlocfilehash: 4fad66141a31ac7ba72ab79dc0092b963417ae72
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91625443"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247553"
 ---
 # <a name="dcount_intersect-plugin"></a>dcount_intersect 外掛程式
 
@@ -38,7 +38,7 @@ T | evaluate dcount_intersect(hll_1, hll_2, hll_3)
 * *T*：輸入表格式運算式。
 * *hll_i*：<sub>我</sub> 以函式計算的 set S 值 [`hll()`](./hll-aggfunction.md) 。
 
-## <a name="returns"></a>傳回值
+## <a name="returns"></a>傳回
 
 傳回資料表 `dcount` ，其中每個資料行都有 N 個值 (，代表設定的交集) 。
 資料行名稱為 s0、s1、... (直到 n-1) 為止。

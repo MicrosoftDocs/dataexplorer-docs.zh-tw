@@ -4,16 +4,16 @@ description: '本文說明 Azure 資料總管中的 extractjson ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9668b173c6b3769113972be2c74382464e7d9819
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: 4891e3b906de540fb2b4939e65359829fd442f7f
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610571"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247508"
 ---
 # <a name="extractjson"></a>extractjson()
 

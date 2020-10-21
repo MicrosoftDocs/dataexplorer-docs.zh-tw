@@ -4,16 +4,16 @@ description: '本文說明 Azure 資料總管中 ( # A1 (彙總函式) make_list
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/09/2020
-ms.openlocfilehash: c53faca94e273bf816abcfa34ed400708a7433a3
-ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
+ms.openlocfilehash: 18d10aa15e25979c0945ec26efb8bfe9a66dfde4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92169552"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252216"
 ---
 # <a name="make_list_with_nulls-aggregation-function"></a>make_list_with_nulls ( # A1 (彙總函式) 
 
@@ -21,7 +21,7 @@ ms.locfileid: "92169552"
 
 * 只能用在[摘要內匯總](summarizeoperator.md)的內容中
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `summarize``make_list_with_nulls(` *Expr*`)`
 

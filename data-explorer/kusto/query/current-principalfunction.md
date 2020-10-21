@@ -1,21 +1,21 @@
 ---
-title: current_principal （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 current_principal （）。
+title: 'current_principal ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 current_principal。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 7fa1ad900eb91390436e88c44ad9fd7394ad087d
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a2530b93bd5102b7c21aa535eb8e7ca7c4360ddf
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348644"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252486"
 ---
 # <a name="current_principal"></a>current_principal()
 
@@ -29,7 +29,7 @@ ms.locfileid: "87348644"
 
 ## <a name="returns"></a>傳回
 
-目前的主體完整名稱（FQN），其為 `string` 。  
+目前的主體完整名稱 (FQN) 為 `string` 。  
 字串格式為：  
 *PrinciplaType* `=`*PrincipalId* `;`*TenantId*
 
@@ -42,7 +42,7 @@ print fqn=current_principal()
 
 |fqn|
 |---|
-|以 aaduser name> = 346e950e-4a62-42bf-96f5-4cf4eac3f11e; 72f988bf-86f1-41af-91ab-2d7cd011db47|
+|aaduser = 346e950e-4a62-42bf-96f5-4cf4eac3f11e; 72f988bf-86f1-41af-91ab-2d7cd011db47|
 
 ::: zone-end
 

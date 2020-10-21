@@ -1,23 +1,23 @@
 ---
-title: percentile_tdigest （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 percentile_tdigest （）。
+title: 'percentile_tdigest ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 percentile_tdigest。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 814124dc0ae9fa5f26a198fafc1bf1d7fd2b83e4
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7111f34fcd42e025b22960aa013310d7e4b672fd
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346196"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252172"
 ---
 # <a name="percentile_tdigest"></a>percentile_tdigest()
 
-計算 `tdigest` 結果（由[tdigest （）](tdigest-aggfunction.md)或[tdigest_merge （）](tdigest-merge-aggfunction.md)）產生的百分位數結果
+從結果 (計算百分位數結果， `tdigest` 由 [tdigest ( # B2 ](tdigest-aggfunction.md) 或 [tdigest_merge ( # B4 ](tdigest-merge-aggfunction.md) 所產生) 
 
 ## <a name="syntax"></a>語法
 
@@ -29,9 +29,9 @@ ms.locfileid: "87346196"
 
 ## <a name="arguments"></a>引數
 
-* *Expr*：所產生的運算式， [`tdigest`](tdigest-aggfunction.md) 或[tdigest_merge （）](tdigest-merge-aggfunction.md)。
-* *百分*位數是指定百分位數的 double 常數。
-* *typeLiteral*：選擇性的類型常值（例如， `typeof(long)` ）。 如果有提供，結果集會是這個型別。 
+* *Expr*：由 [`tdigest`](tdigest-aggfunction.md) 或 [tdigest_merge ( # B1 ](tdigest-merge-aggfunction.md)產生的運算式。
+* *百分* 位數是指定百分位數的雙精度浮點數。
+* *typeLiteral*：選擇性的型別常值 (例如 `typeof(long)`) 。 如果有提供，結果集將會是此類型。 
 * *動態陣列*：整數或浮點數的動態陣列中的百分位數清單。
 
 ## <a name="returns"></a>傳回
@@ -40,11 +40,11 @@ ms.locfileid: "87346196"
 
 **提示**
 
-* 函式必須至少接收一個百分比（而且可能更多），請參閱上述語法： *Percentile1* [ `,` *Percentile2*] .。。[ `,` *PercentileN*]），而結果會是包含結果的動態陣列。 （例如 [`percentiles()`](percentiles-aggfunction.md) ）
+* 函式至少必須獲得一個百分比 (，請參閱上述語法： *Percentile1* [ `,` *Percentile2*] .。。[ `,` *PercentileN*] ) ，且結果將會是包含結果的動態陣列。  (像是 [`percentiles()`](percentiles-aggfunction.md)) 
   
-* 如果只提供一個百分比，而且也提供了類型，則結果會是與該百分比相同的類型所提供的資料行。 在此情況下，所有函式都 `tdigest` 必須屬於該類型。
+* 如果只提供一個百分比，而且也提供型別，則結果將會是該百分比的結果所提供之相同類型的資料行。 在此情況下，所有函式都 `tdigest` 必須屬於該類型。
 
-* 如果 *`Expr`* 包含 `tdigest` 不同類型的函式，請不要提供類型。 結果會是動態類型。 請參閱以下範例。
+* 如果 *`Expr`* 包含 `tdigest` 不同類型的函式，則不提供類型。 結果會是動態類型。 請參閱以下範例。
 
 ## <a name="examples"></a>範例
 

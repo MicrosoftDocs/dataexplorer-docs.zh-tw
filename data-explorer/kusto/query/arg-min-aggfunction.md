@@ -1,25 +1,25 @@
 ---
-title: arg_min （）（彙總函式）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 arg_min （）（彙總函式）。
+title: 'arg_min ( # A1 (彙總函式) -Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中 ( # A1 (彙總函式) arg_min。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/12/2019
-ms.openlocfilehash: 33e2657f2569957002d17d7061cfec863402027e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5c3e7912839dd3258c4a3f96530fbf438bf4ef4f
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349681"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245606"
 ---
-# <a name="arg_min-aggregation-function"></a>arg_min （）（彙總函式）
+# <a name="arg_min-aggregation-function"></a>arg_min ( # A1 (彙總函式) 
 
-在群組中尋找最小化*ExprToMinimize*的資料列，並傳回*ExprToReturn*的值（或傳回 `*` 整個資料列）。
+在群組中尋找最小化 *ExprToMinimize*的資料列，並傳回 *ExprToReturn* (的值，或傳回 `*` 整個資料列) 。
 
-* 只能在[匯總](summarizeoperator.md)的內容中使用
+* 只能用在[摘要內匯總](summarizeoperator.md)的內容中
 
 ## <a name="syntax"></a>語法
 
@@ -28,13 +28,13 @@ ms.locfileid: "87349681"
 ## <a name="arguments"></a>引數
 
 * *ExprToMinimize*：將用於匯總計算的運算式。 
-* *ExprToReturn*：將用來在*ExprToMinimize*最低時傳回值的運算式。 要傳回的運算式可能是萬用字元（*），以傳回輸入資料表的所有資料行。
-* *NameExprToMinimize*：代表*ExprToMinimize*之結果資料行的選擇性名稱。
-* *NameExprToReturn*：代表*ExprToReturn*之結果資料行的其他選擇性名稱。
+* *ExprToReturn*：當 *ExprToMinimize* 為最小值時，將用來傳回值的運算式。 要傳回的運算式可以是萬用字元 ( * ) 傳回輸入資料表的所有資料行。
+* *NameExprToMinimize*：代表 *ExprToMinimize*之結果資料行的選擇性名稱。
+* *NameExprToReturn*：代表 *ExprToReturn*之結果資料行的其他選擇性名稱。
 
 ## <a name="returns"></a>傳回
 
-在群組中尋找最小化*ExprToMinimize*的資料列，並傳回*ExprToReturn*的值（或傳回 `*` 整個資料列）。
+在群組中尋找最小化 *ExprToMinimize*的資料列，並傳回 *ExprToReturn* (的值，或傳回 `*` 整個資料列) 。
 
 ## <a name="examples"></a>範例
 
@@ -50,7 +50,7 @@ Supplies | summarize arg_min(Price, Supplier) by Product
 Supplies | summarize arg_min(Price, *) by Product
 ```
 
-尋找每個大陸中的 southernmost 城市，其國家/地區如下：
+在每個大陸中尋找 southernmost 城市，其國家/地區為：
 
 ```kusto
 PageViewLog 

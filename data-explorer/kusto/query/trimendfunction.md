@@ -1,23 +1,23 @@
 ---
-title: trim_end （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 trim_end （）。
+title: 'trim_end ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 trim_end。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: cab78680a3b996234724bc052d75959928520289
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6a764752f126408ceb48f1c4a1af5c74014b6eab
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87339845"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251973"
 ---
 # <a name="trim_end"></a>trim_end()
 
-移除指定之正則運算式的尾端比對。
+移除指定之正則運算式的尾端相符項。
 
 ## <a name="syntax"></a>語法
 
@@ -30,11 +30,11 @@ ms.locfileid: "87339845"
 
 ## <a name="returns"></a>傳回
 
-修剪在*文字*結尾處找到的*RegEx*相符專案之後的*文字*。
+在*文字*結尾找到的*RegEx 符合 RegEx*之後的*文字*。
 
 ## <a name="example"></a>範例
 
-語句鈴會從*string_to_trim*的結尾修剪*子字串*：
+語句下方從*string_to_trim*的結尾修剪*子字串*：
 
 ```kusto
 let string_to_trim = @"bing.com";
@@ -46,7 +46,7 @@ print string_to_trim = string_to_trim,trimmed_string = trim_end(substring,string
 |--------------|--------------|
 |bing.com      |Bing          |
 
-下一個語句會修剪字串結尾的所有非文字字元：
+下一個語句會從字串的結尾修剪所有非文字字元：
 
 ```kusto
 print str = strcat("-  ","Te st",x,@"// $")

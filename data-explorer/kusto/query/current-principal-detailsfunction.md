@@ -1,19 +1,19 @@
 ---
-title: current_principal_details （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 current_principal_details （）。
+title: 'current_principal_details ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 current_principal_details。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/08/2019
-ms.openlocfilehash: cf10fcfd66b7a9240746a904e4979c8091c3518b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 387504d49b2c8be52357be74e69cdbde581c1298
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348678"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252533"
 ---
 # <a name="current_principal_details"></a>current_principal_details()
 
@@ -25,7 +25,7 @@ ms.locfileid: "87348678"
 
 ## <a name="returns"></a>傳回
 
-目前主體的詳細資料，以做為 `dynamic` 。
+的目前主體詳細資料 `dynamic` 。
 
 ## <a name="example"></a>範例
 
@@ -36,4 +36,4 @@ print d=current_principal_details()
 
 |d|
 |---|
-|{<br>  "UserPrincipalName"： " user@fabrikam.com "，<br>  "IdentityProvider"： " https://sts.windows.net "，<br>  「授權」： "72f988bf-86f1-41af-91ab-2d7cd011db47"，<br>  "Mfa"： "True"，<br>  "Type"： "以 aaduser name>"，<br>  "DisplayName"： "James Smith （upn： user@fabrikam.com ）"，<br>  "ObjectId"： "346e950e-4a62-42bf-96f5-4cf4eac3f11e"，<br>  "FQN"： null、<br>  「附注」： null<br>}|
+|{<br>  "UserPrincipalName"： " user@fabrikam.com "，<br>  "IdentityProvider"： " https://sts.windows.net "，<br>  "授權單位"： "72f988bf-86f1-41af-91ab-2d7cd011db47"，<br>  "Mfa"： "True"，<br>  "Type"： "AadUser"，<br>  "DisplayName"： "James Smith (upn： user@fabrikam.com) "，<br>  "ObjectId"： "346e950e-4a62-42bf-96f5-4cf4eac3f11e"，<br>  "FQN"： null、<br>  「附注」： null<br>}|

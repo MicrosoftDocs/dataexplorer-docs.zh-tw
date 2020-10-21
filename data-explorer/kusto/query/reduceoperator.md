@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的縮減運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d844f693b1509a823702b12bd28b85a9f19a07bd
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 6ef5e42dc9c41426cd66dbf4d857ec0d2c32e2ae
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91102894"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252100"
 ---
 # <a name="reduce-operator"></a>reduce 運算子
 
@@ -45,7 +45,7 @@ T | reduce by LogMessage with threshold=0.1
 
 例如， `reduce by city` 的結果可能包括： 
 
-|模式     |Count |Representative|
+|模式     |計數 |Representative|
 |------------|------|--------------|
 | San *      | 5182 |San Bernard   |
 | Saint *    | 2846 |聖 Lucy    |
@@ -62,7 +62,7 @@ range x from 1 to 1000 step 1
 | reduce by MyText  with threshold=0.001 , characters = "X" 
 ```
 
-|模式         |Count|Representative   |
+|模式         |計數|Representative   |
 |----------------|-----|-----------------|
 |MachineLearning|1000 |MachineLearningX4|
 

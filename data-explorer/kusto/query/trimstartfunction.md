@@ -1,19 +1,19 @@
 ---
-title: trim_start （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 trim_start （）。
+title: 'trim_start ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 trim_start。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4550fb07da37658ecf11a4eb04ecdf199d8ba989
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6f4341e984504c89bfc4d5a1265c5193ac6d0297
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87339539"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251887"
 ---
 # <a name="trim_start"></a>trim_start()
 
@@ -30,11 +30,11 @@ ms.locfileid: "87339539"
 
 ## <a name="returns"></a>傳回
 
-在*文字*開頭找到的*RegEx*相符後的*文字*。
+在*文字*開頭找到的*RegEx 符合 RegEx*之後的*文字*。
 
 ## <a name="example"></a>範例
 
-語句鈴會從*string_to_trim*開始修剪*子字串*：
+語句下方從*string_to_trim*的開頭修剪*子字串*：
 
 ```kusto
 let string_to_trim = @"https://bing.com";

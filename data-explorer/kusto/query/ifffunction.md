@@ -1,23 +1,23 @@
 ---
-title: iff （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 iff （）。
+title: '如果 ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的如果 ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7eeab87f3c3ef42d1e00bf0d6b8853fe3a2f3125
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5cc6a41c8b74e4fd08eebbe968b7384dce39039e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347488"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252280"
 ---
 # <a name="iff"></a>iff()
 
-評估第一個引數（述詞），並傳回第二個或第三個引數的值，視述詞是否評估為 `true` （秒）或 `false` （第三個）而定。
+評估 (述詞) 的第一個引數，並傳回第二個或第三個引數的值，取決於述詞是否評估為 `true` (第二個) 或 `false` (第三個) 。
 
 第二個引數和第三個引數的類型必須相同。
 
@@ -28,8 +28,8 @@ ms.locfileid: "87347488"
 ## <a name="arguments"></a>引數
 
 * 述*詞：評估*為值的運算式 `boolean` 。
-* *ifTrue*：如果述詞評估為 *，則會*評估並從函式傳回其值的運算式 `true` 。
-* *ifFalse*：如果述詞評估為 *，則會*評估並從函式傳回其值的運算式 `false` 。
+* *ifTrue* *：當述* 詞評估為時，會取得評估的運算式以及從函式傳回的值 `true` 。
+* *ifFalse* *：當述* 詞評估為時，會取得評估的運算式以及從函式傳回的值 `false` 。
 
 ## <a name="returns"></a>傳回
 

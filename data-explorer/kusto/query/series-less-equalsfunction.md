@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 series_less_equals。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 0373fdf7c687dd7af63895ce3a542ae9b6b4f150
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: e7172d9840562b26b3f9c532c8a83413131e0c21
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103544"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251576"
 ---
 # <a name="series_less_equals"></a>series_less_equals()
 

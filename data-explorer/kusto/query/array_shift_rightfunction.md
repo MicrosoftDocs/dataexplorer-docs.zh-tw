@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 array_shift_right。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: a38eda3fb595256527c277b12a16f359ef9eb910
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: af983f63046280d4ddd237107d1d2cf35d6cce2d
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91102702"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246992"
 ---
 # <a name="array_shift_right"></a>array_shift_right()
 

@@ -1,23 +1,23 @@
 ---
-title: dayofmonth （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 dayofmonth （）。
+title: 'dayofmonth ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 dayofmonth ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3341f416642b06d899c2a3d1f6675f4d3254291f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: e98e1405a6521ef9cdaf40a24b2c173bdf72c376
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348491"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252409"
 ---
 # <a name="dayofmonth"></a>dayofmonth()
 
-傳回代表給定月份之日數位的整數數位
+傳回代表指定月份之日數的整數數位。
 
 ```kusto
 dayofmonth(datetime(2015-12-14)) == 14
@@ -33,4 +33,4 @@ dayofmonth(datetime(2015-12-14)) == 14
 
 ## <a name="returns"></a>傳回
 
-`day number`指定月份的。
+`day number` 在指定月份。

@@ -1,19 +1,19 @@
 ---
-title: Beta_pdf （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 Beta_pdf （）。
+title: 'Beta_pdf ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 Beta_pdf。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1b94f661973d1ec89fe7f60edc9063b8c0f36d3c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6ef26e3a24d7bc6f1d4cd50f74ca83d0a1d21dab
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349188"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245489"
 ---
 # <a name="beta_pdf"></a>beta_pdf()
 
@@ -27,25 +27,25 @@ Beta 分佈常用於研究不同樣本 (例如人們在一天不同時段內花�
 
 ## <a name="syntax"></a>語法
 
-`beta_pdf(`*x* `, `*Alpha* `, `搶鮮*版*`)`
+`beta_pdf(`*x* `, `*Alpha* `, `*Beta 版*`)`
 
 ## <a name="arguments"></a>引數
 
-* *x*：要在其上評估函數的值。
-* *Alpha*：分佈的參數。
-* 搶鮮*版（Beta*）：散發的參數。
+* *x*：要評估函數的值。
+* *Alpha*：散發的參數。
+* *Beta*：分佈的參數。
 
 ## <a name="returns"></a>傳回
 
-* 機率搶鮮[版（Beta）密度函數](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function)。
+* 機率 [測試密度函數](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function)。
 
 **備註**
 
-如果有任何引數是非數值，Beta_pdf （）會傳回 null 值。
+如果有任何引數不是數值，Beta_pdf ( # A1 會傳回 null 值。
 
-如果 x ≤0或1≤ x，Beta_pdf （）會傳回 NaN 值。
+如果 x ≤0或1≤ x，Beta_pdf ( # A1 會傳回 NaN 值。
 
-如果 Alpha ≤0或 Beta ≤0，Beta_pdf （）會傳回 NaN 值。
+如果 Alpha ≤0或 Beta ≤0，Beta_pdf ( # A1 會傳回 NaN 值。
 
 ## <a name="examples"></a>範例
 
@@ -66,9 +66,9 @@ datatable(x:double, alpha:double, beta:double, comment:string)
 |0.5|10|20|有效的輸入|0.746176019310951|
 |1.5|10|20|x > 1，產生 NaN|NaN|
 |-10|10|20|x < 0，產生 NaN|NaN|
-|0.1|-1|20|Alpha < 0，產生 NaN|NaN|
+|0.1|-1|20|Alpha 是 < 0，產生 NaN|NaN|
 
 **參考**
 
-* 如需計算搶鮮版（Beta）累計機率密度函數的反函數，請參閱[Beta-inv （）](./beta-invfunction.md)。
-* 如需標準累計 Beta 散發函式，請參閱搶鮮[版（Beta）-cdf （）](./beta-cdffunction.md)。
+* 如需計算搶鮮版（Beta）累計機率密度函數的反向，請參閱 [Beta-inv ( # B1 ](./beta-invfunction.md)。
+* 如需標準的累計搶鮮版（Beta）散發功能，請參閱 [Beta-cdf ( # B1 ](./beta-cdffunction.md)。

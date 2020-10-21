@@ -4,18 +4,18 @@ description: 本文說明如何在 Azure 資料總管中分割及撰寫匯總的
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 30d4f6bd315b5a32c67570ab16b9abc3160f0177
-ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
+ms.openlocfilehash: cc36b6358b6428a905e8d315c830ea011952a325
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91954479"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245630"
 ---
 # <a name="using-hll-and-tdigest"></a>使用 hll() 和 tdigest()
 

@@ -1,23 +1,23 @@
 ---
-title: trim （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 trim （）。
+title: 'trim ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 trim ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a28ca267612bef68c676118331b3010a8c947e36
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a5a8bf4884bf6c493c1b3b960fce64fe143ed52e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350633"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251899"
 ---
 # <a name="trim"></a>trim()
 
-移除指定之正則運算式的所有開頭和結尾相符專案。
+移除指定之正則運算式的所有開頭和尾端相符專案。
 
 ## <a name="syntax"></a>語法
 
@@ -25,16 +25,16 @@ ms.locfileid: "87350633"
 
 ## <a name="arguments"></a>引數
 
-* *RegEx*：要從開頭和/或*文字*結尾修剪的字串或[正則運算式](re2.md)。  
+* *RegEx*：要從*文字*開頭和/或結尾修剪的字串或[正則運算式](re2.md)。  
 * *text*：字串。
 
 ## <a name="returns"></a>傳回
 
-修剪比對開始和/或*文字*結尾處找到的*RegEx*相符專案之後的*文字*。
+修剪後的*文字*會在*文字*開頭和/或結尾找到的*RegEx*相符。
 
 ## <a name="example"></a>範例
 
-語句鈴會從*string_to_trim*的開頭和結尾修剪*子字串*：
+語句下方從*string_to_trim*的開頭和結尾修剪*子字串*：
 
 ```kusto
 let string_to_trim = @"--https://bing.com--";
@@ -46,7 +46,7 @@ print string_to_trim = string_to_trim, trimmed_string = trim(substring,string_to
 |---|---|
 |--https://bing.com--|https://bing.com|
 
-下一個語句會從字串的開頭和結尾修剪所有非文字字元：
+下一個語句會修剪字串開頭和結尾的所有非文字字元：
 
 ```kusto
 range x from 1 to 5 step 1

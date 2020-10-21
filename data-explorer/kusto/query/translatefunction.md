@@ -1,24 +1,24 @@
 ---
-title: 翻譯（）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的轉譯（）。
+title: '轉譯 ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明如何在 Azure 資料總管中轉譯 ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2019
-ms.openlocfilehash: d0e99048f3f1b0e3ce5c6c59a65ea645b22d15fe
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5d186172a0be1780347dbf89600c200c00687291
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87340049"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252035"
 ---
 # <a name="translate"></a>translate()
 
-在指定的字串中，以另一組字元（' replacementList '）取代一組字元（' searchList '）。
-函式會搜尋 ' searchList ' 中的字元，並將其取代為 ' replacementList ' 中的對應字元
+以指定字串中 ( ' replacementList ' ) 的另一組字元來取代一組字元 ( ' searchList ' ) 。
+函數會搜尋 ' searchList ' 中的字元，並以 ' replacementList ' 中的對應字元取代它們
 
 ## <a name="syntax"></a>語法
 
@@ -32,7 +32,7 @@ ms.locfileid: "87340049"
 
 ## <a name="returns"></a>傳回
 
-將 ' replacementList ' 中所有字元的 ocurrences 取代為 ' searchList ' 中的對應字元之後的*文字*
+以 ' searchList ' 中的對應字元取代 ' replacementList ' 中的所有字元 ocurrences 之後的*文字*
 
 ## <a name="examples"></a>範例
 

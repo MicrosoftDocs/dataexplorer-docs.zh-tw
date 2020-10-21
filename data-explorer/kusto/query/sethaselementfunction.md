@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 set_has_element。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: b62e5032d6f2ccedc2883b6cbccaf7be69e1cebf
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: b32fd7361d98c47c8e93814db6b794a762fad1cf
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103516"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247196"
 ---
 # <a name="set_has_element"></a>set_has_element()
 

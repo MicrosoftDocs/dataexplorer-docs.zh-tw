@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 series_less。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: d6ed6f073b1b1aa93b5767c46459a7c8a7b4bf55
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: ccf5638c2393ca4fbd63474d93c60d96972580fd
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103529"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251535"
 ---
 # <a name="series_less"></a>series_less()
 
