@@ -1,31 +1,31 @@
 ---
-title: series_periods_validate （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 series_periods_validate （）。
+title: 'series_periods_validate ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 series_periods_validate。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: 24b47981e90c15e8a0f295d845ca28a03f324a88
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: dbf87c65668289e58fab7280a4b70f04152bcba8
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351296"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242028"
 ---
 # <a name="series_periods_validate"></a>series_periods_validate()
 
 檢查時間序列是否包含指定長度的定期模式。  
 
-測量應用程式流量的度量通常是以每週或每日的時間來區分。 這段期間可以藉由執行 `series_periods_validate()` 檢查每週和每日時間來確認。
+測量應用程式流量的計量通常是以每週或每日期間為特徵。 您可以藉由執行 `series_periods_validate()` 每週和每日一次的檢查來確認這段時間。
 
-函式會採用包含時間序列動態陣列的資料行（通常是[make 系列](make-seriesoperator.md)運算子的結果輸出），以及一或多個 `real` 定義要驗證之期間長度的數位，做為輸入。
+此函式會以包含時間序列動態陣列的資料行作為輸入， (通常是產生 [序列](make-seriesoperator.md) 運算子) 的輸出，以及 `real` 定義要驗證之期間長度的一或多個數位。
 
-函式會輸出兩個數據行：
-* *期間*：包含要驗證之期間（在輸入中提供）的動態陣列。
-* *分數*：動態陣列，其中包含介於0和1之間的分數。 分數會顯示句點陣列中其各自位置的*某個期間的*重要性。
+此函數會輸出兩個數據行：
+* *句號*：動態陣列，包含輸入) 中所提供的驗證 (期間。
+* *分數*：包含0和1之間分數的動態陣列。 分數會顯示 *句號陣列中* 其各自位置的某個期間的重要性。
 
 ## <a name="syntax"></a>語法
 
@@ -33,19 +33,19 @@ ms.locfileid: "87351296"
 
 ## <a name="arguments"></a>引數
 
-* *x*：動態陣列純量運算式，這是數值的陣列，通常是[make 系列](make-seriesoperator.md)或[make_list](makelist-aggfunction.md)運算子的結果輸出。
-* *period1*、 *period2*等等： `real` 指定要驗證之期間的數位（以 bin 大小的單位表示）。 例如，如果數列位於1h 的 bin 中，則每週期間為168的 bin。
+* *x*：動態陣列純量運算式，這是數值的陣列，通常是 [構成數列](make-seriesoperator.md) 或 [make_list](makelist-aggfunction.md) 運算子的結果輸出。
+* *period1*、 *period2*等： `real` 指定要驗證之期間（以 bin 大小為單位）的數位。 例如，如果數列在 1h bin 中，則每週期間是168的 bin。
 
 > [!IMPORTANT]
-> * 每個*period*引數的最小值為**4** ，而上限為輸入數列長度的一半。 對於超出這些界限的*period*引數，輸出分數將為**0**。
+> * 每個 *期間* 引數的最大值為 **4** ，而最大值為輸入數列長度的一半。 若為這些界限以外的 *句號* 引數，輸出分數將會是 **0**。
 >
-> * 輸入時間序列必須是一般的，也就是在常數的 bin 中匯總，而且如果是使用[make 系列](make-seriesoperator.md)所建立，則一律為大小寫。 否則，輸出就沒有意義。
+> * 輸入時間序列必須是一般的，也就是在常數 bin 中匯總，而且如果是使用 [make 系列](make-seriesoperator.md)建立的，則一律是大小寫。 否則，輸出就沒有意義。
 > 
-> * 函式最多可接受16個週期來進行驗證。
+> * 函數最多可接受16個期間來進行驗證。
 
 ## <a name="example"></a>範例
 
-下列查詢會內嵌應用程式流量的一個月快照集，每日匯總兩次（bin 大小為12小時）。
+下列查詢會內嵌一個月的應用程式流量快照集，每日匯總兩次 (分類大小為12小時) 。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -54,9 +54,9 @@ print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77
 | render linechart 
 ```
 
-:::image type="content" source="images/series-periods/series-periods.png" alt-text="數列期間":::
+:::image type="content" source="images/series-periods/series-periods.png" alt-text="系列期間":::
 
-如果您 `series_periods_validate()` 在此系列上執行以驗證每週期間（14個點長），則會產生高分數，而當您驗證5天的期間（10點長）時，其分數為**0** 。
+如果您 `series_periods_validate()` 在此系列上執行以驗證每週期間 (14 點) 它會導致高度分數，並在您驗證五天期間（ (10 個點的長) ）時，將會有 **0** 分數。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -65,6 +65,6 @@ print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77
 | project series_periods_validate(y, 14.0, 10.0)
 ```
 
-| 數列 \_ 週期 \_ 驗證 \_ y \_ 期間  | 數列 \_ 週期 \_ 驗證 \_ y \_ 分數 |
+| 數列 \_ 期間 \_ 驗證 \_ y \_ 句號  | 數列 \_ 期間 \_ 驗證 \_ y \_ 分數 |
 |-------------|-------------------|
 | [14.0，10.0] | [0.84，0.0]  |

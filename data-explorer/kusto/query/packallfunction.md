@@ -1,26 +1,26 @@
 ---
 title: 'pack_all ( # A1-Azure 資料總管 |Microsoft Docs'
-description: '本文說明 Azure 資料總管中的 pack_all ( # A1。'
+description: '本文描述 Azure 資料總管中 ( # A1 pack_all。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0c4ce80c00df4c9c6e257fbe1f8a93802f54438e
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 547c9960d9a9f04e57f1b5ff0cdebada449b1b4b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87802939"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249707"
 ---
 # <a name="pack_all"></a>pack_all()
 
-`dynamic`從表格式運算式的所有資料行建立物件 (屬性包) 。
+`dynamic`從表格式運算式的所有資料行，建立 (屬性包) 的物件。
 
 > [!NOTE]
-> 傳回之物件的標記法不保證會在執行之間以位元組層級相容。 例如，出現在包中的屬性可能會以不同的順序出現。
+> 傳回的物件標記法不保證在執行之間是位元組層級相容的。 例如，出現在包中的屬性可能會以不同的順序出現。
 
 ## <a name="syntax"></a>語法
 

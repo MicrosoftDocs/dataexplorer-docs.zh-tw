@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
-ms.openlocfilehash: 04b1f53ad16d8658d3a12d36370261afac02fe86
-ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
+ms.openlocfilehash: 7471173a510fb391ff8af1455b172786072d2618
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/15/2020
-ms.locfileid: "92098416"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243580"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Azure 資料總管資料內嵌總覽 
 
@@ -117,13 +117,13 @@ Azure 資料總管會提供可用於查詢和資料擷取的 SDK。 程式設計
 |[**Azure 資料流程**](kusto/tools/flow.md) | | | | 將命令內嵌為流程的一部分| 必須有高效能的回應時間 |
 | [**IoT 中樞**](ingest-data-iot-hub-overview.md) | [支援的資料格式](ingest-data-iot-hub-overview.md#data-format)  | N/A | 批次處理，串流 | IoT 訊息、IoT 事件、IoT 屬性 | |
 | [**事件中樞**](ingest-data-event-hub-overview.md) | [支援的資料格式](ingest-data-event-hub-overview.md#data-format) | N/A | 批次處理，串流 | 訊息、事件 | |
-| [**事件方格**](ingest-data-event-grid-overview.md) | [支援的資料格式](ingest-data-event-grid-overview.md#data-format) | 1 GB 未壓縮 | 批次處理 | 從 Azure 儲存體持續內嵌，Azure 儲存體中的外部資料 | 100 KB 是最佳的檔案大小，用於 blob 重新命名和建立 blob |
-| [**Net Std**](net-standard-ingest-data.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
+| [**Event Grid**](ingest-data-event-grid-overview.md) | [支援的資料格式](ingest-data-event-grid-overview.md#data-format) | 1 GB 未壓縮 | 批次處理 | 從 Azure 儲存體持續內嵌，Azure 儲存體中的外部資料 | 100 KB 是最佳的檔案大小，用於 blob 重新命名和建立 blob |
+| [**.NET SDK**](net-standard-ingest-data.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**Python**](python-ingest-data.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**Node.js**](node-ingest-data.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注 | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**Java**](kusto/api/java/kusto-java-client-library.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 | [**REST**](kusto/api/netfx/kusto-ingest-client-rest.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接| 根據組織需求撰寫您自己的程式碼 |
-| [**去**](kusto/api/golang/kusto-golang-client-library.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
+| [**Go**](kusto/api/golang/kusto-golang-client-library.md) | 支援的所有格式 | 1 GB 未壓縮 (請參閱附注)  | 批次處理、串流、直接 | 根據組織需求撰寫您自己的程式碼 |
 
 > [!Note] 
 > 在上表中參考時，內嵌支援的檔案大小上限為 4 GB。 建議內嵌 100 MB 和 1 GB 之間的檔案。

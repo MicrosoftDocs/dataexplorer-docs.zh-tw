@@ -1,19 +1,19 @@
 ---
-title: binary_not （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 binary_not （）。
+title: 'binary_not ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 binary_not。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b0672652836edce82be0fc13cd17d6d5d6fe5b62
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: e514f8ce7ee53262c1ef82b650c7ad620151a689
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349069"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243524"
 ---
 # <a name="binary_not"></a>binary_not()
 

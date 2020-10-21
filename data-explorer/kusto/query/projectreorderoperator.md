@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的專案重新排序運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 98887c8044be6ea1b429c51953c6f3f9a899d090
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 7bcb33d30bdfdbd22b28dbb7364427cfa3a81a5b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87802956"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242135"
 ---
 # <a name="project-reorder-operator"></a>project-reorder operator
 
@@ -30,11 +30,11 @@ T | project-reorder Col2, Col1, Col* asc
 ## <a name="arguments"></a>引數
 
 * *T*：輸入資料表。
-* *ColumnNameOrPattern：* 加入至輸出的資料行或資料行萬用字元模式的名稱。
-* 針對萬用字元模式：以 `asc` `desc` 遞增或遞減順序使用其名稱來指定或排序資料行。 如果 `asc` `desc` 未指定或，則順序是由符合來源資料表中的資料行所決定。
+* *ColumnNameOrPattern：* 加入至輸出之資料行或資料行萬用字元模式的名稱。
+* 針對萬用字元模式： `asc` `desc` 使用名稱的遞增或遞減順序來指定或排序資料行。 如果 `asc` `desc` 指定或未指定，則順序是由相符的資料行所決定，因為它們出現在來源資料表中。
 
 > [!NOTE]
-> * 在不明確的*ColumnNameOrPattern*比對中，資料行會出現在符合模式的第一個位置。
+> * 在不明確的 *ColumnNameOrPattern* 比對中，該資料行會出現在符合模式的第一個位置。
 > * 指定的資料行 `project-reorder` 是選擇性的。 未明確指定的資料行會顯示為輸出資料表的最後一個資料行。
 > * 用 [`project-away`](projectawayoperator.md) 來移除資料行。
 > * 用 [`project-rename`](projectrenameoperator.md) 來重新命名資料行。
@@ -42,11 +42,11 @@ T | project-reorder Col2, Col1, Col* asc
 
 ## <a name="returns"></a>傳回
 
-包含依運算子引數所指定順序之資料行的資料表。 `project-reorder`不會重新命名或移除資料表中的資料行，因此，存在於來源資料表中的所有資料行都會出現在結果資料表中。
+資料表，其中包含以運算子引數所指定之順序的資料行。 `project-reorder` 不會重新命名或移除資料表中的資料行，因此，存在於來源資料表中的所有資料行都會出現在結果資料表中。
 
 ## <a name="examples"></a>範例
 
-重新排列具有三個數據行的資料表 (a、b、c) ，讓第二個數據行 (b) 會先出現。
+使用三個數據行重新排序資料表， (a，b，c) ，因此第二個數據行 (b) 將會先出現。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -58,7 +58,7 @@ print a='a', b='b', c='c'
 |---|---|---|
 |b|a|c|
 
-重新排列資料表的資料行，讓以開頭的資料行 `a` 出現在其他資料行之前。
+重新排列資料表的資料行，讓開頭為的資料行 `a` 會出現在其他資料行之前。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -66,6 +66,6 @@ print b = 'b', a2='a2', a3='a3', a1='a1'
 |  project-reorder a* asc
 ```
 
-|賦值|a2|a3|b|
+|旁|答|3|b|
 |---|---|---|---|
-|賦值|a2|a3|b|
+|旁|答|3|b|

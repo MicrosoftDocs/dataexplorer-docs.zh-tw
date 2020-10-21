@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 series_decompose。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 9ff0df578f174bc6964e39e799b91068f89a28e4
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: 2e2c2811dfa4e5b895f0c5b14a9a45b64c2a9291
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793941"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242171"
 ---
 # <a name="series_decompose"></a>series_decompose()
 
@@ -104,7 +104,7 @@ ts
 | render timechart  
 ```
 
-:::image type="content" source="images/samples/series-decompose2.png" alt-text="數列分解2":::
+:::image type="content" source="images/samples/series-decompose2.png" alt-text="數列分解1":::
 
 接下來，我們會重新執行相同的範例。 由於我們預期序列中會有趨勢，因此我們 `linefit` 在 trend 參數中指定。 我們可以看到偵測到正面的趨勢，且基準與輸入數列較接近。 殘差會接近零，而且只有極端值會脫離。我們可以在圖表中看到數列上的所有元件。
 
@@ -121,4 +121,4 @@ ts
 | render timechart  
 ```
 
-:::image type="content" source="images/samples/series-decompose3.png" alt-text="數列分解3":::
+:::image type="content" source="images/samples/series-decompose3.png" alt-text="數列分解1":::

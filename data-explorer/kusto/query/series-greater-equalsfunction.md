@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 series_greater_equals。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 9eaf28787fb3d4ad37408235430559620d876a82
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 97727da3dca342b53881a34b85c47f8e7bb13f9f
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103577"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250044"
 ---
 # <a name="series_greater_equals"></a>series_greater_equals()
 

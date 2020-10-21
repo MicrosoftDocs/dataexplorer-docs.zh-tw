@@ -1,33 +1,33 @@
 ---
-title: stdevp （）（彙總函式）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 stdevp （）（彙總函式）。
+title: 'stdevp ( # A1 (彙總函式) -Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 stdevp ( # A1 (彙總函式) 。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c5dffc8695df466dfc1ac9f0c5bcc4a40f687b2a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 16ae0e297dacefb3a9cc8bc7efb579393d89c968
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87342711"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243834"
 ---
-# <a name="stdevp-aggregation-function"></a>stdevp （）（彙總函式）
+# <a name="stdevp-aggregation-function"></a>stdevp ( # A1 (彙總函式) 
 
-計算每個群組中的*Expr*標準差，並考慮將群組視為[擴展。](https://en.wikipedia.org/wiki/Statistical_population) 
+在群組中計算 *Expr* 的標準差，並考慮將群組視為 [人口](https://en.wikipedia.org/wiki/Statistical_population)。 
 
-* 使用的公式：
+* 使用公式：
 
 :::image type="content" source="images/stdevp-aggfunction/stdev-population.png" alt-text="Stdev 人口":::
 
-* 只能在[匯總](summarizeoperator.md)的內容中使用
+* 只能用在[摘要內匯總](summarizeoperator.md)的內容中
 
 ## <a name="syntax"></a>語法
 
-總結 `stdevp(` *Expr*`)`
+摘要 `stdevp(` *運算式*`)`
 
 ## <a name="arguments"></a>引數
 
@@ -35,7 +35,7 @@ ms.locfileid: "87342711"
 
 ## <a name="returns"></a>傳回
 
-整個群組的*Expr*標準差值。
+整個群組中 *Expr* 的標準差值。
  
 ## <a name="examples"></a>範例
 

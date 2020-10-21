@@ -4,36 +4,36 @@ description: '本文說明 Azure 資料總管中的 bin ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bb6c7c51e295f9af9d6e43a5de5936dfea13f5b6
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 9bafeee9cec5ac81034b879f054e445d8b118dcf
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201673"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243420"
 ---
 # <a name="bin"></a>bin()
 
 將值捨入為指定 bin 大小的整數倍數。 
 
-常用於搭配使用 [`summarize by ...`](./summarizeoperator.md) 。
+經常用於與搭配使用 [`summarize by ...`](./summarizeoperator.md) 。
 如果您有一組零散值，這些值會分組為一組較小的特定值。
 
-Null 值、null 的 bin 大小或負的 bin 大小會產生 null。 
+Null 值、null bin 大小或負的 bin 大小將會產生 null。 
 
-函式 `floor()` 的別名。
+`floor()`函數的別名。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `bin(`*值* `,`*roundTo*`)`
 
 ## <a name="arguments"></a>引數
 
-* *值*：數位、日期或 timespan。 
-* *roundTo*：「bin 大小」。 將 *值*相除的數位或 timespan。 
+* *值*： number、date 或 timespan。 
+* *roundTo*：「bin 大小」。 相除 *值*的數位或 timespan。 
 
 ## <a name="returns"></a>傳回
 

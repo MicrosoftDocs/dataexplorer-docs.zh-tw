@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的 mv-apply 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4fb1ca893f80c045432715cd99e2dc4ea3d18c2a
-ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
+ms.openlocfilehash: c15b3aaf14c9f859c3d93c48406ec642897e59d4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92169518"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243217"
 ---
 # <a name="mv-apply-operator"></a>mv-apply 運算子
 
@@ -57,7 +57,7 @@ T | mv-apply Metric to typeof(real) on
 
 `mv-apply`運算子可視為運算子的一般化 [`mv-expand`](./mvexpandoperator.md) (事實上，如果子查詢只包含投影，則後者可以由前者執行。 ) 
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 *T* `|` `mv-apply` [*ItemIndex*] *ColumnsToExpand* [*RowLimit*] `on` `(` *子查詢*`)`
 
