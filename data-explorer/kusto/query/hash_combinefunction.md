@@ -1,19 +1,19 @@
 ---
-title: hash_combine （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 hash_combine （）。
+title: 'hash_combine ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 hash_combine。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/19/2019
-ms.openlocfilehash: f71a0d0cdfa4fe0ca8cdb84e65a271ee42bc7dc7
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 91a178ded007ff75d96ed73f864276aa7d193d8c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347607"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92244770"
 ---
 # <a name="hash_combine"></a>hash_combine()
 
@@ -27,11 +27,11 @@ ms.locfileid: "87347607"
 
 * *h1*：代表第一個雜湊值的 Long 值。
 * *h2*：代表第二個雜湊值的 Long 值。
-* *hN*：代表 n 個雜湊值的 Long 值。
+* *hN*：代表第 n 個雜湊值的 Long 值。
 
 ## <a name="returns"></a>傳回
 
-給定純量的結合雜湊值。
+給定純量的合併雜湊值。
 
 ## <a name="examples"></a>範例
 
@@ -42,6 +42,6 @@ print value1 = "Hello", value2 = "World"
 | extend combined = hash_combine(h1, h2)
 ```
 
-|value1|value2|h1|h2|混|
+|value1|value2|h1|h2|聯合|
 |---|---|---|---|---|
 |您好|World|753694413698530628|1846988464401551951|-1440138333540407281|

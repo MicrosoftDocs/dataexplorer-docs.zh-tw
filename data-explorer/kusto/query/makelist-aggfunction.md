@@ -4,16 +4,16 @@ description: '本文說明 Azure 資料總管中 ( # A1 (彙總函式) make_list
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: ecfcaa39195caec06184b966403bd6655a00b714
-ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
+ms.openlocfilehash: f5a4c16f1f259de457ef963f2a400d6c9fd79727
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92169535"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246380"
 ---
 # <a name="make_list-aggregation-function"></a>make_list ( # A1 (彙總函式) 
 
@@ -21,7 +21,7 @@ ms.locfileid: "92169535"
 
 * 只能用在[摘要內匯總](summarizeoperator.md)的內容中
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `summarize``make_list(` *Expr* [ `,` *MaxSize*]`)`
 

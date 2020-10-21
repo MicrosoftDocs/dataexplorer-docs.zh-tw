@@ -1,29 +1,29 @@
 ---
-title: binary_all_xor （）（彙總函式）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 binary_all_xor （）（彙總函式）。
+title: 'binary_all_xor ( # A1 (彙總函式) -Azure 資料總管'
+description: '本文說明 Azure 資料總管中 ( # A1 (彙總函式) binary_all_xor。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/06/2020
-ms.openlocfilehash: c2fab7abbcebdc97f6f1c394f840bf6e232db03a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7aa83f7c214c7bc45892ff1064a09dd84240b5f4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349103"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246720"
 ---
-# <a name="binary_all_xor-aggregation-function"></a>binary_all_xor （）（彙總函式）
+# <a name="binary_all_xor-aggregation-function"></a>binary_all_xor ( # A1 (彙總函式) 
 
-`XOR`針對每個摘要群組使用二元運算來累積值（如果沒有群組則執行摘要作業則為 total）。
+使用 `XOR` 每個摘要群組的二進位運算來累積值 (或總計，以在沒有群組) 的情況下完成摘要。
 
-* 只能在[匯總](summarizeoperator.md)的內容中使用
+* 只能用在[摘要內匯總](summarizeoperator.md)的內容中
 
 ## <a name="syntax"></a>語法
 
-總結 `binary_all_xor(` *Expr*`)`
+摘要 `binary_all_xor(` *運算式*`)`
 
 ## <a name="arguments"></a>引數
 
@@ -31,11 +31,11 @@ ms.locfileid: "87349103"
 
 ## <a name="returns"></a>傳回
 
-傳回一個值，其使用 `XOR` 每個摘要群組之記錄的二進位運算來匯總（如果沒有群組，則會匯總）。
+傳回值，這個值會在 `XOR` 每個摘要群組 (或總計的記錄上，使用二進位運算來匯總，如果未分組) ，則會進行匯總。
 
 ## <a name="example"></a>範例
 
-使用二元運算來產生「咖啡館-食物」 `XOR` ：
+使用二元運算來產生「咖啡館」-食物 `XOR` ：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

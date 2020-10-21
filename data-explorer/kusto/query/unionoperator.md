@@ -4,18 +4,18 @@ description: 本文說明 Azure 資料總管中的 union 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 4995c989b04df5dd66e20e3405b5fb7da7c739ce
-ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
+ms.openlocfilehash: b3b7d571662d8a9ed0fd592547f32a131d26e277
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91954700"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245745"
 ---
 # <a name="union-operator"></a>union 運算子
 
@@ -51,7 +51,7 @@ Table1 | union Table2, Table3
 預設為 `isfuzzy=` `false`。
 * *UnionParameters*：零個或多個 (空間分隔) 參數的格式， *Name*這些參數是控制資料列比對作業 `=` 和執行計畫行為的名稱*值*形式。 支援下列參數： 
 
-  |Name           |值                                        |描述                                  |
+  |名稱           |值                                        |描述                                  |
   |---------------|----------------------------------------------|---------------------------------------------|
   |`hint.concurrency`|*Number*|提示系統 `union` 應平行執行運算子的並行子查詢數目。 *預設值*：叢集中單一節點上的 CPU 核心數量 (2 到 16) 。|
   |`hint.spread`|*Number*|提示系統，並行子查詢執行應使用的節點數目 `union` 。 *預設值*：1。|
@@ -144,7 +144,7 @@ union isfuzzy=true
 | count 
 ```
 
-|Count|
+|計數|
 |---|
 |2|
 
@@ -159,7 +159,7 @@ union isfuzzy=true View*, SomeView*, OtherView*
 | count 
 ```
 
-|Count|
+|計數|
 |---|
 |3|
 

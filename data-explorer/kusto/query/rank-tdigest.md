@@ -1,23 +1,23 @@
 ---
-title: rank_tdigest （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 rank_tdigest （）。
+title: 'rank_tdigest ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 rank_tdigest。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 143257a586bb951caeb116882551e55f89c8636e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: bc0fff9d70c8260781332be61c701aaaca364555
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345873"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92244847"
 ---
 # <a name="rank_tdigest"></a>rank_tdigest()
 
-計算集合中值的近似順位。 集合中的值次序 `v` `S` 定義為 `S` 較小或等於的成員計數，由 `v` `S` 其代表 `tdigest` 。
+計算集合中值的大致順位。 集合中值的次序 `v` `S` 定義為 `S` 小於或等於之成員的計數，以 `v` `S` 其表示 `tdigest` 。
 
 ## <a name="syntax"></a>語法
 
@@ -25,20 +25,20 @@ ms.locfileid: "87345873"
 
 ## <a name="arguments"></a>引數
 
-* *TDigest*：由[TDigest （）](tdigest-aggfunction.md)或[tdigest_merge （）](tdigest-merge-aggfunction.md)所產生的運算式
-* *Expr*：代表要用於排序計算之值的運算式。
+* *TDigest*： TDigest 所產生的運算式 [ ( # B1 ](tdigest-aggfunction.md) 或 [tdigest_merge ( # B3 ](tdigest-merge-aggfunction.md)
+* *Expr*：運算式，表示要用於排名計算的值。
 
 ## <a name="returns"></a>傳回
 
-資料集中的 rank foreach 值。
+資料集中的排名 foreach 值。
 
 **提示**
 
-1) 您想要取得其順位的值，其類型必須與相同 `tdigest` 。
+1) 您要取得其排名的值必須與相同的類型 `tdigest` 。
 
 ## <a name="examples"></a>範例
 
-在排序清單（1-1000）中，685的順位是其索引：
+在排序的清單中 (1-1000) ，685的次序是其索引：
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -51,7 +51,7 @@ range x from 1 to 1000 step 1
 |-------------|
 |`685`        |
 
-此查詢會計算所有損害屬性成本的值 $4490 排名：
+此查詢會計算所有損毀屬性成本的值 $4490 排名：
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -65,7 +65,7 @@ StormEvents
 |--------------|
 |`50207`       |
 
-取得順位的預估百分比（除以集合大小）：
+藉由除以 set 大小) ，取得排名 (的估計百分比：
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

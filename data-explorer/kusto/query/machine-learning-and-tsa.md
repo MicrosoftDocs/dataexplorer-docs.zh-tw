@@ -1,21 +1,21 @@
 ---
-title: 時間序列分析 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 數據資源管理器中的時間序列分析。
+title: 時間序列分析-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的時間序列分析。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/06/2019
-ms.openlocfilehash: 1b57886e4e11bda9f0093616550ca3cbbbf0745b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 79857813c55fdc3af7224a7fd4e780ebf381f2bc
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513000"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246439"
 ---
 # <a name="time-series-analysis"></a>時間序列分析 
 
-Kusto 查詢語言作為本機數據類型提供串聯支援。
-運算符 make 系列將資料轉換為系列資料類型,並提供一系列函數,用於進階處理此資料類型。 這些功能包括數據清理、機器學習建模和異常值檢測。
+Kusto 查詢語言以原生資料類型的形式提供序列支援。
+Operator make 系列會將資料轉換成數列資料類型，並提供一系列函數來進行此資料類型的先進處理。 這些函式包括資料清理、機器學習模型和極端偵測。

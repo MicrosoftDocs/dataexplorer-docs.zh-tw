@@ -4,16 +4,16 @@ description: '本文說明 Azure 資料總管中 ( # A1 (彙總函式) make_set_
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 262676e2ee40b619c4984a23c23818c493aad47a
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 8fd126728c93cfdfca677c059c338c9fd8f7a155
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103052"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246344"
 ---
 # <a name="make_set_if-aggregation-function"></a>make_set_if ( # A1 (彙總函式) 
 
