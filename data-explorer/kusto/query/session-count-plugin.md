@@ -1,23 +1,23 @@
 ---
 title: session_count 外掛程式-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 session_count 外掛程式。
+description: 本文說明 Azure 資料總管中 session_count 外掛程式。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c46430fe7acc75685b90d2322d709392c91ed6dc
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0790a3ab173bc653cbd3c4c15b3f28e5a0c70cd5
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351211"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252907"
 ---
 # <a name="session_count-plugin"></a>session_count plugin
 
-根據 ID 資料行，計算時間軸上的會話計數。
+依據時間軸上的識別碼資料行計算會話計數。
 
 ```kusto
 T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday(now()), 1min, 30min, dim1, dim2, dim3)
@@ -25,41 +25,41 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 
 ## <a name="syntax"></a>語法
 
-*T* `| evaluate` `session_count(` *IdColumn* `,` *TimelineColumn* `,` *開始* `,` *結束* `,` *Bin* `,` *LookBackWindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
+*T* `| evaluate` `session_count(` *IdColumn* `,` *TimelineColumn* `,` *Start* `,` *End* `,` *Bin* `,` *LookBackWindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
 ## <a name="arguments"></a>引數
 
 * *T*：輸入表格式運算式。
-* *IdColumn*：識別碼值代表使用者活動的資料行名稱。 
+* *IdColumn*：具有代表使用者活動之識別碼值的資料行名稱。 
 * *TimelineColumn*：代表時間軸的資料行名稱。
-* *Start*：流量分析開始期間的值進行純量。
-* *End*：以分析結束期間的值為純量。
+* *啟動*：具有分析開始期間值的純量值。
+* *End*：具有分析結束期間值的純量值。
 * *Bin*：會話分析步驟期間的純量常數值。
-* *LookBackWindow*：代表會話回顧期間的純量常數值。 如果的識別碼 `IdColumn` 出現在的時間範圍內 `LookBackWindow` ，則會話會被視為現有的會話。 如果識別碼未出現，則會話會被視為新的。
-* *dim1*， *dim2*，...：（選擇性）分割會話計數計算的維度資料行清單。
+* *LookBackWindow*：代表會話回顧期間的純量常數值。 如果中的識別碼 `IdColumn` 出現在的時間範圍內 `LookBackWindow` ，則會將該會話視為現有的。 如果未顯示識別碼，則會將會話視為新的。
+* *dim1*， *dim2*，...： () 選用的維度資料行清單來分割會話計數計算。
 
 ## <a name="returns"></a>傳回
 
-傳回資料表，其中包含每個時間軸時間和每個現有維度組合的會話計數值。
+傳回資料表，其中包含每個時間軸期間的會話計數值，以及每個現有維度組合的會話計數值。
 
 輸出資料表架構為：
 
 |*TimelineColumn*|dim1|..|dim_n|count_sessions|
 |---|---|---|---|---|--|--|--|--|--|--|
-|類型：從*TimelineColumn*|..|..|..|long|
+|類型： *TimelineColumn*的|..|..|..|long|
 
 
 ## <a name="examples"></a>範例
 
 在此範例中，資料具有決定性，而且我們使用具有兩個數據行的資料表：
-- 時間軸：從1到10000的執行數位
+- 時間軸：從1到10000的執行中數位
 - 識別碼：從1到50的使用者識別碼
 
-`Id`如果是的 `Timeline` 分割線 `Timeline` （時間軸% Id = = 0），則會出現在特定位置。
+`Id``Timeline`如果是 `Timeline` (時間軸% Id = = 0) 的分隔線，則會出現在特定位置。
 
-具有的事件 `Id==1` 會出現在任何位置 `Timeline` 、 `Id==2` 每個第二個插槽的事件 `Timeline` ，依此類推。
+具有的事件 `Id==1` 會出現在任何位置 `Timeline` 、 `Id==2` 每個第二個位置的事件， `Timeline` 依此類推。
 
-以下是一些20行的資料：
+以下是20行資料：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -97,7 +97,7 @@ _data
 |8|4|
 |8|8|
 
-讓我們在下一個詞彙定義會話：只要使用者（ `Id` ）在100時段的時間範圍內至少出現一次，會話就會被視為作用中，而會話的查閱視窗則是41的時間位置。
+讓我們在下個詞彙中定義會話：只要使用者 (`Id`) 至少出現一次（在100個時間範圍內），而會話查閱視窗是41時間位置時，就會將會話視為作用中。
 
 下一個查詢會根據上述定義來顯示作用中會話的計數。
 

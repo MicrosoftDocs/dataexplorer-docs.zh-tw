@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: a96e47eeb8c0a27ffb1f1446b68d6adc8e564e4b
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: 8f56568f87c391122b468d7f3ae8027eabe4641e
+ms.sourcegitcommit: 9dbbdf0c339f9af78d754e3fb44b9a4f2469003a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610639"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92292845"
 ---
 # <a name="kustoexplorer-installation-and-user-interface"></a>Kusto. Explorer 安裝和使用者介面
 
@@ -26,10 +26,12 @@ Kusto.Explorer 是一個豐富的桌面應用程式，可讓您在便於使用�
 
 ## <a name="installing-kustoexplorer"></a>安裝 Kusto.Explorer
 
-* 從 [https://aka.ms/ke](https://aka.ms/ke) 下載並安裝 Kusto.Explorer 工具
+* 從下列來源下載並安裝 Kusto.Explorer 工具：
+     * [https://aka.ms/ke](https://aka.ms/ke) (CDN 位置)
+     * [https://aka.ms/ke-mirror](https://aka.ms/ke-mirror) (非 CDN 位置)
 
-* 請改為在下列位置使用瀏覽器存取您的 Kusto 叢集：`https://<your_cluster>.kusto.windows.net.`
-   以您的 Azure 資料總管叢集名稱取代 &lt;your_cluster&gt;。
+* 請改為在下列位置使用瀏覽器存取您的 Kusto 叢集：`https://<your_cluster>.<region>.kusto.windows.net.`
+   以您的 Azure 資料總管叢集名稱和部署區域取代 &lt;your_cluster&gt; 和&lt;區域&gt;。
 
 ### <a name="using-chrome-and-kustoexplorer"></a>使用 Chrome 和 Kusto.Explorer
 
@@ -63,7 +65,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ### <a name="home-tab"></a>首頁索引標籤
 
-:::image type="content" source="images/kusto-explorer/home-tab.png" alt-text="Kusto Explorer 首頁索引標籤":::
+:::image type="content" source="images/kusto-explorer/home-tab.png" alt-text="Kusto Explorer 啟動":::
 
 [首頁] 索引標籤會顯示最近使用的功能，分為幾個區段：
 
@@ -75,7 +77,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ### <a name="query-section"></a>查詢區段
 
-:::image type="content" source="images/kusto-explorer/home-query-menu.png" alt-text="查詢功能表 Kusto Explorer":::
+:::image type="content" source="images/kusto-explorer/home-query-menu.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表|    行為|
 |----|----------|
@@ -84,7 +86,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ### <a name="share-section"></a>共用區段
 
-:::image type="content" source="images/kusto-explorer/home-share-menu.png" alt-text="Kusto Explorer 共用功能表":::
+:::image type="content" source="images/kusto-explorer/home-share-menu.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表|    行為|
 |----|----------|
@@ -94,7 +96,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ### <a name="visualizations-section"></a>視覺效果區段
 
-:::image type="content" source="images/kusto-explorer/home-visualizations-menu.png" alt-text="Kusto Explorer 功能表視覺效果":::
+:::image type="content" source="images/kusto-explorer/home-visualizations-menu.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表         | 行為|
 |-------------|---------|
@@ -118,7 +120,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ### <a name="view-section"></a>檢視區段
 
-:::image type="content" source="images/kusto-explorer/home-view-menu.png" alt-text="Kusto Explorer 檢視功能表":::
+:::image type="content" source="images/kusto-explorer/home-view-menu.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表           | 行為|
 |---------------|---------|
@@ -136,7 +138,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ## <a name="file-tab"></a>[檔案] 索引標籤
 
-:::image type="content" source="images/kusto-explorer/file-tab.png" alt-text="Kusto Explorer 檔案索引標籤":::
+:::image type="content" source="images/kusto-explorer/file-tab.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表| 行為|
 |---------------|---------|
@@ -164,7 +166,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ## <a name="connections-tab"></a>連線索引標籤
 
-:::image type="content" source="images/kusto-explorer/connections-tab.png" alt-text="Kusto Explorer 連線索引標籤":::
+:::image type="content" source="images/kusto-explorer/connections-tab.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表|行為|
 |----|----------|
@@ -189,7 +191,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ## <a name="view-tab"></a>檢視索引標籤
 
-:::image type="content" source="images/kusto-explorer/view-tab.png" alt-text="Kusto Explorer 檢視索引標籤":::
+:::image type="content" source="images/kusto-explorer/view-tab.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表|行為|
 |----|----------|
@@ -218,7 +220,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ## <a name="tools-tab"></a>[Tools] \(工具\) 索引標籤
 
-:::image type="content" source="images/kusto-explorer/tools-tab.png" alt-text="Kusto Explorer 工具索引標籤":::
+:::image type="content" source="images/kusto-explorer/tools-tab.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表|行為|
 |----|----------|
@@ -238,7 +240,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ## <a name="monitoring-tab"></a>監視索引標籤
 
-:::image type="content" source="images/kusto-explorer/monitoring-tab.png" alt-text="Kusto Explorer 監視索引標籤":::
+:::image type="content" source="images/kusto-explorer/monitoring-tab.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表             | 行為|
 |-----------------|---------| 
@@ -249,7 +251,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ## <a name="management-tab"></a>管理索引標籤
 
-:::image type="content" source="images/kusto-explorer/management-tab.png" alt-text="Kusto Explorer 管理索引標籤":::
+:::image type="content" source="images/kusto-explorer/management-tab.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表             | 行為|
 |-----------------|---------|
@@ -261,7 +263,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ## <a name="help-tab"></a>說明索引標籤
 
-:::image type="content" source="images/kusto-explorer/help-tab.png" alt-text="Kusto Explorer 說明索引標籤":::
+:::image type="content" source="images/kusto-explorer/help-tab.png" alt-text="Kusto Explorer 啟動":::
 
 |功能表             | 行為|
 |-----------------|---------|
@@ -274,7 +276,7 @@ Kusto.Explorer [功能表] 面板包含下列索引標籤：
 
 ## <a name="connections-panel"></a>連線面板
 
-:::image type="content" source="images/kusto-explorer/connections-panel.png" alt-text="Kusto Explorer 連線面板":::
+:::image type="content" source="images/kusto-explorer/connections-panel.png" alt-text="Kusto Explorer 啟動":::
 
 [連線] 窗格會顯示所有已設定的叢集連線。 針對每個叢集，會顯示其儲存的資料庫、資料表和屬性 (資料行)。 選取項目 (在主面板中設定搜尋/查詢的隱含內容)，或按兩下項目以將名稱複製到搜尋/查詢面板。
 
@@ -309,7 +311,7 @@ Data Source=https://CLUSTER_NAME.kusto.windows.net;Initial Catalog=DATABASE_NAME
 >[!NOTE]
 > 使用者的網域名稱不一定與主控叢集的租用戶名稱相同。
 
-:::image type="content" source="images/kusto-explorer/advanced-connection-string.png" alt-text="Kusto Explorer 進階連接字串":::
+:::image type="content" source="images/kusto-explorer/advanced-connection-string.png" alt-text="Kusto Explorer 啟動":::
 
 ## <a name="keyboard-shortcuts"></a>鍵盤快速鍵
 
@@ -321,7 +323,7 @@ Kusto.Explorer 會嘗試解譯結果面板中每個資料列的嚴重性和詳�
 
 若要修改輸出色彩配置，或關閉此行為，請從 [工具] 功能表中選取 [選項]  >  [結果檢視器]  >  [詳細程度色彩配置]。
 
-:::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Kusto Explorer 色彩配置修改":::
+:::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Kusto Explorer 啟動":::
 
 ## <a name="next-steps"></a>後續步驟
 

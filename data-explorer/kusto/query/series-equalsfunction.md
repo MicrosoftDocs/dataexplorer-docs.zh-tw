@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 series_equals。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 55da6ece7e99537b4107c3ae03c428c8e234d1bf
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: ffc474ab4415fd8258a4167098450d72f3a9567b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103603"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92253205"
 ---
 # <a name="series_equals"></a>series_equals()
 

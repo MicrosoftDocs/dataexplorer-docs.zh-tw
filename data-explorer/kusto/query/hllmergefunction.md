@@ -1,25 +1,25 @@
 ---
-title: hll_merge （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 hll_merge （）。
+title: 'hll_merge ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 hll_merge。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: ecf16a714b0466a7ffc2da7b69f117383c90970e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6bf364106bef8fbe626f96c22502dae748884180
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347522"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252967"
 ---
 # <a name="hll_merge"></a>hll_merge()
 
-合併 `hll` 結果（匯總版本的純量版本 [`hll_merge()`](hll-merge-aggfunction.md) ）。
+合併 `hll` 結果 (純量版本) 的純量版本 [`hll_merge()`](hll-merge-aggfunction.md) 。
 
-閱讀[基礎演算法（*H*Yper*l*og*l*og）和估計精確度](dcount-aggfunction.md#estimation-accuracy)的相關資訊。
+深入瞭解 [基礎演算法 (*H*Yper*l*og*l*og) 和估計精確度](dcount-aggfunction.md#estimation-accuracy)。
 
 ## <a name="syntax"></a>語法
 
@@ -31,7 +31,7 @@ ms.locfileid: "87347522"
 
 ## <a name="returns"></a>傳回
 
-將資料行 `*Exrp1*` （ `*Expr2*` ，...）合併 `*ExprN*` 成一個值的結果 `hll` 。
+將資料行 [...] 合併為 `*Exrp1*` `*Expr2*` `*ExprN*` 一個 `hll` 值的結果。
 
 ## <a name="examples"></a>範例
 

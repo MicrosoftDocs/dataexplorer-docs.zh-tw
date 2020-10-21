@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 Beta_cdf。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b500f5f0e727fde315bea8d77ab60f600f127271
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 16365c7445ca5436098028cbfbe5709e5b425a38
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103412"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92253101"
 ---
 # <a name="beta_cdf"></a>beta_cdf()
 

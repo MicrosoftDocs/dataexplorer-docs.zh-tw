@@ -1,23 +1,23 @@
 ---
-title: zip （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 zip （）。
+title: 'zip ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 zip ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 28fc477d4dfc5432434261e493f36985514ea28b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 33b914babb8c197f997326cd6dd44654c05d1d9d
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350548"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92253142"
 ---
 # <a name="zip"></a>zip()
 
-函式 `zip` 會接受任意數目的 `dynamic` 陣列，並傳回陣列，其專案為每個陣列，其中包含相同索引之輸入陣列的元素。
+此函式 `zip` 會接受任意數目的 `dynamic` 陣列，並傳回陣列，其專案為每個陣列，其中每一個陣列都包含相同索引的輸入陣列元素。
 
 ## <a name="syntax"></a>語法
 

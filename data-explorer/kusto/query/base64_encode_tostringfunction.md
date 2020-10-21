@@ -1,19 +1,19 @@
 ---
-title: base64_encode_tostring （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 base64_encode_tostring （）。
+title: 'base64_encode_tostring ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 base64_encode_tostring。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: 218f87a3c11695c4aa8135f98b0c445580de9ad0
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6fca71cbc7cf33f49a9f4698553391a84ddbb728
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349256"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252665"
 ---
 # <a name="base64_encode_tostring"></a>base64_encode_tostring()
 
@@ -25,14 +25,14 @@ ms.locfileid: "87349256"
 
 ## <a name="arguments"></a>引數
 
-* *String*：要編碼為 base64 字串的輸入字串。
+* *字串*：要編碼為 base64 字串的輸入字串。
 
 ## <a name="returns"></a>傳回
 
 傳回編碼為 base64 字串的字串。
 
-* 若要將 base64 字串解碼為 UTF-8 字串，請參閱[base64_decode_tostring （）](base64_decode_tostringfunction.md)
-* 若要將 base64 字串解碼為 long 值陣列，請參閱[base64_decode_toarray （）](base64_decode_toarrayfunction.md)
+* 若要將 base64 字串解碼為 UTF-8 字串，請參閱 [base64_decode_tostring ( # B1 ](base64_decode_tostringfunction.md)
+* 若要將 base64 字串解碼為 long 值陣列，請參閱 [base64_decode_toarray ( # B1 ](base64_decode_toarrayfunction.md)
 
 
 ## <a name="example"></a>範例

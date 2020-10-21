@@ -1,23 +1,23 @@
 ---
-title: base64_decode_toarray （）-Azure 資料總管
-description: 本文說明 Azure 資料總管中的 base64_decode_toarray （）。
+title: 'base64_decode_toarray ( # A1-Azure 資料總管'
+description: '本文描述 Azure 資料總管中 ( # A1 base64_decode_toarray。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: 4cfe690b5ee2d32462552fb90300c9e3168b1f1d
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 34a4601c35acb9c95e09e49d201b2e1cddaace8c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349307"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252729"
 ---
 # <a name="base64_decode_toarray"></a>base64_decode_toarray()
 
-將 base64 字串解碼為 long 值的陣列。
+將 base64 字串解碼為 long 值陣列。
 
 ## <a name="syntax"></a>語法
 
@@ -25,14 +25,14 @@ ms.locfileid: "87349307"
 
 ## <a name="arguments"></a>引數
 
-* *String*：要從 base64 解碼成 UTF8 字串的輸入字串。
+* *字串*：要從 base64 解碼成 UTF8 字串的輸入字串。
 
 ## <a name="returns"></a>傳回
 
 傳回從 base64 字串解碼的 long 值陣列。
 
-* 若要將 base64 字串解碼為 UTF-8 字串，請參閱[base64_decode_tostring （）](base64_decode_tostringfunction.md)
-* 若要將字串編碼為 base64 字串，請參閱[base64_encode_tostring （）](base64_encode_tostringfunction.md)
+* 若要將 base64 字串解碼為 UTF-8 字串，請參閱 [base64_decode_tostring ( # B1 ](base64_decode_tostringfunction.md)
+* 若要將字串編碼為 base64 字串，請參閱 [base64_encode_tostring ( # B1 ](base64_encode_tostringfunction.md)
 
 ## <a name="example"></a>範例
 
@@ -46,13 +46,13 @@ print Quine=base64_decode_toarray("S3VzdG8=")
 |-----|
 |[75117115116111]|
 
-如果您嘗試將從無效 UTF-8 編碼所產生的 base64 字串解碼，則會傳回 "null"：
+如果您嘗試將從無效 UTF-8 編碼產生的 base64 字串解碼，將會傳回 "null"：
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print Empty=base64_decode_toarray("U3RyaW5n0KHR0tGA0L7Rh9C60LA=")
 ```
 
-|空白|
+|Empty|
 |-----|
 ||

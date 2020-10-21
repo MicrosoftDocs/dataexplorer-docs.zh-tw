@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: f67b2d61cfed297886447a97dd178dfb578a2c68
-ms.sourcegitcommit: 463ee13337ed6d6b4f21eaf93cf58885d04bccaa
+ms.openlocfilehash: 95f8ce19c6edb419de4fb5053a79c243e3e332c4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/30/2020
-ms.locfileid: "91572138"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252835"
 ---
 # <a name="create-materialized-view"></a>.create materialized-view
 
@@ -47,9 +47,9 @@ ms.locfileid: "91572138"
 
 |引數|類型|描述
 |----------------|-------|---|
-|ViewName|字串|具體化視圖名稱。 視圖名稱無法與相同資料庫中的資料表或函數名稱衝突，而且必須遵守 [識別碼命名規則](../../query/schema-entities/entity-names.md#identifier-naming-rules)。 |
-|SourceTableName|字串|定義此視圖的來源資料表名稱。|
-|查詢|字串|具體化 view 查詢。 如需詳細資訊，請參閱 [查詢](#query-argument)。|
+|ViewName|String|具體化視圖名稱。 視圖名稱無法與相同資料庫中的資料表或函數名稱衝突，而且必須遵守 [識別碼命名規則](../../query/schema-entities/entity-names.md#identifier-naming-rules)。 |
+|SourceTableName|String|定義此視圖的來源資料表名稱。|
+|查詢|String|具體化 view 查詢。 如需詳細資訊，請參閱 [查詢](#query-argument)。|
 
 ### <a name="query-argument"></a>查詢引數
 
@@ -82,10 +82,10 @@ ms.locfileid: "91572138"
 
 |屬性|類型|描述 |
 |----------------|-------|---|
-|回填|bool|是否要根據目前在 *SourceTable* () 中的所有記錄來建立視圖 `true` ，或從 [從現在開始] (`false`) 建立。 預設為 `false`。| 
-|effectiveDateTime|日期時間| 如果與一起指定 `backfill=true` ，則只會建立回填，並在日期時間之後內嵌記錄。 回填也必須設定為 true。 需要日期時間常值，例如 `effectiveDateTime=datetime(2019-05-01)`|
+|回填|bool|是否要根據目前在 *SourceTable* () 中的所有記錄來建立視圖 `true` ，或從 [從現在開始] (`false`) 建立。 預設值為 `false`。| 
+|effectiveDateTime|Datetime| 如果與一起指定 `backfill=true` ，則只會建立回填，並在日期時間之後內嵌記錄。 回填也必須設定為 true。 需要日期時間常值，例如 `effectiveDateTime=datetime(2019-05-01)`|
 |dimensionTables|Array|View 中的維度資料表清單（以逗號分隔）。 請參閱 [查詢引數](#query-argument)
-|autoUpdateSchema|bool|是否要在來源資料表變更時自動更新視圖。 預設為 `false`。 只有 `arg_max(Timestamp, *)`  /  `arg_min(Timestamp, *)`  /  `any(*)` 在) 資料行引數時，此選項才適用于 (類型的視圖 `*` 。 如果此選項設定為 true，則來源資料表的變更將會自動反映在具體化視圖中。
+|autoUpdateSchema|bool|是否要在來源資料表變更時自動更新視圖。 預設值為 `false`。 只有 `arg_max(Timestamp, *)`  /  `arg_min(Timestamp, *)`  /  `any(*)` 在) 資料行引數時，此選項才適用于 (類型的視圖 `*` 。 如果此選項設定為 true，則來源資料表的變更將會自動反映在具體化視圖中。
 |folder|字串|具體化視圖的資料夾。|
 |docString|字串|記錄具體化視圖的字串|
 
@@ -161,14 +161,14 @@ ms.locfileid: "91572138"
 
     <!-- csl -->
     ```
-    .create materialized-view EnrichedArgMax on table T with (dimensionTable = ['DimUsers'])
+    .create materialized-view EnrichedArgMax on table T with (dimensionTables = ['DimUsers'])
     {
         T
         | lookup DimUsers on User  
         | summarize arg_max(Timestamp, *) by User 
     }
     
-    .create materialized-view EnrichedArgMax on table T with (dimensionTable = ['DimUsers'])
+    .create materialized-view EnrichedArgMax on table T with (dimensionTables = ['DimUsers'])
     {
         DimUsers | project User, Age, Address
         | join kind=rightouter hint.strategy=broadcast T on User
@@ -298,8 +298,8 @@ ms.locfileid: "91572138"
 |輸出參數 |類型 |描述
 |---|---|---
 |OperationId|Guid|Create 具體化 view 命令的作業識別碼。
-|作業|字串|作業種類。
-|StartedOn|日期時間|建立作業的開始時間。
+|作業|String|作業種類。
+|StartedOn|Datetime|建立作業的開始時間。
 |CancellationState|字串|其中一個 `Cancelled successfully` (的建立已取消) ， `Cancellation failed` (等候取消超時) ， `Unknown` (視圖建立已不再執行，但這項作業) 尚未取消。
 |ReasonPhrase|字串|取消失敗的原因。
 

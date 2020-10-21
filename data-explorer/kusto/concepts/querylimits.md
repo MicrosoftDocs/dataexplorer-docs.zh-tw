@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 5bb05de1ad5a3a055201f42541927619777cafcd
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: d0f815cd523e0e53111e791d8faaaf6c37c7bb7b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793720"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252848"
 ---
 # <a name="query-limits"></a>查詢限制
 
@@ -26,7 +26,8 @@ Kusto 是一種臨機操作查詢引擎，可裝載大型資料集，並藉由�
 
 * 查詢平行存取限制的預設值取決於其執行所在的 SKU 叢集，且計算方式如下： `Cores-Per-Node x 10` 。
   * 例如，針對在 D14v2 SKU 上設定的叢集，其中每部電腦都有16虛擬核心，預設的查詢平行存取限制為 `16 cores x10 = 160` 。
-* 您可以藉由建立支援票證來變更預設值。 未來，此控制項也會透過 control 命令公開。
+* 您可以藉由設定 [查詢節流原則](../management/query-throttling-policy.md)來變更預設值。 
+  * 可在叢集上同時執行的實際查詢數目取決於各種因素。 最主要的因素包括叢集 SKU、叢集可用資源和查詢模式。 您可以根據在類似生產環境的查詢模式中執行的負載測試，來設定查詢節流原則。
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>結果集大小 (結果截斷的限制) 
 

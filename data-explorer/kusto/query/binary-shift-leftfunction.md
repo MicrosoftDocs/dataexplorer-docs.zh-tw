@@ -1,23 +1,23 @@
 ---
-title: binary_shift_left （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 binary_shift_left （）。
+title: 'binary_shift_left ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文描述 Azure 資料總管中 ( # A1 binary_shift_left。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 46d18bb5d1f661c5346f5ff825c9597088d3f5cf
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9f01f0178fa850009f6298446b02c9d4bd913bf8
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349035"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252611"
 ---
 # <a name="binary_shift_left"></a>binary_shift_left()
 
-傳回一對數位的 binary 位移 left 運算。
+傳回一對數位的二進位左移作業。
 
 ```kusto
 binary_shift_left(x,y)  
@@ -33,5 +33,5 @@ binary_shift_left(x,y)
 
 ## <a name="returns"></a>傳回
 
-傳回一對數位的 binary 位移 left 運算： num1 <<  （num2% 64）。
-如果 n 為負數，則會傳回 Null 值。
+傳回一對數位的二進位左移作業： num1 <<  (num2% 64) 。
+如果 n 是負數，則會傳回 Null 值。

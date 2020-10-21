@@ -4,34 +4,34 @@ description: 本文說明 Azure 資料總管中的 as 運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 857a48ab02ae04e68a8475b7109cebbb2275ca55
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 15dcf79938f4b83f18055b6f59a9b70998ab6049
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803296"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252806"
 ---
 # <a name="as-operator"></a>as 運算子
 
-將名稱系結至運算子的輸入表格式運算式，讓查詢可以多次參考表格式運算式的值，而不會破壞查詢並透過[let 語句](letstatement.md)系結名稱。
+將名稱系結至運算子的輸入表格式運算式，藉此讓查詢能多次參考表格式運算式的值，而不會中斷查詢並透過 [let 語句](letstatement.md)系結名稱。
 
 ## <a name="syntax"></a>語法
 
-*T* `|` `as` [ `hint.materialized` `=` `true` ]*名稱*
+*T* `|` `as` [ `hint.materialized` `=` `true` ] *名稱*
 
 ## <a name="arguments"></a>引數
 
 * *T*：表格式運算式。
 * *名稱*：表格式運算式的暫存名稱。
-* `hint.materialized`：如果設定為 `true` ，則會具體化表格式運算式的值，如同[具體化 ( # B1](./materializefunction.md)函式呼叫所包裝的。
+* `hint.materialized`：如果設定為 `true` ，則會將表格式運算式的值具體化為 [具體化 ( # B1 ](./materializefunction.md) 函式呼叫所包裝。
 
 > [!NOTE]
-> * 提供的名稱 `as` 將用於 union 的資料 `withsource=` 行、尋找[union](./unionoperator.md)的資料行 `source_` ，以及[find](./findoperator.md) `$table` [搜尋](./searchoperator.md)的資料行。
-> * 在[聯結](./joinoperator.md)的外部表格式輸入中使用運算子命名的表格式運算式 (`$left`) 也可以用於聯結的表格式內部輸入 (`$right`) 。
+> * 提供的名稱 `as` 將用於聯集的資料 `withsource=` 行、 [union](./unionoperator.md)尋找的資料行 `source_` ， [find](./findoperator.md)以及搜尋的資料 `$table` 行。 [search](./searchoperator.md)
+> * 在 [聯結](./joinoperator.md)的外部表格式輸入中使用運算子所命名的表格式運算式 (`$left`) 也可以用於聯結的表格式內部輸入 (`$right`) 。
 
 ## <a name="examples"></a>範例
 
