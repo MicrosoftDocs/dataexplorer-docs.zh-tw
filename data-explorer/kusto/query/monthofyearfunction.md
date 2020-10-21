@@ -1,25 +1,25 @@
 ---
-title: monthofyear （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 monthofyear （）。
+title: 'monthofyear ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 monthofyear ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: af015146bb2f07d83d4333312a96d5b80c67190a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: bd40612236b9c9b249c9c070bc784c518be0faae
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346723"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251000"
 ---
 # <a name="monthofyear"></a>monthofyear()
 
-傳回整數，代表指定年份的月份數。
+傳回整數值，代表指定年份的月數。
 
-另一個別名： getmonth （）
+另一個別名： getmonth ( # A1
 
 ```kusto
 monthofyear(datetime("2015-12-14"))
@@ -35,4 +35,4 @@ monthofyear(datetime("2015-12-14"))
 
 ## <a name="returns"></a>傳回
 
-`month number`指定年份。
+`month number` 在指定年份中。

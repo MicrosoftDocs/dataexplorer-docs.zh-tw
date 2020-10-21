@@ -4,16 +4,16 @@ description: '本文說明 Azure 資料總管中的 toguid ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 689ee6bf7b3fcb27dced20b06a9002659622902e
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: d122833f4797c8503dd41cc8ba861554d6924338
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87804129"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250381"
 ---
 # <a name="toguid"></a>toguid()
 
@@ -24,7 +24,7 @@ toguid("70fc66f7-8279-44fc-9092-d364d70fce44") == guid("70fc66f7-8279-44fc-9092-
 ```
 
 > [!NOTE]
-> 可能的話，最好使用[guid ( # B1](./scalar-data-types/guid.md) 。
+> 最好盡可能使用 [guid ( # B1 ](./scalar-data-types/guid.md) 。
 
 ## <a name="syntax"></a>語法
 
@@ -36,5 +36,5 @@ toguid("70fc66f7-8279-44fc-9092-d364d70fce44") == guid("70fc66f7-8279-44fc-9092-
 
 ## <a name="returns"></a>傳回
 
-如果轉換成功，則結果將會是純量 [`guid`](./scalar-data-types/guid.md) 。
-如果轉換不成功，則結果會是 `null` 。
+如果轉換成功，結果將會是純量 [`guid`](./scalar-data-types/guid.md) 。
+如果轉換不成功，結果將會是 `null` 。

@@ -1,23 +1,23 @@
 ---
-title: getyear （）-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的 getyear （）。
+title: 'getyear ( # A1-Azure 資料總管 |Microsoft Docs'
+description: '本文說明 Azure 資料總管中的 getyear ( # A1。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 032cc319661218e77d5b23e6c649de7d5856d6c9
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a820d05b453be7cc991f8068644d33ff990115fc
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347641"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251155"
 ---
 # <a name="getyear"></a>getyear()
 
-傳回引數的年部分 `datetime` 。
+傳回引數的年份部分 `datetime` 。
 
 ## <a name="example"></a>範例
 

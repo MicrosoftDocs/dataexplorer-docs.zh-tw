@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 parse_ipv4。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 48bfab2549da572efba117c21d783b35ac0202af
-ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
+ms.openlocfilehash: f5d65fa75a4f53bea7d27202c5aed2228c167bbd
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91954717"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250902"
 ---
 # <a name="parse_ipv4"></a>parse_ipv4()
 

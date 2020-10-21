@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的範例。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bc28fcb860dc067d55dd2e5ce9de3f3a17b402f2
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 0db8c472ed3b23a1bf46f8fce9cbd38b0ca960b3
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942313"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251028"
 ---
 # <a name="samples"></a>範例
 

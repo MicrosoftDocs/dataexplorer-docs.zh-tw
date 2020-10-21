@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的摘要操作員。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: 9514f7c94568e73a704e6ba6f4bcc5bf61590d2f
-ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
+ms.openlocfilehash: 1317f9767182ad76f226fae6995763ea832cd36a
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91954768"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250855"
 ---
 # <a name="summarize-operator"></a>summarize 運算子
 
@@ -65,17 +65,17 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 |函式|描述|
 |--------|-----------|
-|[任何 ( # B1 ](any-aggfunction.md)|傳回群組的隨機非空白值|
+|[any()](any-aggfunction.md)|傳回群組的隨機非空白值|
 |[anyif()](anyif-aggfunction.md)|使用述詞傳回群組 (的隨機非空白值) |
 |[arg_max()](arg-max-aggfunction.md)|當引數最大化時，傳回一或多個運算式|
 |[arg_min()](arg-min-aggfunction.md)|當引數最小化時，傳回一或多個運算式|
-|[avg ( # B1 ](avg-aggfunction.md)|傳回整個群組的平均值|
+|[avg()](avg-aggfunction.md)|傳回整個群組的平均值|
 |[avgif()](avgif-aggfunction.md)|使用述詞傳回整個群組 (的平均值) |
 |[binary_all_and](binary-all-and-aggfunction.md)|使用群組的二進位檔傳回匯總值 `AND`|
 |[binary_all_or](binary-all-or-aggfunction.md)|使用群組的二進位檔傳回匯總值 `OR`|
 |[binary_all_xor](binary-all-xor-aggfunction.md)|使用群組的二進位檔傳回匯總值 `XOR`|
 |[buildschema()](buildschema-aggfunction.md)|傳回認可輸入所有值的最基本架構 `dynamic`|
-|[計數 ( # B1 ](count-aggfunction.md)|傳回群組的計數|
+|[count()](count-aggfunction.md)|傳回群組的計數|
 |[countif()](countif-aggfunction.md)|傳回包含群組述詞的計數|
 |[dcount()](dcount-aggfunction.md)|傳回群組元素的近似相異計數|
 |[dcountif()](dcountif-aggfunction.md)|傳回與述詞 (之群組元素的近似相異計數) |
@@ -94,11 +94,11 @@ T | summarize count() by price_range=bin(price, 10.0)
 |[percentiles_array ( # B1 ](percentiles-aggfunction.md)|傳回群組的百分位數近似|
 |[percentilesw ( # B1 ](percentiles-aggfunction.md)|傳回群組的加權百分位數近似值|
 |[percentilesw_array ( # B1 ](percentiles-aggfunction.md)|傳回群組的加權百分位數近似|
-|[stdev ( # B1 ](stdev-aggfunction.md)|傳回整個群組的標準差|
+|[stdev()](stdev-aggfunction.md)|傳回整個群組的標準差|
 |[stdevif()](stdevif-aggfunction.md)|使用述詞傳回群組 (之間的標準差) |
-|[sum ( # B1 ](sum-aggfunction.md)|傳回群組內元素的總和|
+|[sum()](sum-aggfunction.md)|傳回群組內元素的總和|
 |[sumif()](sumif-aggfunction.md)|使用述詞傳回群組 (內元素的總和) |
-|[差異 ( # B1 ](variance-aggfunction.md)|傳回整個群組的變異數|
+|[variance()](variance-aggfunction.md)|傳回整個群組的變異數|
 |[varianceif()](varianceif-aggfunction.md)|使用述詞傳回群組 (之間的變異數) |
 
 ## <a name="aggregates-default-values"></a>匯總預設值

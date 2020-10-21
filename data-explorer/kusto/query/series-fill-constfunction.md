@@ -4,16 +4,16 @@ description: '本文描述 Azure 資料總管中 ( # A1 series_fill_const。'
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7e587ab08c009516788e3a44b0b8e4a321741d94
-ms.sourcegitcommit: 8853e50a798ee7c78b69bf9822bbf1ced3abe73c
+ms.openlocfilehash: d775b6029a7449912db16d5fc232c6eabd0996ff
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/25/2020
-ms.locfileid: "91227019"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250878"
 ---
 # <a name="series_fill_const"></a>series_fill_const()
 
@@ -21,7 +21,7 @@ ms.locfileid: "91227019"
 
 採用包含動態數值陣列的運算式做為輸入，以指定的 constant_value 取代 missing_value_placeholder 的所有實例，並傳回產生的陣列。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `series_fill_const(`*x* `, `*constant_value* `[,`*missing_value_placeholder*`])`
 * 會傳回數列 *x* ，其中所有的 *missing_value_placeholder* 實例都取代為 *constant_value*。

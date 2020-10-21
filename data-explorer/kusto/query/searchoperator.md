@@ -4,16 +4,16 @@ description: 本文說明 Azure 資料總管中的搜尋運算子。
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: edd35e5e259666e8ce4360c072aaac6717e6f8c3
-ms.sourcegitcommit: f9d3f54114fb8fab5c487b6aea9230260b85c41d
+ms.openlocfilehash: 24e79b7feeb51a0626ed270a90c3d323fa94cbf3
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/18/2020
-ms.locfileid: "85071874"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250273"
 ---
 # <a name="search-operator"></a>search 運算子
 
@@ -25,17 +25,17 @@ ms.locfileid: "85071874"
 
 ## <a name="arguments"></a>引數
 
-* *TabularSource*：選擇性的表格式運算式，做為要搜尋的資料來源，例如資料表名稱、聯[集運算子](unionoperator.md)、表格式查詢的結果等等。不能與包含*TableSources*的選擇性片語一起出現。
+* *TabularSource*：選擇性的表格式運算式，作為要搜尋的資料來源，例如資料表名稱、等位 [運算子](unionoperator.md)、表格式查詢的結果等等。不可與包含 *TableSources*的選擇性片語一起出現。
 
-* *CaseSensitivity*：選擇性的旗標，可控制所有純量 `string` 運算子與區分大小寫相關的行為。 有效值為兩個同義字 `default` 和 `case_insensitive` （這是運算子的預設值，也就是不 `has` 區分大小寫）和 `case_sensitive` （這會強制所有這類運算子都符合區分大小寫的比對模式）。
+* *CaseSensitivity*：選擇性旗標，可控制所有純量運算子的行為（ `string` 區分大小寫）。 有效的值是兩個同義字 `default` 和 `case_insensitive` (，這是運算子的預設值，也就是不區分 `has` 大小寫的) 和 `case_sensitive` (，它會強制所有這類運算子符合區分大小寫的比對模式) 。
 
-* *TableSources*：以逗號分隔的選擇性清單，其中包含要在搜尋中參與的「萬用字元」資料表名稱。
-  此清單與聯[集運算子](unionoperator.md)的清單具有相同的語法。
-  不能與選擇性的*TabularSource*一起出現。
+* *TableSources*：選擇性的逗號分隔清單，其中包含要參與搜尋的 "萬用字元" 資料表名稱。
+  此清單具有與 [union 運算子](unionoperator.md)清單相同的語法。
+  無法與選擇性的 *TabularSource*一起出現。
 
-* *SearchPredicate*：必要的述詞，定義要搜尋的內容（換句話說，是針對輸入中每一筆記錄評估的布林運算式，如果傳回 `true` ，則會輸出記錄）。*SearchPredicate*的語法會擴充及修改布林運算式的一般 Kusto 語法：
+* *SearchPredicate*：定義要在其中搜尋 (的強制述詞，也就是針對輸入中的每一筆記錄評估的布林運算式，如果傳回 `true` ，則會輸出記錄。 ) 的語法可延伸和修改*SearchPredicate*布林運算式的一般 Kusto 語法：
 
-  **字串符合延伸**模組：在*SearchPredicate*中顯示為詞彙的字串常值，會使用 `has` 、 `hasprefix` 、 `hassuffix` 和這些運算子的反向（ `!` ）或區分大小寫（ `sc` ）版本，來表示所有資料行與常值之間的字詞相符。 決定要套用、或，取決於常值是以 `has` `hasprefix` `hassuffix` 星號（）開頭或結尾（或兩者） `*` 。 不允許常值內的星號。
+  **字串**比對延伸：在 *SearchPredicate* 中顯示為詞彙的字串常值，會使用 `has` 、、以及 `hasprefix` `hassuffix` 反向 (`!`) 或區分大小寫 `sc` 的 () 版本的運算子，來表示所有資料行與常值之間的詞彙相符。 要套用、或是否要套用 `has` 、 `hasprefix` 或 `hassuffix` 取決於常值開始或結束 (，還是) 星號 (`*`) 。 不允許常值中的星號。
 
     |常值   |運算子   |
     |----------|-----------|
@@ -45,20 +45,20 @@ ms.locfileid: "85071874"
     |`*billg*` |`contains` |
     |`bi*lg`   |`matches regex`|
 
-  資料**行限制**：根據預設，字串相符的延伸會嘗試比對資料集的所有資料行。 您可以使用下列語法，將此比對限制為特定資料行： *ColumnName* `:` *StringLiteral*。
+  資料**行限制**：根據預設，字串相符的副檔名會嘗試比對資料集的所有資料行。 您可以使用下列語法，將此比對限制為特定資料行： *ColumnName* `:` *StringLiteral*。
 
-  **字串相等**：可以使用 StringLiteral 語法*ColumnName*來完成資料行與字串值的完全相符（而不是符合字詞） `==` * *。
+  **字串相等**：符合字串值的資料行完全相符 (而不是符合詞彙的) 可以使用 StringLiteral 語法 ColumnName 來完成*ColumnName* `==` * *。
 
-  **其他布林運算式**：語法支援所有一般的 Kusto 布林運算式。
-    例如， `"error" and x==123` 表示：搜尋其任何資料行中具有詞彙的記錄 `error` ，並在資料行中具有值 `123` `x` 。
+  **其他布林運算式**：語法支援所有一般 Kusto 布林運算式。
+    例如， `"error" and x==123` 表示搜尋具有 `error` 任何資料行中之詞彙的記錄，並在資料 `123` 行中包含值 `x` 。
 
-  **Regex match**：使用*Column* StringLiteral 語法表示正則運算式比 `matches regex` *StringLiteral*對，其中*StringLiteral*是 Regex 模式。
+  **Regex 相符**：正則運算式比對會使用資料 *行* `matches regex` *StringLiteral* 語法來表示，其中 *StringLiteral* 是 Regex 模式。
 
-請注意，如果省略*TabularSource*和*TableSources* ，則會在範圍內的資料庫所有不受限制的資料表和視圖上執行搜尋。
+請注意，如果省略 *TabularSource* 和 *TableSources* ，則會對範圍中資料庫的所有不受限制的資料表和資料檢視執行搜尋。
 
-## <a name="summary-of-string-matching-extensions"></a>字串符合延伸模組的摘要
+## <a name="summary-of-string-matching-extensions"></a>字串相符擴充功能的摘要
 
-  |# |語法                                 |意義（對等 `where` ）           |註解|
+  |# |語法                                 |表示 (相等的 `where`)            |註解|
   |--|---------------------------------------|---------------------------------------|--------|
   | 1|`search "err"`                         |`where * has "err"`                    ||
   | 2|`search in (T1,T2,A*) and "err"`       |<code>union T1,T2,A* &#124; where * has "err"<code>   ||
@@ -76,10 +76,10 @@ ms.locfileid: "85071874"
 
 ## <a name="remarks"></a>備註
 
-**不同**于[find 運算子](findoperator.md)， `search` 運算子不支援下列各項：
+**不同** 于 [find 運算子](findoperator.md)， `search` 運算子不支援下列各項：
 
-1. `withsource=`：輸出一律會包含類型的資料行， `$table` `string` 其值為從中抓取每一筆記錄的資料表名稱（如果來源不是資料表，則為某些系統產生的名稱）。
-2. `project=`、 `project-smart` ：輸出架構相當於 `project-smart` 輸出架構。
+1. `withsource=`：輸出一律會包含名為的資料行，其中的 `$table` `string` 值是從中抓取每一筆記錄的資料表名稱 (或某些系統產生的名稱（如果來源不是資料表，但複合運算式) ）。
+2. `project=``project-smart`：輸出架構相當於 `project-smart` 輸出架構。
 
 ## <a name="examples"></a>範例
 
@@ -109,9 +109,9 @@ search in (C*, TF) "billg" or "davec" or "steveb"
 union C*, TF | search "billg" or "davec" or "steveb"
 ```
 
-## <a name="performance-tips"></a>效能提示
+## <a name="performance-tips"></a>效能祕訣
 
   |# |提示                                                                                  |偏好                                        |超過                                                                    |
   |--|-------------------------------------------------------------------------------------|----------------------------------------------|------------------------------------------------------------------------|
   | 1| 偏好在 `search` 數個連續運算子上使用單一運算子 `search`|`search "billg" and ("steveb" or "satyan")`   |<code>search "billg" &#124; search "steveb" or "satyan"<code>           ||
-  | 2| 偏好在運算子內進行篩選 `search`                                       |`search "billg" and "steveb"`                 |<code>search * &#124; where * has "billg" and * has "steveb"<code>      ||
+  | 2| 偏好在運算子內篩選 `search`                                       |`search "billg" and "steveb"`                 |<code>search * &#124; where * has "billg" and * has "steveb"<code>      ||
