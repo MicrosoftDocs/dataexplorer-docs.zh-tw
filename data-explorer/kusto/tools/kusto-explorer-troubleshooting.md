@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 9a697cfd37590f0368d5a8f0bacf91d02e1c8725
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 365ce1e4c8e5dd2157a7975095b9e30dfd1e3722
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92003161"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342700"
 ---
 # <a name="troubleshooting"></a>疑難排解
 
@@ -143,12 +143,12 @@ Following errors were detected during this operation.
 * `Your administrator has blocked this application because it potentially poses a security risk to your computer`.
 * `Your security settings do not allow this application to be installed on your computer.`
 
-#### <a name="solution"></a>解決方案
+#### <a name="solution"></a>解決方法
 
 此徵兆可能是因為另一個應用程式正在覆寫預設的 ClickOnce 信任提示行為。 
 1. 查看您的預設設定。
 1. 將您的設定與您電腦上的實際設定進行比較。
-1. 視需要重設您的設定，如 [這篇](https://docs.microsoft.com/visualstudio/deployment/how-to-configure-the-clickonce-trust-prompt-behavior)操作說明文章所述。
+1. 視需要重設您的設定，如 [這篇](/visualstudio/deployment/how-to-configure-the-clickonce-trust-prompt-behavior)操作說明文章所述。
 
 ### <a name="cleanup-application-data"></a>清除應用程式資料
 
@@ -183,4 +183,4 @@ Following errors were detected during this operation.
 
 * 深入瞭解 [Kusto. Explorer 使用者介面](kusto-explorer.md#overview-of-the-user-interface)
 * 瞭解如何 [從命令列執行 Kusto](kusto-explorer-using.md#kustoexplorer-command-line-arguments)
-* 瞭解 [Kusto Query Language (KQL) ](https://docs.microsoft.com/azure/kusto/query/)
+* 瞭解 [Kusto Query Language (KQL) ](../query/index.md)

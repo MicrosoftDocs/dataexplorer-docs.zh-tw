@@ -7,12 +7,12 @@ ms.reviewer: prvavill
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/31/2020
-ms.openlocfilehash: 630b03fc0e89005f1031aba4cbd1a86d803ff275
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 0fe11b4218f86d501c88e6a217f9ae867a17f5f4
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942024"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343465"
 ---
 # <a name="monitor-azure-data-explorer-using-resource-health-preview"></a>使用資源健康狀態 (Preview 來監視 Azure 資料總管) 
 
@@ -42,7 +42,7 @@ ms.locfileid: "91942024"
 
 :::image type="content" source="media/monitor-with-resource-health/available.png" alt-text="Azure 資料總管資源的資源健康狀態頁面螢幕擷取畫面。狀態會列出為 [可用]，並會反白顯示。" border="false":::
 
-### <a name="unavailable"></a>[無法使用]
+### <a name="unavailable"></a>無法使用
 
 健全狀況狀態為 [ **無法使用** ] 表示 Azure 資料總管資源發生問題，導致無法在查詢和內嵌時使用。 例如，Azure 資料總管資源中的節點可能未預期地重新開機。 如果您的 Azure 資料總管資源在一段長時間內仍維持此狀態，請聯絡 [支援]()人員。
 
@@ -68,6 +68,6 @@ ms.locfileid: "91942024"
 
 ## <a name="next-steps"></a>後續步驟
 
-* [設定資源健康狀態警示](https://docs.microsoft.com/azure/service-health/resource-health-alert-arm-template-guide)
+* [設定資源健康狀態警示](/azure/service-health/resource-health-alert-arm-template-guide)
 * [教學課程：在 Azure 資料總管中內嵌和查詢監視資料](ingest-data-no-code.md)
 * [使用計量來監視 Azure 資料總管效能、健康情況和使用量](using-metrics.md)

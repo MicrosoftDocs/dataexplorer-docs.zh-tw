@@ -7,12 +7,12 @@ ms.reviewer: dorcohen
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/25/2020
-ms.openlocfilehash: 7c40d6b1f62014e8ede6ed3328dd3a3974d41a88
-ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
+ms.openlocfilehash: 72d092683b490c7b58335abc59fd5e3aea2f3e26
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90740298"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342938"
 ---
 # <a name="azure-data-explorer-connector-to-power-automate-preview"></a>Azure 資料總管連接器以 Power Automate (預覽) 
 
@@ -40,7 +40,7 @@ Azure 資料總管 Power Automate (之前的 Microsoft Flow) 連接器，可讓 
 您可以使用使用者認證進行驗證，或使用 Azure Active Directory (Azure AD) 應用程式進行驗證。
 
 > [!Note]
-> 確定您的應用程式是 [Azure AD 的應用程式](kusto/management/access-control/how-to-provision-aad-app.md)，而且已獲授權在您的叢集上執行查詢。
+> 確定您的應用程式是 [Azure AD 的應用程式](./provision-azure-ad-app.md)，而且已獲授權在您的叢集上執行查詢。
 
 1. 在 [執行控制] 命令中，將 **結果視覺化，然後**選取 flow 連接器右上方的三個點。
 
@@ -95,7 +95,7 @@ Azure 資料總管 Power Automate (之前的 Microsoft Flow) 連接器，可讓 
 
 使用這個動作來執行 [控制項命令](kusto/management/index.md)。
 
-1. 指定叢集 URL。 例如，`https://clusterName.eastus.kusto.windows.net`。
+1. 指定叢集 URL。 例如： `https://clusterName.eastus.kusto.windows.net` 。
 1. 輸入資料庫的名稱。
 1. 指定控制命令：
    * 從流程中使用的應用程式和連接器選取動態內容。

@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: c20e18a31105dca584ebe35198462e8755cf8dc4
-ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
+ms.openlocfilehash: f14601f1893542bac22612b383b558df3b2999bb
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92175716"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343210"
 ---
 # <a name="create-a-connection-to-event-hub"></a>建立事件中樞的連線
 
-[Azure 事件中樞](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) 是大型的資料串流平臺和事件內嵌服務。 Azure 資料總管可從客戶管理的事件中樞提供連續的內嵌。
+[Azure 事件中樞](/azure/event-hubs/event-hubs-about) 是大型的資料串流平臺和事件內嵌服務。 Azure 資料總管可從客戶管理的事件中樞提供連續的內嵌。
 
 事件中樞內嵌管線會以數個步驟將事件傳輸至 Azure 資料總管。 您會先在 Azure 入口網站中建立事件中樞。 然後，您會在 Azure 中建立目標資料表，資料總管將會使用指定的內嵌[屬性](#set-ingestion-properties)內嵌[特定格式的資料](#data-format)。 事件中樞連接需要知道 [事件路由](#set-events-routing)。 資料會根據 [事件系統屬性對應](#set-event-system-properties-mapping)，以選取的屬性內嵌。 [建立](#create-event-hub-connection) 事件中樞的連線，以 [建立事件中樞](#create-an-event-hub) 並 [傳送事件](#send-events)。 您可以透過 [Azure 入口網站](ingest-data-event-hub.md)、使用 [c #](data-connection-event-hub-csharp.md) 或 [Python](data-connection-event-hub-python.md)以程式設計方式，或使用 [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)來管理此程式。
 
@@ -25,7 +25,7 @@ ms.locfileid: "92175716"
 
 ## <a name="data-format"></a>資料格式
 
-* 會以 [EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata?view=azure-dotnet) 物件的形式從事件中樞讀取資料。
+* 會以 [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata?view=azure-dotnet) 物件的形式從事件中樞讀取資料。
 * 請參閱 [支援的格式](ingestion-supported-formats.md)。
     > [!NOTE]
     > 事件中樞不支援 raw 格式。
@@ -36,24 +36,24 @@ ms.locfileid: "92175716"
   
 ## <a name="set-ingestion-properties"></a>設定內嵌屬性
 
-內嵌屬性會指示內嵌進程、路由資料的位置，以及如何處理它。 您可以使用[EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)來指定內嵌事件的內嵌[屬性](ingestion-properties.md)。 您可以設定下列屬性：
+內嵌屬性會指示內嵌進程、路由資料的位置，以及如何處理它。 您可以使用[EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)來指定內嵌事件的內嵌[屬性](ingestion-properties.md)。 您可以設定下列屬性：
 
-|屬性 |描述|
+|屬性 |說明|
 |---|---|
-| Table |  (現有目標資料表的區分大小寫) 名稱。 覆寫 `Table` 窗格上的集合 `Data Connection` 。 |
+| 資料表 |  (現有目標資料表的區分大小寫) 名稱。 覆寫 `Table` 窗格上的集合 `Data Connection` 。 |
 | 格式 | 資料格式。 覆寫 `Data format` 窗格上的集合 `Data Connection` 。 |
 | IngestionMappingReference | 要使用之現有內嵌 [對應](kusto/management/create-ingestion-mapping-command.md) 的名稱。 覆寫 `Column mapping` 窗格上的集合 `Data Connection` 。|
 | 壓縮 | 資料壓縮、 `None` (預設) 或 `GZip` 壓縮。|
-| 編碼 | 資料編碼，預設值為 UTF8。 可以是任何 [.net 支援的編碼](https://docs.microsoft.com/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)方式。 |
+| 編碼 | 資料編碼，預設值為 UTF8。 可以是任何 [.net 支援的編碼](/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)方式。 |
 | 標記 (預覽)  | 要與內嵌資料產生關聯的 [標記](kusto/management/extents-overview.md#extent-tagging) 清單，格式為 JSON 陣列字串。 使用標記時，會 [影響效能](kusto/management/extents-overview.md#performance-notes-1) 。 |
 
 <!--| Database | Name of the existing target database.|-->
-<!--| Tags | String representing [tags](https://docs.microsoft.com/azure/kusto/management/extents-overview#extent-tagging) that will be attached to resulting extent. |-->
+<!--| Tags | String representing [tags](/azure/kusto/management/extents-overview#extent-tagging) that will be attached to resulting extent. |-->
 
 ## <a name="set-events-routing"></a>設定事件路由
 
 當您設定 Azure 資料總管叢集的事件中樞連線時，您可以 (資料表名稱、資料格式、壓縮和對應) 來指定目標資料表屬性。 您資料的預設路由也稱為 `static routing` 。
-您也可以使用事件屬性，為每個事件指定目標資料表屬性。 連接會動態路由 [EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)中指定的資料，並覆寫這個事件的靜態屬性。
+您也可以使用事件屬性，為每個事件指定目標資料表屬性。 連接會動態路由 [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)中指定的資料，並覆寫這個事件的靜態屬性。
 
 在下列範例中，請設定事件中樞詳細資料，並將天氣計量資料傳送給資料表 `WeatherMetrics` 。
 資料的 `json` 格式為。 `mapping1` 在資料表上是預先定義的 `WeatherMetrics` 。
@@ -111,7 +111,7 @@ eventHubClient.Close();
 
 ### <a name="create-an-event-hub"></a>建立事件中樞
 
-如果您還沒有帳戶，請 [建立一個事件中樞](https://docs.microsoft.com/azure/event-hubs/event-hubs-create)。 您可以透過 [Azure 入口網站](ingest-data-event-hub.md)、使用 [c #](data-connection-event-hub-csharp.md) 或 [Python](data-connection-event-hub-python.md)以程式設計方式，或使用 [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)來管理連線到事件中樞。
+如果您還沒有帳戶，請 [建立一個事件中樞](/azure/event-hubs/event-hubs-create)。 您可以透過 [Azure 入口網站](ingest-data-event-hub.md)、使用 [c #](data-connection-event-hub-csharp.md) 或 [Python](data-connection-event-hub-python.md)以程式設計方式，或使用 [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)來管理連線到事件中樞。
 
 
 > [!Note]

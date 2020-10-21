@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/13/2020
-ms.openlocfilehash: 2ad77b1763c8f4d85d676b34039a9300fca5912d
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: c1ed0de6f638828abe120caffcb5e14517f09a02
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91941837"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342734"
 ---
 # <a name="extents-data-shards"></a>範圍 (資料分區) 
 
@@ -64,7 +64,7 @@ Kusto 的設計是為了支援具有大量記錄 (資料列) 和大量資料的�
 
 ## <a name="extent-tagging"></a>範圍標記
 
-Kusto 支援將多個選擇性的 *範圍* 標籤附加至範圍中，做為其中繼資料的一部分。 範圍標記 (或單純 *標記*) ，是與範圍相關聯的字串。 您可以使用 [ [顯示範圍](extents-commands.md#show-extents) ] 命令來查看與範圍相關聯的標記，並使用 [範圍標籤 ( # B1 ](../query/extenttagsfunction.md) 函數來查看與範圍中的記錄相關聯的標記。
+Kusto 支援將多個選擇性的 *範圍* 標籤附加至範圍中，做為其中繼資料的一部分。 範圍標記 (或單純 *標記*) ，是與範圍相關聯的字串。 您可以使用 [ [顯示範圍](./show-extents.md) ] 命令來查看與範圍相關聯的標記，並使用 [範圍標籤 ( # B1 ](../query/extenttagsfunction.md) 函數來查看與範圍中的記錄相關聯的標記。
 範圍標籤可以用來有效率地描述範圍內所有資料通用的屬性。
 例如，您可以在內嵌期間新增範圍標籤，以指出內嵌資料的來源，並在稍後使用該標記。 由於範圍會描述資料，當兩個或多個合併時，其相關聯的標記也會合並。 產生的範圍標籤將會是這些合併範圍之所有標記的聯集。
 
@@ -88,7 +88,7 @@ Kusto 會指派特殊意義給所有範圍標籤，其值的格式為*前置**�
 #### <a name="performance-notes"></a>效能注意事項
 
 * 請勿過度過度用 `drop-by` 標記。 以上述方式卸載資料是針對很少發生的事件。 它不是用來取代記錄層級資料，而是依賴以這種方式標記的資料很龐大的事實。 嘗試為每筆記錄或少量記錄提供不同的標記，可能會對效能造成嚴重的影響。
-* 如果在 `drop-by` 資料內嵌之後的一段時間內不需要標記，我們建議您 [捨棄標記](extents-commands.md#drop-extent-tags)。
+* 如果在 `drop-by` 資料內嵌之後的一段時間內不需要標記，我們建議您 [捨棄標記](#drop-by-extent-tags)。
 
 ### <a name="ingest-by-extent-tags"></a>' 內嵌： ' 範圍標籤
 
@@ -113,4 +113,3 @@ Kusto 會指派特殊意義給所有範圍標籤，其值的格式為*前置**�
 * `ingest-by`不建議使用過度使用標記。
 如果已知管線饋送 Kusto 有資料重複問題，建議您盡可能解決這些重複問題，然後再將資料擷取至 Kusto。 此外， `ingest-by` 只有當內嵌至 Kusto 的部分可能會產生重複專案時，才在 Kusto 中使用標籤 (例如，有一種重試機制可與已進行中的內嵌呼叫重迭) 。 嘗試為每個內嵌呼叫設定唯一的 `ingest-by` 標記，可能會對效能造成嚴重的影響。
 * 如果在資料內嵌之後的一段時間內不需要這類標記，我們建議您 [捨棄範圍](drop-extent-tags.md)標籤。
- 

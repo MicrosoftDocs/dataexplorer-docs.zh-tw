@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/24/2019
-ms.openlocfilehash: 9ebce32338bcf82ccea9df5cb23770839c0ee278
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: f5778f4e242361be6c0af7827611ac812137e9c4
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873027"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342870"
 ---
 # <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-c"></a>使用 C 建立 Azure 資料總管的資料庫和資料表原則#
 
@@ -28,16 +28,16 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 * Visual Studio 2019。 如果您沒有 Visual Studio 2019，可以下載並使用 *免費*的 [Visual Studio Community 2019](https://www.visualstudio.com/downloads/)。 在 Visual Studio 設定期間，請務必選取 [ **Azure 開發** ]。
 * Azure 訂用帳戶。 如有需要，您可以在開始前建立 [免費的 Azure 帳戶](https://azure.microsoft.com/free/) 。
 * [測試叢集和資料庫](create-cluster-database-csharp.md)。
-* [測試資料表](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)。
+* [測試資料表](./net-sdk-ingest-data.md#create-a-table-on-your-test-cluster)。
 
-## <a name="install-c-nuget"></a>安裝 c # NuGet
+## <a name="install-c-nuget"></a>安裝 C# Nuget
 
 * 安裝 [Azure 資料總管 (Kusto) NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/)。
 * 安裝 [Kusto NuGet 套件。 NETStandard NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data.NETStandard/)。  (選擇性，用於變更資料表原則。 ) 
 * 安裝 [Microsoft.identitymodel NuGet 套件](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/)，以進行驗證。
 
 ## <a name="authentication"></a>驗證
-若要執行本文中的範例，您需要 Azure Active Directory (Azure AD) 可存取資源的應用程式和服務主體。 您可以使用相同的 Azure AD 應用程式，從 [測試叢集和資料庫](create-cluster-database-csharp.md#authentication)進行驗證。 如果您想要使用不同的 Azure AD 應用程式，請參閱 [建立 Azure AD 應用](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal) 程式，以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 本文也會說明如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client secret` 。 您可能需要將新的 Azure AD 應用程式新增為資料庫中的主體。 如需詳細資訊，請參閱 [管理 Azure 資料總管資料庫許可權](manage-database-permissions.md)。
+若要執行本文中的範例，您需要 Azure Active Directory (Azure AD) 可存取資源的應用程式和服務主體。 您可以使用相同的 Azure AD 應用程式，從 [測試叢集和資料庫](create-cluster-database-csharp.md#authentication)進行驗證。 如果您想要使用不同的 Azure AD 應用程式，請參閱 [建立 Azure AD 應用](/azure/active-directory/develop/howto-create-service-principal-portal) 程式，以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 本文也會說明如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client secret` 。 您可能需要將新的 Azure AD 應用程式新增為資料庫中的主體。 如需詳細資訊，請參閱 [管理 Azure 資料總管資料庫許可權](manage-database-permissions.md)。
 
 ## <a name="alter-database-retention-policy"></a>Alter database 保留原則
 以10天的虛刪除期間設定保留原則。

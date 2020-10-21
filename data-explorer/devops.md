@@ -8,12 +8,12 @@ ms.reviewer: jasonh
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/05/2019
-ms.openlocfilehash: b45e6d0be5a61e4eff8f1c70d3df2fe7ee6901ea
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: a92e657bfc2f440deb20fd4b812169b1c2e32112
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874710"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342904"
 ---
 # <a name="azure-devops-task-for-azure-data-explorer"></a>適用于 Azure 資料總管的 Azure DevOps 工作
 
@@ -22,12 +22,12 @@ ms.locfileid: "88874710"
 
 本檔說明如何使用 **Azure 資料總管–管理員命令** 工作將架構變更部署至資料庫的簡單範例。 如需完整的 CI/CD 管線，請參閱 [Azure DevOps 檔](/azure/devops/user-guide/what-is-azure-devops?view=azure-devops#vsts)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * Azure 資料總管叢集設定：
     * [Azure 資料總管叢集和資料庫](create-cluster-database-portal.md)。
-    * 藉由布建 [Azure AD 應用程式](kusto/management/access-control/how-to-provision-aad-app.md)，建立 Azure Active Directory (Azure AD) 應用程式。
+    * 藉由布建 [Azure AD 應用程式](./provision-azure-ad-app.md)，建立 Azure Active Directory (Azure AD) 應用程式。
     * 藉由 [管理 azure 資料總管資料庫許可權](manage-database-permissions.md)，將存取權授與 azure 資料總管資料庫上的 Azure AD App。
 * Azure DevOps 設定：
     * [註冊免費組織](/azure/devops/user-guide/sign-up-invite-teammates?view=azure-devops)
@@ -105,7 +105,7 @@ ms.locfileid: "88874710"
 
     ![新增服務連接](media/devops/add-service-connection.png)
 
-1. 重複步驟1-5 兩 *次，以從 [函* 式] 和 [ *原則* ] 資料夾部署檔案。 選取 \[儲存\]。 **在 [工作]** 索引標籤中，查看建立的三個工作：**部署資料表**、**部署函數**和**部署原則**。
+1. 重複步驟1-5 兩 *次，以從 [函* 式] 和 [ *原則* ] 資料夾部署檔案。 選取 [儲存]。 **在 [工作]** 索引標籤中，查看建立的三個工作：**部署資料表**、**部署函數**和**部署原則**。
 
     ![部署所有資料夾](media/devops/deploy-all-folders.png)
 

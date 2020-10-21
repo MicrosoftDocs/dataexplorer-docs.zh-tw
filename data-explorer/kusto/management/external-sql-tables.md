@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 79816960b75735e226395f70286ea9d81829a173
-ms.sourcegitcommit: 08c54dabc1efe3d4e2d2581c4b668a6b73daf855
+ms.openlocfilehash: d6473fd0efd588bfc7a6990dd2f57d70960b40e2
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89510690"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342751"
 ---
 # <a name="create-and-alter-external-sql-tables"></a>建立和改變外部 SQL 資料表
 
@@ -40,11 +40,11 @@ ms.locfileid: "89510690"
 
 ## <a name="optional-properties"></a>選用屬性
 
-| 屬性            | 類型            | 描述                          |
+| 屬性            | 類型            | 說明                          |
 |---------------------|-----------------|---------------------------------------------------------------------------------------------------|
 | `folder`            | `string`        | 資料表的資料夾。                  |
 | `docString`         | `string`        | 記錄資料表的字串。      |
-| `firetriggers`      | `true`/`false`  | 如果 `true` 為，則指示目標系統引發 SQL 資料表上定義的 INSERT 觸發程式。 預設為 `false`。  (需詳細資訊，請參閱 [BULK INSERT](https://msdn.microsoft.com/library/ms188365.aspx) 和 [SqlClient SqlBulkCopy](https://msdn.microsoft.com/library/system.data.sqlclient.sqlbulkcopy(v=vs.110).aspx))  |
+| `firetriggers`      | `true`/`false`  | 如果 `true` 為，則指示目標系統引發 SQL 資料表上定義的 INSERT 觸發程式。 預設為 `false`。  (需詳細資訊，請參閱 [BULK INSERT](/sql/t-sql/statements/bulk-insert-transact-sql) 和 [SqlClient SqlBulkCopy](/dotnet/api/system.data.sqlclient.sqlbulkcopy))  |
 | `createifnotexists` | `true`/ `false` | 如果為 `true` ，將會建立目標 SQL 資料表（如果不存在的話）; `primarykey` 在此情況下，必須提供屬性以指出作為主鍵的結果資料行。 預設為 `false`。  |
 | `primarykey`        | `string`        | 如果 `createifnotexists` 為 `true` ，則產生的資料行名稱會當做 SQL 資料表的主鍵（如果是由這個命令建立的話）。                  |
 
@@ -75,7 +75,7 @@ with
 
 **輸出**
 
-| TableName   | TableType | 資料夾         | DocString | [內容]                            |
+| TableName   | TableType | 資料夾         | DocString | 屬性                            |
 |-------------|-----------|----------------|-----------|---------------------------------------|
 | MySqlExternalTable | Sql       | ExternalTables | Docs      | {<br>  "TargetEntityKind": "sqltable'",<br>  "TargetEntityName": "MySqlTable",<br>  "TargetEntityConnectionString"： "Server = tcp:myserver. .net，1433;Authentication = Active Directory 整合式; 初始目錄 = mydatabase;」，<br>  "FireTriggers"： true，<br>  ">createifnotexists"： true，<br>  "PrimaryKey"： "x"<br>} |
 
@@ -98,5 +98,5 @@ Kusto 會執行 `SELECT x, s FROM MySqlTable` SQL 資料庫的查詢，後面接
 
 ## <a name="next-steps"></a>後續步驟
 
-* [外部資料表一般控制項命令](externaltables.md)
+* [外部資料表一般控制項命令](./external-table-commands.md)
 * [建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表](external-tables-azurestorage-azuredatalake.md)

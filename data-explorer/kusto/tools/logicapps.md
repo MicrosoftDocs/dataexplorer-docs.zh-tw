@@ -7,18 +7,18 @@ ms.reviewer: docohe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 04/14/2020
-ms.openlocfilehash: ae79fd334b3ac2a59a99c5ad8d63fccf0ed6784c
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4c918c43f748f97b3bb3f6d0342c660775c1e5c8
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875220"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342649"
 ---
 # <a name="microsoft-logic-app-and-azure-data-explorer"></a>Microsoft 邏輯應用程式和 Azure 資料總管
 
-Azure Kusto 邏輯應用程式連線程式可讓您使用 [Microsoft 邏輯應用程式](https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps) 連接器，自動執行 Kusto 的查詢和命令，做為已排程或觸發之工作的一部分。
+Azure Kusto 邏輯應用程式連線程式可讓您使用 [Microsoft 邏輯應用程式](/azure/logic-apps/logic-apps-what-are-logic-apps) 連接器，自動執行 Kusto 的查詢和命令，做為已排程或觸發之工作的一部分。
 
-邏輯應用程式和流程是建立在相同的連接器上。 因此，適用于 Flow 的 [限制](flow.md#limitations)、 [動作](flow.md#azure-kusto-flow-actions)、 [驗證](flow.md#authentication) 和 [使用範例](flow.md#azure-kusto-flow-actions) 也適用于 Logic Apps，如 [Flow 檔頁面](flow.md)所述。
+邏輯應用程式和 Power Automate 是建立在相同的連接器上。 因此，適用于 Power Automate 的 [限制](../../flow.md#limitations)、 [動作](../../flow.md#flow-actions)、 [驗證](../../flow.md#authentication) 和 [使用範例](../../flow-usage.md) ，也適用于 Logic Apps，如 [Power Automate 檔頁面](../../flow.md)所述。
 
 ## <a name="how-to-create-a-logic-app-with-azure-data-explorer"></a>如何使用 Azure 資料總管建立邏輯應用程式
 
@@ -36,7 +36,7 @@ Azure Kusto 邏輯應用程式連線程式可讓您使用 [Microsoft 邏輯應�
     * 資源群組
     * 邏輯應用程式名稱
     * 區域或整合服務環境
-    * Location
+    * 位置
     * 開啟或關閉記錄分析
 1. 選取 [檢閱 + 建立]。
 
@@ -56,5 +56,5 @@ Azure Kusto 邏輯應用程式連線程式可讓您使用 [Microsoft 邏輯應�
 
 ## <a name="next-steps"></a>後續步驟
 
-* 若要深入瞭解如何設定迴圈動作，請參閱 [Flow 檔頁面](flow.md)
-* 請參閱一些 [使用範例](flow.md#azure-kusto-flow-actions) 以瞭解設定邏輯應用程式動作的概念
+* 若要深入瞭解如何設定迴圈動作，請參閱 [Power Automate 檔頁面](../../flow.md)
+* 請參閱一些 [使用範例](../../flow-usage.md) 以瞭解設定邏輯應用程式動作的概念

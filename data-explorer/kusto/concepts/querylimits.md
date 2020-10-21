@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: d0f815cd523e0e53111e791d8faaaf6c37c7bb7b
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: ee36823bb3f730a12f7ad2d1febe91439d4a2aad
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92252848"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343278"
 ---
 # <a name="query-limits"></a>查詢限制
 
@@ -27,7 +27,7 @@ Kusto 是一種臨機操作查詢引擎，可裝載大型資料集，並藉由�
 * 查詢平行存取限制的預設值取決於其執行所在的 SKU 叢集，且計算方式如下： `Cores-Per-Node x 10` 。
   * 例如，針對在 D14v2 SKU 上設定的叢集，其中每部電腦都有16虛擬核心，預設的查詢平行存取限制為 `16 cores x10 = 160` 。
 * 您可以藉由設定 [查詢節流原則](../management/query-throttling-policy.md)來變更預設值。 
-  * 可在叢集上同時執行的實際查詢數目取決於各種因素。 最主要的因素包括叢集 SKU、叢集可用資源和查詢模式。 您可以根據在類似生產環境的查詢模式中執行的負載測試，來設定查詢節流原則。
+  * 可在叢集上同時執行的實際查詢數目取決於各種因素。 最主要的因素是叢集 SKU、叢集的可用資源和查詢模式。 您可以根據在類似生產環境的查詢模式中執行的負載測試，來設定查詢節流原則。
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>結果集大小 (結果截斷的限制) 
 
@@ -154,7 +154,7 @@ Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too
 
 根據預設，查詢的 timeout 設定為四分鐘，控制命令的時間為10分鐘。 如果需要 (上限為一小時) ，就可以增加這個值。
 
-* 如果您使用 Kusto 進行查詢，請使用**工具** &gt; **選項** *  &gt; **連接** &gt; **查詢伺服器超時**。
+* 如果您使用 Kusto 進行查詢，請使用**工具** &gt; **選項**_ &gt; _*連接* *  &gt; **查詢伺服器超時**。
 * 以程式設計的方式，將 `servertimeout` 用戶端要求屬性設定為類型的值 `System.TimeSpan` ，最多可達一小時。
 
 **有關超時的注意事項**

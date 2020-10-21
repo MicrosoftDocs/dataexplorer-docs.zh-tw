@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: 8f56568f87c391122b468d7f3ae8027eabe4641e
-ms.sourcegitcommit: 9dbbdf0c339f9af78d754e3fb44b9a4f2469003a
+ms.openlocfilehash: a424e34561792287d6e761f8d5b0747fbf8c7100
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 10/21/2020
-ms.locfileid: "92292845"
+ms.locfileid: "92342785"
 ---
 # <a name="kustoexplorer-installation-and-user-interface"></a>Kusto. Explorer 安裝和使用者介面
 
@@ -338,4 +338,4 @@ Kusto.Explorer 會嘗試解譯結果面板中每個資料列的嚴重性和詳�
 * [Kusto.Explorer 程式碼分析器](kusto-explorer-code-analyzer.md)
 * [Kusto.Explorer 程式碼導覽](kusto-explorer-codenav.md)
 * [Kusto.Explorer 程式碼重構](kusto-explorer-refactor.md)
-* [Kusto 查詢語言 (KQL)](https://docs.microsoft.com/azure/kusto/query/)
+* [Kusto 查詢語言 (KQL)](/azure/kusto/query/)

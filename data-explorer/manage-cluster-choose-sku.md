@@ -7,12 +7,12 @@ ms.reviewer: avnera
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/13/2020
-ms.openlocfilehash: 5381b558d54002ddcd50fbbec2e4fbef6d44fdbc
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 44c115cd509b72d5f83b1c1109ae09dc050d1a74
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92003080"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337443"
 ---
 # <a name="select-the-correct-compute-sku-for-your-azure-data-explorer-cluster"></a>為您的 Azure 資料總管叢集選取正確的計算 SKU 
 
@@ -23,7 +23,7 @@ ms.locfileid: "92003080"
 您可以藉由相應 [增加](manage-cluster-vertical-scaling.md)叢集來隨時變更引擎叢集的計算 SKU。 最好是從符合初始案例的最小 SKU 大小著手。 請記住，在使用新的 SKU 重新建立叢集時，擴大叢集會導致最多30分鐘的停機時間。 您也可以使用 [Azure Advisor 建議](azure-advisor.md) 將您的計算 SKU 優化。
 
 > [!TIP]
-> [ (RI) 的計算保留實例 ](https://docs.microsoft.com/azure/virtual-machines/windows/prepay-reserved-vm-instances) 適用于 Azure 資料總管叢集。  
+> [ (RI) 的計算保留實例 ](/azure/virtual-machines/windows/prepay-reserved-vm-instances) 適用于 Azure 資料總管叢集。  
 
 本文說明各種計算 SKU 選項，並提供可協助您做出最佳選擇的技術詳細資料。
 
@@ -128,4 +128,3 @@ Azure 資料總管叢集針對不同類型的工作負載，支援各種不同�
 * 您可以根據不斷變化的需求，相應 [縮小或](manage-cluster-horizontal-scaling.md) 相應放大引擎叢集的大小，以改變容量。
 
 * 使用 [Azure Advisor 建議](azure-advisor.md) 將您的計算 SKU 優化。
-

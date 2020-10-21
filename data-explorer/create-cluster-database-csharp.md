@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: d0eb0ab52fdbab9efc0e3a1305e3424ba5d66427
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 444704ae7ff7554186f357de526a5dc11e79165d
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872109"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343108"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-c"></a>使用 C# 建立 Azure 資料總管叢集與資料庫
 
@@ -34,7 +34,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
 
 ## <a name="authentication"></a>驗證
-若要執行本文中的範例，我們需要可存取資源 Azure AD 應用程式和服務主體。 核取 [ [建立 Azure AD 應用程式](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal) ] 以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 它也會顯示如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
+若要執行本文中的範例，我們需要可存取資源 Azure AD 應用程式和服務主體。 核取 [ [建立 Azure AD 應用程式](/azure/active-directory/develop/howto-create-service-principal-portal) ] 以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 它也會顯示如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
 
 ## <a name="create-the-azure-data-explorer-cluster"></a>建立 Azure 資料總管叢集
 
@@ -129,4 +129,4 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 ## <a name="next-steps"></a>後續步驟
 
-* [使用 Azure 資料總管 .NET Standard SDK 內嵌資料 (預覽)](net-standard-ingest-data.md)
+* [使用 Azure 資料總管 .NET Standard SDK 內嵌資料 (預覽)](./net-sdk-ingest-data.md)

@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: c2cfe861898c2fa68960636b3c4bb4a2dc9b3075
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: b4098fe52eb4632ba8145d2d5491f21c5af805d8
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502444"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343023"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C 建立 Azure 資料總管的事件中樞資料連線#
 
@@ -30,7 +30,7 @@ ms.locfileid: "89502444"
 * 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 建立叢集 [和資料庫](create-cluster-database-csharp.md)
-* 建立 [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
+* 建立 [資料表和資料行對應](./net-sdk-ingest-data.md#create-a-table-on-your-test-cluster)
 *  (選擇性的) 設定[資料庫和資料表原則](database-table-policies-csharp.md)
 * 建立 [具有內嵌資料的事件中樞](ingest-data-event-hub.md#create-an-event-hub)。 
 
@@ -90,7 +90,7 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 | dataFormat | *Csv* | 訊息的資料格式。|
 | eventHubResourceId | *資源識別碼* | 您事件中樞的資源識別碼，其中包含要內嵌的資料。 |
 | consumerGroup | *$Default* | 事件中樞的取用者群組。|
-| location | *Central US* | 資料連線資源的位置。|
+| location | *美國中部* | 資料連線資源的位置。|
 
 ## <a name="generate-data"></a>產生資料
 

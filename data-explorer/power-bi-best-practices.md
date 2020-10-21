@@ -7,16 +7,16 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 4cb2c64e2a66d8412277717e505626965bca1052
-ms.sourcegitcommit: 7024f73c76bf5b506557fd0ef7a0f4f40ec7d313
+ms.openlocfilehash: a508d40d4e48205288dcb6133e267578a54198f9
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92021214"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343516"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>使用 Power BI 來查詢 Azure 資料總管資料並將其視覺化的最佳作法
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 [Power BI](https://docs.microsoft.com/power-bi/) 是一種商務分析解決方案，可讓您將資料視覺化，並在整個組織中共用結果。 Azure 資料總管提供三種連接到 Power BI 中資料的選項。 使用 [內建連接器](power-bi-connector.md)， [從 Azure 資料總管將查詢匯入 Power BI](power-bi-imported-query.md)，或使用 [SQL 查詢](power-bi-sql-query.md)。 本文提供您使用 Power BI 查詢和視覺化 Azure 資料總管資料的秘訣。 
+Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 [Power BI](/power-bi/) 是一種商務分析解決方案，可讓您將資料視覺化，並在整個組織中共用結果。 Azure 資料總管提供三種連接到 Power BI 中資料的選項。 使用 [內建連接器](power-bi-connector.md)， [從 Azure 資料總管將查詢匯入 Power BI](power-bi-imported-query.md)，或使用 [SQL 查詢](power-bi-sql-query.md)。 本文提供您使用 Power BI 查詢和視覺化 Azure 資料總管資料的秘訣。 
 
 ## <a name="best-practices-for-using-power-bi"></a>使用 Power BI 的最佳作法
 
@@ -24,17 +24,17 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 * **旅遊燈** -只將報表所需的資料帶入 Power BI。 如需深入的互動式分析，請使用 [Azure 資料總管 WEB UI](web-query-data.md) ，該 UI 已針對使用 Kusto 查詢語言進行臨機操作探索進行優化。
 
-* **複合模型** -使用 [複合模型](https://docs.microsoft.com/power-bi/desktop-composite-models) ，將最上層儀表板的匯總資料與篩選的操作原始資料合併。 您可以清楚地定義何時使用原始資料，以及何時使用匯總視圖。 
+* **複合模型** -使用 [複合模型](/power-bi/desktop-composite-models) ，將最上層儀表板的匯總資料與篩選的操作原始資料合併。 您可以清楚地定義何時使用原始資料，以及何時使用匯總視圖。 
 
-* 匯**入模式與 DirectQuery 模式**-使用匯**入**模式來進行較小的資料集互動。 針對大型、經常更新的資料集使用 **DirectQuery** 模式。 例如，使用 [匯 **入** ] 模式建立維度資料表，因為它們很小，而且不常變更。 根據預期的資料更新速率來設定重新整理間隔。 使用 **DirectQuery** 模式建立事實資料表，因為這些資料表很大且包含原始資料。 使用這些資料表，利用 Power BI 的 [鑽取](https://docs.microsoft.com/power-bi/desktop-drillthrough)來呈現篩選過的資料。
+* 匯**入模式與 DirectQuery 模式**-使用匯**入**模式來進行較小的資料集互動。 針對大型、經常更新的資料集使用 **DirectQuery** 模式。 例如，使用 [匯 **入** ] 模式建立維度資料表，因為它們很小，而且不常變更。 根據預期的資料更新速率來設定重新整理間隔。 使用 **DirectQuery** 模式建立事實資料表，因為這些資料表很大且包含原始資料。 使用這些資料表，利用 Power BI 的 [鑽取](/power-bi/desktop-drillthrough)來呈現篩選過的資料。
 
 * **平行** 處理原則-Azure 資料總管是可線性調整的資料平臺，因此，您可以藉由增加端對端流程的平行處理原則來改善儀表板轉譯的效能，如下所示：
 
-  * 在 [Power BI 中增加 DirectQuery 的並行連接](https://docs.microsoft.com/power-bi/desktop-directquery-about#maximum-number-of-connections-option-for-directquery)數目。
+  * 在 [Power BI 中增加 DirectQuery 的並行連接](/power-bi/desktop-directquery-about#maximum-number-of-connections-option-for-directquery)數目。
 
   * 使用 [弱式一致性來改善平行](kusto/concepts/queryconsistency.md)處理原則。 這可能會影響資料的時效性。
 
-* **有效** 交叉分析篩選器–使用 [同步](https://docs.microsoft.com/power-bi/visuals/power-bi-visualization-slicers#sync-and-use-slicers-on-other-pages) 交叉分析篩選器，在您準備就緒之前，防止報表載入資料。 在您結構資料集、放置所有視覺效果，並標示所有交叉分析篩選器之後，您可以選取同步交叉分析篩選器，只載入所需的資料。
+* **有效** 交叉分析篩選器–使用 [同步](/power-bi/visuals/power-bi-visualization-slicers#sync-and-use-slicers-on-other-pages) 交叉分析篩選器，在您準備就緒之前，防止報表載入資料。 在您結構資料集、放置所有視覺效果，並標示所有交叉分析篩選器之後，您可以選取同步交叉分析篩選器，只載入所需的資料。
 
 * **使用篩選器** -盡可能使用最多的 Power BI 篩選，以專注于 Azure 資料總管搜尋相關的資料分區。
 

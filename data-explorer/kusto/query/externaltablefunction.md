@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/21/2019
-ms.openlocfilehash: 5ec069979d41a7c750c140ad84ef0db4ba5638a4
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: b966dbd43d1f40842240eaebf7d4008450e1f746
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92245060"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343193"
 ---
 # <a name="external_table"></a>external_table()
 
@@ -40,6 +40,6 @@ external_table('StormEvent')
 
 ## <a name="next-steps"></a>後續步驟
 
-* [外部資料表一般控制項命令](../management/externaltables.md)
+* [外部資料表一般控制項命令](../management/external-table-commands.md)
 * [建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表](../management/external-tables-azurestorage-azuredatalake.md)
 * [建立和改變外部 SQL 資料表](../management/external-sql-tables.md)

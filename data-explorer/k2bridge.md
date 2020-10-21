@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/12/2020
-ms.openlocfilehash: 0d6695ddf6923dcbf44ac3466a2388edc7618551
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: d81ed37a7502e0795fc82f38a918719a5da8db8e
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874965"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342887"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-kibana-with-the-k2bridge-open-source-connector"></a>使用 K2Bridge 開放原始碼連接器，將 Kibana 中 Azure 資料總管的資料視覺化
 
@@ -40,7 +40,7 @@ K2Bridge 支援 Kibana 的 [ **探索** ] 索引標籤，您可以在其中：
 
 * [Helm v3](https://github.com/helm/helm#install)，也就是 Kubernetes 套件管理員。
 
-* Azure Kubernetes Service (AKS) 叢集或任何其他 Kubernetes 叢集。 版本1.14 到1.16 已經過測試和驗證。 如果您需要 AKS 叢集，請參閱如何 [使用 Azure CLI](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough) 或 [使用 AZURE 入口網站](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough-portal)來部署 AKS 叢集。
+* Azure Kubernetes Service (AKS) 叢集或任何其他 Kubernetes 叢集。 版本1.14 到1.16 已經過測試和驗證。 如果您需要 AKS 叢集，請參閱如何 [使用 Azure CLI](/azure/aks/kubernetes-walkthrough) 或 [使用 AZURE 入口網站](/azure/aks/kubernetes-walkthrough-portal)來部署 AKS 叢集。
 
 * [Azure 資料總管](create-cluster-database-portal.md)叢集，包括叢集的 URL 和資料庫名稱。
 
@@ -48,7 +48,7 @@ K2Bridge 支援 Kibana 的 [ **探索** ] 索引標籤，您可以在其中：
 
     我們建議具有檢視器許可權的服務主體，且不鼓勵您使用較高層級的許可權。 [為 Azure AD 服務主體設定叢集的 view 許可權](manage-database-permissions.md#manage-permissions-in-the-azure-portal)。
 
-    如需 Azure AD 服務主體的詳細資訊，請參閱 [建立 Azure AD 的服務主體](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#create-an-azure-active-directory-application)。
+    如需 Azure AD 服務主體的詳細資訊，請參閱 [建立 Azure AD 的服務主體](/azure/active-directory/develop/howto-create-service-principal-portal#create-an-azure-active-directory-application)。
 
 ## <a name="run-k2bridge-on-azure-kubernetes-service-aks"></a>在 Azure Kubernetes Service (AKS 上執行 K2Bridge) 
 
@@ -69,7 +69,7 @@ K2Bridge 支援 Kibana 的 [ **探索** ] 索引標籤，您可以在其中：
 
         1. 從 [GitHub](https://github.com/microsoft/K2Bridge)複製存放庫。
         1. 移至 K2Bridges 根存放庫目錄。
-        1. 執行此命令：
+        1. 請執行這個命令：
 
             ```bash
             helm dependency update charts/k2bridge
@@ -87,7 +87,7 @@ K2Bridge 支援 Kibana 的 [ **探索** ] 索引標籤，您可以在其中：
         ADX_TENANT_ID=[SERVICE_PRINCIPAL_TENANT_ID]
         ```
 
-    1. （選擇性）啟用 Application Insights 遙測。 如果您是第一次使用 Application Insights，請 [建立 Application Insights 資源](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource)。 [將檢測金鑰複製](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource#copy-the-instrumentation-key) 到變數。
+    1. （選擇性）啟用 Application Insights 遙測。 如果您是第一次使用 Application Insights，請 [建立 Application Insights 資源](/azure/azure-monitor/app/create-new-resource)。 [將檢測金鑰複製](/azure/azure-monitor/app/create-new-resource#copy-the-instrumentation-key) 到變數。
 
         ```bash
         APPLICATION_INSIGHTS_KEY=[INSTRUMENTATION_KEY]

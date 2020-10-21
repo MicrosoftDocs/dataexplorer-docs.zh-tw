@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 8dfb0fb6637214d77df5bed436649bb10f808a47
-ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
+ms.openlocfilehash: a274577da1fb93b78b56250c1176fb0e9bda8eed
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90533961"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343074"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-python"></a>使用 Python 建立 Azure 資料總管叢集與資料庫
 
@@ -26,24 +26,24 @@ ms.locfileid: "90533961"
 
 在本文中，您會使用 Python 建立 Azure 資料總管叢集和資料庫。 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 若要使用 Azure 資料總管，請先建立叢集，然後在該叢集中建立一或多個資料庫。 然後將資料內嵌或載入至資料庫，讓您可以對其執行查詢。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [建立免費帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
 
 * [Python 3.4+](https://www.python.org/downloads/)。
 
-* [可存取資源 Azure AD 應用程式和服務主體](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal)。 取得 `Directory (tenant) ID` 、和的值 `Application ID` `Client Secret` 。
+* [可存取資源 Azure AD 應用程式和服務主體](/azure/active-directory/develop/howto-create-service-principal-portal)。 取得 `Directory (tenant) ID` 、和的值 `Application ID` `Client Secret` 。
 
 ## <a name="install-python-package"></a>安裝 Python 套件
 
-若要為 Azure 資料總管 (Kusto) 安裝 Python 套件，請開啟在其路徑中有 Python 的命令提示字元。 執行此命令：
+若要為 Azure 資料總管 (Kusto) 安裝 Python 套件，請開啟在其路徑中有 Python 的命令提示字元。 請執行這個命令：
 
 ```
 pip install azure-common
 pip install azure-mgmt-kusto
 ```
 ## <a name="authentication"></a>驗證
-若要執行本文中的範例，我們需要可存取資源 Azure AD 應用程式和服務主體。 核取 [ [建立 Azure AD 應用程式](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal) ] 以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 它也會顯示如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
+若要執行本文中的範例，我們需要可存取資源 Azure AD 應用程式和服務主體。 核取 [ [建立 Azure AD 應用程式](/azure/active-directory/develop/howto-create-service-principal-portal) ] 以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 它也會顯示如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。
 
 ## <a name="create-the-azure-data-explorer-cluster"></a>建立 Azure 資料總管叢集
 

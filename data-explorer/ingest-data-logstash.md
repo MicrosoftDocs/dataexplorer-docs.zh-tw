@@ -7,12 +7,12 @@ ms.reviewer: takamara
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: b062b2da81662e89dc61720ebf6bb555f896a8ca
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 228722bab25dc19532860f92b8194c4fd2d79a38
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874778"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343091"
 ---
 # <a name="ingest-data-from-logstash-to-azure-data-explorer"></a>將資料從 Logstash 擷取至 Azure 資料總管
 
@@ -89,7 +89,7 @@ Logstash 可產生用來測試端對端管線的範例事件。
 
 ## <a name="configure-logstash-to-send-data-to-azure-data-explorer"></a>設定 Logstash 以將資料傳送至 Azure 資料總管
 
-將下列設定貼到上一個步驟所使用的相同組態檔中。 請將所有預留位置都取代為設定的相關值。 如需詳細資訊，請參閱[建立 AAD 應用程式](kusto/management/access-control/how-to-provision-aad-app.md)。 
+將下列設定貼到上一個步驟所使用的相同組態檔中。 請將所有預留位置都取代為設定的相關值。 如需詳細資訊，請參閱[建立 AAD 應用程式](./provision-azure-ad-app.md)。 
 
 ```ruby
 output {

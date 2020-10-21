@@ -7,12 +7,12 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/06/2020
-ms.openlocfilehash: d07dc282ba3996113903bd1b7c5ab08672d46543
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 4d8574e0b68c234f1cef0ba49b37eb869e61c142
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92003057"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342598"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>使用資料的資料庫在 Azure 資料總管中附加資料庫
 
@@ -30,7 +30,7 @@ ms.locfileid: "92003057"
 
 1. 如果您沒有 Azure 訂用帳戶，請在開始之前先[建立免費帳戶](https://azure.microsoft.com/free/)。
 1. 建立適用于領導人和程式的叢集[和資料庫](create-cluster-database-portal.md)。
-1. 使用內嵌[總覽](/azure/data-explorer/ingest-data-overview)中所討論的其中一種方法，將[資料](ingest-sample-data.md)內嵌至領導者資料庫。
+1. 使用內嵌[總覽](./ingest-data-overview.md)中所討論的其中一種方法，將[資料](ingest-sample-data.md)內嵌至領導者資料庫。
 
 ## <a name="attach-a-database"></a>附加資料庫
 
@@ -257,7 +257,7 @@ New-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername `
 |資料庫名稱     |      要遵循的資料庫名稱。 如果您想要追蹤所有領導者的資料庫，請使用 ' * '。   |
 |領導者叢集資源識別碼    |   領導者叢集的資源識別碼。      |
 |預設主體修改種類    |   預設的主要修改種類。 可以是 `Union` 、 `Replace` 或 `None` 。 如需預設主體修改種類的詳細資訊，請參閱 [主體修改種類控制命令](kusto/management/cluster-follower.md#alter-follower-database-principals-modification-kind)。      |
-|Location   |   所有資源的位置。 領導人和採用者必須位於相同的位置。       |
+|位置   |   所有資源的位置。 領導人和採用者必須位於相同的位置。       |
 
 ---
 
@@ -453,7 +453,7 @@ Remove-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername -N
 |---------|---------|
 |**Union**     |   附加的資料庫主體一律會包含原始資料庫主體，再加上其他新增至 [資料] 資料庫的新主體。      |
 |**Replace**   |    沒有繼承自原始資料庫的主體。 必須針對附加的資料庫建立新的主體。     |
-|**None**   |   附加的資料庫主體只包含原始資料庫的主體，而不含其他主體。      |
+|**無**   |   附加的資料庫主體只包含原始資料庫的主體，而不含其他主體。      |
 
 如需使用控制命令設定授權主體的詳細資訊，請參閱 [控制管理者叢集的控制命令](kusto/management/cluster-follower.md)。
 
@@ -476,4 +476,3 @@ Remove-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername -N
 ## <a name="next-steps"></a>後續步驟
 
 * 如需有關「進行」叢集設定的詳細資訊，請參閱 [控制管理資料叢集的控制命令](kusto/management/cluster-follower.md)。
-

@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: 0df859eb52927d0d59c2cab7de18f1de4bfcf1d7
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: ff4a4f0ada7e12f5de239c1b78b39a8beace15ee
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873588"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342972"
 ---
 # <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-c-preview"></a>使用 c # (Preview 建立適用于 Azure 資料總管的 IoT 中樞資料連線) 
 
@@ -30,7 +30,7 @@ ms.locfileid: "88873588"
 * 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 建立叢集 [和資料庫](create-cluster-database-csharp.md)
-* 建立 [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
+* 建立 [資料表和資料行對應](./net-sdk-ingest-data.md#create-a-table-on-your-test-cluster)
 *  (選擇性的) 設定[資料庫和資料表原則](database-table-policies-csharp.md)
 * 建立 [已設定共用存取原則的 IoT 中樞](ingest-data-iot-hub.md#create-an-iot-hub)。
 
@@ -81,8 +81,8 @@ await kustoManagementClient.DataConnections.CreateOrUpdate(resourceGroupName, cl
 |---|---|---|
 | tenantId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
 | subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
-| clientId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
-| clientSecret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可存取您租使用者中的資源。 |
+| clientId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租用戶中的資源。|
+| clientSecret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可以存取您租用戶中的資源。 |
 | resourceGroupName | *>testrg* | 包含您叢集的資源組名。|
 | clusterName | *mykustocluster* | 叢集的名稱。|
 | databaseName | *mykustodatabase* | 叢集中目標資料庫的名稱。|
@@ -93,6 +93,6 @@ await kustoManagementClient.DataConnections.CreateOrUpdate(resourceGroupName, cl
 | iotHubResourceId | *資源識別碼* | IoT 中樞的資源識別碼，其中包含要內嵌的資料。 |
 | sharedAccessPolicyName | *iothubforread* | 共用存取原則的名稱，可定義裝置和服務連接到 IoT 中樞的許可權。 |
 | consumerGroup | *$Default* | 事件中樞的取用者群組。|
-| location | *Central US* | 資料連線資源的位置。|
+| location | *美國中部* | 資料連線資源的位置。|
 
 [!INCLUDE [data-explorer-data-connection-clean-resources-csharp](includes/data-explorer-data-connection-clean-resources-csharp.md)]

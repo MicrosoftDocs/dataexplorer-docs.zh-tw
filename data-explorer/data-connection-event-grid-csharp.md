@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: 5ba4f61d051a89d0fd3851f3e5be4f344ea79e0b
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 824556388c2f3f70f006ab372e06967c42117f06
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874132"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343057"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C 建立 Azure 資料總管的事件方格資料連線#
 
@@ -31,7 +31,7 @@ ms.locfileid: "88874132"
 * 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 建立叢集 [和資料庫](create-cluster-database-csharp.md)
-* 建立 [資料表和資料行對應](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
+* 建立 [資料表和資料行對應](./net-sdk-ingest-data.md#create-a-table-on-your-test-cluster)
 *  (選擇性的) 設定[資料庫和資料表原則](database-table-policies-csharp.md)
 * [使用事件方格訂用帳戶建立儲存體帳戶](ingest-data-event-grid.md)。
 
@@ -82,8 +82,8 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 |---|---|---|
 | tenantId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您的租用戶識別碼。 也稱為目錄識別碼。|
 | subscriptionId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 您用來建立資源的訂用帳戶識別碼。|
-| clientId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租使用者中的資源。|
-| clientSecret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可存取您租使用者中的資源。 |
+| clientId | *xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxx-xxxxxxxxx* | 應用程式的用戶端識別碼，可存取您租用戶中的資源。|
+| clientSecret | *xxxxxxxxxxxxxx* | 應用程式的用戶端密碼，可以存取您租用戶中的資源。 |
 | resourceGroupName | *>testrg* | 包含您叢集的資源組名。|
 | clusterName | *mykustocluster* | 叢集的名稱。|
 | databaseName | *mykustodatabase* | 叢集中目標資料庫的名稱。|
@@ -94,7 +94,7 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 | eventHubResourceId | *資源識別碼* | 事件中樞設定為傳送事件的事件中樞資源識別碼。 |
 | storageAccountResourceId | *資源識別碼* | 儲存體帳戶的資源識別碼，其中包含要內嵌的資料。 |
 | consumerGroup | *$Default* | 事件中樞的取用者群組。|
-| location | *Central US* | 資料連線資源的位置。|
+| location | *美國中部* | 資料連線資源的位置。|
 
 ## <a name="generate-sample-data"></a>產生範例資料
 

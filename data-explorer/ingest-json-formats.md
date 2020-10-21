@@ -7,16 +7,16 @@ ms.reviewer: kerend
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/19/2020
-ms.openlocfilehash: 711ea8d819fbf8fc66c792a51c0ddc3844647a5e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: f599698f4b35075aaec4ff3789fa9036c40d8c17
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874744"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343227"
 ---
 # <a name="ingest-json-formatted-sample-data-into-azure-data-explorer"></a>將 JSON 格式的範例資料內嵌至 Azure 資料總管
 
-本文說明如何將 JSON 格式的資料內嵌至 Azure 資料總管資料庫。 您將從簡單的原始和對應 JSON 範例開始，繼續進行多線條 JSON，然後處理包含陣列和字典的更複雜 JSON 架構。  這些範例詳細說明使用 Kusto 查詢語言來擷取 JSON 格式資料的程式 (KQL) 、c # 或 Python。 Kusto 查詢語言 `ingest` 控制命令會直接執行至引擎端點。 在生產案例中，會使用用戶端程式庫或資料連線，將內嵌執行至資料管理服務。 使用 azure [資料總管 Python 程式庫](python-ingest-data.md) 來讀取內嵌資料，並 [使用 AZURE 資料總管 .NET Standard SDK 內嵌資料](net-standard-ingest-data.md) ，以取得有關使用這些用戶端程式庫擷取資料的逐步解說。
+本文說明如何將 JSON 格式的資料內嵌至 Azure 資料總管資料庫。 您將從簡單的原始和對應 JSON 範例開始，繼續進行多線條 JSON，然後處理包含陣列和字典的更複雜 JSON 架構。  這些範例詳細說明使用 Kusto 查詢語言來擷取 JSON 格式資料的程式 (KQL) 、c # 或 Python。 Kusto 查詢語言 `ingest` 控制命令會直接執行至引擎端點。 在生產案例中，會使用用戶端程式庫或資料連線，將內嵌執行至資料管理服務。 使用 azure [資料總管 Python 程式庫](python-ingest-data.md) 來讀取內嵌資料，並 [使用 AZURE 資料總管 .NET Standard SDK 內嵌資料](./net-sdk-ingest-data.md) ，以取得有關使用這些用戶端程式庫擷取資料的逐步解說。
 
 ## <a name="prerequisites"></a>先決條件
 

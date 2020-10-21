@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: c10e6502c4e18a5c30d971c4814c2270a0b27ff1
-ms.sourcegitcommit: 830837607f344f1ce1f146f946a41e45bfebcb22
+ms.openlocfilehash: 0532219b8efc1cab7508d1838882b6fa48f5048f
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91806677"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343261"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -138,7 +138,7 @@ ms.locfileid: "91806677"
 <a name="properties"></a>
 *選用屬性*
 
-| 屬性         | 類型     | 描述       |
+| 屬性         | 類型     | 說明       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | 資料表的資料夾                                                                     |
 | `docString`      | `string` | 記錄資料表的字串                                                       |
@@ -276,7 +276,7 @@ dataformat=parquet
 
 **輸出**
 
-| 輸出參數 | 類型   | 描述                       |
+| 輸出參數 | 類型   | 說明                       |
 |------------------|--------|-----------------------------------|
 | Uri              | 字串 | 外部儲存體資料檔案的 URI |
 | 大小             | long   | 檔案長度（以位元組為單位）              |
@@ -321,7 +321,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| 名稱     | 種類 | 對應                                                           |
+| Name     | 種類 | 對應                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -339,7 +339,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| 名稱     | 種類 | 對應                                                                |
+| Name     | 種類 | 對應                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -361,7 +361,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| 名稱     | 種類 | 對應                                                                         |
+| Name     | 種類 | 對應                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -378,5 +378,5 @@ dataformat=parquet
 ```
 ## <a name="next-steps"></a>後續步驟
 
-* [外部資料表一般控制項命令](externaltables.md)
+* [外部資料表一般控制項命令](./external-table-commands.md)
 * [建立和改變外部 SQL 資料表](external-sql-tables.md)

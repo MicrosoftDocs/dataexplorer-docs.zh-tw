@@ -7,12 +7,12 @@ ms.reviewer: avneraa
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/12/2020
-ms.openlocfilehash: fb9cdfbef5b4d2aa7c7b98fdc58d2ec7fdccbd0c
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 962735c666fa94a0b86cfae8775f712ee42e6d33
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874234"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342836"
 ---
 # <a name="delete-data-from-azure-data-explorer"></a>從 Azure 資料總管刪除資料
 
@@ -32,7 +32,7 @@ Azure 資料總管會根據 [保留原則](kusto/management/retentionpolicy.md)�
 
 ## <a name="delete-data-by-dropping-extents"></a>藉由捨棄範圍來刪除資料
 
-[範圍 (資料分區) ](kusto/management/extents-overview.md) 是儲存資料的內部結構。 每個範圍最多可保存數百萬筆記錄。 您可以使用 [drop 片區 (s) 命令](kusto/management/extents-commands.md#drop-extents)，個別刪除範圍或群組。 
+[範圍 (資料分區) ](kusto/management/extents-overview.md) 是儲存資料的內部結構。 每個範圍最多可保存數百萬筆記錄。 您可以使用 [drop 片區 (s) 命令](./kusto/management/drop-extents.md)，個別刪除範圍或群組。
 
 ### <a name="examples"></a>範例
 
@@ -52,5 +52,4 @@ Azure 資料總管會根據 [保留原則](kusto/management/retentionpolicy.md)�
 
 ## <a name="delete-individual-rows-using-purge"></a>使用清除來刪除個別的資料列
 
-您可以使用[資料清除](kusto/concepts/data-purge.md)來刪除個人資料列。 刪除不是即時的，且需要大量的系統資源。 因此，它只會針對合規性案例提供建議。  
-
+您可以使用[資料清除](kusto/concepts/data-purge.md)來刪除個人資料列。 刪除不是即時的，且需要大量的系統資源。 因此，它只會針對合規性案例提供建議。

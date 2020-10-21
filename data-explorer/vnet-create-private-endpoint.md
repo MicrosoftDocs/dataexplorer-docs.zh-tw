@@ -7,29 +7,29 @@ ms.reviewer: elbirnbo
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/09/2020
-ms.openlocfilehash: aeb807db9b69c6c5b806a7f4b152330ea2dabc72
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.openlocfilehash: e980527d2342543777ae8186b9166615f9016c5e
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680745"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343397"
 ---
 # <a name="create-a-private-endpoint-in-your-azure-data-explorer-cluster-in-your-virtual-network-preview"></a>在您的虛擬網路 (預覽版中，在 Azure 資料總管叢集中建立私人端點) 
 
 搭配私人端點使用 Private Link，以安全地存取虛擬網路中的 Azure 資料總管叢集 (VNet) 。 
 
-若要設定您的 [Private Link 服務](https://docs.microsoft.com/azure/private-link/private-link-service-overview)，請使用私人端點與 Azure VNet 位址空間中的 IP 位址。 [Azure 私人端點](https://docs.microsoft.com/azure/private-link/private-endpoint-overview) 會使用您 VNet 中的私人 IP 位址，以私人且安全的方式將您連線到 Azure 資料總管。 您也需要重新設定叢集上的 [DNS](https://docs.microsoft.com/azure/private-link/private-endpoint-dns) 設定，以使用您的私人端點進行連接。 透過此設定，您私人網路上的用戶端與 Azure 資料總管叢集之間的網路流量會透過 VNet 和 Microsoft 骨幹網路上的 [Private Link](https://docs.microsoft.com/azure/private-link/) 來傳送，以移除公用網際網路的暴露程度。 本文說明如何在叢集中建立和設定查詢 (引擎) 和內嵌 (資料管理) 的私人端點。
+若要設定您的 [Private Link 服務](/azure/private-link/private-link-service-overview)，請使用私人端點與 Azure VNet 位址空間中的 IP 位址。 [Azure 私人端點](/azure/private-link/private-endpoint-overview) 會使用您 VNet 中的私人 IP 位址，以私人且安全的方式將您連線到 Azure 資料總管。 您也需要重新設定叢集上的 [DNS](/azure/private-link/private-endpoint-dns) 設定，以使用您的私人端點進行連接。 透過此設定，您私人網路上的用戶端與 Azure 資料總管叢集之間的網路流量會透過 VNet 和 Microsoft 骨幹網路上的 [Private Link](/azure/private-link/) 來傳送，以移除公用網際網路的暴露程度。 本文說明如何在叢集中建立和設定查詢 (引擎) 和內嵌 (資料管理) 的私人端點。
 
 ## <a name="prerequisites"></a>先決條件
 
-* [在您的虛擬網路中建立 Azure 資料總管](https://docs.microsoft.com/azure/data-explorer/vnet-create-cluster-portal)叢集
+* [在您的虛擬網路中建立 Azure 資料總管](./vnet-create-cluster-portal.md)叢集
 * 停用網路原則：
-  * 在 Azure 資料總管叢集虛擬網路中，停用 [Private Link 服務原則](https://docs.microsoft.com/azure/private-link/disable-private-link-service-network-policy)。
-  * 在私人端點虛擬網路（可與 Azure 資料總管叢集虛擬網路相同）中，停用 [私人端點原則](https://docs.microsoft.com/azure/private-link/disable-private-endpoint-network-policy)。
+  * 在 Azure 資料總管叢集虛擬網路中，停用 [Private Link 服務原則](/azure/private-link/disable-private-link-service-network-policy)。
+  * 在私人端點虛擬網路（可與 Azure 資料總管叢集虛擬網路相同）中，停用 [私人端點原則](/azure/private-link/disable-private-endpoint-network-policy)。
 
 ## <a name="create-private-link-service"></a>建立 Private Link 服務
 
-若要安全地連結到叢集上的所有服務，您需要建立 [Private Link 服務](https://docs.microsoft.com/azure/private-link/private-link-service-overview) 兩次：一次用於查詢 (引擎) ，以及一次用於內嵌 (資料管理) 。
+若要安全地連結到叢集上的所有服務，您需要建立 [Private Link 服務](/azure/private-link/private-link-service-overview) 兩次：一次用於查詢 (引擎) ，以及一次用於內嵌 (資料管理) 。
 
 1. 選取入口網站左上角的 [+ 建立資源]  按鈕。
 1. 搜尋 *Private Link 服務*。
@@ -39,18 +39,18 @@ ms.locfileid: "90680745"
 
 1. 在 [ **建立私人連結服務** ] 窗格中，填寫下欄欄位：
 
-    :::image type="content" source="media/vnet-create-private-endpoint/private-link-basics.png" alt-text="建立私人連結服務中的 Tab 鍵 1-基本":::
+    :::image type="content" source="media/vnet-create-private-endpoint/private-link-basics.png" alt-text="Gif 顯示在 Azure 資料總管入口網站中建立 private link 服務的前三個步驟":::
 
     **設定** | **建議的值** | **欄位描述**
     |---|---|---|
     | 訂用帳戶 | 您的訂用帳戶 | 選取保存您的虛擬網路叢集的 Azure 訂用帳戶。|
     | 資源群組 | 您的資源群組 | 選取保存虛擬網路叢集的資源群組。 |
-    | 名稱 | AzureDataExplorerPLS | 選擇在資源群組中識別私用連結服務的名稱。 |
+    | Name | AzureDataExplorerPLS | 選擇在資源群組中識別私用連結服務的名稱。 |
     | 區域 | 與虛擬網路相同 | 選取符合您虛擬網路區域的區域。 |
 
 1. 在 [ **輸出設定** ] 窗格中，填寫下欄欄位：
 
-    :::image type="content" source="media/vnet-create-private-endpoint/private-link-outbound.png" alt-text="Private link tab 2-輸出設定":::
+    :::image type="content" source="media/vnet-create-private-endpoint/private-link-outbound.png" alt-text="Gif 顯示在 Azure 資料總管入口網站中建立 private link 服務的前三個步驟":::
 
     |**設定** | **建議的值** | **欄位描述**
     |---|---|---|
@@ -64,25 +64,25 @@ ms.locfileid: "90680745"
 
 ## <a name="create-private-endpoint"></a>建立私人端點
 
-若要安全地連結到叢集上的所有服務，您必須建立 [私人端點](https://docs.microsoft.com/azure/private-link/private-endpoint-overview) 兩次：一次用於查詢 (引擎) ，一次用於內嵌 (資料管理) 。
+若要安全地連結到叢集上的所有服務，您必須建立 [私人端點](/azure/private-link/private-endpoint-overview) 兩次：一次用於查詢 (引擎) ，一次用於內嵌 (資料管理) 。
 
 1. 選取入口網站左上角的 [+ 建立資源]  按鈕。
 1. 搜尋 *私用端點*。
 1. 在 [ **私人端點**] 底下，選取 [ **建立**]。
 1. 在 [ **建立私人端點** ] 窗格中，填寫下欄欄位：
 
-    :::image type="content" source="media/vnet-create-private-endpoint/step-one-basics.png" alt-text="建立私人端點表單步驟 1-基本":::
+    :::image type="content" source="media/vnet-create-private-endpoint/step-one-basics.png" alt-text="Gif 顯示在 Azure 資料總管入口網站中建立 private link 服務的前三個步驟":::
 
     **設定** | **建議的值** | **欄位描述**
     |---|---|---|
     | 訂用帳戶 | 您的訂用帳戶 | 選取您要用於私人端點的 Azure 訂用帳戶。|
     | 資源群組 | 您的資源群組 | 使用現有資源群組，或建立新的資源群組。 |
-    | 名稱 | AzureDataExplorerPE | 選擇可識別資源群組中虛擬網路的名稱。
+    | Name | AzureDataExplorerPE | 選擇可識別資源群組中虛擬網路的名稱。
     | 區域 | *美國西部* | 選取最符合您需求的區域。
     
 1. 在 [ **資源** ] 窗格中，填寫下欄欄位：
 
-    :::image type="content" source="media/vnet-create-private-endpoint/step-two-resource.png" alt-text="建立虛擬網路表單步驟 2-資源":::
+    :::image type="content" source="media/vnet-create-private-endpoint/step-two-resource.png" alt-text="Gif 顯示在 Azure 資料總管入口網站中建立 private link 服務的前三個步驟":::
 
     **設定** | **值**
     |---|---|
@@ -104,11 +104,11 @@ ms.locfileid: "90680745"
 1. 在 Private Link 服務中，選擇 [設定] 下的 [ **私人端點** 連線]。
 1. 從 [連接] 清單中選擇您的私人端點，然後選取 [ **核准**]。
 
-:::image type="content" source="media/vnet-create-private-endpoint/private-link-approve.png" alt-text="建立私人端點的核准步驟"::: 
+:::image type="content" source="media/vnet-create-private-endpoint/private-link-approve.png" alt-text="Gif 顯示在 Azure 資料總管入口網站中建立 private link 服務的前三個步驟"::: 
 
 ## <a name="set-dns-configuration"></a>設定 DNS 設定
 
-當您在虛擬網路中部署 Azure 資料總管叢集時，我們會更新 [DNS 專案](https://docs.microsoft.com/azure/private-link/private-endpoint-dns) ，以指向 *privatelink* 記錄名稱和區域主機名稱之間的正式名稱。 針對引擎和內嵌 (資料管理) ，會更新此專案。 
+當您在虛擬網路中部署 Azure 資料總管叢集時，我們會更新 [DNS 專案](/azure/private-link/private-endpoint-dns) ，以指向 *privatelink* 記錄名稱和區域主機名稱之間的正式名稱。 針對引擎和內嵌 (資料管理) ，會更新此專案。 
 
 例如，如果您的引擎 DNS 名稱是 myadx.westus.kusto.windows.net，則名稱解析將會是：
 

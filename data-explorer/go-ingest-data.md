@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/10/2020
-ms.openlocfilehash: 82302fc2071eca8bf2fb1e4c89b96de50b1a8806
-ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
+ms.openlocfilehash: c133c3cf1185e7ffdb959ed6ea127af7502820c4
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/08/2020
-ms.locfileid: "89557338"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342564"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-go-sdk"></a>使用 Azure 資料總管 Go SDK 內嵌資料 
 
@@ -151,7 +151,7 @@ func ingestFile(kc *kusto.Client, blobStoreAccountName, blobStoreContainer, blob
     1. 建立**對應**： `StormEvents_CSV_Mapping` 建立對應。
     1. 檔案**內嵌： Azure Blob 儲存體**) 中 (的 CSV 檔案已排入佇列以進行內嵌。
 
-1. 若要建立驗證的服務主體，請使用 Azure CLI 搭配 [az ad sp 建立-rbac](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) 命令。 以程式將使用的環境變數格式，以叢集端點和資料庫名稱來設定服務主體資訊：
+1. 若要建立驗證的服務主體，請使用 Azure CLI 搭配 [az ad sp 建立-rbac](/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) 命令。 以程式將使用的環境變數格式，以叢集端點和資料庫名稱來設定服務主體資訊：
 
     ```console
     export AZURE_SP_CLIENT_ID="<replace with appID>"

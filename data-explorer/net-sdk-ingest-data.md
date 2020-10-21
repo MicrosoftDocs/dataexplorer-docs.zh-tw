@@ -7,12 +7,12 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 07/07/2020
-ms.openlocfilehash: c6a544228d5527f1703567256bd3e824ddc0504a
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 56fd2d253cac80f097caa9206cd3b7c2a9d3c118
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872704"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343499"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-net-sdk"></a>使用 Azure 資料總管 .NET SDK 內嵌資料 
 
@@ -22,10 +22,10 @@ ms.locfileid: "88872704"
 > * [節點](node-ingest-data.md)
 > * [Go](go-ingest-data.md)
 
-Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 它提供兩個適用于 .NET 的用戶端程式庫：內嵌連結 [庫](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Ingest/) 和 [資料連結庫](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data/)。 如需 .NET SDK 的詳細資訊，請參閱 [關於 .NET sdk](/azure/data-explorer/kusto/api/netfx/about-the-sdk)。
+Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 它提供兩個適用于 .NET 的用戶端程式庫：內嵌連結 [庫](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Ingest/) 和 [資料連結庫](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data/)。 如需 .NET SDK 的詳細資訊，請參閱 [關於 .NET sdk](./kusto/api/netfx/about-the-sdk.md)。
 這些程式庫可讓您將資料內嵌 (載入) 至叢集，並從您的程式碼查詢資料。 在本文中，您會先在測試叢集中建立資料表和資料對應。 然後，您將叢集的擷取排入佇列並驗證結果。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 

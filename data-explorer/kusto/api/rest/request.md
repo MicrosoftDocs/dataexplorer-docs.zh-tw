@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/27/2020
-ms.openlocfilehash: 2c6efc03ea252eba5ed63e99d9214e59113856e9
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: cf9f9e5f6a9c5afca58e2637ed4e639882e3749d
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373574"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337409"
 ---
 # <a name="querymanagement-http-request"></a>查詢/管理 HTTP 要求
 
@@ -27,55 +27,55 @@ ms.locfileid: "83373574"
 |查詢 v2  |POST     |`/v2/rest/query`|
 |管理性|POST     |`/v1/rest/mgmt` |
 
-例如，若要將控制命令（「管理」）傳送至服務端點，請使用下列要求行：
+例如，若要將控制命令 ( "management" ) 傳送至服務端點，請使用下列要求行：
 
 ```
 POST https://help.kusto.windows.net/v1/rest/mgmt HTTP/1.1
 ```
 
-請參閱下方，以取得要包含的要求標頭和主體。
+請參閱以下內容，以瞭解要包含的要求標頭和主體。
 
 ## <a name="request-headers"></a>要求標頭
 
 下表包含用於查詢和管理作業的一般標頭。
 
-|標準標頭  |描述                                                                                 |必要/選用 |
+|標準標頭  |說明                                                                                 |必要/選用 |
 |-----------------|--------------------------------------------------------------------------------------------|------------------|
 |`Accept`         |設定為 `application/json`                                                                   |必要          |
-|`Accept-Encoding`|支援的編碼方式為 `gzip` 和`deflate`                                                |選用          |
-|`Authorization`  |請參閱[驗證](./authentication.md)                                                   |必要          |
-|`Connection`     |我們建議您啟用`Keep-Alive`                                                   |選用          |
-|`Content-Length` |我們建議您在已知的情況時指定要求主體長度                            |選用          |
-|`Content-Type`   |將設定為 `application/json` with`charset=utf-8`                                              |必要          |
-|`Expect`         |可以設定為`100-Continue`                                                                |選用          |
-|`Host`           |將設定為傳送要求的合格功能變數名稱（例如， `help.kusto.windows.net` ） |必要|
+|`Accept-Encoding`|支援的編碼為 `gzip` 和 `deflate`                                                |選擇性          |
+|`Authorization`  |請參閱 [驗證](./authentication.md)                                                   |必要          |
+|`Connection`     |建議您啟用 `Keep-Alive`                                                   |選擇性          |
+|`Content-Length` |建議您在已知時指定要求本文長度                            |選擇性          |
+|`Content-Type`   |設定為 `application/json` with `charset=utf-8`                                              |必要          |
+|`Expect`         |可以設定為 `100-Continue`                                                                |選擇性          |
+|`Host`           |設定為要求傳送至 (的限定功能變數名稱，例如， `help.kusto.windows.net`)  |必要|
 
-下表包含用於查詢和管理作業的一般自訂標頭。 除非另有指示，否則這些標頭僅用於遙測用途，而且不會影響任何功能。
+下表包含用於查詢和管理作業的一般自訂標頭。 除非另有指示，否則這些標頭只適用于遙測用途，且不會影響任何功能。
 
-所有標頭都是選擇性的。 我們建議您指定 `x-ms-client-request-id` 自訂標頭。 在某些情況下，例如取消執行中的查詢，則需要此標頭，因為它是用來識別要求。
+所有標頭都是選擇性的。 建議您指定 `x-ms-client-request-id` 自訂標頭。 在某些情況下（例如，取消執行中的查詢），需要此標頭，因為它是用來識別要求。
 
-|自訂標頭           |描述                                                                                               |
+|自訂標頭           |說明                                                                                               |
 |------------------------|----------------------------------------------------------------------------------------------------------|
-|`x-ms-app`              |提出要求之應用程式的（易記）名稱                                                 |
-|`x-ms-user`             |提出要求之使用者的（易記）名稱                                                        |
+|`x-ms-app`              |提出要求之應用程式的 (易記) 名稱                                                 |
+|`x-ms-user`             |提出要求之使用者的 (易記) 名稱                                                        |
 |`x-ms-user-id`          |與 `x-ms-user` 相同                                                                                       |
 |`x-ms-client-request-id`|要求的唯一識別碼                                                                       |
-|`x-ms-client-version`   |提出要求之用戶端的（易記）版本識別碼                                       |
-|`x-ms-readonly`         |如果指定，會強制要求在唯讀模式下執行，以防止它進行長期的變更 |
+|`x-ms-client-version`   |提出要求之用戶端的 (易記) 版本識別碼                                       |
+|`x-ms-readonly`         |如果有指定，會強制要求在唯讀模式中執行，使其無法進行長期持續變更 |
 
 ## <a name="request-parameters"></a>要求參數
 
-您可以在要求中傳遞下列參數。 它們會在要求中編碼為查詢參數，或作為本文的一部分，端視是否使用 GET 或 POST 而定。
+您可以在要求中傳遞下列參數。 這些參數在要求中是以查詢參數或主體的一部分進行編碼，視是否使用 GET 或 POST 而定。
 
-|參數   |描述                                                                                 |必要/選用 |
+|參數   |說明                                                                                 |必要/選用 |
 |------------|--------------------------------------------------------------------------------------------|------------------|
 |`csl`       |要執行之查詢或控制命令的文字                                             |必要          |
-|`db`        |範圍中的資料庫名稱，這是查詢或控制命令的目標            |針對某些控制命令則為選擇性。 <br>其他命令和所有查詢都需要此參數。 </br>                                                                   |
-|`properties`|提供用戶端要求屬性，可修改處理要求的方式及其結果。 如需詳細資訊，請參閱[用戶端要求屬性](../netfx/request-properties.md)                                               | 選用         |
+|`db`        |查詢或控制命令的目標範圍中的資料庫名稱            |某些控制命令是選擇性的。 <br>其他命令和所有查詢都需要。 </br>                                                                   |
+|`properties`|提供用戶端要求屬性，以修改要求的處理方式及其結果。 如需詳細資訊，請參閱 [用戶端要求屬性](../netfx/request-properties.md)                                               | 選擇性         |
 
 ## <a name="get-query-parameters"></a>取得查詢參數
 
-當使用 GET 時，要求的查詢參數會指定要求參數。
+使用 GET 時，要求的查詢參數會指定要求參數。
 
 ## <a name="body"></a>body
 
@@ -83,7 +83,7 @@ POST https://help.kusto.windows.net/v1/rest/mgmt HTTP/1.1
 
 ## <a name="examples"></a>範例
 
-這個範例會顯示查詢的 HTTP POST 要求。
+此範例顯示查詢的 HTTP POST 要求。
 
 ```txt
 POST https://help.kusto.windows.net/v2/rest/query HTTP/1.1
@@ -112,11 +112,11 @@ Request body
 }
 ```
 
-這個範例示範如何使用[捲曲](https://curl.haxx.se/)來建立傳送上述查詢的要求。
+此範例示範如何使用 [捲曲](https://curl.haxx.se/)來建立傳送上述查詢的要求。
 
-1. 取得驗證的權杖。
+1. 取得權杖以進行驗證。
 
-    `AAD_TENANT_NAME_OR_ID` `AAD_APPLICATION_ID` `AAD_APPLICATION_KEY` 設定[AAD 應用程式驗證](../../management/access-control/how-to-provision-aad-app.md)之後，請將、和取代為相關的值
+    `AAD_TENANT_NAME_OR_ID` `AAD_APPLICATION_ID` `AAD_APPLICATION_KEY` 在設定[AAD 應用程式驗證](../../../provision-azure-ad-app.md)之後，以相關的值取代、和。
 
     ```
     curl "https://login.microsoftonline.com/AAD_TENANT_NAME_OR_ID/oauth2/token" \
@@ -126,7 +126,7 @@ Request body
       -F "client_secret=AAD_APPLICATION_KEY"
     ```
 
-    此程式碼片段會為您提供持有人權杖。
+    此程式碼片段會提供您持有人權杖。
 
     ```
     {
@@ -154,4 +154,4 @@ Request body
     -X POST https://help.kusto.windows.net/v2/rest/query
     ```
 
-1. 根據[此規格](response.md)來讀取回應。
+1. 根據 [此規格](response.md)讀取回應。

@@ -7,19 +7,19 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/28/2020
-ms.openlocfilehash: f3925ed2b3012dffbd7e96ca6dd6a795b0499071
-ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
+ms.openlocfilehash: 5e15983039209e2e0c62ebd761e416ebb3bd1076
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92175693"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342615"
 ---
 # <a name="use-lightingest-to-ingest-data-to-azure-data-explorer"></a>使用 LightIngest 將資料內嵌至 Azure 資料總管
  
 LightIngest 是命令列公用程式，適用于將臨機運算元據內嵌至 Azure 資料總管中。 公用程式可以從本機資料夾或 Azure blob 儲存體容器提取來源資料。
 當您想要內嵌大量資料時，LightIngest 最有用，因為內嵌持續時間沒有時間限制。 當您稍後想要根據建立的時間查詢記錄，而不是內嵌時，它也很有用。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * LightIngest-將其下載為 Kusto 的一部分 [NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)
 
@@ -68,7 +68,7 @@ LightIngest 是命令列公用程式，適用于將臨機運算元據內嵌至 A
 
 ## <a name="command-line-arguments"></a>命令列引數
 
-|引數名稱            |類型     |描述       |強制/選用
+|引數名稱            |類型     |說明       |強制/選用
 |------------------------------|--------|----------|-----------------------------|
 |                               |字串   |[Azure 資料總管連接字串](kusto/api/connection-strings/kusto.md) ，指定將處理內嵌的 Kusto 端點。 應以雙引號括住 | 強制性
 |-database、-db          |字串  |目標 Azure 資料總管資料庫名稱 | 選擇性  |
@@ -144,7 +144,7 @@ To use the LightIngest command below:
 
 引數值必須包含：
 * 緊接在時間戳記格式前面的常文字，以單引號括住 (前置詞) 
-* 標準[.Net 日期時程表示法](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)中的時間戳記格式
+* 標準[.Net 日期時程表示法](/dotnet/standard/base-types/custom-date-and-time-format-strings)中的時間戳記格式
 * 緊接在時間戳記 (後置詞) 的常文字。
 
 **範例** 

@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/24/2019
-ms.openlocfilehash: 8febe9934234370b217ab4f5a2591fd0b5adb759
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: e970b469b1114252cab6e125ef247f048b4067bd
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873010"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342853"
 ---
 # <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-python"></a>使用 Python 建立 Azure 資料總管的資料庫和資料表原則
 
@@ -23,7 +23,7 @@ ms.locfileid: "88873010"
 
 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 在本文中，您會使用 Python 建立 Azure 資料總管的資料庫和資料表原則。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * [測試叢集和資料庫](create-cluster-database-python.md)
@@ -38,7 +38,7 @@ pip install azure-kusto-data (Optional, for changing table's policies)
 ```
 
 ## <a name="authentication"></a>驗證
-若要執行本文中的範例，我們需要可存取資源 Azure AD 應用程式和服務主體。 您可以使用相同的 Azure AD 應用程式，從 [測試叢集和資料庫](create-cluster-database-csharp.md#authentication)進行驗證。 如果您想要使用不同的 Azure AD 應用程式，請參閱 [建立 Azure AD 應用](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal) 程式，以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 它也會顯示如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。 您可能需要將新的 Azure AD 應用程式新增為資料庫中的主體，請參閱 [管理 Azure 資料總管資料庫許可權](manage-database-permissions.md)。    
+若要執行本文中的範例，我們需要可存取資源 Azure AD 應用程式和服務主體。 您可以使用相同的 Azure AD 應用程式，從 [測試叢集和資料庫](create-cluster-database-csharp.md#authentication)進行驗證。 如果您想要使用不同的 Azure AD 應用程式，請參閱 [建立 Azure AD 應用](/azure/active-directory/develop/howto-create-service-principal-portal) 程式，以建立免費的 Azure AD 應用程式，並在訂用帳戶範圍新增角色指派。 它也會顯示如何取得 `Directory (tenant) ID` 、 `Application ID` 和 `Client Secret` 。 您可能需要將新的 Azure AD 應用程式新增為資料庫中的主體，請參閱 [管理 Azure 資料總管資料庫許可權](manage-database-permissions.md)。    
 
 ## <a name="alter-database-retention-policy"></a>Alter database 保留原則
 設定包含10天虛刪除期間的保留原則。

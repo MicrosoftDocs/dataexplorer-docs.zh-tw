@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: tutorial
 ms.date: 04/07/2019
-ms.openlocfilehash: a7a964f8bb022885c6ac3bc4828469031987b162
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: f6d993383ecf6c25bf144228e77f02f944bc02d8
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872619"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343329"
 ---
 # <a name="write-queries-for-azure-data-explorer"></a>撰寫 Azure 資料總管查詢
 
@@ -55,7 +55,7 @@ StormEvents
 |   23|
 | |
 
-如需詳細資訊，請參閱 [查詢語言參考資料](https://aka.ms/kustolangref) (英文)。
+如需詳細資訊，請參閱 [查詢語言參考資料](./kusto/query/index.md) (英文)。
 
 ## <a name="most-common-operators"></a>常見運算子
 
@@ -948,4 +948,4 @@ MyFunction ("Texas")
 
 ## <a name="next-steps"></a>後續步驟
 
-[Kusto 查詢語言參考](https://aka.ms/kustolangref) (英文)
+[Kusto 查詢語言參考](./kusto/query/index.md) (英文)

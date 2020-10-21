@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 11/28/2019
-ms.openlocfilehash: 3a17d9e63f0e6803b6950d39ccd58183d44bb51e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 988ace99e8671de229f9bdf796260e64f9d36932
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873571"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342989"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本，建立 Azure 資料總管的事件中樞資料連線
 
@@ -25,12 +25,12 @@ ms.locfileid: "88873571"
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)] 
 在本文中，您將使用 Azure Resource Manager 範本，建立 Azure 資料總管的事件中樞資料連線。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 建立叢集 [和資料庫](create-cluster-database-portal.md)
 * 建立 [資料表和資料行對應](ingest-data-event-hub.md#create-a-target-table-in-azure-data-explorer)
-* 建立 [事件中樞](https://docs.microsoft.com/azure/event-hubs/event-hubs-create)
+* 建立 [事件中樞](/azure/event-hubs/event-hubs-create)
 
 ## <a name="azure-resource-manager-template-for-adding-an-event-hub-data-connection"></a>新增事件中樞資料連線的 Azure Resource Manager 範本
 

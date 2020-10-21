@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: c7c85440c1b2e3830805efdabc3c95ec7ed5797c
-ms.sourcegitcommit: 4b6488a40c35c541a16c65a237c201b7f7dc02e2
+ms.openlocfilehash: 7262b0391abf42dc71a04eec8be9958c46726edb
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89176285"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342547"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-node-library"></a>使用 Azure 資料總管 Node 程式庫擷取資料
 
@@ -56,7 +56,7 @@ const { DataFormat } = require("azure-kusto-ingest").IngestionPropertiesEnums;
 const { BlobDescriptor } = require("azure-kusto-ingest").IngestionDescriptors;
 
 ```
-若要驗證應用程式，Azure 資料總管會使用您的 Azure Active Directory 租用戶識別碼。 若要尋找您的租使用者識別碼，請遵循 [尋找您的 Microsoft 365 租使用者識別碼](https://docs.microsoft.com/onedrive/find-your-office-365-tenant-id)。
+若要驗證應用程式，Azure 資料總管會使用您的 Azure Active Directory 租用戶識別碼。 若要尋找您的租使用者識別碼，請遵循 [尋找您的 Microsoft 365 租使用者識別碼](/onedrive/find-your-office-365-tenant-id)。
 
 執行此程式碼之前，請先設定 `authorityId`、`kustoUri`、`kustoIngestUri` 和 `kustoDatabase` 的值。
 

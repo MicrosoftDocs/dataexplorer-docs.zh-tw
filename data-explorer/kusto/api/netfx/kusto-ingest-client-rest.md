@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 10f59a167de12e4b688f6d9b5f15d3f0f15d8291
-ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
+ms.openlocfilehash: 694b229c36a8bbbe6c15531b555dc8467198cd65
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/08/2020
-ms.locfileid: "89557389"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337596"
 ---
 # <a name="ingestion-without-kustoingest-library"></a>內嵌而不 Kusto 內嵌程式庫
 
@@ -22,7 +22,7 @@ ms.locfileid: "89557389"
 本文說明如何使用 Azure 資料總管的 *佇列* 內嵌來執行生產等級的管線。
 
 > [!NOTE]
-> 下列程式碼是以 c # 撰寫，並利用 Azure 儲存體 SDK、ADAL 驗證程式庫和套件上的 NewtonSoft.JS來簡化範例程式碼。 如有需要，您可以將對應的程式碼取代為適當的 [Azure 儲存體 REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api) 呼叫、 [non-.NET ADAL 封裝](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)，以及任何可用的 JSON 處理封裝。
+> 下列程式碼是以 c # 撰寫，並利用 Azure 儲存體 SDK、ADAL 驗證程式庫和套件上的 NewtonSoft.JS來簡化範例程式碼。 如有需要，您可以將對應的程式碼取代為適當的 [Azure 儲存體 REST API](/rest/api/storageservices/blob-service-rest-api) 呼叫、 [non-.NET ADAL 封裝](/azure/active-directory/develop/active-directory-authentication-libraries)，以及任何可用的 JSON 處理封裝。
 
 本文將討論建議的內嵌模式。 針對 Kusto 程式庫，其對應的實體是 [IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) 介面。 在這裡，用戶端程式代碼會藉由將內嵌通知訊息張貼到 Azure 佇列，與 Azure 資料總管服務互動。 訊息的參考是從 Kusto 資料管理取得 (也稱為「內嵌) 」服務。 與服務的互動必須使用 Azure Active Directory (Azure AD) 進行驗證。
 
@@ -104,7 +104,7 @@ public static void IngestSingleFile(string file, string db, string table, string
 ### <a name="obtain-authentication-evidence-from-azure-ad"></a>從 Azure AD 取得驗證證據
 
 在這裡，我們會使用 ADAL 來取得 Azure AD 權杖，以存取 Kusto 資料管理服務，並要求其輸入佇列。
-如有需要，可在 [非 Windows 平臺](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries) 上使用 ADAL。
+如有需要，可在 [非 Windows 平臺](/azure/active-directory/develop/active-directory-authentication-libraries) 上使用 ADAL。
 
 ```csharp
 // Authenticates the interactive user and retrieves Azure AD Access token for specified resource
@@ -218,7 +218,7 @@ internal static string RetrieveKustoIdentityToken(string ingestClusterBaseUri, s
 
 ### <a name="upload-data-to-the-azure-blob-container"></a>將資料上傳至 Azure Blob 容器
 
-此步驟是關於將本機檔案上傳至 Azure Blob，以供內嵌之用。 此程式碼會使用 Azure 儲存體 SDK。 如果無法使用相依性，您可以使用 [Azure Blob 服務 REST API](https://docs.microsoft.com/rest/api/storageservices/fileservices/blob-service-rest-api)來達成。
+此步驟是關於將本機檔案上傳至 Azure Blob，以供內嵌之用。 此程式碼會使用 Azure 儲存體 SDK。 如果無法使用相依性，您可以使用 [Azure Blob 服務 REST API](/rest/api/storageservices/fileservices/blob-service-rest-api)來達成。
 
 ```csharp
 // Uploads a single local file to an Azure Blob container, returns blob URI and original data size
@@ -283,7 +283,7 @@ internal static string PrepareIngestionMessage(string db, string table, string d
 最後，將您所建立的訊息張貼至您從 Azure 資料總管取得的選取內嵌佇列。
 
 > [!NOTE]
-> 依預設，在 v12 底下的 .net 儲存體用戶端版本會將訊息編碼為 base64 以取得詳細資訊，請參閱 [儲存體](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage)檔。如果您使用的是 v12 以上的 .Net 儲存體用戶端版本，您必須正確地編碼訊息內容。
+> 依預設，在 v12 底下的 .net 儲存體用戶端版本會將訊息編碼為 base64 以取得詳細資訊，請參閱 [儲存體](/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage)檔。如果您使用的是 v12 以上的 .Net 儲存體用戶端版本，您必須正確地編碼訊息內容。
 
 ```csharp
 internal static void PostMessageToQueue(string queueUriWithSas, string message)
@@ -336,7 +336,7 @@ Kusto 資料管理服務預期從輸入 Azure 佇列讀取的訊息是採用下�
 }
 ```
 
-|屬性 | 描述 |
+|屬性 | 說明 |
 |---------|-------------|
 |Id | (GUID) 的訊息識別碼 |
 |BlobPath |路徑 (URI) 至 blob，包括授與 Azure 資料總管讀取/寫入/刪除許可權的 SAS 金鑰。 需要許可權，才能讓 Azure 資料總管在擷取資料完成後刪除 blob|
@@ -353,11 +353,11 @@ Kusto 資料管理服務預期從輸入 Azure 佇列讀取的訊息是採用下�
 
 資料管理預期從輸入 Azure 佇列讀取的訊息是採用下列格式的 JSON 檔。
 
-|屬性 | 描述 |
+|屬性 | 說明 |
 |---------|-------------
 |OperationId |可以用來追蹤服務端作業的作業識別碼 (GUID)  |
 |資料庫 |目標資料庫名稱 |
-|Table |目標資料表名稱 |
+|資料表 |目標資料表名稱 |
 |FailedOn |失敗時間戳記 |
 |IngestionSourceId |識別 Azure 資料總管無法內嵌之資料區塊的 GUID |
 |IngestionSourcePath |路徑 (URI) Azure 資料總管無法內嵌的資料區塊 |

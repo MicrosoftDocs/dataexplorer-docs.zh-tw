@@ -7,12 +7,12 @@ ms.reviewer: ankhanol
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/22/2020
-ms.openlocfilehash: 14f4ed38ecb2e5b4a94dad8a73fb43ea3ff1e5ee
-ms.sourcegitcommit: c8256390d745e345f44d401e33e775702d62721d
+ms.openlocfilehash: 8274cd04dc2ecf588bf4771c06e3f8a760cac74d
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "91007783"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343159"
 ---
 # <a name="ingest-data-from-apache-kafka-into-azure-data-explorer"></a>將 Apache Kafka 的資料內嵌至 Azure 資料總管
  
@@ -22,10 +22,10 @@ Azure 資料總管支援從[Apache Kafka](http://kafka.apache.org/documentation/
 
 如需詳細資訊，請參閱連接器 [git](https://github.com/Azure/kafka-sink-azure-kusto/blob/master/README.md) 存放庫和 [版本詳細](https://github.com/Azure/kafka-sink-azure-kusto/blob/master/README.md#13-major-version-specifics)資料。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
-* 建立 [Microsoft Azure 帳戶](https://docs.microsoft.com/azure/)。
-* 安裝 [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)。
+* 建立 [Microsoft Azure 帳戶](/azure/)。
+* 安裝 [Azure CLI](/cli/azure/install-azure-cli)。
 * 安裝 [Docker](https://docs.docker.com/get-docker/) 及 [Docker Compose](https://docs.docker.com/compose/install)。
 * 使用預設快取和保留原則，[在 Azure 入口網站中建立 Azure 資料總管叢集和資料庫](create-cluster-database-portal.md)。
 
@@ -322,7 +322,7 @@ services:
     | project StartTime, EndTime, Source, EventId
     ```
     
-1. 使用 [`summarize`](https://docs.microsoft.com/azure/data-explorer/write-queries#summarize) 運算子：
+1. 使用 [`summarize`](./write-queries.md#summarize) 運算子：
 
     ```kusto
     Storms
@@ -332,9 +332,9 @@ services:
     | render columnchart
     ```
     
-    :::image type="content" source="media/ingest-data-kafka/kusto-query.png" alt-text="在 Azure 資料總管中 Kafka 查詢資料行圖表結果":::
+    :::image type="content" source="media/ingest-data-kafka/kusto-query.png" alt-text="在 Azure 資料總管入口網站中建立資料表 ":::
 
-如需更多查詢範例和指引，請參閱 [撰寫適用于 Azure 資料總管](write-queries.md) 和 [Kusto 查詢語言檔](https://docs.microsoft.com/azure/data-explorer/kusto/query/)的查詢。
+如需更多查詢範例和指引，請參閱 [撰寫適用于 Azure 資料總管](write-queries.md) 和 [Kusto 查詢語言檔](./kusto/query/index.md)的查詢。
 
 ## <a name="reset"></a>重設
 
@@ -348,7 +348,7 @@ services:
 
 ## <a name="clean-up-resources"></a>清除資源
 
-若要刪除 Azure 資料總管資源，請使用 [az cluster delete](https://docs.microsoft.com/cli/azure/kusto/cluster#az-kusto-cluster-delete) 或 [az Kusto database delete](https://docs.microsoft.com/cli/azure/kusto/database#az-kusto-database-delete)：
+若要刪除 Azure 資料總管資源，請使用 [az cluster delete](/cli/azure/kusto/cluster#az-kusto-cluster-delete) 或 [az Kusto database delete](/cli/azure/kusto/database#az-kusto-database-delete)：
 
 ```azurecli-interactive
 az kusto cluster delete -n <cluster name> -g <resource group name>
@@ -358,7 +358,7 @@ az kusto database delete -n <database name> --cluster-name <cluster name> -g <re
 ## <a name="next-steps"></a>後續步驟
 
 * 深入瞭解 [Big data 架構](/azure/architecture/solution-ideas/articles/big-data-azure-data-explorer)。
-* 瞭解 [如何將 JSON 格式的範例資料內嵌至 Azure 資料總管](https://docs.microsoft.com/azure/data-explorer/ingest-json-formats?tabs=kusto-query-language)。
+* 瞭解 [如何將 JSON 格式的範例資料內嵌至 Azure 資料總管](./ingest-json-formats.md?tabs=kusto-query-language)。
 * 針對其他 Kafka labs：
    * [實際操作實驗室，以分散式模式從 Confluent Cloud Kafka 內嵌](https://github.com/Azure/azure-kusto-labs/blob/master/kafka-integration/confluent-cloud/README.md)
    * [實際操作實驗室，以分散式模式從 HDInsight Kafka 內嵌](https://github.com/Azure/azure-kusto-labs/tree/master/kafka-integration/distributed-mode/hdinsight-kafka)
