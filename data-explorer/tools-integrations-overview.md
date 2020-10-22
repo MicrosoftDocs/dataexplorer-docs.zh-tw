@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 19aff5ad76544573daca380c1555c072fb29eaa2
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: fd596d840dcbaab1843833b4164901423a2ebef8
+ms.sourcegitcommit: 88291fd9cebc26e5210463cb95be5540bf84eef8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343346"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92437386"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Azure 資料總管工具和整合總覽
 
@@ -63,7 +63,7 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
 * [Azure Data Lake](data-lake-query-data.md)
 * [Azure Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
 * [Apache Spark](spark-connector.md)
-* Microsoft Power Apps
+* [Microsoft Power Apps](power-apps-connector.md)
 * Azure Data Studio： [Kusto 延伸模組總覽](/sql/azure-data-studio/extensions/kusto-extension?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)、 [使用 Kusto](/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)，以及 [使用 Kqlmagic](/sql/azure-data-studio/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
 
 ## <a name="visualizations-dashboards-and-reporting"></a>視覺效果、儀表板和報告

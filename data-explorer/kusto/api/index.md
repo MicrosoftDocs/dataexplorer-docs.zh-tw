@@ -8,12 +8,12 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2020
-ms.openlocfilehash: b9fd03bfd08a31d872ca3c0ef48bd96514e9eb18
-ms.sourcegitcommit: 9e0289945270db517e173aa10024e0027b173b52
+ms.openlocfilehash: b352ed44e7beb487588cf94f37d280eb6b51cdf9
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/03/2020
-ms.locfileid: "89428391"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337460"
 ---
 # <a name="azure-data-explorer-api-overview"></a>Azure 資料總管 API 概觀
 
@@ -23,7 +23,7 @@ Azure 資料總管服務支援下列通訊端點：
    此端點支援查詢和[控制命令](../management/index.md)的 [Kusto 查詢語言](../query/index.md)。
 1. [MS-TDS](#ms-tds) 端點，其會實作由 Microsoft SQL Server 產品所使用的 Microsoft 表格式資料流 (TDS) 通訊協定子集。
    這個端點適用於知道如何與 SQL Server 端點通訊以進行查詢的工具。
-1. [Azure Resource Manager (ARM)](https://docs.microsoft.com/azure/role-based-access-control/resource-provider-operations#microsoftkusto) 端點是 Azure 服務的標準方法。 端點可用來管理資源，例如 Azure 資料總管叢集。
+1. [Azure Resource Manager (ARM)](/azure/role-based-access-control/resource-provider-operations#microsoftkusto) 端點是 Azure 服務的標準方法。 端點可用來管理資源，例如 Azure 資料總管叢集。
 
 ## <a name="rest-api"></a>REST API
 

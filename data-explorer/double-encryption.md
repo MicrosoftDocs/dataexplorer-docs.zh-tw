@@ -7,12 +7,12 @@ ms.reviewer: toleibov
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/11/2020
-ms.openlocfilehash: e89ce6f77545b4f0b42cbb3d792edd5ceeb0ed34
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4949190befdc8adcec9f8115305a2a403994395f
+ms.sourcegitcommit: 88291fd9cebc26e5210463cb95be5540bf84eef8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874661"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92437401"
 ---
 # <a name="enable-infrastructure-encryption-double-encryption-during-cluster-creation-in-azure-data-explorer"></a>在 Azure 資料總管的叢集建立期間，啟用基礎結構加密 (雙重加密) 
   
@@ -21,7 +21,6 @@ ms.locfileid: "88874661"
 > [!IMPORTANT]
 > * 只有在建立叢集時，才可以啟用雙重加密。
 > * 一旦在您的叢集上啟用基礎結構加密，您就 **無法** 將它停用。
-> * 雙精確度加密僅適用于支援基礎結構加密的區域。 如需詳細資訊，請參閱 [存放裝置基礎結構加密](/azure/storage/common/infrastructure-encryption-enable)。
 
 # <a name="azure-portal"></a>[Azure 入口網站](#tab/portal)
 
