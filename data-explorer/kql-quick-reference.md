@@ -1,57 +1,60 @@
 ---
 title: KQL 快速參考
-description: 有用的 KQL 函數及其定義的清單,包含語法示例。
+description: 有用的 KQL 函式清單及其定義和語法範例。
 author: orspod
 ms.author: orspodek
 ms.reviewer: ''
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/19/2020
-ms.openlocfilehash: ff9b78af54141f2c7fdbbf7039aad59dca2312a0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2fa4cbd0b1cf7b034bc7ae3202afcde3866ca347
+ms.sourcegitcommit: ee904f45e3eb3feab046263aa9956cb7780a056d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81500706"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92356583"
 ---
 # <a name="kql-quick-reference"></a>KQL 快速參考
 
-本文將列出函數及其說明清單,以説明您開始使用 Kusto 查詢語言。
+本文將說明函式清單及其描述，以協助您開始使用 Kusto 查詢語言。
 
-| 操作員/功能                               | 描述                           | 語法                                           |
+| Operator/函式                               | 說明                           | 語法                                           |
 | :---------------------------------------------- | :------------------------------------ |:-------------------------------------------------|
-|**過濾器/搜尋/條件**                      |**_以篩選或搜尋查詢相關資料_** |                      |
-| [其中](kusto/query/whereoperator.md)                      | 特定謂詞上的篩選器           | `T | where Predicate`                         |
-| [其中包含/有](kusto/query/whereoperator.md)        | `Contains`: 尋找任何子字串 <br> `Has`:尋找特定單字(效能更好)  | `T | where col1 contains/has "[search term]"`|
-| [搜尋](kusto/query/searchoperator.md)                    | 搜尋表中的所有欄位以搜尋值 | `[TabularSource |] search [kind=CaseSensitivity] [in (TableSources)] SearchPredicate` |
-| [採取](kusto/query/takeoperator.md)                        | 返回指定的記錄數。 測試查詢<br>**_注意_**`_take``_limit`: 和 * 是同義詞。 | `T | take NumberOfRows` |
-| [情況 下](kusto/query/casefunction.md)                        | 添加條件語句,類似於其他系統中的 if/然後/elseif。 | `case(predicate_1, then_1, predicate_2, then_2, predicate_3, then_3, else)` |
-| [distinct](kusto/query/distinctoperator.md)                | 產生有輸入表的使用者的不同組合的表格 | `distinct [ColumnName], [ColumnName]` |
-| **日期/時間**                                   |**_使用日期與時間函數的操作_**               |                          |
-|[前](kusto/query/agofunction.md)                           | 返回相對於查詢執行時間的時間偏移量。 例如,`ago(1h)`是目前時鐘讀數前一小時。 | `ago(a_timespan)` |
-| [format_datetime](kusto/query/format-datetimefunction.md)  | 傳[回 各種日期格式](kusto/query/format-datetimefunction.md#supported-formats)的資料。 | `format_datetime(datetime , format)` |
-| [站](kusto/query/binfunction.md)                          | 在時間範圍內捨入所有值並對其進行分組 | `bin(value,roundTo)` |
-| **建立/刪除欄位**                   |**_新增或移除表中的欄位_** |                                                    |
-| [列印](kusto/query/printoperator.md)                      | 使用一個或多個標量表示式輸出單個行 | `print [ColumnName =] ScalarExpression [',' ...]` |
-| [專案](kusto/query/projectoperator.md)                  | 選擇要依指定順序的欄位 | `T | project ColumnName [= Expression] [, ...]` <br> Or <br> `T | project [ColumnName | (ColumnName[,]) =] Expression [, ...]` |
-| [project-away](kusto/query/projectawayoperator.md)         | 選擇要從輸出中排除的欄位 | `T | project-away ColumnNameOrPattern [, ...]` |
-| [延伸](kusto/query/extendoperator.md)                    | 建立計算欄位並將新增到結果集 | `T | extend [ColumnName | (ColumnName[, ...]) =] Expression [, ...]` |
-| **排序與集合資料集**                 |**_通過以有意義的方式對資料進行排序或分組來重組資料_**|                  |
-| [排序](kusto/query/sortoperator.md)                        | 依遞增或遞減的順序順序, 以順序 | `T | sort by expression1 [asc|desc], expression2 [asc|desc], …` |
-| [返回頁首](kusto/query/topoperator.md)                          | 使用資料集排序時傳回資料集的前 N 行`by` | `T | top numberOfRows by expression [asc|desc] [nulls first|last]` |
-| [總結](kusto/query/summarizeoperator.md)              | 根據群組列對行進行`by`群組,並計算每個組的聚合 | `T | summarize [[Column =] Aggregation [, ...]] [by [Column =] GroupExpression [, ...]]` |
-| [計數](kusto/query/countoperator.md)                       | 計算輸入表格記錄(例如,T)<br>此運算子是速記`summarize count() `| `T | count` |
-| [加入](kusto/query/joinoperator.md)                        | 通過匹配每個表中指定列的值,合併兩個表的行以形成新表。 支援各種`flouter`聯接類型: `inner` `innerunique`、 `leftanti` `leftantisemi` `leftouter` `leftsemi`、 `rightanti` `rightantisemi` `rightouter`、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、 、`rightsemi` | `LeftTable | join [JoinParameters] ( RightTable ) on Attributes` |
-| [聯盟](kusto/query/unionoperator.md)                      | 取得兩個或多個表並傳回所有行 | `[T1] | union [T2], [T3], …` |
-| [範圍](kusto/query/rangeoperator.md)                      | 產生具有數字序列的表格 | `range columnName from start to stop step step` |
-| **將資料格式化**                                 | **_以有用的方式重組資料以輸出_** | |
-| [尋找](kusto/query/lookupoperator.md)                    | 以維度表中使用拾值延伸事實資料表的欄 | `T1 | lookup [kind = (leftouter|inner)] ( T2 ) on Attributes` |
-| [mv 延伸](kusto/query/mvexpandoperator.md)               | 將動態陣列轉換為行(多值延伸) | `T | mv-expand Column` |
-| [解析](kusto/query/parseoperator.md)                      | 評估字串運算式，並將其值剖析至一或多個計算的資料行。 用於構建非結構化數據。 | `T | parse [kind=regex  [flags=regex_flags] |simple|relaxed] Expression with * (StringConstant ColumnName [: ColumnType]) *...` |
-| [make-series](kusto/query/make-seriesoperator.md)          | 沿指定軸建立一系列指定的集合值 | `T | make-series [MakeSeriesParamters] [Column =] Aggregation [default = DefaultValue] [, ...] on AxisColumn from start to end step step [by [Column =] GroupExpression [, ...]]` |
-| [讓](kusto/query/letstatement.md)                         | 將名稱綁定到可以引用其綁定值的運算式。 值可以是 lambda 運算式,以創建作為查詢的一部分的臨時函數。 用於`let`在結果看起來像新表的表上創建運算式。 | `let Name = ScalarExpression | TabularExpression | FunctionDefinitionExpression` |
-| **一般**                                     | **_雜項操作和職能_** | |
-| [invoke](kusto/query/invokeoperator.md)                    | 在作為輸入接收的表上運行函數。 | `T | invoke function([param1, param2])` |
-| [評估外掛程式名稱](kusto/query/evaluateoperator.md)     | 評估查詢語言延伸(外掛程式) | `[T |] evaluate [ evaluateParameters ] PluginName ( [PluginArg1 [, PluginArg2]... )` |
-| **視覺效果**                               | **_以圖形格式顯示資料的操作_** | |
-| [呈現](kusto/query/renderoperator.md) | 成像為圖形輸出 | `T | render Visualization [with (PropertyName = PropertyValue [, ...] )]` |
+|**篩選準則/搜尋/條件**                      |**_藉由篩選或搜尋來尋找相關資料_** |                      |
+| [where](kusto/query/whereoperator.md)                      | 特定述詞上的篩選準則           | `T | where Predicate`                         |
+| [where contains/contains](kusto/query/whereoperator.md)        | `Contains`：尋找是否有任何子字串相符 <br> `Has`：尋找特定字組 (效能較佳)   | `T | where col1 contains/has "[search term]"`|
+| [search](kusto/query/searchoperator.md)                    | 搜尋資料表中的所有資料行中的值 | `[TabularSource |] search [kind=CaseSensitivity] [in (TableSources)] SearchPredicate` |
+| [take](kusto/query/takeoperator.md)                        | 傳回指定的記錄數目。 用來測試查詢<br>**_注意_**： `_take` _ 和 `_limit` _ 為同義字。 | `T | take NumberOfRows` |
+| [情況 下](kusto/query/casefunction.md)                        | 加入 condition 語句，類似于其他系統中的 if/then/elseif。 | `case(predicate_1, then_1, predicate_2, then_2, predicate_3, then_3, else)` |
+| [distinct](kusto/query/distinctoperator.md)                | 產生資料表，其中以不同方式結合提供的輸入資料表資料列 | `distinct [ColumnName], [ColumnName]` |
+| **日期/時間**                                   |**_使用日期和時間函數的作業_**               |                          |
+|[前](kusto/query/agofunction.md)                           | 傳回相對於查詢執行時間的時間位移。 例如， `ago(1h)` 是目前時鐘讀取之前的一小時。 | `ago(a_timespan)` |
+| [format_datetime](kusto/query/format-datetimefunction.md)  | 傳回 [各種日期格式](kusto/query/format-datetimefunction.md#supported-formats)的資料。 | `format_datetime(datetime , format)` |
+| [站](kusto/query/binfunction.md)                          | 四捨五入時間範圍內的所有值，並將其分組 | `bin(value,roundTo)` |
+| **建立/移除資料行**                   |**_在資料表中新增或移除資料行_** |                                                    |
+| [print](kusto/query/printoperator.md)                      | 輸出具有一或多個純量運算式的單一資料列 | `print [ColumnName =] ScalarExpression [',' ...]` |
+| [project](kusto/query/projectoperator.md)                  | 選取要包含在指定順序中的資料行 | `T | project ColumnName [= Expression] [, ...]` <br> Or <br> `T | project [ColumnName | (ColumnName[,]) =] Expression [, ...]` |
+| [project-away](kusto/query/projectawayoperator.md)         | 選取要從輸出中排除的資料行 | `T | project-away ColumnNameOrPattern [, ...]` |
+| [專案-保留](kusto/query/project-keep-operator.md)         | 選取要保留在輸出中的資料行 | `T | project-keep ColumnNameOrPattern [, ...]` |
+| [專案-重新命名](kusto/query/projectrenameoperator.md)     | 重新命名結果輸出中的資料行 | `T | project-rename new_column_name = column_name` |
+| [專案-重新排序](kusto/query/projectreorderoperator.md)   | 重新排序結果輸出中的資料行 | `T | project-reorder Col2, Col1, Col* asc` |
+| [extend](kusto/query/extendoperator.md)                    | 建立匯出資料行，並將其加入至結果集。 | `T | extend [ColumnName | (ColumnName[, ...]) =] Expression [, ...]` |
+| **排序和匯總資料集**                 |**_以有意義的方式排序或分組來重建資料_**|                  |
+| [sort](kusto/query/sortoperator.md)                        | 依一或多個資料行以遞增或遞減順序排序輸入資料表的資料列 | `T | sort by expression1 [asc|desc], expression2 [asc|desc], …` |
+| [top](kusto/query/topoperator.md)                          | 使用排序資料集時，傳回資料集的前 N 個數據列 `by` | `T | top numberOfRows by expression [asc|desc] [nulls first|last]` |
+| [summarize](kusto/query/summarizeoperator.md)              | 根據群組資料行將資料 `by` 列分組，並計算每個群組的匯總 | `T | summarize [[Column =] Aggregation [, ...]] [by [Column =] GroupExpression [, ...]]` |
+| [計數](kusto/query/countoperator.md)                       | 計算輸入資料表中的記錄 (例如 T) <br>這個運算子是的縮寫 `summarize count() `| `T | count` |
+| [join](kusto/query/joinoperator.md)                        | 將兩個數據表的資料列合併，藉由比對每個資料表中指定之資料行 () s 的值，來形成新的資料表。 支援完整範圍的聯結類型： `flouter` 、 `inner` 、 `innerunique` 、 `leftanti` 、 `leftantisemi` 、 `leftouter` 、 `leftsemi` `rightanti` `rightantisemi` `rightouter` 、、、、 `rightsemi` | `LeftTable | join [JoinParameters] ( RightTable ) on Attributes` |
+| [union](kusto/query/unionoperator.md)                      | 採用兩個或多個資料表，並傳回其所有資料列 | `[T1] | union [T2], [T3], …` |
+| [range](kusto/query/rangeoperator.md)                      | 產生具有算術值系列的資料表 | `range columnName from start to stop step step` |
+| **格式化資料**                                 | **_以實用的方式將資料重建為輸出_** | |
+| [查找](kusto/query/lookupoperator.md)                    | 擴充事實資料表的資料行，並在維度資料表中查閱值 | `T1 | lookup [kind = (leftouter|inner)] ( T2 ) on Attributes` |
+| [mv-expand](kusto/query/mvexpandoperator.md)               |  (多重值擴充將動態陣列轉換成資料列)  | `T | mv-expand Column` |
+| [解析](kusto/query/parseoperator.md)                      | 評估字串運算式，並將其值剖析至一或多個計算的資料行。 用於結構化資料的結構。 | `T | parse [kind=regex  [flags=regex_flags] |simple|relaxed] Expression with * (StringConstant ColumnName [: ColumnType]) *...` |
+| [make-series](kusto/query/make-seriesoperator.md)          | 沿著指定的軸建立一系列指定的匯總值 | `T | make-series [MakeSeriesParamters] [Column =] Aggregation [default = DefaultValue] [, ...] on AxisColumn from start to end step step [by [Column =] GroupExpression [, ...]]` |
+| [讓](kusto/query/letstatement.md)                         | 將名稱系結至可參考其系結值的運算式。 值可以是 lambda 運算式，以便在查詢中建立特定函數。 用 `let` 來建立資料表的運算式，而資料表的結果看起來就像新的資料表。 | `let Name = ScalarExpression | TabularExpression | FunctionDefinitionExpression` |
+| **一般**                                     | **_其他作業和函式_** | |
+| [invoke](kusto/query/invokeoperator.md)                    | 在其接收為輸入的資料表上執行函數。 | `T | invoke function([param1, param2])` |
+| [評估 pluginName](kusto/query/evaluateoperator.md)     | 評估 (外掛程式) 的查詢語言延伸模組 | `[T |] evaluate [ evaluateParameters ] PluginName ( [PluginArg1 [, PluginArg2]... )` |
+| **視覺效果**                               | **_以圖形格式顯示資料的作業_** | |
+| [轉譯](kusto/query/renderoperator.md) | 以圖形化輸出呈現結果 | `T | render Visualization [with (PropertyName = PropertyValue [, ...] )]` |

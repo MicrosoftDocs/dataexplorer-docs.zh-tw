@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 83a4dba3f426189de615640ab48e1fa60f9e5537
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 9c46c8d0271516c56c3549212ad7b74f721ce81b
+ms.sourcegitcommit: ee904f45e3eb3feab046263aa9956cb7780a056d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92242198"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92356498"
 ---
 # <a name="project-rename-operator"></a>project-rename 運算子
 
@@ -36,7 +36,6 @@ T | project-rename new_column_name = column_name
 ## <a name="returns"></a>傳回
 
 資料表，其資料行的順序與現有資料表中的資料行相同，而且資料行已重新命名。
-
 
 ## <a name="examples"></a>範例
 
