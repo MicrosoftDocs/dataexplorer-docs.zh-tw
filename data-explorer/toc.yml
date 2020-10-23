@@ -313,6 +313,8 @@
           href: using-metrics.md
         - name: 使用資源健康情況來監視叢集健康情況
           href: monitor-with-resource-health.md
+        - name: 建立 Power Apps 應用程式來查詢 Azure 資料總管中的資料
+          href: power-apps-connector.md
     - name: 共用資料
       items:
         - name: 使用 Azure Data Share
@@ -1775,12 +1777,12 @@
       href: 'https://azure.microsoft.com/blog/tag/azure-data-explorer/'
     - name: 論壇
       items:
-        - name: Stack Overflow
+        - name: 堆疊溢位
           href: 'https://stackoverflow.com/questions/tagged/azure-data-explorer'
         - name: Microsoft 技術社群
           href: 'https://techcommunity.microsoft.com/t5/Azure-Data-Explorer/bd-p/Kusto'
-        - name: MSDN 論壇
-          href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureKusto'
+        - name: Microsoft Q&A
+          href: /answers/topics/azure-data-explorer.html
     - name: 產品意見反應
       href: 'https://aka.ms/adefeedback'
     - name: 定價與計費
