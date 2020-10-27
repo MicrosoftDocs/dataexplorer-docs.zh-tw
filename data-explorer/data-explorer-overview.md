@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 09/24/2018
-ms.openlocfilehash: 764dea2e3fe82bf795db81a4e8d3f89e256d3517
-ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
+ms.openlocfilehash: 10192cca4e03aa92ec018f7875e457d4cf109f72
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/15/2020
-ms.locfileid: "92098450"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342921"
 ---
 # <a name="what-is-azure-data-explorer"></a>什麼是 Azure 資料總管？
 
@@ -30,7 +30,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 ## <a name="data-warehousing-workflow"></a>資料倉儲工作流程
 
-Azure 資料總管與其他重要服務整合以提供全端解決方案，包括資料收集、擷取、儲存、編製索引、查詢和視覺化。 這項服務可對數 TB 相異的未經處理資料執行流程的**探索**步驟，因而在資料倉儲流程中發揮關鍵作用。
+Azure 資料總管與其他重要服務整合以提供全端解決方案，包括資料收集、擷取、儲存、編製索引、查詢和視覺化。 這項服務可對數 TB 相異的未經處理資料執行流程的 **探索** 步驟，因而在資料倉儲流程中發揮關鍵作用。
 
 ![資料倉儲圖表](media/data-explorer-overview/data-warehouse.png)
 
@@ -64,7 +64,7 @@ Azure 資料總管同樣可以處理大量的結構化、半結構化 (類似 JS
 
 * 提問
   * [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-data-explorer)
-  * [Microsoft Q&A](https://docs.microsoft.com/answers/topics/azure-data-explorer.html)
+  * [Microsoft Q&A](/answers/topics/azure-data-explorer.html)
   * [Microsoft 技術社群](https://techcommunity.microsoft.com/t5/Azure-Data-Explorer/bd-p/Kusto)
 * [在 User Voice 中提出產品建議](https://aka.ms/AzureDataExplorer.UserVoice)
 
