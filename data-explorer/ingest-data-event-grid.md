@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 3452ca547778869ae08e7aef92c1a3a7a4754446
-ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
+ms.openlocfilehash: 209a58dd53dd773567aeb527fa45499ddd397c20
+ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/15/2020
-ms.locfileid: "92098433"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92558218"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>訂閱 Event Grid 通知，以便將 Blob 擷取至 Azure 資料總管
 
@@ -38,11 +38,11 @@ ms.locfileid: "92098433"
 
 在 Azure 資料總管中建立一個資料表，供事件中樞將資料傳送至此。 在必要條件中準備的叢集與資料庫內建立該資料表。
 
-1. 在 Azure 入口網站中，您的叢集下方，選取 [查詢]****。
+1. 在 Azure 入口網站中，您的叢集下方，選取 [查詢]  。
 
     :::image type="content" source="media/ingest-data-event-grid/query-explorer-link.png" alt-text="連結至查詢瀏覽器"::: 
 
-1. 將下列命令複製到視窗，然後選取 [執行]**** 以建立資料表 (TestTable)，該資料表會接收內嵌的資料。
+1. 將下列命令複製到視窗，然後選取 [執行]  以建立資料表 (TestTable)，該資料表會接收內嵌的資料。
 
     ```kusto
     .create table TestTable (TimeStamp: datetime, Value: string, Source:string)
@@ -50,7 +50,7 @@ ms.locfileid: "92098433"
 
     :::image type="content" source="media/ingest-data-event-grid/run-create-table.png" alt-text="連結至查詢瀏覽器":::
 
-1. 將下列命令複製到視窗中，然後選取 [執行]**** 以將傳入的 JSON 資料對應至資料表 (TestTable) 的資料行名稱與資料類型。
+1. 將下列命令複製到視窗中，然後選取 [執行]  以將傳入的 JSON 資料對應至資料表 (TestTable) 的資料行名稱與資料類型。
 
     ```kusto
     .create table TestTable ingestion json mapping 'TestMapping' '[{"column":"TimeStamp","path":"$.TimeStamp"},{"column":"Value","path":"$.Value"},{"column":"Source","path":"$.Source"}]'
@@ -60,17 +60,17 @@ ms.locfileid: "92098433"
 
 現在，將儲存體帳戶連線至 Azure 資料總管，以便將流入儲存體的資料串流處理到測試資料表。 
 
-1. 在您建立的叢集下方，選取 [**資料庫**  >  **>testdatabase**]。
+1. 在您建立的叢集下方，選取 [ **資料庫**  >  **>testdatabase** ]。
 
     :::image type="content" source="media/ingest-data-event-grid/select-test-database.png" alt-text="連結至查詢瀏覽器":::
 
-1. 選取 [**資料**內嵌  >  **新增資料連線**]。
+1. 選取 [ **資料** 內嵌  >  **新增資料連線** ]。
 
     :::image type="content" source="media/ingest-data-event-grid/data-ingestion-create.png" alt-text="連結至查詢瀏覽器":::
 
 ### <a name="data-connection---basics-tab"></a>資料連線-基本資料索引標籤
 
-1. 選取連線類型： **Blob 儲存體**。
+1. 選取連線類型： **Blob 儲存體** 。
 
 1. 在表單中填寫以下資訊：
 
@@ -85,16 +85,16 @@ ms.locfileid: "92098433"
     | 資源建立 | *自動* | 定義您想要 Azure 資料總管為您建立事件方格訂用帳戶、事件中樞命名空間和事件中樞。 若要手動建立資源，請參閱 [手動建立事件方格內嵌的資源](ingest-data-event-grid-manual.md)|
 
 1. 如果您想要追蹤特定的主題，請選取 [ **篩選設定** ]。 設定通知的篩選條件，如下所示：
-    * [**前置**詞] 欄位是主旨的*常*值前置詞。 當套用的模式為 *startswith*時，它可以跨越多個容器、資料夾或 blob。 不允許使用萬用字元。
+    * [ **前置** 詞] 欄位是主旨的 *常* 值前置詞。 當套用的模式為 *startswith* 時，它可以跨越多個容器、資料夾或 blob。 不允許使用萬用字元。
         * 若要在 blob 容器上定義篩選，欄位 *必須* 設定如下： *`/blobServices/default/containers/[container prefix]`* 。
         * 若要在 blob 首碼 (或 Azure Data Lake Gen2) 中的資料夾上定義篩選，欄位 *必須* 設定如下： *`/blobServices/default/containers/[container name]/blobs/[folder/blob prefix]`* 。
     * **尾碼** 欄位是 blob 的 *常* 值尾碼。 不允許使用萬用字元。
-    * 區分**大小寫**的欄位指出前置詞和後置詞篩選準則是否區分大小寫
+    * 區分 **大小寫** 的欄位指出前置詞和後置詞篩選準則是否區分大小寫
     * 如需有關篩選事件的詳細資訊，請參閱 [Blob 儲存體事件](/azure/storage/blobs/storage-blob-event-overview#filtering-events)。
     
     :::image type="content" source="media/ingest-data-event-grid/filter-settings.png" alt-text="連結至查詢瀏覽器":::    
 
-1. 選取 **[下一步：內嵌屬性]**。
+1. 選取 **[下一步：內嵌屬性]** 。
 
 ### <a name="data-connection---ingest-properties-tab"></a>資料連線-內嵌屬性索引標籤
 
@@ -112,12 +112,12 @@ ms.locfileid: "92098433"
     | 進階設定 | *我的資料有標頭* | 忽略標頭。 支援 * SV 類型的檔案。|
 
    > [!NOTE]
-   > 您不需要指定所有 **預設路由設定**。 也接受部分設定。
+   > 您不需要指定所有 **預設路由設定** 。 也接受部分設定。
 1. 選取 **下一個：檢查 + 建立**
 
 ### <a name="data-connection---review--create-tab"></a>資料連線-[檢查 + 建立] 索引標籤
 
-1. 檢查為您自動建立的資源，然後選取 [ **建立**]。
+1. 檢查為您自動建立的資源，然後選取 [ **建立** ]。
 
     :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-review-create.png" alt-text="連結至查詢瀏覽器":::
 
@@ -173,7 +173,7 @@ ms.locfileid: "92098433"
 
 ### <a name="ingestion-properties"></a>內嵌屬性
 
-您可以透過 blob 中繼資料指定 blob 內嵌的內嵌 [屬性](ingest-data-event-grid-overview.md#set-ingestion-properties) 。 
+您可以透過 blob 中繼資料指定 blob 內嵌的內嵌 [屬性](ingest-data-event-grid-overview.md#ingestion-properties) 。 
 
 > [!NOTE]
 > Azure 資料總管不會在內嵌後刪除 blob。
@@ -184,8 +184,8 @@ ms.locfileid: "92098433"
 
 > [!NOTE]
 > Azure 資料總管具有資料擷取的彙總 (批次處理) 原則，可將擷取程序最佳化。
-根據預設，此原則設定為 5 分鐘。
-您稍後可以視需要修改原則。 在本文中，您可以預期會有幾分鐘的延遲。
+> 根據預設，此原則設定為 5 分鐘。
+> 您稍後可以視需要修改原則。 在本文中，您可以預期會有幾分鐘的延遲。
 
 1. 當應用程式正在執行時，在 Azure 入口網站內事件格線的下方，您會看見活動爆增。
 
@@ -212,7 +212,7 @@ ms.locfileid: "92098433"
 
 如果您不打算再次使用您的事件方格，請清除為您自動建立的事件方格訂用帳戶、事件中樞命名空間和事件中樞，以避免產生成本。
 
-1. 在 Azure 入口網站中，移至左側功能表，然後選取 [ **所有資源**]。
+1. 在 Azure 入口網站中，移至左側功能表，然後選取 [ **所有資源** ]。
 
     :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-all-resource.png" alt-text="連結至查詢瀏覽器":::    
 
@@ -222,7 +222,7 @@ ms.locfileid: "92098433"
 
 1. 在 [刪除資源] 表單中，確認刪除以刪除事件中樞命名空間和事件中樞資源。
 
-1. 移至您的儲存體帳戶。 在左側功能表中，選取 [ **事件**]：
+1. 移至您的儲存體帳戶。 在左側功能表中，選取 [ **事件** ]：
 
     :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-events.png" alt-text="連結至查詢瀏覽器":::
 
@@ -230,18 +230,18 @@ ms.locfileid: "92098433"
 
     :::image type="content" source="media/ingest-data-event-grid/delete-event-grid-subscription.png" alt-text="連結至查詢瀏覽器":::
 
-1. 若要刪除您的 Event Grid 資料連線，請移至您的 Azure 資料總管叢集中。 在左側功能表中，選取 [ **資料庫**]。
+1. 若要刪除您的 Event Grid 資料連線，請移至您的 Azure 資料總管叢集中。 在左側功能表中，選取 [ **資料庫** ]。
 
-1. 選取您的資料庫 **>testdatabase**：
+1. 選取您的資料庫 **>testdatabase** ：
 
     :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-database.png" alt-text="連結至查詢瀏覽器":::
 
-1. 在左側功能表中，選取 [ **資料**內嵌：
+1. 在左側功能表中，選取 [ **資料** 內嵌：
 
     :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-data-ingestion.png" alt-text="連結至查詢瀏覽器":::
 
 1. 選取您的資料連線 *測試格線連接* ，然後選取 [ **刪除** ] 以刪除它。
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * [在 Azure 資料總管中查詢資料](web-query-data.md)

@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: f14601f1893542bac22612b383b558df3b2999bb
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 05848ff0a76ed7a102e54ec08412c4bf16e77891
+ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343210"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92558201"
 ---
-# <a name="create-a-connection-to-event-hub"></a>建立事件中樞的連線
+# <a name="event-hub-data-connection"></a>事件中樞資料連線
 
 [Azure 事件中樞](/azure/event-hubs/event-hubs-about) 是大型的資料串流平臺和事件內嵌服務。 Azure 資料總管可從客戶管理的事件中樞提供連續的內嵌。
 
-事件中樞內嵌管線會以數個步驟將事件傳輸至 Azure 資料總管。 您會先在 Azure 入口網站中建立事件中樞。 然後，您會在 Azure 中建立目標資料表，資料總管將會使用指定的內嵌[屬性](#set-ingestion-properties)內嵌[特定格式的資料](#data-format)。 事件中樞連接需要知道 [事件路由](#set-events-routing)。 資料會根據 [事件系統屬性對應](#set-event-system-properties-mapping)，以選取的屬性內嵌。 [建立](#create-event-hub-connection) 事件中樞的連線，以 [建立事件中樞](#create-an-event-hub) 並 [傳送事件](#send-events)。 您可以透過 [Azure 入口網站](ingest-data-event-hub.md)、使用 [c #](data-connection-event-hub-csharp.md) 或 [Python](data-connection-event-hub-python.md)以程式設計方式，或使用 [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)來管理此程式。
+事件中樞內嵌管線會以數個步驟將事件傳輸至 Azure 資料總管。 您會先在 Azure 入口網站中建立事件中樞。 然後，您會在 Azure 中建立目標資料表，資料總管將會使用指定的內嵌[屬性](#ingestion-properties)內嵌[特定格式的資料](#data-format)。 事件中樞連接需要知道 [事件路由](#events-routing)。 資料會根據 [事件系統屬性對應](#event-system-properties-mapping)，以選取的屬性內嵌。 [建立](#event-hub-connection) 事件中樞的連線，以 [建立事件中樞](#create-an-event-hub) 並 [傳送事件](#send-events)。 您可以透過 [Azure 入口網站](ingest-data-event-hub.md)、使用 [c #](data-connection-event-hub-csharp.md) 或 [Python](data-connection-event-hub-python.md)以程式設計方式，或使用 [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)來管理此程式。
 
 如需 Azure 資料總管中資料內嵌的一般資訊，請參閱 [azure 資料總管資料內嵌總覽](ingest-data-overview.md)。
 
@@ -30,17 +30,17 @@ ms.locfileid: "92343210"
     > [!NOTE]
     > 事件中樞不支援 raw 格式。
 
-* 您可以使用壓縮演算法來壓縮資料 `GZip` 。 `Compression`在內嵌[屬性](#set-ingestion-properties)中指定。
+* 您可以使用壓縮演算法來壓縮資料 `GZip` 。 `Compression`在內嵌[屬性](#ingestion-properties)中指定。
    * 壓縮格式不支援資料壓縮 (Avro、Parquet、ORC) 。
-   * 壓縮資料不支援自訂編碼和內嵌的 [系統屬性](#set-event-system-properties-mapping) 。
+   * 壓縮資料不支援自訂編碼和內嵌的 [系統屬性](#event-system-properties-mapping) 。
   
-## <a name="set-ingestion-properties"></a>設定內嵌屬性
+## <a name="ingestion-properties"></a>內嵌屬性
 
 內嵌屬性會指示內嵌進程、路由資料的位置，以及如何處理它。 您可以使用[EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)來指定內嵌事件的內嵌[屬性](ingestion-properties.md)。 您可以設定下列屬性：
 
-|屬性 |說明|
+|屬性 |描述|
 |---|---|
-| 資料表 |  (現有目標資料表的區分大小寫) 名稱。 覆寫 `Table` 窗格上的集合 `Data Connection` 。 |
+| Table |  (現有目標資料表的區分大小寫) 名稱。 覆寫 `Table` 窗格上的集合 `Data Connection` 。 |
 | 格式 | 資料格式。 覆寫 `Data format` 窗格上的集合 `Data Connection` 。 |
 | IngestionMappingReference | 要使用之現有內嵌 [對應](kusto/management/create-ingestion-mapping-command.md) 的名稱。 覆寫 `Column mapping` 窗格上的集合 `Data Connection` 。|
 | 壓縮 | 資料壓縮、 `None` (預設) 或 `GZip` 壓縮。|
@@ -50,7 +50,10 @@ ms.locfileid: "92343210"
 <!--| Database | Name of the existing target database.|-->
 <!--| Tags | String representing [tags](/azure/kusto/management/extents-overview#extent-tagging) that will be attached to resulting extent. |-->
 
-## <a name="set-events-routing"></a>設定事件路由
+> [!NOTE]
+> 只有在建立資料連線之後排入佇列的事件才會內嵌。
+
+## <a name="events-routing"></a>事件路由
 
 當您設定 Azure 資料總管叢集的事件中樞連線時，您可以 (資料表名稱、資料格式、壓縮和對應) 來指定目標資料表屬性。 您資料的預設路由也稱為 `static routing` 。
 您也可以使用事件屬性，為每個事件指定目標資料表屬性。 連接會動態路由 [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)中指定的資料，並覆寫這個事件的靜態屬性。
@@ -79,7 +82,7 @@ eventHubClient.Send(eventData);
 eventHubClient.Close();
 ```
 
-## <a name="set-event-system-properties-mapping"></a>設定事件系統屬性對應
+## <a name="event-system-properties-mapping"></a>事件系統屬性對應
 
 系統屬性會儲存事件排入佇列時，由事件中樞服務所設定的屬性。 Azure 資料總管事件中樞連接會將選取的屬性內嵌至資料表中的資料登陸。
 
@@ -100,11 +103,11 @@ eventHubClient.Close();
 | x-選擇發行者 |字串 | 發行者名稱（如果訊息已傳送至發行者端點） |
 | x-opt-partition-key |字串 |儲存事件之對應分割區的分割區索引鍵 |
 
-如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，就必須在資料表架構和對應中包含屬性。
+如果您在資料表的 [ **資料來源** ] 區段中選取 [ **事件系統屬性** ]，就必須在資料表架構和對應中包含屬性。
 
 [!INCLUDE [data-explorer-container-system-properties](includes/data-explorer-container-system-properties.md)]
 
-## <a name="create-event-hub-connection"></a>建立事件中樞連線
+## <a name="event-hub-connection"></a>事件中樞連線
 
 > [!Note]
 > 為了達到最佳效能，請在與 Azure 資料總管叢集相同的區域中建立所有資源。
@@ -124,7 +127,7 @@ eventHubClient.Close();
 
 如需如何產生範例資料的範例，請參閱將 [資料從事件中樞內嵌至 Azure 資料總管](ingest-data-event-hub.md#generate-sample-data)
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * [將資料從事件中樞內嵌至 Azure 資料總管](ingest-data-event-hub.md)
 * [使用 C 建立 Azure 資料總管的事件中樞資料連線#](data-connection-event-hub-csharp.md)

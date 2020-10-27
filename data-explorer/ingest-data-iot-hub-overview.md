@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 70e54259a6b7fa3fdeb2ef9843cc5d2df04229b9
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 1ea8960b8d58ed9e549e042f8a4e64164952f32d
+ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343176"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92558184"
 ---
-# <a name="create-a-connection-to-iot-hub"></a>建立 IoT 中樞的連線
+# <a name="iot-hub-data-connection"></a>IoT 中樞資料連線
 
 [Azure IoT 中樞](/azure/iot-hub/about-iot-hub) 是裝載于雲端中的受控服務，可作為 IoT 應用程式與其管理裝置之間雙向通訊的中央訊息中樞。 Azure 資料總管使用其 [與事件中樞相容的內建端點](/azure/iot-hub/iot-hub-devguide-messages-d2c#routing-endpoints)，從客戶管理的 IoT 中樞提供連續的內嵌功能。
 
-IoT 內嵌管線會經歷數個步驟。 首先，您要建立 IoT 中樞，並向其註冊裝置。 然後，您會在 Azure 中建立目標資料表，資料總管將會使用指定的內嵌[屬性](#set-ingestion-properties)內嵌[特定格式的資料](#data-format)。 Iot 中樞連線需要知道要連線至 Azure 資料總管資料表的 [事件路由](#set-events-routing) 。 資料會根據 [事件系統屬性對應](#set-event-system-properties-mapping)，以選取的屬性內嵌。 您可以透過 [Azure 入口網站](ingest-data-iot-hub.md)、使用 [c #](data-connection-iot-hub-csharp.md) 或 [Python](data-connection-iot-hub-python.md)以程式設計方式，或使用 [Azure Resource Manager 範本](data-connection-iot-hub-resource-manager.md)來管理此程式。
+IoT 內嵌管線會經歷數個步驟。 首先，您要建立 IoT 中樞，並向其註冊裝置。 然後，您會在 Azure 中建立目標資料表，資料總管將會使用指定的內嵌[屬性](#ingestion-properties)內嵌[特定格式的資料](#data-format)。 Iot 中樞連線需要知道要連線至 Azure 資料總管資料表的 [事件路由](#events-routing) 。 資料會根據 [事件系統屬性對應](#event-system-properties-mapping)，以選取的屬性內嵌。 您可以透過 [Azure 入口網站](ingest-data-iot-hub.md)、使用 [c #](data-connection-iot-hub-csharp.md) 或 [Python](data-connection-iot-hub-python.md)以程式設計方式，或使用 [Azure Resource Manager 範本](data-connection-iot-hub-resource-manager.md)來管理此程式。
 
 如需 Azure 資料總管中資料內嵌的一般資訊，請參閱 [azure 資料總管資料內嵌總覽](ingest-data-overview.md)。
 
@@ -32,18 +32,21 @@ IoT 內嵌管線會經歷數個步驟。 首先，您要建立 IoT 中樞，並�
 * 請參閱 [支援的壓縮](ingestion-supported-formats.md#supported-data-compression-formats)。
   * 原始未壓縮的資料大小應該是 blob 中繼資料的一部分，否則 Azure 資料總管將會加以評估。 每個檔案的內嵌未壓縮大小限制為 4 GB。
 
-## <a name="set-ingestion-properties"></a>設定內嵌屬性
+## <a name="ingestion-properties"></a>內嵌屬性
 
 內嵌屬性會指示要路由傳送資料的位置，以及處理資料的方式。 您可以使用[EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)指定事件的內嵌[屬性](ingestion-properties.md)。 您可以設定下列屬性：
 
-|屬性 |說明|
+|屬性 |描述|
 |---|---|
-| 資料表 |  (現有目標資料表的區分大小寫) 名稱。 覆寫 `Table` 窗格上的集合 `Data Connection` 。 |
+| Table |  (現有目標資料表的區分大小寫) 名稱。 覆寫 `Table` 窗格上的集合 `Data Connection` 。 |
 | 格式 | 資料格式。 覆寫 `Data format` 窗格上的集合 `Data Connection` 。 |
 | IngestionMappingReference | 要使用之現有內嵌 [對應](kusto/management/create-ingestion-mapping-command.md) 的名稱。 覆寫 `Column mapping` 窗格上的集合 `Data Connection` 。|
 | 編碼 |  資料編碼，預設值為 UTF8。 可以是任何 [.net 支援的編碼](/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)方式。 |
 
-## <a name="set-events-routing"></a>設定事件路由
+> [!NOTE]
+> 只有在建立資料連線之後排入佇列的事件才會內嵌。
+
+## <a name="events-routing"></a>事件路由
 
 設定 Azure 資料總管叢集的 IoT 中樞連線時，您可以 (資料表名稱、資料格式和對應) 來指定目標資料表屬性。 這項設定是您的資料的預設路由，也稱為靜態路由。
 您也可以使用事件屬性，為每個事件指定目標資料表屬性。 連接會動態路由 [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)中指定的資料，並覆寫這個事件的靜態屬性。
@@ -51,7 +54,7 @@ IoT 內嵌管線會經歷數個步驟。 首先，您要建立 IoT 中樞，並�
 > [!Note]
 > 如果 **我的資料包含選取的路由資訊** ，您就必須提供必要的路由資訊作為 events 屬性的一部分。
 
-## <a name="set-event-system-properties-mapping"></a>設定事件系統屬性對應
+## <a name="event-system-properties-mapping"></a>事件系統屬性對應
 
 系統屬性是一種集合，用來儲存 IoT 中樞服務在收到事件時所設定的屬性。 Azure 資料總管 IoT 中樞連線會在資料表的資料登陸中內嵌選取的屬性。
 
@@ -62,7 +65,7 @@ IoT 內嵌管線會經歷數個步驟。 首先，您要建立 IoT 中樞，並�
 
 IoT 中樞會公開下列系統屬性：
 
-|屬性 |說明|
+|屬性 |描述|
 |---|---|
 | message-id | 使用者可設定的訊息識別碼，用於「要求-回覆」模式。 |
 | sequence-number | IoT 中樞指派給每則雲端到裝置訊息的數字 (對每個裝置佇列而言都是唯一的)。 |
@@ -76,11 +79,11 @@ IoT 中樞會公開下列系統屬性：
 | iothub-connection-auth-generation-id| 由 IoT 中樞在裝置到雲端訊息上設定的識別碼。 包含傳送訊息之裝置的 connectionDeviceGenerationId (依據裝置身分識別屬性)。 |
 | iothub-connection-auth-method| 由 IoT 中樞在裝置到雲端訊息上設定的驗證方法。 這個屬性包含用來驗證傳送訊息之裝置的驗證方法的相關資訊。 |
 
-如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，就必須在資料表架構和對應中包含屬性。
+如果您在資料表的 [ **資料來源** ] 區段中選取 [ **事件系統屬性** ]，就必須在資料表架構和對應中包含屬性。
 
 [!INCLUDE [data-explorer-container-system-properties](includes/data-explorer-container-system-properties.md)]
 
-## <a name="create-iot-hub-connection"></a>建立 IoT 中樞連線
+## <a name="iot-hub-connection"></a>IoT 中樞連線
 
 > [!Note]
 > 為了達到最佳效能，請在與 Azure 資料總管叢集相同的區域中建立所有資源。
@@ -97,7 +100,7 @@ IoT 中樞會公開下列系統屬性：
 
 請參閱模擬裝置並產生資料的 [範例專案](https://github.com/Azure-Samples/azure-iot-samples-csharp/tree/master/iot-hub/Quickstarts/simulated-device) 。
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 有各種方法可將資料內嵌到 IoT 中樞。 請參閱下列連結，以取得每個方法的逐步解說。
 
