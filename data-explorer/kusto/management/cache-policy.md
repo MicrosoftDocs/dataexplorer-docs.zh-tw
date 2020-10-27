@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 9b080badd2dc1015319e9b6d44c4c477061f92f9
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: 31d051bf104778ecc4c2a743db6bda5ccf8ed89f
+ms.sourcegitcommit: ef3d919dee27c030842abf7c45c9e82e6e8350ee
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452709"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92630121"
 ---
 # <a name="cache-policy-command"></a>快取原則命令
 
@@ -24,7 +24,7 @@ ms.locfileid: "91452709"
 您可以在資料庫、資料表或 [具體化視圖](materialized-views/materialized-view-overview.md)上設定原則，並使用下列其中一個命令來顯示此原則：
 
 * `.show``database` *DatabaseName* DatabaseName `policy``caching`
-* `.show``table` *TableName* TableName `policy``caching`
+* `.show` `table` *TableName* `policy` `caching`
 * `.show``materialized-view` *MaterializedViewName* MaterializedViewName `policy``caching`
 
 ## <a name="altering-the-cache-policy"></a>改變快取原則
@@ -52,7 +52,7 @@ ms.locfileid: "91452709"
 }
 ```
 
-* `entity_type` ：資料表、資料庫或叢集
+* `entity_type` ：資料表、具體化 view、database 或 cluster
 * `database_or_table_or_materialized-view`：如果實體是資料表或資料庫，則應該在命令中指定其名稱，如下所示： 
   - `database_name` 或 
   - `database_name.table_name` 或 

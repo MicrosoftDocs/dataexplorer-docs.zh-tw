@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 0532219b8efc1cab7508d1838882b6fa48f5048f
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 1d0625c949fe563084caeec936e3433c9ee70f5e
+ms.sourcegitcommit: ef3d919dee27c030842abf7c45c9e82e6e8350ee
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343261"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92630104"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -74,7 +74,7 @@ ms.locfileid: "92343261"
 
   *PartitionName* `:``string` `=` *ColumnName*
 
-* 資料分割，以字串資料行值 [雜湊](../query/hashfunction.md)，模數 *數位*為基礎。
+* 資料分割，以字串資料行值 [雜湊](../query/hashfunction.md)，模數 *數位* 為基礎。
 
   *PartitionName* `:``long` `=` `hash``(` *ColumnName* `,` *數目*`)`
 
@@ -90,9 +90,9 @@ ms.locfileid: "92343261"
 
 外部資料 URI 檔案路徑格式，除了分割區之外，還可以指定此格式。 路徑格式是一系列的資料分割元素和文字分隔符號：
 
-&nbsp;&nbsp;[*StringSeparator*] *Partition* [*StringSeparator*] [*partition* [*StringSeparator*] ...]  
+&nbsp;&nbsp;[ *StringSeparator* ] *Partition* [ *StringSeparator* ] [ *partition* [ *StringSeparator* ] ...]  
 
-其中 *partition* 指的是在子句中宣告的資料分割 `partition` `by` ，而 *StringSeparator* 是以引號括住的任何文字。 連續的資料分割元素必須使用 *StringSeparator*來分開設定。
+其中 *partition* 指的是在子句中宣告的資料分割 `partition` `by` ，而 *StringSeparator* 是以引號括住的任何文字。 連續的資料分割元素必須使用 *StringSeparator* 來分開設定。
 
 您可以使用轉譯為字串的資料分割元素，並以對應的文字分隔符號來建立原始檔案路徑前置詞。 若要指定用於轉譯 datetime 資料分割值的格式，可以使用下列宏：
 
@@ -138,7 +138,7 @@ ms.locfileid: "92343261"
 <a name="properties"></a>
 *選用屬性*
 
-| 屬性         | 類型     | 說明       |
+| 屬性         | 類型     | 描述       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | 資料表的資料夾                                                                     |
 | `docString`      | `string` | 記錄資料表的字串                                                       |
@@ -270,13 +270,13 @@ dataformat=parquet
 
 **語法：** 
 
-`.show``external` `table` *TableName* `artifacts` [ `limit` *MaxResults*]
+`.show``external` `table` *TableName* `artifacts` [ `limit` *MaxResults* ]
 
 其中 *MaxResults* 是選擇性參數，可設定以限制結果數目。
 
 **輸出**
 
-| 輸出參數 | 類型   | 說明                       |
+| 輸出參數 | 類型   | 描述                       |
 |------------------|--------|-----------------------------------|
 | Uri              | 字串 | 外部儲存體資料檔案的 URI |
 | 大小             | long   | 檔案長度（以位元組為單位）              |
@@ -321,7 +321,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| Name     | 種類 | 對應                                                           |
+| 名稱     | 類型 | 對應                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -339,7 +339,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| Name     | 種類 | 對應                                                                |
+| 名稱     | 類型 | 對應                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -361,7 +361,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| Name     | 種類 | 對應                                                                         |
+| 名稱     | 類型 | 對應                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -378,5 +378,6 @@ dataformat=parquet
 ```
 ## <a name="next-steps"></a>後續步驟
 
-* [外部資料表一般控制項命令](./external-table-commands.md)
-* [建立和改變外部 SQL 資料表](external-sql-tables.md)
+* [查詢外部資料表](../../data-lake-query-data.md)。
+* [將資料匯出至外部資料表](data-export/export-data-to-an-external-table.md)。
+* [將資料連續匯出至外部資料表](data-export/continuous-data-export.md)。
