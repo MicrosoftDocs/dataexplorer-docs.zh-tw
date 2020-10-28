@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: bb15bf9393ff6ae4a06fa97ade4070dfcd5e2ef8
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 9d2e50e54d4a33b0648760fc4df395c9686904e9
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343128"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902563"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-powershell"></a>使用 PowerShell 建立 Azure 資料總管叢集與資料庫
 
@@ -22,6 +22,7 @@ ms.locfileid: "92343128"
 > * [PowerShell](create-cluster-database-powershell.md)
 > * [C#](create-cluster-database-csharp.md)
 > * [Python](create-cluster-database-python.md)
+> * [Go](create-cluster-database-go.md)
 > * [ARM 範本](create-cluster-database-resource-manager.md)  
 
 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 若要使用 Azure 資料總管，請先建立叢集，然後在該叢集中建立一或多個資料庫。 然後將資料內嵌 (載入) 至資料庫，讓您可以對資料執行查詢。 在本文中，您會使用 Powershell 來建立叢集和資料庫。 您可以使用 [Az.Kusto](/powershell/module/az.kusto/?view=azps-1.4.0#kusto) 在 Windows 和 Linux 上或在 [Azure Cloud Shell](/azure/cloud-shell/overview) 中執行 PowerShell Cmdlet 和指令碼，以建立及設定 Azure 資料總管叢集與資料庫。
@@ -114,7 +115,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
     Remove-AzKustoCluster -ResourceGroupName testrg -Name mykustocluster
     ```
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * [其他 Az.Kusto 命令](/powershell/module/az.kusto/?view=azps-1.7.0#kusto)
 * [使用 Azure 資料總管 .NET Standard SDK 內嵌資料 (預覽)](./net-sdk-ingest-data.md)

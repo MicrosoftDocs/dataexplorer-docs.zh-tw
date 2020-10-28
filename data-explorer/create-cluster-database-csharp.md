@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 444704ae7ff7554186f357de526a5dc11e79165d
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 9182d4f5c12031cb4aaa62ab07bd00ab7864a627
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343108"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902510"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-c"></a>使用 C# 建立 Azure 資料總管叢集與資料庫
 
@@ -22,13 +22,14 @@ ms.locfileid: "92343108"
 > * [PowerShell](create-cluster-database-powershell.md)
 > * [C#](create-cluster-database-csharp.md)
 > * [Python](create-cluster-database-python.md)
+> * [Go](create-cluster-database-go.md)
 > * [Azure Resource Manager 範本](create-cluster-database-resource-manager.md)
 
 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 若要使用 Azure 資料總管，請先建立叢集，然後在該叢集中建立一或多個資料庫。 然後將資料內嵌 (載入) 至資料庫，讓您可以對資料執行查詢。 在本文中，您會使用 c # 來建立叢集和資料庫。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>Prerequisites
 
-* 如果尚未安裝 Visual Studio 2019，您可以下載並使用**免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
+* 如果尚未安裝 Visual Studio 2019，您可以下載並使用 **免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發** 。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
@@ -71,7 +72,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
    |---|---|---|
    | clusterName | *mykustocluster* | 所需的叢集名稱。|
    | skuName | *Standard_D13_v2* | 將用於叢集的 SKU。 |
-   | tier | *Standard* | SKU 層。 |
+   | tier | *標準* | SKU 層。 |
    | 處理能力 | *number* | 群集實例的數目。 |
    | resourceGroupName | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
 
@@ -127,6 +128,6 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
     kustoManagementClient.Clusters.Delete(resourceGroupName, clusterName);
     ```
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * [使用 Azure 資料總管 .NET Standard SDK 內嵌資料 (預覽)](./net-sdk-ingest-data.md)

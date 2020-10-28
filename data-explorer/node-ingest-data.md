@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 7262b0391abf42dc71a04eec8be9958c46726edb
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 128f15910fee6008a6abd99fc3562518ae5625d6
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342547"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902624"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-node-library"></a>使用 Azure 資料總管 Node 程式庫擷取資料
 
@@ -21,6 +21,7 @@ ms.locfileid: "92342547"
 > * [Python](python-ingest-data.md)
 > * [節點](node-ingest-data.md)
 > * [Go](go-ingest-data.md)
+> * [Java](java-ingest-data.md)
 
 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管提供兩個適用於 Node 的用戶端程式庫：[擷取程式庫](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-ingest)和[資料程式庫](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-data)。 這些程式庫可讓您將資料內嵌 (載入) 至叢集，並從您的程式碼查詢資料。 在本文中，您會先在測試叢集中建立資料表和資料對應。 然後，您將叢集的擷取排入佇列並驗證結果。
 
@@ -82,7 +83,7 @@ const destTableMapping = "StormEvents_CSV_Mapping";
 
 ## <a name="set-source-file-information"></a>設定來源檔案資訊
 
-匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents**範例資料集包含來自國家中心的氣象相關資料[，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
+匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents** 範例資料集包含來自國家中心的氣象相關資料 [，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
 
 ```javascript
 const container = "samplefiles";
@@ -94,7 +95,7 @@ const blobPath = `https://${account}.blob.core.windows.net/${container}/${filePa
 
 ## <a name="create-a-table-on-your-test-cluster"></a>在測試叢集上建立資料表
 
-建立與 `StormEvents.csv` 檔案中的資料結構描述相符的資料表。 此程式碼執行時，會傳回與下列類似的訊息：若要登入，請使用網頁瀏覽器開啟頁面 https://microsoft.com/devicelogin，並輸入程式碼 XXXXXXXXX 來驗證**。 請遵循下列步驟來登入，然後返回執行下一個程式碼區塊。 建立連線的後續程式碼區塊將需要您重新登入。
+建立與 `StormEvents.csv` 檔案中的資料結構描述相符的資料表。 此程式碼執行時，會傳回與下列類似的訊息：若要登入，請使用網頁瀏覽器開啟頁面 https://microsoft.com/devicelogin，並輸入程式碼 XXXXXXXXX 來驗證  。 請遵循下列步驟來登入，然後返回執行下一個程式碼區塊。 建立連線的後續程式碼區塊將需要您重新登入。
 
 ```javascript
 const kustoClient = new KustoClient(kcsbData);

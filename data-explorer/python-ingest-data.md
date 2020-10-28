@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: c20897b0bf3d02e1dfac7e791b4c15189090703c
-ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
+ms.openlocfilehash: 4d47dfb17935cbb6c26e1da4c690d24801066015
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/21/2020
-ms.locfileid: "90832581"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902645"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-python-library"></a>使用 Azure 資料總管 Python 程式庫內嵌資料
 
@@ -21,6 +21,7 @@ ms.locfileid: "90832581"
 > * [Python](python-ingest-data.md)
 > * [節點](node-ingest-data.md)
 > * [Go](go-ingest-data.md)
+> * [Java](java-ingest-data.md)
 
 在本文中，您會使用 Azure 資料總管 Python 程式庫內嵌資料。 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 Azure 資料總管提供兩個適用於 Python 的用戶端程式庫：[內嵌程式庫](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-ingest)和[資料程式庫](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-data)。 這些程式庫可讓您將資料內嵌或載入至叢集中，並從您的程式碼查詢資料。
 
@@ -38,7 +39,7 @@ ms.locfileid: "90832581"
 
 ## <a name="install-the-data-and-ingest-libraries"></a>安裝資料並內嵌程式庫
 
-安裝 *azure-kusto-data* 和 *azure-kusto-ingest*。
+安裝 *azure-kusto-data* 和 *azure-kusto-ingest* 。
 
 ```python
 pip install azure-kusto-data
@@ -55,13 +56,13 @@ from azure.kusto.data.exceptions import KustoServiceError
 from azure.kusto.data.helpers import dataframe_from_result_table
 ```
 
-為了驗證應用程式，Azure 資料總管會使用您的 AAD 租用戶識別碼。 若要尋找您的租用戶識別碼，請使用下列 URL，並以您的網域取代 *YourDomain*。
+若要驗證應用程式，Azure 資料總管會使用您的 Azure Active Directory 租用戶識別碼。 若要尋找您的租使用者識別碼，請使用下列 URL，並將您的網域取代為 *您網域* 。
 
 ```http
 https://login.windows.net/<YourDomain>/.well-known/openid-configuration/
 ```
 
-例如，如果您的網域為 *contoso.com*，則 URL 會是：[https://login.windows.net/contoso.com/.well-known/openid-configuration/](https://login.windows.net/contoso.com/.well-known/openid-configuration/)。 按一下此 URL 來查看結果；第一行如下所示。 
+例如，如果您的網域為 *contoso.com* ，則 URL 會是： [https://login.windows.net/contoso.com/.well-known/openid-configuration/](https://login.windows.net/contoso.com/.well-known/openid-configuration/)。 按一下此 URL 來查看結果；第一行如下所示。 
 
 ```console
 "authorization_endpoint":"https://login.windows.net/6babcaad-604b-40ac-a9d7-9fd97c0b779f/oauth2/authorize"
@@ -76,7 +77,7 @@ KUSTO_INGEST_URI = "https://ingest-<ClusterName>.<Region>.kusto.windows.net:443/
 KUSTO_DATABASE = "<DatabaseName>"
 ```
 
-現在來建構連接字串。 此範例使用服務驗證來存取叢集。 您也可以使用 [aad 應用程式憑證](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L24)、 [aad 應用程式金鑰](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L20)，以及 [aad 使用者和密碼](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L34)。
+現在來建構連接字串。 此範例使用服務驗證來存取叢集。 您也可以使用 [Azure Active Directory 應用程式憑證](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L24)、 [Azure Active Directory 應用程式金鑰](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L20)，以及 [Azure Active Directory 使用者和密碼](https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py#L34)。
 
 您可以在稍後的步驟中建立目的地資料表和對應。
 
@@ -93,7 +94,7 @@ DESTINATION_TABLE_COLUMN_MAPPING = "StormEvents_CSV_Mapping"
 
 ## <a name="set-source-file-information"></a>設定來源檔案資訊
 
-匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents**範例資料集包含來自國家中心的氣象相關資料[，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
+匯入其他類別，並設定資料來源檔案的常數。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents** 範例資料集包含來自國家中心的氣象相關資料 [，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
 
 ```python
 from azure.kusto.ingest import KustoIngestClient, IngestionProperties, FileDescriptor, BlobDescriptor, DataFormat, ReportLevel, ReportMethod
@@ -110,7 +111,7 @@ BLOB_PATH = "https://" + ACCOUNT_NAME + ".blob.core.windows.net/" + \
 
 ## <a name="create-a-table-on-your-cluster"></a>在叢集上建立資料表
 
-建立符合 StormEvents.csv 檔案中資料結構描述的資料表。 此程式碼執行時，會傳回與下列類似的訊息：若要登入，請使用網頁瀏覽器開啟頁面 https://microsoft.com/devicelogin，並輸入程式碼 F3W4VWZDM 來驗證**。 請遵循下列步驟來登入，然後返回執行下一個程式碼區塊。 建立連線的後續程式碼區塊需要您重新登入。
+建立符合 StormEvents.csv 檔案中資料結構描述的資料表。 當此程式碼執行時，它會傳回類似下列訊息的訊息： *若要登入，請使用網頁瀏覽器開啟頁面， https://microsoft.com/devicelogin 並輸入要驗證的程式碼 F3W4VWZDM* 。 請遵循下列步驟來登入，然後返回執行下一個程式碼區塊。 建立連線的後續程式碼區塊需要您重新登入。
 
 ```python
 KUSTO_CLIENT = KustoClient(KCSB_DATA)
@@ -153,7 +154,7 @@ print('Done queuing up ingestion with Azure Data Explorer')
 
 ## <a name="query-data-that-was-ingested-into-the-table"></a>查詢已內嵌至資料表的資料
 
-等待已排入佇列的擷取五到十分鐘，以排定將資料內嵌和載入至 Azure 資料總管。 然後執行下列程式碼，以取得 StormEvents 資料表中的記錄計數。
+等候佇列內嵌的五至10分鐘，以排程將資料內嵌和載入至 Azure 資料總管。 然後執行下列程式碼，以取得 StormEvents 資料表中的記錄計數。
 
 ```python
 QUERY = "StormEvents | count"
@@ -188,6 +189,6 @@ dataframe_from_result_table(RESPONSE.primary_results[0])
 .drop table StormEvents
 ```
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * [使用 Python 查詢資料](python-query-data.md)

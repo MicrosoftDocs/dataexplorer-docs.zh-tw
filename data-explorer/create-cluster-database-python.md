@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: a274577da1fb93b78b56250c1176fb0e9bda8eed
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 91d0f6e399cc2b392e62a202cb5df16edb732f92
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343074"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902526"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-python"></a>使用 Python 建立 Azure 資料總管叢集與資料庫
 
@@ -22,11 +22,12 @@ ms.locfileid: "92343074"
 > * [PowerShell](create-cluster-database-powershell.md)
 > * [C#](create-cluster-database-csharp.md)
 > * [Python](create-cluster-database-python.md)
+> * [Go](create-cluster-database-go.md)
 > * [ARM 範本](create-cluster-database-resource-manager.md)
 
 在本文中，您會使用 Python 建立 Azure 資料總管叢集和資料庫。 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 若要使用 Azure 資料總管，請先建立叢集，然後在該叢集中建立一或多個資料庫。 然後將資料內嵌或載入至資料庫，讓您可以對其執行查詢。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [建立免費帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
 
@@ -87,7 +88,7 @@ pip install azure-mgmt-kusto
    |---|---|---|
    | cluster_name | *mykustocluster* | 所需的叢集名稱。|
    | sku_name | *Standard_D13_v2* | 將用於叢集的 SKU。 |
-   | tier | *Standard* | SKU 層。 |
+   | tier | *標準* | SKU 層。 |
    | 處理能力 | *number* | 群集實例的數目。 |
    | resource_group_name | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
 
@@ -171,6 +172,6 @@ pip install azure-mgmt-kusto
     cluster_operations.delete(resource_group_name = resource_group_name, cluster_name = cluster_name)
     ```
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * [使用 Azure 資料總管 Python 程式庫內嵌資料](python-ingest-data.md)

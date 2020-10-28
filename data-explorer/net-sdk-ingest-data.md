@@ -7,12 +7,12 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 07/07/2020
-ms.openlocfilehash: 56fd2d253cac80f097caa9206cd3b7c2a9d3c118
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 4ab82b593367a3b9fe466c2ddbd6fbee70ad628f
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343499"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902613"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-net-sdk"></a>使用 Azure 資料總管 .NET SDK 內嵌資料 
 
@@ -21,11 +21,12 @@ ms.locfileid: "92343499"
 > * [Python](python-ingest-data.md)
 > * [節點](node-ingest-data.md)
 > * [Go](go-ingest-data.md)
+> * [Java](java-ingest-data.md)
 
 Azure 資料總管是一項快速又可高度調整的資料探索服務，可用於處理記錄和遙測資料。 它提供兩個適用于 .NET 的用戶端程式庫：內嵌連結 [庫](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Ingest/) 和 [資料連結庫](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data/)。 如需 .NET SDK 的詳細資訊，請參閱 [關於 .NET sdk](./kusto/api/netfx/about-the-sdk.md)。
 這些程式庫可讓您將資料內嵌 (載入) 至叢集，並從您的程式碼查詢資料。 在本文中，您會先在測試叢集中建立資料表和資料對應。 然後，您將叢集的擷取排入佇列並驗證結果。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 
@@ -41,13 +42,13 @@ Install-Package Microsoft.Azure.Kusto.Ingest
 
 ### <a name="authentication"></a>驗證
 
-為了驗證應用程式，Azure 資料總管 SDK 會使用您的 AAD 租使用者識別碼。 若要尋找您的租用戶識別碼，請使用下列 URL，並以您的網域取代 *YourDomain*。
+為了驗證應用程式，Azure 資料總管 SDK 會使用您的 AAD 租使用者識別碼。 若要尋找您的租用戶識別碼，請使用下列 URL，並以您的網域取代 *YourDomain* 。
 
 ```http
 https://login.windows.net/<YourDomain>/.well-known/openid-configuration/
 ```
 
-例如，如果您的網域為 *contoso.com*，則 URL 會是：[https://login.windows.net/contoso.com/.well-known/openid-configuration/](https://login.windows.net/contoso.com/.well-known/openid-configuration/)。 按一下此 URL 來查看結果；第一行如下所示。 
+例如，如果您的網域為 *contoso.com* ，則 URL 會是： [https://login.windows.net/contoso.com/.well-known/openid-configuration/](https://login.windows.net/contoso.com/.well-known/openid-configuration/)。 按一下此 URL 來查看結果；第一行如下所示。 
 
 ```console
 "authorization_endpoint":"https://login.windows.net/6babcaad-604b-40ac-a9d7-9fd97c0b779f/oauth2/authorize"
@@ -75,7 +76,7 @@ var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(kustoUri).Wi
 
 ## <a name="set-source-file-information"></a>設定來源檔案資訊
 
-設定來源檔案的路徑。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents**範例資料集包含來自國家中心的氣象相關資料[，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
+設定來源檔案的路徑。 本範例使用裝載於 Azure Blob 儲存體的範例檔案。 **StormEvents** 範例資料集包含來自國家中心的氣象相關資料 [，以取得環境資訊](https://www.ncdc.noaa.gov/stormevents/)。
 
 ```csharp
 var blobPath = "https://kustosamplefiles.blob.core.windows.net/samplefiles/StormEvents.csv?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D";

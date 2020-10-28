@@ -1,20 +1,20 @@
 ---
-title: 使用 Logic Apps 自動執行 Kusto 查詢
-description: 瞭解如何使用 Logic Apps 自動執行 Kusto 查詢和命令並加以排程
+title: 使用 Logic Apps 在 Azure 資料總管中自動執行 Kusto 查詢
+description: 瞭解如何使用 Logic Apps 自動執行 Kusto 查詢和命令並加以排程。
 author: orspod
 ms.author: orspodek
 ms.reviewer: docohe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 04/14/2020
-ms.openlocfilehash: 4c918c43f748f97b3bb3f6d0342c660775c1e5c8
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: a4f79fc367e2769dfe3bf51ed5ad035a7d233ea4
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342649"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902686"
 ---
-# <a name="microsoft-logic-app-and-azure-data-explorer"></a>Microsoft 邏輯應用程式和 Azure 資料總管
+# <a name="microsoft-logic-app-and-azure-data-explorer-preview"></a>Microsoft 邏輯應用程式和 Azure 資料總管 (Preview) 
 
 Azure Kusto 邏輯應用程式連線程式可讓您使用 [Microsoft 邏輯應用程式](/azure/logic-apps/logic-apps-what-are-logic-apps) 連接器，自動執行 Kusto 的查詢和命令，做為已排程或觸發之工作的一部分。
 
@@ -42,7 +42,7 @@ Azure Kusto 邏輯應用程式連線程式可讓您使用 [Microsoft 邏輯應�
 
     ![建立邏輯應用程式](./Images/logicapps/logicapp-create-new.png)
 
-1. 建立邏輯應用程式時，請選取 [ **編輯**]。
+1. 建立邏輯應用程式時，請選取 [ **編輯** ]。
 
     ![編輯邏輯應用程式設計工具](./Images/logicapps/logicapp-editdesigner.png "logicapp-editdesigner")
 
@@ -50,11 +50,11 @@ Azure Kusto 邏輯應用程式連線程式可讓您使用 [Microsoft 邏輯應�
 
     ![邏輯應用程式空白範本](./Images/logicapps/logicapp-blanktemplate.png "logicapp-blanktemplate")
 
-1. 新增週期性動作，然後選取 [ **Azure Kusto**]。
+1. 新增週期性動作，然後選取 [ **Azure Kusto** ]。
 
     ![邏輯應用程式 Kusto 流程連接器](./Images/logicapps/logicapp-kustoconnector.png "logicapp-kustoconnector")
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * 若要深入瞭解如何設定迴圈動作，請參閱 [Power Automate 檔頁面](../../flow.md)
 * 請參閱一些 [使用範例](../../flow-usage.md) 以瞭解設定邏輯應用程式動作的概念
