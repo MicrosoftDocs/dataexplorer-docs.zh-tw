@@ -206,7 +206,7 @@
               href: dashboard-customize-visuals.md
         - name: Power BI
           items:
-            - name: 最佳作法
+            - name: Power BI 最佳做法
               href: power-bi-best-practices.md
             - name: 連接器
               href: power-bi-connector.md
@@ -395,7 +395,7 @@
           href: ./kusto/query/tutorial.md
         - name: 範例
           href: ./kusto/query/samples.md
-        - name: 最佳作法
+        - name: 查詢最佳做法
           href: ./kusto/query/best-practices.md
         - name: 跨資料庫與跨叢集查詢
           href: ./kusto/query/cross-cluster-or-database-queries.md
@@ -1323,8 +1323,8 @@
           href: ./kusto/management/index.md
         - name: 結構描述
           items:
-            - name: 結構描述設計的最佳做法
-              href: ./kusto/management/best-practices.md
+            - name: 結構描述設計的管理最佳做法
+              href: ./kusto/management/management-best-practices.md
             - name: 管理資料庫
               href: ./kusto/management/databases.md
               items:
@@ -1730,7 +1730,7 @@
                   href: ./kusto/api/netfx/kusto-ingest-client-errors.md
                 - name: 作業狀態
                   href: ./kusto/api/netfx/kusto-ingest-client-status.md
-                - name: 最佳作法
+                - name: Kusto.Ingest 的最佳作法
                   href: ./kusto/api/netfx/kusto-ingest-best-practices.md
                 - name: 程式碼範例
                   href: ./kusto/api/netfx/kusto-ingest-client-examples.md
