@@ -96,42 +96,57 @@
           href: lightingest.md
         - name: 事件中樞
           items:
-            - name: 建立事件中樞的連線
+            - name: 事件中樞資料連線
+              displayName: ingest
               href: ingest-data-event-hub-overview.md
             - name: Azure 入口網站
+              displayName: 'Event Hub, ingest, data connection'
               href: ingest-data-event-hub.md
             - name: C#
+              displayName: 'Event Hub, ingest, data connection'
               href: data-connection-event-hub-csharp.md
             - name: Python
+              displayName: 'Event Hub, ingest'
               href: data-connection-event-hub-python.md
             - name: Azure Resource Manager 範本
+              displayName: 'Event Hub, ingest, data connection'
               href: data-connection-event-hub-resource-manager.md
         - name: 事件方格
           items:
-            - name: 建立事件方格的連線
+            - name: 事件方格資料連線
+              displayName: ingest
               href: ingest-data-event-grid-overview.md
             - name: Azure 入口網站
+              displayName: 'Event Grid, ingest, data connection'
               href: ingest-data-event-grid.md
             - name: C#
+              displayName: 'Event Grid, ingest, data connection'
               href: data-connection-event-grid-csharp.md
             - name: Python
+              displayName: 'Event Grid, ingest, data connection'
               href: data-connection-event-grid-python.md
             - name: Azure Resource Manager 範本
+              displayName: 'Event Grid, ingest, data connection'
               href: data-connection-event-grid-resource-manager.md
             - name: 在 Azure 入口網站中手動建立資源
-              displayName: Manually create resources for Event Grid ingestion
+              displayName: 'Manually create resources for Event Grid ingestion, Ingest'
               href: ingest-data-event-grid-manual.md
         - name: IoT 中樞
           items:
-            - name: 建立 IoT 中樞的連線
+            - name: IoT 中樞資料連線
+              displayName: ingest
               href: ingest-data-iot-hub-overview.md
             - name: Azure 入口網站
+              displayName: 'IoT Hub, ingest, data connection'
               href: ingest-data-iot-hub.md
             - name: C#
+              displayName: 'IoT Hub, ingest, data connection'
               href: data-connection-iot-hub-csharp.md
             - name: Python
+              displayName: 'IoT Hub, ingest, data connection'
               href: data-connection-iot-hub-python.md
             - name: Azure Resource Manager 範本
+              displayName: 'IoT Hub, ingest, data connection'
               href: data-connection-iot-hub-resource-manager.md
         - name: Azure Data Factory
           items:

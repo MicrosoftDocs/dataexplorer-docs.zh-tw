@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8587995a6836a1f8a180eada19d450277709a6e7
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 31e4f1fc32f758164c3f232e758080213e6f428d
+ms.sourcegitcommit: 8a7165b28ac6b40722186300c26002fb132e6e4a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92248595"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92749525"
 ---
 # <a name="partition-operator"></a>partition 運算子
 
@@ -25,29 +25,29 @@ T | partition by Col1 ( top 10 by MaxValue )
 T | partition by Col1 { U | where Col2=toscalar(Col1) }
 ```
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
-*T* `|` `partition` [*PartitionParameters*] 資料 `by` *行* `(` *CoNtextualSubquery*`)`
+*T* `|` `partition` [ *PartitionParameters* ] 資料 `by` *行* `(` *CoNtextualSubquery*`)`
 
-*T* `|` `partition` [*PartitionParameters*] 資料 `by` *行* `{` *子查詢*`}`
+*T* `|` `partition` [ *PartitionParameters* ] 資料 `by` *行* `{` *子查詢*`}`
 
 ## <a name="arguments"></a>引數
 
-* *T*：要由運算子處理其資料的表格式來源。
+* *T* ：要由運算子處理其資料的表格式來源。
 
-* 資料*行*： *T*中的資料行名稱，其值會決定如何分割輸入資料表。 請參閱下面的 **附注** 。
+* 資料 *行* ： *T* 中的資料行名稱，其值會決定如何分割輸入資料表。 請參閱下面的 **附注** 。
 
-* *CoNtextualSubquery*：表格式運算式，其中來源是運算子的來源 `partition` ，範圍為單一 *索引鍵值* 。
+* *CoNtextualSubquery* ：表格式運算式，其中來源是運算子的來源 `partition` ，範圍為單一 *索引鍵值* 。
 
-* *子查詢*：不含來源的表格式運算式。 您可以透過呼叫取得 *金鑰* 值 `toscalar()` 。
+* *子查詢* ：不含來源的表格式運算式。 您可以透過呼叫取得 *金鑰* 值 `toscalar()` 。
 
-* *PartitionParameters*：零或多個 (空間分隔) 參數的格式為： *名稱* `=` *值* ，可控制運算子的行為。 支援下列參數：
+* *PartitionParameters* ：零或多個 (空間分隔) 參數的格式為： *名稱* `=` *值* ，可控制運算子的行為。 支援下列參數：
 
   |名稱               |值         |描述|
   |-------------------|---------------|-----------|
   |`hint.materialized`|`true`,`false` |如果設定為，則 `true` 會具體化運算子的來源 `partition` (預設： `false`) |
-  |`hint.concurrency`|*Number*|提示系統 `partition` 應平行執行運算子的並行子查詢數目。 *預設值*：叢集中單一節點上的 CPU 核心數量 (2 到 16) 。|
-  |`hint.spread`|*Number*|提示系統，並行子查詢執行應使用的節點數目 `partition` 。 *預設值*：1。|
+  |`hint.concurrency`|*Number*|提示系統 `partition` 應平行執行運算子的並行子查詢數目。 *預設值* ：叢集中單一節點上的 CPU 核心數量 (2 到 16) 。|
+  |`hint.spread`|*Number*|提示系統，並行子查詢執行應使用的節點數目 `partition` 。 *預設值* ：1。|
 
 ## <a name="returns"></a>傳回
 
@@ -57,7 +57,7 @@ T | partition by Col1 { U | where Col2=toscalar(Col1) }
 
 * 資料分割運算子目前受限於資料分割數目。
   最多可以建立64個不同的資料分割。
-  如果分割區資料行 (資料 *行*) 有超過64個相異值，運算子將會產生錯誤。
+  如果分割區資料行 (資料 *行* ) 有超過64個相異值，運算子將會產生錯誤。
 
 * 子查詢會隱含地參考輸入資料分割， (子查詢) 中的資料分割沒有 "name"。 若要在子查詢中多次參考輸入資料分割，請使用 [as 運算子](asoperator.md)，如下列範例所示 **：資料分割參考** 。
 
@@ -93,7 +93,7 @@ StormEvents
 
 **範例：查詢非重迭的資料分割**
 
-有時候， (效能方面的) ，以便在地圖/縮減樣式中以非重迭的資料分割區執行複雜的子查詢，這會很有用。 下列範例示範如何建立在10個數據分割上的手動分佈匯總。
+有時候， (效能取向的) ，以便在地圖/縮小樣式中對非重迭的資料分割執行複雜的子查詢，這會很有用。 下列範例示範如何建立在10個數據分割上的手動分佈匯總。
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -107,11 +107,11 @@ StormEvents
 | top 5 by Count
 ```
 
-|來源|計數|
+|來源|Count|
 |---|---|
 |Trained Spotter|12770|
 |執法機關|8570|
-|Public|6157|
+|公開|6157|
 |Emergency Manager|4900|
 |合作的觀察者|3039|
 
@@ -171,10 +171,10 @@ StormEvents
 | top 5 by Count
 ```
 
-|來源|計數|
+|來源|Count|
 |---|---|
 |Trained Spotter|12770|
 |執法機關|8570|
-|Public|6157|
+|公開|6157|
 |Emergency Manager|4900|
 |合作的觀察者|3039|

@@ -7,18 +7,18 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.custom: has-adal-ref
+ms.custom: has-adal-ref, devx-track-js
 ms.date: 09/13/2019
-ms.openlocfilehash: e1c2a6f5cbec90d59ed54f15147b912ffbc8fdd3
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 65e15fca7c7a69e1c9ba2d79f7dca531304ea91b
+ms.sourcegitcommit: 8a7165b28ac6b40722186300c26002fb132e6e4a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343414"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92749480"
 ---
 # <a name="how-to-authenticate-with-aad-for-azure-data-explorer-access"></a>How-To 向 AAD 進行 Azure 資料總管存取的驗證
 
-存取 Azure 資料總管的建議方式是向 **Azure Active Directory** 服務進行驗證 (有時也稱為 **Azure AD**，或只是 **AAD**) 。 這麼做可確保 Azure 資料總管永遠不會使用兩階段程式來查看存取主體的目錄認證：
+存取 Azure 資料總管的建議方式是向 **Azure Active Directory** 服務進行驗證 (有時也稱為 **Azure AD** ，或只是 **AAD** ) 。 這麼做可確保 Azure 資料總管永遠不會使用兩階段程式來查看存取主體的目錄認證：
 
 1. 在第一個步驟中，用戶端會與 AAD 服務進行通訊、對其進行驗證，並要求專門針對用戶端打算存取的特定 Azure 資料總管端點發出的存取權杖。
 2. 在第二個步驟中，用戶端會向 Azure 資料總管發出要求，並提供在第一個步驟中取得的存取權杖，作為 Azure 資料總管的身分識別證明。
@@ -31,15 +31,15 @@ Azure 資料總管接著會代表 AAD 發出存取權杖的安全性主體來執
 
 主要驗證案例如下：
 
-* **驗證已登入使用者的用戶端應用程式**。
+* **驗證已登入使用者的用戶端應用程式** 。
   在此案例中，互動式 (用戶端) 應用程式會為使用者觸發 AAD 提示， (例如使用者名稱和密碼) 。
   請參閱 [使用者驗證](#user-authentication)、
 
-* 「無**外設」應用程式**。
+* 「無 **外設」應用程式** 。
   在此案例中，應用程式會在沒有使用者的情況下執行，以提供認證，而應用程式會使用已設定的某些認證，以「本身」驗證至 AAD。
   請參閱 [應用程式驗證](#application-authentication)。
 
-* 代理者**驗證**。
+* 代理者 **驗證** 。
   在此案例中，有時稱為「web 服務」或「web 應用程式」案例，應用程式會從另一個應用程式取得 AAD 存取權杖，然後將它「轉換」為另一個可與 Azure 資料總管搭配使用的 AAD 存取權杖。
   換句話說，應用程式可做為使用者或應用程式之間的中繼程式，以提供認證和 Azure 資料總管服務。
   查看代理者 [驗證](#on-behalf-of-authentication)。
@@ -56,7 +56,7 @@ https://help.kusto.windows.net
 
 ## <a name="specifying-the-aad-tenant-id"></a>指定 AAD 租使用者識別碼
 
-AAD 是多租使用者服務，而且每個組織都可以在 AAD 中建立稱為 **目錄** 的物件。 目錄物件會保存安全性相關的物件，例如使用者帳戶、應用程式和群組。 AAD 通常會將目錄稱為 **租**使用者。 AAD 租使用者會以 GUID (**租使用者識別碼**) 來識別。 在許多情況下，AAD 租使用者也可以透過組織的功能變數名稱來識別。
+AAD 是多租使用者服務，而且每個組織都可以在 AAD 中建立稱為 **目錄** 的物件。 目錄物件會保存安全性相關的物件，例如使用者帳戶、應用程式和群組。 AAD 通常會將目錄稱為 **租** 使用者。 AAD 租使用者會以 GUID ( **租使用者識別碼** ) 來識別。 在許多情況下，AAD 租使用者也可以透過組織的功能變數名稱來識別。
 
 例如，名為 "Contoso" 的組織可能會有租使用者識別碼 `4da81d62-e0a8-4899-adad-4349ca6bfe24` 和功能變數名稱 `contoso.com` 。
 
@@ -70,7 +70,7 @@ AAD 有一些用於驗證的端點：
 * 當裝載要驗證之主體的租使用者不是已知時，可以藉由將上面的值取代為值來使用「一般」端點 `{tenantId}` `common` 。
 
 > [!NOTE]
-> 用於驗證的 AAD 端點也稱為 **aad 授權單位 URL** 或單純的 **aad 授權**單位。
+> 用於驗證的 AAD 端點也稱為 **aad 授權單位 URL** 或單純的 **aad 授權** 單位。
 
 ## <a name="aad-token-cache"></a>AAD 權杖快取
 
@@ -141,17 +141,17 @@ request.Headers.Set(HttpRequestHeader.Authorization, string.Format(CultureInfo.I
 
 1. 開啟 [Azure 入口網站](https://portal.azure.com/) ，並確定您已登入正確的租使用者 (如需登入入口網站) 的身分識別，請參閱右上角。
 
-2. 在 [資源] 窗格中，依序按一下 [ **Azure Active Directory**] 和 [ **應用程式註冊**]。
+2. 在 [資源] 窗格中，依序按一下 [ **Azure Active Directory** ] 和 [ **應用程式註冊** ]。
 
 3. 找出使用代理者流程的應用程式，並開啟它。
 
-4. 按一下 [ **API 許可權**]，然後 **新增許可權**。
+4. 按一下 [ **API 許可權** ]，然後 **新增許可權** 。
 
 5. 搜尋名為 **Azure 資料總管** 的應用程式，並加以選取。
 
-6. 選取 **user_impersonation/存取 Kusto**。
+6. 選取 **user_impersonation/存取 Kusto** 。
 
-7. 按一下 [ **新增許可權**]。
+7. 按一下 [ **新增許可權** ]。
 
 **步驟2：在您的伺服器程式碼中執行權杖交換**
 
