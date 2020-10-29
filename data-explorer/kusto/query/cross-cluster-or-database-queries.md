@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 57b7b6b4c67e0e8903903cef670a561b30b3904e
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: e341a6b9b51b082b16036e368c61fa4c903750da
+ms.sourcegitcommit: 64fdef912cc925c4bdcae98183eb8d7c7a6392d7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92252578"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "93027800"
 ---
 # <a name="cross-database-and-cross-cluster-queries"></a>跨資料庫與跨叢集查詢
 
@@ -41,7 +41,7 @@ cluster("<cluster name>").database("<database name>").<table name>
 
 *資料庫名稱* 會區分大小寫
 
-叢集*名稱*不區分大小寫，而且可以是下列其中一種形式：
+叢集 *名稱* 不區分大小寫，而且可以是下列其中一種形式：
    * 格式正確的 URL，例如 `http://contoso.kusto.windows.net:1234/` 。 僅支援 HTTP 和 HTTPS 架構。
    *  (FQDN) 的完整功能變數名稱，例如 `contoso.kusto.windows.net` 。 這個字串相當於 `https://` **`contoso.kusto.windows.net`** `:443/` 。
    * 沒有網域部分) 的簡短名稱 (主機名稱 [和區域]，例如 `contoso` 或 `contoso.westus` 。 這些字串會轉譯為 `https://` **`contoso`** `.kusto.windows.net:443/` 和 `https://` **`contoso.westus`** `.kusto.windows.net:443/` 。
@@ -84,7 +84,7 @@ restrict access to (my*, database("MyOther*").*, cluster("OtherCluster").databas
 
 * 從預設資料庫中的 [ *我的 ...* ] 開始的任何機構名稱。 
 * 目前叢集之所有資料庫中名為 *MyOther* 的資料表。
-* 叢集*OtherCluster.kusto.windows.net*中所有名為*my2*的資料庫中的任何資料表。
+* 叢集 *OtherCluster.kusto.windows.net* 中所有名為 *my2* 的資料庫中的任何資料表。
 
 ## <a name="functions-and-views"></a>函數和 Views
 
@@ -121,7 +121,7 @@ database("OtherDb").MyView("exception") | extend CalCol=database("OtherDb").MyCa
 
 * Remote function 必須傳回表格式架構。 純量函數只能在相同的叢集中存取。
 * 遠端函數只能接受純量參數。 取得一或多個資料表引數的函數只能在相同的叢集中存取。
-* 遠端函式的架構必須是已知且不變的參數。 如需詳細資訊，請參閱 [跨群集查詢和架構變更](../concepts/crossclusterandschemachanges.md)。
+* 基於效能考慮，在初始呼叫之後，呼叫叢集會快取遠端實體的架構。 因此，對遠端實體所做的變更可能會導致與快取的架構資訊不相符，可能會導致查詢失敗。 如需詳細資訊，請參閱 [跨群集查詢和架構變更](../concepts/crossclusterandschemachanges.md)。
 
 下列跨叢集呼叫是有效的。
 
