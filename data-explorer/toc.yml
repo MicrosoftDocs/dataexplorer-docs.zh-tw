@@ -72,6 +72,8 @@
           href: create-cluster-database-csharp.md
         - name: Python
           href: create-cluster-database-python.md
+        - name: Go
+          href: create-cluster-database-go.md
         - name: Azure Resource Manager 範本
           href: create-cluster-database-resource-manager.md
     - name: 建立資料表
@@ -168,6 +170,8 @@
               href: node-ingest-data.md
             - name: Go SDK
               href: go-ingest-data.md
+            - name: Java SDK
+              href: java-ingest-data.md
         - name: Kafka
           href: ingest-data-kafka.md
         - name: Logstash
@@ -246,6 +250,8 @@
               href: vnet-deploy-troubleshoot.md
             - name: 建立 VNet 叢集的私人端點 - 入口網站
               href: vnet-create-private-endpoint.md
+            - name: 建立資料連線所使用資源的私人或服務端點
+              href: vnet-endpoint-storage-event-hub.md
         - name: 加密
           items:
             - name: 叢集磁片加密 - 入口網站
