@@ -21,7 +21,9 @@
     }
   ],
   "notification_subscribers": [],
-  "sync_notification_subscribers": [],
+  "sync_notification_subscribers": [
+    "ceicnotifications@microsoft.com"
+  ],
   "branches_to_filter": [
     "live",
     "master"
@@ -31,8 +33,8 @@
   "continue_with_document_error": true,
   "skip_source_output_uploading": false,
   "need_preview_pull_request": true,
-	"contribution_branch_mappings": {
-	     "live-sxs": "master"
+  "contribution_branch_mappings": {
+    "live-sxs": "master"
   },
   "dependent_repositories": [
     {
