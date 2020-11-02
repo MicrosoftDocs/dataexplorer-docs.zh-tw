@@ -85,21 +85,26 @@
             - name: 單鍵擷取概觀
               href: ingest-data-one-click.md
             - name: 從容器到新資料表的 CSV 資料
+              displayName: 'ingest data, ingestion, one click'
               href: one-click-ingestion-new-table.md
             - name: 從本機檔案到現有資料表的 JSON 資料
+              displayName: 'ingest data, ingestion, one click'
               href: one-click-ingestion-existing-table.md
         - name: 串流擷取
           items:
             - name: Azure 入口網站
+              displayName: 'ingest data, ingestion'
               href: ingest-data-streaming.md
             - name: C#
+              displayName: 'ingest data, ingestion'
               href: ingest-data-streaming-csharp.md
         - name: 使用 LightIngest
+          displayName: 'ingest data, ingestion'
           href: lightingest.md
         - name: 事件中樞
           items:
             - name: 事件中樞資料連線
-              displayName: ingest
+              displayName: 'ingest, ingestion'
               href: ingest-data-event-hub-overview.md
             - name: Azure 入口網站
               displayName: 'Event Hub, ingest, data connection'
@@ -136,7 +141,7 @@
         - name: IoT 中樞
           items:
             - name: IoT 中樞資料連線
-              displayName: ingest
+              displayName: 'ingest data, ingestion'
               href: ingest-data-iot-hub-overview.md
             - name: Azure 入口網站
               displayName: 'IoT Hub, ingest, data connection'
@@ -163,20 +168,28 @@
         - name: 使用 SDK
           items:
             - name: .NET SDK
+              displayName: 'ingest data, ingestion'
               href: net-sdk-ingest-data.md
             - name: Python
+              displayName: 'ingest data, ingestion'
               href: python-ingest-data.md
             - name: Node SDK
+              displayName: 'ingest data, ingestion'
               href: node-ingest-data.md
             - name: Go SDK
+              displayName: 'ingest data, ingestion'
               href: go-ingest-data.md
             - name: Java SDK
+              displayName: 'ingest data, ingestion'
               href: java-ingest-data.md
         - name: Kafka
+          displayName: 'ingest data, ingestion'
           href: ingest-data-kafka.md
         - name: Logstash
+          displayName: 'ingest data, ingestion'
           href: ingest-data-logstash.md
         - name: JSON 格式化的資料
+          displayName: 'ingest data, ingestion'
           href: ingest-json-formats.md
     - name: 查詢資料
       items:
@@ -212,17 +225,22 @@
           items:
             - name: Power BI 最佳做法
               href: power-bi-best-practices.md
-            - name: 連接器
+            - name: 連接子
+              displayName: PowerBI
               href: power-bi-connector.md
             - name: 已匯入查詢
+              displayName: PowerBI
               href: power-bi-imported-query.md
             - name: SQL 查詢
+              displayName: PowerBI
               href: power-bi-sql-query.md
         - name: Excel
           items:
-            - name: 連接器
+            - name: 連接子
+              displayName: Excel
               href: excel-connector.md
             - name: 空白查詢
+              displayName: Excel
               href: excel-blank-query.md
         - name: Grafana
           href: grafana.md
@@ -251,6 +269,7 @@
             - name: 建立 VNet 叢集的私人端點 - 入口網站
               href: vnet-create-private-endpoint.md
             - name: 建立資料連線所使用資源的私人或服務端點
+              displayName: 'VNet, private endpoint, Azure Storage, Event Hub'
               href: vnet-endpoint-storage-event-hub.md
         - name: 加密
           items:
@@ -263,14 +282,19 @@
         - name: 設定客戶管理的金鑰
           items:
             - name: 入口網站
+              displayName: Configure customer-managed-keys
               href: customer-managed-keys-portal.md
             - name: C#
+              displayName: Configure customer-managed-keys
               href: customer-managed-keys-csharp.md
             - name: Azure Resource Manager 範本
+              displayName: Configure customer-managed-keys
               href: customer-managed-keys-resource-manager.md
             - name: Azure CLI
+              displayName: Configure customer-managed-keys
               href: customer-managed-keys-cli.md
             - name: PowerShell
+              displayName: Configure customer-managed-keys
               href: customer-managed-keys-powershell.md
         - name: 建立 Azure AD 應用程式
           href: provision-azure-ad-app.md
@@ -291,10 +315,13 @@
             - name: 新增叢集主體
               items:
                 - name: C#
+                  displayName: cluster principal
                   href: cluster-principal-csharp.md
                 - name: Python
+                  displayName: cluster principal
                   href: cluster-principal-python.md
                 - name: Azure Resource Manager 範本
+                  displayName: cluster principal
                   href: cluster-principal-resource-manager.md
             - name: 管理叢集語言延伸模組
               displayName: 'Python, R'
@@ -306,10 +333,13 @@
             - name: 新增資料庫主體
               items:
                 - name: C#
+                  displayName: database principal
                   href: database-principal-csharp.md
                 - name: Python
+                  displayName: database principal
                   href: database-principal-python.md
                 - name: Azure Resource Manager 範本
+                  displayName: database principal
                   href: database-principal-resource-manager.md
             - name: 原則
               items:
@@ -386,10 +416,13 @@
     - name: 疑難排解
       items:
         - name: 建立叢集
+          displayName: troubleshoot
           href: troubleshoot-create-cluster.md
         - name: 連線到叢集
+          displayName: troubleshoot
           href: troubleshoot-connect-cluster.md
         - name: 處理資料庫與資料表
+          displayName: troubleshoot
           href: troubleshoot-database-table.md
 - name: 參考
   items:
@@ -545,7 +578,7 @@
               href: ./kusto/query/getschemaoperator.md
             - name: invoke 運算子
               href: ./kusto/query/invokeoperator.md
-            - name: join 運算子
+            - name: 聯結運算子
               items:
                 - name: join 運算子
                   href: ./kusto/query/joinoperator.md
@@ -837,6 +870,10 @@
               href: ./kusto/query/gettypefunction.md
             - name: getyear()
               href: ./kusto/query/getyearfunction.md
+            - name: gzip_compress_to_base64_string()
+              href: ./kusto/query/gzip-base64-compress.md
+            - name: gzip_decompress_from_base64_string()
+              href: ./kusto/query/gzip-base64-decompress.md
             - name: hash()
               href: ./kusto/query/hashfunction.md
             - name: hash_combine()
@@ -1329,7 +1366,8 @@
           href: ./kusto/management/index.md
         - name: 結構描述
           items:
-            - name: 結構描述設計的管理最佳做法
+            - name: 結構描述設計的最佳做法
+              displayName: management
               href: ./kusto/management/management-best-practices.md
             - name: 管理資料庫
               href: ./kusto/management/databases.md
@@ -1563,7 +1601,7 @@
               href: ./kusto/management/data-export/export-data-to-an-external-table.md
             - name: 連續資料匯出
               items:
-                - name: 概觀
+                - name: 連續資料匯出概觀
                   href: ./kusto/management/data-export/continuous-data-export.md
                 - name: 建立或改變連續匯出
                   href: ./kusto/management/data-export/create-alter-continuous.md
@@ -1671,19 +1709,20 @@
       items:
         - name: API 概觀
           href: ./kusto/api/index.md
+        - name: 用戶端程式庫
+          href: ./kusto/api/client-libraries.md
+        - name: 連接字串
           items:
-            - name: 用戶端程式庫
-              href: ./kusto/api/client-libraries.md
-            - name: 連接字串
+            - name: 連接字串概觀
               href: ./kusto/api/connection-strings/index.md
-              items:
-                - name: Kusto 連接字串
-                  href: ./kusto/api/connection-strings/kusto.md
-                - name: 儲存體連接字串
-                  href: ./kusto/api/connection-strings/storage.md
+            - name: Kusto 連接字串
+              href: ./kusto/api/connection-strings/kusto.md
+            - name: 儲存體連接字串
+              href: ./kusto/api/connection-strings/storage.md
         - name: REST API
-          href: ./kusto/api/rest/index.md
           items:
+            - name: REST API 總覽
+              href: ./kusto/api/rest/index.md
             - name: 驗證
               href: ./kusto/api/rest/authentication.md
             - name: 查詢/管理 HTTP 要求
@@ -1696,9 +1735,12 @@
               href: ./kusto/api/rest/deeplink.md
             - name: 串流內嵌
               href: ./kusto/api/rest/streaming-ingest.md
-        - name: MS-TDS (SQL、ADO.NET、JDBC、ODBC)
-          href: ./kusto/api/tds/index.md
+        - name: MS-TDS
+          displayName: 'SQL, ADO.NET, JDBC, ODBC'
           items:
+            - name: MS-TDS 概觀
+              displayName: 'SQL, ADO.NET, JDBC, ODBC'
+              href: ./kusto/api/tds/index.md
             - name: T-SQL
               href: ./kusto/api/tds/t-sql.md
             - name: KQL over TDS
@@ -1721,13 +1763,15 @@
                 - name: 控制追蹤
                   href: ./kusto/api/netfx/controlling-tracing.md
             - name: Kusto.Data
-              href: ./kusto/api/netfx/about-kusto-data.md
               items:
+                - name: Kusto.Data 概觀
+                  href: ./kusto/api/netfx/about-kusto-data.md
                 - name: 要求屬性、ClientRequestProperties
                   href: ./kusto/api/netfx/request-properties.md
             - name: Kusto.Ingest
-              href: ./kusto/api/netfx/about-kusto-ingest.md
               items:
+                - name: Kusto.Ingest 概觀
+                  href: ./kusto/api/netfx/about-kusto-ingest.md
                 - name: 權限
                   href: ./kusto/api/netfx/kusto-ingest-client-permissions.md
                 - name: 用戶端參考
@@ -1798,7 +1842,7 @@
       href: 'https://azure.microsoft.com/blog/tag/azure-data-explorer/'
     - name: 論壇
       items:
-        - name: 堆疊溢位
+        - name: Stack Overflow
           href: 'https://stackoverflow.com/questions/tagged/azure-data-explorer'
         - name: Microsoft 技術社群
           href: 'https://techcommunity.microsoft.com/t5/Azure-Data-Explorer/bd-p/Kusto'
