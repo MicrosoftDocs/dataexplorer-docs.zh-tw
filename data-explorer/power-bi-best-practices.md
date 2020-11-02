@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: a508d40d4e48205288dcb6133e267578a54198f9
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 2d2caef1f406b63bcfd22e8bc565efce8c1f9d39
+ms.sourcegitcommit: 0e2fbc26738371489491a96924f25553a8050d51
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343516"
+ms.lasthandoff: 11/02/2020
+ms.locfileid: "93148502"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>使用 Power BI 來查詢 Azure 資料總管資料並將其視覺化的最佳作法
 
@@ -26,7 +26,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 * **複合模型** -使用 [複合模型](/power-bi/desktop-composite-models) ，將最上層儀表板的匯總資料與篩選的操作原始資料合併。 您可以清楚地定義何時使用原始資料，以及何時使用匯總視圖。 
 
-* 匯**入模式與 DirectQuery 模式**-使用匯**入**模式來進行較小的資料集互動。 針對大型、經常更新的資料集使用 **DirectQuery** 模式。 例如，使用 [匯 **入** ] 模式建立維度資料表，因為它們很小，而且不常變更。 根據預期的資料更新速率來設定重新整理間隔。 使用 **DirectQuery** 模式建立事實資料表，因為這些資料表很大且包含原始資料。 使用這些資料表，利用 Power BI 的 [鑽取](/power-bi/desktop-drillthrough)來呈現篩選過的資料。
+* 匯 **入模式與 DirectQuery 模式** -使用匯 **入** 模式來進行較小的資料集互動。 針對大型、經常更新的資料集使用 **DirectQuery** 模式。 例如，使用 [匯 **入** ] 模式建立維度資料表，因為它們很小，而且不常變更。 根據預期的資料更新速率來設定重新整理間隔。 使用 **DirectQuery** 模式建立事實資料表，因為這些資料表很大且包含原始資料。 使用這些資料表，利用 Power BI 的 [鑽取](/power-bi/desktop-drillthrough)來呈現篩選過的資料。
 
 * **平行** 處理原則-Azure 資料總管是可線性調整的資料平臺，因此，您可以藉由增加端對端流程的平行處理原則來改善儀表板轉譯的效能，如下所示：
 
@@ -98,7 +98,7 @@ in
 
 ### <a name="reaching-kusto-query-limits"></a>到達 Kusto 查詢限制
 
-依預設，Kusto 查詢會傳回最多500000個數據列或 64 MB，如 [查詢限制](kusto/concepts/querylimits.md)中所述。 您可以使用**Azure 資料總管 (Kusto) **連線視窗中的 [ **Advanced options** ] 來覆寫這些預設值：
+依預設，Kusto 查詢會傳回最多500000個數據列或 64 MB，如 [查詢限制](kusto/concepts/querylimits.md)中所述。 您可以使用 **Azure 資料總管 (Kusto)** 連線視窗中的 [ **Advanced options** ] 來覆寫這些預設值：
 
 ![進階選項](media/power-bi-best-practices/advanced-options.png)
 
@@ -128,7 +128,7 @@ in
 
 使用查詢參數來篩選查詢中的資訊並優化查詢效能。
  
-在 [**編輯查詢**] 視窗中， **Home**  >  **進階編輯器**
+在 [ **編輯查詢** ] 視窗中， **Home**  >  **進階編輯器**
 
 1. 尋找查詢的下一節：
 
@@ -173,6 +173,20 @@ in
 您可以在任何支援的查詢步驟中使用查詢參數。 例如，根據參數的值篩選結果。
 
 ![使用參數篩選結果](media/power-bi-best-practices/filter-using-parameter.png)
+
+### <a name="use-valuenativequery-for-azure-data-explorer-features"></a>針對 Azure 資料總管功能使用 >value.nativequery
+
+若要使用 Power BI 不支援的 Azure 資料總管功能，請使用 M 中的 [>value.nativequery ( # B1 ](https://docs.microsoft.com/powerquery-m/value-nativequery) 方法。這個方法會在產生的查詢中插入 Kusto 查詢語言片段，也可以用來讓您更充分掌控所執行的查詢。
+
+下列範例示範如何 `percentiles()` 在 Azure 資料總管中使用函數：
+
+```m
+let
+    StormEvents = AzureDataExplorer.Contents(DefaultCluster, DefaultDatabase){[Name = DefaultTable]}[Data],
+    Percentiles = Value.NativeQuery(StormEvents, "| summarize percentiles(DamageProperty, 50, 90, 95) by State")
+in
+    Percentiles
+```
 
 ### <a name="dont-use-power-bi-data-refresh-scheduler-to-issue-control-commands-to-kusto"></a>請勿使用 Power BI 資料重新整理排程器將控制命令發出至 Kusto
 

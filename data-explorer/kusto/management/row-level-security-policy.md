@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/11/2020
-ms.openlocfilehash: f73cf5718a80528415c9aed201917c1bd52bb660
-ms.sourcegitcommit: 86636f80a12f47ea434f128fa04fe9fc09629730
+ms.openlocfilehash: 25ad7040b0318206a712a9a7fb8d3be58e0f47f3
+ms.sourcegitcommit: 0e2fbc26738371489491a96924f25553a8050d51
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91942628"
+ms.lasthandoff: 11/02/2020
+ms.locfileid: "93148434"
 ---
 # <a name="row_level_security-policy-command"></a>row_level_security 原則命令
 
@@ -51,7 +51,7 @@ ms.locfileid: "91942628"
 > 下列限制適用于 `query` ：
 >
 > * 查詢應該會產生與定義原則的資料表完全相同的架構。 也就是說，查詢的結果應該以相同的順序傳回與原始資料表完全相同的資料行，且具有相同的名稱和類型。
-> * 查詢只能使用下列運算子： `extend` 、 `where` 、 `project` 、 `project-away` 、 `project-rename` 、 `project-reorder` `join` 和 `union` 。
+> * 查詢只能使用下列運算子： `extend` 、 `where` 、 `project` 、 `project-away` 、 `project-keep` 、 `project-rename` 、 `project-reorder` `join` 和 `union` 。
 > * 查詢無法參考啟用 RLS 的其他資料表。
 > * 查詢可以是下列任何一項，也可以是它們的組合：
 >    * 查詢 (例如， `<table_name> | extend CreditCardNumber = "****"`) 
@@ -77,7 +77,7 @@ ms.locfileid: "91942628"
 .alter table Customers policy row_level_security enable "TrimCreditCardNumbers"
 ```
 
-**效能注意事項**： `UserCanSeeFullNumbers` 將會先評估，然後才會 `AllData` 評估或， `PartialData` 但不是兩者都是預期的結果。
+**效能注意事項** ： `UserCanSeeFullNumbers` 將會先評估，然後才會 `AllData` 評估或， `PartialData` 但不是兩者都是預期的結果。
 您可以在 [這裡](rowlevelsecuritypolicy.md#performance-impact-on-queries)閱讀有關 RLS 效能影響的詳細資訊。
 
 ## <a name="deleting-the-policy"></a>刪除原則
