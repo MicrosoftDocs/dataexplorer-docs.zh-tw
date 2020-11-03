@@ -226,13 +226,13 @@
             - name: Power BI 最佳做法
               href: power-bi-best-practices.md
             - name: 連接子
-              displayName: PowerBI
+              displayName: Power BI
               href: power-bi-connector.md
             - name: 已匯入查詢
-              displayName: PowerBI
+              displayName: Power BI
               href: power-bi-imported-query.md
             - name: SQL 查詢
-              displayName: PowerBI
+              displayName: Power BI
               href: power-bi-sql-query.md
         - name: Excel
           items:
@@ -1842,7 +1842,7 @@
       href: 'https://azure.microsoft.com/blog/tag/azure-data-explorer/'
     - name: 論壇
       items:
-        - name: Stack Overflow
+        - name: 堆疊溢位
           href: 'https://stackoverflow.com/questions/tagged/azure-data-explorer'
         - name: Microsoft 技術社群
           href: 'https://techcommunity.microsoft.com/t5/Azure-Data-Explorer/bd-p/Kusto'
