@@ -39,6 +39,7 @@
         - name: 資料內嵌屬性
           href: ingestion-properties.md
         - name: 資料內嵌的格式
+          displayName: supported data formats
           href: ingestion-supported-formats.md
     - name: Kusto 查詢語言
       items:
