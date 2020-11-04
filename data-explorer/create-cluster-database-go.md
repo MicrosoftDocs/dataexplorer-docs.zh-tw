@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/28/2020
-ms.openlocfilehash: 4eedb1a7f9204ff211d258938666cc6ce3b3391a
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 51f44d1a3cd29121a99e442f4033176b00b9e09f
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92906254"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349387"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-using-go"></a>使用 Go 建立 Azure 資料總管叢集和資料庫
 
@@ -41,7 +41,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 ### <a name="authentication"></a>驗證
 
-在執行任何作業之前，程式必須先向 Azure 資料總管進行驗證。 [驗證使用用戶端認證驗證類型](https://docs.microsoft.com/azure/developer/go/azure-sdk-authorization#use-environment-based-authentication) [。NewAuthorizerFromEnvironment](https://pkg.go.dev/github.com/Azure/go-autorest/autorest/azure/auth?tab=doc#NewAuthorizerFromEnvironment) ，它會尋找下列預先定義的環境變數： `AZURE_CLIENT_ID` 、 `AZURE_CLIENT_SECRET` 、 `AZURE_TENANT_ID` 。
+在執行任何作業之前，程式必須先向 Azure 資料總管進行驗證。 [驗證使用用戶端認證驗證類型](/azure/developer/go/azure-sdk-authorization#use-environment-based-authentication) [。NewAuthorizerFromEnvironment](https://pkg.go.dev/github.com/Azure/go-autorest/autorest/azure/auth?tab=doc#NewAuthorizerFromEnvironment) ，它會尋找下列預先定義的環境變數： `AZURE_CLIENT_ID` 、 `AZURE_CLIENT_SECRET` 、 `AZURE_TENANT_ID` 。
 
 下列範例顯示 [kusto。ClustersClient](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#ClustersClient) 會使用這項技術來建立：
 
@@ -195,7 +195,7 @@ func deleteCluster(sub, clusterName, rgName string) {
     cd azure-data-explorer-go-cluster-management
     ```
 
-1. 程式會使用用戶端認證進行驗證。 使用 Azure CLI [az ad sp 建立-rbac](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) 命令來建立服務主體。 儲存用戶端識別碼、用戶端密碼和租使用者識別碼資訊，以便在下一個步驟中使用。
+1. 程式會使用用戶端認證進行驗證。 使用 Azure CLI [az ad sp 建立-rbac](/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) 命令來建立服務主體。 儲存用戶端識別碼、用戶端密碼和租使用者識別碼資訊，以便在下一個步驟中使用。
 
 1. 匯出必要的環境變數，包括服務主體資訊。 輸入您要在其中建立叢集的訂用帳戶識別碼、資源群組和區域。
 
@@ -255,6 +255,6 @@ func deleteCluster(sub, clusterName, rgName string) {
 
 如果您未使用本文中的範例程式碼以程式設計方式刪除叢集，請使用 [Azure CLI](create-cluster-database-cli.md#clean-up-resources)手動將其刪除。
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 [使用 Azure 資料總管 Go SDK 內嵌資料](go-ingest-data.md)

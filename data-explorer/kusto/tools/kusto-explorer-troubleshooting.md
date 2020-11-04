@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 365ce1e4c8e5dd2157a7975095b9e30dfd1e3722
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 6e460ddaab7d58e4dac104db511119933c531506
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342700"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349421"
 ---
 # <a name="troubleshooting"></a>疑難排解
 
@@ -127,7 +127,7 @@ Following errors were detected during this operation.
 #### <a name="enabling-clickonce-verbose-logging"></a>啟用 ClickOnce 詳細資訊記錄
 
 1. 如果應用程式仍無法啟動：
-    1. 在下列情況下建立 LogVerbosityLevel 字串值1，以[啟用詳細資訊 ClickOnce 記錄](https://docs.microsoft.com/visualstudio/deployment/how-to-specify-verbose-log-files-for-clickonce-deployments)：
+    1. 在下列情況下建立 LogVerbosityLevel 字串值1，以[啟用詳細資訊 ClickOnce 記錄](/visualstudio/deployment/how-to-specify-verbose-log-files-for-clickonce-deployments)：
 
         ```kusto
         HKEY_CURRENT_USER\Software\Classes\Software\Microsoft\Windows\CurrentVersion\Deployment
@@ -176,8 +176,8 @@ Following errors were detected during this operation.
 也可以還原至特定版本的 Kusto。 Explorer：
 
 1. 執行 `appwiz.cpl`。
-1. 選取 [ **Kusto** ]，然後選取 [ **卸載/變更**]。
-1. 選取 **[將應用程式還原為先前的狀態**]。
+1. 選取 [ **Kusto** ]，然後選取 [ **卸載/變更** ]。
+1. 選取 **[將應用程式還原為先前的狀態** ]。
 
 ## <a name="next-steps"></a>後續步驟
 

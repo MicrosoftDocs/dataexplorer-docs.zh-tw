@@ -8,12 +8,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/25/2020
-ms.openlocfilehash: 22463307df0358228469fe480f5578222bed52bf
-ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
+ms.openlocfilehash: 630b57dc12b3ed0fac797dcc57f3b38c13a0e476
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89379828"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349508"
 ---
 # <a name="customize-azure-data-explorer-dashboard-visuals"></a>自訂 Azure 資料總管儀表板視覺效果
 
@@ -66,6 +66,12 @@ Azure 資料總管支援多種不同類型的視覺效果。 本節說明不同�
 
 Stat 視覺效果只會顯示一個元素。 如果輸出中有多個資料行和資料列，stat 會顯示第一個資料行的第一個元素。 當您在儀表板上醒目提示 Kpi 時，Stat 卡片會很有用。
 
+### <a name="multi-stat"></a>多重 stat
+
+:::image type="content" source="media/dashboard-customize-visuals/multistat.png" alt-text="多重 stat 視覺效果類型":::
+
+多重 stat 視覺效果會使用單一查詢結果，在群組中顯示多個 stat 卡。 這需要2個數據行，一個用於標籤，另一個則用於值。 使用者可以使用視覺化格式選項，藉由選取資料列和資料行的數目來自訂要顯示的輸出版面配置。 除了更方便的選項之外，此格式化選項還可減少客戶使用類似查詢來建立多個統計資料的叢集負載。
+
 ### <a name="pie-chart"></a>圓形圖
 
 :::image type="content" source="media/dashboard-customize-visuals/pie-chart.png" alt-text="圓形圖視覺效果類型":::
@@ -105,7 +111,7 @@ Stat 視覺效果只會顯示一個元素。 如果輸出中有多個資料行�
 ## <a name="customize-visuals"></a>自訂視覺效果
 
 1. 選取 [儀表板] 功能表中的 [ **編輯** ]，以切換至編輯模式。
-1. 若要存取卡片上的 [視覺效果自訂] 對話方塊，請按一下下拉式功能表 > **編輯卡片**]。 或者，當您使用 [ **新增查詢**] 建立新的卡片時，請選取 [ **編輯卡片**]。
+1. 若要存取卡片上的 [視覺效果自訂] 對話方塊，請按一下下拉式功能表 > **編輯卡片** ]。 或者，當您使用 [ **新增查詢** ] 建立新的卡片時，請選取 [ **編輯卡片** ]。
 
 :::image type="content" source="media/dashboard-customize-visuals/edit-card.png" alt-text="編輯卡片以進行視覺自訂":::
 
@@ -118,10 +124,12 @@ Stat 視覺效果只會顯示一個元素。 如果輸出中有多個資料行�
 |區段  |描述 | 視覺效果類型
 |---------|---------|-----|
 |**一般**    |    選取 **堆疊** 或 **非堆疊** 的圖表格式  | 橫條圖、直條圖和區域圖 |
-|**Data**    |   選取您視覺效果的 **Y 和 X 欄** 。 如果您希望平臺根據查詢結果自動選取資料行，請將選取專案保留為**推斷**    |橫條圖、直條圖、散佈圖和異常圖表|
+|**Data**    |   選取您視覺效果的 **Y 和 X 欄** 。 如果您希望平臺根據查詢結果自動選取資料行，請將選取專案保留為 **推斷**    |橫條圖、直條圖、散佈圖和異常圖表|
 |**圖例**    |   切換顯示或隱藏視覺效果上的圖例   |橫條圖、直條圖、區域圖、折線圖、散佈圖、異常和時間圖表 |
-|**Y 軸**     |   允許自訂 Y 軸屬性： <ul><li>**標籤**：自訂標籤的文字。 </li><li>**最大值**：變更 Y 軸的最大值。  </li><li>**最小值**：變更 Y 軸的最小值。  </li></ul>      |橫條圖、直條圖、區域圖、折線圖、散佈圖、異常和時間圖表 |
-|**X 軸**     |    允許自訂 X 軸屬性： <ul><li>**標籤**：自訂標籤的文字。 </li>     | 橫條圖、直條圖、區域圖、折線圖、散佈圖、異常和時間圖表|
+|**Y 軸**     |   允許自訂 Y 軸屬性： <ul><li>**標籤** ：自訂標籤的文字。 </li><li>**最大值** ：變更 Y 軸的最大值。  </li><li>**最小值** ：變更 Y 軸的最小值。  </li></ul>      |橫條圖、直條圖、區域圖、折線圖、散佈圖、異常和時間圖表 |
+|**X 軸**     |    允許自訂 X 軸屬性。 <li>**標籤** ：自訂標籤的文字。 </li>     | 橫條圖、直條圖、區域圖、折線圖、散佈圖、異常和時間圖表|
+|**轉譯連結**     |    切換以在資料表中以 "HTTPs://" 為開頭的連結，可按一下。 <li>套用於資料 **行** ：選取包含 URL 的資料行。 </li>     | Table|
+|**版面配置**     |    選取多個 stat 視覺效果的版面配置設定。 <li>套用於資料 **行** ：選取包含 URL 的資料行。 </li>     | 多重 stat|
 
 ## <a name="next-steps"></a>後續步驟
 

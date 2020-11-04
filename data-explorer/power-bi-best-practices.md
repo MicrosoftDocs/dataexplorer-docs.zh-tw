@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 2d2caef1f406b63bcfd22e8bc565efce8c1f9d39
-ms.sourcegitcommit: 0e2fbc26738371489491a96924f25553a8050d51
+ms.openlocfilehash: 442185ed0afd977c103d0b571472c0f5e742908c
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/02/2020
-ms.locfileid: "93148502"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349472"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>使用 Power BI 來查詢 Azure 資料總管資料並將其視覺化的最佳作法
 
@@ -176,7 +176,7 @@ in
 
 ### <a name="use-valuenativequery-for-azure-data-explorer-features"></a>針對 Azure 資料總管功能使用 >value.nativequery
 
-若要使用 Power BI 不支援的 Azure 資料總管功能，請使用 M 中的 [>value.nativequery ( # B1 ](https://docs.microsoft.com/powerquery-m/value-nativequery) 方法。這個方法會在產生的查詢中插入 Kusto 查詢語言片段，也可以用來讓您更充分掌控所執行的查詢。
+若要使用 Power BI 不支援的 Azure 資料總管功能，請使用 M 中的 [>value.nativequery ( # B1 ](/powerquery-m/value-nativequery) 方法。這個方法會在產生的查詢中插入 Kusto 查詢語言片段，也可以用來讓您更充分掌控所執行的查詢。
 
 下列範例示範如何 `percentiles()` 在 Azure 資料總管中使用函數：
 

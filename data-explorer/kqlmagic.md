@@ -7,12 +7,12 @@ ms.reviewer: maraheja
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/20/2020
-ms.openlocfilehash: 3af348677bf520d1ccd78388bb6a7a30506e572d
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 857c654c70a2170a42902514718a52fbf7b02944
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92249991"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349455"
 ---
 # <a name="use-a-jupyter-notebook-and-kqlmagic-extension-to-analyze-data-in-azure-data-explorer"></a>使用 Jupyter Notebook 和 kqlmagic 擴充功能來分析 Azure 中的資料資料總管
 
@@ -22,7 +22,7 @@ Jupyter Notebook 是開放原始碼的 Web 應用程式，可讓您建立及共�
 ## <a name="prerequisites"></a>先決條件
 
 - 屬於 Azure Active Directory (Azure AD) 成員的組織電子郵件帳戶。
-- Jupyter Notebook 安裝在本機電腦上或使用 [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kqlmagic?view=sql-server-ver15)
+- Jupyter Notebook 安裝在本機電腦上或使用 [Azure Data Studio](/sql/azure-data-studio/notebooks/notebooks-kqlmagic?view=sql-server-ver15)
 
 ## <a name="install-kqlmagic-library"></a>安裝 kqlmagic 程式庫
 
@@ -42,7 +42,7 @@ Jupyter Notebook 是開放原始碼的 Web 應用程式，可讓您建立及共�
     
 ## <a name="connect-to-the-azure-data-explorer-help-cluster"></a>連線至 Azure 資料總管協助叢集
 
-使用下列命令來連線至裝載於「協助」** 叢集的「範例」** 資料庫。 若為非 Microsoft Azure AD 使用者，請將租使用者名稱取代為 `Microsoft.com` 您的 Azure AD 租使用者。
+使用下列命令來連線至裝載於「協助」叢集的「範例」資料庫。 若為非 Microsoft Azure AD 使用者，請將租使用者名稱取代為 `Microsoft.com` 您的 Azure AD 租使用者。
 
 ```python
 %kql AzureDataExplorer://tenant="Microsoft.com";code;cluster='help';database='Samples'

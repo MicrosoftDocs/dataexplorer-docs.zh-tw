@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 95f8ce19c6edb419de4fb5053a79c243e3e332c4
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 383d1ab5d948a5fbcfb3ab2aad0ff8e5ed675075
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92252835"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349438"
 ---
 # <a name="create-materialized-view"></a>.create materialized-view
 
@@ -45,7 +45,7 @@ ms.locfileid: "92252835"
 
 ## <a name="arguments"></a>引數
 
-|引數|類型|描述
+|引數|類型|Description
 |----------------|-------|---|
 |ViewName|String|具體化視圖名稱。 視圖名稱無法與相同資料庫中的資料表或函數名稱衝突，而且必須遵守 [識別碼命名規則](../../query/schema-entities/entity-names.md#identifier-naming-rules)。 |
 |SourceTableName|String|定義此視圖的來源資料表名稱。|
@@ -72,7 +72,7 @@ ms.locfileid: "92252835"
 
     * 視圖來源資料表中的記錄 (事實資料表) 只會具體化一次。 事實資料表與維度資料表之間的不同內嵌延遲可能會影響視圖結果。
 
-    * **範例**：視圖定義包含具有維度資料表的內部聯結。 在具體化時，維度記錄未完全內嵌，但已內嵌到事實資料表。 此記錄將會從視圖中卸載，且永遠不會重新處理。 
+    * **範例** ：視圖定義包含具有維度資料表的內部聯結。 在具體化時，維度記錄未完全內嵌，但已內嵌到事實資料表。 此記錄將會從視圖中卸載，且永遠不會重新處理。 
 
         同樣地，如果聯結是外部聯結，則會處理事實資料表中的記錄，並將其加入至維度資料表資料行的 null 值。 已新增 () 值為 null 值的記錄將不會再次處理。 它們在維度資料表的資料行中的值會維持 null。
 
@@ -80,7 +80,7 @@ ms.locfileid: "92252835"
 
 子句支援下列各項 `with(propertyName=propertyValue)` 。 所有屬性都是選擇性的。
 
-|屬性|類型|描述 |
+|屬性|類型|Description |
 |----------------|-------|---|
 |回填|bool|是否要根據目前在 *SourceTable* () 中的所有記錄來建立視圖 `true` ，或從 [從現在開始] (`false`) 建立。 預設值為 `false`。| 
 |effectiveDateTime|Datetime| 如果與一起指定 `backfill=true` ，則只會建立回填，並在日期時間之後內嵌記錄。 回填也必須設定為 true。 需要日期時間常值，例如 `effectiveDateTime=datetime(2019-05-01)`|
@@ -202,7 +202,7 @@ ms.locfileid: "92252835"
 
 * 具體化視圖查詢篩選準則會在依 (匯總 by 子句) 的其中一個具體化 View 維度進行篩選時優化。 如果您知道您的查詢模式通常會依某些資料行篩選，而此資料行可以是具體化視圖中的維度，請將它包含在 view 中。 例如：若要公開的具體化視圖 `arg_max` 通常會 `ResourceId` 依篩選 `SubscriptionId` ，建議如下所示：
 
-    **執行**：
+    **執行** ：
     
     ```kusto
     .create materialized-view ArgMaxResourceId on table FactResources
@@ -211,7 +211,7 @@ ms.locfileid: "92252835"
     }
     ``` 
     
-    **請勿這樣做**：
+    **請勿這樣做** ：
     
     ```kusto
     .create materialized-view ArgMaxResourceId on table FactResources
@@ -222,7 +222,7 @@ ms.locfileid: "92252835"
 
 * 請勿包含轉換、正規化，以及可移至 [更新原則](../updatepolicy.md) 做為具體化 view 定義一部分的其他繁重計算。 相反地，請在更新原則中執行所有的處理常式，並只在具體化視圖中執行匯總。 如果適用，請使用此程式來查閱維度資料表。
 
-    **執行**：
+    **執行** ：
     
     * 更新原則：
     
@@ -241,19 +241,19 @@ ms.locfileid: "92252835"
     ```kusto
     .create materialized-view Usage on table Events
     {
-    &nbsp;     Target 
-    &nbsp;     | summarize count() by ResourceId 
+        Target 
+        | summarize count() by ResourceId 
     }
     ```
     
-    **請勿這樣做**：
+    **請勿這樣做** ：
     
     ```kusto
     .create materialized-view Usage on table SourceTable
     {
-    &nbsp;     SourceTable 
-    &nbsp;     | extend ResourceId = strcat('subscriptions/', toupper(SubscriptionId), '/', resourceId)
-    &nbsp;     | summarize count() by ResourceId
+        SourceTable 
+        | extend ResourceId = strcat('subscriptions/', toupper(SubscriptionId), '/', resourceId)
+        | summarize count() by ResourceId
     }
     ```
 
@@ -285,17 +285,17 @@ ms.locfileid: "92252835"
 
 ### <a name="syntax"></a>語法
 
-`.cancel``operation` *operationId*
+`.cancel` `operation` *operationId*
 
 ### <a name="properties"></a>屬性
 
-|屬性|類型|描述
+|屬性|類型|Description
 |----------------|-------|---|
 |operationId|Guid|從 create 具體化 view 命令傳回的作業識別碼。|
 
 ### <a name="output"></a>輸出
 
-|輸出參數 |類型 |描述
+|輸出參數 |類型 |Description
 |---|---|---
 |OperationId|Guid|Create 具體化 view 命令的作業識別碼。
 |作業|String|作業種類。

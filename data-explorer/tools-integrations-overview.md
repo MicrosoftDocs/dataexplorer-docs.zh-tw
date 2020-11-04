@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: fd596d840dcbaab1843833b4164901423a2ebef8
-ms.sourcegitcommit: 88291fd9cebc26e5210463cb95be5540bf84eef8
+ms.openlocfilehash: 71f00cf921609432860a94061be7411e484fd0c9
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92437386"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349319"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Azure 資料總管工具和整合總覽
 
@@ -39,7 +39,7 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
 * Iot 中樞： [從 iot 中樞內嵌總覽](ingest-data-iot-hub-overview.md) 和使用 [Azure 入口網站](ingest-data-iot-hub.md)、 [c #](data-connection-iot-hub-csharp.md)、 [Python](data-connection-iot-hub-python.md) 或 [Azure Resource Manager 範本](data-connection-iot-hub-resource-manager.md)
 * [Logstash](ingest-data-logstash.md)
 * Azure Data Factory： [整合總覽](data-factory-integration.md)、 [複製資料](data-factory-load-data.md)、 [使用 Azure Data Factory 範本大量複製](data-factory-template.md)，以及 [使用 Azure Data Factory 命令活動執行 Azure 資料總管控制命令](data-factory-command-activity.md)
-* [Azure Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
+* [Azure Synapse Apache Spark](/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
 * [Apache Spark](spark-connector.md)
 * [Apache Kafka](ingest-data-kafka.md)
 * [Cosmos DB](https://github.com/Azure/azure-kusto-labs/tree/master/cosmosdb-adx-integration)
@@ -61,7 +61,7 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
 
 * [Azure 監視器](query-monitor-data.md)
 * [Azure Data Lake](data-lake-query-data.md)
-* [Azure Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
+* [Azure Synapse Apache Spark](/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
 * [Apache Spark](spark-connector.md)
 * [Microsoft Power Apps](power-apps-connector.md)
 * Azure Data Studio： [Kusto 延伸模組總覽](/sql/azure-data-studio/extensions/kusto-extension?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)、 [使用 Kusto](/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)，以及 [使用 Kqlmagic](/sql/azure-data-studio/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
@@ -72,7 +72,7 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
 
 ## <a name="notebook-connectivity"></a>筆記本連線能力
 
-* [Azure Notebooks](azure-notebooks.md)
+* [Azure Notebooks](/sql/azure-data-studio/notebooks/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext%253fcontext%253d%252fazure%252fdata-explorer%252fcontext%252fcontext)
 * [Jupyter Notebook](kqlmagic.md)
 * Azure Data Studio： [Kusto 延伸模組總覽](/sql/azure-data-studio/extensions/kusto-extension?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)、 [使用 Kusto](/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)，以及 [使用 Kqlmagic](/sql/azure-data-studio/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
 
