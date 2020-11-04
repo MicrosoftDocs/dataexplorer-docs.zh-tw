@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: fa18a89e44a09a877cedb41c6d6e77384c965801
-ms.sourcegitcommit: 811cf98edefd919b412d80201400919eedcab5cd
+ms.openlocfilehash: 4ef7e15e3009b3ccd098136d9c5013dbe31813b7
+ms.sourcegitcommit: f71801764fdccb061f3cf1e3cfe43ec1557e4e0f
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89274589"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93293129"
 ---
 # <a name="what-is-one-click-ingestion"></a>什麼是單鍵擷取？
 
@@ -44,11 +44,11 @@ ms.locfileid: "89274589"
 
     :::image type="content" source="media/ingest-data-one-click/welcome-ingestion.png" alt-text="從 [歡迎使用 Azure 資料總管] 擷取新資料":::
 
-* 若要從 [Azure 資料總管 Web UI](https://dataexplorer.azure.com/) 存取精靈，請以滑鼠右鍵按一下 Azure 資料總管 Web UI 左側功能表中的**資料庫**或**資料表**列，然後選取 [擷取新資料 (預覽)]。
+* 若要從 [Azure 資料總管 Web UI](https://dataexplorer.azure.com/) 存取精靈，請以滑鼠右鍵按一下 Azure 資料總管 Web UI 左側功能表中的 **資料庫** 或 **資料表** 列，然後選取 [擷取新資料]。
 
     :::image type="content" source="media/ingest-data-one-click/one-click-ingestion-in-webui.png" alt-text="在 Web UI 中選取單鍵擷取":::
 
-* 若要從 Azure 入口網站存取精靈，請選取左側功能表中的 [查詢]，對 [資料庫] 或 [資料表] 按右鍵，然後選取 [內嵌新資料 (預覽)]。
+* 若要從 Azure 入口網站存取精靈，請選取左側功能表中的 [查詢]，對 [資料庫] 或 [資料表] 按右鍵，然後選取 [內嵌新資料]。
 
     :::image type="content" source="media/ingest-data-one-click/access-from-portal.png" alt-text="從 Azure 入口網站存取單鍵擷取精靈":::
 
@@ -80,14 +80,7 @@ ms.locfileid: "89274589"
 
 #### <a name="file-formats"></a>檔案格式
 
-單鍵擷取支援以下列任何格式從來源資料內嵌新的資料表：
-* JSON
-* CSV
-* TSV
-* SCSV
-* SOHSV
-* TSVE
-* PSV
+一鍵式擷取支援以 Azure 資料總管支援的所有[資料格式，從來源資料內嵌以進行擷取](ingestion-supported-formats.md)。
 
 ### <a name="editor-window"></a>編輯器視窗
 
@@ -95,11 +88,23 @@ ms.locfileid: "89274589"
 
 |資料表類型  |可用的資料行調整  |
 |---------|---------|
-|新增     | 新增資料行、刪除資料行、遞增排序、遞減排序  |
-|Existing     | 新增資料行、遞增排序、遞減排序  |
+|新增     | 新增資料行、刪除資料行、更新資料行、遞增排序、遞減排序  |
+|Existing     | 新增資料行、更新資料行、遞增排序、遞減排序  |
 
 >[!NOTE]
 > 您隨時都可以在 [編輯器] 窗格上方，開啟[命令編輯器](one-click-ingestion-new-table.md#command-editor)。 在命令編輯器中，您可以檢視及複製從您的輸入產生的自動命令。
+
+#### <a name="mapping-transformations"></a>對應資訊
+
+某些資料格式對應 (Parquet、JSON 和 Avro) 支援簡單的內嵌時間轉換。 若要套用對應轉換，請在 [編輯器視窗](#editor-window)中建立或更新資料行。
+
+對應轉換可以在 **類型** 字串或日期時間的資料行上執行，而 **來源** 的資料類型為 int 或 long。 支援的對應轉換如下：
+* DateTimeFromUnixSeconds
+* DateTimeFromUnixMilliseconds
+* DateTimeFromUnixMicroseconds
+* DateTimeFromUnixNanoseconds
+
+如需詳細資訊，請參閱[對應轉換](kusto/management/mappings.md#mapping-transformations)。
 
 ### <a name="data-ingestion"></a>資料擷取
 
@@ -107,10 +112,10 @@ ms.locfileid: "89274589"
 
 * 從 **non-container** 來源內嵌資料時，擷取會立即生效。
 
-* 如果您的資料來源是**容器**：
+* 如果您的資料來源是 **容器** ：
     * Azure 資料總管的[批次處理原則](kusto/management/batchingpolicy.md)會彙總您的資料。 
     * 擷取之後，您可以下載擷取報告，並檢閱每個已解決 Blob 的效能。 
-    * 您可以選取**建立連續擷取**，並且設定[使用事件方格進行連續擷取](one-click-ingestion-new-table.md#create-continuous-ingestion-for-container)。
+    * 您可以選取 **建立連續擷取** ，並且設定 [使用事件方格進行連續擷取](one-click-ingestion-new-table.md#create-continuous-ingestion-for-container)。
  
 ### <a name="initial-data-exploration"></a>初始資料探索
    
