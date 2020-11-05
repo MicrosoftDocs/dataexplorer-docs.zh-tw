@@ -1,6 +1,6 @@
 ---
-title: 使用者定義函數-Azure 資料總管 |Microsoft Docs
-description: 本文說明 Azure 資料總管中的使用者定義函數。
+title: User-Defined 函式-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中 User-Defined 的功能。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 769ebc16da0780f1d1832dcbf49bad516c47abd3
-ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
+ms.openlocfilehash: e611bfb1d5dbf0122553b223a200400c526c975f
+ms.sourcegitcommit: 42cc7d11f41a5bfa9e021764b044dcd68d99a258
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/05/2020
-ms.locfileid: "91712012"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93403743"
 ---
 # <a name="user-defined-functions"></a>使用者自訂函數
 
-**使用者定義函數** 是可重複使用的子查詢，您可以將其定義為查詢本身的一部分 (臨機操作函 **式**) ，或保存為資料庫中繼資料的一部分 () **儲存的函數** 。 使用者自訂函式是透過 **名稱**來叫用，並提供零個或多個 **輸入引數** (可以是純量或表格式) ，並產生單一值 (可以根據函式 **主體**以純量或表格式) 。
+**使用者定義函數** 是可重複使用的子查詢，您可以將其定義為查詢本身的一部分 (臨機操作函 **式** ) ，或保存為資料庫中繼資料的一部分 () **儲存的函數** 。 使用者自訂函式是透過 **名稱** 來叫用，並提供零個或多個 **輸入引數** (可以是純量或表格式) ，並產生單一值 (可以根據函式 **主體** 以純量或表格式) 。
 
 使用者定義函數屬於兩個類別的其中一種：
 
@@ -45,6 +45,9 @@ ms.locfileid: "91712012"
 
 名稱在定義的範圍內也必須是唯一的。
 
+> [!NOTE]
+> 如果預存函式和資料表都有相同的名稱，則在查詢資料表/函式名稱時，預存函數會覆寫。
+
 ## <a name="input-arguments"></a>輸入引數
 
 有效的使用者定義函數會遵循下列規則：
@@ -61,7 +64,7 @@ ArgName:ArgType [= ArgDefaultValue]
 ```
  針對表格式引數， *ArgType* 具有與資料表定義相同的語法 (括弧和資料行名稱/類型配對的清單) ，另外還支援單獨 `(*)` 表示「任何表格式架構」。
 
-例如：
+例如︰
 
 |語法                        |輸入引數清單描述                                 |
 |------------------------------|-----------------------------------------------------------------|
@@ -268,7 +271,7 @@ union
 
 ## <a name="view-functions"></a>View 函數
 
-未採用任何引數並傳回表格式運算式的使用者自訂函數，可以標示為 **view**。 將使用者自訂函數標示為 view，表示每當完成萬用字元資料表名稱解析時，函數的行為就像資料表。
+未採用任何引數並傳回表格式運算式的使用者自訂函數，可以標示為 **view** 。 將使用者自訂函數標示為 view，表示每當完成萬用字元資料表名稱解析時，函數的行為就像資料表。
 下列範例顯示兩個使用者定義的函式，以及 `T_view` `T_notview` 顯示中的萬用字元參考如何解析第一個函數 `union` 。
 
 ```kusto

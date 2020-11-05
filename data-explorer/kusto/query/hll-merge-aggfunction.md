@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: a6aa19e3a88e7338494d6f6fad0e23a5ab4a03e4
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 59813656fce6afea3ecba62b13c971e74b095fe1
+ms.sourcegitcommit: 42cc7d11f41a5bfa9e021764b044dcd68d99a258
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92252300"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93403709"
 ---
 # <a name="hll_merge-aggregation-function"></a>hll_merge ( # A1 (彙總函式) 
 
@@ -21,7 +21,7 @@ ms.locfileid: "92252300"
 
 * 只能用在 [摘要內匯總](summarizeoperator.md)的內容中。
 
-如需詳細資訊，請參閱 [基礎演算法 (*H*Yper*l*og*l*og) 和估計精確度](dcount-aggfunction.md#estimation-accuracy)。
+如需詳細資訊，請參閱 [基礎演算法 ( *H* Yper *l* og *l* og) 和估計精確度](dcount-aggfunction.md#estimation-accuracy)。
 
 ## <a name="syntax"></a>語法
 
@@ -37,4 +37,4 @@ ms.locfileid: "92252300"
  
 **提示**
 
-1) 使用函式 [dcount_hll] (dcount-hllfunction.md) `dcount` 從 `hll`  /  `hll-merge` 彙總函式計算。
+1) 使用函數[dcount_hll](dcount-hllfunction.md)可 `dcount` 從 `hll`  /  `hll-merge` 彙總函式計算。
