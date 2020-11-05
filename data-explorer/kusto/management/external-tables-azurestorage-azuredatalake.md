@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1d0625c949fe563084caeec936e3433c9ee70f5e
-ms.sourcegitcommit: ef3d919dee27c030842abf7c45c9e82e6e8350ee
+ms.openlocfilehash: df38761d7ffebdf5e36c14ea25b0d02377bfa128
+ms.sourcegitcommit: fdc1f917621e9b7286bba23903101298cccc4c95
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92630104"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93364117"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -138,7 +138,7 @@ ms.locfileid: "92630104"
 <a name="properties"></a>
 *選用屬性*
 
-| 屬性         | 類型     | 描述       |
+| 屬性         | 類型     | Description       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | 資料表的資料夾                                                                     |
 | `docString`      | `string` | 記錄資料表的字串                                                       |
@@ -219,6 +219,14 @@ dataformat=csv
 with (fileExtension = ".txt")
 ```
 
+若要依查詢中的資料分割資料行進行篩選，請在查詢述詞中指定原始資料行名稱：
+
+```kusto
+external_table("ExternalTable")
+ | where Timestamp between (datetime(2020-01-01) .. datetime(2020-02-01))
+ | where CustomerName in ("John.Doe", "Ivan.Ivanov")
+```
+
 **範例輸出**
 
 |TableName|TableType|資料夾|DocString|屬性|ConnectionStrings|資料分割|PathFormat|
@@ -241,6 +249,14 @@ dataformat=parquet
 ( 
    h@'https://storageaccount.blob.core.windows.net/container1;secretKey'
 )
+```
+
+若要在查詢中依虛擬資料行篩選，請在查詢述詞中指定資料分割名稱：
+
+```kusto
+external_table("ExternalTable")
+ | where Date between (datetime(2020-01-01) .. datetime(2020-02-01))
+ | where CustomerName in ("John.Doe", "Ivan.Ivanov")
 ```
 
 <a name="file-filtering"></a>
@@ -276,7 +292,7 @@ dataformat=parquet
 
 **輸出**
 
-| 輸出參數 | 類型   | 描述                       |
+| 輸出參數 | 類型   | Description                       |
 |------------------|--------|-----------------------------------|
 | Uri              | 字串 | 外部儲存體資料檔案的 URI |
 | 大小             | long   | 檔案長度（以位元組為單位）              |
@@ -321,7 +337,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| 名稱     | 類型 | 對應                                                           |
+| Name     | 類型 | 對應                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -339,7 +355,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| 名稱     | 類型 | 對應                                                                |
+| Name     | 類型 | 對應                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
@@ -361,7 +377,7 @@ dataformat=parquet
 
 **範例輸出**
 
-| 名稱     | 類型 | 對應                                                                         |
+| Name     | 類型 | 對應                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
