@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/16/2020
-ms.openlocfilehash: 5446337177d0e261bd86fbd18119c34b861b89e4
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 606ae915e822cf4f2c02ac590a5bb05bdb17f28a
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942381"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373896"
 ---
 # <a name="monitor-azure-data-explorer-ingestion-commands-and-queries-using-diagnostic-logs"></a>使用診斷記錄來監視 Azure 資料總管內嵌、命令和查詢
 
@@ -33,13 +33,18 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 # <a name="ingestion"></a>[擷取](#tab/ingestion)
 
-* **成功**的內嵌作業：這些記錄檔包含已成功完成內嵌作業的相關資訊。
-* **失敗**的內嵌作業：這些記錄檔具有失敗內嵌作業的詳細資訊，包括錯誤詳細資料。 
+> [!NOTE]
+> 使用 Sdk、資料連線和連接器，可對內嵌端點的佇列內嵌支援內嵌記錄。
+>
+> 內嵌記錄不支援串流內嵌、直接內嵌到引擎、從查詢內嵌，或設定或附加命令。
+
+* **成功** 的內嵌作業：這些記錄檔包含已成功完成內嵌作業的相關資訊。
+* **失敗** 的內嵌作業：這些記錄檔具有失敗內嵌作業的詳細資訊，包括錯誤詳細資料。 
 
 # <a name="commands-and-queries"></a>[命令和查詢](#tab/commands-and-queries)
 
-* **命令**：這些記錄檔包含已達到最終狀態之系統管理命令的相關資訊。
-* **查詢**：這些記錄檔會提供已達到最終狀態之查詢的詳細資訊。 
+* **命令** ：這些記錄檔包含已達到最終狀態之系統管理命令的相關資訊。
+* **查詢** ：這些記錄檔會提供已達到最終狀態之查詢的詳細資訊。 
 
     > [!NOTE]
     > 查詢記錄資料不包含查詢文字。
@@ -53,11 +58,11 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 診斷記錄預設為停用。 若要啟用診斷記錄，請執行下列步驟：
 
 1. 在 [ [Azure 入口網站](https://portal.azure.com)中，選取您要監視的 Azure 資料總管叢集資源。
-1. 在 [監視]**** 下方，選取 [診斷設定]****。
+1. 在 [監視]  下方，選取 [診斷設定]  。
   
     ![新增診斷記錄](media/using-diagnostic-logs/add-diagnostic-logs.png)
 
-1. 選取 [ **新增診斷設定**]。
+1. 選取 [ **新增診斷設定** ]。
 1. 在 [ **診斷設定** ] 視窗中：
 
     :::image type="content" source="media/using-diagnostic-logs/configure-diagnostics-settings.png" alt-text="設定診斷設定":::
@@ -83,7 +88,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 記錄 JSON 字串包括下表所列的元素：
 
-|名稱               |描述
+|Name               |描述
 |---                |---
 |time               |報表的時間
 |resourceId         |Azure Resource Manager 資源識別碼
@@ -117,7 +122,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 ```
 **成功作業診斷記錄的屬性**
 
-|名稱               |描述
+|Name               |描述
 |---                |---
 |succeededOn        |內嵌完成的時間
 |operationId        |Azure 資料總管內嵌作業識別碼
@@ -158,7 +163,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 **失敗作業診斷記錄的屬性**
 
-|名稱               |描述
+|Name               |描述
 |---                |---
 |failedOn           |內嵌完成的時間
 |operationId        |Azure 資料總管內嵌作業識別碼
@@ -179,7 +184,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 記錄 JSON 字串包括下表所列的元素：
 
-|名稱               |描述
+|Name               |描述
 |---                |---
 |time               |報表的時間
 |resourceId         |Azure Resource Manager 資源識別碼
@@ -219,7 +224,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 ```
 **命令診斷記錄的屬性**
 
-|名稱               |描述
+|Name               |描述
 |---                |---
 |RootActivityId |根活動識別碼
 |StartedOn        |此命令開始 (UTC) 時間
@@ -229,7 +234,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |FailureReason  |失敗原因
 |TotalCpu |總 CPU 持續時間
 |CommandType     |命令類型
-|應用程式     |叫用命令的應用程式名稱
+|Application     |叫用命令的應用程式名稱
 |ResourceUtilization     |命令資源使用量
 |Duration     |命令持續時間
 |User     |叫用查詢的使用者
@@ -305,7 +310,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 **查詢診斷記錄的屬性**
 
-|名稱               |描述
+|Name               |描述
 |---                |---
 |RootActivityId |根活動識別碼
 |StartedOn        |此命令開始 (UTC) 時間
@@ -327,7 +332,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |TotalRowsCount        |總數據列計數
 |ScannedRowsCount        |掃描的資料列計數
 |CacheStatistics        |包含快取統計資料
-|Memory        |包含快取記憶體統計資料
+|記憶體        |包含快取記憶體統計資料
 |點擊        |記憶體快取點擊
 |遺漏        |記憶體快取遺漏
 |磁碟        |包含快取磁片統計資料
@@ -351,7 +356,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 ---
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * [使用計量來監視叢集健康情況](using-metrics.md)
 * [教學課程：在 Azure 資料總管中內嵌和查詢監視資料](ingest-data-no-code.md) 以內嵌診斷記錄

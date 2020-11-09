@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 12/19/2018
-ms.openlocfilehash: ef71c978681c9e355e82791d4df3ad7da8db66f7
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: fd277cd46a183606e35219f733dbf86b094d62f8
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874693"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373794"
 ---
 # <a name="handle-duplicate-data-in-azure-data-explorer"></a>在 Azure 資料總管中處理重複的資料
 
@@ -109,7 +109,7 @@ DeviceEventsAll
     > [!NOTE]
     > 更新原則會在擷取期間延長資料篩選後的擷取持續時間，然後內嵌兩次 (內嵌到 `DeviceEventsAll` 資料表和 `DeviceEventsUnique` 資料表)。
 
-1. (選擇性) 在 `DeviceEventsAll` 資料表上設定較低的資料保留期，以避免儲存資料的複本。 根據您要保留的資料量和時間長度，選擇天數，以便進行疑難排解。 您可以將它設定為保留 `0d` 天，以節省 COGS 及改善效能，因為資料不會上傳至儲存體。
+1. (選擇性) 在 `DeviceEventsAll` 資料表上設定較低的資料保留期，以避免儲存資料的複本。 根據您要保留的資料量和時間長度，選擇天數，以便進行疑難排解。 您可以將它設定為 `0d` 保留天數，以節省 COGS (銷售的商品成本) 並改善效能，因為資料不會上傳至儲存體。
 
     ```kusto
     .alter-merge table DeviceEventsAll policy retention softdelete = 1d

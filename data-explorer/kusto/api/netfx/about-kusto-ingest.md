@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 03/18/2020
-ms.openlocfilehash: a79c815202e65fa32f62a76c700d808d0fda86ea
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 33d3515a8465a1e9c3397e675a51c95aa3f00d42
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91941990"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373828"
 ---
 # <a name="kusto-ingest-client-library"></a>Kusto 內嵌用戶端程式庫 
 
@@ -53,7 +53,7 @@ ms.locfileid: "91941990"
 
 下圖概述與 Kusto 的直接內嵌用戶端互動：
 
-:::image type="content" source="../images/about-kusto-ingest/direct-ingest.png" alt-text="此圖顯示 Kusto 內嵌程式庫如何將查詢傳送至查詢內嵌模式下的 Kusto 服務。":::
+:::image type="content" source="../images/about-kusto-ingest/direct-ingest.png" alt-text="此圖顯示 Kusto 內嵌程式庫如何以直接內嵌模式將查詢傳送到 Kusto 服務。":::
 
 > [!NOTE]
 > 不建議在生產等級內嵌解決方案中使用直接模式。
@@ -71,7 +71,7 @@ ms.locfileid: "91941990"
 
 ## <a name="ingestion-best-practices"></a>內嵌最佳作法
 
-內嵌[最佳做法](kusto-ingest-best-practices.md)可在內嵌時提供 COGs 和輸送量的 POV。
+內嵌[最佳做法](kusto-ingest-best-practices.md)可提供 COGS (銷售的商品成本) 和內嵌的輸送量 POV。
 
 * **執行緒安全-** Kusto 內嵌用戶端實作為安全線程，可供重複使用。 不需要為 `KustoQueuedIngestClient` 每個或數個內嵌作業建立類別的實例。 `KustoQueuedIngestClient`每個使用者進程的每個目標 Kusto 叢集都需要單一實例。 執行多個實例會有生產力，而且可能會在資料管理叢集上造成 DoS。
 
@@ -80,13 +80,13 @@ ms.locfileid: "91941990"
 * **架構對應-** 
 [架構](../../management/mappings.md)對應有助於將源資料欄位確定性地系結至目的地資料表資料行。
 
-* 內嵌**許可權-** 
+* 內嵌 **許可權-** 
 [Kusto 內嵌許可權](kusto-ingest-client-permissions.md)說明使用封裝成功內嵌所需的許可權設定 `Kusto.Ingest` 。
 
-* **使用方式-** 如先前所述，Kusto 的持續性和高規模內嵌解決方案的建議基礎應為 **KustoQueuedIngestClient**。
+* **使用方式-** 如先前所述，Kusto 的持續性和高規模內嵌解決方案的建議基礎應為 **KustoQueuedIngestClient** 。
 為了將 Kusto 服務的不必要負載降到最低，我們建議您針對每個 Kusto 叢集，使用 Kusto 內嵌用戶端的單一實例 (排入佇列或直接) 每個進程。 Kusto 內嵌用戶端實作為安全線程，而且可完全重新進入。
 
-## <a name="next-steps"></a>後續步驟
+## <a name="next-steps"></a>下一步
 
 * [Kusto：內嵌用戶端參考](kusto-ingest-client-reference.md) 包含 Kusto 內嵌用戶端介面和實作為的完整參考。 您可以找到有關如何建立內嵌用戶端、增強內嵌要求、管理內嵌進度等等的資訊。
 

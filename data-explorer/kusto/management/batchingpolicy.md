@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 27c92b9081844df0e8f8d4dc207ba5d2a8a2e2f3
-ms.sourcegitcommit: a10e7c6ba96bdb94d95ef23f5d1506eb8fda0041
+ms.openlocfilehash: 0a493c4e808a43d04714487ada17964ab048de6f
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92058660"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373760"
 ---
 # <a name="ingestionbatching-policy"></a>IngestionBatching 原則
 
-## <a name="overview"></a>總覽
+## <a name="overview"></a>概觀
 
 在內嵌程式中，Kusto 會嘗試優化輸送量，方法是在其等候內嵌的同時批次處理小型輸入資料區塊。
 這類批次處理可減少內嵌程式所耗用的資源，也不需要進行內嵌的資源，以優化非批次內嵌所產生的小型資料分區。
@@ -38,7 +38,7 @@ ms.locfileid: "92058660"
 您 `IngestionBatching` 可以在資料庫或資料表上設定原則。 根據預設，如果未定義原則，Kusto 會使用 **5 分鐘** 的預設值做為最大延遲時間、 **1000** 個專案、用於批次處理的 **1g** 總大小。
 
 > [!WARNING]
-> 將此原則設定為極小值的影響，就是叢集的 COGS 增加並降低效能。 此外，在限制的情況下，減少此值實際上可能會導致 **更** 有效率的端對端內嵌延遲，因為並行管理多個內嵌進程的額外負荷。
+> 將此原則設定為極小值的影響，就是在 COGS 的 (成本) 的叢集銷售成本增加，並降低效能。 此外，在限制的情況下，減少此值實際上可能會導致 **更** 有效率的端對端內嵌延遲，因為並行管理多個內嵌進程的額外負荷。
 
 ## <a name="additional-resources"></a>其他資源
 
