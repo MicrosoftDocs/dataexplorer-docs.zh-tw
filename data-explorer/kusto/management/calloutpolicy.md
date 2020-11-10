@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 6e3bb943347e4ea794733451fcf65674e5e23ca7
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: da1cca764563b4ad2ce96ceaeb117e33d059303d
+ms.sourcegitcommit: 25c0440cb0390b9629b819611844f1375de00a66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452658"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94417603"
 ---
 # <a name="callout-policy"></a>註標原則
 
@@ -22,7 +22,7 @@ ms.locfileid: "91452658"
 
 注標原則會在叢集層級進行管理，並分類為下列類型。
 * `kusto` -控制 Azure 資料總管跨叢集查詢。
-* `sql` -控制 [SQL 外掛程式](../query/sqlrequestplugin.md)。
+* `sql` -控制 [SQL 外掛程式](../query/sqlrequestplugin.md) 和 [mysql_request 外掛程式](../query/mysqlrequest-plugin.md)。
 * `cosmosdb` -控制 [CosmosDB 外掛程式](../query/cosmosdb-plugin.md)。
 * `sandbox_artifacts`-控制 ([python](../query/pythonplugin.md)  |  [R](../query/rplugin.md)) 的沙箱化外掛程式。
 * `external_data` -透過 [外部資料表](../query/schema-entities/externaltables.md) 或 [externaldata](../query/externaldata-operator.md) 運算子控制外部資料的存取。

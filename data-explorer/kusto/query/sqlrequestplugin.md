@@ -10,32 +10,33 @@ ms.topic: reference
 ms.date: 02/24/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 1a6349547d5cf1eb3af5a21f6e8c504573f15e52
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: a8a0aae8732104ee64630c1fddb4d563cb542351
+ms.sourcegitcommit: 25c0440cb0390b9629b819611844f1375de00a66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92241771"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94417552"
 ---
 # <a name="sql_request-plugin"></a>sql_request 外掛程式
 
 ::: zone pivot="azuredataexplorer"
 
 `sql_request`外掛程式會將 SQL 查詢傳送至 SQL Server 的網路端點，並傳回結果中的第一個資料列集。
+查詢可能會傳回一個以上的資料列集，但 Kusto 查詢的其餘部分只會提供第一個資料列集。
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
-  `evaluate``sql_request` `(` *ConnectionString* `,` *SqlQuery* [ `,` *SqlParameters* [ `,` *Options*]]`)`
+  `evaluate``sql_request` `(` *ConnectionString* `,` *SqlQuery* [ `,` *SqlParameters* [ `,` *Options* ]]`)`
 
 ## <a name="arguments"></a>引數
 
-* *ConnectionString*： `string` 表示指向 SQL Server 網路端點之連接字串的常值。 查看 [有效的驗證方法](#authentication) ，以及如何指定 [網路端點](#specify-the-network-endpoint)。
+* *ConnectionString* ： `string` 表示指向 SQL Server 網路端點之連接字串的常值。 查看 [有效的驗證方法](#authentication) ，以及如何指定 [網路端點](#specify-the-network-endpoint)。
 
-* *SqlQuery*： `string` 常值，表示要對 SQL 端點執行的查詢。 必須傳回一或多個資料列集，但 Kusto 查詢的其餘部分只能使用第一個資料列集。
+* *SqlQuery* ： `string` 常值，表示要對 SQL 端點執行的查詢。 必須傳回一或多個資料列集，但 Kusto 查詢的其餘部分只能使用第一個資料列集。
 
-* *SqlParameters*：類型的常數值 `dynamic` ，這個值會保存要傳遞做為參數的索引鍵/值組和查詢。 選擇性。
+* *SqlParameters* ：類型的常數值 `dynamic` ，這個值會保存要傳遞做為參數的索引鍵/值組和查詢。 選擇性。
   
-* *選項*：類型的常數值 `dynamic` ，這個值會將更高階的設定保留為索引鍵/值組。 目前，只能 `token` 設定，以傳遞轉送至 SQL 端點的呼叫端所提供的 Azure AD 存取權杖進行驗證。 選擇性。
+* *選項* ：類型的常數值 `dynamic` ，這個值會將更高階的設定保留為索引鍵/值組。 目前，只能 `token` 設定，以傳遞轉送至 SQL 端點的呼叫端所提供的 Azure AD 存取權杖進行驗證。 選擇性。
 
 ## <a name="examples"></a>範例
 
@@ -121,7 +122,7 @@ Sql_request 外掛程式支援 SQL Server 端點的三種驗證方法：
 在連接字串中指定 SQL 網路端點是必要的。
 適當的語法為：
 
-`Server``=` `tcp:` *FQDN* [ `,` *埠*]
+`Server``=` `tcp:` *FQDN* [ `,` *埠* ]
 
 其中：
 

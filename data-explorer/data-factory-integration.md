@@ -8,12 +8,12 @@ ms.reviewer: tomersh26
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/20/2020
-ms.openlocfilehash: aa6b65ea2704476d72da8d58b401bfba45aaecb6
-ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
+ms.openlocfilehash: 18fd9aa351bf1fb3528c48f4125c6fae6a9ccba1
+ms.sourcegitcommit: 25c0440cb0390b9629b819611844f1375de00a66
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/09/2020
-ms.locfileid: "94373777"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94417569"
 ---
 # <a name="integrate-azure-data-explorer-with-azure-data-factory"></a>整合 Azure 資料總管與 Azure Data Factory
 
@@ -34,6 +34,7 @@ Azure Data Factory 複製活動是用來在資料存放區之間傳輸資料。 
 ### <a name="lookup-activity"></a>查閱活動
  
 查閱活動可用來在 Azure 資料總管上執行查詢。 查詢的結果會傳回為查閱活動的輸出，並且可用於管線中的下一個活動，如 [ADF 查閱檔](/azure/data-factory/control-flow-lookup-activity#use-the-lookup-activity-result-in-a-subsequent-activity)中所述。  
+
 除了回應大小限制5000個數據列和 2 MB，活動的查詢超時限制也是1小時。
 
 ### <a name="command-activity"></a>命令活動
@@ -86,7 +87,7 @@ Azure Data Factory 複製活動是用來在資料存放區之間傳輸資料。 
 | | 複製活動 | 從查詢內嵌<br> `.set-or-append` / `.set-or-replace` / `.set` / `.replace` | 從儲存體內嵌 <br> `.ingest` |
 |---|---|---|---|
 | **流程描述** | ADF 會從來源資料存放區取得資料、將其轉換成表格格式，以及進行必要的架構對應變更。 ADF 接著會將資料上傳至 Azure blob，然後將其分割成區塊，然後下載 blob 以將它們內嵌至 ADX 資料表。 <br>  ( **來源資料存放區 > ADF > Azure blob > ADX** )  | 這些命令可以執行查詢或 `.show` 命令，然後將查詢的結果內嵌到資料表中 ( **ADX > ADX** ) 。 | 此命令會從一或多個雲端儲存體成品「提取」資料，以將資料內嵌至資料表。 |
-| **支援的來源資料存放區** |  [各種選項](/azure/data-factory/copy-activity-overview#supported-data-stores-and-formats) | 使用 sql_request 外掛程式) ADLS Gen 2、Azure Blob、SQL (、使用 cosmosdb_sql_request 外掛程式) Cosmos (，以及提供 HTTP 或 Python Api 的任何其他資料存放區。 | Filesystem、Azure Blob 儲存體、ADLS Gen 1、ADLS Gen 2 |
+| **支援的來源資料存放區** |  [各種選項](/azure/data-factory/copy-activity-overview#supported-data-stores-and-formats) | ADLS Gen 2、Azure Blob、SQL (使用 [sql_request ( # A2 外掛程式](kusto/query/sqlrequestplugin.md)) 、使用 [ (外掛程式](kusto\query\mysqlrequest-plugin.md) cosmosdb_sql_request 的 Cosmos) ，以及提供 HTTP 或 Python api 的任何其他資料存放區。 | Filesystem、Azure Blob 儲存體、ADLS Gen 1、ADLS Gen 2 |
 | **效能** | 內嵌已排入佇列並受到管理，藉由提供負載平衡、重試和錯誤處理，確保小型內嵌並確保高可用性。 | <ul><li>這些命令並非專為大量資料匯入所設計。</li><li>如預期般運作，並更便宜。 但是針對生產案例，以及當流量率和資料大小很大時，請使用複製活動。</li></ul> |
 | **伺服器限制** | <ul><li>沒有大小限制。</li><li>最大超時限制：每個內嵌 blob 1 小時。 |<ul><li>查詢元件只有大小限制，可以藉由指定來略過 `noTruncation=true` 。</li><li>最大超時限制：1小時。</li></ul> | <ul><li>沒有大小限制。</li><li>最大超時限制：1小時。</li></ul>|
 
@@ -211,7 +212,7 @@ static void Main(string[] args)
 {"ignoreFirstRecord":"false","csvMappingReference":"Table1_mapping_1","ingestIfNotExists":"[\"Part0001\"]","tags":"[\"ingest-by:Part0001\",\"ingest-by:IngestedByTest\"]"}
 ```
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 * 瞭解如何 [使用 Azure Data Factory 將資料複製到 Azure 資料總管](data-factory-load-data.md)。
 * 瞭解如何使用 [Azure Data Factory 範本，從資料庫大量複製到 Azure 資料總管](data-factory-template.md)。
