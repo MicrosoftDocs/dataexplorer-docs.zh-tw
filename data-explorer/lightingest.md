@@ -7,19 +7,19 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/28/2020
-ms.openlocfilehash: 5e15983039209e2e0c62ebd761e416ebb3bd1076
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: f72d2b7f2036c7c63bfc5a37e2ab944acc60bbf8
+ms.sourcegitcommit: 2ee2901cb82e1655b7f0d960d3427da084230731
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342615"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94520576"
 ---
 # <a name="use-lightingest-to-ingest-data-to-azure-data-explorer"></a>使用 LightIngest 將資料內嵌至 Azure 資料總管
  
 LightIngest 是命令列公用程式，適用于將臨機運算元據內嵌至 Azure 資料總管中。 公用程式可以從本機資料夾或 Azure blob 儲存體容器提取來源資料。
 當您想要內嵌大量資料時，LightIngest 最有用，因為內嵌持續時間沒有時間限制。 當您稍後想要根據建立的時間查詢記錄，而不是內嵌時，它也很有用。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 * LightIngest-將其下載為 Kusto 的一部分 [NuGet 套件](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)
 
@@ -37,21 +37,21 @@ LightIngest 是命令列公用程式，適用于將臨機運算元據內嵌至 A
 1. 流覽至您電腦上已解壓縮的 *工具* 目錄。
 1. 從位置列刪除現有的位置資訊。
 
-    :::image type="content" source="media/lightingest/lightingest-locationbar.png" alt-text="Lightingest 下載":::
+    :::image type="content" source="media/lightingest/lightingest-locationbar.png" alt-text="在 Azure 資料總管中刪除 LightIngest 的現有位置資訊":::
 
 
-1. 輸入 `cmd` ，然後按 **enter**鍵。
+1. 輸入 `cmd` ，然後按 **enter** 鍵。
 1. 在命令提示字元中，輸入 `LightIngest.exe` 後面接著相關的命令列引數。
 
     > [!Tip]
     > 如需支援的命令列引數清單，請輸入 `LightIngest.exe /help` 。
     >
-    > :::image type="content" source="media/lightingest/lightingest-cmd-line-help.png" alt-text="Lightingest 下載":::
+    > :::image type="content" source="media/lightingest/lightingest-cmd-line-help.png" alt-text="LightIngest 的命令列說明":::
 
 1. 輸入， `ingest-` 後面接著將會管理內嵌的 Azure 資料總管叢集的連接字串。
     以雙引號括住連接字串，並遵循 [Kusto 連接字串規格](kusto/api/connection-strings/kusto.md)。
 
-    例如：
+    例如︰
 
     ```
     ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
@@ -68,15 +68,15 @@ LightIngest 是命令列公用程式，適用于將臨機運算元據內嵌至 A
 
 ## <a name="command-line-arguments"></a>命令列引數
 
-|引數名稱            |類型     |說明       |強制/選用
+|引數名稱            |類型     |描述       |強制/選用
 |------------------------------|--------|----------|-----------------------------|
 |                               |字串   |[Azure 資料總管連接字串](kusto/api/connection-strings/kusto.md) ，指定將處理內嵌的 Kusto 端點。 應以雙引號括住 | 強制性
 |-database、-db          |字串  |目標 Azure 資料總管資料庫名稱 | 選擇性  |
 |-資料表                  |字串  |目標 Azure 資料總管資料表名稱 | 強制性 |
 |-sourcePath、-source      |字串  |Blob 容器的來源檔案或根 URI 路徑。 如果資料在 blob 中，必須包含儲存體帳戶金鑰或 SAS。 建議用雙引號括住 |強制性 |
 |-前置詞                  |字串  |當要內嵌的來源資料位於 blob 儲存體時，所有 blob 都會共用此 URL 前置詞，但不包括容器名稱。 <br>例如，如果資料是在中 `MyContainer/Dir1/Dir2` ，則前置詞應為 `Dir1/Dir2` 。 建議用雙引號括住 | 選擇性  |
-|-模式        |字串  |從中挑選原始程式檔/blob 的模式。 支援萬用字元。 例如： `"*.csv"` 。 建議用雙引號括住 | 選擇性  |
-|-zipPattern     |字串  |在 ZIP 封存中選取要內嵌的檔案時，所要使用的正則運算式。<br>封存中的所有其他檔案都會被忽略。 例如： `"*.csv"` 。 建議將它括在雙引號中 | 選擇性  |
+|-模式        |字串  |從中挑選原始程式檔/blob 的模式。 支援萬用字元。 例如，`"*.csv"`。 建議用雙引號括住 | 選擇性  |
+|-zipPattern     |字串  |在 ZIP 封存中選取要內嵌的檔案時，所要使用的正則運算式。<br>封存中的所有其他檔案都會被忽略。 例如，`"*.csv"`。 建議將它括在雙引號中 | 選擇性  |
 |-format、-f           |字串  | 源資料格式。 必須是其中一種 [支援的格式](ingestion-supported-formats.md) | 選擇性  |
 |-ingestionMappingPath, -mappingPath |字串  |內嵌資料行對應的本機檔案路徑。 Json 和 Avro 格式的必要參數。 查看[資料](kusto/management/mappings.md)對應 | 選擇性  |
 |-ingestionMappingRef, -mappingRef  |字串  |先前在資料表上建立之內嵌資料行對應的名稱。 Json 和 Avro 格式的必要參數。 查看[資料](kusto/management/mappings.md)對應 | 選擇性  |
@@ -85,19 +85,19 @@ LightIngest 是命令列公用程式，適用于將臨機運算元據內嵌至 A
 |-tag            |字串   |要與內嵌資料相關聯的[標記](kusto/management/extents-overview.md#extent-tagging)。 允許多個出現次數 | 選擇性  |
 |-dontWait           |bool     |如果設定為 ' true '，則不會等候內嵌完成。 擷取大量檔案/blob 時有用 |選擇性  |
 |-壓縮、-cr          |double |壓縮比例提示。 在擷取壓縮檔案/blob 時很實用，可協助 Azure 資料總管評估原始資料大小。 以原始大小除以壓縮大小計算 |選擇性  |
-|-limit、-l           |整數   |如果設定，則會將內嵌限制為前 N 個檔案 |選擇性  |
+|-limit、-l           |integer   |如果設定，則會將內嵌限制為前 N 個檔案 |選擇性  |
 |-listOnly，-list        |bool    |如果設定，則只會顯示已針對內嵌選取的專案| 選擇性  |
-|-ingestTimeout   |整數  |所有內嵌作業完成的時間（以分鐘為單位）。 預設為 `60`| 選擇性  |
+|-ingestTimeout   |integer  |所有內嵌作業完成的時間（以分鐘為單位）。 預設為 `60`| 選擇性  |
 |-forceSync        |bool  |如果設定，則會強制執行同步內嵌。 預設為 `false` |選擇性  |
-|-dataBatchSize        |整數  |設定每個內嵌作業的總大小限制 (MB、未壓縮)  |選擇性  |
-|-filesInBatch            |整數 |設定每個內嵌作業的檔案/blob 計數限制 |選擇性  |
+|-dataBatchSize        |integer  |設定每個內嵌作業的總大小限制 (MB、未壓縮)  |選擇性  |
+|-filesInBatch            |integer |設定每個內嵌作業的檔案/blob 計數限制 |選擇性  |
 |-devTracing、-trace       |字串    |如果設定，則會根據預設，在目前的目錄中將診斷記錄寫入本機目錄 (， `RollingLogs` 或藉由設定參數值來修改它們)  | 選擇性  |
 
 ## <a name="azure-blob-specific-capabilities"></a>Azure blob 特定功能
 
 與 Azure blob 搭配使用時，LightIngest 會使用特定的 blob 中繼資料屬性來增強內嵌進程。
 
-|Metadata 屬性                            | 使用方式                                                                           |
+|Metadata 屬性                            | 使用量                                                                           |
 |---------------------------------------------|---------------------------------------------------------------------------------|
 |`rawSizeBytes`, `kustoUncompressedSizeBytes` | 如果設定，將會被視為未壓縮的資料大小                       |
 |`kustoCreationTime`, `kustoCreationTimeUtc`  | 解釋為 UTC 時間戳記。 如果設定，將會用來覆寫 Kusto 中的建立時間。 適用于回填案例 |
@@ -155,7 +155,7 @@ To use the LightIngest command below:
 
     ```kusto
     ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -creationTimePattern:"'historicalvalues'yyyyMMdd'.parquet'"
-     -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
+     -pattern:"*.parquet" -format:parquet -limit:2 -cr:10.0 -dontWait:true
     ```
 
 * 對於參考階層式資料夾結構的 blob URI `https://storageaccount/container/folder/2002/12/01/blobname.extension` ，例如 

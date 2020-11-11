@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: 26412683be35825a38f959de62292f3735e7a894
-ms.sourcegitcommit: e820a59191d2ca4394e233d51df7a0584fa4494d
+ms.openlocfilehash: 2ca15e1970ab785bfd5da8623f3dcc569576f1d9
+ms.sourcegitcommit: 2ee2901cb82e1655b7f0d960d3427da084230731
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94446220"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94520559"
 ---
 # <a name="cluster-follower-commands"></a>叢集的對等命令
 
@@ -35,16 +35,16 @@ ms.locfileid: "94446220"
 
 **輸出** 
 
-| 輸出參數                     | 類型    | 說明                                                                                                        |
+| 輸出參數                     | 類型    | 描述                                                                                                        |
 |--------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------|
-| DatabaseName                         | String  | 要遵循的資料庫名稱。                                                                           |
-| LeaderClusterMetadataPath            | String  | 領導者叢集中繼資料容器的路徑。                                                               |
-| CachingPolicyOverride                | String  | 資料庫的覆寫快取原則（序列化為 JSON 或 null）。                                         |
-| AuthorizedPrincipalsOverride         | String  | 資料庫的授權主體覆寫集合，序列化為 JSON 或 null。                    |
-| AuthorizedPrincipalsModificationKind | String  | 要使用 AuthorizedPrincipalsOverride (或) 套用的修改種類 `none` `union` `replace` 。                  |
-| CachingPoliciesModificationKind      | String  | 要使用資料庫或資料表層級快取原則覆寫來套用的修改種類 (`none` ， `union` 或 `replace`) 。 |
+| DatabaseName                         | 字串  | 要遵循的資料庫名稱。                                                                           |
+| LeaderClusterMetadataPath            | 字串  | 領導者叢集中繼資料容器的路徑。                                                               |
+| CachingPolicyOverride                | 字串  | 資料庫的覆寫快取原則（序列化為 JSON 或 null）。                                         |
+| AuthorizedPrincipalsOverride         | 字串  | 資料庫的授權主體覆寫集合，序列化為 JSON 或 null。                    |
+| AuthorizedPrincipalsModificationKind | 字串  | 要使用 AuthorizedPrincipalsOverride (或) 套用的修改種類 `none` `union` `replace` 。                  |
+| CachingPoliciesModificationKind      | 字串  | 要使用資料庫或資料表層級快取原則覆寫來套用的修改種類 (`none` ， `union` 或 `replace`) 。 |
 | IsAutoPrefetchEnabled                | 布林值 | 每次重新整理架構時是否預先提取新的資料。        |
-| TableMetadataOverrides               | String  | 資料表層級屬性覆寫的 JSON 序列化 (（如果定義) ）。                                      |
+| TableMetadataOverrides               | 字串  | 資料表層級屬性覆寫的 JSON 序列化 (（如果定義) ）。                                      |
 
 ### <a name="alter-follower-database-policy-caching"></a>。 alter database 原則快取
 
@@ -181,14 +181,14 @@ ms.locfileid: "94446220"
 
 ### <a name="alter-follower-database-prefetch-extents"></a>。 alter 的資料庫預先提取-範圍
 
-在從基礎儲存體提取至節點的 SSD (快取) 之前，從基礎儲存體提取至節點的「SSD」叢集可能不會讓任何新的資料可供查詢。
+從基礎儲存體將新資料提取到節點的 SSD (快取) ，然後讓此資料可供查詢，使其成為可查詢的資料。
 
-下列命令會在每次架構重新整理時，改變預先提取新範圍的「進行中」資料庫設定。 它需要 [DatabaseAdmin 許可權](../management/access-control/role-based-authorization.md)。
+下列命令會在每次架構重新整理時，改變預先提取新範圍的「進行中」資料庫設定。 此命令需要 [DatabaseAdmin 許可權](../management/access-control/role-based-authorization.md)。
 
 > [!WARNING]
-> * 啟用此設定可能會降低資料的資料在資料的資料中。
-> * 預設設定為 `false` ，建議您保留預設值。
-> * 選擇將設定變更為時 `true` ，建議您在設定變更之後，仔細評估對有效期限的影響。
+> * 這項設定可能會降低對等資料庫中資料的時效性。
+> * 預設設定為 `false` ，建議使用預設值。
+> * 當選擇將設定變更為時 `true` ，請仔細評估設定變更後對有效期限的影響。
 
 **語法**
 
@@ -299,7 +299,7 @@ ms.locfileid: "94446220"
 |LeaderClusterMetadataPath            | `https://storageaccountname.blob.core.windows.net/cluster` |
 |CachingPolicyOverride                | null                                                     |
 |AuthorizedPrincipalsOverride         | []                                                       |
-|AuthorizedPrincipalsModificationKind | 無                                                     |
+|AuthorizedPrincipalsModificationKind | None                                                     |
 |IsAutoPrefetchEnabled                | 否                                                    |
 |TableMetadataOverrides               |                                                          |
 |CachingPoliciesModificationKind      | Union                                                    |                                                                                                                      |
@@ -375,7 +375,7 @@ ms.locfileid: "94446220"
 | {"MyTable1"： {"CachingPolicyOverride"： {"DataHotSpan"： {"Value"： "1.00：00： 00"}，"IndexHotSpan"： {"Value"： "1.00：00： 00"}}} |
 | {"MyTable2"： {"CachingPolicyOverride"： {"DataHotSpan"： {"Value"： "3.00：00： 00"}，"IndexHotSpan"： {"Value"： "3.00：00： 00"}}} |
 
-#### <a name="summary"></a>總結
+#### <a name="summary"></a>摘要
 
 請參閱目前的設定， `MyDatabase` `MyFollowerCluster` 如下所示：
 
