@@ -555,6 +555,8 @@
               href: ./kusto/query/diffpatterns-textplugin.md
             - name: infer_storage_schema 外掛程式
               href: ./kusto/query/inferstorageschemaplugin.md
+            - name: mysql_request 外掛程式
+              href: ./kusto/query/mysqlrequest-plugin.md
             - name: narrow 外掛程式
               href: ./kusto/query/narrowplugin.md
             - name: pivot 外掛程式
@@ -719,6 +721,8 @@
           href: ./kusto/query/arrayindexoffunction.md
         - name: array_length()
           href: ./kusto/query/arraylengthfunction.md
+        - name: array_reverse()
+          href: ./kusto/query/array-reverse-function.md
         - name: array_rotate_left()
           href: ./kusto/query/array_rotate_leftfunction.md
         - name: array_rotate_right()
@@ -1644,6 +1648,14 @@
                   href: ./kusto/management/data-export/show-continuous-failures.md
         - name: 資料庫指標
           href: ./kusto/management/databasecursor.md
+        - name: 外掛程式命令
+          items:
+            - name: .show 外掛程式
+              href: ./kusto/management/show-plugins.md
+            - name: .enable 外掛程式
+              href: ./kusto/management/enable-plugin.md
+            - name: .disable 外掛程式
+              href: ./kusto/management/disable-plugin.md
         - name: 查詢結果快取
           href: ./kusto/management/query-results-cache-commands.md
           items:
