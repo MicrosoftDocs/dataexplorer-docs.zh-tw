@@ -7,18 +7,18 @@ ms.reviewer: kerend
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/19/2020
-ms.openlocfilehash: f599698f4b35075aaec4ff3789fa9036c40d8c17
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 7132542b4387c9146c337a2440b2211d2977ec72
+ms.sourcegitcommit: 3eabd78305d32cd9b8a6bd1d76877ddc19d8ac63
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343227"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94548915"
 ---
 # <a name="ingest-json-formatted-sample-data-into-azure-data-explorer"></a>將 JSON 格式的範例資料內嵌至 Azure 資料總管
 
 本文說明如何將 JSON 格式的資料內嵌至 Azure 資料總管資料庫。 您將從簡單的原始和對應 JSON 範例開始，繼續進行多線條 JSON，然後處理包含陣列和字典的更複雜 JSON 架構。  這些範例詳細說明使用 Kusto 查詢語言來擷取 JSON 格式資料的程式 (KQL) 、c # 或 Python。 Kusto 查詢語言 `ingest` 控制命令會直接執行至引擎端點。 在生產案例中，會使用用戶端程式庫或資料連線，將內嵌執行至資料管理服務。 使用 azure [資料總管 Python 程式庫](python-ingest-data.md) 來讀取內嵌資料，並 [使用 AZURE 資料總管 .NET Standard SDK 內嵌資料](./net-sdk-ingest-data.md) ，以取得有關使用這些用戶端程式庫擷取資料的逐步解說。
 
-## <a name="prerequisites"></a>先決條件
+## <a name="prerequisites"></a>必要條件
 
 [測試叢集和資料庫](create-cluster-database-portal.md)
 
@@ -30,7 +30,7 @@ Azure 資料總管支援兩種 JSON 檔案格式：
 
 ### <a name="ingest-and-map-json-formatted-data"></a>內嵌和對應 JSON 格式化資料
 
-JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.md)來指定*格式*。 JSON 資料的內嵌需要 [對應](kusto/management/mappings.md)，此對應會將 json 來源專案對應至其目標資料行。 擷取資料時，請使用 `IngestionMapping` 屬性，並將其 `ingestionMappingReference` (用於預先定義的對應) 內嵌屬性或其 `IngestionMappings` 屬性。 本文將使用內嵌 `ingestionMappingReference` 屬性，此屬性是在用於內嵌的資料表上預先定義的。 在下列範例中，我們一開始會先將 JSON 記錄擷取成單一資料行資料表的原始資料。 接著，我們將使用對應，將每個屬性內嵌至其對應的資料行。 
+JSON 格式化資料的內嵌需要您使用內嵌 [屬性](ingestion-properties.md)來指定 *格式* 。 JSON 資料的內嵌需要 [對應](kusto/management/mappings.md)，此對應會將 json 來源專案對應至其目標資料行。 擷取資料時，請使用 `IngestionMapping` 屬性，並將其 `ingestionMappingReference` (用於預先定義的對應) 內嵌屬性或其 `IngestionMappings` 屬性。 本文將使用內嵌 `ingestionMappingReference` 屬性，此屬性是在用於內嵌的資料表上預先定義的。 在下列範例中，我們一開始會先將 JSON 記錄擷取成單一資料行資料表的原始資料。 接著，我們將使用對應，將每個屬性內嵌至其對應的資料行。 
 
 ### <a name="simple-json-example"></a>簡單 JSON 範例
 
@@ -58,7 +58,7 @@ JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.
 
 1. 選取 [新增叢集]。
 
-1. 在 [新增叢集]**** 對話方塊中，以 `https://<ClusterName>.<Region>.kusto.windows.net/` 格式輸入您的叢集 URL，然後選取 [新增]****。
+1. 在 [新增叢集] 對話方塊中，以 `https://<ClusterName>.<Region>.kusto.windows.net/` 格式輸入您的叢集 URL，然後選取 [新增]。
 
 1. 貼上下列命令，然後選取 [ **執行** ] 以建立資料表。
 
@@ -79,7 +79,7 @@ JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.
 1. 將資料內嵌到 `RawEvents` 資料表中。
 
     ```kusto
-    .ingest into table RawEvents (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":json, "ingestionMappingReference":"DiagnosticRawRecordsMapping"}'
+    .ingest into table RawEvents ('https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json') with '{"format":json, "ingestionMappingReference":"DiagnosticRawRecordsMapping"}'
     ```
 
 # <a name="c"></a>[C#](#tab/c-sharp)
@@ -135,7 +135,7 @@ JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.
 
     ```csharp
     var ingestUri = "https://ingest-<ClusterName>.<Region>.kusto.windows.net:443/";
-    var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D";
+    var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json"; 
     var ingestConnectionStringBuilder =
         new KustoConnectionStringBuilder(ingestUri)
         {
@@ -195,7 +195,7 @@ JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.
     INGEST_URI = "https://ingest-<ClusterName>.<Region>.kusto.windows.net:443/"
     KCSB_INGEST = KustoConnectionStringBuilder.with_aad_device_authentication(INGEST_URI, AAD_TENANT_ID)
     INGESTION_CLIENT = KustoIngestClient(KCSB_INGEST)
-    BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D'
+    BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json'
     
     INGESTION_PROPERTIES = IngestionProperties(database=DATABASE, table=TABLE, dataFormat=DataFormat.json, mappingReference=MAPPING)
     BLOB_DESCRIPTOR = BlobDescriptor(BLOB_PATH, FILE_SIZE)
@@ -231,7 +231,7 @@ JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.
 1. 將資料內嵌到 `Events` 資料表中。
 
     ```kusto
-    .ingest into table Events (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"json", "ingestionMappingReference":"FlatEventMapping"}'
+    .ingest into table Events ('https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json') with '{"format":"json", "ingestionMappingReference":"FlatEventMapping"}'
     ```
 
     檔案 ' simple.json ' 有一些行分隔的 JSON 記錄。 格式為 `json` ，而且內嵌命令中使用的對應是 `FlatEventMapping` 您所建立的。
@@ -283,7 +283,7 @@ JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.
 1. 將資料內嵌到 `Events` 資料表中。
 
     ```csharp
-    var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D";
+    var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json";
     var properties =
         new KustoQueuedIngestionProperties(database, table)
         {
@@ -322,7 +322,7 @@ JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.
 1. 將資料內嵌到 `Events` 資料表中。
 
     ```python
-    BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D'
+    BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json'
     
     INGESTION_PROPERTIES = IngestionProperties(database=DATABASE, table=TABLE, dataFormat=DataFormat.json, mappingReference=MAPPING)
     BLOB_DESCRIPTOR = BlobDescriptor(BLOB_PATH, FILE_SIZE)
@@ -342,7 +342,7 @@ JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.
 將資料內嵌到 `Events` 資料表中。
 
 ```kusto
-.ingest into table Events (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/multilined.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"multijson", "ingestionMappingReference":"FlatEventMapping"}'
+.ingest into table Events ('https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/multilined.json') with '{"format":"multijson", "ingestionMappingReference":"FlatEventMapping"}'
 ```
 
 # <a name="c"></a>[C#](#tab/c-sharp)
@@ -351,7 +351,7 @@ JSON 格式化資料的內嵌需要您使用內嵌[屬性](ingestion-properties.
 
 ```csharp
 var tableMapping = "FlatEventMapping";
-var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/multilined.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D";
+var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/multilined.json";
 var properties =
     new KustoQueuedIngestionProperties(database, table)
     {
@@ -371,7 +371,7 @@ ingestClient.IngestFromStorageAsync(blobPath, properties);
 
 ```python
 MAPPING = "FlatEventMapping"
-BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/multilined.JSON?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D'
+BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/multilined.json'
 INGESTION_PROPERTIES = IngestionProperties(database=DATABASE, table=TABLE, dataFormat=DataFormat.multijson, mappingReference=MAPPING)
 BLOB_DESCRIPTOR = BlobDescriptor(BLOB_PATH, FILE_SIZE)
 INGESTION_CLIENT.ingest_from_blob(
@@ -438,7 +438,7 @@ INGESTION_CLIENT.ingest_from_blob(
 1. 將資料內嵌到 `RawEvents` 資料表中。
 
     ```kusto
-    .ingest into table RawEvents (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/array.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"multijson", "ingestionMappingReference":"RawEventMapping"}'
+    .ingest into table RawEvents ('https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/array.json') with '{"format":"multijson", "ingestionMappingReference":"RawEventMapping"}'
     ```
 
 1. 檢查資料表中的資料 `Events` 。
@@ -488,7 +488,7 @@ INGESTION_CLIENT.ingest_from_blob(
     ```csharp
     var table = "RawEvents";
     var tableMapping = "RawEventMapping";
-    var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/array.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D";
+    var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/array.json";
     var properties =
         new KustoQueuedIngestionProperties(database, table)
         {
@@ -541,7 +541,7 @@ INGESTION_CLIENT.ingest_from_blob(
     ```python
     TABLE = "RawEvents"
     MAPPING = "RawEventMapping"
-    BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/array.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D'
+    BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/array.json'
     INGESTION_PROPERTIES = IngestionProperties(database=DATABASE, table=TABLE, dataFormat=DataFormat.multijson, mappingReference=MAPPING)
     BLOB_DESCRIPTOR = BlobDescriptor(BLOB_PATH, FILE_SIZE)
     INGESTION_CLIENT.ingest_from_blob(
@@ -595,7 +595,7 @@ INGESTION_CLIENT.ingest_from_blob(
 1. 將資料內嵌到 `Events` 資料表中。
 
     ```kusto
-    .ingest into table Events (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/dictionary.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"multijson", "ingestionMappingReference":"KeyValueEventMapping"}'
+    .ingest into table Events ('https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/dictionary.json') with '{"format":"multijson", "ingestionMappingReference":"KeyValueEventMapping"}'
     ```
 
 # <a name="c"></a>[C#](#tab/c-sharp)
@@ -637,7 +637,7 @@ INGESTION_CLIENT.ingest_from_blob(
 1. 將資料內嵌到 `Events` 資料表中。
 
     ```csharp
-    var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/dictionary.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D";
+    var blobPath = "https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/dictionary.json";
     var properties =
         new KustoQueuedIngestionProperties(database, table)
         {
@@ -665,7 +665,7 @@ INGESTION_CLIENT.ingest_from_blob(
 
      ```python
     MAPPING = "KeyValueEventMapping"
-    BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/dictionary.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D'
+    BLOB_PATH = 'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/dictionary.json'
     INGESTION_PROPERTIES = IngestionProperties(database=DATABASE, table=TABLE, dataFormat=DataFormat.multijson, mappingReference=MAPPING)u
     BLOB_DESCRIPTOR = BlobDescriptor(BLOB_PATH, FILE_SIZE)
     INGESTION_CLIENT.ingest_from_blob(

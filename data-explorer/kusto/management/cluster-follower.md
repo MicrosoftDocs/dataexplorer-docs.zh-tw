@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: 2ca15e1970ab785bfd5da8623f3dcc569576f1d9
-ms.sourcegitcommit: 2ee2901cb82e1655b7f0d960d3427da084230731
+ms.openlocfilehash: 9a670e2dead3e3cd5a2d881974678fcb44eaff29
+ms.sourcegitcommit: 3eabd78305d32cd9b8a6bd1d76877ddc19d8ac63
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94520559"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94548898"
 ---
 # <a name="cluster-follower-commands"></a>叢集的對等命令
 
@@ -193,8 +193,6 @@ ms.locfileid: "94520559"
 **語法**
 
 `.alter``follower` `database` *DatabaseName* `prefetch-extents` = (`true`  |  `false`) 
-
-`.alter``follower` `database` *DatabaseName* [ `from` `h@'` *領導者叢集的中繼資料容器路徑* `'` ] `prefetch-extents` = (`true`  |  `false`) 
 
 **範例**
 

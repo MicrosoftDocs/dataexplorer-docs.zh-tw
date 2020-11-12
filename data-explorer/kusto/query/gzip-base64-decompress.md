@@ -8,14 +8,14 @@ ms.reviewer: elgevork
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/01/2020
-ms.openlocfilehash: 19fc8c7ce74cfe632034722fda2b23c5105d013a
-ms.sourcegitcommit: 0e2fbc26738371489491a96924f25553a8050d51
+ms.openlocfilehash: a35fd4ed2f43c991aa08e2e1594103cb5f5bd7a7
+ms.sourcegitcommit: 3eabd78305d32cd9b8a6bd1d76877ddc19d8ac63
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/02/2020
-ms.locfileid: "93148524"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94548881"
 ---
-# <a name="gzip_decompress_from_base64_string"></a>gzip_decompress_from_base64_string ( # A1
+# <a name="gzip_decompress_from_base64_string"></a>gzip_decompress_from_base64_string()
 
 從 base64 解碼輸入字串，並執行 gzip 解壓縮。
 
@@ -27,6 +27,11 @@ ms.locfileid: "93148524"
 
 *input_string* ： `string` 使用 gzip 壓縮然後以 base64 編碼的輸入。 函數會接受一個字串引數。
 
+> [!NOTE]
+> 此函式會檢查必要的 gzip 標頭欄位 (ID1、ID2 和 CM) ，如果其中有任何欄位有不正確的值，則會傳回空的輸出。
+> 不支援選擇性的標頭欄位。 FLG 和 XFL 都應為零。
+
+
 ## <a name="returns"></a>傳回
 
 * 傳回 `string` 表示原始字串的。 
@@ -36,7 +41,7 @@ ms.locfileid: "93148524"
 ## <a name="examples"></a>範例
 
 ```kusto
-print res=gzip_decompress_from_base64_string("eAEBFADr/zEyMzQ1Njc4OTBxd2VydHl1aW9wOAkGd0xvZwAzAG5JZA==")
+print res=gzip_decompress_from_base64_string("H4sIAAAAAAAA/wEUAOv/MTIzNDU2Nzg5MHF3ZXJ0eXVpb3A6m7f2FAAAAA==")
 ```
 
 **輸出：**
@@ -54,4 +59,5 @@ print res=gzip_decompress_from_base64_string("x0x0x0")
 
 ## <a name="next-steps"></a>後續步驟
 
-使用 [gzip_compress_to_base64_string ( # B1 ](gzip-base64-compress.md)建立壓縮的輸入字串。
+* 使用 [gzip_compress_to_base64_string ( # B1 ](gzip-base64-compress.md)建立壓縮的輸入字串。
+* 另請參閱 [zlib_decompress_from_base64_string](zlib-base64-decompress.md)。
