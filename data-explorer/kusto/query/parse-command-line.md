@@ -8,12 +8,12 @@ ms.reviewer: slneimer
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/28/2020
-ms.openlocfilehash: a13e3def33ea7098a48db7ffefa4406097863c2a
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: da8fe0bfedf5766f4599509e83fa1c7c050d069f
+ms.sourcegitcommit: 88f8ad67711a4f614d65d745af699d013d01af32
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342717"
+ms.lasthandoff: 11/16/2020
+ms.locfileid: "94638983"
 ---
 # <a name="parse_command_line"></a>parse_command_line()
 
@@ -21,12 +21,12 @@ ms.locfileid: "92342717"
 
 ## <a name="syntax"></a>語法
 
-`parse_command_line(`*command_line*，*parser_type*`)`
+`parse_command_line(`*command_line* ， *parser_type*`)`
 
 ## <a name="arguments"></a>引數
 
-* *command_line*：要剖析的命令列。
-* *parser_type*：目前唯一支援的值是 `"Windows"` ，它會以與 [CommandLineToArgvW](/windows/win32/api/shellapi/nf-shellapi-commandlinetoargvw)相同的方式來剖析命令列。
+* *command_line* ：要剖析的命令列。
+* *parser_type* ：目前唯一支援的值是 `"windows"` ，它會以與 [CommandLineToArgvW](/windows/win32/api/shellapi/nf-shellapi-commandlinetoargvw)相同的方式來剖析命令列。
 
 ## <a name="returns"></a>傳回
 

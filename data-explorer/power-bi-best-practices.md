@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 442185ed0afd977c103d0b571472c0f5e742908c
-ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
+ms.openlocfilehash: 47a18e8b8a2ec34207acacfd508114955f28953f
+ms.sourcegitcommit: 88f8ad67711a4f614d65d745af699d013d01af32
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93349472"
+ms.lasthandoff: 11/16/2020
+ms.locfileid: "94639000"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>使用 Power BI 來查詢 Azure 資料總管資料並將其視覺化的最佳作法
 
@@ -91,6 +91,7 @@ in
 | NoTruncate | `[NoTruncate=true]` | 將 `notruncation` set 語句加入至查詢。 允許隱藏傳回給呼叫端的查詢結果截斷。
 | AdditionalSetStatements | `[AdditionalSetStatements="set query_datascope=hotcache"]` | 將提供的 set 語句加入至查詢。 這些語句是用來設定查詢持續時間的查詢選項。 查詢選項可控制查詢如何執行和傳回結果。
 | CaseInsensitive | `[CaseInsensitive=true]` | 讓連接器產生不區分大小寫的查詢- `=~` 在比較值時，查詢會使用運算子而不是 `==` 運算子。
+| ForceUseContains | `[ForceUseContains=true]` | 使用文字欄位時，讓連接器產生使用 `contains` 而非預設值的查詢 `has` 。 雖然效能 `has` 更高，但它並不會處理子字串。 如需這兩個運算子之間差異的詳細資訊，請參閱 [字串運算子](./kusto/query/datatypes-string-operators.md)。
 | 逾時 | `[Timeout=#duration(0,10,0,0)]` | 將查詢的用戶端和伺服器超時設定為提供的持續時間。
 
 > [!NOTE]
