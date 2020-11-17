@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 4ef7e15e3009b3ccd098136d9c5013dbe31813b7
-ms.sourcegitcommit: f71801764fdccb061f3cf1e3cfe43ec1557e4e0f
+ms.openlocfilehash: bf6dced9b0df0b90b0b1ff87389c9dab31ebe7c0
+ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93293129"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94644632"
 ---
 # <a name="what-is-one-click-ingestion"></a>什麼是單鍵擷取？
 
@@ -112,14 +112,15 @@ ms.locfileid: "93293129"
 
 * 從 **non-container** 來源內嵌資料時，擷取會立即生效。
 
-* 如果您的資料來源是 **容器** ：
+* 如果您的資料來源是 **容器**：
     * Azure 資料總管的[批次處理原則](kusto/management/batchingpolicy.md)會彙總您的資料。 
     * 擷取之後，您可以下載擷取報告，並檢閱每個已解決 Blob 的效能。 
-    * 您可以選取 **建立連續擷取** ，並且設定 [使用事件方格進行連續擷取](one-click-ingestion-new-table.md#create-continuous-ingestion-for-container)。
+    * 您可以選取 **建立連續擷取**，並且設定 [使用事件方格進行連續擷取](one-click-ingestion-new-table.md#create-continuous-ingestion-for-container)。
  
 ### <a name="initial-data-exploration"></a>初始資料探索
    
 擷取之後，精靈會提供您使用 **[快速命令](one-click-ingestion-existing-table.md#explore-quick-queries-and-tools)** 的選項，以進行資料的初始探索。
+
 
 ## <a name="next-steps"></a>後續步驟
 

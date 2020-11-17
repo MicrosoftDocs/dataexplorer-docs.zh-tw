@@ -8,18 +8,18 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 8fc1c3949ef13e504de6ba76be1bd5e600926288
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 84aa0d815328532f7a627958b56c41b998665d6b
+ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92244812"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94644598"
 ---
 # <a name="gettype"></a>gettype()
 
 傳回其單一引數的執行時間型別。
 
-執行時間類型可能與名義型別為之運算式的名義 (靜態) 類型不同 `dynamic` ; 在這種情況下，在 `gettype()` 顯示實際值的傳回類型時，可能會很有用， (值在記憶體) 中的編碼方式。
+執行時間類型可能與名義類型為的運算式的名義 (靜態) 類型不同 `dynamic` ; 在這種情況下，在顯示實際值的型別時，可能 `gettype()` 會很有用， (值在記憶體) 中的編碼方式。
 
 ## <a name="syntax"></a>語法
 

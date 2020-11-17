@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/16/2020
-ms.openlocfilehash: bf595e27d7b4881dca7b5e2a370c90a8407a8c78
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 14895e17d77e3bbf1d98d2d68221930d3f291774
+ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92252592"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94644615"
 ---
 # <a name="count-operator"></a>count 運算子
 
@@ -29,7 +29,7 @@ ms.locfileid: "92252592"
 
 ## <a name="returns"></a>傳回
 
-此函式會傳回含有單一記錄且資料行類型為 `long`的資料表。 唯一資料格的值是 T ** 中的記錄數目。 
+此函式會傳回含有單一記錄且資料行類型為 `long`的資料表。 唯一資料格的值是 T 中的記錄數目。 
 
 ## <a name="example"></a>範例
 
@@ -37,3 +37,7 @@ ms.locfileid: "92252592"
 ```kusto
 StormEvents | count
 ```
+
+## <a name="see-also"></a>另請參閱
+
+如需 count ( # A1 彙總函式的詳細資訊，請參閱 [count ( # A3 (彙總函式) ](count-aggfunction.md)。

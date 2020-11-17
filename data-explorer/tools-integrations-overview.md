@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 71f00cf921609432860a94061be7411e484fd0c9
-ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
+ms.openlocfilehash: 2bce9020161e6b26a0df07b306259589c43b62f3
+ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93349319"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94644649"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Azure 資料總管工具和整合總覽
 
@@ -56,6 +56,13 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
     * 其他主題包括 [選項](kusto/tools/kusto-explorer-options.md)、 [疑難排解](kusto/tools/kusto-explorer-troubleshooting.md)、 [鍵盤快速鍵](kusto/tools/kusto-explorer-shortcuts.md)、程式 [代碼重構](kusto/tools/kusto-explorer-refactor.md)、程式碼 [導覽](kusto/tools/kusto-explorer-codenav.md)和程式 [代碼分析](kusto/tools/kusto-explorer-code-analyzer.md)
 * [Web UI](web-query-data.md)
 * [Kusto.Cli](kusto/tools/kusto-cli.md)
+
+### <a name="query-open-source-repositories"></a>查詢開放原始碼存放庫
+
+下列開放原始碼存放庫包含 Kusto Query Lanuguage (KQL) parser 和 editor 的原始程式碼：
+
+* [Kusto 查詢語言](https://github.com/microsoft/Kusto-Query-Language) 剖析器-Kusto 查詢語言剖析器和語義樹狀結構的 .net core 存放庫。
+* [適用于摩納哥編輯器的 Kusto 查詢語言外掛程式](https://github.com/Azure/monaco-kusto) -可內嵌在 web 和 electron 型應用程式中的 Kusto 查詢語言編輯器。 
 
 ### <a name="query-integrations"></a>查詢整合
 
