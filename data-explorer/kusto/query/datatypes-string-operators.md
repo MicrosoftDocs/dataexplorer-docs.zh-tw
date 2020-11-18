@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/19/2020
-ms.openlocfilehash: 61ed36d5d1657957b38ea78f0d2e09faa3a3f4e9
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 1c394d9125bd354cab21d3087c273f983627a0d6
+ms.sourcegitcommit: c351c2c8ab6e184827c4702eb0ec8bf783c7bbd3
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92247775"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94874775"
 ---
 # <a name="string-operators"></a>字串運算子
 
@@ -21,7 +21,7 @@ Kusto 提供各種查詢運算子來搜尋字串資料類型。 下列文章說�
 
 ## <a name="understanding-string-terms"></a>瞭解字串詞彙
 
-Kusto 會編制所有資料行的索引，包括類型的資料行 `string` 。 針對這類資料行，會根據實際資料建立多個索引。 這些索引不會直接公開，但會在具有作為其名稱一部分之運算子的查詢中使用， `string` `has` 例如 `has` 、、 `!has` `hasprefix` 、 `!hasprefix` 。 這些運算子的語法是以資料行的編碼方式來決定。 這些運算子不會執行「純」子字串比對，而是與 *詞彙*相符。
+Kusto 會編制所有資料行的索引，包括類型的資料行 `string` 。 針對這類資料行，會根據實際資料建立多個索引。 這些索引不會直接公開，但會在具有作為其名稱一部分之運算子的查詢中使用， `string` `has` 例如 `has` 、、 `!has` `hasprefix` 、 `!hasprefix` 。 這些運算子的語法是以資料行的編碼方式來決定。 這些運算子不會執行「純」子字串比對，而是與 *詞彙* 相符。
 
 ### <a name="what-is-a-term"></a>什麼是詞彙？ 
 
@@ -32,7 +32,7 @@ Kusto 會編制所有資料行的索引，包括類型的資料行 `string` 。 
 Kusto:  ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
 ```
 
-Kusto 會建立一個詞彙索引，其中包含 *四個字元*以上的所有詞彙，而且此索引會由 `has` 、 `!has` 等等使用。 如果查詢尋找的詞彙小於四個字元，或使用 `contains` 運算子，則 Kusto 將會還原為在資料行中的值無法判斷相符的情況下進行掃描。 這個方法比查詢詞彙索引中的詞彙慢很多。
+Kusto 會建立一個詞彙索引，其中包含 *四個字元* 以上的所有詞彙，而且此索引會由 `has` 、 `!has` 等等使用。 如果查詢尋找的詞彙小於四個字元，或使用 `contains` 運算子，則 Kusto 將會還原為在資料行中的值無法判斷相符的情況下進行掃描。 這個方法比查詢詞彙索引中的詞彙慢很多。
 
 ## <a name="operators-on-strings"></a>字串上的運算子
 
@@ -40,8 +40,10 @@ Kusto 會建立一個詞彙索引，其中包含 *四個字元*以上的所有�
 > 下表使用下列縮寫：
 > * RHS = 運算式的右手邊
 > * LHS = 運算式的左側
+> 
+> 具有尾碼的運算子 `_cs` 會區分大小寫。
 
-運算子        |描述                                                       |區分大小寫|範例 (結果為 `true`)
+運算子        |說明                                                       |區分大小寫|範例 (結果為 `true`)
 ----------------|------------------------------------------------------------------|--------------|-----------------------
 `==`            |等於                                                            |是           |`"aBc" == "aBc"`
 `!=`            |不等於                                                        |是           |`"abc" != "ABC"`
