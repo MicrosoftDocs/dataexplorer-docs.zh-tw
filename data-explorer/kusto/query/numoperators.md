@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b79979abdc13d5cb6b7a71bde2301ed0169ae59b
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: e020d5f6692c8c290b6a68b2ed1b52bc710c89c8
+ms.sourcegitcommit: 574296b9a84084de031684a65f32b6c1bd1a4858
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92249750"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94713984"
 ---
 # <a name="numerical-operators"></a>數值運算子
 
@@ -35,6 +35,9 @@ ms.locfileid: "92249750"
 `>=`           |大於或等於                    |`5 >= 4`
 `in`           |等於其中一個元素       |[請參閱這裡](inoperator.md)
 `!in`          |不等於任何元素   |[請參閱這裡](inoperator.md)
+
+> [!NOTE]
+> 若要從一個數數值型別轉換成另一個，請使用 `to*()` 函數。 例如，請參閱 [`tolong()`](tolongfunction.md) 和 [`toint()`](tointfunction.md) 。
 
 **模數運算子的相關批註**
 

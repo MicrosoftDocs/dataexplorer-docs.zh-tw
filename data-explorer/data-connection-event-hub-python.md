@@ -7,17 +7,18 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: 1990f601b07c3ab5d740e2e46a31de51875bb44b
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: b2877cb3de37610a9e526f659ccdb4a93d2d6568
+ms.sourcegitcommit: 574296b9a84084de031684a65f32b6c1bd1a4858
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343006"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94714137"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-python"></a>使用 Python 建立 Azure 資料總管的事件中樞資料連線
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-event-hub.md)
+> * [單鍵](one-click-event-hub.md)
 > * [C#](data-connection-event-hub-csharp.md)
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)
@@ -25,7 +26,7 @@ ms.locfileid: "92343006"
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 在本文中，您會使用 Python 建立 Azure 資料總管的事件中樞資料連線。 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 具有有效訂用帳戶的 Azure 帳戶。 [免費建立帳戶](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)。
 * [Python 3.4+](https://www.python.org/downloads/)。
@@ -95,6 +96,6 @@ poller = kusto_management_client.data_connections.create_or_update(resource_grou
 | data_format | *Csv* | 訊息的資料格式。|
 | event_hub_resource_id | *資源識別碼* | 您事件中樞的資源識別碼，其中包含要內嵌的資料。 |
 | consumer_group | *$Default* | 事件中樞的取用者群組。|
-| location | *美國中部* | 資料連線資源的位置。|
+| location | *Central US* | 資料連線資源的位置。|
 
 [!INCLUDE [data-explorer-data-connection-clean-resources-python](includes/data-explorer-data-connection-clean-resources-python.md)]

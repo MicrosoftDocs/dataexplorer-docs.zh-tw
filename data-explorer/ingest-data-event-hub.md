@@ -7,17 +7,18 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 69438457dfcbfc4e29805d5d193c227538910e45
-ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
+ms.openlocfilehash: bf5cd6d76878630549537845679d0bdb5d6d3797
+ms.sourcegitcommit: 574296b9a84084de031684a65f32b6c1bd1a4858
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/21/2020
-ms.locfileid: "90832625"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94714120"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>將資料從事件中樞內嵌至 Azure 資料總管
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-event-hub.md)
+> * [單鍵](one-click-event-hub.md)
 > * [C#](data-connection-event-hub-csharp.md)
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)
@@ -43,11 +44,11 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 在本文中，您會產生範例資料，並將其傳送至事件中樞。 第一個步驟是建立事件中樞。 其做法是使用 Azure 入口網站中的 Azure Resource Manager 範本。
 
-1. 若要建立事件中樞，請使用下列按鈕開始部署。 按一下滑鼠右鍵並選取 [在新視窗中開啟]****，以便依照本文中的其餘步驟操作。
+1. 若要建立事件中樞，請使用下列按鈕開始部署。 按一下滑鼠右鍵並選取 [在新視窗中開啟]，以便依照本文中的其餘步驟操作。
 
     [![部署至 Azure 按鈕](media/ingest-data-event-hub/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-event-hubs-create-event-hub-and-consumer-group%2Fazuredeploy.json)
 
-    [部署至 Azure]**** 按鈕可將您帶往 Azure 入口網站，填寫部署表單。
+    [部署至 Azure] 按鈕可將您帶往 Azure 入口網站，填寫部署表單。
 
     ![建立事件中樞表單](media/ingest-data-event-hub/deploy-to-azure.png)
 
@@ -65,27 +66,27 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     |---|---|---|
     | 訂用帳戶 | 您的訂用帳戶 | 選取您要用於事件中樞的 Azure 訂用帳戶。|
     | 資源群組 | *test-hub-rg* | 建立新的資源群組。 |
-    | 位置 | *美國西部* | 請在本文中選取 [ *美國西部* ]。 至於生產系統，請選取最符合您需求的區域。 將事件中樞命名空間建立在與 Kusto 相同的 [位置] 可獲得最佳效能 (對於高輸送量的事件中樞命名空間格外重要)。
+    | Location | *美國西部* | 請在本文中選取 [ *美國西部* ]。 至於生產系統，請選取最符合您需求的區域。 將事件中樞命名空間建立在與 Kusto 相同的 [位置] 可獲得最佳效能 (對於高輸送量的事件中樞命名空間格外重要)。
     | 命名空間名稱 | 唯一命名空間名稱 | 選擇可識別您命名空間的唯一名稱。 例如，*mytestnamespace*。 網域名稱 *servicebus.windows.net* 已附加至您提供的名稱。 名稱只能包含字母、數字和連字號。 名稱必須以字母開頭，且必須以字母或數字結尾。 此值長度必須介於 6 至 50 個字元之間。
     | 事件中樞名稱 | *test-hub* | 事件中樞位於命名空間之下，其會提供專屬的唯一範圍容器。 事件中樞名稱在命名空間內不可重複。 |
     | 取用者群組名稱 | *test-group* | 取用者群組能讓多個取用應用程式各自擁有獨立的事件串流檢視。 |
     | | |
 
-1. 選取 [採購]****，這會確認您正在您的訂用帳戶中建立資源。
+1. 選取 [採購]，這會確認您正在您的訂用帳戶中建立資源。
 
-1. 在工具列上選取 [通知]**** 以監視佈建程序。 可能需要幾分鐘的時間，部署才會成功，但您現在可以移至下一個步驟。
+1. 在工具列上選取 [通知] 以監視佈建程序。 可能需要幾分鐘的時間，部署才會成功，但您現在可以移至下一個步驟。
 
     ![通知圖示](media/ingest-data-event-hub/notifications.png)
 
 ## <a name="create-a-target-table-in-azure-data-explorer"></a>在 Azure 資料總管中建立目標資料表
 
-現在要在 Azure 資料總管中建立一個資料表，供事件中樞將資料傳送至此。 您會在於**必要條件**中佈建的叢集與資料庫中建立該資料表。
+現在要在 Azure 資料總管中建立一個資料表，供事件中樞將資料傳送至此。 您會在於 **必要條件** 中佈建的叢集與資料庫中建立該資料表。
 
-1. 在 Azure 入口網站中瀏覽至您的叢集，然後選取 [查詢]****。
+1. 在 Azure 入口網站中瀏覽至您的叢集，然後選取 [查詢]。
 
     ![查詢應用程式連結](media/ingest-data-event-hub/query-explorer-link.png)
 
-1. 將下列命令複製到視窗，然後選取 [執行]**** 以建立資料表 (TestTable)，該資料表會接收內嵌的資料。
+1. 將下列命令複製到視窗，然後選取 [執行] 以建立資料表 (TestTable)，該資料表會接收內嵌的資料。
 
     ```Kusto
     .create table TestTable (TimeStamp: datetime, Name: string, Metric: int, Source:string)
@@ -93,7 +94,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
     ![執行建立查詢](media/ingest-data-event-hub/run-create-query.png)
 
-1. 將下列命令複製到視窗中，然後選取 [執行]**** 以將傳入的 JSON 資料對應至資料表 (TestTable) 的資料行名稱與資料類型。
+1. 將下列命令複製到視窗中，然後選取 [執行] 以將傳入的 JSON 資料對應至資料表 (TestTable) 的資料行名稱與資料類型。
 
     ```Kusto
     .create table TestTable ingestion json mapping 'TestMapping' '[{"column":"TimeStamp", "Properties": {"Path": "$.timeStamp"}},{"column":"Name", "Properties": {"Path":"$.name"}} ,{"column":"Metric", "Properties": {"Path":"$.metric"}}, {"column":"Source", "Properties": {"Path":"$.source"}}]'
@@ -103,13 +104,13 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 現在您應從 Azure 資料總管連線至事件中樞。 此連線建立後，流入事件中樞資料的資料即會串流至您先前在本文中建立的測試資料表。
 
-1. 選取工具列上的 [通知]****，以確認事件中樞部署已成功。
+1. 選取工具列上的 [通知]，以確認事件中樞部署已成功。
 
-1. 在您建立的叢集下方，選取 [資料庫]****，然後選取 [TestDatabase]****。
+1. 在您建立的叢集下方，選取 [資料庫]，然後選取 [TestDatabase]。
 
     ![選取測試資料庫](media/ingest-data-event-hub/select-test-database.png)
 
-1. 選取 [資料擷取]****，然後選取 [新增資料連線]****。 
+1. 選取 [資料擷取]，然後選取 [新增資料連線]。 
 
     :::image type="content" source="media/ingest-data-event-hub/event-hub-connection.png" alt-text="在事件中樞中選取資料內嵌和新增資料連線-Azure 資料總管":::
 
@@ -131,7 +132,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     
 #### <a name="target-table"></a>目標資料表
 
-路由內嵌資料有兩個選項：靜態** 和動態**。 在本文中，您將使用靜態路由，您可以在此指定資料表名稱、資料格式和對應作為預設值。 如果事件中樞訊息包含資料路由資訊，此路由資訊將會覆寫預設設定。
+路由內嵌資料有兩個選項：靜態和動態。 在本文中，您將使用靜態路由，您可以在此指定資料表名稱、資料格式和對應作為預設值。 如果事件中樞訊息包含資料路由資訊，此路由資訊將會覆寫預設設定。
 
 1. 填寫下列路由設定：
   
@@ -141,7 +142,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
    |---|---|---|
    | 資料表名稱 | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
    | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO 和 W3CLOG。 |
-   | 對應 | *TestMapping* | 您在 **>testdatabase**中建立的[對應](kusto/management/mappings.md)，會將傳入的資料對應至**TestTable**的資料行名稱和資料類型。 JSON、多行 JSON 和 AVRO 的必要參數，以及其他格式的選擇性。|
+   | 對應 | *TestMapping* | 您在 **>testdatabase** 中建立的 [對應](kusto/management/mappings.md)，會將傳入的資料對應至 **TestTable** 的資料行名稱和資料類型。 JSON、多行 JSON 和 AVRO 的必要參數，以及其他格式的選擇性。|
     
    > [!NOTE]
    > * 您不需要指定所有 **預設路由設定**。 也接受部分設定。
@@ -155,14 +156,13 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 > * 單一記錄事件支援系統屬性。
 > * 若為對應 `csv` ，會在記錄的開頭加入屬性。 針對對應 `json` ，會根據下拉式清單中顯示的名稱來新增屬性。
 
-如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，就必須在資料表架構和對應中包含[系統屬性](ingest-data-event-hub-overview.md#system-properties)。
-
+如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，就必須在資料表架構和對應中包含 [系統屬性](ingest-data-event-hub-overview.md#system-properties)。
 
 ## <a name="copy-the-connection-string"></a>複製連接字串
 
 當您執行「必要條件」中所列的[範例應用程式](https://github.com/Azure-Samples/event-hubs-dotnet-ingest)時，您需要事件中樞命名空間的連接字串。
 
-1. 在您建立的事件中樞命名空間下方，選取 [共用存取原則]****，然後選取 [RootManageSharedAccessKey]****。
+1. 在您建立的事件中樞命名空間下方，選取 [共用存取原則]，然後選取 [RootManageSharedAccessKey]。
 
     ![共用存取原則](media/ingest-data-event-hub/shared-access-policies.png)
 
@@ -222,15 +222,15 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 如果您不打算再次使用您的事件中樞，請清除 **test-hub-rg** 以避免產生成本。
 
-1. 在 Azure 入口網站中選取靠左側的 [資源群組]****，然後選取您所建立的群組。  
+1. 在 Azure 入口網站中選取靠左側的 [資源群組]，然後選取您所建立的群組。  
 
     如果左側功能表已摺疊，請選取 ![[展開] 按鈕](media/ingest-data-event-hub/expand.png) 加以展開。
 
    ![選取要刪除的資源群組](media/ingest-data-event-hub/delete-resources-select.png)
 
-1. 在 [test-resource-group]**** 下方，選取 [刪除資源群組]****。
+1. 在 [test-resource-group] 下方，選取 [刪除資源群組]。
 
-1. 在新視窗中，輸入要刪除的資源群組名稱 (*test-hub-rg*)，然後選取 [刪除]****。
+1. 在新視窗中，輸入要刪除的資源群組名稱 (*test-hub-rg*)，然後選取 [刪除]。
 
 ## <a name="next-steps"></a>後續步驟
 

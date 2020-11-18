@@ -7,17 +7,18 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: c98c2a9781f167848989d1b55c70d1d9bda8e239
-ms.sourcegitcommit: 64fdef912cc925c4bdcae98183eb8d7c7a6392d7
+ms.openlocfilehash: f2f0011ea66b4951de9f4aa9eaca70b738b5e346
+ms.sourcegitcommit: 574296b9a84084de031684a65f32b6c1bd1a4858
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/29/2020
-ms.locfileid: "93027783"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94714103"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C 建立 Azure 資料總管的事件中樞資料連線#
 
 > [!div class="op_single_selector"]
 > * [入口網站](ingest-data-event-hub.md)
+> * [單鍵](one-click-event-hub.md)
 > * [C#](data-connection-event-hub-csharp.md)
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager 範本](data-connection-event-hub-resource-manager.md)
@@ -25,9 +26,9 @@ ms.locfileid: "93027783"
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 在本文中，您會使用 c # 來建立 Azure 資料總管的事件中樞資料連線。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>先決條件
 
-* 如果尚未安裝 Visual Studio 2019，您可以下載並使用 **免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發** 。
+* 如果尚未安裝 Visual Studio 2019，您可以下載並使用 **免費的** [Visual Studio 2019 Community 版本](https://www.visualstudio.com/downloads/)。 務必在 Visual Studio 設定期間啟用 **Azure 開發**。
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 建立叢集 [和資料庫](create-cluster-database-csharp.md)
 * 建立 [資料表和資料行對應](./net-sdk-ingest-data.md#create-a-table-on-your-test-cluster)
@@ -91,7 +92,7 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 | dataFormat | *Csv* | 訊息的資料格式。|
 | eventHubResourceId | *資源識別碼* | 您事件中樞的資源識別碼，其中包含要內嵌的資料。 |
 | consumerGroup | *$Default* | 事件中樞的取用者群組。|
-| location | *美國中部* | 資料連線資源的位置。|
+| location | *Central US* | 資料連線資源的位置。|
 | compression | *Gzip* 或 *無* | 資料壓縮的類型。 |
 
 ## <a name="generate-data"></a>產生資料
