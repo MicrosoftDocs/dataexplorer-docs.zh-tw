@@ -55,7 +55,7 @@
           href: security-baseline.md
     - name: 業務持續性
       items:
-        - name: 總覽
+        - name: 概觀
           href: business-continuity-overview.md
         - name: 建立解決方案
           href: business-continuity-create-solution.md
@@ -110,6 +110,9 @@
             - name: Azure 入口網站
               displayName: 'Event Hub, ingest, data connection'
               href: ingest-data-event-hub.md
+            - name: 單鍵
+              displayName: 'Event Hub, ingest, data connection'
+              href: one-click-event-hub.md
             - name: C#
               displayName: 'Event Hub, ingest, data connection'
               href: data-connection-event-hub-csharp.md
