@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/28/2020
-ms.openlocfilehash: 51f44d1a3cd29121a99e442f4033176b00b9e09f
-ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
+ms.openlocfilehash: 05f0055e5faf99d14864338db7f6ad6a4c99946e
+ms.sourcegitcommit: 0820454feb02ae489f3a86b688690422ae29d788
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93349387"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94932696"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-using-go"></a>使用 Go 建立 Azure 資料總管叢集和資料庫
 
@@ -43,7 +43,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 在執行任何作業之前，程式必須先向 Azure 資料總管進行驗證。 [驗證使用用戶端認證驗證類型](/azure/developer/go/azure-sdk-authorization#use-environment-based-authentication) [。NewAuthorizerFromEnvironment](https://pkg.go.dev/github.com/Azure/go-autorest/autorest/azure/auth?tab=doc#NewAuthorizerFromEnvironment) ，它會尋找下列預先定義的環境變數： `AZURE_CLIENT_ID` 、 `AZURE_CLIENT_SECRET` 、 `AZURE_TENANT_ID` 。
 
-下列範例顯示 [kusto。ClustersClient](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#ClustersClient) 會使用這項技術來建立：
+下列範例顯示 [kusto。ClustersClient](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v48.2.0+incompatible/services/kusto/mgmt/2020-02-15/kusto) 會使用這項技術來建立：
 
 ```go
 func getClustersClient(subscription string) kusto.ClustersClient {

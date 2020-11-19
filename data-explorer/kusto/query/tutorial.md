@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 10/08/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c3a099dbe431087fd6b79d78ad2b8ec10d5a5a37
-ms.sourcegitcommit: b6f0f112b6ddf402e97c011a902bd70ba408e897
+ms.openlocfilehash: c87979b788c83a819f9e65658b5e44e40e53ad1d
+ms.sourcegitcommit: 0820454feb02ae489f3a86b688690422ae29d788
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94497709"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94932730"
 ---
 # <a name="tutorial"></a>教學課程
 
@@ -68,7 +68,7 @@ StormEvents
 | project StartTime, EndTime , State , EventType , EpisodeNarrative
 ```
 
-|StartTime|EndTime|狀態|EventType|EpisodeNarrative|
+|StartTime|EndTime|State|EventType|EpisodeNarrative|
 |---|---|---|---|---|
 |2007-02-19 00：00：00.0000000|2007-02-19 08：00：00.0000000|加州|Flood|在南 San Joaquin 的正面系統中，移動了一小段時間，在19日的早期早上時，會有一小段高達西歐的國家/地區間距。 在接近 Taft 的州高速公路166之間回報輕微氾濫。|
 
@@ -83,7 +83,7 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|狀態|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
 |2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|大雨|佛羅里達|在近水樓臺 Volusia 國家/地區的每個部分，在24小時的期間內，最多會有9英寸的 rain。|
 |2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|龍捲風|佛羅里達|在北西部 Crooked Lake 的 Eustis 中，有一次龍捲風觸及。 當您在 Eustis 移動北美洲時，會快速更至 EF1 強度。 此播放軌的長度為兩英里以下，最大寬度為300碼。  龍捲風終結7家庭。 20個家庭收到重大損害，而81家中回報了輕微的損毀。 在 $6200000 設定的嚴重傷害和財產損毀。|
@@ -108,7 +108,7 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|狀態|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
 |2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪活動會延續到新年的提早早上。|
 |2007-12-31 22：30：00.0000000|2007-12-31 23：59：00.0000000|冬季風暴|密西根|這個繁重的雪活動會延續到新年的提早早上。|
@@ -138,7 +138,7 @@ StormEvents
 | project StartTime, EndTime, Duration, EventType, State
 ```
 
-|StartTime|EndTime|Duration|EventType|狀態|
+|StartTime|EndTime|持續時間|EventType|State|
 |---|---|---|---|---|
 |2007-09-18 20：00：00.0000000|2007-09-19 18：00：00.0000000|22:00:00|大雨|佛羅里達|
 |2007-09-20 21：57：00.0000000|2007-09-20 22：05：00.0000000|00:08:00|龍捲風|佛羅里達|
@@ -184,7 +184,7 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-|狀態|StormCount|TypeOfStorms|
+|State|StormCount|TypeOfStorms|
 |---|---|---|
 |德克薩斯州|4701|27|
 |堪薩斯|3166|21|
@@ -499,7 +499,7 @@ Logs | join cluster("TelemetryCluster").database("Telemetry").Metrics on Request
 
 瞭解 Kusto 查詢語言的最佳方式是查看一些簡單的查詢，以取得語言的「操作」。 這些查詢類似于 Azure 資料總管教學課程中所使用的查詢，但它們會使用 Log Analytics 工作區中通用資料表的資料。 
 
-使用 Log Analytics 執行這些查詢，這是 Azure 入口網站中的一項工具，可以使用 Azure 監視器中的記錄資料來寫入記錄查詢並評估其結果。 如果您不熟悉 Log analytics，您可以在 [Log analytics 教學](/azure/azure-monitor/log-query/log-analytics-tutorial.md)課程中完成教學課程。
+使用 Log Analytics 執行這些查詢，這是 Azure 入口網站中的一項工具，可以使用 Azure 監視器中的記錄資料來寫入記錄查詢並評估其結果。 如果您不熟悉 Log analytics，您可以在 [Log analytics 教學](/azure/azure-monitor/log-query/log-analytics-tutorial)課程中完成教學課程。
 
 此處的所有查詢都會使用 [Log Analytics 示範環境](https://ms.portal.azure.com/#blade/Microsoft_Azure_Monitoring_Logs/DemoLogsBlade)。 您可以使用自己的環境，但您可能沒有在這裡使用的一些資料表。 由於示範環境中的資料不是靜態的，因此查詢的結果可能會與此處顯示的結果稍有不同。
 
@@ -668,7 +668,7 @@ InsightsMetrics
 
 [VMComputer](/azure/azure-monitor/reference/tables/vmcomputer) 是適用於 VM 的 Azure 監視器用來儲存其所監視之虛擬機器詳細資料的資料表。 [InsightsMetrics](/azure/azure-monitor/reference/tables/insightsmetrics) 會保存從這些虛擬機器收集的效能資料。 在 *InsightsMetrics* 中收集的一個值是可用記憶體，但無法使用記憶體的百分比。 為了計算百分比，我們需要 *VMComputer* 中每部虛擬機器的實體記憶體。
 
-下列範例查詢會使用聯結來執行這項計算。 [Distinct](/azure/data-explorer/kusto/query/joinoperator)會與 *VMComputer* 搭配使用，因為每一部電腦都會定期收集詳細資料，以便在該資料表中為每個電腦建立多個資料列。 這兩個數據表會使用 [ *電腦* ] 資料行來聯結。 這表示會在結果集中建立一個資料列，其中包含 *InsightsMetrics* 中每個資料列的資料行，且 *電腦* 中的值與 *VMComputer* 中 [ *電腦* ] 資料行的值相符。
+下列範例查詢會使用聯結來執行這項計算。 [Distinct](/azure/data-explorer/kusto/query/joinoperator)會與 *VMComputer* 搭配使用，因為每一部電腦都會定期收集詳細資料，以便在該資料表中為每個電腦建立多個資料列。 這兩個數據表會使用 [ *電腦* ] 資料行來聯結。 這表示會在結果集中建立一個資料列，其中包含 *InsightsMetrics* 中每個資料列的資料行，且 *電腦* 中的值與 *VMComputer* 中 [*電腦*] 資料行的值相符。
 
 ```kusto
 VMComputer
