@@ -1851,6 +1851,9 @@
           href: kusto/functions-library/series-moving-avg-fl.md
         - name: series_rolling_fl()
           href: kusto/functions-library/series-rolling-fl.md
+    - name: Azure 原則內建
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: 資源
   items:
     - name: 部落格
