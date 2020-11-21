@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: b470d017937ed6f2687016ab8a7cf53fed7b51ab
-ms.sourcegitcommit: 993bc7b69096ab5516d3c650b9df97a1f419457b
+ms.openlocfilehash: bd7482abb9c13130d863e9abb73819d9409109ea
+ms.sourcegitcommit: c815c6ccf33864e21e1d3daff26a4f077dff88f7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89614486"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95012167"
 ---
 # <a name="export-data-to-storage"></a>將資料匯出至儲存體
 
@@ -41,7 +41,7 @@ ms.locfileid: "89614486"
 
 * *PropertyName* /*PropertyValue*：零或多個選用的匯出屬性：
 
-|屬性        |類型    |說明                                                                                                                |
+|屬性        |類型    |Description                                                                                                                |
 |----------------|--------|---------------------------------------------------------------------------------------------------------------------------|
 |`sizeLimit`     |`long`  |在壓縮) 之前， (寫入單一儲存體成品的大小限制（以位元組為單位）。 允許的範圍為 100MB (預設) 為1GB。|
 |`includeHeaders`|`string`|針對 `csv` / `tsv` 輸出，會控制資料行標頭的產生。 可以是 `none` (預設值中的其中一個; 不會發出) 的標頭行、 `all` (將標頭行發出至每個儲存成品) ，或 `firstFile` (只) 將標頭行發出至第一個儲存體成品。|
@@ -98,10 +98,36 @@ ms.locfileid: "89614486"
   <| myLogs | where id == "moshe" | limit 10000
 ```
 
-#### <a name="known-issues"></a>已知問題
+## <a name="failures-during-export-commands"></a>匯出命令期間發生失敗
 
-**匯出命令期間發生失敗**
+匯出命令可能會在執行期間暫時失敗。 [連續匯出](continuous-data-export.md) 會自動重試命令。 一般匯出命令 ([匯出至儲存體](export-data-to-storage.md)、 [匯出至外部資料表](export-data-to-an-external-table.md)) 不會執行任何重試。
 
-* 匯出命令可能會在執行期間暫時失敗。 當匯出命令失敗時，將不會刪除已寫入儲存區的成品。 這些成品將會保留在儲存體中。 如果命令失敗，即使已寫入某些成品，也會假設匯出不完整。 追蹤命令完成和成功完成時匯出之成品的最佳方式，是使用 [。顯示作業](../operations.md#show-operations) 和 [. 顯示作業詳細資料](../operations.md#show-operation-details) 命令。
+*  當匯出命令失敗時，將不會刪除已寫入儲存區的成品。 這些成品將會保留在儲存體中。 如果命令失敗，即使已寫入某些成品，也會假設匯出不完整。 
+* 追蹤命令完成和成功完成時匯出之成品的最佳方式，是使用 [。顯示作業](../operations.md#show-operations) 和 [. 顯示作業詳細資料](../operations.md#show-operation-details) 命令。
 
-* 依預設，會將匯出命令分散，使包含要匯出之資料的所有 [範圍](../extents-overview.md) 同時寫入至儲存體。 在大型匯出中，當這類範圍的數目很高時，這可能會導致儲存體負載過高，而導致儲存體節流或暫時性儲存錯誤。 在這種情況下，建議您嘗試增加提供給 export 命令的儲存體帳戶數目 (負載會分散到帳戶) 和/或藉由將散發提示設定為 `per_node` (請參閱命令屬性) ，以減少平行存取。 也可以完全停用散發，但這可能會對命令效能造成顯著的影響。
+### <a name="storage-failures"></a>儲存體失敗
+
+根據預設，匯出命令會散佈，因此可能會有許多並行寫入至儲存體。 分佈層級取決於匯出命令的類型：
+* 一般命令的預設分佈 `.export` 是 `per_shard` ，表示包含資料的所有 [範圍](../extents-overview.md) 都會同時匯出至儲存體。 
+* [匯出至外部資料表](export-data-to-an-external-table.md)命令的預設分佈是 `per_node` ，這表示並行是叢集中的節點數目。
+
+當範圍/節點的數目很大時，這可能會導致儲存體負載過高，而導致儲存體節流或暫時性儲存錯誤。 下列建議可能會依優先順序)  (，來克服這些錯誤：
+
+* 將提供給 export 命令或 [外部資料表定義](../external-tables-azurestorage-azuredatalake.md) 的儲存體帳戶數目增加 (負載會平均分散到帳戶) 。
+* 將散發提示設定為 `per_node` (查看命令屬性) ，以降低平行存取。
+* 將 [用戶端要求屬性](../../api/netfx/request-properties.md)設定 `query_fanout_nodes_percent` 為所需的並行 (% 節點) ，以減少節點匯出的並行。 您可以將屬性設定為匯出查詢的一部分。 例如，下列命令會將同時寫入儲存體的節點數目限制為叢集節點的50%：
+
+    ```kusto
+    .export async  to csv
+        ( h@"https://storage1.blob.core.windows.net/containerName;secretKey" ) 
+        with
+        (
+            distribuion="per_node"
+        ) 
+        <| 
+        set query_fanout_nodes_percent = 50;
+        ExportQuery
+    ```
+
+* 如果匯出到分割的外部資料表，設定 `spread` / `concurrency` 屬性可以減少平行存取 (請參閱[命令屬性](export-data-to-an-external-table.md#syntax)中的詳細資料。
+* 如果上述兩項工作都沒有，也可以將屬性設定為 false 來完全停用散發 `distributed` ，但不建議這麼做，因為它可能會大幅影響命令的效能。

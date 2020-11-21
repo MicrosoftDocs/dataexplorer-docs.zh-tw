@@ -8,14 +8,14 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/03/2020
-ms.openlocfilehash: 7f9465df4847a24a4877c8b1cb637ba1d7542db3
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: be16f33c649640ef92ed971665d4c7610c5501bf
+ms.sourcegitcommit: c815c6ccf33864e21e1d3daff26a4f077dff88f7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342530"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95012204"
 ---
-# <a name="continuous-data-export-overview"></a>連續資料匯出總覽
+# <a name="continuous-data-export-overview"></a>連續資料匯出概觀
 
 本文說明如何使用定期執行的查詢，將資料從 Kusto 連續匯出至 [外部資料表](../external-table-commands.md) 。 結果會儲存在外部資料表中，以定義目的地，例如 Azure Blob 儲存體，以及匯出資料的架構。 此程式可確保所有記錄都會「剛好一次」匯出，但有一些 [例外](#exactly-once-export)狀況。 
 
@@ -36,11 +36,11 @@ ms.locfileid: "92342530"
     > [!NOTE]
     > 此分佈會增加儲存體帳戶 () 的負載，並有機會達到節流限制。 
   * 使用 `single` (或 `distributed` = `false`) 完全停用散發。 這項設定可能會大幅降低連續匯出程式，並影響每個連續匯出反復專案中建立的檔案數目。 
-* 檔案**數目**：
+* 檔案 **數目**：
   * 每個連續匯出反復專案中匯出的檔案數目，取決於外部資料表的資料分割方式。 如需詳細資訊，請參閱 [匯出至外部資料表命令](export-data-to-an-external-table.md#number-of-files)。 每個連續匯出反復專案一律會寫入至新的檔案，而且永遠不會附加至現有的檔案。 因此，匯出的檔案數目也取決於連續匯出的執行頻率。 Frequency 參數為 `intervalBetweenRuns` 。
-* **位置**：
+* **外部資料表儲存體帳戶**：
   * 為了達到最佳效能，Azure 資料總管叢集和儲存體帳戶 (s) 應該在相同的 Azure 區域中共存。
-  * 如果匯出的資料量很大，建議您設定外部資料表的多個儲存體帳戶，以避免進行儲存體節流。 請參閱 [將資料匯出至儲存體](export-data-to-storage.md#known-issues)。
+  * 如果匯出的資料量很大，建議您設定外部資料表的多個儲存體帳戶，以避免進行儲存體節流。 如需詳細資訊，請參閱 [匯出命令期間的儲存體失敗](export-data-to-storage.md#failures-during-export-commands) 。
 
 ## <a name="exactly-once-export"></a>剛好一次匯出
 
@@ -48,7 +48,7 @@ ms.locfileid: "92342530"
 
 「剛好一次」匯出的保證只適用于「 [顯示匯出](show-continuous-artifacts.md)成品」命令中所報告的檔案。 連續匯出不保證每一筆記錄只會寫入至外部資料表一次。 如果在匯出開始之後發生失敗，而且部分成品已經寫入外部資料表，則外部資料表可能會包含重複專案。 如果寫入作業在完成前中止，外部資料表可能會包含損毀的檔案。 在這種情況下，不會從外部資料表中刪除成品，但不會在 [ [顯示匯出](show-continuous-artifacts.md)的成品] 命令中報告這些構件。 使用匯出的檔案可 `show exported artifacts command` 保證不會重複問題，也不會損毀。
 
-## <a name="export-to-fact-and-dimension-tables"></a>匯出至事實和維度資料表
+## <a name="export-from-fact-and-dimension-tables"></a>從事實和維度資料表匯出
 
 根據預設，匯出查詢中參考的所有資料表都會假設為 [事實資料表](../../concepts/fact-and-dimension-tables.md)。 因此，它們的範圍是資料庫資料指標。 語法會明確宣告哪些資料表的範圍 (事實) ，而不是 (維度) 的範圍。 如需 `over` 詳細資料，請參閱 [create 命令](create-alter-continuous.md) 中的參數。
 
