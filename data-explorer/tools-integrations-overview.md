@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 2bce9020161e6b26a0df07b306259589c43b62f3
-ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
+ms.openlocfilehash: f996c3e6abbd145e963765f8aa1457f7ddddeb7e
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94644649"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324766"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Azure 資料總管工具和整合總覽
 
@@ -100,4 +100,3 @@ Azure 資料總管提供不同的工具和整合，以進行資料內嵌、查�
 * [Azure Pipelines](devops.md) 
 * [同步 Kusto](kusto/tools/synckusto.md) 
 
-<!--Open Source Tools-->

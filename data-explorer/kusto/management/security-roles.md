@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4bda122b589e3ba297b3e7c350d15687da6ee123
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 3b30a3e578b6bb1f21dedfcfec7629b60bb255f3
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91056997"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324494"
 ---
 # <a name="security-roles-management"></a>安全性角色管理
 
@@ -34,7 +34,7 @@ ms.locfileid: "91056997"
 
 * *動詞* 命令表示要執行的動作類型： `.show` 、 `.add` 、 `.drop` 和 `.set` 。
 
-    |*動詞命令* |描述                                  |
+    |*動詞命令* |說明                                  |
     |-------|---------------------------------------------|
     |`.show`|傳回目前的值或值。         |
     |`.add` |將一或多個主體新增至角色。     |
@@ -43,7 +43,7 @@ ms.locfileid: "91056997"
 
 * *SecurableObjectType* 是指定其角色的物件類型。
 
-    |*SecurableObjectType*|描述|
+    |*SecurableObjectType*|說明|
     |---------------------|-----------|
     |`database`|指定的資料庫|
     |`table`|指定的資料表|
@@ -53,7 +53,7 @@ ms.locfileid: "91056997"
 
 * *Role* 是相關角色的名稱。
 
-    |*角色*      |描述|
+    |*角色*      |說明|
     |------------|-----------|
     |`principals`|只能出現為動詞的一部分; 會傳回 `.show` 可能影響安全物件的主體清單。|
     |`admins`    |擁有安全物件的控制權，包括能夠加以查看、修改，以及移除物件和所有子物件。|
@@ -108,9 +108,6 @@ ms.locfileid: "91056997"
 * `skip-results`如果有提供，要求命令不會傳回資料庫主體的更新清單。
 
 * *描述*（如有提供）是將與變更相關聯的文字，並由對應的 `.show` 命令抓取。
-
-<!-- TODO: Need more examples for the public syntax. Until then we're keeping this internal -->
-
 
 ## <a name="managing-table-security-roles"></a>管理資料表安全性角色
 

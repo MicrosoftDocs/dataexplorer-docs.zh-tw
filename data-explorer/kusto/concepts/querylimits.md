@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: ee36823bb3f730a12f7ad2d1febe91439d4a2aad
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 3b857e0e16c212c2f12d43f9709a9278526a7344
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343278"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324681"
 ---
 # <a name="query-limits"></a>查詢限制
 
@@ -22,7 +22,7 @@ Kusto 是一種臨機操作查詢引擎，可裝載大型資料集，並藉由�
 
 ## <a name="limit-on-query-concurrency"></a>查詢平行存取限制
 
-「**查詢並行**存取」是一種限制，可讓叢集在許多同時執行的查詢上強加。
+「**查詢並行** 存取」是一種限制，可讓叢集在許多同時執行的查詢上強加。
 
 * 查詢平行存取限制的預設值取決於其執行所在的 SKU 叢集，且計算方式如下： `Cores-Per-Node x 10` 。
   * 例如，針對在 D14v2 SKU 上設定的叢集，其中每部電腦都有16虛擬核心，預設的查詢平行存取限制為 `16 cores x10 = 160` 。
@@ -79,7 +79,7 @@ MyTable | where User=="UserId1"
 
 您可以使用 `.export` 命令或針對稍後的匯總，移除結果截斷限制，以供匯出之用。 如果您選擇 [稍後匯總]，請考慮使用 Kusto 進行匯總。
 
-Kusto 提供數個用戶端程式庫，可處理「無限大」結果，方法是將它們串流至呼叫端。 使用其中一個程式庫，並將它設定為串流模式。 例如，使用 .NET Framework 用戶端 (Kusto) 並將連接字串的串流屬性設為 *true*，或使用一律串流結果的 *ExecuteQueryV2Async ( # B3 * 呼叫。
+Kusto 提供數個用戶端程式庫，可處理「無限大」結果，方法是將它們串流至呼叫端。 使用其中一個程式庫，並將它設定為串流模式。 例如，使用 .NET Framework 用戶端 (Kusto) 並將連接字串的串流屬性設為 *true*，或使用一律串流結果的 *ExecuteQueryV2Async ( # B3* 呼叫。
 
 預設會套用結果截斷，而不只是傳回給用戶端的結果資料流程。 它也會預設套用至任何子查詢，其中一個叢集會在跨叢集查詢中對另一個叢集發出問題，並具有類似的效果。
 
@@ -154,7 +154,7 @@ Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too
 
 根據預設，查詢的 timeout 設定為四分鐘，控制命令的時間為10分鐘。 如果需要 (上限為一小時) ，就可以增加這個值。
 
-* 如果您使用 Kusto 進行查詢，請使用**工具** &gt; **選項**_ &gt; _*連接* *  &gt; **查詢伺服器超時**。
+* 如果您使用 Kusto 進行查詢，請使用 **工具** &gt; **選項** _ &gt; _ *連接* *  &gt; **查詢伺服器超時**。
 * 以程式設計的方式，將 `servertimeout` 用戶端要求屬性設定為類型的值 `System.TimeSpan` ，最多可達一小時。
 
 **有關超時的注意事項**
@@ -162,11 +162,6 @@ Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too
 * 在用戶端上，會從所建立的要求套用超時時間，直到回應開始到達用戶端為止。 在用戶端上讀取回裝載所花費的時間，不會被視為超時時間的一部分。 這取決於呼叫端從資料流程提取資料的速度。
 * 此外，在用戶端上，使用的實際超時值稍微高於使用者要求的伺服器超時值。 這項差異是為了允許網路延遲。
 * 若要自動使用允許的要求超時上限，請將用戶端要求屬性設定 `norequesttimeout` 為 `true` 。
-
-<!--
-  Request timeout can also be set using a set statement, but we don't mention
-  it here since it shouldn't be used in production scenarios.
--->
 
 ## <a name="limit-on-query-cpu-resource-usage"></a>查詢 CPU 資源使用量的限制
 

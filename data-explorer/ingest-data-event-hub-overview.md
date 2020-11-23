@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 05848ff0a76ed7a102e54ec08412c4bf16e77891
-ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
+ms.openlocfilehash: ea3521dec63798a9382bcfca98827288c9b735d3
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92558201"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324800"
 ---
 # <a name="event-hub-data-connection"></a>事件中樞資料連線
 
@@ -38,17 +38,14 @@ ms.locfileid: "92558201"
 
 內嵌屬性會指示內嵌進程、路由資料的位置，以及如何處理它。 您可以使用[EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)來指定內嵌事件的內嵌[屬性](ingestion-properties.md)。 您可以設定下列屬性：
 
-|屬性 |描述|
+|屬性 |說明|
 |---|---|
 | Table |  (現有目標資料表的區分大小寫) 名稱。 覆寫 `Table` 窗格上的集合 `Data Connection` 。 |
 | 格式 | 資料格式。 覆寫 `Data format` 窗格上的集合 `Data Connection` 。 |
 | IngestionMappingReference | 要使用之現有內嵌 [對應](kusto/management/create-ingestion-mapping-command.md) 的名稱。 覆寫 `Column mapping` 窗格上的集合 `Data Connection` 。|
 | 壓縮 | 資料壓縮、 `None` (預設) 或 `GZip` 壓縮。|
 | 編碼 | 資料編碼，預設值為 UTF8。 可以是任何 [.net 支援的編碼](/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)方式。 |
-| 標記 (預覽)  | 要與內嵌資料產生關聯的 [標記](kusto/management/extents-overview.md#extent-tagging) 清單，格式為 JSON 陣列字串。 使用標記時，會 [影響效能](kusto/management/extents-overview.md#performance-notes-1) 。 |
-
-<!--| Database | Name of the existing target database.|-->
-<!--| Tags | String representing [tags](/azure/kusto/management/extents-overview#extent-tagging) that will be attached to resulting extent. |-->
+| 標籤 | 要與內嵌資料產生關聯的 [標記](kusto/management/extents-overview.md#extent-tagging) 清單，格式為 JSON 陣列字串。 使用標記時，會 [影響效能](kusto/management/extents-overview.md#performance-notes-1) 。 |
 
 > [!NOTE]
 > 只有在建立資料連線之後排入佇列的事件才會內嵌。
@@ -103,7 +100,7 @@ eventHubClient.Close();
 | x-選擇發行者 |字串 | 發行者名稱（如果訊息已傳送至發行者端點） |
 | x-opt-partition-key |字串 |儲存事件之對應分割區的分割區索引鍵 |
 
-如果您在資料表的 [ **資料來源** ] 區段中選取 [ **事件系統屬性** ]，就必須在資料表架構和對應中包含屬性。
+如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，就必須在資料表架構和對應中包含屬性。
 
 [!INCLUDE [data-explorer-container-system-properties](includes/data-explorer-container-system-properties.md)]
 
@@ -127,7 +124,7 @@ eventHubClient.Close();
 
 如需如何產生範例資料的範例，請參閱將 [資料從事件中樞內嵌至 Azure 資料總管](ingest-data-event-hub.md#generate-sample-data)
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 * [將資料從事件中樞內嵌至 Azure 資料總管](ingest-data-event-hub.md)
 * [使用 C 建立 Azure 資料總管的事件中樞資料連線#](data-connection-event-hub-csharp.md)

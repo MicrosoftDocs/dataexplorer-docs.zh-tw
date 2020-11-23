@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/28/2020
-ms.openlocfilehash: f72d2b7f2036c7c63bfc5a37e2ab944acc60bbf8
-ms.sourcegitcommit: 2ee2901cb82e1655b7f0d960d3427da084230731
+ms.openlocfilehash: 7f218abffbdbe9cfc4949a87b61f08e92d915bde
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94520576"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324596"
 ---
 # <a name="use-lightingest-to-ingest-data-to-azure-data-explorer"></a>使用 LightIngest 將資料內嵌至 Azure 資料總管
  
@@ -51,7 +51,7 @@ LightIngest 是命令列公用程式，適用于將臨機運算元據內嵌至 A
 1. 輸入， `ingest-` 後面接著將會管理內嵌的 Azure 資料總管叢集的連接字串。
     以雙引號括住連接字串，並遵循 [Kusto 連接字串規格](kusto/api/connection-strings/kusto.md)。
 
-    例如︰
+    例如：
 
     ```
     ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
@@ -68,15 +68,15 @@ LightIngest 是命令列公用程式，適用于將臨機運算元據內嵌至 A
 
 ## <a name="command-line-arguments"></a>命令列引數
 
-|引數名稱            |類型     |描述       |強制/選用
+|引數名稱            |類型     |說明       |強制/選用
 |------------------------------|--------|----------|-----------------------------|
 |                               |字串   |[Azure 資料總管連接字串](kusto/api/connection-strings/kusto.md) ，指定將處理內嵌的 Kusto 端點。 應以雙引號括住 | 強制性
 |-database、-db          |字串  |目標 Azure 資料總管資料庫名稱 | 選擇性  |
 |-資料表                  |字串  |目標 Azure 資料總管資料表名稱 | 強制性 |
 |-sourcePath、-source      |字串  |Blob 容器的來源檔案或根 URI 路徑。 如果資料在 blob 中，必須包含儲存體帳戶金鑰或 SAS。 建議用雙引號括住 |強制性 |
 |-前置詞                  |字串  |當要內嵌的來源資料位於 blob 儲存體時，所有 blob 都會共用此 URL 前置詞，但不包括容器名稱。 <br>例如，如果資料是在中 `MyContainer/Dir1/Dir2` ，則前置詞應為 `Dir1/Dir2` 。 建議用雙引號括住 | 選擇性  |
-|-模式        |字串  |從中挑選原始程式檔/blob 的模式。 支援萬用字元。 例如，`"*.csv"`。 建議用雙引號括住 | 選擇性  |
-|-zipPattern     |字串  |在 ZIP 封存中選取要內嵌的檔案時，所要使用的正則運算式。<br>封存中的所有其他檔案都會被忽略。 例如，`"*.csv"`。 建議將它括在雙引號中 | 選擇性  |
+|-模式        |字串  |從中挑選原始程式檔/blob 的模式。 支援萬用字元。 例如： `"*.csv"` 。 建議用雙引號括住 | 選擇性  |
+|-zipPattern     |字串  |在 ZIP 封存中選取要內嵌的檔案時，所要使用的正則運算式。<br>封存中的所有其他檔案都會被忽略。 例如： `"*.csv"` 。 建議將它括在雙引號中 | 選擇性  |
 |-format、-f           |字串  | 源資料格式。 必須是其中一種 [支援的格式](ingestion-supported-formats.md) | 選擇性  |
 |-ingestionMappingPath, -mappingPath |字串  |內嵌資料行對應的本機檔案路徑。 Json 和 Avro 格式的必要參數。 查看[資料](kusto/management/mappings.md)對應 | 選擇性  |
 |-ingestionMappingRef, -mappingRef  |字串  |先前在資料表上建立之內嵌資料行對應的名稱。 Json 和 Avro 格式的必要參數。 查看[資料](kusto/management/mappings.md)對應 | 選擇性  |
@@ -97,46 +97,12 @@ LightIngest 是命令列公用程式，適用于將臨機運算元據內嵌至 A
 
 與 Azure blob 搭配使用時，LightIngest 會使用特定的 blob 中繼資料屬性來增強內嵌進程。
 
-|Metadata 屬性                            | 使用量                                                                           |
+|Metadata 屬性                            | 使用方式                                                                           |
 |---------------------------------------------|---------------------------------------------------------------------------------|
 |`rawSizeBytes`, `kustoUncompressedSizeBytes` | 如果設定，將會被視為未壓縮的資料大小                       |
 |`kustoCreationTime`, `kustoCreationTimeUtc`  | 解釋為 UTC 時間戳記。 如果設定，將會用來覆寫 Kusto 中的建立時間。 適用于回填案例 |
 
 ## <a name="usage-examples"></a>使用範例
-
-<!-- Waiting for Tzvia or Vladik to rewrite the instructions for this example before publishing it
-
-### Ingesting a specific number of blobs in JSON format
-
-* Ingest two blobs under a specified storage account {Account}, in `JSON` format matching the pattern `.json`
-* Destination is the database {Database}, the table `SampleData`
-* Indicate that your data is compressed with the approximate ratio of 10.0
-* LightIngest won't wait for the ingestion to be completed
-
-To use the LightIngest command below:
-1. Create a table command and enter the table name into the LightIngest command, replacing `SampleData`.
-1. Create a mapping command and enter the IngestionMappingRef command, replacing `SampleData_mapping`.
-1. Copy your cluster name and enter it into the LightIngest command, replacing `{ClusterandRegion}`.
-1. Enter the database name into the LightIngest command, replacing `{Database name}`.
-1. Replace `{Account}` with your account name and replace `{ROOT_CONTAINER}?{SAS token}` with the appropriate information.
-
-    ```
-    LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True"  
-        -db:{Database name} 
-        -table:SampleData 
-        -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER}?{SAS token}" 
-        -IngestionMappingRef:SampleData_mapping 
-        -pattern:"*.json" 
-        -format:JSON 
-        -limit:2 
-        -cr:10.0 
-        -dontWait:true
-    ```
-     
-1. In Azure Data Explorer, open query count.
-
-    ![Ingestion result in Azure Data Explorer](media/lightingest/lightingest-show-failure-count.png)
--->
 
 ### <a name="how-to-ingest-data-using-creationtime"></a>如何使用 CreationTime 內嵌資料
 

@@ -10,27 +10,18 @@ ms.topic: reference
 ms.date: 10/08/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c87979b788c83a819f9e65658b5e44e40e53ad1d
-ms.sourcegitcommit: 0820454feb02ae489f3a86b688690422ae29d788
+ms.openlocfilehash: 8a3c0b058b2c1cf5023ce0069a7dd938fce5caec
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/19/2020
-ms.locfileid: "94932730"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324732"
 ---
 # <a name="tutorial"></a>教學課程
 
 ::: zone pivot="azuredataexplorer"
 
 瞭解 Kusto 查詢語言的最佳方式，就是查看一些簡單的查詢，以使用 [具有一些範例資料的資料庫](https://help.kusto.windows.net/Samples)，來取得語言的「感覺」。 本文中示範的查詢應該在該資料庫上執行。 `StormEvents`此範例資料庫中的表格提供有關在美國發生的風暴的一些資訊。
-
-<!--
-  TODO: Provide link to reference data we used originally in StormEvents
--->
-
-<!--
-  TODO: A few samples below reference non-existent tables, such as Events and Logs.
-        We need to add these tables.
--->
 
 ## <a name="count-rows"></a>計算資料列數目
 
