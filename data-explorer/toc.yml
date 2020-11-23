@@ -201,6 +201,8 @@
           href: data-lake-query-data.md
         - name: 查詢 Azure 監視器中的資料
           href: query-monitor-data.md
+        - name: 查詢 Power Apps 應用程式中的資料
+          href: power-apps-connector.md
         - name: 偵錯 KQL 內嵌 Python
           href: debug-inline-python.md
         - name: 使用 SDK
@@ -370,8 +372,6 @@
           href: using-metrics.md
         - name: 使用資源健康情況來監視叢集健康情況
           href: monitor-with-resource-health.md
-        - name: 建立 Power Apps 應用程式來查詢 Azure 資料總管中的資料
-          href: power-apps-connector.md
     - name: 共用資料
       items:
         - name: 使用 Azure Data Share
@@ -912,6 +912,8 @@
           href: ./kusto/query/ipv4-comparefunction.md
         - name: ipv4_is_match()
           href: ./kusto/query/ipv4-is-matchfunction.md
+        - name: ipv4_is_private()
+          href: ./kusto/query/ipv4-is-privatefunction.md
         - name: ipv6_compare()
           href: ./kusto/query/ipv6-comparefunction.md
         - name: ipv6_is_match()
@@ -1845,6 +1847,8 @@
           href: kusto/functions-library/quantize-fl.md
         - name: series_dot_product_fl()
           href: kusto/functions-library/series-dot-product-fl.md
+        - name: series_exp_smoothing_fl()
+          href: kusto/functions-library/series-exp-smoothing-fl.md
         - name: series_fit_poly_fl()
           href: kusto/functions-library/series-fit-poly-fl.md
         - name: series_moving_avg_fl()
