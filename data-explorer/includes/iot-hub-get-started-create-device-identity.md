@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 09/07/2018
 ms.author: orspodek
 ms.custom: include file, devx-track-azurecli
-ms.openlocfilehash: e21bd487ff110068ceee4a737a27157068e1f17a
-ms.sourcegitcommit: 1c836079c713db3aef33529e6a15af47e2984e7f
+ms.openlocfilehash: 035435d535a2b67b0de8c4fb9e2af9b1ea1dc5ff
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92470907"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95391789"
 ---
 在本節中，您會使用 Azure CLI 建立本文中的裝置身分識別。 裝置識別碼會區分大小寫。
 
@@ -36,4 +36,3 @@ ms.locfileid: "92470907"
 
 記下結果中的裝置連接字串。 裝置應用程式會使用此裝置連接字串，以裝置的形式連接到您的 IoT 中樞。
 
-<!-- images and links -->
