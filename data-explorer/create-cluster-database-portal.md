@@ -7,12 +7,13 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 07/22/2019
-ms.openlocfilehash: cf2673d92cb5a543baed01b91bdd828cc5862aee
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.localizationpriority: high
+ms.openlocfilehash: 44c2a5adf46d8c136675aa70a45dc89ed60c4cc8
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902539"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512735"
 ---
 # <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>快速入門：建立 Azure 資料總管叢集與資料庫
 
@@ -40,7 +41,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 1. 選取入口網站左上角的 [+ 建立資源]  按鈕。
 
-1. 搜尋 *Azure 資料總管* 。
+1. 搜尋 *Azure 資料總管*。
 
    ![搜尋資源](media/create-cluster-database-portal/search-resources.png)
 
@@ -56,7 +57,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
     | 資源群組 | 您的資源群組 | 使用現有資源群組，或建立新的資源群組。 |
     | 叢集名稱 | 唯一叢集名稱 | 選擇可識別您叢集的唯一名稱。 網域名稱 *[region].kusto.windows.net* 已附加至您提供的叢集名稱。 名稱只能包含小寫字母和數字。 必須包含 4 到 22 個字元。
     | 區域 | *美國西部* 或 *美國西部 2* | 在本快速入門中，請選取 [美國西部]  或 [美國西部 2]  (如果使用可用性區域)。 至於生產系統，請選取最符合您需求的區域。
-    | 可用性區域 | *1* 、 *2* 和/或 *3* | 將叢集執行個體放在相同區域的各個可用性區域中 (選擇性)。 [Azure 可用性區域](/azure/availability-zones/az-overview)是相同 Azure 區域內獨特的實體位置。 它們會保護 Azure 資料總管叢集和部分區域失敗的資料。 依預設會在相同的資料中心建立叢集節點。 選取數個可用性區域，可以消除單一失敗點並確保高可用性。 只有在叢集建立期間，才可以部署到可用性區域，日後無法修改。
+    | 可用性區域 | *1*、*2* 和/或 *3* | 將叢集執行個體放在相同區域的各個可用性區域中 (選擇性)。 [Azure 可用性區域](/azure/availability-zones/az-overview)是相同 Azure 區域內獨特的實體位置。 它們會保護 Azure 資料總管叢集和部分區域失敗的資料。 依預設會在相同的資料中心建立叢集節點。 選取數個可用性區域，可以消除單一失敗點並確保高可用性。 只有在叢集建立期間，才可以部署到可用性區域，日後無法修改。
     | 計算規格 | *D13_v2* | 在此本快速入門中，請選取最低價格規格。 至於生產系統，請選取最符合您需求的規格。
     | | | |
 
@@ -95,7 +96,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
     ![顯示資料庫命令](media/create-cluster-database-portal/show-databases.png)
 
-    結果集會顯示 **TestDatabase** ，這是叢集中唯一的資料庫。
+    結果集會顯示 **TestDatabase**，這是叢集中唯一的資料庫。
 
 1. 將命令 `.show tables` 貼到查詢視窗中，然後選取 [執行]  。
 
@@ -112,7 +113,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
     > [!NOTE]
     > 叢集停止時，資料無法供查詢之用，且無法內嵌新的資料。
 
-1. 若要重新啟動叢集，請在 [概觀]  索引標籤頂端選取 [啟動]  。
+1. 若要重新啟動叢集，請在 [概觀] 索引標籤頂端選取 [啟動]。
 
     叢集重新啟動後，約需要 10 分鐘才可供使用 (與最初佈建時相同)。 此外還需要額外的時間將資料載入到經常性快取中。  
 
@@ -120,11 +121,11 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 如果您打算按照其他快速入門和教學課程繼續進行，請保留您建立的資源。 否則，請清除您的資源群組，以避免產生費用。
 
-1. 在 Azure 入口網站中選取靠左側的 [資源群組]  ，然後選取包含資料總管叢集的資源群組。  
+1. 在 Azure 入口網站中選取靠左側的 [資源群組]，然後選取包含資料總管叢集的資源群組。  
 
-1. 選取 [刪除資源群組]  以刪除整個資源群組。 如果使用現有的資源群組，則可以選擇僅刪除資料總管叢集。
+1. 選取 [刪除資源群組] 以刪除整個資源群組。 如果使用現有的資源群組，則可以選擇僅刪除資料總管叢集。
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 > [!div class="nextstepaction"]
 > [快速入門：將資料從事件中樞內嵌至 Azure 資料總管](ingest-data-event-hub.md)

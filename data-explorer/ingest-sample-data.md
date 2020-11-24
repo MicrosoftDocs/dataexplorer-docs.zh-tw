@@ -7,12 +7,13 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 08/12/2019
-ms.openlocfilehash: 3b5958740460bf1c6439544ac095849064216fbb
-ms.sourcegitcommit: 626a0e8695d2655e724283cfc4bdbe8e1d371de4
+ms.localizationpriority: high
+ms.openlocfilehash: d5cff511a67e122af6b71740bbeaec6b7a3048e4
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/05/2020
-ms.locfileid: "89493618"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512752"
 ---
 # <a name="quickstart-ingest-sample-data-into-azure-data-explorer"></a>快速入門：將範例資料擷取至 Azure 資料總管
 
@@ -27,7 +28,7 @@ ms.locfileid: "89493618"
 
 ## <a name="ingest-data"></a>擷取資料
 
-**StormEvents** 範例資料集包含來自[美國國家環境資訊中心](https://www.ncdc.noaa.gov/stormevents/)的氣象相關資料。
+**StormEvents** 範例資料集包含來自 [美國國家環境資訊中心](https://www.ncdc.noaa.gov/stormevents/)的氣象相關資料。
 
 1. 登入 [https://dataexplorer.azure.com](https://dataexplorer.azure.com)。
 

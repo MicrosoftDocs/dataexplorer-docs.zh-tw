@@ -7,12 +7,13 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 06/15/2020
-ms.openlocfilehash: 78666938417ce02d5320c56b247e1b854b842234
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.localizationpriority: high
+ms.openlocfilehash: 479bd512f759a20123e5eb94fcc9ec54e2a13455
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942330"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513296"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>快速入門：在 Azure 資料總管 Web UI 中查詢資料
 
@@ -34,7 +35,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 ![新增叢集](media/web-query-data/add-cluster.png)
 
-您必須將連線新增到至少一個叢集，才能開始執行查詢。 在此節中，您將連線新增至 Azure 資料總管中我們已設置要輔助學習的*說明叢集*，也要將連線新增到在先前快速入門中建立的測試叢集。
+您必須將連線新增到至少一個叢集，才能開始執行查詢。 在此節中，您將連線新增至 Azure 資料總管中我們已設置要輔助學習的 *說明叢集*，也要將連線新增到在先前快速入門中建立的測試叢集。
 
 1. 在應用程式的左上方中，選取 [新增叢集]。
 
@@ -95,7 +96,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
    此查詢會傳回與第一個查詢相同的記錄，但是只包含 `project` 陳述式中指定的資料行。 結果應該會類似於下列表格。
 
-    :::image type="content" source="media/web-query-data/result-set-02.png" alt-text="資料表的螢幕擷取畫面，其中列出十個衝擊事件的開始時間、結束時間、劇集、事件識別碼、狀態和事件種類。" border="false":::
+    :::image type="content" source="media/web-query-data/result-set-02.png" alt-text="資料表的螢幕擷取畫面，其中列出十個衝擊事件的開始時間、結束時間、事件類型、損毀屬性和劇集敘述。" border="false":::
 
 1. 在查詢視窗頂端，選取 [召回] 。
 
@@ -131,7 +132,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 1. 在方格中，展開 **California** 以查看該狀態的記錄。
 
-    :::image type="content" source="media/web-query-data/result-set-03.png" alt-text="資料表的螢幕擷取畫面，其中列出十個衝擊事件的開始時間、結束時間、劇集、事件識別碼、狀態和事件種類。" border="false":::
+    :::image type="content" source="media/web-query-data/result-set-03.png" alt-text="查詢結果格線的螢幕擷取畫面。加州群組已展開，並顯示三個資料列，其中包含來自加州事件的資料。" border="false":::
 
     執行探勘分析時，這種分組類型很有幫助。
 
@@ -175,7 +176,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 1. 在查詢視窗頂端，選取 [共用] 。 
 
-:::image type="content" source="media/web-query-data/share-menu.png" alt-text="資料表的螢幕擷取畫面，其中列出十個衝擊事件的開始時間、結束時間、劇集、事件識別碼、狀態和事件種類。":::
+:::image type="content" source="media/web-query-data/share-menu.png" alt-text="共用功能表":::
 
 下拉式清單中有下列選項可用：
 * 連結至剪貼簿
@@ -188,13 +189,13 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 您可以提供深層連結，讓其他能夠存取叢集的使用者也能執行查詢。
 
-1. 在**共用**中，選取 [連結至剪貼簿或對其進行查詢]。
+1. 在 **共用** 中，選取 [連結至剪貼簿或對其進行查詢]。
 
 1. 複製連結和查詢到文字檔。
 
 1. 將連結貼到新的瀏覽器視窗。 查詢執行之後，結果應該會看起來如下所示。
 
-    :::image type="content" source="media/web-query-data/shared-query.png" alt-text="資料表的螢幕擷取畫面，其中列出十個衝擊事件的開始時間、結束時間、劇集、事件識別碼、狀態和事件種類。":::
+    :::image type="content" source="media/web-query-data/shared-query.png" alt-text="共用查詢深層連結":::
 
 ### <a name="pin-to-dashboard"></a>釘選到儀表板
 
@@ -202,25 +203,25 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 若要釘選查詢：
 
-1. 在**共用**中，選取 [釘選到儀表板]。
+1. 在 **共用** 中，選取 [釘選到儀表板]。
 
 1. 在 [釘選到儀表板] 窗格中：
-    1. 提供**查詢名稱**。
+    1. 提供 **查詢名稱**。
     1. 選取 [使用現有項目] 或 [新建]。
-    1. 提供**儀表板名稱**
+    1. 提供 **儀表板名稱**
     1. 選取 [建立後檢視儀表板] 核取方塊 (如果是新的儀表板)。
     1. 選取 [釘選]
 
-    :::image type="content" source="media/web-query-data/pin-to-dashboard.png" alt-text="資料表的螢幕擷取畫面，其中列出十個衝擊事件的開始時間、結束時間、劇集、事件識別碼、狀態和事件種類。":::
+    :::image type="content" source="media/web-query-data/pin-to-dashboard.png" alt-text="釘選到儀表板窗格":::
     
 > [!NOTE]
-> **釘選到儀表板**只會釘選選取的查詢。 若要建立儀表板資料來源，並將轉譯命令翻譯成儀表板中的視覺效果，您必須在資料庫清單中選取相關的資料庫。
+> **釘選到儀表板** 只會釘選選取的查詢。 若要建立儀表板資料來源，並將轉譯命令翻譯成儀表板中的視覺效果，您必須在資料庫清單中選取相關的資料庫。
 
 ## <a name="export-query-results"></a>匯出查詢結果
 
 若要將查詢結果匯出至 CSV 檔案，請選取 [檔案] > [匯出至 CSV]。
 
-:::image type="content" source="media/web-query-data/export-results.png" alt-text="資料表的螢幕擷取畫面，其中列出十個衝擊事件的開始時間、結束時間、劇集、事件識別碼、狀態和事件種類。":::
+:::image type="content" source="media/web-query-data/export-results.png" alt-text="將結果匯出至 CSV 檔案":::
 
 ## <a name="provide-feedback"></a>提供意見反應
 
