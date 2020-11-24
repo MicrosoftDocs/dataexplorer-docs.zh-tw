@@ -11,12 +11,12 @@ ms.date: 03/29/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: bc083cadbae44723c85c0a119b90ab5b43aba388
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.openlocfilehash: 5670f3f9c7aa8b3d6b10f88433d19246e2daf6d6
+ms.sourcegitcommit: faa747df81c49b96d173dbd5a28d2ca4f3a2db5f
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/24/2020
-ms.locfileid: "95512837"
+ms.locfileid: "95783330"
 ---
 # <a name="render-operator"></a>render 運算子
 
@@ -31,7 +31,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 > * 轉譯運算子不會修改資料。 它會在結果的擴充屬性中插入批註 ( 「視覺效果」 ) 。 批註包含運算子在查詢中提供的資訊。
 > * 視覺效果資訊的解讀是由使用者代理程式所完成。 不同的代理程式 (例如 Kusto，Kusto. WebExplorer) 可能支援不同的視覺效果。
 
-## <a name="syntax"></a>語法
+## <a name="syntax"></a>Syntax
 
 *T* `|` `render` *視覺效果* [ `with` `(` *PropertyName* `=` *PropertyValue* [ `,` ...] `)` ]
 
@@ -43,7 +43,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 |*視覺效果*     |描述|
 |--------------------|-|
-| `anomalychart`     | 類似于時間圖表，但使用[series_decompose_anomalies](./series-decompose-anomaliesfunction.md)函式來[強調異常](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning)。 |
+| `anomalychart`     | 類似于時間圖表，但使用[series_decompose_anomalies](./series-decompose-anomaliesfunction.md)函式來[強調異常](./samples.md#get-more-from-your-data-by-using-kusto-with-machine-learning)。 |
 | `areachart`        | 區域圖。 第一個資料行是 X 軸，而且必須是數值資料行。 其他數值資料行則是 y 軸。 |
 | `barchart`         | 第一個資料行是 X 軸，而且可以是文字、日期時間或數值。 其他資料行是數值，以水準條紋顯示。|
 | `card`             | 第一個結果記錄會視為一組純量值，並顯示為卡片。 |
@@ -169,8 +169,8 @@ range x from -2 to 2 step 0.1
 
 ::: zone pivot="azuredataexplorer"
 
-[教學課程中的轉譯範例](./tutorial.md#render-display-a-chart-or-table)。
+[教學課程中的轉譯範例](./tutorial.md#displaychartortable)
 
-[異常偵測](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning)
+[異常偵測](./samples.md#get-more-from-your-data-by-using-kusto-with-machine-learning)
 
 ::: zone-end
