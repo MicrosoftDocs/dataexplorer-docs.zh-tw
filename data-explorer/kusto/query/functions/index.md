@@ -8,12 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 6c6d9aedee17592ac1eb1b43e93dead80eb9fc61
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.localizationpriority: high
+ms.openlocfilehash: 1e0b3f339a755531d8db146ed2dc478ebb5a888d
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128847"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513024"
 ---
 # <a name="function-types"></a>函式類型
 
