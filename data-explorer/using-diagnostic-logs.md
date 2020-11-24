@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/16/2020
-ms.openlocfilehash: 606ae915e822cf4f2c02ac590a5bb05bdb17f28a
-ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
+ms.openlocfilehash: fed4027d946792448f2c564d8daa019c991b50d2
+ms.sourcegitcommit: 3af95ea6a6746441ac71b1a217bbb02ee23d5f28
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/09/2020
-ms.locfileid: "94373896"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95473570"
 ---
 # <a name="monitor-azure-data-explorer-ingestion-commands-and-queries-using-diagnostic-logs"></a>使用診斷記錄來監視 Azure 資料總管內嵌、命令和查詢
 
@@ -40,11 +40,12 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 * **成功** 的內嵌作業：這些記錄檔包含已成功完成內嵌作業的相關資訊。
 * **失敗** 的內嵌作業：這些記錄檔具有失敗內嵌作業的詳細資訊，包括錯誤詳細資料。 
+* 內嵌 **批次處理作業**：這些記錄檔具有可供內嵌 (持續時間、批次大小和 blob 計數) 之批次的詳細統計資料。
 
 # <a name="commands-and-queries"></a>[命令和查詢](#tab/commands-and-queries)
 
-* **命令** ：這些記錄檔包含已達到最終狀態之系統管理命令的相關資訊。
-* **查詢** ：這些記錄檔會提供已達到最終狀態之查詢的詳細資訊。 
+* **命令**：這些記錄檔包含已達到最終狀態之系統管理命令的相關資訊。
+* **查詢**：這些記錄檔會提供已達到最終狀態之查詢的詳細資訊。 
 
     > [!NOTE]
     > 查詢記錄資料不包含查詢文字。
@@ -62,21 +63,21 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
   
     ![新增診斷記錄](media/using-diagnostic-logs/add-diagnostic-logs.png)
 
-1. 選取 [ **新增診斷設定** ]。
+1. 選取 [新增診斷設定]。
 1. 在 [ **診斷設定** ] 視窗中：
 
     :::image type="content" source="media/using-diagnostic-logs/configure-diagnostics-settings.png" alt-text="設定診斷設定":::
 
-    1. 選取診斷設定的 **名稱** 。
-    1. 選取一或多個目標：儲存體帳戶、事件中樞或 Log Analytics。
-    1. 選取要收集的記錄： `SucceededIngestion` 、 `FailedIngestion` 、 `Command` 或 `Query` 。
+    1. 輸入 **診斷設定名稱**。
+    1. 選取一或多個目標： Log Analytics 工作區、儲存體帳戶或事件中樞。
+    1. 選取要收集的記錄： `SucceededIngestion` 、 `FailedIngestion` 、 `Command` 、或 `Query` 、 `TableUsageStatistics` 或 `TableDetails` 。
     1. 選取要收集的 [計量](using-metrics.md#supported-azure-data-explorer-metrics) (選擇性) 。  
     1. 選取 [ **儲存** ]，以儲存新的診斷記錄設定和計量。
 
 將會在幾分鐘內設定新的設定。 然後，記錄會出現在設定的封存目標中 (儲存體帳戶、事件中樞或 Log Analytics) 。 
 
 > [!NOTE]
-> 如果您將記錄傳送至 log analytics，則 `SucceededIngestion` 、、 `FailedIngestion` `Command` 和 `Query` 記錄會分別儲存在名為： `SucceededIngestion` 、 `FailedIngestion` 、、的 `ADXCommand` log analytics 資料表中 `ADXQuery` 。
+> 如果您將記錄傳送至 log analytics，則 `SucceededIngestion` 、、 `FailedIngestion` `Command` 和 `Query` 記錄會分別儲存在名為： `SucceededIngestion` 、 `FailedIngestion` 、 `ADXIngestionBatching` 、 `ADXCommand` 、 `ADXQuery` 的 log analytics 資料表中。
 
 ## <a name="diagnostic-logs-schema"></a>診斷記錄結構描述
 
@@ -94,7 +95,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |resourceId         |Azure Resource Manager 資源識別碼
 |operationName      |作業的名稱： ' MICROSOFT。KUSTO/叢集/內嵌/動作 '
 |operationVersion   |架構版本： ' 1.0 ' 
-|category           |作業的類別。 `SucceededIngestion` 或 `FailedIngestion`。 [成功](#successful-ingestion-operation-log)作業或[失敗](#failed-ingestion-operation-log)作業的屬性不同。
+|category           |作業的類別。 `SucceededIngestion`、`FailedIngestion` 或 `IngestionBatching`。 [成功](#successful-ingestion-operation-log)作業、[失敗](#failed-ingestion-operation-log)作業或[批次處理](#ingestion-batching-operation-log)作業的屬性不同。
 |properties         |作業的詳細資訊。
 
 #### <a name="successful-ingestion-operation-log"></a>成功的內嵌作業記錄
@@ -110,13 +111,13 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
     "category": "SucceededIngestion",
     "properties":
     {
-        "succeededOn": "2019-05-27 07:55:05.3693628",
-        "operationId": "b446c48f-6e2f-4884-b723-92eb6dc99cc9",
-        "database": "Samples",
-        "table": "StormEvents",
-        "ingestionSourceId": "66a2959e-80de-4952-975d-b65072fc571d",
-        "ingestionSourcePath": "https://kustoingestionlogs.blob.core.windows.net/sampledata/events8347293.json",
-        "rootActivityId": "d0bd5dd3-c564-4647-953e-05670e22a81d"
+        "SucceededOn": "2019-05-27 07:55:05.3693628",
+        "OperationId": "b446c48f-6e2f-4884-b723-92eb6dc99cc9",
+        "Database": "Samples",
+        "Table": "StormEvents",
+        "IngestionSourceId": "66a2959e-80de-4952-975d-b65072fc571d",
+        "IngestionSourcePath": "https://kustoingestionlogs.blob.core.windows.net/sampledata/events8347293.json",
+        "RootActivityId": "d0bd5dd3-c564-4647-953e-05670e22a81d"
     }
 }
 ```
@@ -124,13 +125,13 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 |Name               |描述
 |---                |---
-|succeededOn        |內嵌完成的時間
-|operationId        |Azure 資料總管內嵌作業識別碼
-|[資料庫]           |目標資料庫的名稱
-|資料表              |目標資料表的名稱
-|ingestionSourceId  |內嵌資料來源的識別碼
-|ingestionSourcePath|內嵌資料來源或 blob URI 的路徑
-|rootActivityId     |活動識別碼
+|SucceededOn        |內嵌完成的時間
+|OperationId        |Azure 資料總管內嵌作業識別碼
+|資料庫           |目標資料庫的名稱
+|Table              |目標資料表的名稱
+|IngestionSourceId  |內嵌資料來源的識別碼
+|IngestionSourcePath|內嵌資料來源或 blob URI 的路徑
+|RootActivityId     |活動識別碼
 
 #### <a name="failed-ingestion-operation-log"></a>失敗的內嵌作業記錄
 
@@ -165,18 +166,58 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 |Name               |描述
 |---                |---
-|failedOn           |內嵌完成的時間
-|operationId        |Azure 資料總管內嵌作業識別碼
-|[資料庫]           |目標資料庫的名稱
-|資料表              |目標資料表的名稱
-|ingestionSourceId  |內嵌資料來源的識別碼
-|ingestionSourcePath|內嵌資料來源或 blob URI 的路徑
-|rootActivityId     |活動識別碼
+|FailedOn           |內嵌完成的時間
+|OperationId        |Azure 資料總管內嵌作業識別碼
+|資料庫           |目標資料庫的名稱
+|Table              |目標資料表的名稱
+|IngestionSourceId  |內嵌資料來源的識別碼
+|IngestionSourcePath|內嵌資料來源或 blob URI 的路徑
+|RootActivityId     |活動識別碼
 |詳細資料            |失敗和錯誤訊息的詳細描述
-|errorCode          |錯誤碼 
-|failureStatus      |`Permanent` 或 `Transient`。 暫時性失敗的重試可能會成功。
-|originatesFromUpdatePolicy|如果失敗源自更新原則，則為 True
-|shouldRetry        |如果重試可能會成功，則為 True
+|ErrorCode          |錯誤碼 
+|FailureStatus      |`Permanent` 或 `Transient`。 暫時性失敗的重試可能會成功。
+|OriginatesFromUpdatePolicy|如果失敗源自更新原則，則為 True
+|ShouldRetry        |如果重試可能會成功，則為 True
+
+#### <a name="ingestion-batching-operation-log"></a>內嵌批次處理作業記錄
+
+**範例︰**
+
+```json
+{
+  "resourceId": "/SUBSCRIPTIONS/12534EB3-8109-4D84-83AD-576C0D5E1D06/RESOURCEGROUPS/KEREN/PROVIDERS/MICROSOFT.KUSTO/CLUSTERS/KERENEUS",
+  "time": "2020-05-27T07:55:05.3693628Z",
+  "operationVersion": "1.0",
+  "operationName": "MICROSOFT.KUSTO/CLUSTERS/INGESTIONBATCHING/ACTION",
+  "category": "IngestionBatching",
+  "correlationId": "2bb51038-c7dc-4ebd-9d7f-b34ece4cb735",
+  "properties": {
+    "Database": "Samples",
+    "Table": "StormEvents",
+    "BatchingType": "Size",
+    "SourceCreationTime": "2020-05-27 07:52:04.9623640",
+    "BatchTimeSeconds": 215.5,
+    "BatchSizeBytes": 2356425,
+    "DataSourcesInBatch": 4,
+    "RootActivityId": "2bb51038-c7dc-4ebd-9d7f-b34ece4cb735"
+  }
+}
+
+```
+**內嵌批次處理作業診斷記錄的屬性**
+
+|Name               |描述
+|---                   |---
+| TimeGenerated        | 產生此事件的時間 (UTC)  |
+| 資料庫             | 保存目標資料表的資料庫名稱 |
+| Table                | 內嵌資料的目標資料表名稱 |
+| BatchingType         | 批次處理類型：批次是否達到批次處理時間、資料大小或批次處理原則所設定的檔案數目限制 |
+| SourceCreationTime   | 此批次中建立 blob 的最短時間 (UTC)  |
+| BatchTimeSeconds     | 此批次的批次處理時間總計 (秒)  |
+| BatchSizeBytes       | 此批次中資料的未壓縮大小總計 (位元組)  |
+| DataSourcesInBatch   | 此批次中的資料來源數目 |
+| RootActivityId       | 作業的活動識別碼 |
+
 
 # <a name="commands-and-queries"></a>[命令和查詢](#tab/commands-and-queries)
 
@@ -234,9 +275,9 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |FailureReason  |失敗原因
 |TotalCpu |總 CPU 持續時間
 |CommandType     |命令類型
-|Application     |叫用命令的應用程式名稱
+|應用程式     |叫用命令的應用程式名稱
 |ResourceUtilization     |命令資源使用量
-|Duration     |命令持續時間
+|持續時間     |命令持續時間
 |User     |叫用查詢的使用者
 |主體     |叫用查詢的主體
 
@@ -321,7 +362,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |TotalCpu     |總 CPU 持續時間
 |ApplicationName            |叫用查詢的應用程式名稱
 |MemoryPeak          |記憶體尖峰
-|Duration      |命令持續時間
+|持續時間      |命令持續時間
 |User|叫用查詢的使用者
 |主體        |叫用查詢的主體
 |ScannedExtentsStatistics        | 包含掃描的範圍統計資料
@@ -332,7 +373,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |TotalRowsCount        |總數據列計數
 |ScannedRowsCount        |掃描的資料列計數
 |CacheStatistics        |包含快取統計資料
-|記憶體        |包含快取記憶體統計資料
+|Memory        |包含快取記憶體統計資料
 |點擊        |記憶體快取點擊
 |遺漏        |記憶體快取遺漏
 |磁碟        |包含快取磁片統計資料
@@ -356,7 +397,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 ---
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 * [使用計量來監視叢集健康情況](using-metrics.md)
 * [教學課程：在 Azure 資料總管中內嵌和查詢監視資料](ingest-data-no-code.md) 以內嵌診斷記錄

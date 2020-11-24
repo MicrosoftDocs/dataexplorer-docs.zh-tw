@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: ea3521dec63798a9382bcfca98827288c9b735d3
-ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
+ms.openlocfilehash: b8ba6199d5353ffd34081483c2ffbbd73e88a60c
+ms.sourcegitcommit: 3af95ea6a6746441ac71b1a217bbb02ee23d5f28
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 11/23/2020
-ms.locfileid: "95324800"
+ms.locfileid: "95473517"
 ---
 # <a name="event-hub-data-connection"></a>事件中樞資料連線
 
@@ -38,7 +38,7 @@ ms.locfileid: "95324800"
 
 內嵌屬性會指示內嵌進程、路由資料的位置，以及如何處理它。 您可以使用[EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)來指定內嵌事件的內嵌[屬性](ingestion-properties.md)。 您可以設定下列屬性：
 
-|屬性 |說明|
+|屬性 |描述|
 |---|---|
 | Table |  (現有目標資料表的區分大小寫) 名稱。 覆寫 `Table` 窗格上的集合 `Data Connection` 。 |
 | 格式 | 資料格式。 覆寫 `Data format` 窗格上的集合 `Data Connection` 。 |
@@ -123,6 +123,13 @@ eventHubClient.Close();
 請參閱產生資料的 [範例應用程式](https://github.com/Azure-Samples/event-hubs-dotnet-ingest) ，並將其傳送至事件中樞。
 
 如需如何產生範例資料的範例，請參閱將 [資料從事件中樞內嵌至 Azure 資料總管](ingest-data-event-hub.md#generate-sample-data)
+
+## <a name="set-up-geo-disaster-recovery-solution"></a>設定異地災難復原解決方案
+
+事件中樞提供 [異地災難](/azure/event-hubs/event-hubs-geo-dr) 復原解決方案。 Azure 資料總管不支援 `Alias` 事件中樞命名空間。 若要在您的解決方案中執行異地災難復原，請建立兩個事件中樞資料連線：一個用於主要命名空間，另一個用於次要命名空間。 Azure 資料總管會接聽這兩個事件中樞連線。
+
+> [!NOTE]
+> 使用者必須負責執行從主要命名空間到次要命名空間的容錯移轉。
 
 ## <a name="next-steps"></a>後續步驟
 
