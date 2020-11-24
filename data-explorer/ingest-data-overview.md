@@ -7,12 +7,13 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
-ms.openlocfilehash: 8e8673a4502df6167cb2979678588046fc6d5b1b
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.localizationpriority: high
+ms.openlocfilehash: 5304d2fcce23d6143faebb9326a6ab960a964f22
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343244"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512395"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Azure 資料總管資料內嵌總覽 
 
@@ -30,7 +31,7 @@ Azure 資料總管會從外部來源提取資料，並從暫止的 Azure 佇列�
 
 * **[支援的資料格式](ingestion-supported-formats.md)** 
 
-* 內嵌**[屬性](ingestion-properties.md)**：會影響資料內嵌方式的屬性 (例如，標記、對應、建立時間) 。
+* 內嵌 **[屬性](ingestion-properties.md)**：會影響資料內嵌方式的屬性 (例如，標記、對應、建立時間) 。
 
 * **許可權**：若要內嵌資料，處理常式需要 [資料庫擷取器層級許可權](kusto/management/access-control/role-based-authorization.md)。 其他動作（例如 query）可能需要資料庫管理員、資料庫使用者或資料表管理員許可權。
 
@@ -54,7 +55,7 @@ Azure 資料總管支援數個內嵌方法，每個方法都有自己的目標�
 
 * **[IoT 中樞](https://azure.microsoft.com/services/iot-hub/)**：用來將資料從支援的 IoT 裝置傳輸到 Azure 資料總管的管線。 如需詳細資訊，請參閱 [從 IoT 中樞](ingest-data-iot-hub.md)內嵌。
 
-* **Azure Data Factory (ADF) **：適用于 Azure 中分析工作負載的完全受控資料整合服務。 Azure Data Factory 會連接到超過90的支援來源，以提供有效率且可復原的資料傳輸。 ADF 會準備、轉換和擴充資料，以提供可透過不同方式監視的見解。 這項服務可以用來做為一次性解決方案、定期時間軸，或由特定事件所觸發。 
+* **Azure Data Factory (ADF)**：適用于 Azure 中分析工作負載的完全受控資料整合服務。 Azure Data Factory 會連接到超過90的支援來源，以提供有效率且可復原的資料傳輸。 ADF 會準備、轉換和擴充資料，以提供可透過不同方式監視的見解。 這項服務可以用來做為一次性解決方案、定期時間軸，或由特定事件所觸發。 
   * [整合 Azure 資料總管與 Azure Data Factory](data-factory-integration.md)。
   * [使用 Azure Data Factory 將資料從支援的來源複製到 Azure 資料總管](./data-factory-load-data.md)。
   * [使用 Azure Data Factory 範本，從資料庫大量複製到 Azure 資料總管](data-factory-template.md)。
@@ -100,9 +101,9 @@ Azure 資料總管會提供可用於查詢和資料擷取的 SDK。 程式設計
 
   * **內嵌內嵌**： control 命令 [。內嵌內嵌](kusto/management/data-ingestion/ingest-inline.md) 會傳送到引擎，並將資料內嵌成為命令文字本身的一部分。 此方法適用于拼湊測試用途。
 
-  * **從查詢**內嵌：控制項命令 [。 set、. append、. set-或-append 或。 set-或-replace](kusto/management/data-ingestion/ingest-from-query.md) 會傳送給引擎，並將資料間接指定為查詢或命令的結果。
+  * **從查詢** 內嵌：控制項命令 [。 set、. append、. set-或-append 或。 set-或-replace](kusto/management/data-ingestion/ingest-from-query.md) 會傳送給引擎，並將資料間接指定為查詢或命令的結果。
 
-  * **從儲存體內嵌 (提取) **：控制命令 [。內嵌至](kusto/management/data-ingestion/ingest-from-storage.md) 引擎會將資料儲存在某些外部儲存體 (例如，Azure Blob 儲存體) 由引擎存取，並由命令指向。
+  * **從儲存體內嵌 (提取)**：控制命令 [。內嵌至](kusto/management/data-ingestion/ingest-from-storage.md) 引擎會將資料儲存在某些外部儲存體 (例如，Azure Blob 儲存體) 由引擎存取，並由命令指向。
 
 ## <a name="comparing-ingestion-methods-and-tools"></a>比較內嵌方法和工具
 

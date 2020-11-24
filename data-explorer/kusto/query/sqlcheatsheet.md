@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: af8991e20988dd63a6aac37efe92ca13c7996c84
-ms.sourcegitcommit: 0820454feb02ae489f3a86b688690422ae29d788
+ms.localizationpriority: high
+ms.openlocfilehash: 16a0c6ef7064ae5e16fb649f3cd089196533ec45
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/19/2020
-ms.locfileid: "94932679"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513364"
 ---
 # <a name="sql-to-kusto-cheat-sheet"></a>SQL 對 Kusto 的功能提要
 

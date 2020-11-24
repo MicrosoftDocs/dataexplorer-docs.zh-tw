@@ -8,14 +8,15 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/08/2020
+ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b2b304d012ea541f6855091874be8ea5483fae63
-ms.sourcegitcommit: b6f0f112b6ddf402e97c011a902bd70ba408e897
+ms.openlocfilehash: b448f4249c777d9b9d61e58dad993f3da1817fda
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94497555"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512463"
 ---
 # <a name="samples"></a>範例
 
@@ -48,9 +49,9 @@ StormEvents
 
 |名稱|City|SessionId|時間戳記|
 |---|---|---|---|
-|開始|London|2817330|2015-12-09T10:12:02.32|
+|Start|London|2817330|2015-12-09T10:12:02.32|
 |Game|London|2817330|2015-12-09T10:12:52.45|
-|開始|曼徹斯特|4267667|2015-12-09T10:14:02.23|
+|Start|曼徹斯特|4267667|2015-12-09T10:14:02.23|
 |停止|London|2817330|2015-12-09T10:23:43.18|
 |取消|曼徹斯特|4267667|2015-12-09T10:27:26.29|
 |停止|曼徹斯特|4267667|2015-12-09T10:28:31.72|
@@ -77,7 +78,7 @@ Events
 1. 最後， `project` 會再次加入資料行以顯示活動的持續時間。
 
 
-|City|SessionId|StartTime|StopTime|Duration|
+|City|SessionId|StartTime|StopTime|持續時間|
 |---|---|---|---|---|
 |London|2817330|2015-12-09T10:12:02.32|2015-12-09T10:23:43.18|00:11:40.46|
 |曼徹斯特|4267667|2015-12-09T10:14:02.23|2015-12-09T10:28:31.72|00:14:29.49|
@@ -685,7 +686,7 @@ Fruits
 ## <a name="find-preceding-event"></a>尋找先前的活動
 下一個範例示範如何在2個資料集之間尋找先前的事件。  
 
-*目的：* ：有兩個資料集： A 和 B。針對 B 中的每筆記錄，在 (中找到其先前的事件，也就是中的 arg_max 記錄，該記錄仍「早于」 B) 。 以下是下列範例資料集的預期輸出。 
+*目的：*：有兩個資料集： A 和 B。針對 B 中的每筆記錄，在 (中找到其先前的事件，也就是中的 arg_max 記錄，該記錄仍「早于」 B) 。 以下是下列範例資料集的預期輸出。 
 
 ```kusto
 let A = datatable(Timestamp:datetime, ID:string, EventA:string)
@@ -921,7 +922,7 @@ Heartbeat
 | project ComputerIP, last_octet, next_ip
 ```
 
-在下面的範例中，會搜尋字串 *Trace* 以尋找「時間長度」定義。 相符項目會轉換為 *real* 並乘以時間常數 (1 秒) *，這會將「時間長度」轉換為型別時間戳記* 。
+在下面的範例中，會搜尋字串 *Trace* 以尋找「時間長度」定義。 相符項目會轉換為 *real* 並乘以時間常數 (1 秒) *，這會將「時間長度」轉換為型別時間戳記*。
 ```Kusto
 let Trace="A=12, B=34, Duration=567, ...";
 print Duration = extract("Duration=([0-9.]+)", 1, Trace, typeof(real));  //result: 567
@@ -931,8 +932,8 @@ print Duration_seconds =  extract("Duration=([0-9.]+)", 1, Trace, typeof(real)) 
 
 ### <a name="isempty-isnotempty-notempty"></a>isempty、isnotempty、notempty
 
-- 若引數是空字串或 Null， *isempty* 會傳回 true (另請參閱 *isnull* )。
-- 若引數不是空字串或 Null， *isnotempty* 會傳回 true (另請參閱 *isnotnull* )。 別名： *notempty*.
+- 若引數是空字串或 Null，*isempty* 會傳回 true (另請參閱 *isnull*)。
+- 若引數不是空字串或 Null，*isnotempty* 會傳回 true (另請參閱 *isnotnull*)。 別名：*notempty*.
 
 
 ```Kusto
@@ -1287,9 +1288,9 @@ Heartbeat
 |RemoteIPCountry  | distinct_computers  |
 ------------------|---------------------|
 |美國    | 19                  |
-|Canada           | 3                   |
+|加拿大           | 3                   |
 |愛爾蘭          | 0                   |
-|United Kingdom   | 0                   |
+|英國   | 0                   |
 |荷蘭      | 2                   |
 
 
@@ -1515,9 +1516,9 @@ SecurityEvent
 | top 10 by Duration desc
 ```
 
-在此範例中，第一個資料集會篩選所有登入事件。 這與會篩選所有登出事件的第二個資料集聯結。 投影的資料行是 _Computer_ 、 _Account_ 、 _TargetLogonId_ 與 _TimeGenerated_ 。 兩個資料集會以共用資料行 _TargetLogonId_ 彼此關聯。 輸出是每個關聯的單一記錄，它同時包含登入與登出時間。
+在此範例中，第一個資料集會篩選所有登入事件。 這與會篩選所有登出事件的第二個資料集聯結。 投影的資料行是 _Computer_、_Account_、_TargetLogonId_ 與 _TimeGenerated_。 兩個資料集會以共用資料行 _TargetLogonId_ 彼此關聯。 輸出是每個關聯的單一記錄，它同時包含登入與登出時間。
 
-若兩個資料集都有具有相同名稱的資料行，系統將會為右側資料集的資料行指定索引編號，因此在此範例中，結果會顯示具有來自左側資料表之值的 _TargetLogonId_ ，以及具有來自右側資料表之值的 _TargetLogonId1_ 。 在此案例中，第二個 _TargetLogonId1_ 資料行會使用 `project-away` 運算子移除。
+若兩個資料集都有具有相同名稱的資料行，系統將會為右側資料集的資料行指定索引編號，因此在此範例中，結果會顯示具有來自左側資料表之值的 _TargetLogonId_，以及具有來自右側資料表之值的 _TargetLogonId1_ 。 在此案例中，第二個 _TargetLogonId1_ 資料行會使用 `project-away` 運算子移除。
 
 > [!NOTE]
 > 若要改進效能，請使用 `project` 運算子，只保留聯結資料集的相關資料行。
@@ -1800,7 +1801,7 @@ week
 :::image type="content" source="images/samples/cohorts.png" alt-text="世代分析輸出":::
 
 ### <a name="rolling-monthly-active-users-and-user-stickiness"></a>每月累積作用中使用者和使用者黏著度
-下列範例會使用 [series_fir](/azure/kusto/query/series-firfunction) 函數進行時間序列分析，該函數允許您執行滑動視窗計算。 受監視的範例應用程式是線上商店，透過自訂的事件追蹤使用者的活動。 該查詢會追蹤兩種類型的使用者活動， _AddToCart_ 和 _Checkout_ ，並將 _作用中使用者_ 定義為在指定日期內至少執行一次結帳的使用者。
+下列範例會使用 [series_fir](/azure/kusto/query/series-firfunction) 函數進行時間序列分析，該函數允許您執行滑動視窗計算。 受監視的範例應用程式是線上商店，透過自訂的事件追蹤使用者的活動。 該查詢會追蹤兩種類型的使用者活動，_AddToCart_ 和 _Checkout_，並將 _作用中使用者_ 定義為在指定日期內至少執行一次結帳的使用者。
 
 
 

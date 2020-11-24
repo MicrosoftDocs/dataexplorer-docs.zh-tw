@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a942015908c9608a76d3c49c411de9d17d6e70f5
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 2b034719fa7c2f3714020c722b5717f5cf8590ff
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92248621"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512956"
 ---
 # <a name="parse-operator"></a>parse 運算子
 

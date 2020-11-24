@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b35bb7944e894256056e03eb756ac85cf1354ba8
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 947ab0af6a5aaa98bb07b08005b940fdf2ce6ae5
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92247695"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513177"
 ---
 # <a name="dcount-aggregation-function"></a>dcount ( # A1 (彙總函式) 
 
@@ -80,4 +81,4 @@ T | summarize dcount(B) by G | count
 
 下圖顯示所有支援的精確度設定之相對估計誤差的機率分佈函數（以百分比表示）：
 
-:::image type="content" border="false" source="images/dcount-aggfunction/hll-error-distribution.png" alt-text="D 計數":::
+:::image type="content" border="false" source="images/dcount-aggfunction/hll-error-distribution.png" alt-text="hll 錯誤分佈":::

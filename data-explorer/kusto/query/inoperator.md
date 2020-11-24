@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: 52e26bb5564079de56817e75a203a400ef7f1a50
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: ffb24abe744bfbe3f7f95336edf0263becfa7ec9
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92248981"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513245"
 ---
 # <a name="in-and-in-operators"></a>in 和 !in 運算子
 
@@ -33,18 +34,18 @@ Table1 | where col in ('value1', 'value2')
 
 ### <a name="case-sensitive-syntax"></a>區分大小寫語法
 
-*T*純 `|` `where` *col* `in` `(` *量運算式的*T 欄清單`)`   
+*T* 純 `|` `where` *col* `in` `(` *量運算式的* T 欄清單`)`   
 *T* `|` `where` *col* `in` `(` *表格式運算式*`)`   
  
-*T*純 `|` `where` *col* `!in` `(` *量運算式的*T 欄清單`)`  
+*T* 純 `|` `where` *col* `!in` `(` *量運算式的* T 欄清單`)`  
 *T* `|` `where` *col* `!in` `(` *表格式運算式*`)`   
 
 ### <a name="case-insensitive-syntax"></a>不區分大小寫語法
 
-*T*純 `|` `where` *col* `in~` `(` *量運算式的*T 欄清單`)`   
+*T* 純 `|` `where` *col* `in~` `(` *量運算式的* T 欄清單`)`   
 *T* `|` `where` *col* `in~` `(` *表格式運算式*`)`   
  
-*T*純 `|` `where` *col* `!in~` `(` *量運算式的*T 欄清單`)`  
+*T* 純 `|` `where` *col* `!in~` `(` *量運算式的* T 欄清單`)`  
 *T* `|` `where` *col* `!in~` `(` *表格式運算式*`)`   
 
 ## <a name="arguments"></a>引數
@@ -157,7 +158,7 @@ Lightning_By_State
 | summarize sum(lightning_events) by State 
 ```
 
-| 狀態     | sum_lightning_events |
+| State     | sum_lightning_events |
 |-----------|----------------------|
 | ALABAMA   | 29                   |
 | 威斯康辛州 | 31                   |
@@ -185,6 +186,6 @@ StormEvents | where State in (InterestingStates()) | count
 .show function InterestingStates
 ```
 
-|名稱|參數|body|資料夾|DocString|
+|Name|參數|主體|資料夾|DocString|
 |---|---|---|---|---|
 |InterestingStates|()|{dynamic ( [「華盛頓州」、「佛羅里達州」、「南喬治亞」、「紐約」 ) }

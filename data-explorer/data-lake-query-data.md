@@ -7,12 +7,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/17/2020
-ms.openlocfilehash: 058a42cc21c6af9642d91231e6b1620315f94f55
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.localizationpriority: high
+ms.openlocfilehash: ec62c1d0dfe439ac77d7fce9e69af8e5c8a7a8a0
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680703"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512786"
 ---
 # <a name="query-data-in-azure-data-lake-using-azure-data-explorer"></a>使用 Azure 資料總管在 Azure Data Lake 中查詢資料
 
@@ -138,11 +139,11 @@ external_table('ApiCalls') | take 10
 
 ## <a name="query-taxirides-external-table-in-the-help-cluster"></a>Help 叢集中的查詢 *TaxiRides* 外部資料表
 
-使用稱為「說明」的測試叢集來試用 *不同的 Azure* 資料總管功能。 說明*help*叢集包含包含數十億個計程車乘車點之[紐約市計程車資料集](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)的外部資料表定義。
+使用稱為「說明」的測試叢集來試用 *不同的 Azure* 資料總管功能。 說明 *help* 叢集包含包含數十億個計程車乘車點之 [紐約市計程車資料集](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)的外部資料表定義。
 
 ### <a name="create-external-table-taxirides"></a>建立外部資料表 *TaxiRides* 
 
-本節說明用來在*help*叢集中建立*TaxiRides*外部資料表的查詢。 由於已經建立此資料表，因此您可以略過本節，並直接移至 [查詢 *TaxiRides* 外部資料表資料](#query-taxirides-external-table-data)。
+本節說明用來在 *help* 叢集中建立 *TaxiRides* 外部資料表的查詢。 由於已經建立此資料表，因此您可以略過本節，並直接移至 [查詢 *TaxiRides* 外部資料表資料](#query-taxirides-external-table-data)。
 
 ```kusto
 .create external table TaxiRides
@@ -217,7 +218,7 @@ dataformat=csv
 
 #### <a name="query-taxirides-external-table-without-partitioning"></a>未分割的查詢 *TaxiRides* 外部資料表
 
-在外部資料表*TaxiRides*上[執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=)，以顯示整個資料集內每一周的乘車點。 
+在外部資料表 *TaxiRides* 上 [執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=)，以顯示整個資料集內每一周的乘車點。 
 
 ```kusto
 external_table("TaxiRides")
@@ -231,7 +232,7 @@ external_table("TaxiRides")
 
 #### <a name="query-taxirides-external-table-with-partitioning"></a>使用資料分割查詢 TaxiRides 外部資料表 
 
-在外部資料表*TaxiRides*上[執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==)，以顯示2017年1月所使用的計程車 cab 類型 (黃色或綠色) 。 
+在外部資料表 *TaxiRides* 上 [執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==)，以顯示2017年1月所使用的計程車 cab 類型 (黃色或綠色) 。 
 
 ```kusto
 external_table("TaxiRides")
@@ -267,7 +268,7 @@ external_table("TaxiRides")
  
 ### <a name="compression"></a>壓縮
  
-使用壓縮來減少從遠端存放裝置提取的資料量。 針對 Parquet 格式，請使用內部 Parquet 壓縮機制來分開壓縮資料行群組，讓您可以個別讀取資料行群組。 若要驗證壓縮機制的使用方式，請檢查檔案的命名方式如下： * &lt; filename &gt; . gz. parquet*或* &lt; filename &gt; . snappy. parquet* ，而不是* &lt; filename &gt; . parquet. gz*。 
+使用壓縮來減少從遠端存放裝置提取的資料量。 針對 Parquet 格式，請使用內部 Parquet 壓縮機制來分開壓縮資料行群組，讓您可以個別讀取資料行群組。 若要驗證壓縮機制的使用方式，請檢查檔案的命名方式如下： *&lt; filename &gt; . gz. parquet* 或 *&lt; filename &gt; . snappy. parquet* ，而不是 *&lt; filename &gt; . parquet. gz*。 
  
 ### <a name="partitioning"></a>資料分割
  

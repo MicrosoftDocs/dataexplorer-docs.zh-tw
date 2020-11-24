@@ -8,12 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: a1c4b89677e08872fdf81e72f7391511b7d6c637
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.localizationpriority: high
+ms.openlocfilehash: e65b16ac4a280f2ecbef2c4557cac4a8d7be13b3
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680711"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513126"
 ---
 # <a name="the-datetime-data-type"></a>Datetime 資料類型
 
@@ -29,7 +30,7 @@ ms.locfileid: "90680711"
 
 ## <a name="datetime-literals"></a>datetime 常值
 
-型別的常 `datetime` 值具有語法 `datetime(` *值* `)` ，其中支援*值*的格式數，如下表所示：
+型別的常 `datetime` 值具有語法 `datetime(` *值* `)` ，其中支援 *值* 的格式數，如下表所示：
 
 |範例                                                     |值                                                         |
 |------------------------------------------------------------|--------------------------------------------------------------|
@@ -47,7 +48,7 @@ ms.locfileid: "90680711"
 有數種格式可 `datetime` 支援做為 [datetime ( # A1 常](#datetime-literals) 值和 [todatetime ( # B3 ](../todatetimefunction.md) 函數。
 
 > [!WARNING]
-> **強烈建議您**只使用 ISO 8601 格式。
+> **強烈建議您** 只使用 ISO 8601 格式。
 
 ### <a name="iso-8601"></a>[ISO 8601](https://www.iso.org/iso/home/standards/iso8601.htm)
 

@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: 1317f9767182ad76f226fae6995763ea832cd36a
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 810eba264c717d156f74b9958edecb712d58a4fd
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92250855"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513194"
 ---
 # <a name="summarize-operator"></a>summarize 運算子
 
@@ -38,7 +39,7 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 ## <a name="arguments"></a>引數
 
-* ** 結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
+*  結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
 * *匯總：*[aggregation function](summarizeoperator.md#list-of-aggregation-functions) `count()` 使用資料 `avg()` 行名稱做為引數的彙總函式（例如或）的呼叫。 請參閱 [彙總函式清單](summarizeoperator.md#list-of-aggregation-functions)。
 * *GroupExpression：* 可以參考輸入資料的純量運算式。
   輸出的記錄會與所有群組運算式的相異值一樣多。

@@ -8,18 +8,19 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/03/2020
-ms.openlocfilehash: b5d5ef5ba3b29bf1bc468a64baa159106b164604
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 762c3075c162ba35bdba539d0e86460c78f3297e
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92249375"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95511783"
 ---
 # <a name="query-best-practices"></a>查詢最佳做法
 
 以下是一些最佳作法，讓您的查詢執行速度更快。
 
-|動作  |使用  |請勿使用  |注意  |
+|動作  |使用  |請勿使用  |備註  |
 |---------|---------|---------|---------|
 | **時間篩選** | 先使用時間篩選器。 ||Kusto 已高度優化，可使用時間篩選。| 
 |**字串運算子**      | 使用 `has` 運算子     | 請勿使用 `contains`     | 尋找完整權杖時， `has` 效果會更好，因為它不會尋找子字串。   |
@@ -32,7 +33,7 @@ ms.locfileid: "92249375"
 | **對超過1000000000筆記錄套用轉換**| 調整查詢的大小，以減少送出至轉換的資料量。| 如果可以避免，請不要轉換大量的資料。 | |
 | **新查詢** | `limit [small number]` `count` 在結尾使用或。 | |     對未知的資料集執行未系結的查詢可能會產生 Gb 的結果，以傳回給用戶端，而導致回應緩慢和忙碌的叢集。|
 | **不區分大小寫的比較** | 使用`Col =~ "lowercasestring"` | 請勿使用 `tolower(Col) == "lowercasestring"` |
-| **比較已在小寫 (或大寫) 中的資料 ** | `Col == "lowercasestring"` (或 `Col == "UPPERCASESTRING"`) | 避免使用不區分大小寫的比較。||
+| **比較已在小寫 (或大寫) 中的資料** | `Col == "lowercasestring"` (或 `Col == "UPPERCASESTRING"`) | 避免使用不區分大小寫的比較。||
 | **篩選資料行** |  篩選資料表資料行。|不要篩選計算結果欄。 | |
 | | 使用`T | where predicate(<expression>)` | 請勿使用 `T | extend _value = <expression> | where predicate(_value)` ||
 | **summarize 運算子** |  使用提示。當摘要運算子的具有高基數時， [策略 = 隨機播放](./shufflequery.md) `group by keys` 。 | | 高基數最好高於1000000。|

@@ -7,12 +7,13 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: bf5cd6d76878630549537845679d0bdb5d6d3797
-ms.sourcegitcommit: 574296b9a84084de031684a65f32b6c1bd1a4858
+ms.localizationpriority: high
+ms.openlocfilehash: 798a8b201ee87d5c43aeb31d6af515d41c516bef
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94714120"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512208"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>將資料從事件中樞內嵌至 Azure 資料總管
 
@@ -29,7 +30,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 如需從事件中樞擷取至 Azure 資料總管的一般資訊，請參閱 [連接到事件中樞](ingest-data-event-hub-overview.md)。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * [測試叢集和資料庫](create-cluster-database-portal.md)。

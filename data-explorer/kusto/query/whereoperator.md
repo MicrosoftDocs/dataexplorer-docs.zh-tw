@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 738683b3042295678f7d507425443b47c9dec79e
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 6ac800cd4b38396e0f32f44976c4594c093747bb
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92251796"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512004"
 ---
 # <a name="where-operator"></a>where 運算子
 
@@ -27,16 +28,16 @@ T | where fruit=="apple"
 
 ## <a name="syntax"></a>語法
 
-*T*述詞 `| where` *Predicate*
+*T* 述詞 `| where` *Predicate*
 
 ## <a name="arguments"></a>引數
 
 * *T*：要篩選其記錄的表格式輸入。
-* *Predicate*述詞： `boolean` *T*的資料行上的[運算式](./scalar-data-types/bool.md)。它會針對*T*中的每個資料列進行評估。
+* *Predicate* 述詞： `boolean` *T* 的資料行上的 [運算式](./scalar-data-types/bool.md)。它會針對 *T* 中的每個資料列進行評估。
 
 ## <a name="returns"></a>傳回
 
-Predicate** 是 `true` 之 T** 中的資料列。
+Predicate 是 `true` 之 T 中的資料列。
 
 **附注** Null 值：相較于 null 值，所有篩選函數都會傳回 false。 您可以使用特殊的 null 感知函數來撰寫處理 null 值的查詢。
 
@@ -46,7 +47,7 @@ Predicate** 是 `true` 之 T** 中的資料列。
 
 若要取得最快效能︰
 
-* 在資料行名稱和常數之間**使用簡單比較**。  ( 「常數」表示資料表上的常數-因此 `now()` 和 `ago()` 都是「確定」，因此是使用[ `let` 語句](./letstatement.md)指派的純量值。 ) 
+* 在資料行名稱和常數之間 **使用簡單比較**。  ( 「常數」表示資料表上的常數-因此 `now()` 和 `ago()` 都是「確定」，因此是使用[ `let` 語句](./letstatement.md)指派的純量值。 ) 
 
     例如，`where Timestamp >= ago(1d)` 比 `where floor(Timestamp, 1d) == ago(1d)` 更好。
 

@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9bafeee9cec5ac81034b879f054e445d8b118dcf
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 6fc2e55b43e7c7c2dc2bb537730f8f627e3e4a66
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92243420"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513109"
 ---
 # <a name="bin"></a>bin()
 
@@ -33,11 +34,11 @@ Null 值、null bin 大小或負的 bin 大小將會產生 null。
 ## <a name="arguments"></a>引數
 
 * *值*： number、date 或 timespan。 
-* *roundTo*：「bin 大小」。 相除 *值*的數位或 timespan。 
+* *roundTo*：「bin 大小」。 相除 *值* 的數位或 timespan。 
 
 ## <a name="returns"></a>傳回
 
-低於 value** 的 roundTo** 最接近倍數。  
+低於 value 的 roundTo 最接近倍數。  
  
 ```kusto
 (toint((value/roundTo))) * roundTo`

@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 1e39e71aa9406815338974b2da03d05315054b65
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 6357afeb0a5673584e27b84a231e3c65f897b8fc
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92247364"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512361"
 ---
 # <a name="make-series-operator"></a>make-series 運算子
 
@@ -29,17 +30,17 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 
 ## <a name="arguments"></a>引數
 
-* ** 結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
-* *DefaultValue：* 將使用的預設值，而不是不存在的值。 如果沒有任何資料列具有 *AxisColumn* 和 *GroupExpression*的特定值，則在結果中，陣列的對應元素將會被指派 *DefaultValue*。 如果省略 *DefaultValue* ，則會假設為0。 
+*  結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
+* *DefaultValue：* 將使用的預設值，而不是不存在的值。 如果沒有任何資料列具有 *AxisColumn* 和 *GroupExpression* 的特定值，則在結果中，陣列的對應元素將會被指派 *DefaultValue*。 如果省略 *DefaultValue* ，則會假設為0。 
 * *匯總：*[aggregation function](make-seriesoperator.md#list-of-aggregation-functions) `count()` 使用資料 `avg()` 行名稱做為引數的彙總函式（例如或）的呼叫。 請參閱 [彙總函式清單](make-seriesoperator.md#list-of-aggregation-functions)。 只有傳回數值結果的彙總函式可以與運算子搭配使用 `make-series` 。
 * *AxisColumn：* 數列將會排序的資料行。 您可以將它視為時間軸，但除了 `datetime` 任何數數值型別之外。
-* *啟動*： (選擇性) 要建立之每個數列的 *AxisColumn* 下限值。 *start*、 *end*和 *step* 可用來在指定範圍內建立 *AxisColumn* 值的陣列，並使用指定的 *步驟*。 所有 *匯總* 值都會分別針對這個陣列進行排序。 這個 *AxisColumn* 陣列也是輸出中的最後一個輸出資料行，該資料行的名稱與 *AxisColumn*相同。 如果未指定 *起始* 值，則開始是第一個 bin (步驟) ，其中每個數列都有資料。
-* *end*： (選擇性) *AxisColumn*的高系結 (非內含) 值。 時間序列的最後一個索引小於此值 (*而且將會是小於* *end*) *之步驟*的整數倍數。 如果未提供 *結束* 值，它將會是最後一個 bin (步驟) 的上限，其中每個數列都有資料。
+* *啟動*： (選擇性) 要建立之每個數列的 *AxisColumn* 下限值。 *start*、 *end* 和 *step* 可用來在指定範圍內建立 *AxisColumn* 值的陣列，並使用指定的 *步驟*。 所有 *匯總* 值都會分別針對這個陣列進行排序。 這個 *AxisColumn* 陣列也是輸出中的最後一個輸出資料行，該資料行的名稱與 *AxisColumn* 相同。 如果未指定 *起始* 值，則開始是第一個 bin (步驟) ，其中每個數列都有資料。
+* *end*： (選擇性) *AxisColumn* 的高系結 (非內含) 值。 時間序列的最後一個索引小於此值 (*而且將會是小於* *end*) *之步驟* 的整數倍數。 如果未提供 *結束* 值，它將會是最後一個 bin (步驟) 的上限，其中每個數列都有資料。
 * *步驟*： *AxisColumn* 陣列的兩個連續元素之間的差異， (也就是) 的大小。
 * *GroupExpression：* 在資料行上提供一組相異值的運算式。 通常是已提供有限的一組值的資料行名稱。 
 * *MakeSeriesParameters*：零或多個 (空間分隔) 參數，以控制行為的 *名稱* `=` *值* 形式表示。 支援下列參數： 
   
-  |名稱           |值                                        |描述                                                                                        |
+  |Name           |值                                        |描述                                                                                        |
   |---------------|-------------------------------------|------------------------------------------------------------------------------|
   |`kind`          |`nonempty`                               |當 make series 運算子的輸入為空白時，會產生預設結果|                                
 
@@ -47,7 +48,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 
 輸入資料列會排列成具有相同 `by` 運算式值和 `bin_at(` *AxisColumn* `, ` *步驟* `, ` *開始* `)` 運算式的群組。 然後指定的彙總函式會針對每個群組進行計算，以便為每個群組產生資料列。 結果中會包含資料 `by` 行、 *AxisColumn* 資料行，以及每個計算匯總的至少一個資料行。 不支援多個資料行或非數值結果的 (匯總。 ) 
 
-這個中繼結果有許多資料列，因為 `by` 和 `bin_at(` *AxisColumn*的 `, ` *步驟* `, ` *開始* `)` 值有相異的組合。
+這個中繼結果有許多資料列，因為 `by` 和 `bin_at(` *AxisColumn* 的 `, ` *步驟* `, ` *開始* `)` 值有相異的組合。
 
 最後，會將中繼結果中的資料列排列成具有相同運算式值的群組 `by` ，並將所有匯總值排列成陣列 (`dynamic`) 類型的值。 每個匯總都有一個資料行包含具有相同名稱的陣列。 範圍函數輸出中的最後一個資料行，包含所有 *AxisColumn* 值。 它的值會針對所有資料列重複。 
 
@@ -62,7 +63,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 *T* `| make-series` [*Column* `=` ]*匯總*[ `default` `=` *DefaultValue*] [ `,` ...] `on` *AxisColumn* `in` `range(` *start* `,` *stop* `,` *step* `)` [ `by` [*Column* `=` ] *GroupExpression* [ `,` ...]]
 
 從替代語法產生的數列與主要語法有兩個不同之處：
-* *停止*值為內含。
+* *停止* 值為內含。
 * 分類收納索引軸是使用 bin ( # A1 來產生，而不是 bin_at ( # A3，這表示 *啟動* 可能不會包含在產生的數列中。
 
 建議使用「構成系列」的主要語法，而不是替代語法。

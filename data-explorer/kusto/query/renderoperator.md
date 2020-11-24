@@ -8,14 +8,15 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/29/2020
+ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 069733d2215257106ede58f4fd6e4f2a923a8982
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: bc083cadbae44723c85c0a119b90ab5b43aba388
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92243116"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512837"
 ---
 # <a name="render-operator"></a>render 運算子
 
@@ -73,7 +74,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 ::: zone-end
 
-* *PropertyName* /*PropertyValue*表示轉譯時要使用的其他資訊。
+* *PropertyName* /*PropertyValue* 表示轉譯時要使用的其他資訊。
   所有屬性都是選擇性的。 支援的屬性包括：
 
 ::: zone pivot="azuredataexplorer"

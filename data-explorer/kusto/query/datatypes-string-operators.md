@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/19/2020
-ms.openlocfilehash: 1c394d9125bd354cab21d3087c273f983627a0d6
-ms.sourcegitcommit: c351c2c8ab6e184827c4702eb0ec8bf783c7bbd3
+ms.localizationpriority: high
+ms.openlocfilehash: d7c975dcf3fb00ed1108f55957a35f494310203e
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/18/2020
-ms.locfileid: "94874775"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513228"
 ---
 # <a name="string-operators"></a>字串運算子
 
@@ -43,7 +44,7 @@ Kusto 會建立一個詞彙索引，其中包含 *四個字元* 以上的所有�
 > 
 > 具有尾碼的運算子 `_cs` 會區分大小寫。
 
-運算子        |說明                                                       |區分大小寫|範例 (結果為 `true`)
+運算子        |描述                                                       |區分大小寫|範例 (結果為 `true`)
 ----------------|------------------------------------------------------------------|--------------|-----------------------
 `==`            |等於                                                            |是           |`"aBc" == "aBc"`
 `!=`            |不等於                                                        |是           |`"abc" != "ABC"`

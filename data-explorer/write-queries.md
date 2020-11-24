@@ -7,12 +7,13 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: tutorial
 ms.date: 04/07/2019
-ms.openlocfilehash: f6d993383ecf6c25bf144228e77f02f944bc02d8
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.localizationpriority: high
+ms.openlocfilehash: 22a22f1050a366a79017904550854365dc2ef43c
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343329"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513279"
 ---
 # <a name="write-queries-for-azure-data-explorer"></a>撰寫 Azure 資料總管查詢
 
@@ -22,7 +23,7 @@ ms.locfileid: "92343329"
 
 有兩種方式可執行本文中的查詢：
 
-- 在 Azure 資料總管中，使用我們已設定協助學習的*說明叢集*。
+- 在 Azure 資料總管中，使用我們已設定協助學習的 *說明叢集*。
     請使用為 Azure Active Directory 成員的組織電子郵件帳戶[登入叢集](https://dataexplorer.azure.com/clusters/help/databases/samples)。
 
 - 在您自己包含 StormEvents 範例資料的叢集上。 如需詳細資訊。請參閱[快速入門：建立 Azure 資料總管叢集與資料庫](create-cluster-database-portal.md)及[將範例資料內嵌至 Azure 資料總管](ingest-sample-data.md)。
@@ -61,13 +62,13 @@ StormEvents
 
 本節所述的運算子是建置組塊，可用來了解 Azure 資料總管中的查詢。 您所撰寫的查詢大部分將包含以下數種運算子。
 
-若要在說明叢集上執行查詢：請選取每個查詢上方的 [按一下以執行查詢]****。
+若要在說明叢集上執行查詢：請選取每個查詢上方的 [按一下以執行查詢]。
 
 若要在您自己的叢集上執行查詢：
 
 1. 將每個查詢複製到以網路為基礎的查詢應用程式，然後選取該查詢，或將游標放在查詢中。
 
-1. 選取應用程式頂端的 [執行]****。
+1. 選取應用程式頂端的 [執行]。
 
 ### <a name="count"></a>count
 
@@ -270,7 +271,7 @@ StormEvents
 
 ### <a name="bin"></a>bin()
 
-[**bin()** ](kusto/query/binfunction.md)：將值捨入為指定 bin 大小的整數倍數。
+[**bin()**](kusto/query/binfunction.md)：將值捨入為指定 bin 大小的整數倍數。
 
 下列查詢會計算一天當中為貯體大小的計數。
 
@@ -357,7 +358,7 @@ MyData
 
 ### <a name="ago"></a>ago()
 
-[**ago()** ](kusto/query/agofunction.md)：從目前的 UTC 時鐘時間減去指定的時間範圍。
+[**ago()**](kusto/query/agofunction.md)：從目前的 UTC 時鐘時間減去指定的時間範圍。
 
 下列查詢會傳回過去 12 小時的資料。
 
@@ -631,7 +632,7 @@ FloodDataSet
 
 ### <a name="percentiles"></a>percentiles()
 
-[**percentiles()**](kusto/query/percentiles-aggfunction.md)：針對由運算式定義的母體擴展，傳回該母體擴展之[**最近序數百分位數**](kusto/query/percentiles-aggfunction.md)的估計值。 其精確度取決於百分位數區域中的母體密度。 僅用於 [**summarize**](kusto/query/summarizeoperator.md) 內部彙總的內容。
+[**percentiles()**](kusto/query/percentiles-aggfunction.md)：針對由運算式定義的母體擴展，傳回該母體擴展之 [**最近序數百分位數**](kusto/query/percentiles-aggfunction.md)的估計值。 其精確度取決於百分位數區域中的母體密度。 僅用於 [**summarize**](kusto/query/summarizeoperator.md) 內部彙總的內容。
 
 下列查詢會計算 storm 持續時間的百分位數。
 
@@ -917,7 +918,7 @@ StormEvents
 
 ## <a name="functions"></a>函式
 
-本節說明[**函式**](kusto/query/functions/index.md)：儲存在伺服器上可重複使用的查詢。 函式可由查詢或其他函式叫用 (不支援遞迴函式)。
+本節說明 [**函式**](kusto/query/functions/index.md)：儲存在伺服器上可重複使用的查詢。 函式可由查詢或其他函式叫用 (不支援遞迴函式)。
 
 > [!NOTE]
 > 您無法在說明叢集上建立函式，因為該叢集是唯讀的。 針對此組件使用您自己的測試叢集。

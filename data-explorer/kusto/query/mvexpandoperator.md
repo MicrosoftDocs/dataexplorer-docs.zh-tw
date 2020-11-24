@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
-ms.openlocfilehash: a9f5517baf0963b4857759fc18158cfa0eee0bb1
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.localizationpriority: high
+ms.openlocfilehash: 3324cfe658b2eb29c54ff8a3d44ed660ec13ead5
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793893"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512718"
 ---
 # <a name="mv-expand-operator"></a>mv-expand 運算子
 
@@ -29,11 +30,11 @@ ms.locfileid: "88793893"
 
 ## <a name="arguments"></a>引數
 
-* ** 在結果中，具名資料行中的陣列會展開為多個資料列。 
-* ** 產生陣列的運算式。 如果使用這種形式，則會新增新資料行，並保留現有資料行。
-* ** 新資料行的名稱。
+*  在結果中，具名資料行中的陣列會展開為多個資料列。 
+*  產生陣列的運算式。 如果使用這種形式，則會新增新資料行，並保留現有資料行。
+*  新資料行的名稱。
 * *Typename：* 指出陣列元素的基礎類型，這個類型會變成運算子所產生之資料行的類型 `mv-apply` 。 套用類型的作業僅限轉換，而且不包含剖析或類型轉換。 不符合宣告型別的陣列元素會變成 `null` 值。
-* ** 從每個原始資料列所產生的資料列數目上限。 預設值為2147483647。 
+*  從每個原始資料列所產生的資料列數目上限。 預設值為2147483647。 
 
   > [!Note]
   > 運算子的舊版和過時形式的 `mvexpand` 預設資料列限制為128。

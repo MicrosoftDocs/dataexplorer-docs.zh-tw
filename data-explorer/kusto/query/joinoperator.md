@@ -8,14 +8,15 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
+ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8324d0c6537d6d22a2814a7aa80625278dc36aec
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: b90e5f1c95ec75a946490cd75b5dd89ad2cb1aba
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92241507"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513330"
 ---
 # <a name="join-operator"></a>join 運算子
 
@@ -35,9 +36,9 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 
 * *RightTable*：要合併其資料列的 **右側** 資料表或表格式運算式（有時稱為 **內部** 資料表）。 表示為 `$right` 。
 
-* *屬性*：一或多個以逗號分隔的 **規則** ，描述 *LeftTable* 中的資料列如何與 *RightTable*中的資料列進行比對。 使用邏輯運算子來評估多個規則 `and` 。
+* *屬性*：一或多個以逗號分隔的 **規則** ，描述 *LeftTable* 中的資料列如何與 *RightTable* 中的資料列進行比對。 使用邏輯運算子來評估多個規則 `and` 。
 
-  **規則**可以是下列其中一個：
+  **規則** 可以是下列其中一個：
 
   |規則種類        |語法          |Predicate    |
   |-----------------|--------------|-------------------------|
@@ -47,7 +48,7 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
     > [!NOTE]
     > 針對「依值的相等」，資料行名稱 *必須* 使用以和標記法表示的適用擁有者資料表加以限定 `$left` `$right` 。
 
-* *JoinParameters*：以*名稱*值形式表示的零或多個以空格分隔的參數，以控制資料列比對作業 `=` *Value*和執行計畫的行為。 支援下列參數：
+* *JoinParameters*：以 *名稱* 值形式表示的零或多個以空格分隔的參數，以控制資料列比對作業 `=` *Value* 和執行計畫的行為。 支援下列參數：
 
     ::: zone pivot="azuredataexplorer"
 
@@ -61,7 +62,7 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 
     ::: zone pivot="azuremonitor"
 
-    |名稱           |值                                        |描述                                  |
+    |Name           |值                                        |描述                                  |
     |---------------|----------------------------------------------|---------------------------------------------|
     |`kind`         |聯結類別|查看[聯結](#join-flavors)類別|                                             |
     |`hint.remote`  |`auto`, `left`, `local`, `right`              |                                             |
@@ -159,7 +160,7 @@ X | join kind=innerunique Y on Key
 
 **資料表 X**
 
-|Key |Value1
+|機碼 |Value1
 |---|---
 |a |1
 |b |2
@@ -168,7 +169,7 @@ X | join kind=innerunique Y on Key
 
 **資料表 Y**
 
-|Key |Value2
+|機碼 |Value2
 |---|---
 |b |10
 |c |20
@@ -181,7 +182,7 @@ X | join kind=innerunique Y on Key
 
 在重復資料刪除之後，資料表 X 的聯結左邊是：
 
-|Key |Value1
+|機碼 |Value1
 |---|---
 |a |1
 |b |2
@@ -207,7 +208,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join Y on Key
 ```
 
-|Key|Value1|Key1|Value2|
+|機碼|Value1|Key1|Value2|
 |---|---|---|---|
 |b|2|b|10|
 |c|4|c|20|
@@ -238,7 +239,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=inner Y on Key
 ```
 
-|Key|Value1|Key1|Value2|
+|機碼|Value1|Key1|Value2|
 |---|---|---|---|
 |b|3|b|10|
 |b|2|b|10|
@@ -353,7 +354,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=leftouter Y on Key
 ```
 
-|Key|Value1|Key1|Value2|
+|機碼|Value1|Key1|Value2|
 |---|---|---|---|
 |b|3|b|10|
 |b|2|b|10|
@@ -383,7 +384,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=rightouter Y on Key
 ```
 
-|Key|Value1|Key1|Value2|
+|機碼|Value1|Key1|Value2|
 |---|---|---|---|
 |b|3|b|10|
 |b|2|b|10|
@@ -413,7 +414,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=fullouter Y on Key
 ```
 
-|Key|Value1|Key1|Value2|
+|機碼|Value1|Key1|Value2|
 |---|---|---|---|
 |b|3|b|10|
 |b|2|b|10|
@@ -444,7 +445,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=leftanti Y on Key
 ```
 
-|Key|Value1|
+|機碼|Value1|
 |---|---|
 |a|1|
 
@@ -473,7 +474,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=rightanti Y on Key
 ```
 
-|Key|Value2|
+|機碼|Value2|
 |---|---|
 |d|40|
 
@@ -502,7 +503,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=leftsemi Y on Key
 ```
 
-|Key|Value1|
+|機碼|Value1|
 |---|---|
 |b|3|
 |b|2|
@@ -530,7 +531,7 @@ let Y = datatable(Key:string, Value2:long)
 X | join kind=rightsemi Y on Key
 ```
 
-|Key|Value2|
+|機碼|Value2|
 |---|---|
 |b|10|
 |c|20|

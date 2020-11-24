@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 3b857e0e16c212c2f12d43f9709a9278526a7344
-ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
+ms.localizationpriority: high
+ms.openlocfilehash: cbdebe75713bb7cd786941e7546ab477df497c20
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95324681"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512905"
 ---
 # <a name="query-limits"></a>查詢限制
 

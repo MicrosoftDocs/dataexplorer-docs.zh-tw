@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8ce8af3f9d56e4b5c3d388010b2760906a8e3dc4
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 4baae5bee8dd1e85a304be7fb4eae988acc404d8
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92242426"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512939"
 ---
 # <a name="split"></a>split()
 
@@ -32,8 +33,8 @@ split("aaa_bbb_ccc", "_") == ["aaa","bbb","ccc"]
 ## <a name="arguments"></a>引數
 
 * *來源*：將根據指定的分隔符號進行分割的來源字串。
-* ︰**: The  that will be used in order to split the source string.
-* requestedIndex︰** 以零為基礎的選擇性索引 `int`。 如果提供，當要求的子字串存在時，傳回的字串陣列將會包含該子字串。 
+* ︰: The  that will be used in order to split the source string.
+* requestedIndex︰以零為基礎的選擇性索引 `int`。 如果提供，當要求的子字串存在時，傳回的字串陣列將會包含該子字串。 
 
 ## <a name="returns"></a>傳回
 

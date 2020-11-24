@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0f49ee6763d4afadf12e9e008bd7ea8e61c49acc
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 3125a51733f6672d041e6c1522ea755e5677cb0c
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92246095"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512854"
 ---
 # <a name="parse_json"></a>parse_json()
 
@@ -35,7 +36,7 @@ ms.locfileid: "92246095"
 
 ## <a name="returns"></a>傳回
 
-由 `dynamic` *json*值決定的型別的物件：
+由 `dynamic` *json* 值決定的型別的物件：
 * 如果 *json* 的型別為 `dynamic` ，則其值會依原樣使用。
 * 如果 *json* 的型別為 `string` ，而且是 [格式正確的 json 字串](https://json.org/)，則會剖析字串，並傳回產生的值。
 * 如果 *json* 的類型是 `string` ，但它不是 [格式正確的 json 字串](https://json.org/)，則傳回的值會是 `dynamic` 具有原始值之類型的物件 `string` 。
@@ -56,7 +57,7 @@ T
 | extend duration_value=d.duration.value, duration_min=d["duration"]["min"]
 ```
 
-**備註**
+**注意事項**
 
 通常會有一個描述屬性包的 JSON 字串，其中其中一個「位置」是另一個 JSON 字串。 
 

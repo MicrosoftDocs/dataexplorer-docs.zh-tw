@@ -8,14 +8,15 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
+ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b3b7d571662d8a9ed0fd592547f32a131d26e277
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: b8ad39e8c1233acc2df6c30059a6926cea85f37a
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92245745"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512803"
 ---
 # <a name="union-operator"></a>union 運算子
 
@@ -49,9 +50,9 @@ Table1 | union Table2, Table3
 同樣地，如果參考了多個叢集，則會在值中顯示叢集 __和資料庫__ 的資格。 
 * `isfuzzy=``true`  |  `false` ：如果 `isfuzzy` 設為 `true` -允許對等位腿的模糊解析度。 `Fuzzy` 適用于 `union` 來源集合。 這表示在分析查詢和準備執行時，會將一組聯集來源縮減為存在且可在當時存取的一組資料表參考。 如果找到至少一個這類資料表，任何解析失敗都會在查詢狀態結果中產生一則警告， (每個遺漏的參考) 都會產生警告，但不會防止查詢執行;如果沒有成功的解決方式，查詢將會傳回錯誤。
 預設為 `isfuzzy=` `false`。
-* *UnionParameters*：零個或多個 (空間分隔) 參數的格式， *Name*這些參數是控制資料列比對作業 `=` 和執行計畫行為的名稱*值*形式。 支援下列參數： 
+* *UnionParameters*：零個或多個 (空間分隔) 參數的格式， *Name* 這些參數是控制資料列比對作業 `=` 和執行計畫行為的名稱 *值* 形式。 支援下列參數： 
 
-  |名稱           |值                                        |描述                                  |
+  |Name           |值                                        |描述                                  |
   |---------------|----------------------------------------------|---------------------------------------------|
   |`hint.concurrency`|*Number*|提示系統 `union` 應平行執行運算子的並行子查詢數目。 *預設值*：叢集中單一節點上的 CPU 核心數量 (2 到 16) 。|
   |`hint.spread`|*Number*|提示系統，並行子查詢執行應使用的節點數目 `union` 。 *預設值*：1。|
@@ -79,7 +80,7 @@ Table1 | union Table2, Table3
 
 所含資料列數目和所有輸入資料表中的資料列數目一樣多的資料表。
 
-**備註**
+**注意事項**
 
 ::: zone pivot="azuredataexplorer"
 

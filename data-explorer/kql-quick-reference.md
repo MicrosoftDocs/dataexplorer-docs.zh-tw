@@ -7,18 +7,19 @@ ms.reviewer: ''
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/19/2020
-ms.openlocfilehash: 2fa4cbd0b1cf7b034bc7ae3202afcde3866ca347
-ms.sourcegitcommit: ee904f45e3eb3feab046263aa9956cb7780a056d
+ms.localizationpriority: high
+ms.openlocfilehash: 3b007d1688130449c597ef99281ed89b55d880eb
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92356583"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95511919"
 ---
 # <a name="kql-quick-reference"></a>KQL 快速參考
 
 本文將說明函式清單及其描述，以協助您開始使用 Kusto 查詢語言。
 
-| Operator/函式                               | 說明                           | 語法                                           |
+| Operator/函式                               | 描述                           | 語法                                           |
 | :---------------------------------------------- | :------------------------------------ |:-------------------------------------------------|
 |**篩選準則/搜尋/條件**                      |**_藉由篩選或搜尋來尋找相關資料_** |                      |
 | [where](kusto/query/whereoperator.md)                      | 特定述詞上的篩選準則           | `T | where Predicate`                         |
@@ -33,7 +34,7 @@ ms.locfileid: "92356583"
 | [站](kusto/query/binfunction.md)                          | 四捨五入時間範圍內的所有值，並將其分組 | `bin(value,roundTo)` |
 | **建立/移除資料行**                   |**_在資料表中新增或移除資料行_** |                                                    |
 | [print](kusto/query/printoperator.md)                      | 輸出具有一或多個純量運算式的單一資料列 | `print [ColumnName =] ScalarExpression [',' ...]` |
-| [project](kusto/query/projectoperator.md)                  | 選取要包含在指定順序中的資料行 | `T | project ColumnName [= Expression] [, ...]` <br> Or <br> `T | project [ColumnName | (ColumnName[,]) =] Expression [, ...]` |
+| [project](kusto/query/projectoperator.md)                  | 選取要包含在指定順序中的資料行 | `T | project ColumnName [= Expression] [, ...]` <br> 或 <br> `T | project [ColumnName | (ColumnName[,]) =] Expression [, ...]` |
 | [project-away](kusto/query/projectawayoperator.md)         | 選取要從輸出中排除的資料行 | `T | project-away ColumnNameOrPattern [, ...]` |
 | [專案-保留](kusto/query/project-keep-operator.md)         | 選取要保留在輸出中的資料行 | `T | project-keep ColumnNameOrPattern [, ...]` |
 | [專案-重新命名](kusto/query/projectrenameoperator.md)     | 重新命名結果輸出中的資料行 | `T | project-rename new_column_name = column_name` |
@@ -57,4 +58,4 @@ ms.locfileid: "92356583"
 | [invoke](kusto/query/invokeoperator.md)                    | 在其接收為輸入的資料表上執行函數。 | `T | invoke function([param1, param2])` |
 | [評估 pluginName](kusto/query/evaluateoperator.md)     | 評估 (外掛程式) 的查詢語言延伸模組 | `[T |] evaluate [ evaluateParameters ] PluginName ( [PluginArg1 [, PluginArg2]... )` |
 | **視覺效果**                               | **_以圖形格式顯示資料的作業_** | |
-| [轉譯](kusto/query/renderoperator.md) | 以圖形化輸出呈現結果 | `T | render Visualization [with (PropertyName = PropertyValue [, ...] )]` |
+| [呈現](kusto/query/renderoperator.md) | 以圖形化輸出呈現結果 | `T | render Visualization [with (PropertyName = PropertyValue [, ...] )]` |

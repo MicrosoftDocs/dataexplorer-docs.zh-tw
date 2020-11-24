@@ -8,14 +8,15 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/08/2020
+ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8a3c0b058b2c1cf5023ce0069a7dd938fce5caec
-ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
+ms.openlocfilehash: cae5a3abd7a633bf143d1233db459a98ca53daaf
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95324732"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513007"
 ---
 # <a name="tutorial"></a>教學課程
 
