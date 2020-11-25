@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/28/2020
-ms.openlocfilehash: 05f0055e5faf99d14864338db7f6ad6a4c99946e
-ms.sourcegitcommit: 0820454feb02ae489f3a86b688690422ae29d788
+ms.openlocfilehash: fd0bdc07c2a51d76257800e55921a82cd7fdbbda
+ms.sourcegitcommit: cffc81de2b5c75a0ef5a3c71ff58d1ef52d4eb5c
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/19/2020
-ms.locfileid: "94932696"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95872272"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-using-go"></a>使用 Go 建立 Azure 資料總管叢集和資料庫
 
@@ -29,7 +29,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 在本文中，您會使用 [Go](https://golang.org/)建立 Azure 資料總管叢集和資料庫。 然後，您可以列出並刪除您的新叢集和資料庫，並在您的資源上執行作業。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free)。
 * 安裝 [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)。
@@ -63,7 +63,7 @@ func getClustersClient(subscription string) kusto.ClustersClient {
 
 ### <a name="create-cluster"></a>建立叢集
 
-使用上的 [CreateOrUpdate](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#ClustersClient.CreateOrUpdate) 函式 `kusto.ClustersClient` 來建立新的 Azure 資料總管叢集。 等候進程完成，再檢查結果。
+使用上的 [CreateOrUpdate](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/kusto/mgmt/2018-09-07-preview/kusto) 函式 `kusto.ClustersClient` 來建立新的 Azure 資料總管叢集。 等候進程完成，再檢查結果。
 
 ```go
 func createCluster(sub, name, location, rgName string) {
