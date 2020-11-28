@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b42cf002382cf4f7b79f7f734b6c7137f42fcbc8
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: 7a0a2384409f4b1c7e55231d8bf7b68c44ab8a6d
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967021"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303281"
 ---
 # <a name="management-control-commands-overview"></a>管理 (控制命令) 概觀
 
@@ -77,7 +77,7 @@ $command_results | extend LastColumn=useless(TableName)
 ```kusto
 .set MyTable <|
 let text="Hello, World!";
-print str=Text
+print str=text
 ```
 
 
