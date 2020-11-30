@@ -55,7 +55,7 @@
           href: security-baseline.md
     - name: 業務持續性
       items:
-        - name: 概觀
+        - name: 總覽
           href: business-continuity-overview.md
         - name: 建立解決方案
           href: business-continuity-create-solution.md
@@ -1371,6 +1371,8 @@
           href: ./kusto/query/re2.md
         - name: SQL 對 Kusto 的功能提要
           href: ./kusto/query/sqlcheatsheet.md
+        - name: Splunk 對 Kusto 的功能提要
+          href: ./kusto/query/splunk-cheat-sheet.md
     - name: 查詢工具
       items:
         - name: Kusto.Explorer
@@ -1838,24 +1840,37 @@
     - name: 函式程式庫
       items:
         - name: 函數的清單
+          displayName: functions library
           href: kusto/functions-library/functions-library.md
         - name: kmeans_fl()
+          displayName: functions library
           href: kusto/functions-library/kmeans-fl.md
         - name: predict_fl()
+          displayName: functions library
           href: kusto/functions-library/predict-fl.md
         - name: predict_onnx_fl()
+          displayName: functions library
           href: kusto/functions-library/predict-onnx-fl.md
         - name: quantize_fl()
+          displayName: functions library
           href: kusto/functions-library/quantize-fl.md
         - name: series_dot_product_fl()
+          displayName: functions library
           href: kusto/functions-library/series-dot-product-fl.md
+        - name: series_downsample_fl()
+          displayName: functions library
+          href: kusto/functions-library/series-downsample-fl.md
         - name: series_exp_smoothing_fl()
+          displayName: functions library
           href: kusto/functions-library/series-exp-smoothing-fl.md
         - name: series_fit_poly_fl()
+          displayName: functions library
           href: kusto/functions-library/series-fit-poly-fl.md
         - name: series_moving_avg_fl()
+          displayName: functions library
           href: kusto/functions-library/series-moving-avg-fl.md
         - name: series_rolling_fl()
+          displayName: functions library
           href: kusto/functions-library/series-rolling-fl.md
     - name: Azure 原則內建
       displayName: 'samples, policies, definitions'
