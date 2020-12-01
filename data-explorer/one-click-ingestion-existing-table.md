@@ -73,7 +73,7 @@ ms.locfileid: "93293347"
     
 1. 選取 [更新]。
 1. 在 [結構描述] 索引標籤中：
-    * 原始程式檔名稱會自動選取 **壓縮類型** 。 在此情況下，壓縮類型為 **JSON**
+    * 原始程式檔名稱會自動選取 **壓縮類型**。 在此情況下，壓縮類型為 **JSON**
         
     * 當您選取 [JSON] 時，也必須選取從 1 到 10 的 [JSON 層級]。 這些層級會決定資料表資料行資料分區。
 
@@ -84,13 +84,13 @@ ms.locfileid: "93293347"
 
 #### <a name="add-nested-json-data"></a>新增嵌套的 JSON 資料 
 
-若要從 JSON 層級新增資料行，而這些層級不同於上述 所選的主要 **JSON 層級** ，請執行下列步驟：
+若要從 JSON 層級新增資料行，而這些層級不同於上述 所選的主要 **JSON 層級**，請執行下列步驟：
 
 1. 按一下任何資料行名稱旁的箭號，然後選取 [新的資料行]。
 
     :::image type="content" source="media/one-click-ingestion-existing-table/new-column.png" alt-text="新增新資料行的螢幕擷取畫面選項 - 一鍵式擷取流程的結構描述索引標籤 - Azure 資料總管":::
 
-1. 輸入新的 **資料行名稱** ，然後從下拉式功能表中選取 [資料行類型]。
+1. 輸入新的 **資料行名稱**，然後從下拉式功能表中選取 [資料行類型]。
 1. 在 [來源] 底下，選取 [新建]。
 
     :::image type="content" source="media/one-click-ingestion-existing-table/create-new-source.png" alt-text="螢幕擷取畫面 - 建立新的來源以在一鍵式擷取流程中新增嵌套的 JSON 資料 - Azure 資料總管":::
