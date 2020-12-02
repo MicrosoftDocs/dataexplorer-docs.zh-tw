@@ -9,10 +9,10 @@ ms.topic: quickstart
 ms.date: 08/12/2019
 ms.localizationpriority: high
 ms.openlocfilehash: d5cff511a67e122af6b71740bbeaec6b7a3048e4
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512752"
 ---
 # <a name="quickstart-ingest-sample-data-into-azure-data-explorer"></a>快速入門：將範例資料擷取至 Azure 資料總管

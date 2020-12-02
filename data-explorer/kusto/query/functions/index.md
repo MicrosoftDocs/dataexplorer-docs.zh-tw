@@ -10,10 +10,10 @@ ms.topic: reference
 ms.date: 10/23/2018
 ms.localizationpriority: high
 ms.openlocfilehash: 1e0b3f339a755531d8db146ed2dc478ebb5a888d
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95513024"
 ---
 # <a name="function-types"></a>函式類型

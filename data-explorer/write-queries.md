@@ -9,10 +9,10 @@ ms.topic: tutorial
 ms.date: 04/07/2019
 ms.localizationpriority: high
 ms.openlocfilehash: 22a22f1050a366a79017904550854365dc2ef43c
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95513279"
 ---
 # <a name="write-queries-for-azure-data-explorer"></a>撰寫 Azure 資料總管查詢
