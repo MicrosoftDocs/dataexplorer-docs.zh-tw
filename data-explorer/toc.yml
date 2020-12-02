@@ -55,7 +55,7 @@
           href: security-baseline.md
     - name: 業務持續性
       items:
-        - name: 總覽
+        - name: 概觀
           href: business-continuity-overview.md
         - name: 建立解決方案
           href: business-continuity-create-solution.md
@@ -699,15 +699,18 @@
         - name: 數值運算子
           href: ./kusto/query/numoperators.md
         - name: 字串運算子
-          href: ./kusto/query/datatypes-string-operators.md
+          items:
+            - name: 字串運算子概觀
+              displayName: 'has, contains'
+              href: ./kusto/query/datatypes-string-operators.md
+            - name: in 和 !in 運算子
+              href: ./kusto/query/inoperator.md
+            - name: has_any 運算子
+              href: ./kusto/query/has-anyoperator.md
         - name: between 運算子
           href: ./kusto/query/betweenoperator.md
         - name: not-between 運算子 (!between)
           href: ./kusto/query/notbetweenoperator.md
-        - name: in 和 !in 運算子
-          href: ./kusto/query/inoperator.md
-        - name: has_any 運算子
-          href: ./kusto/query/has-anyoperator.md
     - name: 純量函式
       items:
         - name: 純量函式類型
