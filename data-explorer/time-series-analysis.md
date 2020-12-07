@@ -1,6 +1,6 @@
 ---
 title: 使用 Azure 資料總管分析時間序列資料
-description: 瞭解如何使用 Azure 資料總管分析雲端中的時間序列資料。
+description: 了解如何使用 Azure 資料總管在雲端中分析時間序列資料。
 author: orspod
 ms.author: orspodek
 ms.reviewer: adieldar
@@ -9,10 +9,10 @@ ms.topic: how-to
 ms.date: 04/07/2019
 ms.localizationpriority: high
 ms.openlocfilehash: d7046b8767413889bc77240032a2292deb7c89a3
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512990"
 ---
 # <a name="time-series-analysis-in-azure-data-explorer"></a>Azure 資料總管中的時間序列分析
@@ -60,10 +60,10 @@ demo_make_series1
 | render timechart 
 ```
 
-- 使用 [`make-series`](kusto/query/make-seriesoperator.md) 運算子來建立一組三個時間序列，其中：
+- 使用 [`make-series`](kusto/query/make-seriesoperator.md) 運算子來建立含三個時間序列的集合，其中：
     - `num=count()`：流量的時間序列
     - `range(min_t, max_t, 1h)`：在時間範圍 (資料表記錄的最舊和最新時間戳記) 內，以 1 小時的間隔來建立時間序列
-    - `default=0`：指定填滿遺漏間隔的方法以來建立標準時間序列。 或者 [`series_fill_const()`](kusto/query/series-fill-constfunction.md) ，使用 [`series_fill_forward()`](kusto/query/series-fill-forwardfunction.md) 、 [`series_fill_backward()`](kusto/query/series-fill-backwardfunction.md) 和 [`series_fill_linear()`](kusto/query/series-fill-linearfunction.md) 來變更
+    - `default=0`：指定填滿遺漏間隔的方法以來建立標準時間序列。 或者，使用 [`series_fill_const()`](kusto/query/series-fill-constfunction.md)、[`series_fill_forward()`](kusto/query/series-fill-forwardfunction.md)、[`series_fill_backward()`](kusto/query/series-fill-backwardfunction.md) 及 [`series_fill_linear()`](kusto/query/series-fill-linearfunction.md) 進行變更
     - `byOsVer`：依 OS 分割
 - 實際的時間序列資料結構是每個時間間隔中彙總值的數值陣列。 我們使用 `render timechart` 來產生視覺效果。
 
@@ -80,7 +80,7 @@ demo_make_series1
 
 篩選是單一處理中的常見做法，非常適合用於時間序列處理工作 (例如，緩和吵雜的訊號、變更偵測)。
 - 有兩個泛型篩選函式：
-    - [`series_fir()`](kusto/query/series-firfunction.md)：套用杉樹篩選。 用於移動時間序列平均和差異的簡單計算，以進行變更偵測。
+    - [`series_fir()`](kusto/query/series-firfunction.md)：套用 FIR 篩選。 用於移動時間序列平均和差異的簡單計算，以進行變更偵測。
     - [`series_iir()`](kusto/query/series-iirfunction.md)：套用 IIR 篩選。 用於指數平滑和累計總和。
 - `Extend` 時間序列，此時間序列會透過在查詢中新增大小 5 個間隔的新移動平均序列 (名為 *ma_num*) 來設定：
 
@@ -284,5 +284,5 @@ ADX 在兩分鐘內分析了接近 20,000 個時間序列，並偵測到兩個�
 
 ## <a name="next-steps"></a>後續步驟
 
-* 瞭解 Azure 資料總管中的 [時間序列異常偵測和預測](anomaly-detection.md) 。
-* 瞭解 Azure 資料總管中的 [機器學習功能](machine-learning-clustering.md) 。
+* 了解 Azure 資料總管中的[時間序列異常偵測和預測](anomaly-detection.md) 。
+* 深入了解 Azure 資料總管中的[機器學習功能](machine-learning-clustering.md)。

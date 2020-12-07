@@ -1,6 +1,6 @@
 ---
 title: 將資料從事件中樞內嵌至 Azure 資料總管
-description: 在本文中，您將瞭解如何從事件中樞將) 資料內嵌 (載入 Azure 資料總管。
+description: 在本文中，您會學習到如何將資料從事件中樞內嵌 (載入) 至 Azure 資料總管。
 author: orspod
 ms.author: orspodek
 ms.reviewer: tzgitlin
@@ -9,10 +9,10 @@ ms.topic: how-to
 ms.date: 08/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 798a8b201ee87d5c43aeb31d6af515d41c516bef
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512208"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>將資料從事件中樞內嵌至 Azure 資料總管
@@ -26,14 +26,14 @@ ms.locfileid: "95512208"
 
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 
-Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌服務進行內嵌 (載入資料)。 [事件中樞](/azure/event-hubs/event-hubs-about)可以近乎即時地每秒鐘處理數百萬個事件。 在本文中，您會建立事件中樞、從 Azure 資料總管連線到該中樞，並查看整個系統的資料流程。
+Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌服務進行內嵌 (載入資料)。 [事件中樞](/azure/event-hubs/event-hubs-about)可以近乎即時地每秒鐘處理數百萬個事件。 在本文中，您會建立事件中樞、從 Azure 資料總管連線至事件中樞，以及透過系統檢視資料流程。
 
-如需從事件中樞擷取至 Azure 資料總管的一般資訊，請參閱 [連接到事件中樞](ingest-data-event-hub-overview.md)。
+如需從事件中樞內嵌至 Azure 資料總管的一般資訊，請參閱[連線到事件中樞](ingest-data-event-hub-overview.md)。
 
 ## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
-* [測試叢集和資料庫](create-cluster-database-portal.md)。
+* [一個測試叢集和資料庫](create-cluster-database-portal.md)。
 * 產生資料並將其傳送至事件中樞的[範例應用程式](https://github.com/Azure-Samples/event-hubs-dotnet-ingest)。 將範例應用程式下載到您的系統。
 * 用於執行範例應用程式的 [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)。
 
@@ -43,7 +43,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 ## <a name="create-an-event-hub"></a>建立事件中樞
 
-在本文中，您會產生範例資料，並將其傳送至事件中樞。 第一個步驟是建立事件中樞。 其做法是使用 Azure 入口網站中的 Azure Resource Manager 範本。
+在本文中，您會產生範例資料，並將之傳送到事件中樞。 第一個步驟是建立事件中樞。 其做法是使用 Azure 入口網站中的 Azure Resource Manager 範本。
 
 1. 若要建立事件中樞，請使用下列按鈕開始部署。 按一下滑鼠右鍵並選取 [在新視窗中開啟]，以便依照本文中的其餘步驟操作。
 
@@ -67,7 +67,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     |---|---|---|
     | 訂用帳戶 | 您的訂用帳戶 | 選取您要用於事件中樞的 Azure 訂用帳戶。|
     | 資源群組 | *test-hub-rg* | 建立新的資源群組。 |
-    | Location | *美國西部* | 請在本文中選取 [ *美國西部* ]。 至於生產系統，請選取最符合您需求的區域。 將事件中樞命名空間建立在與 Kusto 相同的 [位置] 可獲得最佳效能 (對於高輸送量的事件中樞命名空間格外重要)。
+    | Location | *美國西部* | 在本文中選取 [美國西部]。 至於生產系統，請選取最符合您需求的區域。 將事件中樞命名空間建立在與 Kusto 相同的 [位置] 可獲得最佳效能 (對於高輸送量的事件中樞命名空間格外重要)。
     | 命名空間名稱 | 唯一命名空間名稱 | 選擇可識別您命名空間的唯一名稱。 例如，*mytestnamespace*。 網域名稱 *servicebus.windows.net* 已附加至您提供的名稱。 名稱只能包含字母、數字和連字號。 名稱必須以字母開頭，且必須以字母或數字結尾。 此值長度必須介於 6 至 50 個字元之間。
     | 事件中樞名稱 | *test-hub* | 事件中樞位於命名空間之下，其會提供專屬的唯一範圍容器。 事件中樞名稱在命名空間內不可重複。 |
     | 取用者群組名稱 | *test-group* | 取用者群組能讓多個取用應用程式各自擁有獨立的事件串流檢視。 |
@@ -113,13 +113,13 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 1. 選取 [資料擷取]，然後選取 [新增資料連線]。 
 
-    :::image type="content" source="media/ingest-data-event-hub/event-hub-connection.png" alt-text="在事件中樞中選取資料內嵌和新增資料連線-Azure 資料總管":::
+    :::image type="content" source="media/ingest-data-event-hub/event-hub-connection.png" alt-text="選取資料擷取並在事件中樞新增資料連線 - Azure 資料總管":::
 
 ### <a name="create-a-data-connection"></a>建立資料連線
 
 1. 在表單中填寫以下資訊：
 
-    :::image type="content" source="media/ingest-data-event-hub/data-connection-pane.png" alt-text="資料連線窗格事件中樞-Azure 資料總管":::
+    :::image type="content" source="media/ingest-data-event-hub/data-connection-pane.png" alt-text="資料連線窗格事件中樞 - Azure 資料總管":::
 
     **設定** | **建議的值** | **欄位描述**
     |---|---|---|
@@ -127,37 +127,37 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     | 訂用帳戶 |      | 事件中樞資源所在的訂用帳戶識別碼。  |
     | 事件中樞命名空間 | 唯一命名空間名稱 | 您先前選擇用來辨識命名空間的名稱。 |
     | 事件中樞 | *test-hub* | 您建立的事件中樞。 |
-    | 取用者群組 | *test-group* | 在您建立的事件中樞中定義的取用者群組。 |
-    | 事件系統屬性 | 選取相關屬性 | [事件中樞系統屬性](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations)。 如果每個事件訊息有多筆記錄，系統屬性將會新增至第一個。 新增系統屬性時，請 [建立](kusto/management/create-table-command.md) 或 [更新](kusto/management/alter-table-command.md) 資料表架構和 [對應](kusto/management/mappings.md) 以包含選取的屬性。 |
-    | 壓縮 | *None* | 事件中樞訊息承載的壓縮類型。 支援的壓縮類型： *無、GZip*。|
+    | 取用者群組 | *test-group* | 在您所建立的事件中樞中定義的取用者群組。 |
+    | 事件系統屬性 | 選取相關屬性 | [事件中樞系統屬性](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations)。 如果每則事件訊息都有多筆記錄，則系統屬性會新增至第一筆記錄。 新增系統屬性時，[建立](kusto/management/create-table-command.md)或[更新](kusto/management/alter-table-command.md)資料表結構描述和[對應](kusto/management/mappings.md)，以包含選取的屬性。 |
+    | 壓縮 | *無* | 事件中樞訊息承載的壓縮類型。 支援的壓縮類型：*無、GZip*。|
     
 #### <a name="target-table"></a>目標資料表
 
-路由內嵌資料有兩個選項：靜態和動態。 在本文中，您將使用靜態路由，您可以在此指定資料表名稱、資料格式和對應作為預設值。 如果事件中樞訊息包含資料路由資訊，此路由資訊將會覆寫預設設定。
+路由內嵌資料有兩個選項：靜態和動態。 在本文中，您會使用靜態路由，以將資料表名稱、資料格式和對應指定為預設值。 如果事件中樞訊息包含資料路由資訊，此路由資訊將會覆寫預設設定。
 
-1. 填寫下列路由設定：
+1. 填妥下列路由設定：
   
-   :::image type="content" source="media/ingest-data-event-hub/default-routing-settings.png" alt-text="將資料擷取至事件中樞的預設路由設定-Azure 資料總管":::
+   :::image type="content" source="media/ingest-data-event-hub/default-routing-settings.png" alt-text="將資料內嵌到事件中樞的預設路由設定 - Azure 資料總管":::
         
    |**設定** | **建議的值** | **欄位描述**
    |---|---|---|
    | 資料表名稱 | *TestTable* | 您在 **TestDatabase** 中建立的資料表。 |
-   | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、多行 JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO 和 W3CLOG。 |
-   | 對應 | *TestMapping* | 您在 **>testdatabase** 中建立的 [對應](kusto/management/mappings.md)，會將傳入的資料對應至 **TestTable** 的資料行名稱和資料類型。 JSON、多行 JSON 和 AVRO 的必要參數，以及其他格式的選擇性。|
+   | 資料格式 | *JSON* | 支援的格式為 Avro、CSV、JSON、MULTILINE JSON、ORC、PARQUET、PSV、SCSV、SOHSV、TSV、TXT、TSVE、APACHEAVRO 和 W3CLOG。 |
+   | 對應 | *TestMapping* | 您在 **TestDatabase** 中建立的 [對應](kusto/management/mappings.md)，會將傳入的資料對應至資料行名稱和 **TestTable** 的資料類型。 需要 JSON、MULTILINE JSON 或 AVRO，而其他格式為選用性質。|
     
    > [!NOTE]
-   > * 您不需要指定所有 **預設路由設定**。 也接受部分設定。
-   > * 只有在建立資料連線之後排入佇列的事件才會內嵌。
+   > * 您不必指定所有 **預設路由設定**。 也會接受部分設定。
+   > * 只會內嵌在建立資料連線之後排入佇列的事件。
 
 1. 選取 [建立]。 
 
 ### <a name="event-system-properties-mapping"></a>事件系統屬性對應
 
 > [!Note]
-> * 單一記錄事件支援系統屬性。
-> * 若為對應 `csv` ，會在記錄的開頭加入屬性。 針對對應 `json` ，會根據下拉式清單中顯示的名稱來新增屬性。
+> * 單一記錄的事件支援系統屬性。
+> * 對於 `csv` 對應，會在記錄的開頭新增屬性。 對於 `json` 對應，會根據下拉式清單中顯示的名稱新增屬性。
 
-如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，就必須在資料表架構和對應中包含 [系統屬性](ingest-data-event-hub-overview.md#system-properties)。
+如果您在資料表的 [資料來源] 區段中選取了 [事件系統屬性]，則必須在資料表結構描述和對應中包含[系統屬性](ingest-data-event-hub-overview.md#system-properties)。
 
 ## <a name="copy-the-connection-string"></a>複製連接字串
 
@@ -167,7 +167,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
     ![共用存取原則](media/ingest-data-event-hub/shared-access-policies.png)
 
-1. 複製 **連接字串-主要金鑰**。 您在下一節中貼上這項資料。
+1. 複製 [連接字串 - 主索引鍵]。 您在下一節中貼上這項資料。
 
     ![連接字串](media/ingest-data-event-hub/connection-string.png)
 
@@ -177,7 +177,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 1. 請在 Visual Studio 中開啟範例應用程式解決方案。
 
-1. 在 *program.cs* 檔案中，將 `eventHubName` 常數更新為事件中樞的名稱，並將常數更新 `connectionString` 為您從事件中樞命名空間複製的連接字串。
+1. 在 program.cs 檔案中，將 `eventHubName` 常數更新為您的事件中樞名稱，並將 `connectionString` 常數更新為您從事件中樞命名空間複製的連接字串。
 
     ```csharp
     const string eventHubName = "test-hub";
@@ -215,9 +215,9 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     ![訊息結果集](media/ingest-data-event-hub/message-result-set.png)
 
     > [!NOTE]
-    > * Azure 資料總管具有資料擷取的彙總 (批次處理) 原則，可將擷取程序最佳化。 原則預設會設定為5分鐘或 500 MB 的資料，因此您可能會遇到延遲。 如需了解匯總選項，請參閱[批次原則](kusto/management/batchingpolicy.md)。 
-    > * 事件中樞內嵌包括事件中樞回應時間為10秒或 1 MB。 
-    > * 設定您的資料表以支援串流處理，並移除回應時間中的延隔時間。 請參閱 [串流原則](kusto/management/streamingingestionpolicy.md)。 
+    > * Azure 資料總管具有資料擷取的彙總 (批次處理) 原則，可將擷取程序最佳化。 此原則已預設為 5 分鐘或 500 MB 的資料，因此您可能會遇到延遲情況。 如需了解匯總選項，請參閱[批次原則](kusto/management/batchingpolicy.md)。 
+    > * 事件中樞擷取包含 10 秒或 1 MB 的事件中樞回應時間。 
+    > * 將您的資料表設定為支援串流，並移除回應時間中的延遲。 請參閱[串流原則](kusto/management/streamingingestionpolicy.md)。 
 
 ## <a name="clean-up-resources"></a>清除資源
 

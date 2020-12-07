@@ -1,6 +1,6 @@
 ---
-title: '分割 ( # A1-Azure 資料總管 |Microsoft Docs'
-description: '本文說明 Azure 資料總管中的分割 ( # A1。'
+title: split() - Azure 資料總管 | Microsoft Docs
+description: 本文說明 API 資料總管中的 split()。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,15 +10,15 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 4baae5bee8dd1e85a304be7fb4eae988acc404d8
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512939"
 ---
 # <a name="split"></a>split()
 
-根據指定的分隔符號分割指定的字串，並傳回包含子字串的字串陣列。
+根據指定的分隔符號分割指定字串，並傳回具有所包含子字串的字串陣列。
 
 (選擇性) 可在特定子字串存在時將它傳回。
 
@@ -28,11 +28,11 @@ split("aaa_bbb_ccc", "_") == ["aaa","bbb","ccc"]
 
 ## <a name="syntax"></a>語法
 
-`split(`*來源* `,`*分隔符號*[ `,` *requestedIndex*]`)`
+`split(`*source*`,` *delimiter* [`,` *requestedIndex*]`)`
 
 ## <a name="arguments"></a>引數
 
-* *來源*：將根據指定的分隔符號進行分割的來源字串。
+* *來源*：將根據指定分隔符號分割的來源字串。
 * ︰: The  that will be used in order to split the source string.
 * requestedIndex︰以零為基礎的選擇性索引 `int`。 如果提供，當要求的子字串存在時，傳回的字串陣列將會包含該子字串。 
 

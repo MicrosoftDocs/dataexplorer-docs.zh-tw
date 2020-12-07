@@ -1,5 +1,5 @@
 ---
-title: 剖析運算子-Azure 資料總管
+title: parse 運算子 - Azure 資料總管
 description: 本文說明 Azure 資料總管中的 parse 運算子。
 services: data-explorer
 author: orspod
@@ -10,16 +10,16 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 2b034719fa7c2f3714020c722b5717f5cf8590ff
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512956"
 ---
 # <a name="parse-operator"></a>parse 運算子
 
-評估字串運算式，並將其值剖析至一或多個計算的資料行。 針對未成功剖析的字串，計算結果欄會有 null。
-如需詳細資訊，請參閱 [parse： where 運算子](parsewhereoperator.md)。
+評估字串運算式，並將其值剖析至一或多個計算的資料行。 計算結果欄會有 Null，代表未成功剖析的字串。
+如需詳細資訊，請參閱 [parse-where 運算子](parsewhereoperator.md)。
 
 ```kusto
 T | parse Text with "ActivityName=" name ", ActivityType=" type
@@ -27,26 +27,26 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
 
 ## <a name="syntax"></a>語法
 
-*T* `| parse` [ `kind=regex` [ `flags=regex_flags` ] | `simple` | `relaxed` ]*運算式* `with` `*` (*StringConstant* *ColumnName* [ `:` *ColumnType*] ) `*` .。。
+*T* `| parse` [`kind=regex` [`flags=regex_flags`] |`simple`|`relaxed`] *Expression* `with` `*` (*StringConstant* *ColumnName* [`:` *ColumnType*]) `*`...
 
 ## <a name="arguments"></a>引數
 
 * *T*：輸入資料表。
 * 種類：
 
-    * 簡單 (預設) ： StringConstant 是一般字串值，而相符項是 strict。 所有字串分隔符號應該會出現在剖析的字串中，而且所有的擴充資料行都必須符合所需的類型。
+    * 簡單 (預設值)：StringConstant 是一般字串值，相符條件嚴格。 所有字串分隔符號都應該出現在剖析的字串中，而且所有擴充的資料行都必須符合所需的類型。
         
-    * RegEx： StringConstant 可以是正則運算式，且相符項是 strict。 所有字串分隔符號（可以是此模式的 RegEx）應該會出現在剖析的字串中，而且所有的擴充資料行都必須符合所需的類型。
+    * regex：StringConstant 可以是規則運算式，相符條件嚴格。 所有字串分隔符號 (可能是此模式的 RegEx) 都應該出現在剖析的字串中，而且所有擴充的資料行都必須符合所需的類型。
     
-    * 旗標：在 RegEx 模式中使用的旗標 `U` ，例如 (Ungreedy) 、 `m` (多行模式) 、 `s` (符合新 `\n` 的行) 、 `i` ([RE2 旗標](re2.md)中不區分大小寫的) 。
+    * flags：用於 RegEx 模式的旗標，例如 [RE2 旗標](re2.md)中的 `U` (非窮盡 (Ungreedy))、`m` (多行模式)、`s` (符合新行 `\n`)、`i` (不區分大小寫)。
         
-    * 寬鬆： StringConstant 是一般字串值，而且比對會放寬。 所有字串分隔符號應該會出現在剖析的字串中，但是擴充的資料行可能部分符合所需的類型。 不符合所需類型的擴充資料行將會取得值 null。
+    * 寬鬆：StringConstant 是一般字串值，相符條件寬鬆。 所有字串分隔符號都應該出現在剖析的字串中，但擴充的資料行可以部份符合所需的類型。 不符合所需類型的擴充資料行將會取得 Null 值。
 
 * *運算式*：評估為字串的運算式。
 
-* *ColumnName：* 要指派值的資料行名稱（從字串運算式解壓縮）。 
+* *ColumnName：* 要對其指派值的資料行名稱，從字串運算式中擷取。 
   
-* *ColumnType：* 選。 純量值，指出要將值轉換成的類型。 預設值為 `string` 類型。
+* *ColumnType：* 選擇性。 純量值，表示要將值轉換成該類型。 預設值為 `string` 類型。
 
 ## <a name="returns"></a>傳回
 
@@ -54,40 +54,40 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
 
 **提示**
 
-* [`project`](projectoperator.md)如果您也想要卸載或重新命名某些資料行，請使用。
+* 如果您也想要捨棄或重新命名某些資料行，請使用 [`project`](projectoperator.md)。
 
-* 在模式中使用 * 來略過垃圾的值。 
+* 在模式中使用 * 來略過垃圾值。 
 
     > [!NOTE] 
-    > `*`無法在類型資料行之後 `string` 使用。
+    > `*` 不能用在 `string` 類型資料行之後。
 
-* 剖析模式的開頭可能是 *ColumnName* ，而不只是 *StringConstant*。
+* 剖析模式的開頭可能是 ColumnName，而不只是 StringConstant。
 
-* 如果剖析的 *運算式* 不是型別 `string` ，則會轉換成類型 `string` 。
+* 如果剖析的「運算式」不是 `string` 類型，其會轉換成 `string` 類型。
 
-* 如果使用 RegEx 模式，則有一個選項可加入 RegEx 旗標，以控制剖析中使用的整個 RegEx。
+* 如果使用 RegEx 模式，您可以選擇新增 RegEx 旗標來控制剖析中使用的整個 RegEx。
 
-* 在 RegEx 模式中，parse 會將模式轉譯成 RegEx。 使用 [RE2 語法](re2.md) 來執行比對，並使用在內部處理的編號已捕獲群組。
+* 在 RegEx 模式中，parse 會將模式 (pattern) 轉譯成 RegEx。 使用 [RE2 語法](re2.md)來執行比對，並使用在內部進行處理且已編號的擷取群組。
     例如：
 
     ```kusto
     parse kind=regex Col with * <regex1> var1:string <regex2> var2:long
     ```
 
-    在 parse 語句中，剖析將在內部產生的 RegEx 為 `.*?<regex1>(.*?)<regex2>(\-\d+)` 。
+    在 parse 陳述式中，parse 在內部產生的 RegEx 是 `.*?<regex1>(.*?)<regex2>(\-\d+)`。
         
-    * `*` 已轉譯為 `.*?` 。
+    * `*` 已翻譯成 `.*?`。
         
-    * `string` 已轉譯為 `.*?` 。
+    * `string` 已翻譯成 `.*?`。
         
-    * `long` 已轉譯為 `\-\d+` 。
+    * `long` 已翻譯成 `\-\d+`。
 
 ## <a name="examples"></a>範例
 
-`parse`運算子會 `extend` 使用相同運算式上的多個應用程式，為數據表提供簡化的方式 `extract` `string` 。 當資料表的 `string` 資料行包含數個您想要分成個別資料行的值時，這個結果就很有用。 例如，開發人員追蹤所產生的資料行 ( " `printf` "/" `Console.WriteLine` " ) 語句。
+`parse` 運算子可讓您在相同的 `string` 運算式上使用多個 `extract` 應用程式，以簡化 `extend` 資料表的方式。 當資料表的 `string` 資料行包含多個您想要細分為個別資料行的值時，這個結果就很有用。 例如，developer trace ("`printf`"/"`Console.WriteLine`") 陳述式產生的資料行。
 
-在下列範例中，假設資料表的資料行 `EventText` `Traces` 包含表單的字串 `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})` 。
-此作業會擴充具有六個數據行的資料表： `resourceName` 、 `totalSlices` 、 `sliceNumber` 、 `lockTime ` 、、 `releaseTime` `previousLockTime` 、 `Month` 和 `Day` 。 
+在下列範例中，假設 `Traces` 資料表的 `EventText` 資料行包含 `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})` 形式的字串。
+作業將會以六個資料行來擴充資料表：`resourceName`、`totalSlices`、`sliceNumber`、`lockTime `、`releaseTime`、`previousLockTime`、`Month` 和 `Day`。 
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -106,13 +106,13 @@ Traces
 
 |resourceName|totalSlices|sliceNumber|lockTime|releaseTime|previousLockTime|
 |---|---|---|---|---|---|
-|PipelineScheduler|27|15|02/17/2016 08:40:00|2016-02-17 08：40：00.0000000|2016-02-17 08：39：00.0000000|
-|PipelineScheduler|27|23|02/17/2016 08:40:01|2016-02-17 08：40：01.0000000|2016-02-17 08：39：01.0000000|
-|PipelineScheduler|27|20|02/17/2016 08:40:01|2016-02-17 08：40：01.0000000|2016-02-17 08：39：01.0000000|
-|PipelineScheduler|27|16|02/17/2016 08:41:00|2016-02-17 08：41：00.0000000|2016-02-17 08：40：00.0000000|
-|PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08：41：00.0000000|2016-02-17 08：40：01.0000000|
+|PipelineScheduler|27|15|02/17/2016 08:40:00|2016-02-17 08:40:00.0000000|2016-02-17 08:39:00.0000000|
+|PipelineScheduler|27|23|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|PipelineScheduler|27|20|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|PipelineScheduler|27|16|02/17/2016 08:41:00|2016-02-17 08:41:00.0000000|2016-02-17 08:40:00.0000000|
+|PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
 
-**適用于 RegEx 模式**
+**適用於 RegEx 模式**
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -131,15 +131,15 @@ Traces
 
 |resourceName|sliceNumber|lockTime|releaseTime|previousLockTime|
 |---|---|---|---|---|
-|PipelineScheduler|15|02/17/2016 08:40:00、 |02/17/2016 08:40:00、 |2016-02-17 08：39：00.0000000|
-|PipelineScheduler|23|02/17/2016 08:40:01、 |02/17/2016 08:40:01、 |2016-02-17 08：39：01.0000000|
-|PipelineScheduler|20|02/17/2016 08:40:01、 |02/17/2016 08:40:01、 |2016-02-17 08：39：01.0000000|
-|PipelineScheduler|16|02/17/2016 08:41:00、 |02/17/2016 08:41:00、 |2016-02-17 08：40：00.0000000|
-|PipelineScheduler|22|02/17/2016 08:41:01、 |02/17/2016 08:41:00、 |2016-02-17 08：40：01.0000000|
+|PipelineScheduler|15|02/17/2016 08:40:00, |02/17/2016 08:40:00, |2016-02-17 08:39:00.0000000|
+|PipelineScheduler|23|02/17/2016 08:40:01, |02/17/2016 08:40:01, |2016-02-17 08:39:01.0000000|
+|PipelineScheduler|20|02/17/2016 08:40:01, |02/17/2016 08:40:01, |2016-02-17 08:39:01.0000000|
+|PipelineScheduler|16|02/17/2016 08:41:00, |02/17/2016 08:41:00, |2016-02-17 08:40:00.0000000|
+|PipelineScheduler|22|02/17/2016 08:41:01, |02/17/2016 08:41:00, |2016-02-17 08:40:01.0000000|
 
-**使用 RegEx 旗標的 RegEx 模式**
+**適用於使用 RegEx 旗標的 RegEx 模式**
 
-如果您只想要取得僅限，請使用下列查詢：
+如果您只想要取得 resourceName，請使用下列查詢：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -158,16 +158,16 @@ Traces
 
 |resourceName|
 |---|
-|PipelineScheduler、totalSlices = 27、sliceNumber = 23、lockTime = 02/17/2016 08:40:01、releaseTime = 02/17/2016 08:40:01|
-|PipelineScheduler、totalSlices = 27、sliceNumber = 15、lockTime = 02/17/2016 08:40:00、releaseTime = 02/17/2016 08:40:00|
-|PipelineScheduler、totalSlices = 27、sliceNumber = 20、lockTime = 02/17/2016 08:40:01、releaseTime = 02/17/2016 08:40:01|
-|PipelineScheduler、totalSlices = 27、sliceNumber = 22、lockTime = 02/17/2016 08:41:01、releaseTime = 02/17/2016 08:41:00|
-|PipelineScheduler、totalSlices = 27、sliceNumber = 16、lockTime = 02/17/2016 08:41:00、releaseTime = 02/17/2016 08:41:00|
+|PipelineScheduler, totalSlices=27, sliceNumber=23, lockTime=02/17/2016 08:40:01, releaseTime=02/17/2016 08:40:01|
+|PipelineScheduler, totalSlices=27, sliceNumber=15, lockTime=02/17/2016 08:40:00, releaseTime=02/17/2016 08:40:00|
+|PipelineScheduler, totalSlices=27, sliceNumber=20, lockTime=02/17/2016 08:40:01, releaseTime=02/17/2016 08:40:01|
+|PipelineScheduler, totalSlices=27, sliceNumber=22, lockTime=02/17/2016 08:41:01, releaseTime=02/17/2016 08:41:00|
+|PipelineScheduler, totalSlices=27, sliceNumber=16, lockTime=02/17/2016 08:41:00, releaseTime=02/17/2016 08:41:00|
 
-您將不會得到預期的結果，因為預設模式為貪婪。
-如果您有幾筆記錄有時候會顯示為較 *低的案例*  ，有時也會顯示為大寫，則您可能會取得某些值的 null。
+您不會得到預期的結果，因為預設模式是 [窮盡]。
+如果您有一些記錄，其中 resourceName 有時候會顯示為小寫，而有時候是大寫，則您得到的某些值可能會是 Null。
 
-若要取得所需的結果，請使用非貪婪的查詢執行查詢， `U` 並停用區分大小寫的 `i` RegEx 旗標。
+若要取得想要的結果，請使用非窮盡的 `U` 來執行查詢，並停用區分大小寫的 `i` RegEx 旗標。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -192,7 +192,7 @@ Traces
 |PipelineScheduler|
 |PipelineScheduler|
 
-如果剖析的字串有分行符號，請使用旗標 `s` 來剖析文字。
+如果剖析過的字串具有分行符號，請使用旗標 `s` 來剖析文字。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -211,22 +211,22 @@ Traces
 
 |resourceName|totalSlices|lockTime|releaseTime|previousLockTime|
 |---|---|---|---|---|
-|PipelineScheduler<br>|27|2016-02-17 08：40：00.0000000|2016-02-17 08：40：00.0000000|2016-02-17 08：39：00.0000000|
-|PipelineScheduler<br>|27|2016-02-17 08：40：01.0000000|2016-02-17 08：40：01.0000000|2016-02-17 08：39：01.0000000|
-|PipelineScheduler<br>|27|2016-02-17 08：40：01.0000000|2016-02-17 08：40：01.0000000|2016-02-17 08：39：01.0000000|
-|PipelineScheduler<br>|27|2016-02-17 08：41：00.0000000|2016-02-17 08：41：00.0000000|2016-02-17 08：40：00.0000000|
-|PipelineScheduler<br>|27|2016-02-17 08：41：01.0000000|2016-02-17 08：41：00.0000000|2016-02-17 08：40：01.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:40:00.0000000|2016-02-17 08:40:00.0000000|2016-02-17 08:39:00.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:40:01.0000000|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:40:01.0000000|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:41:00.0000000|2016-02-17 08:41:00.0000000|2016-02-17 08:40:00.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:41:01.0000000|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
 
 **寬鬆模式**
 
-在這個寬鬆模式的範例中， *totalSlices* 擴充資料行的類型必須是 `long` 。 不過，在剖析的字串中，它的值為 *nonValidLongValue*。
-在 *releaseTime* 擴充資料行中，無法將值 *nonValidDateTime* 剖析為 *datetime*。
-這兩個擴充的資料行會取得 null 值，而其他資料行（例如 *sliceNumber*）仍會取得正確的值。
+在此寬鬆模式的範例中，totalSlices 擴充資料行的類型必須是 `long`。 不過，在剖析的字串中，其值為 nonValidLongValue。
+在 releaseTime 擴充資料行中，nonValidDateTime 值無法剖析為 datetime。
+這兩個擴充的資料行會取得 Null 值，而其他資料行 (例如 sliceNumber) 仍然會取得正確的值。
 
-如果您針對下列相同的查詢使用選項 *種類 = simple* ，則所有的擴充資料行都會得到 null。 這個選項在擴充的資料行上是嚴格的，而且是寬鬆和簡單模式之間的差異。
+如果您在下面的相同查詢中使用 kind = simple 選項，則所有擴充資料行都會得到 Null。 此選項在擴充資料行上是嚴格的，而且是寬鬆模式與簡單模式之間的差異。
 
  > [!NOTE] 
- > 在寬鬆模式下，擴充的資料行可以部分相符。
+ > 在寬鬆模式中，擴充的資料行可以部分相符。
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -245,9 +245,9 @@ Traces
 
 |resourceName|totalSlices|sliceNumber|lockTime|releaseTime|previousLockTime|
 |---|---|---|---|---|---|
-|PipelineScheduler|27|15|02/17/2016 08:40:00||2016-02-17 08：39：00.0000000|
-|PipelineScheduler|27|23|02/17/2016 08:40:01||2016-02-17 08：39：01.0000000|
-|PipelineScheduler||20|02/17/2016 08:40:01||2016-02-17 08：39：01.0000000|
-|PipelineScheduler||16|02/17/2016 08:41:00|2016-02-17 08：41：00.0000000|2016-02-17 08：40：00.0000000|
-|PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08：41：00.0000000|2016-02-17 08：40：01.0000000|
+|PipelineScheduler|27|15|02/17/2016 08:40:00||2016-02-17 08:39:00.0000000|
+|PipelineScheduler|27|23|02/17/2016 08:40:01||2016-02-17 08:39:01.0000000|
+|PipelineScheduler||20|02/17/2016 08:40:01||2016-02-17 08:39:01.0000000|
+|PipelineScheduler||16|02/17/2016 08:41:00|2016-02-17 08:41:00.0000000|2016-02-17 08:40:00.0000000|
+|PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
  

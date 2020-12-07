@@ -1,6 +1,6 @@
 ---
-title: 'parse_json ( # A1-Azure 資料總管'
-description: '本文描述 Azure 資料總管中 ( # A1 parse_json。'
+title: parse_json() - Azure 資料總管
+description: 本文說明 Azure 資料總管中的 parse_json()。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,17 +10,17 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 3125a51733f6672d041e6c1522ea755e5677cb0c
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512854"
 ---
 # <a name="parse_json"></a>parse_json()
 
-將 `string` 做為 JSON 值，並傳回做為的值 `dynamic` 。
+將 `string` 解譯為 JSON 值，並以 `dynamic` 形式傳回值。
 
-當您需要解壓縮 JSON 綜合物件的多個元素時，此函式優於 [extractjson ( # A1 函數](./extractjsonfunction.md) 。
+當您需要擷取 JSON 複合物件的多個元素時，此函式比 [extractjson()](./extractjsonfunction.md) 函式會更合適。
 
 ## <a name="syntax"></a>語法
 
@@ -28,18 +28,18 @@ ms.locfileid: "95512854"
 
 別名：
 - [todynamic()](./todynamicfunction.md)
-- [toobject ( # B1 ](./todynamicfunction.md)
+- [toobject()](./todynamicfunction.md)
 
 ## <a name="arguments"></a>引數
 
-* *json*：類型為的運算式 `string` 。 它代表 [JSON 格式的值](https://json.org/)，或是 [動態](./scalar-data-types/dynamic.md)類型的運算式，表示實際 `dynamic` 值。
+* *json*：`string` 類型的運算式。 其代表 [JSON 格式的值](https://json.org/)，或類型為 [dynamic](./scalar-data-types/dynamic.md) 的運算式，並代表實際的 `dynamic` 值。
 
 ## <a name="returns"></a>傳回
 
-由 `dynamic` *json* 值決定的型別的物件：
-* 如果 *json* 的型別為 `dynamic` ，則其值會依原樣使用。
-* 如果 *json* 的型別為 `string` ，而且是 [格式正確的 json 字串](https://json.org/)，則會剖析字串，並傳回產生的值。
-* 如果 *json* 的類型是 `string` ，但它不是 [格式正確的 json 字串](https://json.org/)，則傳回的值會是 `dynamic` 具有原始值之類型的物件 `string` 。
+`dynamic` 類型的物件，其取決於 *json* 的值：
+* 如果 *json* 的類型為 `dynamic`，其值會依現狀使用。
+* 如果 *json* 的類型為 `string`，而且是[正確格式的 JSON 字串](https://json.org/)，則會剖析字串並傳回所產生的值。
+* 如果 *json* 的類型為 `string`，但不是[正確格式的 JSON 字串](https://json.org/)，則傳回的值是類型為 `string` 且保有原始 `dynamic` 值的物件。
 
 ## <a name="example"></a>範例
 
@@ -49,7 +49,7 @@ ms.locfileid: "95512854"
 {"duration":{"value":118.0,"count":5.0,"min":100.0,"max":150.0,"stdDev":0.0,"sampledValue":118.0,"sum":118.0}}
 ```
 
-然後，下列 CSL 片段會抓取物件中位置的值 `duration` ，並從該位置抓取兩個位置， `duration.value` `duration.min` `118.0`) 分別 (和 `110.0` ）。
+則下列 CSL 片段會擷取物件中 `duration` 位置的值，並從中擷取兩個位置：`duration.value` 和 `duration.min` (分別為 `118.0` 和 `110.0`)。
 
 ```kusto
 T
@@ -59,7 +59,7 @@ T
 
 **注意事項**
 
-通常會有一個描述屬性包的 JSON 字串，其中其中一個「位置」是另一個 JSON 字串。 
+通常會有一個描述屬性包的 JSON 字串，其中的一個「位置」是另一個 JSON 字串。 
 
 例如：
 
@@ -68,7 +68,7 @@ let d='{"a":123, "b":"{\\"c\\":456}"}';
 print d
 ```
 
-在這種情況下，您不只需要 `parse_json` 叫用兩次，也可以確保使用第二個呼叫的 `tostring` 。 否則，的第二個呼叫 `parse_json` 只會將輸入依原樣傳遞給輸出，因為其宣告的型別為 `dynamic` 。
+在這種情況下，不只需要叫用 `parse_json` 兩次，也務必在第二次呼叫中使用 `tostring`。 否則，對 `parse_json` 的第二次呼叫只會依原狀將輸入傳遞至輸出，因為其宣告的類型是 `dynamic`。
 
 ```kusto
 let d='{"a":123, "b":"{\\"c\\":456}"}';

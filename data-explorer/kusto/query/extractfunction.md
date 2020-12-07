@@ -1,6 +1,6 @@
 ---
-title: '解壓縮 ( # A1-Azure 資料總管 |Microsoft Docs'
-description: '本文說明如何在 Azure 資料總管中解壓縮 ( # A1。'
+title: extract() - Azure 資料總管 | Microsoft Docs
+description: 本文說明 Azure 資料總管中的 extract()。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,17 +10,17 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 483c926d60abef120de2a355a6fa040b9608cd7a
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95513041"
 ---
 # <a name="extract"></a>extract()
 
 從文字字串取得 [規則運算式](./re2.md) 的相符項目。 
 
-（選擇性）將解壓縮的子字串轉換成指定的類型。
+(選擇性) 將所擷取的子字串轉換為指定的類型。
 
 ```kusto
 extract("x=([0-9.]+)", 1, "hello x=45.6|wo") == "45.6"
@@ -28,14 +28,14 @@ extract("x=([0-9.]+)", 1, "hello x=45.6|wo") == "45.6"
 
 ## <a name="syntax"></a>語法
 
-`extract(`*RegEx* `,`*captureGroup* `,`*文字*[ `,` *typeLiteral*]`)`
+`extract(`*regex*`,` *captureGroup*`,` *text* [`,` *typeLiteral*]`)`
 
 ## <a name="arguments"></a>引數
 
-* *RegEx*： [正則運算式](./re2.md)。
-* *captureGroup*： `int` 指出要解壓縮之捕獲群組的正整數常數。 0 代表整個相符項目、1 代表規則運算式中第一個 '('括號')' 所相符的值，2 或以上的數字代表後續的括號。
-* *文字*： `string` 要搜尋的。
-* *typeLiteral*：選擇性的型別常值 (例如 `typeof(long)`) 。 如果提供，所擷取的子字串會轉換為此類型。 
+* *regex*：[規則運算式](./re2.md)。
+* *captureGroup*：指出要擷取之擷取群組的正 `int` 常數。 0 代表整個相符項目、1 代表規則運算式中第一個 '('括號')' 所相符的值，2 或以上的數字代表後續的括號。
+* *text*：要搜尋的 `string`。
+* *typeLiteral*：選擇性的類型常值 (例如 `typeof(long)`)。 如果提供，所擷取的子字串會轉換為此類型。 
 
 ## <a name="returns"></a>傳回
 

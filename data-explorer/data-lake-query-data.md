@@ -1,6 +1,6 @@
 ---
-title: 使用 Azure 資料總管在 Azure Data Lake 中查詢資料
-description: 瞭解如何使用 Azure 資料總管來查詢 Azure Data Lake 中的資料。
+title: 使用 Azure 資料總管查詢 Azure Data Lake 中的資料
+description: 了解如何使用 Azure 資料總管查詢 Azure Data Lake 中的資料。
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
@@ -9,32 +9,32 @@ ms.topic: how-to
 ms.date: 06/17/2020
 ms.localizationpriority: high
 ms.openlocfilehash: ec62c1d0dfe439ac77d7fce9e69af8e5c8a7a8a0
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512786"
 ---
-# <a name="query-data-in-azure-data-lake-using-azure-data-explorer"></a>使用 Azure 資料總管在 Azure Data Lake 中查詢資料
+# <a name="query-data-in-azure-data-lake-using-azure-data-explorer"></a>使用 Azure 資料總管查詢 Azure Data Lake 中的資料
 
-Azure Data Lake Storage 是極具擴充性且符合成本效益的 data Lake 解決方案，適用于大型資料分析。 它結合高效能檔案系統的強大功能與大規模和經濟，以協助您減少見解的時間。 Data Lake Storage Gen2 擴充 Azure Blob 儲存體功能，並已針對分析工作負載進行優化。
+Azure Data Lake Storage 是有高度調整性並合乎成本效益的資料湖解決方案，適用於巨量資料分析。 其結合了高效能檔案系統的強大功能與大規模的經濟，協助您減少深入解析的時間。 Data Lake Storage Gen2 擴充 Azure Blob 儲存體功能，並已針對分析工作負載最佳化。
  
-Azure 資料總管整合 Azure Blob 儲存體和 Azure Data Lake Storage (Gen1 和 Gen2) ，可針對儲存在外部儲存體中的資料，提供快速、快取和索引的存取。 您可以分析和查詢資料，而不需要先將資料內嵌到 Azure 資料總管。 您也可以同時跨內嵌和 uningested 外部資料進行查詢。  
+Azure 資料總管可與 Azure Blob 儲存體和 Azure Data Lake Storage (Gen1 和 Gen2) 整合，以對外部儲存體中儲存的資料提供快速、快取和檢索存取。 您不需事先在 Azure 資料總管中進行內嵌，即可分析和查詢資料。 您也可以同時查詢已內嵌和未內嵌的外部資料。  
 
 > [!TIP]
-> 最佳查詢效能會將資料內嵌到 Azure 資料總管中。 在沒有先前內嵌的情況下查詢外部資料的功能，應該僅用於不常查詢的歷程記錄資料或資料。 [將您的外部資料查詢效能優化](#optimize-your-query-performance) ，以獲得最佳結果。
+> 必須在 Azure 資料總管中進行資料內嵌才能達到最佳查詢效能。 查詢外部資料而不需事先內嵌的功能，只能使用於歷史資料或很少查詢的資料。 [最佳化您的外部資料查詢效能](#optimize-your-query-performance)以獲得最佳結果。
  
 ## <a name="create-an-external-table"></a>建立外部資料表
 
-假設您有許多 CSV 檔案包含倉儲中儲存之產品的歷程記錄資訊，而您想要進行快速分析，以找出去年最熱門的五項產品。 在此範例中，CSV 檔案看起來像這樣：
+假設您有許多 CSV 檔案包含倉儲中所儲存產品的歷程記錄資訊，而您想要進行快速分析，以找出去年最熱門的五項產品。 在此範例中，CSV 檔案如下所示：
 
 | 時間戳記 | ProductId   | ProductDescription |
 |-----------|-------------|--------------------|
-| 2019-01-01 11:21:00 | TO6050 | DS/HD 磁片磁碟機中的3。5 |
+| 2019-01-01 11:21:00 | TO6050 | 3.5 吋 DS/HD 磁碟片 |
 | 2019-01-01 11:30:55 | YDX1   | Yamaha DX1 合成器  |
 | ...                 | ...    | ...                     |
 
-這些檔案會儲存在 Azure Blob 儲存體中 `mycompanystorage` ，名為 `archivedproducts` 、依日期分割的容器底下：
+這些檔案會儲存在 Azure Blob 儲存體 `mycompanystorage` 中名為 `archivedproducts` 的容器下 (依日期分割)：
 
 ```
 https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/01/part-00000-7e967c99-cf2b-4dbb-8c53-ce388389470d.csv.gz
@@ -45,7 +45,7 @@ https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/02/part-
 ...
 ```
 
-若要直接對這些 CSV 檔案執行 KQL 查詢，請使用 `.create external table` 命令在 Azure 資料總管中定義外部資料表。 如需外部資料表 create 命令選項的詳細資訊，請參閱 [外部資料表命令](kusto/management/external-tables-azurestorage-azuredatalake.md)。
+若要直接在這些 CSV 檔案上執行 KQL 查詢，請使用 `.create external table` 命令在 Azure 資料總管中定義外部資料表。 如需外部資料表 create 命令選項的詳細資訊，請參閱[外部資料表命令](kusto/management/external-tables-azurestorage-azuredatalake.md)。
 
 ```Kusto
 .create external table ArchivedProducts(Timestamp:datetime, ProductId:string, ProductDescription:string)   
@@ -61,15 +61,15 @@ dataformat=csv
 
 :::image type="content" source="media/data-lake-query-data/external-tables-web-ui.png" alt-text="Web UI 中的外部資料表":::
  
-### <a name="external-table-permissions"></a>外部資料表許可權
+### <a name="external-table-permissions"></a>外部資料表權限
  
 * 資料庫使用者可以建立外部資料表。 資料表建立者會自動成為資料表管理員。
 * 叢集、資料庫或資料表管理員可以編輯現有的資料表。
-* 任何資料庫使用者或讀者都可以查詢外部資料表。
+* 任何資料庫使用者或讀取者都可以查詢外部資料表。
 
 ## <a name="querying-an-external-table"></a>查詢外部資料表
  
-定義外部資料表之後， `external_table()` 函數就可以用來參考它。 查詢的其餘部分是標準的 Kusto 查詢語言。
+定義外部資料表之後，`external_table()` 函式即可用於參考該資料表。 查詢的其餘部分是標準 Kusto 查詢語言。
 
 ```Kusto
 external_table("ArchivedProducts")   
@@ -78,11 +78,11 @@ external_table("ArchivedProducts")
 | top 5 by Count
 ```
 
-## <a name="querying-external-and-ingested-data-together"></a>同時查詢外部和內嵌資料
+## <a name="querying-external-and-ingested-data-together"></a>同時查詢外部和內嵌的資料
 
-您可以同時查詢外部資料表和內嵌相同查詢中的資料表。 您可以 [`join`](kusto/query/joinoperator.md) [`union`](kusto/query/unionoperator.md) 使用 Azure 資料總管、SQL server 或其他來源的其他資料，或外部資料表。 使用 [`let( ) statement`](kusto/query/letstatement.md) ，將速記名稱指派給外部資料表參考。
+您可以在相同的查詢中同時查詢外部資料表和內嵌資料表。 您可以 [`join`](kusto/query/joinoperator.md) 或 [`union`](kusto/query/unionoperator.md) 外部資料表與來自 Azure 資料總管、SQL 伺服器或其他來源的其他資料。 使用 [`let( ) statement`](kusto/query/letstatement.md)，將縮寫名稱指派給外部資料表參考。
 
-在下列範例中， *產品* 是內嵌資料表，而 *ArchivedProducts* 是我們先前定義的外部資料表：
+在下列範例中，*Products* 是內嵌資料表，而 *ArchivedProducts* 是我們先前定義的外部資料表：
 
 ```kusto
 let T1 = external_table("ArchivedProducts") |  where TimeStamp > ago(100d);   
@@ -92,7 +92,7 @@ T1 | join T on ProductId | take 10
 
 ## <a name="querying-hierarchical-data-formats"></a>查詢階層式資料格式
 
-Azure 資料總管允許查詢階層格式，例如 `JSON` 、 `Parquet` 、 `Avro` 和 `ORC` 。 若要將階層式資料結構對應至外部資料表架構 (如果它是不同的) ，請使用 [外部資料表對應命令](kusto/management/external-tables-azurestorage-azuredatalake.md#create-external-table-mapping)。 比方說，如果您想要查詢具有下列格式的 JSON 記錄檔：
+Azure 資料總管允許查詢階層式格式，例如 `JSON`、`Parquet`、`Avro` 和 `ORC`。 若要將階層式資料結構描述對應至外部資料表結構描述 (如果不同的話)，請使用[外部資料表對應命令](kusto/management/external-tables-azurestorage-azuredatalake.md#create-external-table-mapping)。 例如，如果您想要使用下列格式查詢 JSON 記錄檔：
 
 ```JSON
 {
@@ -123,27 +123,27 @@ dataformat=multijson
 )
 ```
 
-定義將資料欄位對應至外部資料表定義欄位的 JSON 對應：
+定義 JSON 對應，以將資料欄位對應至外部資料表定義欄位：
 
 ```kusto
 .create external table ApiCalls json mapping 'MyMapping' '[{"Column":"Timestamp","Properties":{"Path":"$.timestamp"}},{"Column":"TenantId","Properties":{"Path":"$.data.tenant"}},{"Column":"MethodName","Properties":{"Path":"$.data.method"}}]'
 ```
 
-當您查詢外部資料表時，將會叫用對應，而相關資料將會對應至外部資料表資料行：
+當您查詢外部資料表時，將會叫用對應，而相關資料將會對應到外部資料表資料行：
 
 ```kusto
 external_table('ApiCalls') | take 10
 ```
 
-如需對應語法的詳細資訊，請參閱 [資料](kusto/management/mappings.md)對應。
+如需對應語法的詳細資訊，請參閱[資料對應](kusto/management/mappings.md)。
 
-## <a name="query-taxirides-external-table-in-the-help-cluster"></a>Help 叢集中的查詢 *TaxiRides* 外部資料表
+## <a name="query-taxirides-external-table-in-the-help-cluster"></a>查詢說明叢集中的 *TaxiRides* 外部資料表
 
-使用稱為「說明」的測試叢集來試用 *不同的 Azure* 資料總管功能。 說明 *help* 叢集包含包含數十億個計程車乘車點之 [紐約市計程車資料集](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)的外部資料表定義。
+使用名為 *help* 的測試叢集 來試用不同的 Azure 資料總管功能。 *help* 叢集包含[紐約市計程車資料集](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)的外部資料表定義，該資料集包含數十億筆計程車搭乘。
 
 ### <a name="create-external-table-taxirides"></a>建立外部資料表 *TaxiRides* 
 
-本節說明用來在 *help* 叢集中建立 *TaxiRides* 外部資料表的查詢。 由於已經建立此資料表，因此您可以略過本節，並直接移至 [查詢 *TaxiRides* 外部資料表資料](#query-taxirides-external-table-data)。
+本節說明用於在 *help* 叢集中建立 *TaxiRides* 外部資料表的查詢。 因為已建立此資料表，所以您可略過本節並直接移至 [查詢 *TaxiRides* 外部資料表資料](#query-taxirides-external-table-data)。
 
 ```kusto
 .create external table TaxiRides
@@ -208,17 +208,17 @@ dataformat=csv
 )
 ```
 
-您可以藉由查看 Web UI 的左窗格來尋找建立的 **TaxiRides** 資料表：
+您可藉由查看 Web UI 的左窗格，尋找所建立的 **TaxiRides** 資料表：
 
-:::image type="content" source="media/data-lake-query-data/taxirides-external-table.png" alt-text="計程車乘車點外部資料表":::
+:::image type="content" source="media/data-lake-query-data/taxirides-external-table.png" alt-text="計程車搭乘外部資料表":::
 
 ### <a name="query-taxirides-external-table-data"></a>查詢 *TaxiRides* 外部資料表資料 
 
 登入 [https://dataexplorer.azure.com/clusters/help/databases/Samples](https://dataexplorer.azure.com/clusters/help/databases/Samples)。 
 
-#### <a name="query-taxirides-external-table-without-partitioning"></a>未分割的查詢 *TaxiRides* 外部資料表
+#### <a name="query-taxirides-external-table-without-partitioning"></a>查詢未分割的 *TaxiRides* 外部資料表
 
-在外部資料表 *TaxiRides* 上 [執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=)，以顯示整個資料集內每一周的乘車點。 
+在 *TaxiRides* 外部資料表上[執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=)，以顯示整個資料集內一周每一天的搭乘。 
 
 ```kusto
 external_table("TaxiRides")
@@ -226,13 +226,13 @@ external_table("TaxiRides")
 | render columnchart
 ```
 
-此查詢會顯示最忙碌的星期幾。 由於資料未分割，因此查詢最多可能需要幾分鐘的時間才會傳回結果。
+此查詢會顯示一周最忙碌的一天。 由於資料並未分割，因此查詢最多可能需要數分鐘的時間來傳回結果。
 
-:::image type="content" source="media/data-lake-query-data/taxirides-no-partition.png" alt-text="轉譯非資料分割查詢":::
+:::image type="content" source="media/data-lake-query-data/taxirides-no-partition.png" alt-text="呈現未分割的查詢":::
 
-#### <a name="query-taxirides-external-table-with-partitioning"></a>使用資料分割查詢 TaxiRides 外部資料表 
+#### <a name="query-taxirides-external-table-with-partitioning"></a>查詢已分割的 TaxiRides 外部資料表 
 
-在外部資料表 *TaxiRides* 上 [執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==)，以顯示2017年1月所使用的計程車 cab 類型 (黃色或綠色) 。 
+在外部資料表 *TaxiRides* 上[執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==)，以顯示 2017 年 1 月所使用的計程車類型(黃色或綠色)。 
 
 ```kusto
 external_table("TaxiRides")
@@ -241,43 +241,43 @@ external_table("TaxiRides")
 | render piechart
 ```
 
-此查詢會使用資料分割，以優化查詢時間和效能。 查詢會篩選分割資料行 (pickup_datetime) ，並在幾秒鐘內傳回結果。
+此查詢使用資料分割，以最佳化查詢時間和效能。 查詢會依據已分割的資料行 (pickup_datetime) 篩選並在幾秒內傳回結果。
 
-:::image type="content" source="media/data-lake-query-data/taxirides-with-partition.png" alt-text="轉譯分割的查詢":::
+:::image type="content" source="media/data-lake-query-data/taxirides-with-partition.png" alt-text="呈現已分割的查詢":::
   
-您可以撰寫額外的查詢，以在外部資料表 *TaxiRides* 上執行，並深入瞭解資料。 
+您可以撰寫要在外部資料表 *TaxiRides* 上執行的其他查詢並深入了解資料。 
 
-## <a name="optimize-your-query-performance"></a>優化您的查詢效能
+## <a name="optimize-your-query-performance"></a>最佳化您的查詢效能
 
-使用下列查詢外部資料的最佳做法，以優化您在 lake 中的查詢效能。 
+使用下列可供查詢外部資料的最佳做法，將您在資料湖中的查詢效能最佳化。 
  
 ### <a name="data-format"></a>資料格式
  
 * 針對分析查詢使用單欄式格式，原因如下：
-    * 只能讀取與查詢相關的資料行。 
-    * 資料行編碼技術可大幅減少資料大小。  
-* Azure 資料總管支援 Parquet 和 ORC 單欄式格式。 建議採用 Parquet 格式，因為優化的執行。 
+    * 只可以讀取查詢的相關資料行。 
+    * 資料行編碼技術可以大幅縮小資料大小。  
+* Azure 資料總管支援 Parquet 和 ORC 單欄式格式。 建議使用 Parquet 格式，因為其實作已最佳化。 
  
 ### <a name="azure-region"></a>Azure 區域 
  
-檢查外部資料是否與您的 Azure 資料總管叢集位於相同的 Azure 區域。 這種設定可降低成本和資料提取時間。
+檢查外部資料是否與您的 Azure 資料總管叢集位於相同的 Azure 區域中。 此設定可降低成本和資料擷取時間。
  
 ### <a name="file-size"></a>檔案大小
  
-最佳檔案大小為數百 Mb (每個檔案最多 1 GB 的) 。 避免許多需要不需要額外負荷的小型檔案，例如檔案列舉程式較慢，而且使用單欄式格式的限制。 檔案數目應大於 Azure 資料總管叢集中的 CPU 核心數目。 
+最佳檔案大小為每個檔案數百 Mb (最多 1 GB)。 避免許多需要額外負荷的小型檔案，例如較慢的檔案列舉程序和有限的單欄式格式使用。 檔案數目應大於 Azure 資料總管叢集中的 CPU 核心數目。 
  
 ### <a name="compression"></a>壓縮
  
-使用壓縮來減少從遠端存放裝置提取的資料量。 針對 Parquet 格式，請使用內部 Parquet 壓縮機制來分開壓縮資料行群組，讓您可以個別讀取資料行群組。 若要驗證壓縮機制的使用方式，請檢查檔案的命名方式如下： *&lt; filename &gt; . gz. parquet* 或 *&lt; filename &gt; . snappy. parquet* ，而不是 *&lt; filename &gt; . parquet. gz*。 
+使用壓縮來減少從遠端儲存體擷取的資料量。 針對 Parquet 格式，使用可個別壓縮資料行群組的內部 Parquet 壓縮機制，讓您能個別進行讀取。 若要驗證壓縮機制的使用，請檢查檔案的命名方式是否如下： *&lt;filename&gt;.gz.parquet* 或 *&lt;filename&gt;.snappy.parquet*，而不是 *&lt;filename&gt;.parquet.gz*。 
  
 ### <a name="partitioning"></a>資料分割
  
-使用「資料夾」分割區來組織您的資料，讓查詢略過不相關的路徑。 規劃資料分割時，請考慮您查詢中的檔案大小和一般篩選準則，例如時間戳記或租使用者識別碼。
+使用可讓查詢略過無關路徑的「資料夾」分割區來組織您的資料。 在規劃資料分割時，請考慮查詢中的檔案大小和一般篩選條件，例如時間戳記或租用戶識別碼。
  
 ### <a name="vm-size"></a>VM 大小
  
-選取具有更多核心和更高網路輸送量的 VM Sku (記憶體較不重要) 。 如需詳細資訊，請參閱為 [您的 Azure 資料總管叢集選取正確的 VM SKU](manage-cluster-choose-sku.md)。
+選取具有更多核心和較高網路輸送量的 VM SKU (記憶體比較不重要)。 如需詳細資訊，請參閱[為您的 Azure 資料總管叢集選取正確的 VM SKU](manage-cluster-choose-sku.md)。
 
 ## <a name="next-steps"></a>後續步驟
 
-* 使用 Azure 資料總管在 Azure Data Lake 中查詢您的資料。 瞭解如何 [撰寫查詢](write-queries.md) ，以及從您的資料衍生額外的見解。
+* 使用 Azure 資料總管查詢 Azure Data Lake 中的資料。 了解如何[撰寫查詢](write-queries.md)並從您的資料衍生出其他見解。
