@@ -6,21 +6,21 @@ ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 09/24/2018
-ms.openlocfilehash: fdcc048c9abdbbc7b99ba938dd5f4ce3792fce41
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.date: 12/01/2020
+ms.openlocfilehash: 8b94a36bc2e5190770db424126a3461330c4245d
+ms.sourcegitcommit: 4d5628b52b84f7564ea893f621bdf1a45113c137
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875356"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96444189"
 ---
 # <a name="troubleshoot-failure-to-create-or-delete-a-database-or-table-in-azure-data-explorer"></a>疑難排解：無法在 Azure 資料總管中建立或刪除資料庫或資料表
 
-在 Azure 資料總管中，您經常使用資料庫和資料表。 此文章提供適用於可能出現之問題的疑難排解步驟。
+在 Azure 資料總管中，您經常使用資料庫和資料表。 此文章提供適用於可能出現之問題的疑難排解步驟。 
 
 ## <a name="creating-a-database"></a>建立資料庫
 
-1. 確定您有足夠的權限。 若要建立資料庫，您必須是 Azure 訂用帳戶中「參與者」** 或「擁有者」** 角色的成員。 如有必要，請與訂用帳戶系統管理員合作，以便他們可以將您新增到適當的角色。
+1. 確定您有足夠的權限。 若要建立資料庫，您必須是 Azure 訂用帳戶中「參與者」或「擁有者」角色的成員。 如有必要，請與訂用帳戶系統管理員合作，以便他們可以將您新增到適當的角色。
 
 1. 確定資料庫名稱沒有任何名稱驗證錯誤。 名稱必須是英數字元且最大長度為 260 個字元。
 
@@ -28,15 +28,15 @@ ms.locfileid: "88875356"
 
 ## <a name="deleting-or-renaming-a-database"></a>刪除或重新命名資料庫
 
-確定您有足夠的權限。 若要刪除或重新命名資料庫，您必須是 Azure 訂用帳戶中「參與者」** 或「擁有者」** 角色的成員。 如有必要，請與訂用帳戶系統管理員合作，以便他們可以將您新增到適當的角色。
+確定您有足夠的權限。 若要刪除或重新命名資料庫，您必須是 Azure 訂用帳戶中「參與者」或「擁有者」角色的成員。 如有必要，請與訂用帳戶系統管理員合作，以便他們可以將您新增到適當的角色。 如果您有 *資料庫管理員* 角色，也可以刪除或重新命名資料庫。
 
 ## <a name="creating-a-table"></a>建立資料表
 
-1. 確定您有足夠的權限。 若要建立資料表，您必須是資料庫中「資料庫管理員」** 或「資料庫使用者」** 角色的成員，或是 Azure 訂用帳戶的「參與者」** 或「擁有者」** 角色。 如有必要，請與訂用帳戶或叢集系統管理員合作，以便他們可以將您新增到適當的角色。
+1. 確定您有足夠的權限。 若要建立資料表，您必須是資料庫中「資料庫管理員」或「資料庫使用者」角色的成員，或是 Azure 訂用帳戶的「參與者」或「擁有者」角色。 如有必要，請與訂用帳戶或叢集系統管理員合作，以便他們可以將您新增到適當的角色。
 
     如需有關權限的詳細資訊，請參閱[管理資料庫權限](manage-database-permissions.md)。
 
-1. 確定具有相同名稱的資料表尚未存在。 如果存在，則您可以：建立具有不同名稱的資料表；將現有的資料表重新命名 (需要「資料表管理員」** 角色)；或卸除現有資料表 (需要「資料庫管理員」** 角色)。 使用下列命令。
+1. 確定具有相同名稱的資料表尚未存在。 如果存在，則您可以：建立具有不同名稱的資料表；將現有的資料表重新命名 (需要「資料表管理員」角色)；或卸除現有資料表 (需要「資料庫管理員」角色)。 使用下列命令。
 
     ```Kusto
     .drop table <TableName>
@@ -46,7 +46,7 @@ ms.locfileid: "88875356"
 
 ## <a name="deleting-or-renaming-a-table"></a>刪除或重新命名資料表
 
-確定您有足夠的權限。 若要刪除或重新命名資料表，您必須是資料庫中「資料庫管理員」** 或「資料表管理員」** 角色的成員。 如有必要，請與訂用帳戶或叢集系統管理員合作，以便他們可以將您新增到適當的角色。
+確定您有足夠的權限。 若要刪除或重新命名資料表，您必須是資料庫中「資料庫管理員」或「資料表管理員」角色的成員。 如有必要，請與訂用帳戶或叢集系統管理員合作，以便他們可以將您新增到適當的角色。
 
 如需有關權限的詳細資訊，請參閱[管理資料庫權限](manage-database-permissions.md)。
 
@@ -54,10 +54,11 @@ ms.locfileid: "88875356"
 
 1. 查看 [Azure 服務健康情況儀表板](https://azure.microsoft.com/status/)。 在您要嘗試使用資料庫或資料表的區域中尋找 Azure 資料總管的狀態。
 
-    如果狀態不是**良好** (綠色核取記號)，請在狀態改善之後再試一次。
+    如果狀態不是 **良好** (綠色核取記號)，請在狀態改善之後再試一次。
 
 1. 若您仍然需要協助來解決問題，請在 [Azure 入口網站](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)中開啟支援要求。
 
 ## <a name="next-steps"></a>後續步驟
 
-[檢查叢集健康情況](check-cluster-health.md)
+* [檢查叢集健康情況](check-cluster-health.md)
+* [管理資料庫權限](manage-database-permissions.md)

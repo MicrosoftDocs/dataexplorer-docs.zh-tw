@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 07/10/2019
-ms.openlocfilehash: 47bb390e6211a0448e16b3fca16560176dcc8702
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.date: 12/03/2020
+ms.openlocfilehash: d02f9732791bf66a488779e2bc413fa441664ef7
+ms.sourcegitcommit: f134d51e52504d3ca722bdf6d33baee05118173a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343533"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96563322"
 ---
 # <a name="visualize-data-using-the-azure-data-explorer-connector-for-power-bi"></a>使用適用於 Power BI 的 Azure 資料總管連接器將資料視覺化
 
@@ -30,7 +30,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 首先，連線到 Azure 資料總管說明叢集，然後從 *StormEvents* 資料表帶入資料子集。 [!INCLUDE [data-explorer-storm-events](includes/data-explorer-storm-events.md)]
 
-1. 在 Power BI Desktop**的 [常用**] 索引標籤上，選取 [**取得資料** **]。**
+1. 在 Power BI Desktop **的 [常用**] 索引標籤上，選取 [**取得資料** **]。**
 
     ![取得資料](media/power-bi-connector/get-data-more.png)
 
@@ -38,13 +38,13 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
     ![搜尋並取得資料](media/power-bi-connector/search-get-data.png)
 
-1. 在 **Azure 資料總管 (Kusto) ** 畫面上，填寫表單中的下列資訊。
+1. 在 **Azure 資料總管 (Kusto)** 畫面上，填寫表單中的下列資訊。
 
     ![叢集、資料庫、資料表選項](media/power-bi-connector/cluster-database-table.png)
 
     | 設定 | 值 | 欄位描述
     |---|---|---
-    | 叢集 | *https://help.kusto.windows.net* | 說明叢集的 URL。 若是其他叢集，URL 的格式為 HTTPs://。 * \<ClusterName\> \<Region\>kusto.windows.net*。 |
+    | 叢集 | *https://help.kusto.windows.net* | 說明叢集的 URL。 若是其他叢集，URL 的格式為 HTTPs://。 *\<ClusterName\> \<Region\>kusto.windows.net*。 |
     | 資料庫 | 保留空白 | 裝載於所要連線叢集上的資料庫。 我們會在稍後步驟中選取此項目。 |
     | 資料表名稱 | 保留空白 | 資料庫的其中一個資料表，或是 <code>StormEvents \| take 1000</code>之類的查詢。 我們會在稍後步驟中選取此項目。 |
     | 進階選項 | 保留空白 | 您查詢的選項，例如結果集大小。
@@ -72,25 +72,25 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
     | 停用結果集截斷 | `true` | 使用 notruncation 要求選項啟用/停用結果截斷 |
     | 其他 set 語句 | `set query_datascope=hotcache` | 設定查詢持續時間的查詢選項。 查詢選項可控制查詢如何執行和傳回結果。 |
 
-1. 如果您還沒有說明叢集的連線，請登入。 使用組織帳戶登入，然後選取 [連線]****。
+1. 如果您還沒有說明叢集的連線，請登入。 使用組織帳戶登入，然後選取 [連線]。
 
     ![登入](media/power-bi-connector/sign-in.png)
 
-1. 在 [導覽器]**** 畫面上，展開 **Samples** 資料庫，選取 **StormEvents**，然後 [編輯]****。
+1. 在 [導覽 **器** ] 畫面上，展開 [ **範例** ] 資料庫，然後選取 [ **StormEvents** 然後 **轉換資料**]。
 
     ![選取資料表](media/power-bi-connector/select-table.png)
 
     資料表會在「Power Query 編輯器」中開啟，您可以先在此編輯器中編輯資料列和資料行，然後再匯入資料。
 
-1. 在 Power Query 編輯器中，選取 **DamageCrops** 資料行旁邊的箭號，然後選取 [遞減排序]****。
+1. 在 Power Query 編輯器中，選取 **DamageCrops** 資料行旁邊的箭號，然後選取 [遞減排序]。
 
     ![DamageCrops 遞減排序](media/power-bi-connector/sort-descending.png)
 
-1. 在 [首頁]**** 索引標籤上，選取 [保留資料列]****，然後 [保留頂端資料列]****。 輸入值 *1000* 可帶入排序資料表的前 1000 個資料列。
+1. 在 [首頁] 索引標籤上，選取 [保留資料列]，然後 [保留頂端資料列]。 輸入值 *1000* 可帶入排序資料表的前 1000 個資料列。
 
     ![保留頂端資料列](media/power-bi-connector/keep-top-rows.png)
 
-1. 在 [首頁]**** 索引標籤上，選取 [關閉並套用]****。
+1. 在 [首頁] 索引標籤上，選取 [關閉並套用]。
 
     ![關閉並套用](media/power-bi-connector/close-apply.png)
 

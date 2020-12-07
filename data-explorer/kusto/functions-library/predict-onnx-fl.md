@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/09/2020
-ms.openlocfilehash: 9cc70418b39ece5c33d6059c7fc90c47f3039ece
-ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
+ms.openlocfilehash: f00f6cdc2a0c52ce0ad2a6832dafdf11bd02fce4
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90998971"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321874"
 ---
 # <a name="predict_onnx_fl"></a>predict_onnx_fl()
 
@@ -22,7 +22,7 @@ ms.locfileid: "90998971"
 > * `predict_onnx_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。
 > * 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `T | invoke predict_onnx_fl(`*models_tbl* `,`*model_name* `,`*features_cols* `,`*pred_col*`)`
 
@@ -92,7 +92,7 @@ OccupancyDetection
 
 # <a name="persistent"></a>[持續](#tab/persistent)
 
-若要持續使用，請使用 [. create function](../management/create-function.md)。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
+若要持續使用，請使用 [`.create function`](../management/create-function.md) 。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 ### <a name="one-time-installation"></a>一次安裝
 

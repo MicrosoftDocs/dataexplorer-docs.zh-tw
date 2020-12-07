@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/19/2020
 ms.custom: contperfq1
-ms.openlocfilehash: a91eca7232cb2583312ea54cab92aec014f4dcbd
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 153b4265aade03e4059db0b38362d217cdad90df
+ms.sourcegitcommit: 2804e3fe40f6cf8e65811b00b7eb6a4f59c88a99
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343380"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96748411"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>使用計量來監視 Azure 資料總管效能、健康情況和使用量
 
@@ -37,7 +37,7 @@ Azure 資料總管計量提供 Azure 資料總管叢集資源的健康情況和�
 
 在 [計量] 窗格中，選取要追蹤的特定度量、選擇如何匯總資料，以及建立要在儀表板上查看的度量圖表。
 
-**資源**和計量**命名空間**選擇器會針對您的 Azure 資料總管叢集預先選取。 下圖中的數位會對應至下列編號清單。 這些步驟會引導您完成設定和查看度量的不同選項。
+**資源** 和計量 **命名空間** 選擇器會針對您的 Azure 資料總管叢集預先選取。 下圖中的數位會對應至下列編號清單。 這些步驟會引導您完成設定和查看度量的不同選項。
 
 ![計量窗格](media/using-metrics/metrics-pane.png)
 
@@ -83,8 +83,8 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 |**計量** | **單位** | **聚集** | **度量說明** | **維度** |
 |---|---|---|---|---|
 匯出記錄的連續匯出數目    | 計數 | Sum | 所有連續匯出作業中匯出的記錄數目。 | ContinuousExportName |
-連續匯出最大延遲 |    計數   | 最大值   | 延遲 (（分鐘），) 由叢集中的連續匯出工作所報告。 | 無 |
-連續匯出暫止計數 | 計數 | 最大值   | 暫止連續匯出作業的數目。 這些作業已準備好執行，但在佇列中等候，可能是因為容量不足) 。 
+連續匯出最大延遲 |    Count   | 最大值   | 延遲 (（分鐘），) 由叢集中的連續匯出工作所報告。 | 無 |
+連續匯出暫止計數 | Count | 最大值   | 暫止連續匯出作業的數目。 這些作業已準備好執行，但在佇列中等候，可能是因為容量不足) 。 
 連續匯出結果    | Count |   Count   | 每個連續匯出執行的失敗/成功結果。 | ContinuousExportName |
 匯出使用率 |    百分比 | 最大值   | 已使用的匯出容量，在叢集中的總匯出容量 (介於0與100之間) 。 | 無 |
 
@@ -98,10 +98,10 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 | 批次持續時間 | 秒 | Avg、Max、Min | 內嵌流程中批次處理階段的持續時間  | 資料庫 |
 | 批次大小 | 位元組 | Avg、Max、Min | 內嵌的匯總批次中，未壓縮的預期資料大小。 | 資料庫 |
 | 已處理的批次 | 計數 | Avg、Max、Min | 針對內嵌完成的批次數目。 `Batching Type`：批次是否達到批次處理時間、資料大小或檔案數目限制（依 [批次處理原則](./kusto/management/batchingpolicy.md)設定）。 | 資料庫，批次處理類型 |
-| 探索延遲 | 秒 | Avg、Max、Min | 從資料佇列到資料連線探索為止的時間。 此時間未包含在 **Kusto total 內建持續時間** 或 **KustoEventAge (內嵌延遲) ** | 資料庫、資料表、資料連線類型、資料連線名稱 |
+| 探索延遲 | 秒 | Avg、Max、Min | 從資料佇列到資料連線探索為止的時間。 此時間未包含在 **Azure 資料總管的內嵌持續時間總數** 或 **KustoEventAge (內嵌延遲)** | 資料庫、資料表、資料連線類型、資料連線名稱 |
 | 已處理的事件 (針對事件/IoT 中樞) | Count | 最大值、最小值、總和 | 從事件中樞讀取並由叢集處理的事件總數。 這些事件會分割成被拒絕的事件，以及叢集引擎所接受的事件。 | EventStatus |
 | 內嵌延遲 | 秒 | Avg、Max、Min | 擷取資料時的延遲，從在叢集中收到資料的時間直到準備好進行查詢為止。 擷取延遲期間取決於擷取狀況。 | 無 |
-| 擷取結果 | Count | Count | 失敗和成功的內嵌作業總數。 <br> <br> 使用 [套用**分割**] 來建立成功和失敗結果的 bucket，並分析維度 (**值**  >  **狀態**) 。| IngestionResultDetails |
+| 擷取結果 | Count | Count | 失敗和成功的內嵌作業總數。 <br> <br> 使用 [套用 **分割**] 來建立成功和失敗結果的 bucket，並分析維度 (**值**  >  **狀態**) 。| IngestionResultDetails |
 | 擷取量 (以 MB 為單位) | Count | Max、Sum | 在壓縮之前，內嵌至叢集 (的資料大小總計（MB）) 。 | 資料庫 |
 | 階段延遲 | 秒 | Avg、Max、Min | 特定元件處理此批次資料的持續時間。 所有資料批次元件的階段延遲總計等於其內嵌延遲。 | 資料庫、資料連線類型、資料連線名稱|
 
@@ -139,6 +139,6 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 
 ## <a name="next-steps"></a>後續步驟
 
-* [教學課程：在 Azure 資料總管中內嵌和查詢監視資料](ingest-data-no-code.md)
+* [教學課程：在 Azure 資料總管中擷取和查詢監視資料](ingest-data-no-code.md)
 * [使用診斷記錄來監視 Azure 資料總管擷取作業](using-diagnostic-logs.md)
 * [快速入門：在 Azure 資料總管中查詢資料](web-query-data.md)

@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/28/2020
-ms.openlocfilehash: fd0bdc07c2a51d76257800e55921a82cd7fdbbda
-ms.sourcegitcommit: cffc81de2b5c75a0ef5a3c71ff58d1ef52d4eb5c
+ms.openlocfilehash: 833a801e6455fd4d88fbbbab83010aea1d406f02
+ms.sourcegitcommit: 7edce9d9d20f9c0505abda67bb8cc3d2ecd60d15
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "95872272"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96524244"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-using-go"></a>使用 Go 建立 Azure 資料總管叢集和資料庫
 
@@ -78,7 +78,7 @@ func createCluster(sub, name, location, rgName string) {
 
 ### <a name="list-clusters"></a>列出叢集
 
-使用上的 [ListByResourceGroup](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#ClustersClient.ListByResourceGroup) 函數 `kusto.ClustersClient` 取得 [kusto。](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#ClusterListResult) 然後，ClusterListResult 會逐一查看以表格格式顯示輸出。
+使用上的 [ListByResourceGroup](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/kusto/mgmt/2018-09-07-preview/kusto#ClustersClient.ListByResourceGroup) 函數 `kusto.ClustersClient` 取得 [kusto。](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/kusto/mgmt/2018-09-07-preview/kusto#ClusterListResult) 然後，ClusterListResult 會逐一查看以表格格式顯示輸出。
 
 
 ```go
@@ -95,7 +95,7 @@ func listClusters(sub, rgName string) {
 
 ### <a name="create-database"></a>建立資料庫
 
-在 kusto 上使用 [CreateOrUpdate](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#DatabasesClient.CreateOrUpdate) 函數 [。DatabasesClient](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#DatabasesClient) 在現有的叢集中建立新的 Azure 資料總管資料庫。 等候進程完成，再檢查結果。
+在 kusto 上使用 [CreateOrUpdate](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/kusto/mgmt/2018-09-07-preview/kusto#DatabasesClient.CreateOrUpdate) 函數 [。DatabasesClient](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/kusto/mgmt/2018-09-07-preview/kusto#DatabasesClient) 在現有的叢集中建立新的 Azure 資料總管資料庫。 等候進程完成，再檢查結果。
 
 
 ```go
@@ -111,7 +111,7 @@ func createDatabase(sub, rgName, clusterName, location, dbName string) {
 
 ### <a name="list-databases"></a>列出資料庫
 
-使用 [ListByCluster](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#DatabasesClient.ListByCluster) 函數 `kusto.DatabasesClient` 來取得 [kusto。](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#DatabaseListResult) 然後，DatabaseListResult 會逐一查看以表格格式顯示輸出。
+使用 [ListByCluster](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/kusto/mgmt/2018-09-07-preview/kusto#DatabasesClient.ListByCluster) 函數 `kusto.DatabasesClient` 來取得 [kusto。](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/kusto/mgmt/2018-09-07-preview/kusto#DatabaseListResult) 然後，DatabaseListResult 會逐一查看以表格格式顯示輸出。
 
 
 ```go
@@ -127,7 +127,7 @@ func listDatabases(sub, rgName, clusterName string) {
 
 ### <a name="delete-database"></a>刪除資料庫
 
-在上使用 [delete](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#DatabasesClient.Delete) 函數 `kusto.DatabasesClient` 可刪除叢集中現有的資料庫。 等候進程完成，再檢查結果。
+在上使用 [delete](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/kusto/mgmt/2018-09-07-preview/kusto#DatabasesClient.Delete) 函數 `kusto.DatabasesClient` 可刪除叢集中現有的資料庫。 等候進程完成，再檢查結果。
 
 ```go
 func deleteDatabase(sub, rgName, clusterName, dbName string) {
@@ -146,7 +146,7 @@ func deleteDatabase(sub, rgName, clusterName, dbName string) {
 
 ### <a name="delete-cluster"></a>刪除叢集
 
-在上使用 [delete](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go@v0.0.0-20200513030755-ac906323d9fe/services/kusto/mgmt/2020-02-15/kusto?tab=doc#ClustersClient.Delete) 函數 `kusto.ClustersClient` 可刪除叢集。 等候進程完成，再檢查結果。
+在上使用 [delete](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/kusto/mgmt/2018-09-07-preview/kusto#ClustersClient.Delete) 函數 `kusto.ClustersClient` 可刪除叢集。 等候進程完成，再檢查結果。
 
 ```go
 func deleteCluster(sub, clusterName, rgName string) {

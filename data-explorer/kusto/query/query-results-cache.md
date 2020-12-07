@@ -8,12 +8,12 @@ ms.reviewer: amitof
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-ms.openlocfilehash: d0942a949454bf12840626ff25d3703a23aed2cc
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 24ab3cb3e423e3ab6b77f09f2c216feb07ae0d0f
+ms.sourcegitcommit: f134d51e52504d3ca722bdf6d33baee05118173a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92002957"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96563303"
 ---
 # <a name="query-results-cache"></a>查詢結果快取
 
@@ -41,9 +41,9 @@ GithubEvent
 * 這兩個查詢的標記法 (為 UTF-8 字串) 。
 * 這兩個查詢會對相同的資料庫進行。
 * 這兩個查詢會共用相同的 [用戶端要求屬性](../api/netfx/request-properties.md)。 基於快取目的，會忽略下列屬性：
-   * [ClientRequestId](../api/netfx/request-properties.md#the-clientrequestid-x-ms-client-request-id-named-property)
-   * [應用程式](../api/netfx/request-properties.md#the-application-x-ms-app-named-property)
-   * [使用者](../api/netfx/request-properties.md#the-user-x-ms-user-named-property)
+   * [ClientRequestId](../api/netfx/request-properties.md#clientrequestid-x-ms-client-request-id)
+   * [應用程式](../api/netfx/request-properties.md#application-x-ms-app)
+   * [使用者](../api/netfx/request-properties.md#user-x-ms-user)
 
 ### <a name="incompatible-queries"></a>不相容的查詢
 
@@ -72,7 +72,7 @@ GithubEvent
 快取的查詢結果會在該資料表附加一個額外的資料列：
 * 資料列的資料行 `Key` 將包含字串 `ServerCache`
 * 資料列的資料行 `Value` 將包含具有兩個欄位的屬性包：
-   * `OriginalClientRequestId` -指定原始要求的 [ClientRequestId](../api/netfx/request-properties.md#the-clientrequestid-x-ms-client-request-id-named-property)。
+   * `OriginalClientRequestId` -指定原始要求的 [ClientRequestId](../api/netfx/request-properties.md#clientrequestid-x-ms-client-request-id)。
    * `OriginalStartedOn` -指定原始要求的執行時間開始時間。
 
 ## <a name="distribution"></a>散發

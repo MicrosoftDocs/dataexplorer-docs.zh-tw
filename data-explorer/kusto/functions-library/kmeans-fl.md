@@ -7,14 +7,14 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/18/2020
-ms.openlocfilehash: b56aefd94ed58b8731ea6237f131b4da74d4f7be
-ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
+ms.openlocfilehash: 7d2482c36c0c55c34adbc664a6c24f64bdadf7a1
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92184124"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321942"
 ---
-# <a name="kmeans_fl"></a>kmeans_fl ( # A1
+# <a name="kmeans_fl"></a>kmeans_fl()
 
 此函數會 `kmeans_fl()` 使用 [k 表示演算法](https://en.wikipedia.org/wiki/K-means_clustering)clusterizes 資料集。
 
@@ -76,7 +76,7 @@ OccupancyDetection
 
 # <a name="persistent"></a>[持續](#tab/persistent)
 
-若要持續使用，請使用 [. create function](../management/create-function.md)。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
+若要持續使用，請使用 [`.create function`](../management/create-function.md) 。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 ### <a name="one-time-installation"></a>一次安裝
 

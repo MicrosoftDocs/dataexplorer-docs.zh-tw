@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5192bb2d752a5754ae36840611b9f7b0e84da256
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 569554379ffe672ed75fd15da127f03fea35f6d1
+ms.sourcegitcommit: 2804e3fe40f6cf8e65811b00b7eb6a4f59c88a99
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92250730"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96748377"
 ---
 # <a name="take-operator"></a>take 運算子
 
@@ -36,17 +36,14 @@ T | take 5
 
  (`take` 和 `limit` 都是同義字。 ) 
 
-## <a name="does-kusto-support-paging-of-query-results"></a>Kusto 是否支援查詢結果的分頁？
+## <a name="paging-of-query-results"></a>查詢結果的分頁
 
-Kusto 不會提供內建的分頁機制。
-
-Kusto 是一項複雜的服務，可持續將它所儲存的資料優化，以提供優於大量資料集的絕佳查詢效能。 雖然分頁對於具有有限資源的無狀態用戶端來說很有用，但它會將負擔轉移到需要追蹤用戶端狀態資訊的後端服務。 之後端服務的效能和擴充性會受到嚴格限制。
-
-針對分頁支援，請執行下列其中一項功能：
+執行分頁的方法包括：
 
 * 將查詢結果匯出至外部儲存體，並透過產生的資料進行分頁。
+* 撰寫中介層應用程式，藉由快取 Kusto 查詢的結果，提供具狀態的頁面 API。
+* 在 [預存查詢結果](../management/stored-query-results.md#pagination) 中使用分頁。
 
-* 藉由快取 Kusto 查詢的結果，撰寫可提供具狀態頁面 API 的仲介層應用程式。
 
 ## <a name="see-also"></a>另請參閱
 

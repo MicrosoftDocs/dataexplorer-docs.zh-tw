@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/05/2020
-ms.openlocfilehash: 51d5c48fbcd2373ed5cdd1973cc9e53abb26b2de
-ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
+ms.openlocfilehash: e8ec0a07549a8db4027beab8d512f58e3ab6a780
+ms.sourcegitcommit: 4d5628b52b84f7564ea893f621bdf1a45113c137
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/15/2020
-ms.locfileid: "92099527"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96444156"
 ---
 # <a name="manually-create-resources-for-event-grid-ingestion"></a>手動建立事件方格內嵌的資源
 
@@ -28,9 +28,10 @@ Azure 資料總管使用 [事件方格內嵌管線](ingest-data-event-grid-overv
 
 在本文中，您將瞭解如何手動建立事件方格內建所需的資源：事件方格訂用帳戶、事件中樞命名空間和事件中樞。 [必要條件](#prerequisites)中描述事件中樞命名空間和事件中樞建立。 若要在定義事件方格內嵌時使用自動建立這些資源，請參閱 [在 Azure 中建立事件方格資料連線資料總管](ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer)。
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>先決條件
 
 * Azure 訂用帳戶。 建立 [免費的 Azure 帳戶](https://azure.microsoft.com/free/)。
+* 叢集[和資料庫](create-cluster-database-portal.md)。
 * [儲存體帳戶](/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal)。
     * 您可以針對 `BlobStorage` 、 `StorageV2` 或 [Data Lake Storage Gen2](/azure/storage/blobs/data-lake-storage-introduction)Azure 儲存體帳戶設定事件方格通知訂閱。
 * [事件中樞命名空間和事件中樞](/azure/event-hubs/event-hubs-create)。
@@ -45,9 +46,9 @@ Azure 資料總管使用 [事件方格內嵌管線](ingest-data-event-grid-overv
 
      :::image type="content" source="media/eventgrid/create-event-grid-subscription-1.png" alt-text="建立事件方格訂用帳戶":::
 
-1. 在 [建立事件訂用帳戶]**** 視窗的 [基本]**** 索引標籤內，提供下列值：
+1. 在 [建立事件訂用帳戶] 視窗的 [基本] 索引標籤內，提供下列值：
 
-    :::image type="content" source="media/eventgrid/create-event-grid-subscription-2.png" alt-text="建立事件方格訂用帳戶":::
+    :::image type="content" source="media/eventgrid/create-event-grid-subscription-2.png" alt-text="建立要輸入的事件訂用帳戶值":::
 
     |**設定** | **建議的值** | **欄位描述**|
     |---|---|---|
@@ -60,20 +61,20 @@ Azure 資料總管使用 [事件方格內嵌管線](ingest-data-event-grid-overv
 
 1. 在 [ **端點詳細資料**] 中，選取 [ **事件中樞**]。
 
-    :::image type="content" source="media/eventgrid/endpoint-details.png" alt-text="建立事件方格訂用帳戶":::
+    :::image type="content" source="media/eventgrid/endpoint-details.png" alt-text="挑選事件處理常式以接收您的事件-事件中樞-Azure 資料總管":::
 
 1. 按一下 [ **選取端點** ]，然後填入您所建立的事件中樞，例如 [ *測試中樞*]。
     
 1. 如果您想要追蹤特定的主題，請選取 [ **篩選** ] 索引標籤。 設定通知的篩選條件，如下所示：
    
-    :::image type="content" source="media/eventgrid/filters-tab.png" alt-text="建立事件方格訂用帳戶":::
+    :::image type="content" source="media/eventgrid/filters-tab.png" alt-text="篩選索引標籤事件方格":::
 
-   1. 選取 [啟用主旨篩選]****
-   1. 主旨**開頭**為欄位是主體的*常*值前置詞。 因為套用的模式是 *startswith*，它可以跨越多個容器、資料夾或 blob。 不允許使用萬用字元。
+   1. 選取 [啟用主旨篩選]
+   1. 主旨 **開頭** 為欄位是主體的 *常* 值前置詞。 因為套用的模式是 *startswith*，它可以跨越多個容器、資料夾或 blob。 不允許使用萬用字元。
        * 若要在 blob 容器上定義篩選，請依照下列方式設定欄位： *`/blobServices/default/containers/[container prefix]`* 。
        * 若要在 blob 首碼 (或 Azure Data Lake Gen2) 中的資料夾上定義篩選，請依照下列方式設定欄位： *`/blobServices/default/containers/[container name]/blobs/[folder/blob prefix]`* 。
-   1. [主旨結尾為]**** 欄位是 Blob 的*常值*後置詞。 不允許使用萬用字元。
-   1. 區分**大小寫的主體相符**欄位指出前置詞和後置詞篩選準則是否區分大小寫。
+   1. [主旨結尾為] 欄位是 Blob 的 *常值* 後置詞。 不允許使用萬用字元。
+   1. 區分 **大小寫的主體相符** 欄位指出前置詞和後置詞篩選準則是否區分大小寫。
 
     如需有關篩選事件的詳細資訊，請參閱 [blob 儲存體事件](/azure/storage/blobs/storage-blob-event-overview#filtering-events)。
 

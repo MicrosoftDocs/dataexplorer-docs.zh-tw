@@ -7,14 +7,14 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/18/2020
-ms.openlocfilehash: 9b1c6db6af651ae3665c07bda8598212883a8f6c
-ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
+ms.openlocfilehash: 9065c6b86807ad27c588ebffe3334c450a1addcb
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92184119"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321840"
 ---
-# <a name="series_dot_product_fl"></a>series_dot_product_fl ( # A1
+# <a name="series_dot_product_fl"></a>series_dot_product_fl()
 
 計算兩個數值向量的點乘積。
 
@@ -30,7 +30,7 @@ ms.locfileid: "92184119"
 ## <a name="arguments"></a>引數
 
 * *vec1*：數值的動態陣列資料格。
-* *vec2*：數值的動態陣列資料格，與 *vec1*的長度相同。
+* *vec2*：數值的動態陣列資料格，與 *vec1* 的長度相同。
 
 ## <a name="usage"></a>使用方式
 
@@ -57,7 +57,7 @@ union
 
 # <a name="persistent"></a>[持續](#tab/persistent)
 
-若要持續使用，請使用 [. create function](../management/create-function.md)。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
+若要持續使用，請使用 [`.create function`](../management/create-function.md) 。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 ### <a name="one-time-installation"></a>一次安裝
 
