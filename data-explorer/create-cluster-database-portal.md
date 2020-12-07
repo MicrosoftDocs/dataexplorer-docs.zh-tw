@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 07/22/2019
 ms.localizationpriority: high
-ms.openlocfilehash: 44c2a5adf46d8c136675aa70a45dc89ed60c4cc8
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.openlocfilehash: 02e746a3ce929bab9883f1b4faafe7a6fb1ce953
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
-ms.locfileid: "95512735"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "95783262"
 ---
 # <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>快速入門：建立 Azure 資料總管叢集與資料庫
 
@@ -66,6 +66,11 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 1. 部署完成後，請選取 [移至資源]  。
 
     ![前往資源](media/create-cluster-database-portal/notification-resource.png)
+
+> [!NOTE]
+> 如果部署失敗並出現錯誤 "SubscriptionNotRegistered"，請重試作業。 
+> 
+> 當 Kusto 資源提供者未在 [Azure 資源提供者和類型](/azure/azure-resource-manager/management/resource-providers-and-types)中所述的訂用帳戶上註冊時，部署將會失敗。 當部署失敗時，Kusto 資源提供者會在訂用帳戶上自行註冊，然後重試即可成功。
 
 ## <a name="create-a-database"></a>建立資料庫
 

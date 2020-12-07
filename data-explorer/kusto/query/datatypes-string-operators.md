@@ -1,5 +1,5 @@
 ---
-title: 字串運算子-Azure 資料總管
+title: 字串運算子 - Azure 資料總管
 description: 本文說明 Azure 資料總管中的字串運算子。
 services: data-explorer
 author: orspod
@@ -9,40 +9,40 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/19/2020
 ms.localizationpriority: high
-ms.openlocfilehash: d7c975dcf3fb00ed1108f55957a35f494310203e
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.openlocfilehash: 845f0b5c9446f927fadf0141de4568cc28641c8d
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
-ms.locfileid: "95513228"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96320684"
 ---
 # <a name="string-operators"></a>字串運算子
 
-Kusto 提供各種查詢運算子來搜尋字串資料類型。 下列文章說明如何編制字串詞彙的索引、列出字串查詢運算子，以及提供優化效能的秘訣。
+Kusto 提供各種查詢運算子供您搜尋字串資料類型。 下列文章會說明字串字詞編製索引的方式、列出字串查詢運算子，並提供用於將效能最佳化的秘訣。
 
-## <a name="understanding-string-terms"></a>瞭解字串詞彙
+## <a name="understanding-string-terms"></a>了解字串字詞
 
-Kusto 會編制所有資料行的索引，包括類型的資料行 `string` 。 針對這類資料行，會根據實際資料建立多個索引。 這些索引不會直接公開，但會在具有作為其名稱一部分之運算子的查詢中使用， `string` `has` 例如 `has` 、、 `!has` `hasprefix` 、 `!hasprefix` 。 這些運算子的語法是以資料行的編碼方式來決定。 這些運算子不會執行「純」子字串比對，而是與 *詞彙* 相符。
+Kusto 會為所有資料行編製索引，包括 `string` 類型的資料行在內。 視實際資料而定，這類資料行會建置多個索引。 這些索引不會直接公開，而是用於具有 `string` 運算子，並以 `has` 作為其名稱一部分的查詢中，例如 `has`、`!has`、`hasprefix`、`!hasprefix`。 這些運算子的語義會由資料行的編碼方式來加以規定。 這些運算子會比對 *字詞*，而不會執行「純文字」子字串比對。
 
-### <a name="what-is-a-term"></a>什麼是詞彙？ 
+### <a name="what-is-a-term"></a>何謂字詞？ 
 
-根據預設，每個 `string` 值會分成 ASCII 英數位元的最大序列，且每個順序都會變成詞彙。
-例如，在下列內容中， `string` 詞彙是 `Kusto` 、 `WilliamGates3rd` 和下列子字串： `ad67d136` 、 `c1db` 、 `4f9f` 、 `88ef` 、 `d94f3b6b0b5a` 。
+根據預設，每個 `string` 值都會細分成 ASCII 英數字元的最大數量，而每個數量都會成為一個字詞。
+例如，在下列 `string` 中，這些字詞是 `Kusto`、`WilliamGates3rd` 和下列子字串：`ad67d136`、`c1db`、`4f9f`、`88ef`、`d94f3b6b0b5a`。
 
 ```
 Kusto:  ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
 ```
 
-Kusto 會建立一個詞彙索引，其中包含 *四個字元* 以上的所有詞彙，而且此索引會由 `has` 、 `!has` 等等使用。 如果查詢尋找的詞彙小於四個字元，或使用 `contains` 運算子，則 Kusto 將會還原為在資料行中的值無法判斷相符的情況下進行掃描。 這個方法比查詢詞彙索引中的詞彙慢很多。
+Kusto 會建置一個字詞索引，其中包含 *四個字元以上* 的所有字詞，而且 `has`、`!has` 等項目會使用此索引。 如果查詢尋找的字詞小於四個字元，或其使用 `contains` 運算子，則 Kusto 會在無法判斷是否相符的情況下，回復為掃描資料行中的值。 這個方法比查閱字詞索引中的字詞慢很多。
 
 ## <a name="operators-on-strings"></a>字串上的運算子
 
 > [!NOTE]
-> 下表使用下列縮寫：
+> 下表會使用下列縮寫：
 > * RHS = 運算式的右手邊
-> * LHS = 運算式的左側
+> * LHS = 運算式的左手邊
 > 
-> 具有尾碼的運算子 `_cs` 會區分大小寫。
+> 具有 `_cs` 尾碼的運算子會區分大小寫。
 
 運算子        |描述                                                       |區分大小寫|範例 (結果為 `true`)
 ----------------|------------------------------------------------------------------|--------------|-----------------------
@@ -51,17 +51,18 @@ Kusto 會建立一個詞彙索引，其中包含 *四個字元* 以上的所有�
 `=~`            |等於                                                            |否            |`"abc" =~ "ABC"`
 `!~`            |不等於                                                        |否            |`"aBc" !~ "xyz"`
 `has`           |右側 (RHS) 是左側 (LHS) 中的完整詞彙     |否            |`"North America" has "america"`
-`!has`          |RHS 不是 LHS 中的完整詞彙                                     |否            |`"North America" !has "amer"` 
-`has_cs`        |RHS 是 LHS 中的完整詞彙                                        |是           |`"North America" has_cs "America"`
-`!has_cs`       |RHS 不是 LHS 中的完整詞彙                                     |是           |`"North America" !has_cs "amer"` 
-`hasprefix`     |RHS 是 LHS 中的詞彙前置詞                                       |否            |`"North America" hasprefix "ame"`
-`!hasprefix`    |RHS 不是 LHS 中的詞彙前置詞                                   |否            |`"North America" !hasprefix "mer"` 
-`hasprefix_cs`  |RHS 是 LHS 中的詞彙前置詞                                       |是           |`"North America" hasprefix_cs "Ame"`
-`!hasprefix_cs` |RHS 不是 LHS 中的詞彙前置詞                                   |是           |`"North America" !hasprefix_cs "CA"` 
-`hassuffix`     |RHS 是 LHS 中的字詞尾碼                                       |否            |`"North America" hassuffix "ica"`
-`!hassuffix`    |RHS 不是 LHS 中的字詞尾碼                                   |否            |`"North America" !hassuffix "americ"`
-`hassuffix_cs`  |RHS 是 LHS 中的字詞尾碼                                       |是           |`"North America" hassuffix_cs "ica"`
-`!hassuffix_cs` |RHS 不是 LHS 中的字詞尾碼                                   |是           |`"North America" !hassuffix_cs "icA"`
+`!has`          |RHS 不是 LHS 中的完整字詞                                     |否            |`"North America" !has "amer"` 
+[`has_any`](has-anyoperator.md)       |與 `has` 相同，但適用於任何元素                    |否            |`"North America" has_any("south", "north")`
+`has_cs`        |RHS 是 LHS 中的完整字詞                                        |是           |`"North America" has_cs "America"`
+`!has_cs`       |RHS 不是 LHS 中的完整字詞                                     |是           |`"North America" !has_cs "amer"` 
+`hasprefix`     |RHS 是 LHS 中的字詞前置詞                                       |否            |`"North America" hasprefix "ame"`
+`!hasprefix`    |RHS 不是 LHS 中的字詞前置詞                                   |否            |`"North America" !hasprefix "mer"` 
+`hasprefix_cs`  |RHS 是 LHS 中的字詞前置詞                                       |是           |`"North America" hasprefix_cs "Ame"`
+`!hasprefix_cs` |RHS 不是 LHS 中的字詞前置詞                                   |是           |`"North America" !hasprefix_cs "CA"` 
+`hassuffix`     |RHS 是 LHS 中的字詞後置詞                                       |否            |`"North America" hassuffix "ica"`
+`!hassuffix`    |RHS 不是 LHS 中的字詞後置詞                                   |否            |`"North America" !hassuffix "americ"`
+`hassuffix_cs`  |RHS 是 LHS 中的字詞後置詞                                       |是           |`"North America" hassuffix_cs "ica"`
+`!hassuffix_cs` |RHS 不是 LHS 中的字詞後置詞                                   |是           |`"North America" !hassuffix_cs "icA"`
 `contains`      |RHS 作為 LHS 的子序列發生                                |否            |`"FabriKam" contains "BRik"`
 `!contains`     |RHS 未在 LHS 中發生                                         |否            |`"Fabrikam" !contains "xyz"`
 `contains_cs`   |RHS 作為 LHS 的子序列發生                                |是           |`"FabriKam" contains_cs "Kam"`
@@ -75,28 +76,28 @@ Kusto 會建立一個詞彙索引，其中包含 *四個字元* 以上的所有�
 `endswith_cs`   |RHS 是 LHS 的右子序列                               |是           |`"Fabrikam" endswith_cs "kam"`
 `!endswith_cs`  |RHS 不是 LHS 的右子序列                           |是           |`"Fabrikam" !endswith_cs "brik"`
 `matches regex` |LHS 包含 RHS 的相符項目                                      |是           |`"Fabrikam" matches regex "b.*k"`
-`in`            |等於其中一個元素                                     |是           |`"abc" in ("123", "345", "abc")`
-`!in`           |不等於任何元素                                 |是           |`"bca" !in ("123", "345", "abc")`
+[`in`](inoperator.md)            |等於其中一個元素                                     |是           |`"abc" in ("123", "345", "abc")`
+[`!in`](inoperator.md)           |不等於任何元素                                 |是           |`"bca" !in ("123", "345", "abc")`
 `in~`           |等於其中一個元素                                     |否            |`"abc" in~ ("123", "345", "ABC")`
 `!in~`          |不等於任何元素                                 |否            |`"bca" !in~ ("123", "345", "ABC")`
-`has_any`       |與相同， `has` 但適用于任何元素                    |否            |`"North America" has_any("south", "north")`
+
 
 > [!TIP]
-> 所有運算子都包含 `has` 搜尋四個或更多字元的索引 *字詞* ，而不是子字串相符專案。 建立詞彙的方法是將字串分解成 ASCII 英數位元的序列。 請參閱 [瞭解字串字詞](#understanding-string-terms)。
+> 包含 `has` 在內的所有運算子都會搜尋四個以上字元的已編製索引 *字詞*，而不會搜尋子字串相符項目。 將字串細分成 ASCII 英數字元的數列，就會建立一個字詞。 請參閱[了解字串字詞](#understanding-string-terms)。
 
 ## <a name="performance-tips"></a>效能秘訣
 
-為了獲得更好的效能，當有兩個運算子執行相同的工作時，請使用區分大小寫的。
+為獲得較佳效能，當有兩個運算子可執行相同的工作時，請使用會區分大小寫的運算子。
 例如：
 
-* 請改用 `=~``==`
-* 請改用 `in~``in`
-* 請改用 `contains``contains_cs`
+* 不要使用 `=~`，而是使用 `==`
+* 不要使用 `in~`，而是使用 `in`
+* 不要使用 `contains`，而是使用 `contains_cs`
 
-為了更快得到結果，如果您要測試的是以非英數位元或欄位開頭或結尾所系結的符號或英數位元字組是否存在，請使用 `has` 或 `in` 。 
-`has` 的運作速度比 `contains` 、或更快 `startswith` `endswith` 。
+為了更快獲得結果，如果您要測試由非英數字元所繫結的符號或英數字元字組是否存在，或要測試欄位的開頭或結尾，請使用 `has` 或 `in`。 
+`has` 的運作速度快過 `contains`、`startswith` 或 `endswith`。
 
-例如，這些查詢的第一個執行速度會更快：
+例如，這些查詢的第一個會執行得更快：
 
 ```kusto
 EventLog | where continent has "North" | count;

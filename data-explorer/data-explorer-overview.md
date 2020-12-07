@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: overview
 ms.date: 09/24/2018
 ms.localizationpriority: high
-ms.openlocfilehash: 2af4aff9667ecc53794c63010a723494e85126fa
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.openlocfilehash: cd2ad1bebf91cacc80e3cb92fd06bc991c05cc7c
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/24/2020
-ms.locfileid: "95512820"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96354049"
 ---
 # <a name="what-is-azure-data-explorer"></a>什麼是 Azure 資料總管？
 
@@ -57,7 +57,7 @@ Azure 資料總管中的工作通常會遵循此模式：
 
 Azure 資料總管同樣可以處理大量的結構化、半結構化 (類似 JSON 的巢狀型別) 和非結構化 (自然語言) 資料。 這項服務可讓您搜尋特定的文字字詞、找出特定事件，以及對結構化資料執行計量樣式的計算。 Azure 資料總管透過從自由格式文字欄位中擷取執行階段中的值，來橋接非結構化文字記錄和結構化數字與維度。 結合快速的文字索引編製、資料行存放區和時間序列作業，讓資料探索變得簡單。
 
-其他服務建基於 Azure 資料總管強大的查詢語言，進一步延伸了其功能，這些服務包括 [Azure 監視器記錄](/azure/log-analytics/)、[Application Insights](/azure/application-insights/)、[時間序列深入解析](/azure/time-series-insights/)和 [Windows Defender 進階威脅防護](/windows/security/threat-protection/windows-defender-atp/windows-defender-advanced-threat-protection/)。
+其他服務建基於 Azure 資料總管強大的查詢語言，進一步延伸了其功能，這些服務包括 [Azure 監視器記錄](/azure/log-analytics/)、[Application Insights](/azure/application-insights/)、[時間序列深入解析](/azure/time-series-insights/)和[適用於端點的 Microsoft Defender](/windows/security/threat-protection/windows-defender-atp/windows-defender-advanced-threat-protection/)。
 
 ## <a name="how-to-provide-feedback"></a>如何提供意見反應
 
