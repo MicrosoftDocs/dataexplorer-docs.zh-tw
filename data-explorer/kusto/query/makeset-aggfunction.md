@@ -8,18 +8,18 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: 8f5494c9d54d2950ba82da8de0b0094b2d17f798
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 6e57f22dae1abef3838ed6f7065759c4a203e389
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92246409"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303289"
 ---
 # <a name="make_set-aggregation-function"></a>make_set ( # A1 (彙總函式) 
 
-傳回一組相異值的 `dynamic` (JSON) 陣列，這些是 Expr** 在群組中取得的值。
+傳回一組相異值的 `dynamic` (JSON) 陣列，這些是 Expr 在群組中取得的值。
 
-* 只能用在[摘要內匯總](summarizeoperator.md)的內容中
+* 僅用於 [summarize](summarizeoperator.md) 內部彙總的內容。
 
 ## <a name="syntax"></a>語法
 
@@ -31,11 +31,11 @@ ms.locfileid: "92246409"
 * *MaxSize* 是選擇性的整數限制， (預設值為 *1048576*) 時傳回的元素數目上限。 MaxSize 值不能超過1048576。
 
 > [!NOTE]
-> 此函式的舊版和過時變數：的 `makeset()` 預設限制為 *MaxSize* = 128。
+> `makeset()` 是函式的舊版和過時版本 `make_set` 。 舊版的預設限制為 *MaxSize* = 128。
 
 ## <a name="returns"></a>傳回
 
-傳回一組相異值的 `dynamic` (JSON) 陣列，這些是 Expr** 在群組中取得的值。
+傳回一組相異值的 `dynamic` (JSON) 陣列，這些是 Expr 在群組中取得的值。
 陣列的排序次序是未定義的。
 
 > [!TIP]

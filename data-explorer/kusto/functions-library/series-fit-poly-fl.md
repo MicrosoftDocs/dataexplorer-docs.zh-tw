@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: eff9a5cd8ed2d9ed7e518be9aade9ecf2aded7bf
-ms.sourcegitcommit: d0f8d71261f8f01e7676abc77283f87fc450c7b1
+ms.openlocfilehash: 454aa19c5b38eabce49fd319891772746335ceab
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91765475"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321823"
 ---
 # <a name="series_fit_poly_fl"></a>series_fit_poly_fl()
 
@@ -99,7 +99,7 @@ demo_make_series1
 
 # <a name="persistent"></a>[持續](#tab/persistent)
 
-若要持續使用，請使用 [. create function](../management/create-function.md)。  建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
+若要持續使用，請使用 [`.create function`](../management/create-function.md) 。  建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 ### <a name="one-time-installation"></a>一次安裝
 
@@ -183,7 +183,7 @@ demo_make_series1
     | render timechart with(ycolumns=num, fnum)
     ```
     
-    :::image type="content" source="images/series-fit-poly-fl/irregular-time-series.png" alt-text="顯示五個順序多項式符合一般時間序列的圖表" border="false":::
+    :::image type="content" source="images/series-fit-poly-fl/irregular-time-series.png" alt-text="顯示8個順序多項式符合不規則時間序列的圖表" border="false":::
 
 1. X & y 軸上的第五個順序多項式與雜訊
 
@@ -200,6 +200,6 @@ demo_make_series1
     | render linechart
     ```
         
-    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise.png" alt-text="顯示五個順序多項式符合一般時間序列的圖表":::
+    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise.png" alt-text="在 x & y 軸上，符合第五個順序多項式與雜訊的圖表":::
        
-    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise-table.png" alt-text="顯示五個順序多項式符合一般時間序列的圖表" border="false":::
+    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise-table.png" alt-text="符合五個順序多項式與雜訊的係數" border="false":::

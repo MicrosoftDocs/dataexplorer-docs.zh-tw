@@ -7,14 +7,14 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: 24fcdb685d9238416e6652953ab47ff82f91bd72
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: 4d6ce55389c13acc0192d7dc0ef21b4940c6d240
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90075105"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321772"
 ---
-# <a name="series_moving_avg_fl"></a>series_moving_avg_fl ( # A1
+# <a name="series_moving_avg_fl"></a>series_moving_avg_fl()
 
 在數列上套用移動平均篩選。
 
@@ -31,7 +31,7 @@ ms.locfileid: "90075105"
 
 * *y_series*：數值的動態陣列資料格。
 * *n*：移動平均篩選的寬度。
-* *置*中：選擇性的布林值，指出移動平均是否為下列其中一個選項：
+* *置* 中：選擇性的布林值，指出移動平均是否為下列其中一個選項：
     * 在目前點前後的視窗上對稱套用，或 
     * 從目前點到後的視窗套用。 <br>
     依預設， *center* 為 False。
@@ -62,7 +62,7 @@ demo_make_series1
 
 # <a name="persistent"></a>[持續](#tab/persistent)
 
-若要持續使用，請使用 [. create function](../management/create-function.md)。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
+若要持續使用，請使用 [`.create function`](../management/create-function.md) 。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 ### <a name="one-time-installation"></a>一次安裝
 

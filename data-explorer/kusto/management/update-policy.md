@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: c9ef5b2a205665c692c383654f3d050c4658c0f1
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 5d346e5b7932437322cb8a41210a6f375cd6d6f0
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92002994"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321109"
 ---
 # <a name="update-policy-commands"></a>更新原則命令
 
@@ -25,7 +25,7 @@ ms.locfileid: "92002994"
 
 ### <a name="syntax"></a>語法
 
-* `.show``table` *TableName* TableName `policy``update`
+* `.show` `table` *TableName* `policy` `update`
 * `.show``table` *DatabaseName* `.` *TableName* TableName `policy``update`
 * `.show` `table` `*` `policy` `update`
 
@@ -74,7 +74,7 @@ ms.locfileid: "92002994"
 
 ### <a name="returns"></a>傳回
 
-此命令會設定資料表的更新原則物件，並覆寫任何目前的原則，然後傳回對應之的輸出 [。 [顯示資料表更新原則](#show-update-policy) ] 命令。
+此命令會設定資料表的更新原則物件，並覆寫任何目前的原則，然後傳回對應命令的輸出 [`.show table update policy`](#show-update-policy) 。
 
 ### <a name="example"></a>範例
 
@@ -133,7 +133,7 @@ MyUpdateFunction()
 
 **傳回**
 
-此命令會附加至資料表的更新原則物件，並覆寫任何目前的原則，然後傳回對應的輸出 [。顯示資料表 *TableName* 更新原則](#show-update-policy) 命令。
+此命令會附加至資料表的更新原則物件，並覆寫任何目前的原則，然後傳回對應命令的輸出 [`.show table *TableName* update policy`](#show-update-policy) 。
 
 **範例**
 
@@ -148,12 +148,12 @@ MyUpdateFunction()
 
 **語法**
 
-* `.delete``table` *TableName* TableName `policy``update`
+* `.delete` `table` *TableName* `policy` `update`
 * `.delete``table` *DatabaseName* `.` *TableName* TableName `policy``update`
 
 **傳回**
 
-此命令會刪除資料表的更新原則物件，然後傳回對應的輸出。 [ [顯示資料表 *TableName* 更新原則](#show-update-policy) ] 命令。
+此命令會刪除資料表的更新原則物件，然後傳回對應命令的輸出 [`.show table *TableName* update policy`](#show-update-policy) 。
 
 **範例**
 

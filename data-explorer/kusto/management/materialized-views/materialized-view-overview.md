@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: f19104111d8db615c82eff2e399fb4857f27c841
-ms.sourcegitcommit: 463ee13337ed6d6b4f21eaf93cf58885d04bccaa
+ms.openlocfilehash: 407db347d4d21450d5648fe8716e2d82553a9669
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/30/2020
-ms.locfileid: "91572154"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320650"
 ---
 # <a name="materialized-views-preview"></a> (預覽) 具體化視圖
 
@@ -23,11 +23,11 @@ ms.locfileid: "91572154"
 > 具體化視圖有一些 [限制](materialized-view-create.md#limitations-on-creating-materialized-views)，而且不保證適用于所有案例。 使用此功能之前，請先參閱 [效能考慮](#performance-considerations) 。
 
 使用下列命令來管理具體化視圖：
-* [.create materialized-view](materialized-view-create.md)
-* [.alter materialized-view](materialized-view-alter.md)
-* [.drop materialized-view](materialized-view-drop.md)
-* [.disable | .enable materialized-view](materialized-view-enable-disable.md)
-* [。顯示具體化-views 命令](materialized-view-show-commands.md)
+* [`.create materialized-view`](materialized-view-create.md)
+* [`.alter materialized-view`](materialized-view-alter.md)
+* [`.drop materialized-view`](materialized-view-drop.md)
+* [`.disable | .enable materialized-view`](materialized-view-enable-disable.md)
+* [`.show materialized-views commands`](materialized-view-show-commands.md)
 
 ## <a name="why-use-materialized-views"></a>為何要使用具體化視圖？
 
@@ -43,8 +43,8 @@ ms.locfileid: "91572154"
 
 以下是使用具體化 view 可以解決的常見案例：
 
-* 使用 [arg_max ( # A1 (彙總函式) ](../../query/arg-max-aggfunction.md)，查詢每個實體的最後一筆記錄。
-* 使用 [任何 ( # A1 (彙總函式) ](../../query/any-aggfunction.md)，在資料表中消除重複的記錄。
+* 使用[ `arg_max()` (彙總函式) ](../../query/arg-max-aggfunction.md)，查詢每個實體的最後一筆記錄。
+* 使用[ `any()` (彙總函式) ](../../query/any-aggfunction.md)，在資料表中取消重複的記錄。
 * 藉由計算原始資料的定期統計資料，來減少資料的解決方式。 依時間週期使用各種 [彙總函式](materialized-view-create.md#supported-aggregation-functions) 。
     * 例如，用 `T | summarize dcount(User) by bin(Timestamp, 1d)` 來維護每天不同使用者的最新快照集。
 
@@ -54,7 +54,7 @@ ms.locfileid: "91572154"
 
 具體化視圖是由兩個元件所組成：
 
-* *具體化*元件-包含來源資料表中已處理之匯總記錄的 Azure 資料總管資料表。  此資料表一律會依匯總的群組保存單一記錄。
+* *具體化* 元件-包含來源資料表中已處理之匯總記錄的 Azure 資料總管資料表。  此資料表一律會依匯總的群組保存單一記錄。
 * *差異*-來源資料表中尚未處理的新內嵌記錄。
 
 查詢具體化視圖會結合具體化元件與 delta 部分，提供匯總查詢的最新結果。 離線具體化進程會從 *差異* 內嵌至具體化資料表的新記錄，並取代現有的記錄。 取代是藉由重建保存要取代之記錄的範圍來完成。 如果 *差異* 中的記錄與 *具體化* 元件中的所有資料分區持續相交，則每個具體化迴圈都需要重建整個 *具體化* 元件，而且可能不會跟上內建的速率。 在此情況下，此視圖會變成狀況不良，且 *差異* 會不斷成長。
@@ -64,7 +64,7 @@ ms.locfileid: "91572154"
 
 查詢具體化視圖的主要方式是使用它的名稱，例如查詢資料表參考。 查詢具體化視圖時，會將視圖的具體化部分與尚未具體化的來源資料表中的記錄結合。 根據內嵌到來源資料表的所有記錄，查詢具體化視圖一律會傳回最新的結果。 如需具體化視圖元件細目的詳細資訊，請參閱 [具體化視圖的運作方式](#how-materialized-views-work)。 
 
-查詢檢視的另一種方式是使用 [materialized_view ( # A1 函數](../../query/materialized-view-function.md)。 此選項支援只查詢檢視的具體化部分，同時指定使用者願意容忍的延遲上限。 此選項不保證會傳回最新的記錄，但其效能應該比查詢整個視圖的效能更高。 如果您願意犧牲某些有效的效能（例如，遙測儀表板），此函式很有用。
+查詢檢視的另一種方式是使用[ `materialized_view()` 函數](../../query/materialized-view-function.md)。 此選項支援只查詢檢視的具體化部分，同時指定使用者願意容忍的延遲上限。 此選項不保證會傳回最新的記錄，但其效能應該比查詢整個視圖的效能更高。 如果您願意犧牲某些有效的效能（例如，遙測儀表板），此函式很有用。
 
 此視圖可以參與跨叢集或跨資料庫的查詢，但不會包含在萬用字元等位或搜尋中。
 
@@ -88,13 +88,13 @@ ms.locfileid: "91572154"
 
 可能影響具體化 view health 的主要參與者如下：
 
-* 叢集**資源：** 如同在叢集上執行的任何其他進程，具體化視圖會使用叢集 (CPU、記憶體) 的資源。 如果叢集已超載，將具體化視圖新增至其中可能會導致叢集的效能降低。 使用叢集 [健康情況計量](../../../using-metrics.md#cluster-metrics)來監視叢集的健康情況。 [優化自動](../../../manage-cluster-horizontal-scaling.md#optimized-autoscale) 調整目前不會在自動調整規則中納入考慮的具體化 view health。
+* 叢集 **資源：** 如同在叢集上執行的任何其他進程，具體化視圖會使用叢集 (CPU、記憶體) 的資源。 如果叢集已超載，將具體化視圖新增至其中可能會導致叢集的效能降低。 使用叢集 [健康情況計量](../../../using-metrics.md#cluster-metrics)來監視叢集的健康情況。 [優化自動](../../../manage-cluster-horizontal-scaling.md#optimized-autoscale) 調整目前不會在自動調整規則中納入考慮的具體化 view health。
 
 * **與具體化資料重迭：** 在具體化期間，自從上一次具體化 (差異) 之後，所有新的記錄都會內嵌到來源資料表。 新記錄與已具體化記錄之間的交集越高，具體化視圖的效能就越糟。 如果要更新的記錄數目 (例如，在 `arg_max` view) 是來源資料表的一小部分，則具體化視圖的效果最佳。 如果所有或大部分的具體化視圖記錄都必須在每個具體化迴圈中更新，具體化視圖就無法正常執行。 使用 [範圍重建計量](../../../using-metrics.md#materialized-view-metrics) 來識別這種情況。
 
-* 內嵌**速率：** 在具體化視圖的來源資料表中，資料量或內嵌速率沒有硬式編碼的限制。 不過，具體化視圖的建議內嵌速率不超過每秒 1 GB。較高的內嵌速率可能仍能順利執行。 效能取決於叢集大小、可用的資源，以及與現有資料的交集數量。
+* 內嵌 **速率：** 在具體化視圖的來源資料表中，資料量或內嵌速率沒有硬式編碼的限制。 不過，具體化視圖的建議內嵌速率不超過每秒 1 GB。較高的內嵌速率可能仍能順利執行。 效能取決於叢集大小、可用的資源，以及與現有資料的交集數量。
 
-* 叢集中**的具體化視圖數目：** 上述考慮適用于叢集中定義的每個個別具體化 view。 每個視圖都會取用自己的資源，而許多視圖會在可用的資源上互相競爭。 叢集中的具體化視圖數目沒有硬式編碼的限制。 不過，一般建議是在叢集上沒有超過10個具體化視圖。 如果叢集中定義了一個以上的具體化視圖，則可以調整 [容量原則](../capacitypolicy.md#materialized-views-capacity-policy) 。
+* 叢集中 **的具體化視圖數目：** 上述考慮適用于叢集中定義的每個個別具體化 view。 每個視圖都會取用自己的資源，而許多視圖會在可用的資源上互相競爭。 叢集中的具體化視圖數目沒有硬式編碼的限制。 不過，一般建議是在叢集上沒有超過10個具體化視圖。 如果叢集中定義了一個以上的具體化視圖，則可以調整 [容量原則](../capacitypolicy.md#materialized-views-capacity-policy) 。
 
 * **具體化視圖定義**：具體化 view 定義必須根據查詢最佳做法來定義，以獲得最佳查詢效能。 如需詳細資訊，請參閱 [建立命令效能提示](materialized-view-create.md#performance-tips)。
 
@@ -116,15 +116,15 @@ ms.locfileid: "91572154"
 以下列方式監視具體化視圖的健康情況：
 
 * 監視 Azure 入口網站中的 [具體化 view 度量](../../../using-metrics.md#materialized-view-metrics) 。
-* 監視 `IsHealthy` 從 [顯示具體化-view](materialized-view-show-commands.md#show-materialized-view)傳回的屬性。
-* 使用「 [顯示具體化-視圖失敗](materialized-view-show-commands.md#show-materialized-view-failures)」檢查失敗。
+* 監視 `IsHealthy` 從傳回的屬性 [`.show materialized-view`](materialized-view-show-commands.md#show-materialized-view) 。
+* 使用來檢查失敗 [`.show materialized-view failures`](materialized-view-show-commands.md#show-materialized-view-failures) 。
 
 > [!NOTE]
 > 具體化永遠不會略過任何資料，即使有常數失敗也是一樣。 根據來源資料表中的所有記錄，一律保證會傳回查詢的最新快照集。 常數失敗會大幅降低查詢效能，但不會在 view 查詢中造成不正確的結果。
 
 ### <a name="track-resource-consumption"></a>追蹤資源耗用量
 
-**具體化視圖資源耗用量：** 可使用來追蹤具體化 views 具體化進程所耗用的資源。 [顯示命令和查詢](../commands-and-queries.md#show-commands-and-queries) 命令。 使用下列 (取代和) 來篩選特定視圖的記錄 `DatabaseName` `ViewName` ：
+**具體化視圖資源耗用量：** 可使用命令追蹤具體化 view 具體化進程所耗用的資源 [`.show commands-and-queries`](../commands-and-queries.md#show-commands-and-queries) 。 使用下列 (取代和) 來篩選特定視圖的記錄 `DatabaseName` `ViewName` ：
 
 <!-- csl -->
 ```
@@ -160,6 +160,6 @@ ms.locfileid: "91572154"
 
 ## <a name="next-steps"></a>後續步驟
 
-* [。建立具體化視圖](materialized-view-create.md)
-* [.alter materialized-view](materialized-view-alter.md)
+* [`.create materialized view`](materialized-view-create.md)
+* [`.alter materialized-view`](materialized-view-alter.md)
 * [具體化視圖顯示命令](materialized-view-show-commands.md)

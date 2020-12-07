@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: 218ef000869e4cea0f237137a0481a9b4d72d65e
-ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
+ms.openlocfilehash: fe9ea2556346edaf0327e0d9ce50d4d4519d4bb3
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90998988"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321789"
 ---
 # <a name="series_rolling_fl"></a>series_rolling_fl()
 
@@ -23,7 +23,7 @@ ms.locfileid: "90998988"
 > * `series_rolling_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。
 > * 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `T | invoke series_rolling_fl(`*y_series* `,`*y_rolling_series* `,`*n* `,` *aggr* `,` *aggr_params* `,` *中心*`)`
 
@@ -34,7 +34,7 @@ ms.locfileid: "90998988"
 * *n*：滾動視窗的寬度。
 * *aggr*：要使用的彙總函式名稱。 請參閱 [彙總函式](#aggregation-functions)。
 * *aggr_params*：彙總函式的選擇性參數。
-* *置*中：選擇性的布林值，指出滾動視窗是否為下列其中一個選項：
+* *置* 中：選擇性的布林值，指出滾動視窗是否為下列其中一個選項：
     * 在目前的點前後套用對稱套用，或 
     * 從目前的點向後套用。 <br>
     依預設， *center* 為 false，用於計算串流資料。
@@ -108,7 +108,7 @@ demo_make_series1
 
 # <a name="persistent"></a>[持續](#tab/persistent)
 
-若要持續使用，請使用 [. create function](../management/create-function.md)。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
+若要持續使用，請使用 [`.create function`](../management/create-function.md) 。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 ### <a name="one-time-installation"></a>一次安裝
 

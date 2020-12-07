@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 6b0c1247c0d161caae3301dc674a701bd1019ad3
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 6d85b5cbf6752924bbaa03d2b81732cd69be6239
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91056929"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321619"
 ---
 # <a name="capacity-policy"></a>產能原則 
 
@@ -46,7 +46,7 @@ ms.locfileid: "91056929"
 |MinimumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最少值。 預設值為1 |
 |MaximumConcurrentOperationsPerNode |long    |單一節點上的並行範圍合併/重建作業數目的最大值。 預設值為3 |
 
-叢集的總範圍合併容量，如下所示 [。顯示容量](../management/diagnostics.md#show-capacity)的計算方式如下：
+叢集的總範圍合併容量（如下所示 [`.show capacity`](../management/diagnostics.md#show-capacity) ）是由下列計算：
 
 `Number of nodes in cluster` X `Concurrent operations per node`
 
@@ -61,7 +61,7 @@ ms.locfileid: "91056929"
 |-----------------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------|
 |MaximumConcurrentOperationsPerNode |long    |單一節點上清除作業的並行重建範圍數目的最大值 |
 
-叢集的總範圍會清除重建容量 (，如下所示 [。顯示容量](../management/diagnostics.md#show-capacity)) 的計算方式如下：
+叢集的總範圍清除重建容量 (如 [`.show capacity`](../management/diagnostics.md#show-capacity)) 的計算方式如下所示：
 
 `Number of nodes in cluster` X `MaximumConcurrentOperationsPerNode`
 
@@ -75,7 +75,7 @@ ms.locfileid: "91056929"
 |ClusterMaximumConcurrentOperations |long    |叢集中並行匯出作業數目的最大值。                                           |
 |CoreUtilizationCoefficient         |double  |計算匯出容量時要使用的核心百分比係數。 計算的結果一律會被標準化 `ClusterMaximumConcurrentOperations` 。 |
 
-叢集的總匯出容量（如下所 [示），](../management/diagnostics.md#show-capacity)計算方式如下：
+叢集的總匯出容量（如下所示 [`.show capacity`](../management/diagnostics.md#show-capacity) ）是以下列方式計算：
 
 最小 (`ClusterMaximumConcurrentOperations` ， `Number of nodes in cluster` * 最大 (1， `Core count per node`  *  `CoreUtilizationCoefficient`) # A3
 
@@ -89,7 +89,7 @@ ms.locfileid: "91056929"
 |ClusterMinimumConcurrentOperations |long    |叢集中並行範圍分割作業數目的最少值。 預設值：1  |
 |ClusterMaximumConcurrentOperations |long    |叢集中並行範圍分割作業數目的最大值。 預設值：16 |
 
-叢集的總範圍磁碟分割容量 (，如所示 [。顯示容量](../management/diagnostics.md#show-capacity)) 。
+叢集的總範圍資料分割容量 (如) 所示 [`.show capacity`](../management/diagnostics.md#show-capacity) 。
 
 如果資料 `Concurrent operations` `ClusterMinimumConcurrentOperations` `ClusterMaximumConcurrentOperations` 分割作業的成功率超過90%，系統就會自動調整 [，] 範圍內的系統自動調整的有效值。
 
@@ -168,9 +168,9 @@ Maximum(`ClusterMaximumConcurrentOperations`, `Number of nodes in cluster` * `Ma
 > [!WARNING]
 > 更改容量原則之前，請洽詢 Azure 資料總管團隊。
 
-* 使用 [。顯示叢集原則容量](capacity-policy.md#show-cluster-policy-capacity) 以顯示叢集目前的容量原則。
+* 用 [`.show cluster policy capacity`](capacity-policy.md#show-cluster-policy-capacity) 來顯示叢集目前的容量原則。
 
-* 使用 [. alter cluster policy 容量](capacity-policy.md#alter-cluster-policy-capacity) 來改變叢集的容量原則。
+* 使用 [`.alter cluster policy capacity`](capacity-policy.md#alter-cluster-policy-capacity) 來改變叢集的容量原則。
 
 ## <a name="throttling"></a>節流
 

@@ -1,6 +1,6 @@
 ---
-title: 儲存的函數管理概述 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹了 Azure 資料資源管理員中的存儲函數管理概述。
+title: 預存函數管理總覽-Azure 資料總管 |Microsoft Docs
+description: 本文說明 Azure 資料總管中的預存函式管理總覽。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/18/2020
-ms.openlocfilehash: f3768c6252a96215d37bd9f19a44cbf4d3afc731
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4354538b206ee86e34941718bcf6d74130647fb6
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520956"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321347"
 ---
-# <a name="stored-functions-management-overview"></a>儲存的功能管理概述
-本節介紹用於建立和更改以下[使用者定義的函數的控制](../query/functions/user-defined-functions.md)命令:
+# <a name="stored-functions-management-overview"></a>預存函數管理概觀
+本節說明用來建立和改變下列 [使用者定義函數](../query/functions/user-defined-functions.md)的控制命令：
 
 |函式 |描述|
 |---------|-----------|
-|[.alter 函數](alter-function.md) |變更現有函數並將儲存在資料庫中 |
-|[.alter 函式文件字串](alter-docstring-function.md) |變更現有函數的 DocString 值 |
-|[.alter 函數資料夾](alter-folder-function.md) |變更現有函式的資料夾值 |
-|[.建立函數](create-function.md) |建立儲存的函數 |
-|[.建立或變更函數](create-alter-function.md) |建立儲存函數或變更現有函數並將儲存在資料庫中 |
-|[.drop 函數和 .drop 函數](drop-function.md) |從資料庫中移除函數(或函數) |
-|[.顯示函數和 .show 函數](show-function.md) |列出目前選取的資料庫中的所有儲存函數或特定函數 |
+|[`.alter function`](alter-function.md) |改變現有的函式，並將它儲存在資料庫中繼資料中 |
+|[`.alter function docstring`](alter-docstring-function.md) |改變現有函數的 DocString 值 |
+|[`.alter function folder`](alter-folder-function.md) |改變現有函數的資料夾值 |
+|[`.create function`](create-function.md) |建立預存函式 |
+|[`.create-or-alter function`](create-alter-function.md) |建立預存函式，或改變現有的函式，並將它儲存在資料庫中繼資料內。 |
+|[`.drop function` 和 `.drop functions`](drop-function.md) |從資料庫卸載函數 (或函數)  |
+|[`.show functions` 和 `.show function`](show-function.md) |列出目前所選資料庫中的所有預存函式或特定函數 |

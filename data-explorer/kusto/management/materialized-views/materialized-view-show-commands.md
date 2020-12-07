@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 4a9b42410c7a64a54ced0dc326b33242b4b11870
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 0ee41d8aba05eb9b5bf3bc6db3206524fdb5ec0d
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057098"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321296"
 ---
 # <a name="show-materialized-views-commands"></a>。顯示具體化-views 命令
 
@@ -56,7 +56,7 @@ ms.locfileid: "91057098"
 |資料夾|字串|具體化 view 資料夾。
 |DocString|字串|具體化 view doc 字串。
 |AutoUpdateSchema|bool|是否已啟用自動更新的視圖。
-|EffectiveDateTime|Datetime|視圖的有效日期時間（于建立期間決定） (參閱 [。建立具體化視圖](materialized-view-create.md#create-materialized-view)) 。
+|EffectiveDateTime|Datetime|視圖的有效日期時間（于建立期間決定） (查看 [`.create materialized-view`](materialized-view-create.md#create-materialized-view)) 。
 
 ## <a name="show-materialized-view-schema"></a>。顯示具體化-view 架構
 

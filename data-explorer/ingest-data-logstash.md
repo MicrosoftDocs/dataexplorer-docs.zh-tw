@@ -6,21 +6,24 @@ ms.author: orspodek
 ms.reviewer: takamara
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 06/03/2019
-ms.openlocfilehash: 228722bab25dc19532860f92b8194c4fd2d79a38
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.date: 11/26/2020
+ms.openlocfilehash: 83d382de4f5bd683dff934267b5258ece475a8da
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343091"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303372"
 ---
-# <a name="ingest-data-from-logstash-to-azure-data-explorer"></a>將資料從 Logstash 擷取至 Azure 資料總管
+# <a name="ingest-data-from-logstash-to-azure-data-explorer-preview"></a>將資料從 Logstash 內嵌至 Azure 資料總管 (preview) 
 
-[Logstash](https://www.elastic.co/products/logstash) 是開放原始碼的伺服器端資料處理管線，可同時從許多來源擷取資料、轉換資料，然後將資料傳送至您最愛的「隱藏」。 在本文中，您會將該資料傳送至 Azure 資料總管，這是適用于記錄和遙測資料的快速且可高度調整的資料探索服務。 您將先在測試叢集中建立資料表和資料對應，然後指示 Logstash 將資料傳送至資料表，並驗證結果。
+[Logstash](https://www.elastic.co/products/logstash) 是開放原始碼的伺服器端資料處理管線，可同時從許多來源擷取資料、轉換資料，然後將資料傳送至您最愛的「隱藏」。 在本文中，您會將該資料傳送至 Azure 資料總管，這是適用于記錄和遙測資料的快速且可高度調整的資料探索服務。 您一開始會在測試叢集中建立資料表和資料對應，然後指示 Logstash 將資料傳送至資料表並驗證結果。
+
+> [!NOTE]
+> 此連接器目前僅支援 json 資料格式。
 
 ## <a name="prerequisites"></a>先決條件
 
-* Azure 訂用帳戶。 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
+* Azure 訂用帳戶。 如果您沒有帳戶，請在開始之前先建立一個 [免費的 Azure 帳戶](https://azure.microsoft.com/free/) 。
 * Azure 資料總管[測試叢集和資料庫](create-cluster-database-portal.md)
 * Logstash 第 6 版以上的[安裝指示](https://www.elastic.co/guide/en/logstash/current/installing-logstash.html)
 
@@ -113,7 +116,7 @@ output {
 | **app_id**、**app_key** 和 **app_tenant**| 連線至 Azure 資料總管所需的認證。 請務必使用具有擷取權限的應用程式。 |
 | **database**| 要放置事件的資料庫名稱。 |
 | **table** | 要放置事件的目標資料表名稱。 |
-| **對應** | 對應可用來將傳入事件 Json 字串對應至正確的資料列格式 (定義哪個屬性會進入哪個資料行)。 |
+| **映射** | 對應可用來將傳入事件 Json 字串對應至正確的資料列格式 (定義哪個屬性會進入哪個資料行)。 |
 
 ## <a name="run-logstash"></a>執行 Logstash
 

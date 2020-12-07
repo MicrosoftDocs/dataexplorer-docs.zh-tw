@@ -7,14 +7,14 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/22/2020
-ms.openlocfilehash: 373dd34145a644fe14ea4c077a8c55ddf428ba6d
-ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
+ms.openlocfilehash: eabdb80852d2a81f996d3e722dda7df969a914be
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95324893"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321806"
 ---
-# <a name="series_exp_smoothing_fl"></a>series_exp_smoothing_fl ( # A1
+# <a name="series_exp_smoothing_fl"></a>series_exp_smoothing_fl()
 
 在數列上套用基本指數平滑篩選。
 
@@ -23,7 +23,7 @@ ms.locfileid: "95324893"
 > [!NOTE]
 > 此函式是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。 如需詳細資訊，請參閱 [使用](#usage)方式。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `series_exp_smoothing_fl(`*y_series* `, [`*Alpha*`])`
   
@@ -56,7 +56,7 @@ range x from 1 to 50 step 1
 
 # <a name="persistent"></a>[持續](#tab/persistent)
 
-若要持續使用，請使用 [. create function](../management/create-function.md)。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
+若要持續使用，請使用 [`.create function`](../management/create-function.md) 。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 ### <a name="one-time-installation"></a>一次安裝
 

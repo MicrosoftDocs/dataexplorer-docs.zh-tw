@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: 38d353caf1e0352688ee91edfe7f1d2cef94d18a
-ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
+ms.openlocfilehash: 77524f22be72e977f73e0ac606db00d5d4b0c51d
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90998937"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321891"
 ---
 # <a name="quantize_fl"></a>quantize_fl()
 
@@ -23,7 +23,7 @@ Function bin 計量資料 `quantize_fl()` 行。 它會根據 K 表示演算法�
 > * `quantize_fl()` 是 [UDF (使用者定義函數) ](../query/functions/user-defined-functions.md)。
 > * 此函式包含內嵌 Python，且需要在叢集上 [啟用 Python ( # A1 外掛程式](../query/pythonplugin.md#enable-the-plugin) 。 如需詳細資訊，請參閱 [使用](#usage)方式。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `T | invoke quantize_fl(`*num_bins* `,`*in_cols* `,`*out_cols* `,`*標籤*`)`
 
@@ -83,7 +83,7 @@ union
 
 # <a name="persistent"></a>[持續](#tab/persistent)
 
-若要持續使用，請使用 [. create function](../management/create-function.md)。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
+若要持續使用，請使用 [`.create function`](../management/create-function.md) 。 建立函數需要 [資料庫使用者](../management/access-control/role-based-authorization.md)權力。
 
 ### <a name="one-time-installation"></a>一次安裝
 

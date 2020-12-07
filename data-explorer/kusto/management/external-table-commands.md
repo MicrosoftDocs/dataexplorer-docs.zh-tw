@@ -1,6 +1,6 @@
 ---
 title: Kusto 外部資料表一般控制命令-Azure 資料總管
-description: 本文描述一般外部資料表控制項命令
+description: 本文說明一般外部資料表控制項命令
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2020
-ms.openlocfilehash: 8e419d471419a291b3680c4b91d3e6908b2e7f2e
-ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
+ms.openlocfilehash: 7646f86c9a521ab45cf83d7704084f3a5df6b256
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87877326"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321381"
 ---
-# <a name="external-table-general-control-commands"></a>外部資料表一般控制命令
+# <a name="external-table-general-control-commands"></a>外部資料表一般控制項命令
 
-如需外部資料表的總覽，請參閱[外部資料表](../query/schema-entities/externaltables.md)。 下列命令與任何類型) 的_任何外部資料表_ (相關。
+如需外部資料表的總覽，請參閱 [外部資料表](../query/schema-entities/externaltables.md) 。 下列命令與任何類型)  (的 _任何_ 外部資料表相關。
 
-## <a name="show-external-tables"></a>：顯示外部資料表
+## <a name="show-external-tables"></a>。顯示外部資料表
 
-* 傳回資料庫中的所有外部資料表 (或特定外部資料表) 。
-* 需要[資料庫監視器許可權](../management/access-control/role-based-authorization.md)。
+* 傳回資料庫 (中的所有外部資料表，或) 的特定外部資料表。
+* 需要 [資料庫監視器許可權](../management/access-control/role-based-authorization.md)。
 
 **語法：** 
 
 `.show` `external` `tables`
 
-`.show``external` `table` *TableName*
+`.show` `external` `table` *TableName*
 
 **輸出**
 
@@ -38,7 +38,7 @@ ms.locfileid: "87877326"
 | TableType        | 字串 | 外部資料表的類型                                              |
 | 資料夾           | 字串 | 資料表的資料夾                                                     |
 | DocString        | 字串 | 記錄資料表的字串                                       |
-| 屬性       | 字串 | 資料表的 JSON 序列化屬性 (特定于資料表類型)  |
+| 屬性       | 字串 | 資料表的 JSON 序列化屬性 (資料表類型的特定)  |
 
 
 **範例：**
@@ -53,16 +53,16 @@ ms.locfileid: "87877326"
 | T         | Blob      | ExternalTables | Docs      | {}         |
 
 
-## <a name="show-external-table-schema"></a>：顯示外部資料表架構
+## <a name="show-external-table-schema"></a>。顯示外部資料表架構
 
 * 以 JSON 或 CSL 的形式傳回外部資料表的架構。 
-* 需要[資料庫監視器許可權](../management/access-control/role-based-authorization.md)。
+* 需要 [資料庫監視器許可權](../management/access-control/role-based-authorization.md)。
 
 **語法：** 
 
 `.show``external` `table` *TableName* `schema` `as` (`json`  |  `csl`) 
 
-`.show``external` `table` *TableName*`cslschema`
+`.show` `external` `table` *TableName* `cslschema`
 
 **輸出**
 
@@ -87,14 +87,14 @@ ms.locfileid: "87877326"
 
 **輸出：**
 
-*json*
+*Json：*
 
 | TableName | 結構描述    | DatabaseName | 資料夾         | DocString |
 |-----------|----------------------------------|--------------|----------------|-----------|
-| T         | {"Name"： "ExternalBlob"，<br>"Folder"： "ExternalTables"，<br>"DocString"： "檔"，<br>"OrderedColumns"： [{"Name"： "x"，"Type"： "System.object"，"CslType"： "long"，"DocString"： ""}，{"Name"： "s"，"Type"： "system.string"，"CslType"： ""}]} | DB           | ExternalTables | Docs      |
+| T         | {"Name"： "ExternalBlob"，<br>"Folder"： "ExternalTables"，<br>"DocString"： "檔"，<br>"OrderedColumns"： [{"Name"： "x"，"Type"： "system.string"，"CslType"： "long"，"DocString"： ""}，{"Name"： "s"，"Type"： "system.string"，"CslType"： "String"，"DocString"： ""}]} | DB           | ExternalTables | Docs      |
 
 
-*csl*
+*Csl：*
 
 | TableName | 結構描述          | DatabaseName | 資料夾         | DocString |
 |-----------|-----------------|--------------|----------------|-----------|
@@ -104,7 +104,7 @@ ms.locfileid: "87877326"
 
 * 卸載外部資料表 
 * 無法在此作業之後還原外部資料表定義
-* 需要[資料庫管理員許可權](../management/access-control/role-based-authorization.md)。
+* 需要 [資料庫管理員許可權](../management/access-control/role-based-authorization.md)。
 
 **語法：**  
 
@@ -112,7 +112,7 @@ ms.locfileid: "87877326"
 
 **輸出**
 
-傳回已卸載之資料表的屬性。 如需詳細資訊，請參閱[。顯示外部資料表](#show-external-tables)。
+傳回已卸載之資料表的屬性。 如需詳細資訊，請參閱 [`.show external tables`](#show-external-tables) \(英文\)。
 
 **範例：**
 

@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: f51a68fc90237c4213c0135ade4724446800dea9
-ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
+ms.openlocfilehash: ff13ec8fcce49f4d92212e6a38797a97f9ea9dd6
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 08/16/2020
-ms.locfileid: "88259886"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321245"
 ---
 # <a name="streaming-ingestion-policy-command"></a>串流內嵌原則命令
 
-您可以在資料表上設定串流內嵌原則，以允許在此資料表中內嵌串流。 您也可以在資料庫層級設定原則，以便將相同的設定套用到目前和未來的資料表。
+您可以在資料表上設定串流內嵌原則，以允許將串流內嵌到此資料表。 您也可以在資料庫層級設定此原則，將相同的設定套用至目前和未來的資料表。
 
 如需詳細資訊，請參閱 [串流](../../ingest-data-streaming.md)內嵌。 若要深入瞭解串流內嵌原則，請參閱 [串流內嵌原則](streamingingestionpolicy.md)。
 
@@ -53,7 +53,7 @@ ms.locfileid: "88259886"
 
 ## <a name="change-the-policy"></a>變更原則
 
-這 `.alter[-merge] policy streamingingestion` 系列的命令會提供修改資料庫或資料表之資料流程內嵌原則的方法。
+`.alter[-merge] policy streamingingestion`命令系列提供的方法，可讓您修改資料庫或資料表的串流內嵌原則。
 
 **語法**
 
@@ -65,11 +65,11 @@ ms.locfileid: "88259886"
 
 > [!Note]
 >
-> * 允許變更串流內嵌的已啟用/已停用狀態，而不需要修改原則的其他屬性或將屬性設定為預設值（如果尚未在實體上定義原則）。
+> * 允許變更串流內嵌的啟用/停用狀態，而不需要修改原則的其他屬性，或將屬性設為預設值（如果先前未在實體上定義此原則）。
 >
 > * 允許取代實體上的整個串流內嵌原則。 [串流內嵌原則物件](#streaming-ingestion-policy-object) 必須包含所有必要的屬性。
 >
-> * 只允許取代實體上的資料流程內嵌原則的指定屬性。 [串流內嵌原則物件](#streaming-ingestion-policy-object) 可以包含部分或無強制屬性。
+> * 允許只取代實體上資料流程內嵌原則的指定屬性。 [串流內嵌原則物件](#streaming-ingestion-policy-object) 可以包含部分或無強制屬性。
 
 **傳回**
 
@@ -101,7 +101,7 @@ ms.locfileid: "88259886"
 
 **傳回**
 
-此命令會刪除資料表或資料庫 streamingingestion 原則物件，然後傳回對應之的輸出 [。顯示原則 streamingingestion](#display-the-policy) 命令。
+此命令會刪除資料表或資料庫 streamingingestion 原則物件，然後傳回對應命令的輸出 [`.show policy streamingingestion`](#display-the-policy) 。
 
 **範例**
 
@@ -117,5 +117,5 @@ ms.locfileid: "88259886"
 
 |屬性|類型|描述|必要/選用
 |---|---|---|---
-|IsEnabled|`bool`|已針對實體啟用串流內嵌| 必要
-|HintAllocatedRate|`double`|資料會輸入的預估速率（Gb/小時）|選用
+|IsEnabled|`bool`|是否已啟用實體的串流內嵌| 必要
+|HintAllocatedRate|`double`|Ingresses 的資料預估速率（Gb/小時）|選擇性

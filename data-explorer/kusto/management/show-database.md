@@ -1,6 +1,6 @@
 ---
-title: .顯示資料庫 - Azure 資料資源管理員 |微軟文件
-description: 本文介紹 Azure 資料資源管理器中的 .show 資料庫。
+title: ：顯示資料庫-Azure 資料總管 |Microsoft Docs
+description: 本文說明如何在 Azure 資料總管中顯示資料庫。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,95 +8,95 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 95d90377afd33971052dd00cd6ab3d662130824c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: eb3e1dd16d36af5d92019b710f3d5790a24b1296
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519868"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320480"
 ---
-# <a name="show-database"></a>.顯示資料庫
+# <a name="show-database"></a>.show 資料庫
 
-返回顯示上下文資料庫屬性的表。
+傳回資料表，其中顯示內容資料庫的屬性。
 
-要傳回表,其中每個紀錄對應於使用者有權存取的群組的資料庫,請參閱[.show 資料庫](show-databases.md)。
+若要傳回資料表，其中的每一筆記錄對應至使用者可存取的叢集中的資料庫，請參閱 [`.show databases`](show-databases.md) 。
 
 **語法**
 
 `.show` `database` [`details` | `identity` | `policies` | `datastats`]
 
-未指定任何選項的預設呼叫等於"標識"選項。
+未指定任何選項的預設呼叫會等於 ' identity ' 選項。
 
-**輸出「識別」選項**
+**' Identity ' 選項的輸出**
  
 |輸出參數 |類型 |描述 
 |---|---|---
-|DatabaseName  |String |資料庫名稱。 資料庫名稱區分大小寫。 
-|持久存儲  |String |存儲資料庫的持久存儲URI。 (此欄位對於臨時資料庫為空。 
-|版本  |String |資料庫版本號碼。 對於資料庫中的每個更改操作(如添加數據和更改架構),此數位將更新。 
-|IsCurrent  |Boolean |如果資料庫是當前連接指向的,則為 True。 
-|資料庫存取模式  |String |群集如何附加到資料庫。 例如,如果資料庫以 ReadOnly 模式附加,則群集將失敗所有以任何方式修改資料庫的請求。 
-|漂亮名稱 |String |資料庫名稱相當。
-|目前使用者沒有限制檢視器 |Boolean | 指定當前使用者是否為資料庫上的無限制查看器。
-|DatabaseId |Guid |資料庫的唯一 ID。
+|DatabaseName  |String |資料庫名稱。 資料庫名稱會區分大小寫。 
+|PersistentStorage  |String |儲存資料庫的持續性儲存體 URI。  (暫時資料庫的這個欄位是空的。 )  
+|版本  |String |資料庫版本號碼。 資料庫 (中的每個變更作業都會更新這個數位，例如新增資料和變更架構) 。 
+|IsCurrent  |Boolean |如果資料庫是目前連接所指向的資料庫，則為 True。 
+|DatabaseAccessMode  |String |叢集如何連接至資料庫。 例如，如果資料庫是以唯讀模式附加，則叢集將會使所有以任何方式修改資料庫的要求失敗。 
+|PrettyName |String |資料庫的名稱。
+|CurrentUserIsUnrestrictedViewer |Boolean | 指定目前的使用者是否為資料庫上不受限制的檢視器。
+|DatabaseId |Guid |資料庫的唯一識別碼。
 
-**輸出「詳細資訊」選項**
+**[詳細資料] 選項的輸出**
  
 |輸出參數 |類型 |描述 
 |---|---|---
-|DatabaseName  |String |資料庫名稱。 資料庫名稱區分大小寫。 
-|持久存儲  |String |存儲資料庫的持久存儲URI。 (此欄位對於臨時資料庫為空。 
-|版本  |String |資料庫版本號。 對於資料庫中的每個更改操作(如添加數據和更改架構),此數位將更新。 
-|IsCurrent  |Boolean |如果資料庫是當前連接指向的,則為 True。 
-|資料庫存取模式  |String |群集如何附加到資料庫。 例如,如果資料庫以 ReadOnly 模式附加,則群集將失敗所有以任何方式修改資料庫的請求。 
-|漂亮名稱 |String |資料庫名稱相當。
-|授權委託人 |String | 資料庫的授權主體集合(以 JSON 格式序列化)。
-|保留政策 |String | 資料庫的保留策略(以 JSON 格式序列化)。
-|合併原則 |String | 資料庫的擴展區合併策略(以 JSON 格式序列化)。
-|快取政策 |String | 資料庫的緩存策略(以 JSON 格式序列化)。
-|分片原則 |String | 資料庫的分片策略(以 JSON 格式序列化)。
-|串流化原則 |String | 資料庫的流式處理策略(以 JSON 格式序列化)。
-|引入批次處理原則 |String | 資料庫的引入批處理策略(以 JSON 格式序列化)。
-|TotalSize |Real | 資料庫的擴展區總大小。
-|DatabaseId |Guid |資料庫的唯一 ID。
+|DatabaseName  |String |資料庫名稱。 資料庫名稱會區分大小寫。 
+|PersistentStorage  |String |儲存資料庫的持續性儲存體 URI。  (暫時資料庫的這個欄位是空的。 )  
+|版本  |String |資料庫版本號碼。 資料庫 (中的每個變更作業都會更新這個數位，例如新增資料和變更架構) 。 
+|IsCurrent  |Boolean |如果資料庫是目前連接所指向的資料庫，則為 True。 
+|DatabaseAccessMode  |String |叢集如何連接至資料庫。 例如，如果資料庫是以唯讀模式附加，則叢集將會使所有以任何方式修改資料庫的要求失敗。 
+|PrettyName |String |資料庫的名稱。
+|AuthorizedPrincipals |String | 資料庫的授權主體集合 (以 JSON 格式) 進行序列化。
+|>retentionpolicy |String | 資料庫的保留原則 (以 JSON 格式) 進行序列化。
+|MergePolicy |String | 資料庫的範圍合併原則 (以 JSON 格式) 進行序列化。
+|CachingPolicy |String | 資料庫的快取原則 (以 JSON 格式) 進行序列化。
+|ShardingPolicy |String | 資料庫的分區化原則 (以 JSON 格式) 進行序列化。
+|StreamingIngestionPolicy |String | 資料庫的串流內嵌原則 (以 JSON 格式) 進行序列化。
+|IngestionBatchingPolicy |String | 資料庫的內嵌批次處理原則 (以 JSON 格式) 進行序列化。
+|TotalSize |Real | 資料庫的範圍總計大小。
+|DatabaseId |Guid |資料庫的唯一識別碼。
 
-**輸出「政策」選項**
+**[原則] 選項的輸出**
  
 |輸出參數 |類型 |描述 
 |---|---|---
-|DatabaseName  |String |資料庫名稱。 資料庫名稱區分大小寫。 
-|持久存儲  |String |存儲資料庫的持久存儲URI。 (此欄位對於臨時資料庫為空。 
-|版本  |String |資料庫版本號。 對於資料庫中的每個更改操作(如添加數據和更改架構),此數位將更新。 
-|IsCurrent  |Boolean |如果資料庫是當前連接指向的,則為 True。 
-|資料庫存取模式  |String |群集如何附加到資料庫。 例如,如果資料庫以 ReadOnly 模式附加,則群集將失敗所有以任何方式修改資料庫的請求。 
-|漂亮名稱 |String |資料庫的名字很漂亮。
-|DatabaseId |Guid |資料庫的唯一 ID。
-|授權委託人 |String | 資料庫的授權主體集合(以 JSON 格式序列化)。
-|保留政策 |String | 資料庫的保留策略(以 JSON 格式序列化)。
-|合併原則 |String | 資料庫的擴展區合併策略(以 JSON 格式序列化)。
-|快取政策 |String | 資料庫的緩存策略(以 JSON 格式序列化)。
-|分片原則 |String | 資料庫的分片策略(以 JSON 格式序列化)。
-|串流化原則 |String | 資料庫的流式處理策略(以 JSON 格式序列化)。
-|引入批次處理原則 |String | 資料庫的引入批處理策略(以 JSON 格式序列化)。
+|DatabaseName  |String |資料庫名稱。 資料庫名稱會區分大小寫。 
+|PersistentStorage  |String |儲存資料庫的持續性儲存體 URI。  (暫時資料庫的這個欄位是空的。 )  
+|版本  |String |資料庫版本號碼。 資料庫 (中的每個變更作業都會更新這個數位，例如新增資料和變更架構) 。 
+|IsCurrent  |Boolean |如果資料庫是目前連接所指向的資料庫，則為 True。 
+|DatabaseAccessMode  |String |叢集如何連接至資料庫。 例如，如果資料庫是以唯讀模式附加，則叢集將會使所有以任何方式修改資料庫的要求失敗。 
+|PrettyName |String |資料庫的很好名稱。
+|DatabaseId |Guid |資料庫的唯一識別碼。
+|AuthorizedPrincipals |String | 資料庫的授權主體集合 (以 JSON 格式) 進行序列化。
+|>retentionpolicy |String | 資料庫的保留原則 (以 JSON 格式) 進行序列化。
+|MergePolicy |String | 資料庫的範圍合併原則 (以 JSON 格式) 進行序列化。
+|CachingPolicy |String | 資料庫的快取原則 (以 JSON 格式) 進行序列化。
+|ShardingPolicy |String | 資料庫的分區化原則 (以 JSON 格式) 進行序列化。
+|StreamingIngestionPolicy |String | 資料庫的串流內嵌原則 (以 JSON 格式) 進行序列化。
+|IngestionBatchingPolicy |String | 資料庫的內嵌批次處理原則 (以 JSON 格式) 進行序列化。
 
-**輸出資料統計選項**
+**' Datastats ' 選項的輸出**
 
 |輸出參數 |類型 |描述 
 |---|---|---
-|DatabaseName  |String |資料庫名稱。 資料庫名稱區分大小寫。
-|持久存儲  |String |存儲資料庫的持久存儲URI。 (此欄位對於臨時資料庫為空。 
-|版本  |String |資料庫版本號。 對於資料庫中的每個更改操作(如添加數據和更改架構),此數位將更新。 
-|IsCurrent  |Boolean |如果資料庫是當前連接指向的,則為 True。 
-|資料庫存取模式  |String |群集如何附加到資料庫。 例如,如果資料庫以 ReadOnly 模式附加,則群集將失敗所有以任何方式修改資料庫的請求。 
-|漂亮名稱 |String |資料庫的名字很漂亮。
-|DatabaseId |Guid |資料庫的唯一 ID。
-|原始大小 |Real | 資料庫的擴展區的總原始大小。
-|範圍大小 |Real | 資料庫的擴展區總大小(數據 + 索引)。
-|壓縮大小 |Real | 資料庫的擴展區的總數據壓縮大小。
-|IndexSize |Real | 資料庫的擴展區總索引大小。
-|RowCount |long | 資料庫的擴展區的總行計數。
-|熱原裝尺寸 |Real | 資料庫的熱範圍的總原始大小。
-|熱範圍大小 |Real | 資料庫的熱範圍總大小(數據 + 索引)。
-|熱壓縮大小 |Real | 資料庫的熱範圍的總數據壓縮大小。
-|熱指數大小 |Real | 資料庫的熱範圍的總索引大小。
-|熱羅計數 |long | 資料庫的熱範圍總行計數。
+|DatabaseName  |String |資料庫名稱。 資料庫名稱會區分大小寫。
+|PersistentStorage  |String |儲存資料庫的持續性儲存體 URI。  (暫時資料庫的這個欄位是空的。 )  
+|版本  |String |資料庫版本號碼。 資料庫 (中的每個變更作業都會更新這個數位，例如新增資料和變更架構) 。 
+|IsCurrent  |Boolean |如果資料庫是目前連接所指向的資料庫，則為 True。 
+|DatabaseAccessMode  |String |叢集如何連接至資料庫。 例如，如果資料庫是以唯讀模式附加，則叢集將會使所有以任何方式修改資料庫的要求失敗。 
+|PrettyName |String |資料庫的很好名稱。
+|DatabaseId |Guid |資料庫的唯一識別碼。
+|OriginalSize |Real | 資料庫的範圍總計的原始大小。
+|ExtentSize |Real | 資料庫的範圍總計大小 (資料 + 索引) 。
+|CompressedSize |Real | 資料庫的範圍總計資料壓縮大小。
+|IndexSize |Real | 資料庫的範圍總計的索引大小。
+|RowCount |long | 資料庫的範圍總計資料列計數。
+|HotOriginalSize |Real | 資料庫的最大範圍總計的原始大小。
+|HotExtentSize |Real | 資料庫的作用區總計大小 (資料 + 索引) 。
+|HotCompressedSize |Real | 資料庫的最忙碌範圍總計資料壓縮大小。
+|HotIndexSize |Real | 資料庫的作用區總計索引大小。
+|HotRowCount |long | 資料庫的作用區總計資料列計數。

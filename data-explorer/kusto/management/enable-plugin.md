@@ -8,20 +8,20 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/02/2020
-ms.openlocfilehash: a44ebec6774374f4d38dfda3babe42f2f5e07ac6
-ms.sourcegitcommit: 25c0440cb0390b9629b819611844f1375de00a66
+ms.openlocfilehash: a4da3848fa459cf5fae8a7a73f8b1f318ce7e858
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422053"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321466"
 ---
-# <a name="enable-plugin"></a>。啟用外掛程式
+# <a name="enable-plugin"></a>.enable 外掛程式
 
 啟用外掛程式。
 
 此命令需要 `All Databases admin` 許可權。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `.enable``plugin` *PluginName*
 
@@ -34,6 +34,6 @@ ms.locfileid: "94422053"
 
 ## <a name="next-steps"></a>後續步驟
 
-* [。停用外掛程式](disable-plugin.md)
-* [。顯示外掛程式](show-plugins.md)
+* [`.disable plugin`](disable-plugin.md)
+* [`.show plugins`](show-plugins.md)
 

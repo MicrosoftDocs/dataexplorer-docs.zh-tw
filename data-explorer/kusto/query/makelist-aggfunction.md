@@ -8,18 +8,18 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: f5a4c16f1f259de457ef963f2a400d6c9fd79727
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: bd923724a391cfc1638057fec654a1bd74b78479
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92246380"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303363"
 ---
 # <a name="make_list-aggregation-function"></a>make_list ( # A1 (彙總函式) 
 
-傳回群組中 Expr** 所有值的 `dynamic` (JSON) 陣列。
+傳回群組中 Expr 所有值的 `dynamic` (JSON) 陣列。
 
-* 只能用在[摘要內匯總](summarizeoperator.md)的內容中
+* 僅用於 [summarize](summarizeoperator.md) 內部彙總的內容。
 
 ## <a name="syntax"></a>語法
 
@@ -31,11 +31,11 @@ ms.locfileid: "92246380"
 * *MaxSize* 是選擇性的整數限制， (預設值為 *1048576*) 時傳回的元素數目上限。 MaxSize 值不能超過1048576。
 
 > [!NOTE]
-> 此函式的舊版和過時變數：的 `makelist()` 預設限制為 *MaxSize* = 128。
+> `makelist()` 是函式的舊版和過時版本 `make_list` 。 舊版的預設限制為 *MaxSize* = 128。
 
 ## <a name="returns"></a>傳回
 
-傳回群組中 Expr** 所有值的 `dynamic` (JSON) 陣列。
+傳回群組中 Expr 所有值的 `dynamic` (JSON) 陣列。
 如果 `summarize` 未排序運算子的輸入，則產生之陣列中的專案順序是未定義的。
 如果排序運算子的輸入 `summarize` ，則產生的陣列中的元素順序會追蹤輸入的專案順序。
 

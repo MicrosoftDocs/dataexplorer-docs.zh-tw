@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 5b17b69fd49e937b672da07dd0b5c8abae9100fb
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 4b54b7e1c16bce07c5ae97b57f0ebdb6c96a7ad7
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92253044"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320601"
 ---
 # <a name="externaldata-operator"></a>externaldata 運算子
 
@@ -28,7 +28,7 @@ ms.locfileid: "92253044"
 ## <a name="arguments"></a>引數
 
 * *ColumnName*、 *ColumnType*：引數會定義資料表的架構。
-  語法與在 [. create table](../management/create-table-command.md)中定義資料表時所使用的語法相同。
+  語法與在中定義資料表時所使用的語法相同 [`.create table`](../management/create-table-command.md) 。
 
 * *StorageConnectionString*： [儲存體連接字串](../api/connection-strings/storage.md) ，會描述保存要傳回之資料的儲存體成品。
 
@@ -120,4 +120,4 @@ with(format='multijson', ingestionMapping='[{"Column":"Timestamp","Properties":{
 
 此 `MultiJSON` 格式是在這裡使用，因為單一 JSON 記錄會橫跨多行。
 
-如需對應語法的詳細資訊，請參閱 [資料](../management/mappings.md)對應。
+如需對應語法的詳細資訊，請參閱[資料對應](../management/mappings.md)。

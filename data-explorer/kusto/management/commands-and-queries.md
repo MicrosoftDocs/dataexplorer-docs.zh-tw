@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/19/2019
-ms.openlocfilehash: c7f692739071496ce492d168c6036a2c2adac8fd
-ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
+ms.openlocfilehash: 222d04939560342bd849c15f249b1a8a582316a2
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/03/2020
-ms.locfileid: "84329039"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321024"
 ---
 # <a name="commands-and-queries-management"></a>命令和查詢管理
 
-## <a name="show-commands-and-queries"></a>。顯示命令與查詢 
+## <a name="show-commands-and-queries"></a>。顯示命令和查詢 
 
-`.show`傳回 `commands-and-queries` 資料表，其中包含已達到最終狀態的系統管理命令和查詢。 這些命令和查詢可供使用30天。
+`.show`傳回 `commands-and-queries` 資料表，其中包含已達到最終狀態的系統管理員命令和查詢。 這些命令和查詢都有30天的時間。
 
-命令輸出中顯示的資訊類似于[。顯示命令](commands.md)和[。顯示查詢](queries.md)，但基本上可讓您以簡單的方式聯結這兩個結果集。
+命令輸出中顯示的資訊類似于[ `.show` 命令](commands.md)和[ `.show` 查詢](queries.md)，但基本上可讓您以簡單的方式聯結這兩個結果集。
 
 **語法**
 
@@ -43,8 +43,8 @@ ms.locfileid: "84329039"
 | 州                    | 字串     |
 | FailureReason            | 字串     |
 | RootActivityId           | guid       |
-| 使用者                     | 字串     |
-| Application              | 字串     |
+| User                     | 字串     |
+| 應用程式              | 字串     |
 | 主體                | 字串     |
 | ClientRequestProperties  | 動態    |
 | TotalCpu                 | 時間範圍   |
@@ -54,4 +54,4 @@ ms.locfileid: "84329039"
 | ResultSetStatistics      | 動態    |
 
 > [!NOTE]
-> 針對查詢，的值 `CommandType` 為 `Query` 。
+> 若為查詢，的值 `CommandType` 為 `Query` 。

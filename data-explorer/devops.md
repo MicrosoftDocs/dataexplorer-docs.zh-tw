@@ -8,12 +8,12 @@ ms.reviewer: jasonh
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/05/2019
-ms.openlocfilehash: a92e657bfc2f440deb20fd4b812169b1c2e32112
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 14ba0226efc5f38ef3d549f38b2a6224da7c201e
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342904"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320718"
 ---
 # <a name="azure-devops-task-for-azure-data-explorer"></a>適用于 Azure 資料總管的 Azure DevOps 工作
 
@@ -37,12 +37,12 @@ ms.locfileid: "92342904"
 
 ## <a name="create-folders"></a>建立資料夾
 
-在您的 Git 存放庫中 *， (函*式、 *原則*、 *資料表*) 建立下列範例資料夾。 從 [這裡](https://github.com/Azure/azure-kusto-docs-samples/tree/master/DevOps_release_pipeline) 將檔案複製到個別的資料夾，如下所示，並認可變更。 系統會提供範例檔案來執行下列工作流程。
+在您的 Git 存放庫中 *， (函* 式、 *原則*、 *資料表*) 建立下列範例資料夾。 從 [這裡](https://github.com/Azure/azure-kusto-docs-samples/tree/master/DevOps_release_pipeline) 將檔案複製到個別的資料夾，如下所示，並認可變更。 系統會提供範例檔案來執行下列工作流程。
 
 ![建立資料夾](media/devops/create-folders.png)
 
 > [!TIP]
-> 建立您自己的工作流程時，建議您使程式碼具有等冪性。 例如，請使用 [. create-merge table](kusto/management/create-merge-table-command.md) 而非 [create table](kusto/management/create-table-command.md)，並使用 [. create-或-alter](kusto/management/create-alter-function.md) 函數而非 [. create](kusto/management/create-function.md) 函式。
+> 建立您自己的工作流程時，建議您使程式碼具有等冪性。 例如，使用 [`.create-merge table`](kusto/management/create-merge-table-command.md) 取代 [`.create table`](kusto/management/create-table-command.md) ，並使用函式 [`.create-or-alter`](kusto/management/create-alter-function.md) 而不是 [`.create`](kusto/management/create-function.md) 函數。
 
 ## <a name="create-a-release-pipeline"></a>建立發行管線
 
@@ -77,15 +77,15 @@ ms.locfileid: "92342904"
 
     ![新增工作](media/devops/add-task.png)
 
-1. 依此順序建立三個**工作**來部署**資料表**、函式和**原則**。 
+1. 依此順序建立三個 **工作** 來部署 **資料表**、函式和 **原則**。 
 
-1. **在 [工作**] 索引標籤中，選取 [ **+** 依**代理程式作業**]。 搜尋 **Azure 資料總管**。 在 **Marketplace**中，安裝 **Azure 資料總管-Admin 命令** 延伸模組。 然後，選取 [**執行 Azure 資料總管命令**中的 [**新增**]。
+1. **在 [工作**] 索引標籤中，選取 [ **+** 依 **代理程式作業**]。 搜尋 **Azure 資料總管**。 在 **Marketplace** 中，安裝 **Azure 資料總管-Admin 命令** 延伸模組。 然後，選取 [**執行 Azure 資料總管命令** 中的 [**新增**]。
 
      ![新增系統管理員命令](media/devops/add-admin-commands.png)
 
 1. 按一下左邊的 [ **Kusto] 命令** ，並以下列資訊更新工作：
     * **顯示名稱**：工作的名稱
-    * 檔案**路徑**：在 [**資料表]** 工作中，指定 [ */Tables/*]，因為資料表建立檔案位於 [*資料表*] 資料夾中。
+    * 檔案 **路徑**：在 [**資料表]** 工作中，指定 [ */Tables/*]，因為資料表建立檔案位於 [*資料表*] 資料夾中。
     * **端點 URL**：輸入 `EndPoint URL` 在上一個步驟中建立的變數。
     * 選取 [ **使用服務端點** ]，然後選取 [ **+ 新增**]。
 
@@ -105,7 +105,7 @@ ms.locfileid: "92342904"
 
     ![新增服務連接](media/devops/add-service-connection.png)
 
-1. 重複步驟1-5 兩 *次，以從 [函* 式] 和 [ *原則* ] 資料夾部署檔案。 選取 [儲存]。 **在 [工作]** 索引標籤中，查看建立的三個工作：**部署資料表**、**部署函數**和**部署原則**。
+1. 重複步驟1-5 兩 *次，以從 [函* 式] 和 [ *原則* ] 資料夾部署檔案。 選取 [儲存]。 **在 [工作]** 索引標籤中，查看建立的三個工作：**部署資料表**、**部署函數** 和 **部署原則**。
 
     ![部署所有資料夾](media/devops/deploy-all-folders.png)
 

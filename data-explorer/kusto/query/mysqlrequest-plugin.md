@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/24/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c44935a98110cd47f2a40bb261659e12627860c0
-ms.sourcegitcommit: 25c0440cb0390b9629b819611844f1375de00a66
+ms.openlocfilehash: e20e266e6fbae55c308cf13b7601277b8b0f30b2
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422060"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320735"
 ---
 # <a name="mysql_request-plugin-preview"></a>mysql_request 外掛程式 (預覽) 
 
@@ -25,11 +25,11 @@ ms.locfileid: "94422060"
 
 > [!IMPORTANT]
 > `mysql_request`外掛程式處於預覽模式，預設為停用。
-> 若要啟用外掛程式，請執行[ `.enable plugin mysql_request` 命令](../management/enable-plugin.md)。 若要查看已啟用的外掛程式，請使用 [。顯示外掛程式管理命令](../management/show-plugins.md)。
+> 若要啟用外掛程式，請執行[ `.enable plugin mysql_request` 命令](../management/enable-plugin.md)。 若要查看已啟用哪些外掛程式，請使用[ `.show plugin` 管理命令](../management/show-plugins.md)。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
-`evaluate``mysql_request` `(` *ConnectionString* `,` *SqlQuery* [ `,` *SqlParameters* ]`)`
+`evaluate``mysql_request` `(` *ConnectionString* `,` *SqlQuery* [ `,` *SqlParameters*]`)`
 
 ## <a name="arguments"></a>引數
 
@@ -60,7 +60,7 @@ ms.locfileid: "94422060"
 ]
 ```
 
-下列範例顯示 CalloutType 的 alter callout 原則命令 `mysql` ** ：
+下列範例顯示 CalloutType 的 alter callout 原則命令 `mysql` **：
 
 ```kusto
 .alter cluster policy callout @'[{"CalloutType": "mysql", "CalloutUriRegex": "\\.mysql\\.database\\.azure\\.com", "CanCall": true}]'
@@ -85,9 +85,9 @@ Mysql_request 外掛程式僅支援對 MySQL 伺服器端點進行使用者名�
 
 將 SQL 網路端點指定為連接字串的一部分。
 
-**語法** ：
+**語法**：
 
-`Server``=` *FQDN* [ `Port` `=` *埠* ]
+`Server``=` *FQDN* [ `Port` `=` *埠*]
 
 其中：
 

@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/14/2020
-ms.openlocfilehash: c8fa3a000de67559c83745c598da40797e31f9b9
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 667fcc87a1e301bdcceb227bb99ad70d62f46153
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92248345"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320820"
 ---
 # <a name="execute-database-script"></a>.execute 資料庫指令碼
 
@@ -54,7 +54,7 @@ ms.locfileid: "92248345"
 >* 命令會依序執行于輸入腳本中的循序執行。
 >* 腳本執行為非交易式，而且發生錯誤時不會執行任何回復。 使用時，建議使用等冪形式的命令 `.execute database script` 。
 >* 命令的預設行為-第一次發生錯誤時失敗，可以使用屬性引數加以變更。
->*  ( 的唯讀控制命令。顯示) 不會執行的命令，並以狀態報表 `Skipped` 。
+>* 唯讀控制命令 (`.show` 命令) 不會執行，並以狀態報表 `Skipped` 。
 
 ## <a name="example"></a>範例
 

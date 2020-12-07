@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 871ad751105ba6a3f6ce5dcba55b3a0fd1c17789
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 37d82807751a604d88eda7de75fb4978efc0ce1b
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91056980"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321262"
 ---
 # <a name="retention-policy"></a>保留原則
 
@@ -42,20 +42,20 @@ ms.locfileid: "91056980"
     * 保證資料保持可供查詢的時間範圍。 這段期間是從資料內嵌的時間開始測量。
     * 預設值為 `100 years`。
     * 改變數據表或資料庫的虛刪除期間時，新值會套用至現有和新的資料。
-* 復原**能力**：
+* 復原 **能力**：
     * 資料恢復功能 (在刪除資料後) 啟用/停用。
     * 預設值為 `Enabled`。
     * 如果設定為 `Enabled` ，資料將會在被虛刪除後14天復原。
 
 ## <a name="control-commands"></a>控制命令
 
-* 使用 [。 [顯示原則保留](../management/retention-policy.md) ] 可顯示資料庫、資料表或 [具體化視圖](materialized-views/materialized-view-overview.md)目前的保留原則。
-* 使用 [. alter policy 保留](../management/retention-policy.md) 來變更資料庫、資料表或 [具體化視圖](materialized-views/materialized-view-overview.md)目前的保留原則。
+* 用 [`.show policy retention`](../management/retention-policy.md) 來顯示資料庫、資料表或 [具體化視圖](materialized-views/materialized-view-overview.md)目前的保留原則。
+* 用 [`.alter policy retention`](../management/retention-policy.md) 來變更資料庫、資料表或 [具體化視圖](materialized-views/materialized-view-overview.md)的目前保留原則。
 
 ## <a name="defaults"></a>Defaults
 
 根據預設，建立資料庫或資料表時，不會定義保留原則。 通常會建立資料庫，然後根據已知的需求立即設定其建立者的保留原則。
-當您針對尚未設定原則的資料庫或資料表的保留原則執行 [show 命令](../management/retention-policy.md) 時， `Policy` 會顯示為 `null` 。
+當您針對尚未設定原則的資料庫或資料表的保留原則執行[ `.show` 命令](../management/retention-policy.md)時， `Policy` 會顯示為 `null` 。
 
 您可以使用下列命令套用預設的保留原則（具有上述的預設值）。
 
@@ -88,7 +88,7 @@ ms.locfileid: "91056980"
 
 設定資料庫中的所有資料表，使其具有七天的虛刪除期並停用復原。
 
-* *選項 1 (建議的) *：設定資料庫層級的保留原則，並確認沒有設定資料表層級原則。
+* *選項 1 (建議的)*：設定資料庫層級的保留原則，並確認沒有設定資料表層級原則。
 
 ```kusto
 .delete table MyTable1 policy retention        // optional, only if the table previously had its policy set
@@ -111,7 +111,7 @@ ms.locfileid: "91056980"
 * 設定資料表 `MyTable1` ，並 `MyTable2` 在七天內啟用可復原的虛刪除週期。
 * 設定 `MySpecialTable` 為有14天的虛刪除期，且恢復功能已停用。
 
-* *選項 1 (建議的) *：設定資料庫層級的保留原則，並設定資料表層級的保留原則。
+* *選項 1 (建議的)*：設定資料庫層級的保留原則，並設定資料表層級的保留原則。
 
 ```kusto
 .delete table MyTable1 policy retention   // optional, only if the table previously had its policy set

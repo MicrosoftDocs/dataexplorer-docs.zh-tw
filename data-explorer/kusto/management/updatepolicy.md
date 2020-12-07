@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: 28e88b71b5d7a2f8729e2f9eef416ee5804a2880
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 8f19606a75c388917a5195d0ac5cbb0ecf4335f9
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92337630"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321126"
 ---
 # <a name="update-policy-overview"></a>更新原則總覽
 
@@ -49,7 +49,7 @@ ms.locfileid: "92337630"
 資料表可以有零個、一個或多個相關聯的更新原則物件。
 每個這類物件都會以 JSON 屬性包表示，並定義下列屬性。
 
-|屬性 |類型 |說明  |
+|屬性 |類型 |描述  |
 |---------|---------|----------------|
 |IsEnabled                     |`bool`  |指出是否已啟用更新原則 (true) 或停用 (false)                                                                                                                                |
 |來源                        |`string`|觸發要叫用更新原則的資料表名稱                                                                                                                                 |
@@ -66,10 +66,10 @@ ms.locfileid: "92337630"
 
 控制更新原則的命令包括：
 
-* [。顯示資料表 *TableName* 原則更新](update-policy.md#show-update-policy) 會顯示資料表目前的更新原則。
-* [。 alter Table *TableName* policy update](update-policy.md#alter-update-policy) 會設定資料表目前的更新原則。
-* [。 alter-merge Table *TableName* policy update](update-policy.md#alter-merge-table-tablename-policy-update) 會附加至資料表目前的更新原則。
-* [。刪除資料表 *TableName* 原則更新](update-policy.md#delete-table-tablename-policy-update) 會附加至資料表目前的更新原則。
+* [`.show table *TableName* policy update`](update-policy.md#show-update-policy) 顯示資料表目前的更新原則。
+* [`.alter table *TableName* policy update`](update-policy.md#alter-update-policy) 設定資料表的目前更新原則。
+* [`.alter-merge table *TableName* policy update`](update-policy.md#alter-merge-table-tablename-policy-update) 附加至資料表目前的更新原則。
+* [`.delete table *TableName* policy update`](update-policy.md#delete-table-tablename-policy-update) 附加至資料表目前的更新原則。
 
 ## <a name="update-policy-is-initiated-following-ingestion"></a>更新原則會在內嵌之後起始
 
@@ -106,7 +106,7 @@ ms.locfileid: "92337630"
 
 ### <a name="evaluate-resource-usage"></a>評估資源使用量
 
-在下列案例中，使用 [ [顯示查詢](../management/queries.md)] 來評估資源使用量 (CPU、記憶體等等) ：
+使用 [`.show queries`](../management/queries.md) ，在下列案例中評估資源使用量 (CPU、記憶體等等) ：
 *  (`Source` 更新原則) 的屬性之來源資料表名稱 `MySourceTable` 。
 * `Query`更新原則的屬性會呼叫名為的函式 `MyFunction()` 。
 
@@ -122,7 +122,7 @@ MyFunction()
 
 依預設，執行更新原則失敗並不會影響將資料內嵌到來源資料表。 但是，如果更新原則定義為 `IsTransactional` ： true，執行原則的失敗會強制將資料內嵌到來源資料表中。 在某些情況下，將資料內嵌至來源資料表會成功，但是在內嵌至目標資料表期間，更新原則會失敗。
 
-更新原則時所發生的失敗，可以使用 [ [顯示內嵌失敗] 命令](../management/ingestionfailures.md)來抓取。
+更新原則時所發生的失敗，可以使用[ `.show ingestion failures` 命令](../management/ingestionfailures.md)抓取。
  
 ```kusto
 .show ingestion failures 

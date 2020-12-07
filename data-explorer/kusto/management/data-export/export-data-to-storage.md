@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: bd7482abb9c13130d863e9abb73819d9409109ea
-ms.sourcegitcommit: c815c6ccf33864e21e1d3daff26a4f077dff88f7
+ms.openlocfilehash: fd0ac46aa0e2cf73cf0ee5a51359cd346bf1beda
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/21/2020
-ms.locfileid: "95012167"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321551"
 ---
 # <a name="export-data-to-storage"></a>將資料匯出至儲存體
 
@@ -41,7 +41,7 @@ ms.locfileid: "95012167"
 
 * *PropertyName* /*PropertyValue*：零或多個選用的匯出屬性：
 
-|屬性        |類型    |Description                                                                                                                |
+|屬性        |類型    |描述                                                                                                                |
 |----------------|--------|---------------------------------------------------------------------------------------------------------------------------|
 |`sizeLimit`     |`long`  |在壓縮) 之前， (寫入單一儲存體成品的大小限制（以位元組為單位）。 允許的範圍為 100MB (預設) 為1GB。|
 |`includeHeaders`|`string`|針對 `csv` / `tsv` 輸出，會控制資料行標頭的產生。 可以是 `none` (預設值中的其中一個; 不會發出) 的標頭行、 `all` (將標頭行發出至每個儲存成品) ，或 `firstFile` (只) 將標頭行發出至第一個儲存體成品。|
@@ -69,8 +69,8 @@ ms.locfileid: "95012167"
 如果 `async` 指定了旗標，命令就會以非同步模式執行。
 在此模式中，命令會立即以作業識別碼傳回，而且資料匯出會在背景繼續進行，直到完成為止。 命令所傳回的作業識別碼可以用來追蹤其進度，以及透過下列命令的最終結果：
 
-* [。顯示作業](../operations.md#show-operations)：追蹤進度。
-* [。顯示作業詳細資料](../operations.md#show-operation-details)：取得完成結果。
+* [`.show operations`](../operations.md#show-operations)：追蹤進度。
+* [`.show operation details`](../operations.md#show-operation-details)：取得完成結果。
 
 例如，在成功完成後，您可以使用下列內容抓取結果：
 
@@ -103,7 +103,7 @@ ms.locfileid: "95012167"
 匯出命令可能會在執行期間暫時失敗。 [連續匯出](continuous-data-export.md) 會自動重試命令。 一般匯出命令 ([匯出至儲存體](export-data-to-storage.md)、 [匯出至外部資料表](export-data-to-an-external-table.md)) 不會執行任何重試。
 
 *  當匯出命令失敗時，將不會刪除已寫入儲存區的成品。 這些成品將會保留在儲存體中。 如果命令失敗，即使已寫入某些成品，也會假設匯出不完整。 
-* 追蹤命令完成和成功完成時匯出之成品的最佳方式，是使用 [。顯示作業](../operations.md#show-operations) 和 [. 顯示作業詳細資料](../operations.md#show-operation-details) 命令。
+* 追蹤命令完成和成功完成時匯出之成品的最佳方式，是使用 [`.show operations`](../operations.md#show-operations) 和 [`.show operation details`](../operations.md#show-operation-details) 命令。
 
 ### <a name="storage-failures"></a>儲存體失敗
 

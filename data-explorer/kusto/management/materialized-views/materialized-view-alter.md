@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: eaa4e759f0987940a86c509788f5e8a58b2f9e75
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: 03d047d89abc3de3c80414564ec101f309bf69b0
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452726"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320565"
 ---
 # <a name="alter-materialized-view"></a>.alter materialized-view
 
@@ -24,7 +24,7 @@ ms.locfileid: "91452726"
 > [!WARNING]
 > 改變具體化視圖時，請特別小心。 不正確的使用可能會導致資料遺失。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `.alter` `materialized-view`  
 [ `with` `(` *PropertyName* `=` *PropertyValue* `,` ... `)` ]  
@@ -43,13 +43,13 @@ ms.locfileid: "91452726"
 
 ## <a name="properties"></a>屬性
 
-`dimensionTables`是具體化-view alter 命令中唯一支援的屬性。 當查詢參考維度資料表時，應使用此屬性。 如需詳細資訊，請參閱 [。建立具體化-view](materialized-view-create.md) 命令。
+`dimensionTables`是具體化-view alter 命令中唯一支援的屬性。 當查詢參考維度資料表時，應使用此屬性。 如需詳細資訊，請參閱 [`.create materialized-view`](materialized-view-create.md) 命令。
 
 ## <a name="use-cases"></a>使用案例
 
 * 將 `avg` `T | summarize count(), min(Value) by Id` view 查詢修改為，以將匯總加入至視圖-例如，將匯總加入至 `T | summarize count(), min(Value), avg(Value) by Id` 。
 * 變更摘要運算子以外的運算子。 Tor 範例中，藉由變更來篩選掉一些記錄  `T | summarize arg_max(Timestamp, *) by User` `T | where User != 'someone' | summarize arg_max(Timestamp, *) by User` 。
-* 因為來源資料表中的變更，而不變更查詢的 Alter。 Tor 範例假設的視圖 `T | summarize arg_max(Timestamp, *) by Id` 未設定為 `autoUpdateSchema` (請參閱) 。 [建立具體化視圖](materialized-view-create.md) 命令。 如果在視圖的來源資料表中加入或移除資料行，就會自動停用此視圖。 使用完全相同的查詢來執行 alter 命令，以變更具體化視圖的架構，使其符合新的資料表架構。 您仍然必須在變更之後，使用 [ [啟用具體化 view](materialized-view-enable-disable.md) ] 命令來明確啟用此視圖。
+* 因為來源資料表中的變更，而不變更查詢的 Alter。 Tor 範例假設的觀點 `T | summarize arg_max(Timestamp, *) by Id` 未設定為 `autoUpdateSchema` (請參閱 [`.create materialized-view`](materialized-view-create.md) 命令) 。 如果在視圖的來源資料表中加入或移除資料行，就會自動停用此視圖。 使用完全相同的查詢來執行 alter 命令，以變更具體化視圖的架構，使其符合新的資料表架構。 您仍然必須在變更之後，使用 [ [啟用具體化 view](materialized-view-enable-disable.md) ] 命令來明確啟用此視圖。
 
 ## <a name="alter-materialized-view-limitations"></a>Alter 具體化 view 限制
 

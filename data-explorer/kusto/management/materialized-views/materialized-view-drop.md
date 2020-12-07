@@ -8,14 +8,14 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 6b06d1807fdfc2ed3edaa06e57436979afce423d
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 312b8dbd15f9ee570d1693f7bdbb77b9988d8207
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057111"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320602"
 ---
-# <a name="drop-materialized-view"></a>。 drop 具體化-view 
+# <a name="drop-materialized-view"></a>.drop materialized-view 
 
 卸載具體化視圖。
 
@@ -31,7 +31,7 @@ ms.locfileid: "91057111"
 |----------------|-------|-----|
 | MaterializedViewName| String| 具體化視圖的名稱。|
 
-## <a name="returns"></a>傳回值
+## <a name="returns"></a>傳回
 
 此命令會傳回資料庫中的其餘具體化視圖，也就是 [顯示具體化 view](materialized-view-show-commands.md#show-materialized-view) 命令的輸出。
 
@@ -56,4 +56,4 @@ ms.locfileid: "91057111"
 |資料夾|字串|具體化 view 資料夾。
 |DocString|字串|具體化 view doc 字串。
 |AutoUpdateSchema|bool|是否已啟用自動更新的視圖。
-|EffectiveDateTime|Datetime|視圖的有效日期時間（于建立期間決定） (參閱 [。建立具體化視圖](materialized-view-create.md#create-materialized-view)) 
+|EffectiveDateTime|Datetime|視圖的有效日期時間（于建立期間決定） (查看 [`.create materialized-view`](materialized-view-create.md#create-materialized-view)) 

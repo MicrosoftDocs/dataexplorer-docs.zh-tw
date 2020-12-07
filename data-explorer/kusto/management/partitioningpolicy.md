@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 1d2960e4fa8274d9e39aba935a49fd8d14d166e9
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 30929e63c39be10d066815333ba6b277c0aeb5c9
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902669"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321279"
 ---
 # <a name="partitioning-policy"></a>資料分割原則
 
@@ -28,10 +28,10 @@ ms.locfileid: "92902669"
 
 支援下列類型的分割區索引鍵。
 
-|類型                                                   |資料行類型 |磁碟分割內容                    |分割區值                                        |
-|-------------------------------------------------------|------------|----------------------------------------|----------------------|
-|[雜湊](#hash-partition-key)                            |`string`    |`Function`, `MaxPartitionCount`, `Seed` | `Function`(`ColumnName`, `MaxPartitionCount`, `Seed`) |
-|[統一範圍](#uniform-range-datetime-partition-key) |`datetime`  |`RangeSize`, `Reference`                | `bin_at`(`ColumnName`, `RangeSize`, `Reference`)      |
+|類型                                                   |資料行類型 |磁碟分割內容                                               |分割區值                                        |
+|-------------------------------------------------------|------------|-------------------------------------------------------------------|-------------------------------------------------------|
+|[雜湊](#hash-partition-key)                            |`string`    |`Function`, `MaxPartitionCount`, `Seed`, `PartitionAssignmentMode` | `Function`(`ColumnName`, `MaxPartitionCount`, `Seed`) |
+|[統一範圍](#uniform-range-datetime-partition-key) |`datetime`  |`RangeSize`, `Reference`, `OverrideCreationTime`                   | `bin_at`(`ColumnName`, `RangeSize`, `Reference`)      |
 
 ### <a name="hash-partition-key"></a>雜湊分割索引鍵
 
@@ -83,15 +83,16 @@ ms.locfileid: "92902669"
 
 #### <a name="partition-properties"></a>磁碟分割內容
 
-|屬性 | 描述 | 建議值 |
-|---|---|---|---|
-| `RangeSize` | `timespan`指出每個 datetime 資料分割大小的純量常數。 | 從 `1.00:00:00` (一天) 的值開始。 請勿設定較短的值，因為它可能會導致資料表有大量無法合併的小範圍。
-| `Reference` | `datetime`表示固定時間點的純量常數，根據對齊的日期時間分割區而定。 | 請從 `1970-01-01 00:00:00` 開始。 如果有 datetime 分割區索引鍵具有值的記錄 `null` ，其資料分割值會設定為的值 `Reference` 。 |
+|屬性                | 描述                                                                                                                                                     | 建議值                                                                                                                                                                                                                                                            |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `RangeSize`            | `timespan`指出每個 datetime 資料分割大小的純量常數。                                                                                | 從 `1.00:00:00` (一天) 的值開始。 請勿設定較短的值，因為它可能會導致資料表有大量無法合併的小範圍。                                                                                                      |
+| `Reference`            | `datetime`表示固定時間點的純量常數，根據對齊的日期時間分割區而定。                                          | 請從 `1970-01-01 00:00:00` 開始。 如果有 datetime 分割區索引鍵具有值的記錄 `null` ，其資料分割值會設定為的值 `Reference` 。                                                                                                      |
+| `OverrideCreationTime` | `bool`，指出是否應該以分割區索引鍵的值範圍覆寫結果範圍的最小和最大建立時間。 | 預設值為 `false`。 `true`如果資料未依 (抵達時間的順序內嵌，例如單一來源檔案可能會包含非常遠的) 的日期時間值，以及/或您想要根據日期時間值強制保留/快取，而不是內嵌的時間，則設定為。 |
 
 #### <a name="uniform-range-datetime-partition-example"></a>統一範圍 datetime 分割區範例
 
 程式碼片段會在名為的具類型資料行上顯示統一的 datetime 範圍資料分割索引鍵 `datetime` `timestamp` 。
-它會使用 `datetime(1970-01-01)` 做為其參考點， `1d` 每個分割區的大小都是。
+它會使用 `datetime(1970-01-01)` 做為其參考點， `1d` 每個分割區的大小為，且不會覆寫範圍的建立時間。
 
 ```json
 {
@@ -99,7 +100,8 @@ ms.locfileid: "92902669"
   "Kind": "UniformRange",
   "Properties": {
     "Reference": "1970-01-01T00:00:00",
-    "RangeSize": "1.00:00:00"
+    "RangeSize": "1.00:00:00",
+    "OverrideCreationTime": false
   }
 }
 ```
@@ -110,7 +112,7 @@ ms.locfileid: "92902669"
 
 資料分割原則具有下列主要屬性：
 
-* **PartitionKeys** ：
+* **PartitionKeys**：
   * 資料分割索引 [鍵](#partition-keys) 的集合，定義如何分割資料表中的資料。
   * 資料表可具有最多資料 `2` 分割索引鍵，並具有下列其中一個選項：
     * 一個 [雜湊分割索引鍵](#hash-partition-key)。
@@ -121,7 +123,7 @@ ms.locfileid: "92902669"
     * `Kind`： `string` 要套用 (或) 的資料分割 `Hash` 種類 `UniformRange` 。
     * `Properties`： `property bag` -根據完成的資料分割定義參數。
 
-* **EffectiveDateTime** ：
+* **EffectiveDateTime**：
   * 原則生效的 UTC 日期時間。
   * 這是選用屬性。 如果未指定，原則將會在套用原則之後對資料內嵌生效。
   * 因為資料分割進程會忽略保留的任何非同質 (非資料分割) 範圍。 系統會忽略範圍，因為它們的建立時間在資料表有效的虛刪除期間的90% 之前。
@@ -154,7 +156,8 @@ ms.locfileid: "92902669"
       "Kind": "UniformRange",
       "Properties": {
         "Reference": "1970-01-01T00:00:00",
-        "RangeSize": "1.00:00:00"
+        "RangeSize": "1.00:00:00",
+        "OverrideCreationTime": false
       }
     }
   ]
@@ -179,7 +182,7 @@ ms.locfileid: "92902669"
 
 ## <a name="monitor-partitioning"></a>監視資料分割
 
-使用 [ [顯示診斷](../management/diagnostics.md#show-diagnostics) ] 命令來監視叢集中的資料分割進度或狀態。
+使用命令來監視叢集中的資料 [`.show diagnostics`](../management/diagnostics.md#show-diagnostics) 分割進度或狀態。
 
 ```kusto
 .show diagnostics
@@ -192,7 +195,7 @@ ms.locfileid: "92902669"
     * 如果此百分比持續維持在90% 以下，則請評估叢集的資料分割 [容量](partitioningpolicy.md#partition-capacity)。
   * `TableWithMinPartitioningPercentage`：資料表的完整名稱，其分割區百分比顯示于上方。
 
-使用 [. 顯示命令](commands.md) 來監視分割命令及其資源使用。 例如：
+用 [`.show commands`](commands.md) 來監視分割命令及其資源使用。 例如：
 
 ```kusto
 .show commands 
@@ -219,6 +222,6 @@ ms.locfileid: "92902669"
 
 在這兩種情況下，都可以「修正」資料，或在內嵌期間篩選出資料中的任何無關記錄，以減少叢集上資料分割的額外負荷。 例如，使用 [更新原則](updatepolicy.md)。
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 使用資料 [分割原則控制命令](../management/partitioning-policy.md) 來管理資料表的資料分割原則。

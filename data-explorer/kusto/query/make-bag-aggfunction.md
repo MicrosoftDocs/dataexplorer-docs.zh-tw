@@ -8,18 +8,18 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 41eb9703f1718bb43b41927f9ec4d7cac52d67c4
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 936b8aedb4244836eff8c8618a53693395a0343c
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92249940"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303282"
 ---
 # <a name="make_bag-aggregation-function"></a>make_bag ( # A1 (彙總函式) 
 
 傳回 `dynamic` 群組中所有值的 (JSON) 屬性包 (字典) *`Expr`* 。
 
-* 只能用在[摘要內匯總](summarizeoperator.md)的內容中
+* 僅用於 [summarize](summarizeoperator.md) 內部彙總的內容。
 
 ## <a name="syntax"></a>語法
 
@@ -30,9 +30,8 @@ ms.locfileid: "92249940"
 * *Expr*：用於匯總計算的型別運算式 `dynamic` 。
 * *MaxSize* 是傳回的元素數目上限的選擇性整數限制。 預設值為 *1048576*。 MaxSize 值不能超過 *1048576*。
 
-**注意**
-
-函式的舊版和過時變數的 `make_dictionary()` 預設限制為 *MaxSize* = 128。
+> [!NOTE]
+> `make_dictionary()` 是舊版和過時版本的 `make_bag()` 。 舊版的預設限制為 *MaxSize* = 128。
 
 ## <a name="returns"></a>傳回
 

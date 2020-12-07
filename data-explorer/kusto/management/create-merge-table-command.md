@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/05/2020
-ms.openlocfilehash: 19dc7db9e344a516b5c92917dccbf8362b1ca858
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 554f6ed623b5a3be12a360fab0b1d5aa6eb4c084
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91102887"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320956"
 ---
 # <a name="create-merge-table"></a>.create-merge table
 
@@ -27,9 +27,9 @@ ms.locfileid: "91102887"
 
 `.create-merge``table` *TableName* ( [columnName： columnType]，... ) [ `with` `(` [ `docstring` `=` *檔*] [ `,` `folder` `=` *資料夾資料夾*] `)` ]
 
-如果資料表不存在，就會與 ". create table" 命令完全相同。
+如果資料表不存在，則與命令完全相同 `.create table` 。
 
-如果資料表 T 存在，而且您傳送 ". create-merge table T (<columns specification>) " 命令，則：
+如果資料表 T 存在，而您傳送了 `.create-merge table T (<columns specification>)` 命令，則：
 
 * 先前未存在於 T 中的任何資料行 <columns specification> 都會加入至 t 架構的結尾。
 * T 中不是 in 的任何資料行都不 <columns specification> 會從 t 移除。
@@ -37,5 +37,5 @@ ms.locfileid: "91102887"
 
 ## <a name="see-also"></a>另請參閱
 
-* [.create-merge tables](create-merge-tables-command.md)
-* [. 建立資料表](create-table-command.md)
+* [`.create-merge tables`](create-merge-tables-command.md)
+* [`.create table`](create-table-command.md)

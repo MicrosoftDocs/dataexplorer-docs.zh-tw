@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 65b71ab15763506683c461f04975d22d396f6405
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: fc449cb6a376eba66457855173c6e992e6ca1dbc
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512532"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321653"
 ---
 # <a name="alter-table-docstring"></a>.alter 資料表 docstring
 
@@ -22,9 +22,9 @@ ms.locfileid: "84512532"
 `.alter``table` *TableName* `docstring` *檔*
 
 > [!NOTE]
-> * 需要[資料庫管理員許可權](../management/access-control/role-based-authorization.md)
-> * 原先建立資料表的[資料庫使用者](../management/access-control/role-based-authorization.md)可以修改它
-> * 如果資料表不存在，則會傳回錯誤。 若要建立新的資料表，請參閱[. create table](create-table-command.md)
+> * 需要 [資料庫管理員許可權](../management/access-control/role-based-authorization.md)
+> * 原先建立資料表的 [資料庫使用者](../management/access-control/role-based-authorization.md) 可以修改它
+> * 如果資料表不存在，則會傳回錯誤。 若要建立新的資料表，請參閱 [`.create table`](create-table-command.md)
 
 **範例** 
 
