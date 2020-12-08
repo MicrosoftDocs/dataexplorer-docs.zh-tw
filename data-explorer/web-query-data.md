@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 11/22/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 5ccae7e467b2ce41a36868cdad1b059aeec3ef9d
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 38b67a0843cc38c2cbce7d5a41a8eff85b25ebd5
+ms.sourcegitcommit: 7edce9d9d20f9c0505abda67bb8cc3d2ecd60d15
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95872390"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96524295"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>快速入門：在 Azure 資料總管 Web UI 中查詢資料
 
@@ -35,7 +35,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 ![新增叢集](media/web-query-data/add-cluster.png)
 
-您必須先新增叢集連線，才能開始執行查詢。 在本節中，您會新增 Azure 資料總管 **說明** 叢集的連線，以及您在[必要條件](#prerequisites)中所建立測試叢集的連線 (選擇性)。
+您必須先新增叢集連線，才能開始執行查詢。 在本節中，您會新增 Azure 資料總管 **說明** 叢集的連線，以及您在 [必要條件](#prerequisites)中所建立測試叢集的連線 (選擇性)。
 
 ### <a name="add-help-cluster"></a>新增說明叢集
 
@@ -55,7 +55,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 1. 選取 [新增叢集]。
 
-1. 在 [新增叢集] 對話方塊中，以 `https://<ClusterName>.<Region>.kusto.windows.net/` 格式輸入您的測試叢集 URL，然後選取 [新增]。 例如，如下圖所示的 https://mydataexplorercluster.westus.kusto.windows.net：
+1. 在 [新增叢集] 對話方塊中，以 `https://<ClusterName>.<Region>.kusto.windows.net/` 格式輸入您的測試叢集 URL，然後選取 [新增]。 例如，如下圖所示的 `https://mydataexplorercluster.westus.kusto.windows.net`：
 
     :::image type="content" source="media/web-query-data/server-uri.png" alt-text="輸入測試叢集 URL":::
     
