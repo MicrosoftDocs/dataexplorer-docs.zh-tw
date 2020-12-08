@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 40cd53d1bff6b33b81878c85c6c22c3fb85655ee
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: e083303d3d8270f0d673199c3547bff13001174e
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902582"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96774668"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-an-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本建立 Azure 資料總管叢集和資料庫
 
@@ -76,6 +76,29 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
           "location": "[parameters('location')]",
           "tags": {
             "Created By": "GitHub quickstart template"
+          },
+          "properties": {
+              "trustedExternalTenants": [],
+              "optimizedAutoscale": {
+                  "version": 1,
+                  "isEnabled": true,
+                  "minimum": 2,
+                  "maximum": 10
+              },
+              "enableDiskEncryption": false,
+              "enableStreamingIngest": false,
+              "virtualNetworkConfiguration":{
+                  "subnetId": "<subnet resource id>",
+                  "enginePublicIpId": "<Engine service's public IP address resource id>",
+                  "dataManagementPublicIpId": "<Data management's service public IP address resource id>"
+              },
+              "keyVaultProperties":{
+                  "keyName": "<Key name>",
+                  "keyVaultUri": "<Key vault uri>"
+              },
+              "enablePurge": false,
+              "enableDoubleEncryption": false,
+              "engineType": "V3",
           }
       },
       {
@@ -103,11 +126,11 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 ### <a name="use-the-azure-portal-to-deploy-the-template-and-verify-template-deployment"></a>使用 Azure 入口網站部署範本並確認範本部署
 
-1. 若要建立叢集和資料庫，請使用下列按鈕來開始部署。 按一下滑鼠右鍵並選取 [在新視窗中開啟]  ，以便依照本文中的其餘步驟操作。
+1. 若要建立叢集和資料庫，請使用下列按鈕來開始部署。 按一下滑鼠右鍵並選取 [在新視窗中開啟]，以便依照本文中的其餘步驟操作。
 
     [![藍色按鈕的螢幕擷取畫面，其中圖片雲端和已標示為 [部署至 Azure]。](media/create-cluster-database-resource-manager/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-kusto-cluster-database%2Fazuredeploy.json)
 
-    [部署至 Azure]  按鈕可將您帶往 Azure 入口網站，填寫部署表單。
+    [部署至 Azure] 按鈕可將您帶往 Azure 入口網站，填寫部署表單。
 
     :::image type="content" source="media/create-cluster-database-resource-manager/deploy-2-azure.png" alt-text="Azure 入口網站上範本的螢幕擷取畫面。所有用於編輯的按鈕、方塊和核取方塊都會反白顯示。" border="false":::
 
@@ -158,6 +181,6 @@ Write-Host "Press [ENTER] to continue ..."
 
 [!INCLUDE [data-explorer-clean-resources](includes/data-explorer-clean-resources.md)]
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 [將資料內嵌至 Azure 資料總管叢集和資料庫](ingest-data-overview.md)

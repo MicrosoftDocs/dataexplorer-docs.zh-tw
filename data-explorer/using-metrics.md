@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/19/2020
 ms.custom: contperfq1
-ms.openlocfilehash: 153b4265aade03e4059db0b38362d217cdad90df
-ms.sourcegitcommit: 2804e3fe40f6cf8e65811b00b7eb6a4f59c88a99
+ms.openlocfilehash: e92717e68794b21a0c991806aa7319e528433afb
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
 ms.lasthandoff: 12/07/2020
-ms.locfileid: "96748411"
+ms.locfileid: "96774515"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>使用計量來監視 Azure 資料總管效能、健康情況和使用量
 
@@ -101,7 +101,7 @@ Azure 資料總管計量讓您深入瞭解資源的整體效能和使用方式�
 | 探索延遲 | 秒 | Avg、Max、Min | 從資料佇列到資料連線探索為止的時間。 此時間未包含在 **Azure 資料總管的內嵌持續時間總數** 或 **KustoEventAge (內嵌延遲)** | 資料庫、資料表、資料連線類型、資料連線名稱 |
 | 已處理的事件 (針對事件/IoT 中樞) | Count | 最大值、最小值、總和 | 從事件中樞讀取並由叢集處理的事件總數。 這些事件會分割成被拒絕的事件，以及叢集引擎所接受的事件。 | EventStatus |
 | 內嵌延遲 | 秒 | Avg、Max、Min | 擷取資料時的延遲，從在叢集中收到資料的時間直到準備好進行查詢為止。 擷取延遲期間取決於擷取狀況。 | 無 |
-| 擷取結果 | Count | Count | 失敗和成功的內嵌作業總數。 <br> <br> 使用 [套用 **分割**] 來建立成功和失敗結果的 bucket，並分析維度 (**值**  >  **狀態**) 。| IngestionResultDetails |
+| 擷取結果 | Count | Count | 失敗和成功的內嵌作業總數。 <br> <br> 使用 [套用 **分割**] 來建立成功和失敗結果的 bucket，並分析維度 (**值**  >  **狀態**) 。| 狀態 |
 | 擷取量 (以 MB 為單位) | Count | Max、Sum | 在壓縮之前，內嵌至叢集 (的資料大小總計（MB）) 。 | 資料庫 |
 | 階段延遲 | 秒 | Avg、Max、Min | 特定元件處理此批次資料的持續時間。 所有資料批次元件的階段延遲總計等於其內嵌延遲。 | 資料庫、資料連線類型、資料連線名稱|
 

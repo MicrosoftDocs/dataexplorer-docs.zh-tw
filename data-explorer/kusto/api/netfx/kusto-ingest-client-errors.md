@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 61c183f11aa7658faba00c5dd3c4795f235e5467
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: a4da1c35d34a1677cc0608fdf70dcbdb5a3c7c73
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92337477"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96774600"
 ---
 # <a name="kustoingest-errors-and-exceptions"></a>Kusto 內嵌錯誤和例外狀況
 用戶端上的內嵌處理期間發生的任何錯誤都會以 c # 例外狀況表示。
@@ -67,40 +67,7 @@ ms.locfileid: "92337477"
 
 為了協助以程式設計方式處理內嵌失敗，會使用數位錯誤碼 () 來擴充失敗資訊 `IngestionErrorCode enumeration` 。
 
-|ErrorCode                                      |原因                                                        |
-|-----------------------------------------------|--------------------------------------------------------------|
-|Unknown                                        | 發生未知錯誤|
-|Stream_LowMemoryCondition                      | 作業用盡記憶體|
-|Stream_WrongNumberOfFields                     | CSV 檔的欄位數目不一致|
-|Stream_InputStreamTooLarge                     | 針對內嵌提交的檔已超過允許的大小|
-|Stream_NoDataToIngest                          | 找不到要內嵌的資料流程|
-|Stream_DynamicPropertyBagTooLarge              | 內嵌資料中的其中一個動態資料行包含太多唯一屬性|
-|Download_SourceNotFound                        | 無法從 Azure 儲存體下載來源-找不到來源|
-|Download_AccessConditionNotSatisfied           | 無法從 Azure 儲存體下載來源-拒絕存取|
-|Download_Forbidden                             | 無法從 Azure 儲存體下載來源-不允許存取|
-|Download_AccountNotFound                       | 無法從 Azure 儲存體下載來源-找不到帳戶|
-|Download_BadRequest                            | 無法從 Azure 儲存體下載來源-錯誤的要求|
-|Download_NotTransient                          | 無法從 Azure 儲存體下載來源-非暫時性錯誤|
-|Download_UnknownError                          | 無法從 Azure 儲存體下載來源-未知的錯誤|
-|UpdatePolicy_QuerySchemaDoesNotMatchTableSchema| 無法叫用更新原則。 查詢架構與資料表架構不符|
-|UpdatePolicy_FailedDescendantTransaction       | 無法叫用更新原則。 失敗的子交易更新原則|
-|UpdatePolicy_IngestionError                    | 無法叫用更新原則。 發生內嵌錯誤|
-|UpdatePolicy_UnknownError                      | 無法叫用更新原則。 發生未知錯誤|
-|BadRequest_MissingJsonMappingtFailure          | JSON 模式未使用 jsonMapping 參數內嵌|
-|BadRequest_InvalidBlob                         | 引擎無法開啟和讀取非 zip blob|
-|BadRequest_EmptyBlob                           | 空白 blob|
-|BadRequest_EmptyArchive                        | Zip 檔案不包含任何封存的元素|
-|BadRequest_EmptyBlobUri                        | 指定的 blob URI 是空的|
-|BadRequest_DatabaseNotExist                    | 資料庫不存在|
-|BadRequest_TableNotExist                       | 資料表不存在|
-|BadRequest_InvalidKustoIdentityToken           | 不正確 Kusto 身分識別權杖|
-|BadRequest_UriMissingSas                       | Blob 路徑沒有來自未知 blob 儲存體的 SAS|
-|BadRequest_FileTooLarge                        | 嘗試內嵌太大的檔案|
-|BadRequest_NoValidResponseFromEngine           | 內嵌命令沒有有效的回復|
-|BadRequest_TableAccessDenied                   | 拒絕存取資料表|
-|BadRequest_MessageExhausted                    | 訊息已用盡|
-|General_BadRequest                             | 一般錯誤的要求。 可能會在內嵌至不存在的資料庫/資料表時提示|
-|General_InternalServerError                    | 發生內部伺服器錯誤|
+如需內嵌錯誤碼的完整清單，請參閱 [Azure 資料總管中](../../../error-codes.md)的內嵌錯誤碼。
 
 ## <a name="detailed-exceptions-reference"></a>詳細的例外狀況參考
 
@@ -225,6 +192,4 @@ ms.locfileid: "92337477"
 |IngestionErrors | IList<IngestClientException>    | 嘗試內嵌時所發生的錯誤，以及與其相關的來源
 |IsGlobalError   | bool                            | 指出所有來源是否發生例外狀況
 
-## <a name="next-steps"></a>後續步驟
 
-如需機器碼中錯誤的詳細資訊，請參閱 [機器碼中的錯誤](../../concepts/errorsinnativecode.md)。

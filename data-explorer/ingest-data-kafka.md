@@ -7,12 +7,12 @@ ms.reviewer: ankhanol
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/22/2020
-ms.openlocfilehash: 8274cd04dc2ecf588bf4771c06e3f8a760cac74d
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: cc2f10570081fec3a5762ab3f2e23b9e22839063
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343159"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96774651"
 ---
 # <a name="ingest-data-from-apache-kafka-into-azure-data-explorer"></a>將 Apache Kafka 的資料內嵌至 Azure 資料總管
  
@@ -89,7 +89,7 @@ Azure Active Directory 服務主體可透過 [Azure 入口網站](/azure/active-
 1. 針對可設定的內嵌延遲，在資料表上建立批次內嵌原則。
 
     > [!TIP]
-    > 內嵌 [批次處理原則](kusto/management/batchingpolicy.md) 是一種效能優化程式，其中包含三個參數。 第一個參數符合的觸發程式會內嵌到 Azure 資料總管資料表中。
+    > 內嵌 [批次處理原則](kusto/management/batchingpolicy.md) 是一種效能優化程式，其中包含三個參數。 滿足的第一個條件會將觸發程式內嵌到 Azure 資料總管資料表中。
 
     ```kusto
     .alter table Storms policy ingestionbatching @'{"MaximumBatchingTimeSpan":"00:00:15", "MaximumNumberOfItems": 100, "MaximumRawDataSizeMB": 300}'
@@ -332,7 +332,7 @@ services:
     | render columnchart
     ```
     
-    :::image type="content" source="media/ingest-data-kafka/kusto-query.png" alt-text="在 Azure 資料總管入口網站中建立資料表 ":::
+    :::image type="content" source="media/ingest-data-kafka/kusto-query.png" alt-text="在 Azure 資料總管中 Kafka 查詢資料行圖表結果":::
 
 如需更多查詢範例和指引，請參閱 [撰寫適用于 Azure 資料總管](write-queries.md) 和 [Kusto 查詢語言檔](./kusto/query/index.md)的查詢。
 
