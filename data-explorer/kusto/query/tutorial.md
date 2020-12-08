@@ -11,12 +11,12 @@ ms.date: 10/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8a47c51aa7924a28b27602056ea869bfd7a09936
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 0616c0d4dd2a44ba1d54ac83c699a1c0bac249b0
+ms.sourcegitcommit: f134d51e52504d3ca722bdf6d33baee05118173a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95783674"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96563354"
 ---
 # <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>教學課程：在 Azure 資料總管和 Azure 監視器中使用 Kusto 查詢
 
@@ -555,7 +555,7 @@ AzureActivity
 
 ## <a name="show-n-rows-take"></a>顯示 *n* 個資料列：*take*
 
-[NetworkMonitoring](/azure/azure-monitor/reference/tables/networkmonitoring) 包含 Azure 虛擬網路的監視資料。 讓我們使用 [take](./takeoperator.md) 運算子，查看該資料表中的五個隨機範例資料列。 [take](./takeoperator.md) 在顯示資料表中的特定數量資料列時不會依據特定順序：
+[NetworkMonitoring](/azure/azure-monitor/reference/tables/networkmonitoring) 包含 Azure 虛擬網路的監視資料。 讓我們使用 [take](./takeoperator.md) 運算子，查看該資料表中的十個隨機範例資料列。 [take](./takeoperator.md) 在顯示資料表中的特定數量資料列時不會依據特定順序：
 
 ```kusto
 NetworkMonitoring

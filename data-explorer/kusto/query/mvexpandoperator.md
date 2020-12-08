@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
 ms.localizationpriority: high
-ms.openlocfilehash: d9d245da4acd43eb8d5e6a0eeadfa525cbd407a3
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: f14ec4fa24765053711d60f7d2365755b45adbab
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96303326"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96774634"
 ---
 # <a name="mv-expand-operator"></a>mv-expand 運算子
 
@@ -49,8 +49,8 @@ ms.locfileid: "96303326"
 展開的資料行一律具有動態類型。 如果您想要計算或彙總多個值，請使用轉換函式，例如 `todatetime()` 或 `tolong()`。
 
 有兩種屬性包展開模式可受到支援︰
-* `bagexpansion=bag`︰屬性包會展開為單一項目屬性包。 此模式為預設擴充。
-* `bagexpansion=array`：屬性包會展開為有兩個項目 `[`key`,`value`]` 的陣列結構，以便能夠統一存取金鑰和值 (以及舉例來說，對屬性名稱執行相異計數彙總)。 
+* `bagexpansion=bag` 或 `kind=bag`：屬性包會展開為單一項目屬性包。 此模式為預設擴充。
+* `bagexpansion=array` 或 `kind=array`：屬性包會展開為有兩個項目 `[`key`,`value`]` 的陣列結構，以便能夠統一存取金鑰和值 (以及舉例來說，對屬性名稱執行相異計數彙總)。 
 
 ## <a name="examples"></a>範例
 

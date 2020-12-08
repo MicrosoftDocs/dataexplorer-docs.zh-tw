@@ -1489,6 +1489,9 @@
                   href: ./kusto/management/materialized-views/materialized-view-drop.md
                 - name: .disable | .enable materialized-view
                   href: ./kusto/management/materialized-views/materialized-view-enable-disable.md
+            - name: 儲存查詢結果
+              displayName: '.set stored query, .show stored query, .drop stored query'
+              href: ./kusto/management/stored-query-results.md
             - name: 資料行
               items:
                 - name: 資料行管理
