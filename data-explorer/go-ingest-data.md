@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/10/2020
-ms.openlocfilehash: 5fc25c64eabfb9fa27b66b47d0443178e19b4e57
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: ae5cfcbc1011022da53933d4d3552fcd1007bd79
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902494"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96868615"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-go-sdk"></a>使用 Azure 資料總管 Go SDK 內嵌資料 
 
@@ -27,7 +27,7 @@ Azure 資料總管是一項快速又可高度調整的資料探索服務，可�
 
 在本文中，您會先在測試叢集中建立資料表和資料對應。 然後，您可以使用 Go SDK 將內嵌排入佇列，並驗證結果。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 * 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 安裝 [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)。
@@ -50,7 +50,7 @@ go get github.com/Azure/azure-kusto-go/kusto
 
 這會 [檢查程式碼](#review-the-code) 區段是選擇性的。 如果您想要瞭解程式碼的運作方式，您可以參閱下列程式碼片段。 或是，您可以直接跳到[執行應用程式](#run-the-application)。
 
-### <a name="authenticate"></a>Authenticate
+### <a name="authenticate"></a>驗證
 
 在執行任何作業之前，程式必須先向 Azure 資料總管 service 進行驗證。
 
@@ -147,12 +147,12 @@ func ingestFile(kc *kusto.Client, blobStoreAccountName, blobStoreContainer, blob
 
     當您執行範例程式碼時，會執行下列動作：
     
-    1. **Drop table** ： `StormEvents` 當資料表存在) 時，會卸載資料表 (。
-    1. **資料表建立** ： `StormEvents` 已建立資料表。
-    1. 建立 **對應** ： `StormEvents_CSV_Mapping` 建立對應。
-    1. 檔案 **內嵌： Azure Blob 儲存體** ) 中 (的 CSV 檔案已排入佇列以進行內嵌。
+    1. **Drop table**： `StormEvents` 當資料表存在) 時，會卸載資料表 (。
+    1. **資料表建立**： `StormEvents` 已建立資料表。
+    1. 建立 **對應**： `StormEvents_CSV_Mapping` 建立對應。
+    1. 檔案 **內嵌： Azure Blob 儲存體**) 中 (的 CSV 檔案已排入佇列以進行內嵌。
 
-1. 若要建立驗證的服務主體，請使用 Azure CLI 搭配 [az ad sp 建立-rbac](/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) 命令。 以程式將使用的環境變數格式，以叢集端點和資料庫名稱來設定服務主體資訊：
+1. 若要建立驗證的服務主體，請使用 Azure CLI 搭配 [az ad sp 建立-rbac](/cli/azure/ad/sp#az-ad-sp-create-for-rbac) 命令。 以程式將使用的環境變數格式，以叢集端點和資料庫名稱來設定服務主體資訊：
 
     ```console
     export AZURE_SP_CLIENT_ID="<replace with appID>"

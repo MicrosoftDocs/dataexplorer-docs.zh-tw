@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 32c8b8c93ca0ad9fa3b3161ca4cd211cc73eb5c8
-ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
+ms.openlocfilehash: c33906e61751e7e1bf871be1286a3b25051c8342
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93349404"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96868581"
 ---
 # <a name="client-libraries"></a>用戶端程式庫
 
@@ -32,7 +32,7 @@ ms.locfileid: "93349404"
 |    Go        |    [GitHub](https://github.com/Azure/azure-kusto-go)        |    [GitHub](https://github.com/Azure/azure-kusto-go/tree/master/kusto/ingest)        |        [GitHub](https://github.com/Azure/azure-sdk-for-go/tree/master/services/kusto/mgmt)        |
 |    Ruby        |             |             |    [寶石]( https://rubygems.org/gems/azure_mgmt_kusto)         |
 |    PowerShell        |    [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)        |    [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)        |    [套件](https://www.powershellgallery.com/packages/Az.Kusto/)         |
-|    Azure CLI        |             |             |    [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest)         |
+|    Azure CLI        |             |             |    [Azure CLI](/cli/azure/install-azure-cli)         |
 |    REST API        |    [REST](rest/index.md)        |    [REST](rest/index.md)        |     [GitHub](https://github.com/Azure/azure-rest-api-specs/tree/master/specification/azure-kusto/resource-manager/Microsoft.Kusto)         |
 |    TypeScript        |             |             |        [Npm](https://www.npmjs.com/package/@azure/arm-kusto/v/2.0.0)        |
 |      |      |      |      |

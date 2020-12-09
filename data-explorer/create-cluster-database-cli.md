@@ -7,12 +7,12 @@ ms.reviewer: radennis
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 24ec28fee62b4633e5a5694faf731d1888858af3
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 4098f8bd6992ce5f76bfd3f611ba4d4bad2374b3
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902600"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96868649"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-azure-cli"></a>使用 Azure CLI 建立 Azure 資料總管叢集與資料庫
 
@@ -27,13 +27,13 @@ ms.locfileid: "92902600"
 
 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析來自應用程式、網站、IoT 裝置等的大量資料流。 若要使用 Azure 資料總管，請先建立叢集，然後在該叢集中建立一或多個資料庫。 然後將資料內嵌 (載入) 至資料庫，讓您可以對資料執行查詢。 在本文中，您會使用 Azure CLI 來建立叢集和資料庫。
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>必要條件
 
 若要完成這篇文章，您需要 Azure 訂用帳戶。 如果您沒有 Azure 訂用帳戶，請在開始前[建立免費帳戶](https://azure.microsoft.com/free/)。
 
 [!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
 
-如果您選擇在本機安裝和使用 Azure CLI，本文需要 Azure CLI 版本2.0.4 版或更新版本。 執行 `az --version` 來檢查您的版本。 如果您需要安裝或升級，請參閱[安裝 Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest)。
+如果您選擇在本機安裝和使用 Azure CLI，本文需要 Azure CLI 版本2.0.4 版或更新版本。 執行 `az --version` 來檢查您的版本。 如果您需要安裝或升級，請參閱[安裝 Azure CLI](/cli/azure/install-azure-cli)。
 
 ## <a name="configure-the-cli-parameters"></a>設定 CLI 參數
 
@@ -114,6 +114,6 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
     az kusto cluster delete --cluster-name azureclitest --resource-group testrg
     ```
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 * [使用 Azure 資料總管 Python 程式庫內嵌資料](python-ingest-data.md)

@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 9d2e50e54d4a33b0648760fc4df395c9686904e9
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 60bafd05cd15ab4198d656d2c98a3915cd490e33
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902563"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96868666"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-powershell"></a>使用 PowerShell 建立 Azure 資料總管叢集與資料庫
 
@@ -35,7 +35,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 [!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
 
-如果您選擇在本機安裝和使用 Azure CLI，本文需要 Azure CLI 版本2.0.4 版或更新版本。 執行 `az --version` 來檢查您的版本。 如果您需要安裝或升級，請參閱[安裝 Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest)。
+如果您選擇在本機安裝和使用 Azure CLI，本文需要 Azure CLI 版本2.0.4 版或更新版本。 執行 `az --version` 來檢查您的版本。 如果您需要安裝或升級，請參閱[安裝 Azure CLI](/cli/azure/install-azure-cli)。
 
 ## <a name="configure-parameters"></a>設定參數
 
@@ -68,7 +68,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
    |**設定** | **建議的值** | **欄位描述**|
    |---|---|---|
-   | Name | *mykustocluster* | 所需的叢集名稱。|
+   | 名稱 | *mykustocluster* | 所需的叢集名稱。|
    | SKU | *D13_v2* | 將用於叢集的 SKU。 |
    | resourceGroupName | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
 
@@ -93,7 +93,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
    |**設定** | **建議的值** | **欄位描述**|
    |---|---|---|
    | ClusterName | *mykustocluster* | 將在其中建立資料庫的叢集名稱。|
-   | Name | *mykustodatabase* | 您的資料庫名稱。|
+   | 名稱 | *mykustodatabase* | 您的資料庫名稱。|
    | resourceGroupName | *>testrg* | 將在其中建立叢集的資源群組名稱。 |
    | SoftDeletePeriod | *3650:00:00:00* | 將保留資料以供查詢的時間長度。 |
    | HotCachePeriod | *3650:00:00:00* | 資料將保留在快取中的時間長度。 |
@@ -115,7 +115,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
     Remove-AzKustoCluster -ResourceGroupName testrg -Name mykustocluster
     ```
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 * [其他 Az.Kusto 命令](/powershell/module/az.kusto/?view=azps-1.7.0#kusto)
 * [使用 Azure 資料總管 .NET Standard SDK 內嵌資料 (預覽)](./net-sdk-ingest-data.md)

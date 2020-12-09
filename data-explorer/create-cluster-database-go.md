@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/28/2020
-ms.openlocfilehash: 833a801e6455fd4d88fbbbab83010aea1d406f02
-ms.sourcegitcommit: 7edce9d9d20f9c0505abda67bb8cc3d2ecd60d15
+ms.openlocfilehash: 3a8133c42ad87ec7eec693be3109ce5e7aea4935
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/02/2020
-ms.locfileid: "96524244"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96868632"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-using-go"></a>使用 Go 建立 Azure 資料總管叢集和資料庫
 
@@ -195,7 +195,7 @@ func deleteCluster(sub, clusterName, rgName string) {
     cd azure-data-explorer-go-cluster-management
     ```
 
-1. 程式會使用用戶端認證進行驗證。 使用 Azure CLI [az ad sp 建立-rbac](/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) 命令來建立服務主體。 儲存用戶端識別碼、用戶端密碼和租使用者識別碼資訊，以便在下一個步驟中使用。
+1. 程式會使用用戶端認證進行驗證。 使用 Azure CLI [az ad sp 建立-rbac](/cli/azure/ad/sp#az-ad-sp-create-for-rbac) 命令來建立服務主體。 儲存用戶端識別碼、用戶端密碼和租使用者識別碼資訊，以便在下一個步驟中使用。
 
 1. 匯出必要的環境變數，包括服務主體資訊。 輸入您要在其中建立叢集的訂用帳戶識別碼、資源群組和區域。
 
