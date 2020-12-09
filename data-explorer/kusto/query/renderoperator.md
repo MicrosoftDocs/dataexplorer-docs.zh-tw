@@ -7,16 +7,16 @@ ms.author: orspodek
 ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/29/2020
+ms.date: 12/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 5670f3f9c7aa8b3d6b10f88433d19246e2daf6d6
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 8370e69914b2bc5e141321a6bc6722bba6f1fd4d
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95783330"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96868598"
 ---
 # <a name="render-operator"></a>render 運算子
 
@@ -140,8 +140,6 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 |`axes`    |單一圖表會顯示多個 Y 軸 (每個數列一個)。|
 |`panels`  |會針對每個 `ycolumn` 值 (有一定上限) 呈現一個圖表。|
 
-::: zone-end
-
 > [!NOTE]
 > render 運算子的資料模型會查看表格式資料，情形就像其有三種資料行：
 >
@@ -167,10 +165,40 @@ range x from -2 to 2 step 0.1
 | render linechart with  (ycolumns = sin, cos, series = x_sign, sum_sign)
 ```
 
-::: zone pivot="azuredataexplorer"
-
 [教學課程中的呈現範例](./tutorial.md#displaychartortable)
 
 [異常偵測](./samples.md#get-more-from-your-data-by-using-kusto-with-machine-learning)
+
+::: zone-end
+
+::: zone pivot="azuremonitor"
+
+> [!NOTE]
+> render 運算子的資料模型會查看表格式資料，情形就像其有三種資料行：
+>
+> * X 軸資料行 (以 `xcolumn` 屬性表示)。
+> * 數列資料行 (以 `series` 屬性表示的任意數目資料行)。
+> * Y 軸資料行 (以 `ycolumns` 屬性表示的任意數目資料行)。
+  針對每一筆記錄，數列的量值 (圖表中的「點」) 數目會與 Y 軸資料行相同。
+
+> [!TIP]
+> 
+> * 使用 `where`、`summarize` 和 `top` 來限制您顯示的資料量。
+> * 將資料排序以定義 X 軸的順序。
+> * 使用者代理程式可自由「猜測」查詢未指定的屬性值。 特別的是，若結果的結構描述中有「無意義」的資料行，則可能會讓其猜測錯誤。 當這種情況發生時，請嘗試排除這類資料行。 
+
+## <a name="example"></a>範例
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
+```kusto
+InsightsMetrics
+| where Computer == "DC00.NA.contosohotels.com"
+| where Namespace  == "Processor" and Name == "UtilizationPercentage"
+| summarize avg(Val) by Computer, bin(TimeGenerated, 1h)
+| render timechart
+```
+
+[教學課程中的呈現範例](./tutorial.md?pivots=azuremonitor#display-a-chart-or-table-render-1)
+
 
 ::: zone-end
