@@ -7,19 +7,19 @@ ms.reviewer: vladikbr
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/11/2020
-ms.openlocfilehash: aeef0c9295fbb22c225068fb240670fb7d637a98
-ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
+ms.openlocfilehash: 18ac718edd50c804f71b9b82cbffb5b2b7bb2e24
+ms.sourcegitcommit: 202357f866801aafd92e3e29a84bb312e17aebc7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/07/2020
-ms.locfileid: "96776562"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96933770"
 ---
 # <a name="ingestion-error-codes-in-azure-data-explorer"></a>Azure 資料總管中的內嵌錯誤代碼
 
-下列清單包含 [您在內嵌期間可能](ingest-data-overview.md)會遇到的錯誤碼。 當您在叢集上啟用失敗的內嵌 [診斷記錄](using-diagnostic-logs.md#ingestion-logs-schema) 時，您可以在 **失敗** 的內嵌作業記錄檔中看到錯誤碼。 您也可以監視內嵌 **結果** 計量 [，以查看](using-metrics.md#ingestion-metrics) 內嵌錯誤的 **類別** ，而不是特定的錯誤碼。 下列錯誤會依這類分類進行組織。 
+下列清單包含 [您在內嵌期間可能](ingest-data-overview.md)會遇到的錯誤碼。 當您在叢集上啟用失敗的內嵌 [診斷記錄](using-diagnostic-logs.md#ingestion-logs-schema) 時，您可以在 **失敗** 的內嵌作業記錄檔中看到錯誤碼。 您也可以監視內嵌 **結果** 計量 [，以查看](using-metrics.md#ingestion-metrics) 內嵌錯誤的 **類別** ，而不是特定的錯誤碼。 下列錯誤會依照這些分類來組織。 
 
 > [!NOTE]
-> 如果錯誤是暫時性的，則重試內嵌可能會成功。
+> 如果錯誤是暫時性的，重試內嵌可能會成功。
 
 ## <a name="category-badformat"></a>Category： BadFormat
 

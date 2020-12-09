@@ -8,12 +8,12 @@ ms.reviewer: mispecto
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/3/2020
-ms.openlocfilehash: fb998499205be7645f011fe727f5e37495ff3697
-ms.sourcegitcommit: 2804e3fe40f6cf8e65811b00b7eb6a4f59c88a99
+ms.openlocfilehash: 352f82bdb11847574807f81bc63236127900ae94
+ms.sourcegitcommit: 202357f866801aafd92e3e29a84bb312e17aebc7
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/07/2020
-ms.locfileid: "96749297"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96933854"
 ---
 # <a name="stored-query-results-preview"></a> (預覽) 儲存的查詢結果
 
@@ -29,7 +29,7 @@ ms.locfileid: "96749297"
 
 預存查詢結果的行為就像資料表一樣，因為不會保留記錄的順序。 若要逐頁查看結果，建議查詢包含唯一的識別碼資料行。 如需詳細資訊，請參閱[範例](#examples)。 如果查詢傳回多個結果集，則只會儲存第一個結果集。 
 
-使用儲存的查詢結果需要 `Database User` 或更高的存取角色。
+使用儲存的查詢結果需要 `Database Viewer` 或更高的存取角色。
 
 ## <a name="store-the-results-of-a-query"></a>儲存查詢的結果
 
@@ -160,7 +160,7 @@ stored_query_result("DailyClicksByAdNetwork7Days")
 
 `.drop``stored_query_result` *StoredQueryResultName*
 
-`Database User` 需要有許可權才能叫用此命令。
+`Database Viewer` 需要有許可權才能叫用此命令。
 
 #### <a name="returns"></a>傳回
 
