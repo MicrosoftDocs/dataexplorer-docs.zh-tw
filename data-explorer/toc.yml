@@ -1366,8 +1366,6 @@
               href: ./kusto/concepts/runawayqueries.md
             - name: 溢出
               href: ./kusto/concepts/overflow.md
-            - name: 機器碼中的錯誤
-              href: ./kusto/concepts/errorsinnativecode.md
     - name: Kusto 查詢語言的參考資料
       items:
         - name: RE2 語法
@@ -1407,8 +1405,7 @@
           href: ./kusto/management/index.md
         - name: 結構描述
           items:
-            - name: 結構描述設計的最佳做法
-              displayName: management
+            - name: 結構描述管理的最佳做法
               href: ./kusto/management/management-best-practices.md
             - name: 資料庫
               href: ./kusto/management/databases.md
@@ -1691,8 +1688,6 @@
               href: ./kusto/management/commands.md
             - name: 命令與查詢
               href: ./kusto/management/commands-and-queries.md
-            - name: 內嵌失敗
-              href: ./kusto/management/ingestionfailures.md
             - name: 作業
               href: ./kusto/management/operations.md
         - name: 存取控制
@@ -1732,6 +1727,12 @@
               href: ./kusto/management/cluster-follower.md
             - name: 資料清除
               href: ./kusto/concepts/data-purge.md
+        - name: 錯誤和失敗
+          items:
+            - name: 擷取錯誤碼
+              href: error-codes.md
+            - name: 內嵌失敗
+              href: ./kusto/management/ingestionfailures.md
     - name: API
       items:
         - name: API 概觀
@@ -1800,18 +1801,24 @@
                 - name: Kusto.Ingest 概觀
                   href: ./kusto/api/netfx/about-kusto-ingest.md
                 - name: 權限
+                  displayName: Kusto.Ingest
                   href: ./kusto/api/netfx/kusto-ingest-client-permissions.md
                 - name: 用戶端參考
+                  displayName: Kusto.Ingest
                   href: ./kusto/api/netfx/kusto-ingest-client-reference.md
                 - name: 錯誤和例外狀況
+                  displayName: Kusto.Ingest
                   href: ./kusto/api/netfx/kusto-ingest-client-errors.md
                 - name: 作業狀態
+                  displayName: Kusto.Ingest
                   href: ./kusto/api/netfx/kusto-ingest-client-status.md
                 - name: Kusto.Ingest 的最佳作法
                   href: ./kusto/api/netfx/kusto-ingest-best-practices.md
                 - name: 程式碼範例
+                  displayName: Kusto.Ingest
                   href: ./kusto/api/netfx/kusto-ingest-client-examples.md
                 - name: 如何透過 REST API 進行資料內嵌
+                  displayName: Kusto.Ingest
                   href: ./kusto/api/netfx/kusto-ingest-client-rest.md
         - name: Python SDK
           items:

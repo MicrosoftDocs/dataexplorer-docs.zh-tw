@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: cbdebe75713bb7cd786941e7546ab477df497c20
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 3b230ea0ed8bba80741e18f24cd96cf271224f25
+ms.sourcegitcommit: e278dae04f12658d0907f7b6ba46c6a34c53dcd7
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512905"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901098"
 ---
 # <a name="query-limits"></a>查詢限制
 
@@ -83,6 +83,13 @@ MyTable | where User=="UserId1"
 Kusto 提供許多用戶端程式庫，可藉由將結果串流至呼叫端來處理「無限大」的結果量。 使用其中一個程式庫，並將其設定為串流模式。 例如，使用 .NET Framework 用戶端 (Microsoft.Azure.Kusto.Data)，並將連接字串的串流屬性設定為 true，或使用一律會串流結果的 ExecuteQueryV2Async() 呼叫。
 
 結果截斷會預設為套用狀態，而不只是套用至傳回給用戶端的結果串流。 根據預設，其也會套用至跨叢集查詢中一個叢集發給另一個叢集的所有子查詢，且效果類似。
+
+### <a name="setting-multiple-result-truncation-properties"></a>設定多個結果截斷屬性
+
+當使用 `set` 陳述式時，和/或在[用戶端要求屬性](../api/netfx/request-properties.md)中指定旗標時，適用下列情況。
+
+* 如果已設定 `notruncation`，而且也設定任何 `truncationmaxsize`、`truncationmaxrecords` 或 `query_take_max_records`，則 `notruncation` 會遭忽略。
+* 如果 `truncationmaxsize`、`truncationmaxrecords` 和/或 `query_take_max_records` 會設定多次，則會套用每個屬性的「較低」值。
 
 ## <a name="limit-on-memory-per-iterator"></a>每個迭代器的記憶體限制
 
