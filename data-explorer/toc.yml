@@ -1672,8 +1672,10 @@
           href: ./kusto/management/query-results-cache-commands.md
           items:
             - name: 新增快取
+              displayName: show database cache query results
               href: ./kusto/management/show-query-results-cache-command.md
             - name: 清除快取
+              displayName: clear query results cache
               href: ./kusto/management/clear-query-results-cache-command.md
         - name: 系統資訊
           href: ./kusto/management/systeminfo.md
@@ -1897,7 +1899,7 @@
       href: 'https://azure.microsoft.com/blog/tag/azure-data-explorer/'
     - name: 論壇
       items:
-        - name: Stack Overflow
+        - name: 堆疊溢位
           href: 'https://stackoverflow.com/questions/tagged/azure-data-explorer'
         - name: Microsoft 技術社群
           href: 'https://techcommunity.microsoft.com/t5/Azure-Data-Explorer/bd-p/Kusto'
