@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 30929e63c39be10d066815333ba6b277c0aeb5c9
-ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
+ms.openlocfilehash: fdf72c8c58ec8a9fb9c64ecea6219dcc3a736d18
+ms.sourcegitcommit: 2bdb904e6253c9ceb8f1eaa2da35fcf27e13a2cd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96321279"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97091346"
 ---
 # <a name="partitioning-policy"></a>資料分割原則
 
@@ -128,7 +128,8 @@ ms.locfileid: "96321279"
   * 這是選用屬性。 如果未指定，原則將會在套用原則之後對資料內嵌生效。
   * 因為資料分割進程會忽略保留的任何非同質 (非資料分割) 範圍。 系統會忽略範圍，因為它們的建立時間在資料表有效的虛刪除期間的90% 之前。
     > [!NOTE]
-    > 您可以設定過去和資料分割已內嵌資料中的日期時間值。 不過，這種作法可能會大幅增加分割進程中使用的資源。 
+    > 您可以設定過去和資料分割已內嵌資料中的日期時間值。 不過，這種作法可能會大幅增加分割進程中使用的資源。
+    > 請考慮在每次您修改原則時，將 *EffectiveDateTime* 設定為先前的步驟，以 `datetime` 在最多幾天的步驟中進行。
 
 ### <a name="data-partitioning-example"></a>資料分割範例
 
@@ -211,7 +212,7 @@ ms.locfileid: "96321279"
 * 資料分割進程會導致建立更多範圍。 叢集可能會逐漸增加其 [範圍合併容量](../management/capacitypolicy.md#extents-merge-capacity)，讓 [合併範圍](../management/extents-overview.md) 的程式可以保持運作。
 * 如果有高的內嵌輸送量，或有定義分割原則的大量資料表，則叢集可能會逐漸增加分割區的 [範圍](../management/capacitypolicy.md#extents-partition-capacity)，以便讓資料 [分割範圍的進程](#the-data-partitioning-process) 保持可用。
 * 為了避免耗用太多資源，這些動態增加的限制為上限。 如果已完全使用，您可能需要以逐漸且線性的方式將它們增加到超過上限。
-  * 如果增加容量會大幅增加使用叢集的資源，您可以[up](../../manage-cluster-vertical-scaling.md) / [out](../../manage-cluster-horizontal-scaling.md)手動或藉由啟用自動調整來調整叢集。
+  * 如果增加容量會大幅增加使用叢集的資源，您可以[](../../manage-cluster-vertical-scaling.md) / [](../../manage-cluster-horizontal-scaling.md)手動或藉由啟用自動調整來調整叢集。
 
 ## <a name="outliers-in-partitioned-columns"></a>分割資料行中的極端值
 

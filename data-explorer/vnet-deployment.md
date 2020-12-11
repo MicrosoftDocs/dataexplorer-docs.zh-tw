@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: ac73abcf1355531a3b8d9917a6f5d9a0d3965c01
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 196d1f5a72b0b99186f4739ce6b6a25c23b6c325
+ms.sourcegitcommit: 2bdb904e6253c9ceb8f1eaa2da35fcf27e13a2cd
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902350"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97091363"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>將 Azure 資料總管叢集部署到您的虛擬網路
 
@@ -30,8 +30,8 @@ Azure 資料總管支援將叢集部署到虛擬網路中的子網 (VNet) 。 �
 
 您可以針對每個服務 (引擎和資料管理服務) ，使用下列 IP 位址來存取 Azure 資料總管叢集：
 
-* **私人 IP** ：用於存取 VNet 內的叢集。
-* **公用 IP** ：用於從 VNet 外部存取叢集以進行管理和監視，以及做為從叢集啟動之輸出連線的來源位址。
+* **私人 IP**：用於存取 VNet 內的叢集。
+* **公用 IP**：用於從 VNet 外部存取叢集以進行管理和監視，以及做為從叢集啟動之輸出連線的來源位址。
 
 系統會建立下列 DNS 記錄來存取服務： 
 
@@ -45,7 +45,7 @@ Azure 資料總管支援將叢集部署到虛擬網路中的子網 (VNet) 。 �
 
 IP 位址的總數目：
 
-| 用途 | 位址數目 |
+| 使用 | 位址數目 |
 | --- | --- |
 | 引擎服務 | 每個實例1個 |
 | 資料管理服務 | 2 |
@@ -82,7 +82,7 @@ IP 位址的總數目：
 
 | **使用**   | **From**   | **若要**   | **通訊協定**   |
 | --- | --- | --- | --- |
-| 管理性  |[ADX 管理位址](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement (ServiceTag)  | ADX 子網：443  | TCP  |
+| 管理  |[ADX 管理位址](#azure-data-explorer-management-ip-addresses)/AzureDataExplorerManagement (ServiceTag)  | ADX 子網：443  | TCP  |
 | 健康狀況監視  | [ADX 健康情況監視位址](#health-monitoring-addresses)  | ADX 子網：443  | TCP  |
 | ADX 內部通訊  | ADX 子網：所有埠  | ADX 子網：所有埠  | 全部  |
 | 允許 Azure 負載平衡器輸入 (健康情況探查)   | AzureLoadBalancer  | ADX 子網：80443  | TCP  |
@@ -132,7 +132,7 @@ IP 位址的總數目：
 | 南韓中部 | 40.82.156.149 |
 | 南韓南部 | 40.80.234.9 |
 | 美國中北部 | 40.81.45.254 |
-| 歐洲北部 | 52.142.91.221 |
+| 北歐 | 52.142.91.221 |
 | 南非北部 | 102.133.129.138 |
 | 南非西部 | 102.133.0.97 |
 | 美國中南部 | 20.45.3.60 |
@@ -161,7 +161,7 @@ IP 位址的總數目：
 | 澳大利亞東南部 | 191.239.160.47 |
 | 巴西南部 | 23.98.145.105 |
 | 加拿大中部 | 168.61.212.201 |
-| 加拿大東部 | 168.61.212.201 |
+| 加拿大東部 | 168.61.212.201, 23.101.115.123 |
 | 印度中部 | 23.99.5.162 |
 | 美國中部 | 168.61.212.201, 23.101.115.123 |
 | 美國中部 EUAP | 168.61.212.201, 23.101.115.123 |
@@ -178,7 +178,7 @@ IP 位址的總數目：
 | 南韓中部 | 138.91.19.129 |
 | 南韓南部 | 138.91.19.129 |
 | 美國中北部 | 23.96.212.108 |
-| 歐洲北部 | 191.235.212.69, 40.127.194.147 |
+| 北歐 | 191.235.212.69, 40.127.194.147 |
 | 南非北部 | 104.211.224.189 |
 | 南非西部 | 104.211.224.189 |
 | 美國中南部 | 23.98.145.105, 104.215.116.88 |
@@ -191,7 +191,7 @@ IP 位址的總數目：
 | USGov 亞歷桑那 | 52.244.48.35 |
 | USGov 德州 | 52.238.116.34 |
 | USGov 維吉尼亞 | 23.97.0.26 |
-| 美國中西部 | 168.61.212.201 |
+| 美國中西部 | 168.61.212.201, 23.101.115.123 |
 | 西歐 | 23.97.212.5, 213.199.136.176 |
 | 印度西部 | 23.99.5.162 |
 | 美國西部 | 23.99.5.162, 13.88.13.50 |
@@ -201,9 +201,9 @@ IP 位址的總數目：
 
 如果您想要完全停用透過公用 IP 位址存取 Azure 資料總管，請在 NSG 中建立另一個輸入規則。 此規則的 [優先順序](/azure/virtual-network/security-overview#security-rules) 必須較低 () 較高的數位。 
 
-| **使用**   | **Source** | **來源服務標籤** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | **通訊協定** | **動作** | **優先順序** |
+| **使用**   | **來源** | **來源服務標籤** | **來源連接埠範圍**  | **目的地** | **目的地連接埠範圍** | **通訊協定** | **動作** | **優先順序** |
 | ---   | --- | --- | ---  | --- | --- | --- | --- | --- |
-| 停用從網際網路存取 | 服務標記 | Internet | *  | VirtualNetwork | * | 任意 | 拒絕 | 高於上述規則的數位 |
+| 停用從網際網路存取 | 服務標記 | 網際網路 | *  | VirtualNetwork | * | 任意 | 拒絕 | 高於上述規則的數位 |
 
 此規則可讓您只透過下列 DNS 記錄連線到 Azure 資料總管叢集 (對應至每個服務) 的私人 IP：
 * `private-[clustername].[geo-region].kusto.windows.net` (引擎) 
@@ -211,7 +211,7 @@ IP 位址的總數目：
 
 ## <a name="expressroute-setup"></a>ExpressRoute 設定
 
-使用 ExpressRoute 將內部部署網路連線到 Azure 虛擬網路。 常見的設定是透過邊界閘道協定 (BGP) 會話通告預設路由 (0.0.0.0/0) 。 這會強制將來自虛擬網路的流量轉送至客戶的部署網路，而該網路可能會捨棄流量，進而造成輸出流量中斷。 若要克服這個預設值，可以設定 [使用者定義的路由 (UDR)](/azure/virtual-network/virtual-networks-udr-overview#user-defined) (0.0.0.0/0) ，而且下一個躍點將會是 *網際網路* 。 由於 UDR 的優先順序高於 BGP，因此流量會以網際網路為目標。
+使用 ExpressRoute 將內部部署網路連線到 Azure 虛擬網路。 常見的設定是透過邊界閘道協定 (BGP) 會話通告預設路由 (0.0.0.0/0) 。 這會強制將來自虛擬網路的流量轉送至客戶的部署網路，而該網路可能會捨棄流量，進而造成輸出流量中斷。 若要克服這個預設值，可以設定 [使用者定義的路由 (UDR)](/azure/virtual-network/virtual-networks-udr-overview#user-defined) (0.0.0.0/0) ，而且下一個躍點將會是 *網際網路*。 由於 UDR 的優先順序高於 BGP，因此流量會以網際網路為目標。
 
 ## <a name="securing-outbound-traffic-with-firewall"></a>使用防火牆保護輸出流量
 
@@ -246,16 +246,16 @@ crl3.digicert.com:80
 
 > [!NOTE]
 > 如果您使用的是 [Azure 防火牆](/azure/firewall/overview)，請使用下列屬性新增 **網路規則** ： <br>
-> **通訊協定** ： TCP <br> **來源類型** ： IP 位址 <br> **來源** ： * <br> **服務標記** ： AzureMonitor <br> **目的地埠** ：443
+> **通訊協定**： TCP <br> **來源類型**： IP 位址 <br> **來源**： * <br> **服務標記**： AzureMonitor <br> **目的地埠**：443
 
 您也需要使用下一個躍點 *網際網路* 的 [管理位址](#azure-data-explorer-management-ip-addresses)和 [健全狀況監視位址](#health-monitoring-addresses)，在子網上定義 [路由表](/azure/virtual-network/virtual-networks-udr-overview)，以防止非對稱式路由問題。
 
 例如，針對 **美國西部** 區域，必須定義下列 udr：
 
-| Name | 位址首碼 | 下一個躍點 |
+| 名稱 | 位址首碼 | 下一個躍點 |
 | --- | --- | --- |
-| ADX_Management | 13.64.38.225/32 | Internet |
-| ADX_Monitoring | 23.99.5.162/32 | Internet |
+| ADX_Management | 13.64.38.225/32 | 網際網路 |
+| ADX_Monitoring | 23.99.5.162/32 | 網際網路 |
 
 ## <a name="deploy-azure-data-explorer-cluster-into-your-vnet-using-an-azure-resource-manager-template"></a>使用 Azure Resource Manager 範本將 Azure 資料總管叢集部署到您的 VNet
 
