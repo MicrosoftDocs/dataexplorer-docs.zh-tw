@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/16/2020
-ms.openlocfilehash: fed4027d946792448f2c564d8daa019c991b50d2
-ms.sourcegitcommit: 3af95ea6a6746441ac71b1a217bbb02ee23d5f28
+ms.openlocfilehash: 5dbd1aeb777b067e0c7bee15be838eb2f306086f
+ms.sourcegitcommit: d9e203a54b048030eeb6d05b01a65902ebe4e0b8
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95473570"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97371470"
 ---
 # <a name="monitor-azure-data-explorer-ingestion-commands-and-queries-using-diagnostic-logs"></a>使用診斷記錄來監視 Azure 資料總管內嵌、命令和查詢
 
@@ -21,7 +21,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 > [!IMPORTANT] 
 > 診斷記錄資料可能包含機密資料。 根據您的監視需求，限制記錄目的地的許可權。 
 
-## <a name="prerequisites"></a>必要條件
+## <a name="prerequisites"></a>Prerequisites
 
 * 如果您沒有 Azure 訂用帳戶，請建立 [免費的 azure 帳戶](https://azure.microsoft.com/free/)。
 * 登入 [Azure 入口網站](https://portal.azure.com/)。
@@ -37,6 +37,9 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 > 使用 Sdk、資料連線和連接器，可對內嵌端點的佇列內嵌支援內嵌記錄。
 >
 > 內嵌記錄不支援串流內嵌、直接內嵌到引擎、從查詢內嵌，或設定或附加命令。
+
+> [!NOTE]
+> 失敗的內嵌記錄只會針對內嵌作業的最終狀態回報，不同于 (內嵌結果) [使用-計量 # 內嵌-計量] 計量，會針對內部重試的暫時性失敗發出。
 
 * **成功** 的內嵌作業：這些記錄檔包含已成功完成內嵌作業的相關資訊。
 * **失敗** 的內嵌作業：這些記錄檔具有失敗內嵌作業的詳細資訊，包括錯誤詳細資料。 
@@ -89,7 +92,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 記錄 JSON 字串包括下表所列的元素：
 
-|Name               |描述
+|名稱               |說明
 |---                |---
 |time               |報表的時間
 |resourceId         |Azure Resource Manager 資源識別碼
@@ -123,7 +126,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 ```
 **成功作業診斷記錄的屬性**
 
-|Name               |描述
+|名稱               |說明
 |---                |---
 |SucceededOn        |內嵌完成的時間
 |OperationId        |Azure 資料總管內嵌作業識別碼
@@ -164,7 +167,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 **失敗作業診斷記錄的屬性**
 
-|Name               |描述
+|名稱               |說明
 |---                |---
 |FailedOn           |內嵌完成的時間
 |OperationId        |Azure 資料總管內嵌作業識別碼
@@ -206,7 +209,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 ```
 **內嵌批次處理作業診斷記錄的屬性**
 
-|Name               |描述
+|名稱               |描述
 |---                   |---
 | TimeGenerated        | 產生此事件的時間 (UTC)  |
 | 資料庫             | 保存目標資料表的資料庫名稱 |
@@ -225,7 +228,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 記錄 JSON 字串包括下表所列的元素：
 
-|Name               |描述
+|名稱               |說明
 |---                |---
 |time               |報表的時間
 |resourceId         |Azure Resource Manager 資源識別碼
@@ -265,7 +268,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 ```
 **命令診斷記錄的屬性**
 
-|Name               |描述
+|名稱               |說明
 |---                |---
 |RootActivityId |根活動識別碼
 |StartedOn        |此命令開始 (UTC) 時間
@@ -351,7 +354,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 **查詢診斷記錄的屬性**
 
-|Name               |描述
+|名稱               |說明
 |---                |---
 |RootActivityId |根活動識別碼
 |StartedOn        |此命令開始 (UTC) 時間
@@ -373,7 +376,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 |TotalRowsCount        |總數據列計數
 |ScannedRowsCount        |掃描的資料列計數
 |CacheStatistics        |包含快取統計資料
-|Memory        |包含快取記憶體統計資料
+|記憶體        |包含快取記憶體統計資料
 |點擊        |記憶體快取點擊
 |遺漏        |記憶體快取遺漏
 |磁碟        |包含快取磁片統計資料
