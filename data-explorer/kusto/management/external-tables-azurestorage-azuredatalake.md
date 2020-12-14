@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: df38761d7ffebdf5e36c14ea25b0d02377bfa128
-ms.sourcegitcommit: fdc1f917621e9b7286bba23903101298cccc4c95
+ms.openlocfilehash: 6af499d97e4733d0b8e099d02bec9573da6817d3
+ms.sourcegitcommit: fcaf3056db2481f0e3f4c2324c4ac956a4afef38
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93364117"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97389016"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>建立和改變 Azure 儲存體或 Azure Data Lake 中的外部資料表
 
@@ -27,7 +27,7 @@ ms.locfileid: "93364117"
 
  (`.create`  |  `.alter`  |  `.create-or-alter`) `external` `table` *[TableName](#table-name)* `(` *[架構](#schema)*`)`  
 `kind` `=` (`blob` | `adl`)  
-[分割區 `partition` `by` `(` *[Partitions](#partitions)* `)` [ `pathformat` `=` `(` *[PathFormat](#path-format)* `)` ]]  
+[分割區 `partition` `by` `(` *[](#partitions)* `)` [ `pathformat` `=` `(` *[PathFormat](#path-format)* `)` ]]  
 `dataformat``=` *[格式](#format)*  
 `(`*[StorageConnectionString](#connection-string)* [ `,` ...]`)`   
 [ `with` `(` *[PropertyName](#properties)* `=` *[值](#properties)* `,` ... `)` ]  
@@ -83,14 +83,14 @@ ms.locfileid: "93364117"
   *PartitionName* `:``datetime` `=` (`startofyear` \| `startofmonth` \| `startofweek` \| `startofday`) `(` *ColumnName*`)`  
   *PartitionName* `:``datetime` `=` `bin``(` *ColumnName* `,` *TimeSpan*`)`
 
-若要檢查資料分割定義正確性，請 `sampleUris` 在建立外部資料表時使用屬性。
+若要檢查資料分割定義正確性，請使用屬性， `sampleUris` 或 `filesPreview` 在建立外部資料表時使用。
 
 <a name="path-format"></a>
 *PathFormat*
 
 外部資料 URI 檔案路徑格式，除了分割區之外，還可以指定此格式。 路徑格式是一系列的資料分割元素和文字分隔符號：
 
-&nbsp;&nbsp;[ *StringSeparator* ] *Partition* [ *StringSeparator* ] [ *partition* [ *StringSeparator* ] ...]  
+&nbsp;&nbsp;[*StringSeparator*] *Partition* [*StringSeparator*] [*partition* [*StringSeparator*] ...]  
 
 其中 *partition* 指的是在子句中宣告的資料分割 `partition` `by` ，而 *StringSeparator* 是以引號括住的任何文字。 連續的資料分割元素必須使用 *StringSeparator* 來分開設定。
 
@@ -138,7 +138,7 @@ ms.locfileid: "93364117"
 <a name="properties"></a>
 *選用屬性*
 
-| 屬性         | 類型     | Description       |
+| 屬性         | 類型     | 描述       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | 資料表的資料夾                                                                     |
 | `docString`      | `string` | 記錄資料表的字串                                                       |
@@ -147,8 +147,10 @@ ms.locfileid: "93364117"
 | `namePrefix`     | `string` | 如果設定，則表示檔案的前置詞。 在寫入作業中，會使用此前置詞來寫入所有檔案。 在讀取作業中，只會讀取具有這個前置詞的檔案。 |
 | `fileExtension`  | `string` | 如果設定，表示檔案的副檔名。 寫入時，檔案名會以這個尾碼結尾。 讀取時，只會讀取具有此副檔名的檔案。           |
 | `encoding`       | `string` | 指出文字的編碼方式： `UTF8NoBOM` (預設) 或 `UTF8BOM` 。             |
-| `sampleUris`     | `bool`   | 如果設定，命令結果會提供外部資料表定義所預期的一些外部資料檔 URI 範例 (範例會在第二個結果資料表) 中傳回。 這個選項可協助驗證是否已正確定義分割 *[區和](#partitions)* *[PathFormat](#path-format)* 參數。 |
+| `sampleUris`     | `bool`   | 如果設定，命令結果會提供數個模擬外部資料檔 URI 的範例，因為它們是外部資料表定義的預期。 這個選項可協助驗證是否已正確定義分割 *[區和](#partitions)* *[PathFormat](#path-format)* 參數。 |
+| `filesPreview`   | `bool`   | 如果設定，其中一個命令結果資料表會包含的預覽 [。顯示外部資料表構件](#show-external-table-artifacts) 命令。 如同 `sampleUri` ，選項可協助驗證外部 *[](#partitions)* 資料表定義的資料分割和 *[PathFormat](#path-format)* 參數。 |
 | `validateNotEmpty` | `bool`   | 如果設定，則會驗證連接字串中是否有內容。 如果指定的 URI 位置不存在，或者沒有足夠的許可權可以存取它，此命令將會失敗。 |
+| `dryRun` | `bool` | 如果設定，則不會保存外部資料表定義。 此選項適用于驗證外部資料表定義，尤其是與或參數搭配使用 `filesPreview` `sampleUris` 。 |
 
 > [!TIP]
 > 若要深入瞭解 `namePrefix` `fileExtension` 在查詢期間于資料檔案篩選中扮演的角色和屬性，請參閱檔案 [篩選邏輯](#file-filtering) 一節。
@@ -286,13 +288,13 @@ external_table("ExternalTable")
 
 **語法：** 
 
-`.show``external` `table` *TableName* `artifacts` [ `limit` *MaxResults* ]
+`.show``external` `table` *TableName* `artifacts` [ `limit` *MaxResults*]
 
 其中 *MaxResults* 是選擇性參數，可設定以限制結果數目。
 
 **輸出**
 
-| 輸出參數 | 類型   | Description                       |
+| 輸出參數 | 類型   | 描述                       |
 |------------------|--------|-----------------------------------|
 | Uri              | 字串 | 外部儲存體資料檔案的 URI |
 | 大小             | long   | 檔案長度（以位元組為單位）              |
@@ -325,72 +327,72 @@ external_table("ExternalTable")
 
 ## <a name="create-external-table-mapping"></a>. 建立外部資料表對應
 
-`.create``external` `table` *ExternalTableName* `json` `mapping` *MappingName* *MappingInJsonFormat*
+`.create``external` `table` *ExternalTableName* `mapping` *MappingName* *MappingInJsonFormat*
 
 建立新的對應。 如需詳細資訊，請參閱 [資料](./mappings.md#json-mapping)對應。
 
 **範例** 
  
 ```kusto
-.create external table MyExternalTable json mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
+.create external table MyExternalTable mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
 ```
 
 **範例輸出**
 
-| Name     | 類型 | 對應                                                           |
+| 名稱     | 類型 | 對應                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
 ## <a name="alter-external-table-mapping"></a>。 alter external table 對應
 
-`.alter``external` `table` *ExternalTableName* `json` `mapping` *MappingName* *MappingInJsonFormat*
+`.alter``external` `table` *ExternalTableName* `mapping` *MappingName* *MappingInJsonFormat*
 
 改變現有的對應。 
  
 **範例** 
  
 ```kusto
-.alter external table MyExternalTable json mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
+.alter external table MyExternalTable mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
 ```
 
 **範例輸出**
 
-| Name     | 類型 | 對應                                                                |
+| 名稱     | 類型 | 對應                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
 ## <a name="show-external-table-mappings"></a>。顯示外部資料表對應
 
-`.show``external` `table` *ExternalTableName* `json` `mapping` *MappingName* 
+`.show``external` `table` *ExternalTableName* `mapping` *MappingName* 
 
-`.show``external` `table` *ExternalTableName* ExternalTableName `json``mappings`
+`.show``external` `table` *ExternalTableName*`mappings`
 
 顯示 (全部或依名稱) 指定的對應。
  
 **範例** 
  
 ```kusto
-.show external table MyExternalTable json mapping "Mapping1" 
+.show external table MyExternalTable mapping "Mapping1" 
 
-.show external table MyExternalTable json mappings 
+.show external table MyExternalTable mappings 
 ```
 
 **範例輸出**
 
-| Name     | 類型 | 對應                                                                         |
+| 名稱     | 類型 | 對應                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName"： "rownumber"，"Properties"： {"Path"： "$. rownumber"}}，{"ColumnName"： "rowguid"，"Properties"： {"Path"： "$ rowguid"}}] |
 
 ## <a name="drop-external-table-mapping"></a>. drop external table mapping
 
-`.drop``external` `table` *ExternalTableName* `json` `mapping` *MappingName* 
+`.drop``external` `table` *ExternalTableName* `mapping` *MappingName* 
 
 卸載資料庫的對應。
  
 **範例** 
  
 ```kusto
-.drop external table MyExternalTable json mapping "Mapping1" 
+.drop external table MyExternalTable mapping "Mapping1" 
 ```
 ## <a name="next-steps"></a>後續步驟
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 8cd79b6f6531efd9621edf603b38d71bb074f6aa
-ms.sourcegitcommit: c815c6ccf33864e21e1d3daff26a4f077dff88f7
+ms.openlocfilehash: 8b549ca239dac0e88e0a8c0f0748eb86984f5cb4
+ms.sourcegitcommit: fcaf3056db2481f0e3f4c2324c4ac956a4afef38
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/21/2020
-ms.locfileid: "95012181"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97388999"
 ---
 # <a name="export-data-to-an-external-table"></a>將資料匯出至外部資料表
 
@@ -23,7 +23,7 @@ Export 命令會依名稱參考外部資料表。
 
 此命令需要 [資料表管理員或資料庫管理員許可權](../access-control/role-based-authorization.md)。
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax"></a>語法
 
 `.export` [ `async` ] `to` `table` *ExternalTableName* <br>
 [ `with` `(` *PropertyName* `=` *PropertyValue* `,` ... `)` ] <|*查詢*
@@ -39,13 +39,13 @@ Export 命令會依名稱參考外部資料表。
 
 ## <a name="output"></a>輸出
 
-|輸出參數 |類型 |Description
+|輸出參數 |類型 |描述
 |---|---|---
-|ExternalTableName  |字串 |外部資料表的名稱。
-|路徑|字串|輸出路徑。
-|NumRecords|字串| 匯出至路徑的記錄數目。
+|ExternalTableName  |String |外部資料表的名稱。
+|Path|String|輸出路徑。
+|NumRecords|String| 匯出至路徑的記錄數目。
 
-## <a name="notes"></a>備註
+## <a name="notes"></a>備忘稿
 
 * 匯出查詢輸出架構必須符合外部資料表的架構，包括分割區定義的所有資料行。 例如，如果資料表是依 *DateTime* 進行分割，則查詢輸出架構必須有與 *TimestampColumnName* 相符的時間戳記資料行。 此資料行名稱是在外部資料表分割定義中定義。
 
@@ -75,7 +75,7 @@ ExternalBlob 是非分割的外部資料表。
 .export to table ExternalBlob <| T
 ```
 
-|ExternalTableName|路徑|NumRecords|
+|ExternalTableName|Path|NumRecords|
 |---|---|---|
 |ExternalBlob|http://storage1.blob.core.windows.net/externaltable1cont1/1_58017c550b384c0db0fea61a8661333e.csv|10|
 
@@ -86,9 +86,8 @@ PartitionedExternalBlob 是外部資料表，定義如下：
 ```kusto
 .create external table PartitionedExternalBlob (Timestamp:datetime, CustomerName:string) 
 kind=blob
-partition by 
-   "CustomerName="CustomerName,
-   bin(Timestamp, 1d)
+partition by (CustomerName:string=CustomerName, Date:datetime=startofday(Timestamp))   
+pathformat = ("CustomerName=" CustomerName "/" datetime_pattern("yyyy/MM/dd", Date))   
 dataformat=csv
 ( 
    h@'http://storageaccount.blob.core.windows.net/container1;secretKey'
@@ -99,7 +98,7 @@ dataformat=csv
 .export to table PartitionedExternalBlob <| T
 ```
 
-|ExternalTableName|路徑|NumRecords|
+|ExternalTableName|Path|NumRecords|
 |---|---|---|
 |ExternalBlob|http://storageaccount.blob.core.windows.net/container1/CustomerName=customer1/2019/01/01/fa36f35c-c064-414d-b8e2-e75cf157ec35_1_58017c550b384c0db0fea61a8661333e.csv|10|
 |ExternalBlob|http://storageaccount.blob.core.windows.net/container1/CustomerName=customer2/2019/01/01/fa36f35c-c064-414d-b8e2-e75cf157ec35_2_b785beec2c004d93b7cd531208424dc9.csv|10|
