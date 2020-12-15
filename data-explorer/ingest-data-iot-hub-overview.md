@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 1ea8960b8d58ed9e549e042f8a4e64164952f32d
-ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
+ms.openlocfilehash: b76321fd843efe915a6fd55797bd2dc68059b004
+ms.sourcegitcommit: 8ac4717dbff679991b122b09a0c1ed700562a736
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92558184"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97488571"
 ---
 # <a name="iot-hub-data-connection"></a>IoT 中樞資料連線
 
@@ -44,7 +44,7 @@ IoT 內嵌管線會經歷數個步驟。 首先，您要建立 IoT 中樞，並�
 | 編碼 |  資料編碼，預設值為 UTF8。 可以是任何 [.net 支援的編碼](/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)方式。 |
 
 > [!NOTE]
-> 只有在建立資料連線之後排入佇列的事件才會內嵌。
+> 只會內嵌在建立資料連線之後排入佇列的事件。
 
 ## <a name="events-routing"></a>事件路由
 
@@ -79,7 +79,7 @@ IoT 中樞會公開下列系統屬性：
 | iothub-connection-auth-generation-id| 由 IoT 中樞在裝置到雲端訊息上設定的識別碼。 包含傳送訊息之裝置的 connectionDeviceGenerationId (依據裝置身分識別屬性)。 |
 | iothub-connection-auth-method| 由 IoT 中樞在裝置到雲端訊息上設定的驗證方法。 這個屬性包含用來驗證傳送訊息之裝置的驗證方法的相關資訊。 |
 
-如果您在資料表的 [ **資料來源** ] 區段中選取 [ **事件系統屬性** ]，就必須在資料表架構和對應中包含屬性。
+如果您在資料表的 [**資料來源**] 區段中選取 [**事件系統屬性**]，就必須在資料表架構和對應中包含屬性。
 
 [!INCLUDE [data-explorer-container-system-properties](includes/data-explorer-container-system-properties.md)]
 
@@ -98,9 +98,9 @@ IoT 中樞會公開下列系統屬性：
 
 ## <a name="sending-events"></a>傳送事件
 
-請參閱模擬裝置並產生資料的 [範例專案](https://github.com/Azure-Samples/azure-iot-samples-csharp/tree/master/iot-hub/Quickstarts/simulated-device) 。
+請參閱模擬裝置並產生資料的 [範例專案](https://github.com/Azure-Samples/azure-iot-samples-csharp/tree/master/iot-hub/Quickstarts/SimulatedDevice) 。
 
-## <a name="next-steps"></a>下一步
+## <a name="next-steps"></a>後續步驟
 
 有各種方法可將資料內嵌到 IoT 中樞。 請參閱下列連結，以取得每個方法的逐步解說。
 
