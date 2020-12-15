@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 25c0bb4071c74c299ab69432ffc18ad50408be46
-ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
+ms.openlocfilehash: e2c84649653d6d3762a82c1e4aa3c98c9ef8119d
+ms.sourcegitcommit: d9e203a54b048030eeb6d05b01a65902ebe4e0b8
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94644677"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97371646"
 ---
 # <a name="use-one-click-ingestion-to-ingest-csv-data-from-a-container-to-a-new-table-in-azure-data-explorer"></a>在 Azure 資料總管中使用單鍵擷取將 CSV 資料從容器擷取到新的資料表
 
@@ -22,7 +22,7 @@ ms.locfileid: "94644677"
 
 [單鍵擷取](ingest-data-one-click.md)可讓您快速將 JSON、CSV 和其他格式的資料擷取到資料表中，並且輕鬆建立對應結構。 資料可以在一次性或持續擷取程序中，從儲存體、本機檔案或容器中擷取。  
 
-本文件說明如何在特定使用案例中使用直覺式單鍵精靈，將 **CSV** 資料從 **容器** 擷取到 **新的資料表** 中。 您可以使用相同的程序並且做些許調整，以涵蓋各種不同的使用案例。
+本文件說明如何在特定使用案例中使用直覺式單鍵精靈，將 **CSV** 資料從 **容器** 擷取到 **新的資料表** 中。 在內嵌之後，您可以[設定事件方格內嵌管線](#create-continuous-ingestion-for-container)接聽來源容器中的新檔案，並將符合資格的資料內嵌到新資料表中。 您可以使用相同的程序並且做些許調整，以涵蓋各種不同的使用案例。
 
 如需單鍵擷取概觀和必要條件清單，請參閱[單鍵擷取](ingest-data-one-click.md)。
 如需將資料內嵌到 Azure 資料總管中現有資料表的詳細資訊，請參 [單鍵擷取至現有資料表](one-click-ingestion-existing-table.md)
@@ -46,7 +46,7 @@ ms.locfileid: "94644677"
 
 在 [擷取類型] 下，執行下列步驟：
    
-  1. **從容器** 選取 
+  1. **從容器** (blob 容器、ADLS Gen1 容器、ADLS Gen2 容器) 選取。
   1. 在 [連結至儲存體] 欄位中，新增容器的 [SAS URL](/azure/vs-azure-tools-storage-explorer-blobs#get-the-sas-for-a-blob-container)，然後選擇性地輸入範例大小。 若要從這個容器內的資料夾內嵌，請參閱[從容器中的資料夾內嵌](#ingest-from-folder-in-a-container)。
 
       :::image type="content" source="media/one-click-ingestion-new-table/from-container.png" alt-text="從容器單鍵擷取":::
@@ -96,9 +96,11 @@ ms.locfileid: "94644677"
 
 :::image type="content" source="media/one-click-ingestion-new-table/from-container-with-filter.png" alt-text="單鍵擷取篩選條件":::
 
+系統會隨機選取其中一個檔案，並根據 **結構描述定義檔案** 來產生結構描述。 您可以選取不同的檔案。
+
 ## <a name="edit-the-schema"></a>編輯結構描述
 
-選取 [編輯結構描述] 以查看和編輯資料表資料行設定。 系統會隨機選取其中一個 Blob，並根據該 Blob 產生結構描述。 服務會藉由查看來源名稱，自動識別其是否壓縮。
+選取 [編輯結構描述] 以查看和編輯資料表資料行設定。  服務會藉由查看來源名稱，自動識別其是否壓縮。
 
 在 [結構描述] 索引標籤中：
 
@@ -121,14 +123,10 @@ ms.locfileid: "94644677"
 
 當內嵌至新的資料表時，請在建立資料表時，改變資料表的各個層面。
 
-在資料表中： 
- * 按兩下要編輯的新資料行名稱。
- * 選取新的資料行標題並執行下列任何動作：
+[!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
 
-    [!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
-
-  > [!NOTE]
-  > 若為表格式格式，每個資料行都可以內嵌到 Azure 資料總管中的一個資料行。
+> [!NOTE]
+> 針對表格式格式，您無法對應資料行兩次。 若要對應到現有的資料行，請先刪除新的資料行。
 
 [!INCLUDE [data-explorer-one-click-command-editor](includes/data-explorer-one-click-command-editor.md)]
 
