@@ -51,7 +51,7 @@ ms.locfileid: "97513984"
 |---|---|---|---|---|---|---|--- 
 |TestDB||||False|False||v1。1       
 |TestDB|事件|||是|否||       
-|TestDB|事件| 名稱|System.String|是|否||     
+|TestDB|事件| Name|System.String|是|否||     
 |TestDB|事件| StartTime|  System.DateTime|是|否||    
 |TestDB|事件| EndTime|    System.DateTime|是|否||        
 |TestDB|事件| City|   System.String|是| 否||     
@@ -71,7 +71,7 @@ ms.locfileid: "97513984"
 |---|---|---|---|---|---|---|--- 
 |TestDB||||False|False||v1。1       
 |TestDB|事件|||是|否||       
-|TestDB|事件| 名稱|System.String|是|否||     
+|TestDB|事件| Name|System.String|是|否||     
 |TestDB|事件| StartTime|  System.DateTime|是|否||    
 |TestDB|事件| EndTime|    System.DateTime|是|否||        
 |TestDB|事件| City|   System.String|是| 否||     
