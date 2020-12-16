@@ -7,16 +7,16 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/06/2020
-ms.openlocfilehash: 4d8574e0b68c234f1cef0ba49b37eb869e61c142
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 37e32e1fe84cd73f268de4400eec529815d3ce8f
+ms.sourcegitcommit: 35236fefb52978ce9a09bc36affd5321acb039a4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342598"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97514080"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>使用資料的資料庫在 Azure 資料總管中附加資料庫
 
-您可以使用「使用中」 **資料庫** 功能，將位於不同叢集中的資料庫連接到您的 Azure 資料總管叢集中。 在唯讀模式中 **，會以***唯讀*模式附加資料，讓您可以在內嵌至**領導者資料庫**的資料上，查看資料並執行查詢。 資料的資料庫會同步處理領導者資料庫中的變更。 由於同步處理的緣故，資料可用性會有幾秒鐘到幾分鐘的資料延遲。 時間延遲的長度取決於領導者資料庫中繼資料的整體大小。 領導人和執行者資料庫會使用相同的儲存體帳戶來提取資料。 儲存體是由領導者資料庫所擁有。 取用資料庫會在不需要內嵌資料的情況下查看資料。 因為附加的資料庫是唯讀資料庫，所以無法修改資料庫中的資料、資料表和原則，但快取 [原則](#configure-caching-policy)、 [主體](#manage-principals)和 [許可權](#manage-permissions)除外。 無法刪除附加的資料庫。 它們必須由領導者或客戶卸離，然後才能刪除。 
+您可以使用「使用中」 **資料庫** 功能，將位於不同叢集中的資料庫連接到您的 Azure 資料總管叢集中。 在唯讀模式中 **，會以***唯讀* 模式附加資料，讓您可以在內嵌至 **領導者資料庫** 的資料上，查看資料並執行查詢。 資料的資料庫會同步處理領導者資料庫中的變更。 由於同步處理的緣故，資料可用性會有幾秒鐘到幾分鐘的資料延遲。 時間延遲的長度取決於領導者資料庫中繼資料的整體大小。 領導人和執行者資料庫會使用相同的儲存體帳戶來提取資料。 儲存體是由領導者資料庫所擁有。 取用資料庫會在不需要內嵌資料的情況下查看資料。 因為附加的資料庫是唯讀資料庫，所以無法修改資料庫中的資料、資料表和原則，但快取 [原則](#configure-caching-policy)、 [主體](#manage-principals)和 [許可權](#manage-permissions)除外。 無法刪除附加的資料庫。 它們必須由領導者或客戶卸離，然後才能刪除。 
 
 使用「進行中」功能將資料庫附加至不同的叢集時，會用來做為在組織和小組之間共用資料的基礎結構。 這項功能有助於隔離計算資源，以保護生產環境免于非生產環境的使用案例。 您也可以用來將 Azure 資料總管叢集的成本與對資料執行查詢的合作物件產生關聯。
 
@@ -275,7 +275,7 @@ New-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername `
 ### <a name="check-your-leader-cluster"></a>檢查您的領導者叢集
 
 1. 流覽至領導者叢集，然後選取 [**資料庫**]
-2. 檢查相關的資料庫是否已標示為**與其他人共用**的資料庫  >  **是**
+2. 檢查相關的資料庫是否已標示為 **與其他人共用** 的資料庫  >  **是**
 
     ![讀取和寫入附加的資料庫](media/follower/read-write-databases-shared.png)
 
@@ -465,6 +465,14 @@ Remove-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername -N
 
 資料的資料庫管理員可以修改所連接資料庫的快取 [原則](kusto/management/cache-policy.md) ，或其裝載叢集上的任何資料表。 預設為保留資料庫和資料表層級快取原則的領導者資料庫集合。 例如，您可以在領導者資料庫上有30天的快取原則，以便執行每月報告，以及在移出資料庫上使用三天的快取原則，以查詢最新的資料進行疑難排解。 如需使用控制命令來設定資料的資料庫或資料表的快取原則的詳細資訊，請參閱控制管理資料叢集的 [控制命令](kusto/management/cluster-follower.md)。
 
+## <a name="notes"></a>注意
+
+* 如果領導人/執行程式群集的資料庫之間發生衝突，則當所有資料庫後面都有一個執行的叢集時，它們會以下列方式解決：
+  * 在「取用者」叢 *集中建立的資料庫名稱會* 優先于在領導者叢集上建立相同名稱的資料庫。 因此，您必須將移入叢集的資料庫 *db* (或重新命名) ，才能讓該進行中的叢集擁有領導者的資料庫 *db*。
+  * 系統會從其中一個領導者叢集中任意選擇一個名為 *DB* 的資料庫，然後再從 *其中一個* 領導者叢集中選擇，不會再執行一次以上。
+* 用來顯示叢集 [活動記錄和](kusto/management/systeminfo.md) 執行歷程記錄的命令，將會顯示在執行程式叢集上的活動和歷程記錄，而其結果集將不會包含領導人叢集 (s 的) 。
+  * 例如：在執行 `.show queries` 程式叢集上執行的命令只會顯示在資料庫上執行的查詢，並在後面接著執行的資料，而不會對領導者叢集中的相同資料庫執行查詢。
+  
 ## <a name="limitations"></a>限制
 
 * 合作的和領導人叢集必須位於相同的區域中。

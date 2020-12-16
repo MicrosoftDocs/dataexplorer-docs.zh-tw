@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: 8f19606a75c388917a5195d0ac5cbb0ecf4335f9
-ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
+ms.openlocfilehash: 166d5f4f4d81957c49fb3fdedd3b2654985648ab
+ms.sourcegitcommit: 35236fefb52978ce9a09bc36affd5321acb039a4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96321126"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97514061"
 ---
 # <a name="update-policy-overview"></a>更新原則總覽
 
@@ -40,6 +40,7 @@ ms.locfileid: "96321126"
 * 在原則的 `Source` `Query` 一部分或元件參考的函式中參考資料表時 `Query` ：
    * 請勿使用資料表的限定名稱。 請改用 `TableName`。 
    * 請勿使用 `database("DatabaseName").TableName` 或 `cluster("ClusterName").database("DatabaseName").TableName` 。
+* 如需串流內嵌的更新原則限制，請參閱 [串流內嵌限制](../../ingest-data-streaming.md#limitations)。 
 
 > [!WARNING]
 > 在更新原則中定義不正確的查詢可以防止將任何資料內嵌到來源資料表。

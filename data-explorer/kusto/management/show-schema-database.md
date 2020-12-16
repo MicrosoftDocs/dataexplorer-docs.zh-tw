@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b77fe78ec43bce775774ae95c1ea713d03873cf4
-ms.sourcegitcommit: c351c2c8ab6e184827c4702eb0ec8bf783c7bbd3
+ms.openlocfilehash: 4f3639aeb6e401aa37703bbef929af2275960a91
+ms.sourcegitcommit: 35236fefb52978ce9a09bc36affd5321acb039a4
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 11/18/2020
-ms.locfileid: "94874792"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97513984"
 ---
 # <a name="show-database-schema-commands"></a>。顯示資料庫架構命令
 
@@ -50,11 +50,11 @@ ms.locfileid: "94874792"
 |DatabaseName|TableName|ColumnName|ColumnType|IsDefaultTable|IsDefaultColumn|PrettyName|版本
 |---|---|---|---|---|---|---|--- 
 |TestDB||||False|False||v1。1       
-|TestDB|事件|||True|錯||       
-|TestDB|事件| 名稱|System.String|True|錯||     
-|TestDB|事件| StartTime|  System.DateTime|True|錯||    
-|TestDB|事件| EndTime|    System.DateTime|True|錯||        
-|TestDB|事件| City|   System.String|True| 錯||     
+|TestDB|事件|||是|否||       
+|TestDB|事件| 名稱|System.String|是|否||     
+|TestDB|事件| StartTime|  System.DateTime|是|否||    
+|TestDB|事件| EndTime|    System.DateTime|是|否||        
+|TestDB|事件| City|   System.String|是| 否||     
 |TestDB|事件| SessionId|  System.Int32|True|  True|| 
 
 **範例** 
@@ -70,11 +70,11 @@ ms.locfileid: "94874792"
 |DatabaseName|TableName|ColumnName|ColumnType|IsDefaultTable|IsDefaultColumn|PrettyName|版本
 |---|---|---|---|---|---|---|--- 
 |TestDB||||False|False||v1。1       
-|TestDB|事件|||True|錯||       
-|TestDB|事件| 名稱|System.String|True|錯||     
-|TestDB|事件| StartTime|  System.DateTime|True|錯||    
-|TestDB|事件| EndTime|    System.DateTime|True|錯||        
-|TestDB|事件| City|   System.String|True| 錯||     
+|TestDB|事件|||是|否||       
+|TestDB|事件| 名稱|System.String|是|否||     
+|TestDB|事件| StartTime|  System.DateTime|是|否||    
+|TestDB|事件| EndTime|    System.DateTime|是|否||        
+|TestDB|事件| City|   System.String|是| 否||     
 |TestDB|事件| SessionId|  System.Int32|True|  True||  
 
 因為提供的版本低於目前的資料庫版本，所以會傳回 ' TestDB ' 架構。 提供相等或更高的版本會產生空的結果。
@@ -112,25 +112,23 @@ ms.locfileid: "94874792"
 
 **語法**
 
-`.show``database` *DatabaseName* `schema` DatabaseName `as``csl` `script` [ `with(` *選項* `)` ]
+`.show``database`  `schema` DatabaseName `as``csl` `script` [ `with(` *選項* `)` ]
 
 **引數**
 
 下列 *選項* 都是選擇性的：
 
-* `IncludeEncodingPolicies`： (`true`  |  `false`) -如果 `true` ，會包含資料庫/資料表/資料行層級的編碼原則。 預設值為 `false`。 
+* `IncludeEncodingPolicies`： (`true`  |  `false`) -如果 `true` ，會包含資料庫/資料表/資料行層級的編碼原則。 預設為 `false`。 
 * `IncludeSecuritySettings`： (`true`  |  `false`) -預設為 `false` 。 如果 `true` 為，則會包含下列選項：
   * 資料庫/資料表層級的授權主體。
   * 資料表層級的資料列層級安全性原則。
   * 資料表層級的限制視圖存取原則。
-* `IncludeIngestionMappings`： (`true`  |  `false`) -如果 `true` ，會包含資料表層級的內嵌對應。 預設值為 `false`。 
+* `IncludeIngestionMappings`： (`true`  |  `false`) -如果 `true` ，會包含資料表層級的內嵌對應。 預設為 `false`。 
 
 **傳回**
 
 以字串形式傳回的腳本將包含：
 
-* 用來建立資料庫的命令，並設定其名稱（如果有的話）。
-  * 產生的命令會建立暫時性資料庫，並在加入至腳本時將其批註化。
 * 用來在資料庫中建立所有資料表的命令。
 * 用來設定所有資料庫/資料表/資料行原則以符合原始原則的命令。
 * 用來建立或改變資料庫中所有使用者定義函數的命令。
