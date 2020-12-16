@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 1fa4c303624c62b7c43d2ddd0de58977ed6e42aa
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: f8ae6bc55df90dc27fc329e9b49f63430cd77aba
+ms.sourcegitcommit: 335e05864e18616c10881db4ef232b9cda285d6a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92241346"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97596816"
 ---
 # <a name="pattern-statement"></a>pattern 語句
 
 ::: zone pivot="azuredataexplorer"
 
-**模式**是名為 view 的結構，可將預先定義的字串元組對應到無參數函數主體。 模式在兩方面都是唯一的：
+**模式** 是名為 view 的結構，可將預先定義的字串元組對應到無參數函數主體。 模式在兩方面都是唯一的：
 
 * 使用類似範圍表參考的語法來「叫用」模式。
 * 模式具有一組可以對應的引數值，而且對應程式是由 Kusto 完成。 如果已宣告但未定義模式，Kusto 會識別並將模式的所有調用標記為錯誤。 此識別可讓中介層應用程式「解析」這些模式。
@@ -46,7 +46,7 @@ app("ApplicationX").StartEvents
 
 此查詢會從 Kusto 產生錯誤，表示無法解析下一個模式調用： `app("ApplicationX")["StartEvents"]` 和 `app("ApplicationX")["StopEvents"]` 。
 
-## <a name="syntax"></a>語法
+## <a name="syntax-of-pattern-declaration"></a>模式宣告的語法
 
 `declare``pattern` *PatternName*
 
@@ -67,9 +67,9 @@ app("ApplicationX").StartEvents
 
 針對每個符合的模式所提供的運算式，是資料表名稱或對 [let 語句](letstatement.md)的參考。
 
-## <a name="syntax"></a>語法
+## <a name="syntax-of-pattern-definition"></a>模式定義的語法
 
-`declare``pattern` *PatternName*  =  PatternName `(`*ArgName* `:`*ArgType* [ `,` ...] `)`[ `[` *PathName* `:` *PathArgType* `]` ]`{`
+`declare``pattern`   =  PatternName `(`*ArgName* `:`*ArgType* [ `,` ...] `)`[ `[` *PathName* `:` *PathArgType* `]` ]`{`
 &nbsp;&nbsp;&nbsp;&nbsp;`(` *ArgValue1* [ `,` *ArgValue2* ...] `)` [ `.[` * PathValue `]` ] `=` `{` *運算式* `};` &nbsp; &nbsp; &nbsp; &nbsp; [ &nbsp; &nbsp; &nbsp; &nbsp; `(` *ArgValue1_2* [ `,` *ArgValue2_2* ...] `)` [ `.[` *PathValue_2* `]` ] `=` `{` *expression_2* `};` &nbsp; &nbsp; &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp; &nbsp; ]        `}`
 
 * *PatternName*： pattern 關鍵字的名稱。 只允許定義關鍵字的語法：用於偵測具有指定關鍵字的所有模式參考。
@@ -88,7 +88,7 @@ app("ApplicationX").StartEvents
 * *PatternName* `(`*ArgValue1* [ `,` *ArgValue2* ...] `).`*PathValue*
 * *PatternName* `(`*ArgValue1* [ `,` *ArgValue2* ...] `).["`*PathValue*`"]`
 
-## <a name="notes"></a>注意
+## <a name="notes"></a>備忘錄
 
 **案例**
 

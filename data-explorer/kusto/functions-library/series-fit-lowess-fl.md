@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/29/2020
 no-loc: LOWESS
-ms.openlocfilehash: da384b1a907e4b524fc40f1c4133be5cf8e21c9c
-ms.sourcegitcommit: 4d5628b52b84f7564ea893f621bdf1a45113c137
+ms.openlocfilehash: 9a72905820a55f2fbd6f200514cac69450aa9277
+ms.sourcegitcommit: 335e05864e18616c10881db4ef232b9cda285d6a
 ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96469742"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97596771"
 ---
 # <a name="series_fit_lowess_fl"></a>series_fit_lowess_fl()
 
@@ -35,7 +35,7 @@ ms.locfileid: "96469742"
 * *x_series*：包含 [獨立變數](https://www.wikipedia.org/wiki/Dependent_and_independent_variables)的資料行名稱，也就是 x 或時間軸。 這個參數是選擇性的，只有不等 [間距的數列](https://www.wikipedia.org/wiki/Unevenly_spaced_time_series)才需要此參數。 預設值為空字串，因為 x 對於平均間距數列的回歸而言是多餘的。
 * *x_istime*：只有在指定 *x_series* 且其為 datetime 的向量時，才需要此布林值參數。 這個參數是選擇性的，預設值為 *False*。
 
-## <a name="usage"></a>使用方式
+## <a name="usage"></a>使用量
 
 `series_fit_lowess_fl()`這是要使用[invoke 運算子](../query/invokeoperator.md)套用的使用者定義函數[表格式函數](../query/functions/user-defined-functions.md#tabular-function)。 您可以在查詢中內嵌其程式碼，或將其安裝在您的資料庫中。 有兩種使用方式選項：臨機操作和持續使用。 如需範例，請參閱下列索引標籤。
 
@@ -137,7 +137,7 @@ series_fit_lowess_fl(tbl:(*), y_series:string, y_fit_series:string, fit_size:int
 }
 ```
 
-### <a name="usage"></a>使用方式
+### <a name="usage"></a>使用量
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -163,39 +163,39 @@ demo_make_series1
 ### <a name="test-irregular-time-series"></a>測試不規則的時間序列
 
 下列範例會測試不規則的 (不等寬的) 時間序列
-    
-    <!-- csl: https://help.kusto.windows.net:443/Samples -->
-    ```kusto
-    let max_t = datetime(2016-09-03);
-    demo_make_series1
-    | where TimeStamp between ((max_t-1d)..max_t)
-    | summarize num=count() by bin(TimeStamp, 5m), OsVer
-    | order by TimeStamp asc
-    | where hourofday(TimeStamp) % 6 != 0   //  delete every 6th hour to create irregular time series
-    | summarize TimeStamp=make_list(TimeStamp), num=make_list(num) by OsVer
-    | extend fnum = dynamic(null)
-    | invoke series_fit_lowess_fl('num', 'fnum', 9, 'TimeStamp', True)
-    | render timechart 
-    ```
-    
-    :::image type="content" source="images/series-fit-lowess-fl/lowess-irregular-time-series.png" alt-text="Graph showing nine points LOWESS fit to an irregular time series" border="false":::
+
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
+```kusto
+let max_t = datetime(2016-09-03);
+demo_make_series1
+| where TimeStamp between ((max_t-1d)..max_t)
+| summarize num=count() by bin(TimeStamp, 5m), OsVer
+| order by TimeStamp asc
+| where hourofday(TimeStamp) % 6 != 0   //  delete every 6th hour to create irregular time series
+| summarize TimeStamp=make_list(TimeStamp), num=make_list(num) by OsVer
+| extend fnum = dynamic(null)
+| invoke series_fit_lowess_fl('num', 'fnum', 9, 'TimeStamp', True)
+| render timechart 
+```
+
+:::image type="content" source="images/series-fit-lowess-fl/lowess-irregular-time-series.png" alt-text="Graph showing nine points :::非 loc (LOWESS) ：：：符合不規則的時間序列 "border =" false "：：：
 
 比較 LOWESS 與多項式相符
 
 下列範例包含在 x 和 y 軸上有雜訊的第五個順序多項式。 請參閱 LOWESS 與多項式相符的比較。 
 
-    <!-- csl: https://help.kusto.windows.net:443/Samples -->
-    ```kusto
-    range x from 1 to 200 step 1
-    | project x = rand()*5 - 2.3
-    | extend y = pow(x, 5)-8*pow(x, 3)+10*x+6
-    | extend y = y + (rand() - 0.5)*0.5*y
-    | summarize x=make_list(x), y=make_list(y)
-    | extend y_lowess = dynamic(null)
-    | invoke series_fit_lowess_fl('y', 'y_lowess', 15, 'x')
-    | extend series_fit_poly(y, x, 5)
-    | project x, y, y_lowess, y_polynomial=series_fit_poly_y_poly_fit
-    | render linechart
-    ```
-        
-    :::image type="content" source="images/series-fit-lowess-fl/lowess-vs-poly-fifth-order-noise.png" alt-text="Graphs of LOWESS vs polynomial fit for a fifth order polynomial with noise on x & y axes":::
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
+```kusto
+range x from 1 to 200 step 1
+| project x = rand()*5 - 2.3
+| extend y = pow(x, 5)-8*pow(x, 3)+10*x+6
+| extend y = y + (rand() - 0.5)*0.5*y
+| summarize x=make_list(x), y=make_list(y)
+| extend y_lowess = dynamic(null)
+| invoke series_fit_lowess_fl('y', 'y_lowess', 15, 'x')
+| extend series_fit_poly(y, x, 5)
+| project x, y, y_lowess, y_polynomial=series_fit_poly_y_poly_fit
+| render linechart
+```
+
+:::image type="content" source="images/series-fit-lowess-fl/lowess-vs-poly-fifth-order-noise.png" alt-text="Graphs of :::非 loc (LOWESS) ：：： vs 多項式適用于 x & y 軸上有雜訊的第五個順序多項式 "：：：
