@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/09/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 582683a9261d84fa24d819b5234e58effaf90a97
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 2ef75f2249466a9796fb0313186546bd9088ff07
+ms.sourcegitcommit: 28f18c3500992fd7dcfd95dffe2bae0161a22ca3
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512021"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97792926"
 ---
 # <a name="the-dynamic-data-type"></a>動態資料類型
 
@@ -163,6 +163,8 @@ Cast 函數包括：
 * [make_set_if()](../makesetif-aggfunction.md) 會傳回保有所有唯一值的陣列 (使用述詞)。
 
 ## <a name="operators-and-functions-over-dynamic-types"></a>動態類型的運算子和函式
+
+如需純量動態/陣列函式的完整清單，請參閱[動態/陣列函式](../scalarfunctions.md#dynamicarray-functions)。
 
 |運算子或函式|搭配動態資料類型的使用方式|
 |---|---|

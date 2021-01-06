@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 11/22/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 38b67a0843cc38c2cbce7d5a41a8eff85b25ebd5
-ms.sourcegitcommit: 7edce9d9d20f9c0505abda67bb8cc3d2ecd60d15
+ms.openlocfilehash: b20d9a3e6c01f59a9cde44d6462ffeb0072473ed
+ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/02/2020
-ms.locfileid: "96524295"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97822877"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>快速入門：在 Azure 資料總管 Web UI 中查詢資料
 
@@ -88,7 +88,8 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 1. 在第一個查詢下面，複製下列查詢並貼到查詢視窗中。 請注意，其有好幾行且尚未格式化，不像第一個查詢。
 
     ```kusto
-    StormEvents | sort by StartTime desc | project StartTime, EndTime, State, EventType, DamageProperty, EpisodeNarrative | take 10
+    StormEvents | sort by StartTime desc 
+    | project StartTime, EndTime, State, EventType, DamageProperty, EpisodeNarrative | take 10
     ```
 
 1. 選取新的查詢。 按 *Shift+Alt+F* 來格式化查詢，讓其看起來像下列查詢。
@@ -247,6 +248,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 * [匯出環境設定](#export-environment-settings)
 * [匯入環境設定](#import-environment-settings)
+* [反白顯示錯誤層級](#highlight-error-levels)
 * [清除本機狀態](#clean-up-resources)
 
 選取右上方的 [設定] 圖示 :::image type="icon" source="media/web-query-data/settings-icon.png" border="false":::，以開啟 [設定] 視窗。
@@ -277,6 +279,21 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 > [!NOTE]
 > [匯入] 會覆寫任何現有的環境設定和資料。
+
+### <a name="highlight-error-levels"></a>反白顯示錯誤層級
+
+Kusto 會嘗試解譯結果面板中每個資料列的嚴重性和詳細程度層級，並且據以調整其色彩。 其方式是將每個資料行的相異值與一組已知模式 (「警告」、「錯誤」等等) 進行比對。 
+
+若要啟用錯誤層級反白顯示：
+
+1. 選取您的使用者名稱旁邊的「設定」圖示。
+1. 選取 [外觀]索引標籤，並將 [啟用錯誤層級反白顯示] 選項切換至右邊。 
+
+:::image type="content" source="media/web-query-data/enable-error-highlighting.gif" alt-text="動畫 GIF 會示範如何在設定中，啟用錯誤層級的反白顯示":::
+
+**淺色** 模式中的錯誤層級色彩配置 | **深色** 模式中的錯誤層級色彩配置
+|---|---|
+:::image type="content" source="media/web-query-data/light-mode.png" alt-text="淺色模式中色彩圖例的螢幕擷取畫面"::: | :::image type="content" source="media/web-query-data/dark-mode.png" alt-text="深色模式中色彩圖例的螢幕擷取畫面":::
 
 ## <a name="provide-feedback"></a>提供意見反應
 

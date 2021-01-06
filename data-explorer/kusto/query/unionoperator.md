@@ -11,12 +11,12 @@ ms.date: 02/13/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b8ad39e8c1233acc2df6c30059a6926cea85f37a
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 449a5043d26013c8a41ab6fafe0b3c907a22686b
+ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512803"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97822758"
 ---
 # <a name="union-operator"></a>union 運算子
 
@@ -65,6 +65,10 @@ Table1 | union Table2, Table3
     *  資料表名稱，例如 `Events`
     *  必須以括弧括住的查詢運算式，例如 `(Events | where id==42)`
     *  使用萬用字元指定的一組資料表。 例如，`E*` 會形成資料庫中所有資料表的聯集，其名稱以 `E` 開頭。
+
+> [!NOTE]
+> 只要知道資料表的清單，就能使用萬用字元來精簡。 某些工作區包含非常大量的資料表，會導致執行效率不佳。 資料表也可能會隨著導致非預期結果的時間而增加。
+    
 * `kind`: 
     * `inner` - 結果中會有所有輸入資料表共有的資料行子集。
     * `outer` - (預設值)。 結果具有任何輸入中出現的所有資料行。 輸入資料列未定義的資料格會設為 `null`。

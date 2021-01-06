@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: be8d6e9172364d4177e7421e524cc067e4d58d18
-ms.sourcegitcommit: 66577436bcd1106f10fc9c0f233ee17b94478323
+ms.openlocfilehash: 455b3cfc3976566d9c4383890bbd4c20c775cf15
+ms.sourcegitcommit: 4c6bd4cb1eb1f64d84f844d4e7aff2de3a46b009
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/16/2020
-ms.locfileid: "97532182"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97756359"
 ---
 # <a name="query-limits"></a>查詢限制
 
@@ -23,7 +23,7 @@ Kusto 是一種可裝載大型資料集的隨選 (ad-hoc) 查詢引擎，可藉�
 
 ## <a name="limit-on-query-concurrency"></a>查詢並行的限制
 
-叢集會將 **查詢並行** 限制強加於同時執行的多個查詢上。
+叢集會將 **查詢並行** 限制強加於同時執行的數個查詢上。
 
 * 查詢並行限制的預設值取決於其執行所在的 SKU 叢集，且計算方式為：`Cores-Per-Node x 10`。
   * 例如，針對在 D14v2 SKU 上設定的叢集，其中每部機器都有 16 個虛擬核心，預設的查詢並行限制為 `16 cores x10 = 160`。
@@ -68,7 +68,7 @@ set notruncation;
 MyTable | take 1000000
 ```
 
-您也可以設定 `truncationmaxsize` 的值 (以位元組為單位的資料大小上限，預設為 64 MB) 和 `truncationmaxrecords` (記錄數目上限，預設為 500,000)，以更精確地控制結果截斷。 例如，下列查詢會將結果截斷設定為在超過 1,105 筆記錄或 1MB 時發生。
+您也可以設定 `truncationmaxsize` 的值 (以位元組為單位的資料大小上限，預設為 64 MB) 和 `truncationmaxrecords` (記錄數目上限，預設為 500,000)，以更精確地控制結果截斷。 例如，下列查詢會將結果截斷設定為在超過 1,105 筆記錄或 1 MB 時發生。
 
 ```kusto
 set truncationmaxsize=1048576;
@@ -128,7 +128,7 @@ T | where rand() < 0.1 | ...
 T | where hash(UserId, 10) == 1 | ...
 ```
 
-如果 `maxmemoryconsumptionperiterator` 設定多次，例如在用戶端要求屬性和使用 `set` 的語句中，則會套用「較低的」值。
+如果 `maxmemoryconsumptionperiterator` 設定多次，例如在用戶端要求屬性和使用 `set` 的語句中，則會套用較低的值。
 
 
 ## <a name="limit-on-memory-per-node"></a>每個節點的記憶體限制
@@ -140,7 +140,7 @@ set max_memory_consumption_per_query_per_node=68719476736;
 MyTable | ...
 ```
 
-如果 `max_memory_consumption_per_query_per_node` 設定多次，例如在用戶端要求屬性和使用 `set` 的語句中，則會套用「較低的」值。
+如果 `max_memory_consumption_per_query_per_node` 設定多次，例如在用戶端要求屬性和使用 `set` 的語句中，則會套用較低的值。
 
 ## <a name="limit-on-accumulated-string-sets"></a>累計字串集的限制
 
@@ -186,14 +186,14 @@ Kusto 支援在執行查詢時指定兩個[用戶端要求屬性](../api/netfx/r
 這兩個屬性都是預設為最大值 (100) 的整數，但可能會針對特定查詢減少到某個其他值。
 
 第一個屬性 query_fanout_threads_percent 會控制執行緒使用的扇出 (fanout) 因素。
-當此屬性是 100% 時，叢集將會在每個節點上指派所有 CPU。 例如，部署在 Azure D14 節點上的叢集上有 16 個 CPU。
-當此屬性是 50% 時，則會使用一半的 CPU，依此類推。
-數字會無條件進位到一整個 CPU，因此可以放心地將其設定為 0。
+當此屬性設為 100% 時，叢集將會在每個節點上指派所有 CPU。 例如，部署在 Azure D14 節點上的叢集上有 16 個 CPU。
+當此屬性設為 50% 時，則會使用一半的 CPU，依此類推。
+數字會無條件進位到一整個 CPU，因此可以放心地將屬性值設為 0。
 
 第二個屬性 query_fanout_nodes_percent 會控制叢集中可供每個子查詢散發作業使用的查詢節點數。
 其運作方式也類似。
 
-如果 `query_fanout_nodes_percent` 或 `query_fanout_threads_percent` 設定多次，例如在用戶端要求屬性和使用 `set` 語句中，則會套用每個屬性「較低的」值。
+如果 `query_fanout_nodes_percent` 或 `query_fanout_threads_percent` 設定多次，例如在用戶端要求屬性和使用 `set` 語句中，則會套用每個屬性較低的值。
 
 ## <a name="limit-on-query-complexity"></a>查詢複雜度的限制
 

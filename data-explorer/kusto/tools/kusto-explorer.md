@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 0086fb9f649d7bb3b7031521812c1dff0ca532f7
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 2c23633c13c2a58f3c6e6e9b9daf001942117bfb
+ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95513058"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97822826"
 ---
 # <a name="kustoexplorer-installation-and-user-interface"></a>Kusto. Explorer 安裝和使用者介面
 
@@ -325,6 +325,11 @@ Kusto.Explorer 會嘗試解譯結果面板中每個資料列的嚴重性和詳�
 若要修改輸出色彩配置，或關閉此行為，請從 [工具] 功能表中選取 [選項]  >  [結果檢視器]  >  [詳細程度色彩配置]。
 
 :::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Kusto Explorer 色彩配置修改":::
+
+
+**Excel** 色彩配置圖例| **鮮豔** 色彩配置圖例
+|---|---
+| :::image type="content" source="images/kusto-explorer/excel-color-scheme.png" alt-text="Kusto Explorer 中 Excel 色彩配置圖例的螢幕擷取畫面" border="false"::: |:::image type="content" source="images/kusto-explorer/vivid-color-scheme.png" alt-text="Kusto Explorer 中的螢幕擷取畫面鮮豔色彩配置圖例" border="false":::
 
 ## <a name="next-steps"></a>後續步驟
 

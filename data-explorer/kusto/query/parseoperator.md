@@ -9,17 +9,16 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 2b034719fa7c2f3714020c722b5717f5cf8590ff
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: a9da3735df9299b387188157bbae3d561f5de631
+ms.sourcegitcommit: f20619fac91f9bb2e6507cac10d41fb8425218e0
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512956"
+ms.lasthandoff: 12/29/2020
+ms.locfileid: "97811764"
 ---
 # <a name="parse-operator"></a>parse 運算子
 
-評估字串運算式，並將其值剖析至一或多個計算的資料行。 計算結果欄會有 Null，代表未成功剖析的字串。
-如需詳細資訊，請參閱 [parse-where 運算子](parsewhereoperator.md)。
+評估字串運算式，並將其值剖析至一或多個計算的資料行。 計算結果欄會有 Null，代表未成功剖析的字串。 如果不需要使用未成功剖析的資料列，請使用 [parse where 運算子](parsewhereoperator.md)。
 
 ```kusto
 T | parse Text with "ActivityName=" name ", ActivityType=" type
@@ -87,7 +86,7 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
 `parse` 運算子可讓您在相同的 `string` 運算式上使用多個 `extract` 應用程式，以簡化 `extend` 資料表的方式。 當資料表的 `string` 資料行包含多個您想要細分為個別資料行的值時，這個結果就很有用。 例如，developer trace ("`printf`"/"`Console.WriteLine`") 陳述式產生的資料行。
 
 在下列範例中，假設 `Traces` 資料表的 `EventText` 資料行包含 `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})` 形式的字串。
-作業將會以六個資料行來擴充資料表：`resourceName`、`totalSlices`、`sliceNumber`、`lockTime `、`releaseTime`、`previousLockTime`、`Month` 和 `Day`。 
+作業將會以六個資料行來擴充資料表：`resourceName`、`totalSlices`、`sliceNumber`、`lockTime `、`releaseTime` 和 `previousLockTime`。 
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

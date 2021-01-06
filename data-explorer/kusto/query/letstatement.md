@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/09/2020
 ms.localizationpriority: high
-ms.openlocfilehash: c102637adfa1fd0340d28a67b52354956b511ada
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 7723a3ccd06963596744db9c73f499a882b54c3e
+ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95513307"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97822775"
 ---
 # <a name="let-statement"></a>Let 陳述式
 
@@ -52,15 +52,15 @@ Let 運算式所繫結的運算式可以是：
 
  或者：
 
- [*TabularArgName* `:` `(` `*` `)`]
+ [TabularArgName `:` `(` `*` `)`]-表示具有變數和未知資料行的表格式運算式。
 
 `ScalarArguments` - [*ArgName* `:` *ArgType*] [`,` ... ]
 
 
 |欄位  |定義  |範例  |
 |---------|---------|---------|
-| **檢視** | 只能出現在沒有引數的無參數 lambda 中。 這表示當「所有資料表」都是查詢時，將會包含繫結名稱。 | 例如，使用 `union *` 時。|
-| ***TabularArguments** _ | 正式表格式運算式引數的清單。 
+| **檢視** | 只能出現在沒有引數的無參數 let 陳述式中。 當使用「view」關鍵字時，let 陳述式會包含在使用 `union` 運算子搭配資料表/檢視的萬用字元選取查詢中。 |  |
+| **_TabularArguments_* _ | 正式表格式運算式引數的清單。 
 | 每個表格式引數都具有：||
 |<ul><li> _TabularArgName*</li></ul> | 正式表格式引數的名稱。 此名稱可能會出現在 *FunctionBody* 中，而且會在叫用 lambda 時繫結至特定值。 ||
 |<ul><li>資料表結構描述定義 </li></ul> | 屬性及其類型的清單| AtrName：AtrType|

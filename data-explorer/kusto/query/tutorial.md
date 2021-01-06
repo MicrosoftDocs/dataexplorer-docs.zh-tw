@@ -11,12 +11,12 @@ ms.date: 10/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 0616c0d4dd2a44ba1d54ac83c699a1c0bac249b0
-ms.sourcegitcommit: f134d51e52504d3ca722bdf6d33baee05118173a
+ms.openlocfilehash: 56f6952be508a79f06077077f6ec479c7a17c13a
+ms.sourcegitcommit: c4ab6f07e2e5363e331ccd4ecfb6ed813edfbc48
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/03/2020
-ms.locfileid: "96563354"
+ms.lasthandoff: 12/21/2020
+ms.locfileid: "97706391"
 ---
 # <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>教學課程：在 Azure 資料總管和 Azure 監視器中使用 Kusto 查詢
 
@@ -165,7 +165,7 @@ print x=1
 
 ## <a name="aggregate-groups-of-rows-summarize"></a>彙總資料列群組：*summarize*
 
-計算每個國家/地區中發生的事件數目：
+計算每個狀態中發生的事件數目：
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -242,7 +242,7 @@ StormEvents
 
 :::image type="content" source="images/tutorial/event-counts-state.png" alt-text="螢幕擷取畫面：依州別顯示風暴事件計數的直條圖。":::
 
-雖然我們已在 `project` 作業中移除 `mid`，但如果我們想要讓圖表依該順序顯示國家/地區，則仍需要用到。
+雖然我們已在 `project` 作業中移除 `mid`，但如果我們想要讓圖表依該順序顯示狀態，則仍需要用到。
 
 嚴格來說，`render` 是用戶端的一項功能，而不是查詢語言的一部分。 不過，其已整合到該語言中，並且適合用來構想您的結果。
 
