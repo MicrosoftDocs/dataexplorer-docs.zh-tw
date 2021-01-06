@@ -365,11 +365,11 @@
               href: dealing-with-duplicates.md
     - name: 監視
       items:
-        - name: 使用診斷記錄來監視擷取、命令和查詢
-          href: using-diagnostic-logs.md
         - name: 使用計量監視 Azure 資料總管
           displayName: 'health, performance'
           href: using-metrics.md
+        - name: 使用診斷記錄來監視擷取、命令和查詢
+          href: using-diagnostic-logs.md
         - name: 使用資源健康情況來監視叢集健康情況
           href: monitor-with-resource-health.md
     - name: 共用資料
@@ -1444,6 +1444,8 @@
                   href: ./kusto/management/show-ingestion-mapping-command.md
                 - name: .create 資料表
                   href: ./kusto/management/create-table-command.md
+                - name: .create 資料表根據
+                  href: ./kusto/management/create-table-based-on-command.md
                 - name: .create 資料表
                   href: ./kusto/management/create-tables-command.md
                 - name: .create-merge table
