@@ -55,7 +55,7 @@
           href: security-baseline.md
     - name: 業務持續性
       items:
-        - name: 概觀
+        - name: 總覽
           href: business-continuity-overview.md
         - name: 建立解決方案
           href: business-continuity-create-solution.md
@@ -372,6 +372,8 @@
           href: using-diagnostic-logs.md
         - name: 使用資源健康情況來監視叢集健康情況
           href: monitor-with-resource-health.md
+        - name: 使用 Azure 監視器見解
+          href: /azure/azure-monitor/insights/data-explorer?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json
     - name: 共用資料
       items:
         - name: 使用 Azure Data Share
@@ -414,7 +416,7 @@
                   href: /sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=/azure/data-explorer/context/context
                 - name: 使用 Kqlmagic
                   displayName: Azure Data Studio
-                  href: /sql/azure-data-studio/notebooks/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext
+                  href: /sql/azure-data-studio/notebooks/notebooks-kqlmagic?context=/azure/data-explorer/context/context
         - name: Azure Pipelines
           href: devops.md
         - name: 同步 Kusto
