@@ -55,7 +55,7 @@
           href: security-baseline.md
     - name: 業務持續性
       items:
-        - name: 總覽
+        - name: 概觀
           href: business-continuity-overview.md
         - name: 建立解決方案
           href: business-continuity-create-solution.md
@@ -368,7 +368,7 @@
         - name: 使用計量監視 Azure 資料總管
           displayName: 'health, performance'
           href: using-metrics.md
-        - name: 使用診斷記錄來監視擷取、命令和查詢
+        - name: 使用診斷記錄來監視擷取、命令、查詢和資料表
           href: using-diagnostic-logs.md
         - name: 使用資源健康情況來監視叢集健康情況
           href: monitor-with-resource-health.md
