@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
 ms.localizationpriority: high
-ms.openlocfilehash: f14ec4fa24765053711d60f7d2365755b45adbab
-ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
+ms.openlocfilehash: e439fff119e005e44a0649fe22cadf3614ce036d
+ms.sourcegitcommit: 555f3da35fe250fabd35fcc6014bf055ef8405db
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/07/2020
-ms.locfileid: "96774634"
+ms.lasthandoff: 01/07/2021
+ms.locfileid: "97972493"
 ---
 # <a name="mv-expand-operator"></a>mv-expand 運算子
 
@@ -33,7 +33,7 @@ ms.locfileid: "96774634"
 *  在結果中，具名資料行中的陣列會展開為多個資料列。 
 *  產生陣列的運算式。 如果使用這種形式，則會新增新資料行，並保留現有資料行。
 *  新資料行的名稱。
-* *Typename：* 指出陣列元素的基礎類型，這會成為 `mv-apply` 運算子所產生的資料行類型。 套用類型是只能轉換的作業，不會包含剖析或類型轉換。 不符合宣告類型的陣列元素會變成 `null` 值。
+* *Typename：* 指出陣列元素的基礎類型，這會成為 `mv-expand` 運算子所產生的資料行類型。 套用類型是只能轉換的作業，不會包含剖析或類型轉換。 不符合宣告類型的陣列元素會變成 `null` 值。
 *  從每個原始資料列所產生的資料列數目上限。 預設為 2147483647。 
 
   > [!NOTE]
