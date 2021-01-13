@@ -55,7 +55,7 @@
           href: security-baseline.md
     - name: 業務持續性
       items:
-        - name: 概觀
+        - name: 總覽
           href: business-continuity-overview.md
         - name: 建立解決方案
           href: business-continuity-create-solution.md
@@ -1706,6 +1706,8 @@
               href: ./kusto/management/access-control/aad.md
             - name: 主體角色
               href: ./kusto/management/access-control/role-based-authorization.md
+            - name: 允許跨租用戶查詢和命令
+              href: cross-tenant-query-and-commands.md
             - name: Azure Active Directory 驗證方式
               displayName: 'AAD, Azure AD'
               href: ./kusto/management/access-control/how-to-authenticate-with-aad.md
