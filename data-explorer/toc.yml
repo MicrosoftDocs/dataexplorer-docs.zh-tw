@@ -86,7 +86,7 @@
             - name: 單鍵擷取概觀
               href: ingest-data-one-click.md
             - name: 從容器到新資料表的 CSV 資料
-              displayName: 'ingest data, ingestion, one click'
+              displayName: 'Event Grid, ingest data, ingestion, one click'
               href: one-click-ingestion-new-table.md
             - name: 從本機檔案到現有資料表的 JSON 資料
               displayName: 'ingest data, ingestion, one click'
