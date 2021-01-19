@@ -55,7 +55,7 @@
           href: security-baseline.md
     - name: 業務持續性
       items:
-        - name: 總覽
+        - name: 概觀
           href: business-continuity-overview.md
         - name: 建立解決方案
           href: business-continuity-create-solution.md
@@ -1713,24 +1713,28 @@
               href: ./kusto/management/access-control/how-to-authenticate-with-aad.md
         - name: 進階資料管理
           items:
-            - name: 範圍 (資料分區) 概觀
-              href: ./kusto/management/extents-overview.md
-            - name: 範圍命令
+            - name: 範圍 (資料分區)
               items:
-                - name: .alter extent
-                  href: ./kusto/management/alter-extent.md
-                - name: .drop extents
-                  href: ./kusto/management/drop-extents.md
-                - name: .drop extent 標記
-                  href: ./kusto/management/drop-extent-tags.md
-                - name: .merge extents
-                  href: ./kusto/management/merge-extents.md
-                - name: .move extents
-                  href: ./kusto/management/move-extents.md
-                - name: .replace extents
-                  href: ./kusto/management/replace-extents.md
-                - name: .show extents
-                  href: ./kusto/management/show-extents.md
+                - name: 範圍概觀
+                  href: ./kusto/management/extents-overview.md
+                - name: 範圍命令
+                  items:
+                    - name: .alter extent
+                      href: ./kusto/management/alter-extent.md
+                    - name: .drop extents
+                      href: ./kusto/management/drop-extents.md
+                    - name: .drop extent 標記
+                      href: ./kusto/management/drop-extent-tags.md
+                    - name: .merge extents
+                      href: ./kusto/management/merge-extents.md
+                    - name: .move extents
+                      href: ./kusto/management/move-extents.md
+                    - name: .replace extents
+                      href: ./kusto/management/replace-extents.md
+                    - name: .show extents
+                      href: ./kusto/management/show-extents.md
+                - name: 範圍容器清除命令
+                  href: ./kusto/management/clean-extent-containers.md
             - name: 叢集關注者
               href: ./kusto/management/cluster-follower.md
             - name: 資料清除

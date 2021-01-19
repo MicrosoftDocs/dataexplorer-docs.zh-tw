@@ -11,12 +11,12 @@ ms.date: 10/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 56f6952be508a79f06077077f6ec479c7a17c13a
-ms.sourcegitcommit: c4ab6f07e2e5363e331ccd4ecfb6ed813edfbc48
+ms.openlocfilehash: 930936bd9839730ccb0c438cc96a67334ea7ac71
+ms.sourcegitcommit: 64b7b320875950dfee8eb1a23d36aa95e27d7297
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/21/2020
-ms.locfileid: "97706391"
+ms.lasthandoff: 01/14/2021
+ms.locfileid: "98207800"
 ---
 # <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>教學課程：在 Azure 資料總管和 Azure 監視器中使用 Kusto 查詢
 
@@ -416,7 +416,7 @@ StormEvents
 
 * 5% 的風暴持續不到 5 分鐘。
 * 50% 的風暴持續不到 1 小時 25 分鐘。
-* 5% 的風暴持續至少 2 小時 50 分鐘。
+* 95% 的風暴持續至少 2 小時 50 分鐘。
 
 若要取得每個州別的個別明細，請使用個別 `state` 資料行搭配這兩個 `summarize` 運算子：
 
