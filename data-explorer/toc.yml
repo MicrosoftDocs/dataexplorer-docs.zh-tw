@@ -1405,6 +1405,26 @@
         - name: 控制命令概觀
           displayName: Management
           href: ./kusto/management/index.md
+        - name: '工作負載群組 (預覽) '
+          items:
+            - name: 工作負載群組總覽
+              href: ./kusto/management/workload-groups.md
+            - name: 工作負載群組管理
+              href: ./kusto/management/workload-groups-commands.md
+            - name: 要求分類原則
+              items:
+                - name: 要求分類原則
+                  href: ./kusto/management/request-classification-policy.md
+                - name: 要求分類原則命令
+                  href: ./kusto/management/request-classification-policy-commands.md
+            - name: 要求限制原則
+              items:
+                - name: 要求限制原則
+                  href: ./kusto/management/request-limits-policy.md
+            - name: 要求速率限制原則
+              items:
+                - name: 要求速率限制原則
+                  href: ./kusto/management/request-rate-limit-policy.md
         - name: 結構描述
           items:
             - name: 結構描述管理的最佳做法
@@ -1565,12 +1585,6 @@
                   href: ./kusto/management/partitioningpolicy.md
                 - name: 資料分割原則命令
                   href: ./kusto/management/partitioning-policy.md
-            - name: 查詢節流
-              items:
-                - name: 查詢節流原則
-                  href: ./kusto/management/query-throttling-policy.md
-                - name: 查詢節流原則命令
-                  href: ./kusto/management/query-throttling-policy-commands.md
             - name: 保留
               items:
                 - name: 保留原則
