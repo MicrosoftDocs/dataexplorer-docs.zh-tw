@@ -1418,13 +1418,9 @@
                 - name: 要求分類原則命令
                   href: ./kusto/management/request-classification-policy-commands.md
             - name: 要求限制原則
-              items:
-                - name: 要求限制原則
-                  href: ./kusto/management/request-limits-policy.md
+              href: ./kusto/management/request-limits-policy.md
             - name: 要求速率限制原則
-              items:
-                - name: 要求速率限制原則
-                  href: ./kusto/management/request-rate-limit-policy.md
+              href: ./kusto/management/request-rate-limit-policy.md
         - name: 結構描述
           items:
             - name: 結構描述管理的最佳做法
