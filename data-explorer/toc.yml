@@ -53,6 +53,8 @@
           href: security.md
         - name: 安全性基準
           href: security-baseline.md
+        - name: Azure 原則的安全性控制
+          href: ./security-controls-policy.md
     - name: 業務持續性
       items:
         - name: 概觀
