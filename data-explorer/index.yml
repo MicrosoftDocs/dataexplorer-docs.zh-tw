@@ -9,12 +9,12 @@ metadata:
   author: orspod
   ms.author: orspodek
   ms.date: 03/19/2020
-  ms.openlocfilehash: 19fee896eb9e3d6dd857b8c85bd7962b820ff3b3
-  ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
-  ms.translationtype: HT
+  ms.openlocfilehash: f69be915c7e8913dddc426833c74a058e08d55a9
+  ms.sourcegitcommit: 62eff65b320ce4ca53eabed6156eb9fe5b77f548
+  ms.translationtype: MT
   ms.contentlocale: zh-TW
-  ms.lasthandoff: 09/29/2020
-  ms.locfileid: "91452692"
+  ms.lasthandoff: 02/01/2021
+  ms.locfileid: "99224140"
 landingContent:
 - title: 關於 Azure 資料總管
   linkLists:
@@ -22,18 +22,16 @@ landingContent:
     links:
     - text: 什麼是 Azure 資料總管？
       url: data-explorer-overview.md
-  - linkListType: whats-new
-    links:
-    - text: 若要查看 Azure 資料總管的新功能，請加入我們參加 2020 年 10 月 14 日舉行的線上活動
-      url: https://azuredataexplorer.events.idloom.com/azure-data-explorer-online-event
   - linkListType: video
     links:
     - text: 什麼是 Azure 資料總管？ (19:47)
       url: https://youtu.be/D_AJk2lAepw
-    - text: Pluralsight：如何開始使用 Microsoft Azure 資料總管
-      url: https://www.pluralsight.com/courses/microsoft-azure-data-explorer-starting
-    - text: Pluralsight：從頭了解 Kusto 查詢語言 (KQL)
-      url: https://www.pluralsight.com/courses/kusto-query-language-kql-from-scratch
+- title: 訓練
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: 免費 Pluralsight 訓練： Azure 資料總管
+      url: https://www.pluralsight.com/partners/microsoft/azure-data-explorer
 - title: 建立叢集和資料庫
   linkLists:
   - linkListType: quickstart
