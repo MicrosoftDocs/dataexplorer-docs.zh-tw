@@ -507,6 +507,7 @@
         - name: 函式類型
           href: ./kusto/query/functions/index.md
         - name: 使用者自訂函數
+          displayName: 'Kusto view, views, Kusto function'
           href: ./kusto/query/functions/user-defined-functions.md
     - name: 查詢陳述式
       items:
