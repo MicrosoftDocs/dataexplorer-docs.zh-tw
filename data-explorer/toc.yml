@@ -211,6 +211,8 @@
           items:
             - name: Python
               href: python-query-data.md
+        - name: 針對高平行存取優化
+          href: high-concurrency.md
         - name: 時間序列分析及機器學習
           items:
             - name: 時間序列分析
