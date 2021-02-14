@@ -9,12 +9,13 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/07/2019
 ms.localizationpriority: high
-ms.openlocfilehash: 17a9b92f134581021bc7e3b76e5143f18773a423
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+adobe-target: true
+ms.openlocfilehash: d0f71416410812b8160354781111f4a6f46350fd
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95513143"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100359687"
 ---
 # <a name="overview"></a>概觀
 

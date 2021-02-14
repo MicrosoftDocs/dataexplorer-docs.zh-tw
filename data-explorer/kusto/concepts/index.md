@@ -9,12 +9,13 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
-ms.openlocfilehash: df4303a56451a3b2723625005a3f38996dc7cf26
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+adobe-target: true
+ms.openlocfilehash: 5bf3e67439f9903d3d17830e92b1d7b2efbbbec1
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512259"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100359619"
 ---
 # <a name="getting-started-with-kusto"></a>開始使用 Kusto
 
