@@ -4,7 +4,7 @@
   items:
     - name: 什麼是 Azure 資料總管？
       href: data-explorer-overview.md
-    - name: Azure 資料總管的新功能
+    - name: 新功能
       href: whats-new.md
 - name: 快速入門
   expanded: true
