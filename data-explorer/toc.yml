@@ -1573,6 +1573,12 @@
                   href: ./kusto/management/show-function.md
         - name: 原則
           items:
+            - name: 自動刪除
+              items:
+                - name: 自動刪除原則
+                  href: ./kusto/management/auto-delete-policy.md
+                - name: 自動刪除原則命令
+                  href: ./kusto/management/auto-delete-policy-command.md
             - name: 內嵌批次處理
               items:
                 - name: Ingestionbatching 原則
