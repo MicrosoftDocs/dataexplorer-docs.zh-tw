@@ -1,6 +1,6 @@
 ---
-title: 使用者定義的函式 - Azure 資料總管 | Microsoft Docs
-description: 本文說明 Azure 資料總管中使用者定義的函式。
+title: 使用者定義函數-Azure 資料瀏覽器
+description: 本文說明在 Azure 資料瀏覽器中)  (純量和 views 的使用者定義函數。
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 92627b3325a7a2ba8e2e4d58a82ebf6db3977221
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+ms.openlocfilehash: c85fd5dc784747314fe843d8f2325db76ee18d2c
+ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512871"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554664"
 ---
 # <a name="user-defined-functions"></a>使用者自訂函數
 
@@ -23,7 +23,7 @@ ms.locfileid: "95512871"
 使用者定義的函式屬於下列兩個類別之一：
 
 * 純量函式 
-* 表格式函式 
+* 表格式函數，也稱為 views
 
 函式的輸入引數和輸出可決定其為純量或表格式，據以建立其使用方式。 
 

@@ -9,12 +9,13 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 2a49adf8befcd7c20bd4ec1180ccf937c7bfcfff
-ms.sourcegitcommit: fcaf3056db2481f0e3f4c2324c4ac956a4afef38
-ms.translationtype: HT
+adobe-target: true
+ms.openlocfilehash: edca199ed2ba12fa74e69c66f1b1396313606256
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/14/2020
-ms.locfileid: "97388982"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100359891"
 ---
 # <a name="bin"></a>bin()
 
@@ -33,7 +34,7 @@ Null 值、Null 的間隔大小或負的間隔大小都會產生 Null。
 
 ## <a name="arguments"></a>引數
 
-* *value*：數字、日期或[時間範圍](scalar-data-types/timespan.md)。 
+* *value*：數字、日期或 [時間範圍](scalar-data-types/timespan.md)。 
 * *roundTo*：「間隔大小」。 用來分割 value  的數字或時間範圍。 
 
 ## <a name="returns"></a>傳回

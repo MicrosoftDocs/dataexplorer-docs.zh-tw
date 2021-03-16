@@ -9,26 +9,30 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 455b3cfc3976566d9c4383890bbd4c20c775cf15
-ms.sourcegitcommit: 4c6bd4cb1eb1f64d84f844d4e7aff2de3a46b009
-ms.translationtype: HT
+ms.openlocfilehash: 160846f1f543b5c5ae3e156c410551bd8d59a627
+ms.sourcegitcommit: abbcb27396c6d903b608e7b19edee9e7517877bb
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/23/2020
-ms.locfileid: "97756359"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100528049"
 ---
 # <a name="query-limits"></a>查詢限制
 
 Kusto 是一種可裝載大型資料集的隨選 (ad-hoc) 查詢引擎，可藉由將所有相關資料保留在記憶體中來嘗試滿足查詢。
 但其固有風險是查詢會無上限地獨佔服務資源。 Kusto 會以預設查詢限制的形式提供數個內建保護。 如果您考慮移除這些限制，請先判斷您這麼做是否真的可獲得任何價值。
 
-## <a name="limit-on-query-concurrency"></a>查詢並行的限制
+## <a name="limit-on-request-concurrency"></a>要求平行存取限制
 
-叢集會將 **查詢並行** 限制強加於同時執行的數個查詢上。
+**要求並行** 存取是指叢集在多個同時執行的要求上所強加的限制。
 
-* 查詢並行限制的預設值取決於其執行所在的 SKU 叢集，且計算方式為：`Cores-Per-Node x 10`。
-  * 例如，針對在 D14v2 SKU 上設定的叢集，其中每部機器都有 16 個虛擬核心，預設的查詢並行限制為 `16 cores x10 = 160`。
-* 設定[查詢節流原則](../management/query-throttling-policy.md)可以變更預設值。 
-  * 可以在叢集上同時執行的實際查詢數目取決於各種因素。 最主要的因素包括叢集 SKU、叢集的可用資源和查詢模式。 您可以根據類似的生產查詢模式上執行的負載測試，來設定查詢節流原則。
+* 限制的預設值取決於叢集執行所在的 SKU，其計算方式如下： `Cores-Per-Node x 10` 。
+  * 例如，針對在 D14v2 SKU 上設定的叢集，其中每部電腦都有16虛擬核心，預設限制為 `16 cores x10 = 160` 。
+* 您可以藉由設定工作負載群組的 [要求速率限制原則](../management/request-rate-limit-policy.md) 來變更預設值 `default` 。
+  * 可在叢集上同時執行的實際要求數目取決於各種因素。 最主要的因素是叢集 SKU、叢集的可用資源和使用模式。 您可以根據在類似生產環境中執行的負載測試來設定原則。
+
+超過要求的並行限制將會導致下列行為：
+* 因為要求速率限制原則而被拒絕的命令，將會提供 `ControlCommandThrottledException` (錯誤碼 = 429) 。
+* 因為要求速率限制原則而被拒絕的查詢將會提供 `QueryThrottledException` (錯誤碼 = 429) 。
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>結果集大小的限制 (結果截斷)
 
@@ -120,7 +124,9 @@ set maxmemoryconsumptionperiterator=68719476736;
 MyTable | ...
 ```
 
-在許多情況下，您可以藉由資料集取樣來避免超過此限制。 下列兩個查詢說明如何進行取樣。 第一個是使用亂數產生器的統計取樣。 第二個是明確取樣，其方式是從資料集的某些資料行進行雜湊處理，通常是某些識別碼資料行。
+如果查詢使用 `summarize` 、 `join` 或 `make-series` 運算子，您可以使用 [隨機查詢](../query/shufflequery.md) 策略來降低單一電腦上的記憶體壓力。
+
+在其他情況下，您可以取樣資料集，以避免超出此限制。 下列兩個查詢說明如何進行取樣。 第一個查詢是使用亂數產生器的統計取樣。 第二個查詢是具決定性的取樣，藉由從資料集的某個資料行進行雜湊處理（通常是一些識別碼）。
 
 ```kusto
 T | where rand() < 0.1 | ...
@@ -142,19 +148,7 @@ MyTable | ...
 
 如果 `max_memory_consumption_per_query_per_node` 設定多次，例如在用戶端要求屬性和使用 `set` 的語句中，則會套用較低的值。
 
-## <a name="limit-on-accumulated-string-sets"></a>累計字串集的限制
-
-在各種查詢作業中，Kusto 都需要「收集」字串值，並在開始產生結果之前，在內部對這些值進行緩衝處理。 這些累計字串集的大小及其可以保存的項目數量都會受到限制。 此外，每個個別的字串都不應該超過特定限制。
-超過這些限制的其中一個就會導致下列其中一個錯誤：
-
-```
-Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the limit of ...GB (see https://aka.ms/kustoquerylimits)')
-
-Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the maximum count of ..GB items (see http://aka.ms/kustoquerylimits)')
-```
-
-目前沒有任何參數可增加字串集的大小上限。
-因應措施是將查詢重新改寫，以減少必須緩衝處理的資料量。 您可以先將不需要的資料行從輸出中移除 (project away)，然後再讓 join 及 summarize 等運算子使用。 或者，您可以使用[隨機查詢](../query/shufflequery.md)策略。
+如果查詢使用 `summarize` 、 `join` 或 `make-series` 運算子，您可以使用 [隨機查詢](../query/shufflequery.md) 策略來降低單一電腦上的記憶體壓力。
 
 ## <a name="limit-execution-timeout"></a>執行逾時限制
 
@@ -167,7 +161,7 @@ Kusto 中的多個點上都會強制對執行中的要求 (查詢和控制命令
 
 根據預設，查詢的逾時會設定為 4 分鐘，而控制命令則設為 10 分鐘。 如有需要，可以增加此值 (上限為一小時)。
 
-* 如果您使用 Kusto.Explorer 進行查詢，請使用 [工具]&gt; [選項] &gt;[連線]* &gt; [查詢伺服器逾時]。
+* 如果您使用 Kusto 進行查詢，請使用 **工具** &gt; **選項** *  &gt; **連接** &gt; **查詢伺服器超時**。
 * 以程式設計方式，將 `servertimeout` 用戶端要求屬性 (`System.TimeSpan` 類型的值) 設定為最多一小時。
 
 **關於逾時的注意事項**

@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 18959e2387a1a0faf92261dc3c35eca0db44c158
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+ms.openlocfilehash: fe2d9b54970bbbd6ce9b5ee22fc6460c30b34a76
+ms.sourcegitcommit: 61f0c37a8c9aa97cc09715466cc639272174325c
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512888"
+ms.lasthandoff: 03/16/2021
+ms.locfileid: "103566294"
 ---
 # <a name="ingest-from-query-set-append-set-or-append-set-or-replace"></a>從查詢內嵌 (.set、.append、.set-or-append、.set-or-replace)
 
@@ -48,7 +48,7 @@ ms.locfileid: "95512888"
 
 |屬性        |描述|
 |----------------|-----------------------------------------------------------------------------------------------------------------------------|
-|`creationTime`   | 日期時間值 (格式為 ISO8601 字串)，在建立內嵌資料範圍的時間時使用。 如未指定，則會使用目前的值 (`now()`)|
+|`creationTime`   | 日期時間值 (格式為 ISO8601 字串)，在建立內嵌資料範圍的時間時使用。 如未指定，則會使用目前的值 (`now()`)。 當指定時，請確定 `Lookback` 目標資料表的有效 [範圍合併原則](../mergepolicy.md) 中的屬性與指定的值一致。|
 |`extend_schema`  | 布林值，若已指定，則指示命令擴充資料表的結構描述。 預設值為 "false" 此選項僅適用於 `.append`、`.set-or-append` 和 `set-or-replace` 命令。 唯一允許的結構描述擴充會在資料表結尾新增其他資料行|
 |`recreate_schema`  | 布林值。 如果指定，則會描述命令是否可以重新建立資料表的架構。 預設值為 "false" 此選項只適用於 set-or-replace 命令。 此選項的優先順序高於 extend_schema 屬性 (如果兩者都已設定)|
 |`folder`         | 要指派給資料表的資料夾。 如果資料表已經存在，此屬性將會覆寫資料表的資料夾。|

@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 6357afeb0a5673584e27b84a231e3c65f897b8fc
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+ms.openlocfilehash: 29fdacc9483c21c4a8a148d2134f4082d439bb89
+ms.sourcegitcommit: ee49cd8186d4aecd5de1ed6d24db6c7b7a079ac4
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512361"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100548998"
 ---
 # <a name="make-series-operator"></a>make-series 運算子
 
@@ -32,7 +32,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 
 *  結果資料行的選擇性名稱。 預設值為衍生自運算式的名稱。
 * *DefaultValue：* 將使用的預設值，而不是不存在的值。 如果沒有任何資料列含有 AxisColumn 和 GroupExpression 的具體值，則在結果中，將會指派 DefaultValue 給對應的陣列元素。 如果省略 *DefaultValue*，則會採用 0。 
-* *Aggregation：* `count()` 或 `avg()` 等[彙總函式](make-seriesoperator.md#list-of-aggregation-functions)的呼叫，以資料行名稱作為引數。 請參閱[彙總函式清單](make-seriesoperator.md#list-of-aggregation-functions)。 只有傳回數值結果的彙總函式可以搭配 `make-series` 運算子使用。
+* *Aggregation：* `count()` 或 `avg()` 等 [彙總函式](make-seriesoperator.md#list-of-aggregation-functions)的呼叫，以資料行名稱作為引數。 請參閱[彙總函式清單](make-seriesoperator.md#list-of-aggregation-functions)。 只有傳回數值結果的彙總函式可以搭配 `make-series` 運算子使用。
 * *AxisColumn：* 數列會據以排序的資料行。 可視為時間軸，但除了 `datetime` 以外，可接受任何數值類型。
 * *start*：(選擇性) 要建立之每個數列的 *AxisColumn* 下限值。 *start*、*end* 和 *step* 用於在指定的範圍內建立 *AxisColumn* 值的陣列，並使用指定的 *step*。 所有 *Aggregation* 值都會分別針對此陣列進行排序。 此 *AxisColumn* 陣列也是輸出中的最後一個輸出資料行，其名稱與 *AxisColumn* 相同。 如果未指定 *start* 值，start 就是在每個數列中具有資料的第一個間隔 (step)。
 * *end*：(選擇性) *AxisColumn* 的上限 (不包含在內) 值。 時間序列的最後一個索引會小於此值 (而且會是 *start* 加上小於 *end* 的 *step* 整數倍數)。 如果未提供 *end* 值，則會是最後一個間隔 (step) 的上限，其中包含每個數列的資料。
@@ -80,13 +80,14 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 |[avg()](avg-aggfunction.md)|傳回整個群組的平均值|
 |[avgif()](avgif-aggfunction.md)|使用群組的述詞傳回平均值|
 |[count()](count-aggfunction.md)|傳回群組的計數|
-|[countif()](countif-aggfunction.md)|使用群組的述詞傳回計數|
+|[countif()](countif-aggfunction.md)|傳回包含群組述詞的計數|
 |[dcount()](dcount-aggfunction.md)|傳回群組元素的近似相異計數|
 |[dcountif()](dcountif-aggfunction.md)|使用群組的述詞傳回近似相異計數|
 |[max()](max-aggfunction.md)|傳回整個群組的最大值|
 |[maxif()](maxif-aggfunction.md)|使用群組的述詞傳回最大值|
 |[min()](min-aggfunction.md)|傳回整個群組的最小值|
 |[minif()](minif-aggfunction.md)|使用群組的述詞傳回最小值|
+|[百分位數 () ](percentiles-aggfunction.md)|傳回整個群組的百分位數值|
 |[stdev()](stdev-aggfunction.md)|傳回整個群組的標準差|
 |[sum()](sum-aggfunction.md)|傳回群組內元素的總和|
 |[sumif()](sumif-aggfunction.md)|使用群組的述詞傳回元素的總和|
@@ -107,7 +108,9 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 |[series_periods_validate()](series-periods-validatefunction.md)|檢查時間序列是否包含指定長度的定期模式|
 |[series_stats_dynamic()](series-stats-dynamicfunction.md)|傳回具有一般統計資料 (最小值/最大值/變異數/標準差/平均值) 的多個資料行|
 |[series_stats()](series-statsfunction.md)|產生具有一般統計資料 (最小值/最大值/變異數/標準差/平均值) 的動態值|
-  
+
+如需數列分析函數的完整清單，請參閱：[序列處理](scalarfunctions.md#series-processing-functions)函式
+
 ## <a name="list-of-series-interpolation-functions"></a>數列插補函式清單
 
 |函式|描述|

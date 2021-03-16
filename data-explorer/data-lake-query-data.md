@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/17/2020
 ms.localizationpriority: high
-ms.openlocfilehash: ec62c1d0dfe439ac77d7fce9e69af8e5c8a7a8a0
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+ms.openlocfilehash: df9c20fc19a2d3c33d440df72ee33b1449b5c60b
+ms.sourcegitcommit: 600c3430c00eb62d52540fe08dab386a860193cc
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512786"
+ms.lasthandoff: 03/08/2021
+ms.locfileid: "102472156"
 ---
 # <a name="query-data-in-azure-data-lake-using-azure-data-explorer"></a>使用 Azure 資料總管查詢 Azure Data Lake 中的資料
 
@@ -139,7 +139,7 @@ external_table('ApiCalls') | take 10
 
 ## <a name="query-taxirides-external-table-in-the-help-cluster"></a>查詢說明叢集中的 *TaxiRides* 外部資料表
 
-使用名為 *help* 的測試叢集 來試用不同的 Azure 資料總管功能。 *help* 叢集包含[紐約市計程車資料集](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)的外部資料表定義，該資料集包含數十億筆計程車搭乘。
+使用名為 *help* 的測試叢集 來試用不同的 Azure 資料總管功能。 *help* 叢集包含 [紐約市計程車資料集](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)的外部資料表定義，該資料集包含數十億筆計程車搭乘。
 
 ### <a name="create-external-table-taxirides"></a>建立外部資料表 *TaxiRides* 
 
@@ -201,7 +201,7 @@ external_table('ApiCalls') | take 10
   dropoff_puma: string
 )
 kind=blob 
-partition by bin(pickup_datetime, 1d)
+partition by (Date:datetime = bin(pickup_datetime, 1d))   
 dataformat=csv
 ( 
     h@'https://storageaccount.blob.core.windows.net/container1;secretKey'
@@ -218,7 +218,7 @@ dataformat=csv
 
 #### <a name="query-taxirides-external-table-without-partitioning"></a>查詢未分割的 *TaxiRides* 外部資料表
 
-在 *TaxiRides* 外部資料表上[執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=)，以顯示整個資料集內一周每一天的搭乘。 
+在 *TaxiRides* 外部資料表上 [執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=)，以顯示整個資料集內一周每一天的搭乘。 
 
 ```kusto
 external_table("TaxiRides")
@@ -232,7 +232,7 @@ external_table("TaxiRides")
 
 #### <a name="query-taxirides-external-table-with-partitioning"></a>查詢已分割的 TaxiRides 外部資料表 
 
-在外部資料表 *TaxiRides* 上[執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==)，以顯示 2017 年 1 月所使用的計程車類型(黃色或綠色)。 
+在外部資料表 *TaxiRides* 上 [執行此查詢](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==)，以顯示 2017 年 1 月所使用的計程車類型(黃色或綠色)。 
 
 ```kusto
 external_table("TaxiRides")

@@ -9,12 +9,13 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/03/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 762c3075c162ba35bdba539d0e86460c78f3297e
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+adobe-target: true
+ms.openlocfilehash: 87154368a033afe1da7669e71e269081865b689d
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95511783"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100359908"
 ---
 # <a name="query-best-practices"></a>查詢最佳做法
 
@@ -29,6 +30,7 @@ ms.locfileid: "95511783"
 |  | 使用`contains_cs`         | 請勿使用 `contains`        | 如果您可使用 `has`/`has_cs`，而不使用 `contains`/`contains_cs`，甚至更好。 |
 | **搜尋文字**    |    查看特定資料行     |    請勿使用 `*`    |   `*` 會在所有資料行中進行全文檢索搜尋。    |
 | **從跨數百萬個資料列的 [dynamic 物件](./scalar-data-types/dynamic.md)中擷取欄位**    |  如果大部分查詢都會從跨數百萬個資料列的 dynamic 物件中擷取欄位，請在擷取時將您的資料行具體化。      |         | 如此一來，您只需針對資料行擷取付費一次。    |
+| **查閱 [動態物件](./scalar-data-types/dynamic.md)中的罕見索引鍵/值**    |  使用`MyTable | where DynamicColumn has "Rare value" | where DynamicColumn.SomeKey == "Rare value"` | 請勿使用 `MyTable | where DynamicColumn.SomeKey == "Rare value"` | 如此一來，您就可以篩選出大部分的記錄，並且只執行其他的 JSON 剖析。 |
 | **`let` 陳述式，其中包含您多次使用的值** | 使用 [materialize() 函式](./materializefunction.md) |  |   如需如何使用 `materialize()` 的詳細資訊，請參閱 [materialize()](materializefunction.md)。|
 | **對 10 億筆以上的記錄套用轉換**| 調整查詢，以減少送入轉換的資料量。| 若可避免，請不要轉換大量資料。 | |
 | **新查詢** | 在結尾使用 `limit [small number]` 或 `count`。 | |     在未知的資料集上執行未繫結的查詢可能會產生要傳回給用戶端的數 GB 結果，進而導致回應緩慢及叢集忙碌。|

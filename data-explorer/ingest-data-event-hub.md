@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 798a8b201ee87d5c43aeb31d6af515d41c516bef
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+ms.openlocfilehash: 3ffead54d87354b9c7f6a6a370fccfaeac670207
+ms.sourcegitcommit: d19b4214625eeb1ec7aec4fd6c92007a07c76ebc
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512208"
+ms.lasthandoff: 12/22/2020
+ms.locfileid: "102472192"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>將資料從事件中樞內嵌至 Azure 資料總管
 
@@ -128,7 +128,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     | 事件中樞命名空間 | 唯一命名空間名稱 | 您先前選擇用來辨識命名空間的名稱。 |
     | 事件中樞 | *test-hub* | 您建立的事件中樞。 |
     | 取用者群組 | *test-group* | 在您所建立的事件中樞中定義的取用者群組。 |
-    | 事件系統屬性 | 選取相關屬性 | [事件中樞系統屬性](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations)。 如果每則事件訊息都有多筆記錄，則系統屬性會新增至第一筆記錄。 新增系統屬性時，[建立](kusto/management/create-table-command.md)或[更新](kusto/management/alter-table-command.md)資料表結構描述和[對應](kusto/management/mappings.md)，以包含選取的屬性。 |
+    | 事件系統屬性 | 選取相關屬性 | [事件中樞系統屬性](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations)。 新增系統屬性時，[建立](kusto/management/create-table-command.md)或[更新](kusto/management/alter-table-command.md)資料表結構描述和[對應](kusto/management/mappings.md)，以包含選取的屬性。 如需系統屬性限制的詳細資訊，請參閱 [事件系統屬性對應](#event-system-properties-mapping)。 |
     | 壓縮 | *無* | 事件中樞訊息承載的壓縮類型。 支援的壓縮類型：*無、GZip*。|
     
 #### <a name="target-table"></a>目標資料表
@@ -153,9 +153,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
 
 ### <a name="event-system-properties-mapping"></a>事件系統屬性對應
 
-> [!Note]
-> * 單一記錄的事件支援系統屬性。
-> * 對於 `csv` 對應，會在記錄的開頭新增屬性。 對於 `json` 對應，會根據下拉式清單中顯示的名稱新增屬性。
+[!INCLUDE [event-hub-system-mapping](includes/event-hub-system-mapping.md)]
 
 如果您在資料表的 [資料來源] 區段中選取了 [事件系統屬性]，則必須在資料表結構描述和對應中包含[系統屬性](ingest-data-event-hub-overview.md#system-properties)。
 
@@ -215,7 +213,7 @@ Azure 資料總管可從事件中樞、巨量資料串流平台及事件內嵌�
     ![訊息結果集](media/ingest-data-event-hub/message-result-set.png)
 
     > [!NOTE]
-    > * Azure 資料總管具有資料擷取的彙總 (批次處理) 原則，可將擷取程序最佳化。 此原則已預設為 5 分鐘或 500 MB 的資料，因此您可能會遇到延遲情況。 如需了解匯總選項，請參閱[批次原則](kusto/management/batchingpolicy.md)。 
+    > * Azure 資料總管具有資料擷取的彙總 (批次處理) 原則，可將擷取程序最佳化。 當批次的下列其中一項條件為 true 時，預設批次處理原則會設定為密封批次：最大延遲時間為5分鐘、總大小為1G 或 1000 blob。 因此，您可能會遇到延遲。 如需詳細資訊，請參閱 [批次處理原則](kusto/management/batchingpolicy.md)。 
     > * 事件中樞擷取包含 10 秒或 1 MB 的事件中樞回應時間。 
     > * 將您的資料表設定為支援串流，並移除回應時間中的延遲。 請參閱[串流原則](kusto/management/streamingingestionpolicy.md)。 
 

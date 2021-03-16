@@ -1,34 +1,36 @@
 ---
-title: parse_json() - Azure 資料總管
-description: 本文說明 Azure 資料總管中的 parse_json()。
+title: todynamic () ，parse_json () 函式-Azure 資料瀏覽器
+description: 本文說明 Azure 資料 Explorer 中的 todynamic () parse_json () 函數。
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 02/13/2020
+ms.date: 01/25/2021
 ms.localizationpriority: high
-ms.openlocfilehash: 3125a51733f6672d041e6c1522ea755e5677cb0c
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+ms.openlocfilehash: 680ce93ec2a3b39d14475689ac80793a02d86547
+ms.sourcegitcommit: 8468c6886dc097032ef6db86992a5e8c9b18786e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512854"
+ms.lasthandoff: 01/27/2021
+ms.locfileid: "98911939"
 ---
-# <a name="parse_json"></a>parse_json()
+# <a name="todynamic-parse_json"></a>todynamic () 、parse_json () 
 
-將 `string` 解譯為 JSON 值，並以 `dynamic` 形式傳回值。
+將 `string` 解譯為 JSON 值，並以 `dynamic` 形式傳回值。 
 
-當您需要擷取 JSON 複合物件的多個元素時，此函式比 [extractjson()](./extractjsonfunction.md) 函式會更合適。
+> [!NOTE]
+> `todynamic()`和函數的解讀方式相同 `parse_json()` 。
 
-## <a name="syntax"></a>語法
+當您需要擷取 JSON 複合物件的多個元素時，此函式比 [extractjson()](./extractjsonfunction.md) 函式會更合適。 最好盡可能使用 [動態 () ](./scalar-data-types/dynamic.md) 。
 
-`parse_json(`*json*`)`
+## <a name="syntax"></a>Syntax
 
-別名：
-- [todynamic()](./todynamicfunction.md)
-- [toobject()](./todynamicfunction.md)
+`parse_json(` `)` 
+ json `todynamic(`*json*`)`
+
+<!-- deprecated aliases: `toobject()` and parsejson() -->
 
 ## <a name="arguments"></a>引數
 
@@ -38,8 +40,8 @@ ms.locfileid: "95512854"
 
 `dynamic` 類型的物件，其取決於 *json* 的值：
 * 如果 *json* 的類型為 `dynamic`，其值會依現狀使用。
-* 如果 *json* 的類型為 `string`，而且是[正確格式的 JSON 字串](https://json.org/)，則會剖析字串並傳回所產生的值。
-* 如果 *json* 的類型為 `string`，但不是[正確格式的 JSON 字串](https://json.org/)，則傳回的值是類型為 `string` 且保有原始 `dynamic` 值的物件。
+* 如果 *json* 的類型為 `string`，而且是 [正確格式的 JSON 字串](https://json.org/)，則會剖析字串並傳回所產生的值。
+* 如果 *json* 的類型為 `string`，但不是 [正確格式的 JSON 字串](https://json.org/)，則傳回的值是類型為 `string` 且保有原始 `dynamic` 值的物件。
 
 ## <a name="example"></a>範例
 

@@ -6,21 +6,23 @@ ms.author: orspodek
 ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: quickstart
-ms.date: 11/22/2020
+ms.date: 02/09/2021
 ms.localizationpriority: high
-ms.openlocfilehash: b20d9a3e6c01f59a9cde44d6462ffeb0072473ed
-ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
-ms.translationtype: HT
+ms.openlocfilehash: d581ade4a9cbba083e8cebf39a30f01586d2635c
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/30/2020
-ms.locfileid: "97822877"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "103565697"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>快速入門：在 Azure 資料總管 Web UI 中查詢資料
 
 Azure 資料總管是快速、完全受控的資料分析服務，可即時分析大量資料。 Azure 資料總管會提供 Web 體驗，讓您可以連線到 Azure 資料總管叢集，以及撰寫、執行和共用 Kusto 查詢語言命令和查詢。 在 Azure 入口網站和獨立 Web 應用程式形式的 [Azure 資料總管 Web UI](https://dataexplorer.azure.com) 中都可以獲得 Web 體驗。 Azure 資料總管 Web UI 也可以由 HTML iframe 中的其他 Web 入口網站來裝載。 如需如何裝載 Web UI 和所使用 Monaco 編輯器的詳細資訊，請參閱 [Monaco IDE 整合](kusto/api/monaco/monaco-kusto.md)。
 在本快速入門中，您將會在獨立的 Azure 資料總管 Web UI 中工作。
 
-## <a name="prerequisites"></a>先決條件
+:::image type="content" source="media/web-query-data/walkthrough.gif" alt-text="Kusto Web Explorer 體驗的逐步解說":::
+
+## <a name="prerequisites"></a>必要條件
 
 * Azure 訂用帳戶。 如果您沒有 Azure 訂用帳戶，請在開始前建立[免費 Azure 帳戶](https://azure.microsoft.com/free/)。
 * 具有資料的叢集和資料庫。 [建立您自己的叢集](create-cluster-database-portal.md)或使用 Azure 資料總管說明叢集。
@@ -65,7 +67,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 ## <a name="run-queries"></a>執行查詢
 
-您現在可以在這兩個叢集上執行查詢 (假設您的測試叢集中有資料)。 基於本文的目的，我們會將焦點放在 **說明** 叢集。
+您現在可以在這兩個叢集上執行查詢 (假設您的測試叢集中有資料)。 **在本文** 中，我們會將焦點放在說明叢集上。
 
 1. 在左窗格中，在 [說明]叢集下面選取 [範例] 資料庫。
 
@@ -125,9 +127,43 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 ## <a name="work-with-the-table-grid"></a>使用資料表格線
 
-現在您已了解基本查詢的運作方式，讓我們看看如何使用資料表格線來自訂結果和執行進一步分析。
+現在您已瞭解基本查詢的運作方式，您可以使用資料表方格來自訂結果，並進行進一步的分析。 
 
-1. 重新執行第一個查詢。 讓滑鼠停留在 **State** 資料行上，選取功能表，然後選取 **Group by State**。
+### <a name="expand-a-cell"></a>展開資料格
+
+展開資料格有助於查看長字串或動態欄位（例如 JSON）。 
+
+1. 按兩下資料格以開啟展開的視圖。 此視圖可讓您讀取長字串，並提供動態資料的 JSON 格式。
+
+    :::image type="content" source="media/web-query-data/expand-cell.png" alt-text="Azure 資料瀏覽器 WebUI 展開資料格以顯示長字串":::
+
+1. 按一下結果方格右上方的圖示，以切換 [讀取窗格] 模式。 選擇下列展開視圖的讀取窗格模式：內嵌、下方窗格和右窗格。
+
+    :::image type="content" source="media/web-query-data/expanded-view-icon.png" alt-text="變更展開視圖模式之讀取窗格的圖示-Azure 資料瀏覽器 WebUI 查詢結果":::
+
+### <a name="expand-a-row"></a>展開資料列
+
+使用具有數十個數據行的資料表時，請展開整個資料列，以便能夠輕鬆地查看不同資料行及其內容的總覽。 
+
+1. 按一下 **>** 您要展開之資料列左邊的箭號。
+
+    :::image type="content" source="media/web-query-data/expand-row.png" alt-text="在 Azure 資料瀏覽器 WebUI 中展開資料列":::
+
+1. 在展開的資料列中，某些資料行會展開 (箭號) ，而某些資料行則會折迭 (箭號指向右邊) 。 按一下這些箭號可在這兩種模式之間切換。
+
+### <a name="group-column-by-results"></a>依結果群組資料行
+
+在結果中，您可以依任何資料行將結果分組。
+
+1. 執行下列查詢：
+     
+    ```kusto
+    StormEvents
+    | sort by StartTime desc
+    | take 10
+    ```
+
+1. 讓滑鼠停留在 **State** 資料行上，選取功能表，然後選取 **Group by State**。
 
     ![依狀態分組](media/web-query-data/group-by.png)
 
@@ -138,6 +174,34 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 1. 將滑鼠停留在 **Group** 資料行上，然後選取 **Reset columns**。 此設定會讓格線回到其原始狀態。
 
     ![重設資料行](media/web-query-data/reset-columns.png)
+
+#### <a name="use-value-aggregation"></a>使用值匯總
+
+依資料行分組之後，您就可以使用 value 彙總函式來計算每個群組的簡單統計資料。
+
+1. 選取您要評估之資料行的功能表。
+1. 選取 [ **值匯總**]，然後選取您要在此資料行上進行的函數類型。
+
+    :::image type="content" source="media/web-query-data/aggregate.png" alt-text="依結果群組資料行時匯總結果。 ":::
+
+### <a name="filter-columns"></a>篩選資料行
+
+您可以使用一或多個運算子來篩選資料行的結果。
+
+1. 若要篩選特定資料行，請選取該資料行的功能表。
+1. 選取篩選圖示。
+1. 在 [篩選產生器] 中，選取所需的運算子。
+1. 輸入您想要篩選資料行的運算式。 當您輸入時，會篩選結果。
+    
+    > [!NOTE] 
+    > 篩選不區分大小寫。
+
+1. 若要建立多重條件篩選準則，請選取布林運算子來新增另一個條件
+1. 若要移除篩選準則，請從您的第一個篩選準則中刪除文字。
+
+    :::image type="content" source="media/web-query-data/filter-column.gif" alt-text="GIF 顯示如何在 Azure 資料瀏覽器 WebUI 中篩選資料行":::
+
+### <a name="run-cell-statistics"></a>執行資料格統計資料
 
 1. 執行下列查詢。
 
@@ -153,25 +217,42 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
     :::image type="content" source="media/web-query-data/select-stats.png" alt-text="選取函式"::: 
 
-1. 在格線的右側，選取 [資料行] 以查看資料表工具面板。 此面板的功能類似於 Excel 中的樞紐資料表的欄位清單，能讓您在格線本身執行更多分析。
+### <a name="filter-to-query-from-grid"></a>從方格篩選至查詢
+
+篩選方格的另一種簡單方式，就是直接從方格將篩選運算子加入至查詢。
+
+1. 選取具有您想要為其建立查詢篩選之內容的資料格。
+1. 以滑鼠右鍵按一下以開啟 [資料格動作] 功能表。 選取 [ **將選取專案加入為篩選**]。
+    
+    :::image type="content" source="media/web-query-data/add-selection-filter.png" alt-text="在 Azure 資料瀏覽器 WebUI 中將選取專案新增為篩選，以從方格結果查詢":::
+
+1. 查詢子句將會新增至查詢編輯器中的查詢：
+
+    :::image type="content" source="media/web-query-data/add-query-from-filter.png" alt-text="從 Azure 資料瀏覽器 WebUI 中的方格篩選新增查詢子句":::
+
+### <a name="pivot"></a>樞紐
+
+樞紐分析表模式功能與 Excel 的樞紐分析表類似，可讓您在方格本身進行先進的分析。
+
+進行切換可讓您取得資料行值，並將其轉換成資料行。 例如，您可以根據 *狀態* 來將資料行設為佛羅里達、Missouri、>alabama 等等。
+
+1. 在格線的右側，選取 [資料行] 以查看資料表工具面板。
 
     ![資料表工具面板](media/web-query-data/tool-panel.png)
 
-1. 選取 [樞紐分析表模式]，然後拖曳資料行，如下所示：[狀態] 到 [資料列群組]；[DamageProperty] 到 [值]；[EventType] 到 [資料行標籤]。  
+1. 選取 [ **樞紐分析表模式]**，然後將資料行拖曳 **如下： [** 資料列 **群組**]。 **DamageProperty** 至 **值**;和 **狀態** 為數據 **行標籤**。  
 
     ![樞紐分析表模式](media/web-query-data/pivot-mode.png)
 
-    結果應該會類似於下列樞紐分析表。
+    結果看起來應該會像下列的樞紐分析表：
 
     ![樞紐分析表](media/web-query-data/pivot-table.png)
-
-    請注意 Vermont 和 Alabama 在相同的類別中各有兩個事件，而 Texas 在不同的類別下則有兩個事件。 樞紐分析表是非常適合用來進行快速分析的工具，因為其可讓您快速找出這些差異。
 
 ## <a name="search-in-the-results-table"></a>在結果資料表中搜尋
 
 您可以在結果資料表中尋找特定運算式。
 
-1.  執行下列查詢：
+1. 執行下列查詢：
 
     ```Kusto
     StormEvents
@@ -195,7 +276,7 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 1. 在查詢視窗頂端，選取 [共用] 。 
 
-:::image type="content" source="media/web-query-data/share-menu.png" alt-text="共用功能表":::
+    :::image type="content" source="media/web-query-data/share-menu.png" alt-text="共用功能表":::
 
 下拉式清單中有下列選項可用：
 * 連結至剪貼簿
@@ -284,17 +365,35 @@ Azure 資料總管是快速、完全受控的資料分析服務，可即時分�
 
 Kusto 會嘗試解譯結果面板中每個資料列的嚴重性和詳細程度層級，並且據以調整其色彩。 其方式是將每個資料行的相異值與一組已知模式 (「警告」、「錯誤」等等) 進行比對。 
 
+#### <a name="enable-error-level-highlighting"></a>啟用錯誤層級反白顯示
+
 若要啟用錯誤層級反白顯示：
 
 1. 選取您的使用者名稱旁邊的「設定」圖示。
 1. 選取 [外觀]索引標籤，並將 [啟用錯誤層級反白顯示] 選項切換至右邊。 
 
-:::image type="content" source="media/web-query-data/enable-error-highlighting.gif" alt-text="動畫 GIF 會示範如何在設定中，啟用錯誤層級的反白顯示":::
+    :::image type="content" source="media/web-query-data/enable-error-highlighting.gif" alt-text="動畫 GIF 會示範如何在設定中，啟用錯誤層級的反白顯示":::
 
 **淺色** 模式中的錯誤層級色彩配置 | **深色** 模式中的錯誤層級色彩配置
 |---|---|
 :::image type="content" source="media/web-query-data/light-mode.png" alt-text="淺色模式中色彩圖例的螢幕擷取畫面"::: | :::image type="content" source="media/web-query-data/dark-mode.png" alt-text="深色模式中色彩圖例的螢幕擷取畫面":::
 
+#### <a name="column-requirements-for-highlighting"></a>反白顯示的資料行需求
+
+若為反白顯示的錯誤層級，資料行的類型必須是 int、long 或 string。 
+
+* 如果資料行的類型是 `long` 或 `int` ：
+   * 資料行名稱必須是 *層級*
+   * 值只可包含介於1到5之間的數位。
+* 如果資料行的類型為 `string` ： 
+   * 資料行名稱可以選擇性地為提升效能的 *層級* 。 
+   * 此資料行只能包含下列值：
+       * critical、臨界、critical、assert、high
+       * 錯誤，e
+       * 警告，w，監視器
+       * 資訊
+       * 詳細資訊，動詞，d
+   
 ## <a name="provide-feedback"></a>提供意見反應
 
 1. 在應用程式右上角，選取意見反應圖示 :::image type="icon" source="media/web-query-data/icon-feedback.png" border="false":::。

@@ -8,12 +8,13 @@ ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/19/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 3b007d1688130449c597ef99281ed89b55d880eb
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+adobe-target: true
+ms.openlocfilehash: 2fef26a22388d092cd5b8baa7ebca11ae7da4d05
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95511919"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100359704"
 ---
 # <a name="kql-quick-reference"></a>KQL 快速參考
 

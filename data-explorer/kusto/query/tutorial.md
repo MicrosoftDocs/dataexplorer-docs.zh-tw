@@ -11,12 +11,12 @@ ms.date: 10/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 930936bd9839730ccb0c438cc96a67334ea7ac71
-ms.sourcegitcommit: 64b7b320875950dfee8eb1a23d36aa95e27d7297
-ms.translationtype: HT
+ms.openlocfilehash: d66b8d949e04f6cd672078989c9d047729c9596b
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 01/14/2021
-ms.locfileid: "98207800"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100360076"
 ---
 # <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>教學課程：在 Azure 資料總管和 Azure 監視器中使用 Kusto 查詢
 
@@ -416,7 +416,7 @@ StormEvents
 
 * 5% 的風暴持續不到 5 分鐘。
 * 50% 的風暴持續不到 1 小時 25 分鐘。
-* 95% 的風暴持續至少 2 小時 50 分鐘。
+* 95% 的風暴持續不到兩小時和50分鐘。
 
 若要取得每個州別的個別明細，請使用個別 `state` 資料行搭配這兩個 `summarize` 運算子：
 
@@ -527,7 +527,7 @@ InsightsMetrics | count
 
 [AzureActivity](/azure/azure-monitor/reference/tables/azureactivity) 資料表具有 Azure 活動記錄中的項目，可讓您深入了解 Azure 中發生的任何訂用帳戶層級或管理群組層級事件。 讓我們只查看特定一週內的 `Critical` 項目。
 
-[where](/azure/data-explorer/kusto/query/whereoperator) 運算子在 Kusto 查詢語言中很常見。 `where` 會將資料表篩選成符合特定準則的資料列。 下列範例會使用多個命令。 首先，查詢會擷取資料表的所有記錄。 然後，只會篩選出資料中位於時間範圍內的記錄。 最後，只會篩選這些結果中具有 `Critical` 層級的記錄。
+[where](./whereoperator.md) 運算子在 Kusto 查詢語言中很常見。 `where` 會將資料表篩選成符合特定準則的資料列。 下列範例會使用多個命令。 首先，查詢會擷取資料表的所有記錄。 然後，只會篩選出資料中位於時間範圍內的記錄。 最後，只會篩選這些結果中具有 `Critical` 層級的記錄。
 
 > [!NOTE]
 > 除了使用 `TimeGenerated` 資料行在查詢中指定篩選之外，您還可以在 Log Analytics 中指定時間範圍。 如需詳細資訊，請參閱 [Azure 監視器 Log Analytics 中的記錄查詢領域和時間範圍](/azure/azure-monitor/log-query/scope)。
@@ -661,11 +661,11 @@ InsightsMetrics
 
 ## <a name="join-data-from-two-tables"></a>聯結來自兩個資料表的資料
 
-如果您需要在單一查詢中從兩個資料表擷取資料，該怎麼辦？ 您可以使用 [join](/azure/data-explorer/kusto/query/joinoperator?pivots=azuremonitor) 運算子，將來自多個資料表的資料列合併至單一結果集。 每個資料表都必須有一個具有相符值的資料行，join 才能知道要比對哪些資料列。
+如果您需要在單一查詢中從兩個資料表擷取資料，該怎麼辦？ 您可以使用 [join](./joinoperator.md?pivots=azuremonitor) 運算子，將來自多個資料表的資料列合併至單一結果集。 每個資料表都必須有一個具有相符值的資料行，join 才能知道要比對哪些資料列。
 
 [VMComputer](/azure/azure-monitor/reference/tables/vmcomputer) 是一個資料表，可供 Azure 監視器用於 VM 以儲存所監視虛擬機器的詳細資料。 [InsightsMetrics](/azure/azure-monitor/reference/tables/insightsmetrics) 包含從這些虛擬機器收集而來的效能資料。 在 *InsightsMetrics* 中收集的值是可用記憶體，但不是可用的記憶體百分比。 為了計算百分比，我們需要每個虛擬機器的實體記憶體。 該值位於 `VMComputer` 中。
 
-下列範例查詢會使用 join 來執行這項計算。 [distinct](/azure/data-explorer/kusto/query/distinctoperator) 運算子會與 `VMComputer` 搭配使用，因為會定期從每部電腦收集詳細資料。 因此，資料表中的每一部電腦都會建立多個資料列。 這兩個資料表會使用 `Computer` 資料行加以聯結。 結果集中會建立一個資料列，其會針對 `InsightsMetrics` 中的每個資料列包含來自兩個資料表的資料行，並有 `Computer` 中的值，且此值符合 `VMComputer` 中 `Computer` 資料行中的相同值。
+下列範例查詢會使用 join 來執行這項計算。 [distinct](./distinctoperator.md) 運算子會與 `VMComputer` 搭配使用，因為會定期從每部電腦收集詳細資料。 因此，資料表中的每一部電腦都會建立多個資料列。 這兩個資料表會使用 `Computer` 資料行加以聯結。 結果集中會建立一個資料列，其會針對 `InsightsMetrics` 中的每個資料列包含來自兩個資料表的資料行，並有 `Computer` 中的值，且此值符合 `VMComputer` 中 `Computer` 資料行中的相同值。
 
 ```kusto
 VMComputer
@@ -688,8 +688,7 @@ VMComputer
 ```kusto
 let PhysicalComputer = VMComputer
     | distinct Computer, PhysicalMemoryMB;
-    let AvailableMemory = 
-InsightsMetrics
+let AvailableMemory = InsightsMetrics
     | where Namespace == "Memory" and Name == "AvailableMB"
     | project TimeGenerated, Computer, AvailableMemoryMB = Val;
 PhysicalComputer

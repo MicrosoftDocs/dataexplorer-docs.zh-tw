@@ -8,12 +8,13 @@ ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 07/22/2019
 ms.localizationpriority: high
-ms.openlocfilehash: 02e746a3ce929bab9883f1b4faafe7a6fb1ce953
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+adobe-target: true
+ms.openlocfilehash: 90be78650c814570ed848d73c14e40a9cbcd2d73
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95783262"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "103565701"
 ---
 # <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>快速入門：建立 Azure 資料總管叢集與資料庫
 

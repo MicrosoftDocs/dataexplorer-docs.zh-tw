@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 5304d2fcce23d6143faebb9326a6ab960a964f22
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
-ms.translationtype: HT
+ms.openlocfilehash: 147fe77b25229a4d2854fee5b7c15e05ec8a2f9f
+ms.sourcegitcommit: 40f86b7f085152c21b6a1ee877f3ab324b59b88b
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512395"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "101838332"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Azure 資料總管資料擷取概觀 
 
@@ -33,7 +33,7 @@ Azure 資料總管會從外部來源提取資料，並從擱置的 Azure 佇列�
 
 * **[擷取屬性](ingestion-properties.md)** ：會影響資料內嵌方式的屬性 (例如，標記、對應、建立時間)。
 
-* **權限**：若要內嵌資料，程序需要[資料庫擷取器層級權限](kusto/management/access-control/role-based-authorization.md)。 其他動作 (例如查詢) 可能需要資料庫管理員、資料庫使用者或資料表管理員權限。
+* **權限**：若要內嵌資料，程序需要 [資料庫擷取器層級權限](kusto/management/access-control/role-based-authorization.md)。 其他動作 (例如查詢) 可能需要資料庫管理員、資料庫使用者或資料表管理員權限。
 
 ## <a name="batching-vs-streaming-ingestion"></a>批次處理與串流擷取
 
@@ -63,9 +63,9 @@ Azure 資料總管支援數種擷取方法，而每種方法都有自己的目�
 
 ### <a name="ingestion-using-connectors-and-plugins"></a>使用連接器和外掛程式的擷取
 
-* **Logstash 外掛程式**，請參閱[將資料從 Logstash 內嵌至 Azure 資料總管](ingest-data-logstash.md)。
+* **Logstash 外掛程式**，請參閱 [將資料從 Logstash 內嵌至 Azure 資料總管](ingest-data-logstash.md)。
 
-* **Kafka 連接器**，請參閱[將資料從 Kafka 內嵌至 Azure 資料總管](ingest-data-kafka.md)。
+* **Kafka 連接器**，請參閱 [將資料從 Kafka 內嵌至 Azure 資料總管](ingest-data-kafka.md)。
 
 * **[Power Automate](https://flow.microsoft.com/)** ：Azure 資料總管的自動化工作流程管線。 Power Automate 可用於執行查詢，並使用查詢結果作為觸發程序來執行預設動作。 請參閱[適用於 Power Automate 的 Azure 資料總管連接器 (預覽)](flow.md)。
 
@@ -87,7 +87,7 @@ Azure 資料總管會提供可用於查詢和資料擷取的 SDK。 程式設計
 
 * [REST API](kusto/api/netfx/kusto-ingest-client-rest.md)
 
-* [GO API](kusto/api/golang/kusto-golang-client-library.md)
+* [GO SDK](kusto/api/golang/kusto-golang-client-library.md)
 
 ### <a name="tools"></a>工具
 

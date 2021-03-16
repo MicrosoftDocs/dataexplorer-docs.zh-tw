@@ -11,12 +11,12 @@ ms.date: 12/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8370e69914b2bc5e141321a6bc6722bba6f1fd4d
-ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
-ms.translationtype: HT
+ms.openlocfilehash: ee0a307967f1c9834e832de24e574e63f9e55471
+ms.sourcegitcommit: 483f6902735f399bf889035cbc41ddb68d1a71b8
+ms.translationtype: MT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96868598"
+ms.lasthandoff: 03/05/2021
+ms.locfileid: "102189198"
 ---
 # <a name="render-operator"></a>render 運算子
 
@@ -122,7 +122,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 |`barchart`     |`default`          |每個「橫條」都獨立存在。      |
 |               |`unstacked`        |與 `default` 相同。                 |
 |               |`stacked`          |堆疊「橫條」。                      |
-|               |`stacked100`       |堆疊「橫條」，並將每一個橫條延展為與其他橫條相同的寬度。|
+|               |`stacked100`       |堆疊「橫條」並將每個線條延展至與其他人相同的寬度。|
 |`columnchart`  |`default`          |每個「直條」都獨立存在。   |
 |               |`unstacked`        |與 `default` 相同。                 |
 |               |`stacked`          |將「直條」堆疊在另一個直條上方。|
